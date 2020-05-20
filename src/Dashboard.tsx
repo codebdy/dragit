@@ -131,7 +131,7 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position="fixed" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -143,7 +143,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            DragIT
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -160,6 +160,7 @@ export default function Dashboard() {
         open={open}
       >
         <div className={classes.toolbarIcon}>
+          DragIT
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
