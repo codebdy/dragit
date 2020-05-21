@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -40,8 +40,9 @@ function Copyright() {
 }
 
 const drawerWidth = 240;
+const miniDrawerWidth = 80;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
   },
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer - 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -98,20 +99,21 @@ const useStyles = makeStyles((theme) => ({
   drawerPaperMouseOverPop: {
     position: 'fixed',
     width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen * 1.5,
+    }),
   },
 
   //鼠标移动弹出闭合状态
   drawerPaperMouseOverPopMini: {
     position: 'fixed',
-    overflowX: 'hidden',
+    overflow: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen * 1.5,
     }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
+    width: miniDrawerWidth,
   },
 
   appBarSpacer: theme.mixins.toolbar,
@@ -166,15 +168,17 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const drawer = (
-    <div>
+    <div style={{paddingLeft:'10px'}}>
         <div className={classes.toolbarIcon}>
           DragIT
-          <Switch 
-            className={classes.miniToggler} 
-            checked={!mouseOverPop} 
-            color="primary" 
-            onChange={handleDrawerToggleMouseOverPop} 
-          />
+          { (!mouseOverPop ||(mouseOverPop && !mini))&&
+            <Switch 
+              className={classes.miniToggler} 
+              checked={!mouseOverPop} 
+              color="primary" 
+              onChange={handleDrawerToggleMouseOverPop} 
+            />
+          }
         </div>
         <Divider />
         <List>{mainListItems}</List>
@@ -186,7 +190,7 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={clsx(classes.appBar, classes.appBarShift)}>
+      <AppBar position="absolute" className={clsx(classes.appBar, classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
