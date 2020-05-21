@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -22,6 +22,9 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import Switch from '@material-ui/core/Switch';
+import Hidden from '@material-ui/core/Hidden';
 
 function Copyright() {
   return (
@@ -68,7 +71,15 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  miniToggler:{
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
   },
   menuButtonHidden: {
     display: 'none',
@@ -76,16 +87,22 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+
+  //移动设备跟persisent
   drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    position: 'relative',
   },
-  drawerPaperClose: {
+
+  //鼠标移动弹出展开状态
+  drawerPaperMouseOverPop: {
+    position: 'fixed',
+    width: drawerWidth,
+  },
+
+  //鼠标移动弹出闭合状态
+  drawerPaperMouseOverPopMini: {
+    position: 'fixed',
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -96,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
+
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -119,26 +137,63 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const [mouseOverPop, setMouseOverPop] = React.useState(false);
+  const [mini, setMini] = React.useState(false);
+
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+
+  const theme = useTheme();
+
+  const handleDrawerToggleMouseOverPop = (
+    event: React.ChangeEvent<HTMLInputElement>, 
+    checked: React.SetStateAction<boolean>
+  ) => {
+    setMouseOverPop(!checked);
+  }
+
+  const handleMouseEnterDrawer = ()=>{
+    setMini(false)
+  }
+
+  const handleMouseLeaveDrawer = ()=>{
+    setMini(true)
+  }
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const drawer = (
+    <div>
+        <div className={classes.toolbarIcon}>
+          DragIT
+          <Switch 
+            className={classes.miniToggler} 
+            checked={!mouseOverPop} 
+            color="primary" 
+            onChange={handleDrawerToggleMouseOverPop} 
+          />
+        </div>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+    </div>
+  );
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position="fixed" className={clsx(classes.appBar, classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
-            edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
@@ -152,24 +207,38 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          DragIT
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
+      <Hidden smUp implementation="css">
+        <Drawer
+          variant="temporary"
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
+      <Hidden xsDown implementation="css">
+        <Drawer
+          classes={{
+            paper: mouseOverPop  
+              ? (mini ? classes.drawerPaperMouseOverPopMini : classes.drawerPaperMouseOverPop)
+              : classes.drawerPaper
+            ,
+          }}
+          variant="permanent"
+          open
+          onMouseEnter = {handleMouseEnterDrawer}
+          onMouseLeave = {handleMouseLeaveDrawer}
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
