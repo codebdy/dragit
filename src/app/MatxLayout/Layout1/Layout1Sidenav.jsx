@@ -93,7 +93,7 @@ class Layout1Sidenav extends Component {
         className="sidenav__toggle show-on-pc"
         onChange={this.handleSidenavToggle}
         checked={
-          !(this.props.settings.layout1Settings.leftSidebar.mode === "full")
+          (this.props.settings.layout1Settings.leftSidebar.mode === "full")
         }
         color="secondary"
       />
