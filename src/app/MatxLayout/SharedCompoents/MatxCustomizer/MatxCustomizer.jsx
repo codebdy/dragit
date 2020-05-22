@@ -156,7 +156,7 @@ const MatxCustomizer = props => {
           className="my-3"
           onClick={tooglePanel}
         >
-          <Icon className="spin">settings</Icon>
+          <Icon>settings</Icon>
         </IconButton>
       </Tooltip>
 
