@@ -1,32 +1,32 @@
 export const navigations = [
   {
-    name: "Dashboard",
+    name: "仪表盘",
     path: "/dashboard/analytics",
     icon: "dashboard"
   },
   {
-    name: "Forms",
+    name: "表单",
     icon: "description",
     children: [
       {
-        name: "Basic",
+        name: "基本表单",
         path: "/forms/basic",
-        iconText: "B"
+        iconText: "基"
       },
       {
-        name: "Editor",
+        name: "编辑器",
         path: "/forms/editor",
-        iconText: "E"
+        iconText: "编"
       }
     ]
   },
   {
-    name: "Drag and Drop",
+    name: "拖放",
     icon: "control_camera",
     path: "/others/drag-and-drop"
   },
   {
-    name: "Multilevel",
+    name: "层级嵌套",
     icon: "trending_up",
     children: [
       {

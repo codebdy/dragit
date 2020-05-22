@@ -23,7 +23,10 @@ const styles = theme => {
     },
     highlight: {
       background: theme.palette.primary.main
-    }
+    },
+    nested: {
+      paddingLeft: theme.spacing(3),
+    },
   };
 };
 
@@ -93,7 +96,7 @@ class MatxVerticalNavExpansionPanel extends Component {
 
         <div
           ref={el => (this.elementRef = el)}
-          className={classes["expansion-panel"] + " submenu"}
+          className={classes["expansion-panel"] + " submenu " + classes.nested }
           style={
             collapsed
               ? { maxHeight: "0px" }
