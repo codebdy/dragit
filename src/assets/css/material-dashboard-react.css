@@ -65,7 +65,7 @@ body {
   background-color: #eeeeee;
   color: #3c4858;
   margin: 0;
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, "Segoe UI", Roboto, "Noto", "Helvetica Neue", Arial, sans-serif;
   font-weight: 300;
   line-height: 1.5em;
 }
@@ -506,6 +506,4 @@ footer ul li a:hover {
   right: auto;
   left: 80px;
 }
-* {
-  letter-spacing: normal !important;
-}
+
