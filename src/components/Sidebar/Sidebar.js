@@ -15,6 +15,8 @@ import Icon from "@material-ui/core/Icon";
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
 import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks.js";
 
+import Switch from '@material-ui/core/Switch';
+
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
 const useStyles = makeStyles(styles);
@@ -82,10 +84,13 @@ export default function Sidebar(props) {
   );
   var brand = (
     <div className={classes.logo}>
-      <div className={classes.logoImage}>
-        <img src={logo} alt="logo" className={classes.img} />
+      <div>
+        <div className={classes.logoImage}>
+          <img src={logo} alt="logo" className={classes.img} />
+        </div>
+        {logoText}
       </div>
-      {logoText}
+      <Switch />
     </div>
   );
   return (

@@ -62,7 +62,7 @@ const sidebarStyle = theme => ({
   },
   logo: {
     position: "relative",
-    padding: "15px 15px",
+    padding: "15px 0",
     zIndex: "4",
     textAlign: "left",
     fontWeight: "300",
@@ -70,6 +70,7 @@ const sidebarStyle = theme => ({
     backgroundColor: "transparent",
     color: whiteColor,
     display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
     //textTransform: "uppercase",
     fontSize: "25px",
