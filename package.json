@@ -1,65 +1,59 @@
 {
-  "name": "create-react-app-with-typescript",
-  "version": "4.0.0",
-  "private": true,
+  "name": "material-dashboard-react",
+  "version": "1.8.0",
+  "description": "Material Dashboard React. Coded by Creative Tim",
+  "private": false,
+  "main": "dist/index.js",
   "dependencies": {
-    "@date-io/core": "^2.6.0",
-    "@date-io/date-fns": "^2.6.1",
-    "@material-ui/codemod": "^4.5.0",
-    "@material-ui/core": "latest",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.53",
-    "@material-ui/pickers": "^3.2.10",
-    "@types/classnames": "^2.2.10",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "autosuggest-highlight": "^3.1.1",
-    "axios": "^0.19.2",
-    "babel-polyfill": "^6.26.0",
-    "clsx": "^1.1.0",
-    "cross-fetch": "^3.0.4",
-    "date-fns": "^2.14.0",
-    "downshift": "^5.4.2",
-    "echarts": "^4.7.0",
-    "echarts-for-react": "^2.0.16",
-    "firebase": "^7.14.5",
-    "history": "^4.10.1",
-    "lodash": "^4.17.15",
-    "node-sass": "^4.14.1",
-    "notistack": "^0.9.16",
-    "perfect-scrollbar": "^1.5.0",
-    "prop-types": "^15.7.2",
-    "qwest": "^4.5.0",
-    "react": "latest",
-    "react-autosuggest": "^10.0.2",
-    "react-beautiful-dnd": "^13.0.0",
-    "react-big-calendar": "^0.24.6",
-    "react-dom": "latest",
-    "react-highlight": "^0.12.0",
-    "react-html-parser": "^2.0.2",
-    "react-infinite-scroller": "^1.2.4",
-    "react-loadable": "^5.5.0",
-    "react-material-ui-form-validator": "^2.0.10",
-    "react-perfect-scrollbar": "^1.5.8",
-    "react-redux": "^7.2.0",
-    "react-router-config": "^5.1.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1",
-    "react-select": "^3.1.0",
-    "react-vis": "^1.11.7",
-    "recharts": "^1.8.5",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "shortid": "^2.2.15",
-    "swiper": "^5.4.1",
-    "typescript": "latest",
-    "victory": "^34.3.6"
+    "@material-ui/core": "4.3.2",
+    "@material-ui/icons": "4.2.1",
+    "chartist": "0.10.1",
+    "classnames": "2.2.6",
+    "history": "4.9.0",
+    "perfect-scrollbar": "1.4.0",
+    "prop-types": "15.7.2",
+    "react": "16.9.0",
+    "react-chartist": "0.13.3",
+    "react-dom": "16.9.0",
+    "react-google-maps": "9.4.5",
+    "react-router-dom": "5.0.1",
+    "react-scripts": "3.1.0",
+    "react-swipeable-views": "0.13.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "lint:check": "eslint . --ext=js,jsx;  exit 0",
+    "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
+    "build-package-css": "cp src/assets/css/material-dashboard-react.css dist/material-dashboard-react.css",
+    "build-package": "npm run build-package-css && babel src --out-dir dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
+  },
+  "keywords": [],
+  "author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
+  },
+  "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
+  "optionalDependencies": {
+    "@types/googlemaps": "3.37.3",
+    "@types/markerclustererplus": "2.1.33",
+    "ajv": "6.10.2",
+    "typescript": "3.5.3"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "6.0.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.8",
+    "prettier": "1.18.2"
   },
   "browserslist": {
     "production": [
@@ -67,19 +61,6 @@
       "not dead",
       "not op_mini all"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/runtime": "^7.9.6",
-    "axios-mock-adapter": "^1.18.1",
-    "babel-plugin-import": "^1.13.0",
-    "cross-env": "^7.0.2",
-    "customize-cra": "^0.9.1",
-    "eslint-plugin-react-hooks": "^4.0.2",
-    "gh-pages": "^2.2.0"
+    "development": []
   }
 }
