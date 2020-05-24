@@ -6,11 +6,12 @@ import ReactDOM from "react-dom";
 import "./_index.scss";
 
 import * as serviceWorker from "./serviceWorker";
-import App from "./app/App";
+//import App from "./app/App";
+import Dragit from "./app/Dragit";
 
 // cssVars();
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Dragit />, document.getElementById("root"));
 
 // for IE-11 support un-comment cssVars() and it's import in this file
 // and in MatxTheme file

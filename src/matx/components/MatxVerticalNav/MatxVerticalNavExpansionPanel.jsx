@@ -25,7 +25,7 @@ const styles = theme => {
       background: theme.palette.primary.main
     },
     nested: {
-      paddingLeft: theme.spacing(3),
+      paddingLeft: theme.spacing(1.5),
     },
   };
 };
