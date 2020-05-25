@@ -25,7 +25,6 @@ interface SidebarProps extends DrawerProps {
  * @props
  */
 export default function Sidebar(props:SidebarProps = {}) {
-  console.log(props)
   const {dark, light, ...drawerProps} = props
   return(
     <Drawer {...drawerProps} >

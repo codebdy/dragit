@@ -5,7 +5,7 @@ import Sidebar from 'components/Sidebar/Sidebar'
 function App() {
   return (
     <div className="App">
-      <Sidebar dark open={true}>Sidebar content</Sidebar>
+      <Sidebar dark open={true}>Sidebar content learn react</Sidebar>
     </div>
   );
 }
