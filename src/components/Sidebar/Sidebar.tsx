@@ -72,11 +72,9 @@ export default function Sidebar( props:SidebarProps = {} ) {
     ...drawerProps
   } = props
 
-  const paletteType = dark ? 'dark' : 'light'
-
-  const theme2 = createMuiTheme({
+  const theme = createMuiTheme({
     palette: {
-        type: 'dark',
+        type: dark ? 'dark' : 'light',
   
     },
   });
@@ -84,7 +82,7 @@ export default function Sidebar( props:SidebarProps = {} ) {
 
   const classes = useStyles();
   return(
-    <ThemeProvider theme={theme2}>
+    <ThemeProvider theme={theme}>
       <Hidden mdUp implementation="css">
         <Drawer
           {...drawerProps}

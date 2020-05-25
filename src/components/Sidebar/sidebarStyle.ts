@@ -5,6 +5,8 @@ const sidebarStyle = (theme:Theme) => createStyles(
   {
     drawerPaper:{
       width:"260px",
+      boxShadow: theme.shadows[20],
+      border: 0,
     },
 
     drawerPaperBak: {
