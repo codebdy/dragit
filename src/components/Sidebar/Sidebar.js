@@ -22,6 +22,7 @@ import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(styles);
 
