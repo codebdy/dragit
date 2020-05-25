@@ -55,6 +55,7 @@ interface SidebarProps extends DrawerProps {
   onMobileClose?: ModalProps['onClose']
 }
 
+
 /**
  * Sidebar Component, 侧边栏导航组件
  * @version package.json
@@ -71,14 +72,19 @@ export default function Sidebar( props:SidebarProps = {} ) {
     ...drawerProps
   } = props
 
-  const theme = createMuiTheme({
+  const paletteType = dark ? 'dark' : 'light'
+
+  const theme2 = createMuiTheme({
     palette: {
-      type: dark ? 'dark' : 'light',
+        type: 'dark',
+  
     },
   });
+  //console.log(theme)
+
   const classes = useStyles();
   return(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme2}>
       <Hidden mdUp implementation="css">
         <Drawer
           {...drawerProps}
