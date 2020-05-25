@@ -9,6 +9,9 @@ import { ModalProps } from '@material-ui/core/Modal';
 import { makeStyles} from "@material-ui/core/styles";
 import styles from './sidebarStyle';
 
+import Brand from './Brand'
+import Switch from '@material-ui/core/Switch';
+
 //import classNames from "classnames";
 //import PropTypes from "prop-types";
 
@@ -89,6 +92,7 @@ export default function Sidebar(
             keepMounted: true, // Better open performance on mobile.
           }}
         >
+          <Brand></Brand>
           {props.children}
         </Drawer>
       </Hidden>
@@ -101,6 +105,9 @@ export default function Sidebar(
           }}          
           open
         >
+          <Brand>
+            <Switch />
+          </Brand>
           {props.children}
         </Drawer>
       </Hidden>
