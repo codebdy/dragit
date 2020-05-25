@@ -1,17 +1,24 @@
 import React from "react";
 import Drawer, {DrawerProps} from "@material-ui/core/Drawer";
+//classnames 跟@types/classnames两个都要安装才行
+import classNames from "classnames";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
+import { makeStyles} from "@material-ui/core/styles";
+import styles from './sidebarStyle';
+
 //import classNames from "classnames";
 //import PropTypes from "prop-types";
 
 enum SidebarSize{
-  small,
-  medium,
-  large
+  small = "small",
+  medium = "medium",
+  large = "large"
 }
+
+const useStyles = makeStyles(styles);
 
 interface SidebarProps extends DrawerProps {
 
@@ -65,6 +72,7 @@ export default function Sidebar(
       type: dark ? 'dark' : 'light',
     },
   });
+  const classes = useStyles();
   return(
     <ThemeProvider theme={theme}>
       <Hidden mdUp implementation="css">
@@ -74,6 +82,9 @@ export default function Sidebar(
           anchor="left"
           open={mobileOpen}
           onClose={onMobileClose}
+          classes={{
+            paper: classNames(classes.drawerPaper)
+          }}          
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -85,6 +96,9 @@ export default function Sidebar(
         <Drawer
           {...drawerProps}
           variant="permanent"
+          classes={{
+            paper: classNames(classes.drawerPaper)
+          }}          
           open
         >
           {props.children}
