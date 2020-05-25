@@ -1,22 +1,21 @@
 import React from "react";
+import Drawer, {DrawerProps} from "@material-ui/core/Drawer";
 //import classNames from "classnames";
 //import PropTypes from "prop-types";
 
-interface IProps {
+interface SidebarProps extends DrawerProps {
+
   /**
-   * 年龄
+   * Dark 暗主题
+   * @default true
    */
-  age?: number
+  dark?: boolean
+
   /**
-   * 工作
-   * @default doctor
+   * Light 亮主题
+   * @default flase
    */
-  work?: string
-  /**
-   * 修改名字
-   * @param name
-   */
-  changeName?: (name: string) => void
+  light?: boolean
 }
 
 /**
@@ -25,10 +24,13 @@ interface IProps {
  * @visibleName Sidebar 组件名称的显示
  * @props
  */
-export default function Sidebar(props:IProps = {}) {
+export default function Sidebar(props:SidebarProps = {}) {
   console.log(props)
   return(
-    <div>SideBar</div>
+    <div>
+      <Drawer />
+      SideBar
+    </div>
   ) 
     
   
