@@ -27,7 +27,7 @@ interface SidebarProps extends DrawerProps {
 export default function Sidebar(props:SidebarProps = {}) {
   console.log(props)
   return(
-    <Drawer  open={true}>
+    <Drawer open={true} >
       {props.children}
     </Drawer>
   ) 
