@@ -5,7 +5,7 @@ import Sidebar from 'components/Sidebar/Sidebar'
 function App() {
   return (
     <div className="App">
-      <Sidebar dark>Sidebar content</Sidebar>
+      <Sidebar dark open={true}>Sidebar content</Sidebar>
     </div>
   );
 }
