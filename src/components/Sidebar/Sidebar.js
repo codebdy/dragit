@@ -19,11 +19,25 @@ import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks.js";
 import Switch from '@material-ui/core/Switch';
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles(styles);
 
 export default function Sidebar(props) {
-  const classes = useStyles();
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+    const classes = useStyles();
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
@@ -33,17 +47,10 @@ export default function Sidebar(props) {
     <List className={classes.list}>
       {routes.map((prop, key) => {
         var activePro = " ";
-        var listItemClasses;
-        if (prop.path === "/upgrade-to-pro") {
-          activePro = classes.activePro + " ";
-          listItemClasses = classNames({
-            [" " + classes[color]]: true
-          });
-        } else {
-          listItemClasses = classNames({
-            [" " + classes[color]]: activeRoute(prop.layout + prop.path)
-          });
-        }
+        let listItemClasses = classNames({
+          [" " + classes[color]]: activeRoute(prop.layout + prop.path)
+        });
+        
         const whiteFontClasses = classNames({
           [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path)
         });
@@ -92,11 +99,12 @@ export default function Sidebar(props) {
         {logoText}
       </div>
 
-      <Switch />
+      <Switch/>
     </div>
   );
   return (
-    <div>
+<ThemeProvider theme={theme}>
+   <div>
       <Hidden mdUp implementation="css">
         <Drawer
           variant="temporary"
@@ -147,6 +155,7 @@ export default function Sidebar(props) {
         </Drawer>
       </Hidden>
     </div>
+  </ThemeProvider>
   );
 }
 

@@ -110,7 +110,11 @@ const sidebarStyle = theme => ({
       height: "100%",
       content: '""',
       display: "block",
-      background: blackColor,
+      backgroundImage: "linear-gradient(45deg,#780206,#061161)",      
+      fallbacks: {
+        backgroundImage: "-webkit-linear-gradient(45deg,#780206,#061161)",
+      },
+      //background: blackColor,
       opacity: ".8"
     }
   },
@@ -134,7 +138,7 @@ const sidebarStyle = theme => ({
   itemLink: {
     width: "auto",
     transition: "all 300ms linear",
-    margin: "10px 15px 0",
+    margin: "5px 0 0",
     borderRadius: "3px",
     position: "relative",
     display: "block",
@@ -181,17 +185,21 @@ const sidebarStyle = theme => ({
     }
   },
   blue: {
-    backgroundColor: infoColor[0],
-    boxShadow:
+    backgroundColor: "rgba(" +
+    hexToRgb('#5d78ff') +
+    ",.2)",
+    /*boxShadow:
       "0 12px 20px -10px rgba(" +
-      hexToRgb(infoColor[0]) +
+      hexToRgb('#5d78ff') +
       ",.28), 0 4px 20px 0 rgba(" +
       hexToRgb(blackColor) +
       ",.12), 0 7px 8px -5px rgba(" +
       hexToRgb(infoColor[0]) +
-      ",.2)",
+      ",.2)",*/
     "&:hover,&:focus": {
-      backgroundColor: infoColor[0],
+      backgroundColor: "rgba(" +
+      hexToRgb('#5d78ff') +
+      ",.2)",
       boxShadow:
         "0 12px 20px -10px rgba(" +
         hexToRgb(infoColor[0]) +
