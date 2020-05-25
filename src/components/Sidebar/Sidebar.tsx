@@ -61,15 +61,16 @@ interface SidebarProps extends DrawerProps {
  * @visibleName Sidebar 组件名称
  * @props
  */
-export default function Sidebar(
-    props:SidebarProps = {
-      dark:false, 
-      size:SidebarSize.medium,
-      compact:false,
-      mobileOpen:false,
-    }
-  ) {
-  const {dark, size, mobileOpen, compact, onMobileClose, ...drawerProps} = props
+export default function Sidebar( props:SidebarProps = {} ) {
+  const {
+    dark = true, 
+    size = SidebarSize.medium, 
+    mobileOpen = false, 
+    compact = false,
+    onMobileClose, 
+    ...drawerProps
+  } = props
+
   const theme = createMuiTheme({
     palette: {
       type: dark ? 'dark' : 'light',
