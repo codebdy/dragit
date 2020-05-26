@@ -83,6 +83,15 @@ const Sidebar = function( props:SidebarProps = {} ) {
     palette: {
       type: dark ? 'dark' : 'light',
     },
+    typography: {
+
+      body1: {
+        fontFamily:'Roboto, Noto, "Helvetica Neue", Arial, sans-serif',
+        fontSize: '0.9rem',
+        letterSpacing:'0.05rem',
+      },
+
+    },
   });
 
   const fullWidth = sideBarSettings.sizes[size]

@@ -1,6 +1,6 @@
 body,html {
   margin: 0;
-  font-family: Montserrat, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Roboto, Noto, "Helvetica Neue", Arial, sans-serif';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;

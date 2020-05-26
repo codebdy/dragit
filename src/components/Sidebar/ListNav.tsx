@@ -29,10 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(1.5),
       paddingBottom: theme.spacing(1.5),
     },
-    itemText:{
-      fontSize: '0.9rem',
-      letterSpacing:'0.05rem',
-    },
+
     nested: {
       paddingLeft: theme.spacing(4),
     },
@@ -61,7 +58,7 @@ export default function ListNav() {
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
-        <ListItemText primary={<span className = {classes.itemText}>仪表盘</span>}>
+        <ListItemText primary='仪表盘'>
           
         </ListItemText>
       </ListItem>
@@ -69,7 +66,7 @@ export default function ListNav() {
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
-        <ListItemText className = {classes.itemText} primary={<span className = {classes.itemText}>Draft</span>} />
+        <ListItemText primary='Draft' />
       </ListItem>
       <ListItem button className = {classes.listItem} onClick={handleClick}>
         <ListItemIcon>
