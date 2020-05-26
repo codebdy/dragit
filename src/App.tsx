@@ -19,10 +19,17 @@ const sidebarTheme1 = createSidebarTheme({
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [sidebarOccupiedWidth, setSidebarOccupiedWidth] = React.useState(0);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const handleOccupiedWidthChange = (width:number)=>{
+    //console.log(width)
+    setSidebarOccupiedWidth(width)
+  }
+
   const theme2 = createMuiTheme({
     palette: {
         type: 'light',
@@ -32,25 +39,33 @@ function App() {
 
   return (
     <ThemeProvider theme={theme2}>
-      <div className="App">
+      <div className="App" style={{display:'flex', flexFlow:'row',width:'100vw', height:'100vh' }}>
         <CssBaseline />      
-        <Sidebar sidebarTheme={sidebarTheme1} mobileOpen={mobileOpen} onMobileClose={handleDrawerToggle} >Sidebar</Sidebar>
+        <Sidebar 
+          sidebarTheme={sidebarTheme1} 
+          mobileOpen={mobileOpen} 
+          onMobileClose={handleDrawerToggle}
+          onOccupiedWidthChange={handleOccupiedWidthChange} 
+        >Sidebar</Sidebar>
 
-        <AppBar position="fixed">
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-              Responsive drawer
-          </Toolbar>
-        </AppBar>
-        <div style={{justifyContent:'center', display:'flex', marginTop:'60px', flexFlow:'row', }}>
-        <div style={{padding:'20px',display:'flex', flexFlow:'column',}}>
+        <div style={{justifyContent:'center', display:'flex', flexFlow:'row',
+          position:"relative",//marginLeft: sidebarOccupiedWidth + 'px',
+          flex:"1",
+        }}>
+          <AppBar position="absolute">
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+              >
+                <MenuIcon />
+              </IconButton>
+                Responsive drawer
+            </Toolbar>
+          </AppBar>
+          <div style={{padding:'20px',display:'flex', flexFlow:'column',}}>
             <h2>侧边栏主题</h2>
             <Button> 主题1</Button>
             <Button> 主题2</Button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Drawer, {DrawerProps} from "@material-ui/core/Drawer";
 //classnames 跟@types/classnames两个都要安装才行
 import classNames from "classnames";
@@ -6,7 +6,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
+import withWidth from '@material-ui/core/withWidth';
 import styles, {SidebarTheme} from './sidebarStyle';
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 
 import Brand from './Brand'
 import Switch from '@material-ui/core/Switch';
@@ -41,11 +43,6 @@ interface SidebarProps extends DrawerProps {
    */
   size?: SidebarSize,
 
-  /**
-   * Compact 
-   * @default false
-   */
-  compact?: boolean,
 
   /**
    * 是否显示
@@ -54,14 +51,22 @@ interface SidebarProps extends DrawerProps {
   mobileOpen?: boolean,
 
   /**
+   * 屏幕宽度：xs,sm,md,lg,xl
+   */
+  width?: Breakpoint,
+
+  /**
    * 移动设备，隐藏事件
    */
-  onMobileClose?: ModalProps['onClose']
+  onMobileClose?: ModalProps['onClose'],
 
   /**
    * 侧边栏主题
    */
-  sidebarTheme?: SidebarTheme
+  sidebarTheme?: SidebarTheme,
+
+  onOccupiedWidthChange? (width: number): void,
+  
 }
 
 
@@ -71,21 +76,22 @@ interface SidebarProps extends DrawerProps {
  * @visibleName Sidebar 组件名称
  * @props
  */
-export default function Sidebar( props:SidebarProps = {} ) {
+const Sidebar = function( props:SidebarProps = {} ) {
   const {
     dark = true, 
     size = SidebarSize.medium, 
     mobileOpen = false, 
-    compact = false,
-    onMobileClose, 
+    onMobileClose,
+    onOccupiedWidthChange, 
     sidebarTheme,
+    width,
     ...drawerProps
   } = props
+  const [compact, setCompact] = React.useState(false);
 
   const theme = createMuiTheme({
     palette: {
-        type: dark ? 'dark' : 'light',
-  
+      type: dark ? 'dark' : 'light',
     },
   });
 
@@ -93,9 +99,24 @@ export default function Sidebar( props:SidebarProps = {} ) {
   const useStyles = styles(theme, sidebarTheme)
   const classes = useStyles();
 
+  
+  useEffect(() => {
+      console.log(width, compact)
+      onOccupiedWidthChange && onOccupiedWidthChange(compact ? 60 : 260);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  const handleToggle = ()=>{
+    setCompact(!compact)
+    onOccupiedWidthChange && onOccupiedWidthChange(!compact ? 60 : 260)
+  }
+  
+
   return(
     <ThemeProvider theme={theme}>
-      <Hidden mdUp implementation="css">
+      <Hidden mdUp>
         <Drawer
           {...drawerProps}
           variant="temporary"
@@ -113,7 +134,12 @@ export default function Sidebar( props:SidebarProps = {} ) {
           {props.children}
         </Drawer>
       </Hidden>
-      <Hidden smDown implementation="css">
+      <Hidden smDown>
+        <div style={{
+          width: compact ? 60 : 260 + 'px',
+          transition:"width 0.3s",
+        }}>
+        </div>
         <Drawer
           {...drawerProps}
           variant="permanent"
@@ -126,7 +152,10 @@ export default function Sidebar( props:SidebarProps = {} ) {
             className={classes.background}
           ></div>
           <Brand>
-            <Switch />
+            <Switch 
+              checked={!compact}
+              onClick = {handleToggle} 
+            />
           </Brand>
           {props.children}
         </Drawer>
@@ -137,3 +166,5 @@ export default function Sidebar( props:SidebarProps = {} ) {
   ) 
   
 }
+
+export default withWidth()(Sidebar);
