@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import ListNav from "./components/Sidebar/ListNav"
 
 import image5 from "assets/img/sidebar-5.jpg";
 
@@ -41,7 +42,9 @@ function App() {
           mobileOpen={mobileOpen} 
           size={SidebarSize.large}
           onMobileClose={handleDrawerToggle}
-        >Sidebar</Sidebar>
+        >
+          <ListNav />
+        </Sidebar>
 
         <div style={{display:'flex', flexFlow:'row',
           position:"relative",//marginLeft: sidebarOccupiedWidth + 'px',
