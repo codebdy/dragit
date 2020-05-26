@@ -7,14 +7,13 @@ import { ThemeProvider } from '@material-ui/styles';
 import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
 import styles, {SidebarTheme} from './sidebarStyle';
-import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 
 import Brand from './Brand'
 import Switch from '@material-ui/core/Switch';
 
-//import classNames from "classnames";
-//import PropTypes from "prop-types";
-enum SidebarSize{
+import {sideBarSettings} from "utils";
+
+export enum SidebarSize{
   small = "small",
   medium = "medium",
   large = "large"
@@ -50,11 +49,6 @@ interface SidebarProps extends DrawerProps {
   mobileOpen?: boolean,
 
   /**
-   * 屏幕宽度：xs,sm,md,lg,xl
-   */
-  width?: Breakpoint,
-
-  /**
    * 移动设备，隐藏事件
    */
   onMobileClose?: ModalProps['onClose'],
@@ -80,23 +74,32 @@ const Sidebar = function( props:SidebarProps = {} ) {
     mobileOpen = false, 
     onMobileClose,
     sidebarTheme,
-    width,
     ...drawerProps
   } = props
-  const [compact, setCompact] = React.useState(false);
-
+  const [compactable, setCompactable] = React.useState(false);
+  const [full, setFull] = React.useState(true);
+ 
   const theme = createMuiTheme({
     palette: {
       type: dark ? 'dark' : 'light',
     },
   });
 
+  const width = compactable && !full ? sideBarSettings.sizes['compact'] : sideBarSettings.sizes[size];
 
-  const useStyles = styles(theme, sidebarTheme)
+  const useStyles = styles(theme, width, sidebarTheme)
   const classes = useStyles();
 
   const handleToggle = ()=>{
-    setCompact(!compact)
+    setCompactable(!compactable)
+  }
+
+  const handleMouseEnter = ()=>{
+    compactable && setFull(true)
+  }
+
+  const handleMouseLeave = ()=>{
+    compactable && setFull(false)
   }
 
   return(
@@ -124,24 +127,26 @@ const Sidebar = function( props:SidebarProps = {} ) {
           //左边栏占位DIV，APP基于flex布局
         }
         <div style={{
-          width: compact ? 60 : 260 + 'px',
+          width: compactable ? sideBarSettings.sizes['compact'] : sideBarSettings.sizes[size] + 'px',
           transition:"width 0.3s",
         }}>
         </div>
         <Drawer
           {...drawerProps}
-          variant="permanent"
-          classes={{
+          variant = "permanent"
+          classes = {{
             paper: classNames(classes.drawerPaper)
           }}       
           open
+          onMouseEnter = { handleMouseEnter }
+          onMouseLeave = { handleMouseLeave }
         >
           <div 
             className={classes.background}
           ></div>
           <Brand>
             <Switch 
-              checked={!compact}
+              checked={!compactable}
               onClick = {handleToggle} 
             />
           </Brand>

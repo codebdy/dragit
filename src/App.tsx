@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Sidebar, {createSidebarTheme} from 'components/Sidebar/Sidebar'
+import Sidebar, {createSidebarTheme, SidebarSize} from 'components/Sidebar/Sidebar'
 import { CssBaseline } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -39,10 +39,11 @@ function App() {
         <Sidebar 
           sidebarTheme={sidebarTheme1} 
           mobileOpen={mobileOpen} 
+          size={SidebarSize.large}
           onMobileClose={handleDrawerToggle}
         >Sidebar</Sidebar>
 
-        <div style={{justifyContent:'center', display:'flex', flexFlow:'row',
+        <div style={{display:'flex', flexFlow:'row',
           position:"relative",//marginLeft: sidebarOccupiedWidth + 'px',
           flex:"1",
         }}>

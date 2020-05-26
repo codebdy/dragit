@@ -1,4 +1,4 @@
-const hexToRgb = input => {
+/*const hexToRgb = (input:string) => {
   input = input + "";
   input = input.replace("#", "");
   let hexRegex = /[0-9A-Fa-f]/g;
@@ -22,18 +22,18 @@ const hexToRgb = input => {
     ", " +
     parseInt(last, 16)
   );
-};
+};*/
 
-const SideBarSettings = {
+const sideBarSettings = {
   sizes:{
-    small: 200,
+    small: 240,
     medium: 260,
-    large: 320,
+    large: 280,
     compact: 60,
   }
 };
 
 export{
-  hexToRgb,
-  SideBarSettings,
+  //hexToRgb,
+  sideBarSettings,
 }

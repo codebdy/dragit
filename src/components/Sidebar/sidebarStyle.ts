@@ -29,12 +29,13 @@ export interface SidebarTheme{
 
 }
 
-const sidebarStyle = (theme:Theme, sidebarTheme:SidebarTheme = {})=> makeStyles({
+const sidebarStyle = (theme:Theme, width:number, sidebarTheme:SidebarTheme = {})=> makeStyles({
   drawerPaper:{
-    width:"260px",
+    width:width + "px",
     boxShadow: theme.shadows[20],
     border: 0,
     position:"absolute",
+    transition:'width 0.3s',
   },
 
   background: {
