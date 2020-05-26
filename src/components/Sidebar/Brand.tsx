@@ -10,7 +10,7 @@ export default function Sidebar(
   const {children} = props
   return(
     <div>
-      Brand
+      DragIt
       {children}
     </div>
   )

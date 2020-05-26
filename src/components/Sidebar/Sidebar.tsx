@@ -6,22 +6,26 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
-import { makeStyles} from "@material-ui/core/styles";
-import styles from './sidebarStyle';
+import styles, {SidebarTheme} from './sidebarStyle';
 
 import Brand from './Brand'
 import Switch from '@material-ui/core/Switch';
 
 //import classNames from "classnames";
 //import PropTypes from "prop-types";
-
 enum SidebarSize{
   small = "small",
   medium = "medium",
   large = "large"
 }
 
-const useStyles = makeStyles(styles);
+/**
+ * 侧边栏主题创建函数
+ * @param settings 
+ */
+export function createSidebarTheme(settings = {}) : SidebarTheme{
+  return { dark: true, ...settings }
+}
 
 interface SidebarProps extends DrawerProps {
 
@@ -53,6 +57,11 @@ interface SidebarProps extends DrawerProps {
    * 移动设备，隐藏事件
    */
   onMobileClose?: ModalProps['onClose']
+
+  /**
+   * 侧边栏主题
+   */
+  sidebarTheme?: SidebarTheme
 }
 
 
@@ -69,6 +78,7 @@ export default function Sidebar( props:SidebarProps = {} ) {
     mobileOpen = false, 
     compact = false,
     onMobileClose, 
+    sidebarTheme,
     ...drawerProps
   } = props
 
@@ -78,9 +88,11 @@ export default function Sidebar( props:SidebarProps = {} ) {
   
     },
   });
-  //console.log(theme)
 
+
+  const useStyles = styles(theme, sidebarTheme)
   const classes = useStyles();
+
   return(
     <ThemeProvider theme={theme}>
       <Hidden mdUp implementation="css">
@@ -107,9 +119,12 @@ export default function Sidebar( props:SidebarProps = {} ) {
           variant="permanent"
           classes={{
             paper: classNames(classes.drawerPaper)
-          }}          
+          }}       
           open
         >
+          <div 
+            className={classes.background}
+          ></div>
           <Brand>
             <Switch />
           </Brand>
