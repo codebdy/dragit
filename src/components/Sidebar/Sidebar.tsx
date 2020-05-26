@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Drawer, {DrawerProps} from "@material-ui/core/Drawer";
 //classnames 跟@types/classnames两个都要安装才行
 import classNames from "classnames";
@@ -6,7 +6,6 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
-import withWidth from '@material-ui/core/withWidth';
 import styles, {SidebarTheme} from './sidebarStyle';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 
@@ -64,8 +63,6 @@ interface SidebarProps extends DrawerProps {
    * 侧边栏主题
    */
   sidebarTheme?: SidebarTheme,
-
-  onOccupiedWidthChange? (width: number): void,
   
 }
 
@@ -82,7 +79,6 @@ const Sidebar = function( props:SidebarProps = {} ) {
     size = SidebarSize.medium, 
     mobileOpen = false, 
     onMobileClose,
-    onOccupiedWidthChange, 
     sidebarTheme,
     width,
     ...drawerProps
@@ -99,20 +95,9 @@ const Sidebar = function( props:SidebarProps = {} ) {
   const useStyles = styles(theme, sidebarTheme)
   const classes = useStyles();
 
-  
-  useEffect(() => {
-      console.log(width, compact)
-      onOccupiedWidthChange && onOccupiedWidthChange(compact ? 60 : 260);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
   const handleToggle = ()=>{
     setCompact(!compact)
-    onOccupiedWidthChange && onOccupiedWidthChange(!compact ? 60 : 260)
   }
-  
 
   return(
     <ThemeProvider theme={theme}>
@@ -167,4 +152,4 @@ const Sidebar = function( props:SidebarProps = {} ) {
   
 }
 
-export default withWidth()(Sidebar);
+export default Sidebar;

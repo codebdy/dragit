@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button'
 import MenuIcon from '@material-ui/icons/Menu';
+import Hidden from '@material-ui/core/Hidden';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -19,16 +20,10 @@ const sidebarTheme1 = createSidebarTheme({
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [sidebarOccupiedWidth, setSidebarOccupiedWidth] = React.useState(0);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const handleOccupiedWidthChange = (width:number)=>{
-    //console.log(width)
-    setSidebarOccupiedWidth(width)
-  }
 
   const theme2 = createMuiTheme({
     palette: {
@@ -45,7 +40,6 @@ function App() {
           sidebarTheme={sidebarTheme1} 
           mobileOpen={mobileOpen} 
           onMobileClose={handleDrawerToggle}
-          onOccupiedWidthChange={handleOccupiedWidthChange} 
         >Sidebar</Sidebar>
 
         <div style={{justifyContent:'center', display:'flex', flexFlow:'row',
@@ -54,6 +48,7 @@ function App() {
         }}>
           <AppBar position="absolute">
             <Toolbar>
+            <Hidden mdUp>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -62,6 +57,7 @@ function App() {
               >
                 <MenuIcon />
               </IconButton>
+            </Hidden>
                 Responsive drawer
             </Toolbar>
           </AppBar>
