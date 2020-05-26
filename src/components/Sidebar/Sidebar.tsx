@@ -120,6 +120,9 @@ const Sidebar = function( props:SidebarProps = {} ) {
         </Drawer>
       </Hidden>
       <Hidden smDown>
+        {
+          //左边栏占位DIV，APP基于flex布局
+        }
         <div style={{
           width: compact ? 60 : 260 + 'px',
           transition:"width 0.3s",
