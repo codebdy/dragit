@@ -23,6 +23,15 @@ const useStyles = makeStyles((theme: Theme) =>
     subHeader:{
       display:'flex',
       justifyContent:'start',
+      letterSpacing:'0.05rem',
+    },
+    listItem:{
+      paddingTop: theme.spacing(1.5),
+      paddingBottom: theme.spacing(1.5),
+    },
+    itemText:{
+      fontSize: '0.9rem',
+      letterSpacing:'0.05rem',
     },
     nested: {
       paddingLeft: theme.spacing(4),
@@ -48,19 +57,21 @@ export default function ListNav() {
       >
           Nested List Items
         </ListSubheader>
-      <ListItem button>
+      <ListItem button className = {classes.listItem}>
         <ListItemIcon>
           <SendIcon />
         </ListItemIcon>
-        <ListItemText primary="Sent mail" />
+        <ListItemText primary={<span className = {classes.itemText}>仪表盘</span>}>
+          
+        </ListItemText>
       </ListItem>
-      <ListItem button>
+      <ListItem button className = {classes.listItem}>
         <ListItemIcon>
           <DraftsIcon />
         </ListItemIcon>
-        <ListItemText primary="Drafts" />
+        <ListItemText className = {classes.itemText} primary={<span className = {classes.itemText}>Draft</span>} />
       </ListItem>
-      <ListItem button onClick={handleClick}>
+      <ListItem button className = {classes.listItem} onClick={handleClick}>
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
