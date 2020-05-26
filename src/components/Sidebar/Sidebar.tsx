@@ -118,7 +118,11 @@ const Sidebar = function( props:SidebarProps = {} ) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <Brand></Brand>
+          <div 
+            className={classes.background}
+          >
+          </div>
+            <Brand></Brand>
           {props.children}
         </Drawer>
       </Hidden>
