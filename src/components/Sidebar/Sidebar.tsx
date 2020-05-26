@@ -85,9 +85,11 @@ const Sidebar = function( props:SidebarProps = {} ) {
     },
   });
 
-  const width = compactable && !full ? sideBarSettings.sizes['compact'] : sideBarSettings.sizes[size];
+  const fullWidth = sideBarSettings.sizes[size]
 
-  const useStyles = styles(theme, width, sidebarTheme)
+  const width = compactable && !full ? sideBarSettings.sizes['compact'] : fullWidth;
+
+  const useStyles = styles(theme, width, fullWidth, sidebarTheme)
   const classes = useStyles();
 
   const handleToggle = ()=>{
@@ -112,7 +114,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
           open={mobileOpen}
           onClose={onMobileClose}
           classes={{
-            paper: classNames(classes.drawerPaper)
+            paper: classNames(classes.drawerPaper, classes.drawerPaperMobile)
           }}          
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
@@ -122,7 +124,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
             className={classes.background}
           >
           </div>
-            <Brand></Brand>
+            <Brand fullWidth={fullWidth}></Brand>
           {props.children}
         </Drawer>
       </Hidden>
@@ -131,7 +133,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
           //左边栏占位DIV，APP基于flex布局
         }
         <div style={{
-          width: compactable ? sideBarSettings.sizes['compact'] : sideBarSettings.sizes[size] + 'px',
+          width: compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
           transition:"width 0.3s",
         }}>
         </div>
@@ -148,7 +150,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
           <div 
             className={classes.background}
           ></div>
-          <Brand>
+          <Brand fullWidth={fullWidth}>
             <Switch 
               checked={!compactable}
               onClick = {handleToggle} 

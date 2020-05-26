@@ -29,7 +29,7 @@ const sideBarSettings = {
     small: 240,
     medium: 260,
     large: 280,
-    compact: 60,
+    compact: 70,
   }
 };
 
