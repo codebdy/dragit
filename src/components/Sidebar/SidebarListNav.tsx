@@ -131,9 +131,11 @@ export default function SidebarListNav(props : SidebarListNavProps) {
           <List component="div" className={classNames({[classes.nested]: !props.isMini}, classes.nestedList)}>
             <ListItem button >
               <ListItemIcon className={classes.bullet}>
-                <SvgIcon>
-                  <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                </SvgIcon>
+                <Badge color="secondary" badgeContent={100} invisible={false}>
+                  <SvgIcon>
+                    <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
+                  </SvgIcon>
+                </Badge>
               </ListItemIcon>
               <ListItemText primary="Starred1" />
             </ListItem>
