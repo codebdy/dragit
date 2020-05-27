@@ -16,6 +16,7 @@
     "classnames": "^2.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-perfect-scrollbar": "^1.5.8",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5"
   },

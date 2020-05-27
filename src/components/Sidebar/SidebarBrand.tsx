@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       padding: '20px 17px',
       paddingRight: '10px',
+      height:'100px',
     },
     logo:{
       display:'flex',

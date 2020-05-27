@@ -37,6 +37,8 @@ const sidebarStyle = (theme:Theme, width:number, fullWidth:number, sidebarTheme:
     position:"absolute",
     transition:'width 0.3s',
     overflowX:'hidden',
+    display:'flex',
+    flexFlow:'column',
   },
 
   drawerPaperMobile:{
