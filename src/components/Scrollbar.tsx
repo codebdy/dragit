@@ -25,20 +25,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
     scrollX:{
       overflowX: 'auto',
+      overflowY:'hidden',
     },
 
     scrollY:{
       overflowY: 'auto',
+      overflowX: 'hidden',
     },
-    
-    lightTheme:{
-
-    },
-
-    darkTheme:{
-
-    },
-
+   
   }),
 );
 
