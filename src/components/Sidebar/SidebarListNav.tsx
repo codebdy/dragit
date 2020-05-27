@@ -19,8 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      //backgroundColor: theme.palette.background.paper,
-      transition:'all 0.3s',
       paddingLeft:'8px',
     },
     subHeader:{
@@ -37,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: theme.spacing(4),
     },
 
+    nestedList:{
+      transition:'all 0.3s',
+    },
+
     indicator:{
       transition:"all 0.3s",
     },
@@ -46,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     bullet:{
-      minWidth:'41px',
+      minWidth:'46px',
     },
 
     scrollable:{
@@ -76,7 +78,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
         component="nav"
         className={classes.root}
         style={{
-          width: (props.fullWidth -5) + 'px',
+          width: (props.fullWidth -7) + 'px',
         }}
       >
         {!props.isMini && <ListSubheader component="div"
@@ -110,8 +112,8 @@ export default function SidebarListNav(props : SidebarListNavProps) {
           />
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
+          <List component="div" className={classNames({[classes.nested]: !props.isMini}, classes.nestedList)}>
+            <ListItem button >
               <ListItemIcon className={classes.bullet}>
                 <SvgIcon>
                   <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
@@ -119,7 +121,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
               </ListItemIcon>
               <ListItemText primary="Starred1" />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem button>
               <ListItemIcon className={classes.bullet}>
                 <SvgIcon>
                   <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
@@ -127,7 +129,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
               </ListItemIcon>
               <ListItemText primary="Starred2" />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem button>
               <ListItemIcon className={classes.bullet}>
               <SvgIcon>
                   <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
@@ -135,7 +137,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
               </ListItemIcon>
               <ListItemText primary="Starred3" />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem button>
               <ListItemIcon className={classes.bullet}>
               <SvgIcon>
                   <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
@@ -143,7 +145,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
               </ListItemIcon>
               <ListItemText primary="Starred4" />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem button>
               <ListItemIcon className={classes.bullet}>
               <SvgIcon>
                   <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
@@ -151,7 +153,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
               </ListItemIcon>
               <ListItemText primary="Starred5" />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem button >
               <ListItemIcon className={classes.bullet}>
               <SvgIcon>
                   <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
@@ -159,7 +161,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
               </ListItemIcon>
               <ListItemText primary="Starred6" />
             </ListItem>
-            <ListItem button className={classes.nested}>
+            <ListItem button>
               <ListItemIcon >
                 <StarBorder />
               </ListItemIcon>
@@ -170,8 +172,8 @@ export default function SidebarListNav(props : SidebarListNavProps) {
           />
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding className={classes.nested}>
-                <ListItem button className={classes.nested}>
+              <List component="div" disablePadding className={props.isMini ? '' : classes.nested}>
+                <ListItem button>
                   <ListItemIcon className={classes.bullet}>
                   <SvgIcon>
                       <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
@@ -179,7 +181,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
                   </ListItemIcon>
                   <ListItemText primary="Starred6" />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem button >
                   <ListItemIcon className={classes.bullet}>
                   <SvgIcon>
                       <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
