@@ -70,6 +70,7 @@ export default function ListNav() {
         className={classes.root}
       >
         <ListSubheader component="div"
+          disableSticky
           className = {classes.subHeader}
         >
             Nested List Items
