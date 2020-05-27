@@ -2,7 +2,7 @@ import React from "react";
 import Drawer, {DrawerProps} from "@material-ui/core/Drawer";
 //classnames 跟@types/classnames两个都要安装才行
 import classNames from "classnames";
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
@@ -79,7 +79,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
   const [compactable, setCompactable] = React.useState(false);
   const [full, setFull] = React.useState(true);
  
-  const theme = createMuiTheme({
+  const theme = responsiveFontSizes(createMuiTheme({
     palette: {
       type: dark ? 'dark' : 'light',
     },
@@ -92,7 +92,9 @@ const Sidebar = function( props:SidebarProps = {} ) {
       },
 
     },
-  });
+  }));
+
+  
 
   const fullWidth = sideBarSettings.sizes[size]
 

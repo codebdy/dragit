@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import classNames from "classnames";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,29 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
     scrollable:{
       flex:1,
       position: 'relative',
-     
-/*      '&::-webkit-scrollbar': {
-        width: '0.3rem',
-        height: '0.3rem',
-        display: 'none',
-      },
-
-      '&:over':{
-        '&::-webkit-scrollbar': {
-          display: 'block',
-        },
-  
-      },
-
-      '&::-webkit-scrollbar-track': {
-        borderRadius: '0.2rem',
-      }, 
-
-     '&::-webkit-scrollbar-thumb': {
-        borderRadius: '0.2rem',
-        background: 'rgba(255,255,255, 0.2)',
-        transition: 'all .2s',
-      },*/
     },
 
     scrollX:{
@@ -78,15 +55,22 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
   } = props
   const classes = useStyles();
 
+  const theme = useTheme()
+
   return (
     <div 
       className={
-        classNames('dragit-scrollbar', classes.scrollable, {
-          [classes.shellX]:scrollX,
-          [classes.shellY]:scrollY,
-      })
-    }
->
+        classNames(
+          'dragit-scrollbar', 
+          theme.palette.type === 'light' ? 'light' :'',
+          classes.scrollable, 
+          {
+            [classes.shellX]:scrollX,
+            [classes.shellY]:scrollY,
+          }
+        )
+      }
+    >
       <div
         className={
           classNames(classes.scrollable, {

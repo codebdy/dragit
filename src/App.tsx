@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button'
 import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import ListNav from "./components/Sidebar/SidebarListNav"
 
@@ -26,12 +26,12 @@ function App() {
     setMobileOpen(!mobileOpen);
   };
 
-  const theme2 = createMuiTheme({
+  const theme2 = responsiveFontSizes(createMuiTheme({
     palette: {
         type: 'light',
   
     },
-  });
+  }));
 
   return (
     <ThemeProvider theme={theme2}>
