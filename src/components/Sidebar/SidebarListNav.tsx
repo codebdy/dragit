@@ -14,6 +14,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { SvgIcon } from '@material-ui/core';
 import classNames from "classnames";
 import Scrollbar from "../Scrollbar";
+import Badge from '@material-ui/core/Badge';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,7 +69,7 @@ interface SidebarListNavProps{
 export default function SidebarListNav(props : SidebarListNavProps) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-
+  
   const handleClick = () => {
     setOpen(!open);
   };
@@ -97,15 +99,29 @@ export default function SidebarListNav(props : SidebarListNavProps) {
         </ListItem>
         <ListItem button className = {classes.listItem}>
           <ListItemIcon>
+          <Badge color="secondary" badgeContent={100} invisible={false}>
             <DraftsIcon />
+          </Badge>
           </ListItemIcon>
           <ListItemText primary='Draft' />
+          <Chip
+            size="small"
+            label="新"
+            clickable
+            color="primary"
+          />          
         </ListItem>
         <ListItem button className = {classes.listItem} onClick={handleClick}>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="Inbox" />
+          <Chip
+            size="small"
+            label="热"
+            clickable
+            color="secondary"
+          />    
           <ChevronRightIcon className={
                 classNames(classes.indicator, {[classes.opend] : open}) 
               } 
@@ -123,17 +139,13 @@ export default function SidebarListNav(props : SidebarListNavProps) {
             </ListItem>
             <ListItem button>
               <ListItemIcon className={classes.bullet}>
-                <SvgIcon>
-                  <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                </SvgIcon>
+                 <span style={{marginLeft:'5px'}}>编</span>
               </ListItemIcon>
               <ListItemText primary="Starred2" />
             </ListItem>
             <ListItem button>
               <ListItemIcon className={classes.bullet}>
-              <SvgIcon>
-                  <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                </SvgIcon>
+              <span style={{marginLeft:'5px'}}>表</span>
               </ListItemIcon>
               <ListItemText primary="Starred3" />
             </ListItem>
