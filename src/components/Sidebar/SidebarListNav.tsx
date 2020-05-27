@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       //backgroundColor: theme.palette.background.paper,
+      transition:'all 0.3s',
+      paddingLeft:'8px',
     },
     subHeader:{
       display:'flex',
@@ -74,8 +76,7 @@ export default function SidebarListNav(props : SidebarListNavProps) {
         component="nav"
         className={classes.root}
         style={{
-          width: props.fullWidth + 'px',
-          marginLeft: props.isMini ? '10px' :'',
+          width: (props.fullWidth -5) + 'px',
         }}
       >
         {!props.isMini && <ListSubheader component="div"

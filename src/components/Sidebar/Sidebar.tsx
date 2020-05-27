@@ -161,6 +161,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
         >
           <div 
             className={classes.background}
+            style={{width:fullWidth+'px'}}
           ></div>
           <Brand fullWidth={fullWidth}>
             <Switch 
