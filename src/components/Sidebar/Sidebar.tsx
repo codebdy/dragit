@@ -8,7 +8,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
 import styles, {SidebarTheme} from './sidebarStyle';
 
-import Brand from './Brand'
+import Brand from './SidebarBrand'
 import Switch from '@material-ui/core/Switch';
 
 import {sideBarSettings} from "utils";

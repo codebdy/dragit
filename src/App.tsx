@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import ListNav from "./components/Sidebar/ListNav"
+import ListNav from "./components/Sidebar/SidebarListNav"
 
 import image5 from "assets/img/sidebar-5.jpg";
 
