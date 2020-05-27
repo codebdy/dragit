@@ -13,7 +13,7 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { SvgIcon } from '@material-ui/core';
 import classNames from "classnames";
-import Scrollbar from "../Scrollbar"
+import Scrollbar from "../Scrollbar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,7 +55,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ListNav() {
+interface SidebarListNavProps{
+  fullWidth:number,
+  isMini:boolean,
+}
+
+export default function SidebarListNav(props : SidebarListNavProps) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
@@ -68,13 +73,17 @@ export default function ListNav() {
       <List
         component="nav"
         className={classes.root}
+        style={{
+          width: props.fullWidth + 'px',
+          marginLeft: props.isMini ? '10px' :'',
+        }}
       >
-        <ListSubheader component="div"
+        {!props.isMini && <ListSubheader component="div"
           disableSticky
           className = {classes.subHeader}
         >
             Nested List Items
-          </ListSubheader>
+          </ListSubheader>}
         <ListItem button className = {classes.listItem}>
           <ListItemIcon>
             <SendIcon />

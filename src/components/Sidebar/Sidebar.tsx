@@ -10,6 +10,7 @@ import styles, {SidebarTheme} from './sidebarStyle';
 
 import Brand from './SidebarBrand'
 import Switch from '@material-ui/core/Switch';
+import ListNav from "./SidebarListNav"
 
 import {sideBarSettings} from "utils";
 
@@ -135,8 +136,8 @@ const Sidebar = function( props:SidebarProps = {} ) {
             className={classes.background}
           >
           </div>
-            <Brand fullWidth={fullWidth}></Brand>
-          {props.children}
+          <Brand fullWidth={fullWidth}></Brand>
+          <ListNav isMini ={false} fullWidth={fullWidth} />  
         </Drawer>
       </Hidden>
       <Hidden smDown>
@@ -167,7 +168,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
               onClick = {handleToggle} 
             />
           </Brand>
-          {props.children}
+          <ListNav isMini ={compactable && !full} fullWidth={fullWidth} />
         </Drawer>
       </Hidden>
     
