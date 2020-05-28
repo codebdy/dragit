@@ -32,13 +32,17 @@ export interface SidebarTheme{
 const sidebarStyle = (theme:Theme, width:number, fullWidth:number, sidebarTheme:SidebarTheme = {})=> makeStyles({
   drawerPaper:{
     width:width + "px",
-    boxShadow: theme.shadows[20],
+    
     border: 0,
     position:"absolute",
-    transition:'width 0.3s',
     overflowX:'hidden',
     display:'flex',
     flexFlow:'column',
+    transition: "all 0.3s",
+  },
+
+  boxShadow:{
+    boxShadow: theme.shadows[20],
   },
 
   drawerPaperMobile:{

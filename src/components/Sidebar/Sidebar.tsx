@@ -153,7 +153,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
           {...drawerProps}
           variant = "permanent"
           classes = {{
-            paper: classNames(classes.drawerPaper)
+            paper: classNames(classes.drawerPaper, {[classes.boxShadow]:compactable})
           }}       
           open
           onMouseEnter = { handleMouseEnter }
@@ -163,7 +163,7 @@ const Sidebar = function( props:SidebarProps = {} ) {
             className={classes.background}
             style={{width:fullWidth+'px'}}
           ></div>
-          <Brand fullWidth={fullWidth}>
+          <Brand fullWidth={fullWidth} floatUp={compactable}>
             <Switch 
               checked={!compactable}
               onClick = {handleToggle} 
