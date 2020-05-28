@@ -1,5 +1,5 @@
 import React from "react";
-import Drawer, {DrawerProps} from "@material-ui/core/Drawer";
+import Drawer from "@material-ui/core/Drawer";
 //classnames 跟@types/classnames两个都要安装才行
 import classNames from "classnames";
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
@@ -13,6 +13,7 @@ import Switch from '@material-ui/core/Switch';
 import ListNav from "./SidebarListNav"
 
 import {sideBarSettings} from "utils";
+import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{
   small = "small",
@@ -27,9 +28,27 @@ export enum SidebarSize{
 export function createSidebarTheme(settings = {}) : SidebarTheme{
   return { dark: true, ...settings }
 }
+interface RootState {
+  drawer: Array<Object>
+}
 
-interface SidebarProps extends DrawerProps {
+const mapStateToProps = (state: RootState) => {
+  return {
+    items: state.drawer
+  }
+}
 
+const mapDispatchToProps = () => {
+  return {
+
+  }
+}
+
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type SidebarProps = PropsFromRedux & {
   /**
    * if is it dark theme
    * @default true
@@ -58,7 +77,11 @@ interface SidebarProps extends DrawerProps {
    * 侧边栏主题
    */
   sidebarTheme?: SidebarTheme,
-  
+
+  /**
+   * 菜单项，树形结构
+   */
+  items?:Array<Object>,
 }
 
 
@@ -68,14 +91,14 @@ interface SidebarProps extends DrawerProps {
  * @visibleName Sidebar 组件名称
  * @props
  */
-const Sidebar = function( props:SidebarProps = {} ) {
+const Sidebar = function( props:SidebarProps ) {
   const {
     dark = true, 
     size = SidebarSize.medium, 
     mobileOpen = false, 
     onMobileClose,
     sidebarTheme,
-    ...drawerProps
+    items = []
   } = props
   const [compactable, setCompactable] = React.useState(false);
   const [full, setFull] = React.useState(true);
@@ -120,7 +143,6 @@ const Sidebar = function( props:SidebarProps = {} ) {
     <ThemeProvider theme={theme}>
       <Hidden mdUp>
         <Drawer
-          {...drawerProps}
           variant="temporary"
           anchor="left"
           open={mobileOpen}
@@ -137,7 +159,10 @@ const Sidebar = function( props:SidebarProps = {} ) {
           >
           </div>
           <Brand fullWidth={fullWidth}></Brand>
-          <ListNav isMini ={false} fullWidth={fullWidth} />  
+          <ListNav 
+            isMini ={false} fullWidth={fullWidth}
+            items = {items}  
+          />  
         </Drawer>
       </Hidden>
       <Hidden smDown>
@@ -150,7 +175,6 @@ const Sidebar = function( props:SidebarProps = {} ) {
         }}>
         </div>
         <Drawer
-          {...drawerProps}
           variant = "permanent"
           classes = {{
             paper: classNames(classes.drawerPaper, {[classes.boxShadow]:compactable})
@@ -169,7 +193,10 @@ const Sidebar = function( props:SidebarProps = {} ) {
               onClick = {handleToggle} 
             />
           </Brand>
-          <ListNav isMini ={compactable && !full} fullWidth={fullWidth} />
+          <ListNav 
+            isMini ={compactable && !full} fullWidth={fullWidth}
+            items = {items} 
+          />
         </Drawer>
       </Hidden>
     
@@ -179,4 +206,5 @@ const Sidebar = function( props:SidebarProps = {} ) {
   
 }
 
-export default Sidebar;
+
+export default connector(Sidebar)

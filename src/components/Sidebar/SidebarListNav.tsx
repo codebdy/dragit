@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface SidebarListNavProps{
   fullWidth:number,
   isMini:boolean,
+  items?:Array<Object>,
 }
 
 export default function SidebarListNav(props : SidebarListNavProps) {
