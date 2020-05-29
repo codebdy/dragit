@@ -1,19 +1,19 @@
 import { handleAction } from 'redux-actions';
-import { getSidebarItems } from '../actions';
+import {getMenuItemsRequestAction} from "./actions";
 
 const initialState = {
   items: [],
 };
 
-const sidebar = handleAction(getSidebarItems, (state, action) => {
+const sidebar = handleAction(getMenuItemsRequestAction, (state, action) => {
   return {
     ...state,
-    sidebar: [
+    menuItems: [
       {
         id:"1",
         name:"vular-menu-item",
         prependIcon:'mdi-speedometer',
-        title:'仪表盘',
+        title:'测试菜单',
         active:true,
         to:{name:'dashboard'},
       },

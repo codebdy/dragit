@@ -10,14 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import sidebar from './reducers/sidebar'
+import { useDispatch } from 'react-redux'
 
 import image5 from "assets/img/sidebar-5.jpg";
-import {getSidebarItems} from "./actions"
+import {getMenuItemsRequestAction} from "store/menu/actions"
 
-let store = createStore(sidebar)
 
 const sidebarTheme1 = createSidebarTheme({
   backgroundImage: image5,
@@ -30,10 +27,12 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const dispatch = useDispatch()
 
   useEffect(() => {
     console.log('App Init')
-    store.dispatch(getSidebarItems())
+    dispatch(getMenuItemsRequestAction())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   const theme2 = responsiveFontSizes(createMuiTheme({
@@ -43,7 +42,7 @@ function App() {
   }));
 
   return (
-    <Provider store={store}>
+
       <ThemeProvider theme={theme2}>
         <div className="App" style={{display:'flex', flexFlow:'row',width:'100vw', height:'100vh' }}>
           <CssBaseline />      
@@ -96,7 +95,7 @@ function App() {
 
       </ThemeProvider>
 
-    </Provider>
+    
   );
 }
 

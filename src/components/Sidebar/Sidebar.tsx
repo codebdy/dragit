@@ -29,12 +29,13 @@ export function createSidebarTheme(settings = {}) : SidebarTheme{
   return { dark: true, ...settings }
 }
 interface RootState {
-  sidebar: Array<Object>
+  menu:any,
 }
 
 const mapStateToProps = (state: RootState) => {
+  console.log(state)
   return {
-    items: state.sidebar
+    items: state.menu.menuItems
   }
 }
 

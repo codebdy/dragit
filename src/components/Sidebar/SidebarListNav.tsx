@@ -77,7 +77,10 @@ export default function SidebarListNav(props : SidebarListNavProps) {
 
   const listItems = props.items?.map((item)=>{
     return (
-    <ListItem className = {classes.listItem}>
+    <ListItem 
+      className = {classes.listItem}
+      key = {item.id}
+    >
       {item.title}
     </ListItem>
     )
