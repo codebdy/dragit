@@ -10,10 +10,10 @@ import styles, {SidebarTheme} from './sidebarStyle';
 
 import Brand from './SidebarBrand'
 import Switch from '@material-ui/core/Switch';
-import ListNav from "./SidebarListNav"
+import ListNav from "./SidebarLinks"
 
 import {sideBarSettings} from "utils";
-import { connect, ConnectedProps } from 'react-redux'
+//import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{
   small = "small",
@@ -28,27 +28,27 @@ export enum SidebarSize{
 export function createSidebarTheme(settings = {}) : SidebarTheme{
   return { dark: true, ...settings }
 }
-interface RootState {
-  menu:any,
-}
+//interface RootState {
+//  menu:any,
+//}
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    items: state.menu.menuItems
-  }
-}
+//const mapStateToProps = (state: RootState) => {
+//  return {
+//    items: state.menu.menuItems
+//  }
+//}
 
-const mapDispatchToProps = () => {
-  return {
+//const mapDispatchToProps = () => {
+//  return {
 
-  }
-}
+//  }
+//}
 
 
-const connector = connect(mapStateToProps, mapDispatchToProps)
+//const connector = connect(mapStateToProps, mapDispatchToProps)
 
-type PropsFromRedux = ConnectedProps<typeof connector>
-type SidebarProps = PropsFromRedux & {
+//type PropsFromRedux = ConnectedProps<typeof connector>
+type SidebarProps = /*PropsFromRedux &*/ {
   /**
    * if is it dark theme
    * @default true
@@ -98,7 +98,7 @@ const Sidebar = function( props:SidebarProps ) {
     mobileOpen = false, 
     onMobileClose,
     sidebarTheme,
-    items = []
+    //items = []
   } = props
   const [compactable, setCompactable] = React.useState(false);
   const [full, setFull] = React.useState(true);
@@ -161,7 +161,6 @@ const Sidebar = function( props:SidebarProps ) {
           <Brand fullWidth={fullWidth}></Brand>
           <ListNav 
             isMini ={false} fullWidth={fullWidth}
-            items = {items}  
           />  
         </Drawer>
       </Hidden>
@@ -195,7 +194,6 @@ const Sidebar = function( props:SidebarProps ) {
           </Brand>
           <ListNav 
             isMini ={compactable && !full} fullWidth={fullWidth}
-            items = {items} 
           />
         </Drawer>
       </Hidden>
@@ -206,5 +204,5 @@ const Sidebar = function( props:SidebarProps ) {
   
 }
 
-
-export default connector(Sidebar)
+export default Sidebar
+//export default connector(Sidebar)

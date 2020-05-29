@@ -16,6 +16,7 @@ import classNames from "classnames";
 import Scrollbar from "../Scrollbar";
 import Badge from '@material-ui/core/Badge';
 import Chip from '@material-ui/core/Chip';
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,13 +62,17 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface SidebarListNavProps{
+interface RootState {
+  menu:any,
+}
+
+interface SidebarLinksProps{
   fullWidth:number,
   isMini:boolean,
   items?:Array<any>,
 }
 
-export default function SidebarListNav(props : SidebarListNavProps) {
+export default function SidebarLinks(props : SidebarLinksProps) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   
@@ -75,7 +80,11 @@ export default function SidebarListNav(props : SidebarListNavProps) {
     setOpen(!open);
   };
 
-  const listItems = props.items?.map((item)=>{
+  const selectMenu = (state: RootState) => state.menu
+
+  const menu = useSelector(selectMenu)
+
+  const listItems = menu.menuItems?.map((item:any)=>{
     return (
     <ListItem 
       className = {classes.listItem}
