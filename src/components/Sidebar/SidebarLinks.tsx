@@ -12,6 +12,7 @@ import SendIcon from '@material-ui/icons/Send';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { SvgIcon } from '@material-ui/core';
+import Icon from '@material-ui/core/Icon';
 import classNames from "classnames";
 import Scrollbar from "../Scrollbar";
 import Badge from '@material-ui/core/Badge';
@@ -59,6 +60,9 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowY: 'auto',
       position: 'relative',
     },
+    icon:{
+      fontSize: '24px',
+    }
   }),
 );
 
@@ -87,10 +91,17 @@ export default function SidebarLinks(props : SidebarLinksProps) {
   const listItems = menu.menuItems?.map((item:any)=>{
     return (
     <ListItem 
+      button 
       className = {classes.listItem}
       key = {item.id}
     >
-      {item.title}
+        <ListItemIcon>
+          <i className={classNames(item.icon, classes.icon)}>
+          </i>
+        </ListItemIcon>
+        <ListItemText primary={item.title}>
+          
+        </ListItemText>      
     </ListItem>
     )
   })
@@ -116,7 +127,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
         }
         <ListItem button className = {classes.listItem}>
           <ListItemIcon>
-            <SendIcon />
+            <Icon>home</Icon>
           </ListItemIcon>
           <ListItemText primary='仪表盘'>
             
