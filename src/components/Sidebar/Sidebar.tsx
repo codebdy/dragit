@@ -187,7 +187,7 @@ const Sidebar = function( props:SidebarProps ) {
             className={classes.background}
             style={{width:fullWidth+'px'}}
           ></div>
-          <Brand fullWidth={fullWidth} floatUp={compactable}>
+          <Brand fullWidth={fullWidth}>
             <Switch 
               checked={!compactable}
               onClick = {handleToggle} 

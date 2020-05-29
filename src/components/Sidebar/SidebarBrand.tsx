@@ -25,9 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
     },
     img: {
-      width: "30px",
+      width: "35px",
       top: "22px",
-      marginLeft: "4px",
       verticalAlign: "middle",
       border: "0",
       transition: "all 0.3s",
@@ -38,22 +37,22 @@ const useStyles = makeStyles((theme: Theme) =>
       letterSpacing:"0.15rem",
     },
     
-    floatUpImg:{
-      marginLeft: "3px",
-      width: "31px",
-    }
+    //floatUpImg:{
+    //  marginLeft: "3px",
+    //  width: "31px",
+    //}
   }),
 );
 
 export default function Brand(
   props:BrandProps = {}
 ) {
-  const {fullWidth = 260, floatUp = false, children} = props
+  const {fullWidth = 260, children} = props
   const classes = useStyles();
   return(
     <div className={classes.root} style={{width:fullWidth + 'px'}}>
       <div className={classes.logo}>
-        <img className={classNames(classes.img, {[classes.floatUpImg]:floatUp})} src={logo} alt="logo" />
+        <img className={classNames(classes.img)} src={logo} alt="logo" />
         <div className={classes.logoText}>DragIt</div>
       </div>
       {children}
