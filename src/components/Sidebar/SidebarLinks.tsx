@@ -23,16 +23,17 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      paddingLeft:'8px',
     },
     subHeader:{
       display:'flex',
       justifyContent:'start',
       letterSpacing:'0.05rem',
+      paddingLeft: '26px',
     },
     listItem:{
       paddingTop: theme.spacing(1.5),
       paddingBottom: theme.spacing(1.5),
+      paddingLeft: '23px',
     },
 
     nested: {
