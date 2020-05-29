@@ -2,15 +2,14 @@ import { handleAction } from 'redux-actions';
 import {receivedAction} from "./actions";
 
 const initialState = {
-  items: [],
+  menuItems: [],
 };
 
-const sidebar = handleAction(receivedAction, (state, action) => {
-  console.log('receivedAction', action)
+const menuItems = handleAction(receivedAction, (state, action) => {
   return {
     ...state,
     menuItems: action.payload
   };
 }, initialState);
 
-export default sidebar;
+export default menuItems;

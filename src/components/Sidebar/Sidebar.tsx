@@ -33,7 +33,6 @@ interface RootState {
 }
 
 const mapStateToProps = (state: RootState) => {
-  console.log(state)
   return {
     items: state.menu.menuItems
   }
