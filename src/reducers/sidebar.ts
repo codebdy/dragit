@@ -8,9 +8,16 @@ const initialState = {
 const sidebar = handleAction(getSidebarItems, (state, action) => {
   return {
     ...state,
-    sidebar: {
-      test:'first action test',
-    },
+    sidebar: [
+      {
+        id:"1",
+        name:"vular-menu-item",
+        prependIcon:'mdi-speedometer',
+        title:'仪表盘',
+        active:true,
+        to:{name:'dashboard'},
+      },
+    ],
   };
 }, initialState);
 

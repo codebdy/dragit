@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface SidebarListNavProps{
   fullWidth:number,
   isMini:boolean,
-  items?:Array<Object>,
+  items?:Array<any>,
 }
 
 export default function SidebarListNav(props : SidebarListNavProps) {
@@ -75,6 +75,14 @@ export default function SidebarListNav(props : SidebarListNavProps) {
     setOpen(!open);
   };
 
+  const listItems = props.items?.map((item)=>{
+    return (
+    <ListItem className = {classes.listItem}>
+      {item.title}
+    </ListItem>
+    )
+  })
+
   return (
     <Scrollbar>
       <List
@@ -84,12 +92,16 @@ export default function SidebarListNav(props : SidebarListNavProps) {
           width: (props.fullWidth -7) + 'px',
         }}
       >
-        {!props.isMini && <ListSubheader component="div"
-          disableSticky
-          className = {classes.subHeader}
-        >
-            Nested List Items
-          </ListSubheader>}
+        { listItems }
+
+        {!props.isMini && 
+          <ListSubheader component="div"
+            disableSticky
+            className = {classes.subHeader}
+          >
+              Nested List Items
+          </ListSubheader>
+        }
         <ListItem button className = {classes.listItem}>
           <ListItemIcon>
             <SendIcon />

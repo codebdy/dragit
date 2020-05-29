@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Sidebar, {createSidebarTheme, SidebarSize} from 'components/Sidebar/Sidebar'
 import { CssBaseline } from '@material-ui/core';
@@ -15,6 +15,7 @@ import { createStore } from 'redux'
 import sidebar from './reducers/sidebar'
 
 import image5 from "assets/img/sidebar-5.jpg";
+import {getSidebarItems} from "./actions"
 
 let store = createStore(sidebar)
 
@@ -29,6 +30,11 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    console.log('App Init')
+    store.dispatch(getSidebarItems())
+  },[]);
 
   const theme2 = responsiveFontSizes(createMuiTheme({
     palette: {
