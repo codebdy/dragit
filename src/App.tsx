@@ -13,7 +13,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { useDispatch } from 'react-redux'
 
 import image5 from "assets/img/sidebar-5.jpg";
-import {getMenuItemsRequestAction} from "store/menu/actions"
+import {thunkMenuItems} from "store/menu/actions"
 
 
 const sidebarTheme1 = createSidebarTheme({
@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     console.log('App Init')
-    dispatch(getMenuItemsRequestAction())
+    dispatch(thunkMenuItems())
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 

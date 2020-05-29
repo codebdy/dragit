@@ -1,23 +1,15 @@
 import { handleAction } from 'redux-actions';
-import {getMenuItemsRequestAction} from "./actions";
+import {receivedAction} from "./actions";
 
 const initialState = {
   items: [],
 };
 
-const sidebar = handleAction(getMenuItemsRequestAction, (state, action) => {
+const sidebar = handleAction(receivedAction, (state, action) => {
+  console.log('receivedAction', action)
   return {
     ...state,
-    menuItems: [
-      {
-        id:"1",
-        name:"vular-menu-item",
-        prependIcon:'mdi-speedometer',
-        title:'测试菜单',
-        active:true,
-        to:{name:'dashboard'},
-      },
-    ],
+    menuItems: action.payload
   };
 }, initialState);
 
