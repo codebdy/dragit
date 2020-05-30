@@ -11,6 +11,13 @@ export default [
     title:'仪表盘',
     to:{name:'dashboard'},
     icon:'mdi mdi-speedometer',
+    chip:{
+      props:{
+        color:'primary',
+        label:'新',
+        size:'small',
+      }
+    }
   },
   {
     id:"2",
@@ -37,6 +44,13 @@ export default [
         type:'item',
         to:{name:'dashboard'},
         icon:'mdi mdi-circle-small',
+        badge:{
+          props:{
+            color:'secondary',
+            label:'15',
+            size:'small',
+          }
+        }
       },
     
     ],
@@ -60,6 +74,13 @@ export default [
             type:'item',
             to:{name:'dashboard'},
             icon:'mdi mdi-plus-circle',
+            badge:{
+              props:{
+                color:'secondary',
+                label:'3',
+                size:'small',
+              }
+            }
           },
     
         ]
@@ -79,6 +100,6 @@ export default [
     title:'询盘',
     type:'item',
     to:{name:'dashboard'},
-    icon:'mdi mdi-plus-circle',
+    icon:'mdi mdi-email-outline',
   },
 ]

@@ -6,10 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Icon from '@material-ui/core/Icon';
 import classNames from "classnames";
 import Scrollbar from "../Scrollbar";
 import Badge from '@material-ui/core/Badge';
@@ -110,19 +107,40 @@ function Subheader(props:ListItemProps){
 
 function Item(props:ItemProps){
   const classes = useStyles();
+  const {item, mini, children, onClick} = props
+  const {badge, chip, title, icon} = item
   return (
     <ListItem 
       button 
       className = {classes.listItem}
-      onClick = {props.onClick}
+      onClick = {onClick}
     >
-        {props.item.icon && <ListItemIcon className = {classes.itemIcon}>
-          <i className={classNames(props.item.icon, classes.icon)}>
+        {item.icon && <ListItemIcon className = {classes.itemIcon}>
+
+        {badge ? 
+          <Badge 
+            color={badge.props.color} 
+            badgeContent={badge.props.label} 
+            invisible={!mini}
+          >
+            <i className={classNames(icon, classes.icon)}>
+            </i>
+          </Badge>
+          :
+          <i className={classNames(icon, classes.icon)}>
           </i>
+        }
+
         </ListItemIcon>}
-        <ListItemText primary={props.item.title}>
+        <ListItemText primary={title}>
         </ListItemText>
-        {props.children}      
+        {(badge && !mini) &&
+          <Chip {... badge.props}/>          
+        }
+        {chip&&
+          <Chip {... chip.props}/>          
+        }
+        {children}      
     </ListItem>
   )
 
@@ -203,49 +221,6 @@ export default function SidebarLinks(props : SidebarLinksProps) {
         }}
       >
         { listItems }
-
-        {!props.mini && 
-          <ListSubheader component="div"
-            disableSticky
-            className = {classes.subHeader}
-          >
-              Nested List Items
-          </ListSubheader>
-        }
-        <ListItem button className = {classes.listItem}>
-          <ListItemIcon>
-            <Icon>home</Icon>
-          </ListItemIcon>
-          <ListItemText primary='仪表盘'>
-            
-          </ListItemText>
-        </ListItem>
-        <ListItem button className = {classes.listItem}>
-          <ListItemIcon>
-          <Badge color="secondary" badgeContent={100} invisible={false}>
-            <DraftsIcon />
-          </Badge>
-          </ListItemIcon>
-          <ListItemText primary='Draft' />
-          <Chip
-            size="small"
-            label="新"
-            clickable
-            color="primary"
-          />          
-        </ListItem>
-        <ListItem button className = {classes.listItem}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-          <Chip
-            size="small"
-            label="热"
-            clickable
-            color="secondary"
-          />    
-        </ListItem>
       </List>
     </Scrollbar>
   );
