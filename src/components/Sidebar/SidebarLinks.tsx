@@ -8,9 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import StarBorder from '@material-ui/icons/StarBorder';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { SvgIcon } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import classNames from "classnames";
 import Scrollbar from "../Scrollbar";
@@ -51,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transform:'rotate(90deg)',
     },
 
-    bullet:{
+    itemIcon:{
       minWidth:'46px',
     },
 
@@ -72,13 +70,13 @@ interface RootState {
 
 interface SidebarLinksProps{
   fullWidth:number,
-  isMini:boolean,
+  mini:boolean,
   items?:Array<any>,
 }
 
 interface ListItemProps{
   fullWidth?:number,
-  isMini?:boolean,
+  mini?:boolean,
   nested?:boolean,
   item:any,
 }
@@ -97,7 +95,7 @@ function Subheader(props:ListItemProps){
   const classes = useStyles();
   return (
     <Fragment>
-      {!props.isMini &&
+      {!props.mini &&
         <ListSubheader component="div"
           disableSticky
           className = {classes.subHeader}
@@ -118,10 +116,10 @@ function Item(props:ItemProps){
       className = {classes.listItem}
       onClick = {props.onClick}
     >
-        <ListItemIcon>
+        {props.item.icon && <ListItemIcon className = {classes.itemIcon}>
           <i className={classNames(props.item.icon, classes.icon)}>
           </i>
-        </ListItemIcon>
+        </ListItemIcon>}
         <ListItemText primary={props.item.title}>
         </ListItemText>
         {props.children}      
@@ -145,10 +143,10 @@ function Group(props:GroupProps){
     return (
     <Fragment key={item.id}>
       {
-        item.type === 'subheader' && <Subheader nested item={item} />
+        item.type === 'subheader' && <Subheader nested mini = {props.mini} item={item} />
       }
-      {item.type === 'item' && <Item nested item={item}/>}
-      {item.type === 'group' && <Group nested item={item} onOpened={handleOpened} openedId={openedId}/>}
+      {item.type === 'item' && <Item nested mini = {props.mini} item={item}/>}
+      {item.type === 'group' && <Group nested mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
 
     </Fragment>
     )
@@ -162,7 +160,7 @@ function Group(props:GroupProps){
         />
       </Item>
       <Collapse in={props.openedId === props.item.id} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding className={props.isMini ? '' : classes.nested}>
+        <List component="div" disablePadding className={props.mini ? '' : classes.nested}>
           {listItems}
         </List>
       </Collapse>
@@ -186,10 +184,10 @@ export default function SidebarLinks(props : SidebarLinksProps) {
     return (
     <Fragment key={item.id}>
       {
-        item.type === 'subheader' && <Subheader item={item} />
+        item.type === 'subheader' && <Subheader mini = {props.mini} item={item} />
       }
-      {item.type === 'item' && <Item item={item}/>}
-      {item.type === 'group' && <Group item={item} onOpened={handleOpened} openedId={openedId}/>}
+      {item.type === 'item' && <Item mini = {props.mini} item={item}/>}
+      {item.type === 'group' && <Group mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
 
     </Fragment>
     )
@@ -206,7 +204,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
       >
         { listItems }
 
-        {!props.isMini && 
+        {!props.mini && 
           <ListSubheader component="div"
             disableSticky
             className = {classes.subHeader}

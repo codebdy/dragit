@@ -16,7 +16,7 @@ export default [
     id:"2",
     title:'文章管理',
     type:'group',
-    icon:'mdi mdi-plus-circle',
+    icon:'mdi mdi-text-box-outline',
     children:[
         {
           id:"h2-1",
@@ -29,14 +29,14 @@ export default [
         title:'添加文章',
         type:'item',
         to:{name:'dashboard'},
-        icon:'mdi mdi-plus-circle',
+        icon:'mdi mdi-circle-small',
       },
       {
         id:"2-2",
         title:'文章列表',
         type:'item',
         to:{name:'dashboard'},
-        icon:'mdi mdi-plus-circle',
+        icon:'mdi mdi-circle-small',
       },
     
     ],

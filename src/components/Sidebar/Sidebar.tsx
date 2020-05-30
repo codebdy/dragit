@@ -160,7 +160,7 @@ const Sidebar = function( props:SidebarProps ) {
           </div>
           <Brand fullWidth={fullWidth}></Brand>
           <ListNav 
-            isMini ={false} fullWidth={fullWidth}
+            mini ={false} fullWidth={fullWidth}
           />  
         </Drawer>
       </Hidden>
@@ -193,7 +193,7 @@ const Sidebar = function( props:SidebarProps ) {
             />
           </Brand>
           <ListNav 
-            isMini ={compactable && !full} fullWidth={fullWidth}
+            mini ={compactable && !full} fullWidth={fullWidth}
           />
         </Drawer>
       </Hidden>
