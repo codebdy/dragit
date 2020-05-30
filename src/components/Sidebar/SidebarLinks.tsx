@@ -26,8 +26,10 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: '26px',
     },
     listItem:{
-      paddingTop: theme.spacing(1.5),
-      paddingBottom: theme.spacing(1.5),
+      paddingTop: theme.spacing(1.4),
+      paddingBottom: theme.spacing(1.4),
+      marginTop: theme.spacing(0.2),
+      marginBottom: theme.spacing(0.2),
       paddingLeft: '23px',
       transition: 'all 0.3s',
     },
