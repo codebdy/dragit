@@ -18,7 +18,13 @@ export default [
     type:'group',
     icon:'mdi mdi-plus-circle',
     children:[
-      {
+        {
+          id:"h2-1",
+          //type:subheader, item, group
+          type:'subheader',
+          title:'二级应用',
+        },
+        {
         id:"2-1",
         title:'添加文章',
         type:'item',

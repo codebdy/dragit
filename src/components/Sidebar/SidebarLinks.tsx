@@ -79,6 +79,7 @@ interface SidebarLinksProps{
 interface ListItemProps{
   fullWidth?:number,
   isMini?:boolean,
+  nested?:boolean,
   item:any,
 }
 
@@ -131,10 +132,27 @@ function Item(props:ItemProps){
 
 function Group(props:GroupProps){
   const open = props.openedId === props.item.id
+  const [openedId, setOpenedId] = React.useState('');
+  const handleOpened = (id:string)=>{
+    setOpenedId(id)
+  }
+
   const handleClick = () => {
     open ? props.onOpened('') : props.onOpened(props.item.id)
   };
   const classes = useStyles();
+  const listItems = props.item.children?.map((item:any)=>{
+    return (
+    <Fragment key={item.id}>
+      {
+        item.type === 'subheader' && <Subheader nested item={item} />
+      }
+      {item.type === 'item' && <Item nested item={item}/>}
+      {item.type === 'group' && <Group nested item={item} onOpened={handleOpened} openedId={openedId}/>}
+
+    </Fragment>
+    )
+  })
   return (
     <Fragment>
       <Item item={props.item} onClick={handleClick}>
@@ -145,7 +163,7 @@ function Group(props:GroupProps){
       </Item>
       <Collapse in={props.openedId === props.item.id} timeout="auto" unmountOnExit>
         <List component="div" disablePadding className={props.isMini ? '' : classes.nested}>
-          sfawfew
+          {listItems}
         </List>
       </Collapse>
     </Fragment>
@@ -154,13 +172,8 @@ function Group(props:GroupProps){
 
 export default function SidebarLinks(props : SidebarLinksProps) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
   const [openedId, setOpenedId] = React.useState('');
   
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
   const handleOpened = (id:string)=>{
     setOpenedId(id)
   }
@@ -223,7 +236,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
             color="primary"
           />          
         </ListItem>
-        <ListItem button className = {classes.listItem} onClick={handleClick}>
+        <ListItem button className = {classes.listItem}>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
@@ -234,92 +247,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
             clickable
             color="secondary"
           />    
-          <ChevronRightIcon className={
-                classNames(classes.indicator, {[classes.opend] : open}) 
-              } 
-          />
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" className={classNames({[classes.nested]: !props.isMini}, classes.nestedList)}>
-            <ListItem button >
-              <ListItemIcon className={classes.bullet}>
-                <Badge color="secondary" badgeContent={100} invisible={false}>
-                  <SvgIcon>
-                    <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                  </SvgIcon>
-                </Badge>
-              </ListItemIcon>
-              <ListItemText primary="Starred1" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon className={classes.bullet}>
-                 <span style={{marginLeft:'5px'}}>编</span>
-              </ListItemIcon>
-              <ListItemText primary="Starred2" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon className={classes.bullet}>
-              <span style={{marginLeft:'5px'}}>表</span>
-              </ListItemIcon>
-              <ListItemText primary="Starred3" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon className={classes.bullet}>
-              <SvgIcon>
-                  <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                </SvgIcon>
-              </ListItemIcon>
-              <ListItemText primary="Starred4" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon className={classes.bullet}>
-              <SvgIcon>
-                  <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                </SvgIcon>
-              </ListItemIcon>
-              <ListItemText primary="Starred5" />
-            </ListItem>
-            <ListItem button >
-              <ListItemIcon className={classes.bullet}>
-              <SvgIcon>
-                  <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                </SvgIcon>
-              </ListItemIcon>
-              <ListItemText primary="Starred6" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon >
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Starred7" />
-              <ChevronRightIcon className={
-                classNames(classes.indicator, {[classes.opend] : open}) 
-              } 
-          />
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding className={props.isMini ? '' : classes.nested}>
-                <ListItem button>
-                  <ListItemIcon className={classes.bullet}>
-                  <SvgIcon>
-                      <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                    </SvgIcon>
-                  </ListItemIcon>
-                  <ListItemText primary="Starred6" />
-                </ListItem>
-                <ListItem button >
-                  <ListItemIcon className={classes.bullet}>
-                  <SvgIcon>
-                      <path fill="currentColor" d="M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z" />
-                    </SvgIcon>
-                  </ListItemIcon>
-                  <ListItemText primary="Starred6" />
-                </ListItem>
-              </List>
-
-            </Collapse>
-          </List>
-        </Collapse>
       </List>
     </Scrollbar>
   );
