@@ -11,6 +11,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { useDispatch } from 'react-redux'
+import FixedBar from 'components/FixedBar/FixedBar'
 
 import image5 from "assets/img/sidebar-5.jpg";
 import {thunkMenuItems} from "store/menu/actions"
@@ -90,7 +91,7 @@ function App() {
               <Button> 大</Button>
             </div>
           </div>
-          
+          <FixedBar />
         </div>
 
       </ThemeProvider>
