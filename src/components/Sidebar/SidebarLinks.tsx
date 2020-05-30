@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -29,9 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(1.5),
       paddingBottom: theme.spacing(1.5),
       paddingLeft: '23px',
+      transition: 'all 0.3s',
     },
 
-    nested: {
+     nested: {
       paddingLeft: theme.spacing(4),
     },
 
@@ -43,8 +44,23 @@ const useStyles = makeStyles((theme: Theme) =>
       transition:"all 0.3s",
     },
 
-    opend:{
+    opened:{
       transform:'rotate(90deg)',
+    },
+
+    itemOpened:{
+      background:'rgba(255,255,255, 0.1)',
+      "&:hover,&:focus": {
+        backgroundColor: 'rgba(255,255,255, 0.1)',
+      }
+    },
+
+    itemOpenedLight:{
+      background:'rgba(0,0,0, 0.1)',
+      "&:hover,&:focus": {
+        backgroundColor: 'rgba(0,0,0, 0.1)',
+      }
+
     },
 
     itemIcon:{
@@ -94,6 +110,7 @@ interface ItemProps extends ListItemProps{
   onClick?: ()=>void,
   children?: any,
   dotBadge?:any,
+  className?:string,
 }
 
 interface GroupProps extends ListItemProps{
@@ -120,7 +137,7 @@ function Subheader(props:ListItemProps){
 
 function Item(props:ItemProps){
   const classes = useStyles();
-  const {item, mini, dotBadge, children, onClick} = props
+  const {item, mini, dotBadge, className, children, onClick} = props
   const {badge, chip, title, icon} = item
   let iconTsx = (badge ? 
       <Badge 
@@ -146,7 +163,7 @@ function Item(props:ItemProps){
   return (
     <ListItem 
       button 
-      className = {classes.listItem}
+      className = {classNames(classes.listItem, className)}
       onClick = {onClick}
     >
         {item.icon && <ListItemIcon className = {classes.itemIcon}>
@@ -193,7 +210,9 @@ function Group(props:GroupProps){
     open ? props.onOpened('') : props.onOpened(props.item.id)
   };
   const classes = useStyles();
+  const theme = useTheme()
   const dotBadge = getBadge(props.item.children)
+  const openedClass = theme.palette.type==='dark'? classes.itemOpened : classes.itemOpenedLight
   const listItems = props.item.children?.map((item:ItemJson)=>{
     return (
     <Fragment key={item.id}>
@@ -208,9 +227,9 @@ function Group(props:GroupProps){
   })
   return (
     <Fragment>
-      <Item item={props.item} dotBadge={!open && dotBadge} onClick={handleClick}>
+      <Item className={open ? openedClass :''} item={props.item} dotBadge={!open && dotBadge} onClick={handleClick}>
         <ChevronRightIcon className={
-            classNames(classes.indicator, {[classes.opend] : open}) 
+            classNames(classes.indicator, {[classes.opened] : open}) 
           } 
         />
       </Item>

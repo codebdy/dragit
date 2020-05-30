@@ -59,21 +59,21 @@ export default [
     id:"3",
     title:'多级嵌套',
     type:'group',
-    icon:'mdi mdi-plus-circle',
+    icon:'mdi mdi-file-tree-outline',
     children:[
       {
         id:"3-1",
         title:'层级2',
         type:'group',
         to:{name:'dashboard'},
-        icon:'mdi mdi-plus-circle',
+        icon:'mdi mdi-chart-line',
         children:[
           {
             id:"3-2-1",
             title:'层级3',
             type:'item',
             to:{name:'dashboard'},
-            icon:'mdi mdi-plus-circle',
+            icon:'mdi mdi-brightness-percent',
             badge:{
               props:{
                 color:'secondary',
@@ -90,7 +90,7 @@ export default [
         title:'文章列表',
         type:'item',
         to:{name:'dashboard'},
-        icon:'mdi mdi-plus-circle',
+        icon:'mdi mdi-tree-outline',
       },
     
     ],
