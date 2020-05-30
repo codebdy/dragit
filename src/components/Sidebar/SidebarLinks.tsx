@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { SvgIcon } from '@material-ui/core';
@@ -77,13 +76,94 @@ interface SidebarLinksProps{
   items?:Array<any>,
 }
 
+interface ListItemProps{
+  fullWidth?:number,
+  isMini?:boolean,
+  item:any,
+}
+
+interface ItemProps extends ListItemProps{
+  onClick?: ()=>void,
+  children?:any,
+}
+
+interface GroupProps extends ListItemProps{
+  openedId?:string,
+  onOpened: (id:string)=>void,
+}
+
+function Subheader(props:ListItemProps){
+  const classes = useStyles();
+  return (
+    <Fragment>
+      {!props.isMini &&
+        <ListSubheader component="div"
+          disableSticky
+          className = {classes.subHeader}
+        >
+            {props.item.title}
+        </ListSubheader>
+      }
+
+    </Fragment>
+  )
+}
+
+function Item(props:ItemProps){
+  const classes = useStyles();
+  return (
+    <ListItem 
+      button 
+      className = {classes.listItem}
+      onClick = {props.onClick}
+    >
+        <ListItemIcon>
+          <i className={classNames(props.item.icon, classes.icon)}>
+          </i>
+        </ListItemIcon>
+        <ListItemText primary={props.item.title}>
+        </ListItemText>
+        {props.children}      
+    </ListItem>
+  )
+
+}
+
+function Group(props:GroupProps){
+  const open = props.openedId === props.item.id
+  const handleClick = () => {
+    open ? props.onOpened('') : props.onOpened(props.item.id)
+  };
+  const classes = useStyles();
+  return (
+    <Fragment>
+      <Item item={props.item} onClick={handleClick}>
+        <ChevronRightIcon className={
+            classNames(classes.indicator, {[classes.opend] : open}) 
+          } 
+        />
+      </Item>
+      <Collapse in={props.openedId === props.item.id} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding className={props.isMini ? '' : classes.nested}>
+          sfawfew
+        </List>
+      </Collapse>
+    </Fragment>
+  )  
+}
+
 export default function SidebarLinks(props : SidebarLinksProps) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [openedId, setOpenedId] = React.useState('');
   
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const handleOpened = (id:string)=>{
+    setOpenedId(id)
+  }
 
   const selectMenu = (state: RootState) => state.menu
 
@@ -91,19 +171,14 @@ export default function SidebarLinks(props : SidebarLinksProps) {
 
   const listItems = menu.menuItems?.map((item:any)=>{
     return (
-    <ListItem 
-      button 
-      className = {classes.listItem}
-      key = {item.id}
-    >
-        <ListItemIcon>
-          <i className={classNames(item.icon, classes.icon)}>
-          </i>
-        </ListItemIcon>
-        <ListItemText primary={item.title}>
-          
-        </ListItemText>      
-    </ListItem>
+    <Fragment key={item.id}>
+      {
+        item.type === 'subheader' && <Subheader item={item} />
+      }
+      {item.type === 'item' && <Item item={item}/>}
+      {item.type === 'group' && <Group item={item} onOpened={handleOpened} openedId={openedId}/>}
+
+    </Fragment>
     )
   })
 
