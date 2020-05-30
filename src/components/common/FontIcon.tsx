@@ -1,7 +1,7 @@
 import React from "react";
 
 interface FontIconProps{
-  iconClass:string,
+  iconClass?:string,
   size?:number,
   color?:string,
   backgroundColor?:string,

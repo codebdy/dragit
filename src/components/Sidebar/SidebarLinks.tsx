@@ -59,6 +59,20 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface ItemJson{
+  id: string,
+  type:'subheader' | 'item' | 'group',
+  title?:'仪表盘',
+  icon?:string,
+  badge?:{
+    props:any
+  },
+  chip?:{
+    props:any
+  },
+  children: Array<ItemJson>,
+}
+
 interface RootState {
   menu:any,
 }
@@ -66,19 +80,20 @@ interface RootState {
 interface SidebarLinksProps{
   fullWidth:number,
   mini:boolean,
-  items?:Array<any>,
+  items?:Array<ItemJson>,
 }
 
 interface ListItemProps{
   fullWidth?:number,
   mini?:boolean,
   nested?:boolean,
-  item:any,
+  item:ItemJson,
 }
 
 interface ItemProps extends ListItemProps{
   onClick?: ()=>void,
-  children?:any,
+  children?: any,
+  dotBadge?:any,
 }
 
 interface GroupProps extends ListItemProps{
@@ -105,8 +120,29 @@ function Subheader(props:ListItemProps){
 
 function Item(props:ItemProps){
   const classes = useStyles();
-  const {item, mini, children, onClick} = props
+  const {item, mini, dotBadge, children, onClick} = props
   const {badge, chip, title, icon} = item
+  let iconTsx = (badge ? 
+      <Badge 
+        color={badge.props.color} 
+        badgeContent={badge.props.label} 
+        invisible={!mini || !badge.props.label}
+      >
+        <FontIcon iconClass = {icon} />
+      </Badge>
+      :
+      <FontIcon iconClass = {icon} />
+    )
+  if(dotBadge){
+    iconTsx = (<Badge 
+      color={dotBadge.props.color} 
+      variant="dot"
+      invisible={!dotBadge.props.label}
+    >
+      <FontIcon iconClass = {icon} />
+    </Badge>)
+  }
+
   return (
     <ListItem 
       button 
@@ -114,24 +150,13 @@ function Item(props:ItemProps){
       onClick = {onClick}
     >
         {item.icon && <ListItemIcon className = {classes.itemIcon}>
-
-        {badge ? 
-          <Badge 
-            color={badge.props.color} 
-            badgeContent={badge.props.label} 
-            invisible={!mini}
-          >
-            <FontIcon iconClass = {icon} />
-          </Badge>
-          :
-          <FontIcon iconClass = {icon} />
+          { iconTsx }
+        </ListItemIcon>
         }
-
-        </ListItemIcon>}
         <ListItemText primary={title}>
         </ListItemText>
-        {(badge && !mini) &&
-          <Chip {... badge.props}/>          
+        {(badge && badge.props.label && !mini) &&
+          <Chip {... badge.props} />          
         }
         {chip&&
           <Chip {... chip.props}/>          
@@ -140,6 +165,21 @@ function Item(props:ItemProps){
     </ListItem>
   )
 
+}
+
+function getBadge(children:Array<any>): any{
+  for(let item of children){
+    if(item.badge){
+      return item.badge
+    }
+    if(item.children){
+      let badge = getBadge(item.children)
+      if(badge){
+        return badge
+      }
+    }
+  }
+  return null
 }
 
 function Group(props:GroupProps){
@@ -153,7 +193,8 @@ function Group(props:GroupProps){
     open ? props.onOpened('') : props.onOpened(props.item.id)
   };
   const classes = useStyles();
-  const listItems = props.item.children?.map((item:any)=>{
+  const dotBadge = getBadge(props.item.children)
+  const listItems = props.item.children?.map((item:ItemJson)=>{
     return (
     <Fragment key={item.id}>
       {
@@ -167,7 +208,7 @@ function Group(props:GroupProps){
   })
   return (
     <Fragment>
-      <Item item={props.item} onClick={handleClick}>
+      <Item item={props.item} dotBadge={!open && dotBadge} onClick={handleClick}>
         <ChevronRightIcon className={
             classNames(classes.indicator, {[classes.opend] : open}) 
           } 
@@ -194,7 +235,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
 
   const menu = useSelector(selectMenu)
 
-  const listItems = menu.menuItems?.map((item:any)=>{
+  const listItems = menu.menuItems?.map((item:ItemJson)=>{
     return (
     <Fragment key={item.id}>
       {
