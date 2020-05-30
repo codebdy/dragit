@@ -12,6 +12,7 @@ import Scrollbar from "../Scrollbar";
 import Badge from '@material-ui/core/Badge';
 import Chip from '@material-ui/core/Chip';
 import { useSelector } from "react-redux";
+import FontIcon from "components/common/FontIcon"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,9 +56,6 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowY: 'auto',
       position: 'relative',
     },
-    icon:{
-      fontSize: '24px',
-    }
   }),
 );
 
@@ -123,12 +121,10 @@ function Item(props:ItemProps){
             badgeContent={badge.props.label} 
             invisible={!mini}
           >
-            <i className={classNames(icon, classes.icon)}>
-            </i>
+            <FontIcon iconClass = {icon} />
           </Badge>
           :
-          <i className={classNames(icon, classes.icon)}>
-          </i>
+          <FontIcon iconClass = {icon} />
         }
 
         </ListItemIcon>}
