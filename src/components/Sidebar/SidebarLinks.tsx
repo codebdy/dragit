@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from "classnames";
-import Scrollbar from "../Scrollbar";
+import Scrollbar from "../common/Scrollbar";
 import Badge from '@material-ui/core/Badge';
 import Chip from '@material-ui/core/Chip';
 import { useSelector } from "react-redux";
