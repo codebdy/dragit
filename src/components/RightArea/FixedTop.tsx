@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme: Theme) =>
       top:'0',
       width:'100%',
       minHeight: '50px',
-      border:'solid 1px',
     },
 
   }),

@@ -13,6 +13,10 @@ import Switch from '@material-ui/core/Switch';
 import ListNav from "./SidebarLinks"
 
 import {sideBarSettings} from "utils";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "store";
+import { compactableAction } from "store/sidebar/actions";
+import SidebarWidthPlaceholder from "./SidebarWidthPlaceholder";
 //import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{
@@ -59,7 +63,7 @@ type SidebarProps = /*PropsFromRedux &*/ {
    * Drawer size in open state
    * @default medium
    */
-  size?: SidebarSize,
+  //size?: SidebarSize,
 
 
   /**
@@ -94,13 +98,13 @@ type SidebarProps = /*PropsFromRedux &*/ {
 const Sidebar = function( props:SidebarProps ) {
   const {
     dark = true, 
-    size = SidebarSize.medium, 
+    //size = SidebarSize.medium, 
     mobileOpen = false, 
     onMobileClose,
     sidebarTheme,
     //items = []
   } = props
-  const [compactable, setCompactable] = React.useState(false);
+  //const [compactable, setCompactable] = React.useState(false);
   const [full, setFull] = React.useState(true);
  
   const theme = responsiveFontSizes(createMuiTheme({
@@ -118,17 +122,19 @@ const Sidebar = function( props:SidebarProps ) {
     },
   }));
 
+  const selectSidebar = (state: RootState) => state.sidebar
+  const sidebar = useSelector(selectSidebar)  
+  const compactable = sidebar.compactable
   
+  const fullWidth = sideBarSettings.sizes[sidebar.size]
 
-  const fullWidth = sideBarSettings.sizes[size]
-
-  const width = compactable && !full ? sideBarSettings.sizes['compact'] : fullWidth;
+   const width = compactable && !full ? sideBarSettings.sizes['compact'] : fullWidth;
 
   const useStyles = styles(theme, width, fullWidth, sidebarTheme)
   const classes = useStyles();
-
+  const dispatch = useDispatch()
   const handleToggle = ()=>{
-    setCompactable(!compactable)
+    dispatch(compactableAction())
   }
 
   const handleMouseEnter = ()=>{
@@ -164,15 +170,8 @@ const Sidebar = function( props:SidebarProps ) {
           />  
         </Drawer>
       </Hidden>
+      <SidebarWidthPlaceholder />
       <Hidden smDown>
-        {
-          //左边栏占位DIV，APP基于flex布局
-        }
-        <div style={{
-          width: compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
-          transition:"width 0.3s",
-        }}>
-        </div>
         <Drawer
           variant = "permanent"
           classes = {{

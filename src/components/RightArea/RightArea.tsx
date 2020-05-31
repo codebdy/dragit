@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'relative',
       background: '#f2f4f4',
       width: '0',
-      border: 'solid 1px',
     },
 
   }),
