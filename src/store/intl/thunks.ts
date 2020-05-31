@@ -3,11 +3,12 @@ import { Action } from "redux";
 import { RootState } from "store";
 import axios from 'axios';
 
-import {receivedAction, requestFailureAction} from './actions'
+import {receivedAction, requestFailureAction, loadingAction} from './actions'
 
 const thunkIntl = (lang:string = 'zh-CN'
 ): ThunkAction<void, RootState, null, Action<string>> => {
   return async dispatch => {
+    dispatch(loadingAction())
     axios.get(`locales/${lang}.json`).then(res => {
       dispatch(receivedAction(
         {

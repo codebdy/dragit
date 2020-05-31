@@ -3,14 +3,14 @@ import {receivedAction} from "./actions";
 
 const initialState = {
   menuItems: [],
-  loaded: false,
+  loading: true,
 };
 
 const menuItems = handleAction(receivedAction, (state, action) => {
   return {
     ...state,
     menuItems: action.payload,
-    loaded: true,
+    loading: false,
   };
 }, initialState);
 
