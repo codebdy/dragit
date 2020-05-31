@@ -10,12 +10,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import FixedBar from 'components/FixedBar/FixedBar'
+import Loading from 'components/common/Loading'
 
 import image5 from 'assets/img/sidebar-5.jpg';
 import {thunkMenuItems} from 'store/menu/thunks';
 import {thunkIntl} from 'store/intl/thunks';
+import { RootState } from 'store';
 
 
 const sidebarTheme1 = createSidebarTheme({
@@ -44,9 +46,13 @@ function App() {
     },
   }));
 
-  return (
+  const selectIntl = (state: RootState) => state.intl
 
-      <ThemeProvider theme={theme2}>
+  const intLang = useSelector(selectIntl)
+
+  return (
+    intLang.initDone?
+      (<ThemeProvider theme={theme2}>
         <div className="App" style={{display:'flex', flexFlow:'row',width:'100vw', height:'100vh' }}>
           <CssBaseline />      
           <Sidebar 
@@ -96,8 +102,9 @@ function App() {
           <FixedBar />
         </div>
 
-      </ThemeProvider>
-
+      </ThemeProvider>)
+    :
+    (<Loading />)
     
   );
 }

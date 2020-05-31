@@ -4,8 +4,6 @@ import FontIcon from "components/common/FontIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Paper, Tooltip } from "@material-ui/core";
 import intl from 'react-intl-universal';
-import { RootState } from "store";
-import { useSelector } from "react-redux";
 
 interface FixedBarProps{
 }
@@ -33,11 +31,6 @@ export default function FixedBar(
   props:FixedBarProps = {}
 ) {
   const classes = useStyles();
-  const selectIntl = (state: RootState) => state.intl
-
-  const intLang = useSelector(selectIntl)
-
-  console.log(intLang)
 
   return(
       <Paper  className={classes.root} elevation={20}>

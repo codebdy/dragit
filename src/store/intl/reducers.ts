@@ -2,20 +2,22 @@ import { handleAction } from 'redux-actions';
 import { receivedAction } from "./actions";
 import intl from "react-intl-universal"
 
+
 const initialState = {
-  lang: null,
+  initDone:false,
 };
 
 const lang = handleAction(receivedAction, (state, action) => {
   let currentLocale = action.payload.currentLocale;
+  intl.init({
+    currentLocale,
+    locales: {
+      [currentLocale]: action.payload.locals
+    }
+  })
   return {
     ...state,
-    intl: intl.init({
-      currentLocale,
-      locales: {
-        [currentLocale]: action.payload.locals
-      }
-    })
+    initDone:true,
   };
 }, initialState);
 
