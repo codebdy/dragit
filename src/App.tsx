@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux'
 import FixedBar from 'components/FixedBar/FixedBar'
 
 import image5 from "assets/img/sidebar-5.jpg";
-import {thunkMenuItems} from "store/menu/actions"
+import {thunkMenuItems} from "store/menu/thunks"
 
 
 const sidebarTheme1 = createSidebarTheme({
