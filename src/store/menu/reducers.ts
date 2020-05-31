@@ -1,12 +1,14 @@
-import { handleAction } from 'redux-actions';
-import {receivedAction} from "./actions";
+import { handleAction, Action } from 'redux-actions';
+import {receivedAction, loadingAction} from "./actions";
 
 const initialState = {
   menuItems: [],
   loading: true,
 };
 
-const menuItems = handleAction(receivedAction, (state, action) => {
+type State = typeof initialState
+
+const received = handleAction(receivedAction, (state, action) => {
   return {
     ...state,
     menuItems: action.payload,
@@ -14,4 +16,26 @@ const menuItems = handleAction(receivedAction, (state, action) => {
   };
 }, initialState);
 
-export default menuItems;
+const loading = handleAction(loadingAction, (state, action) => {
+  return {
+    ...state,
+    loading:true,
+  };
+}, initialState);
+
+function reducer(
+  state = initialState,
+  action: Action<any>
+): State {
+  
+  if(action.type === receivedAction().type){
+    return received(state, action)
+  }
+  if(action.type === loadingAction().type){
+    return loading(state, action)
+  }
+
+  return state
+}
+
+export default reducer;

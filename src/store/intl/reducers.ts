@@ -30,11 +30,11 @@ const loading = handleAction(loadingAction, (state, action) => {
 }, initialState);
 
 
-function intlReducer(
+function reducer(
   state = initialState,
   action: Action<any>
 ): State {
-  
+
   if(action.type === receivedAction().type){
     return received(state, action)
   }
@@ -45,4 +45,4 @@ function intlReducer(
   return state
 }
 
-export default intlReducer;
+export default reducer;
