@@ -1,15 +1,22 @@
 import { handleAction } from 'redux-actions';
-import {receivedAction} from "./actions";
+import { receivedAction } from "./actions";
+import intl from "react-intl-universal"
 
 const initialState = {
-  menuItems: [],
+  lang: null,
 };
 
-const menuItems = handleAction(receivedAction, (state, action) => {
+const lang = handleAction(receivedAction, (state, action) => {
+  let currentLocale = action.payload.currentLocale;
   return {
     ...state,
-    menuItems: action.payload
+    intl: intl.init({
+      currentLocale,
+      locales: {
+        [currentLocale]: action.payload.locals
+      }
+    })
   };
 }, initialState);
 
-export default menuItems;
+export default lang;

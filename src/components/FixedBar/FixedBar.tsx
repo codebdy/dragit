@@ -3,6 +3,9 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import FontIcon from "components/common/FontIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Paper, Tooltip } from "@material-ui/core";
+import intl from 'react-intl-universal';
+import { RootState } from "store";
+import { useSelector } from "react-redux";
 
 interface FixedBarProps{
 }
@@ -30,25 +33,31 @@ export default function FixedBar(
   props:FixedBarProps = {}
 ) {
   const classes = useStyles();
+  const selectIntl = (state: RootState) => state.intl
+
+  const intLang = useSelector(selectIntl)
+
+  console.log(intLang)
+
   return(
       <Paper  className={classes.root} elevation={20}>
-        <Tooltip title="布局设计" arrow placement="left">
-          <IconButton aria-label="布局设计">
+        <Tooltip title={intl.get('design-layout')} arrow placement="left">
+          <IconButton aria-label={intl.get('design-layout')}>
             <FontIcon iconClass="mdi mdi-pencil-ruler" />
           </IconButton>
         </Tooltip>
-        <Tooltip title="模块管理" arrow placement="left">
-          <IconButton aria-label="模块管理">
+        <Tooltip title={intl.get('modules')} arrow placement="left">
+          <IconButton aria-label={intl.get('modules')}>
             <FontIcon iconClass="mdi mdi-view-grid-plus" />
           </IconButton>
         </Tooltip>
-        <Tooltip title="设置" arrow placement="left">
-          <IconButton aria-label="设置">
+        <Tooltip title={intl.get('settings')} arrow placement="left">
+          <IconButton aria-label={intl.get('settings')}>
             <FontIcon iconClass="mdi mdi-cog" />
           </IconButton>
         </Tooltip>
-        <Tooltip title="调试" arrow placement="left">
-          <IconButton  aria-label="调试">
+        <Tooltip title={intl.get('debug')} arrow placement="left">
+          <IconButton  aria-label={intl.get('debug')}>
             <FontIcon iconClass="mdi mdi-android-debug-bridge"/>
           </IconButton>
         </Tooltip>

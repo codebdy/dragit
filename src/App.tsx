@@ -13,8 +13,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import { useDispatch } from 'react-redux'
 import FixedBar from 'components/FixedBar/FixedBar'
 
-import image5 from "assets/img/sidebar-5.jpg";
-import {thunkMenuItems} from "store/menu/thunks"
+import image5 from 'assets/img/sidebar-5.jpg';
+import {thunkMenuItems} from 'store/menu/thunks';
+import {thunkIntl} from 'store/intl/thunks';
 
 
 const sidebarTheme1 = createSidebarTheme({
@@ -31,8 +32,9 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('App Init')
-    dispatch(thunkMenuItems())
+    console.log('App Init');
+    dispatch(thunkIntl());
+    dispatch(thunkMenuItems());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
