@@ -19,20 +19,19 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      paddingLeft:'7px',
     },
     subHeader:{
       display:'flex',
       justifyContent:'start',
       letterSpacing:'0.05rem',
-      paddingLeft: '19px',
+      paddingLeft: '26px',
     },
     listItem:{
       paddingTop: theme.spacing(1.4),
       paddingBottom: theme.spacing(1.4),
       marginTop: theme.spacing(0.2),
       marginBottom: theme.spacing(0.2),
-      paddingLeft: '15px',
+      paddingLeft: '23px',
       transition: 'all 0.3s',
     },
 
@@ -277,7 +276,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
         component="nav"
         className={classes.root}
         style={{
-          width: (props.fullWidth -7) + 'px',
+          width: (props.fullWidth) + 'px',
         }}
       >
         {menu.loading?
