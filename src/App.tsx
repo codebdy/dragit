@@ -51,7 +51,7 @@ function App() {
   const intLang = useSelector(selectIntl)
 
   return (
-    intLang.initDone?
+    intLang.loaded?
       (<ThemeProvider theme={theme2}>
         <div className="App" style={{display:'flex', flexFlow:'row',width:'100vw', height:'100vh' }}>
           <CssBaseline />      

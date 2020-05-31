@@ -4,7 +4,7 @@ import intl from "react-intl-universal"
 
 
 const initialState = {
-  initDone:false,
+  loaded:false,
 };
 
 const lang = handleAction(receivedAction, (state, action) => {
@@ -17,7 +17,7 @@ const lang = handleAction(receivedAction, (state, action) => {
   })
   return {
     ...state,
-    initDone:true,
+    loaded:true,
   };
 }, initialState);
 
