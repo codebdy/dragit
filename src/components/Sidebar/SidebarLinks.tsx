@@ -13,6 +13,7 @@ import Badge from '@material-ui/core/Badge';
 import Chip from '@material-ui/core/Chip';
 import { useSelector } from "react-redux";
 import FontIcon from "components/common/FontIcon"
+import LoadingSkeleton from "./LoadingSkeleton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -278,7 +279,12 @@ export default function SidebarLinks(props : SidebarLinksProps) {
           width: (props.fullWidth -7) + 'px',
         }}
       >
-        { listItems }
+        {menu.loading?
+          <LoadingSkeleton/>
+          :
+          listItems
+        }
+
       </List>
     </Scrollbar>
   );
