@@ -2,7 +2,7 @@ import React from "react";
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import FontIcon from "components/common/FontIcon"
 import IconButton from '@material-ui/core/IconButton';
-import { Paper } from "@material-ui/core";
+import { Paper, Tooltip } from "@material-ui/core";
 
 interface FixedBarProps{
 }
@@ -32,21 +32,26 @@ export default function FixedBar(
   const classes = useStyles();
   return(
       <Paper  className={classes.root} elevation={20}>
-        <IconButton aria-label="Design page">
-          <FontIcon iconClass="mdi mdi-pencil-ruler" />
-        </IconButton>
-        <IconButton aria-label="Design page">
-          <FontIcon iconClass="mdi mdi-view-grid-plus" />
-        </IconButton>
-        <IconButton aria-label="Design page">
-          <FontIcon iconClass="mdi mdi-file-tree" />
-        </IconButton>
-        <IconButton aria-label="Design page">
-          <FontIcon iconClass="mdi mdi-cog" />
-        </IconButton>
-        <IconButton  aria-label="Design page">
-          <FontIcon iconClass="mdi mdi-android-debug-bridge"/>
-        </IconButton>
+        <Tooltip title="布局设计" arrow placement="left">
+          <IconButton aria-label="布局设计">
+            <FontIcon iconClass="mdi mdi-pencil-ruler" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="模块管理" arrow placement="left">
+          <IconButton aria-label="模块管理">
+            <FontIcon iconClass="mdi mdi-view-grid-plus" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="设置" arrow placement="left">
+          <IconButton aria-label="设置">
+            <FontIcon iconClass="mdi mdi-cog" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="调试" arrow placement="left">
+          <IconButton  aria-label="调试">
+            <FontIcon iconClass="mdi mdi-android-debug-bridge"/>
+          </IconButton>
+        </Tooltip>
       </Paper >
   )
 }
