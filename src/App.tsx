@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import './App.css';
 import Sidebar, {createSidebarTheme} from 'components/Sidebar/Sidebar'
 import { CssBaseline } from '@material-ui/core';
-import Button from '@material-ui/core/Button'
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux'
@@ -52,7 +51,7 @@ function App() {
       (<Loading />)
     :
       (<ThemeProvider theme={theme2}>
-        <div className="App" style={{display:'flex', flexFlow:'row',width:'100vw', height:'100vh' }}>
+        <div style={{background:'#f2f4f4' }}>
           <CssBaseline />      
           <Sidebar 
             sidebarTheme={sidebarTheme1} 
@@ -62,29 +61,9 @@ function App() {
           />
           <TopNav onSidebarToggle = {handleDrawerToggle}/>
 
-          <div style={{display:'flex', flexFlow:'column',
-            position:"relative",
-            flex:"1",
-          }}>
-            
-
-            <div style={{padding:'20px',display:'flex', flexFlow:'column',}}>
-              <h2>侧边栏主题</h2>
-              <Button> 主题1</Button>
-              <Button> 主题2</Button>
-              <Button> 主题3</Button>
-              <Button> 主题4</Button>
-              <Button> 主题5</Button>
-            </div>
-            <div style={{padding:'20px'}}>
-              <h2>侧边栏背景</h2>
-              <Button> 背景1</Button>
-            </div>
-            <div style={{padding:'20px'}}>
-              <h2>侧边栏大小</h2>
-              <Button> 大</Button>
-            </div>
+          <div style={{ height:'1000px' }}>
           </div>
+
           <FixedBar />
         </div>
 

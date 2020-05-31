@@ -164,7 +164,7 @@ const Sidebar = function( props:SidebarProps ) {
             className={classes.background}
           >
           </div>
-          <Brand fullWidth={fullWidth}></Brand>
+          
           <ListNav 
             mini ={false} fullWidth={fullWidth}
           />  

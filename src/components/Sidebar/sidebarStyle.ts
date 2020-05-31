@@ -34,7 +34,7 @@ const sidebarStyle = (theme:Theme, width:number, fullWidth:number, sidebarTheme:
     width:width + "px",
     
     border: 0,
-    position:"absolute",
+    position:"fixed",
     overflowX:'hidden',
     display:'flex',
     flexFlow:'column',
