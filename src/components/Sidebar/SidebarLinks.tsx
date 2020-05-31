@@ -19,19 +19,20 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      paddingLeft:'7px',
     },
     subHeader:{
       display:'flex',
       justifyContent:'start',
       letterSpacing:'0.05rem',
-      paddingLeft: '26px',
+      paddingLeft: '19px',
     },
     listItem:{
       paddingTop: theme.spacing(1.4),
       paddingBottom: theme.spacing(1.4),
       marginTop: theme.spacing(0.2),
       marginBottom: theme.spacing(0.2),
-      paddingLeft: '23px',
+      paddingLeft: '15px',
       transition: 'all 0.3s',
     },
 
