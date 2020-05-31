@@ -1,10 +1,18 @@
 import React from "react";
-import { makeStyles, createStyles, Theme, Paper } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      flexFlow: 'row',
+      alignItems: 'center',
+      position: 'absolute',
+      left:'0',
+      top:'0',
+      width:'100%',
+      minHeight: '50px',
+      border:'solid 1px',
     },
 
   }),
@@ -13,8 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function FixedTop() {
   const classes = useStyles();
   return (
-    <Paper className = {classes.root}>
+    <div className = {classes.root}>
       Top
-    </Paper>
+    </div>
   )
 }

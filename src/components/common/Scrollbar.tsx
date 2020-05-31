@@ -39,12 +39,14 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ScrollbarProps{
   scrollY?: boolean,
   scrollX?: boolean,
+  className?: string,
   children?: any,
 }
 export default function Scrollbar(props:ScrollbarProps = {}) {
   const {
     scrollX = false, 
     scrollY = true,
+    className,
     children 
   } = props
   const classes = useStyles();
@@ -55,7 +57,8 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
     <div 
       className={
         classNames(
-          'dragit-scrollbar', 
+          'dragit-scrollbar',
+          className, 
           theme.palette.type === 'light' ? 'light' :'',
           classes.scrollable, 
           {
@@ -67,7 +70,7 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
     >
       <div
         className={
-          classNames(classes.scrollable, {
+          classNames(className, classes.scrollable, {
             [classes.scrollX]:scrollX,
             [classes.scrollY]:scrollY,
           })

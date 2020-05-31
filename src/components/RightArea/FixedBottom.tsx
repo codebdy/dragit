@@ -5,6 +5,13 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      flexFlow: 'row',
+      alignItems: 'center',
+      position: 'absolute',
+      left:'0',
+      bottom:'0',
+      width:'100%',
+      minHeight: '50px',
     },
 
   }),
@@ -13,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function FixedBottom() {
   const classes = useStyles();
   return (
-    <Paper className = {classes.root}>
+    <Paper className = {classes.root} square>
       Bottom
     </Paper>
   )
