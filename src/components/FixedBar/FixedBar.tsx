@@ -1,34 +1,26 @@
 import React from "react";
 import { createStyles, Theme, makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import classNames from "classnames";
 import FontIcon from "components/common/FontIcon"
 import IconButton from '@material-ui/core/IconButton';
+import { Paper } from "@material-ui/core";
 
 interface FixedBarProps{
 }
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-  },
-});
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'fixed',
       right:'0',
-      top:'calc(50% - 100px)',
+      top:'calc(50% - 150px)',
       width:'56px',
-      background:'#7367f0',
+      //background:'#121246',
       color:"rgba(255,255,255,1)",
       display: 'flex',
       flexFlow: 'column',
       justifyContent: 'center',
       alignItems:'center',
       borderRadius:'5px 0 0 5px',
-      boxShadow:theme.shadows[15],
       padding:'10px 0',
     },
   }),
@@ -39,13 +31,12 @@ export default function FixedBar(
 ) {
   const classes = useStyles();
   return(
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
+      <Paper  className={classes.root} elevation={20}>
         <IconButton aria-label="Design page">
           <FontIcon iconClass="mdi mdi-pencil-ruler" />
         </IconButton>
         <IconButton aria-label="Design page">
-          <FontIcon iconClass="mdi mdi-view-module" />
+          <FontIcon iconClass="mdi mdi-view-grid-plus" />
         </IconButton>
         <IconButton aria-label="Design page">
           <FontIcon iconClass="mdi mdi-file-tree" />
@@ -53,7 +44,9 @@ export default function FixedBar(
         <IconButton aria-label="Design page">
           <FontIcon iconClass="mdi mdi-cog" />
         </IconButton>
-      </div>
-    </ThemeProvider>
+        <IconButton  aria-label="Design page">
+          <FontIcon iconClass="mdi mdi-android-debug-bridge"/>
+        </IconButton>
+      </Paper >
   )
 }
