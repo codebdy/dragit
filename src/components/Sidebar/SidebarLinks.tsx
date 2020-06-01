@@ -17,8 +17,8 @@ import LoadingSkeleton from "./LoadingSkeleton";
 import { NavLink } from "react-router-dom";
 
 const whiteColor = '#fff';
-const openBackground = "rgba(255,255,255, 0.1)";
-const openBackgroundLight = "rgba(0,0,0, 0.1)";
+const openBackground = "rgba(255,255,255, 0.05)";
+const openBackgroundLight = "rgba(0,0,0, 0.05)";
 const activeBackground = "rgba(255,255,255, 0.2)";
 const activeBackgroundLight = "rgba(0,0,0, 0.2)";
 
@@ -42,10 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: 'all 0.3s',
       //textDecoration: "none",
       color: whiteColor,
-      "&:hover,&:focus,&:visited,&:active": {
-        color: whiteColor,
-        textDecoration: "none",
-      }
+      //"&:hover,&:focus,&:visited,&:active": {
+        //color: whiteColor,
+        //textDecoration: "none",
+      //}
     },
     itemLink: {
       textDecoration: "none",

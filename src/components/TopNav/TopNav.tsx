@@ -17,11 +17,11 @@ import FontIcon from 'components/common/FontIcon';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background: theme.palette.background.default,
-      //background:'#7367f0',
-      boxShadow:'none',
-      //boxShadow: theme.shadows[10],
-      color:'grey',
+      //background: theme.palette.background.default,
+      background:'#7367f0',
+      //boxShadow:'none',
+      boxShadow: theme.shadows[10],
+      color:'#fff',
       transition: 'all 0.3s',
     },
 
@@ -111,7 +111,6 @@ export default function TopNav(props:{onSidebarToggle: any}) {
               DragIT
             </Typography>          
           </Hidden>
-
           <div className={classes.grow} />
           
           <IconButton aria-label="show 4 new mails" color="inherit">
