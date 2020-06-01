@@ -47,7 +47,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
   const [sticky, setSticky] = React.useState(false);
   const handleScroll = function(event:any){
     let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0
-    setSticky(topOffset > 50)
+    setSticky(topOffset > 30)
 
   }
 
