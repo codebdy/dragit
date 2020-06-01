@@ -16,7 +16,6 @@ import {sideBarSettings} from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
-import SidebarWidthPlaceholder from "./SidebarWidthPlaceholder";
 //import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,9 +13,24 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import { Hidden } from '@material-ui/core';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      background:'transparent',
+      boxShadow:'none',
+      color:'grey',
+      transition: 'all 0.3s',
+    },
+
+    sticky:{
+      //boxShadow:'rgba(25, 42, 70, 0.13) -8px 12px 18px 0px;',
+      boxShadow: theme.shadows[10],
+      color:'#fff',
+      background:'#7367f0',
+    },
+
     placeholder: {
       background:'transparent',
       boxShadow:'none',
@@ -23,21 +38,27 @@ const useStyles = makeStyles((theme: Theme) =>
     grow: {
       flexGrow: 1,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
-    },
 
   }),
 );
 
-export default function PrimarySearchAppBar(props:{onSidebarToggle: any}) {
+export default function TopNav(props:{onSidebarToggle: any}) {
   const classes = useStyles();
+  const [sticky, setSticky] = React.useState(false);
+  const handleScroll = function(event:any){
+    let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0
+    setSticky(topOffset > 50)
+
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      // 清除
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -66,13 +87,13 @@ export default function PrimarySearchAppBar(props:{onSidebarToggle: any}) {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-
+  
   return (
     <Fragment>
       <AppBar position="relative" className={classes.placeholder}>
         <Toolbar></Toolbar>
-      </AppBar>      
-      <AppBar position="fixed">
+      </AppBar>
+      <AppBar position="fixed" className={classNames(classes.root, {[classes.sticky]:sticky},)}>
         <Toolbar>
           <SidebarWidthPlaceholder />
           <Hidden mdUp>
@@ -111,11 +132,9 @@ export default function PrimarySearchAppBar(props:{onSidebarToggle: any}) {
           >
             <AccountCircle />
           </IconButton>
-          
-
         </Toolbar>
       </AppBar>
       {renderMenu}
     </Fragment>
-  );
+  )
 }

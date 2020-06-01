@@ -3,7 +3,7 @@ import { CssBaseline, makeStyles, Theme, createStyles } from '@material-ui/core'
 import Sidebar, { createSidebarTheme } from 'components/Sidebar/Sidebar';
 import image5 from 'assets/img/sidebar-5.jpg';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
-import TopNav from 'components/TopNav/TopNav - 副本';
+import TopNav from 'components/TopNav/TopNav';
 import FixedBar from 'components/FixedBar/FixedBar';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -42,7 +42,15 @@ export default function Layout(){
 
     <div style={{ height:'1000px', flex:'1', display:'flex', flexFlow:'row'}}>
       <SidebarWidthPlaceholder />
-      <div style={{flex:'1'}}>content</div>
+      <div style={{flex:'1'}}>
+      content<br/><br/>
+      content2<br/><br/>
+      content3<br/><br/>
+      content4<br/><br/>
+      content5<br/><br/>
+      content6<br/><br/>
+      content7<br/><br/>
+      </div>
     </div>
 
     <FixedBar />
