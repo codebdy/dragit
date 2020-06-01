@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'fixed',
       right:'20px',
       top:'calc(50% - 150px)',
-      width:'46px',
+      width:'52px',
       //background:'#121246',
       color:"rgba(255,255,255,1)",
       display: 'flex',
