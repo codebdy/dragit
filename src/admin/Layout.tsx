@@ -47,12 +47,12 @@ export default function Layout(){
       <div style={{ flex:'1', display:'flex', flexFlow:'row'}}>
         <SidebarWidthPlaceholder />
         <PageContent>
-        <BrowserRouter>
-          <Switch> 
-            <Route path="/admin/dashboard" component={Dashboard}></Route>
-            <Redirect to="/admin/dashboard" from='/admin' /> 
-          </Switch>
-        </BrowserRouter>
+          <BrowserRouter>
+            <Switch> 
+              <Route path="/admin/dashboard" component={Dashboard}></Route>
+              <Redirect to="/admin/dashboard" from='/admin' /> 
+            </Switch>
+          </BrowserRouter>
         </PageContent>
       </div>
 

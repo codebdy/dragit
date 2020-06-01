@@ -9,7 +9,7 @@ const thunkIntl = (lang:string = 'zh-CN'
 ): ThunkAction<void, RootState, null, Action<string>> => {
   return async dispatch => {
     dispatch(loadingAction())
-    axios.get(`locales/${lang}.json`).then(res => {
+    axios.get(`/locales/${lang}.json`).then(res => {
       dispatch(receivedAction(
         {
           currentLocale:lang,

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'fixed',
-      right:'20px',
+      right:'0',
       top:'calc(50% - 150px)',
       width:'52px',
       //background:'#121246',

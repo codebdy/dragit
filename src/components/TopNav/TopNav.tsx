@@ -18,7 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       background:'transparent',
+      //background:'#7367f0',
       boxShadow:'none',
+      //boxShadow: theme.shadows[10],
       color:'grey',
       transition: 'all 0.3s',
     },
