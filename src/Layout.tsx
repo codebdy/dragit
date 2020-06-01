@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       background:'#f2f4f4',
+      minHeight:'100%',
     },
 
   }),
@@ -31,29 +32,29 @@ export default function Layout(){
 
   return (
     <div className={classes.root}>
-    <CssBaseline />      
-    <Sidebar 
-      sidebarTheme={sidebarTheme1} 
-      mobileOpen={mobileOpen} 
-      //size={SidebarSize.large}
-      onMobileClose={handleDrawerToggle}
-    />
-    <TopNav onSidebarToggle = {handleDrawerToggle}/>
+      <CssBaseline />      
+      <Sidebar 
+        sidebarTheme={sidebarTheme1} 
+        mobileOpen={mobileOpen} 
+        //size={SidebarSize.large}
+        onMobileClose={handleDrawerToggle}
+      />
+      <TopNav onSidebarToggle = {handleDrawerToggle}/>
 
-    <div style={{ height:'1000px', flex:'1', display:'flex', flexFlow:'row'}}>
-      <SidebarWidthPlaceholder />
-      <div style={{flex:'1'}}>
-      content<br/><br/>
-      content2<br/><br/>
-      content3<br/><br/>
-      content4<br/><br/>
-      content5<br/><br/>
-      content6<br/><br/>
-      content7<br/><br/>
+      <div style={{ flex:'1', display:'flex', flexFlow:'row'}}>
+        <SidebarWidthPlaceholder />
+        <div style={{flex:'1'}}>
+        content<br/><br/>
+        content2<br/><br/>
+        content3<br/><br/>
+        content4<br/><br/>
+        content5<br/><br/>
+        content6<br/><br/>
+        content7<br/><br/>
+        </div>
       </div>
-    </div>
 
-    <FixedBar />
-  </div>
-)
+      <FixedBar />
+    </div>
+  )
 }

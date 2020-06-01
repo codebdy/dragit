@@ -33,7 +33,7 @@ export default function FixedBar(
   const classes = useStyles();
 
   return(
-      <Paper  className={classes.root} elevation={15}>
+      <Paper  className={classes.root} elevation={24}>
         <Tooltip title={intl.get('design-layout')} arrow placement="left">
           <IconButton aria-label={intl.get('design-layout')}>
             <FontIcon iconClass="mdi mdi-pencil-ruler" />
