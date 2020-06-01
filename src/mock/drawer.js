@@ -9,7 +9,7 @@ export default [
     id:"1",
     type:'item',
     title:'仪表盘',
-    to:{name:'dashboard'},
+    to:'/admin/dashboard',
     icon:'mdi mdi-speedometer',
     chip:{
       props:{
@@ -18,6 +18,13 @@ export default [
         size:'small',
       }
     }
+  },
+  {
+    id:"m2",
+    type:'item',
+    title:'媒体库',
+    to:'/admin/medias',
+    icon:'mdi mdi-image-auto-adjust',
   },
   {
     id:"2",

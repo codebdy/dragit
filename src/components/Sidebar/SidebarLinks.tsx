@@ -14,6 +14,7 @@ import Chip from '@material-ui/core/Chip';
 import { useSelector } from "react-redux";
 import FontIcon from "components/common/FontIcon"
 import LoadingSkeleton from "./LoadingSkeleton";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -90,6 +91,7 @@ interface ItemJson{
     props:any
   },
   children: Array<ItemJson>,
+  to?: string,
 }
 
 interface RootState {
@@ -187,6 +189,18 @@ function Item(props:ItemProps){
 
 }
 
+function ItemTo(props: {to?:string, children:any}){
+  
+  return(
+    props.to?
+    <NavLink to={ props.to}>
+      {props.children}
+    </NavLink>
+    :
+    props.children
+  )
+}
+
 function getBadge(children:Array<any>): any{
   for(let item of children){
     if(item.badge){
@@ -222,7 +236,7 @@ function Group(props:GroupProps){
       {
         item.type === 'subheader' && <Subheader nested mini = {props.mini} item={item} />
       }
-      {item.type === 'item' && <Item nested mini = {props.mini} item={item}/>}
+      {item.type === 'item' && <ItemTo to={item.to}><Item nested mini = {props.mini} item={item}/> </ItemTo>}
       {item.type === 'group' && <Group nested mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
 
     </Fragment>
@@ -263,7 +277,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
       {
         item.type === 'subheader' && <Subheader mini = {props.mini} item={item} />
       }
-      {item.type === 'item' && <Item mini = {props.mini} item={item}/>}
+      {item.type === 'item' && <ItemTo to={item.to}><Item mini = {props.mini} item={item}/></ItemTo>}
       {item.type === 'group' && <Group mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
 
     </Fragment>

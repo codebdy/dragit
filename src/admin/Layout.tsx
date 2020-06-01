@@ -7,7 +7,8 @@ import TopNav from 'components/TopNav/TopNav';
 import FixedBar from 'components/FixedBar/FixedBar';
 import PageContent from 'components/PageContent/PageContent';
 import Dashboard from 'views/Dashboard/Dashboard';
-import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
+import { Redirect, Switch, Route } from 'react-router-dom';
+import Medias from 'views/Medias/Medias';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,12 +48,11 @@ export default function Layout(){
       <div style={{ flex:'1', display:'flex', flexFlow:'row'}}>
         <SidebarWidthPlaceholder />
         <PageContent>
-          <BrowserRouter>
-            <Switch> 
-              <Route path="/admin/dashboard" component={Dashboard}></Route>
-              <Redirect to="/admin/dashboard" from='/admin' /> 
-            </Switch>
-          </BrowserRouter>
+          <Switch> 
+            <Route path="/admin/dashboard" component={Dashboard}></Route>
+            <Route path="/admin/medias" component={Medias}></Route>
+            <Redirect to="/admin/dashboard" from='/admin' /> 
+          </Switch>
         </PageContent>
       </div>
 
