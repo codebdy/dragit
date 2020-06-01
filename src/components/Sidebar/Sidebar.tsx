@@ -170,7 +170,7 @@ const Sidebar = function( props:SidebarProps ) {
           />  
         </Drawer>
       </Hidden>
-      <SidebarWidthPlaceholder />
+      
       <Hidden smDown>
         <Drawer
           variant = "permanent"
@@ -195,7 +195,7 @@ const Sidebar = function( props:SidebarProps ) {
             mini ={compactable && !full} fullWidth={fullWidth}
           />
         </Drawer>
-      </Hidden>
+        </Hidden>
     
     </ThemeProvider>
 
