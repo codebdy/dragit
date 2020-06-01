@@ -5,6 +5,7 @@ import image5 from 'assets/img/sidebar-5.jpg';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import TopNav from 'components/TopNav/TopNav';
 import FixedBar from 'components/FixedBar/FixedBar';
+import PageContent from 'components/PageContent/PageContent';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,15 +44,7 @@ export default function Layout(){
 
       <div style={{ flex:'1', display:'flex', flexFlow:'row'}}>
         <SidebarWidthPlaceholder />
-        <div style={{flex:'1'}}>
-        content<br/><br/>
-        content2<br/><br/>
-        content3<br/><br/>
-        content4<br/><br/>
-        content5<br/><br/>
-        content6<br/><br/>
-        content7<br/><br/>
-        </div>
+        <PageContent />
       </div>
 
       <FixedBar />

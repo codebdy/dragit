@@ -9,11 +9,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import { Hidden } from '@material-ui/core';
 import classNames from 'classnames';
+import FontIcon from 'components/common/FontIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,11 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     sticky:{
-      boxShadow:'rgba(25, 42, 70, 0.13) 0px 12px 18px 0px;',
-      //boxShadow: theme.shadows[10],
-      //color:'#fff',
-      //background:'#7367f0',
-      background:'#fff',
+      //boxShadow:'rgba(25, 42, 70, 0.13) 0px 12px 18px 0px;',
+      boxShadow: theme.shadows[10],
+      color:'#fff',
+      background:'#7367f0',
+      //background:'#fff',
     },
 
     placeholder: {
@@ -115,12 +114,12 @@ export default function TopNav(props:{onSidebarToggle: any}) {
           
           <IconButton aria-label="show 4 new mails" color="inherit">
             <Badge badgeContent={4} color="secondary">
-              <MailIcon />
+              <FontIcon iconClass = "mdi mdi-email-outline"/>
             </Badge>
           </IconButton>
           <IconButton aria-label="show 17 new notifications" color="inherit">
             <Badge badgeContent={17} color="secondary">
-              <NotificationsIcon />
+            <FontIcon iconClass = "mdi mdi-bell-outline"/>
             </Badge>
           </IconButton>
           <IconButton
