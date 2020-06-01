@@ -16,6 +16,12 @@ import FontIcon from "components/common/FontIcon"
 import LoadingSkeleton from "./LoadingSkeleton";
 import { NavLink } from "react-router-dom";
 
+const whiteColor = '#fff';
+const openBackground = "rgba(255,255,255, 0.1)";
+const openBackgroundLight = "rgba(0,0,0, 0.1)";
+const activeBackground = "rgba(255,255,255, 0.2)";
+const activeBackgroundLight = "rgba(0,0,0, 0.2)";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -34,9 +40,32 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(0.2),
       paddingLeft: '23px',
       transition: 'all 0.3s',
+      //textDecoration: "none",
+      color: whiteColor,
+      "&:hover,&:focus,&:visited,&:active": {
+        color: whiteColor,
+        textDecoration: "none",
+      }
+    },
+    itemLink: {
+      textDecoration: "none",
     },
 
-     nested: {
+    activeItem: {
+      width:'100%',
+      height:'100%',
+      display:'block',
+      background: theme.palette.type === 'dark' ? activeBackground : activeBackgroundLight,
+      "&:hover,&:focus": {
+        backgroundColor: theme.palette.type === 'dark' ? activeBackground : activeBackgroundLight,
+      }
+    },
+
+    //itemText: {
+   //   textDecoration: "none",
+    //},
+  
+    nested: {
       paddingLeft: theme.spacing(4),
     },
 
@@ -53,9 +82,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     itemOpened:{
-      background:'rgba(255,255,255, 0.1)',
+      background: theme.palette.type === 'dark' ? openBackground : openBackgroundLight,
       "&:hover,&:focus": {
-        backgroundColor: 'rgba(255,255,255, 0.1)',
+        backgroundColor:  theme.palette.type === 'dark' ? openBackground : openBackgroundLight,
       }
     },
 
@@ -140,6 +169,20 @@ function Subheader(props:ListItemProps){
   )
 }
 
+function ItemTo(props: {to?:string, children:any}){
+  const classes = useStyles();
+  return(
+    props.to?
+    <NavLink to={ props.to} activeClassName={ classes.activeItem}
+      className={classes.itemLink}
+    >
+      {props.children}
+    </NavLink>
+    :
+    props.children
+  )
+}
+
 function Item(props:ItemProps){
   const classes = useStyles();
   const {item, mini, dotBadge, className, children, onClick} = props
@@ -165,41 +208,33 @@ function Item(props:ItemProps){
     </Badge>)
   }
 
-  return (
-    <ListItem 
-      button 
-      className = {classNames(classes.listItem, className)}
-      onClick = {onClick}
-    >
-        {item.icon && <ListItemIcon className = {classes.itemIcon}>
-          { iconTsx }
-        </ListItemIcon>
-        }
-        <ListItemText primary={title}>
-        </ListItemText>
-        {(badge && badge.props.label && !mini) &&
-          <Chip {... badge.props} />          
-        }
-        {chip&&
-          <Chip {... chip.props}/>          
-        }
-        {children}      
-    </ListItem>
-  )
-
-}
-
-function ItemTo(props: {to?:string, children:any}){
   
-  return(
-    props.to?
-    <NavLink to={ props.to}>
-      {props.children}
-    </NavLink>
-    :
-    props.children
+  return (
+    <ItemTo to={item.to}>
+      <ListItem 
+        button 
+        className = {classNames(classes.listItem, className)}
+        onClick = {onClick}
+      >
+          {item.icon && <ListItemIcon className = {classes.itemIcon}>
+            { iconTsx }
+          </ListItemIcon>
+          }
+          <ListItemText primary={title} >
+          </ListItemText>
+          {(badge && badge.props.label && !mini) &&
+            <Chip {... badge.props} />          
+          }
+          {chip&&
+            <Chip {... chip.props}/>          
+          }
+          {children}      
+      </ListItem>
+    </ItemTo>    
   )
+
 }
+
 
 function getBadge(children:Array<any>): any{
   for(let item of children){
@@ -227,16 +262,15 @@ function Group(props:GroupProps){
     open ? props.onOpened('') : props.onOpened(props.item.id)
   };
   const classes = useStyles();
-  const theme = useTheme()
   const dotBadge = getBadge(props.item.children)
-  const openedClass = theme.palette.type==='dark'? classes.itemOpened : classes.itemOpenedLight
+
   const listItems = props.item.children?.map((item:ItemJson)=>{
     return (
     <Fragment key={item.id}>
       {
         item.type === 'subheader' && <Subheader nested mini = {props.mini} item={item} />
       }
-      {item.type === 'item' && <ItemTo to={item.to}><Item nested mini = {props.mini} item={item}/> </ItemTo>}
+      {item.type === 'item' && <Item nested mini = {props.mini} item={item}/> }
       {item.type === 'group' && <Group nested mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
 
     </Fragment>
@@ -244,7 +278,7 @@ function Group(props:GroupProps){
   })
   return (
     <Fragment>
-      <Item className={open ? openedClass :''} item={props.item} dotBadge={!open && dotBadge} onClick={handleClick}>
+      <Item className={open ? classes.itemOpened :''} item={props.item} dotBadge={!open && dotBadge} onClick={handleClick}>
         <ChevronRightIcon className={
             classNames(classes.indicator, {[classes.opened] : open}) 
           } 
@@ -277,7 +311,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
       {
         item.type === 'subheader' && <Subheader mini = {props.mini} item={item} />
       }
-      {item.type === 'item' && <ItemTo to={item.to}><Item mini = {props.mini} item={item}/></ItemTo>}
+      {item.type === 'item' && <Item mini = {props.mini} item={item}/>}
       {item.type === 'group' && <Group mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
 
     </Fragment>
