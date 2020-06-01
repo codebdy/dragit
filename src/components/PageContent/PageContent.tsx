@@ -11,13 +11,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PageContent() {
+export default function PageContent(props:{children?: any}) {
   const classes = useStyles();
   return (
     <div className = {classNames( 
       classes.root,
     )}>
-        <div style={{height:'1000px', width:'100%'}}>xxxx</div>
+      {props.children}
     </div>
   )
 }

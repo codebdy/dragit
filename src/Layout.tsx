@@ -44,7 +44,9 @@ export default function Layout(){
 
       <div style={{ flex:'1', display:'flex', flexFlow:'row'}}>
         <SidebarWidthPlaceholder />
-        <PageContent />
+        <PageContent>
+          <div style={{height:'1000px', width:'100%'}}>xxxx</div>
+        </PageContent>
       </div>
 
       <FixedBar />
