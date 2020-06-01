@@ -7,6 +7,7 @@ import TopNav from 'components/TopNav/TopNav';
 import FixedBar from 'components/FixedBar/FixedBar';
 import PageContent from 'components/PageContent/PageContent';
 import Dashboard from 'views/Dashboard/Dashboard';
+import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +47,12 @@ export default function Layout(){
       <div style={{ flex:'1', display:'flex', flexFlow:'row'}}>
         <SidebarWidthPlaceholder />
         <PageContent>
-          <Dashboard />
+        <BrowserRouter>
+          <Switch> 
+            <Route path="/admin/dashboard" component={Dashboard}></Route>
+            <Redirect to="/admin/dashboard" from='/admin' /> 
+          </Switch>
+        </BrowserRouter>
         </PageContent>
       </div>
 
