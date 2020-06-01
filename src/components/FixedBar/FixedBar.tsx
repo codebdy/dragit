@@ -4,6 +4,7 @@ import FontIcon from "components/common/FontIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Paper, Tooltip } from "@material-ui/core";
 import intl from 'react-intl-universal';
+import { NavLink } from "react-router-dom";
 
 interface FixedBarProps{
 }
@@ -40,9 +41,11 @@ export default function FixedBar(
           </IconButton>
         </Tooltip>
         <Tooltip title={intl.get('modules')} arrow placement="left">
-          <IconButton aria-label={intl.get('modules')}>
-            <FontIcon iconClass="mdi mdi-view-grid-plus" />
-          </IconButton>
+          <NavLink to={'/design'}>
+            <IconButton aria-label={intl.get('modules')}>
+              <FontIcon iconClass="mdi mdi-view-grid-plus" />
+            </IconButton>
+          </NavLink>
         </Tooltip>
         <Tooltip title={intl.get('theme-settings')} arrow placement="left">
           <IconButton aria-label={intl.get('theme-settings')}>
