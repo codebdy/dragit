@@ -44,9 +44,9 @@ export default function FixedBar(
             <FontIcon iconClass="mdi mdi-view-grid-plus" />
           </IconButton>
         </Tooltip>
-        <Tooltip title={intl.get('settings')} arrow placement="left">
-          <IconButton aria-label={intl.get('settings')}>
-            <FontIcon iconClass="mdi mdi-cog" />
+        <Tooltip title={intl.get('theme-settings')} arrow placement="left">
+          <IconButton aria-label={intl.get('theme-settings')}>
+            <FontIcon iconClass="mdi mdi-image-filter-black-white" />
           </IconButton>
         </Tooltip>
         <Tooltip title={intl.get('debug')} arrow placement="left">
