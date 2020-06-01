@@ -13,7 +13,7 @@ import Medias from 'views/Medias/Medias';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background:'#f2f4f4',
+      //background:'#f2f4f4',
       minHeight:'100%',
     },
 

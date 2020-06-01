@@ -43,7 +43,11 @@ function App() {
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
       type: 'light',
+      background:{
+        default:'#f2f4f4',
+      },    
     },
+
     shadows:[...generateShadows(oldTheme)] as any
   }));
 

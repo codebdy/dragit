@@ -17,7 +17,7 @@ import FontIcon from 'components/common/FontIcon';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background:'transparent',
+      background: theme.palette.background.default,
       //background:'#7367f0',
       boxShadow:'none',
       //boxShadow: theme.shadows[10],
