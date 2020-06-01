@@ -113,9 +113,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
           <div className={classes.grow} />
           
           <IconButton aria-label="show 4 new mails" color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <FontIcon iconClass = "mdi mdi-email-outline"/>
-            </Badge>
+            <FontIcon iconClass = "mdi mdi-github"/>
           </IconButton>
           <IconButton aria-label="show 17 new notifications" color="inherit">
             <Badge badgeContent={17} color="secondary">

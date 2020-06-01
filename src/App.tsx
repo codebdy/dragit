@@ -3,13 +3,16 @@ import './App.css';
 import { createMuiTheme, responsiveFontSizes, Theme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from 'components/common/Loading'
 
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+
+import Loading from 'components/common/Loading'
 import {thunkMenuItems} from 'store/menu/thunks';
 import {thunkIntl} from 'store/intl/thunks';
 import { RootState } from 'store';
 
-import Layout from 'Layout';
+import Layout from 'admin/Layout';
+import ModuleManager from 'designer/ModuleManager';
 
 
 function App() {
@@ -55,7 +58,13 @@ function App() {
       (<Loading />)
     :
       (<ThemeProvider theme={theme}>
-        <Layout></Layout>
+        <BrowserRouter>
+          <Switch> 
+            <Route path="/admin" component={Layout}></Route>
+            <Route path="/design" component={ModuleManager}></Route>
+            <Redirect to="/admin" from='/' /> 
+          </Switch>
+        </BrowserRouter>
       </ThemeProvider>)
   );
 }
