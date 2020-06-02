@@ -85,12 +85,8 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: theme.palette.type === 'light'? fade(theme.palette.common.black, 0.10) : fade(theme.palette.common.white, 0.25),
       },
       marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(2),
-        width: 'auto',
-      },
+      width: 'auto',
+      marginLeft: theme.spacing(2),
     },
     searchIcon: {
       padding: theme.spacing(0, 2),
@@ -109,10 +105,7 @@ const useStyles = makeStyles((theme: Theme) =>
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '20ch',
-      },
+
     },
     mainUploadButton:{
       boxShadow: theme.shadows[6],
@@ -159,6 +152,7 @@ export default function Medias(props:{children?: any}) {
                   />
                 </div>                
                 <Spacer />
+                
                 <input
                   accept="image/*"
                   className={classes.uploadInput}
@@ -166,35 +160,41 @@ export default function Medias(props:{children?: any}) {
                   multiple
                   type="file"
                 />
-                <label htmlFor="contained-button-file">
-                </label>
-                <label htmlFor="contained-button-file">
-                  <Tooltip title={intl.get('upload')} arrow placement="top">
-                    <IconButton  
-                      aria-label={intl.get('upload')}  
-                      component="span"
-                      className={classes.uploadButton}
-                    >
-                      <FontIcon iconClass="mdi mdi-cloud-upload-outline" size={toolIconSize} />
+                <Hidden xsDown>
+                  <label htmlFor="contained-button-file">
+                    <Tooltip title={intl.get('upload')} arrow placement="top">
+                      <IconButton  
+                        aria-label={intl.get('upload')}  
+                        component="span"
+                        className={classes.uploadButton}
+                      >
+                        <FontIcon iconClass="mdi mdi-cloud-upload-outline" size={toolIconSize} />
+                      </IconButton>
+                    </Tooltip>
+                  </label>
+
+                  <Tooltip title={intl.get('filter')} arrow placement="top">
+                    <IconButton aria-label={intl.get('filter')} component="span">
+                      <FontIcon iconClass="mdi mdi-filter-outline" size={toolIconSize} />
                     </IconButton>
                   </Tooltip>
-                </label>
+                  <Tooltip title={intl.get('sort-by')} arrow placement="top">
+                    <IconButton aria-label={intl.get('sort-by')} component="span">
+                      <FontIcon iconClass="mdi mdi mdi-sort-ascending"  size={toolIconSize} />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={intl.get('list')} arrow placement="top">
+                    <IconButton aria-label={intl.get('list')} component="span">
+                      <FontIcon iconClass="mdi mdi-format-list-checkbox"  size={toolIconSize} />
+                    </IconButton>
+                  </Tooltip>
 
-                <Tooltip title={intl.get('filter')} arrow placement="top">
-                  <IconButton aria-label={intl.get('filter')} component="span">
-                    <FontIcon iconClass="mdi mdi-filter-outline" size={toolIconSize} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={intl.get('sort-by')} arrow placement="top">
-                  <IconButton aria-label={intl.get('sort-by')} component="span">
-                    <FontIcon iconClass="mdi mdi mdi-sort-ascending"  size={toolIconSize} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={intl.get('list')} arrow placement="top">
-                  <IconButton aria-label={intl.get('list')} component="span">
-                    <FontIcon iconClass="mdi mdi-format-list-checkbox"  size={toolIconSize} />
-                  </IconButton>
-                </Tooltip>
+                </Hidden>
+                <Hidden smUp>
+                    <IconButton aria-label={intl.get('list')} component="span">
+                      <FontIcon iconClass="mdi mdi-dots-horizontal"  size={toolIconSize} />
+                    </IconButton>
+                </Hidden>
               </div>
               <Divider></Divider>
               <Grid container justify="space-between" alignItems="center">
