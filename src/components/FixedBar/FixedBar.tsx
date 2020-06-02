@@ -2,7 +2,7 @@ import React from "react";
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import FontIcon from "components/common/FontIcon"
 import IconButton from '@material-ui/core/IconButton';
-import { Paper, Tooltip } from "@material-ui/core";
+import { Paper, Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
 
@@ -34,6 +34,7 @@ export default function FixedBar(
   const classes = useStyles();
 
   return(
+    <Hidden mdDown>
       <Paper  className={classes.root} elevation={24}>
         <Tooltip title={intl.get('design-layout')} arrow placement="left">
           <IconButton aria-label={intl.get('design-layout')}>
@@ -58,5 +59,7 @@ export default function FixedBar(
           </IconButton>
         </Tooltip>
       </Paper >
+
+    </Hidden>
   )
 }

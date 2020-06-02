@@ -1,5 +1,5 @@
 import React from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon } from "@material-ui/core";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden } from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
@@ -197,32 +197,47 @@ export default function Medias(props:{children?: any}) {
                 </Tooltip>
               </div>
               <Divider></Divider>
-              <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
-                <Link color="inherit" href="/">
-                  全部
-                </Link>
-                <Link color="inherit" href="/getting-started/installation/">
-                  文章
-                </Link>
-                <Link
-                  color="textPrimary"
-                  href="/components/breadcrumbs/"
-                  aria-current="page"
-                >
-                  缩略图
-                </Link>
-              </Breadcrumbs>
+              <Grid container justify="space-between" alignItems="center">
+                <Grid item>
+                  <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
+                    <Link color="inherit" href="/">
+                      全部
+                    </Link>
+                    <Link color="inherit" href="/getting-started/installation/">
+                      文章
+                    </Link>
+                    <Link
+                      color="textPrimary"
+                      href="/components/breadcrumbs/"
+                      aria-current="page"
+                    >
+                      缩略图
+                    </Link>
+                  </Breadcrumbs>                  
+                </Grid>
+                <Grid item>
+                  <Hidden lgUp>
+                    <IconButton>
+                      <SvgIcon>
+                        <path fill="currentColor" d="M20 6H12L10 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V8A2 2 0 0 0 20 6M20 18H4V8H20M13 17V14H15V17H17V13H19L14 9L9 13H11V17Z" />
+                      </SvgIcon>                    
+                    </IconButton>
+                  </Hidden>
+                </Grid>
+              </Grid>
 
               <div className ={classes.mediasGrid}>content</div>
             </div>
             <Divider orientation="vertical" flexItem />
-            <div className = {classes.right}>
-              <div className = {classes.folderTitle}>
-                {intl.get('folder')}
+            <Hidden mdDown>
+              <div className = {classes.right}>
+                <div className = {classes.folderTitle}>
+                  {intl.get('folder')}
+                </div>
+                <Divider></Divider>
+                right
               </div>
-              <Divider></Divider>
-              right
-            </div>
+            </Hidden>
           </Paper>
         </Grid>
       </Grid>
