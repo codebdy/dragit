@@ -1,5 +1,5 @@
 import React from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden } from "@material-ui/core";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography } from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
@@ -55,6 +55,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     breadcrumb:{
       padding: theme.spacing(2),
+    },
+    breadcumbText:{
       fontSize: '0.9rem',
     },
     mediasGrid:{
@@ -199,20 +201,16 @@ export default function Medias(props:{children?: any}) {
               <Divider></Divider>
               <Grid container justify="space-between" alignItems="center">
                 <Grid item>
-                  <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumb}>
+                  <Breadcrumbs aria-label="breadcrumb" 
+                    className={classNames(classes.breadcrumb, classes.breadcumbText) }
+                  >
                     <Link color="inherit" href="/">
                       全部
                     </Link>
                     <Link color="inherit" href="/getting-started/installation/">
                       文章
                     </Link>
-                    <Link
-                      color="textPrimary"
-                      href="/components/breadcrumbs/"
-                      aria-current="page"
-                    >
-                      缩略图
-                    </Link>
+                    <Typography color="textPrimary" className={classes.breadcumbText}>缩略图</Typography>
                   </Breadcrumbs>                  
                 </Grid>
                 <Grid item>
