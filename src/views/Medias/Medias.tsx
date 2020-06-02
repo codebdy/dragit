@@ -116,7 +116,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     mainUploadButton:{
       boxShadow: theme.shadows[6],
-      borderRadius: '20px',
     },
 
     uploadIcon:{
