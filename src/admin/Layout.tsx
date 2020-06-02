@@ -13,8 +13,17 @@ import Medias from 'views/Medias/Medias';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      //background:'#f2f4f4',
       minHeight:'100%',
+      display:'flex',
+      flexFlow:'column',
+    },
+
+    content:{
+      flex:'1', 
+      display:'flex', 
+      flexFlow:'row',
+      height:'100%',
+      width:'100%',
     },
 
   }),
@@ -45,7 +54,7 @@ export default function Layout(){
       />
       <TopNav onSidebarToggle = {handleDrawerToggle}/>
 
-      <div style={{ flex:'1', display:'flex', flexFlow:'row'}}>
+      <div className={classes.content}>
         <SidebarWidthPlaceholder />
         <PageContent>
           <Switch> 

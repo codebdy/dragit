@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';

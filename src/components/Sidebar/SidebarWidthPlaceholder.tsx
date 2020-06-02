@@ -18,7 +18,9 @@ export default function SidebarWidthPlaceholder(){
       }
       <div style={{
         width: sidebar.compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
-        transition:"width 0.3s",
+        transition: "width 0.3s",
+        flexGrow: 0,
+        flexShrink: 0,
       }}>
       </div>
     </Hidden>
