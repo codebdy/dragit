@@ -34,7 +34,7 @@ export default function FixedBar(
   const classes = useStyles();
 
   return(
-    <Hidden mdDown>
+    <Hidden smDown>
       <Paper  className={classes.root} elevation={24}>
         <Tooltip title={intl.get('design-layout')} arrow placement="left">
           <IconButton aria-label={intl.get('design-layout')}>

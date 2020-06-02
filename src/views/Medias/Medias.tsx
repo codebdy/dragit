@@ -5,6 +5,7 @@ import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
 import FontIcon from "components/common/FontIcon";
 import SearchIcon from '@material-ui/icons/Search';
+import MediasGridList from "./MediasGridList";
 
 const toolbarHeight = "52px";
 
@@ -46,12 +47,15 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
     },
     toolbar:{
-      minHeight:toolbarHeight,
+      minHeight:theme.spacing(7),
       display:'flex',
       flexFlow:'row',
       alignItems:'center',
       flexWrap: 'wrap',
       paddingRight: '0',
+    },
+    breadCrumbShell:{
+      minHeight:theme.spacing(7),
     },
     breadcrumb:{
       padding: theme.spacing(2),
@@ -60,11 +64,11 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: '0.9rem',
     },
     mediasGrid:{
-      padding:theme.spacing(2),
+      padding:theme.spacing(0, 2, 2, 2),
     },
     folderTitle:{
       padding:theme.spacing(1) ,
-      minHeight:toolbarHeight,
+      minHeight:theme.spacing(7),
       display:'flex',
       alignItems: 'center',
       fontWeight: 500,
@@ -111,6 +115,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     mainUploadButton:{
       boxShadow: theme.shadows[6],
+    },
+
+    backButton:{
+      marginLeft:'2px',
     },
 
     uploadIcon:{
@@ -199,9 +207,16 @@ export default function Medias(props:{children?: any}) {
                 </Hidden>
               </div>
               <Divider></Divider>
-              <Grid container justify="space-between" alignItems="center">
+              <Grid container justify="space-between" alignItems="center" className={classes.breadCrumbShell}>
                 <Grid item>
-                  <Breadcrumbs aria-label="breadcrumb" 
+                  <IconButton className={classes.backButton}>
+                    <SvgIcon>
+                      <path fill="currentColor" d="M2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12M18,11H10L13.5,7.5L12.08,6.08L6.16,12L12.08,17.92L13.5,16.5L10,13H18V11Z" />
+                    </SvgIcon>                    
+                  </IconButton>                  
+                </Grid>
+                <Grid item>
+                   <Breadcrumbs aria-label="breadcrumb" 
                     className={classNames(classes.breadcrumb, classes.breadcumbText) }
                   >
                     <Link color="inherit" href="/">
@@ -211,10 +226,10 @@ export default function Medias(props:{children?: any}) {
                       文章
                     </Link>
                     <Typography color="textPrimary" className={classes.breadcumbText}>缩略图</Typography>
-                  </Breadcrumbs>                  
+                  </Breadcrumbs>
                 </Grid>
-                <Grid item>
-                  <Hidden lgUp>
+                <Grid item>                  
+                 <Hidden lgUp>
                     <IconButton>
                       <SvgIcon>
                         <path fill="currentColor" d="M20 6H12L10 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V8A2 2 0 0 0 20 6M20 18H4V8H20M13 17V14H15V17H17V13H19L14 9L9 13H11V17Z" />
@@ -224,7 +239,9 @@ export default function Medias(props:{children?: any}) {
                 </Grid>
               </Grid>
 
-              <div className ={classes.mediasGrid}>content</div>
+              <div className ={classes.mediasGrid}>
+                <MediasGridList></MediasGridList>
+              </div>
             </div>
             <Divider orientation="vertical" flexItem />
             <Hidden mdDown>
