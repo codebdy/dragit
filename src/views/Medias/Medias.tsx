@@ -6,6 +6,8 @@ import intl from 'react-intl-universal';
 import FontIcon from "components/common/FontIcon";
 import SearchIcon from '@material-ui/icons/Search';
 
+const toolbarHeight = "52px";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     meidas: {
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
     },
     toolbar:{
-      minHeight:'52px',
+      minHeight:toolbarHeight,
       display:'flex',
       flexFlow:'row',
       alignItems:'center',
@@ -60,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     folderTitle:{
       padding:'10px',
+      minHeight:toolbarHeight,
     },
     uploadInput: {
       display: 'none',
