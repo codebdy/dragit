@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       //background: theme.palette.background.default,
-      background:'#7367f0',
+      background:'#5d78ff',
       //boxShadow:'none',
       boxShadow: theme.shadows[10],
       color:'#fff',

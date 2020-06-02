@@ -47,8 +47,11 @@ function App() {
         default:'#f2f4f4',
       },
       primary:{
-        main:"#7367f0",
-      }    
+        main:"#5d78ff",
+      },
+      //secondary:{
+        //main:"#ff9e43",
+      //},    
     },
 
     shadows:[...generateShadows(oldTheme)] as any
