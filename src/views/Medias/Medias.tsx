@@ -7,8 +7,6 @@ import FontIcon from "components/common/FontIcon";
 import SearchIcon from '@material-ui/icons/Search';
 import MediasGridList from "./MediasGridList";
 
-const toolbarHeight = "52px";
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     meidas: {
