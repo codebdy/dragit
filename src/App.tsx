@@ -45,7 +45,10 @@ function App() {
       type: 'light',
       background:{
         default:'#f2f4f4',
-      },    
+      },
+      primary:{
+        main:"#7367f0",
+      }    
     },
 
     shadows:[...generateShadows(oldTheme)] as any
