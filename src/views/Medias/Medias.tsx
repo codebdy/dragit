@@ -1,9 +1,10 @@
 import React from "react";
-import { makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton } from "@material-ui/core";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase } from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
 import FontIcon from "components/common/FontIcon";
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flex:1,
       display:'flex',
       flexFlow:'column',
-      paddingBottom:'10px',
+      paddingBottom: theme.spacing(2),
     },
     paper:{
 
@@ -43,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
     },
     toolbar:{
-      paddingLeft:'10px',
       minHeight:'52px',
       display:'flex',
       flexFlow:'row',
@@ -52,11 +52,11 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingRight: '0',
     },
     breadcrumb:{
-      padding: '10px',
+      padding: theme.spacing(2),
       fontSize: '0.9rem',
     },
     mediasGrid:{
-      padding:'10px',
+      padding:theme.spacing(2),
     },
     folderTitle:{
       padding:'10px',
@@ -70,6 +70,43 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
     },
 
+    search: {
+      position: 'relative',
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: theme.palette.type === 'light'? fade(theme.palette.common.black, 0.05) : fade(theme.palette.common.white, 0.15),
+      '&:hover': {
+        backgroundColor: theme.palette.type === 'light'? fade(theme.palette.common.black, 0.10) : fade(theme.palette.common.white, 0.25),
+      },
+      marginRight: theme.spacing(2),
+      marginLeft: 0,
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(2),
+        width: 'auto',
+      },
+    },
+    searchIcon: {
+      padding: theme.spacing(0, 2),
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    inputRoot: {
+      color: 'inherit',
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch',
+      },
+    },    
   }),
 );
 
@@ -84,7 +121,20 @@ export default function Medias(props:{children?: any}) {
           <Paper className = {classNames(classes.paper, classes.flex1)}>
             <div className = {classes.left}>
               <div className ={classes.toolbar}>
-                Tool  bar<Spacer />
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search…"
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                </div>                
+                <Spacer />
                 <input
                   accept="image/*"
                   className={classes.uploadInput}
