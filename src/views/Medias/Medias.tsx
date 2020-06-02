@@ -61,8 +61,12 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:theme.spacing(2),
     },
     folderTitle:{
-      padding:'10px',
+      padding:theme.spacing(1) ,
       minHeight:toolbarHeight,
+      display:'flex',
+      alignItems: 'center',
+      fontWeight: 500,
+      fontSize: '1.1rem',
     },
     uploadInput: {
       display: 'none',
@@ -197,7 +201,7 @@ export default function Medias(props:{children?: any}) {
             <Divider orientation="vertical" flexItem />
             <div className = {classes.right}>
               <div className = {classes.folderTitle}>
-                目录管理 
+                {intl.get('folder')}
               </div>
               <Divider></Divider>
               right

@@ -7,5 +7,6 @@
   "filter": "过滤",
   "sort-by": "排序",
   "list": "列表",
-  "grid": "栅格"
+  "grid": "栅格",
+  "folder":"目录"
 }
