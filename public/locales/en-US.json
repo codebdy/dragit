@@ -2,5 +2,10 @@
   "design-layout": "Design Layout",
   "modules": "Modules",
   "theme-settings": "Theme settings",
-  "debug": "Debug"
+  "debug": "Debug",
+  "upload": "Upload",
+  "filter": "Filter",
+  "sort-by": "Sort by",
+  "list": "List",
+  "grid": "Grid"
 }

@@ -145,9 +145,9 @@ export default function Medias(props:{children?: any}) {
                 <label htmlFor="contained-button-file">
                 </label>
                 <label htmlFor="contained-button-file">
-                  <Tooltip title={intl.get('theme-settings')} arrow placement="top">
+                  <Tooltip title={intl.get('upload')} arrow placement="top">
                     <IconButton  
-                      aria-label={intl.get('theme-settings')}  
+                      aria-label={intl.get('upload')}  
                       component="span"
                       className={classes.uploadButton}
                     >
@@ -156,19 +156,19 @@ export default function Medias(props:{children?: any}) {
                   </Tooltip>
                 </label>
 
-                <Tooltip title={intl.get('theme-settings')} arrow placement="top">
-                  <IconButton aria-label={intl.get('theme-settings')} component="span">
+                <Tooltip title={intl.get('filter')} arrow placement="top">
+                  <IconButton aria-label={intl.get('filter')} component="span">
                     <FontIcon iconClass="mdi mdi-filter-outline" size={toolIconSize} />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={intl.get('theme-settings')} arrow placement="top">
-                  <IconButton aria-label={intl.get('theme-settings')} component="span">
+                <Tooltip title={intl.get('sort-by')} arrow placement="top">
+                  <IconButton aria-label={intl.get('sort-by')} component="span">
                     <FontIcon iconClass="mdi mdi mdi-sort-ascending"  size={toolIconSize} />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={intl.get('theme-settings')} arrow placement="top">
-                  <IconButton aria-label={intl.get('theme-settings')} component="span">
-                    <FontIcon iconClass="mdi mdi-view-grid-outline"  size={toolIconSize} />
+                <Tooltip title={intl.get('list')} arrow placement="top">
+                  <IconButton aria-label={intl.get('list')} component="span">
+                    <FontIcon iconClass="mdi mdi-format-list-checkbox"  size={toolIconSize} />
                   </IconButton>
                 </Tooltip>
               </div>

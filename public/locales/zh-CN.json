@@ -2,5 +2,10 @@
   "design-layout": "布局设计",
   "modules": "模块管理",
   "theme-settings": "主题配置",
-  "debug": "调试"
+  "debug": "调试",
+  "upload": "上传",
+  "filter": "过滤",
+  "sort-by": "排序",
+  "list": "列表",
+  "grid": "栅格"
 }
