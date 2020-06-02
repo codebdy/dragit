@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function PageContent(props:{spacing?:number, children?: any}) {
-  const {spacing = 5, children} = props;
+  const {/*spacing = 5,*/ children} = props;
   const classes = useStyles();
   return (
     <div className = {classNames( 

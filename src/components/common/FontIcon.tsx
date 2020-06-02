@@ -1,21 +1,25 @@
 import React from "react";
+import classNames from "classnames";
 
 interface FontIconProps{
   iconClass?:string,
   size?:number,
   color?:string,
   backgroundColor?:string,
+  className?:string,
 }
 
 export default function FontIcon(props:FontIconProps){
-  const {iconClass, size = 24, color, backgroundColor} = props
+  const {iconClass, size = 24, color, backgroundColor, className} = props
   return (
     <i 
-      className={iconClass}
+      className={ classNames(iconClass, className)}
       style={{
         fontSize: size + 'px',
         color: color,
         backgroundColor: backgroundColor,
+        width: props.size &&( 30 + 'px'),
+        height: props.size &&( 30 + 'px'),
       }}
     />
   )
