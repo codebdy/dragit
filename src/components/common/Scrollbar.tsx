@@ -6,14 +6,13 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     shellY:{
       flex:1, 
-      paddingRight:'2px', 
       display:'flex', 
       flexFlow:'column',
-      height:'0'
+      height:'0',
     },
     shellX:{
       flex:1, 
-      paddingBottom:'2px', 
+      //paddingBottom:'2px', 
       display:'flex', 
       flexFlow:'row',
       width:'0',

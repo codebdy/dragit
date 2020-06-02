@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     itemIcon:{
-      minWidth:'46px',
+      minWidth:'48px',
     },
 
     scrollable:{
