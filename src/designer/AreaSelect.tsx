@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, fade } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
-import { closeAreaSelectAction } from 'store/designer/actions';
+import { closeAreaSelectAction, designPageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
@@ -62,6 +62,12 @@ export default function AreaSelect() {
     dispatch(openFixedBarAction());
   };
 
+  const handleDesignPageContent = (event:any) =>{
+    dispatch(closeAreaSelectAction());
+    dispatch(designPageContentAction());
+    event.stopPropagation()
+  }
+
   return (
     <Backdrop className={classes.backdrop} open={myStore.areaSelect} onClick={handleClose}>
       <SidebarWidthPlaceholder className={classes.area}>
@@ -77,6 +83,7 @@ export default function AreaSelect() {
         <div className={classNames(classes.pageContentArea, classes.area) }>
           <Button variant="contained" color="primary" size="large" 
             className={classNames(classes.designButton) }
+            onClick={handleDesignPageContent}
           >
             <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
             {intl.get('design')}

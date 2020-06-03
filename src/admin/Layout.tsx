@@ -10,6 +10,7 @@ import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Medias from 'views/Medias/Medias';
 import AreaSelect from 'designer/AreaSelect';
+import PageContentDesign from 'designer/PageContentDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,6 +67,7 @@ export default function Layout(){
         </PageContent>
       </div>
       <AreaSelect></AreaSelect>
+      <PageContentDesign></PageContentDesign>
       <FixedBar />
     </div>
   )

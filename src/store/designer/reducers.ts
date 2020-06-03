@@ -1,23 +1,38 @@
 import { handleAction, Action } from 'redux-actions';
-import {closeAreaSelectAction, openAreaSelectAction} from "./actions";
+import {closeAreaSelectAction, openAreaSelectAction, designPageContentAction, cancelPageContentAction} from "./actions";
 
 const initialState = {
   areaSelect: false,
+  pageContentDesign: false,
 };
 
 type State = typeof initialState
 
-const closeIt = handleAction(closeAreaSelectAction, (state, action) => {
+const closeAreaSelect = handleAction(closeAreaSelectAction, (state, action) => {
   return {
     ...state,
     areaSelect: false,
   };
 }, initialState);
 
-const openIt = handleAction(openAreaSelectAction, (state, action) => {
+const openAreaSelect = handleAction(openAreaSelectAction, (state, action) => {
   return {
     ...state,
     areaSelect: true,
+  };
+}, initialState);
+
+const openPageContentDesigner = handleAction(designPageContentAction, (state, action) => {
+  return {
+    ...state,
+    pageContentDesign: true,
+  };
+}, initialState);
+
+const closePageContentDesigner = handleAction(cancelPageContentAction, (state, action) => {
+  return {
+    ...state,
+    pageContentDesign: false,
   };
 }, initialState);
 
@@ -25,13 +40,20 @@ function reducer(
   state = initialState,
   action: Action<any>
 ): State {
-  if(action.type === closeAreaSelectAction().type){
-    return closeIt(state, action)
-  }
-  if(action.type === openAreaSelectAction().type){
+  switch(action.type){
+    case closeAreaSelectAction().type:
+      return closeAreaSelect(state, action);
 
-    return openIt(state, action)
-  }
+    case openAreaSelectAction().type:
+      return openAreaSelect(state, action);
+
+    case designPageContentAction().type:
+      return openPageContentDesigner(state, action);
+
+    case cancelPageContentAction().type:
+      return closePageContentDesigner(state, action);
+      
+    }
 
   return state
 }

@@ -20,16 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexFlow: 'row',
       alignItems: 'stretch',
+      background: 'rgba(0, 0, 0, 0.9)'
     },
     area:{
-      border: 'dashed 2px',
-      borderColor: fade(theme.palette.primary.main, 0.6),
-      display: 'flex',
-      justifyContent :'center',
-      alignItems : 'center',
-      '&:hover':{
-        borderColor: theme.palette.primary.main,
-      }
+      border: '0',
     },
     rightArea:{
       flex:1,
@@ -63,24 +57,18 @@ export default function PageContentDesign() {
   };
 
   return (
-    <Backdrop className={classes.backdrop} open={myStore.areaSelect} onClick={handleClose}>
+    <Backdrop className={classes.backdrop} open={myStore.pageContentDesign} onClick={handleClose}>
       <SidebarWidthPlaceholder className={classes.area}>
-        <Button variant="contained" color="primary" size="large" className={classes.designButton}>
-          <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
-          {intl.get('design')}
-        </Button>
+        
       </SidebarWidthPlaceholder>
       <div 
         className = {classes.rightArea}
       >
-        <TopNavHeightPlaceholder></TopNavHeightPlaceholder>
+        <TopNavHeightPlaceholder>
+          保存
+        </TopNavHeightPlaceholder>
         <div className={classNames(classes.pageContentArea, classes.area) }>
-          <Button variant="contained" color="primary" size="large" 
-            className={classNames(classes.designButton) }
-          >
-            <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
-            {intl.get('design')}
-          </Button>
+          
         </div>
       </div>
     </Backdrop>

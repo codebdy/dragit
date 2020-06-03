@@ -4,14 +4,14 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import menuReducer from './menu/reducers';
 import intlReducer from './intl/reducers';
 import sidebarReducer from './sidebar/reducers';
-import areaSelectReducer from './designer/reducers';
+import designReducer from './designer/reducers';
 import fixedBarReducer from './fixedBar/reducers';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
   intl: intlReducer,
   sidebar: sidebarReducer,
-  designer: areaSelectReducer,
+  designer: designReducer,
   fixedBar: fixedBarReducer,
 })
 
