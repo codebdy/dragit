@@ -21,20 +21,25 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
-      color: '#fff',
       display: 'flex',
       flexFlow: 'row',
-      alignItems: 'stretch',
-      background: '#1a1a27'
+      height:'100%',
     },
-    area:{
-      border: '0',
+    leftArea:{
+      display:'flex',
+      flexFlow:'column',
+      height:'100%',
+      background: '#1a1a27',
+      boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.6), 0px 20px 31px 3px rgba(0,0,0,0.24), 0px 8px 38px 7px rgba(0,0,0,0.12);',
+      zIndex:theme.zIndex.drawer + 1,
+      color:"#fff",
     },
     rightArea:{
       flex:1,
       display:'flex',
       flexFlow:'column',
       justifyContent: 'stretch',
+      height:'100%',
     },
     designButton:{
       boxShadow: theme.shadows[10],
@@ -57,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     toolbar:{
       background:"#3e3e54",
+      boxShadow: theme.shadows[10],
     }
 
   }),
@@ -93,15 +99,16 @@ export default function PageContentDesign() {
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
-        <SidebarWidthPlaceholder className={classes.area}>
+        <SidebarWidthPlaceholder className={classes.leftArea}>
           <TopNavHeightPlaceholder>
             <h3>
               <FontIcon iconClass="mdi mdi-tools" className={classes.toolboxIcon}></FontIcon>
               组件箱
             </h3>
           </TopNavHeightPlaceholder>
-          
-          <Toolbox></Toolbox>
+          <Scrollbar>
+            <Toolbox></Toolbox>
+          </Scrollbar>
         </SidebarWidthPlaceholder>
       </ThemeProvider>
       <div 
@@ -118,7 +125,7 @@ export default function PageContentDesign() {
             </Button>
           </TopNavHeightPlaceholder>
         </ThemeProvider>
-        <div className={classNames(classes.pageContentArea, classes.area) }>
+        <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent>
             <div style={{height:'1500px'}}>
               ewewe
