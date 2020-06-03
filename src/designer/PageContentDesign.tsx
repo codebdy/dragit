@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -64,6 +64,18 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const darkTheme = responsiveFontSizes(createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary:{
+      main:"#5d78ff",
+    },
+    //secondary:{
+      //main:"#ff9e43",
+    //},    
+  },
+}));
+
 export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
@@ -82,21 +94,27 @@ export default function PageContentDesign() {
 
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
-      <SidebarWidthPlaceholder className={classes.area}>
-        
-      </SidebarWidthPlaceholder>
+      <ThemeProvider theme={darkTheme}>
+        <SidebarWidthPlaceholder className={classes.area}>
+          <div>
+            组件箱
+          </div>
+        </SidebarWidthPlaceholder>
+      </ThemeProvider>
       <div 
         className = {classes.rightArea}
       >
-        <TopNavHeightPlaceholder>
-          <Spacer></Spacer>
-          <Button className={classes.cancelButon} onClick={handleCancel}>
-            {intl.get('cancel')}
-          </Button>
-          <Button className={classes.saveButon} onClick={handleSave}>
-          {intl.get('save')}
-          </Button>
-        </TopNavHeightPlaceholder>
+        <ThemeProvider theme={darkTheme}>
+          <TopNavHeightPlaceholder>
+            <Spacer></Spacer>
+            <Button onClick={handleCancel}>
+              {intl.get('cancel')}
+            </Button>
+            <Button variant="contained" color="primary" onClick={handleSave}>
+            {intl.get('save')}
+            </Button>
+          </TopNavHeightPlaceholder>
+        </ThemeProvider>
         <div className={classNames(classes.pageContentArea, classes.area) }>
           <Scrollbar permanent>
             <div style={{height:'1500px'}}>
