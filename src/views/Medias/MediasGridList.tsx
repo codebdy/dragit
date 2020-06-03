@@ -1,75 +1,112 @@
 import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
-import Box from '@material-ui/core/Box';
+import Image from 'components/common/Image'
+
+import { Grid, Typography } from '@material-ui/core';
 //import tileData from './tileData';
 
 const tileData = [
   {
+    id:'1',
     img: '/static/images/grid-list/breakfast.jpg',
     title: 'Breakfast',
     author: 'jill111',
-    cols: 2,
     featured: true,
   },
   {
+    id:'2',
     img: '/static/images/grid-list/burgers.jpg',
     title: 'Tasty burger',
     author: 'director90',
   },
   {
+    id:'3',
     img: '/static/images/grid-list/camera.jpg',
     title: 'Camera',
     author: 'Danson67',
   },
   {
+    id:'4',
     img: '/static/images/grid-list/morning.jpg',
     title: 'Morning',
     author: 'fancycrave1',
     featured: true,
   },
   {
+    id:'5',
     img: '/static/images/grid-list/hats.jpg',
     title: 'Hats',
     author: 'Hans',
   },
   {
+    id:'6',
     img: '/static/images/grid-list/honey.jpg',
     title: 'Honey',
     author: 'fancycravel',
   },
   {
+    id:'7',
     img: '/static/images/grid-list/vegetables.jpg',
     title: 'Vegetables',
     author: 'jill111',
     cols: 2,
   },
   {
+    id:'8',
     img: '/static/images/grid-list/plant.jpg',
     title: 'Water plant',
     author: 'BkrmadtyaKarki',
   },
   {
+    id:'9',
     img: '/static/images/grid-list/mushroom.jpg',
     title: 'Mushrooms',
     author: 'PublicDomainPictures',
   },
   {
+    id:'10',
     img: '/static/images/grid-list/olive.jpg',
     title: 'Olive oil',
     author: 'congerdesign',
   },
   {
+    id:'11',
     img: '/static/images/grid-list/star.jpg',
     title: 'Sea star',
-    cols: 2,
     author: '821292',
   },
   {
+    id:'12',
+    img: '/static/images/grid-list/bike.jpg',
+    title: 'Bike',
+    author: 'danfador',
+  },
+  {
+    id:'13',
+    img: '/static/images/grid-list/bike.jpg',
+    title: 'Bike',
+    author: 'danfador',
+  },
+  {
+    id:'14',
+    img: '/static/images/grid-list/bike.jpg',
+    title: 'Bike',
+    author: 'danfador',
+  },
+  {
+    id:'15',
+    img: '/static/images/grid-list/bike.jpg',
+    title: 'Bike',
+    author: 'danfador',
+  },
+  {
+    id:'16',
+    img: '/static/images/grid-list/bike.jpg',
+    title: 'Bike',
+    author: 'danfador',
+  },
+  {
+    id:'17',
     img: '/static/images/grid-list/bike.jpg',
     title: 'Bike',
     author: 'danfador',
@@ -79,11 +116,14 @@ const tileData = [
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
+      flex: 1,
+    },
+    title:{
+      textAlign: "center",
+      paddingTop:theme.spacing(1),
+    },
+    titleText:{
+      fontSize: '0.85rem',
     },
     gridList: {
       flex:1,
@@ -115,25 +155,20 @@ export default function MediasGridList() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3}>
+    <Grid container className={classes.root} spacing={2}>
+     
         {tileData.map((tile:any) => (
-         
-            <GridListTile>
-              <img src={tile.img} alt={tile.title} />
-              <GridListTileBar
-                title={tile.title}
-                subtitle={<span>by: {tile.author}</span>}
-                actionIcon={
-                  <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
-                    <InfoIcon />
-                  </IconButton>
-                }
-              />
-            </GridListTile>
-
+          <Grid item key={tile.id} lg={2} sm={3} xs={4}>
+            <Image src={tile.img} />
+            <div className={classes.title}>
+              <Typography color="textSecondary" className={classes.titleText}>
+                {tile.title}
+              </Typography>
+                
+            </div>
+          </Grid>
         ))}
-      </GridList>
-    </div>
+      
+    </Grid>
   );
 }

@@ -62,6 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: '0.9rem',
     },
     mediasGrid:{
+      flex:1,
+      display:'flex',
       padding:theme.spacing(0, 2, 2, 2),
     },
     folderTitle:{
