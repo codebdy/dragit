@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'fixed',
-      right:'0',
+      right: theme.spacing(1),
       //top:'calc(50% - 150px)',
-      bottom:'20px',
+      bottom: theme.spacing(1),
       width:'52px',
       //background:'#121246',
       color:"rgba(255,255,255,1)",
