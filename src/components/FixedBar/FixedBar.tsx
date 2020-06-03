@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openAreaSelectAction } from "store/AreaSelect/actions";
 import { closeFixedBarAction } from "store/FixedBar/actions";
 import { RootState } from "store";
+import { compactableAction } from "store/Sidebar/actions";
 
 interface FixedBarProps{
 }
@@ -39,13 +40,17 @@ export default function FixedBar(
   const classes = useStyles();
   const dispatch = useDispatch()
   
+  const selectMyStore = (state: RootState) => state.fixedBar
+  const myStore = useSelector(selectMyStore)  
+
+  const selectSidebar = (state: RootState) => state.sidebar
+  const sidebarStore = useSelector(selectSidebar)  
+
   const handleOpen = () => {
     dispatch(openAreaSelectAction());
     dispatch(closeFixedBarAction());
+    sidebarStore.compactable && dispatch(compactableAction());
   };
-
-  const selectMyStore = (state: RootState) => state.fixedBar
-  const myStore = useSelector(selectMyStore)  
 
   return(
     <Hidden smDown>{}

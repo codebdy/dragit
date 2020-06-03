@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, fade } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeAreaSelectAction } from 'store/AreaSelect/actions';
@@ -10,6 +10,7 @@ import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder'
 import intl from 'react-intl-universal';
 import FontIcon from 'components/common/FontIcon';
 import TopNavHeightPlaceholder from 'components/TopNav/TopNavHeightPlaceholder';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,12 +21,15 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow: 'row',
       alignItems: 'stretch',
     },
-    sidebarArea:{
+    area:{
       border: 'dashed 2px',
-      borderColor: theme.palette.primary.main,
+      borderColor: fade(theme.palette.primary.main, 0.6),
       display: 'flex',
       justifyContent :'center',
       alignItems : 'center',
+      '&:hover':{
+        borderColor: theme.palette.primary.main,
+      }
     },
     rightArea:{
       flex:1,
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'stretch',
     },
     designButton:{
-      boxShadow: theme.shadows[6],
+      boxShadow: theme.shadows[10],
     },
 
     designButtonIcon:{
@@ -42,12 +46,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     pageContentArea:{
       flex:1,
-      border: 'dashed 2px',
-      borderColor: theme.palette.primary.main,
-      display: 'flex',
-      justifyContent :'center',
-      alignItems : 'center',
-    }
+    },
+
   }),
 );
 
@@ -64,7 +64,7 @@ export default function AreaSelect() {
 
   return (
     <Backdrop className={classes.backdrop} open={myStore.open} onClick={handleClose}>
-      <SidebarWidthPlaceholder className={classes.sidebarArea}>
+      <SidebarWidthPlaceholder className={classes.area}>
         <Button variant="contained" color="primary" size="large" className={classes.designButton}>
           <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
           {intl.get('design')}
@@ -74,8 +74,10 @@ export default function AreaSelect() {
         className = {classes.rightArea}
       >
         <TopNavHeightPlaceholder></TopNavHeightPlaceholder>
-        <div className={classes.pageContentArea}>
-          <Button variant="contained" color="primary" size="large" className={classes.designButton}>
+        <div className={classNames(classes.pageContentArea, classes.area) }>
+          <Button variant="contained" color="primary" size="large" 
+            className={classNames(classes.designButton) }
+          >
             <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
             {intl.get('design')}
           </Button>
