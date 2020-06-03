@@ -1,16 +1,17 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, fade } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { RootState } from 'store';
-import { useSelector, useDispatch } from 'react-redux';
-import { closeAreaSelectAction } from 'store/designer/actions';
-import { openFixedBarAction } from 'store/fixedBar/actions';
+import { useSelector } from 'react-redux';
+
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
-import FontIcon from 'components/common/FontIcon';
+
 import TopNavHeightPlaceholder from 'components/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
+import Scrollbar from 'components/common/Scrollbar';
+import Spacer from 'components/common/Spacer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +41,22 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     pageContentArea:{
       flex:1,
+      background: theme.palette.background.default,
+      overflow: 'auto',
+      display:'flex',
+      flexFlow:'column',
+    },
+
+    cancelButon:{
+      color:'#fff',
+    },
+
+    saveButon:{
+      color:'#fff',
+      background:theme.palette.primary.main,
+      '&:hover':{
+        background:theme.palette.primary.dark,
+      }
     },
 
   }),
@@ -49,15 +66,15 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)  
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
   
-  const handleClose = () => {
-    dispatch(closeAreaSelectAction());
-    dispatch(openFixedBarAction());
-  };
+  //const handleClose = () => {
+  //  dispatch(closeAreaSelectAction());
+  //  dispatch(openFixedBarAction());
+  //};
 
   return (
-    <Backdrop className={classes.backdrop} open={myStore.pageContentDesign} onClick={handleClose}>
+    <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <SidebarWidthPlaceholder className={classes.area}>
         
       </SidebarWidthPlaceholder>
@@ -65,10 +82,21 @@ export default function PageContentDesign() {
         className = {classes.rightArea}
       >
         <TopNavHeightPlaceholder>
-          保存
+          <Spacer></Spacer>
+          <Button className={classes.cancelButon}>
+            {intl.get('cancel')}
+          </Button>
+          <Button className={classes.saveButon}>
+          {intl.get('save')}
+          </Button>
         </TopNavHeightPlaceholder>
         <div className={classNames(classes.pageContentArea, classes.area) }>
-          
+          <Scrollbar permanent>
+            <div style={{height:'1500px'}}>
+              ewewe
+            </div>
+
+          </Scrollbar>
         </div>
       </div>
     </Backdrop>

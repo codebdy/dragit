@@ -9,5 +9,7 @@
   "list": "列表",
   "grid": "栅格",
   "folder":"目录",
-  "design": "设计"
+  "design": "设计",
+  "save": "保存",
+  "cancel": "取消"
 }

@@ -9,5 +9,7 @@
   "list": "List",
   "grid": "Grid",
   "folder": "Folder",
-  "design": "Design"
+  "design": "Design",
+  "save": "Save",
+  "cancel": "Cancel"
 }
