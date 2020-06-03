@@ -13,6 +13,7 @@ import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder'
 import { Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import FontIcon from 'components/common/FontIcon';
+import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,10 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
       //background:'#fff',
     },
 
-    placeholder: {
-      background:'transparent',
-      boxShadow:'none',
-    },
     grow: {
       flexGrow: 1,
     },
@@ -92,9 +89,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
   
   return (
     <Fragment>
-      <AppBar position="relative" className={classes.placeholder}>
-        <Toolbar></Toolbar>
-      </AppBar>
+      <TopNavHeightPlaceholder />
       <AppBar position="fixed" className={classNames(classes.root, {[classes.sticky]:sticky},)}>
         <Toolbar>
           <SidebarWidthPlaceholder />
