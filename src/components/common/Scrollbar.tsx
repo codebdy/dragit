@@ -40,11 +40,13 @@ interface ScrollbarProps{
   scrollX?: boolean,
   className?: string,
   children?: any,
+  permanent?:boolean,
 }
 export default function Scrollbar(props:ScrollbarProps = {}) {
   const {
     scrollX = false, 
     scrollY = true,
+    permanent = false,
     className,
     children 
   } = props
@@ -56,7 +58,8 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
     <div 
       className={
         classNames(
-          'dragit-scrollbar',
+          'dragit-scrollbar ',
+          permanent && 'permanent',
           className, 
           theme.palette.type === 'light' ? 'light' :'',
           classes.scrollable, 

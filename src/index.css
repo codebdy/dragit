@@ -22,12 +22,15 @@ h2{
 
 .dragit-scrollbar ::-webkit-scrollbar {
   display: none;
+  width: 0.3rem;
+  height: 0.3rem;}
+
+.dragit-scrollbar.permanent ::-webkit-scrollbar {
+  display: block;
 }
 
 .dragit-scrollbar:hover ::-webkit-scrollbar{
   display: block;
-  width: 0.3rem;
-  height: 0.3rem;
 }
 
 .dragit-scrollbar ::-webkit-scrollbar-track {

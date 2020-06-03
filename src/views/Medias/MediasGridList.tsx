@@ -3,6 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Image from 'components/common/Image'
 
 import { Grid, Typography } from '@material-ui/core';
+import Scrollbar from 'components/common/Scrollbar';
 //import tileData from './tileData';
 
 const tileData = [
@@ -117,6 +118,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
+      padding:theme.spacing(0, 2, 2, 2),
     },
     title:{
       textAlign: "center",
@@ -155,7 +157,8 @@ export default function MediasGridList() {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root} spacing={2}>
+    <Scrollbar permanent>
+      <Grid container className={classes.root} spacing={2}>
      
         {tileData.map((tile:any) => (
           <Grid item key={tile.id} lg={2} sm={3} xs={4}>
@@ -168,7 +171,8 @@ export default function MediasGridList() {
             </div>
           </Grid>
         ))}
-      
-    </Grid>
+      </Grid>
+
+    </Scrollbar>
   );
 }

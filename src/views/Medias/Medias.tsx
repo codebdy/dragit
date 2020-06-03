@@ -64,7 +64,8 @@ const useStyles = makeStyles((theme: Theme) =>
     mediasGrid:{
       flex:1,
       display:'flex',
-      padding:theme.spacing(0, 2, 2, 2),
+      flexFlow:'column',
+      //padding:theme.spacing(0, 2, 2, 2),
     },
     folderTitle:{
       padding:theme.spacing(1) ,
