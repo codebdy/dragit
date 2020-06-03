@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, Divider } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -14,6 +14,7 @@ import Scrollbar from 'components/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
 import { cancelPageContentAction, savePageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
+import FontIcon from 'components/common/FontIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,6 +62,10 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
 
+    toolboxIcon:{
+      marginRight:theme.spacing(2),
+    }
+
   }),
 );
 
@@ -96,9 +101,14 @@ export default function PageContentDesign() {
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
         <SidebarWidthPlaceholder className={classes.area}>
-          <div>
-            组件箱
-          </div>
+          <TopNavHeightPlaceholder>
+            <h3>
+              <FontIcon iconClass="mdi mdi-tools" className={classes.toolboxIcon}></FontIcon>
+              组件箱
+            </h3>
+          </TopNavHeightPlaceholder>
+          <Divider></Divider>
+          <div>ddd</div>
         </SidebarWidthPlaceholder>
       </ThemeProvider>
       <div 
