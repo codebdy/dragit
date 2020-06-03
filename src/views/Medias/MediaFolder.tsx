@@ -122,9 +122,13 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 264,
       flexGrow: 1,
       maxWidth: 400,
+      paddingLeft:theme.spacing(2),
+      paddingRight:theme.spacing(2),
     },
     scrollBar:{
+      paddingRight:theme.spacing(0.2),
       paddingBottom:theme.spacing(2),
+      paddingTop:theme.spacing(2),
     },
   }),
 );

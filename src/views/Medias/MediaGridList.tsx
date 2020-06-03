@@ -123,6 +123,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     scrollBar:{
       paddingBottom:theme.spacing(2),
+      paddingRight:theme.spacing(0.2),
     },
 
     title:{
