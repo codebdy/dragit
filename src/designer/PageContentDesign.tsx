@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, Divider } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,6 +15,7 @@ import Spacer from 'components/common/Spacer';
 import { cancelPageContentAction, savePageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import FontIcon from 'components/common/FontIcon';
+import Toolbox from './Toolbox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexFlow: 'row',
       alignItems: 'stretch',
-      background: 'rgba(0, 0, 0, 0.9)'
+      background: '#1a1a27'
     },
     area:{
       border: '0',
@@ -50,20 +51,12 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
     },
 
-    cancelButon:{
-      color:'#fff',
-    },
-
-    saveButon:{
-      color:'#fff',
-      background:theme.palette.primary.main,
-      '&:hover':{
-        background:theme.palette.primary.dark,
-      }
-    },
-
     toolboxIcon:{
       marginRight:theme.spacing(2),
+    },
+
+    toolbar:{
+      background:"#3e3e54",
     }
 
   }),
@@ -107,15 +100,15 @@ export default function PageContentDesign() {
               组件箱
             </h3>
           </TopNavHeightPlaceholder>
-          <Divider></Divider>
-          <div>ddd</div>
+          
+          <Toolbox></Toolbox>
         </SidebarWidthPlaceholder>
       </ThemeProvider>
       <div 
         className = {classes.rightArea}
       >
         <ThemeProvider theme={darkTheme}>
-          <TopNavHeightPlaceholder>
+          <TopNavHeightPlaceholder className={classes.toolbar}>
             <Spacer></Spacer>
             <Button onClick={handleCancel}>
               {intl.get('cancel')}
