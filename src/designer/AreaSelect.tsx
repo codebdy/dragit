@@ -9,6 +9,7 @@ import { openFixedBarAction } from 'store/FixedBar/actions';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 import FontIcon from 'components/common/FontIcon';
+import TopNavHeightPlaceholder from 'components/TopNav/TopNavHeightPlaceholder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     rightArea:{
       flex:1,
+      display:'flex',
+      flexFlow:'column',
+      justifyContent: 'stretch',
     },
     designButton:{
       boxShadow: theme.shadows[6],
@@ -35,6 +39,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
     designButtonIcon:{
       marginRight: theme.spacing(1),
+    },
+    pageContentArea:{
+      flex:1,
+      border: 'dashed 2px',
+      borderColor: theme.palette.primary.main,
+      display: 'flex',
+      justifyContent :'center',
+      alignItems : 'center',
     }
   }),
 );
@@ -60,7 +72,15 @@ export default function AreaSelect() {
       </SidebarWidthPlaceholder>
       <div 
         className = {classes.rightArea}
-      ></div>
+      >
+        <TopNavHeightPlaceholder></TopNavHeightPlaceholder>
+        <div className={classes.pageContentArea}>
+          <Button variant="contained" color="primary" size="large" className={classes.designButton}>
+            <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
+            {intl.get('design')}
+          </Button>
+        </div>
+      </div>
     </Backdrop>
   );
 }
