@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function AreaSelect() {
+export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)  

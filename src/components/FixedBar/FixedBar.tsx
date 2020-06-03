@@ -6,10 +6,10 @@ import { Paper, Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { openAreaSelectAction } from "store/AreaSelect/actions";
-import { closeFixedBarAction } from "store/FixedBar/actions";
+import { openAreaSelectAction } from "store/designer/actions";
+import { closeFixedBarAction } from "store/fixedBar/actions";
 import { RootState } from "store";
-import { compactableAction } from "store/Sidebar/actions";
+import { compactableAction } from "store/sidebar/actions";
 
 interface FixedBarProps{
 }

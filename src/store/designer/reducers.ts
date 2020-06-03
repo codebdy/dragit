@@ -2,7 +2,7 @@ import { handleAction, Action } from 'redux-actions';
 import {closeAreaSelectAction, openAreaSelectAction} from "./actions";
 
 const initialState = {
-  open: false,
+  areaSelect: false,
 };
 
 type State = typeof initialState
