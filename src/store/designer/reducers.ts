@@ -10,14 +10,14 @@ type State = typeof initialState
 const closeIt = handleAction(closeAreaSelectAction, (state, action) => {
   return {
     ...state,
-    open: false,
+    areaSelect: false,
   };
 }, initialState);
 
 const openIt = handleAction(openAreaSelectAction, (state, action) => {
   return {
     ...state,
-    open: true,
+    areaSelect: true,
   };
 }, initialState);
 
