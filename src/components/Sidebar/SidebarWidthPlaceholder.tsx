@@ -4,8 +4,9 @@ import {sideBarSettings} from "utils";
 import { RootState } from "store";
 import { useSelector } from "react-redux";
 
-export default function SidebarWidthPlaceholder(){
-
+export default function SidebarWidthPlaceholder(
+  props:{children?:any, className?:string, style?:any}
+){
   const selectSidebar = (state: RootState) => state.sidebar
   const sidebar = useSelector(selectSidebar)  
   
@@ -17,11 +18,15 @@ export default function SidebarWidthPlaceholder(){
         //左边栏占位DIV，APP基于flex布局
       }
       <div style={{
-        width: sidebar.compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
-        transition: "width 0.3s",
-        flexGrow: 0,
-        flexShrink: 0,
-      }}>
+          width: sidebar.compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
+          transition: "width 0.3s",
+          flexGrow: 0,
+          flexShrink: 0,
+          ...props.style
+        }}
+        className = {props.className}
+      >
+        {props.children}
       </div>
     </Hidden>
 )
