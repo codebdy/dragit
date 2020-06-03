@@ -118,8 +118,13 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
-      padding:theme.spacing(0, 2, 2, 2),
+      padding:theme.spacing(0, 2, 0, 2),
     },
+
+    scrollBar:{
+      paddingBottom:theme.spacing(2),
+    },
+
     title:{
       textAlign: "center",
       paddingTop:theme.spacing(1),
@@ -157,7 +162,7 @@ export default function MediasGridList() {
   const classes = useStyles();
 
   return (
-    <Scrollbar permanent>
+    <Scrollbar permanent className={classes.scrollBar} >
       <Grid container className={classes.root} spacing={2}>
      
         {tileData.map((tile:any) => (

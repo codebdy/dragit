@@ -1,11 +1,13 @@
 import React from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography } from "@material-ui/core";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography, Fab } from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
 import FontIcon from "components/common/FontIcon";
+import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
-import MediasGridList from "./MediasGridList";
+import MediaGridList from "./MediaGridList";
+import MediaFolder from "./MediaFolder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,12 +70,13 @@ const useStyles = makeStyles((theme: Theme) =>
       //padding:theme.spacing(0, 2, 2, 2),
     },
     folderTitle:{
-      padding:theme.spacing(1) ,
+      padding:theme.spacing(2) ,
       minHeight:theme.spacing(7),
       display:'flex',
       alignItems: 'center',
       fontWeight: 500,
       fontSize: '1.1rem',
+      position: 'relative',
     },
     uploadInput: {
       display: 'none',
@@ -125,6 +128,12 @@ const useStyles = makeStyles((theme: Theme) =>
     uploadIcon:{
       marginRight: theme.spacing(1),
     },
+
+    fab: {
+      position: 'absolute',
+      bottom: '-20px',
+      right: theme.spacing(2),
+    },  
   }),
 );
 
@@ -241,7 +250,7 @@ export default function Medias(props:{children?: any}) {
               </Grid>
 
               <div className ={classes.mediasGrid}>
-                <MediasGridList></MediasGridList>
+                <MediaGridList></MediaGridList>
               </div>
             </div>
             <Divider orientation="vertical" flexItem />
@@ -249,9 +258,12 @@ export default function Medias(props:{children?: any}) {
               <div className = {classes.right}>
                 <div className = {classes.folderTitle}>
                   {intl.get('folder')}
+                  <Fab size="small" color="primary" className={classes.fab} aria-label="add">
+                    <AddIcon />
+                  </Fab>
                 </div>
                 <Divider></Divider>
-                right
+                <MediaFolder />
               </div>
             </Hidden>
           </Paper>
