@@ -5,6 +5,10 @@ import IconButton from '@material-ui/core/IconButton';
 import { Paper, Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { openAreaSelectAction } from "store/AreaSelect/actions";
+import { closeFixedBarAction } from "store/FixedBar/actions";
+import { RootState } from "store";
 
 interface FixedBarProps{
 }
@@ -33,12 +37,23 @@ export default function FixedBar(
   props:FixedBarProps = {}
 ) {
   const classes = useStyles();
+  const dispatch = useDispatch()
+  
+  const handleOpen = () => {
+    dispatch(openAreaSelectAction());
+    dispatch(closeFixedBarAction());
+  };
+
+  const selectMyStore = (state: RootState) => state.fixedBar
+  const myStore = useSelector(selectMyStore)  
 
   return(
-    <Hidden smDown>
+    <Hidden smDown>{}
+    {
+      myStore.open && 
       <Paper  className={classes.root} elevation={24}>
         <Tooltip title={intl.get('design-layout')} arrow placement="left">
-          <IconButton aria-label={intl.get('design-layout')}>
+          <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>
             <FontIcon iconClass="mdi mdi-pencil-ruler" />
           </IconButton>
         </Tooltip>
@@ -60,7 +75,7 @@ export default function FixedBar(
           </IconButton>
         </Tooltip>
       </Paper >
-
+    }
     </Hidden>
   )
 }

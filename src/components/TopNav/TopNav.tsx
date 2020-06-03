@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
     sticky:{
       //boxShadow:'rgba(25, 42, 70, 0.13) 0px 12px 18px 0px;',
       boxShadow: theme.shadows[10],
-      color:'#fff',
-      background:'#7367f0',
+      //color:'#fff',
+      //background:'#7367f0',
       //background:'#fff',
     },
 

@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Loading from 'components/common/Loading'
-import {thunkMenuItems} from 'store/menu/thunks';
-import {thunkIntl} from 'store/intl/thunks';
+import {thunkMenuItems} from 'store/Menu/thunks';
+import {thunkIntl} from 'store/Intl/thunks';
 import { RootState } from 'store';
 
 import Layout from 'admin/Layout';

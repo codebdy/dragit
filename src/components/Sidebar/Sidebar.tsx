@@ -15,7 +15,7 @@ import ListNav from "./SidebarLinks"
 import {sideBarSettings} from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
-import { compactableAction } from "store/sidebar/actions";
+import { compactableAction } from "store/Sidebar/actions";
 //import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{
