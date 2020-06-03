@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
       height:'100%',
       background: '#1a1a27',
-      boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.6), 0px 20px 31px 3px rgba(0,0,0,0.24), 0px 8px 38px 7px rgba(0,0,0,0.12);',
+      boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.2), 0px 20px 31px 3px rgba(0,0,0,0.14), 0px 8px 38px 7px rgba(0,0,0,0.12)',
       zIndex:theme.zIndex.drawer + 1,
       color:"#fff",
     },
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     toolbar:{
       background:"#3e3e54",
-      boxShadow: theme.shadows[10],
+      boxShadow: theme.shadows[6],
     }
 
   }),
