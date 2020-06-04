@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton, Container, Grid, Card } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -16,6 +16,7 @@ import { cancelPageContentAction, savePageContentAction } from 'store/designer/a
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import FontIcon from 'components/common/FontIcon';
 import Toolbox from './Toolbox/Toolbox';
+import Canvas from './Core/Nodes/Canvas';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -73,16 +74,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       flexFlow: 'column',
     },
-    canvas:{
-      flex:1,
-      display:'flex',
-      flexFlow: 'column',
-      padding: theme.spacing(1),
-    },
-    outline:{
-      outline:"#5d78ff dashed 1px",
-      padding:theme.spacing(2),
-    }
   }),
 );
 
@@ -114,6 +105,7 @@ export default function PageContentDesign() {
     dispatch(openFixedBarAction());
   };
 
+
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
@@ -135,7 +127,7 @@ export default function PageContentDesign() {
         <ThemeProvider theme={darkTheme}>
           <TopNavHeightPlaceholder className={classes.toolbar}>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-layers"/>
+              <FontIcon iconClass="mdi mdi-layers-outline"/>
             </IconButton>
             <IconButton>
               <FontIcon iconClass="mdi mdi-dock-bottom"/>
@@ -172,19 +164,7 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar}>
-            <div className={classes.canvas}>
-              <Container className = {classes.outline} style={{flex:1,}}>
-                <Grid container className = {classes.outline} >
-                <Grid item className = {classes.outline} xs={6}>
-                    <Card>ddd</Card> 
-                  </Grid>
-                  <Grid item className = {classes.outline} xs={6}> 
-                    
-                  </Grid>
-                </Grid>
-                
-              </Container>
-            </div>
+            <Canvas />
           </Scrollbar>
         </div>
       </div>
