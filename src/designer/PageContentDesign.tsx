@@ -15,7 +15,7 @@ import Spacer from 'components/common/Spacer';
 import { cancelPageContentAction, savePageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import FontIcon from 'components/common/FontIcon';
-import Toolbox from './Toolbox';
+import Toolbox from './Toolbox/Toolbox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -121,10 +121,10 @@ export default function PageContentDesign() {
         <ThemeProvider theme={darkTheme}>
           <TopNavHeightPlaceholder className={classes.toolbar}>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-dock-bottom"/>
+              <FontIcon iconClass="mdi mdi-layers"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-layers"/>
+              <FontIcon iconClass="mdi mdi-dock-bottom"/>
             </IconButton>
             <Spacer></Spacer>
             <Button onClick={handleCancel}>

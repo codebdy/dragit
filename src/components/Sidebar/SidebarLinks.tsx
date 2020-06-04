@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ItemJson{
   id: string,
   type:'subheader' | 'item' | 'group',
-  title?:'仪表盘',
+  title?:string,
   icon?:string,
   badge?:{
     props:any
