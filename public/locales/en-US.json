@@ -11,5 +11,10 @@
   "folder": "Folder",
   "design": "Design",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "form": "Form",
+  "relations": "Relations",
+  "customized": "Customized",
+  "component-box": "Component box"
+
 }

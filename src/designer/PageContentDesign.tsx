@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -32,7 +32,11 @@ const useStyles = makeStyles((theme: Theme) =>
       background: '#1a1a27',
       boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.2), 0px 20px 31px 3px rgba(0,0,0,0.14), 0px 8px 38px 7px rgba(0,0,0,0.12)',
       zIndex:theme.zIndex.drawer + 1,
-      color:"#fff",
+      color:"#f7f7f7",
+    },
+    leftTitle:{
+      padding: theme.spacing(1,0,0,1),
+      fontSize: '1.2rem',
     },
     rightArea:{
       flex:1,
@@ -100,11 +104,11 @@ export default function PageContentDesign() {
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
         <SidebarWidthPlaceholder className={classes.leftArea}>
-          <TopNavHeightPlaceholder>
-            <h3>
+          <TopNavHeightPlaceholder className={classes.leftTitle}>
+            
               <FontIcon iconClass="mdi mdi-tools" className={classes.toolboxIcon}></FontIcon>
-              组件箱
-            </h3>
+              {intl.get('component-box')}
+
           </TopNavHeightPlaceholder>
           <Scrollbar>
             <Toolbox></Toolbox>
@@ -116,6 +120,12 @@ export default function PageContentDesign() {
       >
         <ThemeProvider theme={darkTheme}>
           <TopNavHeightPlaceholder className={classes.toolbar}>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-dock-bottom"/>
+            </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-layers"/>
+            </IconButton>
             <Spacer></Spacer>
             <Button onClick={handleCancel}>
               {intl.get('cancel')}

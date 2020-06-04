@@ -11,5 +11,9 @@
   "folder":"目录",
   "design": "设计",
   "save": "保存",
-  "cancel": "取消"
+  "cancel": "取消",
+  "form": "表单",
+  "relations": "关联",
+  "customized": "自定义",
+  "component-box": "组件箱"
 }
