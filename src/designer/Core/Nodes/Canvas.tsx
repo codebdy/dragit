@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Container, Grid, Card } from "@material-ui/core";
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -8,6 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flex:1,
       display:'flex',
       flexFlow: 'column',
+    },
+
+    editPadding:{
       padding: theme.spacing(1),
     },
 
@@ -25,10 +29,13 @@ export default function Canvas(){
 
   return (
     <div className={classes.canvas}>
-      <Container className = {classes.outline} style={{flex:1,}}>
+      <Container 
+        className = {classNames(classes.outline, classes.editPadding)} 
+        style={{flex:1,}}
+      >
         <Grid container className = {classes.outline} >
         <Grid item className = {classes.outline} xs={6}>
-            <Card>ddd</Card> 
+            <Card elevation={6}>ddd</Card> 
           </Grid>
           <Grid item className = {classes.outline} xs={6}> 
             
