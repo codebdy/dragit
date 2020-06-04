@@ -18,8 +18,9 @@ export default function FontIcon(props:FontIconProps){
         fontSize: size + 'px',
         color: color,
         backgroundColor: backgroundColor,
-        width: props.size &&( 26 + 'px'),
-        height: props.size &&( 26 + 'px'),
+        width: ( size + 'px'),
+        height: ( size + 'px'),
+        lineHeight: size + 'px',
       }}
     />
   )
