@@ -44,7 +44,7 @@ function App() {
     palette: {
       type: 'light',
       background:{
-        default:'#f2f4f4',
+        default:'#f4f5fa',
       },
       primary:{
         main:"#5d78ff",

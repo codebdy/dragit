@@ -1,7 +1,7 @@
 export default [
   {
     id:"1",
-    titleKey: "grid",
+    titleKey: "layout",
     icon:"mdi mdi-view-dashboard",
     children:[
       {
@@ -28,6 +28,14 @@ export default [
           item:true,
         },
       },  
+      //{
+      //  id:"1-4",
+      //  title:"弹性盒子",
+      //  name:"Box",
+     //   props:{
+      //    item:true,
+      //  },
+      //},  
     ]
   },
   {

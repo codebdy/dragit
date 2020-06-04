@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton, Container, Grid, Card } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -67,8 +67,22 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar:{
       background:"#3e3e54",
       boxShadow: theme.shadows[6],
+    },
+    scrollBar:{
+      flex:1,
+      display:'flex',
+      flexFlow: 'column',
+    },
+    canvas:{
+      flex:1,
+      display:'flex',
+      flexFlow: 'column',
+      padding: theme.spacing(1),
+    },
+    outline:{
+      outline:"#5d78ff dashed 1px",
+      padding:theme.spacing(2),
     }
-
   }),
 );
 
@@ -126,6 +140,27 @@ export default function PageContentDesign() {
             <IconButton>
               <FontIcon iconClass="mdi mdi-dock-bottom"/>
             </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-square-outline"/>
+            </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-arrow-expand-horizontal"/>
+            </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-arrow-expand-vertical"/>
+            </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-eye-outline"/>
+            </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-undo"/>
+            </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-redo"/>
+            </IconButton>
+            <IconButton>
+              <FontIcon iconClass="mdi mdi-delete-outline"/>
+            </IconButton>
             <Spacer></Spacer>
             <Button onClick={handleCancel}>
               {intl.get('cancel')}
@@ -136,11 +171,20 @@ export default function PageContentDesign() {
           </TopNavHeightPlaceholder>
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
-          <Scrollbar permanent>
-            <div style={{height:'1500px'}}>
-              ewewe
+          <Scrollbar permanent className={classes.scrollBar}>
+            <div className={classes.canvas}>
+              <Container className = {classes.outline} style={{flex:1,}}>
+                <Grid container className = {classes.outline} >
+                <Grid item className = {classes.outline} xs={6}>
+                    <Card>ddd</Card> 
+                  </Grid>
+                  <Grid item className = {classes.outline} xs={6}> 
+                    
+                  </Grid>
+                </Grid>
+                
+              </Container>
             </div>
-
           </Scrollbar>
         </div>
       </div>

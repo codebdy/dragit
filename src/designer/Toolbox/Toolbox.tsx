@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
       letterSpacing: '1px',
     },
     itemText:{
-      fontSize:"0.8rem",
+      fontSize:"0.9rem",
       letterSpacing: '1px',
     },
   }),
