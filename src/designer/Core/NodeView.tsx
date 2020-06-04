@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { nodeMap } from "../Nodes/nodeMap"
-import { INode } from '../Nodes/Inode';
+import { nodeMap } from "./Nodes/nodeMap"
+import { INode } from './Nodes/INode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

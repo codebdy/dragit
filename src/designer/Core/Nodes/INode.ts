@@ -1,5 +1,5 @@
 export interface INode{
-  id:string,
+  id:number,
   name:string,
   children?:Array<INode>,
 }
