@@ -1,10 +1,10 @@
 import { IState } from "./IState";
-import { INode } from "../Nodes/INode";
+//import { INode } from "../Node/IFsm";
 
 export class State implements IState{
-  node:INode;
+  //node:INode;
 
-  constructor(node:INode){
-    this.node = node
-  }
+  //constructor(node:INode){
+  //  this.node = node
+  //}
 }

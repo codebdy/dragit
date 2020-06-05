@@ -3,10 +3,10 @@ import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
 import { IView } from './IView';
-import { INode } from '../Nodes/INode';
+import { NodeContext } from './NodeContext';
 
 interface INodeProps{
-  node:INode
+  schema:ISchema
 }
 
 interface INodeState {
@@ -15,10 +15,13 @@ interface INodeState {
 }
 
 export class NodeView extends React.Component<INodeProps, INodeState> implements IView{
+  node:NodeContext;
 
-  constructor(props: Readonly<{node:INode}>) {
+  constructor( props: Readonly<{schema:ISchema}> ) {
     super(props);
-    this.state = { schema: props.node.schema, fsmStyle:{} };
+    this.state = { schema: props.schema, fsmStyle:{} };
+    
+    this.node = new NodeContext(this)
   }
 
   handleMouseEnter(){
@@ -30,11 +33,11 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
   }
 
   render() {
-    const node = this.props.node;
-    const rule =  resolveRule(node.schema.name)
+    const schema = this.state.schema;
+    const rule =  resolveRule(schema.name)
 
     return(React.createElement(
-      resolveNode(node.schema.name),
+      resolveNode(schema.name),
       {
         className:'drag-node-outline',
         style:{
@@ -47,9 +50,9 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
         onMouseEnter : this.handleMouseEnter,
         onMouseOut : this.handleMouseOut,
       },
-      node.children?.map((child:INode)=>{
+      schema.children?.map((child:ISchema)=>{
         return (
-          <NodeView key={child.id} node={child} />
+          <NodeView key={child.id} schema={child} />
         )
       })
       )
