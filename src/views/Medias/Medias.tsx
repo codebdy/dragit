@@ -3,7 +3,7 @@ import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, 
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
-import FontIcon from "components/common/FontIcon";
+import MdiIcon from "components/common/MdiIcon";
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import MediaGridList from "./MediaGridList";
@@ -188,31 +188,31 @@ export default function Medias(props:{children?: any}) {
                         component="span"
                         className={classes.uploadButton}
                       >
-                        <FontIcon iconClass="mdi mdi-cloud-upload-outline" size={toolIconSize} />
+                        <MdiIcon iconClass="mdi-cloud-upload-outline" size={toolIconSize} />
                       </IconButton>
                     </Tooltip>
                   </label>
 
                   <Tooltip title={intl.get('filter')} arrow placement="top">
                     <IconButton aria-label={intl.get('filter')} component="span">
-                      <FontIcon iconClass="mdi mdi-filter-outline" size={toolIconSize} />
+                      <MdiIcon iconClass="mdi-filter-outline" size={toolIconSize} />
                     </IconButton>
                   </Tooltip>
                   <Tooltip title={intl.get('sort-by')} arrow placement="top">
                     <IconButton aria-label={intl.get('sort-by')} component="span">
-                      <FontIcon iconClass="mdi mdi mdi-sort-ascending"  size={toolIconSize} />
+                      <MdiIcon iconClass="mdi-sort-ascending"  size={toolIconSize} />
                     </IconButton>
                   </Tooltip>
                   <Tooltip title={intl.get('list')} arrow placement="top">
                     <IconButton aria-label={intl.get('list')} component="span">
-                      <FontIcon iconClass="mdi mdi-format-list-checkbox"  size={toolIconSize} />
+                      <MdiIcon iconClass="mdi-format-list-checkbox"  size={toolIconSize} />
                     </IconButton>
                   </Tooltip>
 
                 </Hidden>
                 <Hidden smUp>
                     <IconButton aria-label={intl.get('list')} component="span">
-                      <FontIcon iconClass="mdi mdi-dots-horizontal"  size={toolIconSize} />
+                      <MdiIcon iconClass="mdi-dots-horizontal"  size={toolIconSize} />
                     </IconButton>
                 </Hidden>
               </div>

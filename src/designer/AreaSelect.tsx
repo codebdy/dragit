@@ -8,7 +8,7 @@ import { closeAreaSelectAction, designPageContentAction } from 'store/designer/a
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
-import FontIcon from 'components/common/FontIcon';
+import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from 'components/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 
@@ -72,7 +72,7 @@ export default function AreaSelect() {
     <Backdrop className={classes.backdrop} open={myStore.areaSelect} onClick={handleClose}>
       <SidebarWidthPlaceholder className={classes.area}>
         <Button variant="contained" color="primary" size="large" className={classes.designButton}>
-          <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
+          <MdiIcon iconClass="mdi-pencil-ruler" className={classes.designButtonIcon} />
           {intl.get('design')}
         </Button>
       </SidebarWidthPlaceholder>
@@ -85,7 +85,7 @@ export default function AreaSelect() {
             className={classNames(classes.designButton) }
             onClick={handleDesignPageContent}
           >
-            <FontIcon iconClass="mdi mdi-pencil-ruler" className={classes.designButtonIcon} />
+            <MdiIcon iconClass="mdi-pencil-ruler" className={classes.designButtonIcon} />
             {intl.get('design')}
           </Button>
         </div>

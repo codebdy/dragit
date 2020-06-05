@@ -1,6 +1,6 @@
 import React from "react";
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import FontIcon from "components/common/FontIcon"
+import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Paper, Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
@@ -59,24 +59,24 @@ export default function FixedBar(
       <Paper  className={classes.root} elevation={24}>
         <Tooltip title={intl.get('design-layout')} arrow placement="left">
           <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>
-            <FontIcon iconClass="mdi mdi-pencil-ruler" />
+            <MdiIcon iconClass="mdi-pencil-ruler" />
           </IconButton>
         </Tooltip>
         <Tooltip title={intl.get('modules')} arrow placement="left">
           <NavLink to={'/design'}>
             <IconButton aria-label={intl.get('modules')}>
-              <FontIcon iconClass="mdi mdi-view-grid-plus" />
+              <MdiIcon iconClass="mdi-view-grid-plus" />
             </IconButton>
           </NavLink>
         </Tooltip>
         <Tooltip title={intl.get('theme-settings')} arrow placement="left">
           <IconButton aria-label={intl.get('theme-settings')}>
-            <FontIcon iconClass="mdi mdi-image-filter-black-white" />
+            <MdiIcon iconClass="mdi-image-filter-black-white" />
           </IconButton>
         </Tooltip>
         <Tooltip title={intl.get('debug')} arrow placement="left">
           <IconButton  aria-label={intl.get('debug')}>
-            <FontIcon iconClass="mdi mdi-android-debug-bridge"/>
+            <MdiIcon iconClass="mdi-android-debug-bridge"/>
           </IconButton>
         </Tooltip>
       </Paper >

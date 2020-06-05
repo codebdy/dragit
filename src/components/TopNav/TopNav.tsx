@@ -12,7 +12,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
 import { Hidden } from '@material-ui/core';
 import classNames from 'classnames';
-import FontIcon from 'components/common/FontIcon';
+import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -109,11 +109,11 @@ export default function TopNav(props:{onSidebarToggle: any}) {
           <div className={classes.grow} />
           
           <IconButton aria-label="show 4 new mails" color="inherit">
-            <FontIcon iconClass = "mdi mdi-github"/>
+            <MdiIcon iconClass = "mdi-github"/>
           </IconButton>
           <IconButton aria-label="show 17 new notifications" color="inherit">
             <Badge badgeContent={17} color="secondary">
-            <FontIcon iconClass = "mdi mdi-bell-outline"/>
+            <MdiIcon iconClass = "mdi-bell-outline"/>
             </Badge>
           </IconButton>
           <IconButton

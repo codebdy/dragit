@@ -6,7 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import FontIcon from 'components/common/FontIcon';
+import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
 import items from './items'
@@ -72,7 +72,7 @@ function Item(props:{item:ItemJson}){
         }
       >
       </ListItemText>
-      <FontIcon iconClass="mdi mdi-arrow-all" size={20}/> 
+      <MdiIcon iconClass="mdi-arrow-all" size={20}/> 
     </ListItem>  
   )
 }
@@ -89,7 +89,7 @@ function ItemGroup(props:{item:ItemJson, openedId:string, onToggleOpen: (id:stri
     <Fragment>
       <ListItem button onClick= {handleClick}>
         <ListItemIcon>
-          <FontIcon iconClass={item.icon} size={22}/>
+          <MdiIcon iconClass={item.icon} size={22}/>
         </ListItemIcon>
         <ListItemText primary={item.titleKey ? intl.get(item.titleKey) : item.title} 
           classes={{

@@ -14,7 +14,7 @@ import Scrollbar from 'components/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
 import { cancelPageContentAction, savePageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
-import FontIcon from 'components/common/FontIcon';
+import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
 import Canvas from './Core/Nodes/Canvas';
 
@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme: Theme) =>
       background:"#3e3e54",
       boxShadow: theme.shadows[6],
     },
+    cancelButton:{
+      marginRight:theme.spacing(1),
+    },
     scrollBar:{
       flex:1,
       display:'flex',
@@ -112,7 +115,7 @@ export default function PageContentDesign() {
         <SidebarWidthPlaceholder className={classes.leftArea}>
           <TopNavHeightPlaceholder className={classes.leftTitle}>
             
-              <FontIcon iconClass="mdi mdi-tools" className={classes.toolboxIcon}></FontIcon>
+              <MdiIcon iconClass="mdi-tools" className={classes.toolboxIcon}></MdiIcon>
               {intl.get('component-box')}
 
           </TopNavHeightPlaceholder>
@@ -127,34 +130,34 @@ export default function PageContentDesign() {
         <ThemeProvider theme={darkTheme}>
           <TopNavHeightPlaceholder className={classes.toolbar}>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-layers-outline"/>
+              <MdiIcon iconClass="mdi-layers-outline"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-dock-bottom"/>
+              <MdiIcon iconClass="mdi-dock-bottom"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-square-outline"/>
+              <MdiIcon iconClass="mdi-border-none-variant"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-arrow-expand-horizontal"/>
+              <MdiIcon iconClass="mdi-arrow-expand-horizontal"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-arrow-expand-vertical"/>
+              <MdiIcon iconClass="mdi-arrow-expand-vertical"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-eye-outline"/>
+              <MdiIcon iconClass="mdi-eye-outline"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-undo"/>
+              <MdiIcon iconClass="mdi-undo"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-redo"/>
+              <MdiIcon iconClass="mdi-redo"/>
             </IconButton>
             <IconButton>
-              <FontIcon iconClass="mdi mdi-delete-outline"/>
+              <MdiIcon iconClass="mdi-delete-outline"/>
             </IconButton>
             <Spacer></Spacer>
-            <Button onClick={handleCancel}>
+            <Button onClick={handleCancel} className = {classes.cancelButton}>
               {intl.get('cancel')}
             </Button>
             <Button variant="contained" color="primary" onClick={handleSave}>

@@ -2,7 +2,7 @@ export default [
   {
     id:"1",
     titleKey: "layout",
-    icon:"mdi mdi-view-dashboard",
+    icon:"mdi-view-dashboard",
     children:[
       {
         id:"1-1",
@@ -41,7 +41,7 @@ export default [
   {
     id:"2",
     titleKey: "form",
-    icon:"mdi mdi-text-box",
+    icon:"mdi-text-box",
     children:[
       {
         id:"2-1",
@@ -73,11 +73,11 @@ export default [
   {
     id:"3",
     titleKey: "relations",
-    icon:"mdi mdi-relation-many-to-many",
+    icon:"mdi-relation-many-to-many",
   },
   {
     id:"4",
     titleKey: "customized",
-    icon:"mdi mdi-puzzle",
+    icon:"mdi-puzzle",
   },
 ]

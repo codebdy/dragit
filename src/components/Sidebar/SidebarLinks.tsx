@@ -12,7 +12,7 @@ import Scrollbar from "../common/Scrollbar";
 import Badge from '@material-ui/core/Badge';
 import Chip from '@material-ui/core/Chip';
 import { useSelector } from "react-redux";
-import FontIcon from "components/common/FontIcon"
+import FontIcon from "components/common/MdiIcon"
 import LoadingSkeleton from "./LoadingSkeleton";
 import { NavLink } from "react-router-dom";
 

@@ -10,7 +10,7 @@ export default [
     type:'item',
     title:'仪表盘',
     to:'/admin/dashboard',
-    icon:'mdi mdi-speedometer',
+    icon:'mdi-speedometer',
     chip:{
       props:{
         color:'primary',
@@ -24,13 +24,13 @@ export default [
     type:'item',
     title:'媒体库',
     to:'/admin/medias',
-    icon:'mdi mdi-image-auto-adjust',
+    icon:'mdi-image-auto-adjust',
   },
   {
     id:"2",
     title:'文章管理',
     type:'group',
-    icon:'mdi mdi-text-box-outline',
+    icon:'mdi-text-box-outline',
     children:[
         {
           id:"h2-1",
@@ -43,14 +43,14 @@ export default [
         title:'添加文章',
         type:'item',
         to:{name:'dashboard'},
-        icon:'mdi mdi-circle-small',
+        icon:'mdi-circle-small',
       },
       {
         id:"2-2",
         title:'文章列表',
         type:'item',
         to:{name:'dashboard'},
-        icon:'mdi mdi-circle-small',
+        icon:'mdi-circle-small',
         badge:{
           props:{
             color:'secondary',
@@ -66,21 +66,21 @@ export default [
     id:"3",
     title:'多级嵌套',
     type:'group',
-    icon:'mdi mdi-file-tree-outline',
+    icon:'mdi-file-tree-outline',
     children:[
       {
         id:"3-1",
         title:'层级2',
         type:'group',
         to:{name:'dashboard'},
-        icon:'mdi mdi-chart-line',
+        icon:'mdi-chart-line',
         children:[
           {
             id:"3-2-1",
             title:'层级3',
             type:'item',
             to:{name:'dashboard'},
-            icon:'mdi mdi-brightness-percent',
+            icon:'mdi-brightness-percent',
             badge:{
               props:{
                 color:'secondary',
@@ -97,7 +97,7 @@ export default [
         title:'文章列表',
         type:'item',
         to:{name:'dashboard'},
-        icon:'mdi mdi-tree-outline',
+        icon:'mdi-tree-outline',
       },
     
     ],
@@ -107,6 +107,6 @@ export default [
     title:'询盘',
     type:'item',
     to:{name:'dashboard'},
-    icon:'mdi mdi-email-outline',
+    icon:'mdi-email-outline',
   },
 ]
