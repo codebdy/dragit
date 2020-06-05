@@ -18,7 +18,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
 //import Canvas from './Core/Canvas';
 import { Node } from './Core/Node';
-import { NodeView } from './Core/NodeView';
+import { NodeView } from './Core/View/NodeView';
 import pageContent from './pageContent'
 
 const useStyles = makeStyles((theme: Theme) =>

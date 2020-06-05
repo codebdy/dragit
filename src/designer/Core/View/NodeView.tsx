@@ -1,7 +1,7 @@
 import React from 'react';
-import { ISchema } from './Schemas/ISchema';
-import { resolveNode } from "./resoveNode"
-import { resolveRule } from './Rules/resolveRule';
+import { ISchema } from '../Schemas/ISchema';
+import { resolveNode } from "../resoveNode"
+import { resolveRule } from '../Rules/resolveRule';
 
 interface INodeProps{
   schema: ISchema
