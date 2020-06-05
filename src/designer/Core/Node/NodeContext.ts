@@ -7,4 +7,12 @@ export class NodeContext implements IContext{
   constructor(view :IView){
     this.view = view;
   }
+
+  onMouseEnter(){
+    console.log('onMouseEnter')
+  }
+
+  onMouseOut(){
+    console.log('onMouseOut')
+  }
 }

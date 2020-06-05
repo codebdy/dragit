@@ -8,7 +8,7 @@ const nodeMap : { [key: string]: any } = {
 }
 
 function resolveNode(name:string): any{
-  return nodeMap[name] ? nodeMap[name] : 'name'
+  return nodeMap[name] ? nodeMap[name] : name
 }
 
 export {resolveNode}

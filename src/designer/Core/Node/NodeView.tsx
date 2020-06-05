@@ -15,21 +15,23 @@ interface INodeState {
 }
 
 export class NodeView extends React.Component<INodeProps, INodeState> implements IView{
-  node:NodeContext;
+  nodeContext:NodeContext;
 
   constructor( props: Readonly<{schema:ISchema}> ) {
     super(props);
     this.state = { schema: props.schema, fsmStyle:{} };
     
-    this.node = new NodeContext(this)
+    this.nodeContext = new NodeContext(this)
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseOut = this.handleMouseOut.bind(this)
   }
 
   handleMouseEnter(){
-
+    this.nodeContext.onMouseEnter()
   }
 
   handleMouseOut(){
-
+    this.nodeContext.onMouseOut()
   }
 
   render() {
