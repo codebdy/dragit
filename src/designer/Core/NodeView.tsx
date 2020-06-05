@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { nodeMap } from "./Nodes/nodeMap"
-import { INode } from './Nodes/INode';
+import { nodeMap } from "./nodeMap"
+import { ISchema } from './Schemas/ISchema';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function NodeView(props:{schema:INode}){
+export default function NodeView(props:{schema:ISchema}){
   const {schema} = props;
   const classes = useStyles();
   const node = nodeMap[schema.name] ? nodeMap[schema.name] : schema.name
@@ -22,7 +22,7 @@ export default function NodeView(props:{schema:INode}){
       {
         className:classes.outline,
       },
-      schema.children?.map((child:INode)=>{
+      schema.children?.map((child:ISchema)=>{
         return (
           <NodeView key={child.id} schema={child} />
         )

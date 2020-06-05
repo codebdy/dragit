@@ -16,7 +16,7 @@ import { cancelPageContentAction, savePageContentAction } from 'store/designer/a
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
-import Canvas from './Core/Nodes/Canvas';
+import Canvas from './Core/Schemas/Canvas';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
