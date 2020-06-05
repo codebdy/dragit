@@ -1,6 +1,6 @@
-import { ISchema } from "./ISchema";
+import { ISchema } from "./Schemas/ISchema";
 
-export class Schema implements ISchema{
+export class Node implements ISchema{
   static idSeed:number = 1;
   id: number = 0 ;
   name:string = 'div';
@@ -13,8 +13,8 @@ export class Schema implements ISchema{
   }
 
   seedId(){
-    this.id = Schema.idSeed
-    Schema.idSeed ++
+    this.id = Node.idSeed
+    Node.idSeed ++
   }
 
 }

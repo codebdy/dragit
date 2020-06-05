@@ -22,9 +22,9 @@ export default function Canvas(props: {className?:string, children?:any, style?:
   const classes = useStyles();
 
   return (
-    <div 
+    <div
+      {...props}
       className={ classNames(classes.canvas, props.className, classes.editPadding) }
-      style={props.style}
     >
       {props.children}
     </div>

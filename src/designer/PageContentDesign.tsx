@@ -17,8 +17,8 @@ import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
 //import Canvas from './Core/Canvas';
-import { Schema } from './Core/Schemas/Schema';
-import { DragNode } from './Core/DragNode';
+import { Node } from './Core/Node';
+import { NodeView } from './Core/NodeView';
 import pageContent from './pageContent'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -99,7 +99,7 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   
-  const [canvasSchema, setCanvasSchema] = React.useState(new Schema('Canvas', pageContent));
+  const [canvasSchema, setCanvasSchema] = React.useState(new Node('Canvas', pageContent));
 
   const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()
@@ -173,7 +173,7 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar}>
-            <DragNode schema={canvasSchema} />
+            <NodeView schema={canvasSchema} />
           </Scrollbar>
         </div>
       </div>

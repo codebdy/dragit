@@ -1,6 +1,5 @@
 import React from 'react';
 import { ISchema } from './Schemas/ISchema';
-import { INode } from './INode';
 import { resolveNode } from "./resoveNode"
 import { resolveRule } from './Rules/resolveRule';
 
@@ -12,7 +11,7 @@ interface INodeState {
   schema: ISchema
 }
 
-export class DragNode extends React.Component<INodeProps, INodeState> implements INode{
+export class NodeView extends React.Component<INodeProps, INodeState>{
 
   constructor(props: Readonly<{schema:ISchema}>) {
     super(props);
@@ -36,7 +35,7 @@ export class DragNode extends React.Component<INodeProps, INodeState> implements
       },
       schema.children?.map((child:ISchema)=>{
         return (
-          <DragNode key={child.id} schema={child} />
+          <NodeView key={child.id} schema={child} />
         )
       })
       )

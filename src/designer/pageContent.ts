@@ -1,5 +1,9 @@
-import { Schema } from "./Core/Schemas/Schema";
+import { Node } from "./Core/Node";
 
 export default [
-  new Schema('Container'),
+  new Node('Container',
+    [
+      new Node('Grid'),
+    ]
+  ),
 ]
