@@ -24,11 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function Canvas(){
+export default function Canvas(props: {className?:string}){
   const classes = useStyles();
 
   return (
-    <div className={classes.canvas}>
+    <div className={ classNames(classes.canvas, props.className) }>
       <Container 
         className = {classNames(classes.outline, classes.editPadding)} 
         style={{flex:1,}}

@@ -1,7 +1,9 @@
 import { Container } from "@material-ui/core";
+import Canvas from "./Canvas"
 
 const nodeMap : { [key: string]: any } = {
   Container,
+  Canvas,
 }
 
 function resolveNode(name:string): any{

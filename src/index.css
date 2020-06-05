@@ -69,3 +69,7 @@ h2{
   background: rgba(0,0,0, 0.3);
   transition: all .2s;
 }
+
+.drag-node-outline{
+  outline: #5d78ff dashed 1px;
+}

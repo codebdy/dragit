@@ -16,7 +16,9 @@ import { cancelPageContentAction, savePageContentAction } from 'store/designer/a
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
-import Canvas from './Core/Schemas/Canvas';
+//import Canvas from './Core/Canvas';
+import { Schema } from './Core/Schemas/Schema';
+import { DragNode } from './Core/DragNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,6 +97,9 @@ const darkTheme = responsiveFontSizes(createMuiTheme({
 export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
+  
+  const [canvasSchema, setCanvasSchema] = React.useState(new Schema('Canvas'));
+
   const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()
   
@@ -167,7 +172,7 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar}>
-            <Canvas />
+            <DragNode schema={canvasSchema} />
           </Scrollbar>
         </div>
       </div>
