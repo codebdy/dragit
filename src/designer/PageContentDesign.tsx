@@ -99,7 +99,7 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   
-  const [canvasSchema, setCanvasSchema] = React.useState(new Node('Canvas', pageContent));
+  const [canvasNode, setCanvasNode] = React.useState(new Node({name:'Canvas'}));
 
   const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()
@@ -173,7 +173,7 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar}>
-            <NodeView schema={canvasSchema} />
+            <NodeView node={canvasNode} />
           </Scrollbar>
         </div>
       </div>

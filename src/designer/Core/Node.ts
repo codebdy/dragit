@@ -1,15 +1,16 @@
 import { ISchema } from "./Schemas/ISchema";
+import { INode } from "./INode";
 
-export class Node implements ISchema{
+export class Node implements INode{
   static idSeed:number = 1;
   id: number = 0 ;
-  name:string = 'div';
-  children?: ISchema[] | undefined;
+  schema: ISchema;
+  children?: INode[] | undefined;
   
-  constructor(name:string, children:Array<ISchema>=[]) {
+  constructor(schema:ISchema) {
     this.seedId()
-    this.name = name;
-    this.children = children;
+    this.schema = schema;
+    //this.children = children;
   }
 
   seedId(){

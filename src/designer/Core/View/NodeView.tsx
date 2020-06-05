@@ -2,28 +2,31 @@ import React from 'react';
 import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
+import { IView } from './IView';
+import { INode } from '../INode';
 
 interface INodeProps{
-  schema: ISchema
+  node:INode
 }
 
 interface INodeState {
-  schema: ISchema
+  schema: ISchema,
+  fsmStyle: any,
 }
 
-export class NodeView extends React.Component<INodeProps, INodeState>{
+export class NodeView extends React.Component<INodeProps, INodeState> implements IView{
 
-  constructor(props: Readonly<{schema:ISchema}>) {
+  constructor(props: Readonly<{node:INode}>) {
     super(props);
-    this.state = { schema: props.schema };
+    this.state = { schema: props.node.schema, fsmStyle:{} };
   }
 
   render() {
-    const schema = this.state.schema;
-    const rule =  resolveRule(schema.name)
+    const node = this.props.node;
+    const rule =  resolveRule(node.schema.name)
 
     return(React.createElement(
-      resolveNode(schema.name),
+      resolveNode(node.schema.name),
       {
         className:'drag-node-outline',
         style:{
@@ -33,9 +36,9 @@ export class NodeView extends React.Component<INodeProps, INodeState>{
           paddingRight : rule.editPaddingX,
         }
       },
-      schema.children?.map((child:ISchema)=>{
+      node.children?.map((child:INode)=>{
         return (
-          <NodeView key={child.id} schema={child} />
+          <NodeView key={child.id} node={child} />
         )
       })
       )
