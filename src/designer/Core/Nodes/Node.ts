@@ -1,4 +1,4 @@
-import { ISchema } from "./Schemas/ISchema";
+import { ISchema } from "../Schemas/ISchema";
 import { INode } from "./INode";
 
 export class Node implements INode{
@@ -7,10 +7,10 @@ export class Node implements INode{
   schema: ISchema;
   children?: INode[] | undefined;
   
-  constructor(schema:ISchema) {
+  constructor(schema:ISchema, children: Array<INode> = []) {
     this.seedId()
     this.schema = schema;
-    //this.children = children;
+    this.children = children;
   }
 
   seedId(){

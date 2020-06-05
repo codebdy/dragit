@@ -17,9 +17,10 @@ import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
 //import Canvas from './Core/Canvas';
-import { Node } from './Core/Node';
+import { Node } from './Core/Nodes/Node';
 import { NodeView } from './Core/View/NodeView';
 import pageContent from './pageContent'
+import { parseSchemas } from './Core/Nodes/nodeParser';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -99,7 +100,7 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   
-  const [canvasNode, setCanvasNode] = React.useState(new Node({name:'Canvas'}));
+  const [canvasNode, setCanvasNode] = React.useState(new Node({name:'Canvas'}, parseSchemas(pageContent)));
 
   const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()

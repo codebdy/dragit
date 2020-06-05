@@ -3,7 +3,7 @@ import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
 import { IView } from './IView';
-import { INode } from '../INode';
+import { INode } from '../Nodes/INode';
 
 interface INodeProps{
   node:INode
@@ -21,6 +21,14 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
     this.state = { schema: props.node.schema, fsmStyle:{} };
   }
 
+  handleMouseEnter(){
+
+  }
+
+  handleMouseOut(){
+
+  }
+
   render() {
     const node = this.props.node;
     const rule =  resolveRule(node.schema.name)
@@ -34,7 +42,10 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
           paddingBottom : rule.editPaddingY,
           paddingLeft : rule.editPaddingX,
           paddingRight : rule.editPaddingX,
-        }
+
+        },
+        onMouseEnter : this.handleMouseEnter,
+        onMouseOut : this.handleMouseOut,
       },
       node.children?.map((child:INode)=>{
         return (

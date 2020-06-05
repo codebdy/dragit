@@ -1,5 +1,5 @@
 import { IState } from "./IState";
-import { INode } from "../INode";
+import { INode } from "../Nodes/INode";
 
 export class State implements IState{
   node:INode;

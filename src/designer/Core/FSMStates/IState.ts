@@ -1,4 +1,4 @@
-import { INode } from "../INode";
+import { INode } from "../Nodes/INode";
 
 export interface IState{
 

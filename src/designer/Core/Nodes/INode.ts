@@ -1,4 +1,4 @@
-import { ISchema } from "./Schemas/ISchema";
+import { ISchema } from "../Schemas/ISchema";
 
 export interface INode{
   id:number;
