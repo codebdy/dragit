@@ -19,6 +19,7 @@ import Toolbox from './Toolbox/Toolbox';
 //import Canvas from './Core/Canvas';
 import { Schema } from './Core/Schemas/Schema';
 import { DragNode } from './Core/DragNode';
+import pageContent from './pageContent'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -98,7 +99,7 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   
-  const [canvasSchema, setCanvasSchema] = React.useState(new Schema('Canvas'));
+  const [canvasSchema, setCanvasSchema] = React.useState(new Schema('Canvas', pageContent));
 
   const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()

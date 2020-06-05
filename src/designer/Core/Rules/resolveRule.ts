@@ -3,7 +3,7 @@ import { ContainerRule } from "./ContainerRule"
 import { IRule } from "./IRule"
 
 const ruleMap : { [key: string]: any } = {
-  ContainerRule
+  'Container': ContainerRule,
 }
 
 function resolveRule(name:string): IRule{

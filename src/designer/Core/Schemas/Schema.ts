@@ -6,9 +6,10 @@ export class Schema implements ISchema{
   name:string = 'div';
   children?: ISchema[] | undefined;
   
-  constructor(name:string) {
+  constructor(name:string, children:Array<ISchema>=[]) {
     this.seedId()
     this.name = name;
+    this.children = children;
   }
 
   seedId(){
