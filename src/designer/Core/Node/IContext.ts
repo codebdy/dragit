@@ -7,5 +7,4 @@ export interface IContext{
   toDraggedState: ()=>void;
   toPreivewState: ()=>void;
   schema: ISchema;
-  focusNode: (nodeId:number) => void;
 }

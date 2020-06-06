@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
 import { NodeContext } from './NodeContext';
+import bus, {FOCUS_NODE} from "../bus";
 
 interface INodeProps{
   schema:ISchema
@@ -22,12 +23,27 @@ export default function NodeView(props:INodeProps){
     return dom;
   }
 
+  //const dispatch = useDispatch()
+
   const [nodeContext] = React.useState(new NodeContext({
       setStyle:setStyle,
       setSchema:setSchema,
+      //dispatch: dispatch,
       dom: getDom
     }, schema)
   );
+
+  const focusNode = (node:ISchema)=>{
+    if(node.id !== schema.id)
+    nodeContext.toNormalState()
+  }
+
+  useEffect(() => {
+    bus.on(FOCUS_NODE, focusNode)
+    return () => {
+      bus.off(FOCUS_NODE, focusNode)
+    };
+  });
 
   const rule =  resolveRule(schema.name);
 
@@ -36,7 +52,6 @@ export default function NodeView(props:INodeProps){
   }
 
   const handleMouseOut = (event:MouseEvent)=>{
-    //console.log('handleMouseOut')
     nodeContext.handleMouseOut(event);
   }
 

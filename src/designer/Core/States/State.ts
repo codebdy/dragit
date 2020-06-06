@@ -23,12 +23,12 @@ export class State implements IState{
   handleClick(event:MouseEvent){
     this.context.toFocusState();
     event.stopPropagation();
-    bus.emit(FOCUS_NODE, this.context.schema.id)
+    bus.emit(FOCUS_NODE, this.context.schema)
   }
 
-  focusNode(nodeId:number){
-    (nodeId !== this.context.schema.id) && this.context.toNormalState();
-  }
+  //focusNode(nodeId:number){
+    //(nodeId !== this.context.schema.id) && this.context.toNormalState();
+  //}
   
   enter(){
   }

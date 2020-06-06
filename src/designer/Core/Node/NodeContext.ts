@@ -28,8 +28,7 @@ export class NodeContext implements IContext{
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.focusNode = this.focusNode.bind(this);
-  }
+   }
 
   handleMouseMove(event:MouseEvent){
     this.state.handleMouseMove(event);
@@ -41,10 +40,6 @@ export class NodeContext implements IContext{
 
   handleClick(event:MouseEvent){
     this.state.handleClick(event);
-  }
-
-  focusNode(nodeId:number){
-    this.state.focusNode(nodeId);
   }
 
   toNormalState(){

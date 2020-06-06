@@ -4,6 +4,7 @@ import {closeAreaSelectAction, openAreaSelectAction, designPageContentAction, ca
 const initialState = {
   areaSelect: false,
   pageContentDesign: false,
+  focusedNodeId : undefined,
 };
 
 type State = typeof initialState
@@ -52,8 +53,7 @@ function reducer(
 
     case cancelPageContentAction().type:
       return closePageContentDesigner(state, action);
-      
-    }
+  }
 
   return state
 }
