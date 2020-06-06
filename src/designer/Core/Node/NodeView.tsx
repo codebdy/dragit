@@ -4,6 +4,7 @@ import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
 import { IView } from './IView';
 import { NodeContext } from './NodeContext';
+import bus, {FOCUS_NODE} from "../bus";
 
 interface INodeProps{
   schema:ISchema
@@ -21,26 +22,36 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
     super(props);
     this.state = { schema: props.schema, style:{} };
     
-    this.nodeContext = new NodeContext(this)
-    this.handleMouseMove = this.handleMouseMove.bind(this)
-    this.handleMouseOut = this.handleMouseOut.bind(this)
+    this.nodeContext = new NodeContext(this, this.state.schema);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   setStyle(style:{[key:string]:string}){
     this.setState({style:style})
   }
+  componentWillMount(){
+    bus.on(FOCUS_NODE,(nodeId:number)=>{
+      this.nodeContext.focusNode(nodeId);
+    })
+  }
 
   handleMouseMove(event:MouseEvent){
-    this.nodeContext.handleMouseMove(event)
+    this.nodeContext.handleMouseMove(event);
   }
 
   handleMouseOut(event:MouseEvent){
-    this.nodeContext.handleMouseOut(event)
+    this.nodeContext.handleMouseOut(event);
+  }
+
+  handleClick(event:MouseEvent){
+    this.nodeContext.handleClick(event);
   }
 
   render() {
     const schema = this.state.schema;
-    const rule =  resolveRule(schema.name)
+    const rule =  resolveRule(schema.name);
 
     return(React.createElement(
       resolveNode(schema.name),
@@ -56,6 +67,7 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
         },
         onMouseMove : this.handleMouseMove,
         onMouseOut : this.handleMouseOut,
+        onClick : this.handleClick,
       },
       schema.children?.map((child:ISchema)=>{
         return (

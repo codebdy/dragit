@@ -1,6 +1,6 @@
 import { Rule } from "./Rule";
 
 export class ContainerRule extends Rule{
-  editPaddingY = '8px';
-  editPaddingX = '8px';
+  editPaddingY = '16px';
+  editPaddingX = '16px';
 }
