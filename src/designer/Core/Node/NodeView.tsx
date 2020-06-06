@@ -11,7 +11,7 @@ interface INodeProps{
 
 interface INodeState {
   schema: ISchema,
-  fsmStyle: any,
+  style: {[key:string]:string},
 }
 
 export class NodeView extends React.Component<INodeProps, INodeState> implements IView{
@@ -19,19 +19,23 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
 
   constructor( props: Readonly<{schema:ISchema}> ) {
     super(props);
-    this.state = { schema: props.schema, fsmStyle:{} };
+    this.state = { schema: props.schema, style:{} };
     
     this.nodeContext = new NodeContext(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseOut = this.handleMouseOut.bind(this)
   }
 
+  setStyle(style:{[key:string]:string}){
+    this.setState({style:style})
+  }
+
   handleMouseEnter(){
-    this.nodeContext.onMouseEnter()
+    this.nodeContext.handleMouseEnter()
   }
 
   handleMouseOut(){
-    this.nodeContext.onMouseOut()
+    this.nodeContext.handleMouseOut()
   }
 
   render() {
@@ -47,6 +51,7 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
           paddingBottom : rule.editPaddingY,
           paddingLeft : rule.editPaddingX,
           paddingRight : rule.editPaddingX,
+          ...this.state.style,
 
         },
         onMouseEnter : this.handleMouseEnter,

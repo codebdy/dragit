@@ -1,10 +1,21 @@
 import { IState } from "./IState";
-//import { INode } from "../Node/IFsm";
+import { IContext } from "../Node/IContext";
 
 export class State implements IState{
-  //node:INode;
+  context: IContext;
 
-  //constructor(node:INode){
-  //  this.node = node
-  //}
+  constructor(context:IContext){
+    this.context = context
+  }
+
+  style(){
+    return {};
+  }
+
+  handleMouseEnter(){
+  }
+
+  handleMouseOut(){
+  }
+
 }
