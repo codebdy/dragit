@@ -65,9 +65,10 @@ export class NodeContext implements IContext{
 
   toState(stateName : string){
     if(this[stateName] !== this.state){
+      this.state.leave();
       this.state = this[stateName];
+      this.state.enter();
       this.view?.setStyle(this.state.style());
     }
   }
-
 }

@@ -4,4 +4,6 @@ export interface IState{
   handleClick: (event : MouseEvent)=>void;
   focusNode: (nodeId: number)=>void;
   style: ()=>{[key:string]:string};
+  enter: ()=>void;
+  leave: ()=>void;
 }

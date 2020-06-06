@@ -29,5 +29,13 @@ export class State implements IState{
   focusNode(nodeId:number){
     (nodeId !== this.context.schema.id) && this.context.toNormalState();
   }
+  
+  enter(){
+
+  }
+  
+  leave(){
+    
+  }
 
 }
