@@ -1,4 +1,5 @@
 import { ISchema } from "../Schemas/ISchema";
+import { IView } from "./IView";
 
 export interface IContext{
   toNormalState: ()=>void;
@@ -7,4 +8,5 @@ export interface IContext{
   toDraggedState: ()=>void;
   toPreivewState: ()=>void;
   schema: ISchema;
+  view: IView;
 }

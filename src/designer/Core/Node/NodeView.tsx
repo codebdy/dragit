@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
@@ -17,10 +17,10 @@ interface INodeState {
 export default function NodeView(props:INodeProps){
   const [schema, setSchema] = React.useState(props.schema);
   const [style, setStyle] = React.useState({});
-  let dom:any = null;
+  const nodeEl = useRef(null);
 
   const getDom = ()=>{
-    return dom;
+    return nodeEl.current;
   }
 
   //const dispatch = useDispatch()
@@ -62,9 +62,9 @@ export default function NodeView(props:INodeProps){
   return(React.createElement(
     resolveNode(schema.name),
     {
+      ref:nodeEl,
       className:'drag-node-outline',
       style:{
-        ref: (el:any) => dom = el,
         paddingTop : rule.editPaddingY,
         paddingBottom : rule.editPaddingY,
         paddingLeft : rule.editPaddingX,

@@ -9,7 +9,7 @@ import { PreviewState } from "../States/PreviewState";
 import { ISchema } from "../Schemas/ISchema";
 
 export class NodeContext implements IContext{
-  view:IView | undefined;
+  view:IView ;
   schema:ISchema;
 
   normalState:IState = new NormalState(this);

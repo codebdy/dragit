@@ -6,5 +6,12 @@ export class FocusState extends State{
       outline:"solid #5d78ff 2px",
     }
   }
-  
+
+  enter(){
+    console.log(this.context.view.dom())
+  }
+
+  leave(){
+  }
+
 }
