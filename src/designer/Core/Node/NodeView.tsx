@@ -22,7 +22,7 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
     this.state = { schema: props.schema, style:{} };
     
     this.nodeContext = new NodeContext(this)
-    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseMove = this.handleMouseMove.bind(this)
     this.handleMouseOut = this.handleMouseOut.bind(this)
   }
 
@@ -30,12 +30,12 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
     this.setState({style:style})
   }
 
-  handleMouseEnter(){
-    this.nodeContext.handleMouseEnter()
+  handleMouseMove(event:MouseEvent){
+    this.nodeContext.handleMouseMove(event)
   }
 
-  handleMouseOut(){
-    this.nodeContext.handleMouseOut()
+  handleMouseOut(event:MouseEvent){
+    this.nodeContext.handleMouseOut(event)
   }
 
   render() {
@@ -54,7 +54,7 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
           ...this.state.style,
 
         },
-        onMouseEnter : this.handleMouseEnter,
+        onMouseMove : this.handleMouseMove,
         onMouseOut : this.handleMouseOut,
       },
       schema.children?.map((child:ISchema)=>{

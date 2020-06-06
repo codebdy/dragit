@@ -21,15 +21,15 @@ export class NodeContext implements IContext{
   constructor(view :IView){
     this.view = view;
     this.state = this.normalState;
-    this.toNormalState();
+    //this.toNormalState();
   }
 
-  handleMouseEnter(){
-    this.state.handleMouseEnter()
+  handleMouseMove(event:MouseEvent){
+    this.state.handleMouseMove(event)
   }
 
-  handleMouseOut(){
-    this.state.handleMouseOut()
+  handleMouseOut(event:MouseEvent){
+    this.state.handleMouseOut(event)
   }
 
   toNormalState(){
@@ -49,8 +49,10 @@ export class NodeContext implements IContext{
   }
 
   toState(stateName : string){
-    this.state = this[stateName]
-    this.view?.setStyle(this.state.style())
+    if(this[stateName] !== this.state){
+      this.state = this[stateName]
+      this.view?.setStyle(this.state.style())
+    }
   }
 
 }

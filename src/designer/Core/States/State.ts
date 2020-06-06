@@ -12,10 +12,11 @@ export class State implements IState{
     return {};
   }
 
-  handleMouseEnter(){
+  handleMouseMove(event:MouseEvent){
+    event.stopPropagation()
   }
 
-  handleMouseOut(){
+  handleMouseOut(event:MouseEvent){
   }
 
 }

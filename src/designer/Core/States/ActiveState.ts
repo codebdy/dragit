@@ -7,7 +7,7 @@ export class ActiveState extends State{
     }
   }
 
-  handleMouseOut(){
+  handleMouseOut(event:MouseEvent){
     this.context.toNormalState();
   }
 
