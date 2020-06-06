@@ -31,10 +31,13 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
   setStyle(style:{[key:string]:string}){
     this.setState({style:style})
   }
-  componentWillMount(){
-    bus.on(FOCUS_NODE,(nodeId:number)=>{
-      this.nodeContext.focusNode(nodeId);
-    })
+
+  componentDidMount(){
+    bus.on(FOCUS_NODE,this.nodeContext.focusNode)
+  }
+
+  componentWillUnmount() {
+    bus.off(FOCUS_NODE,this.nodeContext.focusNode)
   }
 
   handleMouseMove(event:MouseEvent){

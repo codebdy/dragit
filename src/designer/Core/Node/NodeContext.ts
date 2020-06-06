@@ -25,6 +25,10 @@ export class NodeContext implements IContext{
     this.schema = schema;
     this.state = this.normalState;
     //this.toNormalState();
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.focusNode = this.focusNode.bind(this);
   }
 
   handleMouseMove(event:MouseEvent){

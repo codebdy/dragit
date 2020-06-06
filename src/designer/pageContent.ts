@@ -5,7 +5,10 @@ export default [
     children:[
       {
         name:'Grid',
-        Children:[
+        children:[
+          {
+            name:'Grid',
+          },
           {
             name:'Grid',
           },
