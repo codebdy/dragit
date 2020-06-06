@@ -2,9 +2,7 @@ import React from 'react';
 import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
-import { IView } from './IView';
 import { NodeContext } from './NodeContext';
-import bus, {FOCUS_NODE} from "../bus";
 
 interface INodeProps{
   schema:ISchema
@@ -15,6 +13,64 @@ interface INodeState {
   style: {[key:string]:string},
 }
 
+export default function NodeView(props:INodeProps){
+  const [schema, setSchema] = React.useState(props.schema);
+  const [style, setStyle] = React.useState({});
+  let dom:any = null;
+
+  const getDom = ()=>{
+    return dom;
+  }
+
+  const [nodeContext] = React.useState(new NodeContext({
+      setStyle:setStyle,
+      setSchema:setSchema,
+      dom: getDom
+    }, schema)
+  );
+
+  const rule =  resolveRule(schema.name);
+
+  const handleMouseMove = (event:MouseEvent)=>{
+    nodeContext.handleMouseMove(event);
+  }
+
+  const handleMouseOut = (event:MouseEvent)=>{
+    //console.log('handleMouseOut')
+    nodeContext.handleMouseOut(event);
+  }
+
+  const handleClick = (event:MouseEvent)=>{
+    nodeContext.handleClick(event);
+  }
+
+  return(React.createElement(
+    resolveNode(schema.name),
+    {
+      className:'drag-node-outline',
+      style:{
+        ref: (el:any) => dom = el,
+        paddingTop : rule.editPaddingY,
+        paddingBottom : rule.editPaddingY,
+        paddingLeft : rule.editPaddingX,
+        paddingRight : rule.editPaddingX,
+        ...style,
+
+      },
+      onMouseMove : handleMouseMove,
+      onMouseOut : handleMouseOut,
+      onClick : handleClick,
+    },
+    schema.children?.map((child:ISchema)=>{
+      return (
+        <NodeView key={child.id} schema={child} />
+      )
+    })
+    )
+  )
+}
+
+/*
 export class NodeView extends React.Component<INodeProps, INodeState> implements IView{
   nodeContext:NodeContext;
 
@@ -30,6 +86,10 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
 
   setStyle(style:{[key:string]:string}){
     this.setState({style:style})
+  }
+
+  dom(){
+    return this.refs.viewDom;
   }
 
   componentDidMount(){
@@ -61,6 +121,7 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
       {
         className:'drag-node-outline',
         style:{
+          ref:'viewDom',
           paddingTop : rule.editPaddingY,
           paddingBottom : rule.editPaddingY,
           paddingLeft : rule.editPaddingX,
@@ -81,4 +142,4 @@ export class NodeView extends React.Component<INodeProps, INodeState> implements
     )
 
   }
-}
+}*/

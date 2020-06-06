@@ -7,11 +7,15 @@ const designPageContentAction = createAction('DESIGN_PAGE_CONTENT');
 const savePageContentAction = createAction('SAVE_PAGE_CONTENT');
 const cancelPageContentAction = createAction('CANCEL_DESIGN_PAGE_CONTENT');
 
+const focusNodeAction = createAction('FOCUS_NODE');
+const activeNodeAction = createAction('ACTIVE_NODE');
 
 export {
   closeAreaSelectAction,
   openAreaSelectAction,
   designPageContentAction,
   savePageContentAction,
-  cancelPageContentAction
+  cancelPageContentAction,
+  focusNodeAction,
+  activeNodeAction
 };

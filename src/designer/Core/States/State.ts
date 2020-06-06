@@ -31,11 +31,9 @@ export class State implements IState{
   }
   
   enter(){
-
   }
-  
+
   leave(){
-    
   }
 
 }

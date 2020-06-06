@@ -17,7 +17,7 @@ import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
 import { Schema } from './Core/Schemas/Schema';
-import { NodeView } from './Core/Node/NodeView';
+import NodeView from './Core/Node/NodeView';
 import pageContent from './pageContent'
 import { parseSchemas } from './Core/Schemas/jsonParser';
 
