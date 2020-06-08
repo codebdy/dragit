@@ -7,12 +7,14 @@ import bus, {FOCUS_NODE} from "../bus";
 import { IContext } from './IContext';
 
 interface INodeProps{
-  schema:ISchema
+  schema:ISchema,
+  contextName?:any,
 }
 
 interface INodeState {
   schema: ISchema,
   style: {[key:string]:string},
+  
 }
 
 
@@ -25,15 +27,13 @@ export default function NodeView(props:INodeProps){
     return nodeEl.current;
   }
 
-  //const dispatch = useDispatch()
+  const contextName = props.contextName ? props.contextName : NodeContext;
 
-  const [nodeContext] = React.useState(new NodeContext({
-      setStyle:setStyle,
-      setSchema:setSchema,
-      //dispatch: dispatch,
-      dom: getDom
-    }, schema)
-  );
+  const [nodeContext] = React.useState(new contextName({
+    setStyle:setStyle,
+    setSchema:setSchema,
+    dom: getDom
+  }, schema));
 
   const focusNode = (node:IContext)=>{
     if(node.schema.id !== schema.id)

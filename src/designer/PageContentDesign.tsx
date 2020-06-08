@@ -21,6 +21,7 @@ import NodeView from './Core/Node/NodeView';
 import pageContent from './pageContent'
 import { parseSchemas } from './Core/Schemas/jsonParser';
 import ActiveLabel from './Core/Utils/ActiveLabel';
+import { CanvasContext } from './Core/Node/CanvasContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -174,7 +175,7 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar}>
-            <NodeView schema={canvasSchema} />
+            <NodeView schema={canvasSchema} contextName={CanvasContext} />
           </Scrollbar>
         </div>
       </div>

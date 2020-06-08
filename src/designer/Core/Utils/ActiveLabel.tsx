@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { IContext } from '../Node/IContext';
 import bus, { ACTIVE_NODE, UN_ACTIVE_NODE } from '../bus';
@@ -7,6 +7,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     label: {
       position:'fixed',
+      background:'#5d78ff',
+      color:'#fff',
+      padding:' 0 5px',
+      fontSize:'0.8rem',
+      height:'20px',
+      lineHeight:'20px',
     },
 
   }),
@@ -40,8 +46,13 @@ export default function ActiveLabel(){
   });
 
   return (
-    <div className={classes.label}>
-      Active Label
-    </div>
+    <Fragment>
+      {nodId !== 0 && 
+        <div className={classes.label}>
+          Active Label
+        </div>
+      }
+
+    </Fragment>
   )
 }

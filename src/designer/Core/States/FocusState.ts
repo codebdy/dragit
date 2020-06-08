@@ -10,7 +10,7 @@ export class FocusState extends State{
 
   enter(){
     bus.emit(FOCUS_NODE, this.context)
-    console.log(this.context.view.dom())
+    //console.log(this.context.view.dom())
   }
 
   leave(){
