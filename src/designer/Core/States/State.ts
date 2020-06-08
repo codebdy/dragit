@@ -1,6 +1,5 @@
 import { IState } from "./IState";
 import { IContext } from "../Node/IContext";
-import bus, {FOCUS_NODE} from "../bus";
 
 export class State implements IState{
   context: IContext;
@@ -23,7 +22,6 @@ export class State implements IState{
   handleClick(event:MouseEvent){
     this.context.toFocusState();
     event.stopPropagation();
-    bus.emit(FOCUS_NODE, this.context.schema)
   }
 
   //focusNode(nodeId:number){

@@ -17,16 +17,18 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-export default function Canvas(props: {className?:string, children?:any, style?:any}){
+const Canvas = React.forwardRef((props: {className?:string, children?:any, style?:any}, ref:any) => {
   const classes = useStyles();
 
   return (
     <div
+      ref={ref}
       {...props}
       className={ classNames(classes.canvas, props.className, classes.editPadding) }
     >
       {props.children}
     </div>
   )
-}
+});
+
+export default Canvas

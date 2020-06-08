@@ -4,6 +4,7 @@ import { resolveNode } from "../resoveNode"
 import { resolveRule } from '../Rules/resolveRule';
 import { NodeContext } from './NodeContext';
 import bus, {FOCUS_NODE} from "../bus";
+import { IContext } from './IContext';
 
 interface INodeProps{
   schema:ISchema
@@ -13,6 +14,7 @@ interface INodeState {
   schema: ISchema,
   style: {[key:string]:string},
 }
+
 
 export default function NodeView(props:INodeProps){
   const [schema, setSchema] = React.useState(props.schema);
@@ -33,8 +35,8 @@ export default function NodeView(props:INodeProps){
     }, schema)
   );
 
-  const focusNode = (node:ISchema)=>{
-    if(node.id !== schema.id)
+  const focusNode = (node:IContext)=>{
+    if(node.schema.id !== schema.id)
     nodeContext.toNormalState()
   }
 
@@ -84,6 +86,7 @@ export default function NodeView(props:INodeProps){
     )
   )
 }
+
 
 /*
 export class NodeView extends React.Component<INodeProps, INodeState> implements IView{

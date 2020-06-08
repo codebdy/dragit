@@ -1,4 +1,5 @@
 import { State } from "./State";
+import bus, {FOCUS_NODE, UN_FOCUS_NODE} from "../bus";
 
 export class FocusState extends State{
   style(){
@@ -8,10 +9,12 @@ export class FocusState extends State{
   }
 
   enter(){
+    bus.emit(FOCUS_NODE, this.context)
     console.log(this.context.view.dom())
   }
 
   leave(){
+    bus.emit(UN_FOCUS_NODE, this.context)
   }
 
 }

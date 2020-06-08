@@ -20,6 +20,7 @@ import { Schema } from './Core/Schemas/Schema';
 import NodeView from './Core/Node/NodeView';
 import pageContent from './pageContent'
 import { parseSchemas } from './Core/Schemas/jsonParser';
+import ActiveLabel from './Core/Utils/ActiveLabel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -177,6 +178,7 @@ export default function PageContentDesign() {
           </Scrollbar>
         </div>
       </div>
+      <ActiveLabel />
     </Backdrop>
   );
 }
