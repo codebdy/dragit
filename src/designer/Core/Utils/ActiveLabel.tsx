@@ -21,9 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ActiveLabel(){
   const classes = useStyles();
   const [nodId, setNodeId] = React.useState(0);
+  const [text, setText] = React.useState('');
 
   const activeNode = (node:IContext)=>{
-    setNodeId(node.schema.id)
+    setNodeId(node.schema.id);
+    setText(node.rule.label);
     //if(node.schema.id !== schema.id)
     //nodeContext.toNormalState()
   }
@@ -49,7 +51,7 @@ export default function ActiveLabel(){
     <Fragment>
       {nodId !== 0 && 
         <div className={classes.label}>
-          Active Label
+          {text}
         </div>
       }
 

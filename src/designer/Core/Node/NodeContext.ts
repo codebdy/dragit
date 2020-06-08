@@ -7,10 +7,13 @@ import { FocusState } from "../States/FocusState";
 import { DraggedState } from "../States/DraggedState";
 import { PreviewState } from "../States/PreviewState";
 import { ISchema } from "../Schemas/ISchema";
+import { resolveRule } from "../Rules/resolveRule";
+import { IRule } from "../Rules/IRule";
 
 export class NodeContext implements IContext{
   view:IView ;
   schema:ISchema;
+  rule:IRule;
 
   normalState:IState = new NormalState(this);
   activeState:IState = new ActiveState(this);
@@ -24,7 +27,7 @@ export class NodeContext implements IContext{
     this.view = view;
     this.schema = schema;
     this.state = this.normalState;
-    //this.toNormalState();
+    this.rule =  resolveRule(schema.name);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleClick = this.handleClick.bind(this);

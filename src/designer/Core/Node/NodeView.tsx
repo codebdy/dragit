@@ -47,8 +47,6 @@ export default function NodeView(props:INodeProps){
     };
   });
 
-  const rule =  resolveRule(schema.name);
-
   const handleMouseMove = (event:MouseEvent)=>{
     nodeContext.handleMouseMove(event);
   }
@@ -67,10 +65,10 @@ export default function NodeView(props:INodeProps){
       ref:nodeEl,
       className:'drag-node-outline',
       style:{
-        paddingTop : rule.editPaddingY,
-        paddingBottom : rule.editPaddingY,
-        paddingLeft : rule.editPaddingX,
-        paddingRight : rule.editPaddingX,
+        paddingTop : nodeContext.rule.editPaddingY,
+        paddingBottom : nodeContext.rule.editPaddingY,
+        paddingLeft : nodeContext.rule.editPaddingX,
+        paddingRight : nodeContext.rule.editPaddingX,
         ...style,
 
       },
