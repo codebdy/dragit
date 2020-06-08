@@ -12,6 +12,7 @@ export interface IContext{
   toFocusState: ()=>void;
   toDraggedState: ()=>void;
   toPreivewState: ()=>void;
+  
   schema: ISchema;
   view: IView;
   rule:IRule;

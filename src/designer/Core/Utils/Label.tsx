@@ -25,7 +25,7 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const followElement = (node:IContext)=>{
+  const doFollow = (node:IContext)=>{
     let domElement = node.view.dom()
     let rect = domElement.getBoundingClientRect()
     setLeft(rect.x)
@@ -33,23 +33,31 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
     setTop(top)
   }
 
-  const activeNode = (node:IContext)=>{
+  const follow = (node:IContext)=>{
     setFollowing(node);
-    followElement(node);
-  }
+    doFollow(node);
+    if(showEvent === 'FOCUS_NODE'){
+      //console.log(following.schema.id === node.schema.id)
+      console.log('activeNode', following?.schema.id)
+    }
+}
 
-  const unActiveNode = (node:IContext)=>{
+  const unFollow = (node:IContext)=>{
     if(following && following.schema.id === node.schema.id){
       setFollowing(null)
+      if(showEvent === 'FOCUS_NODE'){
+        console.log('unActiveNode', following.schema.id)
+      }
+      
     }
   }
 
   useEffect(() => {
-    bus.on(showEvent, activeNode)
-    bus.on(hideEvent, unActiveNode)
+    bus.on(showEvent, follow)
+    bus.on(hideEvent, unFollow)
     return () => {
-      bus.off(showEvent, activeNode)
-      bus.off(hideEvent, unActiveNode)
+      bus.off(showEvent, follow)
+      bus.off(hideEvent, unFollow)
     };
   });
 

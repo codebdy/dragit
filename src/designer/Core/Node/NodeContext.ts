@@ -9,6 +9,8 @@ import { PreviewState } from "../States/PreviewState";
 import { ISchema } from "../Schemas/ISchema";
 import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";
+import { ActionFunctionAny, Action } from "redux-actions";
+import bus, { WILL_FOCUS_NODE } from "../bus";
 
 export class NodeContext implements IContext{
   view:IView ;
@@ -33,6 +35,10 @@ export class NodeContext implements IContext{
     this.handleClick = this.handleClick.bind(this);
    }
 
+  dispatch( action: ActionFunctionAny<Action<any>>){
+
+  }
+  
   handleMouseMove(event:MouseEvent){
     this.state.handleMouseMove(event);
   }
@@ -52,6 +58,7 @@ export class NodeContext implements IContext{
     this.toState('activeState');
   }
   toFocusState(){
+    bus.emit(WILL_FOCUS_NODE, this);
     this.toState('focusState');
   }
   toDraggedState(){

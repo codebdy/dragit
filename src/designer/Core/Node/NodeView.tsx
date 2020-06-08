@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
-import { resolveRule } from '../Rules/resolveRule';
 import { NodeContext } from './NodeContext';
-import bus, {FOCUS_NODE} from "../bus";
+import bus, {WILL_FOCUS_NODE} from "../bus";
 import { IContext } from './IContext';
 
 interface INodeProps{
@@ -36,14 +35,15 @@ export default function NodeView(props:INodeProps){
   }, schema));
 
   const focusNode = (node:IContext)=>{
-    if(node.schema.id !== schema.id)
-    nodeContext.toNormalState()
+    if(node.schema.id !== schema.id){
+      nodeContext.toNormalState()      
+    }
   }
 
   useEffect(() => {
-    bus.on(FOCUS_NODE, focusNode)
+    bus.on(WILL_FOCUS_NODE, focusNode)
     return () => {
-      bus.off(FOCUS_NODE, focusNode)
+      bus.off(WILL_FOCUS_NODE, focusNode)
     };
   });
 

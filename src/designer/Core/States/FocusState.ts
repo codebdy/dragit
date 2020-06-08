@@ -1,5 +1,5 @@
 import { State } from "./State";
-import bus, {FOCUS_NODE, UN_FOCUS_NODE} from "../bus";
+import bus, {UN_FOCUS_NODE, FOCUS_NODE} from "../bus";
 
 export class FocusState extends State{
   style(){
@@ -9,12 +9,13 @@ export class FocusState extends State{
   }
 
   enter(){
-    bus.emit(FOCUS_NODE, this.context)
-    //console.log(this.context.view.dom())
+    console.log('Enter Focus', this.context.schema.id);
+    bus.emit(FOCUS_NODE, this.context);
   }
 
   leave(){
-    bus.emit(UN_FOCUS_NODE, this.context)
+    console.log('Leave Focus', this.context.schema.id);
+    bus.emit(UN_FOCUS_NODE, this.context);
   }
 
 }
