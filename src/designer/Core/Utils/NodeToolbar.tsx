@@ -1,11 +1,11 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { IContext } from '../Node/IContext';
-import bus from '../bus';
+import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    label: {
+    toolbar: {
       position:'fixed',
       background:'#5d78ff',
       color:'#fff',
@@ -13,13 +13,13 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize:'0.8rem',
       height:'20px',
       lineHeight:'20px',
+      width:'100px',
     },
 
   }),
 );
 
-export default function Label(props:{showEvent:string, hideEvent:string}){
-  const{showEvent, hideEvent} = props;
+export default function NodeToolbar(){
   const classes = useStyles();
   const [following, setFollowing] = React.useState<IContext|null>(null);
   const [left, setLeft] = React.useState(0);
@@ -28,7 +28,7 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
   const doFollow = (node:IContext)=>{
     let domElement = node.view.dom()
     let rect = domElement.getBoundingClientRect()
-    setLeft(rect.x)
+    setLeft(rect.right - 100)
     let top = rect.y < 80 ? rect.y + rect.height : rect.y - 20
     setTop(top)
   }
@@ -41,28 +41,29 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
   const unFollow = (node:IContext)=>{
     if(following && following.schema.id === node.schema.id){
       setFollowing(null)
+      
     }
   }
 
   useEffect(() => {
-    bus.on(showEvent, follow)
-    bus.on(hideEvent, unFollow)
+    bus.on(FOCUS_NODE, follow)
+    bus.on(UN_FOCUS_NODE, unFollow)
     return () => {
-      bus.off(showEvent, follow)
-      bus.off(hideEvent, unFollow)
+      bus.off(FOCUS_NODE, follow)
+      bus.off(UN_FOCUS_NODE, unFollow)
     };
   });
 
   return (
     <Fragment>
       {!!following && 
-        <div className={classes.label}
+        <div className={classes.toolbar}
           style={{
             left:left + 'px',
             top: top + 'px',
           }}
         >
-          {following.rule.label}
+          Toolbar
         </div>
       }
 

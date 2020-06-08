@@ -23,6 +23,7 @@ import { parseSchemas } from './Core/Schemas/jsonParser';
 import ActiveLabel from './Core/Utils/ActiveLabel';
 import { CanvasContext } from './Core/Node/CanvasContext';
 import FocusLabel from './Core/Utils/FocusLabel';
+import NodeToolbar from './Core/Utils/NodeToolbar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -182,6 +183,7 @@ export default function PageContentDesign() {
       </div>
       <ActiveLabel />
       <FocusLabel />
+      <NodeToolbar />
     </Backdrop>
   );
 }
