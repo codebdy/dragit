@@ -20,19 +20,29 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ActiveLabel(){
   const classes = useStyles();
-  const [nodId, setNodeId] = React.useState(0);
-  const [text, setText] = React.useState('');
+  const [following, setFollowing] = React.useState<IContext|null>(null);
+  const [left, setLeft] = React.useState(0);
+  const [top, setTop] = React.useState(0);
+
+  const followElement = (node:IContext)=>{
+    let domElement = node.view.dom()
+    let rect = domElement.getBoundingClientRect()
+    setLeft(rect.x)
+    let top = rect.y < 80 ? rect.y + rect.height : rect.y - 20
+    setTop(top)
+  }
 
   const activeNode = (node:IContext)=>{
-    setNodeId(node.schema.id);
-    setText(node.rule.label);
+    setFollowing(node);
+    //setText(node.rule.label);
+    followElement(node);
     //if(node.schema.id !== schema.id)
     //nodeContext.toNormalState()
   }
 
   const unActiveNode = (node:IContext)=>{
-    if(nodId === node.schema.id){
-      setNodeId(0)
+    if(following && following.schema.id === node.schema.id){
+      setFollowing(null)
     }
     //if(node.schema.id !== schema.id)
     //nodeContext.toNormalState()
@@ -49,9 +59,14 @@ export default function ActiveLabel(){
 
   return (
     <Fragment>
-      {nodId !== 0 && 
-        <div className={classes.label}>
-          {text}
+      {!!following && 
+        <div className={classes.label}
+          style={{
+            left:left + 'px',
+            top: top + 'px',
+          }}
+        >
+          {following.rule.label}
         </div>
       }
 
