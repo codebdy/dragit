@@ -1,11 +1,7 @@
 import { State } from "./State";
 
 export class DraggedState extends State{
-  style(){
-    return {
-      background: "yellow",
-    }
-  }
+  className = 'dragged-node';
 
   enter(){
     document.body.classList.add('one-element-dragged');

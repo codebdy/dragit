@@ -3,14 +3,14 @@ import { IContext } from "../Node/IContext";
 
 export class State implements IState{
   context: IContext;
-
+  style = {};
+  className = '';
+  
   constructor(context:IContext){
     this.context = context
   }
 
-  style(){
-    return {};
-  }
+
 
   handleMouseMove(event:MouseEvent){
     event.stopPropagation();

@@ -82,7 +82,6 @@ export default function NodeToolbar(){
   }
 
   const handleMouseUp=()=>{
-    //console.log('handleMouseUp', following)
     window.draggedNode?.toNormalState();
   }
 

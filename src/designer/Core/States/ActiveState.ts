@@ -2,11 +2,10 @@ import { State } from "./State";
 import bus, { ACTIVE_NODE, UN_ACTIVE_NODE } from "../bus";
 
 export class ActiveState extends State{
-  style(){
-    return {
-      outline:"solid #5d78ff 1px",
-    }
-  }
+  style = {
+    outline:"solid #5d78ff 1px",
+  };
+  
 
   handleMouseOut(event:MouseEvent){
     this.context.toNormalState();

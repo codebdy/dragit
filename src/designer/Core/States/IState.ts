@@ -3,7 +3,8 @@ export interface IState{
   handleMouseOut: (event : MouseEvent)=>void;
   handleClick: (event : MouseEvent)=>void;
   //focusNode: (nodeId: number)=>void;
-  style: ()=>{[key:string]:string};
   enter: ()=>void;
   leave: ()=>void;
+  style:{[key:string]:string};
+  className: string;
 }

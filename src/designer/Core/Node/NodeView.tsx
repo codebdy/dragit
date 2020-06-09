@@ -20,6 +20,7 @@ interface INodeState {
 export default function NodeView(props:INodeProps){
   const [schema, setSchema] = React.useState(props.schema);
   const [style, setStyle] = React.useState({});
+  const [className, setClassName] = React.useState('');
   const nodeEl = useRef(null);
 
   const getDom = ()=>{
@@ -29,6 +30,7 @@ export default function NodeView(props:INodeProps){
   const contextName = props.contextName ? props.contextName : NodeContext;
   const [nodeContext] = React.useState(new contextName({
     setStyle:setStyle,
+    setClassName: setClassName,
     setSchema:setSchema,
     dom: getDom
   }, schema, props.parent));
@@ -62,7 +64,7 @@ export default function NodeView(props:INodeProps){
     resolveNode(schema.name),
     {
       ref:nodeEl,
-      className:'drag-node-outline',
+      className:'drag-node-outline ' + className,
       style:{
         paddingTop : nodeContext.rule.editPaddingY,
         paddingBottom : nodeContext.rule.editPaddingY,

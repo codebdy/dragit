@@ -75,7 +75,8 @@ export class NodeContext implements IContext{
       this.state.leave();
       this.state = this[stateName];
       this.state.enter();
-      this.view?.setStyle(this.state.style());
+      this.view?.setStyle(this.state.style);
+      this.view?.setClassName(this.state.className);
     }
   }
 }
