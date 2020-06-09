@@ -1,10 +1,11 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { IContext } from '../Node/IContext';
-import bus, { FOCUS_NODE, UN_FOCUS_NODE, FOCUS_IT } from '../bus';
+import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
 
 const height = 28;
+declare var window: any;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,17 +62,29 @@ export default function NodeToolbar(){
   }
 
   useEffect(() => {
-    bus.on(FOCUS_NODE, follow)
-    bus.on(UN_FOCUS_NODE, unFollow)
+    bus.on(FOCUS_NODE, follow);
+    bus.on(UN_FOCUS_NODE, unFollow);
+    document.addEventListener('mouseup', handleMouseUp);
     return () => {
       bus.off(FOCUS_NODE, follow)
       bus.off(UN_FOCUS_NODE, unFollow)
+      document.removeEventListener('mouseup', handleMouseUp)
     };
   });
 
   const handleToParent=()=>{
     following?.parent?.toFocusState();
   };
+
+  const handleBeginDrag=()=>{
+    following?.toDraggedState();
+    window.draggedNode = following;
+  }
+
+  const handleMouseUp=()=>{
+    //console.log('handleMouseUp', following)
+    window.draggedNode?.toNormalState();
+  }
 
   return (
     <Fragment>
@@ -88,7 +101,10 @@ export default function NodeToolbar(){
           >
             <MdiIcon iconClass='mdi-arrow-up' size={iconSize} />
           </div>
-          <div className={classes.button}>
+          <div 
+            className={classes.button}
+            onMouseDown = {handleBeginDrag}
+          >
             <MdiIcon iconClass='mdi-arrow-all' size={iconSize} />
           </div>
           <div className={classes.button}>

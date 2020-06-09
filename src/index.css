@@ -20,6 +20,14 @@ h2{
   font-size: 1.5rem;
 }
 
+body.one-element-dragged{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
 .dragit-scrollbar ::-webkit-scrollbar {
   display: none;
   width: 0.3rem;
