@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize:'0.8rem',
       height:'20px',
       lineHeight:'20px',
+      userSelect:'none',
+      cursor: 'default',
     },
 
   }),

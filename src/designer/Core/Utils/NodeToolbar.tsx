@@ -2,6 +2,9 @@ import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { IContext } from '../Node/IContext';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
+import MdiIcon from 'components/common/MdiIcon';
+
+const height = 28;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -9,17 +12,30 @@ const useStyles = makeStyles((theme: Theme) =>
       position:'fixed',
       background:'#5d78ff',
       color:'#fff',
-      padding:' 0 5px',
       fontSize:'0.8rem',
-      height:'20px',
-      lineHeight:'20px',
-      width:'100px',
+      height:height + 'px',
+      lineHeight:height + 'px',
+      width: (height * 5) + 'px',
+      display: 'flex',
+      flexFlow: 'row',
+      alignItems:'strech',
     },
+
+    button:{
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center',
+      width:height + 'px',
+      "&:hover ":{
+        background:'rgba(255, 255, 255, 0.1)',
+      }
+    }
 
   }),
 );
 
 export default function NodeToolbar(){
+  const iconSize = 16;
   const classes = useStyles();
   const [following, setFollowing] = React.useState<IContext|null>(null);
   const [left, setLeft] = React.useState(0);
@@ -28,8 +44,8 @@ export default function NodeToolbar(){
   const doFollow = (node:IContext)=>{
     let domElement = node.view.dom()
     let rect = domElement.getBoundingClientRect()
-    setLeft(rect.right - 100)
-    let top = rect.y < 80 ? rect.y + rect.height : rect.y - 20
+    setLeft(rect.right - height * 5)
+    let top = rect.y < 80 ? rect.y + rect.height : rect.y - 28
     setTop(top)
   }
 
@@ -63,7 +79,21 @@ export default function NodeToolbar(){
             top: top + 'px',
           }}
         >
-          Toolbar
+          <div className={classes.button}>
+            <MdiIcon iconClass='mdi-arrow-up' size={iconSize} />
+          </div>
+          <div className={classes.button}>
+            <MdiIcon iconClass='mdi-arrow-all' size={iconSize} />
+          </div>
+          <div className={classes.button}>
+            <MdiIcon iconClass='mdi-square-edit-outline' size={iconSize} />
+          </div>
+          <div className={classes.button}>
+            <MdiIcon iconClass='mdi-content-copy' size={14} />
+          </div>
+          <div className={classes.button}>
+            <MdiIcon iconClass='mdi-delete-outline' size={iconSize} />
+          </div>
         </div>
       }
 

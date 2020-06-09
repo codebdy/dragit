@@ -9,7 +9,7 @@ interface MdiIconProps{
   className?:string,
 }
 
-export default function FontIcon(props:MdiIconProps){
+export default function MdiIcon(props:MdiIconProps){
   const {iconClass, size = 24, color, backgroundColor, className} = props
   return (
     <i 
