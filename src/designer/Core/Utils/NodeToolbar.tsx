@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { IContext } from '../Node/IContext';
-import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
+import bus, { FOCUS_NODE, UN_FOCUS_NODE, FOCUS_IT } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
 
 const height = 28;
@@ -57,7 +57,6 @@ export default function NodeToolbar(){
   const unFollow = (node:IContext)=>{
     if(following && following.schema.id === node.schema.id){
       setFollowing(null)
-      
     }
   }
 
@@ -70,6 +69,10 @@ export default function NodeToolbar(){
     };
   });
 
+  const handleToParent=()=>{
+    following?.parent?.toFocusState();
+  };
+
   return (
     <Fragment>
       {!!following && 
@@ -79,7 +82,10 @@ export default function NodeToolbar(){
             top: top + 'px',
           }}
         >
-          <div className={classes.button}>
+          <div 
+            className={classes.button}
+            onClick = {handleToParent}
+          >
             <MdiIcon iconClass='mdi-arrow-up' size={iconSize} />
           </div>
           <div className={classes.button}>

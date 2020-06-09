@@ -6,4 +6,5 @@ export const FOCUS_NODE = "FOCUS_NODE";
 export const UN_FOCUS_NODE = "UN_FOCUS_NODE";
 export const ACTIVE_NODE = "ACTIVE_NODE";
 export const UN_ACTIVE_NODE = "UN_ACTIVE_NODE";
+export const FOCUS_IT = "FOCUS_IT"; 
 export default bus       
