@@ -53,7 +53,7 @@ export default function NodeToolbar(){
   const follow = (node:IContext)=>{
     setFollowing(node);
     doFollow(node);
-}
+  }
 
   const unFollow = (node:IContext)=>{
     if(following && following.schema.id === node.schema.id){
@@ -72,17 +72,18 @@ export default function NodeToolbar(){
     };
   });
 
-  const handleToParent=()=>{
+  const handleToParent=(event:any)=>{
     following?.parent?.toFocusState();
+    event.stopPropagation()
   };
 
   const handleBeginDrag=()=>{
-    following?.toDraggedState();
     window.draggedNode = following;
+    following?.toDraggedState();
   }
 
   const handleMouseUp=()=>{
-    window.draggedNode?.toNormalState();
+    window.draggedNode?.toFocusState();
   }
 
   return (
