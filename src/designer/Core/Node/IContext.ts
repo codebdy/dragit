@@ -16,5 +16,5 @@ export interface IContext{
   schema: ISchema;
   view: IView;
   rule:IRule;
-  parent?: IContext;
+  //parent?: IContext;
 }

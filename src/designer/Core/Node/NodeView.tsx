@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { ISchema } from '../Schemas/ISchema';
 import { resolveNode } from "../resoveNode"
 import { NodeContext } from './NodeContext';
-import bus, {WILL_FOCUS_NODE} from "../bus";
+import bus, {WILL_FOCUS_NODE, FOCUS_IT} from "../bus";
 import { IContext } from './IContext';
 
 interface INodeProps{
   schema:ISchema,
   contextName?:any,
-  parent?:IContext,
+  //parent?:IContext,
 }
 
 interface INodeState {
@@ -33,18 +33,26 @@ export default function NodeView(props:INodeProps){
     setClassName: setClassName,
     setSchema:setSchema,
     dom: getDom
-  }, schema, props.parent));
+  }, schema));
   //console.log(nodeContext);
   const handleWillFocusNode = (node:IContext)=>{
     if(node.schema.id !== schema.id){
-      nodeContext.toNormalState()      
+      nodeContext.toNormalState();  
+    }
+  }
+
+  const handleFocusIt = (id:number)=>{
+    if(id === schema.id){
+      nodeContext.toFocusState();   
     }
   }
 
   useEffect(() => {
     bus.on(WILL_FOCUS_NODE, handleWillFocusNode)
+    bus.on(FOCUS_IT, handleFocusIt)
     return () => {
       bus.off(WILL_FOCUS_NODE, handleWillFocusNode)
+      bus.off(FOCUS_IT, handleFocusIt)
     };
   });
 
@@ -79,7 +87,7 @@ export default function NodeView(props:INodeProps){
     },
     schema.children?.map((child:ISchema)=>{
       return (
-        <NodeView key={child.id} schema={child} parent={nodeContext} />
+        <NodeView key={child.id} schema={child} />
       )
     })
     )

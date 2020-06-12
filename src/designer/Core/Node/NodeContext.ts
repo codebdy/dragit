@@ -16,7 +16,7 @@ export class NodeContext implements IContext{
   view:IView ;
   schema:ISchema;
   rule:IRule;
-  parent?:IContext;
+  //parent?:IContext;
 
   normalState:IState = new NormalState(this);
   activeState:IState = new ActiveState(this);
@@ -26,10 +26,10 @@ export class NodeContext implements IContext{
   [key: string]:any;
 
   state:IState;
-  constructor(view :IView, schema:ISchema, parent?:IContext){
+  constructor(view :IView, schema:ISchema){
     this.view = view;
     this.schema = schema;
-    this.parent = parent;
+    //this.parent = parent;
     this.state = this.normalState;
     this.rule =  resolveRule(schema.name);
     this.handleMouseMove = this.handleMouseMove.bind(this);
