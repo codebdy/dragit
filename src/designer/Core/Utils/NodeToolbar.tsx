@@ -85,6 +85,7 @@ export default function NodeToolbar(){
 
   const handleMouseUp=()=>{
     window.draggedNode?.toFocusState();
+    window.draggedNode = null;
   }
 
   return (
