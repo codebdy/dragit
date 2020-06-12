@@ -1,5 +1,5 @@
 import { Schema } from "./Schema";
-import { ISchema } from "../Node/ISchema";
+import { ISchema } from "./ISchema";
 
 export function parseSchema(json:any):ISchema{
   return new Schema(json, parseSchemas(json.children))

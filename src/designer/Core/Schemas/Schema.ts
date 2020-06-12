@@ -1,4 +1,4 @@
-import { ISchema } from "../Node/ISchema";
+import { ISchema } from "./ISchema";
 
 export class Schema implements ISchema{
   static idSeed:number = 1;

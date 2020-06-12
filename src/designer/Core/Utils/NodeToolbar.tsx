@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { INode } from '../Node/INode';
+import { IContext } from '../Node/IContext';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
 
@@ -38,11 +38,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function NodeToolbar(){
   const iconSize = 16;
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<INode|null>(null);
+  const [following, setFollowing] = React.useState<IContext|null>(null);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const doFollow = (node:INode)=>{
+  const doFollow = (node:IContext)=>{
     let domElement = node.view.dom()
     let rect = domElement.getBoundingClientRect()
     setLeft(rect.right - height * 5)
@@ -50,12 +50,12 @@ export default function NodeToolbar(){
     setTop(top)
   }
 
-  const follow = (node:INode)=>{
+  const follow = (node:IContext)=>{
     setFollowing(node);
     doFollow(node);
   }
 
-  const unFollow = (node:INode)=>{
+  const unFollow = (node:IContext)=>{
     if(following && following.schema.id === node.schema.id){
       setFollowing(null)
     }
