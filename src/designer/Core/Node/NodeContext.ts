@@ -1,11 +1,11 @@
 import { IView } from "./IView";
 import { IContext } from "./IContext";
-import { IState } from "../States/IState";
-import { ActiveState } from "../States/ActiveState";
-import { NormalState } from "../States/NormalState";
-import { FocusState } from "../States/FocusState";
-import { DraggedState } from "../States/DraggedState";
-import { PreviewState } from "../States/PreviewState";
+import { IState } from "./States/IState";
+import { ActiveState } from "./States/ActiveState";
+import { NormalState } from "./States/NormalState";
+import { FocusState } from "./States/FocusState";
+import { DraggedState } from "./States/DraggedState";
+import { PreviewState } from "./States/PreviewState";
 import { ISchema } from "../Schemas/ISchema";
 import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";

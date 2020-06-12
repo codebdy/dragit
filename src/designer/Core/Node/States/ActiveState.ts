@@ -1,5 +1,5 @@
 import { State } from "./State";
-import bus, { ACTIVE_NODE, UN_ACTIVE_NODE } from "../bus";
+import bus, { ACTIVE_NODE, UN_ACTIVE_NODE } from "../../bus";
 
 export class ActiveState extends State{
   style = {

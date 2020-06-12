@@ -1,6 +1,6 @@
 import { NodeContext } from "./NodeContext";
-import { IState } from "../States/IState";
-import { NormalState } from "../States/NormalState";
+import { IState } from "./States/IState";
+import { NormalState } from "./States/NormalState";
 
 export class CanvasContext extends NodeContext{
 

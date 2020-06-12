@@ -1,5 +1,5 @@
 import { IState } from "./IState";
-import { IContext } from "../Node/IContext";
+import { IContext } from "../IContext";
 
 export class State implements IState{
   context: IContext;

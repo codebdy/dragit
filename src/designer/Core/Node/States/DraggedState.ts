@@ -1,5 +1,5 @@
 import { State } from "./State";
-import bus, { DRAGE_NODE, UN_DRAGE_NODE } from "../bus";
+import bus, { DRAGE_NODE, UN_DRAGE_NODE } from "../../bus";
 
 export class DraggedState extends State{
   className = 'dragged-node';
