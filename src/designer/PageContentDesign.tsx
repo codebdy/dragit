@@ -21,7 +21,7 @@ import NodeView from './Core/Node/NodeView';
 import pageContent from './pageContent'
 import { parseSchemas } from './Core/Schemas/jsonParser';
 import ActiveLabel from './Core/Utils/ActiveLabel';
-import { CanvasContext } from './Core/Node/CanvasContext';
+import { CanvasNode } from './Core/Node/CanvasNode';
 import FocusLabel from './Core/Utils/FocusLabel';
 import NodeToolbar from './Core/Utils/NodeToolbar';
 import MouseFollower from './Core/Utils/MouseFollower';
@@ -178,7 +178,7 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar}>
-            <NodeView schema={canvasSchema} contextName={CanvasContext} />
+            <NodeView schema={canvasSchema} contextName={CanvasNode} />
           </Scrollbar>
         </div>
       </div>

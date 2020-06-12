@@ -1,8 +1,8 @@
-import { ISchema } from "../Schemas/ISchema";
+import { ISchema } from "./ISchema";
 import { IView } from "./IView";
 import { IRule } from "../Rules/IRule";
 
-export interface IContext{
+export interface INode{
   handleMouseMove: (event:MouseEvent)=>void;
   handleMouseOut: (event:MouseEvent)=>void;
   handleClick: (event:MouseEvent)=>void;
@@ -16,5 +16,5 @@ export interface IContext{
   schema: ISchema;
   view: IView;
   rule:IRule;
-  parent?: IContext;
+  parent?: INode;
 }

@@ -1,12 +1,12 @@
 import { handleAction, Action } from 'redux-actions';
 import {closeAreaSelectAction, openAreaSelectAction, designPageContentAction, cancelPageContentAction, unActiveNodeAction, activeNodeAction, focusNodeAction, unFocusNodeAction} from "./actions";
-import { IContext } from 'designer/Core/Node/IContext';
+import { INode } from 'designer/Core/Node/INode';
 
 const initialState:{
   areaSelect:boolean, 
   pageContentDesign:boolean,
-  activedNode:IContext | null,
-  focusedNode:IContext | null,
+  activedNode:INode | null,
+  focusedNode:INode | null,
 } = 
   {
     areaSelect: false,

@@ -1,12 +1,12 @@
 import { IState } from "./IState";
-import { IContext } from "../Node/IContext";
+import { INode } from "../Node/INode";
 
 export class State implements IState{
-  context: IContext;
+  context: INode;
   style = {};
   className = '';
   
-  constructor(context:IContext){
+  constructor(context:INode){
     this.context = context
   }
 

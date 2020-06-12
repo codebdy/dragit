@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { IContext } from '../Node/IContext';
+import { INode } from '../Node/INode';
 import bus from '../bus';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Label(props:{showEvent:string, hideEvent:string}){
   const{showEvent, hideEvent} = props;
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<IContext|null>(null);
+  const [following, setFollowing] = React.useState<INode|null>(null);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const doFollow = (node:IContext)=>{
+  const doFollow = (node:INode)=>{
     let domElement = node.view.dom()
     let rect = domElement.getBoundingClientRect()
     setLeft(rect.x)
@@ -35,12 +35,12 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
     setTop(top)
   }
 
-  const follow = (node:IContext)=>{
+  const follow = (node:INode)=>{
     setFollowing(node);
     doFollow(node);
 }
 
-  const unFollow = (node:IContext)=>{
+  const unFollow = (node:INode)=>{
     if(following && following.schema.id === node.schema.id){
       setFollowing(null)
     }

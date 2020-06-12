@@ -1,4 +1,4 @@
-import { ISchema } from "../Schemas/ISchema";
+import { ISchema } from "./ISchema";
 
 export interface IView{
   setStyle:(style:{[key:string]:string})=>void;
