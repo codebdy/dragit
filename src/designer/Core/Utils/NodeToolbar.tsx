@@ -3,6 +3,9 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { INode } from '../Node/INode';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
+import { sideBarSettings } from 'utils';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 const height = 28;
 declare var window: any;
@@ -20,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexFlow: 'row',
       alignItems:'strech',
+      zIndex:theme.zIndex.drawer + 1,
     },
 
     button:{
@@ -42,15 +46,22 @@ export default function NodeToolbar(){
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
+  const selectSidebar = (state: RootState) => state.sidebar
+  const sidebar = useSelector(selectSidebar)  
+  
+  const sideBarWidth = sideBarSettings.sizes[sidebar.size]
+
   const doFollow = (node:INode)=>{
-    let domElement = node.view?.getDom()
+    let domElement = node.view?.getDom();
     if(!domElement){
       return 
     }
-    let rect = domElement.getBoundingClientRect()
-    setLeft(rect.right - height * 5)
-    let top = rect.y < 80 ? rect.y + rect.height : rect.y - 28
-    setTop(top)
+    let rect = domElement.getBoundingClientRect();
+    let left = rect.right - height * 5;
+    left = left < sideBarWidth ? sideBarWidth : left;
+    setLeft(left)
+    let top = rect.y < 80 ? rect.y + rect.height : rect.y - 28;
+    setTop(top);
   }
 
   const follow = (node:INode)=>{
