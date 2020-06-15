@@ -10,6 +10,7 @@ import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";
 import bus, { WILL_FOCUS_NODE, REFRESH_IT, UN_DRAGE_NODE } from "../bus";
 import { INode } from "./INode";
+import { remove, contains, add } from "../Utils/ArrayHelper";
 
 declare var window:any;
 
@@ -27,7 +28,7 @@ export class Node implements INode{
   focusState:IState = new FocusState(this);
   draggedState:IState = new DraggedState(this);
   previewState:IState = new PreviewState(this);
-  [key: string]:any;
+  //[key: string]:any;
 
   state:IState;
   constructor(meta:IMeta, children:Array<INode>=[]){
@@ -38,6 +39,10 @@ export class Node implements INode{
     this.state = this.normalState;
     this.rule =  resolveRule(meta.name);
     this.children = children;
+    this.children.map((child:INode) =>{
+      child.parent = this;
+      return child;
+    })
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -94,11 +99,11 @@ export class Node implements INode{
   }
 
   toState(stateName : string){
-    if(this[stateName] !== this.state){
+    if((this as any)[stateName] !== this.state){
       this.state.leave();
-      this.state = this[stateName];
+      this.state = (this as any)[stateName];
       this.state.enter();
-      this.view?.refresh(this);
+      this.view?.refresh();
     }
   }
 
@@ -106,16 +111,29 @@ export class Node implements INode{
   //  this.view?.setSchema(this.schema);
  // }
 
-  //moveInBottom(target:IContext){
-  //  this.schema.removeFormParent();
-    //target.schema.addChild(this.schema);
-  //  bus.emit(REFRESH_IT, this.schema.parent?.id );
+  removeFormParent(){
+    //console.log('removeFormParent', this.id)
+    this.parent && remove(this, this.parent?.children);
+    this.parent = undefined;
+  }
+
+  moveInBottom(target:INode){
+    let parent = this.parent;
+    if(contains(this, target.children)){
+      return;
+    }
+    //console.log('moveInBottom target', target.id)
+    this.removeFormParent();
+    
+    add(this, target.children);
+    this.parent = target;
+    //bus.emit(REFRESH_IT, this.schema.parent?.id );
     //bus.emit(REFRESH_IT, target.schema.id );
     //bus.emit(UN_DRAGE_NODE, window.draggedNode);
-  //  window.draggedNode = null;
-    //this.refresh();
-    //target.refresh();
-  //}
+    
+    parent?.view?.refresh();
+    target.view?.refresh();
+  }
 
   //moveInTop(target:IContext){
 //

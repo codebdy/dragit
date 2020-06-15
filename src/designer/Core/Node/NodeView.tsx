@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { resolveNode } from "../resoveNode"
 //import { Node } from './Node';
-//import bus, {WILL_FOCUS_NODE, FOCUS_IT, REFRESH_IT} from "../bus";
+import bus, {WILL_FOCUS_NODE, FOCUS_IT} from "../bus";
 import { INode } from './INode';
 
 interface INodeProps{
@@ -25,7 +25,7 @@ export default function NodeView(props:INodeProps){
     return nodeEl.current;
   }
 
-  const refresh = (node:INode)=>{
+  const refresh = ()=>{
     setNodeProps({...node.props});
     setChildren([...node.children]);
   }
@@ -38,11 +38,11 @@ export default function NodeView(props:INodeProps){
   //  dom: getDom
   //}, schema));
   //console.log(nodeContext);
-  //const handleWillFocusNode = (node:IContext)=>{
-    //if(node.schema.id !== schema.id){
-    //  nodeContext.toNormalState();  
-    //}
-  //}
+  const handleWillFocusNode = (focusNode:INode)=>{
+    if(node.id !== focusNode.id){
+      node.toNormalState();  
+    }
+  }
 
   //const handleFocusIt = (id:number)=>{
   //  if(id === schema.id){
@@ -63,11 +63,11 @@ export default function NodeView(props:INodeProps){
       getDom
     };
 
-    //bus.on(WILL_FOCUS_NODE, handleWillFocusNode)
+    bus.on(WILL_FOCUS_NODE, handleWillFocusNode)
     //bus.on(FOCUS_IT, handleFocusIt)
     //bus.on(REFRESH_IT, handleRefreshIt)
     return () => {
-      //bus.off(WILL_FOCUS_NODE, handleWillFocusNode)
+      bus.off(WILL_FOCUS_NODE, handleWillFocusNode)
       //bus.off(FOCUS_IT, handleFocusIt)
       //bus.off(REFRESH_IT, handleRefreshIt)
       node.view = undefined;

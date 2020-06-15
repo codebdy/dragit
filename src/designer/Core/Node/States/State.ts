@@ -13,7 +13,7 @@ export class State implements IState{
 
   handleMouseMove(event:MouseEvent){
     //window.draggedNode?.moveInBottom(this.context);
-    event.stopPropagation();
+    //event.stopPropagation();
   }
 
   handleMouseOut(event:MouseEvent){

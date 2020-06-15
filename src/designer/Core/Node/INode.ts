@@ -16,5 +16,8 @@ export interface INode{
   toActiveState: ()=>void;
   toFocusState: ()=>void;
   toDraggedState: ()=>void;
-  toPreivewState: ()=>void;  
+  toPreivewState: ()=>void;
+  
+  moveInBottom:(target:INode)=>void;
+  removeFormParent:()=>void;
 }

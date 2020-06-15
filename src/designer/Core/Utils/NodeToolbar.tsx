@@ -59,9 +59,9 @@ export default function NodeToolbar(){
   }
 
   const unFollow = (node:INode)=>{
-    //if(following && following.schema.id === node.schema.id){
-    //  setFollowing(null)
-    //}
+    if(following && following.id === node.id){
+      setFollowing(null)
+    }
   }
 
   useEffect(() => {

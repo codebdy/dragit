@@ -44,9 +44,9 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
 }
 
   const unFollow = (node:INode)=>{
-    //if(following && following.schema.id === node.schema.id){
-    //  setFollowing(null)
-    //}
+    if(following && following.id === node.id){
+      setFollowing(null)
+    }
   }
 
   useEffect(() => {

@@ -19,7 +19,7 @@ import Toolbox from './Toolbox/Toolbox';
 //import { Schema } from './Core/Schemas/Schema';
 import NodeView from './Core/Node/NodeView';
 import pageContent from './pageContent'
-import { parseNodes } from './Core/Schemas/jsonParser';
+import { parseNodes } from './Core/Node/jsonParser';
 import ActiveLabel from './Core/Utils/ActiveLabel';
 import { CanvasNode } from './Core/Node/CanvasNode';
 import FocusLabel from './Core/Utils/FocusLabel';

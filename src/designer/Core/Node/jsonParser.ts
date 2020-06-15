@@ -1,5 +1,5 @@
-import { INode } from "../Node/INode";
-import { Node } from "../Node/Node";
+import { INode } from "./INode";
+import { Node } from "./Node";
 
 export function parseNode(json:any):INode{
   return new Node(json, parseNodes(json.children))
