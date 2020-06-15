@@ -8,7 +8,6 @@ import { PreviewState } from "./States/PreviewState";
 import { IMeta } from "./IMeta";
 import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";
-import { ActionFunctionAny, Action } from "redux-actions";
 import bus, { WILL_FOCUS_NODE, REFRESH_IT, UN_DRAGE_NODE } from "../bus";
 import { INode } from "./INode";
 
@@ -51,7 +50,17 @@ export class Node implements INode{
 
   get props(){
     return {
-      className:'drag-node-outline ',
+      className:'drag-node-outline ' + this.state.className,
+      style:{
+        paddingTop : this.rule.editPaddingY,
+        paddingBottom : this.rule.editPaddingY,
+        paddingLeft : this.rule.editPaddingX,
+        paddingRight : this.rule.editPaddingX,
+        ...this.state.style
+      },
+      onMouseMove : this.handleMouseMove,
+      onMouseOut : this.handleMouseOut,
+      onClick : this.handleClick,
     };
   }
   
@@ -89,8 +98,7 @@ export class Node implements INode{
       this.state.leave();
       this.state = this[stateName];
       this.state.enter();
-      //this.view?.setStyle(this.state.style);
-      //this.view?.setClassName(this.state.className);
+      this.view?.refresh(this);
     }
   }
 
