@@ -1,8 +1,6 @@
 import {EventEmitter} from 'events'    
  
 const bus = new EventEmitter();
-export const FOCUS_IT = "FOCUS_IT";
-export const REFRESH_IT = "REFRESH_IT";
 export const WILL_FOCUS_NODE = "WILL_FOCUS_NODE";
 export const FOCUS_NODE = "FOCUS_NODE";
 export const UN_FOCUS_NODE = "UN_FOCUS_NODE";

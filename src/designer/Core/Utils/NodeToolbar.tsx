@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { INode } from '../Node/INode';
-import bus, { FOCUS_NODE, UN_FOCUS_NODE, FOCUS_IT } from '../bus';
+import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
 
 const height = 28;
@@ -76,8 +76,7 @@ export default function NodeToolbar(){
   });
 
   const handleToParent=(event:any)=>{
-    //bus.emit(FOCUS_IT, following?.schema.parent?.id);
-    //following?.parent?.toFocusState();
+    following?.parent?.toFocusState();
     event.stopPropagation()
   };
 

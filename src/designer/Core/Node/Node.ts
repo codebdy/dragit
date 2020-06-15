@@ -8,7 +8,7 @@ import { PreviewState } from "./States/PreviewState";
 import { IMeta } from "./IMeta";
 import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";
-import bus, { WILL_FOCUS_NODE, REFRESH_IT, UN_DRAGE_NODE } from "../bus";
+import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode } from "./INode";
 import { remove, contains, add } from "../Utils/ArrayHelper";
 
@@ -118,24 +118,18 @@ export class Node implements INode{
   }
 
   moveInBottom(target:INode){
-    let parent = this.parent;
+    let oldParent = this.parent;
     if(contains(this, target.children)){
       return;
     }
-    //console.log('moveInBottom target', target.id)
+
     this.removeFormParent();
     
     add(this, target.children);
     this.parent = target;
-    //bus.emit(REFRESH_IT, this.schema.parent?.id );
-    //bus.emit(REFRESH_IT, target.schema.id );
-    //bus.emit(UN_DRAGE_NODE, window.draggedNode);
     
-    parent?.view?.refresh();
+    oldParent?.view?.refresh();
     target.view?.refresh();
   }
 
-  //moveInTop(target:IContext){
-//
-  //};
 }
