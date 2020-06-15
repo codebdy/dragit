@@ -4,17 +4,12 @@ import { IRule } from "./IRule"
 import { GridRule } from "./GridRule"
 import { IMeta } from "../Node/IMeta"
 
-/*const ruleMap : { [key: string]: any } = {
-  'Container': ContainerRule,
-  'Grid': GridRule,
-}*/
-
 const rules:Array<IRule> =[
   new ContainerRule(),
   new GridRule(),
 ];
 
-const barseRule = new Rule();
+const baseRule = new Rule();
 
 function resolveRule(meta:IMeta): IRule{
   for (const rule of rules) {
@@ -22,7 +17,7 @@ function resolveRule(meta:IMeta): IRule{
       return rule;
     }
   }
-  return barseRule;
+  return baseRule;
 }
 
 export {resolveRule}
