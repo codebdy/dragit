@@ -37,7 +37,7 @@ export class Node implements INode{
     this.meta = meta;
     //this.parent = parent;
     this.state = this.normalState;
-    this.rule =  resolveRule(meta.name);
+    this.rule =  resolveRule(meta);
     this.children = children;
     this.children.map((child:INode) =>{
       child.parent = this;

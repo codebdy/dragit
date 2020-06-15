@@ -26,19 +26,8 @@ export default function MouseFollower(){
   const [top, setTop] = React.useState(0);
 
   const makeFollower = (node:INode)=>{
-    console.log('makeFollower')
     setFollowing(node);
   }
-
-  //const doFollow = (node:INode)=>{
-  //  let domElement = node.view.dom()
-  //}
-
-
-  //const follow = (node:INode)=>{
-  //  setFollowing(node);
-  //  doFollow(node);
-  //}
 
   const unFollow = (node:INode)=>{
     setFollowing(null)
