@@ -16,12 +16,12 @@ import { cancelPageContentAction, savePageContentAction } from 'store/designer/a
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
-import { Schema } from './Core/Schemas/Schema';
+//import { Schema } from './Core/Schemas/Schema';
 import NodeView from './Core/Node/NodeView';
 import pageContent from './pageContent'
-import { parseSchemas } from './Core/Schemas/jsonParser';
+import { parseNodes } from './Core/Schemas/jsonParser';
 import ActiveLabel from './Core/Utils/ActiveLabel';
-import { CanvasContext } from './Core/Node/CanvasContext';
+import { CanvasNode } from './Core/Node/CanvasNode';
 import FocusLabel from './Core/Utils/FocusLabel';
 import NodeToolbar from './Core/Utils/NodeToolbar';
 import MouseFollower from './Core/Utils/MouseFollower';
@@ -104,7 +104,7 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   
-  const [canvasSchema, setCanvasSchema] = React.useState(new Schema({name:'Canvas'}, parseSchemas(pageContent)));
+  const [canvas] = React.useState(new CanvasNode({name:'Canvas'}, parseNodes(pageContent)));
 
   const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()
@@ -178,7 +178,7 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar}>
-            <NodeView schema={canvasSchema} contextName={CanvasContext} />
+            <NodeView node={canvas} />
           </Scrollbar>
         </div>
       </div>

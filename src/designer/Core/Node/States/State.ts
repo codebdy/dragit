@@ -1,18 +1,18 @@
 import { IState } from "./IState";
-import { IContext } from "../IContext";
+import { INode } from "../INode";
+declare var window: {draggedNode:INode};
 
 export class State implements IState{
-  context: IContext;
+  context: INode;
   style = {};
   className = '';
   
-  constructor(context:IContext){
+  constructor(context:INode){
     this.context = context
   }
 
-
-
   handleMouseMove(event:MouseEvent){
+    //window.draggedNode?.moveInBottom(this.context);
     event.stopPropagation();
   }
 
@@ -24,10 +24,6 @@ export class State implements IState{
     event.stopPropagation();
   }
 
-  //focusNode(nodeId:number){
-    //(nodeId !== this.context.schema.id) && this.context.toNormalState();
-  //}
-  
   enter(){
   }
 

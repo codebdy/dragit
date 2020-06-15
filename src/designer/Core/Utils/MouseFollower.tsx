@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import bus, { DRAGE_NODE, UN_DRAGE_NODE } from '../bus';
-import { IContext } from '../Node/IContext';
+import { INode } from '../Node/INode';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,26 +21,26 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function MouseFollower(){
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<IContext|null>(null);
+  const [following, setFollowing] = React.useState<INode|null>(null);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const makeFollower = (node:IContext)=>{
+  const makeFollower = (node:INode)=>{
     console.log('makeFollower')
     setFollowing(node);
   }
 
-  //const doFollow = (node:IContext)=>{
+  //const doFollow = (node:INode)=>{
   //  let domElement = node.view.dom()
   //}
 
 
-  //const follow = (node:IContext)=>{
+  //const follow = (node:INode)=>{
   //  setFollowing(node);
   //  doFollow(node);
   //}
 
-  const unFollow = (node:IContext)=>{
+  const unFollow = (node:INode)=>{
     setFollowing(null)
   }
 

@@ -1,14 +1,14 @@
-import { Schema } from "./Schema";
-import { ISchema } from "./ISchema";
+import { INode } from "../Node/INode";
+import { Node } from "../Node/Node";
 
-export function parseSchema(json:any):ISchema{
-  return new Schema(json, parseSchemas(json.children))
+export function parseNode(json:any):INode{
+  return new Node(json, parseNodes(json.children))
 }
 
-export function parseSchemas( jsons:any ) : Array<ISchema>{
-  let nodes = new Array<ISchema>();
+export function parseNodes( jsons:any ) : Array<INode>{
+  let nodes = new Array<INode>();
   jsons && jsons.forEach((json: any)=>{
-    nodes.push(parseSchema(json))
+    nodes.push(parseNode(json))
   })
   return nodes
 }

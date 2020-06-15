@@ -1,12 +1,12 @@
-import { handleAction, Action } from 'redux-actions';
+import { Action, handleActions } from 'redux-actions';
 import {closeAreaSelectAction, openAreaSelectAction, designPageContentAction, cancelPageContentAction, unActiveNodeAction, activeNodeAction, focusNodeAction, unFocusNodeAction} from "./actions";
-import { IContext } from 'designer/Core/Node/IContext';
+import { INode } from 'designer/Core/Node/INode';
 
 const initialState:{
   areaSelect:boolean, 
   pageContentDesign:boolean,
-  activedNode:IContext | null,
-  focusedNode:IContext | null,
+  activedNode:INode | null,
+  focusedNode:INode | null,
 } = 
   {
     areaSelect: false,
@@ -17,92 +17,66 @@ const initialState:{
 
 type State = typeof initialState
 
-const closeAreaSelect = handleAction(closeAreaSelectAction, (state, action) => {
-  return {
-    ...state,
-    areaSelect: false,
-  };
-}, initialState);
 
-const openAreaSelect = handleAction(openAreaSelectAction, (state, action) => {
-  return {
-    ...state,
-    areaSelect: true,
-  };
-}, initialState);
+const actionMap={
+  [openAreaSelectAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      areaSelect: true,
+    };
+  },
+  [closeAreaSelectAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      areaSelect: false,
+    };
+  },
 
-const openPageContentDesigner = handleAction(designPageContentAction, (state, action) => {
-  return {
-    ...state,
-    pageContentDesign: true,
-  };
-}, initialState);
+  [designPageContentAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      pageContentDesign: true,
+    };
+  },
+  [cancelPageContentAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      pageContentDesign: false,
+    };
+  },
 
-const closePageContentDesigner = handleAction(cancelPageContentAction, (state, action) => {
-  return {
-    ...state,
-    pageContentDesign: false,
-  };
-}, initialState);
+  [focusNodeAction().type] :(state:State, action:Action<any>) => {
+    return {
+      ...state,
+      focusedNode: action.payload,
+    };
+  },
 
-const activeNode = handleAction(activeNodeAction, (state, action) => {
-  return {
-    ...state,
-    activedNode: action.payload,
-  };
-}, initialState);
-const unActiveNode = handleAction(unActiveNodeAction, (state, action) => {
-  return {
-    ...state,
-    activedNode: null,
-  };
-}, initialState);
+  [unFocusNodeAction().type] :(state:State, action:Action<any>) => {
+    return {
+      ...state,
+      focusedNode: null,
+    };
+  },
 
-const focusNode = handleAction(focusNodeAction, (state, action) => {
-  return {
-    ...state,
-    focusedNode: action.payload,
-  };
-}, initialState);
-const unFocusNode = handleAction(unFocusNodeAction, (state, action) => {
-  return {
-    ...state,
-    focusedNode: null,
-  };
-}, initialState);
+  [activeNodeAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      activedNode: action.payload,
+    };
+  },
+  [unActiveNodeAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      activedNode: null,
+    };
+  },
 
-
-function reducer(
-  state = initialState,
-  action: Action<any>
-): State {
-  switch(action.type){
-    case closeAreaSelectAction().type:
-    return closeAreaSelect(state, action);
-
-    case openAreaSelectAction().type:
-    return openAreaSelect(state, action);
-
-    case designPageContentAction().type:
-    return openPageContentDesigner(state, action);
-
-    case cancelPageContentAction().type:
-    return closePageContentDesigner(state, action);
-
-    case activeNodeAction().type:
-    return activeNode(state, action);
-
-    case unActiveNodeAction().type:
-    return unActiveNode(state, action);
-    
-    case focusNodeAction().type:
-    return focusNode(state, action);
-
-    case unFocusNodeAction().type:
-    return unFocusNode(state, action);
-  }
-
-  return state
 }
+
+const reducer = handleActions(
+  actionMap,
+  initialState
+)
 
 export default reducer;
