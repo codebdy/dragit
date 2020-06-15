@@ -63,6 +63,7 @@ export class Node implements INode{
         paddingRight : this.rule.editPaddingX,
         ...this.state.style
       },
+      ...this.meta.props,
       onMouseMove : this.handleMouseMove,
       onMouseOut : this.handleMouseOut,
       onClick : this.handleClick,

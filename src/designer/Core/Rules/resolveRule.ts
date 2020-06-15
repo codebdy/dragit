@@ -1,12 +1,14 @@
 import { Rule } from "./Rule"
 import { ContainerRule } from "./ContainerRule"
 import { IRule } from "./IRule"
-import { GridRule } from "./GridRule"
+import { GridContainerRule } from "./GridContainerRule"
 import { IMeta } from "../Node/IMeta"
+import { GridItemRule } from "./GridItemRule"
 
 const rules:Array<IRule> =[
   new ContainerRule(),
-  new GridRule(),
+  new GridContainerRule(),
+  new GridItemRule(),
 ];
 
 const baseRule = new Rule();
