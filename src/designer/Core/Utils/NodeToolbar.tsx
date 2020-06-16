@@ -9,7 +9,7 @@ import { RootState } from 'store';
 import classNames from 'classnames';
 
 const height = 28;
-declare var window: any;
+declare var window: {draggedNode:INode | null};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -102,7 +102,13 @@ export default function NodeToolbar(){
   }
 
   const handleMouseUp=()=>{
-    window.draggedNode?.toFocusState();
+    if(window.draggedNode?.parent){
+      window.draggedNode?.toFocusState();      
+    }
+    else{
+      window.draggedNode?.toNormalState();
+    }
+
     window.draggedNode = null;
   }
 
