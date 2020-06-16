@@ -6,12 +6,12 @@ export class DraggedState extends State{
 
   enter(){
     document.body.classList.add('one-element-dragged');
-    bus.emit(DRAGE_NODE, this.context)
+    bus.emit(DRAGE_NODE, this.node)
   }
 
   leave(){
     document.body.classList.remove('one-element-dragged');
-    bus.emit(UN_DRAGE_NODE, this.context)
+    bus.emit(UN_DRAGE_NODE, this.node)
   }
 
 }

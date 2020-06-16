@@ -10,7 +10,7 @@ import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";
 import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode } from "./INode";
-import { remove, contains, add } from "../Utils/ArrayHelper";
+import { remove, last, first, before, after, insertBefore, insertAfter } from "../Utils/ArrayHelper";
 
 declare var window:any;
 
@@ -69,6 +69,10 @@ export class Node implements INode{
       onClick : this.handleClick,
     };
   }
+
+  accept(child:INode){
+    return this.rule.accept(child.rule);
+  }
   
   handleMouseMove(event:MouseEvent){
     this.state.handleMouseMove(event);
@@ -108,29 +112,68 @@ export class Node implements INode{
     }
   }
 
-  //refresh(){
-  //  this.view?.setSchema(this.schema);
- // }
+  flexFlowRow(){
+    return this.meta.name === 'Grid' && this.meta.props?.container && (this.meta.props?.direction !== 'column' && this.meta.props?.direction !== 'column-reverse');
+  }
 
   removeFormParent(){
-    //console.log('removeFormParent', this.id)
+    let oldParent = this.parent;
     this.parent && remove(this, this.parent?.children);
     this.parent = undefined;
+    oldParent?.view?.refresh();
   }
 
   moveInBottom(target:INode){
-    let oldParent = this.parent;
-    if(contains(this, target.children)){
-      return;
-    }
+    //let oldParent = this.parent;
+    //if(contains(this, target.children)){
+    //  return;
+    //}
 
     this.removeFormParent();
     
-    add(this, target.children);
+    target.children.push(this);
     this.parent = target;
     
-    oldParent?.view?.refresh();
+    //oldParent?.view?.refresh();
     target.view?.refresh();
   }
 
+  moveInTop(target:INode){
+    this.removeFormParent();
+    
+    target.children.unshift(this);
+    this.parent = target;
+
+    target.view?.refresh();
+  }
+
+  moveBefore(target:INode){
+    this.removeFormParent();
+    insertBefore(target, target.children);
+    this.parent = target.parent;
+    target.parent?.view?.refresh();
+  }
+
+  moveAfter(target:INode){
+    this.removeFormParent();
+    insertAfter(target, target.children);
+    this.parent = target.parent;
+    target.parent?.view?.refresh();
+  }
+
+  get firstChild(){
+    return first(this.children);
+  }
+
+  get lastChild(){
+    return last(this.children);
+  }
+
+  get beforeBrother(){
+    return before(this, this.children)
+  }
+
+  get afterBrother(){
+    return after(this, this.children)
+  }
 }

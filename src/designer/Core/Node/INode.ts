@@ -12,12 +12,24 @@ export interface INode{
   parent?: INode;
   children: Array<INode>;
 
+  accept: (child:INode)=>boolean;
+
   toNormalState: ()=>void;
   toActiveState: ()=>void;
   toFocusState: ()=>void;
   toDraggedState: ()=>void;
   toPreivewState: ()=>void;
+
+  flexFlowRow:()=>boolean;
   
   moveInBottom:(target:INode)=>void;
+  moveInTop:(target:INode)=>void;
   removeFormParent:()=>void;
+  moveBefore:(target:INode)=>void;
+  moveAfter:(target:INode)=>void;
+
+  firstChild?: INode;
+  lastChild?: INode;
+  beforeBrother?: INode;
+  afterBrother?: INode;
 }

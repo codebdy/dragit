@@ -3,12 +3,12 @@ import { INode } from "../INode";
 declare var window: {draggedNode:INode};
 
 export class State implements IState{
-  context: INode;
+  node: INode;
   style = {};
   className = '';
   
   constructor(context:INode){
-    this.context = context
+    this.node = context
   }
 
   handleMouseMove(event:MouseEvent){
@@ -20,7 +20,7 @@ export class State implements IState{
   }
 
   handleClick(event:MouseEvent){
-    this.context.toFocusState();
+    this.node.toFocusState();
     event.stopPropagation();
   }
 

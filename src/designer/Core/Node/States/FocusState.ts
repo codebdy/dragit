@@ -8,11 +8,11 @@ export class FocusState extends State{
   
 
   enter(){
-    bus.emit(FOCUS_NODE, this.context);
+    bus.emit(FOCUS_NODE, this.node);
   }
 
   leave(){
-    bus.emit(UN_FOCUS_NODE, this.context);
+    bus.emit(UN_FOCUS_NODE, this.node);
   }
 
 }

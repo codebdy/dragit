@@ -1,5 +1,6 @@
 import { Rule } from "./Rule";
 import { IMeta } from "../Node/IMeta";
+import { IRule } from "./IRule";
 
 export class GridItemRule extends Rule{
   editPaddingY = '16px';
@@ -12,4 +13,8 @@ export class GridItemRule extends Rule{
     }
     return false;
   }
+
+  //accept(childRule:IRule){
+  //  return false;
+  //}  
 }

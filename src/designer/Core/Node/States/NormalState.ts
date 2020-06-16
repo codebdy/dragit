@@ -2,7 +2,7 @@ import { State } from "./State";
 
 export class NormalState extends State{
   handleMouseMove(event:MouseEvent){
-    this.context.toActiveState()
+    this.node.toActiveState()
     event.stopPropagation()
     //console.log('normal mouse move')
   }
