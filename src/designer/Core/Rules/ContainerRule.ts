@@ -4,7 +4,7 @@ import { IMeta } from "../Node/IMeta";
 export class ContainerRule extends Rule{
   editPaddingY = '16px';
   editPaddingX = '16px';
-  label ="Container";
+  labelKey ="page-container";
 
   match(meta:IMeta){
     if(meta.name === 'Container'){

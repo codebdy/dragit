@@ -60,7 +60,7 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
 
   return (
     <Fragment>
-      {!!following && 
+      {!!following && following.rule.label &&
         <div className={classes.label}
           style={{
             left:left + 'px',

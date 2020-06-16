@@ -6,7 +6,7 @@ import { GridItemRule } from "./GridItemRule";
 export class GridContainerRule extends Rule{
   editPaddingY = '16px';
   editPaddingX = '16px';
-  label ="Grid Container";
+  labelKey ="grid-container";
 
   match(meta:IMeta){
     if(meta.name === 'Grid' && meta.props?.container === true){

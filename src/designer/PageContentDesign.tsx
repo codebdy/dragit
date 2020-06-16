@@ -24,7 +24,7 @@ import ActiveLabel from './Core/Utils/ActiveLabel';
 import { CanvasNode } from './Core/Node/CanvasNode';
 import FocusLabel from './Core/Utils/FocusLabel';
 import NodeToolbar from './Core/Utils/NodeToolbar';
-import MouseFollower from './Core/Utils/MouseFollower';
+//import MouseFollower from './Core/Utils/MouseFollower';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
