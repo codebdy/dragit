@@ -15,11 +15,11 @@ export class GridContainerRule extends Rule{
     return false;
   }
 
-  //accept(childRule:IRule){
-    //if(childRule.label === (new GridItemRule()).label){
-    //  return true;
-    //}
-    //return false;
-  //}
+  accept(childRule:IRule){
+    if(childRule.label === (new GridItemRule()).label){
+      return true;
+    }
+    return false;
+  }
 
 }

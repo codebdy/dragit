@@ -14,8 +14,8 @@ class Rect{
 
   isIn(event:MouseEvent){
     return (
-      this.rect.left  < event.clientX &&  this.rect.right > event.clientX &&
-      this.rect.top  < event.clientY &&  this.rect.bottom  > event.clientY
+      this.rect.left  <= event.clientX &&  this.rect.right >= event.clientX &&
+      this.rect.top  <= event.clientY &&  this.rect.bottom  >= event.clientY
     )
   }
 }
@@ -117,29 +117,86 @@ export class ActiveState extends State{
     return !this.inBottom(event);
   }
 
+  //拖入区域的顶部条形区域
+  get dragOutRectTopArea(){
+    let domElement = this.node.view?.getDom()
+    if(!domElement){
+      return undefined;
+    }
+      let rect = domElement.getBoundingClientRect() 
+    return new Rect({
+      left: rect.left,
+      right: rect.right,
+      top: rect.top,
+      bottom: rect.top + this.dropInMargin,
+    })
+  }
+
+  get dragOutRectRightArea(){
+    let domElement = this.node.view?.getDom()
+    if(!domElement){
+      return undefined;
+    }
+      let rect = domElement.getBoundingClientRect() 
+    return new Rect({
+      left: rect.right - this.dropInMargin,
+      right: rect.right,
+      top: rect.top,
+      bottom: rect.bottom,
+    })
+  }
+
+  get dragOutRectBottomArea(){
+    let domElement = this.node.view?.getDom()
+    if(!domElement){
+      return undefined;
+    }
+      let rect = domElement.getBoundingClientRect() 
+    return new Rect({
+      left: rect.left,
+      right: rect.right,
+      top: rect.bottom - this.dropInMargin,
+      bottom: rect.bottom,
+    })
+  }
+  
+  get dragOutRectLeftArea(){
+    let domElement = this.node.view?.getDom()
+    if(!domElement){
+      return undefined;
+    }
+
+    let rect = domElement.getBoundingClientRect() 
+    return new Rect({
+      left: rect.left,
+      right: rect.left + this.dropInMargin,
+      top: rect.top,
+      bottom: rect.bottom,
+    })
+  }
 
   onBefore(event:MouseEvent){
     let draggedNode = window.draggedNode;
-    if(!this.node.parent?.accept(draggedNode)){
-      return false;
+    if(this.node.parent?.accept(draggedNode)){
+      return this.dragOutRectTopArea?.isIn(event) || this.dragOutRectLeftArea?.isIn(event);
     }
    return false; 
   }
 
   onAfter(event:MouseEvent){
     let draggedNode = window.draggedNode;
-    if(!this.node.parent?.accept(draggedNode)){
-      return false;
+    if(this.node.parent?.accept(draggedNode)){
+      return this.dragOutRectBottomArea?.isIn(event) || this.dragOutRectRightArea?.isIn(event);
     }
     return false;
   }
   
   handleMouseMove(event:MouseEvent){
+    event.stopPropagation();
     let draggedNode = window.draggedNode 
     if(!draggedNode){
       return;
     }
-    event.stopPropagation();
 
     if(this.inBottom(event)){
       this.node.lastChild !== draggedNode && draggedNode.moveInBottom(this.node);

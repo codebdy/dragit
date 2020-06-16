@@ -149,14 +149,14 @@ export class Node implements INode{
 
   moveBefore(target:INode){
     this.removeFormParent();
-    insertBefore(target, target.children);
+    insertBefore(this, target, target.parent?.children);
     this.parent = target.parent;
     target.parent?.view?.refresh();
   }
 
   moveAfter(target:INode){
     this.removeFormParent();
-    insertAfter(target, target.children);
+    insertAfter(this, target, target.parent?.children);
     this.parent = target.parent;
     target.parent?.view?.refresh();
   }

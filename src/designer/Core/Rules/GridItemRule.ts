@@ -14,7 +14,7 @@ export class GridItemRule extends Rule{
     return false;
   }
 
-  //accept(childRule:IRule){
-  //  return false;
-  //}  
+  accept(childRule:IRule){
+    return false;
+  }  
 }
