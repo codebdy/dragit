@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       cursor: 'default',
       pointerEvents:'none',
       borderRadius:'3px',
+      zIndex:theme.zIndex.drawer + 3,
     },
 
   }),

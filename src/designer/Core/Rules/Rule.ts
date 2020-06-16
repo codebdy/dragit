@@ -3,7 +3,7 @@ import { IMeta } from "../Node/IMeta";
 import intl from 'react-intl-universal';
 
 export class Rule implements IRule{
-  labelKey: string = 'div';
+  labelKey?: string;
   dropInMargin = 8;
   _label:string ="div";
   match(meta:IMeta){

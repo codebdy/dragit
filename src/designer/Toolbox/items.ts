@@ -7,35 +7,31 @@ export default [
       {
         id:"1-1",
         titleKey:"page-container",
-        name:"Container",
-        props:{
-
-        },
+        meta:{
+          name:"Container",
+        }
       },  
       {
         id:"1-2",
         titleKey:"grid-container",
-        name:"Grid",
-        props:{
-          container:true,
-        },
+        meta:{
+          name:"Grid",
+          props:{
+            container:true,
+          },
+        }
       },  
       {
         id:"1-3",
         titleKey:"grid-item",
-        name:"Grid",
-        props:{
-          item:true,
-        },
+        meta:{
+          name:"Grid",
+          props:{
+            item:true,
+          },
+        }
       },  
-      //{
-      //  id:"1-4",
-      //  title:"弹性盒子",
-      //  name:"Box",
-     //   props:{
-      //    item:true,
-      //  },
-      //},  
+  
     ]
   },
   {

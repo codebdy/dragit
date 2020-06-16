@@ -13,7 +13,11 @@ import items from './items'
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import {sideBarSettings} from "utils";
+import { parseNode } from 'designer/Core/Node/jsonParser';
+import { INode } from 'designer/Core/Node/INode';
+import bus, { WILL_FOCUS_NODE } from 'designer/Core/bus';
 
+declare var window: {draggedNode:INode};
 const hoverBackground = "rgba(255,255,255, 0.1)";
 const hoverBackgroundLight = "rgba(0,0,0, 0.2)";
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,18 +60,23 @@ interface ItemJson{
   titleKey?:string,
   title?:string,
   icon?:string,
+  meta?:any,
   children?: Array<any>,
 }
 
 function Item(props:{item:ItemJson}){
   const{item} = props
   const classes = useStyles();
-  const handleClick=()=>{
-    
+  const handleMouseDown=()=>{
+    let node = parseNode(JSON.parse(JSON.stringify(item.meta)));
+    //node.toFocusState();
+    bus.emit(WILL_FOCUS_NODE, node);
+    window.draggedNode = node;
+    node.toDraggedState();
   }
 
   return (
-    <ListItem className={classes.component} onClick={handleClick}>
+    <ListItem className={classes.component} onMouseDown={handleMouseDown}>
       <ListItemText 
         primary={item.titleKey ? intl.get(item.titleKey) : item.title} 
         classes={{
