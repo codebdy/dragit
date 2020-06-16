@@ -101,6 +101,11 @@ export default function NodeToolbar(){
     following?.toDraggedState();
   }
 
+  const handleRemove = ()=>{
+    following?.toNormalState();
+    following?.removeFormParent();
+  }
+
   const handleMouseUp=()=>{
     if(window.draggedNode?.parent){
       window.draggedNode?.toFocusState();      
@@ -139,7 +144,9 @@ export default function NodeToolbar(){
           <div className={classes.button}>
             <MdiIcon iconClass='mdi-content-copy' size={14} />
           </div>
-          <div className={classes.button}>
+          <div className={classes.button}
+            onClick={ handleRemove }
+          >
             <MdiIcon iconClass='mdi-delete-outline' size={iconSize} />
           </div>
         </div>
