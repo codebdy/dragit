@@ -62,8 +62,12 @@ interface ItemJson{
 function Item(props:{item:ItemJson}){
   const{item} = props
   const classes = useStyles();
+  const handleClick=()=>{
+    
+  }
+
   return (
-      <ListItem className={classes.component}>
+    <ListItem className={classes.component} onClick={handleClick}>
       <ListItemText 
         primary={item.titleKey ? intl.get(item.titleKey) : item.title} 
         classes={{
