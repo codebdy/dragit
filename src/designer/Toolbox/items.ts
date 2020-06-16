@@ -6,7 +6,7 @@ export default [
     children:[
       {
         id:"1-1",
-        title:"页面容器",
+        titleKey:"page-container",
         name:"Container",
         props:{
 
@@ -14,7 +14,7 @@ export default [
       },  
       {
         id:"1-2",
-        title:"栅格容器",
+        titleKey:"grid-container",
         name:"Grid",
         props:{
           container:true,
@@ -22,7 +22,7 @@ export default [
       },  
       {
         id:"1-3",
-        title:"栅格项",
+        titleKey:"grid-item",
         name:"Grid",
         props:{
           item:true,

@@ -185,7 +185,7 @@ export default function PageContentDesign() {
       <ActiveLabel />
       <FocusLabel />
       <NodeToolbar />
-      <MouseFollower />
+      
     </Backdrop>
   );
 }

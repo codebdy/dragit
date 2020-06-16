@@ -6,6 +6,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import { sideBarSettings } from 'utils';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import classNames from 'classnames';
 
 const height = 28;
 declare var window: any;
@@ -34,7 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover ":{
         background:'rgba(255, 255, 255, 0.1)',
       }
-    }
+    },
+
+    move:{
+      cursor:'move',
+    },
 
   }),
 );
@@ -117,7 +122,7 @@ export default function NodeToolbar(){
             <MdiIcon iconClass='mdi-arrow-up' size={iconSize} />
           </div>
           <div 
-            className={classes.button}
+            className={ classNames(classes.button, classes.move) }
             onMouseDown = {handleBeginDrag}
           >
             <MdiIcon iconClass='mdi-arrow-all' size={iconSize} />
