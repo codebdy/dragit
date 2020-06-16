@@ -18,8 +18,6 @@ import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox/Toolbox';
 //import { Schema } from './Core/Schemas/Schema';
 import NodeView from './Core/Node/NodeView';
-import pageContent from './pageContent'
-import { parseNodes } from './Core/Node/jsonParser';
 import ActiveLabel from './Core/Utils/ActiveLabel';
 import { CanvasNode } from './Core/Node/CanvasNode';
 import FocusLabel from './Core/Utils/FocusLabel';
@@ -104,7 +102,7 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   
-  const [canvas] = React.useState(new CanvasNode({name:'Canvas'}, parseNodes(pageContent)));
+  const [canvas] = React.useState(new CanvasNode({name:'Canvas'}, []));
 
   const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()
