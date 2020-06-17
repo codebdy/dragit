@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: "all 0.3s",
     },
     logoText: {
-      marginLeft:'1.2rem',
+      marginLeft:'1.3rem',
       fontSize:"1.4rem",
       letterSpacing:"0.15rem",
     },

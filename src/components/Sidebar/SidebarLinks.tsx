@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent:'start',
       letterSpacing:'0.05rem',
       paddingLeft: '26px',
+      fontSize:"1.1rem",
     },
     listItem:{
       paddingTop: theme.spacing(1.4),
@@ -40,12 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(0.2),
       paddingLeft: '23px',
       transition: 'all 0.3s',
-      //textDecoration: "none",
+      fontSize:"1.1rem",
       color: whiteColor,
-      //"&:hover,&:focus,&:visited,&:active": {
-        //color: whiteColor,
-        //textDecoration: "none",
-      //}
     },
     itemLink: {
       textDecoration: "none",
@@ -61,9 +58,9 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
 
-    //itemText: {
-   //   textDecoration: "none",
-    //},
+    itemText: {
+      fontSize:"1.1rem",
+    },
   
     nested: {
       paddingLeft: theme.spacing(4),
@@ -208,6 +205,8 @@ function Item(props:ItemProps){
     </Badge>)
   }
 
+  const text = <span className={classes.itemText}>{title}</span>;
+
   
   return (
     <ItemTo to={item.to}>
@@ -220,7 +219,7 @@ function Item(props:ItemProps){
             { iconTsx }
           </ListItemIcon>
           }
-          <ListItemText primary={title} >
+          <ListItemText primary={text} >
           </ListItemText>
           {(badge && badge.props.label && !mini) &&
             <Chip {... badge.props} />          
