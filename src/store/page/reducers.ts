@@ -1,12 +1,14 @@
 import { Action, handleActions } from 'redux-actions';
 import {loadingSchemaAction, receivedSchemaAction, requestSchemaFailureAction} from "./actions";
+import { RXElement } from 'views/Page/RXElement';
+import { parseElements } from 'views/Page/jsonParser';
 
 const initialState:
 {
   schemaLoading:boolean, 
   dataLoading:boolean,
   pageId:string,
-  schema:any,
+  schema?:Array<RXElement>,
   data:any,
   requestError:any
 } = 
@@ -35,7 +37,7 @@ const actionMap={
     return {
       ...state,
       schemaLoading: false,
-      schema: action.payload,
+      schema: parseElements(action.payload),
     };
   },
 

@@ -38,11 +38,11 @@ export default function PageView(props:{match: any }) {
           <Skeleton animation="wave" variant="rect" className={classes.media} />
         </Container>
       }
-      {/*props.children?.map((child:RXElement, index : number)=>{
+      {pageInStore.schema?.map((child:RXElement)=>{
         return (
           <ElementRender key={child.id} element={child} />
         )
-      })*/}
+      })}
     </Fragment>
   )
 }
