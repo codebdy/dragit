@@ -6,11 +6,12 @@ import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder'
 import TopNav from 'components/TopNav/TopNav';
 import FixedBar from 'components/FixedBar/FixedBar';
 import PageContent from 'components/PageContent/PageContent';
-import Dashboard from 'views/Dashboard/Dashboard';
+//import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Medias from 'views/Medias/Medias';
 import AreaSelect from 'designer/AreaSelect';
 import PageContentDesign from 'designer/PageContentDesign';
+import PageView from 'views/Page/PageView';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,9 +61,9 @@ export default function Layout(){
         <SidebarWidthPlaceholder />
         <PageContent>
           <Switch> 
-            <Route path="/admin/dashboard" component={Dashboard}></Route>
+            <Route path="/admin/page/:id" component={PageView}></Route>
             <Route path="/admin/medias" component={Medias}></Route>
-            <Redirect to="/admin/dashboard" from='/admin' /> 
+            <Redirect to="/admin/page/dashboard" from='/admin' /> 
           </Switch>
         </PageContent>
       </div>

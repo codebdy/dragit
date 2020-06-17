@@ -6,6 +6,7 @@ import intlReducer from './intl/reducers';
 import sidebarReducer from './sidebar/reducers';
 import designReducer from './designer/reducers';
 import fixedBarReducer from './fixedBar/reducers';
+import pageReducer from './page/reducers';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   designer: designReducer,
   fixedBar: fixedBarReducer,
+  page: pageReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>
