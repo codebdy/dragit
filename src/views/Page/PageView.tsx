@@ -44,6 +44,7 @@ export default function PageView(props:{match: any }) {
             <ElementRender key={child.id} element={child} />
           )
         })}
+        {!pageInStore.schema && <span>Emperty Page</span>}
       </Container>
     </Fragment>
   )
