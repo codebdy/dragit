@@ -1,4 +1,5 @@
 import { IMeta } from "../Node/IMeta";
+import { INode } from "../Node/INode";
 
 export interface IRule{
   editPaddingY?: string;
@@ -7,5 +8,5 @@ export interface IRule{
   labelKey?: string;
   dropInMargin: number;
   match: (meta:IMeta)=>boolean;
-  accept: (childRule:IRule)=>boolean;
+  accept: (child:INode)=>boolean;
 }

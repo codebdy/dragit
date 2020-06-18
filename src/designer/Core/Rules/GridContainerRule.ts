@@ -1,10 +1,10 @@
 import { Rule } from "./Rule";
 import { IMeta } from "../Node/IMeta";
-import { IRule } from "./IRule";
 import { GridItemRule } from "./GridItemRule";
+import { INode } from "../Node/INode";
 
 export class GridContainerRule extends Rule{
-  labelKey ="grid-container";
+  labelKey ="row";
 
   match(meta:IMeta){
     if(meta.name === 'Grid' && meta.props?.container === true){
@@ -13,8 +13,8 @@ export class GridContainerRule extends Rule{
     return false;
   }
 
-  accept(childRule:IRule){
-    if(childRule.label === (new GridItemRule()).label){
+  accept(child:INode){
+    if(child.rule.label === (new GridItemRule()).label){
       return true;
     }
     return false;

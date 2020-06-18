@@ -60,14 +60,16 @@ export class Node implements INode{
   get props(){
     return {
       className:'drag-node-outline ' + this.state.className,
+      ...this.meta.props,      
       style:{
         paddingTop : this.rule.editPaddingY,
         paddingBottom : this.rule.editPaddingY,
         paddingLeft : this.rule.editPaddingX,
         paddingRight : this.rule.editPaddingX,
-        ...this.state.style
+        ...this.state.style,
+        ...this.meta.props?.style,
       },
-      ...this.meta.props,
+
       onMouseMove : this.handleMouseMove,
       onMouseOut : this.handleMouseOut,
       onClick : this.handleClick,
@@ -75,7 +77,7 @@ export class Node implements INode{
   }
 
   accept(child:INode){
-    return this.rule.accept(child.rule);
+    return this.rule.accept(child);
   }
   
   handleMouseMove(event:MouseEvent){

@@ -19,6 +19,6 @@
     "layout": "Layout",
 
     "page-container": "Page container",
-    "grid-container": "Grid container",
-    "grid-item": "Grid item"
+    "row": "Row",
+    "column": "Column"
 }

@@ -58,6 +58,6 @@ export default function MouseFollower(){
         left:left + 'px',
         top: top + 'px',
       }}
-    >{following.rule.label}</div>
+    >{following.label}</div>
   )
 }

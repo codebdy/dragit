@@ -13,7 +13,7 @@ export default [
       },  
       {
         id:"1-2",
-        titleKey:"grid-container",
+        titleKey:"row",
         meta:{
           name:"Grid",
           props:{
@@ -23,11 +23,13 @@ export default [
       },  
       {
         id:"1-3",
-        titleKey:"grid-item",
+        titleKey:"column",
         meta:{
           name:"Grid",
           props:{
             item:true,
+            xs:12,
+            md:true,
           },
         }
       },  
@@ -46,24 +48,39 @@ export default [
           name:"Card",
           props:{
             elevation: 6,
+            style:{
+              marginTop: '16px',
+            }
           }          
         }
       },  
       {
         id:"2-2",
-        title:"Grid:Container",
-        name:"Grid",
-        props:{
-          container:true,
-        },
+        title:"Card Header",
+        meta:{
+          name:"CardHeader",
+          props:{
+            title:'Card Header',
+          }          
+        }
       },  
       {
         id:"2-3",
-        title:"Grid:Item",
-        name:"Grid",
-        props:{
-          item:true,
-        },
+        title:"Card Content",
+        meta:{
+          name:"CardContent",
+          props:{
+          }          
+        }
+      },  
+      {
+        id:"2-4",
+        title:"Card Actions",
+        meta:{
+          name:"CardActions",
+          props:{
+          }          
+        }
       },  
     ]
   },
