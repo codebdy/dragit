@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent:'start',
       letterSpacing:'0.05rem',
       paddingLeft: '26px',
-      fontSize:"1.1rem",
+      fontSize:"1.05rem",
     },
     listItem:{
       paddingTop: theme.spacing(1.4),
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(0.2),
       paddingLeft: '23px',
       transition: 'all 0.3s',
-      fontSize:"1.1rem",
+      fontSize:"1.05rem",
       color: whiteColor,
     },
     itemLink: {

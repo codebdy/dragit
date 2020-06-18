@@ -23,6 +23,7 @@
     "echarts": "^4.8.0",
     "echarts-for-react": "^2.0.16",
     "events": "^3.1.0",
+    "formik": "^2.1.4",
     "mockjs": "^1.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -36,7 +37,8 @@
     "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "yup": "^0.29.1"
   },
   "scripts": {
     "start": "react-scripts start",

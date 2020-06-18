@@ -94,6 +94,17 @@ export default [{
                             {
                                 name: 'CardContent',
                                 text: 'body',
+                            },
+                            {
+                                name: 'CardActions',
+                                children: [{
+                                    name: 'Button',
+                                    text: '保存',
+                                    props: {
+                                        variant: "contained",
+                                        color: "primary",
+                                    }
+                                }]
                             }
                         ]
                     }]
