@@ -88,9 +88,9 @@ export default [{
                                 }
 
                             },
-                            //{
-                            //name: 'Divider'
-                            //},
+                            {
+                                name: 'Divider'
+                            },
                             {
                                 name: 'CardContent',
                                 text: 'body',

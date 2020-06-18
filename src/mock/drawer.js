@@ -8,7 +8,7 @@ export default [{
         id: "1",
         type: 'item',
         title: '仪表盘',
-        to: '/admin/page/dashboard',
+        to: '/admin/dashboard',
         icon: 'mdi-speedometer',
         chip: {
             props: {

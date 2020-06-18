@@ -1,12 +1,17 @@
 import React from "react";
-import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Card } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Card, Input } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
     paper: {
       padding: theme.spacing(2),
-      textAlign: 'center',
+      //textAlign: 'center',
       color: theme.palette.text.secondary,
     },
   }),
@@ -18,7 +23,15 @@ export default function Dashboard(props:{children?: any}) {
     <Container>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Paper className={classes.paper} elevation={6}>xs=12</Paper>
+            <Paper className={classes.paper} elevation={6}>
+            <form className={classes.root} noValidate autoComplete="off">
+              <Input defaultValue="Hello world" fullWidth inputProps={{ 'aria-label': 'description' }} />
+              <Input placeholder="Placeholder" inputProps={{ 'aria-label': 'description' }} />
+              <Input defaultValue="Disabled" disabled inputProps={{ 'aria-label': 'description' }} />
+              <Input defaultValue="Error" error inputProps={{ 'aria-label': 'description' }} />
+            </form>
+
+            </Paper>
           </Grid>
           <Grid item xs={6}>
          

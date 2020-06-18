@@ -12,6 +12,7 @@ import Medias from 'views/Medias/Medias';
 import AreaSelect from 'designer/AreaSelect';
 import PageContentDesign from 'designer/PageContentDesign';
 import PageView from 'views/Page/PageView';
+import Dashboard from 'views/Dashboard/Dashboard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,6 +63,7 @@ export default function Layout(){
         <PageContent>
           <Switch> 
             <Route path="/admin/page/:id" component={PageView}></Route>
+            <Route path="/admin/dashboard" component={Dashboard}></Route>
             <Route path="/admin/medias" component={Medias}></Route>
             <Redirect to="/admin/page/dashboard" from='/admin' /> 
           </Switch>
