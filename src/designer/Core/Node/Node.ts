@@ -53,6 +53,10 @@ export class Node implements INode{
     Node.idSeed ++
   }
 
+  get label(){
+    return this.rule.label ? this.rule.label : this.meta.name
+  }
+
   get props(){
     return {
       className:'drag-node-outline ' + this.state.className,

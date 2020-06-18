@@ -3,8 +3,6 @@ import { IMeta } from "../Node/IMeta";
 import { IRule } from "./IRule";
 
 export class GridItemRule extends Rule{
-  editPaddingY = '16px';
-  editPaddingX = '16px';
   labelKey ="grid-item";
 
   match(meta:IMeta){

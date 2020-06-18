@@ -28,27 +28,31 @@ export default function Dashboard(props:{children?: any}) {
   return (
     <Container>
       
-      <form className={classes.root} noValidate autoComplete="off">
+      <form noValidate autoComplete="off">
         
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper} elevation={6}>
             <FormikExample />  
             <div>
-                <FormControl className={classes.margin}>
-                  <InputLabel htmlFor="input-with-icon-adornment">With a start adornment</InputLabel>
-                  <Input
-                    id="input-with-icon-adornment"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                <TextField
-                  className={classes.margin}
+                
+                <div className={classes.margin}>
+                  
+                </div>
+              </div>
+              
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <AccountCircle />
+                </Grid>
+                <Grid item>
+                  <TextField id="input-with-icon-grid" variant="outlined" label="With a grid" />
+                </Grid>
+              </Grid>
+              <TextField
+                  
                   id="input-with-icon-textfield"
+                  variant="outlined"
                   label="TextField"
                   InputProps={{
                     startAdornment: (
@@ -57,20 +61,7 @@ export default function Dashboard(props:{children?: any}) {
                       </InputAdornment>
                     ),
                   }}
-                />
-                <div className={classes.margin}>
-                  <Grid container spacing={1} alignItems="flex-end">
-                    <Grid item>
-                      <AccountCircle />
-                    </Grid>
-                    <Grid item>
-                      <TextField id="input-with-icon-grid" label="With a grid" />
-                    </Grid>
-                  </Grid>
-                </div>
-              </div>
-
-
+              />
               <TextField id="standard-basic" required label="Standard" variant="outlined" fullWidth size="small" multiline rows = {10}/>
               <TextField required label="Test" variant="outlined" size="small" />
               <TextField required label="Test" error variant="outlined" size="small" helperText="error text" />

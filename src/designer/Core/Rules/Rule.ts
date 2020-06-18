@@ -3,9 +3,11 @@ import { IMeta } from "../Node/IMeta";
 import intl from 'react-intl-universal';
 
 export class Rule implements IRule{
+  editPaddingY = '16px';
+  editPaddingX = '16px';
   labelKey?: string;
   dropInMargin = 8;
-  _label:string ="div";
+  _label?:string;
   match(meta:IMeta){
     return true;
   }

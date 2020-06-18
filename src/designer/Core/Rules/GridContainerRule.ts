@@ -4,8 +4,6 @@ import { IRule } from "./IRule";
 import { GridItemRule } from "./GridItemRule";
 
 export class GridContainerRule extends Rule{
-  editPaddingY = '16px';
-  editPaddingX = '16px';
   labelKey ="grid-container";
 
   match(meta:IMeta){

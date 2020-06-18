@@ -41,11 +41,13 @@ export default [
     children:[
       {
         id:"2-1",
-        title:"Container",
-        name:"Container",
-        props:{
-
-        },
+        title:"Card",
+        meta:{
+          name:"Card",
+          props:{
+            elevation: 6,
+          }          
+        }
       },  
       {
         id:"2-2",

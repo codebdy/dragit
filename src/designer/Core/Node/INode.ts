@@ -8,6 +8,7 @@ export interface INode{
   meta: IMeta;
   view?: IView;
   props: {[key: string]:any};
+  label: string;
 
   parent?: INode;
   children: Array<INode>;
