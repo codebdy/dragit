@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { makeStyles, Theme, createStyles, Container } from "@material-ui/core";
 import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,13 +21,13 @@ const Canvas = React.forwardRef((props: {className?:string, children?:any, style
   const classes = useStyles();
 
   return (
-    <div
+    <Container
       ref={ref}
       {...props}
       className={ classNames(classes.canvas, props.className, classes.editPadding) }
     >
       {props.children}
-    </div>
+    </Container>
   )
 });
 

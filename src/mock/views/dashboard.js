@@ -1,6 +1,4 @@
 export default [{
-  name: 'Container',
-  children: [{
         name: 'Grid',
         props: {
             container: true,
@@ -51,4 +49,3 @@ export default [{
         ]
     },
   ]
-}]

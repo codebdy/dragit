@@ -1,44 +1,42 @@
 export default [{
-    name: 'Container',
-    children: [{
-            name: 'Grid',
-            props: {
-                container: true,
-                justify: 'space-between',
-                alignItems: "center",
-            },
-            children: [{
-                    name: 'Grid',
-                    props: {
-                        item: true,
-                    },
-                    children: [{
-                        name: 'h2',
-                        text: '文章编辑',
-                    }],
-                },
-                {
-                    name: 'Grid',
-                    //text: 'test',
-                    props: {
-                        item: true,
-                    },
-                    children: [{
-                        name: 'Button',
-                        text: '保存',
-                        props: {
-                            variant: "contained",
-                            color: "primary",
-                            //size: "large",
-                            style: {
-                                fontSize: '1.1rem',
-                            }
-                        }
-                    }]
-                },
-            ]
+        name: 'Grid',
+        props: {
+            container: true,
+            justify: 'space-between',
+            alignItems: "center",
         },
-        {
+        children: [{
+                name: 'Grid',
+                props: {
+                    item: true,
+                },
+                children: [{
+                    name: 'h2',
+                    text: '文章编辑',
+                }],
+            },
+            {
+                name: 'Grid',
+                //text: 'test',
+                props: {
+                    item: true,
+                },
+                children: [{
+                    name: 'Button',
+                    text: '保存',
+                    props: {
+                        variant: "contained",
+                        color: "primary",
+                        //size: "large",
+                        style: {
+                            fontSize: '1.1rem',
+                        }
+                    }
+                }]
+            },
+        ]
+    },
+    {
             name: 'Grid',
             props: {
                 container: true,
@@ -62,8 +60,8 @@ export default [{
                     },
                 }
             ]
-        },
-        {
+    },
+    {
             name: 'Grid',
             props: {
                 container: true,
@@ -125,6 +123,5 @@ export default [{
                 }
             ]
 
-        }
-    ]
-}]
+    }
+]

@@ -4,13 +4,13 @@ export default [
     titleKey: "layout",
     icon:"mdi-view-dashboard",
     children:[
-      {
-        id:"1-1",
-        titleKey:"page-container",
-        meta:{
-          name:"Container",
-        }
-      },  
+      //{
+      //  id:"1-1",
+      //  titleKey:"page-container",
+      //  meta:{
+      //    name:"Container",
+      //  }
+      //},  
       {
         id:"1-2",
         titleKey:"row",
