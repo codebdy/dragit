@@ -4,8 +4,10 @@ import { GridContainerRule } from "./GridContainerRule"
 import { IMeta } from "../Node/IMeta"
 import { GridItemRule } from "./GridItemRule"
 import { CardRule } from "./CardRule"
+import { CanvasRule } from "./CanvasRule"
 
 const rules:Array<IRule> = [
+  new CanvasRule(),
   new GridContainerRule(),
   new GridItemRule(),
   new CardRule(),

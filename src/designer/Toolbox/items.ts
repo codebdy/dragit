@@ -51,7 +51,18 @@ export default [
             style:{
               //marginTop: '16px',
             }
-          }          
+          },
+          children:[
+            {
+              name:"CardHeader",
+              props:{
+                title:'Form Card',
+              }          
+            },
+            {
+              name:"CardContent",
+            }
+          ]          
         }
       },  
       {

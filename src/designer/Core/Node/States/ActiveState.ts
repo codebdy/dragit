@@ -79,6 +79,21 @@ export class ActiveState extends State{
     })
   }
 
+  get dragInRectLeftHalf(){
+    let domElement = this.node.view?.getDom()
+    if(!domElement){
+      return undefined;
+    }
+
+    let rect = domElement.getBoundingClientRect() 
+    return new Rect({
+      left: rect.left + this.dropInMargin,
+      right: rect.left + rect.width/2,
+      top: rect.top + this.dropInMargin,
+      bottom: rect.bottom - this.dropInMargin,
+    })
+  }
+
   inBottom(event:MouseEvent){
     let draggedNode = window.draggedNode;
     if(!this.node.accept(draggedNode)){
@@ -97,7 +112,7 @@ export class ActiveState extends State{
 
     //子元素行布局
     if(this.node.flexFlowRow()){
-      return !this.dragInRectLeftArea?.isIn(event);
+      return !this.dragInRectLeftHalf?.isIn(event);
     }
 
     //子元素列布局
