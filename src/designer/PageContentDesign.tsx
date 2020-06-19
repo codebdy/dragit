@@ -23,6 +23,7 @@ import { CanvasNode } from './Core/Node/CanvasNode';
 import FocusLabel from './Core/Utils/FocusLabel';
 import NodeToolbar from './Core/Utils/NodeToolbar';
 import MouseFollower from './Core/Utils/MouseFollower';
+import bus, { CANVAS_SCROLL } from './Core/bus';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -117,6 +118,10 @@ export default function PageContentDesign() {
     dispatch(openFixedBarAction());
   };
 
+  const handleScroll = ()=>{
+    bus.emit(CANVAS_SCROLL)
+  }
+
 
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
@@ -175,7 +180,7 @@ export default function PageContentDesign() {
           </TopNavHeightPlaceholder>
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
-          <Scrollbar permanent className={classes.scrollBar}>
+          <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
             <NodeView node={canvas} />
           </Scrollbar>
         </div>

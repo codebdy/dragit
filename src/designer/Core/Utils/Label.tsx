@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { INode } from '../Node/INode';
-import bus from '../bus';
+import bus, { CANVAS_SCROLL } from '../bus';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Label(props:{showEvent:string, hideEvent:string}){
   const{showEvent, hideEvent} = props;
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<INode|null>(null);
+  const [following, setFollowing] = React.useState<INode|undefined>(undefined);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const doFollow = (node:INode)=>{
-    let domElement = node.view?.getDom()
+  const doFollow = (node:INode|undefined)=>{
+    let domElement = node?.view?.getDom()
     if(!domElement){
       return 
     }
@@ -45,17 +45,24 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
 
   const unFollow = (node:INode)=>{
     if(following && following.id === node.id){
-      setFollowing(null)
+      setFollowing(undefined)
     }
+  }
+  const hangdePositionChange = ()=>{
+    doFollow(following);
   }
 
   useEffect(() => {
     bus.on(showEvent, follow)
     bus.on(hideEvent, unFollow)
+      bus.on(CANVAS_SCROLL, hangdePositionChange);
+      window.addEventListener('resize', hangdePositionChange)
     return () => {
       bus.off(showEvent, follow)
       bus.off(hideEvent, unFollow)
-    };
+      bus.off(CANVAS_SCROLL, hangdePositionChange);
+      window.removeEventListener('resize', hangdePositionChange)
+     };
   });
 
   return (

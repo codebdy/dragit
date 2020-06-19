@@ -8,5 +8,6 @@ export const ACTIVE_NODE = "ACTIVE_NODE";
 export const UN_ACTIVE_NODE = "UN_ACTIVE_NODE";
 export const DRAGE_NODE = "DRAGE_NODE";
 export const UN_DRAGE_NODE = "UN_DRAGE_NODE";
+export const CANVAS_SCROLL = "CANVAS_SCROLL";
 bus.setMaxListeners(10000);
 export default bus       

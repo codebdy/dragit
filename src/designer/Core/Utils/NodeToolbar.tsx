@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { INode } from '../Node/INode';
-import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../bus';
+import bus, { FOCUS_NODE, UN_FOCUS_NODE, CANVAS_SCROLL } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
 import { sideBarSettings } from 'utils';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import { RootState } from 'store';
 import classNames from 'classnames';
 
 const height = 28;
-declare var window: {draggedNode:INode | null};
+declare var window: any;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function NodeToolbar(){
   const iconSize = 16;
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<INode|null>(null);
+  const [following, setFollowing] = React.useState<INode|undefined>(undefined);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
@@ -56,8 +56,8 @@ export default function NodeToolbar(){
   
   const sideBarWidth = sideBarSettings.sizes[sidebar.size]
 
-  const doFollow = (node:INode)=>{
-    let domElement = node.view?.getDom();
+  const doFollow = (node?:INode)=>{
+    let domElement = node?.view?.getDom();
     if(!domElement){
       return 
     }
@@ -76,18 +76,26 @@ export default function NodeToolbar(){
 
   const unFollow = (node:INode)=>{
     if(following && following.id === node.id){
-      setFollowing(null)
+      setFollowing(undefined)
     }
+  }
+
+  const hangdePositionChange = ()=>{
+    doFollow(following);
   }
 
   useEffect(() => {
     bus.on(FOCUS_NODE, follow);
     bus.on(UN_FOCUS_NODE, unFollow);
     document.addEventListener('mouseup', handleMouseUp);
+    bus.on(CANVAS_SCROLL, hangdePositionChange);
+    window.addEventListener('resize', hangdePositionChange)
     return () => {
       bus.off(FOCUS_NODE, follow)
       bus.off(UN_FOCUS_NODE, unFollow)
       document.removeEventListener('mouseup', handleMouseUp)
+      bus.off(CANVAS_SCROLL, hangdePositionChange);
+      window.removeEventListener('resize', hangdePositionChange)
     };
   });
 

@@ -41,6 +41,7 @@ interface ScrollbarProps{
   className?: string,
   children?: any,
   permanent?:boolean,
+  onScroll?: any,
 }
 export default function Scrollbar(props:ScrollbarProps = {}) {
   const {
@@ -48,7 +49,8 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
     scrollY = true,
     permanent = false,
     className,
-    children 
+    children,
+    onScroll
   } = props
   const classes = useStyles();
 
@@ -68,7 +70,9 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
             [classes.shellY]:scrollY,
           }
         )
+        
       }
+      onScroll = {onScroll}
     >
       <div
         className={
@@ -77,6 +81,8 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
             [classes.scrollY]:scrollY,
           })
         }
+
+        onScroll = {onScroll}
       >
         {children}
       </div>
