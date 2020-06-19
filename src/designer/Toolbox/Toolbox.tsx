@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
    
     component:{
-      cursor: 'move',
+      //cursor: 'move',
       userSelect: 'none',
       "&:hover,&:focus": {
         backgroundColor: theme.palette.type === 'dark' ? hoverBackground : hoverBackgroundLight,

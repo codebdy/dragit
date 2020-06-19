@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     move:{
-      cursor:'move',
+      //cursor:'move',
     },
 
   }),
