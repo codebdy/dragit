@@ -28,7 +28,7 @@ const Canvas = React.forwardRef((props: {className?:string, children?:any, style
       className={ classNames(classes.canvas, props.className, classes.editPadding) }
     >
       {props.children}
-     
+      {!props.children && <span></span>}
     </Container>
   )
 });

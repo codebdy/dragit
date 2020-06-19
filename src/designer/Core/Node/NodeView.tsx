@@ -45,24 +45,30 @@ export default function NodeView(props:INodeProps){
     };
   });
 
+  const childrenNodes = children?.map((child:INode)=>{
+    return (
+      <NodeView key={child.id} node={child} />
+    )
+  });
 
-  const Node = resolveNode(node.meta.name);
   return(
-    <Fragment>
-    {(node.children && node.children.length > 0) || node.meta.text ?
-      (<Node ref={nodeEl} {...nodeProps}>
-        {node.meta.text}
-        {children?.map((child: INode)=>{
-          return (
-            <NodeView key={child.id} node={child} />
-          )
-        })}
-      </Node>)
-      :
-      <Node {...node.meta.props} />
-    }
-    </Fragment>
+    children?.length > 0 || node.meta.text ? 
+      React.createElement(
+      resolveNode(node.meta.name),
+      {
+        ref:nodeEl,
+        ...nodeProps
+      },
+      [node.meta.text, ...childrenNodes]
+    )
+    :
+    React.createElement(
+      resolveNode(node.meta.name),
+      {
+        ref:nodeEl,
+        ...nodeProps
+      }
+    )
   )
-
-
 }
+
