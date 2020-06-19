@@ -54,7 +54,7 @@ export class Node implements INode{
   }
 
   get label(){
-    return this.rule.label ? this.rule.label : this.meta.name
+    return this.rule.resolveLabel(this.meta);
   }
 
   get props(){

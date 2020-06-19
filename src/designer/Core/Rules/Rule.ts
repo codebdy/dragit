@@ -15,11 +15,12 @@ export class Rule implements IRule{
     return true;
   }
 
-  get label(){
-    return this.labelKey ? intl.get(this.labelKey) : this._label;
+  resolveLabel(meta:IMeta):string|undefined{
+    let label = this.labelKey ? intl.get(this.labelKey) : this._label;
+    return label ? label : meta.name;
   }
 
-  set label(label){
+  set label(label:string){
     this._label = label;
   }
 

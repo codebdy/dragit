@@ -14,7 +14,7 @@ export class GridContainerRule extends Rule{
   }
 
   accept(child:INode){
-    if(child.rule.label === (new GridItemRule()).label){
+    if(child.rule instanceof GridItemRule){
       return true;
     }
     return false;

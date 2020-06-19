@@ -14,4 +14,8 @@ export class FieldRule extends Rule{
   accept(child:INode){
     return false;
   }
+
+  resolveLabel(meta:IMeta):string|undefined{
+    return meta.props?.as;
+  }
 }
