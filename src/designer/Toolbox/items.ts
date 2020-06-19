@@ -100,6 +100,7 @@ export default [
           name:"Field",
           props:{
             as:"TextField",
+            variant:"outlined",
           }
         }
 

@@ -6,6 +6,7 @@ import { GridItemRule } from "./GridItemRule"
 import { CardRule } from "./CardRule"
 import { CanvasRule } from "./CanvasRule"
 import { CardHaderRule } from "./CardHeaderRule"
+import { FieldRule } from "./FieldRule"
 
 const rules:Array<IRule> = [
   new CanvasRule(),
@@ -13,6 +14,7 @@ const rules:Array<IRule> = [
   new GridItemRule(),
   new CardRule(),
   new CardHaderRule(),
+  new FieldRule(),
 ];
 
 const baseRule = new Rule();
