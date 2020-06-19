@@ -24,6 +24,7 @@ import FocusLabel from './Core/Utils/FocusLabel';
 import NodeToolbar from './Core/Utils/NodeToolbar';
 import MouseFollower from './Core/Utils/MouseFollower';
 import bus, { CANVAS_SCROLL } from './Core/bus';
+import { parseNodes } from './Core/Node/jsonParser';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -102,10 +103,10 @@ const darkTheme = responsiveFontSizes(createMuiTheme({
 export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
-  
-  const [canvas] = React.useState(new CanvasNode());
+  const myStore = useSelector(selectMyStore) 
+  let nodes = parseNodes(myStore.metas);
+  const canvas = new CanvasNode(nodes);
 
-  const myStore = useSelector(selectMyStore)  
   const dispatch = useDispatch()
   
   const handleCancel = () => {
@@ -181,7 +182,10 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
+          {myStore.pageId && 
             <NodeView node={canvas} />
+          }
+            
           </Scrollbar>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Fragment } from 'react';
 import { resolveNode } from "../resoveNode"
 //import { Node } from './Node';
 import bus, {WILL_FOCUS_NODE } from "../bus";
@@ -45,17 +45,24 @@ export default function NodeView(props:INodeProps){
     };
   });
 
-  return(React.createElement(
-    resolveNode(node.meta.name),
-    {
-      ref:nodeEl,
-      ...nodeProps
-    },
-    children?.map((child:INode)=>{
-      return (
-        <NodeView key={child.id} node={child} />
-      )
-    })
-    )
+
+  const Node = resolveNode(node.meta.name);
+  return(
+    <Fragment>
+    {(node.children && node.children.length > 0) || node.meta.text ?
+      (<Node ref={nodeEl} {...nodeProps}>
+        {node.meta.text}
+        {children?.map((child: INode)=>{
+          return (
+            <NodeView key={child.id} node={child} />
+          )
+        })}
+      </Node>)
+      :
+      <Node {...node.meta.props} />
+    }
+    </Fragment>
   )
+
+
 }

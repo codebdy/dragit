@@ -4,10 +4,14 @@ import {closeAreaSelectAction, openAreaSelectAction, designPageContentAction, ca
 const initialState:{
   areaSelect:boolean, 
   pageContentDesign:boolean,
+  pageId:string,
+  metas:any,
 } = 
   {
     areaSelect: false,
     pageContentDesign: false,
+    pageId:'',
+    metas:undefined,
   };
 
 type State = typeof initialState
@@ -31,6 +35,8 @@ const actionMap={
     return {
       ...state,
       pageContentDesign: true,
+      pageId: action.payload.pageId,
+      metas: action.payload.metas,
     };
   },
   [cancelPageContentAction().type]: (state:State, action:Action<any>) => {

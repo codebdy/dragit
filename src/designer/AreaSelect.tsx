@@ -53,9 +53,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AreaSelect() {
   const classes = useStyles();
-  const selectMyStore = (state: RootState) => state.designer
-  const myStore = useSelector(selectMyStore)  
-  const dispatch = useDispatch()
+  const selectMyStore = (state: RootState) => state.designer;
+  const myStore = useSelector(selectMyStore);
+  const selectPageStore = (state: RootState) => state.page;
+  const pageStore = useSelector(selectPageStore);
+  const dispatch = useDispatch();
   
   const handleClose = () => {
     dispatch(closeAreaSelectAction());
@@ -64,7 +66,7 @@ export default function AreaSelect() {
 
   const handleDesignPageContent = (event:any) =>{
     dispatch(closeAreaSelectAction());
-    dispatch(designPageContentAction());
+    dispatch(designPageContentAction({pageId:pageStore.pageId, metas:pageStore.metas}));
     event.stopPropagation()
   }
 
