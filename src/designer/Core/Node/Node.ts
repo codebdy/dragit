@@ -59,19 +59,19 @@ export class Node implements INode{
 
   get props(){
     const paddingX={
-      paddingLeft : (this.children.length === 0 && this.rule.empertyPadding)||this.rule.editPaddingX,
-      paddingRight : (this.children.length === 0 && this.rule.empertyPadding)|| this.rule.editPaddingX,    
+      paddingLeft : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingX,
+      paddingRight : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingX,    
     }
     const paddingY={
-      paddingTop :  (this.children.length === 0 && this.rule.empertyPadding)||this.rule.editPaddingY,
-      paddingBottom :  (this.children.length === 0 && this.rule.empertyPadding)||this.rule.editPaddingY,
+      paddingTop : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingY,
+      paddingBottom : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingY,
     }
     return {
       className:'drag-node-outline ' + this.state.className,
       ...this.meta.props,      
       style:{
-        ...this.rule.editPaddingX && paddingX,
-        ...this.rule.editPaddingY && paddingY,
+        ...paddingX,
+        ...paddingY,
         ...this.state.style,
         ...this.meta.props?.style,
       },

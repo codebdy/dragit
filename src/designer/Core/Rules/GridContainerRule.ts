@@ -4,6 +4,8 @@ import { GridItemRule } from "./GridItemRule";
 import { INode } from "../Node/INode";
 
 export class GridContainerRule extends Rule{
+  editPaddingY = '16px';
+  editPaddingX = '16px';
   labelKey ="row";
 
   match(meta:IMeta){

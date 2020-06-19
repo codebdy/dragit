@@ -4,8 +4,8 @@ import intl from 'react-intl-universal';
 import { INode } from "../Node/INode";
 
 export class Rule implements IRule{
-  editPaddingY = '16px';
-  editPaddingX = '16px';
+  editPaddingY = '';
+  editPaddingX = '';
   empertyPadding = '16px';
   labelKey?: string;
   dropInMargin = 8;

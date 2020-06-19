@@ -5,6 +5,8 @@ import { INode } from "../Node/INode";
 import { FieldRule } from "./FieldRule";
 
 export class GridItemRule extends Rule{
+  //editPaddingY = '16px';
+  //editPaddingX = '16px';
   labelKey ="column";
 
   match(meta:IMeta){

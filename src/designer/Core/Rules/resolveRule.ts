@@ -8,6 +8,7 @@ import { CanvasRule } from "./CanvasRule"
 import { CardHaderRule } from "./CardHeaderRule"
 import { FieldRule } from "./FieldRule"
 import { DividerRule } from "./DividerRule"
+import { ButtonRule } from "./ButtonRule"
 
 const rules:Array<IRule> = [
   new CanvasRule(),
@@ -17,6 +18,7 @@ const rules:Array<IRule> = [
   new CardHaderRule(),
   new FieldRule(),
   new DividerRule(),
+  new ButtonRule(),
 ];
 
 const baseRule = new Rule();
