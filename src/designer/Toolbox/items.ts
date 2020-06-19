@@ -92,7 +92,18 @@ export default [
           props:{
           }          
         }
-      },  
+      }, 
+      {
+        id:"2-5",
+        title:"TextField",
+        meta:{
+          name:"Field",
+          props:{
+            as:"TextField",
+          }
+        }
+
+      }, 
     ]
   },
 

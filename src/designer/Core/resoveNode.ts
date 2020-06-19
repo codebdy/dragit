@@ -1,11 +1,15 @@
 import { Container, Grid } from "@material-ui/core";
-import Canvas from "./Canvas"
+import Canvas from "./Canvas";
 import {
   Button, 
   Card, CardHeader, CardContent, CardActions, 
   Divider,
-  Paper
-} from "@material-ui/core"
+  Paper,
+  TextField,
+} from "@material-ui/core";
+
+import Field from "components/PageContent/Field";
+
 
 const nodeMap : { [key: string]: any } = {
   Container,
@@ -18,6 +22,8 @@ const nodeMap : { [key: string]: any } = {
   CardContent,
   CardActions,
   Paper,
+  TextField,
+  Field,
 }
 
 function resolveNode(name:string): any{

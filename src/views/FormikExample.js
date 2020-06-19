@@ -95,6 +95,7 @@ function Contact(props) {
                   return (
                     <form onSubmit={handleSubmit}>
                       <TextField
+                        error={errors.name && touched.name}
                         label="name"
                         name="name"
                         className={classes.textField}
