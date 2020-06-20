@@ -1,6 +1,7 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { TextField, Button } from '@material-ui/core';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -22,21 +23,52 @@ export default function PageForm(props:{children?:any}){
   return (
     <Formik
       initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
+        email: '', name: '', comment: ''
       }}
-      validationSchema={SignupSchema}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email()
+          .required('Required'),
+        name: Yup.string()
+          .required('Required'),
+        comment: Yup.string()
+          .required('Required'),
+      })}
+
       onSubmit={values => {
         // same shape as initial values
+        console.log('Form submit');
         console.log(values);
       }}
     >
-      {(props) => (
-        <Form>
-          {children(props)}
-        </Form>
-      )}
+      {(props) => {
+        const {
+          values,
+          touched,
+          errors,
+          dirty,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          handleReset,
+        } = props;
+        return(
+          <Form>
+            <TextField
+              error ={!!errors['name'] && !!touched['name']}
+              label="name"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              helperText={(errors.name && touched.name) && errors.name}
+              margin="normal"
+            />
+            {children(props)}
+          </Form>
+        )
+      }}
     </Formik>
   )
 }
