@@ -26,6 +26,13 @@ export default [{
         icon: 'mdi-speedometer',
     },
     {
+        id: "t2test",
+        type: 'item',
+        title: 'test2',
+        to: '/admin/page/dashboard',
+        icon: 'mdi-home',
+    },
+    {
         id: "m2",
         type: 'item',
         title: '媒体库',

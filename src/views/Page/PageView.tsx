@@ -18,9 +18,7 @@ export default function PageView(props:{match: any }) {
   useEffect(() => {
     console.log('PageView useEffect:', props.match.params.id);
     dispatch(thunkPageSchema(props.match.params.id));
-    return () => {
-      
-    };
+
   },[dispatch, props.match.params.id]);
   
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { TextField, Button } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 const validateSchema = Yup.object().shape({
   email: Yup.string()

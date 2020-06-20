@@ -103,7 +103,7 @@ const darkTheme = responsiveFontSizes(createMuiTheme({
 export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
-  const myStore = useSelector(selectMyStore) 
+  const myStore = useSelector(selectMyStore)
   let nodes = parseNodes(myStore.metas);
   let canvas = new CanvasNode(nodes);
   //const [canvas] = React.useState(new CanvasNode(nodes));
@@ -183,10 +183,9 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-          {myStore.pageId && 
-            <NodeView node={canvas} />
-          }
-            
+            {myStore.pageContentDesign &&
+              <NodeView node={canvas} />
+            }
           </Scrollbar>
         </div>
       </div>
