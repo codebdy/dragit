@@ -1,25 +1,17 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import ElementRender from "./ElementRender";
 import { RXElement } from "./RXElement";
-import { Container, makeStyles } from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
+
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkPageSchema } from "store/page/thunks";
 import PageForm from "./PageForm";
-const useStyles = makeStyles((theme) => ({
-  card: {
-    maxWidth: 345,
-    margin: theme.spacing(2),
-  },
-  media: {
-    height: 'calc(100vh - 150px)',
-  },
-}));
+import { Container } from "@material-ui/core";
+import PageSkeleton from "./PageSkeleton";
+
 
 export default function PageView(props:{match: any }) {
-  const classes = useStyles();
-  const selectPage = (state: RootState) => state.page;
+   const selectPage = (state: RootState) => state.page;
   const pageInStore = useSelector(selectPage);
   const dispatch = useDispatch()
 
@@ -32,23 +24,20 @@ export default function PageView(props:{match: any }) {
   },[dispatch, props.match.params.id]);
   
   return (
-    <Fragment>
+    <Container>      
       { pageInStore.schemaLoading &&
-        <Container>
-          <Skeleton animation="wave" height={50} width="30%" style={{ marginTop: 6 }} />
-          <Skeleton animation="wave" variant="rect" className={classes.media} />
-        </Container>
+        <PageSkeleton />
       }
-      <Container>
-        <PageForm>
-          {pageInStore.schema?.map((child:RXElement)=>{
+
+      <PageForm>
+        {(props: any)=>(
+          pageInStore.schema?.map((child:RXElement)=>{
             return (
-              <ElementRender key={child.id} element={child} />
+              <ElementRender key={child.id} element={child} formik={props}/>
             )
-          })}
-          {!pageInStore.schema && <span>Emperty Page</span>}
-        </PageForm>
-      </Container>
-    </Fragment>
+          })
+        )}
+      </PageForm>
+    </Container>
   )
 }
