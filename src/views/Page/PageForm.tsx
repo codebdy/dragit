@@ -3,17 +3,13 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button } from '@material-ui/core';
 
-const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  lastName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
+const validateSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Invalid email')
+    .email()
+    .required('Required'),
+  name: Yup.string()
+    ['required']('必须的'),
+  comment: Yup.string()
     .required('Required'),
 });
 
@@ -25,15 +21,7 @@ export default function PageForm(props:{children?:any}){
       initialValues={{
         email: '', name: '', comment: ''
       }}
-      validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email()
-          .required('Required'),
-        name: Yup.string()
-          .required('Required'),
-        comment: Yup.string()
-          .required('Required'),
-      })}
+      validationSchema={validateSchema}
 
       onSubmit={values => {
         // same shape as initial values
