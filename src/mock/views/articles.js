@@ -1,3 +1,4 @@
+import {JUMP_TOP_PAGE_ACTION} from "views/Page/FormAction"
 export default [{
   name: 'Grid',
   props: {
@@ -34,7 +35,7 @@ export default [{
               fontSize: '1.1rem',
             },
             onClick:{
-              name:'JumpToPage',
+              name: JUMP_TOP_PAGE_ACTION,
               pageId:'article',
               dataId:'1',
             }

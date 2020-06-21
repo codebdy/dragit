@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { FormAction } from './FormAction';
+import { FormAction, JUMP_TOP_PAGE_ACTION } from './FormAction';
+import { withRouter } from 'react-router-dom';
 
 const validateSchema = Yup.object().shape({
   email: Yup.string()
@@ -13,10 +14,13 @@ const validateSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export default function PageForm(props:{children?:any}){
-  const {children} = props;
+const PageForm = (props:any) =>{
+  const {children, history} = props;
   const formActionHandle = (action:FormAction)=>{
-    console.log('Process Form Action:', action);
+    if(action.name === JUMP_TOP_PAGE_ACTION){
+      const url = '/admin/page/' + action.pageId + (action.dataId ? '/' + action.dataId : '' );
+      history.push(url);
+    }
   }
 
   return (
@@ -42,3 +46,5 @@ export default function PageForm(props:{children?:any}){
     </Formik>
   )
 }
+
+export default withRouter(PageForm)
