@@ -4,22 +4,25 @@ import { RXElement } from "./RXElement";
 
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
-import { thunkPageSchema } from "store/page/thunks";
+import { thunkPageSchema, thunkModuleIndexSchema } from "store/page/thunks";
 import PageForm from "./PageForm";
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { FormActionHandle } from './FormAction';
 
 export default function PageView(props:{match: any }) {
-   const selectPage = (state: RootState) => state.page;
+  const{moduleId, pageId} = props.match.params;
+  const selectPage = (state: RootState) => state.page;
   const pageInStore = useSelector(selectPage);
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('PageView useEffect:', props.match.params.pageId);
-    dispatch(thunkPageSchema(props.match.params.pageId));
+    console.log('PageView useEffect:', moduleId, pageId);
+    dispatch(
+      pageId ? thunkPageSchema(pageId) : thunkModuleIndexSchema(moduleId)
+    );
 
-  },[dispatch, props.match.params.pageId]);
+  },[dispatch, moduleId, pageId]);
   
   return (
     <Container>      

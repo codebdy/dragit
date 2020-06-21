@@ -19,7 +19,7 @@ const PageForm = (props:any) =>{
   const formActionHandle = (action:FormAction)=>{
     switch (action.name){
       case JUMP_TO_PAGE_ACTION:
-        const url = `/admin/module/${action.page.moduleId}/page/${action.page.pageId}` + (action.dataId ? '/' + action.page.dataId : '' );
+        const url = `/admin/module/${action.page.moduleId}/${action.page.pageId}` + (action.dataId ? '/' + action.page.dataId : '' );
         history.push(url);
         return;
         

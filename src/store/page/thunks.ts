@@ -8,7 +8,7 @@ import {loadingSchemaAction, receivedSchemaAction, requestSchemaFailureAction} f
 const thunkPageSchema = (pageId:string
 ): ThunkAction<void, RootState, null, Action<string>> => {
   return async dispatch => {
-    dispatch(loadingSchemaAction(pageId))
+    dispatch(loadingSchemaAction())
 
     axios.get('/api/page/' + pageId).then(res => {
       dispatch(receivedSchemaAction(res.data));
@@ -20,6 +20,23 @@ const thunkPageSchema = (pageId:string
   }
 };
 
+const thunkModuleIndexSchema = (moduelId:string
+  ): ThunkAction<void, RootState, null, Action<string>> => {
+    return async dispatch => {
+      dispatch(loadingSchemaAction())
+  
+      axios.get('/api/moudle-index/' + moduelId).then(res => {
+        console.log(moduelId, res.data)
+        dispatch(thunkPageSchema(res.data));
+      })
+      .catch(err => {
+        console.log('chunk error');
+        dispatch(requestSchemaFailureAction(err.message));
+      });
+    }
+  };
+
 export {
   thunkPageSchema,
+  thunkModuleIndexSchema,
 };
