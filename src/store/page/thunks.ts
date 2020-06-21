@@ -8,7 +8,7 @@ import {loadingSchemaAction, receivedSchemaAction, requestSchemaFailureAction} f
 const thunkPageSchema = (pageId:string
 ): ThunkAction<void, RootState, null, Action<string>> => {
   return async dispatch => {
-    dispatch(loadingSchemaAction())
+    dispatch(loadingSchemaAction(pageId))
 
     axios.get('/api/page/' + pageId).then(res => {
       dispatch(receivedSchemaAction(res.data));

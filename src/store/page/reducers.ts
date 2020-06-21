@@ -31,7 +31,7 @@ const actionMap={
     return {
       ...state,
       schemaLoading: true,
-      //pageId:action.payload,
+      pageId:action.payload,
     };
   },
 
