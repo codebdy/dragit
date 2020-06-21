@@ -17,13 +17,15 @@ const validateSchema = Yup.object().shape({
 const PageForm = (props:any) =>{
   const {children, history} = props;
   const formActionHandle = (action:FormAction)=>{
-    if(action.name === JUMP_TOP_PAGE_ACTION){
-      const url = '/admin/page/' + action.pageId + (action.dataId ? '/' + action.dataId : '' );
-      history.push(url);
-      return;
-    }
-    if(action.name === GO_BACK_ACTION){
-      history.goBack();
+    switch (action.name){
+      case JUMP_TOP_PAGE_ACTION:
+        const url = '/admin/page/' + action.pageId + (action.dataId ? '/' + action.dataId : '' );
+        history.push(url);
+        return;
+        
+      case GO_BACK_ACTION:
+        history.goBack();
+        return;    
     }
     
   }
