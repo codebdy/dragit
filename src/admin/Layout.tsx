@@ -62,7 +62,7 @@ export default function Layout(){
         <SidebarWidthPlaceholder />
         <PageContent>
           <Switch> 
-            <Route path="/admin/page/:id" component={PageView}></Route>
+            <Route path="/admin/page/:pageId/:dataId?" component={PageView}></Route>
             <Route path="/admin/dashboard" component={Dashboard}></Route>
             <Route path="/admin/medias" component={Medias}></Route>
             <Redirect to="/admin/page/dashboard" from='/admin' /> 

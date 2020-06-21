@@ -28,8 +28,8 @@ export default [{
     {
         id: "t2test",
         type: 'item',
-        title: 'test2',
-        to: '/admin/page/dashboard',
+        title: '文章列表',
+        to: '/admin/page/articles',
         icon: 'mdi-home',
     },
     {

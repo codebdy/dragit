@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { TextField } from '@material-ui/core';
+import { FormAction } from './FormAction';
 
 const validateSchema = Yup.object().shape({
   email: Yup.string()
@@ -15,6 +15,9 @@ const validateSchema = Yup.object().shape({
 
 export default function PageForm(props:{children?:any}){
   const {children} = props;
+  const formActionHandle = (action:FormAction)=>{
+    console.log('Process Form Action:', action);
+  }
 
   return (
     <Formik
@@ -30,30 +33,9 @@ export default function PageForm(props:{children?:any}){
       }}
     >
       {(props) => {
-        const {
-          values,
-          touched,
-          errors,
-          dirty,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          handleReset,
-        } = props;
         return(
           <Form>
-            <TextField
-              error ={!!errors['name'] && !!touched['name']}
-              label="name"
-              name="name"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              helperText={(errors.name && touched.name) && errors.name}
-              margin="normal"
-            />
-            {children(props)}
+            {children(props, formActionHandle)}
           </Form>
         )
       }}

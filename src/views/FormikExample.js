@@ -92,8 +92,15 @@ function Contact(props) {
                     handleSubmit,
                     handleReset,
                   } = props;
+
+                  const handleTest=(event)=>{
+                    
+                    console.log('handle test');
+                    handleSubmit();
+                    event.preventDefault();
+                  }
                   return (
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleTest}>
                       <TextField
                         error={errors.name && touched.name}
                         label="name"

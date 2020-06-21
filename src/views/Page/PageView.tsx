@@ -8,7 +8,7 @@ import { thunkPageSchema } from "store/page/thunks";
 import PageForm from "./PageForm";
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
-
+import { FormActionHandle } from './FormAction';
 
 export default function PageView(props:{match: any }) {
    const selectPage = (state: RootState) => state.page;
@@ -16,10 +16,10 @@ export default function PageView(props:{match: any }) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('PageView useEffect:', props.match.params.id);
-    dispatch(thunkPageSchema(props.match.params.id));
+    console.log('PageView useEffect:', props.match.params.pageId);
+    dispatch(thunkPageSchema(props.match.params.pageId));
 
-  },[dispatch, props.match.params.id]);
+  },[dispatch, props.match.params.pageId]);
   
   return (
     <Container>      
@@ -28,10 +28,10 @@ export default function PageView(props:{match: any }) {
       }
 
       <PageForm>
-        {(props: any)=>(
+        {(props: any, onFormAction: FormActionHandle)=>(
           pageInStore.schema?.map((child:RXElement)=>{
             return (
-              <ElementRender key={child.id} element={child} formik={props}/>
+              <ElementRender key={child.id} element={child} formik={props} onFormAction={onFormAction}/>
             )
           })
         )}
