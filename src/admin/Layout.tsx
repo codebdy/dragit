@@ -61,10 +61,12 @@ export default function Layout(){
       <div className={classes.content}>
         <SidebarWidthPlaceholder />
         <PageContent>
-          <Switch> 
+          <Switch>
+            <Route path="/admin/module/:moduleId/page/:pageId/:dataId?" component={PageView}></Route> 
             <Route path="/admin/page/:pageId/:dataId?" component={PageView}></Route>
             <Route path="/admin/dashboard" component={Dashboard}></Route>
             <Route path="/admin/medias" component={Medias}></Route>
+            <Redirect to="/admin/module/:moduleId/page/index" from='/admin/module/:moduleId/' /> 
             <Redirect to="/admin/page/dashboard" from='/admin' /> 
           </Switch>
         </PageContent>
