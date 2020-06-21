@@ -8,7 +8,7 @@ const initialState:
   schemaLoading:boolean, 
   dataLoading:boolean,
   pageId:string,
-  metas:any,
+  pageJson:any,
   schema?:Array<RXElement>,
   data:any,
   requestError:any
@@ -17,7 +17,7 @@ const initialState:
     schemaLoading: false,
     dataLoading: false,
     pageId:'',
-    metas:undefined,
+    pageJson:undefined,
     schema:undefined,
     data:undefined,
     requestError:undefined,
@@ -39,8 +39,8 @@ const actionMap={
     return {
       ...state,
       schemaLoading: false,
-      metas:action.payload,
-      schema: parseElements(action.payload),
+      pageJson:action.payload,
+      schema: parseElements(action.payload.layout),
     };
   },
 

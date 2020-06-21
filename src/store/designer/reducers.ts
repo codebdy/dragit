@@ -5,13 +5,13 @@ const initialState:{
   areaSelect:boolean, 
   pageContentDesign:boolean,
   pageId:string,
-  metas:any,
+  pageJson:any,
 } = 
   {
     areaSelect: false,
     pageContentDesign: false,
     pageId:'',
-    metas:undefined,
+    pageJson:undefined,
   };
 
 type State = typeof initialState
@@ -36,7 +36,7 @@ const actionMap={
       ...state,
       pageContentDesign: true,
       pageId: action.payload.pageId,
-      metas: action.payload.metas,
+      pageJson: action.payload.pageJson,
     };
   },
   [cancelPageContentAction().type]: (state:State, action:Action<any>) => {

@@ -15,5 +15,5 @@ Mock.mock('/api/page/test', 'get', test)
 Mock.mock('/api/moudle-index/articles', 'get', 'articles')
 
 Mock.setup({
-    timeout: 1000
+    timeout: 500
 })

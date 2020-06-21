@@ -66,7 +66,7 @@ export default function AreaSelect() {
 
   const handleDesignPageContent = (event:any) =>{
     dispatch(closeAreaSelectAction());
-    dispatch(designPageContentAction({pageId:pageStore.pageId, metas:pageStore.metas}));
+    dispatch(designPageContentAction({pageId:pageStore.pageId, pageJson:pageStore.pageJson}));
     event.stopPropagation()
   }
 

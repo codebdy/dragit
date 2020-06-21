@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { FormAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION } from './FormAction';
+import { FormAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, PageJumper } from './FormAction';
 import { withRouter } from 'react-router-dom';
 
 const validateSchema = Yup.object().shape({
@@ -14,12 +14,16 @@ const validateSchema = Yup.object().shape({
     .required('Required'),
 });
 
+const resolvePageUrl=(page:PageJumper)=>{
+  return `/admin/module/${page.moduleId}/${page.pageId}` + (page.dataId ? '/' + page.dataId : '' );
+}
+
 const PageForm = (props:any) =>{
   const {children, history} = props;
   const formActionHandle = (action:FormAction)=>{
     switch (action.name){
       case JUMP_TO_PAGE_ACTION:
-        const url = `/admin/module/${action.page.moduleId}/${action.page.pageId}` + (action.dataId ? '/' + action.page.dataId : '' );
+        const url = resolvePageUrl(action.page);
         history.push(url);
         return;
         

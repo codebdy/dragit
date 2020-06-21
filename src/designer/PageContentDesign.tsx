@@ -104,7 +104,7 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)
-  let nodes = parseNodes(myStore.metas);
+  let nodes = parseNodes(myStore.pageJson?.layout);
   let canvas = new CanvasNode(nodes);
   //const [canvas] = React.useState(new CanvasNode(nodes));
 

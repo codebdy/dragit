@@ -20,7 +20,7 @@ const thunkPageSchema = (pageId:string
   }
 };
 
-const thunkModuleIndexSchema = (moduelId:string
+const thunkModuleDefaultPageSchema = (moduelId:string
   ): ThunkAction<void, RootState, null, Action<string>> => {
     return async dispatch => {
       dispatch(loadingSchemaAction())
@@ -37,5 +37,5 @@ const thunkModuleIndexSchema = (moduelId:string
 
 export {
   thunkPageSchema,
-  thunkModuleIndexSchema,
+  thunkModuleDefaultPageSchema,
 };
