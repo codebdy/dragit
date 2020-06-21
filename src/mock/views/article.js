@@ -1,3 +1,5 @@
+import {GO_BACK_ACTION} from "views/Page/FormAction";
+
 export default [{
   name: 'Grid',
   props: {
@@ -30,6 +32,10 @@ export default [{
             style: {
               fontSize: '1.1rem',
               marginRight: '8px',
+            },
+            onClick:{
+              name: GO_BACK_ACTION,
+              careDuty: true, //如果有修改，显示保存提示
             }
           }
         },
