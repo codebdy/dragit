@@ -26,7 +26,6 @@ const thunkModuleIndexSchema = (moduelId:string
       dispatch(loadingSchemaAction())
   
       axios.get('/api/moudle-index/' + moduelId).then(res => {
-        console.log(moduelId, res.data)
         dispatch(thunkPageSchema(res.data));
       })
       .catch(err => {
