@@ -1,10 +1,10 @@
 import React from 'react';
 import { CssBaseline, makeStyles, Theme, createStyles } from '@material-ui/core';
-import Sidebar, { createSidebarTheme } from 'components/Sidebar/Sidebar';
+import Sidebar, { createSidebarTheme } from 'admin/Sidebar/Sidebar';
 import image5 from 'assets/img/sidebar-5.jpg';
-import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
-import TopNav from 'components/TopNav/TopNav';
-import FixedBar from 'components/FixedBar/FixedBar';
+import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
+import TopNav from 'admin/TopNav/TopNav';
+import FixedBar from 'admin/FixedBar/FixedBar';
 import PageContent from 'components/PageContent/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';

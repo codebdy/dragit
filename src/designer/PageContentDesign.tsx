@@ -5,12 +5,12 @@ import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton 
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
-import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
+import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 
-import TopNavHeightPlaceholder from 'components/TopNav/TopNavHeightPlaceholder';
+import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
-import Scrollbar from 'components/common/Scrollbar';
+import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
 import { cancelPageContentAction, savePageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';

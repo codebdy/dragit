@@ -34,7 +34,7 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
     }
     let rect = domElement.getBoundingClientRect()
     setLeft(rect.x)
-    let top = rect.y < 80 ? rect.y + rect.height : rect.y - 20
+    let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
     setTop(top)
   }
 

@@ -13,7 +13,7 @@ import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
-import Scrollbar from 'components/common/Scrollbar';
+import Scrollbar from 'admin/common/Scrollbar';
 
 declare module 'csstype' {
   interface Properties {

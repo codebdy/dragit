@@ -6,10 +6,10 @@ import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeAreaSelectAction, designPageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
-import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
+import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
-import TopNavHeightPlaceholder from 'components/TopNav/TopNavHeightPlaceholder';
+import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>

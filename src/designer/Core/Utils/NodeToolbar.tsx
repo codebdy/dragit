@@ -65,7 +65,7 @@ export default function NodeToolbar(){
     let left = rect.right - height * 5;
     left = left < sideBarWidth ? sideBarWidth : left;
     setLeft(left)
-    let top = rect.y < 80 ? rect.y + rect.height : rect.y - 28;
+    let top = rect.y < 90 ? rect.y + rect.height : rect.y - 28;
     setTop(top);
   }
 

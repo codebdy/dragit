@@ -3,7 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Image from 'components/common/Image'
 
 import { Grid, Typography } from '@material-ui/core';
-import Scrollbar from 'components/common/Scrollbar';
+import Scrollbar from 'admin/common/Scrollbar';
 //import tileData from './tileData';
 
 const tileData = [

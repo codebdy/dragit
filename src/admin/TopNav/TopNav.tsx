@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import SidebarWidthPlaceholder from 'components/Sidebar/SidebarWidthPlaceholder';
+import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import { Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import MdiIcon from 'components/common/MdiIcon';
