@@ -14,7 +14,7 @@ const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email()
     .required('Required'),
-  name: Yup.string()
+  title: Yup.string()
     ['required']('必须的'),
   comment: Yup.string()
     .required('Required'),

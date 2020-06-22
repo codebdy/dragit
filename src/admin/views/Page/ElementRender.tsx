@@ -42,11 +42,12 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
   if(field){
     elementProps = {
       ...elementProps,
+      name: field,
       value: field && values && values[field],
       error: errors[field] && touched[field],
       onChange: handleChange,
       onBlur: handleBlur,
-      helperText: (errors.name && touched.name) && errors.name,    
+      helperText: (errors[field] && touched[field]) && errors[field],    
     }
   }
 
