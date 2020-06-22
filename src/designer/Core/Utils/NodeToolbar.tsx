@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexFlow: 'row',
       alignItems:'strech',
-      zIndex:theme.zIndex.drawer + 2,
+      //zIndex:theme.zIndex.drawer + 2,
     },
 
     button:{
