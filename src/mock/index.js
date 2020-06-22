@@ -3,6 +3,7 @@ import drawer from './drawer'
 import dashboard from './views/dashboard'
 import articles from './views/articles'
 import formData from './data/formData'
+import listData from './data/listData'
 import article from './views/article'
 import test from './views/test'
 
@@ -13,6 +14,7 @@ Mock.mock('/api/page/articles', 'get', articles)
 Mock.mock('/api/page/article', 'get', article)
 Mock.mock('/api/page/test', 'get', test)
 Mock.mock('/api/moudle-index/articles', 'get', 'articles')
+Mock.mock('/api/data/list', 'get', listData)
 
 Mock.setup({
     timeout: 500

@@ -2,10 +2,13 @@ import {JUMP_TO_PAGE_ACTION, GET_DATA_ACTION} from "admin/views/Page/FormAction"
 export default {
   initAction:{
     name:GET_DATA_ACTION,
-    api:'/api/list',
-    params:{
-      modelName:'/RXDrag/Model/Article',
-    },
+    axiosAction:{
+      method:'get',
+      url:'/api/data/list',
+      data:{
+        modelName:'/RXDrag/Model/Article',
+      },      
+    }
   },
   fields:[
   ],

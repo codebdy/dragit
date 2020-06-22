@@ -1,25 +1,25 @@
 import { Action, handleActions } from 'redux-actions';
-import {loadingSchemaAction, receivedSchemaAction, requestSchemaFailureAction} from "./actions";
+import {loadingSchemaAction, receivedSchemaAction, requestSchemaFailureAction, loadingModelAction, receivedModelAction} from "./actions";
 import { RXElement } from 'admin/views/Page/RXElement';
 import { parseElements } from 'admin/views/Page/jsonParser';
 
 const initialState:
 {
   schemaLoading:boolean, 
-  dataLoading:boolean,
+  modelLoading:boolean,
   pageId:string,
   pageJson:any,
   schema?:Array<RXElement>,
-  data:any,
+  model:any,
   requestError:any
 } = 
   {
     schemaLoading: false,
-    dataLoading: false,
+    modelLoading: false,
     pageId:'',
     pageJson:undefined,
     schema:undefined,
-    data:undefined,
+    model:undefined,
     requestError:undefined,
   };
 
@@ -48,6 +48,27 @@ const actionMap={
     return {
       ...state,
       schemaLoading: false,
+      requestError: action.payload,
+    };
+  },
+
+  [loadingModelAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      modelLoading: false,
+    };
+  },
+  [receivedModelAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      modelLoading: false,
+      model: action.payload,
+    };
+  },
+  [requestSchemaFailureAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      modelLoading: false,
       requestError: action.payload,
     };
   },

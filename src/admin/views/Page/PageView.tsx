@@ -4,7 +4,7 @@ import { RXElement } from "./RXElement";
 
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
-import { thunkPageSchema, thunkModuleDefaultPageSchema } from "store/page/thunks";
+import { thunkPageSchema } from "store/page/thunks";
 import PageForm from "./PageForm";
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
@@ -19,8 +19,8 @@ export default function PageView(props:{match: any }) {
   useEffect(() => {
     console.log('PageView useEffect:', moduleId, pageId, dataId);
     dispatch(
-      pageId ? thunkPageSchema(pageId) : thunkModuleDefaultPageSchema(moduleId)
-    );
+      thunkPageSchema({moduleId:moduleId,pageId:pageId, dataId:dataId})
+     );
 
   },[dispatch, moduleId, pageId, dataId]);
   
