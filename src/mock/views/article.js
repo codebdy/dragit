@@ -1,6 +1,14 @@
 import {GO_BACK_ACTION} from "admin/views/Page/FormAction";
 
 export default {
+  initAction:{
+      method:'get',
+      url:'/api/data/article',
+      data:{
+        modelName:'/RXDrag/Model/Article',
+      },      
+  },
+
   layout:[{
     name: 'Grid',
     props: {

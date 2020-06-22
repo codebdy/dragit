@@ -5,7 +5,7 @@ import image5 from 'assets/img/sidebar-5.jpg';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import TopNav from 'admin/TopNav/TopNav';
 import FixedBar from 'admin/FixedBar/FixedBar';
-import PageContent from 'components/PageContent/PageContent';
+import PageContent from 'admin/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Medias from 'admin/views/Medias/Medias';

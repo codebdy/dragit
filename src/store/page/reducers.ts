@@ -55,7 +55,7 @@ const actionMap={
   [loadingModelAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,
-      modelLoading: false,
+      modelLoading: true,
     };
   },
   [receivedModelAction().type]: (state:State, action:Action<any>) => {

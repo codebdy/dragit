@@ -24,10 +24,8 @@ const thunkPageSchema = (page:PageJumper
     axios.get('/api/page/' + page.pageId).then(res => {
       dispatch(receivedSchemaAction(res.data));
       //获取页面数据
-      if(res.data.initAction){
-        const axiosAction = res.data.initAction.axiosAction
-        dispatch(thunkPageModel({...axiosAction, data:{...axiosAction.data, dataId:page.dataId} }))
-      }
+      const axiosAction = res.data.initAction;
+      axiosAction && dispatch(thunkPageModel({...axiosAction, data:{...axiosAction.data, dataId:page.dataId} }));
     })
     .catch(err => {
       console.log('chunk error');
@@ -55,7 +53,6 @@ const thunkPageModel = (action:AxiosAction
   return async dispatch => {
     dispatch(loadingModelAction())
     axios(action).then(res => {
-      console.log('thunkPageModel', res.data)
       dispatch(receivedModelAction(res.data));
     })
     .catch(err => {

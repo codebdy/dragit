@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@material-ui/core";
 
-import Field from "components/PageContent/Field";
+import Field from "components/Field";
 
 
 const nodeMap : { [key: string]: any } = {
