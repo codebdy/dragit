@@ -16,6 +16,8 @@ const validationSchema = Yup.object().shape({
     .required('Required'),
   title: Yup.string()
     ['required']('必须的'),
+  slug: Yup.string()
+    ['required']('必须的'),
   comment: Yup.string()
     .required('Required'),
 });

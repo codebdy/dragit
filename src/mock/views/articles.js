@@ -40,7 +40,6 @@ export default {
               props: {
                 variant: "contained",
                 color: "primary",
-                type: "submit",
                 //size: "large",
                 style: {
                   fontSize: '1.1rem',

@@ -24,8 +24,11 @@ const PageForm = (props:any) =>{
     }
     
   }
-  const formikView = (
+
+  //console.log('PageForm', model);
+  return (
     <Formik
+      enableReinitialize
       initialValues={model}
       validationSchema={validationSchema}
       onSubmit={values => {
@@ -43,11 +46,6 @@ const PageForm = (props:any) =>{
         )
       }}
     </Formik>
-  )
-  //console.log('PageForm', model);
-  return (
-    //为了刷新initialValues并且显示字段的skeleton
-    model ? formikView : <div>{formikView}</div>
   )
 }
 

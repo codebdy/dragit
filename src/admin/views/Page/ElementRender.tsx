@@ -38,12 +38,12 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
 
   let elementProps:any = {...element.meta.props,  onClick:handleOnClick}
   //console.log(formik);
-  
+  const value = field && values && values[field];
   if(field){
     elementProps = {
       ...elementProps,
       name: field,
-      value: field && values && values[field],
+      value: value || '',
       error: errors[field] && touched[field],
       onChange: handleChange,
       onBlur: handleBlur,
