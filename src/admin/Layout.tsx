@@ -8,11 +8,11 @@ import FixedBar from 'admin/FixedBar/FixedBar';
 import PageContent from 'components/PageContent/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
-import Medias from 'views/Medias/Medias';
+import Medias from 'admin/views/Medias/Medias';
 import AreaSelect from 'designer/AreaSelect';
 import PageContentDesign from 'designer/PageContentDesign';
-import PageView from 'views/Page/PageView';
-import Dashboard from 'views/Dashboard/Dashboard';
+import PageView from 'admin/views/Page/PageView';
+import Dashboard from 'admin/views/Dashboard/Dashboard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

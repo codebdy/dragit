@@ -1,7 +1,7 @@
 import { Action, handleActions } from 'redux-actions';
 import {loadingSchemaAction, receivedSchemaAction, requestSchemaFailureAction} from "./actions";
-import { RXElement } from 'views/Page/RXElement';
-import { parseElements } from 'views/Page/jsonParser';
+import { RXElement } from 'admin/views/Page/RXElement';
+import { parseElements } from 'admin/views/Page/jsonParser';
 
 const initialState:
 {

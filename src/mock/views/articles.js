@@ -1,4 +1,4 @@
-import {JUMP_TO_PAGE_ACTION, GET_DATA_ACTION} from "views/Page/FormAction"
+import {JUMP_TO_PAGE_ACTION, GET_DATA_ACTION} from "admin/views/Page/FormAction"
 export default {
   initAction:{
     name:GET_DATA_ACTION,

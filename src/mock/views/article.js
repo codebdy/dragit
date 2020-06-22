@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "views/Page/FormAction";
+import {GO_BACK_ACTION} from "admin/views/Page/FormAction";
 
 export default {
   layout:[{
