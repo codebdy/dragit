@@ -2,6 +2,9 @@ import React, { Fragment } from 'react';
 import { resolveNode } from 'designer/Core/resoveNode';
 import { RXElement } from './RXElement';
 import { FormActionHandle } from './FormAction';
+import resolveSkeleton from './resolveSkeleton';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 export default function ElementRender(props:{element:RXElement, formik:any, onFormAction: FormActionHandle}){
   const {element, formik, onFormAction} = props;
@@ -12,22 +15,56 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
       return
     }
     onFormAction(onClickAction);
+  };
+
+  const selectPage = (state: RootState) => state.page;
+  const pageInStore = useSelector(selectPage);
+
+  const skeletonView = resolveSkeleton(element.meta.name);
+
+  const field = element.meta.props?.field;
+
+  const {
+    values,
+    touched,
+    errors,
+    dirty,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    handleReset,
+  } = formik;
+
+  let elementProps:any = {...element.meta.props,  onClick:handleOnClick}
+  //console.log(formik);
+  
+  if(field){
+    elementProps = {
+      ...elementProps,
+      value: field && values && values[field],
+      error: errors[field] && touched[field],
+      onChange: handleChange,
+      onBlur: handleBlur,
+      helperText: (errors.name && touched.name) && errors.name,    
+    }
   }
+
+  const elementView = (element.children && element.children.length > 0) || element.meta.text ?
+    (<Element {...elementProps}>
+      {element.meta.text}
+      {element.children?.map((child: RXElement)=>{
+        return (
+          <ElementRender key={child.id} element={child} formik={formik} onFormAction={onFormAction}/>
+        )
+      })}
+    </Element>)
+    :
+    <Element {...elementProps} />
 
   return(
     <Fragment>
-    {(element.children && element.children.length > 0) || element.meta.text ?
-      (<Element {...element.meta.props} onClick = {handleOnClick}>
-        {element.meta.text}
-        {element.children?.map((child: RXElement)=>{
-          return (
-            <ElementRender key={child.id} element={child} formik={formik} onFormAction={onFormAction}/>
-          )
-        })}
-      </Element>)
-      :
-      <Element {...element.meta.props} />
-    }
+    { pageInStore.modelLoading && field ? skeletonView : elementView }
     </Fragment>
   )
 }

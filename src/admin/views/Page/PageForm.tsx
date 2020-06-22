@@ -1,25 +1,16 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
+
 import { FormAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, PageJumper } from './FormAction';
 import { withRouter } from 'react-router-dom';
-
-const validateSchema = Yup.object().shape({
-  email: Yup.string()
-    .email()
-    .required('Required'),
-  name: Yup.string()
-    ['required']('必须的'),
-  comment: Yup.string()
-    .required('Required'),
-});
 
 const resolvePageUrl=(page:PageJumper)=>{
   return `/admin/module/${page.moduleId}/${page.pageId}` + (page.dataId ? '/' + page.dataId : '' );
 }
 
 const PageForm = (props:any) =>{
-  const {children, history} = props;
+  const {children, history, model, validationSchema} = props;
+
   const formActionHandle = (action:FormAction)=>{
     switch (action.name){
       case JUMP_TO_PAGE_ACTION:
@@ -33,14 +24,10 @@ const PageForm = (props:any) =>{
     }
     
   }
-
-  return (
+  const formikView = (
     <Formik
-      initialValues={{
-        email: '', name: '', comment: ''
-      }}
-      validationSchema={validateSchema}
-
+      initialValues={model}
+      validationSchema={validationSchema}
       onSubmit={values => {
         // same shape as initial values
         console.log('Form submit');
@@ -56,6 +43,11 @@ const PageForm = (props:any) =>{
         )
       }}
     </Formik>
+  )
+  //console.log('PageForm', model);
+  return (
+    //为了刷新initialValues并且显示字段的skeleton
+    model ? formikView : <div>{formikView}</div>
   )
 }
 

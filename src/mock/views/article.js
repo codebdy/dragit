@@ -117,6 +117,7 @@ export default {
                                 fullWidth: true,
                                 label:'标题',
                                 variant:"outlined",
+                                field:'title',
                                 //size:"small",
                               }
                             },

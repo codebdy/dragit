@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ElementRender from "./ElementRender";
 import { RXElement } from "./RXElement";
-
+import * as Yup from 'yup';
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkPageSchema } from "store/page/thunks";
@@ -9,6 +9,16 @@ import PageForm from "./PageForm";
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { FormActionHandle } from './FormAction';
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email()
+    .required('Required'),
+  name: Yup.string()
+    ['required']('必须的'),
+  comment: Yup.string()
+    .required('Required'),
+});
 
 export default function PageView(props:{match: any }) {
   const{moduleId, pageId, dataId} = props.match.params;
@@ -30,7 +40,7 @@ export default function PageView(props:{match: any }) {
         <PageSkeleton />
       }
 
-      <PageForm>
+      <PageForm model={pageInStore.model} validationSchema = {validationSchema}>
         {(props: any, onFormAction: FormActionHandle)=>(
           pageInStore.schema?.map((child:RXElement)=>{
             return (
