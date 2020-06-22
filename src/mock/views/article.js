@@ -138,6 +138,7 @@ export default {
                                 label:'Slug',
                                 variant:"outlined",
                                 //size:"small",
+                                field:'slug',
                               }
                             },
                           ]
@@ -159,6 +160,7 @@ export default {
                                 variant:"outlined",
                                 //size:"small",
                                 //select: true,
+                                field:'auther',
                               }
                             },
                           ]
@@ -183,6 +185,7 @@ export default {
                                 InputLabelProps:{
                                   shrink: true,
                                 },
+                                field:'create_date',
                               }
                             },
                           ]
