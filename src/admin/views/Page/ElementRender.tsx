@@ -2,9 +2,6 @@ import React, { Fragment } from 'react';
 import { resolveNode } from 'components/resoveNode';
 import { RXElement } from './RXElement';
 import { FormActionHandle } from './FormAction';
-import resolveSkeleton from './resolveSkeleton';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
 
 export default function ElementRender(props:{element:RXElement, formik:any, onFormAction: FormActionHandle}){
   const {element, formik, onFormAction} = props;
