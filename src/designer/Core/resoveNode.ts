@@ -8,7 +8,8 @@ import {
   TextField,
 } from "@material-ui/core";
 
-import Field from "components/Field";
+import FormField from "components/FormField";
+import Portlet from "components/Portlet"
 
 
 const nodeMap : { [key: string]: any } = {
@@ -23,7 +24,8 @@ const nodeMap : { [key: string]: any } = {
   CardActions,
   Paper,
   TextField,
-  Field,
+  FormField,
+  Portlet,
 }
 
 function resolveNode(name:string): any{

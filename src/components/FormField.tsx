@@ -1,7 +1,7 @@
 import React from 'react';
 import { resolveNode } from 'designer/Core/resoveNode';
 
-const Field = React.forwardRef((props:{as:string}, ref:any) => {
+const FormField = React.forwardRef((props:{as:string}, ref:any) => {
   const {as, ...rest} = props
   const InputControl = resolveNode(as);
   return (
@@ -12,4 +12,4 @@ const Field = React.forwardRef((props:{as:string}, ref:any) => {
   )
 });
 
-export default Field
+export default FormField

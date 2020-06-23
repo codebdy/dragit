@@ -2,7 +2,7 @@ import { Rule } from "./Rule";
 import { IMeta } from "../Node/IMeta";
 import { CardRule } from "./CardRule";
 import { INode } from "../Node/INode";
-import { FieldRule } from "./FieldRule";
+import { FormFieldRule } from "./FormFieldRule";
 
 export class GridItemRule extends Rule{
   //editPaddingY = '16px';
@@ -20,7 +20,7 @@ export class GridItemRule extends Rule{
     if(child.rule instanceof CardRule){
       return true;
     }    
-    if(child.rule instanceof FieldRule){
+    if(child.rule instanceof FormFieldRule){
       return true;
     }    
     return false;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Card, Input, FormControl, InputLabel, InputAdornment } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Card, Input, FormControl, InputLabel, InputAdornment, CardHeader, CardActions, CardContent } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -89,14 +89,13 @@ export default function Dashboard(props:{children?: any}) {
             </Paper>
           </Grid>
           <Grid item xs={6}>
-         
             <ExpansionPanel elevation={6}>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <h3>Expansion Panel 1</h3>
+                <h2>基本信息</h2>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Typography>
@@ -104,10 +103,17 @@ export default function Dashboard(props:{children?: any}) {
                   sit amet blandit leo lobortis eget.
                 </Typography>
               </ExpansionPanelDetails>
+              <CardActions>Action</CardActions>
             </ExpansionPanel>
           </Grid>
           <Grid item xs={6}>
-            <Card className={classes.paper} elevation={6}>Card</Card>
+            <Card elevation={6}>
+              <CardHeader title="基本信息"></CardHeader>
+              <div style={{/*height:'0px', overflow:'hidden',*/}}>
+              <CardContent>Content</CardContent>
+              <CardActions>Action</CardActions>
+              </div>
+            </Card>
           </Grid>
           <Grid item xs={3}>
             <Paper className={classes.paper} elevation={6}>xs=3</Paper>

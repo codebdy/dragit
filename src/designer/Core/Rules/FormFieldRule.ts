@@ -2,13 +2,13 @@ import { Rule } from "./Rule";
 import { INode } from "../Node/INode";
 import { IMeta } from "../Node/IMeta";
 
-export class FieldRule extends Rule{
+export class FormFieldRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
 
   match(meta:IMeta){
-    return meta.name === 'Field';
+    return meta.name === 'FormField';
   }
   
   accept(child:INode){

@@ -38,19 +38,19 @@ export default function PageView(props:{match: any }) {
   
   return (
     <Container>      
-      { pageInStore.schemaLoading &&
+      { pageInStore.schemaLoading ?
         <PageSkeleton />
+      :
+        <PageForm model={pageInStore.model} validationSchema = {validationSchema}>
+          {(props: any, onFormAction: FormActionHandle)=>(
+            pageInStore.schema?.map((child:RXElement)=>{
+              return (
+                <ElementRender key={child.id} element={child} formik={props} onFormAction={onFormAction}/>
+              )
+            })
+          )}
+        </PageForm>
       }
-
-      <PageForm model={pageInStore.model} validationSchema = {validationSchema}>
-        {(props: any, onFormAction: FormActionHandle)=>(
-          pageInStore.schema?.map((child:RXElement)=>{
-            return (
-              <ElementRender key={child.id} element={child} formik={props} onFormAction={onFormAction}/>
-            )
-          })
-        )}
-      </PageForm>
     </Container>
   )
 }

@@ -79,9 +79,19 @@ export default {
           },
           children: [
             {
+              name:'Portlet',
+              props: {
+                elevation: 6,
+                open:true,
+              }
+            },
+            {
               name: 'Card',
               props: {
                 elevation: 6,
+                style:{
+                  marginTop:'16px',
+                },              
               },
               children: [{
                   name: 'CardHeader',
@@ -111,7 +121,7 @@ export default {
                           },
                           children:[
                             {
-                              name:"Field",
+                              name:"FormField",
                               props:{
                                 as:'TextField',
                                 fullWidth: true,
@@ -131,7 +141,7 @@ export default {
                           },
                           children:[
                             {
-                              name:"Field",
+                              name:"FormField",
                               props:{
                                 as:'TextField',
                                 fullWidth: true,
@@ -152,7 +162,7 @@ export default {
                           },
                           children:[
                             {
-                              name:"Field",
+                              name:"FormField",
                               props:{
                                 as:'TextField',
                                 fullWidth: true,
@@ -174,7 +184,7 @@ export default {
                           },
                           children:[
                             {
-                              name:"Field",
+                              name:"FormField",
                               props:{
                                 as:'TextField',
                                 fullWidth: true,
@@ -199,7 +209,7 @@ export default {
                           },
                           children:[
                             {
-                              name:"Field",
+                              name:"FormField",
                               props:{
                                 as:'TextField',
                                 fullWidth: true,
@@ -219,7 +229,7 @@ export default {
                           },
                           children:[
                             {
-                              name:"Field",
+                              name:"FormField",
                               props:{
                                 as:'TextField',
                                 fullWidth: true,
@@ -238,7 +248,7 @@ export default {
                           },
                           children:[
                             {
-                              name:"Field",
+                              name:"FormField",
                               props:{
                                 as:'TextField',
                                 fullWidth: true,

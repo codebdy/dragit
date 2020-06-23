@@ -97,7 +97,7 @@ export default [
         id:"2-5",
         title:"TextField",
         meta:{
-          name:"Field",
+          name:"FormField",
           props:{
             as:"TextField",
             variant:"outlined",
