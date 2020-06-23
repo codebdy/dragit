@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,11 +12,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const PortletFooter = React.forwardRef((props:{children:any}, ref:any) => {
+const PortletFooter = React.forwardRef((props:{children:any, className:string}, ref:any) => {
+  const {children, className, ...rest} = props
   const classes = useStyles();
   return (
-    <div className={classes.portletFooter}>
-      {props.children}
+    <div className={classNames(classes.portletFooter,className )} {...rest}>
+      {children}
     </div>
   )
 });

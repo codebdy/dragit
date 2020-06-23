@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const PortletFormGridBody = React.forwardRef((props:{children:any, className:any,}, ref:any) => {
-  const {className, ...rest} = props
+  const {className, children, ...rest} = props
   const classes = useStyles();
   return (
     <Grid container spacing={3} className={ classNames(classes.portletBody, className) } {...rest} ref={ref}>
-      {props.children}
+      {children}
     </Grid>
   )
 });

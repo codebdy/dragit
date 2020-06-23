@@ -2,9 +2,6 @@ import React, { useRef, Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Typography, Divider, IconButton } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
-import PortletFormGridBody from './PortletFormGridBody';
-import FormGridItem from './FormGridItem';
-import PortletFooter from './PortletFooter';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,7 +49,7 @@ interface PortletProps{
 
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open,withHeader, title, scalable, ...rest} = props;
+  const {open,withHeader, children, title, scalable, ...rest} = props;
   const [opened, setOpened] = React.useState(open);
 
   const hendleClickChevronIcon = ()=>{
@@ -97,11 +94,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
         }}
       >
         <div ref={bodyInnerRef} className={classes.bodyInner}>
-          {props.children}
-          <PortletFooter>
-            Footer
-          </PortletFooter> 
-
+          {children}
         </div>
       </div>
     </Paper>

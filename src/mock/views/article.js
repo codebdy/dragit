@@ -103,6 +103,10 @@ export default {
                       text:'text',
                     }
                   ]
+                },
+                {
+                  name:'PortletFooter',
+                  text:'Footer',
                 }
               ]
             },

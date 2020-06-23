@@ -3,9 +3,10 @@ import { Grid } from '@material-ui/core';
 
 
 const FormGridItem = React.forwardRef((props:{children:any, className:string}, ref:any) => {
+  const{children, ...rest} = props
   return (
-    <Grid item {...props} ref={ref}>
-      {props.children}
+    <Grid item {...rest} ref={ref}>
+      {children}
     </Grid>
   )
 });
