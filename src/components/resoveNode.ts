@@ -1,5 +1,5 @@
 import { Container, Grid } from "@material-ui/core";
-import Canvas from "./Canvas";
+import Canvas from "../designer/Core/Canvas";
 import {
   Button, 
   Card, CardHeader, CardContent, CardActions, 
@@ -10,6 +10,9 @@ import {
 
 import FormField from "components/FormField";
 import Portlet from "components/Portlet"
+import PortletFormGridBody from "components/PortletFormGridBody"
+import PortletFooter from "components/PortletFooter"
+import FormGridItem from "components/FormGridItem"
 
 
 const nodeMap : { [key: string]: any } = {
@@ -26,6 +29,9 @@ const nodeMap : { [key: string]: any } = {
   TextField,
   FormField,
   Portlet,
+  PortletFormGridBody,
+  FormGridItem,
+  PortletFooter,
 }
 
 function resolveNode(name:string): any{

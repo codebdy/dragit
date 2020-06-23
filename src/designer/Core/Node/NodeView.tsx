@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { resolveNode } from "../resoveNode"
+import { resolveNode } from "../../../components/resoveNode"
 //import { Node } from './Node';
 import bus, {WILL_FOCUS_NODE } from "../bus";
 import { INode } from './INode';

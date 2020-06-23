@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { resolveNode } from 'designer/Core/resoveNode';
+import { resolveNode } from 'components/resoveNode';
 import { RXElement } from './RXElement';
 import { FormActionHandle } from './FormAction';
 import resolveSkeleton from './resolveSkeleton';

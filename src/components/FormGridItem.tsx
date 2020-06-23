@@ -2,9 +2,9 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 
 
-const FormGridItem = React.forwardRef((props:{children:any}, ref:any) => {
+const FormGridItem = React.forwardRef((props:{children:any, className:string}, ref:any) => {
   return (
-    <Grid item>
+    <Grid item {...props} ref={ref}>
       {props.children}
     </Grid>
   )

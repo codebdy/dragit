@@ -1,5 +1,5 @@
 import React, { useRef, Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Paper, Typography, Divider } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Paper, Typography, Divider, IconButton } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
 import PortletFormGridBody from './PortletFormGridBody';
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     indicator:{
       transition:"all 0.3s",
-      cursor:'pointer',
     },
 
     opened:{
@@ -30,11 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
     body:{
       transition:'all 0.3s',
-      overflow:'hidden',
     },
 
     bodyClose:{
       height:'0px',
+      overflow:'hidden',
     },
     bodyInner:{
       //padding:theme.spacing(2),
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface PortletProps{
-  hasTitle:boolean;
+  withHeader:boolean;
   children?:any;
   open?:boolean;
   title?:string;
@@ -53,7 +52,7 @@ interface PortletProps{
 
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open,hasTitle, title, scalable, ...rest} = props;
+  const {open,withHeader, title, scalable, ...rest} = props;
   const [opened, setOpened] = React.useState(open);
 
   const hendleClickChevronIcon = ()=>{
@@ -72,7 +71,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
       {...rest}
       className = {classes.portlet}
     >
-      {hasTitle && 
+      {withHeader && 
         <Fragment>
           <div className = {classes.header}>
             <Typography variant="h5">
@@ -80,12 +79,13 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
             </Typography>
             {
               scalable &&
-              <ChevronRightIcon 
-                className={
-                  classNames(classes.indicator,  {[classes.opened] : opened})
-                } 
-                onClick ={hendleClickChevronIcon} 
-              />
+              <IconButton onClick ={hendleClickChevronIcon} >              
+                <ChevronRightIcon 
+                  className={
+                    classNames(classes.indicator,  {[classes.opened] : opened})
+                  } 
+                />
+              </IconButton>
             }
           </div>
           <Divider></Divider>
@@ -97,14 +97,11 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
         }}
       >
         <div ref={bodyInnerRef} className={classes.bodyInner}>
-          <PortletFormGridBody>
-            <FormGridItem>xxx</FormGridItem>            
-            <FormGridItem>xxx</FormGridItem>
-          </PortletFormGridBody>
+          {props.children}
           <PortletFooter>
             Footer
           </PortletFooter> 
-          {props.children}
+
         </div>
       </div>
     </Paper>

@@ -83,17 +83,35 @@ export default {
               props: {
                 elevation: 6,
                 open:true,
-                hasTitle:true,
+                withHeader:true,
                 title:'基本信息',
                 scalable: true,
-              }
+              },
+              children:[
+                {
+                  name:'PortletFormGridBody',
+                  children:[
+                    {
+                      name: 'FormGridItem',
+                      text:'text',
+                      props:{
+                        
+                      }
+                    },
+                    {
+                      name: 'FormGridItem',
+                      text:'text',
+                    }
+                  ]
+                }
+              ]
             },
             {
               name:'Portlet',
               props: {
                 elevation: 6,
                 //open:true,
-                hasTitle:true,
+                withHeader:true,
                 title:'基本信息2',
                 scalable: false,
                 style:{
