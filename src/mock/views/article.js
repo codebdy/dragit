@@ -93,15 +93,52 @@ export default {
                   children:[
                     {
                       name: 'FormGridItem',
-                      text:'text',
                       props:{
-                        
+                        as:'TextField',
+                        label:'标题',
+                        variant:"outlined",
+                        field:'title',
+                        xs:12,
                       }
                     },
                     {
                       name: 'FormGridItem',
-                      text:'text',
-                    }
+                      props:{
+                        as:'TextField',
+                        label:'Slug',
+                        variant:"outlined",
+                        //size:"small",
+                        field:'slug',
+                        xs:12,                      
+                      }
+                    },
+                    {
+                      name: 'FormGridItem',
+                      props:{
+                        as:'TextField',
+                        label:'作者',
+                        variant:"outlined",
+                        //size:"small",
+                        //select: true,
+                        field:'auther',
+                        xs:6,
+                      }
+                    },
+                    {
+                      name: 'FormGridItem',
+                      props:{
+                        as:'TextField',
+                        label:"创作日期",
+                        variant:"outlined",
+                        //size:"small",
+                        type:'date',
+                        InputLabelProps:{
+                          shrink: true,
+                        },
+                        field:'create_date',
+                        xs:6,
+                      }
+                    },
                   ]
                 },
                 {

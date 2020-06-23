@@ -17,11 +17,6 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
     onFormAction(onClickAction);
   };
 
-  const selectPage = (state: RootState) => state.page;
-  const pageInStore = useSelector(selectPage);
-
-  const skeletonView = resolveSkeleton(element.meta.name);
-
   const field = element.meta.props?.field;
 
   const {
@@ -65,7 +60,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
 
   return(
     <Fragment>
-    { pageInStore.modelLoading && field ? skeletonView : elementView }
+    { elementView }
     </Fragment>
   )
 }

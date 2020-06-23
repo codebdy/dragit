@@ -16,7 +16,7 @@ const PortletFooter = React.forwardRef((props:{children:any, className:string}, 
   const {children, className, ...rest} = props
   const classes = useStyles();
   return (
-    <div className={classNames(classes.portletFooter,className )} {...rest}>
+    <div className={classNames(classes.portletFooter,className )} {...rest} ref={ref}>
       {children}
     </div>
   )

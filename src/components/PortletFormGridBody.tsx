@@ -15,7 +15,7 @@ const PortletFormGridBody = React.forwardRef((props:{children:any, className:any
   const {className, children, ...rest} = props
   const classes = useStyles();
   return (
-    <Grid container spacing={3} className={ classNames(classes.portletBody, className) } {...rest} ref={ref}>
+    <Grid container spacing={2} className={ classNames(classes.portletBody, className) } {...rest} ref={ref}>
       {children}
     </Grid>
   )

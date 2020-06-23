@@ -9,6 +9,7 @@ import { CardHaderRule } from "./CardHeaderRule"
 import { FormFieldRule } from "./FormFieldRule"
 import { DividerRule } from "./DividerRule"
 import { ButtonRule } from "./ButtonRule"
+import { FormGridItemRule } from "./FormGridItemRule"
 
 const rules:Array<IRule> = [
   new CanvasRule(),
@@ -19,6 +20,7 @@ const rules:Array<IRule> = [
   new FormFieldRule(),
   new DividerRule(),
   new ButtonRule(),
+  new FormGridItemRule(),
 ];
 
 const baseRule = new Rule();
