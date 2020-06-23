@@ -83,6 +83,22 @@ export default {
               props: {
                 elevation: 6,
                 open:true,
+                hasTitle:true,
+                title:'基本信息',
+                scalable: true,
+              }
+            },
+            {
+              name:'Portlet',
+              props: {
+                elevation: 6,
+                //open:true,
+                hasTitle:true,
+                title:'基本信息2',
+                scalable: false,
+                style:{
+                  marginTop:'16px',
+                },              
               }
             },
             {

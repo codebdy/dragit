@@ -1,19 +1,22 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     portletBody: {
-      flex:1,
+      padding:theme.spacing(2),
     },
 
   }),
 );
 
-export default function PortletFormGridBody(){
+const PortletFormGridBody = React.forwardRef((props:{children:any}, ref:any) => {
   const classes = useStyles();
   return (
-    <div className={classes.portletBody}>
-    </div>
+    <Grid container spacing={3} className={classes.portletBody} ref={ref}>
+      {props.children}
+    </Grid>
   )
-}
+});
+export default  PortletFormGridBody
+

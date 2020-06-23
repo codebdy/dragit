@@ -1,7 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Typography, Divider } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
+import PortletFormGridBody from './PortletFormGridBody';
+import FormGridItem from './FormGridItem';
+import PortletFooter from './PortletFooter';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,15 +37,23 @@ const useStyles = makeStyles((theme: Theme) =>
       height:'0px',
     },
     bodyInner:{
-      padding:theme.spacing(2),
+      //padding:theme.spacing(2),
     }
 
   }),
 );
 
-const Portlet = React.forwardRef((props: {children?:any, open:boolean}, ref:any) => {
+interface PortletProps{
+  hasTitle:boolean;
+  children?:any;
+  open?:boolean;
+  title?:string;
+  scalable?:boolean;
+}
+
+const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open, ...rest} = props;
+  const {open,hasTitle, title, scalable, ...rest} = props;
   const [opened, setOpened] = React.useState(open);
 
   const hendleClickChevronIcon = ()=>{
@@ -51,7 +62,9 @@ const Portlet = React.forwardRef((props: {children?:any, open:boolean}, ref:any)
 
   const bodyInnerRef = useRef(null);
 
-  const height = bodyInnerRef?.current ? (bodyInnerRef?.current as any).getBoundingClientRect().height + 'px': '';
+  let height = bodyInnerRef?.current ? (bodyInnerRef?.current as any).getBoundingClientRect().height + 'px': '';
+
+  height = scalable ? (opened ? height : '0px') : 'auto';
 
   return (
     <Paper
@@ -59,28 +72,39 @@ const Portlet = React.forwardRef((props: {children?:any, open:boolean}, ref:any)
       {...rest}
       className = {classes.portlet}
     >
-      <div>
-        <div className = {classes.header}>
-          <Typography variant="h5">
-            基本信息
-          </Typography>
-          <ChevronRightIcon 
-            className={
-              classNames(classes.indicator,  {[classes.opened] : opened})
-            } 
-            onClick ={hendleClickChevronIcon} 
-          />
-        </div>
-        <Divider></Divider>
-      </div>
+      {hasTitle && 
+        <Fragment>
+          <div className = {classes.header}>
+            <Typography variant="h5">
+              {title}
+            </Typography>
+            {
+              scalable &&
+              <ChevronRightIcon 
+                className={
+                  classNames(classes.indicator,  {[classes.opened] : opened})
+                } 
+                onClick ={hendleClickChevronIcon} 
+              />
+            }
+          </div>
+          <Divider></Divider>
+        </Fragment>
+      }
       <div className ={classNames(classes.body,  {[classes.bodyClose] : !opened})}
         style ={{
-          height: opened? height : '0px'
+          height: height
         }}
       >
         <div ref={bodyInnerRef} className={classes.bodyInner}>
-          xxx
-        {props.children}
+          <PortletFormGridBody>
+            <FormGridItem>xxx</FormGridItem>            
+            <FormGridItem>xxx</FormGridItem>
+          </PortletFormGridBody>
+          <PortletFooter>
+            Footer
+          </PortletFooter> 
+          {props.children}
         </div>
       </div>
     </Paper>
