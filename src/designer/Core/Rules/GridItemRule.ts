@@ -3,6 +3,8 @@ import { IMeta } from "../Node/IMeta";
 import { CardRule } from "./CardRule";
 import { INode } from "../Node/INode";
 import { FormFieldRule } from "./FormFieldRule";
+import { PortletRule } from "./PortletRule";
+
 
 export class GridItemRule extends Rule{
   //editPaddingY = '16px';
@@ -21,6 +23,10 @@ export class GridItemRule extends Rule{
       return true;
     }    
     if(child.rule instanceof FormFieldRule){
+      return true;
+    }
+
+    if(child.rule instanceof PortletRule){
       return true;
     }    
     return false;
