@@ -21,8 +21,8 @@ interface FormGridItemProps{
 const FormGridItem = React.forwardRef((props:FormGridItemProps, ref:any) => {
   const{children, xs, sm, md, lg, xl, style, className, editStyle, editClassName, ...rest} = props
   return (
-    <Grid item  xs={xs} sm={sm} md={md} lg={lg} xl={xl} style={{...style, ...editStyle}} className = {classNames(className, editClassName)}>
-      <FormField {...rest} fullWidth={true} ref={ref}>
+    <Grid item  xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
+      <FormField {...rest} fullWidth={true} ref={ref} style={{...style, ...editStyle}} className = {classNames(className, editClassName)}>
         {children}        
       </FormField>
 
