@@ -45,11 +45,12 @@ interface PortletProps{
   open?:boolean;
   title?:string;
   scalable?:boolean;
+  className?:any;
 }
 
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open,withHeader, children, title, scalable, ...rest} = props;
+  const {open,withHeader, children, title, scalable, className, ...rest} = props;
   const [opened, setOpened] = React.useState(open);
 
   const hendleClickChevronIcon = ()=>{
@@ -66,7 +67,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
     <Paper
       ref={ref}
       {...rest}
-      className = {classes.portlet}
+      className = { classNames(classes.portlet, className) }
     >
       {withHeader && 
         <Fragment>
