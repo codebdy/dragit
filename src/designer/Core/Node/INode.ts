@@ -33,4 +33,6 @@ export interface INode{
   lastChild?: INode;
   beforeBrother?: INode;
   afterBrother?: INode;
+
+  firstChildAfterMouse: (point:{x:number, y:number})=>INode|undefined;
 }

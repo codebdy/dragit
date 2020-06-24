@@ -67,13 +67,13 @@ export class Node implements INode{
       paddingBottom : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingY,
     }
     return {
-      className:'drag-node-outline ' + this.state.className,
       ...this.meta.props,      
-      style:{
+      style:this.meta.props?.style,
+      editClassName:'drag-node-outline ' + this.state.className,
+      editStyle:{
         ...paddingX,
         ...paddingY,
         ...this.state.style,
-        ...this.meta.props?.style,
       },
 
       onMouseMove : this.handleMouseMove,
@@ -187,5 +187,9 @@ export class Node implements INode{
 
   get afterBrother(){
     return after(this, this.children)
+  }
+
+  firstChildAfterMouse(point:{x:number, y:number}){
+    return undefined;
   }
 }

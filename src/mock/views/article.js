@@ -139,6 +139,21 @@ export default {
                         xs:6,
                       }
                     },
+                    {
+                      name:"FormGridItem",
+                      props:{
+                        as:'TextField',
+                        fullWidth: true,
+                        label:'简介',
+                        variant:"outlined",
+                        //size:"small",
+                        multiline:true,
+                        rows:5,
+                        xs:12,
+                      }
+
+                    }
+                    
                   ]
                 },
                 {

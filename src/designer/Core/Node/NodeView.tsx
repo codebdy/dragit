@@ -3,6 +3,7 @@ import { resolveNode } from "../../../components/resoveNode"
 //import { Node } from './Node';
 import bus, {WILL_FOCUS_NODE } from "../bus";
 import { INode } from './INode';
+import classNames from 'classnames';
 
 interface INodeProps{
   node: INode,
@@ -14,6 +15,8 @@ export default function NodeView(props:INodeProps){
 
   const [nodeProps, setNodeProps] = React.useState(node.props);
   const [children, setChildren] = React.useState(node.children);
+
+  const {style, editStyle, className, editClassName, ...rest} = nodeProps;
 
   const nodeEl = useRef(null);
 
@@ -57,7 +60,9 @@ export default function NodeView(props:INodeProps){
       resolveNode(node.meta.name),
       {
         ref:nodeEl,
-        ...nodeProps
+        className:classNames(className, editClassName),
+        ...rest,
+        style:{...style, ...editStyle}
       },
       [node.meta.text, ...childrenNodes]
     )
@@ -66,7 +71,9 @@ export default function NodeView(props:INodeProps){
       resolveNode(node.meta.name),
       {
         ref:nodeEl,
-        ...nodeProps
+        className:classNames(className, editClassName),
+        ...rest,
+        style:{...style, ...editStyle}
       }
     )
   )
