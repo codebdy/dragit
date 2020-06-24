@@ -1,5 +1,5 @@
 import { State } from "./State";
-import bus, { ACTIVE_NODE, UN_ACTIVE_NODE } from "../../bus";
+//import bus, { ACTIVE_NODE, UN_ACTIVE_NODE } from "../../bus";
 import { INode } from "../INode";
 
 declare var window: {draggedNode:INode};
@@ -22,7 +22,10 @@ class Rect{
 export class DragoverState extends State{
   style = {
     outline:"solid #5d78ff 1px",
+    cursor:"default",
   };
+
+  className ="rx-drag-over";
 
   get dropInMargin(){
     let margin = this.node.rule.dropInMargin

@@ -32,6 +32,10 @@ body.one-element-dragged {
     position: relative;
 }
 
+.rx-drag-over *{
+    cursor: default;
+}
+
 
 /*遮住内部子元素，不让其响应dragover事件*/
 

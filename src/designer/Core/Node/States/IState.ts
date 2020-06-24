@@ -5,6 +5,6 @@ export interface IState{
   //focusNode: (nodeId: number)=>void;
   enter: ()=>void;
   leave: ()=>void;
-  style:{[key:string]:string};
+  style: any;
   className: string;
 }
