@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton, Tabs, Tab } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -44,9 +44,17 @@ const useStyles = makeStyles((theme: Theme) =>
       color:"#f7f7f7",
     },
     leftTitle:{
-      padding: theme.spacing(1,0,0,1),
-      fontSize: '1.2rem',
+      padding: theme.spacing(0),
+      //fontSize: '1.1rem',
+      //borderBottom:"rgba(0,0,0, .4) solid 2px",
+      display:'flex',
+      flexFlow:'row',
+      alignItems:"flex-end",
+      height:'63px',
+      background: 'rgba(0,0,0,0.3)',
+      boxShadow: theme.shadows[6],
     },
+
     rightArea:{
       flex:1,
       display:'flex',
@@ -124,17 +132,33 @@ export default function PageContentDesign() {
     bus.emit(CANVAS_SCROLL)
   }
 
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
 
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
         <SidebarWidthPlaceholder className={classes.leftArea}>
-          <TopNavHeightPlaceholder className={classes.leftTitle}>
-            
-              <MdiIcon iconClass="mdi-tools" className={classes.toolboxIcon}></MdiIcon>
-              {intl.get('component-box')}
+          
+            <div className={classes.leftTitle}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="fullWidth"
+              aria-label="full width tabs example"
+            >
+              <Tab icon={<MdiIcon iconClass="mdi-view-dashboard"></MdiIcon>} style={{minWidth:'80px', }}/>
+              <Tab icon={<MdiIcon iconClass="mdi-brush"></MdiIcon>} style={{minWidth:'80px', }}/>
+              <Tab icon={<MdiIcon iconClass="mdi-view-list-outline"></MdiIcon>}  style={{minWidth:'80px', }}/>
+            </Tabs>          
+            </div>
 
-          </TopNavHeightPlaceholder>
+          
           <Scrollbar>
             <Toolbox></Toolbox>
           </Scrollbar>
