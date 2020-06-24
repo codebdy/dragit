@@ -9,8 +9,9 @@ import { IMeta } from "./IMeta";
 import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";
 import bus, { WILL_FOCUS_NODE } from "../bus";
-import { INode } from "./INode";
+import { INode, MousePoint } from "./INode";
 import { remove, last, first, before, after, insertBefore, insertAfter } from "../Utils/ArrayHelper";
+import { DragoverState } from "./States/DragoverState";
 
 declare var window:any;
 
@@ -27,6 +28,7 @@ export class Node implements INode{
   activeState:IState = new ActiveState(this);
   focusState:IState = new FocusState(this);
   draggedState:IState = new DraggedState(this);
+  dragoverState:IState = new DragoverState(this);
   previewState:IState = new PreviewState(this);
   //[key: string]:any;
 
@@ -110,6 +112,9 @@ export class Node implements INode{
   }
   toDraggedState(){
     this.toState('draggedState');
+  }  
+  toDragoverState(){
+    this.toState('dragoverState');
   }
   toPreivewState(){
     this.toState('previewState');
@@ -189,7 +194,33 @@ export class Node implements INode{
     return after(this, this.children)
   }
 
-  firstChildAfterMouse(point:{x:number, y:number}){
+  firstChildAfterMouse(point:MousePoint){
+    for(let child of this.children){
+      if(child.isAfterMouse(point)){
+        return child;
+      }
+    }
+
     return undefined;
+  }
+
+  isAfterMouse(point:MousePoint):boolean{
+    const{clientX, clientY} = point;
+    let domElement = this.view?.getDom()
+    if(!domElement){
+      return false;
+    }
+
+    let rect = domElement.getBoundingClientRect() 
+
+    if(rect.left >= clientX){
+      return true;
+    }
+
+    if(rect.top >= clientY){
+      return true;
+    }
+
+    return false;
   }
 }

@@ -46,11 +46,20 @@ interface PortletProps{
   title?:string;
   scalable?:boolean;
   className?:any;
+  spacingTop?:number;
+  spacingRight?:number;
+  spacingBottom?:number;
+  spacingLeft?:number;
 }
 
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open,withHeader, children, title, scalable, className, ...rest} = props;
+  const {open,withHeader, children, title, scalable, className, 
+    spacingTop,
+    spacingRight,
+    spacingBottom,
+    spacingLeft,
+    ...rest} = props;
   const [opened, setOpened] = React.useState(open);
 
   const hendleClickChevronIcon = ()=>{

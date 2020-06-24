@@ -2,6 +2,11 @@ import { IRule } from "../Rules/IRule";
 import { IMeta } from "./IMeta";
 import { IView } from "./IView";
 
+export interface MousePoint{
+  clientX:number, 
+  clientY:number
+}
+
 export interface INode{
   id: number;
   rule: IRule;
@@ -20,6 +25,7 @@ export interface INode{
   toFocusState: ()=>void;
   toDraggedState: ()=>void;
   toPreivewState: ()=>void;
+  toDragoverState: ()=>void;
 
   flexFlowRow:()=>boolean;
   
@@ -34,5 +40,6 @@ export interface INode{
   beforeBrother?: INode;
   afterBrother?: INode;
 
-  firstChildAfterMouse: (point:{x:number, y:number})=>INode|undefined;
+  firstChildAfterMouse: (point:MousePoint)=>INode|undefined;
+  isAfterMouse: (point:MousePoint)=>boolean;
 }
