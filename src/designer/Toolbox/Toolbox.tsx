@@ -155,10 +155,9 @@ export default function Toolbox() {
         defaultCollapseIcon={<ArrowDropDownIcon />}
         defaultExpandIcon={<ArrowRightIcon />}
       >
-        <TreeItem nodeId="1" label={<ItemLabel title="页面" />}>
-          <TreeItem nodeId="2" label={<ItemLabel isLeaf title="叶子" />} />
-          <TreeItem nodeId="3" label="文章列表" />
-          <TreeItem nodeId="4" label="订单编辑" />
+        <TreeItem nodeId="1" label={<ItemLabel title="布局" />}>
+          <TreeItem nodeId="2" label={<ItemLabel isLeaf title="行" />} />
+          <TreeItem nodeId="3" label={<ItemLabel isLeaf title="列" />} />
         </TreeItem>
         <TreeItem nodeId="5" label={<ItemLabel title="documents" />}>
           <TreeItem nodeId="10" label="OSS" />
