@@ -5,7 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
@@ -16,6 +15,12 @@ import {sideBarSettings} from "utils";
 import { parseNode } from 'designer/Core/Node/jsonParser';
 import { INode } from 'designer/Core/Node/INode';
 import bus, { WILL_FOCUS_NODE } from 'designer/Core/bus';
+import TreeView from '@material-ui/lab/TreeView';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import TreeItem from '@material-ui/lab/TreeItem';
+import ItemLabel from './ItemLabel';
 
 declare var window: {draggedNode:INode};
 const hoverBackground = "rgba(255,255,255, 0.1)";
@@ -144,21 +149,43 @@ export default function Toolbox() {
   };
 
   return (
+    <Fragment>
+      <TreeView
+        className={classes.root}
+        defaultCollapseIcon={<ArrowDropDownIcon />}
+        defaultExpandIcon={<ArrowRightIcon />}
+      >
+        <TreeItem nodeId="1" label={<ItemLabel title="页面" />}>
+          <TreeItem nodeId="2" label={<ItemLabel isLeaf title="叶子" />} />
+          <TreeItem nodeId="3" label="文章列表" />
+          <TreeItem nodeId="4" label="订单编辑" />
+        </TreeItem>
+        <TreeItem nodeId="5" label={<ItemLabel title="documents" />}>
+          <TreeItem nodeId="10" label="OSS" />
+          <TreeItem nodeId="6" label="Material-UI">
+            <TreeItem nodeId="7" label="src">
+              <TreeItem nodeId="8" label="index.js" />
+              <TreeItem nodeId="9" label="tree-view.js" />
+            </TreeItem>
+          </TreeItem>
+        </TreeItem>
+      </TreeView>      
     <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      className={classes.root}
-      style={{
-        width: sidebar.compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
-      }}
-    >
-      {
-        items.map((item:ItemJson)=>{
-          return (
-            <ItemGroup key={item.id} openedId={opened} item={item} onToggleOpen={handleToggleOpen} />
-          )
-        })
-      }
-    </List>
-  );
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        className={classes.root}
+        style={{
+          width: sidebar.compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
+        }}
+      >
+        {
+          items.map((item:ItemJson)=>{
+            return (
+              <ItemGroup key={item.id} openedId={opened} item={item} onToggleOpen={handleToggleOpen} />
+            )
+          })
+        }
+      </List>
+    </Fragment>
+   );
 }
