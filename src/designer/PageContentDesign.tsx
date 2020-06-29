@@ -18,7 +18,6 @@ import MdiIcon from 'components/common/MdiIcon';
 import NodeView from './Core/Node/NodeView';
 import ActiveLabel from './Core/Utils/ActiveLabel';
 import { CanvasNode } from './Core/Node/CanvasNode';
-import FocusLabel from './Core/Utils/FocusLabel';
 import NodeToolbar from './Core/Utils/NodeToolbar';
 import MouseFollower from './Core/Utils/MouseFollower';
 import bus, { CANVAS_SCROLL } from './Core/bus';
