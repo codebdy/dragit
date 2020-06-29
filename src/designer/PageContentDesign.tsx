@@ -1,11 +1,10 @@
 import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton, Tabs, Tab } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
-import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 
 import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
@@ -15,7 +14,6 @@ import Spacer from 'components/common/Spacer';
 import { cancelPageContentAction, savePageContentAction } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
-import Toolbox from './Toolbox/Toolbox';
 //import { Schema } from './Core/Schemas/Schema';
 import NodeView from './Core/Node/NodeView';
 import ActiveLabel from './Core/Utils/ActiveLabel';
@@ -25,6 +23,7 @@ import NodeToolbar from './Core/Utils/NodeToolbar';
 import MouseFollower from './Core/Utils/MouseFollower';
 import bus, { CANVAS_SCROLL } from './Core/bus';
 import { parseNodes } from './Core/Node/jsonParser';
+import LeftArea from './LeftArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -132,37 +131,10 @@ export default function PageContentDesign() {
     bus.emit(CANVAS_SCROLL)
   }
 
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
-
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
-        <SidebarWidthPlaceholder className={classes.leftArea}>
-          
-            <div className={classes.leftTitle}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              indicatorColor="primary"
-              textColor="primary"
-              variant="fullWidth"
-              aria-label="full width tabs example"
-            >
-              <Tab icon={<MdiIcon iconClass="mdi-view-dashboard"></MdiIcon>} style={{minWidth:'80px', }}/>
-              <Tab icon={<MdiIcon iconClass="mdi-brush"></MdiIcon>} style={{minWidth:'80px', }}/>
-              <Tab icon={<MdiIcon iconClass="mdi-view-list-outline"></MdiIcon>}  style={{minWidth:'80px', }}/>
-            </Tabs>          
-            </div>
-
-          
-          <Scrollbar>
-            <Toolbox></Toolbox>
-          </Scrollbar>
-        </SidebarWidthPlaceholder>
+        <LeftArea/>
       </ThemeProvider>
       <div 
         className = {classes.rightArea}
