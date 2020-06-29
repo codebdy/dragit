@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      padding:theme.spacing(2),
     },
     treeItemLabel: {
       fontSize:'0.9rem',
