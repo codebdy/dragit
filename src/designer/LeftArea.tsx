@@ -5,6 +5,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import Scrollbar from 'admin/common/Scrollbar';
 import Toolbox from './Toolbox/Toolbox';
 import Box from '@material-ui/core/Box';
+import AttributeBox from './AttributeBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -87,7 +88,7 @@ export default function LeftArea(){
         <Toolbox></Toolbox>
       </TabPanel>
       <TabPanel value={value} index={1}>
-       2
+       <AttributeBox></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
         3
