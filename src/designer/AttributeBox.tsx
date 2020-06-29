@@ -14,7 +14,9 @@ export default function AttributeBox(){
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      Attributes
+      <div>外边距：</div>
+      <div>内边距：</div>      
+      <div>绑定字段：</div>
     </div>
   )
 }

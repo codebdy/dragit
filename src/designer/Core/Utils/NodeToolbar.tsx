@@ -62,7 +62,7 @@ export default function NodeToolbar(){
       return 
     }
     let rect = domElement.getBoundingClientRect();
-    let left = rect.right - height * 5;
+    let left = rect.x;
     left = left < sideBarWidth ? sideBarWidth : left;
     setLeft(left)
     let top = rect.y < 90 ? rect.y + rect.height : rect.y - 28;

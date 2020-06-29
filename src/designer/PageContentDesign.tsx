@@ -185,9 +185,8 @@ export default function PageContentDesign() {
           </Scrollbar>
         </div>
       </div>
-      <ActiveLabel />
-      <FocusLabel />
       <NodeToolbar />
+      <ActiveLabel />
       <MouseFollower />
     </Backdrop>
   );
