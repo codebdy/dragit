@@ -5,7 +5,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import Scrollbar from 'admin/common/Scrollbar';
 import Toolbox from './Toolbox/Toolbox';
 import Box from '@material-ui/core/Box';
-import AttributeBox from './AttributeBox';
+import AttributeBox from './Attrebutebox/AttributeBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
