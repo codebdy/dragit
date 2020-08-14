@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Tabs, Tab } from '@material-ui/core';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import MdiIcon from 'components/common/MdiIcon';
@@ -6,6 +6,8 @@ import Scrollbar from 'admin/common/Scrollbar';
 import Toolbox from './Toolbox/Toolbox';
 import Box from '@material-ui/core/Box';
 import AttributeBox from './Attrebutebox/AttributeBox';
+import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
+import { INode } from 'designer/Core/Node/INode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,10 +61,26 @@ function TabPanel(props: TabPanelProps) {
 export default function LeftArea(){
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+  const follow = (node:INode)=>{
+    setFocusedNode(node)
+  }
+  const unFollow = ()=>{
+    setFocusedNode(null)
+  }
+
+  useEffect(() => {
+    bus.on(FOCUS_NODE, follow);
+    bus.on(UN_FOCUS_NODE, unFollow);
+    return () => {
+      bus.off(FOCUS_NODE, follow);
+      bus.off(UN_FOCUS_NODE, unFollow);
+    };
+  });
 
   return (
     <SidebarWidthPlaceholder className={classes.leftArea}>
@@ -88,7 +106,7 @@ export default function LeftArea(){
         <Toolbox></Toolbox>
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <AttributeBox></AttributeBox>
+       <AttributeBox node = {focusedNode}></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
         3

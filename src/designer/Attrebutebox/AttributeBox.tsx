@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, ExpansionPanel } from '@material-ui/core';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {RowGroup, AttributeRow, RowLabel, RowValue} from './AttributeRow';
-import bus, { FOCUS_NODE, UN_FOCUS_NODE } from '../Core/bus';
 import { INode } from 'designer/Core/Node/INode';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,28 +38,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function AttributeBox(){
+export default function AttributeBox(props:{node:INode|null}){
   const classes = useStyles();
-  const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
-  const follow = (node:INode)=>{
-    setFocusedNode(node)
-  }
-  const unFollow = ()=>{
-    setFocusedNode(null)
-  }
-
-  useEffect(() => {
-    bus.on(FOCUS_NODE, follow);
-    bus.on(UN_FOCUS_NODE, unFollow);
-    return () => {
-      bus.off(FOCUS_NODE, follow);
-      bus.off(UN_FOCUS_NODE, unFollow);
-    };
-  });
+  const {node} = props
 
   return (
     <div className={classes.root}>
-      {focusedNode&&
+      {node&&
       <Fragment>
       <ExpansionPanel className={classes.panelPaper}>
         <ExpansionPanelSummary
