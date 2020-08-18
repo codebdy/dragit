@@ -20,7 +20,7 @@ export default {
       children: [{
               name: 'Grid',
               props: {
-                  item: true,
+                item: true,
               },
               children: [{
                   name: 'h2',

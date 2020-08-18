@@ -46,143 +46,156 @@ export default function AttributeBox(props:{node:INode|null}){
     <div className={classes.root}>
       {node&&
       <Fragment>
-      <ExpansionPanel className={classes.panelPaper}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>外观</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.pannelDetail}>
-          <RowGroup
-            totalLabel='外边距'
-            totalInput = {
-              <input type="number"
-                min="0"
-                max="10"
-                step="2"
-                className={classes.input}
-              />
-            }
+        <ExpansionPanel className={classes.panelPaper}>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            <AttributeRow>
-              <RowLabel nested>上</RowLabel>
-              <RowValue>
+            <Typography className={classes.heading}>属性</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className={classes.pannelDetail}>
+            <RowGroup
+              totalLabel='外边距'
+              totalInput = {
                 <input type="number"
                   min="0"
                   max="10"
                   step="2"
                   className={classes.input}
                 />
-              </RowValue>
-            </AttributeRow>
-            <AttributeRow>
-              <RowLabel nested>下</RowLabel>
-              <RowValue>
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              </RowValue>
-            </AttributeRow>
-            <AttributeRow>
-              <RowLabel nested>左</RowLabel>
-              <RowValue>
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              </RowValue>
-            </AttributeRow>
-            <AttributeRow>
-              <RowLabel nested>右</RowLabel>
-              <RowValue>
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              </RowValue>
-            </AttributeRow>
-          </RowGroup>
+              }
+            >
+              <AttributeRow>
+                <RowLabel nested>上</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+              <AttributeRow>
+                <RowLabel nested>下</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+              <AttributeRow>
+                <RowLabel nested>左</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+              <AttributeRow>
+                <RowLabel nested>右</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+            </RowGroup>
 
-          <RowGroup
-            totalLabel='内边距'
-            totalInput = {
-              <input type="number"
-                min="0"
-                max="10"
-                step="2"
-                className={classes.input}
-              />
-            }
+            <RowGroup
+              totalLabel='内边距'
+              totalInput = {
+                <input type="number"
+                  min="0"
+                  max="10"
+                  step="2"
+                  className={classes.input}
+                />
+              }
+            >
+              <AttributeRow>
+                <RowLabel nested>上</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+              <AttributeRow>
+                <RowLabel nested>下</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+              <AttributeRow>
+                <RowLabel nested>左</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+              <AttributeRow>
+                <RowLabel nested>右</RowLabel>
+                <RowValue>
+                  <input type="number"
+                    min="0"
+                    max="10"
+                    step="2"
+                    className={classes.input}
+                  />
+                </RowValue>
+              </AttributeRow>
+            </RowGroup>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel  className={classes.panelPaper}>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel3a-content"
+            id="panel3a-header"
           >
-            <AttributeRow>
-              <RowLabel nested>上</RowLabel>
-              <RowValue>
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              </RowValue>
-            </AttributeRow>
-            <AttributeRow>
-              <RowLabel nested>下</RowLabel>
-              <RowValue>
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              </RowValue>
-            </AttributeRow>
-            <AttributeRow>
-              <RowLabel nested>左</RowLabel>
-              <RowValue>
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              </RowValue>
-            </AttributeRow>
-            <AttributeRow>
-              <RowLabel nested>右</RowLabel>
-              <RowValue>
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              </RowValue>
-            </AttributeRow>
-          </RowGroup>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel  className={classes.panelPaper}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography className={classes.heading}>数据</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <div>绑定字段</div>
-        
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+            <Typography className={classes.heading}>样式</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <div>margin</div>
+          
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel  className={classes.panelPaper}>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel3a-content"
+            id="panel3a-header"
+          >
+            <Typography className={classes.heading}>数据</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <div>绑定字段</div>
+          
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
       </Fragment>
       }
     </div>
