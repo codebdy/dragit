@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, ExpansionPanel } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, ExpansionPanel, Select, MenuItem } from '@material-ui/core';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {RowGroup, AttributeRow, RowLabel, RowValue} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
+import { IField } from 'designer/Core/Rules/IRule';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,6 +56,19 @@ export default function AttributeBox(props:{node:INode|null}){
             <Typography className={classes.heading}>属性</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.pannelDetail}>
+            {
+              node.rule.getFields().map((field:IField)=>{
+                return(
+                  <AttributeRow>
+                    <RowLabel>{field.label}</RowLabel>
+                    <RowValue>
+                      <field.input
+                      />
+                    </RowValue>
+                  </AttributeRow>                  
+                )
+              })
+            }
             <RowGroup
               totalLabel='外边距'
               totalInput = {
@@ -180,7 +194,7 @@ export default function AttributeBox(props:{node:INode|null}){
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div>margin</div>
-          
+
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel  className={classes.panelPaper}>

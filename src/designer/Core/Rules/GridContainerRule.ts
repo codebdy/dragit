@@ -3,6 +3,7 @@ import { IMeta } from "../Node/IMeta";
 import { GridItemRule } from "./GridItemRule";
 import { INode } from "../Node/INode";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
+import { IField } from "./IRule";
 
 export class GridContainerRule extends Rule{
   editPaddingY = '16px';
@@ -23,7 +24,7 @@ export class GridContainerRule extends Rule{
     return false;
   }
 
-  get fields(){
+  getFields(): Array<IField>{
     return [
       {
         name:'alignContent',

@@ -1,4 +1,4 @@
-import { IRule } from "./IRule";
+import { IRule, IField } from "./IRule";
 import { IMeta } from "../Node/IMeta";
 import intl from 'react-intl-universal';
 import { INode } from "../Node/INode";
@@ -26,5 +26,9 @@ export class Rule implements IRule{
 
   accept(child:INode){
     return true;
+  }
+
+  getFields(): Array<IField>{
+    return []
   }
 }

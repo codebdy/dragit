@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1,0),
       display:'flex',
       alignItems:'center',
-      minWidth:'80px',
+      minWidth:'100px',
       cursor:'default',
       userSelect:'none',
     },
