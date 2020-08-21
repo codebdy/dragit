@@ -10,12 +10,21 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function OptionSelect(){
+export interface InputProps{
+  field:string;
+  value:any;
+  onChange:any;
+  schema?:any;
+}
+
+export default function OptionSelect(props:InputProps){
   //const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  const {field, value, onChange, schema} = props;
+  const [age, setAge] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setAge(event.target.value as string);
+    onChange(field, event.target.value as string);
   };  
   return (
     <Select
@@ -25,9 +34,13 @@ export default function OptionSelect(){
     <MenuItem value="">
       <em>None</em>
     </MenuItem>
-    <MenuItem value={10}>Ten</MenuItem>
-    <MenuItem value={20}>Twenty</MenuItem>
-    <MenuItem value={30}>Thirty</MenuItem>
+    {
+      schema && Object.keys(schema).map((itemKey:string)=>{
+        return (
+        <MenuItem value={itemKey}>{schema[itemKey]}</MenuItem>
+        )
+      })
+    }
   </Select>
   )
 }

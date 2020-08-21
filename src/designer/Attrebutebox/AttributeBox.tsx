@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function AttributeBox(props:{node:INode|null}){
   const classes = useStyles();
   const {node} = props
-
+  const propChange = (field:string, value:any) => {
+    node?.updateProp(field, value)
+  };
   return (
     <div className={classes.root}>
       {node&&
@@ -63,6 +65,10 @@ export default function AttributeBox(props:{node:INode|null}){
                     <RowLabel>{field.label}</RowLabel>
                     <RowValue>
                       <field.input
+                        field={field.name}
+                        value={node.props[field.name]}
+                        onChange= {propChange}
+                        schema={field.schema}
                       />
                     </RowValue>
                   </AttributeRow>                  

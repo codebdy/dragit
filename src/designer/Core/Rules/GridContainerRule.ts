@@ -30,16 +30,15 @@ export class GridContainerRule extends Rule{
         name:'alignContent',
         label:'Align Content',
         input:OptionSelect,
-        schema:[
-          'stretch',
-          'center',
-          'flex-start',
-          'flex-end',
-          'space-between',
-          'space-around'
-        ]
+        schema:{
+          'stretch':'Stretch',
+          'center':'Center',
+          'flex-start':'Flex Start',
+          'flex-end' : 'Flex End',
+          'space-between':'Space Between',
+          'space-around' : 'Space Around'
+        }
       }
-      
     ]
   }
 

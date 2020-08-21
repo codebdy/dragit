@@ -42,4 +42,6 @@ export interface INode{
 
   firstChildAfterMouse: (point:MousePoint)=>INode|undefined;
   isAfterMouse: (point:MousePoint)=>boolean;
+
+  updateProp:(field:string, value:any)=>void;
 }

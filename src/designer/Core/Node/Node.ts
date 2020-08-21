@@ -223,4 +223,10 @@ export class Node implements INode{
 
     return false;
   }
+
+  updateProp(field:string, value:any){
+    this.meta.props = !this.meta.props ? {} : this.meta.props;
+    this.meta.props[field] = value;
+    this.view?.refresh();
+  }
 }
