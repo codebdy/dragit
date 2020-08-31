@@ -38,7 +38,32 @@ export class GridContainerRule extends Rule{
           'space-between':'Space Between',
           'space-around' : 'Space Around'
         }
-      }
+      },
+      {
+        name:'alignItems',
+        label:'Align Items',
+        input:OptionSelect,
+        schema:{
+          'flex-start':'Flex Start',
+          'center':'Center',
+          'flex-end' : 'Flex End',
+          'stretch':'Stretch',
+          'baseline' : 'Baseline'
+        }
+      },
+      {
+        name:'justify',
+        label:'Justify',
+        input:OptionSelect,
+        schema:{
+          'flex-start':'Flex Start',
+          'center':'Center',
+          'flex-end' : 'Flex End',
+          'space-between':'Space Between',
+          'space-around' : 'Space Around',
+          'space-evenly' : 'Space Evenly'
+        }
+      },
     ]
   }
 
