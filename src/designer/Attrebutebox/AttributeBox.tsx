@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {RowGroup, AttributeRow, RowLabel, RowValue} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
 import { IField } from 'designer/Core/Rules/IRule';
+import StyleList from './Inputs/StyleList';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -199,7 +200,7 @@ export default function AttributeBox(props:{node:INode|null}){
             <Typography className={classes.heading}>样式</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <div>margin</div>
+            <StyleList />
 
           </ExpansionPanelDetails>
         </ExpansionPanel>

@@ -5,7 +5,7 @@ import { INode } from "../Node/INode";
 import { FormFieldRule } from "./FormFieldRule";
 import { PortletRule } from "./PortletRule";
 import { IField } from "./IRule";
-import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
+import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 
 
 export class GridItemRule extends Rule{
@@ -37,18 +37,117 @@ export class GridItemRule extends Rule{
   getFields(): Array<IField>{
     return [
       {
-        name:'alignContent',
-        label:'Align Content',
-        input:NumberInput,
+        name:'xl',
+        label:'xl',
+        input:OptionSelect,
         schema:{
-          'stretch':'Stretch',
-          'center':'Center',
-          'flex-start':'Flex Start',
-          'flex-end' : 'Flex End',
-          'space-between':'Space Between',
-          'space-around' : 'Space Around'
-        }
+          'false':'false',
+          'auto':'auto',
+          'true':'true',
+          '1' : '1',
+          '2': '2',
+          '3' : '3',
+          '4' : '4',
+          '5' : '5',
+          '6' : '6',
+          '7' : '7',
+          '8' : '8',
+          '9' : '9',
+          '10' : '10',
+          '11' : '11',
+          '12' : '12',
+        },
       },
+      {
+        name:'lg',
+        label:'lg',
+        input:OptionSelect,
+        schema:{
+          'false':'false',
+          'auto':'auto',
+          'true':'true',
+          '1' : '1',
+          '2': '2',
+          '3' : '3',
+          '4' : '4',
+          '5' : '5',
+          '6' : '6',
+          '7' : '7',
+          '8' : '8',
+          '9' : '9',
+          '10' : '10',
+          '11' : '11',
+          '12' : '12',
+        },
+      },
+      {
+        name:'md',
+        label:'md',
+        input:OptionSelect,
+        schema:{
+          'false':'false',
+          'auto':'auto',
+          'true':'true',
+          '1' : '1',
+          '2': '2',
+          '3' : '3',
+          '4' : '4',
+          '5' : '5',
+          '6' : '6',
+          '7' : '7',
+          '8' : '8',
+          '9' : '9',
+          '10' : '10',
+          '11' : '11',
+          '12' : '12',
+        },
+      },
+      {
+        name:'sm',
+        label:'sm',
+        input:OptionSelect,
+        schema:{
+          'false':'false',
+          'auto':'auto',
+          'true':'true',
+          '1' : '1',
+          '2': '2',
+          '3' : '3',
+          '4' : '4',
+          '5' : '5',
+          '6' : '6',
+          '7' : '7',
+          '8' : '8',
+          '9' : '9',
+          '10' : '10',
+          '11' : '11',
+          '12' : '12',
+        },
+      },
+
+      {
+        name:'xs',
+        label:'xs',
+        input:OptionSelect,
+        schema:{
+          'false':'false',
+          'auto':'auto',
+          'true':'true',
+          '1' : '1',
+          '2': '2',
+          '3' : '3',
+          '4' : '4',
+          '5' : '5',
+          '6' : '6',
+          '7' : '7',
+          '8' : '8',
+          '9' : '9',
+          '10' : '10',
+          '11' : '11',
+          '12' : '12',
+        },
+      },
+
     ]
   }
   

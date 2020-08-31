@@ -5,7 +5,7 @@ import { InputProps } from './InputProps';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     input:{
-      background:'#41474c', 
+      background:'rgba(255,255,255,0.15)', 
       outline:'0', 
       border:'1px', 
       color:'#cdcfd0', 
