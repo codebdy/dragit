@@ -4,6 +4,7 @@ import { GridItemRule } from "./GridItemRule";
 import { INode } from "../Node/INode";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import { IField } from "./IRule";
+import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 
 export class GridContainerRule extends Rule{
   editPaddingY = '16px';
@@ -52,6 +53,17 @@ export class GridContainerRule extends Rule{
         }
       },
       {
+        name:'direction',
+        label:'Direction',
+        input:OptionSelect,
+        schema:{
+          'row':'Row',
+          'row-reverse':'Row Reverse',
+          'column' : 'Column',
+          'column-reverse':'Column Reverse',
+        }
+      },
+      {
         name:'justify',
         label:'Justify',
         input:OptionSelect,
@@ -62,6 +74,16 @@ export class GridContainerRule extends Rule{
           'space-between':'Space Between',
           'space-around' : 'Space Around',
           'space-evenly' : 'Space Evenly'
+        }
+      },
+      {
+        name:'spacing',
+        label:'Spacing',
+        input:NumberInput,
+        schema:{
+          'min':'0',
+          'max':'10',
+          'step':'1',
         }
       },
     ]

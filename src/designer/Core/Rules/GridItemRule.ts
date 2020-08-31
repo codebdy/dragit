@@ -4,6 +4,8 @@ import { CardRule } from "./CardRule";
 import { INode } from "../Node/INode";
 import { FormFieldRule } from "./FormFieldRule";
 import { PortletRule } from "./PortletRule";
+import { IField } from "./IRule";
+import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 
 
 export class GridItemRule extends Rule{
@@ -30,5 +32,24 @@ export class GridItemRule extends Rule{
       return true;
     }    
     return false;
-  }  
+  }
+  
+  getFields(): Array<IField>{
+    return [
+      {
+        name:'alignContent',
+        label:'Align Content',
+        input:NumberInput,
+        schema:{
+          'stretch':'Stretch',
+          'center':'Center',
+          'flex-start':'Flex Start',
+          'flex-end' : 'Flex End',
+          'space-between':'Space Between',
+          'space-around' : 'Space Around'
+        }
+      },
+    ]
+  }
+  
 }

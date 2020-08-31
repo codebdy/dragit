@@ -1,34 +1,19 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, Select, MenuItem } from '@material-ui/core';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    optionSelect: {
-
-    },
-
-  }),
-);
-
-export interface InputProps{
-  field:string;
-  value:any;
-  onChange:any;
-  schema?:any;
-}
+import { Select, MenuItem} from '@material-ui/core';
+import { InputProps } from './InputProps';
 
 export default function OptionSelect(props:InputProps){
   //const classes = useStyles();
   const {field, value, onChange, schema} = props;
-  const [age, setAge] = React.useState(value);
+  const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAge(event.target.value as string);
+    setInputValue(event.target.value as string);
     onChange(field, event.target.value as string);
   };  
   return (
     <Select
-      value={age}
+      value={inputValue}
       onChange={handleChange}
     >
     <MenuItem value="">
