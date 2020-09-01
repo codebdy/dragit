@@ -46,6 +46,12 @@ export default function AttributeBox(props:{node:INode|null}){
   const propChange = (field:string, value:any) => {
     node?.updateProp(field, value)
   };
+
+  const hanleStyleChange = (value:any)=>{
+    //console.log(value);
+    node?.updateProp('style', value);
+  }
+
   return (
     <div className={classes.root}>
       {node&&
@@ -200,8 +206,7 @@ export default function AttributeBox(props:{node:INode|null}){
             <Typography className={classes.heading}>样式</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <StyleList />
-
+            <StyleList value={node.props.style} onChange={hanleStyleChange} />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel  className={classes.panelPaper}>

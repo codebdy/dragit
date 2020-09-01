@@ -49,40 +49,89 @@ interface StyleItem{
   value:string;
 }
 
-export default function StyleList(){
+function toItems(styles: { [key: string]: any } ){
+  let itemsArray:Array<StyleItem> = [];
+  if(styles){
+    for(var key in styles){
+      itemsArray.push({name:key, value:styles[key]});
+    }
+  }
+  return itemsArray
+}
+
+function toStyles(items:Array<StyleItem>){
+  let styles : { [key: string]: any } = {};
+  items.forEach(item=>{
+    item.name && isNaN( item.name as unknown as number) && (styles[item.name] = item.value);
+  })
+  return styles
+}
+
+function toHump(name:string) {
+  return name.replace(/-(\w)/g, function(all: any, letter: string){
+      return letter.toUpperCase();
+  });
+}
+
+export default function StyleList(props:{value:{}, onChange:any}){
   const classes = useStyles();
   //const {field, value, onChange, schema} = props;
-  let itemsArray:Array<StyleItem> = [];
-  const [items, setItems] = React.useState(itemsArray);
+  const [items, setItems] = React.useState(toItems(props.value));
   const [newItem, setNewItem] = React.useState({name:'',value:''});
 
   const handleNameChange = (event: React.ChangeEvent<{ value: unknown }>, index:number) => {
-    items[index].name = event.target.value as string;
+    items[index].name = (event.target.value as string).trim();
     setItems([...items]);
+    //props.onChange(toStyles(items));
   };
 
   const handleValueChange = (event: React.ChangeEvent<{ value: unknown }>, index:number) => {
-    items[index].value = event.target.value as string;
+    items[index].value = (event.target.value as string).trim();
     setItems([...items]);
+    //props.onChange(toStyles(items));
+  };
+
+  const revmoveEmpertyItem = (index:number) => {
+    let item = items[index];
+    if(!item.name && !item.value){
+      items.splice(index,1);
+      setItems([...items]);
+    }
+  }
+
+  const handleNameBlur = (index:number) => {
+    items[index].name = toHump(items[index].name);
+    setItems([...items]);
+    revmoveEmpertyItem(index);
+    props.onChange(toStyles(items));
+  };
+
+  const handleValueBlur = (index:number) => {
+    revmoveEmpertyItem(index);
+    props.onChange(toStyles(items));
   };
   
   const handleRemove = (index:number)=>{
     items.splice(index,1);
     setItems([...items]);
+    props.onChange(toStyles(items));
   }
 
   const handleAddNew = ()=>{
+    newItem.name = toHump(newItem.name);
     if(newItem.name && newItem.value){
-      setItems([...items, {name:newItem.name, value:newItem.value}]);
+      let newItems = [...items, {name:newItem.name, value:newItem.value}]
+      setItems(newItems);
       setNewItem({name:'',value:''});
+      props.onChange(toStyles(newItems));
     }
   }
 
   const handleNewNameChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setNewItem({name:event.target.value as string, value:newItem.value});
+    setNewItem({name:(event.target.value as string).trim(), value:newItem.value});
   }
   const handleNewValueChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setNewItem({name:newItem.name, value:event.target.value as string});
+    setNewItem({name:newItem.name, value:(event.target.value as string).trim()});
   }
 
   return (
@@ -90,15 +139,17 @@ export default function StyleList(){
       {
         items.map((item:StyleItem, index:number)=>{
           return(
-            <div className={classes.row} key={item.name+index}>
+            <div className={classes.row} key={index}>
               <input className = { classNames(classes.input, classes.leftInput) } 
                 value={item.name}
                 onChange = {(e)=>{handleNameChange(e, index)}}
+                onBlur = {e=>{handleNameBlur(index)}}
               />
               :
               <input className = {classNames(classes.input, classes.rightInput)} 
                 value={item.value}
                 onChange = {(e)=>{handleValueChange(e, index)}}
+                onBlur = {e=>{handleValueBlur(index)}}
               />
               <div className = {classes.clearButton} onClick = {()=>{handleRemove(index)}}>x</div>
             </div>

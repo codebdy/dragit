@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
 export default function NumberInput(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange, schema} = props;
