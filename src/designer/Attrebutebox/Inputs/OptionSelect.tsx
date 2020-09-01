@@ -22,7 +22,7 @@ export default function OptionSelect(props:InputProps){
     {
       schema && Object.keys(schema).map((itemKey:string)=>{
         return (
-        <MenuItem value={itemKey}>{schema[itemKey]}</MenuItem>
+        <MenuItem key={itemKey} value={itemKey}>{schema[itemKey]}</MenuItem>
         )
       })
     }

@@ -62,7 +62,7 @@ export default function AttributeBox(props:{node:INode|null}){
             {
               node.rule.getFields().map((field:IField)=>{
                 return(
-                  <AttributeRow>
+                  <AttributeRow key={field.name}>
                     <RowLabel>{field.label}</RowLabel>
                     <RowValue>
                       <field.input

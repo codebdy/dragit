@@ -44,30 +44,80 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface StyleItem{
+  name:string;
+  value:string;
+}
 
 export default function StyleList(){
   const classes = useStyles();
   //const {field, value, onChange, schema} = props;
-  //const [inputValue, setInputValue] = React.useState(value);
+  let itemsArray:Array<StyleItem> = [];
+  const [items, setItems] = React.useState(itemsArray);
+  const [newItem, setNewItem] = React.useState({name:'',value:''});
 
-  ///const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-  //  setInputValue(event.target.value as string);
-  //  onChange(field, event.target.value as string);
-  //};  
+  const handleNameChange = (event: React.ChangeEvent<{ value: unknown }>, index:number) => {
+    items[index].name = event.target.value as string;
+    setItems([...items]);
+  };
+
+  const handleValueChange = (event: React.ChangeEvent<{ value: unknown }>, index:number) => {
+    items[index].value = event.target.value as string;
+    setItems([...items]);
+  };
+  
+  const handleRemove = (index:number)=>{
+    items.splice(index,1);
+    setItems([...items]);
+  }
+
+  const handleAddNew = ()=>{
+    if(newItem.name && newItem.value){
+      setItems([...items, {name:newItem.name, value:newItem.value}]);
+      setNewItem({name:'',value:''});
+    }
+  }
+
+  const handleNewNameChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setNewItem({name:event.target.value as string, value:newItem.value});
+  }
+  const handleNewValueChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setNewItem({name:newItem.name, value:event.target.value as string});
+  }
 
   return (
     <div className={classes.root}>
+      {
+        items.map((item:StyleItem, index:number)=>{
+          return(
+            <div className={classes.row} key={item.name+index}>
+              <input className = { classNames(classes.input, classes.leftInput) } 
+                value={item.name}
+                onChange = {(e)=>{handleNameChange(e, index)}}
+              />
+              :
+              <input className = {classNames(classes.input, classes.rightInput)} 
+                value={item.value}
+                onChange = {(e)=>{handleValueChange(e, index)}}
+              />
+              <div className = {classes.clearButton} onClick = {()=>{handleRemove(index)}}>x</div>
+            </div>
+          )
+        })
+      }
+
       <div className={classes.row}>
-        <input className = { classNames(classes.input, classes.leftInput) } />
+        <input className = { classNames(classes.input, classes.leftInput) } 
+          onChange = {handleNewNameChange}
+          onBlur = {handleAddNew} 
+          value={newItem.name}
+        />
         :
-        <input className = {classNames(classes.input, classes.rightInput)} />
-        <div className = {classes.clearButton}>x</div>
-      </div>
-      <div className={classes.row}>
-        <input className = { classNames(classes.input, classes.leftInput) } />
-        :
-        <input className = {classNames(classes.input, classes.rightInput)} />
-        <div className = {classes.clearButton}>x</div>
+        <input className = {classNames(classes.input, classes.rightInput)} 
+          onChange = {handleNewValueChange}
+          onBlur = {handleAddNew}  
+          value={newItem.value}
+        />
       </div>
     </div>
     
