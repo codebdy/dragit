@@ -16,6 +16,9 @@ export default function OptionSelect(props:InputProps){
       value={inputValue || ''}
       onChange={handleChange}
     >
+    <MenuItem value="">
+      <em>None</em>
+    </MenuItem>
     {
       schema && Object.keys(schema).map((itemKey:string)=>{
         return (

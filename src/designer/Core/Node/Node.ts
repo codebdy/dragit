@@ -226,7 +226,12 @@ export class Node implements INode{
 
   updateProp(field:string, value:any){
     this.meta.props = !this.meta.props ? {} : this.meta.props;
-    this.meta.props[field] = value;
+    if(value){
+      this.meta.props[field] = value;
+    }else{
+      delete this.meta.props[field];
+    }
+
     this.view?.refresh();
   }
 }
