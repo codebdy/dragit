@@ -16,6 +16,7 @@ export default {
           container: true,
           justify: 'space-between',
           alignItems: "center",
+          spacing: 1,
       },
       children: [{
               name: 'Grid',

@@ -25,8 +25,9 @@ export default function NumberInput(props:InputProps){
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setInputValue(event.target.value as string);
-    onChange(field, event.target.value as string);
+    let newValue = parseInt(event.target.value as string) 
+    setInputValue(newValue);
+    onChange(field, newValue);
   };  
 
   return (
