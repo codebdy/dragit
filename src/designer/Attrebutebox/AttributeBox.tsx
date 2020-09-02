@@ -68,7 +68,7 @@ export default function AttributeBox(props:{node:INode|null}){
             {
               node.rule.getFields().map((field:IField)=>{
                 return(
-                  <AttributeRow key={field.name}>
+                  <AttributeRow key={node.id + '-' + field.name}>
                     <RowLabel>{field.label}</RowLabel>
                     <RowValue>
                       <field.input
@@ -206,7 +206,7 @@ export default function AttributeBox(props:{node:INode|null}){
             <Typography className={classes.heading}>样式</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <StyleList value={node.props.style} onChange={hanleStyleChange} />
+            <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel  className={classes.panelPaper}>

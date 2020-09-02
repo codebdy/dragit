@@ -6,11 +6,12 @@ import { FormFieldRule } from "./FormFieldRule";
 import { PortletRule } from "./PortletRule";
 import { IField } from "./IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
+import { GridContainerRule } from "./GridContainerRule";
 
 
 export class GridItemRule extends Rule{
-  //editPaddingY = '16px';
-  //editPaddingX = '16px';
+  editPaddingY = '16px';
+  editPaddingX = '16px';
   labelKey ="column";
 
   match(meta:IMeta){
@@ -21,6 +22,10 @@ export class GridItemRule extends Rule{
   }
 
   accept(child:INode){
+    if(child.rule instanceof GridContainerRule){
+      return true;
+    }
+
     if(child.rule instanceof CardRule){
       return true;
     }    

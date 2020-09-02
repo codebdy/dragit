@@ -67,7 +67,8 @@ export default function LeftArea(){
     setValue(newValue);
   };
   const follow = (node:INode)=>{
-    setFocusedNode(node)
+    //console.log(node);
+    setFocusedNode(node);
   }
   const unFollow = ()=>{
     setFocusedNode(null)

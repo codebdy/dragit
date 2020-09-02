@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles} from '@material-ui/core';
-import { InputProps } from './InputProps';
-import { AttributeRow, RowLabel, RowValue } from '../AttributeRow';
+
 import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
