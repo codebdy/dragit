@@ -29,7 +29,7 @@ export class TypographyRule extends Rule{
           'justify' : 'justify',
         },
       },
-      {
+     /* {
         name:'display',
         label:'display',
         input:OptionSelect,
@@ -38,7 +38,7 @@ export class TypographyRule extends Rule{
           'block': 'block',
           'inline' : 'inline',
         },
-      },
+      },*/
       {
         name:'gutterBottom',
         label:'gutterBottom',
