@@ -12,6 +12,7 @@ import { ButtonRule } from "./ButtonRule"
 import { FormGridItemRule } from "./FormGridItemRule"
 import { PortletRule } from "./PortletRule"
 import { PortletFormGridBodyRule } from "./PortletFormGridBodyRule"
+import { TypographyRule } from "./TypographyRule"
 
 const rules:Array<IRule> = [
   new CanvasRule(),
@@ -25,6 +26,7 @@ const rules:Array<IRule> = [
   new FormGridItemRule(),
   new PortletRule(),
   new PortletFormGridBodyRule(),
+  new TypographyRule(),
 ];
 
 const baseRule = new Rule();

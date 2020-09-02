@@ -103,7 +103,17 @@ export default [
             variant:"outlined",
           }
         }
-
+      }, 
+      {
+        id:"2-6",
+        title:"Typography",
+        meta:{
+          name:"Typography",
+          text: "Typography",
+          props:{
+            variant:"inherit",
+          }
+        }
       }, 
     ]
   },

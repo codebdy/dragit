@@ -5,7 +5,7 @@ export interface IField{
   name:string;
   label:string;//存Label ID， 从资源文件读取
   input:any;
-  schema:any;
+  schema?:any;
 }
 
 export interface IRule{

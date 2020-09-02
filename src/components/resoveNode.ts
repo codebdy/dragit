@@ -6,6 +6,7 @@ import {
   Divider,
   Paper,
   TextField,
+  Typography,
 } from "@material-ui/core";
 
 import FormField from "components/FormField";
@@ -32,6 +33,7 @@ const nodeMap : { [key: string]: any } = {
   PortletFormGridBody,
   FormGridItem,
   PortletFooter,
+  Typography,
 }
 
 function resolveNode(name:string): any{

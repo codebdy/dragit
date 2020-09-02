@@ -139,62 +139,6 @@ export default function AttributeBox(props:{node:INode|null}){
               </AttributeRow>
             </RowGroup>
 
-            <RowGroup
-              totalLabel='内边距'
-              totalInput = {
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              }
-            >
-              <AttributeRow>
-                <RowLabel nested>上</RowLabel>
-                <RowValue>
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                </RowValue>
-              </AttributeRow>
-              <AttributeRow>
-                <RowLabel nested>下</RowLabel>
-                <RowValue>
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                </RowValue>
-              </AttributeRow>
-              <AttributeRow>
-                <RowLabel nested>左</RowLabel>
-                <RowValue>
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                </RowValue>
-              </AttributeRow>
-              <AttributeRow>
-                <RowLabel nested>右</RowLabel>
-                <RowValue>
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                </RowValue>
-              </AttributeRow>
-            </RowGroup>
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel  className={classes.panelPaper}>
