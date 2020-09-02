@@ -36,7 +36,7 @@ export default function NumberInput(props:InputProps){
       max={schema.max}
       step={schema.step}
       className={classes.input}
-      value={inputValue}
+      value={inputValue|schema.min}
       onChange={handleChange}
     />
   )

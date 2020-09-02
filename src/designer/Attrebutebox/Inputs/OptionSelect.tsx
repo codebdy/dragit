@@ -8,8 +8,8 @@ export default function OptionSelect(props:InputProps){
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setInputValue(event.target.value as string);
-    onChange(field, event.target.value as string);
+    setInputValue(event.target.value);
+    onChange(field, event.target.value);
   };  
   return (
     <Select
@@ -22,7 +22,7 @@ export default function OptionSelect(props:InputProps){
     {
       schema && Object.keys(schema).map((itemKey:string)=>{
         return (
-        <MenuItem key={itemKey} value={itemKey}>{schema[itemKey]}</MenuItem>
+        <MenuItem key={itemKey} value={schema[itemKey]}>{itemKey}</MenuItem>
         )
       })
     }
