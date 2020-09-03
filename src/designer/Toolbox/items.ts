@@ -120,9 +120,9 @@ export default [
         title:"Typography",
         meta:{
           name:"Typography",
-          text: "Typography",
           props:{
             variant:"inherit",
+            rxText: "Typography",
           }
         }
       }, 

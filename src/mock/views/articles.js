@@ -26,7 +26,7 @@ export default {
               children: [{
                   name: 'h2',
                   props:{
-                    text: '文章列表',
+                    rxText: '文章列表',
                   }
                   
               }],
@@ -43,7 +43,7 @@ export default {
               props: {
                 variant: "contained",
                 color: "primary",
-                text: '新建',
+                rxText: '新建',
                 //size: "large",
                 style: {
                   fontSize: '1.1rem',

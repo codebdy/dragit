@@ -23,7 +23,10 @@ export default {
         },
         children: [{
           name: 'h2',
-          text: '文章编辑',
+          props:{
+            rxText: '文章编辑',            
+          }
+
         }],
       },
       {
@@ -35,9 +38,9 @@ export default {
         children: [
           {
             name: 'Button',
-            text: '取消',
             props: {
               variant: "outlined",
+              rxText: '取消',
               style: {
                 fontSize: '1.1rem',
                 marginRight: '8px',
@@ -50,8 +53,8 @@ export default {
           },
           {
           name: 'Button',
-          text: '保存',
           props: {
+            rxText: '保存',
             variant: "contained",
             color: "primary",
             type: "submit",

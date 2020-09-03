@@ -28,7 +28,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
     handleReset,
   } = formik;
   let metaProps = element.meta.props? element.meta.props :{};
-  const {text, ...rest} = metaProps as any;
+  const {rxText, ...rest} = metaProps as any;
 
   let elementProps:any = {...rest,  onClick:handleOnClick}
   //console.log(formik);
@@ -45,9 +45,9 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
     }
   }
 
-  const elementView = (element.children && element.children.length > 0) || text ?
+  const elementView = (element.children && element.children.length > 0) || rxText ?
     (<Element {...elementProps}>
-      {text}
+      {rxText}
       {element.children?.map((child: RXElement)=>{
         return (
           <ElementRender key={child.id} element={child} formik={formik} onFormAction={onFormAction}/>

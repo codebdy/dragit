@@ -16,7 +16,7 @@ export default function NodeView(props:INodeProps){
   const [nodeProps, setNodeProps] = React.useState(node.props);
   const [children, setChildren] = React.useState(node.children);
 
-  const {style, editStyle, className, editClassName, text, ...rest} = nodeProps;
+  const {style, editStyle, className, editClassName, rxText, ...rest} = nodeProps;
 
   const nodeEl = useRef(null);
 
@@ -55,7 +55,7 @@ export default function NodeView(props:INodeProps){
   });
 
   return(
-    children?.length > 0 || text ? 
+    children?.length > 0 || rxText ? 
       React.createElement(
       resolveNode(node.meta.name),
       {
@@ -64,7 +64,7 @@ export default function NodeView(props:INodeProps){
         ...rest,
         style:{...style, ...editStyle}
       },
-      [text, ...childrenNodes]
+      [rxText, ...childrenNodes]
     )
     :
     React.createElement(

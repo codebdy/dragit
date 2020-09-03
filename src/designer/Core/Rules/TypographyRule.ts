@@ -4,6 +4,7 @@ import { INode } from "../Node/INode";
 import { IField } from "./IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
+import TextareaInput from "designer/Attrebutebox/Inputs/TextareaInput";
 
 export class TypographyRule extends Rule{
 
@@ -75,6 +76,12 @@ export class TypographyRule extends Rule{
           'srOnly' : 'srOnly',
           'inherit' : 'inherit',
         },
+      },
+
+      {
+        name:'rxText',
+        label:'text',
+        input:TextareaInput,
       },
     ]
   }
