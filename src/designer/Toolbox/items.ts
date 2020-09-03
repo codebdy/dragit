@@ -108,10 +108,10 @@ export default [
         id:"2-6",
         title:"Button",
         meta:{
-          name:"Button",
-          text: "Button",
+          name:"Button",          
           props:{
             variant:"contained",
+            rxText: "Button",
           }
         }
       }, 
