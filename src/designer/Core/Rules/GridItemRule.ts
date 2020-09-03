@@ -22,10 +22,13 @@ export class GridItemRule extends Rule{
   }
 
   accept(child:INode){
+    if(child.rule instanceof GridItemRule){
+      return false;
+    }
+   /*
     if(child.rule instanceof GridContainerRule){
       return true;
     }
-
     if(child.rule instanceof CardRule){
       return true;
     }    
@@ -35,8 +38,8 @@ export class GridItemRule extends Rule{
 
     if(child.rule instanceof PortletRule){
       return true;
-    }    
-    return false;
+    }    */
+    return true;
   }
   
   getFields(): Array<IField>{
