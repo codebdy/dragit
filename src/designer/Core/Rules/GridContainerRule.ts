@@ -32,12 +32,12 @@ export class GridContainerRule extends Rule{
         label:'Align Content',
         input:OptionSelect,
         schema:{
-          'stretch':'Stretch',
-          'center':'Center',
-          'flex-start':'Flex Start',
-          'flex-end' : 'Flex End',
-          'space-between':'Space Between',
-          'space-around' : 'Space Around'
+          'Stretch':'stretch',
+          'Center':'center',
+          'Flex Start':'flex-start',
+          'Flex End' : 'flex-end',
+          'Space Between':'space-between',
+          'Space Around' : 'space-around'
         }
       },
       {
@@ -45,11 +45,11 @@ export class GridContainerRule extends Rule{
         label:'Align Items',
         input:OptionSelect,
         schema:{
-          'flex-start':'Flex Start',
-          'center':'Center',
-          'flex-end' : 'Flex End',
-          'stretch':'Stretch',
-          'baseline' : 'Baseline'
+          'Flex Start':'flex-start',
+          'Center':'center',
+          'Flex End' : 'flex-end',
+          'Stretch':'stretch',
+          'Baseline' : 'baseline'
         }
       },
       {
@@ -57,10 +57,10 @@ export class GridContainerRule extends Rule{
         label:'Direction',
         input:OptionSelect,
         schema:{
-          'row':'Row',
-          'row-reverse':'Row Reverse',
-          'column' : 'Column',
-          'column-reverse':'Column Reverse',
+          'Row':'row',
+          'Row Reverse':'row-reverse',
+          'Column' : 'column',
+          'Column Reverse':'column-reverse',
         }
       },
       {
@@ -68,12 +68,12 @@ export class GridContainerRule extends Rule{
         label:'Justify',
         input:OptionSelect,
         schema:{
-          'flex-start':'Flex Start',
-          'center':'Center',
-          'flex-end' : 'Flex End',
-          'space-between':'Space Between',
-          'space-around' : 'Space Around',
-          'space-evenly' : 'Space Evenly'
+          'Flex Start':'flex-start',
+          'Center':'center',
+          'Flex End' : 'flex-end',
+          'Space Between':'space-between',
+          'Space Around' : 'space-around',
+          'Space Evenly' : 'space-evenly'
         }
       },
       {
@@ -81,9 +81,9 @@ export class GridContainerRule extends Rule{
         label:'Spacing',
         input:NumberInput,
         schema:{
-          'min':'0',
-          'max':'10',
-          'step':'1',
+          'min':0,
+          'max':10,
+          'step':1,
         }
       },
     ]
