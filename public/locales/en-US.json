@@ -20,5 +20,11 @@
 
     "page-container": "Page container",
     "row": "Row",
-    "column": "Column"
+    "column": "Column",
+
+    "selected-node":"Selected Node:",
+    "attributes":"Attributes",
+    "style":"Style",
+    "data":"Data"
+
 }

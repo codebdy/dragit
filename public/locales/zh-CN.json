@@ -20,6 +20,10 @@
 
     "page-container": "页面容器",
     "row": "行",
-    "column": "列"
+    "column": "列",
 
+    "selected-node":"选中的节点：",
+    "attributes":"属性",
+    "style":"样式",
+    "data":"数据"
 }

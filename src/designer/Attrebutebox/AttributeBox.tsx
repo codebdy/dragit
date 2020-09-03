@@ -8,6 +8,7 @@ import {RowGroup, AttributeRow, RowLabel, RowValue} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
 import { IField } from 'designer/Core/Rules/IRule';
 import StyleList from './Inputs/StyleList';
+import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,14 +60,17 @@ export default function AttributeBox(props:{node:INode|null}){
     <div className={classes.root}>
       {node&&
       <Fragment>
-        <div className={classes.nodeLabel}>选中节点：<span style={{color:'#5d78ff'}}>{node.label}</span></div>
+        <div className={classes.nodeLabel}>
+          {intl.get('selected-node')}
+          <span style={{color:'#5d78ff'}}>{node.label}</span>
+        </div>
         <ExpansionPanel className={classes.panelPaper}>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className={classes.heading}>属性</Typography>
+            <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.pannelDetail}>
             {
@@ -151,7 +155,7 @@ export default function AttributeBox(props:{node:INode|null}){
             aria-controls="panel3a-content"
             id="panel3a-header"
           >
-            <Typography className={classes.heading}>样式</Typography>
+            <Typography className={classes.heading}>{intl.get('style')}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
@@ -163,7 +167,7 @@ export default function AttributeBox(props:{node:INode|null}){
             aria-controls="panel3a-content"
             id="panel3a-header"
           >
-            <Typography className={classes.heading}>数据</Typography>
+            <Typography className={classes.heading}>{intl.get('data')}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div>绑定字段</div>
