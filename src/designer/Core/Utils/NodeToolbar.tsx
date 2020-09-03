@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 const height = 28;
 declare var window: any;
-
+const barWidth = height*4;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     toolbar: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize:'0.8rem',
       height:height + 'px',
       lineHeight:height + 'px',
-      width: (height * 5) + 'px',
+      width: barWidth + 'px',
       display: 'flex',
       flexFlow: 'row',
       alignItems:'strech',
@@ -61,7 +61,7 @@ export default function NodeToolbar(){
     if(!domElement){
       return 
     }
-    let barWidth = height * 5;
+
     let rect = domElement.getBoundingClientRect();
     let left = rect.x + rect.width - barWidth;
     left = left < sideBarWidth ? sideBarWidth : left;
@@ -148,9 +148,10 @@ export default function NodeToolbar(){
           >
             <MdiIcon iconClass='mdi-arrow-all' size={iconSize} />
           </div>
-          {<div className={classes.button}>
-            <MdiIcon iconClass='mdi-square-edit-outline' size={iconSize} />
-          </div>}
+          {//<div className={classes.button}>
+            //<MdiIcon iconClass='mdi-square-edit-outline' size={iconSize} />
+          //</div>
+          }
           <div className={classes.button}>
             <MdiIcon iconClass='mdi-content-copy' size={14} />
           </div>

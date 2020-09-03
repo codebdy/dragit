@@ -22,12 +22,13 @@ export default {
               name: 'Grid',
               props: {
                 item: true,
-                suppressContentEditableWarning:true,
-                contentEditable:true,
               },
               children: [{
                   name: 'h2',
-                  text: '文章列表',
+                  props:{
+                    text: '文章列表',
+                  }
+                  
               }],
           },
           {
@@ -39,11 +40,10 @@ export default {
             children: [
             {
               name: 'Button',
-              text: '新建',
               props: {
                 variant: "contained",
                 color: "primary",
-
+                text: '新建',
                 //size: "large",
                 style: {
                   fontSize: '1.1rem',

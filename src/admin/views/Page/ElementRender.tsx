@@ -27,8 +27,10 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
     handleSubmit,
     handleReset,
   } = formik;
+  let metaProps = element.meta.props? element.meta.props :{};
+  const {text, ...rest} = metaProps as any;
 
-  let elementProps:any = {...element.meta.props,  onClick:handleOnClick}
+  let elementProps:any = {...rest,  onClick:handleOnClick}
   //console.log(formik);
   const value = field && values && values[field];
   if(field){
@@ -43,9 +45,9 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
     }
   }
 
-  const elementView = (element.children && element.children.length > 0) || element.meta.text ?
+  const elementView = (element.children && element.children.length > 0) || text ?
     (<Element {...elementProps}>
-      {element.meta.text}
+      {text}
       {element.children?.map((child: RXElement)=>{
         return (
           <ElementRender key={child.id} element={child} formik={formik} onFormAction={onFormAction}/>
