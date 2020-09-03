@@ -106,6 +106,17 @@ export default [
       }, 
       {
         id:"2-6",
+        title:"Button",
+        meta:{
+          name:"Button",
+          text: "Button",
+          props:{
+            variant:"contained",
+          }
+        }
+      }, 
+      {
+        id:"2-7",
         title:"Typography",
         meta:{
           name:"Typography",
