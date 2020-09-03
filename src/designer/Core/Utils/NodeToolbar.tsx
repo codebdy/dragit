@@ -61,9 +61,11 @@ export default function NodeToolbar(){
     if(!domElement){
       return 
     }
+    let barWidth = height * 5;
     let rect = domElement.getBoundingClientRect();
-    let left = rect.x;
+    let left = rect.x + rect.width - barWidth;
     left = left < sideBarWidth ? sideBarWidth : left;
+    left = left + barWidth > document.body.clientWidth ? document.body.clientWidth - barWidth : left;
     setLeft(left)
     let top = rect.y < 90 ? rect.y + rect.height : rect.y - 28;
     setTop(top);
@@ -146,9 +148,9 @@ export default function NodeToolbar(){
           >
             <MdiIcon iconClass='mdi-arrow-all' size={iconSize} />
           </div>
-          <div className={classes.button}>
+          {<div className={classes.button}>
             <MdiIcon iconClass='mdi-square-edit-outline' size={iconSize} />
-          </div>
+          </div>}
           <div className={classes.button}>
             <MdiIcon iconClass='mdi-content-copy' size={14} />
           </div>

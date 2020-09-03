@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, ExpansionPanel, Select, MenuItem } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, ExpansionPanel } from '@material-ui/core';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
       '&:focus':{
         border:'#0a6fb7 solid 1px'
       }
+    },
+    nodeLabel:{
+      padding:'16px',
     }
   }),
 );
@@ -56,6 +59,7 @@ export default function AttributeBox(props:{node:INode|null}){
     <div className={classes.root}>
       {node&&
       <Fragment>
+        <div className={classes.nodeLabel}>选中节点：<span style={{color:'#5d78ff'}}>{node.label}</span></div>
         <ExpansionPanel className={classes.panelPaper}>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}

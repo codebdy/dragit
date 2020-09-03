@@ -22,6 +22,8 @@ export default {
               name: 'Grid',
               props: {
                 item: true,
+                suppressContentEditableWarning:true,
+                contentEditable:true,
               },
               children: [{
                   name: 'h2',
@@ -41,6 +43,7 @@ export default {
               props: {
                 variant: "contained",
                 color: "primary",
+
                 //size: "large",
                 style: {
                   fontSize: '1.1rem',

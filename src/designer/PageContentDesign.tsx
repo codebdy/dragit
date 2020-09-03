@@ -23,6 +23,7 @@ import MouseFollower from './Core/Utils/MouseFollower';
 import bus, { CANVAS_SCROLL } from './Core/bus';
 import { parseNodes } from './Core/Node/jsonParser';
 import LeftArea from './LeftArea';
+import FocusLabel from './Core/Utils/FocusLabel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -184,6 +185,7 @@ export default function PageContentDesign() {
           </Scrollbar>
         </div>
       </div>
+      <FocusLabel />
       <NodeToolbar />
       <ActiveLabel />
       <MouseFollower />
