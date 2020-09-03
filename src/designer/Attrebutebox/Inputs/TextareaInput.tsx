@@ -27,9 +27,9 @@ export default function TextareaInput(props:InputProps){
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    let newValue = event.target.value as string
+    let newValue = (event.target.value as string);
     setInputValue(newValue);
-    onChange(field, newValue);
+    onChange(field, newValue ||' ');
   };  
 
   return (

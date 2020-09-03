@@ -4,6 +4,7 @@ import { IMeta } from "../Node/IMeta";
 import { IField } from "./IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
+import TextareaInput from "designer/Attrebutebox/Inputs/TextareaInput";
 
 export class ButtonRule extends Rule{
   editPaddingY = '';
@@ -79,6 +80,11 @@ export class ButtonRule extends Rule{
           'outlined': 'outlined',
           'text' : 'text',
         },
+      },
+      {
+        name:'rxText',
+        label:'text',
+        input:TextareaInput,
       },
     ]
   }
