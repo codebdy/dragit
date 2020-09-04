@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import clsx from 'clsx';
 import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -15,10 +15,11 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import classNames from 'classnames';
+import { TextField, InputAdornment } from '@material-ui/core';
+import MdiIcon from './common/MdiIcon';
+import ListViewFilter from 'components/ListViewFilter';
 
 interface Data {
   calories: number;
@@ -100,7 +101,7 @@ const headCells: HeadCell[] = [
   { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
 ];
 
-interface EnhancedTableProps {
+interface ListViewProps {
   classes: ReturnType<typeof useStyles>;
   numSelected: number;
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
@@ -110,7 +111,7 @@ interface EnhancedTableProps {
   rowCount: number;
 }
 
-function EnhancedTableHead(props: EnhancedTableProps) {
+function ListViewHead(props: ListViewProps) {
   const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
@@ -156,7 +157,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingLeft: theme.spacing(2),
+      padding: theme.spacing(2),
       paddingRight: theme.spacing(1),
     },
     highlight:
@@ -175,11 +176,11 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface EnhancedTableToolbarProps {
+interface ListViewToolbarProps {
   numSelected: number;
 }
 
-const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
+const ListViewToolbar = (props: ListViewToolbarProps) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -194,22 +195,37 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Nutrition
-        </Typography>
+        <div className={classes.title}>
+        <TextField
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <MdiIcon iconClass="mdi-magnify "/>
+              </InputAdornment>
+            ),
+          }}
+          variant = "outlined"
+          size = "small"
+        />
+        </div>
       )}
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <Fragment>
+          <Tooltip title="Delete">
+            <IconButton aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Delete">
+            <IconButton aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </Fragment>        
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
+        <Fragment>
+          <ListViewFilter/>
+        </Fragment>        
       )}
     </Toolbar>
   );
@@ -241,7 +257,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ListView() {
+const ListView = React.forwardRef((props: {className:string}, ref:any)=>{
+  const {className, ...rest} = props
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
@@ -303,9 +320,9 @@ export default function ListView() {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <div className={classes.root}>
+    <div className={classNames(classes.root,className )} {...rest} ref={ref}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <ListViewToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -313,7 +330,7 @@ export default function ListView() {
             size={'medium'}
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
+            <ListViewHead
               classes={classes}
               numSelected={selected.length}
               order={order}
@@ -351,7 +368,7 @@ export default function ListView() {
                       <TableCell align="right">{row.calories}</TableCell>
                       <TableCell align="right">{row.fat}</TableCell>
                       <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right"><div dangerouslySetInnerHTML={{__html: `<span style="color:red;" >${row.protein}</span>`}} /></TableCell>
                     </TableRow>
                   );
                 })}
@@ -364,8 +381,9 @@ export default function ListView() {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25, 50]}
           component="div"
+          labelRowsPerPage = "每页条数："
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
@@ -375,4 +393,7 @@ export default function ListView() {
       </Paper>
     </div>
   );
-}
+})
+
+export default ListView;
+
