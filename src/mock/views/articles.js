@@ -59,6 +59,9 @@ export default {
               }
             }]
           },
+          {
+            name:'ListView',
+          }
       ]
     },
   ] 

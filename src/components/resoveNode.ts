@@ -14,6 +14,7 @@ import Portlet from "components/Portlet"
 import PortletFormGridBody from "components/PortletFormGridBody"
 import PortletFooter from "components/PortletFooter"
 import FormGridItem from "components/FormGridItem"
+import ListView from "components/ListView"
 
 
 const nodeMap : { [key: string]: any } = {
@@ -34,6 +35,7 @@ const nodeMap : { [key: string]: any } = {
   FormGridItem,
   PortletFooter,
   Typography,
+  ListView,
 }
 
 function resolveNode(name:string): any{
