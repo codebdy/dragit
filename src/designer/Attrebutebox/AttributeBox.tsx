@@ -90,7 +90,7 @@ export default function AttributeBox(props:{node:INode|null}){
                 )
               })
             }
-            <RowGroup
+            {/*<RowGroup
               totalLabel='外边距'
               totalInput = {
                 <input type="number"
@@ -145,7 +145,8 @@ export default function AttributeBox(props:{node:INode|null}){
                   />
                 </RowValue>
               </AttributeRow>
-            </RowGroup>
+            </RowGroup>*/
+          }
 
           </ExpansionPanelDetails>
         </ExpansionPanel>

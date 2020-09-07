@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Menu, { MenuProps } from '@material-ui/core/Menu';
-import { Tooltip, IconButton, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Card, CardActionArea, CardActions, Button, CardContent, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { Tooltip, IconButton, FormLabel, RadioGroup, FormControlLabel, Radio, Button, makeStyles, Theme, createStyles } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 const StyledMenu = withStyles({
