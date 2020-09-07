@@ -1,19 +1,13 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Menu, { MenuProps } from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import { Tooltip, IconButton } from '@material-ui/core';
+import { Tooltip, IconButton, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Card, CardActionArea, CardActions, Button, CardContent, makeStyles, Theme, createStyles } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
+    
   },
 })((props: MenuProps) => (
   <Menu
@@ -31,20 +25,37 @@ const StyledMenu = withStyles({
   />
 ));
 
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    filterContainer: {
+      display: 'flex',
+      flexFlow: 'column',
     },
-  },
-}))(MenuItem);
+
+    scrollArea:{
+      maxHeight:'300px',
+      overflow:'auto',
+      padding: '10px',
+    },
+    actionArea:{
+      display:'flex',
+      alignItems:'center',
+      paddingTop:'20px',
+      justifyContent:'flex-end',
+    }
+
+  }),
+);
 
 export default function ListViewFilter() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [value, setValue] = React.useState('female');
+  const classes = useStyles();
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((event.target as HTMLInputElement).value);
+  };
+  
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -68,24 +79,34 @@ export default function ListViewFilter() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Sent mail" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </StyledMenuItem>
+    <div className={classes.filterContainer}>
+      
+          <div className={classes.scrollArea}>
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel value="other" control={<Radio />} label="Other" />
+            <FormControlLabel value="disabled" control={<Radio />} label="(Disabled option)" />
+          </RadioGroup>
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel value="other" control={<Radio />} label="Other" />
+            <FormControlLabel value="disabled" control={<Radio />} label="(Disabled option)" />
+          </RadioGroup>
+        </div>
+        
+        <div className={classes.actionArea}>
+          <Button size="large" >
+            清空
+          </Button>
+          <Button size="large" color="primary">
+            关闭
+          </Button>
+        </div>         
+      </div>
       </StyledMenu>
     </div>
   );
