@@ -2,17 +2,16 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      maxWidth: 360,
+      maxWidth: 220,
       backgroundColor: theme.palette.background.paper,
     },
   }),
@@ -37,9 +36,6 @@ export default function TableColumnsList() {
           selected={selectedIndex === 0}
           onClick={(event) => handleListItemClick(event, 0)}
         >
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
           <ListItemText primary="Inbox" />
         </ListItem>
         <ListItem
@@ -47,14 +43,8 @@ export default function TableColumnsList() {
           selected={selectedIndex === 1}
           onClick={(event) => handleListItemClick(event, 1)}
         >
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
           <ListItemText primary="Drafts" />
         </ListItem>
-      </List>
-      <Divider />
-      <List component="nav" aria-label="secondary mailbox folder">
         <ListItem
           button
           selected={selectedIndex === 2}
@@ -68,7 +58,15 @@ export default function TableColumnsList() {
           onClick={(event) => handleListItemClick(event, 3)}
         >
           <ListItemText primary="Spam" />
+          <IconButton aria-label="delete">
+            <DeleteIcon fontSize="small" />
+          </IconButton>
         </ListItem>
+        
+          <IconButton>
+            <AddIcon />
+          </IconButton>
+        
       </List>
     </div>
   );

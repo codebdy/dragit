@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider, TextField, Switch, FormControlLabel} from '@material-ui/core';
 import { InputProps } from './InputProps';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
@@ -7,18 +7,25 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import TableColumnsList from './TableColumnsList';
 
-
-
 const styles = (theme: Theme) =>
   createStyles({
     more:{
       width:'24px',
+    },
+    dilogContent:{
+      display:'flex',
+      flexFlow:'row',
+      width:'560px',
+    },
+    itemContent:{
+      flex:1,
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+    },
+    itemInput:{
+        margin: theme.spacing(1),
+    },
 
-    },
-    root: {
-      margin: 0,
-      padding: theme.spacing(2),
-    },
     closeButton: {
       position: 'absolute',
       right: theme.spacing(1),
@@ -38,7 +45,7 @@ export interface DialogTitleProps extends WithStyles<typeof styles> {
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+    <MuiDialogTitle disableTypography {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
@@ -94,16 +101,54 @@ export default function TableColumnsDialog(props:InputProps){
     <Fragment>
       <IconButton size="small" className = {classes.more} onClick={handleClickOpen}> ··· </IconButton>
       <ThemeProvider theme={theme}>
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 
+          open={open}
+          scroll = 'paper'
+        >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
             表格列编辑器
           </DialogTitle>
-          <DialogContent dividers>
+          <DialogContent dividers className={classes.dilogContent}>
               <TableColumnsList />
+              <div className = {classes.itemContent}>
+                <TextField className = {classes.itemInput} label="字段" variant="outlined" size="small" fullWidth />
+                <TextField className = {classes.itemInput} label="列名" variant="outlined" size="small" fullWidth />
+                <FormControlLabel
+                  className = {classes.itemInput}
+                  control={
+                    <Switch
+                      color="primary"
+                    />
+                  }
+                  label="可检索"
+                />
+                <FormControlLabel
+                  className = {classes.itemInput}
+                  control={
+                    <Switch
+                      color="primary"
+                    />
+                  }
+                  label="可排序"
+                />
+                <TextField
+                  className = {classes.itemInput} 
+                  label="显示模板"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                />
+              
+              </div>
             </DialogContent>
           <DialogActions>
+              <Button autoFocus onClick={handleClose}>
+                取消
+              </Button>
               <Button autoFocus onClick={handleClose} color="primary">
-                Save changes
+                保存
               </Button>
             </DialogActions>
         </Dialog>      
