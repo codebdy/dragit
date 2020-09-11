@@ -14,7 +14,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
     onFormAction(onClickAction);
   };
 
-  const field = element.meta.props?.field;
+  //const field = element.meta.props?.field;
 
   const {
     values,
@@ -28,7 +28,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
     handleReset,
   } = formik;
   let metaProps = element.meta.props? element.meta.props :{};
-  const {rxText, ...rest} = metaProps as any;
+  const {rxText, field, ...rest} = metaProps as any;
 
   let elementProps:any = {...rest,  onClick:handleOnClick}
   //console.log(formik);

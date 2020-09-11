@@ -37,6 +37,9 @@ export default function TableColumnsList() {
           onClick={(event) => handleListItemClick(event, 0)}
         >
           <ListItemText primary="Inbox" />
+          <IconButton aria-label="delete">
+            <DeleteIcon fontSize="small" />
+          </IconButton>
         </ListItem>
         <ListItem
           button
@@ -44,6 +47,9 @@ export default function TableColumnsList() {
           onClick={(event) => handleListItemClick(event, 1)}
         >
           <ListItemText primary="Drafts" />
+          <IconButton aria-label="delete">
+            <DeleteIcon fontSize="small" />
+          </IconButton>
         </ListItem>
         <ListItem
           button
@@ -51,6 +57,9 @@ export default function TableColumnsList() {
           onClick={(event) => handleListItemClick(event, 2)}
         >
           <ListItemText primary="Trash" />
+          <IconButton aria-label="delete">
+            <DeleteIcon fontSize="small" />
+          </IconButton>
         </ListItem>
         <ListItem
           button

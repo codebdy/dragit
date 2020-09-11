@@ -72,6 +72,12 @@ const DialogActions = withStyles((theme: Theme) => ({
 const theme = responsiveFontSizes(createMuiTheme({
   palette: {
     type: 'light',
+    background:{
+      default:'#f4f5fa',
+    },
+    primary:{
+      main:"#5d78ff",
+    },  
   },
 
 }));

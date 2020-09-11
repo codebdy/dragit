@@ -60,8 +60,19 @@ export default {
             }]
           },
           {
-            name:'ListView',
+            name: 'Grid',
+            props: {
+              item: true,
+              xs:12,
+            },
+            children: [          {
+              name:'ListView',
+              props:{
+                field:'records',
+              }
+            }],
           }
+
       ]
     },
   ] 
