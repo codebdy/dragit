@@ -115,7 +115,7 @@ export default function TableColumnsDialog(props:InputProps){
             表格列编辑器
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>
-              <TableColumnsList />
+              <TableColumnsList columns={inputValue} />
               <div className = {classes.itemContent}>
                 <TextField className = {classes.itemInput} label="字段" variant="outlined" size="small" fullWidth />
                 <TextField className = {classes.itemInput} label="列名" variant="outlined" size="small" fullWidth />

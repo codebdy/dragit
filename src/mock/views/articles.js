@@ -69,6 +69,20 @@ export default {
               name:'ListView',
               props:{
                 field:'records',
+                columns:[
+                  {
+                    field:'name',
+                    label:'名称',
+                    props:{
+                      align:'right',
+                    }
+
+                  },
+                  {
+                    field:'title',
+                    label:'标题',
+                  }
+                ]
               }
             }],
           }

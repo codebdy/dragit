@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import classNames from 'classnames';
 import { Data, ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
+import { ListViewColumn } from './ListViewColumn';
 
 
 /*function createData(
@@ -51,8 +52,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const ListView = React.forwardRef((props: {className:string, helperText?:string, value?:any}, ref:any)=>{
-  const {className, helperText, value, ...rest} = props
+const ListView = React.forwardRef((props: {className:string, helperText?:string, value?:any, columns:Array<ListViewColumn>}, ref:any)=>{
+  const {className, helperText, value, columns, ...rest} = props
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
@@ -132,15 +133,17 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
+              columns = {columns}
             />
             <TableBody>
               {rows.map((row, index) => {
                   const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                  const labelId = `listview-${index}`;
 
                   return (
                     <TableRow
                       hover
+                      id={row.id}
                       onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
@@ -155,9 +158,15 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
-                      </TableCell>
+                      {
+                        columns.map((column, colIndex) => {
+                          return(
+                            <TableCell key={row.id + '-' + column.field} {... column.props}>
+                              {row[column.field]}
+                            </TableCell>
+                          )
+                        })
+                      }
                       <TableCell align="right">{row.calories}</TableCell>
                       <TableCell align="right">{row.fat}</TableCell>
                       <TableCell align="right">{row.carbs}</TableCell>

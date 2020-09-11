@@ -1,5 +1,6 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel, makeStyles, Theme, createStyles } from "@material-ui/core";
 import React from "react";
+import { ListViewColumn } from "./ListViewColumn";
 
 type Order = 'asc' | 'desc';
 
@@ -17,14 +18,6 @@ export interface HeadCell {
   label: string;
   numeric: boolean;
 }
-
-const headCells: HeadCell[] = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
-];
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,12 +53,13 @@ interface ListViewHeadProps {
   order: Order;
   orderBy: string;
   rowCount: number;
+  columns:Array<ListViewColumn>;
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-  const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-    onRequestSort(event, property);
+  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, columns } = props;
+  const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
+    //onRequestSort(event, property);
   };
 
   return (
@@ -80,20 +74,19 @@ export function ListViewHead(props: ListViewHeadProps) {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+        {columns.map((headCell) => (
           <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
+            key={headCell.field}
+            sortDirection={orderBy === headCell.field ? order : false}
           >
             <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
+              id = {headCell.field}
+              active={orderBy === headCell.field}
+              direction={orderBy === headCell.field ? order : 'asc'}
+              onClick={createSortHandler(headCell.field)}
             >
               {headCell.label}
-              {orderBy === headCell.id ? (
+              {orderBy === headCell.field ? (
                 <span>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
