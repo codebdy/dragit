@@ -18,16 +18,17 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function TableColumnsList(props:{columns:Array<ListViewColumn>}) {
-  const {columns} = props; 
+export default function TableColumnsList(props:{columns:Array<ListViewColumn>, onSelected:(index:number)=>void}) {
+  const {columns, onSelected} = props; 
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
     setSelectedIndex(index);
+    onSelected(index);
   };
 
   const handleRemove = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -38,7 +39,7 @@ export default function TableColumnsList(props:{columns:Array<ListViewColumn>}) 
 
   return (
     <div className={classes.root}>
-      <List component="nav" aria-label="main mailbox folders">
+      <List component="nav">
         {
           columns.map((column, index)=>{
             return(

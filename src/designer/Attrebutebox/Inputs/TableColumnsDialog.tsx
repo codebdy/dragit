@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider, TextField, Switch, FormControlLabel} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider, TextField, Switch, FormControlLabel, MenuItem, Select, FormControl, InputLabel} from '@material-ui/core';
 import { InputProps } from './InputProps';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import TableColumnsList from './TableColumnsList';
+import intl from 'react-intl-universal';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -85,13 +86,18 @@ const theme = responsiveFontSizes(createMuiTheme({
 export default function TableColumnsDialog(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
-  const [inputValue, setInputValue] = React.useState(value);
+  const [columns, setComuns] = React.useState(value);
+  const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = (event.target.value as string);
-    setInputValue(newValue);
+    setComuns(newValue);
     onChange(field, newValue ||' ');
-  };  
+  };
+  
+  const handleSelected = (index:number)=>{
+    setSelectedIndex(index);
+  }
 
   const [open, setOpen] = React.useState(false);
 
@@ -112,49 +118,98 @@ export default function TableColumnsDialog(props:InputProps){
           scroll = 'paper'
         >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            表格列编辑器
+            {intl.get('column-editor')}
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>
-              <TableColumnsList columns={inputValue} />
+              <TableColumnsList columns={columns} onSelected ={handleSelected} />
               <div className = {classes.itemContent}>
-                <TextField className = {classes.itemInput} label="字段" variant="outlined" size="small" fullWidth />
-                <TextField className = {classes.itemInput} label="列名" variant="outlined" size="small" fullWidth />
-                <FormControlLabel
-                  className = {classes.itemInput}
-                  control={
-                    <Switch
-                      color="primary"
+                {
+                  selectedIndex >=0 &&
+                  <Fragment>
+                    <TextField 
+                      className = {classes.itemInput} 
+                      label={intl.get('field')}
+                      variant="outlined" 
+                      fullWidth
+                      value = {columns[selectedIndex].field} 
                     />
-                  }
-                  label="可检索"
-                />
-                <FormControlLabel
-                  className = {classes.itemInput}
-                  control={
-                    <Switch
-                      color="primary"
+                    <TextField 
+                      className = {classes.itemInput} 
+                      label={intl.get('column-name')} 
+                      variant="outlined" 
+                      fullWidth
+                      value = {columns[selectedIndex].label} 
                     />
-                  }
-                  label="可排序"
-                />
-                <TextField
-                  className = {classes.itemInput} 
-                  label="显示模板"
-                  multiline
-                  rows={4}
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                />
+                    <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
+                      <InputLabel id="align-select-label">{intl.get('align')}</InputLabel>
+                      <Select
+                        labelId="align-select-label"
+                        id="align-select"
+                        label={intl.get('align')}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={'center'}>Center</MenuItem>
+                        <MenuItem value={'inherit'}>Inherit</MenuItem>
+                        <MenuItem value={'justify'}>Justify</MenuItem>
+                        <MenuItem value={'left'}>Left</MenuItem>
+                        <MenuItem value={'right'}>Right</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
+                      <InputLabel id="align-select-label">{intl.get('size')}</InputLabel>
+                      <Select
+                        labelId="size-select-label"
+                        id="size-select"
+                        label = {intl.get('size')}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={'medium'}>Medium</MenuItem>
+                        <MenuItem value={'small'}>Small</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <FormControlLabel
+                      className = {classes.itemInput}
+                      control={
+                        <Switch
+                          color="primary"
+                          checked = {!!columns[selectedIndex].searchable}
+                        />
+                      }
+                      label={intl.get('searchable')}
+                    />
+                    <FormControlLabel
+                      className = {classes.itemInput}
+                      control={
+                        <Switch
+                          color="primary"
+                          checked = {!!columns[selectedIndex].sortable}
+                        />
+                      }
+                      label={intl.get('sortable')}
+                    />
+                    <TextField
+                      className = {classes.itemInput} 
+                      label={intl.get('show-template')}
+                      multiline
+                      rows={4}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Fragment>
+                }
               
               </div>
             </DialogContent>
           <DialogActions>
               <Button autoFocus onClick={handleClose}>
-                取消
+                {intl.get('cancel')}
               </Button>
               <Button autoFocus onClick={handleClose} color="primary">
-                保存
+                {intl.get('save')}
               </Button>
             </DialogActions>
         </Dialog>      

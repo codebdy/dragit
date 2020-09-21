@@ -25,6 +25,15 @@
     "selected-node":"Selected Node:",
     "attributes":"Attributes",
     "style":"Style",
-    "data":"Data"
+    "data":"Data",
+
+    "column-editor":"Table Cell Editor",
+    "field":"Field",
+    "column-name":"Column Name",
+    "align":"Align",
+    "size":"Size",
+    "searchable":"Searchable",
+    "sortable":"Sortable",
+    "show-template":"Show template"
 
 }

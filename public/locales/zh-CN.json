@@ -25,5 +25,14 @@
     "selected-node":"选中的节点：",
     "attributes":"属性",
     "style":"样式",
-    "data":"数据"
+    "data":"数据",
+
+    "column-editor":"表格列编辑器",
+    "field":"字段",
+    "column-name":"列名",
+    "align":"对齐",
+    "size":"大小",
+    "searchable":"可检索",
+    "sortable":"可排序",
+    "show-template":"显示模板"
 }

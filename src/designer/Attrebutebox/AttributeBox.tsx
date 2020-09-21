@@ -4,7 +4,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {RowGroup, AttributeRow, RowLabel, RowValue} from './AttributeRow';
+import {AttributeRow, RowLabel, RowValue} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
 import { IField } from 'designer/Core/Rules/IRule';
 import StyleList from './Inputs/StyleList';

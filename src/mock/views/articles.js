@@ -73,6 +73,7 @@ export default {
                   {
                     field:'name',
                     label:'名称',
+                    searchable:true,
                     props:{
                       align:'right',
                     }
@@ -81,6 +82,7 @@ export default {
                   {
                     field:'title',
                     label:'标题',
+                    sortable:true,
                   }
                 ]
               }
