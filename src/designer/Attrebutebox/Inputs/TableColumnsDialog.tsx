@@ -89,11 +89,6 @@ export default function TableColumnsDialog(props:InputProps){
   const [columns, setComuns] = React.useState(JSON.parse(JSON.stringify(value)));
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    let newValue = (event.target.value as string);
-    setComuns(newValue);
-    onChange(field, newValue ||' ');
-  };
   
   const handleSelected = (index:number)=>{
     setSelectedIndex(index);
@@ -107,6 +102,10 @@ export default function TableColumnsDialog(props:InputProps){
   const handleClose = () => {
     setOpen(false);
   };
+  const handleChange = () => {
+    onChange(field, JSON.parse(JSON.stringify(columns)));
+    setOpen(false);
+  };
   const handleRemove = (index:number) => {
     if(index === selectedIndex){
       (index + 1) >= columns.length ? setSelectedIndex(index-1) : setSelectedIndex(index);;
@@ -115,7 +114,7 @@ export default function TableColumnsDialog(props:InputProps){
     setComuns([...columns]);
   };
   const handelAddNew = ()=>{
-    columns.push({field:'new-field', label:'New Field'});
+    columns.push({field:'new-field', label:'New Field', props:{}});
     setComuns([...columns]);
     setSelectedIndex(columns.length - 1);
   };
@@ -128,7 +127,17 @@ export default function TableColumnsDialog(props:InputProps){
     }
     columns[sourceIndex] = columns.splice(targetIndex, 1, columns[sourceIndex])[0]
     setComuns([...columns]);
-  }
+  };
+
+  const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
+    columns[selectedIndex][name] = value;
+    setComuns([...columns]);
+  };
+
+  const handleChangeProp = (index:number, name:string, value:string|unknown)=>{
+    columns[selectedIndex].props[name] = value;
+    setComuns([...columns]);
+  };
 
 
   return (
@@ -162,6 +171,9 @@ export default function TableColumnsDialog(props:InputProps){
                       variant="outlined" 
                       fullWidth
                       value = {columns[selectedIndex].field} 
+                      onChange = {event=>{
+                        handleChangeAttribute(selectedIndex, 'field', event.target.value.trim())
+                      }}
                     />
                     <TextField 
                       className = {classes.itemInput} 
@@ -169,6 +181,9 @@ export default function TableColumnsDialog(props:InputProps){
                       variant="outlined" 
                       fullWidth
                       value = {columns[selectedIndex].label} 
+                      onChange = {event=>{
+                        handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
+                      }}
                     />
                     <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
                       <InputLabel id="align-select-label">{intl.get('align')}</InputLabel>
@@ -176,6 +191,10 @@ export default function TableColumnsDialog(props:InputProps){
                         labelId="align-select-label"
                         id="align-select"
                         label={intl.get('align')}
+                        value = {columns[selectedIndex].props.align || ''}
+                        onChange = {event=>{
+                          handleChangeProp(selectedIndex, 'align', event.target.value)
+                        }}
                       >
                         <MenuItem value="">
                           <em>None</em>
@@ -193,6 +212,10 @@ export default function TableColumnsDialog(props:InputProps){
                         labelId="size-select-label"
                         id="size-select"
                         label = {intl.get('size')}
+                        value = {columns[selectedIndex].props.size || ''}
+                        onChange = {event=>{
+                          handleChangeProp(selectedIndex, 'size', event.target.value)
+                        }}
                       >
                         <MenuItem value="">
                           <em>None</em>
@@ -207,6 +230,9 @@ export default function TableColumnsDialog(props:InputProps){
                         <Switch
                           color="primary"
                           checked = {!!columns[selectedIndex].searchable}
+                          onChange = {event=>{
+                            handleChangeAttribute(selectedIndex, 'searchable', event.target.checked)
+                          }}                        
                         />
                       }
                       label={intl.get('searchable')}
@@ -217,6 +243,9 @@ export default function TableColumnsDialog(props:InputProps){
                         <Switch
                           color="primary"
                           checked = {!!columns[selectedIndex].sortable}
+                          onChange = {event=>{
+                            handleChangeAttribute(selectedIndex, 'sortable', event.target.checked)
+                          }}                        
                         />
                       }
                       label={intl.get('sortable')}
@@ -225,9 +254,13 @@ export default function TableColumnsDialog(props:InputProps){
                       className = {classes.itemInput} 
                       label={intl.get('show-template')}
                       multiline
+                      fullWidth
                       rows={4}
                       variant="outlined"
-                      fullWidth
+                      value = {columns[selectedIndex].template || ''}
+                      onChange = {event=>{
+                        handleChangeAttribute(selectedIndex, 'template', event.target.value.trim())
+                      }}
                     />
                   </Fragment>
                 }
@@ -238,7 +271,7 @@ export default function TableColumnsDialog(props:InputProps){
               <Button autoFocus onClick={handleClose}>
                 {intl.get('cancel')}
               </Button>
-              <Button autoFocus onClick={handleClose} color="primary">
+              <Button autoFocus onClick={handleChange} color="primary">
                 {intl.get('save')}
               </Button>
             </DialogActions>
