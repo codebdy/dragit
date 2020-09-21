@@ -74,9 +74,9 @@ export function ListViewHead(props: ListViewHeadProps) {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
-        {columns.map((headCell) => (
+        {columns.map((headCell,index) => (
           <TableCell
-            key={headCell.field}
+            key={headCell.field + '-' + index}
             sortDirection={orderBy === headCell.field ? order : false}
           >
             <TableSortLabel
