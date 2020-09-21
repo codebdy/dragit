@@ -86,7 +86,7 @@ const theme = responsiveFontSizes(createMuiTheme({
 export default function TableColumnsDialog(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
-  const [columns, setComuns] = React.useState(value);
+  const [columns, setComuns] = React.useState(JSON.parse(JSON.stringify(value)));
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -107,6 +107,29 @@ export default function TableColumnsDialog(props:InputProps){
   const handleClose = () => {
     setOpen(false);
   };
+  const handleRemove = (index:number) => {
+    if(index === selectedIndex){
+      (index + 1) >= columns.length ? setSelectedIndex(index-1) : setSelectedIndex(index);;
+    }
+    columns.splice(index,1);
+    setComuns([...columns]);
+  };
+  const handelAddNew = ()=>{
+    columns.push({field:'new-field', label:'New Field'});
+    setComuns([...columns]);
+    setSelectedIndex(columns.length - 1);
+  };
+  const handleChangePosition = (sourceIndex:number, targetIndex:number)=>{
+    if(sourceIndex === selectedIndex){
+      setSelectedIndex(targetIndex);
+    }
+    if(targetIndex === selectedIndex){
+      setSelectedIndex(sourceIndex);
+    }
+    columns[sourceIndex] = columns.splice(targetIndex, 1, columns[sourceIndex])[0]
+    setComuns([...columns]);
+  }
+
 
   return (
 
@@ -121,7 +144,14 @@ export default function TableColumnsDialog(props:InputProps){
             {intl.get('column-editor')}
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>
-              <TableColumnsList columns={columns} onSelected ={handleSelected} />
+              <TableColumnsList 
+                columns={columns} 
+                selectedIndex={selectedIndex} 
+                onSelected ={handleSelected}
+                onAddNew = {handelAddNew} 
+                onRemove = {handleRemove}
+                onChangePosition = {handleChangePosition}
+              />
               <div className = {classes.itemContent}>
                 {
                   selectedIndex >=0 &&

@@ -15,27 +15,50 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 220,
       backgroundColor: theme.palette.background.paper,
     },
+    item:{
+      userSelect:"none",
+    }
   }),
 );
 
-export default function TableColumnsList(props:{columns:Array<ListViewColumn>, onSelected:(index:number)=>void}) {
-  const {columns, onSelected} = props; 
+export default function TableColumnsList(
+    props:{
+        columns:Array<ListViewColumn>, 
+        selectedIndex:number, 
+        onSelected:(index:number)=>void,
+        onAddNew:()=>void,
+        onRemove:(index:number)=>void,
+        onChangePosition:(sourceIndex:number, targetIndex:number)=>void,
+  }) {
+  const {columns, selectedIndex, onSelected, onAddNew, onRemove, onChangePosition} = props; 
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
-
+  const [draggedIndex, setDraggedIndex] = React.useState(-1);
   const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    setSelectedIndex(index);
     onSelected(index);
   };
 
   const handleRemove = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     index: number)=>{
-      event.stopPropagation();
-      event.nativeEvent.stopImmediatePropagation();
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    onRemove(index);
+  };
+
+  const handleAdd = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+    onAddNew();
+  };
+
+  const handleDragOver = (event:React.DragEvent<HTMLLIElement>, index:number)=>{
+    if(index !== draggedIndex){
+      event.preventDefault();
     }
+  }
+
+  const handleDrop = (targetIndex:number)=>{
+    onChangePosition(draggedIndex, targetIndex);
+  }
 
   return (
     <div className={classes.root}>
@@ -44,10 +67,15 @@ export default function TableColumnsList(props:{columns:Array<ListViewColumn>, o
           columns.map((column, index)=>{
             return(
               <ListItem
+                className = {classes.item}
+                draggable="true"
                 key = {column.field + '-' + index}
-                button
                 selected={selectedIndex === index}
-                onClick={(event) => handleListItemClick(event, index)}
+                onClick={(event) => handleListItemClick(index)}
+                onDragStart={event => setDraggedIndex(index)}
+                onDragOver = {event=> handleDragOver(event, index)}
+                onDragEnd = {event =>{setDraggedIndex(-1)}}
+                onDrop = {event =>{handleDrop(index)}}
               >
                 <ListItemText primary={column.field} />
                 <IconButton aria-label="delete"
@@ -60,7 +88,7 @@ export default function TableColumnsList(props:{columns:Array<ListViewColumn>, o
           })
         }
         
-          <IconButton>
+          <IconButton onClick={handleAdd} >
             <AddIcon />
           </IconButton>
         
