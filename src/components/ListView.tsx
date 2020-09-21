@@ -161,7 +161,7 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
                       {
                         columns.map((column, colIndex) => {
                           return(
-                            <TableCell key={row.id + '-' + column.field} {... column.props}>
+                            <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props}>
                               {row[column.field]}
                             </TableCell>
                           )
