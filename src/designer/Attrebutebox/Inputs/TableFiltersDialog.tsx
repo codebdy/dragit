@@ -7,6 +7,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import TableMetaList from './TableMetaList';
 import intl from 'react-intl-universal';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -25,6 +26,11 @@ const styles = (theme: Theme) =>
     },
     itemInput:{
         margin: theme.spacing(1),
+    },
+
+    nameValueItem:{
+      display:'flex',
+      flexFlow:'row',
     },
 
     closeButton: {
@@ -83,7 +89,7 @@ const theme = responsiveFontSizes(createMuiTheme({
 
 }));
 
-export default function TableColumnsDialog(props:InputProps){
+export default function TableFiltersDialog(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
@@ -114,7 +120,7 @@ export default function TableColumnsDialog(props:InputProps){
     setComuns([...columns]);
   };
   const handelAddNew = ()=>{
-    columns.push({field:'new-field', label:'New Field', props:{}});
+    columns.push({field:'new-filter', label:'New Filter', props:{}});
     setComuns([...columns]);
     setSelectedIndex(columns.length - 1);
   };
@@ -139,6 +145,9 @@ export default function TableColumnsDialog(props:InputProps){
     setComuns([...columns]);
   };
 
+  const handleAddNameValueItem = ()=>{
+
+  };
 
   return (
 
@@ -150,7 +159,7 @@ export default function TableColumnsDialog(props:InputProps){
           scroll = 'paper'
         >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            {intl.get('column-editor')}
+            {intl.get('filter-editor')}
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>
               <TableMetaList 
@@ -167,17 +176,17 @@ export default function TableColumnsDialog(props:InputProps){
                   <Fragment>
                     <TextField 
                       className = {classes.itemInput} 
-                      label={intl.get('field')}
+                      label={intl.get('slug')}
                       variant="outlined" 
                       fullWidth
                       value = {columns[selectedIndex].field} 
                       onChange = {event=>{
-                        handleChangeAttribute(selectedIndex, 'field', event.target.value.trim())
+                        handleChangeAttribute(selectedIndex, 'slug', event.target.value.trim())
                       }}
                     />
                     <TextField 
                       className = {classes.itemInput} 
-                      label={intl.get('column-name')} 
+                      label={intl.get('name')} 
                       variant="outlined" 
                       fullWidth
                       value = {columns[selectedIndex].label} 
@@ -185,83 +194,34 @@ export default function TableColumnsDialog(props:InputProps){
                         handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
                       }}
                     />
-                    <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
-                      <InputLabel id="align-select-label">{intl.get('align')}</InputLabel>
-                      <Select
-                        labelId="align-select-label"
-                        id="align-select"
-                        label={intl.get('align')}
-                        value = {columns[selectedIndex].props.align || ''}
-                        onChange = {event=>{
-                          handleChangeProp(selectedIndex, 'align', event.target.value)
-                        }}
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={'center'}>Center</MenuItem>
-                        <MenuItem value={'inherit'}>Inherit</MenuItem>
-                        <MenuItem value={'justify'}>Justify</MenuItem>
-                        <MenuItem value={'left'}>Left</MenuItem>
-                        <MenuItem value={'right'}>Right</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
-                      <InputLabel id="align-select-label">{intl.get('size')}</InputLabel>
-                      <Select
-                        labelId="size-select-label"
-                        id="size-select"
-                        label = {intl.get('size')}
-                        value = {columns[selectedIndex].props.size || ''}
-                        onChange = {event=>{
-                          handleChangeProp(selectedIndex, 'size', event.target.value)
-                        }}
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={'medium'}>Medium</MenuItem>
-                        <MenuItem value={'small'}>Small</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControlLabel
-                      className = {classes.itemInput}
-                      control={
-                        <Switch
-                          color="primary"
-                          checked = {!!columns[selectedIndex].searchable}
-                          onChange = {event=>{
-                            handleChangeAttribute(selectedIndex, 'searchable', event.target.checked)
-                          }}                        
-                        />
-                      }
-                      label={intl.get('searchable')}
-                    />
-                    <FormControlLabel
-                      className = {classes.itemInput}
-                      control={
-                        <Switch
-                          color="primary"
-                          checked = {!!columns[selectedIndex].sortable}
-                          onChange = {event=>{
-                            handleChangeAttribute(selectedIndex, 'sortable', event.target.checked)
-                          }}                        
-                        />
-                      }
-                      label={intl.get('sortable')}
-                    />
-                    <TextField
+                    <div className = {classes.itemInput}>{intl.get('filter-conditions')}</div>
+                    <div className ={classes.nameValueItem}>
+                      <TextField 
                       className = {classes.itemInput} 
-                      label={intl.get('show-template')}
-                      multiline
-                      fullWidth
-                      rows={4}
-                      variant="outlined"
-                      value = {columns[selectedIndex].template || ''}
+                      label={intl.get('slug')} 
+                      variant="outlined" 
+                      size="small"
+                       
                       onChange = {event=>{
-                        handleChangeAttribute(selectedIndex, 'template', event.target.value.trim())
+                        handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
                       }}
                     />
+                      <TextField 
+                      className = {classes.itemInput} 
+                      label={intl.get('name')} 
+                      variant="outlined" 
+                      size="small"
+                      
+                      onChange = {event=>{
+                        handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
+                      }}
+                    />
+                    </div>
+                    <div>
+                    <IconButton onClick={handleAddNameValueItem} >
+                      <AddIcon />
+                    </IconButton>
+                    </div>
                   </Fragment>
                 }
               

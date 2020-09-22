@@ -3,6 +3,7 @@ import { IMeta } from "../Node/IMeta";
 import { INode } from "../Node/INode";
 import { IField } from "./IRule";
 import TableColumnsDialog from "designer/Attrebutebox/Inputs/TableColumnsDialog";
+import TableFiltersDialog from "designer/Attrebutebox/Inputs/TableFiltersDialog";
 
 export class ListViewRule extends Rule{
   empertyPadding = '';
@@ -21,6 +22,11 @@ export class ListViewRule extends Rule{
         name:'columns',
         label:'columns',
         input:TableColumnsDialog,
+      },
+      {
+        name:'filters',
+        label:'filters',
+        input:TableFiltersDialog,
       },
 
     ]

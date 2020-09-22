@@ -1,4 +1,5 @@
 {
+    "name":"名称",
     "design-layout": "布局设计",
     "modules": "模块管理",
     "theme-settings": "主题配置",
@@ -34,5 +35,9 @@
     "size":"大小",
     "searchable":"可检索",
     "sortable":"可排序",
-    "show-template":"显示模板"
+    "show-template":"显示模板",
+
+    "filter-editor":"表格过滤器编辑",
+    "slug":"标识",
+    "filter-conditions":"过滤器条件列表"
 }
