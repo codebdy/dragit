@@ -30,12 +30,16 @@ export default function ListViewColumnsDialog(props:InputProps){
     columns[selectedIndex].props[name] = value;
     setComuns([...columns]);
   };
-
+  const handleAddNew = ()=>{
+    columns.push({field:'new-field', label:'New Field', props:{}});
+    setSelectedIndex(columns.length - 1);
+  };
 
   return (
     <MetaListDialog
       title ={intl.get('column-editor')}
       value = {columns}
+      onAddNew = {handleAddNew}
       selectedIndex = {selectedIndex}
       onChange = {newValue=>{setComuns(newValue)}}
       onSave = {()=>{onChange(field, JSON.parse(JSON.stringify(columns)))}}

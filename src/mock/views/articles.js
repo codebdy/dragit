@@ -86,7 +86,23 @@ export default {
                     props:{
                     }
                   }
+                ],
+
+                filters:[
+                  {
+                    slug:'gender',
+                    label:'性别',
+                    searchable:true,
+
+
+                  },
+                  {
+                    slug:'publish',
+                    label:'已发布',
+
+                  }
                 ]
+
               }
             }],
           }

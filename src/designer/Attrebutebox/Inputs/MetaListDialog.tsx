@@ -83,7 +83,8 @@ export interface MetaListDialogProps{
   title:string;
   value:Array<MetaListItem>;
   selectedIndex:number;
-  children:React.ReactNode;  
+  children:React.ReactNode;
+  onAddNew:()=>void;  
   onChange:(newValue:Array<MetaListItem>)=>void;
   onSave:()=>void;
   onSelected:(number:number)=>void;
@@ -91,7 +92,7 @@ export interface MetaListDialogProps{
 
 export default function MetaListDialog(props:MetaListDialogProps){
   const classes = useStyles();
-  const {title, value, selectedIndex, onChange, onSave, onSelected, children} = props;
+  const {title, value, selectedIndex, onAddNew, onChange, onSave, onSelected, children} = props;
   const items = value;
   
   const handleSelected = (index:number)=>{
@@ -117,11 +118,7 @@ export default function MetaListDialog(props:MetaListDialogProps){
     items.splice(index,1);
     onChange([...items]);
   };
-  const handelAddNew = ()=>{
-    items.push({field:'new-item', label:'New Item', props:{}});
-    onChange([...items]);
-    onSelected(items.length - 1);
-  };
+
   const handleChangePosition = (sourceIndex:number, targetIndex:number)=>{
     if(sourceIndex === selectedIndex){
       onSelected(targetIndex);
@@ -150,7 +147,7 @@ export default function MetaListDialog(props:MetaListDialogProps){
                 items={items} 
                 selectedIndex={selectedIndex} 
                 onSelected ={handleSelected}
-                onAddNew = {handelAddNew} 
+                onAddNew = {onAddNew} 
                 onRemove = {handleRemove}
                 onChangePosition = {handleChangePosition}
               />

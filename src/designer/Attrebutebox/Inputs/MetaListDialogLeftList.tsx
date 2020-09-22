@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export interface MetaListItem{
-  field:string;
   label:string;
   [key:string]:any;
 }
@@ -69,12 +68,12 @@ export default function MetaListDialogLeftList(
     <div className={classes.root}>
       <List component="nav">
         {
-          items.map((column, index)=>{
+          items.map((item, index)=>{
             return(
               <ListItem
                 className = {classes.item}
                 draggable="true"
-                key = {column.field + '-' + index}
+                key = {item.label + '-' + index}
                 selected={selectedIndex === index}
                 onClick={(event) => handleListItemClick(index)}
                 onDragStart={event => setDraggedIndex(index)}
@@ -82,11 +81,11 @@ export default function MetaListDialogLeftList(
                 onDragEnd = {event =>{setDraggedIndex(-1)}}
                 onDrop = {event =>{handleDrop(index)}}
               >
-                <ListItemText primary={column.field} />
+                <ListItemText primary={item.label} />
                 <IconButton aria-label="delete"
                   onClick = {(event) => handleRemove(event, index)}
                 >
-                  <DeleteIcon fontSize="small" />
+                  <CloseIcon fontSize="small" />
                 </IconButton>
               </ListItem>              
             )
