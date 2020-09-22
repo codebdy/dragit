@@ -2,7 +2,7 @@ import { Rule } from "./Rule";
 import { IMeta } from "../Node/IMeta";
 import { INode } from "../Node/INode";
 import { IField } from "./IRule";
-import TableColumnsDialog from "designer/Attrebutebox/Inputs/TableColumnsDialog";
+import ListViewColumnsDialog from "designer/Attrebutebox/Inputs/ListViewColumnsDialog";
 import TableFiltersDialog from "designer/Attrebutebox/Inputs/TableFiltersDialog";
 
 export class ListViewRule extends Rule{
@@ -21,7 +21,7 @@ export class ListViewRule extends Rule{
       {
         name:'columns',
         label:'columns',
-        input:TableColumnsDialog,
+        input:ListViewColumnsDialog,
       },
       {
         name:'filters',

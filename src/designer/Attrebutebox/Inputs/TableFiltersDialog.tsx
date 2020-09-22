@@ -5,7 +5,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
-import TableMetaList from './TableMetaList';
+import MetaListDialogLeftList from './MetaListDialogLeftList';
 import intl from 'react-intl-universal';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -162,8 +162,8 @@ export default function TableFiltersDialog(props:InputProps){
             {intl.get('filter-editor')}
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>
-              <TableMetaList 
-                columns={columns} 
+              <MetaListDialogLeftList 
+                items={columns} 
                 selectedIndex={selectedIndex} 
                 onSelected ={handleSelected}
                 onAddNew = {handelAddNew} 
