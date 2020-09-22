@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider, TextField, Switch, FormControlLabel, MenuItem, Select, FormControl, InputLabel} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider} from '@material-ui/core';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
@@ -118,7 +118,7 @@ export default function MetaListDialog(props:MetaListDialogProps){
     onChange([...items]);
   };
   const handelAddNew = ()=>{
-    items.push({field:'new-field', label:'New Field', props:{}});
+    items.push({field:'new-item', label:'New Item', props:{}});
     onChange([...items]);
     onSelected(items.length - 1);
   };
@@ -155,9 +155,7 @@ export default function MetaListDialog(props:MetaListDialogProps){
                 onChangePosition = {handleChangePosition}
               />
               <div className = {classes.itemContent}>
-                {
-                  selectedIndex >=0 && children
-                }
+                {children}
               
               </div>
             </DialogContent>

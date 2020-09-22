@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function TableMetaList(
+export default function MetaListInput(
     props:{
         columns:Array<ListViewColumn>, 
         selectedIndex:number, 
