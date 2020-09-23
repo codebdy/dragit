@@ -52,7 +52,7 @@ export default function ListViewColumnsDialog(props:InputProps){
             label={intl.get('field')}
             variant="outlined" 
             fullWidth
-            value = {columns[selectedIndex].field} 
+            value = {columns[selectedIndex].field || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'field', event.target.value.trim())
             }}
@@ -62,7 +62,7 @@ export default function ListViewColumnsDialog(props:InputProps){
             label={intl.get('column-name')} 
             variant="outlined" 
             fullWidth
-            value = {columns[selectedIndex].label} 
+            value = {columns[selectedIndex].label || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
             }}

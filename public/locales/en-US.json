@@ -39,6 +39,10 @@
 
     "filter-editor":"Table Filters",
     "slug":"Slug",
-    "filter-conditions":"Filter Conditions"
+    "filter-conditions":"Filter Conditions",
+
+    "action-editor":"Action Editor",
+    "action-icon":"Action Icon"
+   
 
 }

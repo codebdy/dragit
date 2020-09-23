@@ -4,8 +4,6 @@ import { InputProps } from './InputProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 
-import MetaListInput, { MetaItem } from './MetaListInput';
-
 const styles = (theme: Theme) =>
   createStyles({
     itemInput:{
@@ -16,7 +14,7 @@ const styles = (theme: Theme) =>
 
 const useStyles = makeStyles(styles);
 
-export default function ListViewFiltersDialog(props:InputProps){
+export default function ListViewActionDialog(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [filters, setFilters] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
@@ -27,19 +25,15 @@ export default function ListViewFiltersDialog(props:InputProps){
     setFilters([...filters]);
   };
 
-  const handleNameValueListChange = (metas:Array<MetaItem>)=>{
-    filters[selectedIndex].conditions = metas;
-    setFilters([...filters]);
-  };
 
   const handleAddNew = ()=>{
-    filters.push({slug:'new-filter', label:'New Filter', props:{}});
+    filters.push({slug:'new-action', label:'New Action', props:{}});
     setSelectedIndex(filters.length - 1);
   };
   
   return (
     <MetaListDialog
-      title ={intl.get('filter-editor')}
+      title ={intl.get('action-editor')}
       value = {filters}
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
@@ -68,10 +62,15 @@ export default function ListViewFiltersDialog(props:InputProps){
               handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
             }}
           />
-          <MetaListInput 
-            label={intl.get('filter-conditions')}
-            value = {filters[selectedIndex].conditions}
-            onChange = {handleNameValueListChange} 
+          <TextField 
+            className = {classes.itemInput} 
+            label={intl.get('action-icon')} 
+            variant="outlined" 
+            fullWidth
+            value = {filters[selectedIndex].icon || ''} 
+            onChange = {event=>{
+              handleChangeAttribute(selectedIndex, 'icon', event.target.value.trim())
+            }}
           />
         </Fragment>
       }

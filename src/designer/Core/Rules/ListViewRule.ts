@@ -5,6 +5,7 @@ import { IField } from "./IRule";
 import ListViewColumnsDialog from "designer/Attrebutebox/Inputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "designer/Attrebutebox/Inputs/ListViewFiltersDialog";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
+import ListViewActionDialog from "designer/Attrebutebox/Inputs/ListViewActionDialog";
 
 export class ListViewRule extends Rule{
   empertyPadding = '';
@@ -32,12 +33,12 @@ export class ListViewRule extends Rule{
       {
         name:'rowActions',
         label:'row-actions',
-        input:ListViewFiltersDialog,
+        input:ListViewActionDialog,
       },
       {
         name:'batchActions',
         label:'batch-actions',
-        input:ListViewFiltersDialog,
+        input:ListViewActionDialog,
       },
       {
         name:'rowsPerPageOptions',

@@ -39,5 +39,9 @@
 
     "filter-editor":"表格过滤器编辑",
     "slug":"标识",
-    "filter-conditions":"过滤器条件列表"
+    "filter-conditions":"过滤器条件列表",
+
+    "action-editor":"Action 编辑器",
+    "action-icon":"Action 图标"
+
 }
