@@ -4,8 +4,9 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
-import MetaListDialogLeftList, { MetaListItem } from './MetaListDialogLeftList';
+import MetaListDialogLeftList from './MetaListDialogLeftList';
 import intl from 'react-intl-universal';
+import { ListViewMetaItem } from 'components/ListViewMetaItem';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -81,11 +82,11 @@ const theme = responsiveFontSizes(createMuiTheme({
 
 export interface MetaListDialogProps{
   title:string;
-  value:Array<MetaListItem>;
+  value:Array<ListViewMetaItem>;
   selectedIndex:number;
   children:React.ReactNode;
   onAddNew:()=>void;  
-  onChange:(newValue:Array<MetaListItem>)=>void;
+  onChange:(newValue:Array<ListViewMetaItem>)=>void;
   onSave:()=>void;
   onSelected:(number:number)=>void;
 }

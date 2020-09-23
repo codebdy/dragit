@@ -11,8 +11,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import classNames from 'classnames';
 import { Data, ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
-import { ListViewColumn } from './ListViewColumn';
-
+import { ListViewMetaItem } from './ListViewMetaItem';
+import intl from 'react-intl-universal';
 
 /*function createData(
   name: string,
@@ -52,8 +52,20 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const ListView = React.forwardRef((props: {className:string, helperText?:string, value?:any, columns:Array<ListViewColumn>}, ref:any)=>{
-  const {className, helperText, value, columns, ...rest} = props
+const ListView = React.forwardRef((
+    props: {
+      className:string, 
+      helperText?:string, 
+      value?:any, 
+      columns:Array<ListViewMetaItem>, 
+      fitlers:Array<ListViewMetaItem>,
+      batchActions:Array<ListViewMetaItem>,
+      rowActions:Array<ListViewMetaItem>,
+      rowsPerPageOptions:string,
+      defalutRowsPerPage:number 
+    }, ref:any)=>{
+
+  const {className, helperText, value, columns, fitlers, rowActions, batchActions, rowsPerPageOptions = "10,25,50", defalutRowsPerPage = 10, ...rest} = props
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
@@ -61,7 +73,15 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
   const [page, setPage] = React.useState(0);
   const rows: any[] = value? value : [];
   //const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(defalutRowsPerPage);
+
+  const parseRowsPerPageOptions = ()=>{
+    let ret: number[] = [];
+    rowsPerPageOptions?.replace('，',',').split(',').forEach(i=>{
+      ret.push(parseInt(i));
+    })
+    return ret;
+  }
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -121,7 +141,6 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
         <ListViewToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
-            
             aria-labelledby="tableTitle"
             size={'medium'}
             aria-label="enhanced table"
@@ -139,7 +158,6 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
               {rows.map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `listview-${index}`;
-
                   return (
                     <TableRow
                       hover
@@ -161,16 +179,12 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
                       {
                         columns.map((column, colIndex) => {
                           return(
-                            <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props}>
-                              {row[column.field]}
+                            <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props} 
+                            dangerouslySetInnerHTML={{__html: row[column.field]}} >
                             </TableCell>
                           )
                         })
                       }
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right"><div dangerouslySetInnerHTML={{__html: `<span style="color:red;" >${row.protein}</span>`}} /></TableCell>
                     </TableRow>
                   );
                 })}
@@ -183,14 +197,19 @@ const ListView = React.forwardRef((props: {className:string, helperText?:string,
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 50]}
+          rowsPerPageOptions={parseRowsPerPageOptions()}
           component="div"
-          labelRowsPerPage = "每页条数："
+          labelRowsPerPage = {intl.get('rows-per-page') + ':'}
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
+          SelectProps={{
+            inputProps: { 'aria-label': 'rows per page' },
+            //native: true,
+            id:'pagination',
+          }}
         />
       </Paper>
     </div>

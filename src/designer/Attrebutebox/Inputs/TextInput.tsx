@@ -26,7 +26,7 @@ export default function TextInput(props:InputProps){
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    let newValue = parseInt(event.target.value as string) 
+    let newValue = (event.target.value as string).trim();
     setInputValue(newValue);
     onChange(field, newValue);
   };  

@@ -46,7 +46,7 @@ export class ListViewRule extends Rule{
         input:TextInput,
       },
       {
-        name:'rowsPerPage',
+        name:'defalutRowsPerPage',
         label:'rows-per-page',
         input:TextInput,
       },
