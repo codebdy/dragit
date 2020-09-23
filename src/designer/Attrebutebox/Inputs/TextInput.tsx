@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function TextInput(props:InputProps){
   const classes = useStyles();
-  const {field, value, onChange, schema} = props;
+  const {field, value, onChange} = props;
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
