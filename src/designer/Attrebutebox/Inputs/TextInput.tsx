@@ -13,13 +13,14 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:'4px',
       '&:focus':{
         border:'#0a6fb7 solid 1px'
-      }
+      },
+      width:'100%',
     }
 
   }),
 );
 
-export default function NumberInput(props:InputProps){
+export default function TextInput(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange, schema} = props;
   const [inputValue, setInputValue] = React.useState(value);
@@ -31,12 +32,9 @@ export default function NumberInput(props:InputProps){
   };  
 
   return (
-    <input type="number"
-      min={schema?.min}
-      max={schema?.max}
-      step={schema?.step}
+    <input 
       className={classes.input}
-      value={inputValue||schema?.min}
+      value={inputValue||''}
       onChange={handleChange}
     />
   )
