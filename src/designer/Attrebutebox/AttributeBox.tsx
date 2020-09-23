@@ -77,7 +77,7 @@ export default function AttributeBox(props:{node:INode|null}){
               node.rule.getFields().map((field:IField)=>{
                 return(
                   <AttributeRow key={node.id + '-' + field.name}>
-                    <RowLabel>{field.label}</RowLabel>
+                    <RowLabel>{intl.get(field.label)||field.label}</RowLabel>
                     <RowValue>
                       <field.input
                         field={field.name}

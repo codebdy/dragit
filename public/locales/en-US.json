@@ -42,7 +42,12 @@
     "filter-conditions":"Filter Conditions",
 
     "action-editor":"Action Editor",
-    "action-icon":"Action Icon"
+    "action-icon":"Action Icon",
    
-
+    "columns":"Columns",
+    "filters":"Filters",
+    "row-actions":"Row Actions",
+    "batch-actions":"Batch Actions",
+    "rows-per-page-options":"Rows Options",
+    "rows-per-page":"Rows"
 }

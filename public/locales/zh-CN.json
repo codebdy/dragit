@@ -41,7 +41,13 @@
     "slug":"标识",
     "filter-conditions":"过滤器条件列表",
 
-    "action-editor":"Action 编辑器",
-    "action-icon":"Action 图标"
+    "action-editor":"指令编辑器",
+    "action-icon":"指令图标",
 
+    "columns":"列",
+    "filters":"过滤器",
+    "row-actions":"行指令",
+    "batch-actions":"列指令",
+    "rows-per-page-options":"行数选项",
+    "rows-per-page":"每页行数"
 }
