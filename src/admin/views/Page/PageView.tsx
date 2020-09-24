@@ -8,7 +8,7 @@ import { thunkPageSchema } from "store/page/thunks";
 import PageForm from "./PageForm";
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
-import { FormActionHandle } from './FormAction';
+import { PageActionHandle } from './PageAction';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -42,10 +42,10 @@ export default function PageView(props:{match: any }) {
         <PageSkeleton />
       :
         <PageForm model={pageInStore.model} validationSchema = {validationSchema}>
-          {(props: any, onFormAction: FormActionHandle)=>(
+          {(props: any, onPageAction: PageActionHandle)=>(
             pageInStore.schema?.map((child:RXElement)=>{
               return (
-                <ElementRender key={child.id} element={child} formik={props} onFormAction={onFormAction}/>
+                <ElementRender key={child.id} element={child} formik={props} onPageAction={onPageAction}/>
               )
             })
           )}

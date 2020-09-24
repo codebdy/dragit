@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 
-import { FormAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, PageJumper } from './FormAction';
+import { PageAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, PageJumper } from './PageAction';
 import { withRouter } from 'react-router-dom';
 
 const resolvePageUrl=(page:PageJumper)=>{
@@ -11,7 +11,7 @@ const resolvePageUrl=(page:PageJumper)=>{
 const PageForm = (props:any) =>{
   const {children, history, model, validationSchema} = props;
 
-  const formActionHandle = (action:FormAction)=>{
+  const formActionHandle = (action:PageAction)=>{
     switch (action.name){
       case JUMP_TO_PAGE_ACTION:
         const url = resolvePageUrl(action.page);

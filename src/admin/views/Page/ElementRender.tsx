@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 import { resolveNode } from 'components/resoveNode';
 import { RXElement } from './RXElement';
-import { FormActionHandle } from './FormAction';
+import { PageActionHandle } from './PageAction';
 
-export default function ElementRender(props:{element:RXElement, formik:any, onFormAction: FormActionHandle}){
-  const {element, formik, onFormAction} = props;
+export default function ElementRender(props:{element:RXElement, formik:any, onPageAction: PageActionHandle}){
+  const {element, formik, onPageAction} = props;
   const onClickAction = element.meta.props?.onClick;
   const Element = resolveNode(element.meta.name);
   const handleOnClick = ()=>{
     if(!onClickAction){
       return
     }
-    onFormAction(onClickAction);
+    onPageAction(onClickAction);
   };
 
   //const field = element.meta.props?.field;
@@ -50,7 +50,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onFo
       {rxText}
       {element.children?.map((child: RXElement)=>{
         return (
-          <ElementRender key={child.id} element={child} formik={formik} onFormAction={onFormAction}/>
+          <ElementRender key={child.id} element={child} formik={formik} onPageAction={onPageAction}/>
         )
       })}
     </Element>)

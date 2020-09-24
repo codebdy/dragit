@@ -1,4 +1,4 @@
-import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/FormAction"
+import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/PageAction"
 export default {
   initAction:{
     method:'get',
@@ -7,6 +7,8 @@ export default {
       modelName:'/RXDrag/Model/Article',
     },      
   },
+  //不带验证表单
+  widthForm:false,
   fields:[
   ],
   layout:[
@@ -93,8 +95,12 @@ export default {
                     slug:'gender',
                     label:'性别',
                     searchable:true,
-
-
+                    conditions:[
+                      {
+                        slug:'male',
+                        label:'男'
+                      }
+                    ]
                   },
                   {
                     slug:'publish',

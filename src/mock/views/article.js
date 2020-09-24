@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "admin/views/Page/FormAction";
+import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
 
 export default {
   initAction:{
@@ -8,6 +8,8 @@ export default {
         modelName:'/RXDrag/Model/Article',
       },      
   },
+  //带验证表单
+  widthForm:true,
 
   layout:[{
     name: 'Grid',

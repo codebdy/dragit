@@ -3,7 +3,7 @@ import { Action } from "redux";
 import { RootState } from "store";
 import axios from 'axios';
 import {loadingSchemaAction, receivedSchemaAction, requestSchemaFailureAction, requestModelFailureAction, loadingModelAction, receivedModelAction} from './actions'
-import { PageJumper } from "admin/views/Page/FormAction";
+import { PageJumper } from "admin/views/Page/PageAction";
 
 interface AxiosAction{
   method:'get'|'GET'|'post'|'POST',

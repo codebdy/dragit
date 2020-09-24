@@ -10,11 +10,11 @@ export interface PageJumper{
   dataId?:string,
 }
 
-export interface FormAction{
+export interface PageAction{
   name:string;
   [key:string]: any;
 }
 
-export interface FormActionHandle{
-  (formAction:FormAction): void;
+export interface PageActionHandle{
+  (formAction:PageAction): void;
 }
