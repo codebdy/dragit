@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Tooltip, IconButton, FormLabel, RadioGroup, FormControlLabel, Radio, Button, makeStyles, Theme, createStyles, Popover } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { ListViewMetaItem } from './ListViewMetaItem';
+import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -108,10 +109,10 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>, v
         
           <div className={classes.actionArea}>
             <Button size="large" onClick={handleClear}>
-              清空
+              {intl.get('clear')}
             </Button>
             <Button size="large" color="primary" onClick={handleClose}>
-              关闭
+              {intl.get('close')}
             </Button>
           </div>         
         </div>
