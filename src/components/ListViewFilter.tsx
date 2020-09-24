@@ -1,32 +1,15 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Menu, { MenuProps } from '@material-ui/core/Menu';
+import React, { Fragment } from 'react';
+import Menu from '@material-ui/core/Menu';
 import { Tooltip, IconButton, FormLabel, RadioGroup, FormControlLabel, Radio, Button, makeStyles, Theme, createStyles } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-    
-  },
-})((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
+import { ListViewMetaItem } from './ListViewMetaItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    paper: {
+      border: '1px solid #d3d4d5',
+      
+    },
     filterContainer: {
       display: 'flex',
       flexFlow: 'column',
@@ -47,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ListViewFilter() {
+export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>}) {
+  const {filters} = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [value, setValue] = React.useState('female');
   const classes = useStyles();
@@ -67,47 +51,61 @@ export default function ListViewFilter() {
   return (
     <div>
       <Tooltip title="Filter list">
-          <IconButton aria-label="filter list" onClick={handleClick}>
+          <IconButton aria-label="filter list"  name="list-view-filter-icon-button" onClick={handleClick}>
             <FilterListIcon />
           </IconButton>
         </Tooltip>
 
-      <StyledMenu
-        id="customized-menu"
+      <Menu
+        id="filter-menu"
+        classes = {{paper:classes.paper}}
         anchorEl={anchorEl}
         keepMounted
-        open={Boolean(anchorEl)}
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}        open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-    <div className={classes.filterContainer}>
+        <div className={classes.filterContainer}>
       
           <div className={classes.scrollArea}>
-          <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <FormControlLabel value="disabled" control={<Radio />} label="(Disabled option)" />
-          </RadioGroup>
-          <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <FormControlLabel value="disabled" control={<Radio />} label="(Disabled option)" />
-          </RadioGroup>
-        </div>
+            {
+              filters?.map((filter, index)=>{
+                return (
+                  <Fragment key = {filter.slug}>
+                    <FormLabel component="legend">{filter.label}</FormLabel>
+                    <RadioGroup aria-label={filter.label} name={filter.slug} value={value} onChange={handleChange}>
+                      {
+                        filter.conditions?.map((condition: any)=>{
+                          return (
+                            <FormControlLabel key={filter.slug + '-' + condition.slug} value={condition.slug} control={<Radio />} label={condition.label} />
+                          )
+                        })
+                      }
+                    </RadioGroup>
+                  </Fragment>
+                )
+              })
+            }
+          </div>
         
-        <div className={classes.actionArea}>
-          <Button size="large" >
-            清空
-          </Button>
-          <Button size="large" color="primary">
-            关闭
-          </Button>
-        </div>         
-      </div>
-      </StyledMenu>
+          <div className={classes.actionArea}>
+            <Button size="large" >
+              清空
+            </Button>
+            <Button size="large" color="primary">
+              关闭
+            </Button>
+          </div>         
+        </div>
+      </Menu>
     </div>
   );
 }

@@ -101,6 +101,23 @@ export default {
                     label:'已发布',
 
                   }
+                ],
+                batchActions:[
+                  {
+                    slug:"publish",
+                    label:"发布",
+                    icon:"mdi-publish",
+                  },
+                  {
+                    slug:"check",
+                    label:"审核",
+                    icon:"mdi-check-bold",
+                  },
+                  {
+                    slug:"delete",
+                    label:"删除",
+                    icon:"mdi-delete",
+                  },
                 ]
 
               }

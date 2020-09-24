@@ -58,14 +58,14 @@ const ListView = React.forwardRef((
       helperText?:string, 
       value?:any, 
       columns:Array<ListViewMetaItem>, 
-      fitlers:Array<ListViewMetaItem>,
+      filters:Array<ListViewMetaItem>,
       batchActions:Array<ListViewMetaItem>,
       rowActions:Array<ListViewMetaItem>,
       rowsPerPageOptions:string,
       defalutRowsPerPage:number 
     }, ref:any)=>{
 
-  const {className, helperText, value, columns, fitlers, rowActions, batchActions, rowsPerPageOptions = "10,25,50", defalutRowsPerPage = 10, ...rest} = props
+  const {className, helperText, value, columns, filters, rowActions, batchActions, rowsPerPageOptions = "10,25,50", defalutRowsPerPage = 10, ...rest} = props
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
@@ -138,7 +138,11 @@ const ListView = React.forwardRef((
   return (
     <div className={classNames(classes.root,className )} {...rest} ref={ref}>
       <Paper>
-        <ListViewToolbar numSelected={selected.length} />
+        <ListViewToolbar 
+          numSelected={selected.length}
+          filters = {filters}
+          batchActions = {batchActions}
+        />
         <TableContainer>
           <Table
             aria-labelledby="tableTitle"

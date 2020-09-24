@@ -4,6 +4,7 @@ import MdiIcon from "./common/MdiIcon";
 import ListViewFilter from "./ListViewFilter";
 import clsx from 'clsx';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { ListViewMetaItem } from "./ListViewMetaItem";
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,11 +30,13 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 
 interface ListViewToolbarProps {
   numSelected: number;
+  filters:Array<ListViewMetaItem>,
+  batchActions:Array<ListViewMetaItem>,
 }
 
 const ListViewToolbar = (props: ListViewToolbarProps) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, filters, batchActions } = props;
 
   return (
     <Toolbar
@@ -63,20 +66,21 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
       )}
       {numSelected > 0 ? (
         <Fragment>
-          <Tooltip title="Delete">
-            <IconButton aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Delete">
-            <IconButton aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
+          {
+            batchActions?.map((action, index)=>{
+              return(
+                <Tooltip title={action.label} key={action.slug}>
+                  <IconButton aria-label={action.label} name={'batch-action-' + action.slug}>
+                    <MdiIcon iconClass = {action.icon} size="20" />
+                  </IconButton>
+                </Tooltip>
+              )
+            })
+          }
         </Fragment>        
       ) : (
         <Fragment>
-          <ListViewFilter/>
+          <ListViewFilter filters = {filters}/>
         </Fragment>        
       )}
     </Toolbar>
