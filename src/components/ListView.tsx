@@ -71,6 +71,7 @@ const ListView = React.forwardRef((
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const rows: any[] = value? value : [];
+  const [filterValues, setFilterValues] = React.useState({});
   //const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(defalutRowsPerPage);
 
@@ -117,6 +118,10 @@ const ListView = React.forwardRef((
     setSelected(newSelected);
   };
 
+  const handleFilterChange = (values:any)=>{
+    setFilterValues(values)
+  }
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -141,6 +146,8 @@ const ListView = React.forwardRef((
           numSelected={selected.length}
           filters = {filters}
           batchActions = {batchActions}
+          filterValues = {filterValues}
+          onFilterChange = {handleFilterChange}
         />
         <TableContainer>
           <Table

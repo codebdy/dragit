@@ -98,12 +98,26 @@ export default {
                       {
                         slug:'male',
                         label:'男'
-                      }
+                      },
+                      {
+                        slug:'female',
+                        label:'女'
+                      },
                     ]
                   },
                   {
                     slug:'publish',
                     label:'已发布',
+                    conditions:[
+                      {
+                        slug:'published',
+                        label:'已发布男'
+                      },
+                      {
+                        slug:'not-published',
+                        label:'未发布'
+                      },
+                    ]
 
                   }
                 ],

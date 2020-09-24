@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import Menu from '@material-ui/core/Menu';
-import { Tooltip, IconButton, FormLabel, RadioGroup, FormControlLabel, Radio, Button, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { Tooltip, IconButton, FormLabel, RadioGroup, FormControlLabel, Radio, Button, makeStyles, Theme, createStyles, Popover } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { ListViewMetaItem } from './ListViewMetaItem';
 
@@ -8,36 +7,41 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
       border: '1px solid #d3d4d5',
-      
     },
+
     filterContainer: {
       display: 'flex',
       flexFlow: 'column',
     },
 
+    label:{
+      marginTop:'10px',
+    },
+
     scrollArea:{
       maxHeight:'300px',
       overflow:'auto',
-      padding: '10px',
+      padding: '10px 20px',
     },
+
     actionArea:{
       display:'flex',
       alignItems:'center',
-      paddingTop:'20px',
+      //paddingTop:'20px',
       justifyContent:'flex-end',
     }
 
   }),
 );
 
-export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>}) {
-  const {filters} = props;
+export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>, values:any, onChange:(values:any)=>void}) {
+  const {filters, values = {}, onChange} = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [value, setValue] = React.useState('female');
   const classes = useStyles();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, filterSlug:string) => {
+    values[filterSlug] = (event.target as HTMLInputElement).value;
+    onChange({...values});
   };
   
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -48,6 +52,10 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>}) 
     setAnchorEl(null);
   };
 
+  const handleClear = ()=>{
+    onChange({});
+  }
+
   return (
     <div>
       <Tooltip title="Filter list">
@@ -56,7 +64,7 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>}) 
           </IconButton>
         </Tooltip>
 
-      <Menu
+      <Popover
         id="filter-menu"
         classes = {{paper:classes.paper}}
         anchorEl={anchorEl}
@@ -70,7 +78,8 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>}) 
         transformOrigin={{
           vertical: 'top',
           horizontal: 'center',
-        }}        open={Boolean(anchorEl)}
+        }}        
+        open={Boolean(anchorEl)}
         onClose={handleClose}
       >
         <div className={classes.filterContainer}>
@@ -80,8 +89,10 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>}) 
               filters?.map((filter, index)=>{
                 return (
                   <Fragment key = {filter.slug}>
-                    <FormLabel component="legend">{filter.label}</FormLabel>
-                    <RadioGroup aria-label={filter.label} name={filter.slug} value={value} onChange={handleChange}>
+                    <FormLabel className={classes.label} component="div">{filter.label}</FormLabel>
+                    <RadioGroup aria-label={filter.label} name={filter.slug} value={values[filter.slug] ||''} 
+                      onChange={e=>handleChange(e, filter.slug)}
+                    >
                       {
                         filter.conditions?.map((condition: any)=>{
                           return (
@@ -97,15 +108,15 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>}) 
           </div>
         
           <div className={classes.actionArea}>
-            <Button size="large" >
+            <Button size="large" onClick={handleClear}>
               清空
             </Button>
-            <Button size="large" color="primary">
+            <Button size="large" color="primary" onClick={handleClose}>
               关闭
             </Button>
           </div>         
         </div>
-      </Menu>
+      </Popover>
     </div>
   );
 }

@@ -3,7 +3,6 @@ import React, { Fragment } from "react";
 import MdiIcon from "./common/MdiIcon";
 import ListViewFilter from "./ListViewFilter";
 import clsx from 'clsx';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { ListViewMetaItem } from "./ListViewMetaItem";
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
@@ -32,11 +31,13 @@ interface ListViewToolbarProps {
   numSelected: number;
   filters:Array<ListViewMetaItem>,
   batchActions:Array<ListViewMetaItem>,
+  filterValues:any, 
+  onFilterChange:(filterValues:any)=>void
 }
 
 const ListViewToolbar = (props: ListViewToolbarProps) => {
   const classes = useToolbarStyles();
-  const { numSelected, filters, batchActions } = props;
+  const { numSelected, filters, batchActions,filterValues,onFilterChange } = props;
 
   return (
     <Toolbar
@@ -80,7 +81,7 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
         </Fragment>        
       ) : (
         <Fragment>
-          <ListViewFilter filters = {filters}/>
+          <ListViewFilter filters = {filters} values={filterValues} onChange = {onFilterChange}/>
         </Fragment>        
       )}
     </Toolbar>
