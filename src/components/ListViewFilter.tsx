@@ -6,7 +6,7 @@ import { ListViewMetaItem } from './ListViewMetaItem';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      border: '1px solid #d3d4d5',
+      paddingBottom:theme.spacing(0.5),
     },
 
     filterContainer: {
@@ -15,19 +15,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     label:{
-      marginTop:'10px',
+      marginTop:theme.spacing(1),
     },
 
     scrollArea:{
       maxHeight:'300px',
       overflow:'auto',
-      padding: '10px 20px',
+      padding: theme.spacing(1, 3),
     },
 
     actionArea:{
       display:'flex',
       alignItems:'center',
-      //paddingTop:'20px',
       justifyContent:'flex-end',
     }
 
@@ -69,7 +68,7 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>, v
         classes = {{paper:classes.paper}}
         anchorEl={anchorEl}
         keepMounted
-        elevation={0}
+        elevation={3}
         getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
