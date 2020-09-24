@@ -14,33 +14,6 @@ import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
 
-/*function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-): Data {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];*/
-//const rows: any[] = [];
-
 type Order = 'asc' | 'desc';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -91,19 +64,19 @@ const ListView = React.forwardRef((
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      //const newSelecteds = rows.map((n) => n.name);
-      //setSelected(newSelecteds);
+      const newSelecteds = rows.map((n) => n.id);
+      setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected: string[] = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -166,17 +139,17 @@ const ListView = React.forwardRef((
             />
             <TableBody>
               {rows.map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `listview-${index}`;
                   return (
                     <TableRow
                       hover
                       id={row.id}
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
