@@ -8,8 +8,6 @@ export default {
         modelName:'/RXDrag/Model/Article',
       },      
   },
-  //带验证表单
-  widthForm:true,
 
   layout:[{
     name: 'Grid',

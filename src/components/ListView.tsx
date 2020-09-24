@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const ListView = React.forwardRef((
     props: {
       className:string, 
-      helperText?:string, 
       value?:any, 
       columns:Array<ListViewMetaItem>, 
       filters:Array<ListViewMetaItem>,
@@ -65,7 +64,7 @@ const ListView = React.forwardRef((
       defalutRowsPerPage:number 
     }, ref:any)=>{
 
-  const {className, helperText, value, columns, filters, rowActions, batchActions, rowsPerPageOptions = "10,25,50", defalutRowsPerPage = 10, ...rest} = props
+  const {className, value, columns, filters, rowActions, batchActions, rowsPerPageOptions = "10,25,50", defalutRowsPerPage = 10, ...rest} = props
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');

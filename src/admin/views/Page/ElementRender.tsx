@@ -28,20 +28,25 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
     handleReset,
   } = formik;
   let metaProps = element.meta.props? element.meta.props :{};
-  const {rxText, field, ...rest} = metaProps as any;
+  const {rxText, field, noValidation, ...rest} = metaProps as any;
 
   let elementProps:any = {...rest,  onClick:handleOnClick}
-  //console.log(formik);
   const value = field && values && values[field];
   if(field){
     elementProps = {
       ...elementProps,
       name: field,
       value: value || '',
-      error: errors[field] && touched[field],
-      onChange: handleChange,
-      onBlur: handleBlur,
+      error:   errors[field] && touched[field],
+      onChange:  handleChange,
+      onBlur:  handleBlur,
       helperText: (errors[field] && touched[field]) && errors[field],    
+    }
+
+    if(noValidation){
+      delete elementProps.onBlur;
+      delete elementProps.helperText;
+      delete elementProps.error;
     }
   }
 

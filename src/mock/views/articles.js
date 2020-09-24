@@ -7,8 +7,6 @@ export default {
       modelName:'/RXDrag/Model/Article',
     },      
   },
-  //不带验证表单
-  widthForm:false,
   fields:[
   ],
   layout:[
@@ -71,6 +69,7 @@ export default {
               name:'ListView',
               props:{
                 field:'records',
+                noValidation: true,
                 columns:[
                   {
                     field:'name',
