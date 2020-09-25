@@ -37,16 +37,16 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
       ...elementProps,
       name: field,
       value: value || '',
-      error:   errors[field] && touched[field],
       onChange:  handleChange,
-      onBlur:  handleBlur,
-      helperText: (errors[field] && touched[field]) && errors[field],    
     }
 
-    if(noValidation){
-      delete elementProps.onBlur;
-      delete elementProps.helperText;
-      delete elementProps.error;
+    if(!noValidation){
+      elementProps = {
+        error:   errors[field] && touched[field],
+        onBlur:  handleBlur,
+        helperText: (errors[field] && touched[field]) && errors[field],
+        ...elementProps 
+      }
     }
   }
 
