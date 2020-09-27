@@ -70,6 +70,7 @@ export default {
               props:{
                 field:'records',
                 noValidation: true,
+                withActions:true,
                 columns:[
                   {
                     field:'name',

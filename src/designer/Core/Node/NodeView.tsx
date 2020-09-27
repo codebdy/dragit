@@ -16,7 +16,7 @@ export default function NodeView(props:INodeProps){
   const [nodeProps, setNodeProps] = React.useState(node.props);
   const [children, setChildren] = React.useState(node.children);
 
-  const {style, editStyle, className, editClassName, rxText, noValidation, ...rest} = nodeProps;
+  const {style, editStyle, className, editClassName, rxText, noValidation, withActions, ...rest} = nodeProps;
 
   const nodeEl = useRef(null);
 

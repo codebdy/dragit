@@ -13,6 +13,7 @@ import { Data, ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
+import { PageActionHandle } from 'admin/views/Page/PageAction';
 
 type Order = 'asc' | 'desc';
 
@@ -34,10 +35,22 @@ const ListView = React.forwardRef((
       batchActions:Array<ListViewMetaItem>,
       rowActions:Array<ListViewMetaItem>,
       rowsPerPageOptions:string,
-      defalutRowsPerPage:number 
+      defalutRowsPerPage:number,
+      onAction: PageActionHandle,
     }, ref:any)=>{
 
-  const {className, value, columns, filters, rowActions, batchActions, rowsPerPageOptions = "10,25,50", defalutRowsPerPage = 10, ...rest} = props
+  const {
+    className, 
+    value, 
+    columns, 
+    filters, 
+    rowActions, 
+    batchActions, 
+    rowsPerPageOptions = "10,25,50", 
+    defalutRowsPerPage = 10, onAction,
+    ...rest
+  } = props
+  
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
