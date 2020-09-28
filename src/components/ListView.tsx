@@ -77,7 +77,7 @@ const ListView = React.forwardRef((
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
   const [keyword, setKeyword] = React.useState('');
-  const [selectedFilters, setSelectedFilters] = React.useState([]);
+  const [filterValues, setFilterValues] = React.useState({});
   const [sortBy, setSortBy] = React.useState([]);
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
@@ -91,7 +91,6 @@ const ListView = React.forwardRef((
   //});
   const [selected, setSelected] = React.useState<string[]>([]);
   const rows: any[] = value&& value.data? value.data : [];
-  const [filterValues, setFilterValues] = React.useState({});
 
 
   const parseRowsPerPageOptions = ()=>{
@@ -152,8 +151,12 @@ const ListView = React.forwardRef((
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
     //读取数据
-    console.log('handleChangePage',newPage)
+    console.log('换页',newPage)
   };
+
+  const handleBatchAction = (actionSlug:string)=>{
+    console.log('批处理', actionSlug)
+  }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     let pageRows = parseInt(event.target.value, 10)
@@ -177,6 +180,7 @@ const ListView = React.forwardRef((
           filterValues = {filterValues}
           onFilterChange = {handleFilterChange}
           onKeywordChange = {handleKeywordChange}
+          onBatchAction = {handleBatchAction}
         />
         <TableContainer>
           <Table
