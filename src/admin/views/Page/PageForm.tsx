@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 
-import { PageAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, PageJumper } from './PageAction';
+import { PageAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, PageJumper, PAGE_ACTION } from './PageAction';
 import { withRouter } from 'react-router-dom';
 
 const resolvePageUrl=(page:PageJumper)=>{
@@ -20,7 +20,10 @@ const PageForm = (props:any) =>{
         
       case GO_BACK_ACTION:
         history.goBack();
-        return;    
+        return;
+        
+      case PAGE_ACTION:
+        return;
     }
     
   }

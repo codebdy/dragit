@@ -50,6 +50,7 @@
     "filters":"Filters",
     "row-actions":"Row Actions",
     "batch-actions":"Batch Actions",
-    "rows-per-page-options":"Rows Options",
-    "rows-per-page":"Rows Per Page"
+    "rows-per-page":"Rows Per Page",
+    "pager-options":"Page Options"
+
 }

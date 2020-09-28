@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'fixed',
       right: theme.spacing(1),
       //top:'calc(50% - 150px)',
-      bottom: theme.spacing(1),
+      bottom: theme.spacing(10),
       width:'52px',
       //background:'#121246',
       color:"rgba(255,255,255,1)",

@@ -50,6 +50,7 @@
     "filters":"过滤器",
     "row-actions":"行指令",
     "batch-actions":"批量指令",
-    "rows-per-page-options":"行数选项",
-    "rows-per-page":"每页行数"
+    "rows-per-page":"每页行数",
+    "pager-options":"分页选项"
+
 }

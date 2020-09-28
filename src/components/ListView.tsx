@@ -26,10 +26,28 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+export interface Paginate{
+  total:number,
+  per_page:number,
+  current_page:number,
+  last_page:number,
+  from:number,
+  to:number,
+  data:Array<unknown>,
+}
+
+export interface ListViewForm{
+  page:number,
+  rowsPerPage:number,
+  keyword:string,
+  filters:Array<string>,
+  sortBy:Array<string>
+}
+
 const ListView = React.forwardRef((
     props: {
       className:string, 
-      value?:any, 
+      value?:Paginate, 
       columns:Array<ListViewMetaItem>, 
       filters:Array<ListViewMetaItem>,
       batchActions:Array<ListViewMetaItem>,
@@ -37,7 +55,9 @@ const ListView = React.forwardRef((
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
-    }, ref:any)=>{
+    }, 
+    ref:any
+  )=>{
 
   const {
     className, 
@@ -47,19 +67,32 @@ const ListView = React.forwardRef((
     rowActions, 
     batchActions, 
     rowsPerPageOptions = "10,25,50", 
-    defalutRowsPerPage = 10, onAction,
+    defalutRowsPerPage = 10, 
+    onAction,
     ...rest
   } = props
   
   const classes = useStyles();
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
+  const [keyword, setKeyword] = React.useState('');
+  const [selectedFilters, setSelectedFilters] = React.useState([]);
+  const [sortBy, setSortBy] = React.useState([]);
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
+
+  //const [queryForm, setQueryForm] = React.useState<ListViewForm>({
+  //  page: 0,
+  //  rowsPerPage: defalutRowsPerPage,
+  //  keyword: '',
+  //  filters:[],
+  //  sortBy:[]    
+  //});
   const [selected, setSelected] = React.useState<string[]>([]);
-  const [page, setPage] = React.useState(0);
-  const rows: any[] = value? value : [];
+  const rows: any[] = value&& value.data? value.data : [];
   const [filterValues, setFilterValues] = React.useState({});
-  //const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(defalutRowsPerPage);
+
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -70,9 +103,9 @@ const ListView = React.forwardRef((
   }
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+    //const isAsc = orderBy === property && order === 'asc';
+    //setOrder(isAsc ? 'desc' : 'asc');
+    //setOrderBy(property);
   };
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,32 +137,46 @@ const ListView = React.forwardRef((
     setSelected(newSelected);
   };
 
+  const handleKeywordChange = (keyword:string)=>{
+    setKeyword(keyword);
+    //读取数据
+    console.log('关键词变化')
+  }
+
   const handleFilterChange = (values:any)=>{
-    setFilterValues(values)
+    setFilterValues(values);
+    //读取数据
+    console.log('过滤器变化', values)
   }
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
+    //读取数据
+    console.log('handleChangePage',newPage)
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    let pageRows = parseInt(event.target.value, 10)
+    console.log('handleChangeRowsPerPage', pageRows) 
+    setRowsPerPage(pageRows);
     setPage(0);
   };
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  //const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <div className={classNames(classes.root,className )} {...rest} ref={ref}>
+    <div className={classNames(classes.root, className)} {...rest} ref={ref}>
       <Paper>
-        <ListViewToolbar 
+        <ListViewToolbar
+          keyword = {keyword}
           numSelected={selected.length}
           filters = {filters}
           batchActions = {batchActions}
           filterValues = {filterValues}
           onFilterChange = {handleFilterChange}
+          onKeywordChange = {handleKeywordChange}
         />
         <TableContainer>
           <Table
@@ -180,11 +227,11 @@ const ListView = React.forwardRef((
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/*emptyRows > 0 && (
                 <TableRow style={{ height: (53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              )*/}
             </TableBody>
           </Table>
         </TableContainer>

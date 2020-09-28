@@ -68,7 +68,7 @@ export default {
             children: [          {
               name:'ListView',
               props:{
-                field:'records',
+                field:'paginate',
                 noValidation: true,
                 withActions:true,
                 columns:[
@@ -89,7 +89,8 @@ export default {
                     }
                   }
                 ],
-
+                rowsPerPageOptions:'10,25,50',
+                defalutRowsPerPage:'10',
                 filters:[
                   {
                     slug:'gender',

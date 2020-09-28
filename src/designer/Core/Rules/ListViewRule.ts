@@ -42,7 +42,7 @@ export class ListViewRule extends Rule{
       },
       {
         name:'rowsPerPageOptions',
-        label:'rows-per-page-options',
+        label:'pager-options',
         input:TextInput,
       },
       {

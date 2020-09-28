@@ -28,16 +28,19 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 );
 
 interface ListViewToolbarProps {
+  keyword:string,
   numSelected: number;
   filters:Array<ListViewMetaItem>,
   batchActions:Array<ListViewMetaItem>,
   filterValues:any, 
+  onKeywordChange:(keyword:string)=>void,
   onFilterChange:(filterValues:any)=>void
 }
 
 const ListViewToolbar = (props: ListViewToolbarProps) => {
   const classes = useToolbarStyles();
-  const { numSelected, filters, batchActions,filterValues,onFilterChange } = props;
+  const { numSelected, filters, batchActions, filterValues, onKeywordChange, onFilterChange } = props;
+  const [keyword, setKeyword] = React.useState(props.keyword)
 
   return (
     <Toolbar
@@ -62,6 +65,14 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
           }}
           variant = "outlined"
           size = "small"
+          value = {keyword}
+          onChange = {e=>{setKeyword(e.target.value as string)}}
+          onKeyUp = {e=>{
+              if(e.keyCode === 13) {
+                onKeywordChange(keyword)
+              }
+            }
+          }
         />
         </div>
       )}
