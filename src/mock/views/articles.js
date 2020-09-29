@@ -9,6 +9,7 @@ export default {
   //},
   fields:[
   ],
+  withoutForm:true,
   layout:[
     {
       name: 'Grid',

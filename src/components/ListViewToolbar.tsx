@@ -69,9 +69,9 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
           value = {keyword}
           onChange = {e=>{setKeyword(e.target.value as string)}}
           onKeyUp = {e=>{
-              if(e.keyCode === 13) {
-                onKeywordChange(keyword)
-              }
+              //if(e.keyCode === 13) {
+              //  onKeywordChange(keyword)
+              //}
             }
           }
         />

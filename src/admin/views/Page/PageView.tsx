@@ -41,7 +41,7 @@ export default function PageView(props:{match: any }) {
       { pageInStore.schemaLoading ?
         <PageSkeleton />
       :
-        <PageForm model={pageInStore.model} validationSchema = {validationSchema}>
+        <PageForm model={pageInStore.model} validationSchema = {validationSchema} withoutForm = {pageInStore.pageJson?.withoutForm}>
           {(props: any, onPageAction: PageActionHandle)=>(
             pageInStore.schema?.map((child:RXElement)=>{
               return (

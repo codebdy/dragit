@@ -9,7 +9,7 @@ const resolvePageUrl=(page:PageJumper)=>{
 }
 
 const PageForm = (props:any) =>{
-  const {children, history, model, validationSchema} = props;
+  const {children, history, model, validationSchema, withoutForm} = props;
 
   const formActionHandle = (action:PageAction)=>{
     switch (action.name){
@@ -43,6 +43,9 @@ const PageForm = (props:any) =>{
       {(props) => {
 
         return(
+          withoutForm?
+            children(props, formActionHandle)
+          :
           <Form>
             {children(props, formActionHandle)}
           </Form>
