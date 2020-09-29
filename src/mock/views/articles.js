@@ -1,12 +1,12 @@
 import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/PageAction"
 export default {
-  initAction:{
-    method:'get',
-    url:'/api/data/list',
-    data:{
-      modelName:'/RXDrag/Model/Article',
-    },      
-  },
+  //initAction:{
+  //  method:'get',
+  //  url:'/api/data/list',
+  //  data:{
+  //    modelName:'/RXDrag/Model/Article',
+  //  },      
+  //},
   fields:[
   ],
   layout:[
@@ -68,8 +68,8 @@ export default {
             children: [          {
               name:'ListView',
               props:{
-                field:'paginate',
-                noValidation: true,
+                //field:'paginate',
+                //noValidation: true,
                 withActions:true,
                 columns:[
                   {
@@ -124,7 +124,7 @@ export default {
 
                   }
                 ],
-                batchActions:[
+                batchCommands:[
                   {
                     slug:"publish",
                     label:"发布",
@@ -140,7 +140,20 @@ export default {
                     label:"删除",
                     icon:"mdi-delete",
                   },
-                ]
+                ],
+                bind:{
+                  method:'post',
+                  url:'/api/data/list',
+                  params:{
+                    modelName:'/RXDrag/Model/Article',
+                    command:'query',//'PAGE-ACTION'
+                    //commandSlug:'delete',
+                    selected:[],
+                    query:{
+                      keyword:'text',
+                    },
+                  },      
+                },
 
               }
             }],

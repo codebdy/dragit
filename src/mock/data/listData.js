@@ -1,5 +1,5 @@
 export default{
-  paginate:{
+
     data:[
       {
         id:'1',
@@ -77,5 +77,4 @@ export default{
         title:'汇集漫天星星，星星之火可以燎原',
       },
     ]
-  }
 }

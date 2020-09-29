@@ -28,7 +28,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
     handleReset,
   } = formik;
   let metaProps = element.meta.props? element.meta.props :{};
-  const {rxText, field, noValidation, withActions, ...rest} = metaProps as any;
+  const {rxText, field, withActions, ...rest} = metaProps as any;
 
   let elementProps:any = {...rest,  onClick:handleOnClick}
   const value = field && values && values[field];
@@ -38,15 +38,9 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
       name: field,
       value: value || '',
       onChange:  handleChange,
-    }
-
-    if(!noValidation){
-      elementProps = {
-        error:   errors[field] && touched[field],
-        onBlur:  handleBlur,
-        helperText: (errors[field] && touched[field]) && errors[field],
-        ...elementProps 
-      }
+      error:   errors[field] && touched[field],
+      onBlur:  handleBlur,
+      helperText: (errors[field] && touched[field]) && errors[field],
     }
 
     if(withActions){

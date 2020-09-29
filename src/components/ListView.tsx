@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,6 +14,9 @@ import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
 import { PageActionHandle } from 'admin/views/Page/PageAction';
+import axios from 'axios';
+
+export const COMMAND_QUERY = "query";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
+
+export interface Row{
+  id:any,
+  [key:string]:any,
+}
 
 export interface Paginate{
   total:number,
@@ -42,51 +50,64 @@ export interface ListViewForm{
   sortBy:Array<string>
 }
 
+export interface BindMeta{
+  method:"POST"|"GET",
+  url:string,
+  params:unknown,
+}
+
 const ListView = React.forwardRef((
     props: {
       className:string, 
       value?:Paginate, 
       columns:Array<ListViewMetaItem>, 
       filters:Array<ListViewMetaItem>,
-      batchActions:Array<ListViewMetaItem>,
-      rowActions:Array<ListViewMetaItem>,
+      batchCommands:Array<ListViewMetaItem>,
+      rowCommands:Array<ListViewMetaItem>,
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
+      bind:BindMeta
     }, 
     ref:any
   )=>{
 
   const {
     className, 
-    value, 
+    //value, 
     columns, 
     filters, 
-    rowActions, 
-    batchActions, 
+    rowCommands, 
+    batchCommands, 
     rowsPerPageOptions = "10,25,50", 
-    defalutRowsPerPage = 10, 
+    defalutRowsPerPage = 10,
     onAction,
+    bind,
     ...rest
   } = props
   
   const classes = useStyles();
 
-  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
+  const [paginate, setPaginate] = React.useState<any>({
+    page:0,
+    data:[],
+  });
+
+  const rows = paginate.data;
+
   const [keyword, setKeyword] = React.useState('');
   const [filterValues, setFilterValues] = React.useState({});
   const [orders, setOrders] = React.useState<Array<FieldOrder>>([])
-  //const [queryForm, setQueryForm] = React.useState<ListViewForm>({
-  //  page: 0,
-  //  rowsPerPage: defalutRowsPerPage,
-  //  keyword: '',
-  //  filters:[],
-  //  sortBy:[]    
-  //});
   const [selected, setSelected] = React.useState<string[]>([]);
-  const rows: any[] = value&& value.data? value.data : [];
+  //const [rows, setRows] = React.useState<Array<Row>>([]);
+  //const rows: any[] = value&& value.data? value.data : [];
 
+  useEffect(() => {
+    console.log('ListView useEffect')
+    emitAction(COMMAND_QUERY);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -96,11 +117,9 @@ const ListView = React.forwardRef((
     return ret;
   }
 
-
-
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.id);
+      const newSelecteds = rows.map((n:Row) => n.id);
       setSelected(newSelecteds);
       return;
     }
@@ -127,6 +146,33 @@ const ListView = React.forwardRef((
     setSelected(newSelected);
   };
 
+  const emitAction = (command:string, rowID?:string)=>{
+    axios(
+      {
+        method:"get",
+        url:bind.url,
+        params:bind.params,
+        data:{
+          command:command,
+          keyword:keyword,
+          filterValues:filterValues,
+          orders:orders,
+          selected:rowID ? [rowID] : selected,
+        }
+      }
+    ).then(res => {
+      setPaginate(res.data);
+      //dispatch(receivedSchemaAction(res.data));
+      //获取页面数据
+      //const axiosAction = res.data.initAction;
+      //axiosAction && dispatch(thunkPageModel({...axiosAction, data:{...axiosAction.data, dataId:page.dataId} }));
+    })
+    .catch(err => {
+      console.log('server error');
+    });
+
+  }
+
   const handleKeywordChange = (keyword:string)=>{
     setKeyword(keyword);
     //读取数据
@@ -140,7 +186,7 @@ const ListView = React.forwardRef((
   }
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
+    //setPage(newPage);
     //读取数据
     console.log('换页',newPage)
   };
@@ -150,15 +196,15 @@ const ListView = React.forwardRef((
     console.log('排序', newOrders)
   };
 
-  const handleBatchAction = (actionSlug:string)=>{
-    console.log('批处理', actionSlug)
+  const handleBatchAction = (commandSlug:string)=>{
+    console.log('批处理', commandSlug)
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     let pageRows = parseInt(event.target.value, 10)
     console.log('handleChangeRowsPerPage', pageRows) 
     setRowsPerPage(pageRows);
-    setPage(0);
+    //setPage(0);
   };
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
@@ -172,7 +218,7 @@ const ListView = React.forwardRef((
           keyword = {keyword}
           numSelected={selected.length}
           filters = {filters}
-          batchActions = {batchActions}
+          batchCommands = {batchCommands}
           filterValues = {filterValues}
           onFilterChange = {handleFilterChange}
           onKeywordChange = {handleKeywordChange}
@@ -189,11 +235,11 @@ const ListView = React.forwardRef((
               orders = {orders}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={rows.length || 0}
               columns = {columns}
             />
             <TableBody>
-              {rows.map((row, index) => {
+              {rows.map((row:Row, index: any) => {
                   const isItemSelected = isSelected(row.id);
                   const labelId = `listview-${index}`;
                   return (
@@ -238,15 +284,13 @@ const ListView = React.forwardRef((
           rowsPerPageOptions={parseRowsPerPageOptions()}
           component="div"
           labelRowsPerPage = {intl.get('rows-per-page') + ':'}
-          count={rows.length}
+          count={rows.length || 0}
           rowsPerPage={rowsPerPage}
-          page={page}
+          page={paginate?.page || 0}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
           SelectProps={{
             inputProps: { 'aria-label': 'rows per page' },
-            //native: true,
-            id:'pagination',
           }}
         />
       </Paper>

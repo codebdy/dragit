@@ -31,12 +31,12 @@ export class ListViewRule extends Rule{
         input:ListViewFiltersDialog,
       },
       {
-        name:'rowActions',
+        name:'rowCommands',
         label:'row-actions',
         input:ListViewActionDialog,
       },
       {
-        name:'batchActions',
+        name:'batchCommands',
         label:'batch-actions',
         input:ListViewActionDialog,
       },

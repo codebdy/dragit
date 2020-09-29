@@ -31,7 +31,7 @@ interface ListViewToolbarProps {
   keyword:string,
   numSelected: number;
   filters:Array<ListViewMetaItem>,
-  batchActions:Array<ListViewMetaItem>,
+  batchCommands:Array<ListViewMetaItem>,
   filterValues:any, 
   onKeywordChange:(keyword:string)=>void,
   onFilterChange:(filterValues:any)=>void,
@@ -40,7 +40,7 @@ interface ListViewToolbarProps {
 
 const ListViewToolbar = (props: ListViewToolbarProps) => {
   const classes = useToolbarStyles();
-  const { numSelected, filters, batchActions, filterValues, onKeywordChange, onFilterChange, onBatchAction } = props;
+  const { numSelected, filters, batchCommands, filterValues, onKeywordChange, onFilterChange, onBatchAction } = props;
   const [keyword, setKeyword] = React.useState(props.keyword)
 
   return (
@@ -80,13 +80,13 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
       {numSelected > 0 ? (
         <Fragment>
           {
-            batchActions?.map((action, index)=>{
+            batchCommands?.map((command, index)=>{
               return(
-                <Tooltip title={action.label} key={action.slug}>
-                  <IconButton aria-label={action.label} name={'batch-action-' + action.slug}
-                    onClick = {()=>{onBatchAction(action.slug)}}
+                <Tooltip title={command.label} key={command.slug}>
+                  <IconButton aria-label={command.label} name={'batch-action-' + command.slug}
+                    onClick = {()=>{onBatchAction(command.slug)}}
                   >
-                    <MdiIcon iconClass = {action.icon} size="20" />
+                    <MdiIcon iconClass = {command.icon} size="20" />
                   </IconButton>
                 </Tooltip>
               )

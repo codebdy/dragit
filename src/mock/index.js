@@ -14,7 +14,7 @@ Mock.mock('/api/page/articles', 'get', articles)
 Mock.mock('/api/page/article', 'get', article)
 Mock.mock('/api/page/test', 'get', test)
 Mock.mock('/api/moudle-index/articles', 'get', 'articles')
-Mock.mock('/api/data/list', 'get', listData)
+Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
 
 Mock.setup({
     timeout: 500
