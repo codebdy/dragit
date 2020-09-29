@@ -166,6 +166,7 @@ const ListView = React.forwardRef((
       }
     ).then(res => {
       setPaginate(res.data);
+      setPage(res.data?.page)
     })
     .catch(err => {
       console.log('server error');
