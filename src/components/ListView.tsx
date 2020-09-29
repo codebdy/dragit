@@ -9,13 +9,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import classNames from 'classnames';
-import { Data, ListViewHead } from './ListViewHead';
+import { FieldOrder, ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
 import { PageActionHandle } from 'admin/views/Page/PageAction';
-
-type Order = 'asc' | 'desc';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,10 +76,7 @@ const ListView = React.forwardRef((
   const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
   const [keyword, setKeyword] = React.useState('');
   const [filterValues, setFilterValues] = React.useState({});
-  const [sortBy, setSortBy] = React.useState([]);
-  const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
-
+  const [orders, setOrders] = React.useState<Array<FieldOrder>>([])
   //const [queryForm, setQueryForm] = React.useState<ListViewForm>({
   //  page: 0,
   //  rowsPerPage: defalutRowsPerPage,
@@ -101,11 +96,7 @@ const ListView = React.forwardRef((
     return ret;
   }
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
-    //const isAsc = orderBy === property && order === 'asc';
-    //setOrder(isAsc ? 'desc' : 'asc');
-    //setOrderBy(property);
-  };
+
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -154,6 +145,11 @@ const ListView = React.forwardRef((
     console.log('换页',newPage)
   };
 
+  const handleRequestSort = (newOrders:Array<FieldOrder>) => {
+    setOrders(newOrders)
+    console.log('排序', newOrders)
+  };
+
   const handleBatchAction = (actionSlug:string)=>{
     console.log('批处理', actionSlug)
   }
@@ -190,8 +186,7 @@ const ListView = React.forwardRef((
           >
             <ListViewHead
               numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
+              orders = {orders}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}

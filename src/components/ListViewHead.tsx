@@ -4,37 +4,58 @@ import { ListViewMetaItem } from "./ListViewMetaItem";
 
 type Order = 'asc' | 'desc';
 
-export interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
-
-export interface HeadCell {
-  disablePadding: boolean;
-  id: keyof Data;
-  label: string;
-  numeric: boolean;
-}
-
-interface ListViewHeadProps {
-  //classes: ReturnType<typeof useStyles>;
+export interface ListViewHeadProps {
   numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onRequestSort: (orders:Array<FieldOrder>) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  order: Order;
-  orderBy: string;
+  orders: Array<FieldOrder>;
   rowCount: number;
   columns:Array<ListViewMetaItem>;
 }
 
+export interface FieldOrder{
+  field:string;
+  direction: Order;
+}
+
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, columns } = props;
+  const { onSelectAllClick, orders, numSelected, rowCount, onRequestSort, columns } = props;
+
   const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
-    //onRequestSort(event, property);
+    let order = getOrder(field);
+    if(order){
+      if(order.direction === 'asc'){
+        order.direction = 'desc';
+        onRequestSort([...orders])
+      }else if(order.direction === 'desc'){
+        removeOrder(order.field)
+      }
+    }else{
+      onRequestSort([...orders, {field:field, direction:'asc'}]);
+    }
   };
+
+  const removeOrder = (field:string)=>{
+    for(var i = 0; i < orders.length; i++){
+      if(field === orders[i].field){
+        orders.splice(i,1);
+        onRequestSort([...orders])
+        return
+      }
+    }    
+  }
+
+  const getOrderDirection = (field:string)=>{
+    return getOrder(field)?.direction;
+  }
+
+  const getOrder = (field:string)=>{
+    for(var i = 0; i < orders.length; i++){
+      if(field === orders[i].field){
+        return orders[i]
+      }
+    }
+  }
 
   return (
     <TableHead>
@@ -48,24 +69,24 @@ export function ListViewHead(props: ListViewHeadProps) {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
-        {columns.map((headCell,index) => (
+        {columns.map((column,index) => (
           <TableCell
-            key={headCell.field + '-' + index}
-            sortDirection={orderBy === headCell.field ? order : false}
+            key={column.field + '-' + index}
+            sortDirection={getOrderDirection(column.field)}
+            {...column.props}
           >
-            <TableSortLabel
-              id = {headCell.field}
-              active={orderBy === headCell.field}
-              direction={orderBy === headCell.field ? order : 'asc'}
-              onClick={createSortHandler(headCell.field)}
-            >
-              {headCell.label}
-              {orderBy === headCell.field ? (
-                <span>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>
+            {column.sortable ?
+                column.label
+              :
+              <TableSortLabel
+                id = {column.field}
+                active={!!getOrderDirection(column.field)}
+                direction={getOrderDirection(column.field)}
+                onClick={createSortHandler(column.field)}
+              >
+                {column.label}
+              </TableSortLabel>
+            }
           </TableCell>
         ))}
       </TableRow>
