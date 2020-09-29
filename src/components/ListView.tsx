@@ -87,7 +87,7 @@ const ListView = React.forwardRef((
   } = props
   
   const classes = useStyles();
-
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
   const [paginate, setPaginate] = React.useState<any>({
     page:0,
@@ -102,12 +102,13 @@ const ListView = React.forwardRef((
   const [selected, setSelected] = React.useState<string[]>([]);
   //const [rows, setRows] = React.useState<Array<Row>>([]);
   //const rows: any[] = value&& value.data? value.data : [];
+  let realtimePage = page;
 
   useEffect(() => {
     console.log('ListView useEffect')
     emitAction(COMMAND_QUERY);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  },[keyword, filterValues, orders]);
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -147,6 +148,7 @@ const ListView = React.forwardRef((
   };
 
   const emitAction = (command:string, rowID?:string)=>{
+    console.log('ListView提交数据：',command, keyword)
     axios(
       {
         method:"get",
@@ -158,14 +160,12 @@ const ListView = React.forwardRef((
           filterValues:filterValues,
           orders:orders,
           selected:rowID ? [rowID] : selected,
+          page:realtimePage,
+          pageRows:rowsPerPage,
         }
       }
     ).then(res => {
       setPaginate(res.data);
-      //dispatch(receivedSchemaAction(res.data));
-      //获取页面数据
-      //const axiosAction = res.data.initAction;
-      //axiosAction && dispatch(thunkPageModel({...axiosAction, data:{...axiosAction.data, dataId:page.dataId} }));
     })
     .catch(err => {
       console.log('server error');
@@ -175,29 +175,24 @@ const ListView = React.forwardRef((
 
   const handleKeywordChange = (keyword:string)=>{
     setKeyword(keyword);
-    //读取数据
-    console.log('关键词变化')
   }
 
   const handleFilterChange = (values:any)=>{
     setFilterValues(values);
-    //读取数据
-    console.log('过滤器变化', values)
   }
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    //setPage(newPage);
-    //读取数据
-    console.log('换页',newPage)
+    setPage(newPage);
+    realtimePage = newPage;
+    emitAction(COMMAND_QUERY)
   };
 
   const handleRequestSort = (newOrders:Array<FieldOrder>) => {
     setOrders(newOrders)
-    console.log('排序', newOrders)
   };
 
   const handleBatchAction = (commandSlug:string)=>{
-    console.log('批处理', commandSlug)
+    emitAction(commandSlug)
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -286,7 +281,7 @@ const ListView = React.forwardRef((
           labelRowsPerPage = {intl.get('rows-per-page') + ':'}
           count={rows.length || 0}
           rowsPerPage={rowsPerPage}
-          page={paginate?.page || 0}
+          page={realtimePage||0}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
           SelectProps={{
