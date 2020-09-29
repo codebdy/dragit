@@ -76,8 +76,6 @@ export function ListViewHead(props: ListViewHeadProps) {
             {...column.props}
           >
             {column.sortable ?
-                column.label
-              :
               <TableSortLabel
                 id = {column.field}
                 active={!!getOrderDirection(column.field)}
@@ -86,6 +84,8 @@ export function ListViewHead(props: ListViewHeadProps) {
               >
                 {column.label}
               </TableSortLabel>
+              :
+              column.label
             }
           </TableCell>
         ))}

@@ -76,6 +76,7 @@ export default {
                     field:'name',
                     label:'名称',
                     searchable:true,
+                    sortable:true,
                     props:{
                       align:'right',
                     }
