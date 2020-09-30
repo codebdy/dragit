@@ -142,6 +142,28 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
+                rowCommands:[
+                  {
+                    slug:"edit",
+                    label:"编辑",
+                    icon:"mdi-pencil",
+                  },
+                  {
+                    slug:"publish",
+                    label:"发布",
+                    icon:"mdi-publish",
+                  },
+                  {
+                    slug:"check",
+                    label:"审核",
+                    icon:"mdi-check-bold",
+                  },
+                  {
+                    slug:"delete",
+                    label:"删除",
+                    icon:"mdi-delete",
+                  },
+                ],
                 bind:{
                   method:'post',
                   url:'/api/data/list',

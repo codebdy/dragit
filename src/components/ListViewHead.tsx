@@ -13,6 +13,7 @@ export interface ListViewHeadProps {
   rowCount: number;
   columns:Array<ListViewMetaItem>;
   loading:boolean;
+  hasRowCommands:boolean;
 }
 
 export interface FieldOrder{
@@ -21,7 +22,7 @@ export interface FieldOrder{
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, orders, numSelected, rowCount, onRequestSort, columns, loading } = props;
+  const { onSelectAllClick, orders, numSelected, rowCount, onRequestSort, columns, loading, hasRowCommands: hasRowCommand } = props;
 
   const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
     let order = getOrder(field);
@@ -101,6 +102,17 @@ export function ListViewHead(props: ListViewHeadProps) {
             }
           </TableCell>
         ))}
+        {
+          hasRowCommand&&
+          (
+            loading ? 
+            <TableCell  align="right">
+              <Skeleton animation="wave" height={50} width="50%" />
+            </TableCell>
+            :
+            <TableCell></TableCell>
+          )
+        }
       </TableRow>
     </TableHead>
   );

@@ -16,6 +16,8 @@ import intl from 'react-intl-universal';
 import { PageActionHandle } from 'admin/views/Page/PageAction';
 import axios from 'axios';
 import { Skeleton } from '@material-ui/lab';
+import { Tooltip, IconButton } from '@material-ui/core';
+import MdiIcon from './common/MdiIcon';
 
 export const COMMAND_QUERY = "query";
 
@@ -159,6 +161,7 @@ const ListView = React.forwardRef((
 
   const emitAction = (command:string, rowID?:string)=>{
     console.log('ListView提交数据：',command, keyword)
+    setSelected([]);
     setLoading(true);
     axios(
       {
@@ -213,6 +216,9 @@ const ListView = React.forwardRef((
     setPage(0);
   };
 
+  const hasRowCommands = rowCommands && rowCommands.length > 0;
+  
+
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   //const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -244,6 +250,7 @@ const ListView = React.forwardRef((
               rowCount={rows.length || 0}
               columns = {columns}
               loading = {loading}
+              hasRowCommands = {hasRowCommands}
             />
             <TableBody>
               {rows.map((row:Row, index: any) => {
@@ -285,6 +292,35 @@ const ListView = React.forwardRef((
                             </TableCell>
                           )
                         })
+                      }
+                      {
+                        hasRowCommands&&
+                        (
+                          loading ? 
+                            <TableCell key={row.id + '-command'} align="right">
+                              <Skeleton animation="wave" height={50} width="50%" />
+                            </TableCell>
+                          :
+                            <TableCell key={row.id + '-command'} align="right">
+                              {
+                                rowCommands?.map((command, index)=>{
+                                  return(
+                                    <Tooltip title={command.label} key={command.slug}>
+                                      <IconButton aria-label={command.label} name={'batch-action-' + command.slug}
+                                        onClick = {(e)=>{
+                                          emitAction(command.slug, row.id);
+                                          e.stopPropagation();
+                                        }}
+                                        size = "small"
+                                      >
+                                        <MdiIcon iconClass = {command.icon} size="16" />
+                                      </IconButton>
+                                    </Tooltip>
+                                  )
+                                })
+                              }                              
+                            </TableCell>
+                        )
                       }
                     </TableRow>
                   );
