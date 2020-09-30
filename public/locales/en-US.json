@@ -38,6 +38,10 @@
     "searchable":"Searchable",
     "sortable":"Sortable",
     "show-template":"Show template",
+    "jump-to":"Jump To",
+    "module-id":"Module ID",
+    "page-id":"Page ID",
+    "param-field":"Param Field",
 
     "filter-editor":"Table Filters",
     "slug":"Slug",

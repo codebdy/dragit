@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, TextField, FormControlLabel, Switch, Checkbox} from '@material-ui/core';
 import { InputProps } from './InputProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
@@ -9,12 +9,16 @@ const styles = (theme: Theme) =>
     itemInput:{
       margin: theme.spacing(1),
     },
+
+    jumpCheckbox:{
+      margin: theme.spacing(-0.2),
+    }
     
   });
 
 const useStyles = makeStyles(styles);
 
-export default function ListViewActionDialog(props:InputProps){
+export default function ListViewCommandDialog(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [filters, setFilters] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
@@ -68,6 +72,49 @@ export default function ListViewActionDialog(props:InputProps){
             variant="outlined" 
             fullWidth
             value = {filters[selectedIndex].icon || ''} 
+            onChange = {event=>{
+              handleChangeAttribute(selectedIndex, 'icon', event.target.value.trim())
+            }}
+          />
+          <FormControlLabel
+            className = {classes.jumpCheckbox}
+            control={
+              <Checkbox
+                color="primary"
+                checked = {false}
+                onChange = {event=>{
+                  //handleChangeAttribute(selectedIndex, 'sortable', event.target.checked)
+                }}                        
+              />
+            }
+            label={intl.get('jump-to')}
+          />
+          <TextField 
+            className = {classes.itemInput} 
+            label={intl.get('module-id')} 
+            variant="outlined" 
+            fullWidth
+            value = {filters[selectedIndex].moduleId || ''} 
+            onChange = {event=>{
+              handleChangeAttribute(selectedIndex, 'icon', event.target.value.trim())
+            }}
+          />
+          <TextField 
+            className = {classes.itemInput} 
+            label={intl.get('page-id')} 
+            variant="outlined" 
+            fullWidth
+            value = {filters[selectedIndex].pageId || ''} 
+            onChange = {event=>{
+              handleChangeAttribute(selectedIndex, 'icon', event.target.value.trim())
+            }}
+          />
+          <TextField 
+            className = {classes.itemInput} 
+            label={intl.get('param-field')} 
+            variant="outlined" 
+            fullWidth
+            value = {filters[selectedIndex].paramField || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'icon', event.target.value.trim())
             }}

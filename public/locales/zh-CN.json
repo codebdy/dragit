@@ -38,6 +38,10 @@
     "searchable":"可检索",
     "sortable":"可排序",
     "show-template":"显示模板",
+    "jump-to":"页面跳转",
+    "module-id":"模块ID",
+    "page-id":"页面ID",
+    "param-field":"参数字段",
 
     "filter-editor":"表格过滤器编辑",
     "slug":"标识",
