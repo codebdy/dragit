@@ -15,6 +15,7 @@ import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
 import { PageActionHandle } from 'admin/views/Page/PageAction';
 import axios from 'axios';
+import { Skeleton } from '@material-ui/lab';
 
 export const COMMAND_QUERY = "query";
 
@@ -56,6 +57,15 @@ export interface BindMeta{
   params:unknown,
 }
 
+function creatEmpertyRows(length:number){
+  let rows = []
+  for(var i = 0; i < length; i++){
+    rows.push({id:i+1});
+  }
+
+  return rows;
+}
+
 const ListView = React.forwardRef((
     props: {
       className:string, 
@@ -94,21 +104,21 @@ const ListView = React.forwardRef((
     data:[],
   });
 
-  const rows = paginate.data;
-
   const [keyword, setKeyword] = React.useState('');
   const [filterValues, setFilterValues] = React.useState({});
   const [orders, setOrders] = React.useState<Array<FieldOrder>>([])
   const [selected, setSelected] = React.useState<string[]>([]);
-  //const [rows, setRows] = React.useState<Array<Row>>([]);
-  //const rows: any[] = value&& value.data? value.data : [];
+  const [loading, setLoading] = React.useState(false);
+
+  const rows = loading ? creatEmpertyRows(rowsPerPage) : paginate.data;
+
   let realtimePage = page;
 
   useEffect(() => {
     console.log('ListView useEffect')
     emitAction(COMMAND_QUERY);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[keyword, filterValues, orders]);
+  },[keyword, filterValues, orders, rowsPerPage]);
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -149,6 +159,7 @@ const ListView = React.forwardRef((
 
   const emitAction = (command:string, rowID?:string)=>{
     console.log('ListView提交数据：',command, keyword)
+    setLoading(true);
     axios(
       {
         method:"get",
@@ -167,11 +178,12 @@ const ListView = React.forwardRef((
     ).then(res => {
       setPaginate(res.data);
       setPage(res.data?.page)
+      setLoading(false);
     })
     .catch(err => {
       console.log('server error');
-    });
-
+      setLoading(false);
+    })
   }
 
   const handleKeywordChange = (keyword:string)=>{
@@ -197,10 +209,8 @@ const ListView = React.forwardRef((
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let pageRows = parseInt(event.target.value, 10)
-    console.log('handleChangeRowsPerPage', pageRows) 
-    setRowsPerPage(pageRows);
-    //setPage(0);
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
@@ -233,6 +243,7 @@ const ListView = React.forwardRef((
               onRequestSort={handleRequestSort}
               rowCount={rows.length || 0}
               columns = {columns}
+              loading = {loading}
             />
             <TableBody>
               {rows.map((row:Row, index: any) => {
@@ -250,15 +261,25 @@ const ListView = React.forwardRef((
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox
-                          id = {row.id}
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
+                        {
+                          loading ? 
+                          <Skeleton animation="wave" height={50} width="60%" />
+                          :
+                          <Checkbox
+                            id = {row.id}
+                            checked={isItemSelected}
+                            inputProps={{ 'aria-labelledby': labelId }}
+                          />
+                        }
                       </TableCell>
                       {
                         columns.map((column, colIndex) => {
                           return(
+                            loading ? 
+                            <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props} >
+                              <Skeleton animation="wave" height={50} width="50%" />
+                            </TableCell>
+                            :
                             <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props} 
                             dangerouslySetInnerHTML={{__html: row[column.field]}} >
                             </TableCell>

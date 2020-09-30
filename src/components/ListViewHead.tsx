@@ -1,4 +1,5 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import React from "react";
 import { ListViewMetaItem } from "./ListViewMetaItem";
 
@@ -11,6 +12,7 @@ export interface ListViewHeadProps {
   orders: Array<FieldOrder>;
   rowCount: number;
   columns:Array<ListViewMetaItem>;
+  loading:boolean;
 }
 
 export interface FieldOrder{
@@ -19,7 +21,7 @@ export interface FieldOrder{
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, orders, numSelected, rowCount, onRequestSort, columns } = props;
+  const { onSelectAllClick, orders, numSelected, rowCount, onRequestSort, columns, loading } = props;
 
   const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
     let order = getOrder(field);
@@ -61,15 +63,25 @@ export function ListViewHead(props: ListViewHeadProps) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
-            id = 'all'
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
+          {
+             loading ? 
+              <Skeleton animation="wave" height={50} width="60%" />
+             :
+            <Checkbox
+              id = 'all'
+              indeterminate={numSelected > 0 && numSelected < rowCount}
+              checked={rowCount > 0 && numSelected === rowCount}
+              onChange={onSelectAllClick}
+              inputProps={{ 'aria-label': 'select all desserts' }}
+            />
+          }
         </TableCell>
         {columns.map((column,index) => (
+          loading ? 
+          <TableCell key={column.field + '-' + index} {... column.props} >
+            <Skeleton animation="wave" height={50} width="50%" />
+          </TableCell>
+          :
           <TableCell
             key={column.field + '-' + index}
             sortDirection={getOrderDirection(column.field)}
