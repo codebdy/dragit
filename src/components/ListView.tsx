@@ -68,6 +68,28 @@ function creatEmpertyRows(length:number){
   return rows;
 }
 
+const ListViewCell = (props:{row:any, columns:Array<ListViewMetaItem>, colIndex:number})=>{
+  const {row, columns, colIndex} = props;
+  const column = columns[colIndex]
+  const parseTemplate = ()=>{
+    let cellValue = column.template;
+    columns.forEach((col)=>{
+      cellValue = cellValue.replace(`{$${col.field}}`, row[col.field]);
+    })
+    return cellValue
+  }
+  return(
+    column.template?
+    <TableCell {... column.props} 
+      dangerouslySetInnerHTML={{__html:parseTemplate()}} >
+    </TableCell>
+    :
+    <TableCell {... column.props}>
+      {row[column.field]}
+    </TableCell>
+  )
+}
+
 const ListView = React.forwardRef((
     props: {
       className:string, 
@@ -287,9 +309,12 @@ const ListView = React.forwardRef((
                               <Skeleton animation="wave" height={50} width="50%" />
                             </TableCell>
                             :
-                            <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props} 
-                            dangerouslySetInnerHTML={{__html: row[column.field]}} >
-                            </TableCell>
+                            <ListViewCell
+                              key = {row.id + '-' + colIndex + '-' + column.field} 
+                              row={row} 
+                              columns = {columns} 
+                              colIndex = {colIndex} 
+                            />
                           )
                         })
                       }

@@ -87,6 +87,7 @@ export default {
                     field:'title',
                     label:'标题',
                     sortable:true,
+                    template:'<span style="color:red;">{$title}</span>',
                     props:{
                     }
                   }
