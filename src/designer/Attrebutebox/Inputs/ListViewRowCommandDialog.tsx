@@ -3,7 +3,6 @@ import { makeStyles, Theme, createStyles, TextField, FormControlLabel, Checkbox}
 import { InputProps } from './InputProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
-import { idText } from 'typescript';
 
 const styles = (theme: Theme) =>
   createStyles({
