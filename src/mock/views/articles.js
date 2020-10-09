@@ -148,6 +148,13 @@ export default {
                     slug:"edit",
                     label:"编辑",
                     icon:"mdi-pencil",
+                    jumpToPage:{
+                      //name: JUMP_TO_PAGE_ACidTION,
+                      moduleId:'articles',
+                      pageId:'article',
+                      param:'id',
+                      paramField:'id',
+                    }
                   },
                   {
                     slug:"publish",

@@ -41,6 +41,7 @@
     "jump-to":"页面跳转",
     "module-id":"模块ID",
     "page-id":"页面ID",
+    "page-param":"页面参数",
     "param-field":"参数字段",
 
     "filter-editor":"表格过滤器编辑",

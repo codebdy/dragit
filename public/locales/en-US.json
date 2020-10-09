@@ -41,6 +41,7 @@
     "jump-to":"Jump To",
     "module-id":"Module ID",
     "page-id":"Page ID",
+    "page-param":"Page Param",
     "param-field":"Param Field",
 
     "filter-editor":"Table Filters",
