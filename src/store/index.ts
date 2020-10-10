@@ -7,6 +7,7 @@ import sidebarReducer from './sidebar/reducers';
 import designReducer from './designer/reducers';
 import fixedBarReducer from './fixedBar/reducers';
 import pageReducer from './page/reducers';
+import alertbarReducer from './alertbar/reducers';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   designer: designReducer,
   fixedBar: fixedBarReducer,
   page: pageReducer,
+  alertbar:alertbarReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

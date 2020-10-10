@@ -18,6 +18,8 @@ import axios from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton } from '@material-ui/core';
 import MdiIcon from './common/MdiIcon';
+import { openSuccessAlertAction } from 'store/alertbar/actions';
+import { useDispatch } from 'react-redux';
 
 export const COMMAND_QUERY = "query";
 
@@ -181,6 +183,8 @@ const ListView = React.forwardRef((
     setSelected(newSelected);
   };
 
+  const dispatch = useDispatch()
+
   const emitAction = (command:string, rowID?:string)=>{
     console.log('ListView提交数据：',command, keyword)
     setSelected([]);
@@ -204,6 +208,7 @@ const ListView = React.forwardRef((
       setPaginate(res.data);
       setPage(res.data?.page)
       setLoading(false);
+      dispatch(openSuccessAlertAction())
     })
     .catch(err => {
       console.log('server error');

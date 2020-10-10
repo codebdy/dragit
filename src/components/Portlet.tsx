@@ -69,7 +69,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const bodyInnerRef = useRef(null);
 
   //以前用height，用maxHeight解决页面迁移时，高度计算不准的bug
-  let maxHeight = bodyInnerRef?.current ? (bodyInnerRef?.current as any).getBoundingClientRect().height + 1000 + 'px': '';
+  let maxHeight = bodyInnerRef?.current ? (bodyInnerRef?.current as any).getBoundingClientRect().height + 200 + 'px': '';
 
   maxHeight = scalable ? (opened ? maxHeight : '0px') : 'auto';
 

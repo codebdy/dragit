@@ -1,10 +1,10 @@
 import React from 'react';
 import { CssBaseline, makeStyles, Theme, createStyles } from '@material-ui/core';
-import Sidebar, { createSidebarTheme } from 'admin/Sidebar/Sidebar';
+import Sidebar, { createSidebarTheme } from 'admin/Sidebar';
 import image5 from 'assets/img/sidebar-5.jpg';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import TopNav from 'admin/TopNav/TopNav';
-import FixedBar from 'admin/FixedBar/FixedBar';
+import FixedBar from 'admin/FixedBar';
 import PageContent from 'admin/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
@@ -13,6 +13,7 @@ import AreaSelect from 'designer/AreaSelect';
 import PageContentDesign from 'designer/PageContentDesign';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
+import SuccessAlertBar from './SuccessAlertBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,6 +76,7 @@ export default function Layout(){
       <AreaSelect></AreaSelect>
       <PageContentDesign></PageContentDesign>
       <FixedBar />
+      <SuccessAlertBar />
     </div>
   )
 }

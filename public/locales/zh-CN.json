@@ -56,6 +56,7 @@
     "row-actions":"行指令",
     "batch-actions":"批量指令",
     "rows-per-page":"每页行数",
-    "pager-options":"分页选项"
+    "pager-options":"分页选项",
 
+    "operate-success":"操作成功！"
 }

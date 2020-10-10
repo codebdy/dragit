@@ -1,6 +1,6 @@
 import { handleAction, Action } from 'redux-actions';
 import {changeSizeAction, compactableAction} from "./actions";
-import { SidebarSize } from 'admin/Sidebar/Sidebar';
+import { SidebarSize } from 'admin/Sidebar';
 
 const initialState = {
   size: SidebarSize.medium,
