@@ -42,10 +42,9 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
       onBlur:  handleBlur,
       helperText: (errors[field] && touched[field]) && errors[field],
     }
-
-    if(withActions){
-      elementProps.onAction = onPageAction;
-    }
+  }
+  if(withActions){
+    elementProps.onAction = onPageAction;
   }
 
   const elementView = (element.children && element.children.length > 0) || rxText ?

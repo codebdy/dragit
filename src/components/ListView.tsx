@@ -13,7 +13,7 @@ import { FieldOrder, ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
-import { PageActionHandle } from 'admin/views/Page/PageAction';
+import { JUMP_TO_PAGE_ACTION, PageActionHandle, PageJumper } from 'admin/views/Page/PageAction';
 import axios from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton } from '@material-ui/core';
@@ -210,6 +210,10 @@ const ListView = React.forwardRef((
       setLoading(false);
     })
   }
+  const jumpToPage = (pageParams:PageJumper, row:any)=>{
+    console.log(onAction)
+    onAction({name:JUMP_TO_PAGE_ACTION, page:pageParams})
+  }
 
   const handleKeywordChange = (keyword:string)=>{
     setKeyword(keyword);
@@ -333,7 +337,7 @@ const ListView = React.forwardRef((
                                     <Tooltip title={command.label} key={command.slug}>
                                       <IconButton aria-label={command.label} name={'batch-action-' + command.slug}
                                         onClick = {(e)=>{
-                                          emitAction(command.slug, row.id);
+                                          command.jumpToPage ? jumpToPage(command.jumpToPage as PageJumper, row) : emitAction(command.slug);
                                           e.stopPropagation();
                                         }}
                                         size = "small"
