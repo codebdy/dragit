@@ -68,9 +68,10 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
 
   const bodyInnerRef = useRef(null);
 
-  let height = bodyInnerRef?.current ? (bodyInnerRef?.current as any).getBoundingClientRect().height + 'px': '';
+  //以前用height，用maxHeight解决页面迁移时，高度计算不准的bug
+  let maxHeight = bodyInnerRef?.current ? (bodyInnerRef?.current as any).getBoundingClientRect().height + 1000 + 'px': '';
 
-  height = scalable ? (opened ? height : '0px') : 'auto';
+  maxHeight = scalable ? (opened ? maxHeight : '0px') : 'auto';
 
   return (
     <Paper
@@ -100,7 +101,8 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
       }
       <div className ={classNames(classes.body,  {[classes.bodyClose] : !opened})}
         style ={{
-          height: height
+          height: 'auto',
+          maxHeight:maxHeight
         }}
       >
         <div ref={bodyInnerRef} className={classes.bodyInner}>
