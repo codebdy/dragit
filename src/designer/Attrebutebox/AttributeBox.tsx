@@ -9,6 +9,7 @@ import { INode } from 'designer/Core/Node/INode';
 import { IField } from 'designer/Core/Rules/IRule';
 import StyleList from './Inputs/StyleList';
 import intl from 'react-intl-universal';
+import AttributeBoxActionSection from './AttributeBoxActionSection';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -172,7 +173,7 @@ export default function AttributeBox(props:{node:INode|null}){
               <Typography className={classes.heading}>{intl.get('action')}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <div>动作</div>
+              <AttributeBoxActionSection node={node} />
             </ExpansionPanelDetails>            
           </ExpansionPanel>
         }

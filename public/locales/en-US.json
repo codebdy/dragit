@@ -30,6 +30,8 @@
     "style":"Style",
     "data":"Data",
     "action":"Action",
+    "go-back":"Go Back",
+    "sumbit-data":"Sumbit Data",
 
     "column-editor":"Table Cell Editor",
     "field":"Field",
