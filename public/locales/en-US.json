@@ -71,5 +71,11 @@
     "endIcon" : "End Icon",
     "fullWidth": "Full Width",
     "variant":"variant",
-    "text":"Text"
+    "text":"Text",
+
+    "xl":"XL",
+    "lg":"LG",
+    "md":"MD",
+    "sm":"SM",
+    "xs":"XS"
 }

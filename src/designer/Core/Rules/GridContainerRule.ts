@@ -29,7 +29,7 @@ export class GridContainerRule extends Rule{
     return [
       {
         name:'alignContent',
-        label:'Align Content',
+        label:'align-content',
         input:OptionSelect,
         schema:{
           'Stretch':'stretch',
@@ -42,7 +42,7 @@ export class GridContainerRule extends Rule{
       },
       {
         name:'alignItems',
-        label:'Align Items',
+        label:'align-items',
         input:OptionSelect,
         schema:{
           'Flex Start':'flex-start',
@@ -54,7 +54,7 @@ export class GridContainerRule extends Rule{
       },
       {
         name:'direction',
-        label:'Direction',
+        label:'direction',
         input:OptionSelect,
         schema:{
           'Row':'row',
@@ -65,7 +65,7 @@ export class GridContainerRule extends Rule{
       },
       {
         name:'justify',
-        label:'Justify',
+        label:'justify',
         input:OptionSelect,
         schema:{
           'Flex Start':'flex-start',
@@ -78,7 +78,7 @@ export class GridContainerRule extends Rule{
       },
       {
         name:'spacing',
-        label:'Spacing',
+        label:'spacing',
         input:NumberInput,
         schema:{
           'min':0,

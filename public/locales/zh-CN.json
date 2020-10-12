@@ -71,6 +71,17 @@
     "endIcon" : "结束图标",
     "fullWidth": "宽填满",
     "variant":"变量",
-    "text":"文本"
+    "text":"文本",
+    "align-content":"内容对齐",
+    "align-items":"项目对齐",
+    "direction" : "方向",
+    "justify" : "Justify",
+    "spacing" : "间距",
+
+    "xl":"超大屏",
+    "lg":"大屏",
+    "md":"中屏",
+    "sm":"小屏",
+    "xs":"超小屏"
 
 }
