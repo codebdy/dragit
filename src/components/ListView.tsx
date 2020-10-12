@@ -218,7 +218,7 @@ const ListView = React.forwardRef((
     })
   }
   const jumpToPage = (pageParams:PageJumper, row:any)=>{
-    onAction({name:JUMP_TO_PAGE_ACTION, page:pageParams})
+    onAction({name:JUMP_TO_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
   }
 
   const handleKeywordChange = (keyword:string)=>{
