@@ -135,6 +135,7 @@ const ListView = React.forwardRef((
   const [orders, setOrders] = React.useState<Array<FieldOrder>>([])
   const [selected, setSelected] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
+  //const [successAlert, setSuccessAlert] = React.useState(false);
 
   const rows = loading ? creatEmpertyRows(rowsPerPage) : paginate.data;
 
@@ -185,7 +186,7 @@ const ListView = React.forwardRef((
 
   const dispatch = useDispatch()
 
-  const emitAction = (command:string, rowID?:string)=>{
+  const emitAction = (command:string, showAlert?:boolean, rowID?:string)=>{
     console.log('ListView提交数据：',command, keyword)
     setSelected([]);
     setLoading(true);
@@ -208,7 +209,8 @@ const ListView = React.forwardRef((
       setPaginate(res.data);
       setPage(res.data?.page)
       setLoading(false);
-      dispatch(openSuccessAlertAction())
+      showAlert && dispatch(openSuccessAlertAction())
+      //setSuccessAlert(false);
     })
     .catch(err => {
       console.log('server error');
@@ -216,7 +218,6 @@ const ListView = React.forwardRef((
     })
   }
   const jumpToPage = (pageParams:PageJumper, row:any)=>{
-    console.log(onAction)
     onAction({name:JUMP_TO_PAGE_ACTION, page:pageParams})
   }
 
@@ -239,7 +240,10 @@ const ListView = React.forwardRef((
   };
 
   const handleBatchAction = (commandSlug:string)=>{
-    emitAction(commandSlug)
+    emitAction(commandSlug, true);
+  }
+  const handleRowAction = (commandSlug:string, rowId:string)=>{
+    emitAction(commandSlug, true, rowId);
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -342,7 +346,7 @@ const ListView = React.forwardRef((
                                     <Tooltip title={command.label} key={command.slug}>
                                       <IconButton aria-label={command.label} name={'batch-action-' + command.slug}
                                         onClick = {(e)=>{
-                                          command.jumpToPage ? jumpToPage(command.jumpToPage as PageJumper, row) : emitAction(command.slug);
+                                          command.jumpToPage ? jumpToPage(command.jumpToPage as PageJumper, row) : handleRowAction(command.slug, row.id);
                                           e.stopPropagation();
                                         }}
                                         size = "small"
