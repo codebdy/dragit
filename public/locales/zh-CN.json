@@ -62,5 +62,15 @@
     "rows-per-page":"每页行数",
     "pager-options":"分页选项",
 
-    "operate-success":"操作成功！"
+    "operate-success":"操作成功！",
+
+    "color": "颜色",
+    "disabled":"禁用",
+    "disableElevation":"禁用阴影",
+    "disableRipple" : "禁用波纹",
+    "endIcon" : "结束图标",
+    "fullWidth": "宽填满",
+    "variant":"变量",
+    "text":"文本"
+
 }

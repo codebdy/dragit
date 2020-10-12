@@ -62,5 +62,14 @@
     "rows-per-page":"Rows Per Page",
     "pager-options":"Page Options",
 
-    "operate-success":"Operate Success!"
+    "operate-success":"Operate Success!",
+
+    "color": "Color",
+    "disabled":"Disabled",
+    "disableElevation":"Disable Elevation",
+    "disableRipple" : "Disable Ripple",
+    "endIcon" : "End Icon",
+    "fullWidth": "Full Width",
+    "variant":"variant",
+    "text":"Text"
 }
