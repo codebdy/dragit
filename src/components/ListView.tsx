@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -135,6 +135,7 @@ const ListView = React.forwardRef((
   const [orders, setOrders] = React.useState<Array<FieldOrder>>([])
   const [selected, setSelected] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
+  const mountedRef = useRef(true);
   //const [successAlert, setSuccessAlert] = React.useState(false);
 
   const rows = loading ? creatEmpertyRows(rowsPerPage) : paginate.data;
@@ -144,6 +145,10 @@ const ListView = React.forwardRef((
   useEffect(() => {
     console.log('ListView useEffect')
     emitAction(COMMAND_QUERY);
+
+    return () => { 
+      mountedRef.current = false
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[keyword, filterValues, orders, rowsPerPage]);
 
@@ -206,17 +211,19 @@ const ListView = React.forwardRef((
         }
       }
     ).then(res => {
-      setPaginate(res.data);
-      setPage(res.data?.page)
-      setLoading(false);
-      showAlert && dispatch(openSuccessAlertAction())
-      //setSuccessAlert(false);
+      if(mountedRef.current){
+        setPaginate(res.data);
+        setPage(res.data?.page)
+        setLoading(false);
+        showAlert && dispatch(openSuccessAlertAction())
+      }
     })
     .catch(err => {
       console.log('server error');
       setLoading(false);
     })
-  }
+  };
+
   const jumpToPage = (pageParams:PageJumper, row:any)=>{
     onAction({name:JUMP_TO_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
   }
