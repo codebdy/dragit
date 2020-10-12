@@ -159,7 +159,7 @@ export default function AttributeBox(props:{node:INode|null}){
           >
             <Typography className={classes.heading}>{intl.get('style')}</Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
+          <ExpansionPanelDetails className={classes.pannelDetail}>
             <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -172,7 +172,7 @@ export default function AttributeBox(props:{node:INode|null}){
             >
               <Typography className={classes.heading}>{intl.get('action')}</Typography>
             </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+            <ExpansionPanelDetails className={classes.pannelDetail}>
               <AttributeBoxActionSection node={node} />
             </ExpansionPanelDetails>            
           </ExpansionPanel>
