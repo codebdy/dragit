@@ -89,7 +89,7 @@ export default function ListViewRowCommandDialog(props:InputProps){
                 color="primary"
                 checked = {!!command.jumpToPage}
                 onChange = {event=>{
-                  handleChangeAttribute(selectedIndex, 'jumpToPage', event.target.checked ? {param:'id', paramField:'id'} : undefined)
+                  handleChangeAttribute(selectedIndex, 'jumpToPage', event.target.checked ? {/*param:'id', paramField:'id'*/} : undefined)
                 }}                        
               />
             }
@@ -118,7 +118,7 @@ export default function ListViewRowCommandDialog(props:InputProps){
                   hanldeJumpParams('pageId', event.target.value.trim())
                 }}
               />
-              <TextField 
+              {/*<TextField 
                 className = {classes.itemInput} 
                 label={intl.get('page-param')} 
                 variant="outlined" 
@@ -137,7 +137,7 @@ export default function ListViewRowCommandDialog(props:InputProps){
                 onChange = {event=>{
                   hanldeJumpParams('paramField', event.target.value.trim())
                 }}
-              />
+              />*/}
             </Fragment>
           }
         </Fragment>
