@@ -103,7 +103,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              DragIT
+              DragRX
             </Typography>          
           </Hidden>
           <div className={classes.grow} />

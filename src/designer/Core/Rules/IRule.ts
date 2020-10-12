@@ -19,5 +19,12 @@ export interface IRule{
   accept: (child:INode)=>boolean;
   resolveLabel: (meta:IMeta)=>string|undefined;
 
+  //属性字段
   getFields: ()=>Array<IField>;
+
+  //动作
+  hasAction?:boolean;
+
+  //数据
+  hasData?:boolean;
 }

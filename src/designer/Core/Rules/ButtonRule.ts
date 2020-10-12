@@ -10,6 +10,7 @@ export class ButtonRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
+  hasAction = true;
 
   match(meta:IMeta){
     return meta.name === 'Button';

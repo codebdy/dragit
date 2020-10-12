@@ -29,6 +29,7 @@
     "attributes":"Attributes",
     "style":"Style",
     "data":"Data",
+    "action":"Action",
 
     "column-editor":"Table Cell Editor",
     "field":"Field",

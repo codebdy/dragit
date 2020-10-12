@@ -53,7 +53,7 @@ export default function Brand(
     <div className={classes.root} style={{width:fullWidth + 'px'}}>
       <div className={classes.logo}>
         <img className={classNames(classes.img)} src={logo} alt="logo" />
-        <div className={classes.logoText}>DragIt</div>
+        <div className={classes.logoText}>DragRX</div>
       </div>
       {children}
     </div>

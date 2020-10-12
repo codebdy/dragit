@@ -29,6 +29,7 @@
     "attributes":"属性",
     "style":"样式",
     "data":"数据",
+    "action":"动作",
 
     "column-editor":"表格列编辑器",
     "field":"字段",
