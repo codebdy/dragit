@@ -32,6 +32,7 @@
     "action":"Action",
     "go-back":"Go Back",
     "sumbit-data":"Sumbit Data",
+    "action-slug":"Action Slug",
 
     "column-editor":"Table Cell Editor",
     "field":"Field",

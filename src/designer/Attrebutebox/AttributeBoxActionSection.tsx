@@ -13,10 +13,10 @@ export default function AttributeBoxActionSection(props:{node:INode}){
 
   const handleActionChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let actionName = event.target.value as string;
-    let newAction:PageAction =  {name: actionName};
-    if(actionName === JUMP_TO_PAGE_ACTION){
-      newAction = {...newAction, page:{moduleId:'', pageId:''}};
-    }
+    let newAction:PageAction =  {...action, name: actionName};
+    //if(actionName === JUMP_TO_PAGE_ACTION){
+    //  newAction = {...newAction, };
+    //}
 
     setAction(newAction);
     node.updateProp('onClick', newAction)
@@ -34,7 +34,14 @@ export default function AttributeBoxActionSection(props:{node:INode}){
     let newAction:PageAction =  {...action, page:{...action.page, pageId:newValue}};
     setAction(newAction);
     node.updateProp('onClick', newAction)
-  };  
+  }; 
+
+  const handleSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    let newValue = (event.target.value as string);
+    let newAction:PageAction =  {...action, slug:newValue};
+    setAction(newAction);
+    node.updateProp('onClick', newAction)
+  }; 
 
   return (
     <Fragment>
@@ -58,19 +65,29 @@ export default function AttributeBoxActionSection(props:{node:INode}){
         JUMP_TO_PAGE_ACTION === action.name &&
         <Fragment>
           <AttributeRow>
-            <RowLabel nested>模块ID</RowLabel>
+            <RowLabel nested>{intl.get("module-id")}</RowLabel>
             <RowValue>
               <StyledTextInput value={action.page?.moduleId} onChange={handleModuleIdChange}/>
             </RowValue>
           </AttributeRow>
           <AttributeRow>
-            <RowLabel nested>页面ID</RowLabel>
+            <RowLabel nested>{intl.get("page-id")}</RowLabel>
             <RowValue>
               <StyledTextInput  value={action.page?.pageId} onChange={handlePageIdChange}/>
             </RowValue>
           </AttributeRow>
         </Fragment>
       }
-    </Fragment>
+      {
+        POST_DATA_ACTION === action.name &&
+        <AttributeRow>
+          <RowLabel nested>{intl.get("action-slug")}</RowLabel>
+          <RowValue>
+            <StyledTextInput value={action.slug||''} onChange={handleSlugChange}/>
+          </RowValue>
+        </AttributeRow>
+
+      }
+   </Fragment>
   )
 }

@@ -32,6 +32,7 @@
     "action":"动作",
     "go-back":"后退",
     "sumbit-data":"提交数据",
+    "action-slug":"动作标识",
 
     "column-editor":"表格列编辑器",
     "field":"字段",
