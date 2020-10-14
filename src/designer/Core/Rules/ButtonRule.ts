@@ -31,10 +31,10 @@ export class ButtonRule extends Rule{
         label:'color',
         input:OptionSelect,
         schema:{
-          'default' : 'default',
-          'inherit': 'inherit',
-          'primary' : 'primary',
-          'secondary' : 'secondary',
+          'Default' : 'default',
+          'Inherit': 'inherit',
+          'Primary' : 'primary',
+          'Secondary' : 'secondary',
         },
       },
       {
@@ -67,9 +67,9 @@ export class ButtonRule extends Rule{
         label:'size',
         input:OptionSelect,
         schema:{
-          'large' : 'large',
-          'medium': 'medium',
-          'small' : 'small',
+          'Large' : 'large',
+          'Medium': 'medium',
+          'Small' : 'small',
         },
       },
       {
@@ -77,15 +77,25 @@ export class ButtonRule extends Rule{
         label:'variant',
         input:OptionSelect,
         schema:{
-          'contained' : 'contained',
-          'outlined': 'outlined',
-          'text' : 'text',
+          'Contained' : 'contained',
+          'Outlined': 'outlined',
+          'Text' : 'text',
         },
       },
       {
         name:'rxText',
         label:'text',
         input:TextInput,
+      },
+      {
+        name:'type',
+        label:'type',
+        input:OptionSelect,
+        schema:{
+          'Submit' : 'submit',
+          'Reset': 'reset',
+          'Button' : 'button',
+        },
       },
     ]
   }

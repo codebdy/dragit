@@ -77,5 +77,8 @@
     "lg":"LG",
     "md":"MD",
     "sm":"SM",
-    "xs":"XS"
+    "xs":"XS",
+
+    "type":"Type",
+    "finished-go-back":"Go Back"
 }

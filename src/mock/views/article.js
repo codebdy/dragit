@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
+import {GO_BACK_ACTION, POST_DATA_ACTION} from "admin/views/Page/PageAction";
 
 export default {
   initAction:{
@@ -61,7 +61,12 @@ export default {
             //size: "large",
             style: {
               fontSize: '1.1rem',
-            }
+            },
+            onClick:{
+              name: POST_DATA_ACTION,
+              slug:'save',
+              needGoBack:true,
+            }            
           }
         }]
       },

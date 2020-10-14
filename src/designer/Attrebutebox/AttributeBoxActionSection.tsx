@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { MenuItem, Select } from '@material-ui/core';
+import { MenuItem, Select, Switch } from '@material-ui/core';
 import { AttributeRow, RowLabel, RowValue } from './AttributeRow';
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, POST_DATA_ACTION } from 'admin/views/Page/PageAction';
 import intl from 'react-intl-universal';
@@ -43,6 +43,13 @@ export default function AttributeBoxActionSection(props:{node:INode}){
     node.updateProp('onClick', newAction)
   }; 
 
+  const handleNeedGoBack = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue =  event.target.checked;
+    let newAction:PageAction =  {...action, needGoBack:newValue};
+    setAction(newAction);
+    node.updateProp('onClick', newAction)
+  }; 
+
   return (
     <Fragment>
       <AttributeRow>
@@ -80,12 +87,24 @@ export default function AttributeBoxActionSection(props:{node:INode}){
       }
       {
         POST_DATA_ACTION === action.name &&
+        <Fragment>
         <AttributeRow>
           <RowLabel nested>{intl.get("action-slug")}</RowLabel>
           <RowValue>
             <StyledTextInput value={action.slug||''} onChange={handleSlugChange}/>
           </RowValue>
         </AttributeRow>
+          <AttributeRow>
+          <RowLabel nested>{intl.get("finished-go-back")}</RowLabel>
+          <RowValue>
+          <Switch
+            checked={action.needGoBack||false}
+            onChange={handleNeedGoBack}
+            color="primary"
+          />
+          </RowValue>
+        </AttributeRow>
+        </Fragment>
 
       }
    </Fragment>

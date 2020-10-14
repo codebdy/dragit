@@ -30,7 +30,7 @@
     "style":"样式",
     "data":"数据",
     "action":"动作",
-    "go-back":"后退",
+    "go-back":"返回",
     "sumbit-data":"提交数据",
     "action-slug":"动作标识",
 
@@ -82,6 +82,9 @@
     "lg":"大屏",
     "md":"中屏",
     "sm":"小屏",
-    "xs":"超小屏"
+    "xs":"超小屏",
+
+    "type":"类型",
+    "finished-go-back":"提交后返回"
 
 }
