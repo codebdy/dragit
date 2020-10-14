@@ -163,7 +163,7 @@ export default function AttributeBox(props:{node:INode|null}){
             <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        {node.rule.hasAction &&
+        {node.rule.hasAction && 
           <ExpansionPanel  className={classes.panelPaper}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}

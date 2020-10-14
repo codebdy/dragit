@@ -12,14 +12,14 @@ import { PageActionHandle } from './PageAction';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email()
-    .required('Required'),
-  title: Yup.string()
-    ['required']('必须的'),
-  slug: Yup.string()
-    ['required']('必须的'),
-  comment: Yup.string()
-    .required('Required'),
+  //  .email()
+  //  .required('Required'),
+  //title: Yup.string()
+  //  ['required']('必须的'),
+  //slug: Yup.string()
+  //  ['required']('必须的'),
+  //comment: Yup.string()
+  //  .required('Required'),
 });
 
 export default function PageView(props:{match: any }) {

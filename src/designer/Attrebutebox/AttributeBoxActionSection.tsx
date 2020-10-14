@@ -64,7 +64,6 @@ export default function AttributeBoxActionSection(props:{node:INode}){
             </MenuItem>
             <MenuItem value={GO_BACK_ACTION}>{intl.get("go-back")}</MenuItem>
             <MenuItem value={JUMP_TO_PAGE_ACTION}>{intl.get("jump-to")}</MenuItem>
-            <MenuItem value={POST_DATA_ACTION}>{intl.get("sumbit-data")}</MenuItem>
           </Select>
         </RowValue>
       </AttributeRow>  
@@ -94,7 +93,7 @@ export default function AttributeBoxActionSection(props:{node:INode}){
             <StyledTextInput value={action.slug||''} onChange={handleSlugChange}/>
           </RowValue>
         </AttributeRow>
-          <AttributeRow>
+        <AttributeRow>
           <RowLabel nested>{intl.get("finished-go-back")}</RowLabel>
           <RowValue>
           <Switch

@@ -22,9 +22,9 @@ const PageForm = (props:any) =>{
         history.goBack();
         return;
         
-      case POST_DATA_ACTION:
-        console.log('POST_DATA_ACTION', action)
-        return;
+      //case POST_DATA_ACTION:
+      //  console.log('POST_DATA_ACTION', action)
+      //  return;
     }
     
   }
