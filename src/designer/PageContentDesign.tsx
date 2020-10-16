@@ -111,10 +111,17 @@ export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)
+  //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(myStore.pageJson?.layout);
   let canvas = new CanvasNode(nodes);
-  //const [canvas] = React.useState(new CanvasNode(nodes));
+  //复制一份出来，不保存的话直接扔掉
+  let fields = myStore.pageJson
+    ?
+    JSON.parse(JSON.stringify(myStore.pageJson?.fields))
+    :
+    []
 
+ 
   const dispatch = useDispatch()
   
   const handleCancel = () => {
@@ -134,7 +141,7 @@ export default function PageContentDesign() {
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
-        <LeftArea/>
+        <LeftArea fields={fields}/>
       </ThemeProvider>
       <div 
         className = {classes.rightArea}

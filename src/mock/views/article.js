@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION, POST_DATA_ACTION} from "admin/views/Page/PageAction";
+import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
 
 export default {
   initAction:{
@@ -236,6 +236,17 @@ export default {
       ]
   
   }
+  ],
+
+  fields:[
+    {
+      name:'title',
+      type:'string',
+    },
+    {
+      name:'name',
+      type:'string',
+    },
   ]
   
 }

@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import AttributeBox from './Attrebutebox/AttributeBox';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
 import { INode } from 'designer/Core/Node/INode';
+import FieldBox from './FieldBox/FieldBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +59,8 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
-export default function LeftArea(){
+export default function LeftArea(props:{fields:Array<any>}){
+  const {fields} = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
@@ -66,6 +68,11 @@ export default function LeftArea(){
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+
+  const handleFieldsChange = ()=>{
+
+  };
+
   const follow = (node:INode)=>{
     //console.log(node);
     setFocusedNode(node);
@@ -110,7 +117,7 @@ export default function LeftArea(){
        <AttributeBox node = {focusedNode}></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        3
+        <FieldBox fields = {fields} onChange = {handleFieldsChange} />
       </TabPanel>
     </Scrollbar>
   </SidebarWidthPlaceholder>

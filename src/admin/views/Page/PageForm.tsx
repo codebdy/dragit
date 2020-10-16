@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 
-import { PageAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, POST_DATA_ACTION, PageJumper } from './PageAction';
+import { PageAction, JUMP_TO_PAGE_ACTION, GO_BACK_ACTION, PageJumper } from './PageAction';
 import { withRouter } from 'react-router-dom';
 
 const resolvePageUrl=(page:PageJumper)=>{
@@ -35,10 +35,10 @@ const PageForm = (props:any) =>{
       enableReinitialize
       initialValues={model}
       validationSchema={validationSchema}
-      onSubmit={values => {
+      onSubmit={formModel => {
         // same shape as initial values
         console.log('Form submit');
-        console.log(values);
+        console.log(formModel);
       }}
     >
       {(props) => {
