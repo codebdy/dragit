@@ -26,42 +26,38 @@ interface StyleItem{
   value:string;
 }
 
-
 export default function FieldBox(props:{fields:Array<any>, onChange:any}){
   const classes = useStyles();
   //const {field, value, onChange, schema} = props;
   const [items, setItems] = React.useState(props.fields);
-  const [newItem, setNewItem] = React.useState({name:'',value:''});
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
+  const [editingIndex, setEditingIndex] = React.useState(-1);
 
   const handleSelected = (index:number)=>{
     setSelectedIndex(index);
   }
-  //const handleNameChange = (event: React.ChangeEvent<{ value: unknown }>, index:number) => {
-    //props.onChange(toStyles(items));
-  //};
 
-  //console.log('FieldBox', props.fields)
-
-  const handleValueChange = (event: React.ChangeEvent<{ value: unknown }>, index:number) => {
-    items[index].value = (event.target.value as string).trim();
-    setItems([...items]);
-    //props.onChange(toStyles(items));
-  };
-
-  const revmoveEmpertyItem = (index:number) => {
-    let item = items[index];
-    if(!item.name && !item.value){
-      items.splice(index,1);
-      setItems([...items]);
+  const handleEditing = (index:number, editing:boolean)=>{
+    if(editing){
+      setEditingIndex(index);      
     }
+    else{
+      setEditingIndex(-1); 
+    }
+
   }
 
- 
   const handleRemove = (index:number)=>{
     items.splice(index,1);
     setItems([...items]);
-    //props.onChange(toStyles(items));
+
+    if(index === selectedIndex){
+      setSelectedIndex(-1);
+    }
+
+    if(index === editingIndex){
+      setEditingIndex(-1);
+    }
   }
 
   const handleNameChange = (newName:string, index:number)=>{
@@ -71,20 +67,10 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
   }
 
   const handleAddNew = ()=>{
-    //newItem.name = toHump(newItem.name);
-    if(newItem.name && newItem.value){
-      let newItems = [...items, {name:newItem.name, value:newItem.value}]
-      setItems(newItems);
-      setNewItem({name:'',value:''});
-      //props.onChange(toStyles(newItems));
-    }
-  }
-
-  const handleNewNameChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setNewItem({name:(event.target.value as string).trim(), value:newItem.value});
-  }
-  const handleNewValueChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setNewItem({name:newItem.name, value:(event.target.value as string).trim()});
+    let newItems = [...items, {name:'', rule:{}}]
+    setItems(newItems);
+    setSelectedIndex(newItems.length - 1);
+    setEditingIndex(newItems.length - 1);
   }
 
   return (
@@ -96,7 +82,9 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
               key={index} 
               field={item.name} 
               selected = {selectedIndex === index} 
+              editing = {editingIndex === index} 
               onSelected = {()=>handleSelected(index)}
+              onEditing = {(editing)=>handleEditing(index, editing)}
               onRemove = {()=>{handleRemove(index)}}
               onNameChange = {(newName)=>handleNameChange(newName, index)}
             />
@@ -105,7 +93,7 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
       }
       <div className={classes.add}>
         <IconButton aria-label="add"
-          onClick = {(event) => {}}
+          onClick = {handleAddNew}
         >
           <AddIcon />
         </IconButton>

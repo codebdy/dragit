@@ -44,15 +44,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function FieldBoxRow(
     props:{field:string,
       selected:boolean, 
+      editing:boolean, 
       onSelected:()=>void,
+      onEditing:(editing:boolean)=>void,
       onRemove:()=>void,
       onNameChange:(newName:string)=>void
     }
   ){
-  const {field, selected, onSelected, onRemove, onNameChange} = props;
+  const {field, selected, editing, onSelected, onEditing, onRemove, onNameChange} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
-  const [eidting, setEditing] = React.useState(false);
 
   const handleRemoveClick = (event:React.MouseEvent<unknown>)=>{
     onRemove();
@@ -60,9 +61,6 @@ export default function FieldBoxRow(
   };
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     onNameChange((event.target.value as string).trim())
-    //items[index].name = (event.target.value as string).trim();
-    //setItems([...items]);
-    //props.onChange(toStyles(items));
   };
 
   return (
@@ -72,24 +70,23 @@ export default function FieldBoxRow(
       onMouseLeave = {()=>setHover(false)}
     >
       { 
-        eidting?
+        editing?
         <input className = { classNames(classes.input) } 
         value={field}
-        onBlur = {()=>setEditing(false)}
+        onBlur = {()=>onEditing(false)}
         autoFocus = {true}
         onChange = {handleFieldChange}
         />
         :
         <div className = {classNames(classes.leftInput, classes.text)}
-          onClick = {()=>{selected&&setEditing(true)}}
+          onClick = {()=>{selected&&onEditing(true)}}
         >{field}</div>
       }
       {
         (hover || selected)&&
         <div>
-          <IconButton size="small" className = {classes.more}> <MdiIcon iconClass = "mdi-dots-horizontal" size={12} /> </IconButton>
           <IconButton size="small" className = {classes.more}
-            onClick = {()=>{setEditing(true)}}
+            onClick = {()=>{onEditing(true)}}
           ><MdiIcon iconClass = "mdi-pencil" size={12} /></IconButton>
           <IconButton size="small" className = {classes.more}
             onClick = {handleRemoveClick}
