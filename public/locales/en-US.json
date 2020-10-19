@@ -84,5 +84,14 @@
 
     "validate-rules":"Validate Rules",
     "validate-type":"Validate Type",
-    "authority":"Authority"
+    "authority":"Authority",
+    "required":"Required",
+    "email":"Email",
+    "url":"Url",
+    "length":"Length",
+    "min":"Min",
+    "max":"Max",
+    "matches-regex":"Matches",
+    "positive":"Positive",
+    "negative":"Negative"
 }

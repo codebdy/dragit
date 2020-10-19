@@ -89,5 +89,14 @@
 
     "validate-rules":"验证规则",
     "validate-type":"验证类型",
-    "authority":"权限"
+    "authority":"权限",
+    "required":"必须输入",
+    "email":"邮箱",
+    "url":"网址",
+    "length":"长度",
+    "min":"最小值",
+    "max":"最大值",
+    "matches-regex":"匹配表达式",
+    "positive":"正数",
+    "negative":"负数"
 }
