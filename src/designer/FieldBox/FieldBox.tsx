@@ -3,7 +3,7 @@ import {makeStyles, Theme, createStyles, IconButton} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import intl from 'react-intl-universal';
 import FieldBoxRow from './FieldBoxRow';
-import FieldBoxValidateArea from './FieldBoxValidateArea';
+import FieldBoxValidateArea, { ValidateRule } from './FieldBoxValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     listArea:{
-      flex:1,
+      flex:1.2,
       overflowY:'auto',
       padding: theme.spacing(1),
     },
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: 'rgba(0,0,0,0.3)',
     },
     rulesArea:{
-      height:'280px',
+      flex:1,
       overflowY:'auto',
       padding: theme.spacing(1),
     },
@@ -51,7 +51,7 @@ interface StyleItem{
 export default function FieldBox(props:{fields:Array<any>, onChange:any}){
   const classes = useStyles();
   //const {field, value, onChange, schema} = props;
-  const [items, setItems] = React.useState(props.fields);
+  const [fields, setFields] = React.useState(props.fields);
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const [editingIndex, setEditingIndex] = React.useState(-1);
 
@@ -66,12 +66,11 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
     else{
       setEditingIndex(-1); 
     }
-
   }
 
   const handleRemove = (index:number)=>{
-    items.splice(index,1);
-    setItems([...items]);
+    fields.splice(index,1);
+    setFields([...fields]);
 
     if(index === selectedIndex){
       setSelectedIndex(-1);
@@ -83,23 +82,27 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
   }
 
   const handleNameChange = (newName:string, index:number)=>{
-    items[index].name = newName;
-    setItems([...items]);
-
+    fields[index].name = newName;
+    setFields([...fields]);
   }
 
   const handleAddNew = ()=>{
-    let newItems = [...items, {name:'', rule:{}}]
-    setItems(newItems);
-    setSelectedIndex(newItems.length - 1);
-    setEditingIndex(newItems.length - 1);
+    let newFields = [...fields, {name:'', rule:{}}]
+    setFields(newFields);
+    setSelectedIndex(newFields.length - 1);
+    setEditingIndex(newFields.length - 1);
+  }
+
+  const handleRuleChange = (rule:ValidateRule)=>{
+    fields[selectedIndex].rule = rule; 
+    setFields([...fields]);
   }
 
   return (
     <div className={classes.root}>
       <div className = {classes.listArea}>
         {
-          items.map((item:StyleItem, index:number)=>{
+          fields.map((item:StyleItem, index:number)=>{
             return(
               <FieldBoxRow 
                 key={index} 
@@ -126,7 +129,13 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
         {intl.get('validate-rules')}
       </div>
       <div  className = {classes.rulesArea}>
-        <FieldBoxValidateArea />
+        {
+          selectedIndex >=0 &&
+          <FieldBoxValidateArea 
+            rule={fields[selectedIndex].rule}
+            onChange = {handleRuleChange}
+          />
+        }
       </div>
     </div>
     
