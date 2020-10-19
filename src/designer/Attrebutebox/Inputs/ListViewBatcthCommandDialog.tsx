@@ -29,7 +29,6 @@ export default function ListViewBatcthCommandDialog(props:InputProps){
     setCommands([...commands]);
   };
 
-
   const handleAddNew = ()=>{
     commands.push({slug:'new-action', label:'New Action', props:{}});
     setSelectedIndex(commands.length - 1);

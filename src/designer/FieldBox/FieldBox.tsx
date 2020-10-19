@@ -1,15 +1,41 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, IconButton} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-
+import intl from 'react-intl-universal';
 import FieldBoxRow from './FieldBoxRow';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root:{
       //background:'rgba(0,0,0,0.3)',
-      padding:'8px',
       borderRadius:'3px',
+      display:'flex',
+      flexFlow:'column',
+      flex:1,  
+      height:'calc(100vh - 65px)',
+    },
+
+    listArea:{
+      flex:1,
+      overflowY:'auto',
+      padding: theme.spacing(1),
+    },
+    areaTitle:{
+      height:'36px',
+      lineHeight:'36px',
+      paddingLeft: theme.spacing(1),
+      background: 'rgba(0,0,0,0.3)',
+    },
+    rulesArea:{
+      height:'280px',
+      overflowY:'auto',
+      padding: theme.spacing(1),
+    },
+
+    authArea:{
+      height:'90px',
+      overflowY:'auto',
+      padding: theme.spacing(1),
     },
 
     add:{
@@ -75,28 +101,43 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
 
   return (
     <div className={classes.root}>
-      {
-        items.map((item:StyleItem, index:number)=>{
-          return(
-            <FieldBoxRow 
-              key={index} 
-              field={item.name} 
-              selected = {selectedIndex === index} 
-              editing = {editingIndex === index} 
-              onSelected = {()=>handleSelected(index)}
-              onEditing = {(editing)=>handleEditing(index, editing)}
-              onRemove = {()=>{handleRemove(index)}}
-              onNameChange = {(newName)=>handleNameChange(newName, index)}
-            />
-          )
-        })
-      }
-      <div className={classes.add}>
-        <IconButton aria-label="add"
-          onClick = {handleAddNew}
-        >
-          <AddIcon />
-        </IconButton>
+      <div className = {classes.listArea}>
+        {
+          items.map((item:StyleItem, index:number)=>{
+            return(
+              <FieldBoxRow 
+                key={index} 
+                field={item.name} 
+                selected = {selectedIndex === index} 
+                editing = {editingIndex === index} 
+                onSelected = {()=>handleSelected(index)}
+                onEditing = {(editing)=>handleEditing(index, editing)}
+                onRemove = {()=>{handleRemove(index)}}
+                onNameChange = {(newName)=>handleNameChange(newName, index)}
+              />
+            )
+          })
+        }
+        <div className={classes.add}>
+          <IconButton aria-label="add"
+            onClick = {handleAddNew}
+          >
+            <AddIcon />
+          </IconButton>
+        </div>
+      </div>
+      <div className = {classes.areaTitle}>
+        {intl.get('validate-rules')}
+      </div>
+      <div  className = {classes.rulesArea}>
+        haha<br/>
+      </div>
+      <div className = {classes.areaTitle}>
+        {intl.get('authority')}
+      </div>
+      <div  className = {classes.authArea}>
+        可见<br/>
+        可编辑
       </div>
 
     </div>

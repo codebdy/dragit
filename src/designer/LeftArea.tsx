@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
       background: 'rgba(0,0,0,0.3)',
       boxShadow: theme.shadows[6],
     },
-
-
   }),
 );
 

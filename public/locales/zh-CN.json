@@ -85,6 +85,8 @@
     "xs":"超小屏",
 
     "type":"类型",
-    "finished-go-back":"提交后返回"
+    "finished-go-back":"提交后返回",
 
+    "validate-rules":"验证规则",
+    "authority":"权限"
 }

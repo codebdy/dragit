@@ -80,5 +80,8 @@
     "xs":"XS",
 
     "type":"Type",
-    "finished-go-back":"Go Back"
+    "finished-go-back":"Go Back",
+
+    "validate-rules":"Validate Rules",
+    "authority":"Authority"
 }
