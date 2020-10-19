@@ -132,14 +132,6 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
       <div  className = {classes.rulesArea}>
         haha<br/>
       </div>
-      <div className = {classes.areaTitle}>
-        {intl.get('authority')}
-      </div>
-      <div  className = {classes.authArea}>
-        可见<br/>
-        可编辑
-      </div>
-
     </div>
     
   )

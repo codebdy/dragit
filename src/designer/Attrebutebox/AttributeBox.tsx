@@ -163,12 +163,25 @@ export default function AttributeBox(props:{node:INode|null}){
             <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
           </ExpansionPanelDetails>
         </ExpansionPanel>
+        <ExpansionPanel  className={classes.panelPaper}>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel4a-content"
+            id="panel4a-header"
+          >
+            <Typography className={classes.heading}>{intl.get('authority')}</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className={classes.pannelDetail}>
+            可见<br/>
+            可编辑
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
         {node.rule.hasAction && 
           <ExpansionPanel  className={classes.panelPaper}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3a-content"
-              id="panel3a-header"
+              aria-controls="panel5a-content"
+              id="panel5a-header"
             >
               <Typography className={classes.heading}>{intl.get('action')}</Typography>
             </ExpansionPanelSummary>
