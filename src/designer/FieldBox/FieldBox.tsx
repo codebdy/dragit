@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, IconButton} from '@material-ui/core';
+import {makeStyles, Theme, createStyles, IconButton} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import intl from 'react-intl-universal';
 import FieldBoxRow from './FieldBoxRow';
+import FieldBoxValidateArea from './FieldBoxValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,11 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
     },
 
-    authArea:{
-      height:'90px',
-      overflowY:'auto',
-      padding: theme.spacing(1),
-    },
 
     add:{
       display:'flex',
@@ -130,7 +126,7 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
         {intl.get('validate-rules')}
       </div>
       <div  className = {classes.rulesArea}>
-        haha<br/>
+        <FieldBoxValidateArea />
       </div>
     </div>
     
