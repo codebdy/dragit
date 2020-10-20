@@ -60,136 +60,136 @@ export default function AttributeBox(props:{node:INode|null}){
   return (
     <div className={classes.root}>
       {node&&
-      <Fragment>
-        <div className={classes.nodeLabel}>
-          {intl.get('selected-node')}
-          <span style={{color:'#5d78ff'}}>{node.label}</span>
-        </div>
-        <ExpansionPanel className={classes.panelPaper}>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={classes.pannelDetail}>
-            {
-              node.rule.getFields().map((field:IField)=>{
-                return(
-                  <AttributeRow key={node.id + '-' + field.name}>
-                    <RowLabel>{intl.get(field.label)||field.label}</RowLabel>
-                    <RowValue>
-                      <field.input
-                        field={field.name}
-                        value={node.props[field.name]}
-                        onChange= {propChange}
-                        schema={field.schema}
-                      />
-                    </RowValue>
-                  </AttributeRow>                  
-                )
-              })
-            }
-            {/*<RowGroup
-              totalLabel='外边距'
-              totalInput = {
-                <input type="number"
-                  min="0"
-                  max="10"
-                  step="2"
-                  className={classes.input}
-                />
-              }
+        <Fragment>
+          <div className={classes.nodeLabel}>
+            {intl.get('selected-node')}
+            <span style={{color:'#5d78ff'}}>{node.label}</span>
+          </div>
+          <ExpansionPanel className={classes.panelPaper}>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
-              <AttributeRow>
-                <RowLabel nested>上</RowLabel>
-                <RowValue>
+              <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails className={classes.pannelDetail}>
+              {
+                node.rule.getFields().map((field:IField)=>{
+                  return(
+                    <AttributeRow key={node.id + '-' + field.name}>
+                      <RowLabel>{intl.get(field.label)||field.label}</RowLabel>
+                      <RowValue>
+                        <field.input
+                          field={field.name}
+                          value={node.props[field.name]}
+                          onChange= {propChange}
+                          schema={field.schema}
+                        />
+                      </RowValue>
+                    </AttributeRow>                  
+                  )
+                })
+              }
+              {/*<RowGroup
+                totalLabel='外边距'
+                totalInput = {
                   <input type="number"
                     min="0"
                     max="10"
                     step="2"
                     className={classes.input}
                   />
-                </RowValue>
-              </AttributeRow>
-              <AttributeRow>
-                <RowLabel nested>下</RowLabel>
-                <RowValue>
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                </RowValue>
-              </AttributeRow>
-              <AttributeRow>
-                <RowLabel nested>左</RowLabel>
-                <RowValue>
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                </RowValue>
-              </AttributeRow>
-              <AttributeRow>
-                <RowLabel nested>右</RowLabel>
-                <RowValue>
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                </RowValue>
-              </AttributeRow>
-            </RowGroup>*/
-          }
+                }
+              >
+                <AttributeRow>
+                  <RowLabel nested>上</RowLabel>
+                  <RowValue>
+                    <input type="number"
+                      min="0"
+                      max="10"
+                      step="2"
+                      className={classes.input}
+                    />
+                  </RowValue>
+                </AttributeRow>
+                <AttributeRow>
+                  <RowLabel nested>下</RowLabel>
+                  <RowValue>
+                    <input type="number"
+                      min="0"
+                      max="10"
+                      step="2"
+                      className={classes.input}
+                    />
+                  </RowValue>
+                </AttributeRow>
+                <AttributeRow>
+                  <RowLabel nested>左</RowLabel>
+                  <RowValue>
+                    <input type="number"
+                      min="0"
+                      max="10"
+                      step="2"
+                      className={classes.input}
+                    />
+                  </RowValue>
+                </AttributeRow>
+                <AttributeRow>
+                  <RowLabel nested>右</RowLabel>
+                  <RowValue>
+                    <input type="number"
+                      min="0"
+                      max="10"
+                      step="2"
+                      className={classes.input}
+                    />
+                  </RowValue>
+                </AttributeRow>
+              </RowGroup>*/
+            }
 
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel  className={classes.panelPaper}>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography className={classes.heading}>{intl.get('style')}</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={classes.pannelDetail}>
-            <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel  className={classes.panelPaper}>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel4a-content"
-            id="panel4a-header"
-          >
-            <Typography className={classes.heading}>{intl.get('authority')}</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={classes.pannelDetail}>
-            可见<br/>
-            可编辑
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        {node.rule.hasAction && 
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
           <ExpansionPanel  className={classes.panelPaper}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel5a-content"
-              id="panel5a-header"
+              aria-controls="panel3a-content"
+              id="panel3a-header"
             >
-              <Typography className={classes.heading}>{intl.get('action')}</Typography>
+              <Typography className={classes.heading}>{intl.get('style')}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.pannelDetail}>
-              <AttributeBoxActionSection node={node} />
-            </ExpansionPanelDetails>            
+              <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
+            </ExpansionPanelDetails>
           </ExpansionPanel>
-        }
+          {node.rule.hasAction && 
+            <ExpansionPanel  className={classes.panelPaper}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel5a-content"
+                id="panel5a-header"
+              >
+                <Typography className={classes.heading}>{intl.get('action')}</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails className={classes.pannelDetail}>
+                <AttributeBoxActionSection node={node} />
+              </ExpansionPanelDetails>            
+            </ExpansionPanel>
+          }
+          <ExpansionPanel  className={classes.panelPaper}>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel4a-content"
+              id="panel4a-header"
+            >
+              <Typography className={classes.heading}>{intl.get('authority')}</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails className={classes.pannelDetail}>
+              可见<br/>
+              可编辑
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
         </Fragment>
       }
     </div>
