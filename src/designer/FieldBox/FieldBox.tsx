@@ -50,8 +50,8 @@ interface StyleItem{
 
 export default function FieldBox(props:{fields:Array<any>, onChange:any}){
   const classes = useStyles();
-  //const {field, value, onChange, schema} = props;
-  const [fields, setFields] = React.useState(props.fields);
+  const {fields, onChange} = props;
+  //const [fields, setFields] = React.useState(props.fields);
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const [editingIndex, setEditingIndex] = React.useState(-1);
 
@@ -70,7 +70,7 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
 
   const handleRemove = (index:number)=>{
     fields.splice(index,1);
-    setFields([...fields]);
+    onChange([...fields]);
 
     if(index === selectedIndex){
       setSelectedIndex(-1);
@@ -83,19 +83,19 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
 
   const handleNameChange = (newName:string, index:number)=>{
     fields[index].name = newName;
-    setFields([...fields]);
+    onChange([...fields]);
   }
 
   const handleAddNew = ()=>{
     let newFields = [...fields, {name:'', rule:{}}]
-    setFields(newFields);
+    onChange(newFields);
     setSelectedIndex(newFields.length - 1);
     setEditingIndex(newFields.length - 1);
   }
 
   const handleRuleChange = (rule:ValidateRule)=>{
     fields[selectedIndex].rule = rule; 
-    setFields([...fields]);
+    onChange([...fields]);
   }
 
   return (

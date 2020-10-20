@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton } from '@material-ui/core';
@@ -114,12 +114,18 @@ export default function PageContentDesign() {
   //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(myStore.pageJson?.layout);
   let canvas = new CanvasNode(nodes);
-  //复制一份出来，不保存的话直接扔掉
-  let fields = myStore.pageJson
+  const [fields, setFields] = useState<Array<any>>([]);
+
+  useEffect(() => {
+  let fieldsData = myStore.pageJson
     ?
     JSON.parse(JSON.stringify(myStore.pageJson?.fields))
     :
-    []
+    [];   
+    setFields(fieldsData)
+  },[myStore.pageJson]);
+  //复制一份出来，不保存的话直接扔掉
+
 
  
   const dispatch = useDispatch()
@@ -138,10 +144,14 @@ export default function PageContentDesign() {
     bus.emit(CANVAS_SCROLL)
   }
 
+  const handleFieldsChange = (newFields:Array<any>)=>{
+    setFields(newFields)
+  }
+
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
-        <LeftArea fields={fields}/>
+        <LeftArea fields={fields} onFieldsChange={handleFieldsChange}/>
       </ThemeProvider>
       <div 
         className = {classes.rightArea}

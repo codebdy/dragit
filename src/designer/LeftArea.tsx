@@ -57,18 +57,14 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
-export default function LeftArea(props:{fields:Array<any>}){
-  const {fields} = props;
+export default function LeftArea(props:{fields:Array<any>, onFieldsChange:(fields:Array<any>)=>void}){
+  const {fields, onFieldsChange} = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
-  };
-
-  const handleFieldsChange = ()=>{
-
   };
 
   const follow = (node:INode)=>{
@@ -115,7 +111,7 @@ export default function LeftArea(props:{fields:Array<any>}){
        <AttributeBox node = {focusedNode} fields = {fields}></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <FieldBox fields = {fields} onChange = {handleFieldsChange} />
+        <FieldBox fields = {fields} onChange = {onFieldsChange} />
       </TabPanel>
     </Scrollbar>
   </SidebarWidthPlaceholder>
