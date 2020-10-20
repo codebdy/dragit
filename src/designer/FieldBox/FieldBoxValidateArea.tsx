@@ -105,6 +105,16 @@ export default function FieldBoxValidateArea(props:{rule?:ValidateRule, onChange
         rule?.valueType === 'number' &&
         <Fragment>
           <AttributeRow>
+            <RowLabel nested>{intl.get("required")}</RowLabel>
+            <RowValue>
+            <Switch
+              checked={rule.required||false}
+              onChange={ (e)=>{handleRuleChange('required', e.target.checked)} }
+              color="primary"
+            />
+            </RowValue>
+          </AttributeRow>
+          <AttributeRow>
             <RowLabel nested>{intl.get("positive")}</RowLabel>
             <RowValue>
             <Switch

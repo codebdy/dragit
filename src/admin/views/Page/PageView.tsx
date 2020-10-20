@@ -9,18 +9,49 @@ import PageForm from "./PageForm";
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { PageActionHandle } from './PageAction';
+import intl from 'react-intl-universal';
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-  //  .email()
-  //  .required('Required'),
-  //title: Yup.string()
-  //  ['required']('必须的'),
-  //slug: Yup.string()
-  //  ['required']('必须的'),
-  //comment: Yup.string()
-  //  .required('Required'),
-});
+function contructRuleSchema(fields:Array<any>){
+  let schema:any = {};
+  fields&&fields.forEach(field=>{
+    let rule = field.rule;
+    if(rule && rule.valueType === "string"){
+      let yupObj = Yup.string();
+      yupObj = rule.required ? yupObj.required(intl.get('msg-required')) : yupObj;
+      yupObj = rule.email ? yupObj.email(intl.get('msg-email')) : yupObj;
+      yupObj = rule.url ? yupObj = yupObj.url(intl.get('msg-url')) : yupObj;
+      yupObj = rule.length ? yupObj.length(rule.length, intl.get('msg-length')) : yupObj;
+      yupObj = rule.min ? yupObj.min(rule.min, intl.get('msg-min')) : yupObj;
+      yupObj = rule.max ? yupObj.max(rule.max, intl.get('msg-max')) : yupObj;
+      yupObj = rule.matchesRegex ? yupObj.matches(rule.matchesRegex, intl.get('msg-matches')) : yupObj;
+      schema[field.name] = yupObj;
+    }
+
+    if(rule && rule.valueType === "number"){
+      let yupObj = Yup.number();
+      yupObj = rule.required ? yupObj.required(intl.get('msg-required')) : yupObj;
+      yupObj = rule.positive ? yupObj.positive(intl.get('msg-positive')) : yupObj;
+      yupObj = rule.negative ? yupObj.negative(intl.get('msg-negative')) : yupObj;
+      yupObj = rule.min ? yupObj.min(rule.min, intl.get('msg-min')) : yupObj;
+      yupObj = rule.max ? yupObj.max(rule.max, intl.get('msg-max')) : yupObj;
+      schema[field.name] = yupObj;
+    }
+
+    if(rule && rule.valueType === "date"){
+      let yupObj = Yup.date();
+      yupObj = rule.required ? yupObj.required(intl.get('msg-required')) : yupObj;
+      yupObj = rule.min ? yupObj.min(rule.min, intl.get('msg-min')) : yupObj;
+      yupObj = rule.max ? yupObj.max(rule.max, intl.get('msg-max')) : yupObj;
+      schema[field.name] = yupObj;
+    }
+    if(rule && rule.valueType === "boolean"){
+      let yupObj = Yup.boolean();
+      schema[field.name] = yupObj;
+    }
+  })
+  console.log('validationSchema', schema)
+  return  Yup.object().shape(schema);
+}
 
 export default function PageView(props:{match: any }) {
   const{moduleId, pageId, dataId} = props.match.params;
@@ -41,7 +72,12 @@ export default function PageView(props:{match: any }) {
       { pageInStore.schemaLoading ?
         <PageSkeleton />
       :
-        <PageForm model={pageInStore.model} validationSchema = {validationSchema} withoutForm = {pageInStore.pageJson?.withoutForm}>
+        <PageForm model={pageInStore.model} 
+          validationSchema = {
+            contructRuleSchema(pageInStore.pageJson?.fields)
+          } 
+          withoutForm = {pageInStore.pageJson?.withoutForm}
+        >
           {(props: any, onPageAction: PageActionHandle)=>(
             pageInStore.schema?.map((child:RXElement)=>{
               return (

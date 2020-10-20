@@ -241,11 +241,20 @@ export default {
   fields:[
     {
       name:'title',
-      type:'string',
+      rule:{
+        valueType:'string',
+        required:true,
+      }
     },
     {
       name:'name',
-      type:'string',
+    },
+    {
+      name:'slug',
+      rule:{
+        valueType:'string',
+        required:true,
+      }
     },
   ]
   

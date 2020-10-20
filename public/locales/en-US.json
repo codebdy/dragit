@@ -93,5 +93,16 @@
     "max":"Max",
     "matches-regex":"Matches",
     "positive":"Positive",
-    "negative":"Negative"
+    "negative":"Negative",
+
+    "msg-required":"Required",
+    "msg-email":"Please enter right emmail",
+    "msg-url":"Please enter url",
+    "msg-length":"Please enter right lenght value",
+    "msg-min":"To small",
+    "msg-max":"To big",
+    "msg-matches":"Please enter right value",
+    "msg-positive":"Please enter positive",
+    "msg-negative":"Please enter negative"
+
 }

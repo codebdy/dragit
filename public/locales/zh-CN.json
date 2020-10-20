@@ -98,5 +98,15 @@
     "max":"最大值",
     "matches-regex":"匹配表达式",
     "positive":"正数",
-    "negative":"负数"
+    "negative":"负数",
+
+    "msg-required":"必须输入",
+    "msg-email":"请输入合法Email地址",
+    "msg-url":"请输入合法url",
+    "msg-length":"长度不对",
+    "msg-min":"数值过小",
+    "msg-max":"数值过大",
+    "msg-matches":"请输入正确的数据格式",
+    "msg-positive":"请输入正数",
+    "msg-negative":"请输入负数"
 }
