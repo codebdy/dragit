@@ -49,7 +49,6 @@ function contructRuleSchema(fields:Array<any>){
       schema[field.name] = yupObj;
     }
   })
-  console.log('validationSchema', schema)
   return  Yup.object().shape(schema);
 }
 
