@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, ExpansionPanel } from '@material-ui/core';
+import React, { Fragment, useEffect } from 'react';
+import { makeStyles, Theme, createStyles, ExpansionPanel, MenuItem, Select } from '@material-ui/core';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
@@ -45,16 +45,25 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function AttributeBox(props:{node:INode|null}){
+export default function AttributeBox(props:{node:INode|null, fields:Array<any>}){
   const classes = useStyles();
-  const {node} = props
+  const {node, fields} = props;
+  const [field, setField] = React.useState(node?.meta.props?.field);
   const propChange = (field:string, value:any) => {
-    node?.updateProp(field, value)
+    node?.updateProp(field, value);
   };
 
+  useEffect(() => {
+    setField(node?.meta.props?.field)
+  },[node]);
+
   const hanleStyleChange = (value:any)=>{
-    //console.log(value);
     node?.updateProp('style', value);
+  }
+  const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    let newField = event.target.value as string;
+    node?.updateProp('field', newField)
+    setField(newField)
   }
 
   return (
@@ -68,8 +77,6 @@ export default function AttributeBox(props:{node:INode|null}){
           <ExpansionPanel className={classes.panelPaper}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
             >
               <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
             </ExpansionPanelSummary>
@@ -154,8 +161,6 @@ export default function AttributeBox(props:{node:INode|null}){
           <ExpansionPanel  className={classes.panelPaper}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3a-content"
-              id="panel3a-header"
             >
               <Typography className={classes.heading}>{intl.get('style')}</Typography>
             </ExpansionPanelSummary>
@@ -163,16 +168,45 @@ export default function AttributeBox(props:{node:INode|null}){
               <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
+          {node.rule.hasData && 
+            <ExpansionPanel  className={classes.panelPaper}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+              >
+                <Typography className={classes.heading}>{intl.get('data')}</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails  key={node.id + '-data'} className={classes.pannelDetail}>
+                <AttributeRow>
+                  <RowLabel>{intl.get("field")}</RowLabel>
+                  <RowValue>
+                    <Select
+                      value={field || ''}
+                      onChange={handleFieldChange}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      {
+                        fields.map((field,index)=>{
+                          return (
+                            <MenuItem key={field.name + '-' + index} value={field.name}>{field.name}</MenuItem>
+                          )
+                        })
+                      }
+                    </Select>
+                  </RowValue>
+                </AttributeRow>  
+              </ExpansionPanelDetails>            
+            </ExpansionPanel>
+          }
           {node.rule.hasAction && 
             <ExpansionPanel  className={classes.panelPaper}>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel5a-content"
-                id="panel5a-header"
               >
                 <Typography className={classes.heading}>{intl.get('action')}</Typography>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.pannelDetail}>
+              <ExpansionPanelDetails key={node.id + '-action'} className={classes.pannelDetail}>
                 <AttributeBoxActionSection node={node} />
               </ExpansionPanelDetails>            
             </ExpansionPanel>
@@ -180,8 +214,6 @@ export default function AttributeBox(props:{node:INode|null}){
           <ExpansionPanel  className={classes.panelPaper}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel4a-content"
-              id="panel4a-header"
             >
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
             </ExpansionPanelSummary>

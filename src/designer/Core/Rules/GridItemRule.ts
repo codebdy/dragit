@@ -1,13 +1,8 @@
 import { Rule } from "./Rule";
 import { IMeta } from "../Node/IMeta";
-import { CardRule } from "./CardRule";
 import { INode } from "../Node/INode";
-import { FormFieldRule } from "./FormFieldRule";
-import { PortletRule } from "./PortletRule";
 import { IField } from "./IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { GridContainerRule } from "./GridContainerRule";
-
 
 export class GridItemRule extends Rule{
   editPaddingY = '16px';

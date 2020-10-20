@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { MenuItem, Select, Switch } from '@material-ui/core';
 import { AttributeRow, RowLabel, RowValue } from './AttributeRow';
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, POST_DATA_ACTION } from 'admin/views/Page/PageAction';
@@ -11,12 +11,14 @@ export default function AttributeBoxActionSection(props:{node:INode}){
   const {node} = props;
   const [action, setAction] = React.useState(node.meta.props?.onClick||{});
 
+  useEffect(() => {
+    setAction(node.meta.props?.onClick||{})
+  },[node]);
+
+
   const handleActionChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let actionName = event.target.value as string;
     let newAction:PageAction =  {...action, name: actionName};
-    //if(actionName === JUMP_TO_PAGE_ACTION){
-    //  newAction = {...newAction, };
-    //}
 
     setAction(newAction);
     node.updateProp('onClick', newAction)

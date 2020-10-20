@@ -112,7 +112,7 @@ export default function LeftArea(props:{fields:Array<any>}){
         <Toolbox></Toolbox>
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <AttributeBox node = {focusedNode}></AttributeBox>
+       <AttributeBox node = {focusedNode} fields = {fields}></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <FieldBox fields = {fields} onChange = {handleFieldsChange} />

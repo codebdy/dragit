@@ -6,6 +6,7 @@ export class FormGridItemRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
+  hasData = true;
 
   match(meta:IMeta){
     return meta.name === 'FormGridItem';
@@ -16,6 +17,6 @@ export class FormGridItemRule extends Rule{
   }
 
   resolveLabel(meta:IMeta):string|undefined{
-    return 'Grid item:' + meta.props?.as;
+    return 'Form item:' + meta.props?.as;
   }
 }
