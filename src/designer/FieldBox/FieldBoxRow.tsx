@@ -76,6 +76,11 @@ export default function FieldBoxRow(
         onBlur = {()=>onEditing(false)}
         autoFocus = {true}
         onChange = {handleFieldChange}
+        onKeyUp = {e=>{
+          if(e.keyCode === 13) {
+            onEditing(false)
+          }
+        }}
         />
         :
         <div className = {classNames(classes.leftInput, classes.text)}
