@@ -1,71 +1,20 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
-import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
-import Typography from '@material-ui/core/Typography';
-import MailIcon from '@material-ui/icons/Mail';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import TreeItem from '@material-ui/lab/TreeItem';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Label from '@material-ui/icons/Label';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import InfoIcon from '@material-ui/icons/Info';
-import ForumIcon from '@material-ui/icons/Forum';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
-import Scrollbar from 'admin/common/Scrollbar';
+import { IconButton, Typography } from '@material-ui/core';
+import MdiIcon from 'components/common/MdiIcon';
 
-declare module 'csstype' {
-  interface Properties {
-    '--tree-view-color'?: string;
-    '--tree-view-bg-color'?: string;
-  }
-}
-
-type StyledTreeItemProps = TreeItemProps & {
-  bgColor?: string;
-  color?: string;
-  labelIcon: React.ElementType<SvgIconProps>;
-  labelInfo?: string;
-  labelText: string;
-};
-
-const useTreeItemStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      color: theme.palette.text.secondary,
-      '&:hover > $content': {
-        backgroundColor: theme.palette.action.hover,
-      },
-      '&:focus > $content, &$selected > $content': {
-        backgroundColor: `var(--tree-view-bg-color, ${theme.palette.grey[400]})`,
-        color: 'var(--tree-view-color)',
-      },
-      '&:focus > $content $label, &:hover > $content $label, &$selected > $content $label': {
-        backgroundColor: 'transparent',
-      },
-    },
-    content: {
-      color: theme.palette.text.secondary,
-      borderTopRightRadius: theme.spacing(2),
-      borderBottomRightRadius: theme.spacing(2),
-      paddingRight: theme.spacing(1),
-      fontWeight: theme.typography.fontWeightMedium,
-      '$expanded > &': {
-        fontWeight: theme.typography.fontWeightRegular,
-      },
-    },
-    group: {
-      marginLeft: 0,
-      '& $content': {
-        paddingLeft: theme.spacing(2),
-      },
-    },
-    expanded: {},
-    selected: {},
-    label: {
-      fontWeight: 'inherit',
-      color: 'inherit',
+      padding:theme.spacing(1),
     },
     labelRoot: {
       display: 'flex',
@@ -78,112 +27,106 @@ const useTreeItemStyles = makeStyles((theme: Theme) =>
     labelText: {
       fontWeight: 'inherit',
       flexGrow: 1,
-    },
+      margintLeft:'4px',
+    },  
+    actions: {
+      width:'76px',
+      
+    },  
   }),
 );
 
-function StyledTreeItem(props: StyledTreeItemProps) {
-  const classes = useTreeItemStyles();
-  const { labelText, labelIcon: LabelIcon, labelInfo, color, bgColor, ...other } = props;
+const items:Array<FolderNode> = [
+  {
+    id:'1',
+    name:'产品',
+    children:[
+      {
+        id:'1-2',
+        name:'二氯',
+      },
+      {
+        id:'1-3',
+        name:'三氯三氯三氯三氯',
+      },
+    ]
+  },
+  {
+    id:'2',
+    name:'文章',
+  },
+  {
+    id:'3',
+    name:'其他',
+  },
+]
 
-  return (
-    <TreeItem
-      label={
-        <div className={classes.labelRoot}>
-          <LabelIcon color="inherit" className={classes.labelIcon} />
-          <Typography variant="body2" className={classes.labelText}>
-            {labelText}
-          </Typography>
-          <Typography variant="caption" color="inherit">
-            {labelInfo}
-          </Typography>
-        </div>
-      }
-      style={{
-        '--tree-view-color': color,
-        '--tree-view-bg-color': bgColor,
-      }}
-      classes={{
-        root: classes.root,
-        content: classes.content,
-        expanded: classes.expanded,
-        selected: classes.selected,
-        group: classes.group,
-        label: classes.label,
-      }}
-      {...other}
-    />
-  );
+interface FolderNode{
+  id:string;
+  name:string;
+  children?:Array<FolderNode>;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      height: 264,
-      flexGrow: 1,
-      maxWidth: 400,
-      paddingLeft:theme.spacing(2),
-      paddingRight:theme.spacing(2),
-    },
-    scrollBar:{
-      paddingRight:theme.spacing(0.2),
-      paddingBottom:theme.spacing(2),
-      paddingTop:theme.spacing(2),
-    },
-  }),
-);
+function Folder(props:{node:FolderNode}){
+  const {node} = props;
+  const classes = useStyles();
+  return(
+    <TreeItem nodeId={node.id} label={
+      <div className={classes.labelRoot}>
+        <FolderOpenIcon />
+        <Typography variant="body2" className={classes.labelText}>
+          {node.name}
+        </Typography>
+        <div className={classes.actions}>
+          <IconButton size = "small">
+            <EditIcon fontSize = "small" />
+          </IconButton>
+          <IconButton size = "small">
+            <AddIcon fontSize = "small" />
+          </IconButton>
+          <IconButton size = "small">
+            <DeleteIcon fontSize = "small" />
+          </IconButton>
+        </div>
+      </div>}
+    >
+      {
+        node.children?.map((child)=>{
+          return(
+            <Folder node = {child} key={child.id} />
+          )
+        })
+      }
+    </TreeItem>
+
+  )
+}
 
 export default function MediaFolder() {
   const classes = useStyles();
 
   return (
-    <Scrollbar permanent className={classes.scrollBar} >
-      <TreeView
-        className={classes.root}
-        defaultExpanded={['3']}
-        defaultCollapseIcon={<ArrowDropDownIcon />}
-        defaultExpandIcon={<ArrowRightIcon />}
-        defaultEndIcon={<div style={{ width: 24 }} />}
+    <TreeView
+      className={classes.root}
+      defaultCollapseIcon={<ExpandMoreIcon />}
+      defaultExpandIcon={<ChevronRightIcon />}
+    >
+      <TreeItem nodeId="root" label=
+        {
+          <div className={classes.labelRoot}>
+            <MdiIcon iconClass = "mdi-folder-home-outline" size="22" />
+            <Typography variant="body2" className={classes.labelText}>
+              全部
+            </Typography>
+        </div>
+        }
       >
-        <StyledTreeItem nodeId="1" labelText="All Mail" labelIcon={MailIcon} />
-        <StyledTreeItem nodeId="2" labelText="Trash" labelIcon={DeleteIcon} />
-        <StyledTreeItem nodeId="3" labelText="Categories" labelIcon={Label}>
-          <StyledTreeItem
-            nodeId="5"
-            labelText="Social"
-            labelIcon={SupervisorAccountIcon}
-            labelInfo="90"
-            color="#1a73e8"
-            bgColor="#e8f0fe"
-          />
-          <StyledTreeItem
-            nodeId="6"
-            labelText="Updates"
-            labelIcon={InfoIcon}
-            labelInfo="2,294"
-            color="#e3742f"
-            bgColor="#fcefe3"
-          />
-          <StyledTreeItem
-            nodeId="7"
-            labelText="Forums"
-            labelIcon={ForumIcon}
-            labelInfo="3,566"
-            color="#a250f5"
-            bgColor="#f3e8fd"
-          />
-          <StyledTreeItem
-            nodeId="8"
-            labelText="Promotions"
-            labelIcon={LocalOfferIcon}
-            labelInfo="733"
-            color="#3c8039"
-            bgColor="#e6f4ea"
-          />
-        </StyledTreeItem>
-        <StyledTreeItem nodeId="4" labelText="History" labelIcon={Label} />
-      </TreeView>
-
-    </Scrollbar>
+        {
+          items.map((node)=>{
+            return <Folder node={node} key={node.id}/>
+          })
+        }
+      </TreeItem>
+    </TreeView>
   );
 }
