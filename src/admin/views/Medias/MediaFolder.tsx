@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       padding: theme.spacing(0.5, 0),
+      height:'30px',
     },
     labelIcon: {
       marginRight: theme.spacing(1),
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },  
     actions: {
       width:'76px',
-      
+      textAlign:'center',
     },  
   }),
 );
@@ -48,6 +49,16 @@ const items:Array<FolderNode> = [
       {
         id:'1-3',
         name:'三氯三氯三氯三氯',
+        children:[
+          {
+            id:'1-3-1',
+            name:'200g片',
+          },
+          {
+            id:'1-3-2',
+            name:'50g片',
+          }
+        ]
       },
     ]
   },
@@ -70,24 +81,33 @@ interface FolderNode{
 function Folder(props:{node:FolderNode}){
   const {node} = props;
   const classes = useStyles();
+  const [hover, setHover] = React.useState(false);
+
   return(
     <TreeItem nodeId={node.id} label={
-      <div className={classes.labelRoot}>
+      <div 
+        className={classes.labelRoot}
+        onMouseOver = {()=>setHover(true)}
+        onMouseLeave = {()=>setHover(false)}
+      >
         <FolderOpenIcon />
         <Typography variant="body2" className={classes.labelText}>
           {node.name}
         </Typography>
-        <div className={classes.actions}>
-          <IconButton size = "small">
-            <EditIcon fontSize = "small" />
-          </IconButton>
-          <IconButton size = "small">
-            <AddIcon fontSize = "small" />
-          </IconButton>
-          <IconButton size = "small">
-            <DeleteIcon fontSize = "small" />
-          </IconButton>
-        </div>
+        {
+          hover&&
+          <div className={classes.actions}>
+            <IconButton size = "small">
+              <EditIcon fontSize = "small" />
+            </IconButton>
+            <IconButton size = "small">
+              <AddIcon fontSize = "small" />
+            </IconButton>
+            <IconButton size = "small">
+              <DeleteIcon fontSize = "small" />
+            </IconButton>
+          </div>
+        }
       </div>}
     >
       {
@@ -118,6 +138,11 @@ export default function MediaFolder() {
             <Typography variant="body2" className={classes.labelText}>
               全部
             </Typography>
+            <div className={classes.actions}>
+              <IconButton size = "small">
+                <AddIcon fontSize = "small" />
+              </IconButton>
+            </div>
         </div>
         }
       >

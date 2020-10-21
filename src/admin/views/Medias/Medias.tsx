@@ -4,7 +4,6 @@ import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
 import MdiIcon from "components/common/MdiIcon";
-import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import MediaGridList from "./MediaGridList";
 import MediaFolder from "./MediaFolder";
@@ -258,9 +257,6 @@ export default function Medias(props:{children?: any}) {
               <div className = {classes.right}>
                 <div className = {classes.folderTitle}>
                   {intl.get('folder')}
-                  <Fab size="small" color="primary" className={classes.fab} aria-label="add">
-                    <AddIcon />
-                  </Fab>
                 </div>
                 <Divider></Divider>
                 <MediaFolder />
