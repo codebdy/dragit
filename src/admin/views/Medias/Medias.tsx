@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: theme.spacing(2),
     },
     paper:{
-
       display:'flex',
       flexFlow:'row',
     },
@@ -140,6 +139,7 @@ export default function Medias(props:{children?: any}) {
   const [selectedFolder, setSelectedFolder] = React.useState('root');
   const [gridLoading, setGridLoading] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
+  const [pageNumber, setPageNumber] = React.useState(0);
 
   useEffect(() => {
     setFolderLoading(true);
@@ -158,24 +158,33 @@ export default function Medias(props:{children?: any}) {
     })
   
   },[]);
-
   useEffect(() => {
     setGridLoading(true);
+    setPageNumber(0);
     setMedias([]);
+    loadMedias();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[pageNumber, selectedFolder]);
+
+  const loadMedias = (oldMedias:Array<MediaMeta> = []) => {
     axios(
       {
-        method:"get",
-        url:'/api/medias/medias',
+        method: "get",
+        url: '/api/medias/medias',
+        params: {
+          folder: selectedFolder === 'root' ? '' : selectedFolder,
+          page: pageNumber,
+        }
       }
     ).then(res => {
-      setMedias(res.data);
+      setMedias(oldMedias.concat(res.data));
       setGridLoading(false);
     })
     .catch(err => {
       console.log('server error');
       setGridLoading(false);
-    })
-  },[selectedFolder]);
+    });
+  }
 
   return (
     <Container className={classes.meidas}>
@@ -317,4 +326,5 @@ export default function Medias(props:{children?: any}) {
       </Grid>
     </Container>
   )
+
 }

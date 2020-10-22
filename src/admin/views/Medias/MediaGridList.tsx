@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     progress:{
       width:'100%',
       textAlign:'center',
-      padding:theme.spacing(5),
+      padding:theme.spacing(10),
     }
   }),
 );
@@ -53,8 +53,8 @@ export default function MediasGridList(props:{loading:boolean, medias:Array<Medi
     <Scrollbar permanent className={classes.scrollBar} >
       <Grid container className={classes.root} spacing={2}>
      
-        {medias.map((tile:any) => (
-          <Grid item key={tile.id} lg={2} sm={3} xs={4}>
+        {medias.map((tile:any, index) => (
+          <Grid item key={tile.id + '-' + index} lg={2} sm={3} xs={4}>
             <Image src={tile.img} />
             <div className={classes.title}>
               <Typography color="textSecondary" className={classes.titleText}>
@@ -70,7 +70,6 @@ export default function MediasGridList(props:{loading:boolean, medias:Array<Medi
           <CircularProgress />
         </div>
       }
-      
     </Scrollbar>
   );
 }
