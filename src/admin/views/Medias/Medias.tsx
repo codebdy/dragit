@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography, LinearProgress } from "@material-ui/core";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography, LinearProgress, CircularProgress } from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
 import MdiIcon from "components/common/MdiIcon";
 import SearchIcon from '@material-ui/icons/Search';
-import MediaGridList from "./MediaGridList";
+import MediaGridList, { MediaMeta } from "./MediaGridList";
 import MediaFolder, { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 
@@ -143,6 +143,8 @@ export default function Medias(props:{children?: any}) {
   const [folderLoading, setFolderLoading] = React.useState(false);
   const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
   const [selectedFolder, setSelectedFolder] = React.useState('root');
+  const [gridLoading, setGridLoading] = React.useState(false);
+  const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
 
   useEffect(() => {
     setFolderLoading(true);
@@ -163,7 +165,20 @@ export default function Medias(props:{children?: any}) {
   },[]);
 
   useEffect(() => {
-    
+    setGridLoading(true);
+    axios(
+      {
+        method:"get",
+        url:'/api/medias/medias',
+      }
+    ).then(res => {
+      setMedias(res.data);
+      setGridLoading(false);
+    })
+    .catch(err => {
+      console.log('server error');
+      setGridLoading(false);
+    })
   },[selectedFolder]);
 
   return (
@@ -276,7 +291,10 @@ export default function Medias(props:{children?: any}) {
               </Grid>
 
               <div className ={classes.mediasGrid}>
-                <MediaGridList></MediaGridList>
+                <MediaGridList 
+                  loading={gridLoading}
+                  medias = {medias}
+                ></MediaGridList>
               </div>
             </div>
             <Divider orientation="vertical" flexItem />
@@ -292,7 +310,10 @@ export default function Medias(props:{children?: any}) {
                 <MediaFolder 
                   folders = {folders} 
                   selectedFolder={selectedFolder}
-                  onSelect = {setSelectedFolder}
+                  onSelect = {(folder)=>{
+                      setSelectedFolder(folder);
+                      setMedias([]);
+                  }}
                 />
               </div>
             </Hidden>
