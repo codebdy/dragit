@@ -129,11 +129,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(1),
     },
 
-    fab: {
-      position: 'absolute',
-      bottom: '-20px',
-      right: theme.spacing(2),
-    },  
   }),
 );
 
@@ -166,6 +161,7 @@ export default function Medias(props:{children?: any}) {
 
   useEffect(() => {
     setGridLoading(true);
+    setMedias([]);
     axios(
       {
         method:"get",
@@ -312,7 +308,6 @@ export default function Medias(props:{children?: any}) {
                   selectedFolder={selectedFolder}
                   onSelect = {(folder)=>{
                       setSelectedFolder(folder);
-                      setMedias([]);
                   }}
                 />
               </div>
