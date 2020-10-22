@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton, Typography } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
+import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,42 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const items:Array<FolderNode> = [
-  {
-    id:'1',
-    name:'产品',
-    children:[
-      {
-        id:'1-2',
-        name:'二氯',
-      },
-      {
-        id:'1-3',
-        name:'三氯三氯三氯三氯',
-        children:[
-          {
-            id:'1-3-1',
-            name:'200g片',
-          },
-          {
-            id:'1-3-2',
-            name:'50g片',
-          }
-        ]
-      },
-    ]
-  },
-  {
-    id:'2',
-    name:'文章',
-  },
-  {
-    id:'3',
-    name:'其他',
-  },
-]
-
-interface FolderNode{
+export interface FolderNode{
   id:string;
   name:string;
   children?:Array<FolderNode>;
@@ -122,21 +88,25 @@ function Folder(props:{node:FolderNode}){
   )
 }
 
-export default function MediaFolder() {
+export default function MediaFolder(props:{folders:Array<FolderNode>, selectedFolder:string, onSelect:(node:string)=>void}) {
+  const {folders, selectedFolder, onSelect} = props;
   const classes = useStyles();
-
   return (
     <TreeView
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
+      selected = {selectedFolder}
+      onNodeSelect = {(e: any, nodeId: string) =>{
+        onSelect(nodeId);
+      }}
     >
       <TreeItem nodeId="root" label=
         {
           <div className={classes.labelRoot}>
             <MdiIcon iconClass = "mdi-folder-home-outline" size="22" />
             <Typography variant="body2" className={classes.labelText}>
-              全部
+              {intl.get('all')}
             </Typography>
             <div className={classes.actions}>
               <IconButton size = "small">
@@ -147,7 +117,7 @@ export default function MediaFolder() {
         }
       >
         {
-          items.map((node)=>{
+          folders.map((node)=>{
             return <Folder node={node} key={node.id}/>
           })
         }

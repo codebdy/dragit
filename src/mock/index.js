@@ -6,6 +6,7 @@ import formData from './data/formData'
 import listData from './data/listData'
 import article from './views/article'
 import test from './views/test'
+import mediaFolders from './medias/mediaFolders'
 
 Mock.mock('/api/drawer', 'get', drawer)
 Mock.mock('/api/page/dashboard', 'get', dashboard)
@@ -15,6 +16,7 @@ Mock.mock('/api/page/article', 'get', article)
 Mock.mock('/api/page/test', 'get', test)
 Mock.mock('/api/moudle-index/articles', 'get', 'articles')
 Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
+Mock.mock('/api/medias/folders', mediaFolders)
 
 Mock.setup({
     timeout: 500

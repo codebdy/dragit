@@ -1,12 +1,13 @@
-import React from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography } from "@material-ui/core";
+import React, { useEffect } from "react";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography, LinearProgress } from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
 import MdiIcon from "components/common/MdiIcon";
 import SearchIcon from '@material-ui/icons/Search';
 import MediaGridList from "./MediaGridList";
-import MediaFolder from "./MediaFolder";
+import MediaFolder, { FolderNode } from "./MediaFolder";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -139,10 +140,36 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Medias(props:{children?: any}) {
   const classes = useStyles();
   const toolIconSize = 21;
+  const [folderLoading, setFolderLoading] = React.useState(false);
+  const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
+  const [selectedFolder, setSelectedFolder] = React.useState('root');
+
+  useEffect(() => {
+    setFolderLoading(true);
+    axios(
+      {
+        method:"get",
+        url:'/api/medias/folders',
+      }
+    ).then(res => {
+      setFolders(res.data);
+      setFolderLoading(false);
+    })
+    .catch(err => {
+      console.log('server error');
+      setFolderLoading(false);
+    })
+  
+  },[]);
+
+  useEffect(() => {
+    
+  },[selectedFolder]);
+
   return (
     <Container className={classes.meidas}>
       <Grid container justify="space-between" alignItems="center">
-        <Grid item><h2>媒体库</h2></Grid>
+        <Grid item><h2>{intl.get("medias")}</h2></Grid>
         <Grid item>
         <Button variant="contained" color="secondary" size="large" className={classes.mainUploadButton}>
           <SvgIcon className={classes.uploadIcon}>
@@ -259,7 +286,14 @@ export default function Medias(props:{children?: any}) {
                   {intl.get('folder')}
                 </div>
                 <Divider></Divider>
-                <MediaFolder />
+                  {
+                    folderLoading && <LinearProgress />
+                  }
+                <MediaFolder 
+                  folders = {folders} 
+                  selectedFolder={selectedFolder}
+                  onSelect = {setSelectedFolder}
+                />
               </div>
             </Hidden>
           </Paper>

@@ -103,6 +103,8 @@
     "msg-max":"To big",
     "msg-matches":"Please enter right value",
     "msg-positive":"Please enter positive",
-    "msg-negative":"Please enter negative"
+    "msg-negative":"Please enter negative",
 
+    "all":"All",
+    "medias":"Medias"
 }

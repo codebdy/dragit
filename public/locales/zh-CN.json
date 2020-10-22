@@ -108,5 +108,8 @@
     "msg-max":"数值过大",
     "msg-matches":"请输入正确的数据格式",
     "msg-positive":"请输入正数",
-    "msg-negative":"请输入负数"
+    "msg-negative":"请输入负数",
+
+    "all":"全部",
+    "medias":"媒体库"
 }
