@@ -140,6 +140,7 @@ export default function Medias(props:{children?: any}) {
   const [gridLoading, setGridLoading] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
+  const [haseData] = React.useState(true);
 
   useEffect(() => {
     setFolderLoading(true);
@@ -165,6 +166,13 @@ export default function Medias(props:{children?: any}) {
     loadMedias();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[pageNumber, selectedFolder]);
+
+  const handleScrollToEnd = ()=>{
+    if(!gridLoading && haseData){
+      setGridLoading(true);
+      loadMedias(medias);
+    }
+  }
 
   const loadMedias = (oldMedias:Array<MediaMeta> = []) => {
     axios(
@@ -299,6 +307,7 @@ export default function Medias(props:{children?: any}) {
                 <MediaGridList 
                   loading={gridLoading}
                   medias = {medias}
+                  onScrollToEnd = {handleScrollToEnd}
                 ></MediaGridList>
               </div>
             </div>

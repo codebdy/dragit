@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MutableRefObject, useRef } from "react";
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import classNames from "classnames";
 
@@ -41,7 +41,7 @@ interface ScrollbarProps{
   className?: string,
   children?: any,
   permanent?:boolean,
-  onScroll?: any,
+  onScroll?: (scrollRef: React.RefObject<HTMLDivElement>)=>void,
 }
 export default function Scrollbar(props:ScrollbarProps = {}) {
   const {
@@ -50,11 +50,12 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
     permanent = false,
     className,
     children,
-    onScroll
+    onScroll = (scrollRef:React.RefObject<HTMLDivElement>)=>{}
   } = props
   const classes = useStyles();
 
   const theme = useTheme()
+  const ref = useRef(null);
 
   return (
     <div 
@@ -72,7 +73,11 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
         )
         
       }
-      onScroll = {onScroll}
+      ref = {ref}
+      onScroll = {(e)=>{
+        e.preventDefault();
+        onScroll(ref);
+      }}
     >
       <div
         className={
@@ -82,7 +87,10 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
           })
         }
 
-        onScroll = {onScroll}
+        onScroll = {(e)=>{
+          e.preventDefault();
+          onScroll(ref)
+        }}
       >
         {children}
       </div>
