@@ -9,6 +9,7 @@ import MediaGridList, { MediaMeta } from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
+import { remove } from "ArrayHelper";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -132,6 +133,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
+
 export default function Medias(props:{children?: any}) {
   const classes = useStyles();
   const toolIconSize = 21;
@@ -195,7 +198,7 @@ export default function Medias(props:{children?: any}) {
     });
   }
 
-  const handelAddFolder = (parent?:FolderNode)=>{
+  const handleAddFolder = (parent?:FolderNode)=>{
     setFolderLoading(true)
     axios(
       {
@@ -233,6 +236,43 @@ export default function Medias(props:{children?: any}) {
     });
 
   }
+
+  
+  const handleRemoveFolder = (folder:FolderNode, parentFolder:FolderNode|undefined)=>{
+    setFolderLoading(true)
+    if(selectedFolder === folder.id){
+      setSelectedFolder('root');
+    }
+    axios(
+      {
+        method: "get",
+        url: '/api/medias/remove-folder',
+        params:{
+          id:folder.id
+        },
+      }
+    ).then(res => {
+      setFolderLoading(false);
+      if(!parentFolder){
+        remove(folder, folders)
+        setFolders([...folders])
+      }
+      else{
+        remove(folder, parentFolder.children)
+        setFolders([...folders])
+      }
+    })
+    .catch(err => {
+      console.log('server error',err);
+      setFolderLoading(false);
+    });
+
+  }
+
+  const handleMoveToFolderTo = (folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode)=>{
+
+  }
+
 
   return (
     <Container className={classes.meidas}>
@@ -367,8 +407,10 @@ export default function Medias(props:{children?: any}) {
                   onSelect = {(folder)=>{
                       setSelectedFolder(folder);
                   }}
-                  onAddFolder = {handelAddFolder}
+                  onAddFolder = {handleAddFolder}
                   onFolderNameChange = {handleFolderNameChange}
+                  onRemoveFolder = {handleRemoveFolder}
+                  onMoveFolderTo = {handleMoveToFolderTo}
                 />
               </div>
             </Hidden>

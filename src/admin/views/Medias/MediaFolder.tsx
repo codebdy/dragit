@@ -61,9 +61,12 @@ export function FolderActions(props:{children:any}){
 
 export default function MediaFolder (props:{
   node:FolderNode,
-  onFolderNameChange:(name:string, folder:FolderNode)=>void
+  onFolderNameChange:(name:string, folder:FolderNode)=>void,
+  onAddFolder:(parentFolder?:FolderNode)=>void,
+  onRemoveFolder:(folder:FolderNode, parentFolder:FolderNode|undefined)=>void,
+  onMoveFolderTo:(folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode)=>void
 }){
-  const {node, onFolderNameChange} = props;
+  const {node, onFolderNameChange, onAddFolder, onRemoveFolder, onMoveFolderTo} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(node.editing);
@@ -120,7 +123,10 @@ export default function MediaFolder (props:{
             <IconButton size = "small">
               <AddIcon fontSize = "small" />
             </IconButton>
-            <IconButton size = "small">
+            <IconButton size = "small"  onClick={(e)=>{
+              e.stopPropagation();
+              onRemoveFolder(node, undefined);
+            }}>
               <DeleteIcon fontSize = "small" />
             </IconButton>
           </FolderActions>
@@ -130,7 +136,24 @@ export default function MediaFolder (props:{
       {
         node.children?.map((child)=>{
           return(
-            <MediaFolder node = {child} key={child.id} onFolderNameChange={onFolderNameChange}/>
+            <MediaFolder 
+              node = {child} 
+              key={child.id} 
+              onFolderNameChange={onFolderNameChange}
+              onAddFolder = {( parentFolder:FolderNode|undefined)=>{
+                if(!parentFolder){
+                  parentFolder = node
+                }
+                onAddFolder(parentFolder)
+              }}
+              onRemoveFolder = {(folder:FolderNode, parentFolder:FolderNode|undefined)=>{
+                if(!parentFolder){
+                  parentFolder = node
+                }
+                onRemoveFolder(folder, parentFolder)
+              }}
+              onMoveFolderTo = {onMoveFolderTo}
+            />
           )
         })
       }

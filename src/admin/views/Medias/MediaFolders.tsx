@@ -29,11 +29,12 @@ export default function MediaFolders(
     props:{
       folders:Array<FolderNode>, 
       selectedFolder:string, onSelect:(node:string)=>void,
-      onAddFolder:(parent?:FolderNode)=>void,
-      onFolderNameChange:(name:string, folder:FolderNode)=>void
-    }
+      onFolderNameChange:(name:string, folder:FolderNode)=>void,
+      onAddFolder:(parentFolder?:FolderNode)=>void,
+      onRemoveFolder:(folder:FolderNode, parentFolder:FolderNode|undefined)=>void,
+      onMoveFolderTo:(folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode)=>void    }
   ) {
-  const {folders, selectedFolder, onSelect, onAddFolder, onFolderNameChange} = props;
+  const {folders, selectedFolder, onSelect, onAddFolder, onFolderNameChange, onRemoveFolder, onMoveFolderTo} = props;
   const classes = useStyles();
   const handleAddInRoot = (event: React.MouseEvent<unknown>)=>{
     event.stopPropagation();
@@ -68,7 +69,14 @@ export default function MediaFolders(
       >
         {
           folders.map((node)=>{
-            return <MediaFolder node={node} key={node.id} onFolderNameChange = {onFolderNameChange}/>
+            return <MediaFolder 
+              node={node} 
+              key={node.id} 
+              onFolderNameChange = {onFolderNameChange}
+              onAddFolder = {onAddFolder}
+              onRemoveFolder = {onRemoveFolder}
+              onMoveFolderTo = {onMoveFolderTo}
+            />
           })
         }
       </TreeItem>

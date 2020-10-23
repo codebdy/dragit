@@ -10,7 +10,7 @@ import { resolveRule } from "../Rules/resolveRule";
 import { IRule } from "../Rules/IRule";
 import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode, MousePoint } from "./INode";
-import { remove, last, first, before, after, insertBefore, insertAfter } from "../Utils/ArrayHelper";
+import { remove, last, first, before, after, insertBefore, insertAfter } from "../../../ArrayHelper";
 import { DragoverState } from "./States/DragoverState";
 
 declare var window:any;

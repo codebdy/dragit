@@ -28,6 +28,7 @@ Mock.mock('/api/medias/folders', mediaFolders)
 Mock.mock(RegExp('/api/medias/medias?.*'),'get', medias)
 Mock.mock('/api/medias/add-folder','post', {id:()=>createFolderId(), name:"new folder"})
 Mock.mock('/api/medias/change-folder','post')
+Mock.mock(RegExp('/api/medias/remove-folder?.*'),'get')
 
 Mock.setup({
     timeout: 500
