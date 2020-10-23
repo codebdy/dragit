@@ -9,6 +9,13 @@ import test from './views/test'
 import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
 
+window.mediaFolderId = 100;
+
+function createFolderId(){
+    window.mediaFolderId = window.mediaFolderId + 1;
+    return window.mediaFolderId;
+}
+
 Mock.mock('/api/drawer', 'get', drawer)
 Mock.mock('/api/page/dashboard', 'get', dashboard)
 Mock.mock('/api/data/article', 'get', formData)
@@ -19,6 +26,8 @@ Mock.mock('/api/moudle-index/articles', 'get', 'articles')
 Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
 Mock.mock('/api/medias/folders', mediaFolders)
 Mock.mock(RegExp('/api/medias/medias?.*'),'get', medias)
+Mock.mock('/api/medias/add-folder','post', {id:()=>createFolderId(), name:"new folder"})
+Mock.mock('/api/medias/change-folder','post')
 
 Mock.setup({
     timeout: 500

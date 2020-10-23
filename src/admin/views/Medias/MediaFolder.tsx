@@ -24,7 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
     actions: {
       width:'76px',
       textAlign:'center',
-    },  
+    },
+    nameInput:{
+      width:'100px',
+    }  
   }),
 );
 
@@ -32,6 +35,7 @@ export interface FolderNode{
   id:string;
   name:string;
   children?:Array<FolderNode>;
+  editing?:boolean,
 }
 
 export function FolderLabel(props:{children:any}){
@@ -55,13 +59,29 @@ export function FolderActions(props:{children:any}){
 }
 
 
-export default function MediaFolder (props:{node:FolderNode}){
-  const {node} = props;
+export default function MediaFolder (props:{
+  node:FolderNode,
+  onFolderNameChange:(name:string, folder:FolderNode)=>void
+}){
+  const {node, onFolderNameChange} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
+  const [editing, setEditing] = React.useState(node.editing);
+  const [nodeName, setNodeName] = React.useState(node.name);
+
+  const handleEndEditing = ()=>{
+    setEditing(false);
+    delete node.editing;
+    nodeName !== node.name && onFolderNameChange(nodeName, node);  
+  }
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let value = (event.target as HTMLInputElement).value;
+    setNodeName(value);
+  };
 
   return(
-    <TreeItem nodeId={node.id} label={
+    <TreeItem nodeId={node.id.toString()} label={
       <div 
         className={classes.labelRoot}
         onMouseOver = {()=>setHover(true)}
@@ -69,12 +89,32 @@ export default function MediaFolder (props:{node:FolderNode}){
       >
         <FolderOpenIcon />
         <FolderLabel>
-          {node.name}
+          {
+            editing?
+            <input 
+              value={nodeName} 
+              autoFocus= {true} 
+              className={classes.nameInput}
+              onBlur = {handleEndEditing}
+              onKeyUp = {e=>{
+                if(e.keyCode === 13) {
+                  handleEndEditing()
+                }
+              }}
+
+              onChange = {handleChange}
+            />
+            :
+            nodeName
+          }
         </FolderLabel>
         {
           hover&&
           <FolderActions>
-            <IconButton size = "small">
+            <IconButton size = "small" onClick={(e)=>{
+              e.stopPropagation();
+              setEditing(true);
+            }}>
               <EditIcon fontSize = "small" />
             </IconButton>
             <IconButton size = "small">
@@ -90,7 +130,7 @@ export default function MediaFolder (props:{node:FolderNode}){
       {
         node.children?.map((child)=>{
           return(
-            <MediaFolder node = {child} key={child.id} />
+            <MediaFolder node = {child} key={child.id} onFolderNameChange={onFolderNameChange}/>
           )
         })
       }

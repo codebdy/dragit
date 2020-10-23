@@ -195,6 +195,45 @@ export default function Medias(props:{children?: any}) {
     });
   }
 
+  const handelAddFolder = (parent?:FolderNode)=>{
+    setFolderLoading(true)
+    axios(
+      {
+        method: "post",
+        url: '/api/medias/add-folder',
+      }
+    ).then(res => {
+      let newFolder = res.data
+      newFolder.editing = true;
+      setFolderLoading(false);
+      //setSelectedFolder(newFolder.id.toString());
+      setFolders([...folders, newFolder]);
+    })
+    .catch(err => {
+      console.log('server error');
+      setFolderLoading(false);
+    });
+  }
+
+  const handleFolderNameChange = (name:string, folder:FolderNode)=>{
+    setFolderLoading(true)
+    folder.name = name;    
+    axios(
+      {
+        method: "post",
+        url: '/api/medias/change-folder',
+        data:folder,
+      }
+    ).then(res => {
+      setFolderLoading(false);
+    })
+    .catch(err => {
+      console.log('server error');
+      setFolderLoading(false);
+    });
+
+  }
+
   return (
     <Container className={classes.meidas}>
       <Grid container justify="space-between" alignItems="center">
@@ -328,6 +367,8 @@ export default function Medias(props:{children?: any}) {
                   onSelect = {(folder)=>{
                       setSelectedFolder(folder);
                   }}
+                  onAddFolder = {handelAddFolder}
+                  onFolderNameChange = {handleFolderNameChange}
                 />
               </div>
             </Hidden>
