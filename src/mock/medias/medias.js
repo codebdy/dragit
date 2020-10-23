@@ -104,4 +104,10 @@ export default[
     title: 'Bike',
     author: 'danfador',
   },
+  {
+    id:'18',
+    img: '/static/images/grid-list/bike.jpg',
+    title: 'Bike',
+    author: 'danfador',
+  },
 ];

@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography, LinearProgress, CircularProgress } from "@material-ui/core";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography, LinearProgress} from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import intl from 'react-intl-universal';
 import MdiIcon from "components/common/MdiIcon";
 import SearchIcon from '@material-ui/icons/Search';
 import MediaGridList, { MediaMeta } from "./MediaGridList";
-import MediaFolder, { FolderNode } from "./MediaFolder";
+import MediaFolders from "./MediaFolders";
+import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -321,7 +322,7 @@ export default function Medias(props:{children?: any}) {
                   {
                     folderLoading && <LinearProgress />
                   }
-                <MediaFolder 
+                <MediaFolders 
                   folders = {folders} 
                   selectedFolder={selectedFolder}
                   onSelect = {(folder)=>{
