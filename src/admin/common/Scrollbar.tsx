@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef } from "react";
+import React, { useRef } from "react";
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import classNames from "classnames";
 
