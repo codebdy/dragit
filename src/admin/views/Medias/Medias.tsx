@@ -274,8 +274,8 @@ export default function Medias(props:{children?: any}) {
 
   }
 
-  const handleMoveToFolderTo = (folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode)=>{
-
+  const handleMoveToFolderTo = (folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode|undefined)=>{
+    //remove()
   }
 
 

@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       padding: theme.spacing(0.5, 0),
       height:'30px',
+      userSelect:'none',
     },
 
     labelText: {
@@ -38,11 +39,26 @@ export interface FolderNode{
   editing?:boolean,
 }
 
-export function FolderLabel(props:{children:any}){
+export function FolderLabel(props:{
+    children:any,
+    onDragOver:(event:React.DragEvent<HTMLLIElement>)=>void,
+    onDrop:()=>void,
+    onDragStart?:()=>void,
+    onDragEnd?:()=>void,    
+    draggable?:boolean
+  }){
+  const {draggable, onDragOver, onDrop, onDragStart, onDragEnd} = props;
   const classes = useStyles();
 
   return(
-    <Typography variant="body2" className={classes.labelText}>
+    <Typography variant="body2" 
+      className={classes.labelText} 
+      draggable={draggable}
+      onDragStart={onDragStart}
+      onDragOver = {onDragOver}
+      onDragEnd = {onDragEnd}
+      onDrop = {onDrop}      
+    >
       {props.children}
     </Typography>    
   )
@@ -61,12 +77,28 @@ export function FolderActions(props:{children:any}){
 
 export default function MediaFolder (props:{
   node:FolderNode,
+  draggedFolder:FolderNode|undefined,
+  draggedParent:FolderNode|undefined,
   onFolderNameChange:(name:string, folder:FolderNode)=>void,
   onAddFolder:(parentFolder?:FolderNode)=>void,
   onRemoveFolder:(folder:FolderNode, parentFolder:FolderNode|undefined)=>void,
-  onMoveFolderTo:(folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode)=>void
+  onMoveFolderTo:(folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode)=>void,
+  onDragStart:(folder:FolderNode, parent:FolderNode|undefined)=>void,
+  onDragEnd:()=>void,
+  parent?:FolderNode|undefined, 
 }){
-  const {node, onFolderNameChange, onAddFolder, onRemoveFolder, onMoveFolderTo} = props;
+  const {
+    node,
+    parent,
+    draggedFolder,
+    draggedParent,
+    onFolderNameChange, 
+    onAddFolder, 
+    onRemoveFolder, 
+    onMoveFolderTo,
+    onDragStart,
+    onDragEnd
+  } = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(node.editing);
@@ -83,6 +115,16 @@ export default function MediaFolder (props:{
     setNodeName(value);
   };
 
+  const handleDragOver = (event:React.DragEvent<HTMLLIElement>)=>{
+    draggedFolder && draggedFolder !== node && event.preventDefault();
+  }
+
+  const handleDrop = ()=>{
+    if(draggedFolder && draggedFolder !== node){
+      onMoveFolderTo(draggedFolder, draggedParent, node);
+    }
+  }
+
   return(
     <TreeItem nodeId={node.id.toString()} label={
       <div 
@@ -91,7 +133,13 @@ export default function MediaFolder (props:{
         onMouseLeave = {()=>setHover(false)}
       >
         <FolderOpenIcon />
-        <FolderLabel>
+        <FolderLabel
+          draggable={true}
+          onDragStart={()=>onDragStart(node, parent)}
+          onDragOver = {handleDragOver}
+          onDragEnd = {onDragEnd}
+          onDrop = {handleDrop}           
+        >
           {
             editing?
             <input 
@@ -140,8 +188,11 @@ export default function MediaFolder (props:{
         node.children?.map((child)=>{
           return(
             <MediaFolder 
-              node = {child} 
-              key={child.id} 
+              key={child.id}               
+              node = {child}
+              parent = {node}
+              draggedFolder = {draggedFolder}
+              draggedParent = {draggedParent}
               onFolderNameChange={onFolderNameChange}
               onAddFolder = {onAddFolder}
               onRemoveFolder = {(folder:FolderNode, parentFolder:FolderNode|undefined)=>{
@@ -150,6 +201,8 @@ export default function MediaFolder (props:{
                 }
                 onRemoveFolder(folder, parentFolder)
               }}
+              onDragStart = {onDragStart}
+              onDragEnd = {onDragEnd}             
               onMoveFolderTo = {onMoveFolderTo}
             />
           )
