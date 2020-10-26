@@ -41,23 +41,12 @@ export interface FolderNode{
 
 export function FolderLabel(props:{
     children:any,
-    onDragOver:(event:React.DragEvent<HTMLLIElement>)=>void,
-    onDrop:()=>void,
-    onDragStart?:()=>void,
-    onDragEnd?:()=>void,    
-    draggable?:boolean
   }){
-  const {draggable, onDragOver, onDrop, onDragStart, onDragEnd} = props;
   const classes = useStyles();
 
   return(
     <Typography variant="body2" 
-      className={classes.labelText} 
-      draggable={draggable}
-      onDragStart={onDragStart}
-      onDragOver = {onDragOver}
-      onDragEnd = {onDragEnd}
-      onDrop = {onDrop}      
+      className={classes.labelText}
     >
       {props.children}
     </Typography>    
@@ -115,7 +104,7 @@ export default function MediaFolder (props:{
     setNodeName(value);
   };
 
-  const handleDragOver = (event:React.DragEvent<HTMLLIElement>)=>{
+  const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
     draggedFolder && draggedFolder !== node && event.preventDefault();
   }
 
@@ -131,14 +120,14 @@ export default function MediaFolder (props:{
         className={classes.labelRoot}
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}
-      >
-        <FolderOpenIcon />
-        <FolderLabel
           draggable={true}
           onDragStart={()=>onDragStart(node, parent)}
           onDragOver = {handleDragOver}
           onDragEnd = {onDragEnd}
-          onDrop = {handleDrop}           
+          onDrop = {handleDrop}         
+        >
+        <FolderOpenIcon />
+        <FolderLabel
         >
           {
             editing?

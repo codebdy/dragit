@@ -57,18 +57,18 @@ export default function MediaFolders(
     >
       <TreeItem nodeId="root" label=
         {
-          <div className={classes.labelRoot}>
-            <MdiIcon iconClass = "mdi-folder-home-outline" size="22" />
-            <FolderLabel
-              onDragOver={e=>{
-                if(draggedFolder){
-                  e.preventDefault()
-                }
-              }}
-              onDrop={
-                ()=>{draggedFolder && onMoveFolderTo(draggedFolder, draggedParent, undefined)}
+          <div className={classes.labelRoot}
+            onDragOver={e=>{
+              if(draggedFolder){
+                e.preventDefault()
               }
-            >
+            }}
+            onDrop={
+              ()=>{draggedFolder && onMoveFolderTo(draggedFolder, draggedParent, undefined)}
+            }
+          >
+            <MdiIcon iconClass = "mdi-folder-home-outline" size="22" />
+            <FolderLabel>
               {intl.get('all')}
             </FolderLabel>
             <FolderActions>
