@@ -120,7 +120,10 @@ export default function MediaFolder (props:{
             }}>
               <EditIcon fontSize = "small" />
             </IconButton>
-            <IconButton size = "small">
+            <IconButton size = "small" onClick={(e)=>{
+              e.stopPropagation();
+              onAddFolder(node);
+            }}>
               <AddIcon fontSize = "small" />
             </IconButton>
             <IconButton size = "small"  onClick={(e)=>{
@@ -140,12 +143,7 @@ export default function MediaFolder (props:{
               node = {child} 
               key={child.id} 
               onFolderNameChange={onFolderNameChange}
-              onAddFolder = {( parentFolder:FolderNode|undefined)=>{
-                if(!parentFolder){
-                  parentFolder = node
-                }
-                onAddFolder(parentFolder)
-              }}
+              onAddFolder = {onAddFolder}
               onRemoveFolder = {(folder:FolderNode, parentFolder:FolderNode|undefined)=>{
                 if(!parentFolder){
                   parentFolder = node

@@ -210,7 +210,12 @@ export default function Medias(props:{children?: any}) {
       newFolder.editing = true;
       setFolderLoading(false);
       //setSelectedFolder(newFolder.id.toString());
-      setFolders([...folders, newFolder]);
+      if(parent){
+        parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
+        setFolders([...folders])
+      }else{
+        setFolders([...folders, newFolder]);
+      }
     })
     .catch(err => {
       console.log('server error');
