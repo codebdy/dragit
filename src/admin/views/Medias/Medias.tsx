@@ -250,7 +250,7 @@ export default function Medias(props:{children?: any}) {
     }
     axios(
       {
-        method: "get",
+        method: "post",
         url: '/api/medias/remove-folder',
         params:{
           id:folder.id
@@ -275,7 +275,43 @@ export default function Medias(props:{children?: any}) {
   }
 
   const handleMoveToFolderTo = (folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode|undefined)=>{
-    //remove()
+    setFolderLoading(true)
+    if(selectedFolder === folder.id){
+      setSelectedFolder('root');
+    }
+    axios(
+      {
+        method: "post",
+        url: '/api/medias/move-to-folder',
+        params:{
+          id:folder.id,
+          targetId:targetFolder?.id
+        },
+      }
+    ).then(res => {
+      setFolderLoading(false);
+      if(parentFolder){
+          remove(folder, parentFolder.children)
+      }
+      else{
+        remove(folder, folders)
+      }
+  
+      if(targetFolder){
+        targetFolder.children = targetFolder?.children? [...targetFolder?.children, folder] : [folder]
+      }
+      else{
+        folders.push(folder)
+      }
+  
+      setFolders([...folders]);
+ 
+    })
+    .catch(err => {
+      console.log('server error',err);
+      setFolderLoading(false);
+    });
+
   }
 
 
