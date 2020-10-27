@@ -106,5 +106,6 @@
     "msg-negative":"Please enter negative",
 
     "all":"All",
-    "medias":"Medias"
+    "medias":"Medias",
+    "root-dir":"Root"
 }

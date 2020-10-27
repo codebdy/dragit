@@ -36,7 +36,8 @@ export interface FolderNode{
   id:string;
   name:string;
   children?:Array<FolderNode>;
-  editing?:boolean,
+  editing?:boolean;
+  parent?:FolderNode;
 }
 
 export function FolderLabel(props:{
@@ -67,20 +68,16 @@ export function FolderActions(props:{children:any}){
 export default function MediaFolder (props:{
   node:FolderNode,
   draggedFolder:FolderNode|undefined,
-  draggedParent:FolderNode|undefined,
   onFolderNameChange:(name:string, folder:FolderNode)=>void,
   onAddFolder:(parentFolder?:FolderNode)=>void,
-  onRemoveFolder:(folder:FolderNode, parentFolder:FolderNode|undefined)=>void,
-  onMoveFolderTo:(folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode)=>void,
-  onDragStart:(folder:FolderNode, parent:FolderNode|undefined)=>void,
+  onRemoveFolder:(folder:FolderNode)=>void,
+  onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode)=>void,
+  onDragStart:(folder:FolderNode)=>void,
   onDragEnd:()=>void,
-  parent?:FolderNode|undefined, 
 }){
   const {
     node,
-    parent,
     draggedFolder,
-    draggedParent,
     onFolderNameChange, 
     onAddFolder, 
     onRemoveFolder, 
@@ -110,7 +107,7 @@ export default function MediaFolder (props:{
 
   const handleDrop = ()=>{
     if(draggedFolder && draggedFolder !== node){
-      onMoveFolderTo(draggedFolder, draggedParent, node);
+      onMoveFolderTo(draggedFolder, node);
     }
   }
 
@@ -121,14 +118,13 @@ export default function MediaFolder (props:{
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}
           draggable={true}
-          onDragStart={()=>onDragStart(node, parent)}
+          onDragStart={()=>onDragStart(node)}
           onDragOver = {handleDragOver}
           onDragEnd = {onDragEnd}
           onDrop = {handleDrop}         
         >
         <FolderOpenIcon />
-        <FolderLabel
-        >
+        <FolderLabel>
           {
             editing?
             <input 
@@ -165,7 +161,7 @@ export default function MediaFolder (props:{
             </IconButton>
             <IconButton size = "small"  onClick={(e)=>{
               e.stopPropagation();
-              onRemoveFolder(node, undefined);
+              onRemoveFolder(node);
             }}>
               <DeleteIcon fontSize = "small" />
             </IconButton>
@@ -179,17 +175,10 @@ export default function MediaFolder (props:{
             <MediaFolder 
               key={child.id}               
               node = {child}
-              parent = {node}
               draggedFolder = {draggedFolder}
-              draggedParent = {draggedParent}
               onFolderNameChange={onFolderNameChange}
               onAddFolder = {onAddFolder}
-              onRemoveFolder = {(folder:FolderNode, parentFolder:FolderNode|undefined)=>{
-                if(!parentFolder){
-                  parentFolder = node
-                }
-                onRemoveFolder(folder, parentFolder)
-              }}
+              onRemoveFolder = {onRemoveFolder}
               onDragStart = {onDragStart}
               onDragEnd = {onDragEnd}             
               onMoveFolderTo = {onMoveFolderTo}

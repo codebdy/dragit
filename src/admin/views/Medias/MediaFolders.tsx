@@ -31,13 +31,13 @@ export default function MediaFolders(
       selectedFolder:string, onSelect:(node:string)=>void,
       onFolderNameChange:(name:string, folder:FolderNode)=>void,
       onAddFolder:(parentFolder?:FolderNode)=>void,
-      onRemoveFolder:(folder:FolderNode, parentFolder:FolderNode|undefined)=>void,
-      onMoveFolderTo:(folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode|undefined)=>void    }
+      onRemoveFolder:(folder:FolderNode)=>void,
+      onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void    }
   ) {
   const {folders, selectedFolder, onSelect, onAddFolder, onFolderNameChange, onRemoveFolder, onMoveFolderTo} = props;
   const classes = useStyles();
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
-  const [draggedParent, setDraggedParent] = React.useState<FolderNode|undefined>();
+  //const [draggedParent, setDraggedParent] = React.useState<FolderNode|undefined>();
 
   const handleAddInRoot = (event: React.MouseEvent<unknown>)=>{
     event.stopPropagation();
@@ -64,12 +64,12 @@ export default function MediaFolders(
               }
             }}
             onDrop={
-              ()=>{draggedFolder && onMoveFolderTo(draggedFolder, draggedParent, undefined)}
+              ()=>{draggedFolder && onMoveFolderTo(draggedFolder, undefined)}
             }
           >
             <MdiIcon iconClass = "mdi-folder-home-outline" size="22" />
             <FolderLabel>
-              {intl.get('all')}
+              {intl.get('root-dir')}
             </FolderLabel>
             <FolderActions>
               <IconButton size = "small" onClick={handleAddInRoot}>
@@ -85,18 +85,15 @@ export default function MediaFolders(
               key={node.id} 
               node={node} 
               draggedFolder = {draggedFolder}
-              draggedParent = {draggedParent}
               onFolderNameChange = {onFolderNameChange}
               onAddFolder = {onAddFolder}
               onRemoveFolder = {onRemoveFolder}
               onMoveFolderTo = {onMoveFolderTo}
-              onDragStart = {(folder, parent)=>{
+              onDragStart = {(folder)=>{
                 setDraggedFolder(folder)
-                setDraggedParent(parent)
               }}
               onDragEnd = {()=>{
                 setDraggedFolder(undefined)
-                setDraggedParent(undefined)
               }}               
             />
           })

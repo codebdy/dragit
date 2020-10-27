@@ -111,5 +111,6 @@
     "msg-negative":"请输入负数",
 
     "all":"全部",
-    "medias":"媒体库"
+    "medias":"媒体库",
+    "root-dir":"根目录"
 }

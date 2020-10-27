@@ -134,6 +134,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
+function makeupParent(folders?:Array<FolderNode>, parent?:FolderNode){
+  folders && folders.forEach(folder=>{
+    folder.parent = parent;
+    makeupParent(folder.children, folder)
+  })
+  return folders?folders:[];
+}
 
 export default function Medias(props:{children?: any}) {
   const classes = useStyles();
@@ -154,7 +161,7 @@ export default function Medias(props:{children?: any}) {
         url:'/api/medias/folders',
       }
     ).then(res => {
-      setFolders(res.data);
+      setFolders(makeupParent(res.data));
       setFolderLoading(false);
     })
     .catch(err => {
@@ -243,7 +250,8 @@ export default function Medias(props:{children?: any}) {
   }
 
   
-  const handleRemoveFolder = (folder:FolderNode, parentFolder:FolderNode|undefined)=>{
+  const handleRemoveFolder = (folder:FolderNode)=>{
+    const parentFolder = folder.parent;
     setFolderLoading(true)
     if(selectedFolder === folder.id){
       setSelectedFolder('root');
@@ -274,7 +282,8 @@ export default function Medias(props:{children?: any}) {
 
   }
 
-  const handleMoveToFolderTo = (folder:FolderNode, parentFolder:FolderNode|undefined, targetFolder:FolderNode|undefined)=>{
+  const handleMoveToFolderTo = (folder:FolderNode, targetFolder:FolderNode|undefined)=>{
+    const parentFolder = folder.parent;
     setFolderLoading(true)
     if(selectedFolder === folder.id){
       setSelectedFolder('root');
@@ -396,7 +405,7 @@ export default function Medias(props:{children?: any}) {
                 <Grid item>
                   <IconButton className={classes.backButton}>
                     <SvgIcon>
-                      <path fill="currentColor" d="M2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12M18,11H10L13.5,7.5L12.08,6.08L6.16,12L12.08,17.92L13.5,16.5L10,13H18V11Z" />
+                      <path fill="currentColor" d="M13,18V10L16.5,13.5L17.92,12.08L12,6.16L6.08,12.08L7.5,13.5L11,10V18H13M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2Z" />
                     </SvgIcon>                    
                   </IconButton>                  
                 </Grid>
@@ -405,7 +414,7 @@ export default function Medias(props:{children?: any}) {
                     className={classNames(classes.breadcrumb, classes.breadcumbText) }
                   >
                     <Link color="inherit" href="/">
-                      全部
+                    {intl.get('root-dir')}
                     </Link>
                     <Link color="inherit" href="/getting-started/installation/">
                       文章
