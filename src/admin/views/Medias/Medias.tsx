@@ -123,6 +123,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     breadCrumbShell:{
       minHeight:theme.spacing(7),
+      //boxShadow: theme.shadows[5],
     },
   }),
 );
@@ -448,8 +449,12 @@ export default function Medias(props:{children?: any}) {
               <div className ={classes.mediasGrid}>
                 <MediaGridList 
                   loading={gridLoading}
+                  folders = {selectedFolderNode? selectedFolderNode.children : folders}
                   medias = {medias}
                   onScrollToEnd = {handleScrollToEnd}
+                  onSelect = {(folder)=>{
+                    setSelectedFolder(folder);
+                  }}
                 ></MediaGridList>
               </div>
             </div>

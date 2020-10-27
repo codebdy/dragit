@@ -54,6 +54,7 @@ export default function MediaBreadCrumbs(props:{folder?:FolderNode, onSelect:(no
           <Link 
             color="inherit" 
             className={classes.crumbLink}
+            key={crumb.id}
             onClick={()=>{onSelect(crumb.id)}}
           >{crumb.name}</Link>
         )

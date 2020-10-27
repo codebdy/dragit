@@ -2,8 +2,11 @@ import React, { useRef } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Image from 'components/common/Image'
 
-import { CircularProgress, Grid, Typography } from '@material-ui/core';
+import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'admin/common/Scrollbar';
+import { FolderNode } from './MediaFolder';
+import MediaGridListFolder from './MediaGridListFolder';
+import MediaGridListItemTitle from './MediaGridListItemTitle';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,13 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingRight:theme.spacing(0.2),
     },
 
-    title:{
-      textAlign: "center",
-      paddingTop:theme.spacing(1),
-    },
-    titleText:{
-      fontSize: '0.85rem',
-    },
     gridList: {
       flex:1,
     },
@@ -45,8 +41,14 @@ export interface MediaMeta{
   title: string,
 }
 
-export default function MediasGridList(props:{loading:boolean, medias:Array<MediaMeta>, onScrollToEnd:()=>void}) {
-  const {loading, medias, onScrollToEnd} = props;
+export default function MediasGridList(props:{
+    loading:boolean, 
+    folders:Array<FolderNode>|undefined,
+    medias:Array<MediaMeta>, 
+    onScrollToEnd:()=>void,
+    onSelect:(nodeId:string)=>void
+  }) {
+  const {loading, folders, medias, onScrollToEnd, onSelect} = props;
   const classes = useStyles();
   const ref = useRef(null);  
   
@@ -72,15 +74,16 @@ export default function MediasGridList(props:{loading:boolean, medias:Array<Medi
       onScroll = {handleScroll}
     >
       <Grid container className={classes.root} spacing={2} ref={ref}>
+        {folders?.map((folder:any, index) => (
+          <Grid item key={folder.id + '-folder'} lg={2} sm={3} xs={4}>
+            <MediaGridListFolder folder={folder} onSelect={onSelect}/>
+          </Grid>
+        ))}
      
         {medias.map((tile:any, index) => (
           <Grid item key={tile.id + '-' + index} lg={2} sm={3} xs={4}>
             <Image src={tile.img} />
-            <div className={classes.title}>
-              <Typography color="textSecondary" className={classes.titleText}>
-                {tile.title}
-              </Typography>
-            </div>
+            <MediaGridListItemTitle title={tile.title} />
           </Grid>
         ))}
       </Grid>
