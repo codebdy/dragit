@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Breadcrumbs, Link, Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, Typography, LinearProgress} from "@material-ui/core";
+import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider,Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, LinearProgress} from "@material-ui/core";
 import classNames from "classnames";
 import Spacer from "components/common/Spacer";
-import intl from 'react-intl-universal';
 import MdiIcon from "components/common/MdiIcon";
 import SearchIcon from '@material-ui/icons/Search';
 import MediaGridList, { MediaMeta } from "./MediaGridList";
@@ -10,6 +9,8 @@ import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { remove } from "ArrayHelper";
+import intl from 'react-intl-universal';
+import MediaBreadCrumbs from "./MediaBreadCrumbs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,15 +55,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems:'center',
       flexWrap: 'wrap',
       paddingRight: '0',
-    },
-    breadCrumbShell:{
-      minHeight:theme.spacing(7),
-    },
-    breadcrumb:{
-      padding: theme.spacing(2),
-    },
-    breadcumbText:{
-      fontSize: '0.9rem',
     },
     mediasGrid:{
       flex:1,
@@ -129,7 +121,9 @@ const useStyles = makeStyles((theme: Theme) =>
     uploadIcon:{
       marginRight: theme.spacing(1),
     },
-
+    breadCrumbShell:{
+      minHeight:theme.spacing(7),
+    },
   }),
 );
 
@@ -142,6 +136,21 @@ function makeupParent(folders?:Array<FolderNode>, parent?:FolderNode){
   return folders?folders:[];
 }
 
+function getByIdFromTree(id:string, folders?:Array<FolderNode>):FolderNode|undefined{
+  if(folders){
+    for(var i = 0; i < folders.length; i++){
+      if(folders[i].id === id){
+        return folders[i];
+      }
+      let searchedChild = getByIdFromTree(id, folders[i].children);
+      if(searchedChild){
+        return searchedChild;
+      }
+    }
+  }
+  return undefined;
+}
+
 export default function Medias(props:{children?: any}) {
   const classes = useStyles();
   const toolIconSize = 21;
@@ -152,6 +161,8 @@ export default function Medias(props:{children?: any}) {
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
   const [haseData] = React.useState(true);
+
+  const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
 
   useEffect(() => {
     setFolderLoading(true);
@@ -403,24 +414,25 @@ export default function Medias(props:{children?: any}) {
               <Divider></Divider>
               <Grid container justify="space-between" alignItems="center" className={classes.breadCrumbShell}>
                 <Grid item>
-                  <IconButton className={classes.backButton}>
+                  <IconButton className={classes.backButton}
+                    disabled = {selectedFolder === 'root'}
+                    onClick={
+                      ()=>{
+                        setSelectedFolder(selectedFolderNode?.parent? selectedFolderNode.parent.id : 'root')
+                      }
+                    }
+                  >
                     <SvgIcon>
                       <path fill="currentColor" d="M13,18V10L16.5,13.5L17.92,12.08L12,6.16L6.08,12.08L7.5,13.5L11,10V18H13M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2Z" />
                     </SvgIcon>                    
                   </IconButton>                  
                 </Grid>
                 <Grid item>
-                   <Breadcrumbs aria-label="breadcrumb" 
-                    className={classNames(classes.breadcrumb, classes.breadcumbText) }
-                  >
-                    <Link color="inherit" href="/">
-                    {intl.get('root-dir')}
-                    </Link>
-                    <Link color="inherit" href="/getting-started/installation/">
-                      文章
-                    </Link>
-                    <Typography color="textPrimary" className={classes.breadcumbText}>缩略图</Typography>
-                  </Breadcrumbs>
+                    <MediaBreadCrumbs folder={selectedFolderNode} 
+                      onSelect = {(folder)=>{
+                        setSelectedFolder(folder);
+                      }} 
+                    />
                 </Grid>
                 <Grid item>                  
                  <Hidden lgUp>

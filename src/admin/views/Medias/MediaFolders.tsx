@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediaFolders(
     props:{
       folders:Array<FolderNode>, 
-      selectedFolder:string, onSelect:(node:string)=>void,
+      selectedFolder:string, 
+      onSelect:(node:string)=>void,
       onFolderNameChange:(name:string, folder:FolderNode)=>void,
       onAddFolder:(parentFolder?:FolderNode)=>void,
       onRemoveFolder:(folder:FolderNode)=>void,
