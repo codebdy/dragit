@@ -1,28 +1,14 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import MdiIcon from 'components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
-import { FolderNode } from './MediaFolder';
+import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    folder:{
-      border: '#f2f2ff solid 1px',
-      flex:1,
-      paddingBottom:"100%",
+    root: {
       position:"relative",
-      borderRadius:"5px",
-      //cursor:"pointer",
     },
-
-    folderIcon:{
-      position:"absolute",
-      top:"calc(50% - 25px)",
-      left:"calc(50% - 25px)",
-      color:"#757575",
-    },
-
     mask:{
       position:'absolute',
       height:'100%',
@@ -34,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       flexFlow:"column"
     },
+
     toolbar:{
       height:'40px',
       width:"100%",
@@ -42,38 +29,41 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent:'flex-end',
       padding:'2px',
     }
-
   }),
 );
+export interface MediaMeta{
+  id:string;
+  thumbnail: string,
+  title: string,
+}
 
-export default function MediaGridListFolder(props:{folder:FolderNode, onSelect:(nodeId:string)=>void}){
-  const {folder, onSelect} = props;
+
+export default function MediaGridListImage(props:{image:MediaMeta}){
+  const {image} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
 
   return (
     <Fragment>
-      <div 
-        className={classes.folder} 
-        onDoubleClick = {()=>onSelect(folder.id)}
+      <div className = {classes.root}
         onMouseOver = {()=>setHover(true)}
-        onMouseLeave = {()=>setHover(false)}
+        onMouseLeave = {()=>setHover(false)}          
       >
-        <MdiIcon className={classes.folderIcon} iconClass = "mdi-folder-outline" size="50" />
+        <Image src={image.thumbnail} 
+        />
         {
           hover&&
           <div className={classes.mask}>
             <div className={classes.toolbar}>
+              <MediaGridListIconButton icon = "mdi-magnify" onClick={()=>{}} />
               <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>{}} />
               <MediaGridListIconButton icon = "mdi-delete-outline" onClick={()=>{}} />
             </div>
           </div>
-        }
-      </div>
-      {
-        //<LinearProgress />
-      }
-      <MediaGridListItemTitle title={folder.name} />
+        }        
+      </div>        
+      <MediaGridListItemTitle title={image.title} />
+
     </Fragment>
   )
 }

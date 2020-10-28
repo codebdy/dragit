@@ -4,13 +4,14 @@ import classNames from "classnames";
 import Spacer from "components/common/Spacer";
 import MdiIcon from "components/common/MdiIcon";
 import SearchIcon from '@material-ui/icons/Search';
-import MediaGridList, { MediaMeta } from "./MediaGridList";
+import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { remove } from "ArrayHelper";
 import intl from 'react-intl-universal';
 import MediaBreadCrumbs from "./MediaBreadCrumbs";
+import { MediaMeta } from "./MediaGridListImage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

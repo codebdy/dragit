@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import Image from 'components/common/Image'
 
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'admin/common/Scrollbar';
 import { FolderNode } from './MediaFolder';
 import MediaGridListFolder from './MediaGridListFolder';
-import MediaGridListItemTitle from './MediaGridListItemTitle';
+import MediaGridListImage, { MediaMeta } from './MediaGridListImage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,12 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   }),
 );
-
-export interface MediaMeta{
-  id:string;
-  img: string,
-  title: string,
-}
 
 export default function MediasGridList(props:{
     loading:boolean, 
@@ -82,8 +75,7 @@ export default function MediasGridList(props:{
      
         {medias.map((tile:any, index) => (
           <Grid item key={tile.id + '-' + index} lg={2} sm={3} xs={4}>
-            <Image src={tile.img} />
-            <MediaGridListItemTitle title={tile.title} />
+            <MediaGridListImage image={tile} />
           </Grid>
         ))}
       </Grid>
