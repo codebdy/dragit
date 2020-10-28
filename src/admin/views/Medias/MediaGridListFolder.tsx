@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, IconButton } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import { FolderNode } from './MediaFolder';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import MediaGridListIconButton from './MediaGridListIconButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,11 +64,8 @@ export default function MediaGridListFolder(props:{folder:FolderNode, onSelect:(
           hover&&
           <div className={classes.mask}>
             <div className={classes.toolbar}>
-              <div>
-                <IconButton size = "small">
-                  <EditIcon fontSize="small" />
-                </IconButton>
-              </div>
+              <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>{}} />
+              <MediaGridListIconButton icon = "mdi-trash-can" onClick={()=>{}} />
             </div>
           </div>
         }
