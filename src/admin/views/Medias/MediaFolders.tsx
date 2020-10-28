@@ -9,6 +9,7 @@ import { IconButton } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import MediaFolder, { FolderActions, FolderLabel, FolderNode } from './MediaFolder';
+import { MediaMeta } from './MediaGridListImage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,24 +30,28 @@ export default function MediaFolders(
     props:{
       folders:Array<FolderNode>, 
       draggedFolder:FolderNode|undefined,
+      draggedMedia:MediaMeta|undefined,
       selectedFolder:string, 
       onSelect:(node:string)=>void,
       onFolderNameChange:(name:string, folder:FolderNode)=>void,
       onAddFolder:(parentFolder?:FolderNode)=>void,
       onRemoveFolder:(folder:FolderNode)=>void,
       onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
+      onMoveMediaTo:(media:MediaMeta, targetFolder:FolderNode|undefined)=>void,
       onDragFolder:(folder:FolderNode|undefined)=>void
     }
   ) {
   const {
     folders, 
     draggedFolder, 
+    draggedMedia,
     selectedFolder, 
     onSelect, 
     onAddFolder, 
     onFolderNameChange, 
     onRemoveFolder, 
     onMoveFolderTo,
+    onMoveMediaTo,
     onDragFolder
   } = props;
   const classes = useStyles();
@@ -73,12 +78,15 @@ export default function MediaFolders(
         {
           <div className={classes.labelRoot}
             onDragOver={e=>{
-              if(draggedFolder){
+              if(draggedFolder || draggedMedia){
                 e.preventDefault()
               }
             }}
             onDrop={
-              ()=>{draggedFolder && onMoveFolderTo(draggedFolder, undefined)}
+              ()=>{
+                draggedFolder && onMoveFolderTo(draggedFolder, undefined);
+                draggedMedia && onMoveMediaTo(draggedMedia, undefined);
+              }
             }
           >
             <MdiIcon iconClass = "mdi-folder-home-outline" size="22" />
@@ -99,10 +107,12 @@ export default function MediaFolders(
               key={node.id + '-' + node.name} 
               node={node} 
               draggedFolder = {draggedFolder}
+              draggedMedia = {draggedMedia}
               onFolderNameChange = {onFolderNameChange}
               onAddFolder = {onAddFolder}
               onRemoveFolder = {onRemoveFolder}
               onMoveFolderTo = {onMoveFolderTo}
+              onMoveMediaTo = {onMoveMediaTo}
               onDragStart = {(folder)=>{
                 onDragFolder(folder)
               }}

@@ -12,6 +12,7 @@ import { remove } from "ArrayHelper";
 import intl from 'react-intl-universal';
 import MediaBreadCrumbs from "./MediaBreadCrumbs";
 import { MediaMeta } from "./MediaGridListImage";
+import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER } from "Api";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -158,6 +159,7 @@ export default function Medias(props:{children?: any}) {
   const toolIconSize = 21;
   const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
+  const [draggedMedia, setDraggedMedia] = React.useState<MediaMeta|undefined>();
   const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
   const [selectedFolder, setSelectedFolder] = React.useState('root');
   const [gridLoading, setGridLoading] = React.useState(false);
@@ -202,8 +204,8 @@ export default function Medias(props:{children?: any}) {
   const loadMedias = (oldMedias:Array<MediaMeta> = []) => {
     axios(
       {
-        method: "get",
-        url: '/api/medias/medias',
+        method: API_MEDIAS.method as any,
+        url: API_MEDIAS.url,
         params: {
           folder: selectedFolder === 'root' ? '' : selectedFolder,
           page: pageNumber,
@@ -223,8 +225,8 @@ export default function Medias(props:{children?: any}) {
     setFolderLoading(true)
     axios(
       {
-        method: "post",
-        url: '/api/medias/add-folder',
+        method: API_MEDIAS_ADD_FOLDER.method as any,
+        url: API_MEDIAS_ADD_FOLDER.url,
       }
     ).then(res => {
       let newFolder = res.data
@@ -249,8 +251,8 @@ export default function Medias(props:{children?: any}) {
     folder.name = name;    
     axios(
       {
-        method: "post",
-        url: '/api/medias/change-folder',
+        method: API_MEDIAS_CHANGE_FOLDER_NAME.method as any,
+        url: API_MEDIAS_CHANGE_FOLDER_NAME.url,
         data:folder,
       }
     ).then(res => {
@@ -273,8 +275,8 @@ export default function Medias(props:{children?: any}) {
     }
     axios(
       {
-        method: "post",
-        url: '/api/medias/remove-folder',
+        method:API_MEDIAS_REMOVE_FOLDER.method as any,
+        url: API_MEDIAS_REMOVE_FOLDER.url,
         params:{
           id:folder.id
         },
@@ -305,8 +307,8 @@ export default function Medias(props:{children?: any}) {
     }
     axios(
       {
-        method: "post",
-        url: '/api/medias/move-to-folder',
+        method: API_MEDIAS_MOVE_FOLDER_TO.method as any,
+        url: API_MEDIAS_MOVE_FOLDER_TO.url,
         params:{
           id:folder.id,
           targetId:targetFolder?.id
@@ -337,6 +339,32 @@ export default function Medias(props:{children?: any}) {
       setFolderLoading(false);
     });
 
+  }
+
+  const handelMoveMediaTo = (media:MediaMeta, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
+    if(targetFolder?.id === selectedFolder || (!targetFolder && selectedFolder==='root')){
+      return
+    }    
+    
+    fromGrid ? setFolderLoading(targetFolder ? targetFolder.id : true) : setFolderLoading(true);
+    axios(
+      {
+        method: API_MEDIAS_MOVE_MEDIA_TO.method as any,
+        url: API_MEDIAS_MOVE_MEDIA_TO.url,
+        params:{
+          media:media.id,
+          folder:targetFolder?.id
+        },
+      }
+    ).then(res => {
+      setFolderLoading(false);
+      remove(media, medias);
+      setMedias([...medias]);
+    })
+    .catch(err => {
+      console.log('server error',err);
+      setFolderLoading(false);
+    });
   }
 
   const handeRemoveMedia = (media:MediaMeta)=>{
@@ -460,6 +488,7 @@ export default function Medias(props:{children?: any}) {
                   loading={gridLoading}
                   folderLoading = {folderLoading}
                   draggedFolder = {draggedFolder}
+                  draggedMedia = {draggedMedia}
                   folders = {selectedFolderNode? selectedFolderNode.children : folders}
                   medias = {medias}
                   onScrollToEnd = {handleScrollToEnd}
@@ -469,8 +498,11 @@ export default function Medias(props:{children?: any}) {
                   onFolderNameChange = {(name, folder)=>handleFolderNameChange(name, folder, true)}
                   onRemoveFolder = {(folder)=>handleRemoveFolder(folder, true)}
                   onMoveFolderTo = {(folder, targetFolder)=>handleMoveToFolderTo(folder, targetFolder, true)}
+                  onMoveMediaTo = {(media, folder)=>handelMoveMediaTo(media, folder, true)}
                   onRemoveMedia = {handeRemoveMedia}
                   onDragFolder = {setDraggedFolder}
+                  onMediaDragStart = {setDraggedMedia}
+                  onMediaDragEnd = {()=>setDraggedMedia(undefined)}
                 ></MediaGridList>
               </div>
             </div>
@@ -486,6 +518,7 @@ export default function Medias(props:{children?: any}) {
                   }
                 <MediaFolders
                   draggedFolder = {draggedFolder} 
+                  draggedMedia = {draggedMedia}
                   folders = {folders} 
                   selectedFolder={selectedFolder}
                   onSelect = {(folder)=>{
@@ -495,6 +528,7 @@ export default function Medias(props:{children?: any}) {
                   onFolderNameChange = {handleFolderNameChange}
                   onRemoveFolder = {handleRemoveFolder}
                   onMoveFolderTo = {handleMoveToFolderTo}
+                  onMoveMediaTo = {handelMoveMediaTo}
                   onDragFolder = {setDraggedFolder}
                 />
               </div>

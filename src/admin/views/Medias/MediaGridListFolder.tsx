@@ -4,6 +4,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import { FolderNode } from './MediaFolder';
 import MediaGridListIconButton from './MediaGridListIconButton';
+import { MediaMeta } from './MediaGridListImage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,10 +53,12 @@ export default function MediaGridListFolder(props:{
     folder:FolderNode, 
     folderLoading:boolean|string,
     draggedFolder:FolderNode|undefined,
+    draggedMedia:MediaMeta|undefined,
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
     onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
+    onMoveMediaTo:(media:MediaMeta, targetFolder:FolderNode|undefined)=>void,
     onDragStart:(folder:FolderNode)=>void,
     onDragEnd:()=>void,
   
@@ -64,10 +67,12 @@ export default function MediaGridListFolder(props:{
     folder, 
     folderLoading, 
     draggedFolder,
+    draggedMedia,
     onSelect, 
     onFolderNameChange, 
     onRemoveFolder, 
     onMoveFolderTo,
+    onMoveMediaTo,
     onDragStart, 
     onDragEnd
   } = props;
@@ -90,11 +95,16 @@ export default function MediaGridListFolder(props:{
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
     draggedFolder && draggedFolder !== folder && event.preventDefault();
+    draggedMedia && event.preventDefault();
   }
 
   const handleDrop = ()=>{
     if(draggedFolder && draggedFolder !== folder){
       onMoveFolderTo(draggedFolder, folder);
+    }
+
+    if(draggedMedia){
+      onMoveMediaTo(draggedMedia, folder);
     }
   }
 

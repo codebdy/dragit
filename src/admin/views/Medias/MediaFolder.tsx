@@ -5,6 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { MediaMeta } from './MediaGridListImage';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -68,20 +69,24 @@ export function FolderActions(props:{children:any}){
 export default function MediaFolder (props:{
   node:FolderNode,
   draggedFolder:FolderNode|undefined,
+  draggedMedia:MediaMeta|undefined,
   onFolderNameChange:(name:string, folder:FolderNode)=>void,
   onAddFolder:(parentFolder?:FolderNode)=>void,
   onRemoveFolder:(folder:FolderNode)=>void,
   onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode)=>void,
+  onMoveMediaTo:(media:MediaMeta, targetFolder:FolderNode|undefined)=>void,
   onDragStart:(folder:FolderNode)=>void,
   onDragEnd:()=>void,
 }){
   const {
     node,
     draggedFolder,
+    draggedMedia,
     onFolderNameChange, 
     onAddFolder, 
     onRemoveFolder, 
     onMoveFolderTo,
+    onMoveMediaTo,
     onDragStart,
     onDragEnd
   } = props;
@@ -103,11 +108,15 @@ export default function MediaFolder (props:{
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
     draggedFolder && draggedFolder !== node && event.preventDefault();
+    draggedMedia && event.preventDefault();
   }
 
   const handleDrop = ()=>{
     if(draggedFolder && draggedFolder !== node){
       onMoveFolderTo(draggedFolder, node);
+    }
+    if(draggedMedia){
+      onMoveMediaTo(draggedMedia, node);
     }
   }
 
@@ -179,9 +188,11 @@ export default function MediaFolder (props:{
               key={child.id + '-' + child.name}               
               node = {child}
               draggedFolder = {draggedFolder}
+              draggedMedia = {draggedMedia}
               onFolderNameChange={onFolderNameChange}
               onAddFolder = {onAddFolder}
               onRemoveFolder = {onRemoveFolder}
+              onMoveMediaTo = {onMoveMediaTo}
               onDragStart = {onDragStart}
               onDragEnd = {onDragEnd}             
               onMoveFolderTo = {onMoveFolderTo}

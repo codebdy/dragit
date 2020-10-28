@@ -38,6 +38,7 @@ export default function MediasGridList(props:{
     loading:boolean, 
     folderLoading:string|boolean,
     draggedFolder:FolderNode|undefined,
+    draggedMedia:MediaMeta|undefined,
     folders:Array<FolderNode>|undefined,
     medias:Array<MediaMeta>, 
     onScrollToEnd:()=>void,
@@ -46,12 +47,16 @@ export default function MediasGridList(props:{
     onRemoveFolder:(folder:FolderNode)=>void,
     onRemoveMedia:(media:MediaMeta)=>void,
     onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
+    onMoveMediaTo:(media:MediaMeta, targetFolder:FolderNode|undefined)=>void,
     onDragFolder:(folder:FolderNode|undefined)=>void,
+    onMediaDragStart:(media:MediaMeta) =>void,
+    onMediaDragEnd:()=>void,
   }) {
   const {
     loading, 
     folderLoading, 
-    draggedFolder, 
+    draggedFolder,
+    draggedMedia, 
     folders, 
     medias, 
     onScrollToEnd, 
@@ -59,8 +64,11 @@ export default function MediasGridList(props:{
     onFolderNameChange, 
     onRemoveFolder, 
     onMoveFolderTo,
+    onMoveMediaTo,
     onRemoveMedia,
-    onDragFolder
+    onDragFolder,
+    onMediaDragStart,
+    onMediaDragEnd
   } = props;
   const classes = useStyles();
   const ref = useRef(null);  
@@ -92,11 +100,13 @@ export default function MediasGridList(props:{
             <MediaGridListFolder
               folderLoading = {folderLoading}
               draggedFolder = {draggedFolder}
+              draggedMedia = {draggedMedia}
               folder={folder} 
               onSelect={onSelect} 
               onFolderNameChange={onFolderNameChange}
               onRemoveFolder = {onRemoveFolder}
               onMoveFolderTo = {onMoveFolderTo}
+              onMoveMediaTo = {onMoveMediaTo}
               onDragStart = {(folder)=>{
                 onDragFolder(folder)
               }}
@@ -109,7 +119,12 @@ export default function MediasGridList(props:{
      
         {medias.map((tile:any, index) => (
           <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
-            <MediaGridListImage image={tile} onRemoveMedia = {onRemoveMedia}/>
+            <MediaGridListImage 
+              image = {tile} 
+              onRemoveMedia = {onRemoveMedia} 
+              onDragStart={onMediaDragStart}
+              onDragEnd = {onMediaDragEnd}
+            />
           </Grid>
         ))}
       </Grid>

@@ -43,8 +43,15 @@ export interface MediaMeta{
 }
 
 
-export default function MediaGridListImage(props:{image:MediaMeta, onRemoveMedia:(media:MediaMeta)=>void}){
-  const {image, onRemoveMedia} = props;
+export default function MediaGridListImage(
+  props:{
+    image:MediaMeta, 
+    onRemoveMedia:(media:MediaMeta)=>void,
+    onDragStart:(media:MediaMeta)=>void,
+    onDragEnd:()=>void,  
+  }
+){
+  const {image, onRemoveMedia, onDragStart, onDragEnd} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
@@ -107,8 +114,14 @@ export default function MediaGridListImage(props:{image:MediaMeta, onRemoveMedia
   return (
     <Fragment>
       <div className = {classes.root}
+        draggable={true}
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}          
+        onDragStart={()=>{
+          setHover(false);
+          onDragStart(image);
+        }}
+        onDragEnd = {onDragEnd}
       >
         <Image src={image.thumbnail} 
         />
@@ -138,7 +151,6 @@ export default function MediaGridListImage(props:{image:MediaMeta, onRemoveMedia
               handleEndEditing()
             }
           }}
-
           onChange = {handleChange}
         />
         :
