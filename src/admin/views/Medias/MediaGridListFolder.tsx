@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, LinearProgress } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import { FolderNode } from './MediaFolder';
@@ -50,18 +50,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediaGridListFolder(props:{
     folder:FolderNode, 
+    folderLoading:boolean|string,
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
   }){
-  const {folder, onSelect, onFolderNameChange, onRemoveFolder} = props;
+  const {folder, folderLoading, onSelect, onFolderNameChange, onRemoveFolder} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
   const [folderName, setFolderName] = React.useState(folder.name);
   const handleEndEditing = ()=>{
     setEditing(false);
-    onFolderNameChange(folderName, folder);
+    if(folderName !== folder.name){
+      onFolderNameChange(folderName, folder);
+      folder.name = folderName;
+    }
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +94,7 @@ export default function MediaGridListFolder(props:{
         }
       </div>
       {
-        //<LinearProgress />
+        folderLoading === folder.id && <LinearProgress />
       }
       {
         editing?

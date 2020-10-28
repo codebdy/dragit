@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediasGridList(props:{
     loading:boolean, 
+    folderLoading:string|boolean,
     folders:Array<FolderNode>|undefined,
     medias:Array<MediaMeta>, 
     onScrollToEnd:()=>void,
@@ -44,7 +45,7 @@ export default function MediasGridList(props:{
     onRemoveFolder:(folder:FolderNode)=>void,
     onRemoveMedia:(media:MediaMeta)=>void,
   }) {
-  const {loading, folders, medias, onScrollToEnd, onSelect, onFolderNameChange, onRemoveFolder, onRemoveMedia} = props;
+  const {loading, folderLoading, folders, medias, onScrollToEnd, onSelect, onFolderNameChange, onRemoveFolder, onRemoveMedia} = props;
   const classes = useStyles();
   const ref = useRef(null);  
   
@@ -72,7 +73,8 @@ export default function MediasGridList(props:{
       <Grid container className={classes.root} spacing={2} ref={ref}>
         {folders?.map((folder:any, index) => (
           <Grid item key={folder.id + '-folder-' + folder.name} lg={2} sm={3} xs={4}>
-            <MediaGridListFolder 
+            <MediaGridListFolder
+              folderLoading = {folderLoading}
               folder={folder} 
               onSelect={onSelect} 
               onFolderNameChange={onFolderNameChange}
