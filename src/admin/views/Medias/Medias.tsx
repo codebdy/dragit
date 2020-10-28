@@ -337,6 +337,11 @@ export default function Medias(props:{children?: any}) {
 
   }
 
+  const handeRemoveMedia = (media:MediaMeta)=>{
+    remove(media, medias);
+    setMedias([...medias]);
+  }
+
 
   return (
     <Container className={classes.meidas}>
@@ -459,6 +464,7 @@ export default function Medias(props:{children?: any}) {
                   }}
                   onFolderNameChange = {handleFolderNameChange}
                   onRemoveFolder = {handleRemoveFolder}
+                  onRemoveMedia = {handeRemoveMedia}
                 ></MediaGridList>
               </div>
             </div>

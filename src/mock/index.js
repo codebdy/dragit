@@ -30,6 +30,8 @@ Mock.mock('/api/medias/add-folder','post', {id:()=>createFolderId(), name:"new f
 Mock.mock('/api/medias/change-folder','post')
 Mock.mock(RegExp('/api/medias/remove-folder?.*'),'post')
 Mock.mock(RegExp('/api/medias/move-to-folder?.*'),'post')
+Mock.mock(RegExp('/api/medias/change-media-name?.*'),'post')
+Mock.mock(RegExp('/api/medias/remove-media?.*'),'post')
 
 Mock.setup({
     timeout: 500

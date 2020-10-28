@@ -42,8 +42,9 @@ export default function MediasGridList(props:{
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
+    onRemoveMedia:(media:MediaMeta)=>void,
   }) {
-  const {loading, folders, medias, onScrollToEnd, onSelect, onFolderNameChange, onRemoveFolder} = props;
+  const {loading, folders, medias, onScrollToEnd, onSelect, onFolderNameChange, onRemoveFolder, onRemoveMedia} = props;
   const classes = useStyles();
   const ref = useRef(null);  
   
@@ -82,7 +83,7 @@ export default function MediasGridList(props:{
      
         {medias.map((tile:any, index) => (
           <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
-            <MediaGridListImage image={tile} />
+            <MediaGridListImage image={tile} onRemoveMedia = {onRemoveMedia}/>
           </Grid>
         ))}
       </Grid>
