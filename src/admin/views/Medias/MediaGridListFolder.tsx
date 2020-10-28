@@ -41,15 +41,32 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'row',
       justifyContent:'flex-end',
       padding:'2px',
-    }
-
+    },
+    titleInput:{
+      width:'100%',
+    }  
   }),
 );
 
-export default function MediaGridListFolder(props:{folder:FolderNode, onSelect:(nodeId:string)=>void}){
-  const {folder, onSelect} = props;
+export default function MediaGridListFolder(props:{
+    folder:FolderNode, 
+    onSelect:(nodeId:string)=>void,
+    onFolderNameChange:(name:string, folder:FolderNode)=>void
+  }){
+  const {folder, onSelect, onFolderNameChange} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
+  const [editing, setEditing] = React.useState(false);
+  const [folderName, setFolderName] = React.useState(folder.name);
+  const handleEndEditing = ()=>{
+    setEditing(false);
+    onFolderNameChange(folderName, folder);
+  }
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let value = (event.target as HTMLInputElement).value;
+    setFolderName(value);
+  };
 
   return (
     <Fragment>
@@ -64,7 +81,8 @@ export default function MediaGridListFolder(props:{folder:FolderNode, onSelect:(
           hover&&
           <div className={classes.mask}>
             <div className={classes.toolbar}>
-              <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>{}} />
+              <MediaGridListIconButton icon = "mdi-magnify" onClick={()=>onSelect(folder.id)} />
+              <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>setEditing(true)} />
               <MediaGridListIconButton icon = "mdi-delete-outline" onClick={()=>{}} />
             </div>
           </div>
@@ -73,7 +91,25 @@ export default function MediaGridListFolder(props:{folder:FolderNode, onSelect:(
       {
         //<LinearProgress />
       }
-      <MediaGridListItemTitle title={folder.name} />
+      {
+        editing?
+        <input 
+          value={folderName} 
+          autoFocus= {true} 
+          className={classes.titleInput}
+          onBlur = {handleEndEditing}
+          onKeyUp = {e=>{
+            if(e.keyCode === 13) {
+              handleEndEditing()
+            }
+          }}
+
+          onChange = {handleChange}
+        />
+        :
+        <MediaGridListItemTitle title={folderName} />
+      }
+      
     </Fragment>
   )
 }

@@ -254,6 +254,7 @@ export default function Medias(props:{children?: any}) {
       }
     ).then(res => {
       setFolderLoading(false);
+      setFolders([...folders]);
     })
     .catch(err => {
       console.log('server error');
@@ -456,6 +457,7 @@ export default function Medias(props:{children?: any}) {
                   onSelect = {(folder)=>{
                     setSelectedFolder(folder);
                   }}
+                  onFolderNameChange = {handleFolderNameChange}
                 ></MediaGridList>
               </div>
             </div>

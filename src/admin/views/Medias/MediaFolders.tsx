@@ -83,7 +83,7 @@ export default function MediaFolders(
         {
           folders.map((node)=>{
             return <MediaFolder 
-              key={node.id} 
+              key={node.id + '-' + node.name} 
               node={node} 
               draggedFolder = {draggedFolder}
               onFolderNameChange = {onFolderNameChange}

@@ -173,7 +173,7 @@ export default function MediaFolder (props:{
         node.children?.map((child)=>{
           return(
             <MediaFolder 
-              key={child.id}               
+              key={child.id + '-' + child.name}               
               node = {child}
               draggedFolder = {draggedFolder}
               onFolderNameChange={onFolderNameChange}
