@@ -28,16 +28,29 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediaFolders(
     props:{
       folders:Array<FolderNode>, 
+      draggedFolder:FolderNode|undefined,
       selectedFolder:string, 
       onSelect:(node:string)=>void,
       onFolderNameChange:(name:string, folder:FolderNode)=>void,
       onAddFolder:(parentFolder?:FolderNode)=>void,
       onRemoveFolder:(folder:FolderNode)=>void,
-      onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void    }
+      onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
+      onDragFolder:(folder:FolderNode|undefined)=>void
+    }
   ) {
-  const {folders, selectedFolder, onSelect, onAddFolder, onFolderNameChange, onRemoveFolder, onMoveFolderTo} = props;
+  const {
+    folders, 
+    draggedFolder, 
+    selectedFolder, 
+    onSelect, 
+    onAddFolder, 
+    onFolderNameChange, 
+    onRemoveFolder, 
+    onMoveFolderTo,
+    onDragFolder
+  } = props;
   const classes = useStyles();
-  const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
+
   //const [draggedParent, setDraggedParent] = React.useState<FolderNode|undefined>();
 
   const handleAddInRoot = (event: React.MouseEvent<unknown>)=>{
@@ -91,10 +104,10 @@ export default function MediaFolders(
               onRemoveFolder = {onRemoveFolder}
               onMoveFolderTo = {onMoveFolderTo}
               onDragStart = {(folder)=>{
-                setDraggedFolder(folder)
+                onDragFolder(folder)
               }}
               onDragEnd = {()=>{
-                setDraggedFolder(undefined)
+                onDragFolder(undefined)
               }}               
             />
           })

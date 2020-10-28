@@ -118,7 +118,10 @@ export default function MediaFolder (props:{
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}
           draggable={true}
-          onDragStart={()=>onDragStart(node)}
+          onDragStart={()=>{
+            setHover(false);
+            onDragStart(node);
+          }}
           onDragOver = {handleDragOver}
           onDragEnd = {onDragEnd}
           onDrop = {handleDrop}         

@@ -51,11 +51,26 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediaGridListFolder(props:{
     folder:FolderNode, 
     folderLoading:boolean|string,
+    draggedFolder:FolderNode|undefined,
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
+    onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
+    onDragStart:(folder:FolderNode)=>void,
+    onDragEnd:()=>void,
+  
   }){
-  const {folder, folderLoading, onSelect, onFolderNameChange, onRemoveFolder} = props;
+  const {
+    folder, 
+    folderLoading, 
+    draggedFolder,
+    onSelect, 
+    onFolderNameChange, 
+    onRemoveFolder, 
+    onMoveFolderTo,
+    onDragStart, 
+    onDragEnd
+  } = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
@@ -73,13 +88,31 @@ export default function MediaGridListFolder(props:{
     setFolderName(value);
   };
 
+  const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
+    draggedFolder && draggedFolder !== folder && event.preventDefault();
+  }
+
+  const handleDrop = ()=>{
+    if(draggedFolder && draggedFolder !== folder){
+      onMoveFolderTo(draggedFolder, folder);
+    }
+  }
+
   return (
     <Fragment>
       <div 
-        className={classes.folder} 
+        className={classes.folder}
+        draggable={true}
         onDoubleClick = {()=>onSelect(folder.id)}
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}
+        onDragStart={()=>{
+          setHover(false);
+          onDragStart(folder);
+        }}
+        onDragOver = {handleDragOver}
+        onDragEnd = {onDragEnd}
+        onDrop = {handleDrop}          
       >
         <MdiIcon className={classes.folderIcon} iconClass = "mdi-folder-outline" size="50" />
         {

@@ -157,6 +157,7 @@ export default function Medias(props:{children?: any}) {
   const classes = useStyles();
   const toolIconSize = 21;
   const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
+  const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
   const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
   const [selectedFolder, setSelectedFolder] = React.useState('root');
   const [gridLoading, setGridLoading] = React.useState(false);
@@ -296,9 +297,9 @@ export default function Medias(props:{children?: any}) {
 
   }
 
-  const handleMoveToFolderTo = (folder:FolderNode, targetFolder:FolderNode|undefined)=>{
+  const handleMoveToFolderTo = (folder:FolderNode, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
     const parentFolder = folder.parent;
-    setFolderLoading(true)
+    fromGrid ? setFolderLoading(targetFolder ? targetFolder.id : true) : setFolderLoading(true)
     if(selectedFolder === folder.id){
       setSelectedFolder('root');
     }
@@ -319,9 +320,10 @@ export default function Medias(props:{children?: any}) {
       else{
         remove(folder, folders)
       }
-  
+      folder.parent = undefined;
       if(targetFolder){
         targetFolder.children = targetFolder?.children? [...targetFolder?.children, folder] : [folder]
+        folder.parent = targetFolder;
       }
       else{
         folders.push(folder)
@@ -457,6 +459,7 @@ export default function Medias(props:{children?: any}) {
                 <MediaGridList 
                   loading={gridLoading}
                   folderLoading = {folderLoading}
+                  draggedFolder = {draggedFolder}
                   folders = {selectedFolderNode? selectedFolderNode.children : folders}
                   medias = {medias}
                   onScrollToEnd = {handleScrollToEnd}
@@ -465,7 +468,9 @@ export default function Medias(props:{children?: any}) {
                   }}
                   onFolderNameChange = {(name, folder)=>handleFolderNameChange(name, folder, true)}
                   onRemoveFolder = {(folder)=>handleRemoveFolder(folder, true)}
+                  onMoveFolderTo = {(folder, targetFolder)=>handleMoveToFolderTo(folder, targetFolder, true)}
                   onRemoveMedia = {handeRemoveMedia}
+                  onDragFolder = {setDraggedFolder}
                 ></MediaGridList>
               </div>
             </div>
@@ -479,7 +484,8 @@ export default function Medias(props:{children?: any}) {
                   {
                     folderLoading === true && <LinearProgress />
                   }
-                <MediaFolders 
+                <MediaFolders
+                  draggedFolder = {draggedFolder} 
                   folders = {folders} 
                   selectedFolder={selectedFolder}
                   onSelect = {(folder)=>{
@@ -489,6 +495,7 @@ export default function Medias(props:{children?: any}) {
                   onFolderNameChange = {handleFolderNameChange}
                   onRemoveFolder = {handleRemoveFolder}
                   onMoveFolderTo = {handleMoveToFolderTo}
+                  onDragFolder = {setDraggedFolder}
                 />
               </div>
             </Hidden>
