@@ -40,9 +40,10 @@ export default function MediasGridList(props:{
     medias:Array<MediaMeta>, 
     onScrollToEnd:()=>void,
     onSelect:(nodeId:string)=>void,
-    onFolderNameChange:(name:string, folder:FolderNode)=>void
+    onFolderNameChange:(name:string, folder:FolderNode)=>void,
+    onRemoveFolder:(folder:FolderNode)=>void,
   }) {
-  const {loading, folders, medias, onScrollToEnd, onSelect, onFolderNameChange} = props;
+  const {loading, folders, medias, onScrollToEnd, onSelect, onFolderNameChange, onRemoveFolder} = props;
   const classes = useStyles();
   const ref = useRef(null);  
   
@@ -70,12 +71,17 @@ export default function MediasGridList(props:{
       <Grid container className={classes.root} spacing={2} ref={ref}>
         {folders?.map((folder:any, index) => (
           <Grid item key={folder.id + '-folder-' + folder.name} lg={2} sm={3} xs={4}>
-            <MediaGridListFolder folder={folder} onSelect={onSelect} onFolderNameChange={onFolderNameChange}/>
+            <MediaGridListFolder 
+              folder={folder} 
+              onSelect={onSelect} 
+              onFolderNameChange={onFolderNameChange}
+              onRemoveFolder = {onRemoveFolder}
+            />
           </Grid>
         ))}
      
         {medias.map((tile:any, index) => (
-          <Grid item key={tile.id + '-image-' + tile.title} lg={2} sm={3} xs={4}>
+          <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
             <MediaGridListImage image={tile} />
           </Grid>
         ))}

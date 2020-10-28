@@ -458,6 +458,7 @@ export default function Medias(props:{children?: any}) {
                     setSelectedFolder(folder);
                   }}
                   onFolderNameChange = {handleFolderNameChange}
+                  onRemoveFolder = {handleRemoveFolder}
                 ></MediaGridList>
               </div>
             </div>

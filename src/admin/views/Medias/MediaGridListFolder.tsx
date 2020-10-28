@@ -51,9 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediaGridListFolder(props:{
     folder:FolderNode, 
     onSelect:(nodeId:string)=>void,
-    onFolderNameChange:(name:string, folder:FolderNode)=>void
+    onFolderNameChange:(name:string, folder:FolderNode)=>void,
+    onRemoveFolder:(folder:FolderNode)=>void,
   }){
-  const {folder, onSelect, onFolderNameChange} = props;
+  const {folder, onSelect, onFolderNameChange, onRemoveFolder} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
@@ -83,7 +84,7 @@ export default function MediaGridListFolder(props:{
             <div className={classes.toolbar}>
               <MediaGridListIconButton icon = "mdi-magnify" onClick={()=>onSelect(folder.id)} />
               <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>setEditing(true)} />
-              <MediaGridListIconButton icon = "mdi-delete-outline" onClick={()=>{}} />
+              <MediaGridListIconButton icon = "mdi-delete-outline" onClick={()=>onRemoveFolder(folder)} />
             </div>
           </div>
         }
