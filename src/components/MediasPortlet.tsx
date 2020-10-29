@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import intl from 'react-intl-universal';
 import MdiIcon from './common/MdiIcon';
+import MediaAdder from './Medias/MediaAdder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+    },
+    body:{
+      padding:theme.spacing(2),
     },
 
   }),
@@ -88,8 +92,13 @@ const MediasPortlet = React.forwardRef((
         </Popper>        
       </div>
       <Divider></Divider>
-      <div>
-        ddd
+      <div className={classes.body}>
+        <Grid container spacing={3}>
+          <Grid item xs={2}>
+            <MediaAdder onClick={()=>{}}/>
+          </Grid>
+        </Grid>
+
       </div>
     </Paper>
   )
