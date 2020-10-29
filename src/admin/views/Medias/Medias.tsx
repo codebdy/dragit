@@ -8,7 +8,7 @@ import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
-import { remove } from "ArrayHelper";
+import { remove, toggle } from "ArrayHelper";
 import intl from 'react-intl-universal';
 import MediaBreadCrumbs from "./MediaBreadCrumbs";
 import { MediaMeta } from "./MediaGridListImage";
@@ -164,6 +164,7 @@ export default function Medias(props:{children?: any}) {
   const [selectedFolder, setSelectedFolder] = React.useState('root');
   const [gridLoading, setGridLoading] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
+  const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
   const [haseData] = React.useState(true);
 
@@ -190,9 +191,11 @@ export default function Medias(props:{children?: any}) {
     setGridLoading(true);
     setPageNumber(0);
     setMedias([]);
+    setSelectedMedias([]);
     loadMedias();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[pageNumber, selectedFolder]);
+
 
   const handleScrollToEnd = ()=>{
     if(!gridLoading && haseData){
@@ -372,6 +375,11 @@ export default function Medias(props:{children?: any}) {
     setMedias([...medias]);
   }
 
+  const handleToggleSelectMedia = (media:MediaMeta)=>{
+    toggle(media, selectedMedias);
+    setSelectedMedias([...selectedMedias]);
+  }
+
 
   return (
     <Container className={classes.meidas}>
@@ -491,6 +499,7 @@ export default function Medias(props:{children?: any}) {
                   draggedMedia = {draggedMedia}
                   folders = {selectedFolderNode? selectedFolderNode.children : folders}
                   medias = {medias}
+                  selectedMedias = {selectedMedias}
                   onScrollToEnd = {handleScrollToEnd}
                   onSelect = {(folder)=>{
                     setSelectedFolder(folder);
@@ -503,6 +512,7 @@ export default function Medias(props:{children?: any}) {
                   onDragFolder = {setDraggedFolder}
                   onMediaDragStart = {setDraggedMedia}
                   onMediaDragEnd = {()=>setDraggedMedia(undefined)}
+                  onToggleSelectMedia = {handleToggleSelectMedia}
                 ></MediaGridList>
               </div>
             </div>

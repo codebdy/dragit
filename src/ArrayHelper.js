@@ -72,11 +72,12 @@ export function contains(node, array) {
     return false
 }
 
-export function tongleOnCondition(condition, node, array) {
-    if (condition) {
-        add(node, array)
-    } else {
+export function toggle(node, array){
+    if(contains(node, array)){
         remove(node, array)
+    }
+    else{
+        add(node, array)
     }
 }
 

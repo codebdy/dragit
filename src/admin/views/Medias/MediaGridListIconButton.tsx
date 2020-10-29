@@ -24,7 +24,7 @@ export default function MediaGridListIconButton(props:{icon:string, onClick:()=>
   const classes = useStyles();
   return (
     <div className={classes.root} onClick = {onClick}>
-      <MdiIcon iconClass = {icon} color="white" size={14} />
+      <MdiIcon iconClass = {icon} color="#f7f7f7" size={14} />
     </div>
   )
 }

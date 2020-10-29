@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     scrollBar:{
       paddingBottom:theme.spacing(2),
       paddingRight:theme.spacing(0.2),
+      paddingTop:theme.spacing(0.2),
     },
 
     gridList: {
@@ -41,6 +42,7 @@ export default function MediasGridList(props:{
     draggedMedia:MediaMeta|undefined,
     folders:Array<FolderNode>|undefined,
     medias:Array<MediaMeta>, 
+    selectedMedias:Array<MediaMeta>, 
     onScrollToEnd:()=>void,
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
@@ -51,6 +53,7 @@ export default function MediasGridList(props:{
     onDragFolder:(folder:FolderNode|undefined)=>void,
     onMediaDragStart:(media:MediaMeta) =>void,
     onMediaDragEnd:()=>void,
+    onToggleSelectMedia:(media:MediaMeta)=>void,
   }) {
   const {
     loading, 
@@ -58,7 +61,8 @@ export default function MediasGridList(props:{
     draggedFolder,
     draggedMedia, 
     folders, 
-    medias, 
+    medias,
+    selectedMedias, 
     onScrollToEnd, 
     onSelect, 
     onFolderNameChange, 
@@ -68,7 +72,8 @@ export default function MediasGridList(props:{
     onRemoveMedia,
     onDragFolder,
     onMediaDragStart,
-    onMediaDragEnd
+    onMediaDragEnd,
+    onToggleSelectMedia
   } = props;
   const classes = useStyles();
   const ref = useRef(null);  
@@ -121,9 +126,11 @@ export default function MediasGridList(props:{
           <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
             <MediaGridListImage 
               image = {tile} 
+              selectedMedias = {selectedMedias}
               onRemoveMedia = {onRemoveMedia} 
               onDragStart={onMediaDragStart}
               onDragEnd = {onMediaDragEnd}
+              onToggleSelect = {onToggleSelectMedia}
             />
           </Grid>
         ))}

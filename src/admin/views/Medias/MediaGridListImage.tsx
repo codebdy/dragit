@@ -5,11 +5,18 @@ import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { API_MEDIAS_CHANGE_MEDIA_NAME, API_MEDIAS_REMOVE_MEDIA } from 'Api';
 import axios from 'axios';
+import MdiIcon from 'components/common/MdiIcon';
+import classNames from 'classnames';
+import { contains } from 'ArrayHelper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position:"relative",
+    },
+    checked:{
+      border:"#5d78ff solid 2px",
+      borderRadius:"5px",
     },
     mask:{
       position:'absolute',
@@ -20,7 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
       background:"rgba(50,50,50, 0.3)",
       borderRadius:"5px",
       display:'flex',
-      flexFlow:"column"
+      flexFlow:"column",
+      justifyContent:"space-between",
     },
 
     toolbar:{
@@ -33,6 +41,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     titleInput:{
       width:'100%',
+    },
+    checkbox:{
+      width:'30px',
+      height:'30px',
+      background:"#f7f7f7",
+      position:'absolute',
+      bottom: '3px', 
+      right:'3px',
+      borderRadius:'50%',
+      display:"flex",
+      justifyContent:"center",
+      alignItems:"center",
     }  
   }),
 );
@@ -45,20 +65,27 @@ export interface MediaMeta{
 
 export default function MediaGridListImage(
   props:{
+    selectedMedias:Array<MediaMeta>, 
     image:MediaMeta, 
     onRemoveMedia:(media:MediaMeta)=>void,
     onDragStart:(media:MediaMeta)=>void,
-    onDragEnd:()=>void,  
+    onDragEnd:()=>void,
+    onToggleSelect:(media:MediaMeta)=>void,
   }
 ){
-  const {image, onRemoveMedia, onDragStart, onDragEnd} = props;
+  const {selectedMedias, image, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
   const [imageTitle, setImageTitle] = React.useState(image.title);
   const [loading, setLoading] = React.useState(false);
 
+  const selected = contains(image, selectedMedias);
+
   const changeImageTitleOnServer = ()=>{
+    if(imageTitle === image.title){
+      return
+    }
     setLoading(true)
 
     axios(
@@ -71,6 +98,7 @@ export default function MediaGridListImage(
         },
       }
     ).then(res => {
+      image.title = imageTitle
       setLoading(false);
     })
     .catch(err => {
@@ -113,7 +141,7 @@ export default function MediaGridListImage(
 
   return (
     <Fragment>
-      <div className = {classes.root}
+      <div className = { classNames(classes.root) }
         draggable={true}
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}          
@@ -122,8 +150,11 @@ export default function MediaGridListImage(
           onDragStart(image);
         }}
         onDragEnd = {onDragEnd}
+        onClick = {()=>onToggleSelect(image)}
       >
-        <Image src={image.thumbnail} 
+        <Image 
+          src={image.thumbnail}
+          className = { classNames({[classes.checked]:selected}) } 
         />
         {
           hover&&
@@ -133,6 +164,13 @@ export default function MediaGridListImage(
               <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>setEditing(true)} />
               <MediaGridListIconButton icon = "mdi-delete-outline" onClick={removeMedia} />
             </div>
+
+          </div>
+        }
+        {
+          selected &&
+          <div className={classes.checkbox}>
+            <MdiIcon iconClass="mdi-check" size="18" color="#5d78ff" />
           </div>
         }        
       </div>        
