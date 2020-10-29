@@ -56,6 +56,13 @@ export function remove(node, array) {
     }
 }
 
+export function batchRemove(nodes, array) {
+    for (var i = 0; i < nodes.length; i++) {
+        remove(nodes[i], array)
+    }
+}
+
+
 export function add(node, array) {
     if (!contains(node, array)) {
         array.push(node)

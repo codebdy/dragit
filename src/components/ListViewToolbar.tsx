@@ -4,6 +4,7 @@ import MdiIcon from "./common/MdiIcon";
 import ListViewFilter from "./ListViewFilter";
 import clsx from 'clsx';
 import { ListViewMetaItem } from "./ListViewMetaItem";
+import intl from 'react-intl-universal';
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +52,7 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
     >
       {numSelected > 0 ? (
         <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-          {numSelected} selected
+          {numSelected} {intl.get('records-selected')}
         </Typography>
       ) : (
         <div className={classes.title}>

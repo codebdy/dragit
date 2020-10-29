@@ -5,12 +5,13 @@ import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
-import { remove, toggle } from "ArrayHelper";
+import { batchRemove, remove, toggle } from "ArrayHelper";
 import { MediaMeta } from "./MediaGridListImage";
-import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER } from "Api";
+import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "Api";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
+import MediasBatchActions from "./MediasBatchActions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -118,6 +119,7 @@ export default function Medias(props:{children?: any}) {
   const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
   const [haseData] = React.useState(true);
+  const [batchActionLoading, setBatchActionLoading] = React.useState(false);
 
   const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
 
@@ -333,6 +335,29 @@ export default function Medias(props:{children?: any}) {
     setSelectedMedias([...selectedMedias]);
   }
 
+  const handleRemoveSelected = ()=>{
+    setBatchActionLoading(true)
+    axios(
+      {
+        method: API_MEDIAS_REMOVE_MEDIAS.method as any,
+        url: API_MEDIAS_REMOVE_MEDIAS.url,
+        data:{
+          imageIds:selectedMedias.map((media)=>{return media.id}),
+        },
+      }
+    ).then(res => {
+      setBatchActionLoading(false);
+      batchRemove(selectedMedias, medias)
+      setSelectedMedias([])
+      setMedias([...medias])
+    })
+    .catch(err => {
+      console.log('server error',err);
+      setBatchActionLoading(false);
+    });
+    
+  }
+
 
   return (
     <Container className={classes.meidas}>
@@ -352,7 +377,16 @@ export default function Medias(props:{children?: any}) {
           <Paper className = {classNames(classes.paper, classes.flex1)} elevation={6}>
             <div className = {classes.left}>
               <div className ={classes.toolbar}>
+                {
+                  selectedMedias.length > 0 ?
+                  <MediasBatchActions 
+                    selectedMedias = {selectedMedias}
+                    onClearSelected = {()=>setSelectedMedias([])}
+                    onRemoveSelected = {handleRemoveSelected}
+                  />
+                  :
                   <MediasToolbar />
+                }
               </div>
               <Divider></Divider>
               <MediasBreadCrumbs 
@@ -360,6 +394,7 @@ export default function Medias(props:{children?: any}) {
                 selectedFolderNode = {selectedFolderNode}
                 onSelect={setSelectedFolder}
               />
+              {batchActionLoading && <LinearProgress />}
               <div className ={classes.mediasGrid}>
                 <MediaGridList 
                   loading={gridLoading}
