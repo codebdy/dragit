@@ -15,7 +15,7 @@ import PortletFormGridBody from "components/PortletFormGridBody"
 import PortletFooter from "components/PortletFooter"
 import FormGridItem from "components/FormGridItem"
 import ListView from "components/ListView"
-
+import MediasPortlet from "components/MediasPortlet"
 
 const nodeMap : { [key: string]: any } = {
   Container,
@@ -36,6 +36,7 @@ const nodeMap : { [key: string]: any } = {
   PortletFooter,
   Typography,
   ListView,
+  MediasPortlet,
 }
 
 function resolveNode(name:string): any{

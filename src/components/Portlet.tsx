@@ -87,7 +87,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
             </Typography>
             {
               scalable &&
-              <IconButton onClick ={hendleClickChevronIcon} >              
+              <IconButton onClick ={hendleClickChevronIcon} style={{zIndex:0}} >              
                 <ChevronRightIcon 
                   className={
                     classNames(classes.indicator,  {[classes.opened] : opened})

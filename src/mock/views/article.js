@@ -87,6 +87,12 @@ export default {
           },
           children: [
             {
+              name:'MediasPortlet',
+              props: {
+                elevation: 6,
+               },
+            },
+            {
               name:'Portlet',
               props: {
                 elevation: 6,
@@ -94,7 +100,9 @@ export default {
                 withHeader:true,
                 title:'基本信息',
                 scalable: true,
-              },
+                style:{
+                  marginTop:'16px',
+                },              },
               children:[
                 {
                   name:'PortletFormGridBody',

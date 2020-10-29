@@ -112,5 +112,10 @@
     "records-selected":"Selected",
     "replace":"Replace",
     "delete":"Delete",
-    "clear-selected":"Clear Selected"
+    "clear-selected":"Clear Selected",
+
+    "media":"Media",
+    "edit-alt-text":"Edit Alt Text",
+    "delete-all-medias":"Remove All Medias"
+
 }

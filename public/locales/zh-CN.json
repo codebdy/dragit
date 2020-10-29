@@ -117,5 +117,9 @@
     "records-selected":"个被选中",
     "replace":"替换",
     "delete":"删除",
-    "clear-selected":"清除选中"
+    "clear-selected":"清除选中",
+
+    "media":"媒体",
+    "edit-alt-text":"编辑ALT文本",
+    "delete-all-medias":"删除所有媒体"
 }
