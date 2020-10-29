@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import {makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, IconButton, Button, SvgIcon, Hidden, LinearProgress} from "@material-ui/core";
+import {makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, Button, SvgIcon, Hidden, LinearProgress} from "@material-ui/core";
 import classNames from "classnames";
 import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { remove, toggle } from "ArrayHelper";
-import MediasBreadCrumbItems from "./MediasBreadCrumbItems";
 import { MediaMeta } from "./MediaGridListImage";
 import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER } from "Api";
 import MediasToolbar from "./MediasToolbar";
