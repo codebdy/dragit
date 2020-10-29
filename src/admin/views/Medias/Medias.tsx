@@ -372,7 +372,9 @@ export default function Medias(props:{children?: any}) {
 
   const handeRemoveMedia = (media:MediaMeta)=>{
     remove(media, medias);
+    remove(media, selectedMedias);
     setMedias([...medias]);
+    setSelectedMedias([...selectedMedias]);
   }
 
   const handleToggleSelectMedia = (media:MediaMeta)=>{
