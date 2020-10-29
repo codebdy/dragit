@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
-import {fade, makeStyles, Theme, createStyles, Container, Grid, Paper, Divider,Tooltip, IconButton, InputBase, Button, SvgIcon, Hidden, LinearProgress} from "@material-ui/core";
+import {makeStyles, Theme, createStyles, Container, Grid, Paper, Divider, IconButton, Button, SvgIcon, Hidden, LinearProgress} from "@material-ui/core";
 import classNames from "classnames";
-import Spacer from "components/common/Spacer";
-import MdiIcon from "components/common/MdiIcon";
-import SearchIcon from '@material-ui/icons/Search';
 import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { remove, toggle } from "ArrayHelper";
-import intl from 'react-intl-universal';
-import MediaBreadCrumbs from "./MediaBreadCrumbs";
+import MediasBreadCrumbItems from "./MediasBreadCrumbItems";
 import { MediaMeta } from "./MediaGridListImage";
 import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER } from "Api";
+import MediasToolbar from "./MediasToolbar";
+import intl from 'react-intl-universal';
+import MediasBreadCrumbs from "./MediasBreadCrumbs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
       display:'flex',
       flexFlow:'column',
-      
     },
     square:{
       borderRadius:'0',
@@ -50,14 +48,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       flexFlow:'column',
     },
-    toolbar:{
-      minHeight:theme.spacing(7),
-      display:'flex',
-      flexFlow:'row',
-      alignItems:'center',
-      flexWrap: 'wrap',
-      paddingRight: '0',
-    },
     mediasGrid:{
       flex:1,
       display:'flex',
@@ -73,60 +63,15 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: '1.1rem',
       position: 'relative',
     },
-    uploadInput: {
-      display: 'none',
-    },
-    uploadButton:{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
 
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: theme.palette.type === 'light'? fade(theme.palette.common.black, 0.05) : fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: theme.palette.type === 'light'? fade(theme.palette.common.black, 0.10) : fade(theme.palette.common.white, 0.25),
-      },
-      marginRight: theme.spacing(2),
-      width: 'auto',
-      marginLeft: theme.spacing(2),
-    },
-    searchIcon: {
-      padding: theme.spacing(0, 2),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-
-    },
     mainUploadButton:{
       boxShadow: theme.shadows[6],
-    },
-
-    backButton:{
-      marginLeft:'2px',
     },
 
     uploadIcon:{
       marginRight: theme.spacing(1),
     },
-    breadCrumbShell:{
-      minHeight:theme.spacing(7),
-      //boxShadow: theme.shadows[5],
-    },
+
   }),
 );
 
@@ -156,7 +101,6 @@ function getByIdFromTree(id:string, folders?:Array<FolderNode>):FolderNode|undef
 
 export default function Medias(props:{children?: any}) {
   const classes = useStyles();
-  const toolIconSize = 21;
   const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
   const [draggedMedia, setDraggedMedia] = React.useState<MediaMeta|undefined>();
@@ -400,99 +344,13 @@ export default function Medias(props:{children?: any}) {
         <Grid item xs={12} className={classes.mainCol}>
           <Paper className = {classNames(classes.paper, classes.flex1)} elevation={6}>
             <div className = {classes.left}>
-              <div className ={classes.toolbar}>
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <InputBase
-                    placeholder="Search…"
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                  />
-                </div>                
-                <Spacer />
-                
-                <input
-                  accept="image/*"
-                  className={classes.uploadInput}
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                />
-                <Hidden xsDown>
-                  <label htmlFor="contained-button-file">
-                    <Tooltip title={intl.get('upload')} arrow placement="top">
-                      <IconButton  
-                        aria-label={intl.get('upload')}  
-                        component="span"
-                        className={classes.uploadButton}
-                      >
-                        <MdiIcon iconClass="mdi-cloud-upload-outline" size={toolIconSize} />
-                      </IconButton>
-                    </Tooltip>
-                  </label>
-
-                  <Tooltip title={intl.get('filter')} arrow placement="top">
-                    <IconButton aria-label={intl.get('filter')} component="span">
-                      <MdiIcon iconClass="mdi-filter-outline" size={toolIconSize} />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title={intl.get('sort-by')} arrow placement="top">
-                    <IconButton aria-label={intl.get('sort-by')} component="span">
-                      <MdiIcon iconClass="mdi-sort-ascending"  size={toolIconSize} />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title={intl.get('list')} arrow placement="top">
-                    <IconButton aria-label={intl.get('list')} component="span">
-                      <MdiIcon iconClass="mdi-format-list-checkbox"  size={toolIconSize} />
-                    </IconButton>
-                  </Tooltip>
-
-                </Hidden>
-                <Hidden smUp>
-                    <IconButton aria-label={intl.get('list')} component="span">
-                      <MdiIcon iconClass="mdi-dots-horizontal"  size={toolIconSize} />
-                    </IconButton>
-                </Hidden>
-              </div>
+              <MediasToolbar />
               <Divider></Divider>
-              <Grid container justify="space-between" alignItems="center" className={classes.breadCrumbShell}>
-                <Grid item>
-                  <IconButton className={classes.backButton}
-                    disabled = {selectedFolder === 'root'}
-                    onClick={
-                      ()=>{
-                        setSelectedFolder(selectedFolderNode?.parent? selectedFolderNode.parent.id : 'root')
-                      }
-                    }
-                  >
-                    <SvgIcon>
-                      <path fill="currentColor" d="M13,18V10L16.5,13.5L17.92,12.08L12,6.16L6.08,12.08L7.5,13.5L11,10V18H13M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2Z" />
-                    </SvgIcon>                    
-                  </IconButton>                  
-                </Grid>
-                <Grid item>
-                    <MediaBreadCrumbs folder={selectedFolderNode} 
-                      onSelect = {(folder)=>{
-                        setSelectedFolder(folder);
-                      }} 
-                    />
-                </Grid>
-                <Grid item>                  
-                 <Hidden lgUp>
-                    <IconButton>
-                      <SvgIcon>
-                        <path fill="currentColor" d="M20 6H12L10 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V8A2 2 0 0 0 20 6M20 18H4V8H20M13 17V14H15V17H17V13H19L14 9L9 13H11V17Z" />
-                      </SvgIcon>                    
-                    </IconButton>
-                  </Hidden>
-                </Grid>
-              </Grid>
-
+              <MediasBreadCrumbs 
+                selectedFolder = {selectedFolder}
+                selectedFolderNode = {selectedFolderNode}
+                onSelect={setSelectedFolder}
+              />
               <div className ={classes.mediasGrid}>
                 <MediaGridList 
                   loading={gridLoading}

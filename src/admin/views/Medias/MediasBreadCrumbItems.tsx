@@ -28,7 +28,7 @@ function makeupLinkCrumbs(folder?:FolderNode, allCrumbs?:Array<FolderNode>){
   return allCrumbs
 }
 
-export default function MediaBreadCrumbs(props:{folder?:FolderNode, onSelect:(node:string)=>void}){
+export default function MediasBreadCrumbItems(props:{folder?:FolderNode, onSelect:(node:string)=>void}){
   const {folder, onSelect} = props;
   const classes = useStyles();
   const linkCrumbs = makeupLinkCrumbs(folder);
