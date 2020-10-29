@@ -8,7 +8,7 @@ import FixedBar from 'admin/FixedBar';
 import PageContent from 'admin/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
-import Medias from 'admin/views/Medias/Medias';
+import Medias from 'components/Medias/Medias';
 import AreaSelect from 'designer/AreaSelect';
 import PageContentDesign from 'designer/PageContentDesign';
 import PageView from 'admin/views/Page/PageView';
