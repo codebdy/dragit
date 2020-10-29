@@ -18,12 +18,16 @@ const useStyles = makeStyles((theme: Theme) =>
       border:"#5d78ff solid 2px",
       borderRadius:"5px",
     },
+    notChecked:{
+      border:"transparent solid 2px",
+      borderRadius:"5px",    
+    },
     mask:{
       position:'absolute',
-      height:'100%',
+      height:'calc(100% - 2px)',
       width:"100%",
       left:"0",
-      top:"0",
+      top:"1px",
       background:"rgba(50,50,50, 0.3)",
       borderRadius:"5px",
       display:'flex',
@@ -47,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height:'30px',
       background:"#f7f7f7",
       position:'absolute',
-      bottom: '3px', 
+      bottom: '5px', 
       right:'3px',
       borderRadius:'50%',
       display:"flex",
@@ -154,7 +158,7 @@ export default function MediaGridListImage(
       >
         <Image 
           src={image.thumbnail}
-          className = { classNames({[classes.checked]:selected}) } 
+          className = { selected? classes.checked : classes.notChecked } 
         />
         {
           hover&&
