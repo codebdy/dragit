@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, fade, Hidden, IconButton, InputBase, Tooltip } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import Spacer from 'components/common/Spacer';
@@ -7,14 +7,6 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    toolbar:{
-      minHeight:theme.spacing(7),
-      display:'flex',
-      flexFlow:'row',
-      alignItems:'center',
-      flexWrap: 'wrap',
-      paddingRight: '0',
-    },
     uploadInput: {
       display: 'none',
     },
@@ -60,7 +52,7 @@ export default function MediasToolbar(){
   const classes = useStyles();
   const toolIconSize = 21;
   return (
-    <div className ={classes.toolbar}>
+    <Fragment>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
@@ -118,6 +110,6 @@ export default function MediasToolbar(){
             <MdiIcon iconClass="mdi-dots-horizontal"  size={toolIconSize} />
           </IconButton>
       </Hidden>
-    </div>
+    </Fragment>
   )
 }

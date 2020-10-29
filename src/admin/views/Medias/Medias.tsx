@@ -41,6 +41,14 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
 
     },
+    toolbar:{
+      minHeight:theme.spacing(7),
+      display:'flex',
+      flexFlow:'row',
+      alignItems:'center',
+      flexWrap: 'wrap',
+      paddingRight: '0',
+    },
     right:{
       width:'260px',
       flexShrink:0,
@@ -343,7 +351,9 @@ export default function Medias(props:{children?: any}) {
         <Grid item xs={12} className={classes.mainCol}>
           <Paper className = {classNames(classes.paper, classes.flex1)} elevation={6}>
             <div className = {classes.left}>
-              <MediasToolbar />
+              <div className ={classes.toolbar}>
+                  <MediasToolbar />
+              </div>
               <Divider></Divider>
               <MediasBreadCrumbs 
                 selectedFolder = {selectedFolder}
