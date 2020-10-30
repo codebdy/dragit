@@ -86,8 +86,13 @@ function getByIdFromTree(id:string, folders?:Array<FolderNode>):FolderNode|undef
   return undefined;
 }
 
-export default function MediasContent(props:{onSelectedChange?:(medias:Array<MediaMeta>)=>void}){
-  const {onSelectedChange} = props;
+export default function MediasContent(
+  props:{
+    single?:boolean,
+    onSelectedChange?:(medias:Array<MediaMeta>)=>void
+  }
+){
+  const {single, onSelectedChange} = props;
   const classes = useStyles();
   const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
@@ -315,8 +320,16 @@ export default function MediasContent(props:{onSelectedChange?:(medias:Array<Med
   }
 
   const handleToggleSelectMedia = (media:MediaMeta)=>{
-    toggle(media, selectedMedias);
-    setSelectedMedias([...selectedMedias]);
+    if(single){
+      if(selectedMedias.length > 0 && media === selectedMedias[0]){
+        setSelectedMedias([])
+      }else{
+        setSelectedMedias([media]);
+      }
+    }else{
+      toggle(media, selectedMedias);
+      setSelectedMedias([...selectedMedias]);
+    }
   }
 
   const handleRemoveSelected = ()=>{

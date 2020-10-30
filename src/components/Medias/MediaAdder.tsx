@@ -92,7 +92,7 @@ export default function MediaAdder(props:{onClick:()=>void}){
           </Toolbar>
         </AppBar>
         <DialogContent dividers className={classes.dialogContent}>
-          <MediasContent onSelectedChange = {setSelectedMedias} />
+          <MediasContent onSelectedChange = {setSelectedMedias} single = {false}/>
         </DialogContent>
         <DialogActions>
           <Spacer />
