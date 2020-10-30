@@ -59,7 +59,8 @@ const Transition = React.forwardRef(function Transition(
   return  <Grow ref={ref} {...props} />;
 });
 
-export default function MediaAdder(props:{onClick:()=>void}){
+export default function MediaAdder(props:{onSelectMedias:(medias:Array<MediaMeta>)=>void}){
+  const {onSelectMedias} = props;
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -72,6 +73,11 @@ export default function MediaAdder(props:{onClick:()=>void}){
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleSelect = ()=>{
+    onSelectMedias(selectedMedias);
+    setOpen(false);
+  }
 
   return (
     <Fragment>
@@ -99,7 +105,7 @@ export default function MediaAdder(props:{onClick:()=>void}){
           <Button onClick={handleClose} size="large">
             {Intl.get('cancel')}
           </Button>          
-          <Button onClick={handleClose} size="large" variant="contained" color="primary"
+          <Button onClick={handleSelect} size="large" variant="contained" color="primary"
             disabled = {selectedMedias.length === 0}
           >
             {Intl.get('select')}

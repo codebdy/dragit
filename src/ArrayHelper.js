@@ -88,6 +88,15 @@ export function toggle(node, array){
     }
 }
 
+export function mergeArray(oldArray, newArray){
+    for (var i = 0; i < newArray.length; i++) {
+        if (!contains(newArray[i], oldArray) ) {
+            add(newArray[i], oldArray)
+        }
+    }
+    return [...oldArray];
+}
+
 export function clear(array) {
     array.length = 0
 }
