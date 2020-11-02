@@ -100,3 +100,22 @@ export function mergeArray(oldArray, newArray){
 export function clear(array) {
     array.length = 0
 }
+
+export function exchange(first, second, array){
+    let rtArray = [...array]
+    let firstIndex = indexOf(first, array)
+    let secondIndex = indexOf(second, array)
+    rtArray[firstIndex] = second
+    rtArray[secondIndex]  = first
+    return rtArray;
+}
+
+export function indexOf(node, array){
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === node) {
+            return i
+        }
+    }
+
+    return -1
+}

@@ -1,27 +1,45 @@
 import React, { Fragment } from 'react';
 import { MediaMeta } from './Medias/MediaGridListImage';
 import MediaAdder from './Medias/MediaAdder';
-import Image from 'components/common/Image'
 import { Grid } from '@material-ui/core';
+import MediasPortletMedia from './MediasPortletMedia';
 
 
 export default function MediasPortletFeathureGrid(
   props:{
     medias:Array<MediaMeta>, 
-    onSelectMedias:(selectedMedias:Array<MediaMeta>)=>void
+    onSelectMedias:(selectedMedias:Array<MediaMeta>)=>void,
+    onSwap:(first:MediaMeta, second:MediaMeta)=>void,
   }
 ){
-  const {medias, onSelectMedias} = props;
+  const {medias, onSelectMedias, onSwap} = props;
+  const [draggedMedia, setDraggedMedia] = React.useState<MediaMeta|undefined>(undefined);
   const meidasOnFirstLeft = medias.slice(1,9);
 
   const leftMedias = medias.slice(9);
+  const handleDragStart = (media:MediaMeta)=>{
+    setDraggedMedia(media)
+  }
+  const handleDragEnd = ()=>{
+    setDraggedMedia(undefined);
+  }
+
+  const handleDrop = (media:MediaMeta)=>{
+    draggedMedia && onSwap(media, draggedMedia);
+  }
 
   return (
     <Fragment>
       {
         medias.length > 0 &&
         <Grid  item xs={ 4}>
-          <Image src={medias[0].thumbnail}/>
+          <MediasPortletMedia 
+            media={medias[0]}
+            draggedMedia = {draggedMedia}
+            onDragStart = {handleDragStart}
+            onDragEnd = {handleDragEnd}
+            onDrop = {handleDrop}
+          />
         </Grid> 
       }
       {
@@ -31,7 +49,13 @@ export default function MediasPortletFeathureGrid(
             meidasOnFirstLeft.map((media, index)=>{
               return (
                 <Grid key={media.id + '-' + index} item xs={3}>
-                  <Image src={media.thumbnail}/>
+                  <MediasPortletMedia 
+                    media={media}
+                    draggedMedia = {draggedMedia}
+                    onDragStart = {handleDragStart}
+                    onDragEnd = {handleDragEnd}
+                    onDrop = {handleDrop}
+                  />
                 </Grid>                
               )
             })
@@ -49,7 +73,13 @@ export default function MediasPortletFeathureGrid(
         leftMedias.map((media, index)=>{
           return (
             <Grid key={media.id + '-' + index} item xs={2}>
-              <Image src={media.thumbnail}/>
+              <MediasPortletMedia 
+                media={media}
+                draggedMedia = {draggedMedia}
+                onDragStart = {handleDragStart}
+                onDragEnd = {handleDragEnd}
+                onDrop = {handleDrop}
+              />
             </Grid>                
           )
         })

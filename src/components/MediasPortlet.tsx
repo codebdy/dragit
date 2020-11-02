@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import intl from 'react-intl-universal';
 import MdiIcon from './common/MdiIcon';
 import { MediaMeta } from './Medias/MediaGridListImage';
-import { mergeArray } from 'ArrayHelper';
+import { exchange, mergeArray } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,6 +56,10 @@ const MediasPortlet = React.forwardRef((
     setMedias(mergeArray(medias,selectedMedias ));
   }
 
+  const handleSwap = (first:MediaMeta, second:MediaMeta)=>{
+    setMedias(exchange(first, second, medias));
+  }
+
   return (
     <Paper 
       ref={ref}
@@ -101,7 +105,11 @@ const MediasPortlet = React.forwardRef((
       <Divider></Divider>
       <div className={classes.body}>
         <Grid container spacing={3}>
-          <MediasPortletFeathureGrid medias={medias} onSelectMedias={handleSelectedMedias} />
+          <MediasPortletFeathureGrid 
+            medias={medias} 
+            onSelectMedias={handleSelectedMedias}
+            onSwap = {handleSwap}
+          />
         </Grid>
 
       </div>
