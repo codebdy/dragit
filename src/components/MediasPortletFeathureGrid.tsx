@@ -10,9 +10,10 @@ export default function MediasPortletFeathureGrid(
     medias:Array<MediaMeta>, 
     onSelectMedias:(selectedMedias:Array<MediaMeta>)=>void,
     onSwap:(first:MediaMeta, second:MediaMeta)=>void,
+    onRemove:(media:MediaMeta)=>void,
   }
 ){
-  const {medias, onSelectMedias, onSwap} = props;
+  const {medias, onSelectMedias, onSwap, onRemove} = props;
   const [draggedMedia, setDraggedMedia] = React.useState<MediaMeta|undefined>(undefined);
   const meidasOnFirstLeft = medias.slice(1,9);
 
@@ -39,6 +40,7 @@ export default function MediasPortletFeathureGrid(
             onDragStart = {handleDragStart}
             onDragEnd = {handleDragEnd}
             onDrop = {handleDrop}
+            onRemove = {onRemove}
           />
         </Grid> 
       }
@@ -55,6 +57,7 @@ export default function MediasPortletFeathureGrid(
                     onDragStart = {handleDragStart}
                     onDragEnd = {handleDragEnd}
                     onDrop = {handleDrop}
+                    onRemove = {onRemove}
                   />
                 </Grid>                
               )
@@ -79,6 +82,7 @@ export default function MediasPortletFeathureGrid(
                 onDragStart = {handleDragStart}
                 onDragEnd = {handleDragEnd}
                 onDrop = {handleDrop}
+                onRemove = {onRemove}
               />
             </Grid>                
           )

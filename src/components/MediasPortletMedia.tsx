@@ -36,12 +36,13 @@ export default function MediasPortletMedia(
   props:{
     media:MediaMeta,
     draggedMedia:MediaMeta|undefined,
+    onRemove:(media:MediaMeta)=>void,
     onDragStart:(media:MediaMeta)=>void,
     onDragEnd:()=>void,
     onDrop:(targetMedia:MediaMeta)=>void
   }
 ){
-  const {media, draggedMedia, onDragStart, onDragEnd, onDrop} = props
+  const {media, draggedMedia, onRemove, onDragStart, onDragEnd, onDrop} = props
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
 
@@ -68,7 +69,7 @@ export default function MediasPortletMedia(
       {
         hover&&
         <div className={classes.mask}>
-          <IconButton className={classes.closeButton} size="small">
+          <IconButton className={classes.closeButton} size="small" onClick={()=>onRemove(media)}>
             <MdiIcon iconClass = "mdi-close" color="#f7f7f7" size="16" />
           </IconButton>
   

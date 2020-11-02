@@ -1,11 +1,12 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid, Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import intl from 'react-intl-universal';
 import MdiIcon from './common/MdiIcon';
 import { MediaMeta } from './Medias/MediaGridListImage';
-import { exchange, mergeArray } from 'ArrayHelper';
+import { exchange, mergeArray, remove } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
+import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,12 +39,13 @@ const MediasPortlet = React.forwardRef((
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
 
+
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
     if (anchorRef && anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
 
-    setMenuOpen(false)
+    setMenuOpen(false);
   };
   const handleListKeyDown = (event: React.KeyboardEvent) =>{
     if (event.key === 'Tab') {
@@ -52,12 +54,21 @@ const MediasPortlet = React.forwardRef((
     }
   }
 
+  const handleClear = ()=>{
+    setMedias([]);
+    setMenuOpen(false);
+  }
+
   const handleSelectedMedias = (selectedMedias:Array<MediaMeta>)=>{
     setMedias(mergeArray(medias,selectedMedias ));
   }
 
   const handleSwap = (first:MediaMeta, second:MediaMeta)=>{
     setMedias(exchange(first, second, medias));
+  }
+
+  const handleRemove = (media:MediaMeta)=>{
+    setMedias([...remove(media, medias)]);
   }
 
   return (
@@ -89,7 +100,7 @@ const MediasPortlet = React.forwardRef((
                       </ListItemIcon>
                       <ListItemText primary={intl.get('edit-alt-text')} />
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleClear}>
                       <ListItemIcon>
                         <MdiIcon iconClass="mdi-delete-sweep-outline" />
                       </ListItemIcon>
@@ -105,11 +116,22 @@ const MediasPortlet = React.forwardRef((
       <Divider></Divider>
       <div className={classes.body}>
         <Grid container spacing={3}>
-          <MediasPortletFeathureGrid 
-            medias={medias} 
-            onSelectMedias={handleSelectedMedias}
-            onSwap = {handleSwap}
-          />
+          <Hidden smDown>
+            <MediasPortletFeathureGrid 
+              medias={medias} 
+              onSelectMedias={handleSelectedMedias}
+              onSwap = {handleSwap}
+              onRemove = {handleRemove}
+            />
+          </Hidden>
+          <Hidden mdUp>
+            <MediasPortletColumnsGrid 
+              medias={medias} 
+              onSelectMedias={handleSelectedMedias}
+              onSwap = {handleSwap}
+              onRemove = {handleRemove}            
+            />
+          </Hidden>
         </Grid>
 
       </div>

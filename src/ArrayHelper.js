@@ -54,6 +54,8 @@ export function remove(node, array) {
             break
         }
     }
+
+    return array
 }
 
 export function batchRemove(nodes, array) {
