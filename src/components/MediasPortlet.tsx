@@ -7,6 +7,7 @@ import { MediaMeta } from './Medias/MediaGridListImage';
 import { exchange, mergeArray, remove } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
+import MediasPortletAltsDialog from './MediasPortletAltsDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +40,7 @@ const MediasPortlet = React.forwardRef((
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
+  const [altsOpen, setAltsOpen] = React.useState(false); 
 
 
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -58,6 +60,11 @@ const MediasPortlet = React.forwardRef((
   const handleClear = ()=>{
     setMedias([]);
     setMenuOpen(false);
+  }
+
+  const handleEditAlts = ()=>{
+    setAltsOpen(true);
+    setMenuOpen(false);  
   }
 
   const handleSelectedMedias = (selectedMedias:Array<MediaMeta>)=>{
@@ -95,7 +102,7 @@ const MediasPortlet = React.forwardRef((
               <Paper elevation={5} >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={menuOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleEditAlts}>
                       <ListItemIcon>
                         <MdiIcon iconClass="mdi-text-recognition" />
                       </ListItemIcon>
@@ -148,7 +155,7 @@ const MediasPortlet = React.forwardRef((
 
           }
         </Grid>
-
+        <MediasPortletAltsDialog medias={medias} open = {altsOpen} onClose={()=>setAltsOpen(false)} />
       </div>
     </Paper>
   )

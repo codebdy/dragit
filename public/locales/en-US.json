@@ -16,6 +16,7 @@
     "select":"Select",
     "clear": "Clear",
     "close": "Close",
+    "confirm":"Confirm",
     "form": "Form",
     "relations": "Relations",
     "customized": "Customized",
@@ -117,6 +118,9 @@
 
     "media":"Media",
     "edit-alt-text":"Edit Alt Text",
-    "delete-all-medias":"Remove All Medias"
+    "delete-all-medias":"Remove All Medias",
+    "alt-edit-tips":"Add alt text to image, please ensure every alt is unique.",
+    "copy-to-all-images":"Copy to all images",
+    "alt-text":"Alt text"
 
 }

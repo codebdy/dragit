@@ -102,7 +102,7 @@ export default function MediaAdder(props:{onSelectMedias:(medias:Array<MediaMeta
         </DialogContent>
         <DialogActions>
           <Spacer />
-          <Button onClick={handleClose} size="large">
+          <Button onClick={handleClose} size="large" variant="outlined">
             {Intl.get('cancel')}
           </Button>          
           <Button onClick={handleSelect} size="large" variant="contained" color="primary"

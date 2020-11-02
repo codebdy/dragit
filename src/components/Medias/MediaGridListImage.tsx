@@ -64,6 +64,7 @@ export interface MediaMeta{
   id:string;
   thumbnail: string,
   title: string,
+  alt?:string,
 }
 
 
