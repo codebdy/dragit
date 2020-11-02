@@ -39,6 +39,10 @@ const MediasPortlet = React.forwardRef((
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
 
+  const meidasOnFirstLeft = medias.slice(1,9);
+
+  const leftMedias = medias.slice(9);
+
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
     if (anchorRef && anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
@@ -103,17 +107,47 @@ const MediasPortlet = React.forwardRef((
       <div className={classes.body}>
         <Grid container spacing={3}>
           {
-            medias.map((media, index)=>{
+            medias.length > 0 &&
+            <Grid  item xs={ 4}>
+              <Image src={medias[0].thumbnail}/>
+            </Grid> 
+          }
+          {
+            meidasOnFirstLeft.length > 0 &&
+            <Grid container item xs={8} spacing={3}>
+              {
+                meidasOnFirstLeft.map((media, index)=>{
+                  return (
+                    <Grid key={media.id + '-' + index} item xs={3}>
+                      <Image src={media.thumbnail}/>
+                    </Grid>                
+                  )
+                })
+              }
+
+              {
+                meidasOnFirstLeft.length < 8 &&           
+                <Grid item xs={3}>
+                  <MediaAdder onSelectMedias={handleSelectedMedias}/>
+                </Grid>
+              }
+            </Grid> 
+          }
+          {  
+            leftMedias.map((media, index)=>{
               return (
-                <Grid key={media.id + '-' + index} item xs={index === 0 ? 4 : 2}>
+                <Grid key={media.id + '-' + index} item xs={2}>
                   <Image src={media.thumbnail}/>
                 </Grid>                
               )
             })
           }
-          <Grid item xs={2}>
-            <MediaAdder onSelectMedias={handleSelectedMedias}/>
-          </Grid>
+          {
+            (medias.length <= 1 || meidasOnFirstLeft.length >= 8) &&
+            <Grid item xs={2}>
+              <MediaAdder onSelectMedias={handleSelectedMedias}/>
+            </Grid>
+          }
         </Grid>
 
       </div>

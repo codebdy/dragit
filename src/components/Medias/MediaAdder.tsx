@@ -65,7 +65,7 @@ export default function MediaAdder(props:{onSelectMedias:(medias:Array<MediaMeta
 
   const [open, setOpen] = React.useState(false);
   const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>([]);
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
