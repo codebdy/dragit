@@ -3,10 +3,9 @@ import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography
 import classNames from 'classnames';
 import intl from 'react-intl-universal';
 import MdiIcon from './common/MdiIcon';
-import MediaAdder from './Medias/MediaAdder';
 import { MediaMeta } from './Medias/MediaGridListImage';
 import { mergeArray } from 'ArrayHelper';
-import Image from 'components/common/Image'
+import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,10 +37,6 @@ const MediasPortlet = React.forwardRef((
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
-
-  const meidasOnFirstLeft = medias.slice(1,9);
-
-  const leftMedias = medias.slice(9);
 
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
     if (anchorRef && anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
@@ -106,48 +101,7 @@ const MediasPortlet = React.forwardRef((
       <Divider></Divider>
       <div className={classes.body}>
         <Grid container spacing={3}>
-          {
-            medias.length > 0 &&
-            <Grid  item xs={ 4}>
-              <Image src={medias[0].thumbnail}/>
-            </Grid> 
-          }
-          {
-            meidasOnFirstLeft.length > 0 &&
-            <Grid container item xs={8} spacing={3}>
-              {
-                meidasOnFirstLeft.map((media, index)=>{
-                  return (
-                    <Grid key={media.id + '-' + index} item xs={3}>
-                      <Image src={media.thumbnail}/>
-                    </Grid>                
-                  )
-                })
-              }
-
-              {
-                meidasOnFirstLeft.length < 8 &&           
-                <Grid item xs={3}>
-                  <MediaAdder onSelectMedias={handleSelectedMedias}/>
-                </Grid>
-              }
-            </Grid> 
-          }
-          {  
-            leftMedias.map((media, index)=>{
-              return (
-                <Grid key={media.id + '-' + index} item xs={2}>
-                  <Image src={media.thumbnail}/>
-                </Grid>                
-              )
-            })
-          }
-          {
-            (medias.length <= 1 || meidasOnFirstLeft.length >= 8) &&
-            <Grid item xs={2}>
-              <MediaAdder onSelectMedias={handleSelectedMedias}/>
-            </Grid>
-          }
+          <MediasPortletFeathureGrid medias={medias} onSelectMedias={handleSelectedMedias} />
         </Grid>
 
       </div>
