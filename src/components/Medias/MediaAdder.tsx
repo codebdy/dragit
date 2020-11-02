@@ -108,7 +108,13 @@ export default function MediaAdder(props:{onSelectMedias:(medias:Array<MediaMeta
           <Button onClick={handleSelect} size="large" variant="contained" color="primary"
             disabled = {selectedMedias.length === 0}
           >
-            {Intl.get('select')}
+            {Intl.get('select')} 
+            {
+              selectedMedias.length > 0 &&
+              <Fragment>
+                ({selectedMedias.length})
+              </Fragment>
+            }
           </Button>
           <Spacer />
         </DialogActions>
