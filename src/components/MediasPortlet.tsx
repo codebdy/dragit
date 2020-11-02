@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid, Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import intl from 'react-intl-universal';
@@ -29,11 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MediasPortlet = React.forwardRef((
   props: {
-    className?:any
+    className?:any,
+    cols?:number
   }, 
   ref:any
 )=>{
-  const{className, ...rest} = props;
+  const{className, cols, ...rest} = props;
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -116,22 +117,36 @@ const MediasPortlet = React.forwardRef((
       <Divider></Divider>
       <div className={classes.body}>
         <Grid container spacing={3}>
-          <Hidden smDown>
-            <MediasPortletFeathureGrid 
-              medias={medias} 
-              onSelectMedias={handleSelectedMedias}
-              onSwap = {handleSwap}
-              onRemove = {handleRemove}
-            />
-          </Hidden>
-          <Hidden mdUp>
+          {
+            cols ?
             <MediasPortletColumnsGrid 
-              medias={medias} 
-              onSelectMedias={handleSelectedMedias}
-              onSwap = {handleSwap}
-              onRemove = {handleRemove}            
-            />
-          </Hidden>
+            medias={medias}
+            cols = {cols}
+            onSelectMedias={handleSelectedMedias}
+            onSwap = {handleSwap}
+            onRemove = {handleRemove}            
+          />            
+          :
+            <Fragment>
+              <Hidden smDown>
+                <MediasPortletFeathureGrid 
+                  medias={medias} 
+                  onSelectMedias={handleSelectedMedias}
+                  onSwap = {handleSwap}
+                  onRemove = {handleRemove}
+                />
+              </Hidden>
+              <Hidden mdUp>
+                <MediasPortletColumnsGrid 
+                  medias={medias} 
+                  onSelectMedias={handleSelectedMedias}
+                  onSwap = {handleSwap}
+                  onRemove = {handleRemove}            
+                />
+              </Hidden>
+            </Fragment>
+
+          }
         </Grid>
 
       </div>
