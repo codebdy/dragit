@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import intl from 'react-intl-universal';
 import MdiIcon from './common/MdiIcon';
 import { MediaMeta } from './Medias/MediaGridListImage';
-import { exchange, mergeArray, remove } from 'ArrayHelper';
+import { add, exchange, remove } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
@@ -27,6 +27,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
+
+export function contains(node:any, array:any) {
+  for (var i = 0; i < array.length; i++) {
+      if (array[i].id === node.id) {
+          return true
+      }
+  }
+
+  return false
+}
+
+export function mergeArray(oldArray:any, newArray:any){
+  for (var i = 0; i < newArray.length; i++) {
+      if (!contains(newArray[i], oldArray) ) {
+          add(newArray[i], oldArray)
+      }
+  }
+  return [...oldArray];
+}
 
 const MediasPortlet = React.forwardRef((
   props: {
@@ -155,7 +174,16 @@ const MediasPortlet = React.forwardRef((
 
           }
         </Grid>
-        <MediasPortletAltsDialog medias={medias} open = {altsOpen} onClose={()=>setAltsOpen(false)} />
+        {
+          altsOpen && 
+          <MediasPortletAltsDialog 
+            medias={medias} 
+            open = {altsOpen} 
+            onClose={()=>setAltsOpen(false)}
+            onChange = {(medias)=>setMedias(medias)}
+          />
+        }
+        
       </div>
     </Paper>
   )

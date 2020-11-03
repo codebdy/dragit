@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Grow, AppBar, Button, Dialog, DialogActions, DialogContent, IconButton, Toolbar, Typography, FormControl, Input, InputAdornment, InputLabel, OutlinedInput, Tooltip } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import Spacer from './common/Spacer';
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:0,
       minHeight:"300px",
       flexFlow:"column",
+      minWidth:"400px",
     },
     tips:{
       padding:theme.spacing(2),
@@ -40,10 +41,11 @@ const useStyles = makeStyles((theme: Theme) =>
     imageSchell:{
       width:'80px',
       padding:theme.spacing(1),
+      paddingLeft:theme.spacing(2),
     },
     inputSchell:{
       flex:1,
-      padding:theme.spacing(0.8),
+      padding:theme.spacing(0.2),
     },
     textField: {
       width:"calc(100% - 30px)",
@@ -59,9 +61,35 @@ const Transition = React.forwardRef(function Transition(
 });
 
 
-export default function MediasPortletAltsDialog(props:{medias:Array<MediaMeta>, open:boolean, onClose:()=>void}){
-  const {medias, open, onClose} = props;
+export default function MediasPortletAltsDialog(
+  props:{
+    medias:Array<MediaMeta>, 
+    open:boolean, 
+    onClose:()=>void, 
+    onChange:(medias:Array<MediaMeta>)=>void,
+  }
+){
+  const {open, onClose, onChange} = props;
   const classes = useStyles();
+  const [medias, setMedias] = React.useState<Array<MediaMeta>>(JSON.parse(JSON.stringify(props.medias)));
+
+  const handleChange = (alt:string, media:MediaMeta)=>{
+    media.alt = alt;
+    setMedias([...medias]);
+  }
+
+  const handleCopyToAll = ()=>{
+    medias.forEach(media=>{
+      media.alt = medias[0].alt;
+    })
+    setMedias([...medias]);
+  }
+
+  const handleConfim = ()=>{
+    onChange(medias)
+    onClose();
+  }
+
   return (
     <Dialog 
       open={open} 
@@ -96,14 +124,14 @@ export default function MediasPortletAltsDialog(props:{medias:Array<MediaMeta>, 
                     <InputLabel htmlFor = {"alt-text-" + media.id}>{Intl.get("alt-text")}</InputLabel>
                     <OutlinedInput
                       id={"alt-text-" + media.id}
-                      //onChange={handleChange('password')}
+                      value={media.alt || ''}
+                      onChange={(e)=>handleChange(e.target.value as string, media)}
                       endAdornment={
                         index === 0 &&
                         <InputAdornment position="end">
                           <Tooltip title={Intl.get("copy-to-all-images")}>
                             <IconButton
-                              //onClick={handleClickShowPassword}
-                              //onMouseDown={handleMouseDownPassword}
+                              onClick={handleCopyToAll}
                               edge="end"
                             >
                               <MdiIcon iconClass="mdi-expand-all-outline"/>
@@ -125,16 +153,23 @@ export default function MediasPortletAltsDialog(props:{medias:Array<MediaMeta>, 
       </DialogContent>
       <DialogActions>
         <Spacer />
-        <Button onClick={onClose} size="large" variant="outlined">
+        <Button 
+          size="large" 
+          variant="outlined"
+          onClick={onClose}
+        >
           {Intl.get('cancel')}
         </Button>          
-        <Button  size="large" variant="contained" color="primary">
+        <Button  
+          size="large" 
+          variant="contained" 
+          color="primary"
+          onClick={handleConfim}
+        >
           {Intl.get('confirm')} 
         </Button>
         <Spacer />
       </DialogActions>
     </Dialog>      
-
-
   )
 }
