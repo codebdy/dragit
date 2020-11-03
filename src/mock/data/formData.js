@@ -4,4 +4,24 @@ export default{
   slug:'',
   auther:'悠闲地水',
   create_date:'2020-04-04',
+  medias:[
+    {
+      id:'1',
+      thumbnail: '/static/images/grid-list/breakfast.jpg',
+      title: 'Breakfast',
+      alt:'第一个',
+    },
+    {
+      id:'2',
+      thumbnail: '/static/images/grid-list/burgers.jpg',
+      title: 'Tasty burger',
+      alt:'第二个',
+    },
+    {
+      id:'3',
+      thumbnail: '/static/images/grid-list/camera.jpg',
+      title: 'Camera',
+    },
+  
+  ]
 }

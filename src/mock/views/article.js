@@ -91,6 +91,7 @@ export default {
               props: {
                 elevation: 6,
                 //cols:3,
+                field:'medias',
                },
             },
             {

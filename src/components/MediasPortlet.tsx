@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid, Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import intl from 'react-intl-universal';
@@ -49,18 +49,44 @@ export function mergeArray(oldArray:any, newArray:any){
 
 const MediasPortlet = React.forwardRef((
   props: {
+    value?:any
     className?:any,
-    cols?:number
+    cols?:number,
+    onChange:(event:any)=>void,
+    helperText?:string,
+    id?:string,
+    name?:string,
   }, 
   ref:any
 )=>{
-  const{className, cols, ...rest} = props;
+  const{value, className, cols, onChange, helperText, name, ...rest} = props;
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
+  const [medias, setMedias] = React.useState<Array<MediaMeta>>(value? value :[]);
   const [altsOpen, setAltsOpen] = React.useState(false); 
 
+  useEffect(() => {
+    setMedias(value? value :[])
+  },[value]);
+  
+  useEffect(() => {
+    if(medias !== value && !(!value && medias.length === 0)){
+      const event = {
+        persist: () => {return {}},
+        target: {
+          type: "change",
+          //id: props.id,
+          name: props.name,
+          value: medias
+        }
+      };
+ 
+      //console.log('useEffect', 'medias:', medias, 'value', value)
+      onChange && onChange(event);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[medias]);
 
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
     if (anchorRef && anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
@@ -101,6 +127,7 @@ const MediasPortlet = React.forwardRef((
   return (
     <Paper 
       ref={ref}
+      id = {name}      
       {...rest}
       className = { classNames(classes.portlet, className) }
     >
@@ -109,7 +136,7 @@ const MediasPortlet = React.forwardRef((
           {intl.get('media')}
         </Typography>
         
-        <IconButton ref={anchorRef} onClick={()=>setMenuOpen(true)} >              
+        <IconButton ref={anchorRef} onClick={()=>setMenuOpen(true)} id="setting-button">              
           <MdiIcon iconClass = "mdi-dots-vertical" />
         </IconButton>
         <Popper open={menuOpen} anchorEl={anchorRef.current} role={undefined} transition disablePortal style={{zIndex:1}}>
@@ -121,13 +148,13 @@ const MediasPortlet = React.forwardRef((
               <Paper elevation={5} >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={menuOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleEditAlts}>
+                    <MenuItem onClick={handleEditAlts} id="alts-menu-items">
                       <ListItemIcon>
                         <MdiIcon iconClass="mdi-text-recognition" />
                       </ListItemIcon>
                       <ListItemText primary={intl.get('edit-alt-text')} />
                     </MenuItem>
-                    <MenuItem onClick={handleClear}>
+                    <MenuItem onClick={handleClear} id="clear-menu-items">
                       <ListItemIcon>
                         <MdiIcon iconClass="mdi-delete-sweep-outline" />
                       </ListItemIcon>
@@ -183,7 +210,7 @@ const MediasPortlet = React.forwardRef((
             onChange = {(medias)=>setMedias(medias)}
           />
         }
-        
+        <div>{helperText}</div>
       </div>
     </Paper>
   )

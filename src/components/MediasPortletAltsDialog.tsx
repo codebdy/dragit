@@ -85,8 +85,8 @@ export default function MediasPortletAltsDialog(
     setMedias([...medias]);
   }
 
-  const handleConfim = ()=>{
-    onChange(medias)
+  const handleConfirm = ()=>{
+    onChange(medias)      
     onClose();
   }
 
@@ -97,13 +97,16 @@ export default function MediasPortletAltsDialog(
       TransitionComponent={Transition} 
       maxWidth="md"
       scroll = "paper"
+      id="alts-dialog"
     >
       <AppBar className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             {Intl.get('edit-alt-text')}
           </Typography>
-          <IconButton color="inherit" onClick={onClose} aria-label="close" className={classes.closeButton}>
+          <IconButton color="inherit" onClick={onClose} aria-label="close" className={classes.closeButton}
+            id="alt-dialog-close"
+          >
             <CloseIcon />
           </IconButton>
         </Toolbar>
@@ -125,7 +128,10 @@ export default function MediasPortletAltsDialog(
                     <OutlinedInput
                       id={"alt-text-" + media.id}
                       value={media.alt || ''}
-                      onChange={(e)=>handleChange(e.target.value as string, media)}
+                      onChange={(e)=>{
+                        console.log(e);
+                        handleChange(e.target.value as string, media)
+                      }}
                       endAdornment={
                         index === 0 &&
                         <InputAdornment position="end">
@@ -157,6 +163,7 @@ export default function MediasPortletAltsDialog(
           size="large" 
           variant="outlined"
           onClick={onClose}
+          id="alt-dialog-cancel"
         >
           {Intl.get('cancel')}
         </Button>          
@@ -164,7 +171,8 @@ export default function MediasPortletAltsDialog(
           size="large" 
           variant="contained" 
           color="primary"
-          onClick={handleConfim}
+          onClick={handleConfirm}
+          id="alt-dialog-confirm"
         >
           {Intl.get('confirm')} 
         </Button>
