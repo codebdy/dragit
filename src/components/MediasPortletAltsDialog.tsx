@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Grow, AppBar, Button, Dialog, DialogActions, DialogContent, IconButton, Toolbar, Typography, FormControl, Input, InputAdornment, InputLabel, OutlinedInput, Tooltip } from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, createStyles, Grow, AppBar, Button, Dialog, DialogActions, DialogContent, IconButton, Toolbar, Typography, FormControl, InputAdornment, InputLabel, OutlinedInput, Tooltip } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import Spacer from './common/Spacer';
 import CloseIcon from '@material-ui/icons/Close';
@@ -116,10 +116,10 @@ export default function MediasPortletAltsDialog(
           medias.map((media, index)=>{
             return(
             <div className={classes.row} key={media.id + '-row'}>
-                <div className = {classes.imageSchell}>
-                  <Image src={media.thumbnail}/>
-                </div>
-                <div className = {classes.inputSchell}>
+              <div className = {classes.imageSchell}>
+                <Image src={media.thumbnail}/>
+              </div>
+              <div className = {classes.inputSchell}>
                   <FormControl className={classNames(classes.margin, classes.textField)} variant="outlined">
                     <InputLabel htmlFor = {"alt-text-" + media.id}>{Intl.get("alt-text")}</InputLabel>
                     <OutlinedInput
@@ -145,7 +145,7 @@ export default function MediasPortletAltsDialog(
                   </FormControl>
 
                 </div>
-                </div>
+            </div>
             )
           })
 
