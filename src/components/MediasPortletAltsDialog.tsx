@@ -129,7 +129,6 @@ export default function MediasPortletAltsDialog(
                       id={"alt-text-" + media.id}
                       value={media.alt || ''}
                       onChange={(e)=>{
-                        console.log(e);
                         handleChange(e.target.value as string, media)
                       }}
                       endAdornment={

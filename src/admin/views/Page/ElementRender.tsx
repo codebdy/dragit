@@ -38,13 +38,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
       ...elementProps,
       name: field,
       value: value || '',
-      onChange:  (e:any)=>{
-        //console.log('eeee',e, e.id, e.name)
-        //解决警告 Formik called `handleChange`, but you forgot to pass an `id` or `name` attribute to your input:undefined
-        //if(e.id || e.name){
-          handleChange(e)          
-        //}
-      },
+      onChange: handleChange,
       error:   errors[field] && touched[field],
       onBlur:  (e:any)=>{
         e.target.id = field
