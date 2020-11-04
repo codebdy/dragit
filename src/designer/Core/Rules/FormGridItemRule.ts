@@ -39,7 +39,17 @@ export class FormGridItemRule extends Rule{
           name:'rows',
           label:'rows',
           input:TextInput,
-        },        
+        },
+        {
+          name:'size',
+          label:'size',
+          input:OptionSelect,
+          schema:{
+            'Medium' : 'medium',
+            'Small': 'small',
+          },
+        }
+   
       )
     }
     return [
@@ -53,6 +63,11 @@ export class FormGridItemRule extends Rule{
           'Standard' : 'standard',
         },
       },
+      {
+        name:'label',
+        label:'label',
+        input:TextInput,
+      }, 
       ...options,
       ...colWidthOptions
     ]

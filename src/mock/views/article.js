@@ -150,9 +150,9 @@ export default {
                         variant:"outlined",
                         //size:"small",
                         type:'date',
-                        //InputLabelProps:{
-                        //  shrink: true,
-                        //},
+                        InputLabelProps:{
+                          shrink: true,
+                        },
                         field:'create_date',
                         xs:6,
                       }
@@ -169,7 +169,6 @@ export default {
                         rows:5,
                         xs:12,
                       }
-
                     }
                     
                   ]

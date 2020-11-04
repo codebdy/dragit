@@ -146,5 +146,6 @@
     "title":"标题",
 
     "multiline":"多行",
-    "rows":"行数"
+    "rows":"行数",
+    "label":"标签"
 }

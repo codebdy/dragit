@@ -141,6 +141,7 @@
     "title":"Title",
 
     "multiline":"Multiline",
-    "rows":"rows"
+    "rows":"rows",
+    "label":"label"
 
 }

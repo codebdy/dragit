@@ -104,19 +104,38 @@ export default [
   {
     id:"3",
     titleKey: "form",
-    icon:"mdi-text-box",
     children:[
       {
-        id:"3-5",
+        id:"3-1",
         title:"TextField",
         meta:{
           name:"FormGridItem",
           props:{
             as:"TextField",
+            label:"TextField",
             variant:"outlined",
           }
         }
-      }, 
+      },
+      {
+        id:"3-2",
+        title:"Date",
+        meta:{
+          name: 'FormGridItem',
+          props:{
+            as:'TextField',
+            label:"Date",
+            variant:"outlined",
+            //size:"small",
+            type:'date',
+            InputLabelProps:{
+              shrink: true,
+            },
+            field:'create_date',
+            xs:6,
+          }
+        },
+      },
       {
         id:"3-6",
         title:"Button",
