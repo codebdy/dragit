@@ -25,6 +25,8 @@
     "page":"Page",
     "page-title":"Title",
     "portlet":"Portlet",
+    "portlet-body":"Portlet body",
+    "portlet-footer":"Portlet footer",    
     "medias-portlet":"Medias portlet",
 
     "page-container": "Page container",

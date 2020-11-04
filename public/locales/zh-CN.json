@@ -25,6 +25,8 @@
     "page":"页面",
     "page-title":"标题",
     "portlet":"卡片",
+    "portlet-body":"卡片内容",
+    "portlet-footer":"卡片页脚",
     "medias-portlet":"媒体卡片",
 
     "page-container": "页面容器",

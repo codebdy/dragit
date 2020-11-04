@@ -4,7 +4,7 @@ import { GridContainerRule } from "./GridContainerRule"
 import { IMeta } from "../Node/IMeta"
 import { GridItemRule } from "./GridItemRule"
 import { CanvasRule } from "./CanvasRule"
-import { FormFieldRule } from "./FormFieldRule"
+//import { FormFieldRule } from "./FormFieldRule"
 import { DividerRule } from "./DividerRule"
 import { ButtonRule } from "./ButtonRule"
 import { FormGridItemRule } from "./FormGridItemRule"
@@ -19,7 +19,7 @@ const rules:Array<IRule> = [
   new CanvasRule(),
   new GridContainerRule(),
   new GridItemRule(),
-  new FormFieldRule(),
+  //new FormFieldRule(),
   new DividerRule(),
   new ButtonRule(),
   new FormGridItemRule(),

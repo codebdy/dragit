@@ -150,9 +150,9 @@ export default {
                         variant:"outlined",
                         //size:"small",
                         type:'date',
-                        InputLabelProps:{
-                          shrink: true,
-                        },
+                        //InputLabelProps:{
+                        //  shrink: true,
+                        //},
                         field:'create_date',
                         xs:6,
                       }
@@ -225,7 +225,21 @@ export default {
             md: 4,
           },
           children: [
-            
+            {
+              name:'Portlet',
+              props: {
+                elevation: 6,
+                open:true,
+                withHeader:true,
+                title:'显示',
+                collapsible: true,
+              },
+              children:[
+                {
+                  name:"PortletFormGridBody",
+                }
+              ]
+            }
           ]
         }
       ]

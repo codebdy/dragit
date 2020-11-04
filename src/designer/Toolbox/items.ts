@@ -76,6 +76,20 @@ export default [
       },  
       {
         id:"2-3",
+        titleKey:"portlet-body",
+        meta:      {
+          name:'PortletFormGridBody',
+        }
+      },
+      {
+        id:"2-3",
+        titleKey:"portlet-footer",
+        meta:      {
+          name:'PortletFooter',
+        }
+      },
+      {
+        id:"2-5",
         titleKey:"medias-portlet",
         meta:      {
           name:'MediasPortlet',
@@ -84,7 +98,7 @@ export default [
             //spacingTop:2,              
           },
         }
-      }
+      },
     ]
   },
   {
