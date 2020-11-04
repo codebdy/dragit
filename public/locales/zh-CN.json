@@ -126,5 +126,13 @@
     "delete-all-medias":"删除所有媒体",
     "alt-edit-tips":"为图片添加Alt文本， 以提高在搜索引擎中的表现，注意每个图片的文本是唯一的。",
     "copy-to-all-images":"复制到所有图片",
-    "alt-text":"Alt文本"
+    "alt-text":"Alt文本",
+
+    "cols":"列数",
+    "elevation":"海拔阴影",
+    "open":"展开",
+    "spacing-top":"上边距",
+    "spacing-right":"右边距",
+    "spacing-bottom":"下边距",
+    "spacing-left":"左边距"
 }

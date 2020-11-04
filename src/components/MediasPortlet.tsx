@@ -8,6 +8,7 @@ import { add, exchange, remove } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
+import { makeSpaceStyle } from './Util';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,15 +57,35 @@ const MediasPortlet = React.forwardRef((
     helperText?:string,
     id?:string,
     name?:string,
+    spacingTop?:number,
+    spacingRight?:number,
+    spacingBottom?:number,
+    spacingLeft?:number,
+    style?:any,
   }, 
   ref:any
 )=>{
-  const{value, className, cols, onChange, helperText, name, ...rest} = props;
+  const{value, className, cols, onChange, helperText, name,
+    style,
+    spacingTop,
+    spacingRight,
+    spacingBottom,
+    spacingLeft,
+     ...rest
+  } = props;
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<MediaMeta>>(value? value :[]);
   const [altsOpen, setAltsOpen] = React.useState(false); 
+
+  const mergedStyle = {
+    ...style,
+    marginTop : makeSpaceStyle(spacingTop),
+    marginRight : makeSpaceStyle(spacingRight),
+    marginBottom : makeSpaceStyle(spacingBottom),
+    marginLeft : makeSpaceStyle(spacingLeft),    
+  }
 
   useEffect(() => {
     setMedias(value? value :[])
@@ -127,7 +148,8 @@ const MediasPortlet = React.forwardRef((
   return (
     <Paper 
       ref={ref}
-      id = {name}      
+      id = {name}
+      style={mergedStyle}      
       {...rest}
       className = { classNames(classes.portlet, className) }
     >

@@ -121,6 +121,14 @@
     "delete-all-medias":"Remove All Medias",
     "alt-edit-tips":"Add alt text to image, please ensure every alt is unique.",
     "copy-to-all-images":"Copy to all images",
-    "alt-text":"Alt text"
+    "alt-text":"Alt text",
+
+    "cols":"Columns",
+    "elevation":"Elevation",
+    "open":"Open",
+    "spacing-top":"Top Spacing",
+    "spacing-right":"Right Spacing",
+    "spacing-bottom":"Bottom Spacing",
+    "spacing-left":"Left Spacing"
 
 }

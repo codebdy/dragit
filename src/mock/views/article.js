@@ -92,6 +92,7 @@ export default {
                 elevation: 6,
                 //cols:3,
                 field:'medias',
+                //spacingTop:2,  
                },
             },
             {
@@ -102,9 +103,8 @@ export default {
                 withHeader:true,
                 title:'基本信息',
                 scalable: true,
-                style:{
-                  marginTop:'16px',
-                },              },
+                spacingTop:2,              
+              },
               children:[
                 {
                   name:'PortletFormGridBody',
