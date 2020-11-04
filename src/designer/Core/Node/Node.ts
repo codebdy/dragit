@@ -60,13 +60,14 @@ export class Node implements INode{
   }
 
   get props(){
+    const hasChildren = this.children.length === 0 && !this.meta?.props?.rxText
     const paddingX={
-      paddingLeft : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingX,
-      paddingRight : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingX,    
+      paddingLeft : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingX,
+      paddingRight : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingX,    
     }
     const paddingY={
-      paddingTop : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingY,
-      paddingBottom : this.children.length === 0 ? this.rule.empertyPadding : this.rule.editPaddingY,
+      paddingTop : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingY,
+      paddingBottom : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingY,
     }
     return {
       ...this.meta.props,      

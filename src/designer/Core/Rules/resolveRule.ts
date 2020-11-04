@@ -15,6 +15,7 @@ import { PortletFormGridBodyRule } from "./PortletFormGridBodyRule"
 import { TypographyRule } from "./TypographyRule"
 import { ListViewRule } from "./ListViewRule"
 import {MediasPortletRule} from "./MediasPortletRule"
+import {HeadRule} from "./HeadRule"
 
 const rules:Array<IRule> = [
   new CanvasRule(),
@@ -31,6 +32,7 @@ const rules:Array<IRule> = [
   new TypographyRule(),
   new ListViewRule(),
   new MediasPortletRule(),
+  new HeadRule(),
 ];
 
 const baseRule = new Rule();

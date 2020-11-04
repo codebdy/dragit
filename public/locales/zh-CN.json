@@ -22,6 +22,8 @@
     "customized": "自定义",
     "component-box": "组件箱",
     "layout": "布局",
+    "page":"页面",
+    "page-title":"页面标题",
 
     "page-container": "页面容器",
     "row": "行",

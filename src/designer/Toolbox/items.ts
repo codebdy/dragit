@@ -38,11 +38,40 @@ export default [
   },
   {
     id:"2",
+    titleKey: "page",
+    children:[
+      {
+        id:"2-1",
+        titleKey:"page-title",
+        meta:{
+          name:"h2",
+          props:{
+            rxText:'Page title',
+          }
+        }
+      },  
+      {
+        id:"2-3",
+        titleKey:"column",
+        meta:{
+          name:"Grid",
+          props:{
+            item:true,
+            xs:12,
+            md:true,
+          },
+        }
+      },  
+  
+    ]
+  },
+  {
+    id:"3",
     titleKey: "form",
     icon:"mdi-text-box",
     children:[
       {
-        id:"2-1",
+        id:"3-1",
         title:"Card",
         meta:{
           name:"Card",
@@ -66,7 +95,7 @@ export default [
         }
       },  
       {
-        id:"2-2",
+        id:"3-2",
         title:"Card Header",
         meta:{
           name:"CardHeader",
@@ -76,7 +105,7 @@ export default [
         }
       },  
       {
-        id:"2-3",
+        id:"3-3",
         title:"Card Content",
         meta:{
           name:"CardContent",
@@ -85,7 +114,7 @@ export default [
         }
       },  
       {
-        id:"2-4",
+        id:"3-4",
         title:"Card Actions",
         meta:{
           name:"CardActions",
@@ -94,7 +123,7 @@ export default [
         }
       }, 
       {
-        id:"2-5",
+        id:"3-5",
         title:"TextField",
         meta:{
           name:"FormField",
@@ -105,7 +134,7 @@ export default [
         }
       }, 
       {
-        id:"2-6",
+        id:"3-6",
         title:"Button",
         meta:{
           name:"Button",          
@@ -116,7 +145,7 @@ export default [
         }
       }, 
       {
-        id:"2-7",
+        id:"3-7",
         title:"Typography",
         meta:{
           name:"Typography",
@@ -130,12 +159,12 @@ export default [
   },
 
   {
-    id:"3",
+    id:"4",
     titleKey: "relations",
     icon:"mdi-relation-many-to-many",
   },
   {
-    id:"4",
+    id:"5",
     titleKey: "customized",
     icon:"mdi-puzzle",
   },

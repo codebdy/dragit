@@ -22,6 +22,8 @@
     "customized": "Customized",
     "component-box": "Component box",
     "layout": "Layout",
+    "page":"Page",
+    "page-title":"Page title",
 
     "page-container": "Page container",
     "row": "Row",
