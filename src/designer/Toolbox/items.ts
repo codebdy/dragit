@@ -74,7 +74,17 @@ export default [
           ]
         },
       },  
-  
+      {
+        id:"2-3",
+        titleKey:"medias-portlet",
+        meta:      {
+          name:'MediasPortlet',
+          props: {
+            elevation: 6,
+            //spacingTop:2,              
+          },
+        }
+      }
     ]
   },
   {

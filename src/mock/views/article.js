@@ -225,21 +225,6 @@ export default {
             md: 4,
           },
           children: [
-            {
-              name: 'Card',
-              props: {
-                elevation: 6,
-               },
-               children: [
-                {
-                  name: 'CardHeader',
-                  props: {
-                    title: '显示',
-                  }
-  
-                },
-              ],
-            },
             
           ]
         }

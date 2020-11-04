@@ -4,6 +4,7 @@ import { INode } from "../Node/INode";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 import { IField } from "./IRule";
 import StyledTextInput from "designer/Attrebutebox/Inputs/StyledTextInput";
+import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 
 export class MediasPortletRule extends Rule{
   editPaddingY = '';
@@ -22,12 +23,7 @@ export class MediasPortletRule extends Rule{
       {
         name:'cols',
         label:'cols',
-        input:StyledTextInput,
-        schema:{
-          max:6,
-          min:1,
-          step:1        
-        }
+        input:TextInput,
       },
       {
         name:'spacingTop',
