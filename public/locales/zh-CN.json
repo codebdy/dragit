@@ -23,7 +23,8 @@
     "component-box": "组件箱",
     "layout": "布局",
     "page":"页面",
-    "page-title":"页面标题",
+    "page-title":"标题",
+    "portlet":"卡片",
 
     "page-container": "页面容器",
     "row": "行",
@@ -132,9 +133,12 @@
 
     "cols":"列数",
     "elevation":"海拔阴影",
-    "open":"展开",
+    "defalut-open":"展开",
+    "collapsible":"可折叠",
     "spacing-top":"上边距",
     "spacing-right":"右边距",
     "spacing-bottom":"下边距",
-    "spacing-left":"左边距"
+    "spacing-left":"左边距",
+    "with-header":"显示标题",
+    "title":"标题"
 }

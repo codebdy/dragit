@@ -23,7 +23,8 @@
     "component-box": "Component box",
     "layout": "Layout",
     "page":"Page",
-    "page-title":"Page title",
+    "page-title":"Title",
+    "portlet":"Portlet",
 
     "page-container": "Page container",
     "row": "Row",
@@ -127,10 +128,13 @@
 
     "cols":"Columns",
     "elevation":"Elevation",
-    "open":"Open",
+    "defalut-open":"Default open",
+    "collapsible":"Collapsible",
     "spacing-top":"Top Spacing",
     "spacing-right":"Right Spacing",
     "spacing-bottom":"Bottom Spacing",
-    "spacing-left":"Left Spacing"
+    "spacing-left":"Left Spacing",
+    "with-header":"with-header",
+    "title":"Title"
 
 }

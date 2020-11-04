@@ -102,7 +102,7 @@ export default {
                 open:true,
                 withHeader:true,
                 title:'基本信息',
-                scalable: true,
+                collapsible: true,
                 spacingTop:2,              
               },
               children:[

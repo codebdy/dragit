@@ -51,16 +51,28 @@ export default [
         }
       },  
       {
-        id:"2-3",
-        titleKey:"column",
-        meta:{
-          name:"Grid",
-          props:{
-            item:true,
-            xs:12,
-            md:true,
+        id:"2-2",
+        titleKey:"portlet",
+        meta:      {
+          name:'Portlet',
+          props: {
+            elevation: 6,
+            open:true,
+            withHeader:true,
+            title:'Portlet',
+            collapsible: true,
+            spacingTop:2,              
           },
-        }
+          children:[
+            {
+              name:'PortletFormGridBody',
+            },
+            {
+              name:'PortletFooter',
+              text:'Footer',
+            }
+          ]
+        },
       },  
   
     ]
@@ -71,62 +83,10 @@ export default [
     icon:"mdi-text-box",
     children:[
       {
-        id:"3-1",
-        title:"Card",
-        meta:{
-          name:"Card",
-          props:{
-            elevation: 6,
-            style:{
-              //marginTop: '16px',
-            }
-          },
-          children:[
-            {
-              name:"CardHeader",
-              props:{
-                title:'Form Card',
-              }          
-            },
-            {
-              name:"CardContent",
-            }
-          ]          
-        }
-      },  
-      {
-        id:"3-2",
-        title:"Card Header",
-        meta:{
-          name:"CardHeader",
-          props:{
-            title:'Card Header',
-          }          
-        }
-      },  
-      {
-        id:"3-3",
-        title:"Card Content",
-        meta:{
-          name:"CardContent",
-          props:{
-          }          
-        }
-      },  
-      {
-        id:"3-4",
-        title:"Card Actions",
-        meta:{
-          name:"CardActions",
-          props:{
-          }          
-        }
-      }, 
-      {
         id:"3-5",
         title:"TextField",
         meta:{
-          name:"FormField",
+          name:"FormGridItem",
           props:{
             as:"TextField",
             variant:"outlined",

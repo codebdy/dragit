@@ -3,9 +3,7 @@ import { IRule } from "./IRule"
 import { GridContainerRule } from "./GridContainerRule"
 import { IMeta } from "../Node/IMeta"
 import { GridItemRule } from "./GridItemRule"
-import { CardRule } from "./CardRule"
 import { CanvasRule } from "./CanvasRule"
-import { CardHaderRule } from "./CardHeaderRule"
 import { FormFieldRule } from "./FormFieldRule"
 import { DividerRule } from "./DividerRule"
 import { ButtonRule } from "./ButtonRule"
@@ -21,8 +19,6 @@ const rules:Array<IRule> = [
   new CanvasRule(),
   new GridContainerRule(),
   new GridItemRule(),
-  new CardRule(),
-  new CardHaderRule(),
   new FormFieldRule(),
   new DividerRule(),
   new ButtonRule(),

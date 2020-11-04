@@ -45,7 +45,7 @@ interface PortletProps{
   children?:any;
   open?:boolean;
   title?:string;
-  scalable?:boolean;
+  collapsible?:boolean;
   className?:any;
   spacingTop?:number;
   spacingRight?:number;
@@ -56,7 +56,7 @@ interface PortletProps{
 
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open,withHeader, children, title, scalable, className, 
+  const {open,withHeader, children, title, collapsible, className, 
     style,
     spacingTop,
     spacingRight,
@@ -81,7 +81,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   //以前用height，用maxHeight解决页面迁移时，高度计算不准的bug
   let maxHeight = bodyInnerRef?.current ? (bodyInnerRef?.current as any).getBoundingClientRect().height + 200 + 'px': '';
 
-  maxHeight = scalable ? (opened ? maxHeight : '0px') : 'auto';
+  maxHeight = collapsible ? (opened ? maxHeight : '0px') : 'auto';
 
   return (
     <Paper
@@ -97,8 +97,8 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
               {title}
             </Typography>
             {
-              scalable &&
-              <IconButton onClick ={hendleClickChevronIcon} style={{zIndex:0}} >              
+              collapsible &&
+              <IconButton onClick ={hendleClickChevronIcon} style={{zIndex:0}} size="small" >              
                 <ChevronRightIcon 
                   className={
                     classNames(classes.indicator,  {[classes.opened] : opened})

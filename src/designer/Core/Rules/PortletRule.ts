@@ -4,6 +4,7 @@ import { INode } from "../Node/INode";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 import { IField } from "./IRule";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
+import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 
 export class PortletRule extends Rule{
 
@@ -24,8 +25,13 @@ export class PortletRule extends Rule{
   getFields(): Array<IField>{
     return [
       {
+        name:'collapsible',
+        label:'collapsible',
+        input:SwitchInput,
+      },      
+      {
         name:'open',
-        label:'open',
+        label:'defalut-open',
         input:SwitchInput,
       },      
       {
@@ -79,7 +85,16 @@ export class PortletRule extends Rule{
           step:1
         }
       },
-
+      {
+        name:'withHeader',
+        label:'with-header',
+        input:SwitchInput,
+      }, 
+      {
+        name:'title',
+        label:'title',
+        input:TextInput,
+      },
     ]
   }
 

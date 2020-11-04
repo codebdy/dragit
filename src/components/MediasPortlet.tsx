@@ -158,7 +158,7 @@ const MediasPortlet = React.forwardRef((
           {intl.get('media')}
         </Typography>
         
-        <IconButton ref={anchorRef} onClick={()=>setMenuOpen(true)} id="setting-button">              
+        <IconButton ref={anchorRef} onClick={()=>setMenuOpen(true)} id="setting-button"  size="small">              
           <MdiIcon iconClass = "mdi-dots-vertical" />
         </IconButton>
         <Popper open={menuOpen} anchorEl={anchorRef.current} role={undefined} transition disablePortal style={{zIndex:1}}>
