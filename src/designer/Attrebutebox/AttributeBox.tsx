@@ -82,7 +82,7 @@ export default function AttributeBox(props:{node:INode|null, fields:Array<any>})
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.pannelDetail}>
               {
-                node.rule.getFields().map((field:IField)=>{
+                node.rule.getFields(node.meta).map((field:IField)=>{
                   return(
                     <AttributeRow key={node.id + '-' + field.name}>
                       <RowLabel>{intl.get(field.label)||field.label}</RowLabel>

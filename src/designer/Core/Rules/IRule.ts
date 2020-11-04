@@ -20,7 +20,7 @@ export interface IRule{
   resolveLabel: (meta:IMeta)=>string|undefined;
 
   //属性字段
-  getFields: ()=>Array<IField>;
+  getFields: (meta?:IMeta)=>Array<IField>;
 
   //动作
   hasAction?:boolean;

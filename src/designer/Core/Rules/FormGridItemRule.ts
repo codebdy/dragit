@@ -4,6 +4,8 @@ import { IMeta } from "../Node/IMeta";
 import { IField } from "./IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import { colWidthOptions } from "./GridItemRule";
+import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
+import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 
 export class FormGridItemRule extends Rule{
   editPaddingY = '';
@@ -23,7 +25,23 @@ export class FormGridItemRule extends Rule{
     return 'Form item:' + meta.props?.as;
   }
 
-  getFields(): Array<IField>{
+  getFields(meta?:IMeta): Array<IField>{
+    let options:Array<IField> = []
+    
+    if(meta?.props?.as === "TextField"){
+      options.push(
+        {
+          name:'multiline',
+          label:'multiline',
+          input:SwitchInput,
+        },
+        {
+          name:'rows',
+          label:'rows',
+          input:TextInput,
+        },        
+      )
+    }
     return [
       {
         name:'variant',
@@ -35,6 +53,7 @@ export class FormGridItemRule extends Rule{
           'Standard' : 'standard',
         },
       },
+      ...options,
       ...colWidthOptions
     ]
   }

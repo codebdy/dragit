@@ -138,6 +138,9 @@
     "spacing-bottom":"Bottom Spacing",
     "spacing-left":"Left Spacing",
     "with-header":"with-header",
-    "title":"Title"
+    "title":"Title",
+
+    "multiline":"Multiline",
+    "rows":"rows"
 
 }

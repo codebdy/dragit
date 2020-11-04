@@ -143,5 +143,8 @@
     "spacing-bottom":"下边距",
     "spacing-left":"左边距",
     "with-header":"显示标题",
-    "title":"标题"
+    "title":"标题",
+
+    "multiline":"多行",
+    "rows":"行数"
 }
