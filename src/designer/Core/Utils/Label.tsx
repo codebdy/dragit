@@ -2,6 +2,8 @@ import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { INode } from '../Node/INode';
 import bus, { CANVAS_SCROLL } from '../bus';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +28,9 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
   const [following, setFollowing] = React.useState<INode|undefined>(undefined);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-
+  const selectMyStore = (state: RootState) => state.designer
+  const myStore = useSelector(selectMyStore)
+  
   const doFollow = (node:INode|undefined)=>{
     let domElement = node?.view?.getDom()
     if(!domElement){
@@ -64,6 +68,11 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
       window.removeEventListener('resize', hangdePositionChange)
      };
   });
+
+  useEffect(() => {
+    hangdePositionChange();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[myStore.showPaddingX, myStore.showPaddingY]);
 
   return (
     <Fragment>
