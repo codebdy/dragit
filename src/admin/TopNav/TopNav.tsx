@@ -10,7 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
-import { Hidden } from '@material-ui/core';
+import { Hidden, Link } from '@material-ui/core';
 import classNames from 'classnames';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
@@ -108,9 +108,9 @@ export default function TopNav(props:{onSidebarToggle: any}) {
           </Hidden>
           <div className={classes.grow} />
           
-          <IconButton aria-label="show 4 new mails" color="inherit">
-            <MdiIcon iconClass = "mdi-github"/>
-          </IconButton>
+          <a href="https://github.com/rxwater/dragit" target="_blank" rel="noopener noreferrer">
+            <MdiIcon iconClass = "mdi-github" color="#fff"/>
+          </a>
           <IconButton aria-label="show 17 new notifications" color="inherit">
             <Badge badgeContent={17} color="secondary">
             <MdiIcon iconClass = "mdi-bell-outline"/>
