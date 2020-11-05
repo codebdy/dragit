@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
@@ -250,10 +250,15 @@ export default function PageContentDesign() {
           </Scrollbar>
         </div>
       </div>
-      <FocusLabel />
-      <NodeToolbar />
-      <ActiveLabel />
-      <MouseFollower />
+      {
+        myStore.pageContentDesign && 
+        <Fragment>
+          <FocusLabel />
+          <NodeToolbar />
+          <ActiveLabel />
+          <MouseFollower />
+        </Fragment>
+      }
     </Backdrop>
   );
 }
