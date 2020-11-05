@@ -14,6 +14,8 @@ import PageContentDesign from 'designer/PageContentDesign';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
 import SuccessAlertBar from './SuccessAlertBar';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +43,8 @@ const sidebarTheme1 = createSidebarTheme({
 
 export default function Layout(){
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const selectMyStore = (state: RootState) => state.designer
+  const myStore = useSelector(selectMyStore)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -74,7 +78,7 @@ export default function Layout(){
         </PageContent>
       </div>
       <AreaSelect></AreaSelect>
-      <PageContentDesign></PageContentDesign>
+      {myStore.pageContentDesign && <PageContentDesign></PageContentDesign>}
       <FixedBar />
       <SuccessAlertBar />
     </div>

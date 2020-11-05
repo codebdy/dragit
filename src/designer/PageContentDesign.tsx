@@ -244,14 +244,12 @@ export default function PageContentDesign() {
         </ThemeProvider>
         <div className={classNames(classes.pageContentArea) }>
           <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-            {myStore.pageContentDesign &&
               <NodeView node={canvas} />
-            }
           </Scrollbar>
         </div>
       </div>
       {
-        myStore.pageContentDesign && 
+     
         <Fragment>
           <FocusLabel />
           <NodeToolbar />
