@@ -34,6 +34,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
   const value = field && values && values[field];
 
   if(field){
+    let errorMsg = (errors[field] && touched[field]) && errors[field];
     elementProps = {
       ...elementProps,
       name: field,
@@ -45,7 +46,7 @@ export default function ElementRender(props:{element:RXElement, formik:any, onPa
         handleBlur(e)
       }
       ,
-      helperText: (errors[field] && touched[field]) && errors[field],
+      helperText: errorMsg? errorMsg : metaProps.helperText,
     }
   }
   if(withActions){

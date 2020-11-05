@@ -127,6 +127,7 @@ export default {
                         variant:"outlined",
                         //size:"small",
                         field:'slug',
+                        //required:true,
                         xs:12,                      
                       }
                     },
@@ -140,6 +141,20 @@ export default {
                         //select: true,
                         field:'auther',
                         xs:6,
+                        helperText:'作者提示'
+                      }
+                    },
+                    {
+                      name: 'FormGridItem',
+                      props:{
+                        as:'SelectInput',
+                        label:"分类",
+                        variant:"outlined",
+                        //size:"small",
+                        field:'category',
+                        xs:6,
+                        //required:true,
+                        helperText:'请选择分类',
                       }
                     },
                     {
@@ -259,6 +274,13 @@ export default {
     },
     {
       name:'slug',
+      rule:{
+        valueType:'string',
+        required:true,
+      }
+    },
+    {
+      name:'category',
       rule:{
         valueType:'string',
         required:true,

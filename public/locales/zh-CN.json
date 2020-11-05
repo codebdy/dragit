@@ -151,6 +151,6 @@
     "text-field":"文本框",
     "date":"日期",
     "button":"按钮",
-    "typography":"文字"
-
+    "typography":"文字",
+    "helper-text":"提示文字"
 }

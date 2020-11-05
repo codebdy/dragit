@@ -4,6 +4,7 @@ export default{
   slug:'',
   auther:'悠闲地水',
   create_date:'2020-04-04',
+  category:'',
   medias:[
     {
       id:'1',

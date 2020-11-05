@@ -146,6 +146,7 @@
     "text-field":"TextField",
     "date":"Date",
     "button":"Button",
-    "typography":"Typography"
+    "typography":"Typography",
+    "helper-text":"Helper text"
 
 }

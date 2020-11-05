@@ -75,7 +75,7 @@ export default function PageView(props:{match: any }) {
           validationSchema = {
             contructRuleSchema(pageInStore.pageJson?.fields)
           } 
-          withoutForm = {pageInStore.pageJson?.withoutForm}
+          //withoutForm = {pageInStore.pageJson?.withoutForm}
         >
           {(props: any, onPageAction: PageActionHandle)=>(
             pageInStore.schema?.map((child:RXElement)=>{

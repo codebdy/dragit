@@ -68,8 +68,18 @@ export class FormGridItemRule extends Rule{
         label:'label',
         input:TextInput,
       }, 
+      {
+        name:'required',
+        label:'required',
+        input:SwitchInput,
+      },
       ...options,
-      ...colWidthOptions
+      ...colWidthOptions,
+      {
+        name:'helperText',
+        label:'helper-text',
+        input:TextInput,
+      }
     ]
   }
 
