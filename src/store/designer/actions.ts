@@ -7,10 +7,17 @@ const designPageContentAction = createAction('DESIGN_PAGE_CONTENT');
 const savePageContentAction = createAction('SAVE_PAGE_CONTENT');
 const cancelPageContentAction = createAction('CANCEL_DESIGN_PAGE_CONTENT');
 
+const showOutlineActon = createAction('SHOW_OUT_LINE');
+const showPaddingXActon = createAction('SHOW_PADDING_X');
+const showPaddingYActon = createAction('SHOW_PADDING_Y');
+
 export {
   closeAreaSelectAction,
   openAreaSelectAction,
   designPageContentAction,
   savePageContentAction,
   cancelPageContentAction,
+  showOutlineActon,
+  showPaddingXActon,
+  showPaddingYActon
 };

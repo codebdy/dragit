@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider, IconButton } from '@material-ui/core';
+import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,7 +11,7 @@ import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
-import { cancelPageContentAction, savePageContentAction } from 'store/designer/actions';
+import { cancelPageContentAction, savePageContentAction, showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
 //import { Schema } from './Core/Schemas/Schema';
@@ -92,6 +92,26 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       flexFlow: 'column',
     },
+
+    toolbarButton:{
+      display:'flex',
+      alignItems:'center',
+      justifyContent:'center',
+      width:'40px',
+      height:'40px',
+      borderRadius:'3px',
+      margin:'1px',
+      "&:hover":{
+        background:"rgba(255,255,255, 0.1)",
+      },
+      cursor:"pointer",
+    },
+    checkedButton:{
+      background:"rgba(255,255,255, 0.15)",
+      "&:hover":{
+        background:"rgba(255,255,255, 0.2)",
+      },
+    }
   }),
 );
 
@@ -107,10 +127,24 @@ const darkTheme = responsiveFontSizes(createMuiTheme({
   },
 }));
 
+export function ToolbarIcon(props:{checked?:boolean, onClick?:()=>void, children?:any}){
+  const{checked, onClick, children} = props;
+  const classes = useStyles();
+
+  return (
+    <div className={ classNames(classes.toolbarButton, {[classes.checkedButton]:checked}) }
+      onClick = {onClick}
+    >
+      {children}
+    </div>
+  )
+}
+
 export default function PageContentDesign() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)
+  const{showOutline, showPaddingX, showPaddingY} = myStore;
   //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(myStore.pageJson?.layout);
   let canvas = new CanvasNode(nodes);
@@ -158,33 +192,47 @@ export default function PageContentDesign() {
       >
         <ThemeProvider theme={darkTheme}>
           <TopNavHeightPlaceholder className={classes.toolbar}>
-            <IconButton>
+            <ToolbarIcon>
               <MdiIcon iconClass="mdi-layers-outline"/>
-            </IconButton>
-            <IconButton>
-              <MdiIcon iconClass="mdi-dock-bottom"/>
-            </IconButton>
-            <IconButton>
+            </ToolbarIcon>
+            <ToolbarIcon>
+              <MdiIcon iconClass="mdi-file-cog-outline"/>
+            </ToolbarIcon>
+            {//<ToolbarIcon>
+             // <MdiIcon iconClass="mdi-dock-bottom"/>
+              //</ToolbarIcon>
+            }
+            <ToolbarIcon 
+              checked={showOutline}
+              onClick = {()=>{
+                dispatch(showOutlineActon(!showOutline))
+              }}
+            >
               <MdiIcon iconClass="mdi-border-none-variant"/>
-            </IconButton>
-            <IconButton>
+            </ToolbarIcon>
+            <ToolbarIcon checked={showPaddingX}
+              onClick = {()=>{
+                dispatch(showPaddingXActon(!showPaddingX))
+              }}
+            >
               <MdiIcon iconClass="mdi-arrow-expand-horizontal"/>
-            </IconButton>
-            <IconButton>
+            </ToolbarIcon>
+            <ToolbarIcon checked={showPaddingY}
+              onClick = {()=>{
+                dispatch(showPaddingYActon(!showPaddingY))
+              }}
+              >
               <MdiIcon iconClass="mdi-arrow-expand-vertical"/>
-            </IconButton>
-            <IconButton>
-              <MdiIcon iconClass="mdi-eye-outline"/>
-            </IconButton>
-            <IconButton>
+            </ToolbarIcon>
+            <ToolbarIcon>
               <MdiIcon iconClass="mdi-undo"/>
-            </IconButton>
-            <IconButton>
+            </ToolbarIcon>
+            <ToolbarIcon>
               <MdiIcon iconClass="mdi-redo"/>
-            </IconButton>
-            <IconButton>
+            </ToolbarIcon>
+            <ToolbarIcon>
               <MdiIcon iconClass="mdi-delete-outline"/>
-            </IconButton>
+            </ToolbarIcon>
             <Spacer></Spacer>
             <Button onClick={handleCancel} className = {classes.cancelButton}>
               {intl.get('cancel')}

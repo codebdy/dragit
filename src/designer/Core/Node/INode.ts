@@ -18,6 +18,12 @@ export interface INode{
   parent?: INode;
   children: Array<INode>;
 
+  getProps:(
+    showOutline?:boolean, 
+    showPaddingX?:boolean,
+    showPaddingY?:boolean,
+  )=>{[key: string]:any};
+
   accept: (child:INode)=>boolean;
 
   toNormalState: ()=>void;

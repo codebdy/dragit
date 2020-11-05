@@ -59,20 +59,24 @@ export class Node implements INode{
     return this.rule.resolveLabel(this.meta);
   }
 
-  get props(){
+  getProps(    
+    showOutline?:boolean, 
+    showPaddingX?:boolean,
+    showPaddingY?:boolean,
+  ){
     const hasChildren = this.children.length === 0 && !this.meta?.props?.rxText
     const paddingX={
-      paddingLeft : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingX,
-      paddingRight : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingX,    
+      paddingLeft : hasChildren ? this.rule.empertyPadding : showPaddingX && this.rule.editPaddingX,
+      paddingRight : hasChildren ? this.rule.empertyPadding : showPaddingX && this.rule.editPaddingX,    
     }
     const paddingY={
-      paddingTop : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingY,
-      paddingBottom : hasChildren ? this.rule.empertyPadding : this.rule.editPaddingY,
+      paddingTop : hasChildren ? this.rule.empertyPadding : showPaddingY && this.rule.editPaddingY,
+      paddingBottom : hasChildren ? this.rule.empertyPadding : showPaddingY && this.rule.editPaddingY,
     }
     return {
       ...this.meta.props,      
       style:this.meta.props?.style,
-      editClassName:'drag-node-outline ' + this.state.className,
+      editClassName: showOutline?'drag-node-outline ':'' + this.state.className,
       editStyle:{
         ...paddingX,
         ...paddingY,
@@ -83,6 +87,11 @@ export class Node implements INode{
       onMouseOut : this.handleMouseOut,
       onClick : this.handleClick,
     };
+
+  }
+
+  get props(){
+    return this.getProps()
   }
 
   accept(child:INode){

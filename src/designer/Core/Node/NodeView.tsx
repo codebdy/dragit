@@ -4,6 +4,8 @@ import { resolveNode } from "../../../components/resoveNode"
 import bus, {WILL_FOCUS_NODE } from "../bus";
 import { INode } from './INode';
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 interface INodeProps{
   node: INode,
@@ -13,19 +15,20 @@ interface INodeProps{
 export default function NodeView(props:INodeProps){
   const {node} = props;
 
-  const [nodeProps, setNodeProps] = React.useState(node.props);
   const [children, setChildren] = React.useState(node.children);
-
-  const {style, editStyle, className, editClassName, rxText, withActions, ...rest} = nodeProps;
-
+  
+  const selectMyStore = (state: RootState) => state.designer
+  const myStore = useSelector(selectMyStore)
   const nodeEl = useRef(null);
 
   const getDom = ()=>{
     return nodeEl.current;
   }
 
+  const nodeProps = node.getProps(myStore.showOutline, myStore.showPaddingX, myStore.showPaddingY);
+  const {style, editStyle, className, editClassName, rxText, withActions, ...rest} = nodeProps;
+
   const refresh = ()=>{
-    setNodeProps({...node.props});
     setChildren([...node.children]);
   }
 
