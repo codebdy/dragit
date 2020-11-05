@@ -82,7 +82,7 @@ export default [
         }
       },
       {
-        id:"2-3",
+        id:"2-4",
         titleKey:"portlet-footer",
         meta:      {
           name:'PortletFooter',
@@ -107,7 +107,7 @@ export default [
     children:[
       {
         id:"3-1",
-        title:"TextField",
+        titleKey:"text-field",
         meta:{
           name:"FormGridItem",
           props:{
@@ -119,7 +119,7 @@ export default [
       },
       {
         id:"3-2",
-        title:"Date",
+        titleKey:"date",
         meta:{
           name: 'FormGridItem',
           props:{
@@ -138,7 +138,7 @@ export default [
       },
       {
         id:"3-6",
-        title:"Button",
+        titleKey:"button",
         meta:{
           name:"Button",          
           props:{
@@ -149,7 +149,7 @@ export default [
       }, 
       {
         id:"3-7",
-        title:"Typography",
+        titleKey:"typography",
         meta:{
           name:"Typography",
           props:{

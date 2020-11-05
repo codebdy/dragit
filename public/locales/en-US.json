@@ -142,6 +142,10 @@
 
     "multiline":"Multiline",
     "rows":"rows",
-    "label":"label"
+    "label":"label",
+    "text-field":"TextField",
+    "date":"Date",
+    "button":"Button",
+    "typography":"Typography"
 
 }

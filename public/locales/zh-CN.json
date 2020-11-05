@@ -147,5 +147,10 @@
 
     "multiline":"多行",
     "rows":"行数",
-    "label":"标签"
+    "label":"标签",
+    "text-field":"文本框",
+    "date":"日期",
+    "button":"按钮",
+    "typography":"文字"
+
 }
