@@ -55,6 +55,9 @@ export default function NodeToolbar(){
   const sidebar = useSelector(selectSidebar)  
   
   const sideBarWidth = sideBarSettings.sizes[sidebar.size]
+  
+  const selectMyStore = (state: RootState) => state.designer
+  const myStore = useSelector(selectMyStore)
 
   const doFollow = (node?:INode)=>{
     let domElement = node?.view?.getDom();
@@ -100,6 +103,11 @@ export default function NodeToolbar(){
       window.removeEventListener('resize', hangdePositionChange)
     };
   });
+
+  useEffect(() => {
+    hangdePositionChange();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[myStore.showPaddingX, myStore.showPaddingY]);
 
   const handleToParent=(event:any)=>{
     following?.parent?.toFocusState();
