@@ -10,7 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
-import { Hidden, Link } from '@material-ui/core';
+import { Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
