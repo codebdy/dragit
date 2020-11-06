@@ -159,5 +159,8 @@
     "date":"日期",
     "button":"按钮",
     "typography":"文字",
-    "helper-text":"提示文字"
+    "helper-text":"提示文字",
+
+    "is-form-page":"表单页",
+    "api":"页面接口"
 }

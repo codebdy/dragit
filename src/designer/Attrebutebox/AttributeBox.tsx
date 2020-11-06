@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function AttributeBox(props:{node:INode|null, fields:Array<any>}){
+export default function AttributeBox(props:{node:INode|null}){
   const classes = useStyles();
   const {node} = props;
   const [field, setField] = React.useState(node?.meta.props?.field);

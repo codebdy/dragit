@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import AttributeBox from './Attrebutebox/AttributeBox';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
 import { INode } from 'designer/Core/Node/INode';
-import FieldBox from './SettingsBox/SettingsBox';
+import SettingsBox, { PageSettings } from './SettingsBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,8 +57,8 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
-export default function LeftArea(props:{fields:Array<any>, onFieldsChange:(fields:Array<any>)=>void}){
-  const {fields, onFieldsChange} = props;
+export default function LeftArea(props:{pageSettings?:PageSettings, onSettingsChange:(settings:PageSettings)=>void}){
+  const {pageSettings, onSettingsChange} = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
@@ -108,10 +108,10 @@ export default function LeftArea(props:{fields:Array<any>, onFieldsChange:(field
         <Toolbox></Toolbox>
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <AttributeBox node = {focusedNode} fields = {fields}></AttributeBox>
+       <AttributeBox node = {focusedNode}></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <FieldBox fields = {fields} onChange = {onFieldsChange} />
+        <SettingsBox settings = {pageSettings} onChange = {onSettingsChange} />
       </TabPanel>
     </Scrollbar>
   </SidebarWidthPlaceholder>

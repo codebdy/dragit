@@ -24,6 +24,7 @@ import bus, { CANVAS_SCROLL } from './Core/bus';
 import { parseNodes } from './Core/Node/jsonParser';
 import LeftArea from './LeftArea';
 import FocusLabel from './Core/Utils/FocusLabel';
+import { PageSettings } from './SettingsBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -148,15 +149,18 @@ export default function PageContentDesign() {
   //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(myStore.pageJson?.layout);
   let canvas = new CanvasNode(nodes);
-  const [fields, setFields] = useState<Array<any>>([]);
+  const [pageSettings, setPageSettings] = useState<PageSettings|undefined>();
 
   useEffect(() => {
-  let fieldsData = myStore.pageJson
+  let settingsData = myStore.pageJson?.settings
     ?
-    JSON.parse(JSON.stringify(myStore.pageJson?.fields))
+    JSON.parse(JSON.stringify(myStore.pageJson?.settings))
     :
-    [];   
-    setFields(fieldsData)
+    {
+      isFormPage:false,
+      api:'',
+    };   
+    setPageSettings(settingsData)
   },[myStore.pageJson]);
   //复制一份出来，不保存的话直接扔掉
 
@@ -178,14 +182,14 @@ export default function PageContentDesign() {
     bus.emit(CANVAS_SCROLL)
   }
 
-  const handleFieldsChange = (newFields:Array<any>)=>{
-    setFields(newFields)
+  const handlSettingsChange = (newSettings:PageSettings)=>{
+    setPageSettings(newSettings)
   }
 
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
       <ThemeProvider theme={darkTheme}>
-        <LeftArea fields={fields} onFieldsChange={handleFieldsChange}/>
+        <LeftArea pageSettings={pageSettings} onSettingsChange={handlSettingsChange}/>
       </ThemeProvider>
       <div 
         className = {classes.rightArea}

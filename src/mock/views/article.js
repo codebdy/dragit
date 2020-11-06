@@ -286,31 +286,9 @@ export default {
   }
   ],
 
-  fields:[
-    {
-      name:'title',
-      rule:{
-        valueType:'string',
-        required:true,
-      }
-    },
-    {
-      name:'name',
-    },
-    {
-      name:'slug',
-      rule:{
-        valueType:'string',
-        required:true,
-      }
-    },
-    {
-      name:'category',
-      rule:{
-        valueType:'string',
-        required:true,
-      }
-    },
-  ]
+  settings:{
+    isFormPage:true,
+    api:'',
+  }
   
 }
