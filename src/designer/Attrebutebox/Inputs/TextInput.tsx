@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputProps } from './InputProps';
-import StyledTextInput from './StyledTextInput';
+import {StyledTextInput} from './StyledInput';
 
 export default function TextInput(props:InputProps){
   const {field, value, onChange} = props;

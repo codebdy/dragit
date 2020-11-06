@@ -10,7 +10,7 @@ import { IField } from 'designer/Core/Rules/IRule';
 import StyleList from './Inputs/StyleList';
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './AttributeBoxActionSection';
-import StyledTextInput from './Inputs/StyledTextInput';
+import {StyledTextInput} from './Inputs/StyledInput';
 import AttributeBoxValidateArea, { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>

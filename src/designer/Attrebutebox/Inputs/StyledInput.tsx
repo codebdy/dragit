@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function StyledTextInput(props:any){
+const StyledTextInput = (props:any) => {
   const classes = useStyles();
   return (
     <input 
@@ -28,3 +28,15 @@ export default function StyledTextInput(props:any){
     />
   )
 }
+
+const  StyledTextAreaInput = (props:any)=>{
+  const classes = useStyles();
+  return (
+    <textarea 
+      className={classes.input}
+      {...props}
+  ></textarea>
+  )
+}
+
+export {StyledTextInput, StyledTextAreaInput}

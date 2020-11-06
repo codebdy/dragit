@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles, Theme, createStyles, Switch} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { AttributeRow, RowLabel, RowValue } from './Attrebutebox/AttributeRow';
-import StyledTextInput from './Attrebutebox/Inputs/StyledTextInput';
+import {StyledTextAreaInput} from './Attrebutebox/Inputs/StyledInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,10 +44,12 @@ export default function FieldBox(props:{settings?:PageSettings, onChange:any}){
       <AttributeRow>
       <RowLabel>{intl.get("api")}</RowLabel>
       <RowValue>
-        <StyledTextInput 
+        <StyledTextAreaInput 
           value={api||''} 
           onChange={(e:any)=>{setApi(e.target.value)}} 
-          onBlur={()=>onChange({...settings, api:api})}/>
+          onBlur={()=>onChange({...settings, api:api})}
+          rows="5"
+        />
       </RowValue>
       </AttributeRow>      
     </div>

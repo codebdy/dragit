@@ -4,7 +4,7 @@ import { AttributeRow, RowLabel, RowValue } from './AttributeRow';
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, POST_DATA_ACTION } from 'admin/views/Page/PageAction';
 import intl from 'react-intl-universal';
 import { INode } from 'designer/Core/Node/INode';
-import StyledTextInput from './Inputs/StyledTextInput';
+import {StyledTextInput} from './Inputs/StyledInput';
 
 
 export default function AttributeBoxActionSection(props:{node:INode}){

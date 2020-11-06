@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import {MenuItem, Select, Switch, FormControl } from '@material-ui/core';
 import { AttributeRow, RowLabel, RowValue } from 'designer/Attrebutebox/AttributeRow';
 import intl from 'react-intl-universal';
-import StyledTextInput from 'designer/Attrebutebox/Inputs/StyledTextInput';
+import {StyledTextAreaInput, StyledTextInput} from 'designer/Attrebutebox/Inputs/StyledInput';
 
 
 export interface ValidateRule{
@@ -114,7 +114,11 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
           <AttributeRow>
             <RowLabel>{intl.get("error-message")}</RowLabel>
             <RowValue>
-              <StyledTextInput value={rule?.errorMessage||''} onChange={(e:any)=>{handleRuleChange('errorMessage', e.target.value)}}/>
+              <StyledTextAreaInput 
+                value={rule?.errorMessage||''} 
+                onChange={(e:any)=>{handleRuleChange('errorMessage', e.target.value)}}
+                rows="2"
+              />
             </RowValue>
           </AttributeRow>
 
