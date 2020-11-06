@@ -11,6 +11,46 @@ function metaRuleToRegisterRules(rule:ValidateRule){
   if(rule.required){
     rtRules['required'] = intl.get('msg-required');
   }
+  if(rule.valueType === "string"){
+    rule.minLength && (rtRules['minLength'] = {
+      value:rule.minLength,
+      message:intl.get('msg-min-length')
+    });    
+    rule.maxLength && (rtRules['maxLength'] = {
+      value:rule.maxLength,
+      message:intl.get('msg-max-length')
+    });
+
+    rule.min && (rtRules['min'] = {
+      value:rule.min,
+      message:intl.get('msg-min')
+    });
+    rule.min && (rtRules['max'] = {
+      value:rule.max,
+      message:intl.get('msg-max')
+    });
+
+    if(rule.ruleType === "email"){
+      rtRules['pattern'] = {
+        value:/^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/i,
+        message:rule.errorMessage || intl.get('msg-email')
+      }
+    }
+    if(rule.ruleType === "url"){
+      rtRules['pattern'] = {
+        value:/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/i,
+        message:rule.errorMessage || intl.get('msg-email')
+      }
+    }
+    if(rule.ruleType === "custumized"){
+      rtRules['pattern'] = {
+        // eslint-disable-next-line no-eval
+        value:eval(rule.pattern||''),
+        message:rule.errorMessage
+      }
+    }
+
+  }
   return rtRules;
 }
 

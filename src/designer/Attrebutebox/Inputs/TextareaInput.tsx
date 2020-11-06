@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
         border:'#0a6fb7 solid 1px'
       },
       width:'100%',
-
     }
 
   }),

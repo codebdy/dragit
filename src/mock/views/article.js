@@ -155,6 +155,23 @@ export default {
                     {
                       name: 'FormGridItem',
                       props:{
+                        as:'TextField',
+                        label:'Email',
+                        variant:"outlined",
+                        //size:"small",
+                        //select: true,
+                        field:'email',
+                        rule:{
+                          valueType:'string',
+                          ruleType:'email',
+                          required:true,
+                        },
+                        xs:6,
+                      }
+                    },
+                    {
+                      name: 'FormGridItem',
+                      props:{
                         as:'SelectInput',
                         label:"分类",
                         variant:"outlined",
