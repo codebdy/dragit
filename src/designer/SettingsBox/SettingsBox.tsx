@@ -2,8 +2,8 @@ import React from 'react';
 import {makeStyles, Theme, createStyles, IconButton} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import intl from 'react-intl-universal';
-import FieldBoxRow from './FieldBoxRow';
-import FieldBoxValidateArea, { ValidateRule } from './FieldBoxValidateArea';
+import FieldBoxRow from './SettingsFieldBoxRow';
+import FieldBoxValidateArea, { ValidateRule } from '../Attrebutebox/AttributeBoxValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,11 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight:'36px',
       paddingLeft: theme.spacing(1),
       background: 'rgba(0,0,0,0.3)',
-    },
-    rulesArea:{
-      flex:1,
-      overflowY:'auto',
-      padding: theme.spacing(1),
     },
 
 
@@ -93,11 +88,6 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
     setEditingIndex(newFields.length - 1);
   }
 
-  const handleRuleChange = (rule:ValidateRule)=>{
-    fields[selectedIndex].rule = rule; 
-    onChange([...fields]);
-  }
-
   return (
     <div className={classes.root}>
       <div className = {classes.listArea}>
@@ -124,18 +114,6 @@ export default function FieldBox(props:{fields:Array<any>, onChange:any}){
             <AddIcon />
           </IconButton>
         </div>
-      </div>
-      <div className = {classes.areaTitle}>
-        {intl.get('validate-rules')}
-      </div>
-      <div  className = {classes.rulesArea}>
-        {
-          selectedIndex >=0 &&
-          <FieldBoxValidateArea 
-            rule={fields[selectedIndex].rule}
-            onChange = {handleRuleChange}
-          />
-        }
       </div>
     </div>
     

@@ -10,7 +10,7 @@ import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, PageJumper } from './PageAction';
 import intl from 'react-intl-universal';
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 function contructRuleSchema(fields:Array<any>){
   let schema:any = {};
@@ -68,9 +68,14 @@ const PageView = (props:{match: any, history:any })=>{
 
   },[dispatch, moduleId, pageId, dataId]);
   
-  const { register, errors, handleSubmit } = useForm({mode: 'all'});
+  const methods = useForm({mode: 'all'});
+  const {handleSubmit} = methods;
   const onSubmit = (data: any) => console.log('数据提交',data);
   
+  //const hanleChange = (field:string, value:any)=>{
+  //  setFormModel({...formModel,[field]:value });
+  //}
+
   const resolvePageUrl=(page:PageJumper)=>{
     return `/admin/module/${page.moduleId}/${page.pageId}` + (page.dataId ? '/' + page.dataId : '' );
   }
@@ -94,29 +99,29 @@ const PageView = (props:{match: any, history:any })=>{
   }
 
   return (
-    <Container>      
-      { pageInStore.schemaLoading ?
-        <PageSkeleton />
-      :
-        <form onSubmit={handleSubmit(onSubmit)}>
-        {
-            pageInStore.schema?.map((child:RXElement)=>{
-              return (
-                <ElementRender 
-                  key={child.id} 
-                  element={child} 
-                  rxForm={{
-                    register:register,
-                    errors:errors,
-                    formModel:pageInStore.model
-                  }} 
-                  onPageAction={formActionHandle}
-                />
-              )
-            })
+    <Container>
+      <FormProvider {...methods}>
+        { pageInStore.schemaLoading ?
+          <PageSkeleton />
+        :
+          <form onSubmit={handleSubmit(onSubmit)}>
+          {
+              pageInStore.schema?.map((child:RXElement)=>{
+                return (
+                  <ElementRender 
+                    key={child.id} 
+                    element={child} 
+                    rxForm={{
+                      formModel:pageInStore.model,
+                    }} 
+                    onPageAction={formActionHandle}
+                  />
+                )
+              })
+          }
+          </form>
         }
-        </form>
-      }
+      </FormProvider>
     </Container>
   )
 }

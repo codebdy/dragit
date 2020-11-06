@@ -90,6 +90,7 @@
     "type":"Type",
     "finished-go-back":"Go Back",
 
+    "validate" : "Validate",
     "validate-rules":"Validate Rules",
     "validate-type":"Validate Type",
     "authority":"Authority",

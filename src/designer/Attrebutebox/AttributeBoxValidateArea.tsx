@@ -9,7 +9,7 @@ export interface ValidateRule{
   [key:string]:any;
 }
 
-export default function FieldBoxValidateArea(props:{rule?:ValidateRule, onChange:(rule:ValidateRule)=>void}){
+export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onChange:(rule:ValidateRule)=>void}){
   const {rule, onChange} = props;
   const handleTypeChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let valueType = event.target.value as string;

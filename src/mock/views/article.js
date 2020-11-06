@@ -117,6 +117,10 @@ export default {
                         variant:"outlined",
                         field:'title',
                         xs:12,
+                        rule:{
+                          valueType:'string',
+                          required:true,
+                        }                      
                       }
                     },
                     {
@@ -129,6 +133,10 @@ export default {
                         field:'slug',
                         //required:true,
                         xs:12,                      
+                        rule:{
+                          valueType:'string',
+                          required:true,
+                        }                      
                       }
                     },
                     {

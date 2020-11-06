@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import AttributeBox from './Attrebutebox/AttributeBox';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
 import { INode } from 'designer/Core/Node/INode';
-import FieldBox from './FieldBox/FieldBox';
+import FieldBox from './SettingsBox/SettingsBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

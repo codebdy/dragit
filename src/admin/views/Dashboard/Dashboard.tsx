@@ -28,7 +28,7 @@ export default function Dashboard(props:{children?: any}) {
   return (
     <Container>
       
-      <form noValidate autoComplete="off">
+     
         
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -174,7 +174,7 @@ export default function Dashboard(props:{children?: any}) {
             <Paper className={classes.paper}>xs=3</Paper>
           </Grid>
         </Grid>
-        </form>
+      
     </Container>
   )
 }

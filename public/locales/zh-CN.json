@@ -95,6 +95,7 @@
     "type":"类型",
     "finished-go-back":"提交后返回",
 
+    "validate" : "验证",
     "validate-rules":"验证规则",
     "validate-type":"验证类型",
     "authority":"权限",

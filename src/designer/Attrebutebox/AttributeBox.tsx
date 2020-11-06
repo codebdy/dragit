@@ -10,6 +10,8 @@ import { IField } from 'designer/Core/Rules/IRule';
 import StyleList from './Inputs/StyleList';
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './AttributeBoxActionSection';
+import StyledTextInput from './Inputs/StyledTextInput';
+import AttributeBoxValidateArea, { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,8 +49,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AttributeBox(props:{node:INode|null, fields:Array<any>}){
   const classes = useStyles();
-  const {node, fields} = props;
+  const {node} = props;
   const [field, setField] = React.useState(node?.meta.props?.field);
+  const [rule, setRule] = React.useState(node?.meta.props?.rule);
   const propChange = (field:string, value:any) => {
     node?.updateProp(field, value);
   };
@@ -62,8 +65,13 @@ export default function AttributeBox(props:{node:INode|null, fields:Array<any>})
   }
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let newField = event.target.value as string;
-    node?.updateProp('field', newField)
-    setField(newField)
+    node?.updateProp('field', newField);
+    setField(newField);
+  }
+
+  const handleRuleChange = (rule:ValidateRule)=>{
+    node?.updateProp('field', rule);
+    setRule(rule);
   }
 
   return (
@@ -180,21 +188,9 @@ export default function AttributeBox(props:{node:INode|null, fields:Array<any>})
                   <AttributeRow>
                     <RowLabel>{intl.get("field")}</RowLabel>
                     <RowValue>
-                      <Select
-                        value={field || ''}
-                        onChange={handleFieldChange}
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        {
-                          fields.map((field,index)=>{
-                            return (
-                              <MenuItem key={field.name + '-' + index} value={field.name}>{field.name}</MenuItem>
-                            )
-                          })
-                        }
-                      </Select>
+                      <StyledTextInput value={field || ''}
+                        onChange={handleFieldChange}>
+                      </StyledTextInput>
                     </RowValue>
                   </AttributeRow>  
                 </ExpansionPanelDetails>            
@@ -203,29 +199,10 @@ export default function AttributeBox(props:{node:INode|null, fields:Array<any>})
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
                 >
-                  <Typography className={classes.heading}>{intl.get('validate-rules')}</Typography>
+                  <Typography className={classes.heading}>{intl.get('validate')}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails  key={node.id + '-rule'} className={classes.pannelDetail}>
-                  <AttributeRow>
-                    <RowLabel>{intl.get("field")}</RowLabel>
-                    <RowValue>
-                      <Select
-                        value={field || ''}
-                        onChange={handleFieldChange}
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        {
-                          fields.map((field,index)=>{
-                            return (
-                              <MenuItem key={field.name + '-' + index} value={field.name}>{field.name}</MenuItem>
-                            )
-                          })
-                        }
-                      </Select>
-                    </RowValue>
-                  </AttributeRow>  
+                  <AttributeBoxValidateArea rule={rule} onChange={handleRuleChange} /> 
                 </ExpansionPanelDetails>            
               </ExpansionPanel>
             </Fragment>
