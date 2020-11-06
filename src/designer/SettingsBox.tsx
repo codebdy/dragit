@@ -48,7 +48,7 @@ export default function FieldBox(props:{settings?:PageSettings, onChange:any}){
           value={api||''} 
           onChange={(e:any)=>{setApi(e.target.value)}} 
           onBlur={()=>onChange({...settings, api:api})}
-          rows="5"
+          rows="2"
         />
       </RowValue>
       </AttributeRow>      

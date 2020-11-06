@@ -42,7 +42,7 @@ function metaRuleToRegisterRules(rule:ValidateRule){
         message:rule.errorMessage || intl.get('msg-email')
       }
     }
-    if(rule.ruleType === "custumized"){
+    if(rule.ruleType === "custumized" && rule.pattern){
       rtRules['pattern'] = {
         // eslint-disable-next-line no-eval
         value:eval(rule.pattern||''),
@@ -80,7 +80,7 @@ export default function ElementRender(props:{element:RXElement, formModel:any, o
       ...elementProps,
       name: field,
       value: value || '',
-      control:control,
+      control:field && control,
       error: error ? true : undefined,
       rules: rule && metaRuleToRegisterRules(rule),
       helperText: error? error.message : metaProps.helperText,

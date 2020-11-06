@@ -70,7 +70,7 @@ export default function AttributeBox(props:{node:INode|null}){
   }
 
   const handleRuleChange = (rule:ValidateRule)=>{
-    node?.updateProp('field', rule);
+    node?.updateProp('rule', rule);
     setRule(rule);
   }
 
