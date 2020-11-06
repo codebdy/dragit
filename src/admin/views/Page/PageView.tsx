@@ -9,49 +9,8 @@ import { withRouter } from 'react-router-dom';
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, PageJumper } from './PageAction';
-import intl from 'react-intl-universal';
+
 import { FormProvider, useForm } from "react-hook-form";
-
-function contructRuleSchema(fields:Array<any>){
-  let schema:any = {};
-  fields&&fields.forEach(field=>{
-    let rule = field.rule;
-    if(rule && rule.valueType === "string"){
-      let yupObj = Yup.string();
-      yupObj = rule.required ? yupObj.required(intl.get('msg-required')) : yupObj;
-      yupObj = rule.email ? yupObj.email(intl.get('msg-email')) : yupObj;
-      yupObj = rule.url ? yupObj = yupObj.url(intl.get('msg-url')) : yupObj;
-      yupObj = rule.length ? yupObj.length(rule.length, intl.get('msg-length')) : yupObj;
-      yupObj = rule.min ? yupObj.min(rule.min, intl.get('msg-min')) : yupObj;
-      yupObj = rule.max ? yupObj.max(rule.max, intl.get('msg-max')) : yupObj;
-      yupObj = rule.matchesRegex ? yupObj.matches(rule.matchesRegex, intl.get('msg-matches')) : yupObj;
-      schema[field.name] = yupObj;
-    }
-
-    if(rule && rule.valueType === "number"){
-      let yupObj = Yup.number();
-      yupObj = rule.required ? yupObj.required(intl.get('msg-required')) : yupObj;
-      yupObj = rule.positive ? yupObj.positive(intl.get('msg-positive')) : yupObj;
-      yupObj = rule.negative ? yupObj.negative(intl.get('msg-negative')) : yupObj;
-      yupObj = rule.min ? yupObj.min(rule.min, intl.get('msg-min')) : yupObj;
-      yupObj = rule.max ? yupObj.max(rule.max, intl.get('msg-max')) : yupObj;
-      schema[field.name] = yupObj;
-    }
-
-    if(rule && rule.valueType === "date"){
-      let yupObj = Yup.date();
-      yupObj = rule.required ? yupObj.required(intl.get('msg-required')) : yupObj;
-      yupObj = rule.min ? yupObj.min(rule.min, intl.get('msg-min')) : yupObj;
-      yupObj = rule.max ? yupObj.max(rule.max, intl.get('msg-max')) : yupObj;
-      schema[field.name] = yupObj;
-    }
-    if(rule && rule.valueType === "boolean"){
-      let yupObj = Yup.boolean();
-      schema[field.name] = yupObj;
-    }
-  })
-  return  Yup.object().shape(schema);
-}
 
 const PageView = (props:{match: any, history:any })=>{
   const{history} = props;
@@ -72,10 +31,6 @@ const PageView = (props:{match: any, history:any })=>{
   const {handleSubmit} = methods;
   const onSubmit = (data: any) => console.log('数据提交',data);
   
-  //const hanleChange = (field:string, value:any)=>{
-  //  setFormModel({...formModel,[field]:value });
-  //}
-
   const resolvePageUrl=(page:PageJumper)=>{
     return `/admin/module/${page.moduleId}/${page.pageId}` + (page.dataId ? '/' + page.dataId : '' );
   }
@@ -111,9 +66,7 @@ const PageView = (props:{match: any, history:any })=>{
                   <ElementRender 
                     key={child.id} 
                     element={child} 
-                    rxForm={{
-                      formModel:pageInStore.model,
-                    }} 
+                    formModel={pageInStore.model}
                     onPageAction={formActionHandle}
                   />
                 )

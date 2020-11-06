@@ -3,14 +3,19 @@ import { resolveNode } from 'components/resoveNode';
 import { RXElement } from './RXElement';
 import { PageActionHandle } from './PageAction';
 import { useFormContext } from 'react-hook-form';
+import { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
+import intl from 'react-intl-universal';
 
-export interface RxForm{
-  formModel:any,
+function metaRuleToRegisterRules(rule:ValidateRule){
+  let rtRules:any = {};
+  if(rule.required){
+    rtRules['required'] = intl.get('msg-required');
+  }
+  return rtRules;
 }
 
-
-export default function ElementRender(props:{element:RXElement, rxForm:RxForm, onPageAction: PageActionHandle}){
-  const {element, rxForm, onPageAction} = props;
+export default function ElementRender(props:{element:RXElement, formModel:any, onPageAction: PageActionHandle}){
+  const {element, formModel, onPageAction} = props;
   const onClickAction = element.meta.props?.onClick;
   const Element = resolveNode(element.meta.name);
   const {control, errors} = useFormContext();
@@ -26,7 +31,7 @@ export default function ElementRender(props:{element:RXElement, rxForm:RxForm, o
   const {rxText, rule, field, withActions, ...rest} = metaProps as any;
 
   let elementProps:any = {...rest,  onClick:handleOnClick}
-  let value = field && rxForm.formModel && rxForm.formModel[field];
+  let value = field && formModel && formModel[field];
 
   if(field){
     let error = errors && errors[field];
@@ -37,10 +42,7 @@ export default function ElementRender(props:{element:RXElement, rxForm:RxForm, o
       value: value || '',
       control:control,
       error: error ? true : undefined,
-      rules: rule && { required: "This is required.", maxLength: {
-        value: 10,
-        message: "This input exceed maxLength."
-      } },
+      rules: rule && metaRuleToRegisterRules(rule),
       helperText: error? error.message : metaProps.helperText,
     }
   }
@@ -53,7 +55,7 @@ export default function ElementRender(props:{element:RXElement, rxForm:RxForm, o
       {rxText}
       {element.children?.map((child: RXElement)=>{
         return (
-          <ElementRender key={child.id} element={child} rxForm={rxForm} onPageAction={onPageAction}/>
+          <ElementRender key={child.id} element={child} formModel={formModel} onPageAction={onPageAction}/>
         )
       })}
     </Element>)
