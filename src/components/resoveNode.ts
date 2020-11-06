@@ -15,8 +15,8 @@ import PortletFormGridBody from "components/PortletFormGridBody"
 import PortletFooter from "components/PortletFooter"
 import FormGridItem from "components/FormGridItem"
 import ListView from "components/ListView"
-import MediasPortlet from "components/MediasPortlet"
-import SelectInput from "./SelectInput";
+import MediasPortlet from "components/Inputs/MediasPortlet"
+import SelectInput from "./Inputs/SelectInput";
 
 const nodeMap : { [key: string]: any } = {
   Container,

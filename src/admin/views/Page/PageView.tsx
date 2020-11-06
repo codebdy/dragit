@@ -5,11 +5,12 @@ import * as Yup from 'yup';
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkPageSchema } from "store/page/thunks";
-import PageForm from "./PageForm";
+import { withRouter } from 'react-router-dom';
 import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
-import { PageActionHandle } from './PageAction';
+import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, PageJumper } from './PageAction';
 import intl from 'react-intl-universal';
+import { useForm } from "react-hook-form";
 
 function contructRuleSchema(fields:Array<any>){
   let schema:any = {};
@@ -52,7 +53,8 @@ function contructRuleSchema(fields:Array<any>){
   return  Yup.object().shape(schema);
 }
 
-export default function PageView(props:{match: any }) {
+const PageView = (props:{match: any, history:any })=>{
+  const{history} = props;
   const{moduleId, pageId, dataId} = props.match.params;
   const selectPage = (state: RootState) => state.page;
   const pageInStore = useSelector(selectPage);
@@ -66,26 +68,57 @@ export default function PageView(props:{match: any }) {
 
   },[dispatch, moduleId, pageId, dataId]);
   
+  const { register, errors, handleSubmit } = useForm({mode: 'all'});
+  const onSubmit = (data: any) => console.log('数据提交',data);
+  
+  const resolvePageUrl=(page:PageJumper)=>{
+    return `/admin/module/${page.moduleId}/${page.pageId}` + (page.dataId ? '/' + page.dataId : '' );
+  }
+  
+  const formActionHandle = (action:PageAction)=>{
+    switch (action.name){
+      case JUMP_TO_PAGE_ACTION:
+        const url = resolvePageUrl(action.page);
+        history.push(url);
+        return;
+        
+      case GO_BACK_ACTION:
+        history.goBack();
+        return;
+        
+      //case POST_DATA_ACTION:
+      //  console.log('POST_DATA_ACTION', action)
+      //  return;
+    }
+    
+  }
+
   return (
     <Container>      
       { pageInStore.schemaLoading ?
         <PageSkeleton />
       :
-        <PageForm model={pageInStore.model} 
-          validationSchema = {
-            contructRuleSchema(pageInStore.pageJson?.fields)
-          } 
-          //withoutForm = {pageInStore.pageJson?.withoutForm}
-        >
-          {(props: any, onPageAction: PageActionHandle)=>(
+        <form onSubmit={handleSubmit(onSubmit)}>
+        {
             pageInStore.schema?.map((child:RXElement)=>{
               return (
-                <ElementRender key={child.id} element={child} formik={props} onPageAction={onPageAction}/>
+                <ElementRender 
+                  key={child.id} 
+                  element={child} 
+                  rxForm={{
+                    register:register,
+                    errors:errors,
+                    formModel:pageInStore.model
+                  }} 
+                  onPageAction={formActionHandle}
+                />
               )
             })
-          )}
-        </PageForm>
+        }
+        </form>
       }
     </Container>
   )
 }
+
+export default withRouter(PageView)

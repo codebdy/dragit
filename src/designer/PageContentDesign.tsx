@@ -195,9 +195,6 @@ export default function PageContentDesign() {
             <ToolbarIcon>
               <MdiIcon iconClass="mdi-layers-outline"/>
             </ToolbarIcon>
-            <ToolbarIcon>
-              <MdiIcon iconClass="mdi-file-cog-outline"/>
-            </ToolbarIcon>
             {//<ToolbarIcon>
              // <MdiIcon iconClass="mdi-dock-bottom"/>
               //</ToolbarIcon>

@@ -2,13 +2,13 @@ import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid, Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import intl from 'react-intl-universal';
-import MdiIcon from './common/MdiIcon';
-import { MediaMeta } from './Medias/MediaGridListImage';
+import MdiIcon from '../common/MdiIcon';
+import { MediaMeta } from '../Medias/MediaGridListImage';
 import { add, exchange, remove } from 'ArrayHelper';
-import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
-import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
-import MediasPortletAltsDialog from './MediasPortletAltsDialog';
-import { makeSpaceStyle } from './Util';
+import MediasPortletFeathureGrid from '../MediasPortletFeathureGrid';
+import MediasPortletColumnsGrid from '../MediasPortletColumnsGrid';
+import MediasPortletAltsDialog from '../MediasPortletAltsDialog';
+import { makeSpaceStyle } from '../Util';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,6 +62,7 @@ const MediasPortlet = React.forwardRef((
     spacingBottom?:number,
     spacingLeft?:number,
     style?:any,
+    inputRef?:any,
   }, 
   ref:any
 )=>{
@@ -71,6 +72,7 @@ const MediasPortlet = React.forwardRef((
     spacingRight,
     spacingBottom,
     spacingLeft,
+    inputRef,
      ...rest
   } = props;
   const classes = useStyles();

@@ -98,7 +98,7 @@ export default function LeftArea(props:{fields:Array<any>, onFieldsChange:(field
     >
       <Tab icon={<MdiIcon iconClass="mdi-view-dashboard"></MdiIcon>} style={{minWidth:'80px', }}/>
       <Tab icon={<MdiIcon iconClass="mdi-brush"></MdiIcon>} style={{minWidth:'80px', }}/>
-      <Tab icon={<MdiIcon iconClass="mdi-view-list-outline"></MdiIcon>}  style={{minWidth:'80px', }}/>
+      <Tab icon={<MdiIcon iconClass="mdi-file-cog-outline"/>}  style={{minWidth:'80px', }}/>
     </Tabs>          
     </div>
 

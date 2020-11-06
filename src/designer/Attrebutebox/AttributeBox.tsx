@@ -168,36 +168,67 @@ export default function AttributeBox(props:{node:INode|null, fields:Array<any>})
               <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
-          {node.rule.hasData && 
-            <ExpansionPanel  className={classes.panelPaper}>
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <Typography className={classes.heading}>{intl.get('data')}</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails  key={node.id + '-data'} className={classes.pannelDetail}>
-                <AttributeRow>
-                  <RowLabel>{intl.get("field")}</RowLabel>
-                  <RowValue>
-                    <Select
-                      value={field || ''}
-                      onChange={handleFieldChange}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      {
-                        fields.map((field,index)=>{
-                          return (
-                            <MenuItem key={field.name + '-' + index} value={field.name}>{field.name}</MenuItem>
-                          )
-                        })
-                      }
-                    </Select>
-                  </RowValue>
-                </AttributeRow>  
-              </ExpansionPanelDetails>            
-            </ExpansionPanel>
+          {node.rule.hasData &&
+            <Fragment> 
+              <ExpansionPanel  className={classes.panelPaper}>
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                >
+                  <Typography className={classes.heading}>{intl.get('data')}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails  key={node.id + '-data'} className={classes.pannelDetail}>
+                  <AttributeRow>
+                    <RowLabel>{intl.get("field")}</RowLabel>
+                    <RowValue>
+                      <Select
+                        value={field || ''}
+                        onChange={handleFieldChange}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {
+                          fields.map((field,index)=>{
+                            return (
+                              <MenuItem key={field.name + '-' + index} value={field.name}>{field.name}</MenuItem>
+                            )
+                          })
+                        }
+                      </Select>
+                    </RowValue>
+                  </AttributeRow>  
+                </ExpansionPanelDetails>            
+              </ExpansionPanel>
+              <ExpansionPanel  className={classes.panelPaper}>
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                >
+                  <Typography className={classes.heading}>{intl.get('validate-rules')}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails  key={node.id + '-rule'} className={classes.pannelDetail}>
+                  <AttributeRow>
+                    <RowLabel>{intl.get("field")}</RowLabel>
+                    <RowValue>
+                      <Select
+                        value={field || ''}
+                        onChange={handleFieldChange}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        {
+                          fields.map((field,index)=>{
+                            return (
+                              <MenuItem key={field.name + '-' + index} value={field.name}>{field.name}</MenuItem>
+                            )
+                          })
+                        }
+                      </Select>
+                    </RowValue>
+                  </AttributeRow>  
+                </ExpansionPanelDetails>            
+              </ExpansionPanel>
+            </Fragment>
           }
           {node.rule.hasAction && 
             <ExpansionPanel  className={classes.panelPaper}>

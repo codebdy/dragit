@@ -20,15 +20,16 @@ const SelectInput = React.forwardRef((
     multiple?:boolean,
     helperText?:string,
     onChange:any,
+    inputRef?:any,
   },
   ref
 )=>{
-  const{value, label, variant, multiple, helperText, onChange, ...rest} = props;
+  const{value, label, variant, multiple, helperText, onChange, inputRef, ...rest} = props;
   const classes = useStyles();
   const [id] = React.useState(idSeed++);
 
   const empertyValue = multiple?[]:'';
-  console.log(props);
+  //console.log(props);
   return (
     <FormControl variant={variant as any} className={classes.root} {...rest}>
       <InputLabel id={`label-${id}`} >{label}</InputLabel>
