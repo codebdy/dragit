@@ -4,7 +4,7 @@ import Sidebar, { createSidebarTheme } from 'admin/Sidebar';
 import image5 from 'assets/img/sidebar-5.jpg';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import TopNav from 'admin/TopNav/TopNav';
-import FixedBar from 'admin/FixedBar';
+//import FixedBar from 'admin/FixedBar';
 import PageContent from 'admin/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
@@ -79,7 +79,7 @@ export default function Layout(){
       </div>
       <AreaSelect></AreaSelect>
       {myStore.pageContentDesign && <PageContentDesign></PageContentDesign>}
-      <FixedBar />
+      {/*<FixedBar />*/}
       <SuccessAlertBar />
     </div>
   )
