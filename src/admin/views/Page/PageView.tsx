@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import ElementRender from "./ElementRender";
 import { RXElement } from "./RXElement";
 import { RootState } from "store";
@@ -52,28 +52,38 @@ const PageView = (props:{match: any, history:any })=>{
     
   }
 
+  const pageContent =  pageInStore.schemaLoading ?
+      <PageSkeleton />
+      :
+      <Fragment>
+        {
+          pageInStore.schema?.map((child:RXElement)=>{
+            return (
+              <ElementRender 
+                key={child.id} 
+                element={child} 
+                formModel={pageInStore.model}
+                onPageAction={formActionHandle}
+              />
+            )
+          })
+        }
+      </Fragment>
+
+
   return (
     <Container>
-      <FormProvider {...methods}>
-        { pageInStore.schemaLoading ?
-          <PageSkeleton />
-        :
-          <form onSubmit={handleSubmit(onSubmit)}>
-          {
-              pageInStore.schema?.map((child:RXElement)=>{
-                return (
-                  <ElementRender 
-                    key={child.id} 
-                    element={child} 
-                    formModel={pageInStore.model}
-                    onPageAction={formActionHandle}
-                  />
-                )
-              })
-          }
-          </form>
+      <FormProvider {...methods}>      
+        {
+          pageInStore.pageJson?.settings?.isFormPage 
+          ?
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {pageContent}
+            </form>
+          :
+            pageContent
         }
-      </FormProvider>
+      </FormProvider>    
     </Container>
   )
 }
