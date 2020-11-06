@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import ElementRender from "./ElementRender";
 import { RXElement } from "./RXElement";
-import * as Yup from 'yup';
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkPageSchema } from "store/page/thunks";
