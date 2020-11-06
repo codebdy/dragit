@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Card, Input, FormControl, InputLabel, InputAdornment, CardHeader, CardActions, CardContent } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Card, Input, FormControl, InputLabel, InputAdornment, CardHeader, CardActions, CardContent, MenuItem, Select } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -49,6 +49,24 @@ export default function Dashboard(props:{children?: any}) {
                   <TextField id="input-with-icon-grid" variant="outlined" label="With a grid" />
                 </Grid>
               </Grid>
+              <FormControl variant="outlined" size="small">
+                <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  //value={age}
+                  //onChange={handleChange}
+                  label="Age"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+
               <TextField
                   
                   id="input-with-icon-textfield"

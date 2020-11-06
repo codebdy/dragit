@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) =>
     attrRow:{
       display:'flex',
       flexFlow:'row',
+      padding:theme.spacing(0.2, 0),
     },
     rowLabel:{
       color:'#a8afb2',

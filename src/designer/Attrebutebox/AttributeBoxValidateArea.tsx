@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
-import {MenuItem, Select, Switch } from '@material-ui/core';
+import {MenuItem, Select, Switch, FormControl } from '@material-ui/core';
 import { AttributeRow, RowLabel, RowValue } from 'designer/Attrebutebox/AttributeRow';
 import intl from 'react-intl-universal';
 import StyledTextInput from 'designer/Attrebutebox/Inputs/StyledTextInput';
+
 
 export interface ValidateRule{
   valueType?:string;
@@ -36,7 +37,7 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
 
 
   return (
-    <Fragment>
+    <div>
       <AttributeRow>
         <RowLabel>{intl.get("required")}</RowLabel>
         <RowValue>
@@ -51,17 +52,20 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
       <AttributeRow>
         <RowLabel>{intl.get("validate-type")}</RowLabel>
         <RowValue>
-          <Select
-            value={rule?.valueType || ''}
-            onChange={handleTypeChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value='string'>{intl.get('string')}</MenuItem>
-            <MenuItem value='number'>{intl.get('number')}</MenuItem>
-            <MenuItem value='date'>{intl.get('date')}</MenuItem>
-          </Select>
+          <FormControl variant="outlined" size="small">
+            <Select
+              value={rule?.valueType || ''}
+              onChange={handleTypeChange}
+              variant="outlined"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value='string'>{intl.get('string')}</MenuItem>
+              <MenuItem value='number'>{intl.get('number')}</MenuItem>
+              <MenuItem value='date'>{intl.get('date')}</MenuItem>
+            </Select>
+          </FormControl>
         </RowValue>
       </AttributeRow>
       {
@@ -70,17 +74,19 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
           <AttributeRow>
             <RowLabel>{intl.get("validate-rules")}</RowLabel>
             <RowValue>
-              <Select
-                value={rule?.ruleType || ''}
-                onChange={handleRuleTypeChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value='email'>{intl.get('email')}</MenuItem>
-                <MenuItem value='url'>{intl.get('url')}</MenuItem>
-                <MenuItem value='customized'>{intl.get('customized')}</MenuItem>
-              </Select>
+              <FormControl variant="outlined" size="small">
+                <Select
+                  value={rule?.ruleType || ''}
+                  onChange={handleRuleTypeChange}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value='email'>{intl.get('email')}</MenuItem>
+                  <MenuItem value='url'>{intl.get('url')}</MenuItem>
+                  <MenuItem value='customized'>{intl.get('customized')}</MenuItem>
+                </Select>
+              </FormControl>
             </RowValue>
           </AttributeRow>
 
@@ -151,6 +157,6 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
       }
 
 
-    </Fragment>
+    </div>
   )
 }
