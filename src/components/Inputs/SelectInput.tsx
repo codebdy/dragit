@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+export interface SelectItems{
+  fromUrl?:boolean;
+  items?:Array<any>;
+  url?:string;
+}
+
 const SelectInput = React.forwardRef((
   props:{
     value?:string|[],
@@ -23,9 +29,7 @@ const SelectInput = React.forwardRef((
     withoutEmpertyItem?:boolean,
     itemKey?:string,
     itemName?:string,
-    fromServer?:boolean,
-    items?:Array<any>,
-    dataUrl?:string,
+    data:SelectItems,
   },
   ref
 )=>{
@@ -38,11 +42,19 @@ const SelectInput = React.forwardRef((
     withoutEmpertyItem, 
     itemKey = 'id',
     itemName = 'name',
-    fromServer,
-    items,
-    dataUrl,
+    data,
     ...rest
   } = props;
+  const {
+    fromUrl,
+    items,
+    url,
+  } = data;
+
+  //如果不从服务器读取数据，itemKey跟itemName设置无效
+  let key = fromUrl ? itemKey : 'slug';
+  let name = fromUrl ? itemName : 'label';
+
   const classes = useStyles();
   const [menuItems, setMenuItems] = React.useState(items);
   const [loading, setLoading] = React.useState(false);
@@ -51,15 +63,14 @@ const SelectInput = React.forwardRef((
   const mountedRef = useRef(true);
 
   useEffect(() => {
-    if(!fromServer || !dataUrl){
+    if(!fromUrl || !url){
       return;
     }
-
     setLoading(true);
     axios(
       {
         method:"get",
-        url:dataUrl,
+        url:url,
       }
     ).then(res => {
       if(mountedRef.current){
@@ -90,9 +101,9 @@ const SelectInput = React.forwardRef((
         </MenuItem>
       }
       {
-        menuItems?.map((item)=>{
+        menuItems?.map((item, index)=>{
           return (
-          <MenuItem key = {item[itemKey]}value={item[itemKey]}>{item[itemName]}</MenuItem>
+          <MenuItem key = {`${item[key]}-${index}`} value={item[key]}>{item[name]}</MenuItem>
           )
         })
       }

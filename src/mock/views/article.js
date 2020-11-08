@@ -183,21 +183,24 @@ export default {
                         multiple:true,
                         rule:{
                           required:true,
-                        },           
-                        items:[
-                          {
-                            id:'news',
-                            name:'新闻',
-                          },
-                          {
-                            id:'tech',
-                            name:'技术',
-                          },
-                          {
-                            id:'jingyan‘',
-                            name:'经验',
-                          },
-                        ]           
+                        },
+                        data:{
+                          fromUrl:false,           
+                          items:[
+                            {
+                              slug:'news',
+                              label:'新闻',
+                            },
+                            {
+                              slug:'tech',
+                              label:'技术',
+                            },
+                            {
+                              slug:'jingyan‘',
+                              label:'经验',
+                            },
+                          ]
+                        }           
                       }
                     },
                     {
@@ -209,8 +212,12 @@ export default {
                         field:'channel',
                         xs:6,
                         required:true,
-                        fromServer:true,
-                        dataUrl:'/api/base/items',
+                        withoutEmpertyItem:true,                        
+                        data:{
+                          fromUrl:true,
+                          url:'/api/base/items',
+                        },
+
                         rule:{
                           required:true,
                         },

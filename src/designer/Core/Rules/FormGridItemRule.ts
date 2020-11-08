@@ -6,6 +6,7 @@ import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import { colWidthOptions } from "./GridItemRule";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
+import SelectItemsInput from "designer/Attrebutebox/Inputs/SelectItemsInput";
 
 export class FormGridItemRule extends Rule{
   editPaddingY = '';
@@ -52,6 +53,37 @@ export class FormGridItemRule extends Rule{
    
       )
     }
+
+    if(meta?.props?.as === "SelectInput"){
+      options.push(
+        {
+          name:'multiple',
+          label:'multiple-select',
+          input:SwitchInput,
+        },
+        {
+          name:'withoutEmpertyItem',
+          label:'without-emperty-item',
+          input:SwitchInput,
+        },
+        {
+          name:'itemKey',
+          label:'item-key',
+          input:TextInput,
+        },
+        {
+          name:'itemName',
+          label:'item-name',
+          input:TextInput,
+        },
+        {
+          name:'data',
+          label:'items-data',
+          input:SelectItemsInput,
+        },
+      )
+    }
+    
     return [
       {
         name:'variant',

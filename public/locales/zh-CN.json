@@ -161,6 +161,14 @@
     "typography":"文字",
     "helper-text":"提示文字",
 
+    "multiple-select":"复选",
+    "without-emperty-item":"不带空项",
+    "item-key":"条目键值",
+    "item-name":"条目名称",
+    "items-data":"条目数据",
+    "from-url":"从URL获取",
+    "edit-select-items":"编辑下拉条目",
+
     "is-form-page":"表单页",
     "api":"页面接口"
 }

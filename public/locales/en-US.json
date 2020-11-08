@@ -156,6 +156,14 @@
     "typography":"Typography",
     "helper-text":"Helper text",
 
+    "multiple-select":"Multiple",
+    "without-emperty-item":"Without emperty",
+    "item-key":"Itme key",
+    "item-name":"Item name",
+    "items-data":"Items data",
+    "from-url":"From url",
+    "edit-select-items":"Edit select items",
+
     "is-form-page":"Is form page",
     "api":"API"
 
