@@ -123,30 +123,29 @@ export default function TopNav(props:{onSidebarToggle: any}) {
               DragRX
             </Typography>          
           </Hidden>
-          <Hidden smDown>
-            <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
-              <IconButton aria-label={intl.get('design-layout')} color="inherit" onClick={handleOpen}>
-                <MdiIcon iconClass="mdi-pencil-ruler" />
+
+          <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
+            <IconButton aria-label={intl.get('design-layout')} color="inherit" onClick={handleOpen}>
+              <MdiIcon iconClass="mdi-pencil-ruler" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={intl.get('modules')} arrow placement="bottom">
+            
+              <IconButton aria-label={intl.get('modules')} color="inherit">
+                <MdiIcon iconClass="mdi-view-grid-plus" />
               </IconButton>
-            </Tooltip>
-            <Tooltip title={intl.get('modules')} arrow placement="bottom">
-              
-                <IconButton aria-label={intl.get('modules')} color="inherit">
-                  <MdiIcon iconClass="mdi-view-grid-plus" />
-                </IconButton>
-              
-            </Tooltip>
-            <Tooltip title={intl.get('theme-settings')} arrow placement="bottom">
-              <IconButton aria-label={intl.get('theme-settings')} color="inherit">
-                <MdiIcon iconClass="mdi-image-filter-black-white" />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={intl.get('debug')} arrow placement="bottom">
-              <IconButton  aria-label={intl.get('debug')} color="inherit">
-                <MdiIcon iconClass="mdi-android-debug-bridge"/>
-              </IconButton>
-            </Tooltip>
-          </Hidden>
+            
+          </Tooltip>
+          <Tooltip title={intl.get('theme-settings')} arrow placement="bottom">
+            <IconButton aria-label={intl.get('theme-settings')} color="inherit">
+              <MdiIcon iconClass="mdi-image-filter-black-white" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={intl.get('debug')} arrow placement="bottom">
+            <IconButton  aria-label={intl.get('debug')} color="inherit">
+              <MdiIcon iconClass="mdi-android-debug-bridge"/>
+            </IconButton>
+          </Tooltip>
           <div className={classes.grow} />
 
           
