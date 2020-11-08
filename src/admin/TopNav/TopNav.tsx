@@ -14,11 +14,6 @@ import { Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store';
-import { openAreaSelectAction } from 'store/designer/actions';
-import { closeFixedBarAction } from 'store/fixedBar/actions';
-import { compactableAction } from 'store/sidebar/actions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,9 +61,6 @@ export default function TopNav(props:{onSidebarToggle: any}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  
-  const selectSidebar = (state: RootState) => state.sidebar
-  const sidebarStore = useSelector(selectSidebar)  
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -77,15 +69,6 @@ export default function TopNav(props:{onSidebarToggle: any}) {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
-  const dispatch = useDispatch();
-  
-  const handleOpen = () => {
-    dispatch(openAreaSelectAction());
-    dispatch(closeFixedBarAction());
-    sidebarStore.compactable && dispatch(compactableAction());
-  };
-
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
