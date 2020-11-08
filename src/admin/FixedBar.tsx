@@ -18,18 +18,17 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'fixed',
-      right: theme.spacing(1),
-      //top:'calc(50% - 150px)',
-      bottom: theme.spacing(10),
-      width:'52px',
-      //background:'#121246',
+      top: theme.spacing(2),
+      left:'calc(50% - 100px)',
+      height:'52px',
       color:"rgba(255,255,255,1)",
       display: 'flex',
-      flexFlow: 'column',
+      flexFlow: 'row',
       justifyContent: 'center',
       alignItems:'center',
-      borderRadius:'5px',
+      borderRadius:'3px',
       padding:'10px 0',
+      zIndex:theme.zIndex.appBar,
     },
   }),
 );
@@ -57,24 +56,24 @@ export default function FixedBar(
     {
       myStore.open && 
       <Paper  className={classes.root} elevation={24}>
-        <Tooltip title={intl.get('design-layout')} arrow placement="left">
+        <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
           <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>
             <MdiIcon iconClass="mdi-pencil-ruler" />
           </IconButton>
         </Tooltip>
-        <Tooltip title={intl.get('modules')} arrow placement="left">
+        <Tooltip title={intl.get('modules')} arrow placement="bottom">
           <NavLink to={'/design'}>
             <IconButton aria-label={intl.get('modules')}>
               <MdiIcon iconClass="mdi-view-grid-plus" />
             </IconButton>
           </NavLink>
         </Tooltip>
-        <Tooltip title={intl.get('theme-settings')} arrow placement="left">
+        <Tooltip title={intl.get('theme-settings')} arrow placement="bottom">
           <IconButton aria-label={intl.get('theme-settings')}>
             <MdiIcon iconClass="mdi-image-filter-black-white" />
           </IconButton>
         </Tooltip>
-        <Tooltip title={intl.get('debug')} arrow placement="left">
+        <Tooltip title={intl.get('debug')} arrow placement="bottom">
           <IconButton  aria-label={intl.get('debug')}>
             <MdiIcon iconClass="mdi-android-debug-bridge"/>
           </IconButton>
