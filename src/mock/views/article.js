@@ -223,7 +223,6 @@ export default {
                         },
                       },        
                     },
-
                     {
                       name: 'FormGridItem',
                       props:{
@@ -239,6 +238,27 @@ export default {
                         xs:6,
                       }
                     },
+                    {
+                      name: 'FormGridItem',
+                      props:{
+                        as:'ComboBoxInput',
+                        label:"标签",
+                        variant:"outlined",
+                        field:'channel',
+                        xs:12,
+                        required:true,
+                        withoutEmpertyItem:true,                        
+                        data:{
+                          fromUrl:true,
+                          url:'/api/base/items',
+                        },
+
+                        rule:{
+                          required:true,
+                        },
+                      },        
+                    },
+
                     {
                       name:"FormGridItem",
                       props:{
