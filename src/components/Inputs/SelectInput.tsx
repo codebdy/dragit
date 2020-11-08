@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
-
-var idSeed = 1;
+import { Skeleton } from '@material-ui/lab';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,34 +20,95 @@ const SelectInput = React.forwardRef((
     multiple?:boolean,
     helperText?:string,
     onChange:any,
-    inputRef?:any,
+    withoutEmpertyItem?:boolean,
+    itemKey?:string,
+    itemName?:string,
+    fromServer?:boolean,
+    items?:Array<any>,
+    dataUrl?:string,
   },
   ref
 )=>{
-  const{value, label, variant, multiple, helperText, onChange, inputRef, ...rest} = props;
+  const{value, 
+    label, 
+    variant, 
+    multiple, 
+    helperText, 
+    onChange, 
+    withoutEmpertyItem, 
+    itemKey = 'id',
+    itemName = 'name',
+    fromServer,
+    items,
+    dataUrl,
+    ...rest
+  } = props;
   const classes = useStyles();
-  const [id] = React.useState(idSeed++);
+  const [menuItems, setMenuItems] = React.useState(items);
+  const [loading, setLoading] = React.useState(false);
 
   const empertyValue = multiple?[]:'';
-  //console.log(props);
-  return (
-    <FormControl variant={variant as any} className={classes.root} {...rest}>
-      <InputLabel id={`label-${id}`} >{label}</InputLabel>
-      <Select
-        labelId={`label-${id}`}
-        id={`select-input-${id}`}
-        multiple = {multiple}
-        value={value || empertyValue}
-        onChange={onChange}
-        label={label}
-      >
+  const mountedRef = useRef(true);
+
+  useEffect(() => {
+    if(!fromServer || !dataUrl){
+      return;
+    }
+
+    setLoading(true);
+    axios(
+      {
+        method:"get",
+        url:dataUrl,
+      }
+    ).then(res => {
+      if(mountedRef.current){
+        setMenuItems(res.data);
+        setLoading(false);
+      }
+    })
+    .catch(err => {
+      console.log('server error');
+      setLoading(false);
+    })
+    
+    return () => { 
+      mountedRef.current = false
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
+  const select =  <Select
+      multiple = {multiple}
+      value={value || empertyValue}
+      onChange={onChange}
+      label={label}
+    >
+      { !withoutEmpertyItem &&
         <MenuItem value={empertyValue}>
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
+      }
+      {
+        menuItems?.map((item)=>{
+          return (
+          <MenuItem key = {item[itemKey]}value={item[itemKey]}>{item[itemName]}</MenuItem>
+          )
+        })
+      }
+    </Select>
+  //console.log(props);
+  return (
+    <FormControl variant={variant as any} className={classes.root} {...rest}>
+      <InputLabel 
+      >{label}</InputLabel>
+      {
+        loading ?
+        <Skeleton animation="wave" height={50} width="80%" />
+        :
+        select
+      }
+
       <FormHelperText>{helperText}</FormHelperText>
       
     </FormControl>

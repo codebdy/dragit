@@ -178,10 +178,45 @@ export default {
                         //size:"small",
                         field:'category',
                         xs:6,
-                        //required:true,
+                        required:true,
                         helperText:'请选择分类',
+                        multiple:true,
+                        rule:{
+                          required:true,
+                        },           
+                        items:[
+                          {
+                            id:'news',
+                            name:'新闻',
+                          },
+                          {
+                            id:'tech',
+                            name:'技术',
+                          },
+                          {
+                            id:'jingyan‘',
+                            name:'经验',
+                          },
+                        ]           
                       }
                     },
+                    {
+                      name: 'FormGridItem',
+                      props:{
+                        as:'SelectInput',
+                        label:"频道",
+                        variant:"outlined",
+                        field:'channel',
+                        xs:6,
+                        required:true,
+                        fromServer:true,
+                        dataUrl:'/api/base/items',
+                        rule:{
+                          required:true,
+                        },
+                      },        
+                    },
+
                     {
                       name: 'FormGridItem',
                       props:{

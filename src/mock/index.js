@@ -35,6 +35,21 @@ Mock.mock(RegExp('/api/medias/remove-media?.*'),'post')
 Mock.mock(RegExp('/api/medias/remove-medias?.*'),'post')
 Mock.mock(RegExp('/api/medias/move-media-to?.*'),'post')
 
+Mock.mock('/api/base/items','get', [
+    {
+        id:'base1',
+        name:'条目1',
+      },
+      {
+        id:'base2',
+        name:'条目2',
+      },
+      {
+        id:'base3',
+        name:'条目3',
+      },
+])
+
 Mock.setup({
     timeout: 500
 })
