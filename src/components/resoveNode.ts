@@ -18,6 +18,7 @@ import ListView from "components/ListView"
 import MediasPortlet from "components/Inputs/MediasPortlet"
 import SelectInput from "./Inputs/SelectInput";
 import ComboboxInput from "./Inputs/ComboboxInput";
+import OneToManyTable from "./Inputs/OneToManyTable"
 
 const nodeMap : { [key: string]: any } = {
   Container,
@@ -41,6 +42,7 @@ const nodeMap : { [key: string]: any } = {
   MediasPortlet,
   SelectInput,
   ComboboxInput,
+  OneToManyTable,
 }
 
 function resolveNode(name:string): any{

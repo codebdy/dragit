@@ -315,6 +315,16 @@ export default {
               ]
             },
             {
+              name:'OneToManyTable',
+              props: {
+                elevation: 6,
+                title:'规格库存',
+                collapsible: true,
+                spacingTop:2,
+                open:true,              
+              },            
+            },
+            {
               name: 'Card',
               props: {
                 elevation: 6,
