@@ -26,7 +26,7 @@ const ComboboxInput = React.forwardRef((
     freeSolo,
     onChange, 
     //withoutEmpertyItem, 
-    itemKey = 'id',
+    //itemKey = 'id',
     itemName = 'name',
     data,
     ...rest
@@ -38,7 +38,7 @@ const ComboboxInput = React.forwardRef((
     url,
   } = data;
 
-  let key = fromUrl ? itemKey : 'slug';
+  //let key = fromUrl ? itemKey : 'slug';
   let name = fromUrl ? itemName : 'label';
   const mountedRef = useRef(true);
   const [loading, setLoading] = React.useState(false);
@@ -78,11 +78,8 @@ const ComboboxInput = React.forwardRef((
 
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
-    let changedValue = multiple?
-        newValue.map((item:any)=>{return item && item[key]})
-        :
-        (newValue && newValue[key]);
-    onChange(changedValue && changedValue.length === 0 ? undefined : changedValue);
+
+    onChange(newValue && newValue.length === 0 ? '' : newValue);
   }
 
   return (
@@ -93,7 +90,7 @@ const ComboboxInput = React.forwardRef((
       loading = {loading}
 
       value = {inputValue}
-      
+      //defaultValue = {value||empertyValue}
       renderInput={(params) => (
         <TextField
           ref={ref}
