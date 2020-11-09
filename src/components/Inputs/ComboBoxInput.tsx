@@ -7,12 +7,8 @@ import axios from 'axios';
 const ComboboxInput = React.forwardRef((
   props:{
     value?:string|[],
-    //label?:string,
-    //variant?:string,
     multiple?:boolean,
-    freeSolo?:boolean,
     onChange:any,
-    //required?:boolean,
     itemKey?:string,
     itemName?:string,
     data:SelectItems,  
@@ -20,13 +16,8 @@ const ComboboxInput = React.forwardRef((
   ref:any
 )=>{
   const{value, 
-    //label, 
-    //variant, 
     multiple, 
-    freeSolo,
     onChange, 
-    //withoutEmpertyItem, 
-    //itemKey = 'id',
     itemName = 'name',
     data,
     ...rest
@@ -34,11 +25,9 @@ const ComboboxInput = React.forwardRef((
 
   const {
     fromUrl,
-    //items,
     url,
   } = data;
 
-  //let key = fromUrl ? itemKey : 'slug';
   let name = fromUrl ? itemName : 'label';
   const mountedRef = useRef(true);
   const [loading, setLoading] = React.useState(false);
