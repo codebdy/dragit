@@ -134,8 +134,8 @@ export default {
                         //required:true,
                         xs:12,                      
                         rule:{
-                          valueType:'string',
-                          required:true,
+                          //valueType:'string',
+                          //required:true,
                         }                      
                       }
                     },
@@ -241,13 +241,46 @@ export default {
                     {
                       name: 'FormGridItem',
                       props:{
-                        as:'ComboBoxInput',
+                        as:'ComboboxInput',
                         label:"标签",
                         variant:"outlined",
-                        field:'channel',
+                        field:'tags',
+                        multiple:false,
                         xs:12,
-                        required:true,
-                        withoutEmpertyItem:true,                        
+                        //required:true,
+                        data:{
+                          fromUrl:false,           
+                          items:[
+                            {
+                              slug:'product',
+                              label:'产品',
+                            },
+                            {
+                              slug: 'iPhone',
+                              label:'iPhone',
+                            },
+                            {
+                              slug:'apple',
+                              label:'苹果',
+                            },
+                          ]
+                        },           
+
+                        rule:{
+                          //required:true,
+                        },
+                      },        
+                    },
+                    {
+                      name: 'FormGridItem',
+                      props:{
+                        as:'ComboboxInput',
+                        label:"标签2",
+                        variant:"outlined",
+                        field:'tags2',
+                        multiple:true,
+                        xs:12,
+                        //required:true,
                         data:{
                           fromUrl:true,
                           url:'/api/base/items',
@@ -344,8 +377,7 @@ export default {
           ]
         }
       ]
-  
-  }
+    }
   ],
 
   settings:{

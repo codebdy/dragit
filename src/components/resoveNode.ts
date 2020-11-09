@@ -17,7 +17,7 @@ import FormGridItem from "components/FormGridItem"
 import ListView from "components/ListView"
 import MediasPortlet from "components/Inputs/MediasPortlet"
 import SelectInput from "./Inputs/SelectInput";
-import ComboBoxInput from "./Inputs/ComboBoxInput";
+import ComboboxInput from "./Inputs/ComboboxInput";
 
 const nodeMap : { [key: string]: any } = {
   Container,
@@ -40,7 +40,7 @@ const nodeMap : { [key: string]: any } = {
   ListView,
   MediasPortlet,
   SelectInput,
-  ComboBoxInput,
+  ComboboxInput,
 }
 
 function resolveNode(name:string): any{

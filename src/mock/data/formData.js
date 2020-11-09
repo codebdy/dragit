@@ -5,6 +5,8 @@ export default{
   auther:'悠闲地水',
   create_date:'2020-04-04',
   category:'',
+  tags:'苹果',  
+  //tags2:['苹果'],
   medias:[
     {
       id:'1',

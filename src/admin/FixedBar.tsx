@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow: 'row',
       justifyContent: 'center',
       alignItems:'center',
-      borderRadius:'3px',
+      borderRadius:'5px',
       padding:'10px 0',
       zIndex:theme.zIndex.appBar,
     },
