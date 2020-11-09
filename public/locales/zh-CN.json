@@ -33,6 +33,9 @@
     "row": "行",
     "column": "列",
 
+    "selectbox":"选择框",
+    "combobox":"组合框",
+
     "selected-node":"选中的节点：",
     "attributes":"属性",
     "style":"样式",

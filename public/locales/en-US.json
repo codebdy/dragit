@@ -33,6 +33,9 @@
     "row": "Row",
     "column": "Column",
 
+    "selectbox":"Select",
+    "combobox":"ComboBox",
+
     "selected-node":"Selected Node:",
     "attributes":"Attributes",
     "style":"Style",

@@ -126,13 +126,41 @@ export default [
             as:'TextField',
             label:"Date",
             variant:"outlined",
-            //size:"small",
             type:'date',
             InputLabelProps:{
               shrink: true,
             },
-            field:'create_date',
             xs:6,
+          }
+        },
+      },
+      {
+        id:"3-3",
+        titleKey:"selectbox",
+        meta:{
+          name: 'FormGridItem',
+          props:{
+            as:'SelectInput',
+            label:"Select",
+            variant:"outlined",
+            xs:6,
+            data:{
+            }          
+          }
+        },
+      },
+      {
+        id:"3-4",
+        titleKey:"combobox",
+        meta:{
+          name: 'FormGridItem',
+          props:{
+            as:'ComboboxInput',
+            label:"Combobox",
+            variant:"outlined",
+            xs:6,
+            data:{
+            }
           }
         },
       },

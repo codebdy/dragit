@@ -68,7 +68,7 @@ const ComboboxInput = React.forwardRef((
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
 
-    onChange(newValue && newValue.length === 0 ? '' : newValue);
+    onChange && (onChange(newValue && newValue.length === 0 ? '' : newValue));
   }
 
   return (
