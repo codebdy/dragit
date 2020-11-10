@@ -331,6 +331,7 @@ export default {
                     input:{
                       name:'MediaInput',
                       props:{
+                        width:'60px',
                       }
                     }
                   },
@@ -359,7 +360,25 @@ export default {
                         size:'small',
                       }
                     }
-                  }
+                  },
+                  {
+                    field:'category',
+                    label:'分类',
+                    input:{
+                      name:'SelectInput',
+                        props:{
+                        variant:"outlined",
+                        size:'small',
+                        withoutEmpertyItem:false,                        
+                        data:{
+                          fromUrl:true,
+                          url:'/api/base/items',
+                        },
+                      }
+                    },        
+                  },
+
+
                 ]         
               },            
             },
