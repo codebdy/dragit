@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import Portlet from 'components/Portlet';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteForever from '@material-ui/icons/DeleteForever';
+import CloseIcon from '@material-ui/icons/Close';
 import { resolveNode } from 'components/resoveNode';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -157,7 +157,7 @@ const OneToManyTable = React.forwardRef((
                   <IconButton aria-label="delete"
                     onClick = {(event) => {handelRemove(rowIndex)}}
                   >
-                    <DeleteForever fontSize="small" />
+                    <CloseIcon fontSize="small" />
                   </IconButton>
                 </TableCell>
               </TableRow>
