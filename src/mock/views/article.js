@@ -321,7 +321,41 @@ export default {
                 title:'规格库存',
                 collapsible: true,
                 spacingTop:2,
-                open:true,              
+                open:true,
+                size:"small",
+                field:'specs',
+                columns:[
+                  {
+                    field:'image',
+                    label:'图片',
+                  },
+                  {
+                    field:'name',
+                    label:'名称',
+                    props:{
+                      width:'200px',
+                    },
+
+                    input:{
+                      name:'TextField',
+                      props:{
+                        variant:'outlined',
+                        size:'small',
+                      }
+                    }
+                  },
+                  {
+                    field:'color',
+                    label:'颜色',
+                    input:{
+                      name:'TextField',
+                      props:{
+                        variant:'outlined',
+                        size:'small',
+                      }
+                    }
+                  }
+                ]         
               },            
             },
             {
@@ -338,7 +372,6 @@ export default {
                   props: {
                     title: 'SEO Meta',
                   }
-  
                 },
               ],
             },

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton, TextField } from '@material-ui/core';
-import { MediaMeta } from '../Medias/MediaGridListImage';
+import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import Portlet from 'components/Portlet';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteForever from '@material-ui/icons/DeleteForever';
+import { resolveNode } from 'components/resoveNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,17 +21,16 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein };
+interface ColumnMeta{
+  field?:string;
+  label?:string;
+  props?:any;
+  input?:{
+    name:string,
+    props:any,
+  };
 }
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+var seedId = 1;
 
 const OneToManyTable = React.forwardRef((
   props: {
@@ -44,6 +43,8 @@ const OneToManyTable = React.forwardRef((
     name?:string,
     style?:any,
     inputRef?:any,
+    size?:any,
+    columns?:Array<ColumnMeta>
   }, 
   ref:any
 )=>{
@@ -53,25 +54,29 @@ const OneToManyTable = React.forwardRef((
     name,
     style,
     inputRef,
+    size,
+    columns = [],
      ...rest
   } = props;
   const classes = useStyles();
-  const [medias, setMedias] = React.useState<Array<MediaMeta>>(value? value :[]);
+  const [rows, setRows] = React.useState<Array<any>>(value? value :[]);
 
 
   useEffect(() => {
-    setMedias(value? value :[])
+    setRows(value? value :[])
   },[value]);
   
   useEffect(() => {
-    if(medias !== value && !(!value && medias.length === 0)){
+    if(rows !== value && !(!value && rows.length === 0)){
       const event = {
         persist: () => {return {}},
         target: {
           type: "change",
-          //id: props.id,
           name: props.name,
-          value: medias
+          value: rows.map(row=>{
+            const newId = (row.id && row.id.toString().startsWith('TEMP-'))? undefined: row.id;
+            return {...rows, id: newId }
+          })
         }
       };
  
@@ -79,7 +84,25 @@ const OneToManyTable = React.forwardRef((
       onChange && onChange(event);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[medias]);
+  },[rows]);
+
+  const handleAddNew = ()=>{
+    setRows([...rows, {id:`TEMP-${seedId++}`}]);
+  }
+
+  const handelRemove = (index:number)=>{
+    let tempRows = [...rows];
+    tempRows.splice(index, 1);
+    setRows(tempRows);
+  }
+
+  const handleChange = (index: number, field?:string, value?:any)=>{
+    if(field){
+      let tempRows = [...rows];
+      tempRows[index][field] = value;
+      setRows(tempRows);      
+    }
+  }
 
 
   return (
@@ -93,36 +116,46 @@ const OneToManyTable = React.forwardRef((
     >
 
       <div className={classes.body}>
-        <Table className={classes.table}>
+        <Table className={classes.table} size={size}>
           <TableHead>
             <TableRow>
-              <TableCell><b>Dessert (100g serving)</b></TableCell>
-              <TableCell>
-                <b>Calories</b>
-              </TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              {
+                columns.map((column, index)=>{
+                  const{width = undefined, ...other} = (column.props?column.props : {})
+                  return(
+                    <TableCell key={`${column}-${index}`} component="th" style={{width:width}} {...other}>
+                      <b>
+                        {column.label}
+                      </b>
+                    </TableCell>
+                  )
+                })
+              }
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  <TextField value={row.name} variant="outlined" size="small" />
-                </TableCell>
-                <TableCell>
-                  <TextField value={row.calories} variant="outlined" size="small" />
-                </TableCell>
-                <TableCell>
-                  <TextField value={row.fat} variant="outlined" size="small" />
-                </TableCell>
-                <TableCell><TextField value={row.fat} variant="outlined" size="small" /></TableCell>
-                <TableCell><TextField value={row.fat} variant="outlined" size="small" /></TableCell>
+            {rows.map((row:any, rowIndex) => (
+              <TableRow key={`row-${rowIndex}-${row.id}`} >
+                {
+                  columns.map((column, index)=>{
+                    const{width = undefined, ...other} = (column.props?column.props : {})
+                    const InputControl = resolveNode(column.input&&column.input.name ? column.input.name :'TextField');
+                    const theValue = column.field ? row[column.field]:  '';
+                    return(
+                      <TableCell key={`${column}-${index}-row-${rowIndex}`} style={{width:width}} {...other}>
+                        <InputControl 
+                          value={theValue||''} 
+                          {...column.input?.props}
+                          onChange={(e:any)=>handleChange(rowIndex, column.field, e.target.value)}
+                        />
+                      </TableCell>
+                    )
+                  })
+                }
                 <TableCell align="right">
                   <IconButton aria-label="delete"
-                    onClick = {(event) => {}}
+                    onClick = {(event) => {handelRemove(rowIndex)}}
                   >
                     <DeleteForever fontSize="small" />
                   </IconButton>
@@ -132,7 +165,7 @@ const OneToManyTable = React.forwardRef((
           </TableBody>
         </Table>    
         <div className={classes.addNewArea}>
-          <IconButton onClick={()=>{}} >
+          <IconButton onClick={handleAddNew} >
             <AddIcon />
           </IconButton>
         </div>
