@@ -8,9 +8,35 @@ import Intl from "react-intl-universal";
 import Spacer from 'components/common/Spacer';
 import MediasContent from './MediasContent';
 import { MediaMeta } from './MediaGridListImage';
+import Image from 'components/common/Image'
+import MediaGridListIconButton from './MediaGridListIconButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    singleImage:{
+      position:'relative',
+      cursor:'pointer',
+    },
+
+    mask:{
+      position:'absolute',
+      height:'calc(100% - 2px)',
+      width:"100%",
+      left:"0",
+      top:"1px",
+      background:"rgba(50,50,50, 0.3)",
+      borderRadius:"5px",
+      display:'flex',
+      flexFlow:"column",
+      justifyContent:"space-between",
+    },
+
+    removeButton:{
+      position:'absolute',
+      top:'0px',
+      right:'0px',
+    },
+
     root: {
       width:"100%",
       paddingBottom:'100%',
@@ -59,12 +85,13 @@ const Transition = React.forwardRef(function Transition(
   return  <Grow ref={ref} {...props} />;
 });
 
-export default function MediaAdder(props:{onSelectMedias:(medias:Array<MediaMeta>)=>void}){
-  const {onSelectMedias} = props;
+export default function MediaAdder(props:{value?:Array<MediaMeta>, onSelectMedias:(medias?:Array<MediaMeta>)=>void, single?:boolean}){
+  const {value, onSelectMedias, single} = props;
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
-  const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>([]);
+  const [hover, setHover] = React.useState(false);
+  const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>(value || []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -73,19 +100,44 @@ export default function MediaAdder(props:{onSelectMedias:(medias:Array<MediaMeta
   const handleClose = () => {
     setOpen(false);
   };
+  const firstValue = value && (value.length > 0 ? value[0] :  undefined);
 
   const handleSelect = ()=>{
-    onSelectMedias(selectedMedias);
+    onSelectMedias([...selectedMedias]);
     setOpen(false);
   }
 
   return (
     <Fragment>
-      <div className={classes.root} onClick = {handleClickOpen}>
-        <div className={classes.inner}>
-          <MdiIcon iconClass="mdi-plus" color="#5d78ff" size="50"/>
+      {
+        single && firstValue?
+        <div 
+          className={classes.singleImage}
+          onClick = {handleClickOpen} 
+          onMouseOver = {()=>setHover(true)}
+          onMouseLeave = {()=>setHover(false)} 
+        >
+          <Image 
+            src={firstValue?.thumbnail}
+          />
+          {
+            hover && 
+            <div className={classes.mask}>
+              <div className={classes.removeButton}>
+                <MediaGridListIconButton icon = "mdi-close" 
+                  onClick={()=>onSelectMedias([])} 
+                />
+              </div>
+            </div>
+          }
         </div>
-      </div>
+        :        
+        <div className={classes.root} onClick = {handleClickOpen}>
+          <div className={classes.inner}>
+            <MdiIcon iconClass="mdi-plus" color="#5d78ff" size="50"/>
+          </div>      
+        </div>      
+      }
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
@@ -98,7 +150,7 @@ export default function MediaAdder(props:{onSelectMedias:(medias:Array<MediaMeta
           </Toolbar>
         </AppBar>
         <DialogContent dividers className={classes.dialogContent}>
-          <MediasContent onSelectedChange = {setSelectedMedias} single = {false}/>
+          <MediasContent  onSelectedChange = {setSelectedMedias} single = {single}/>
         </DialogContent>
         <DialogActions>
           <Spacer />

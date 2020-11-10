@@ -8,7 +8,7 @@ import MediasPortletMedia from './MediasPortletMedia';
 export default function MediasPortletFeathureGrid(
   props:{
     medias:Array<MediaMeta>, 
-    onSelectMedias:(selectedMedias:Array<MediaMeta>)=>void,
+    onSelectMedias:(selectedMedias?:Array<MediaMeta>|MediaMeta)=>void,
     onSwap:(first:MediaMeta, second:MediaMeta)=>void,
     onRemove:(media:MediaMeta)=>void,
   }

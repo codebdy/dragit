@@ -10,15 +10,16 @@ import {
 } from "@material-ui/core";
 
 import FormField from "components/FormField";
-import Portlet from "components/Portlet"
-import PortletFormGridBody from "components/PortletFormGridBody"
-import PortletFooter from "components/PortletFooter"
-import FormGridItem from "components/FormGridItem"
-import ListView from "components/ListView"
-import MediasPortlet from "components/Inputs/MediasPortlet"
+import Portlet from "components/Portlet";
+import PortletFormGridBody from "components/PortletFormGridBody";
+import PortletFooter from "components/PortletFooter";
+import FormGridItem from "components/FormGridItem";
+import ListView from "components/ListView";
+import MediasPortlet from "components/Inputs/MediasPortlet";
 import SelectInput from "./Inputs/SelectInput";
 import ComboboxInput from "./Inputs/ComboboxInput";
-import OneToManyTable from "./Inputs/OneToManyTable"
+import OneToManyTable from "./Inputs/OneToManyTable";
+import MediaInput from "./Inputs/MediaInput";
 
 const nodeMap : { [key: string]: any } = {
   Container,
@@ -43,6 +44,7 @@ const nodeMap : { [key: string]: any } = {
   SelectInput,
   ComboboxInput,
   OneToManyTable,
+  MediaInput,
 }
 
 function resolveNode(name:string): any{

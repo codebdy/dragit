@@ -135,7 +135,7 @@ export default function MediasContent(
   },[pageNumber, selectedFolder]);
 
   useEffect(() => {
-    onSelectedChange && onSelectedChange(selectedMedias);
+    onSelectedChange && onSelectedChange([...selectedMedias]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selectedMedias]);
 

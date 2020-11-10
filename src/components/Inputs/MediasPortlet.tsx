@@ -135,7 +135,7 @@ const MediasPortlet = React.forwardRef((
     setMenuOpen(false);  
   }
 
-  const handleSelectedMedias = (selectedMedias:Array<MediaMeta>)=>{
+  const handleSelectedMedias = (selectedMedias?:Array<MediaMeta>|MediaMeta)=>{
     setMedias(mergeArray(medias,selectedMedias ));
   }
 

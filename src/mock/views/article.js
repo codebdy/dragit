@@ -328,6 +328,11 @@ export default {
                   {
                     field:'image',
                     label:'图片',
+                    input:{
+                      name:'MediaInput',
+                      props:{
+                      }
+                    }
                   },
                   {
                     field:'name',
