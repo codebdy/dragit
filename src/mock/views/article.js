@@ -366,7 +366,7 @@ export default {
                     label:'分类',
                     input:{
                       name:'SelectInput',
-                        props:{
+                      props:{
                         variant:"outlined",
                         size:'small',
                         withoutEmpertyItem:false,                        

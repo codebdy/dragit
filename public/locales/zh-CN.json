@@ -163,6 +163,7 @@
     "button":"按钮",
     "typography":"文字",
     "helper-text":"提示文字",
+    "input-type":"输入类型",
 
     "multiple-select":"复选",
     "without-emperty-item":"不带空项",

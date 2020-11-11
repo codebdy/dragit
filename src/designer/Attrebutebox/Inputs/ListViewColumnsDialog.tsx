@@ -51,6 +51,7 @@ export default function ListViewColumnsDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('field')}
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {columns[selectedIndex].field || ''} 
             onChange = {event=>{
@@ -61,13 +62,14 @@ export default function ListViewColumnsDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('column-name')} 
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {columns[selectedIndex].label || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
             }}
           />
-          <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
+          <FormControl  fullWidth variant="outlined" size = "small"  className={classes.itemInput}>
             <InputLabel id="align-select-label">{intl.get('align')}</InputLabel>
             <Select
               labelId="align-select-label"
@@ -88,7 +90,7 @@ export default function ListViewColumnsDialog(props:InputProps){
               <MenuItem value={'right'}>Right</MenuItem>
             </Select>
           </FormControl>
-          <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
+          <FormControl  fullWidth variant="outlined" size = "small" className={classes.itemInput}>
             <InputLabel id="align-select-label">{intl.get('size')}</InputLabel>
             <Select
               labelId="size-select-label"
@@ -139,6 +141,7 @@ export default function ListViewColumnsDialog(props:InputProps){
             fullWidth
             rows={4}
             variant="outlined"
+            size = "small"
             value = {columns[selectedIndex].template || ''}
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'template', event.target.value.trim())

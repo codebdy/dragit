@@ -34,7 +34,8 @@ export default function SelectItemsInput(props:InputProps){
   };  
 
   const handleItemsChange = (newItems:Array<any>)=>{
-
+    let newValue =  {...inputValue, items:newItems};
+    onChange(field, newValue)
   }
 
   return (
@@ -42,7 +43,7 @@ export default function SelectItemsInput(props:InputProps){
       <FormControlLabel
         control={
           <Switch
-            checked={inputValue.fromUrl}
+            checked={inputValue.fromUrl || false}
             onChange={handleFromUrlChange}
             name="FromUrl"
             color="primary"

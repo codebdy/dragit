@@ -52,6 +52,7 @@ export default function ListViewFiltersDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('slug')}
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {filters[selectedIndex].slug || ''} 
             onChange = {event=>{
@@ -62,6 +63,7 @@ export default function ListViewFiltersDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('name')} 
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {filters[selectedIndex].label || ''} 
             onChange = {event=>{

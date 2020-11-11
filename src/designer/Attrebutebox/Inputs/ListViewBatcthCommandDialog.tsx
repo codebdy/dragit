@@ -49,6 +49,7 @@ export default function ListViewBatcthCommandDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('slug')}
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {commands[selectedIndex].slug || ''} 
             onChange = {event=>{
@@ -59,6 +60,7 @@ export default function ListViewBatcthCommandDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('name')} 
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {commands[selectedIndex].label || ''} 
             onChange = {event=>{
@@ -69,6 +71,7 @@ export default function ListViewBatcthCommandDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('action-icon')} 
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {commands[selectedIndex].icon || ''} 
             onChange = {event=>{

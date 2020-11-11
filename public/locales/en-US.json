@@ -158,6 +158,7 @@
     "button":"Button",
     "typography":"Typography",
     "helper-text":"Helper text",
+    "input-type":"Input type",
 
     "multiple-select":"Multiple",
     "without-emperty-item":"Without emperty",

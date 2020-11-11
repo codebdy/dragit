@@ -1,13 +1,18 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, TextField, Switch, FormControlLabel, MenuItem, Select, FormControl, InputLabel} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, TextField, MenuItem, Select, FormControl, InputLabel, FormControlLabel, Switch} from '@material-ui/core';
 import { InputProps } from './InputProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 import { Fragment } from 'react';
+import SelectItemsInput from './SelectItemsInput';
 
 const styles = (theme: Theme) =>
   createStyles({
-
+    inputArea:{
+      paddingLeft:theme.spacing(2),
+      display:'flex',
+      flexFlow:'column',
+    },
     itemInput:{
         margin: theme.spacing(1),
     },
@@ -27,6 +32,7 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
   };
 
   const handleChangeProp = (index:number, name:string, value:string|unknown)=>{
+    columns[selectedIndex].props = columns[selectedIndex].props || {};
     columns[selectedIndex].props[name] = value;
     setComuns([...columns]);
   };
@@ -34,6 +40,12 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
     columns.push({field:'new-field', label:'New Field', props:{}});
     setSelectedIndex(columns.length - 1);
   };
+  const handleChangeInputProps = (index:number, name:string, value:string|unknown)=>{
+    let input = columns[selectedIndex].input;
+    input.props =input?.props || {};
+    input.props[name] = value;
+    setComuns([...columns]);
+  }
 
   return (
     <MetaListDialog
@@ -51,6 +63,7 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
             className = {classes.itemInput} 
             label={intl.get('field')}
             variant="outlined" 
+            size = "small"
             fullWidth
             value = {columns[selectedIndex].field || ''} 
             onChange = {event=>{
@@ -60,14 +73,15 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
           <TextField 
             className = {classes.itemInput} 
             label={intl.get('column-name')} 
-            variant="outlined" 
+            variant="outlined"
+            size = "small" 
             fullWidth
             value = {columns[selectedIndex].label || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
             }}
           />
-          <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
+          <FormControl  fullWidth variant="outlined" size = "small" className={classes.itemInput}>
             <InputLabel id="align-select-label">{intl.get('align')}</InputLabel>
             <Select
               labelId="align-select-label"
@@ -88,7 +102,7 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
               <MenuItem value={'right'}>Right</MenuItem>
             </Select>
           </FormControl>
-          <FormControl  fullWidth variant="outlined"  className={classes.itemInput}>
+          <FormControl  fullWidth variant="outlined" size = "small" className={classes.itemInput}>
             <InputLabel id="align-select-label">{intl.get('size')}</InputLabel>
             <Select
               labelId="size-select-label"
@@ -106,44 +120,93 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
               <MenuItem value={'small'}>Small</MenuItem>
             </Select>
           </FormControl>
-          <FormControlLabel
-            className = {classes.itemInput}
-            control={
-              <Switch
-                color="primary"
-                checked = {!!columns[selectedIndex].searchable}
-                onChange = {event=>{
-                  handleChangeAttribute(selectedIndex, 'searchable', event.target.checked)
-                }}                        
-              />
+          <FormControl  fullWidth variant="outlined" size = "small" className={classes.itemInput}>
+            <InputLabel id="align-select-label">{intl.get('input-type')}</InputLabel>
+            <Select
+              labelId="size-select-label"
+              id="size-select"
+              label = {intl.get('input-type')}
+              value = {columns[selectedIndex].input?.name || 'TextField'}
+              onChange = {event=>{
+                handleChangeAttribute(selectedIndex, 'input', {...columns[selectedIndex].input, name:event.target.value, props:{}})
+              }}
+            >
+              <MenuItem value={"TextField"}>{intl.get('text-field')}</MenuItem>
+              <MenuItem value={'SelectInput'}>{intl.get('selectbox')}</MenuItem>
+              <MenuItem value={'ComboboxInput'}>{intl.get('combobox')}</MenuItem>
+              <MenuItem value={'MediaInput'}>{intl.get('media')}</MenuItem>
+            </Select>
+          </FormControl>
+          <div className={classes.inputArea}>
+            {
+              (columns[selectedIndex].input?.name === "TextField" || 
+              columns[selectedIndex].input?.name === "SelectInput" || 
+              columns[selectedIndex].input?.name === "ComboboxInput") &&
+              <Fragment>
+                <FormControl  fullWidth variant="outlined" size = "small" className={classes.itemInput}>
+                  <InputLabel id="align-select-label">{intl.get('size')}</InputLabel>
+                  <Select
+                    labelId="size-select-label"
+                    id="size-select"
+                    label = {intl.get('size')}
+                    value = {columns[selectedIndex].input?.props?.size || ''}
+                    onChange = {event=>{
+                      handleChangeInputProps(selectedIndex, 'size', event.target.value)
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={'medium'}>Medium</MenuItem>
+                    <MenuItem value={'small'}>Small</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl  fullWidth variant="outlined" size = "small" className={classes.itemInput}>
+                  <InputLabel id="align-select-label">{intl.get('variant')}</InputLabel>
+                  <Select
+                    labelId="size-select-label"
+                    id="size-select"
+                    label = {intl.get('variant')}
+                    value = {columns[selectedIndex].input?.props?.variant || ''}
+                    onChange = {event=>{
+                      handleChangeInputProps(selectedIndex, 'variant', event.target.value)
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={'filled'}>Filled</MenuItem>
+                    <MenuItem value={'outlined'}>Outlined</MenuItem>
+                    <MenuItem value={'standard'}>Standard</MenuItem>
+                  </Select>
+                </FormControl>
+              </Fragment>
             }
-            label={intl.get('searchable')}
-          />
-          <FormControlLabel
-            className = {classes.itemInput}
-            control={
-              <Switch
-                color="primary"
-                checked = {!!columns[selectedIndex].sortable}
-                onChange = {event=>{
-                  handleChangeAttribute(selectedIndex, 'sortable', event.target.checked)
-                }}                        
+            {
+              columns[selectedIndex].input?.name === "SelectInput" &&
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={columns[selectedIndex].input?.props?.withoutEmpertyItem || false}
+                    onChange= {event=>{
+                      handleChangeInputProps(selectedIndex, 'withoutEmpertyItem', event.target.checked)
+                    }}
+                    name="withoutEmpertyItem"
+                    color="primary"
+                  />
+                }
+                label={<span>{intl.get("without-emperty-item")}</span>}
               />
+            
             }
-            label={intl.get('sortable')}
-          />
-          <TextField
-            className = {classes.itemInput} 
-            label={intl.get('show-template')}
-            multiline
-            fullWidth
-            rows={4}
-            variant="outlined"
-            value = {columns[selectedIndex].template || ''}
-            onChange = {event=>{
-              handleChangeAttribute(selectedIndex, 'template', event.target.value.trim())
-            }}
-          />
+            {
+              (columns[selectedIndex].input?.name === "SelectInput" || 
+              columns[selectedIndex].input?.name === "ComboboxInput" ) &&
+              <SelectItemsInput field="data" value={columns[selectedIndex].input?.props?.data} onChange = {(field, data)=>{
+                handleChangeInputProps(selectedIndex, field, data)
+              }}/>
+            }
+          </div>
         </Fragment>
       }
     </MetaListDialog>
