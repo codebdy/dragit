@@ -4,6 +4,7 @@ import Portlet from 'components/Portlet';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import { resolveNode } from 'components/resoveNode';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       justifyContent:'center',
       padding:theme.spacing(1),
+    },
+    helperText:{
+      padding:theme.spacing(1),
+    },
+    error:{
+      color:'red',
     }
   }),
 );
@@ -36,8 +43,8 @@ const OneToManyTable = React.forwardRef((
   props: {
     value?:any
     className?:any,
-    cols?:number,
     onChange:(event:any)=>void,
+    error:boolean,
     helperText?:string,
     id?:string,
     name?:string,
@@ -48,8 +55,9 @@ const OneToManyTable = React.forwardRef((
   }, 
   ref:any
 )=>{
-  const{value, className, cols, 
+  const{value, className,  
     onChange, 
+    error,
     helperText, 
     name,
     style,
@@ -169,7 +177,7 @@ const OneToManyTable = React.forwardRef((
             <AddIcon />
           </IconButton>
         </div>
-        <div>{helperText}</div>
+        <div className={classNames(classes.helperText, {[classes.error]:error})}>{helperText}</div>
       </div>
     </Portlet>
   )

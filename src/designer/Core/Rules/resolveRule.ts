@@ -14,6 +14,7 @@ import { TypographyRule } from "./TypographyRule"
 import { ListViewRule } from "./ListViewRule"
 import {MediasPortletRule} from "./MediasPortletRule"
 import {HeadRule} from "./HeadRule"
+import {OneToManyTableRule} from "./OneToManyTableRule"
 
 const rules:Array<IRule> = [
   new CanvasRule(),
@@ -29,6 +30,7 @@ const rules:Array<IRule> = [
   new ListViewRule(),
   new MediasPortletRule(),
   new HeadRule(),
+  new OneToManyTableRule(),
 ];
 
 const baseRule = new Rule();

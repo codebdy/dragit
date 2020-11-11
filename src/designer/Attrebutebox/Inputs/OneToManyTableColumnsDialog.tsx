@@ -15,7 +15,7 @@ const styles = (theme: Theme) =>
 
   const useStyles = makeStyles(styles);
 
-export default function ListViewColumnsDialog(props:InputProps){
+export default function OneToManyTableColumnsDialog(props:InputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
