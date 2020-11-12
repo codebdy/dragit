@@ -9,6 +9,7 @@ import MediasPortletFeathureGrid from '../MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from '../MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from '../MediasPortletAltsDialog';
 import { makeSpaceStyle } from '../Util';
+import { Controller } from 'react-hook-form';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -240,4 +241,25 @@ const MediasPortlet = React.forwardRef((
   )
 })
 
-export default MediasPortlet;
+const FormedMediasPortlet = React.forwardRef((props:any, ref:any)=>{
+  const {control, name, value, rule, ...rest} = props;
+  //console.log(value);
+  return (
+    control?
+      <Controller
+        name={name}
+        control={control}
+        defaultValue={value}
+        rules={ rule }
+        render={props =>
+          <MediasPortlet value={value} {...rest} ref = {ref}
+            onChange={e => {props.onChange(e.target.value)}}
+          />
+        } // props contains: onChange, onBlur and value
+      />
+    :
+    <MediasPortlet value={value} {...rest} ref = {ref}/>
+  )
+})
+
+export default FormedMediasPortlet;

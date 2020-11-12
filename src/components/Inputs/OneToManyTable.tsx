@@ -88,7 +88,7 @@ const OneToManyTable = React.forwardRef((
         }
       };
  
-      //console.log('useEffect', 'medias:', medias, 'value', value)
+      console.log('useEffect',onChange, event)
       onChange && onChange(event);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
