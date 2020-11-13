@@ -10,6 +10,9 @@ import MediasPortletColumnsGrid from '../MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from '../MediasPortletAltsDialog';
 import { makeSpaceStyle } from '../Util';
 import { Controller } from 'react-hook-form';
+import resolveSkeleton from 'admin/views/Page/resolveSkeleton';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -242,23 +245,24 @@ const MediasPortlet = React.forwardRef((
 })
 
 const FormedMediasPortlet = React.forwardRef((props:any, ref:any)=>{
-  const {control, name, value, rule, ...rest} = props;
-  //console.log(value);
+  const {control, value, ...rest} = props;
+  const selectPage = (state: RootState) => state.page;
+  const pageInStore = useSelector(selectPage);
+  const skeletonView = resolveSkeleton('MediasPortlet');  
+
   return (
-    control?
+    pageInStore.modelLoading ? skeletonView :
+    (control?
       <Controller
-        name={name}
-        control={control}
-        defaultValue={value}
-        rules={ rule }
-        render={props =>
-          <MediasPortlet value={value} {...rest} ref = {ref}
-            onChange={e => {props.onChange(e.target.value)}}
-          />
-        } // props contains: onChange, onBlur and value
+        as={MediasPortlet}
+        control = {control}
+        defaultValue = {value}
+        value={value}
+        {...rest}
+        ref={ref}
       />
     :
-    <MediasPortlet value={value} {...rest} ref = {ref}/>
+    <MediasPortlet value={value} {...rest} ref = {ref}/>)
   )
 })
 

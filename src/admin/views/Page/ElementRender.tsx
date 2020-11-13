@@ -75,7 +75,7 @@ export default function ElementRender(props:{element:RXElement, formModel:any, o
 
   if(field){
     let error = errors && errors[field];
-    //console.log('errors', rxForm.errors, value)
+    //field === 'medias' && console.log('ElementRender',field)
     elementProps = {
       ...elementProps,
       name: field,
