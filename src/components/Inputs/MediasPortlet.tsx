@@ -99,7 +99,7 @@ const MediasPortlet = React.forwardRef((
   
   useEffect(() => {
     if(medias !== value && !(!value && medias.length === 0)){
-      const event = {
+     /* const event = {
         persist: () => {return {}},
         target: {
           type: "change",
@@ -107,10 +107,10 @@ const MediasPortlet = React.forwardRef((
           name: props.name,
           value: medias
         }
-      };
+      };*/
  
       //console.log('useEffect', 'medias:', medias, 'value', value)
-      onChange && onChange(event);
+      onChange && onChange(medias);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[medias]);
