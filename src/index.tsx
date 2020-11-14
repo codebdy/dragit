@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import './mock'
 import { Provider } from 'react-redux'
 import configureStore from "./store";
-import {register, registerHtmlTag} from "./DragIt";
+import {register, registerHtmlTag} from "./DragRX";
 import { Button, Divider, Typography } from '@material-ui/core';
 import PortletGridItem from 'components/Portlet/GridItem';
 import ListView from 'components/ListView';

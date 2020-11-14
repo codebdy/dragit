@@ -11,7 +11,7 @@ import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode, MousePoint } from "./INode";
 import { remove, last, first, before, after, insertBefore, insertAfter } from "../../../ArrayHelper";
 import { DragoverState } from "./States/DragoverState";
-import { resolveRule } from "DragIt";
+import { resolveRule } from "DragRX";
 
 export class Node implements INode{
   static idSeed:number = 1;

@@ -4,7 +4,7 @@ import { PageActionHandle } from './PageAction';
 import { useFormContext } from 'react-hook-form';
 import { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 import intl from 'react-intl-universal';
-import { resolveNode } from 'DragIt';
+import { resolveNode } from 'DragRX';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};

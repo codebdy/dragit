@@ -4,7 +4,7 @@ import Portlet from 'components/Portlet';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import classNames from 'classnames';
-import { resolveNode } from 'DragIt';
+import { resolveNode } from 'DragRX';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
