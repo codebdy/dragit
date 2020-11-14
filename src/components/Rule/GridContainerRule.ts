@@ -1,9 +1,9 @@
 import { Rule } from "./Rule";
-import { IMeta } from "../Node/IMeta";
+import { IMeta } from "../../designer/Core/Node/IMeta";
 import { GridItemRule } from "./GridItemRule";
-import { INode } from "../Node/INode";
+import { INode } from "../../designer/Core/Node/INode";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { IField } from "./IRule";
+import { IField } from "../IRule";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 
 export class GridContainerRule extends Rule{

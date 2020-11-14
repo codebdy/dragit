@@ -1,5 +1,5 @@
-import { IMeta } from "../Node/IMeta";
-import { INode } from "../Node/INode";
+import { IMeta } from "../designer/Core/Node/IMeta";
+import { INode } from "../designer/Core/Node/INode";
 
 export interface IField{
   name:string;

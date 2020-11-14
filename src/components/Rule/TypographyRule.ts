@@ -1,7 +1,7 @@
 import { Rule } from "./Rule";
-import { IMeta } from "../Node/IMeta";
-import { INode } from "../Node/INode";
-import { IField } from "./IRule";
+import { IMeta } from "../../designer/Core/Node/IMeta";
+import { INode } from "../../designer/Core/Node/INode";
+import { IField } from "../IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
 import TextareaInput from "designer/Attrebutebox/Inputs/TextareaInput";

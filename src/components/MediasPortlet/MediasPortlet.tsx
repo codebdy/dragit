@@ -266,4 +266,4 @@ const FormedMediasPortlet = React.forwardRef((props:any, ref:any)=>{
   )
 })
 
-export default FormedMediasPortlet;
+export default MediasPortlet;

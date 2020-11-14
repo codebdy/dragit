@@ -1,6 +1,6 @@
 import { Rule } from "./Rule";
-import { IMeta } from "../Node/IMeta";
-import { INode } from "../Node/INode";
+import { IMeta } from "../../designer/Core/Node/IMeta";
+import { INode } from "../../designer/Core/Node/INode";
 
 export class PortletFormGridBodyRule extends Rule{
 

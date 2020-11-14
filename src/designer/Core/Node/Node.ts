@@ -6,14 +6,12 @@ import { FocusState } from "./States/FocusState";
 import { DraggedState } from "./States/DraggedState";
 import { PreviewState } from "./States/PreviewState";
 import { IMeta } from "./IMeta";
-import { resolveRule } from "../Rules/resolveRule";
-import { IRule } from "../Rules/IRule";
+import { IRule } from "../../../components/IRule";
 import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode, MousePoint } from "./INode";
 import { remove, last, first, before, after, insertBefore, insertAfter } from "../../../ArrayHelper";
 import { DragoverState } from "./States/DragoverState";
-
-declare var window:any;
+import { resolveRule } from "DragIt";
 
 export class Node implements INode{
   static idSeed:number = 1;
@@ -39,7 +37,7 @@ export class Node implements INode{
     this.meta = meta;
     //this.parent = parent;
     this.state = this.normalState;
-    this.rule =  resolveRule(meta);
+    this.rule =  resolveRule(meta.name);
     this.children = children;
     this.children.map((child:INode) =>{
       child.parent = this;

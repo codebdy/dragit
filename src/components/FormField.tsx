@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { resolveNode } from 'components/resoveNode';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import resolveSkeleton from 'admin/views/Page/resolveSkeleton';
 import { Controller } from 'react-hook-form';
+import { resolveNode } from 'DragIt';
 
 const FormField = React.forwardRef((props:any, ref:any) => {
   const {as, control, value,...rest} = props

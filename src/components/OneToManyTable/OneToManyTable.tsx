@@ -3,8 +3,8 @@ import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead
 import Portlet from 'components/Portlet/Portlet';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import { resolveNode } from 'components/resoveNode';
 import classNames from 'classnames';
+import { resolveNode } from 'DragIt';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

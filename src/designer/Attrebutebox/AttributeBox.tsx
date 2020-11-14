@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {AttributeRow, RowLabel, RowValue} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
-import { IField } from 'designer/Core/Rules/IRule';
+import { IField } from 'components/IRule';
 import StyleList from './Inputs/StyleList';
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './AttributeBoxActionSection';

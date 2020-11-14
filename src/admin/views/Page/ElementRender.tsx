@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { resolveNode } from 'components/resoveNode';
 import { RXElement } from './RXElement';
 import { PageActionHandle } from './PageAction';
 import { useFormContext } from 'react-hook-form';
 import { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 import intl from 'react-intl-universal';
+import { resolveNode } from 'DragIt';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};

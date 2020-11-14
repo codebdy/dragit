@@ -1,7 +1,7 @@
 import { Rule } from "./Rule";
-import { INode } from "../Node/INode";
+import { INode } from "../../designer/Core/Node/INode";
 import { GridItemRule } from "./GridItemRule";
-import { IMeta } from "../Node/IMeta";
+import { IMeta } from "../../designer/Core/Node/IMeta";
 
 export class CanvasRule extends Rule{
   editPaddingY = '';

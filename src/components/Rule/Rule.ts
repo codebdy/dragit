@@ -1,7 +1,7 @@
-import { IRule, IField } from "./IRule";
-import { IMeta } from "../Node/IMeta";
+import { IRule, IField } from "../IRule";
+import { IMeta } from "../../designer/Core/Node/IMeta";
 import intl from 'react-intl-universal';
-import { INode } from "../Node/INode";
+import { INode } from "../../designer/Core/Node/INode";
 
 export class Rule implements IRule{
   editPaddingY = '';

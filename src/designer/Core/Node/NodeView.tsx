@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { resolveNode } from "../../../components/resoveNode"
 //import { Node } from './Node';
 import bus, {WILL_FOCUS_NODE } from "../bus";
 import { INode } from './INode';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { resolveNode } from 'DragIt';
 
 interface INodeProps{
   node: INode,
