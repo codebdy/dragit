@@ -7,9 +7,9 @@ import './mock'
 import { Provider } from 'react-redux'
 import configureStore from "./store";
 import {register, registerHtmlTag} from "./DragIt";
-import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { Button, Divider, TextField, Typography } from '@material-ui/core';
 import FormField from 'components/FormField';
-import FormGridItem from 'components/FormGridItem';
+import FormGridItem from 'components/Grid/FormGridItem';
 import ListView from 'components/ListView';
 import MediaSelect from 'components/MediaSelect/MediaSelect';
 import OneToManyTable from 'components/OneToManyTable';
@@ -24,18 +24,16 @@ import { HeadRule } from 'components/Head/Rule';
 import { ButtonRule } from 'components/Button/Rule';
 import { DividerRule } from 'components/Divider/Rule';
 import { CanvasRule } from 'components/Canvas/Rule';
+import GridRow from 'components/Grid/Row';
+import GridColumn from 'components/Grid/Column';
 
 const store = configureStore();
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
-register('Grid', Grid);
+register('GridRow', GridRow);
+register('GridColumn', GridColumn);
 register('Button',Button, ButtonRule);
-register('Card', Card);
-register('CardHeader', CardHeader);
-register('CardContent', CardContent);
-register('CardActions', CardActions);
-register('Paper', Paper);
 register('TextField', TextField);
 register('FormField', FormField);
 register('Portlet', Portlet);

@@ -1,17 +1,16 @@
-import { Rule } from "./Rule";
-import { GridItemRule } from "./GridItemRule";
-import { INode } from "../../designer/Core/Node/INode";
+import { Rule } from "../../Rule/Rule";
+import { INode } from "../../../designer/Core/Node/INode";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { IField } from "../IRule";
+import { IField } from "../../IRule";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 
-export class GridContainerRule extends Rule{
+export class GridRowRule extends Rule{
   editPaddingY = '16px';
   editPaddingX = '16px';
   labelKey ="row";
 
   accept(child:INode){
-    if(child.rule instanceof GridItemRule){
+    if(child.meta.name === 'GridColumn'){
       return true;
     }
     return false;

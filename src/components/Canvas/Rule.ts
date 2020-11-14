@@ -1,6 +1,5 @@
 import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import { GridItemRule } from "../Rule/GridItemRule";
 
 export class CanvasRule extends Rule{
   editPaddingY = '';
@@ -8,7 +7,7 @@ export class CanvasRule extends Rule{
   dropInMargin = 0;
 
   accept(child:INode){
-    if(child.rule instanceof GridItemRule){
+    if(child.meta.name === 'GridColumn'){
       return false;
     }
     return true;

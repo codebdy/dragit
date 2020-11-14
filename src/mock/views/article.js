@@ -10,17 +10,13 @@ export default {
   },
 
   layout:[{
-    name: 'Grid',
+    name: 'GridRow',
     props: {
-      container: true,
       justify: 'space-between',
       alignItems: "center",
     },
     children: [{
-        name: 'Grid',
-        props: {
-          item: true,
-        },
+        name: 'GridColumn',
         children: [{
           name: 'h2',
           props:{
@@ -30,11 +26,7 @@ export default {
         }],
       },
       {
-        name: 'Grid',
-        //text: 'test',
-        props: {
-          item: true,
-        },
+        name: 'GridColumn',
         children: [
           {
             name: 'Button',
@@ -73,16 +65,14 @@ export default {
     ]
   },
   {
-      name: 'Grid',
+      name: 'GridRow',
       props: {
-        container: true,
         spacing: 3,
       },
   
       children: [{
-          name: 'Grid',
+          name: 'GridColumn',
           props: {
-            item: true,
             md: 8,
           },
           children: [
@@ -382,47 +372,11 @@ export default {
                 ]         
               },            
             },
-            {
-              name: 'Card',
-              props: {
-                elevation: 6,
-                style:{
-                  marginTop:'16px',
-                },
-               },
-               children: [
-                {
-                  name: 'CardHeader',
-                  props: {
-                    title: 'SEO Meta',
-                  }
-                },
-              ],
-            },
-            {
-              name: 'Card',
-              props: {
-                elevation: 6,
-                style:{
-                  marginTop:'16px',
-                },
-               },
-               children: [
-                {
-                  name: 'CardHeader',
-                  props: {
-                    title: '内容',
-                  }
-  
-                },
-              ],
-            },
           ]
         },
         {
-          name: 'Grid',
+          name: 'GridColumn',
           props: {
-            item: true,
             md: 4,
           },
           children: [

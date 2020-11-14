@@ -1,6 +1,6 @@
-import { Rule } from "./Rule";
-import { INode } from "../../designer/Core/Node/INode";
-import { IField } from "../IRule";
+import { Rule } from "../../Rule/Rule";
+import { INode } from "../../../designer/Core/Node/INode";
+import { IField } from "../../IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 
 const colWidthOptions = [
@@ -118,13 +118,13 @@ const colWidthOptions = [
 
 ]
 
-export class GridItemRule extends Rule{
+export class GridColumnRule extends Rule{
   editPaddingY = '16px';
   editPaddingX = '16px';
   labelKey ="column";
 
   accept(child:INode){
-    if(child.rule instanceof GridItemRule){
+    if(child.meta.name === 'GridColumn'){
       return false;
     }
    /*

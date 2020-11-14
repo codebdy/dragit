@@ -12,18 +12,15 @@ export default {
   withoutForm:true,
   layout:[
     {
-      name: 'Grid',
+      name: 'GridRow',
       props: {
-          container: true,
           justify: 'space-between',
           alignItems: "center",
           spacing: 1,
       },
-      children: [{
-              name: 'Grid',
-              props: {
-                item: true,
-              },
+      children: [
+          {
+              name: 'GridColumn',
               children: [{
                   name: 'h2',
                   props:{
@@ -33,11 +30,7 @@ export default {
               }],
           },
           {
-            name: 'Grid',
-            //text: 'test',
-            props: {
-              item: true,
-            },
+            name: 'GridColumn',
             children: [
             {
               name: 'Button',
@@ -61,9 +54,8 @@ export default {
             }]
           },
           {
-            name: 'Grid',
+            name: 'GridColumn',
             props: {
-              item: true,
               xs:12,
             },
             children: [          {
