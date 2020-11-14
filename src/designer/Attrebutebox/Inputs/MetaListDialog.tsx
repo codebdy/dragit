@@ -134,7 +134,7 @@ export default function MetaListDialog(props:MetaListDialogProps){
   return (
 
     <Fragment>
-      <IconButton size="small" className = {classes.more} onClick={handleClickOpen}> ··· </IconButton>
+      <Button fullWidth variant="outlined" size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> 列 ···</Button>
       <ThemeProvider theme={theme}>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 
           open={open}

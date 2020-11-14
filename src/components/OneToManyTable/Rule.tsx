@@ -31,6 +31,7 @@ export class OneToManyTableRule extends Rule{
       {
         name:'helperText',
         label:'helper-text',
+        xs:12,
         input:TextInput,
       },
     ]

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { makeStyles, Theme, createStyles, ExpansionPanel } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, ExpansionPanel, Grid } from '@material-ui/core';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
@@ -89,81 +89,25 @@ export default function AttributeBox(props:{node:INode|null}){
               <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.pannelDetail}>
-              {
-                node.rule.getFields(node.meta).map((field:IField)=>{
-                  return(
-                    <AttributeRow key={node.id + '-' + field.name}>
-                      <RowLabel>{intl.get(field.label)||field.label}</RowLabel>
-                      <RowValue>
-                        <field.input
-                          field={field.name}
-                          value={node.props[field.name]}
-                          onChange= {propChange}
-                          schema={field.schema}
-                        />
-                      </RowValue>
-                    </AttributeRow>                  
-                  )
-                })
-              }
-              {/*<RowGroup
-                totalLabel='外边距'
-                totalInput = {
-                  <input type="number"
-                    min="0"
-                    max="10"
-                    step="2"
-                    className={classes.input}
-                  />
-                }
-              >
-                <AttributeRow>
-                  <RowLabel nested>上</RowLabel>
-                  <RowValue>
-                    <input type="number"
-                      min="0"
-                      max="10"
-                      step="2"
-                      className={classes.input}
-                    />
-                  </RowValue>
-                </AttributeRow>
-                <AttributeRow>
-                  <RowLabel nested>下</RowLabel>
-                  <RowValue>
-                    <input type="number"
-                      min="0"
-                      max="10"
-                      step="2"
-                      className={classes.input}
-                    />
-                  </RowValue>
-                </AttributeRow>
-                <AttributeRow>
-                  <RowLabel nested>左</RowLabel>
-                  <RowValue>
-                    <input type="number"
-                      min="0"
-                      max="10"
-                      step="2"
-                      className={classes.input}
-                    />
-                  </RowValue>
-                </AttributeRow>
-                <AttributeRow>
-                  <RowLabel nested>右</RowLabel>
-                  <RowValue>
-                    <input type="number"
-                      min="0"
-                      max="10"
-                      step="2"
-                      className={classes.input}
-                    />
-                  </RowValue>
-                </AttributeRow>
-              </RowGroup>*/
-            }
+              <Grid container spacing={1}>
+                {
+                  node.rule.getFields(node.meta).map((field:IField)=>{
+                    return(
+                      <Grid item key={node.id + '-' + field.name} xs={field.xs || 6}>
+                          <field.input
+                            label={intl.get(field.label)||field.label}
+                            field={field.name}
+                            value={node.props[field.name]}
+                            onChange= {propChange}
+                            schema={field.schema}
+                          />
 
+                      </Grid>                  
+                    )
+                  })
+                }
+
+              </Grid>
             </ExpansionPanelDetails>
           </ExpansionPanel>
           <ExpansionPanel  className={classes.panelPaper}>

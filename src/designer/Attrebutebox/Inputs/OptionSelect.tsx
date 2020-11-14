@@ -12,7 +12,7 @@ export default function OptionSelect(props:InputProps){
     onChange(field, event.target.value);
   };  
   return (
-    <FormControl variant="outlined" size="small">
+    <FormControl variant="outlined" size="small" fullWidth>
       <Select
         value={inputValue || ''}
         onChange={handleChange}

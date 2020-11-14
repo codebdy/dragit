@@ -1,9 +1,9 @@
 import React from 'react';
+import { TextField } from '@material-ui/core';
 import { InputProps } from './InputProps';
-import {StyledTextInput} from './StyledInput';
 
 export default function TextInput(props:InputProps){
-  const {field, value, onChange} = props;
+  const {field, label, value, onChange} = props;
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -13,9 +13,13 @@ export default function TextInput(props:InputProps){
   };  
 
   return (
-    <StyledTextInput 
+    <TextField
+      label={label}
       value={inputValue||''}
       onChange={handleChange}
+      size="small"
+      fullWidth
+      variant = "outlined"
     />
   )
 }
