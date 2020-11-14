@@ -97,203 +97,273 @@ export default {
               },
               children:[
                 {
-                  name:'PortletFormGridBody',
+                  name:'PortletGridContainer',
                   children:[
                     {
-                      name: 'FormGridItem',
+                      name: 'PortletGridItem',
                       props:{
-                        as:'TextField',
-                        label:'标题',
-                        variant:"outlined",
-                        field:'title',
                         xs:12,
-                        rule:{
-                          valueType:'string',
-                          required:true,
-                        }                      
-                      }
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'标题',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'title',
+                            rule:{
+                              valueType:'string',
+                              required:true,
+                            }                      
+                          }
+                        }
+                      ]
                     },
                     {
-                      name: 'FormGridItem',
+                      name: 'PortletGridItem',
                       props:{
-                        as:'TextField',
-                        label:'Slug',
-                        variant:"outlined",
-                        //size:"small",
-                        field:'slug',
-                        //required:true,
                         xs:12,                      
-                        rule:{
-                          //valueType:'string',
-                          //required:true,
-                        }                      
-                      }
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'Slug',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'slug',
+                            //required:true,
+                            rule:{
+                              //valueType:'string',
+                              //required:true,
+                            }                      
+                          },
+                        }
+                      ]
                     },
                     {
-                      name: 'FormGridItem',
+                      name: 'PortletGridItem',
                       props:{
-                        as:'TextField',
-                        label:'作者',
-                        variant:"outlined",
-                        //size:"small",
-                        //select: true,
-                        field:'auther',
                         xs:6,
-                        helperText:'作者提示'
-                      }
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'作者',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'auther',
+                            //required:true,
+                            helperText:'作者提示',
+                            rule:{
+                              //valueType:'string',
+                              //required:true,
+                            }                      
+                          },
+                        }
+                      ]
                     },
                     {
-                      name: 'FormGridItem',
+                      name: 'PortletGridItem',
                       props:{
-                        as:'TextField',
-                        label:'Email',
-                        variant:"outlined",
-                        //size:"small",
-                        //select: true,
-                        field:'email',
-                        rule:{
-                          valueType:'string',
-                          ruleType:'email',
-                          required:true,
-                        },
                         xs:6,
-                      }
-                    },
-                    {
-                      name: 'FormGridItem',
-                      props:{
-                        as:'SelectBox',
-                        label:"分类",
-                        variant:"outlined",
-                        //size:"small",
-                        field:'category',
-                        xs:6,
-                        required:true,
-                        helperText:'请选择分类',
-                        multiple:true,
-                        rule:{
-                          required:true,
-                        },
-                        data:{
-                          fromUrl:false,           
-                          items:[
-                            {
-                              slug:'news',
-                              label:'新闻',
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'Email',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'email',
+                            rule:{
+                              valueType:'string',
+                              ruleType:'email',
+                              required:true,
                             },
-                            {
-                              slug:'tech',
-                              label:'技术',
-                            },
-                            {
-                              slug:'jingyan‘',
-                              label:'经验',
-                            },
-                          ]
-                        }           
-                      }
-                    },
-                    {
-                      name: 'FormGridItem',
-                      props:{
-                        as:'SelectBox',
-                        label:"频道",
-                        variant:"outlined",
-                        field:'channel',
-                        xs:6,
-                        required:true,
-                        withoutEmpertyItem:true,                        
-                        data:{
-                          fromUrl:true,
-                          url:'/api/base/items',
-                        },
+                          },
+                        }
+                      ]
 
-                        rule:{
-                          required:true,
-                        },
-                      },        
                     },
                     {
-                      name: 'FormGridItem',
+                      name: 'PortletGridItem',
                       props:{
-                        as:'TextField',
-                        label:"创作日期",
-                        variant:"outlined",
-                        //size:"small",
-                        type:'date',
-                        InputLabelProps:{
-                          shrink: true,
-                        },
-                        field:'create_date',
                         xs:6,
-                      }
+                      },
+                      children:[
+                        {
+                          name:'SelectBox',
+                          props:{
+                            label:"分类",
+                            variant:"outlined",
+                            field:'category',
+                            required:true,
+                            helperText:'请选择分类',
+                            fullWidth:true,
+                            multiple:true,
+                            rule:{
+                              required:true,
+                            },
+                            data:{
+                              fromUrl:false,           
+                              items:[
+                                {
+                                  slug:'news',
+                                  label:'新闻',
+                                },
+                                {
+                                  slug:'tech',
+                                  label:'技术',
+                                },
+                                {
+                                  slug:'jingyan‘',
+                                  label:'经验',
+                                },
+                              ]
+                            }           
+                          }
+                        }
+                      ],
                     },
                     {
-                      name: 'FormGridItem',
+                      name: 'PortletGridItem',
                       props:{
-                        as:'Combobox',
-                        label:"标签",
-                        variant:"outlined",
-                        field:'tags',
-                        multiple:false,
+                        xs:6,
+                      },
+                      children:[
+                        {
+                          name:'SelectBox',
+                          props:{
+                            label:"频道",
+                            variant:"outlined",
+                            field:'channel',
+                            fullWidth:true,
+                            xs:6,
+                            required:true,
+                            withoutEmpertyItem:true,                        
+                            data:{
+                              fromUrl:true,
+                              url:'/api/base/items',
+                            },
+
+                            rule:{
+                              required:true,
+                            },
+                          },        
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:6,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'创作日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            //size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'create_date',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
                         xs:12,
-                        //required:true,
-                        data:{
-                          fromUrl:false,           
-                          items:[
-                            {
-                              slug:'product',
-                              label:'产品',
-                            },
-                            {
-                              slug: 'iPhone',
-                              label:'iPhone',
-                            },
-                            {
-                              slug:'apple',
-                              label:'苹果',
-                            },
-                          ]
-                        },           
+                      },
+                      children:[
+                        {
+                          name:'Combobox',
+                          props:{
+                            label:"标签",
+                            variant:"outlined",
+                            field:'tags',
+                            multiple:false,
+                            //required:true,
+                            data:{
+                              fromUrl:false,           
+                              items:[
+                                {
+                                  slug:'product',
+                                  label:'产品',
+                                },
+                                {
+                                  slug: 'iPhone',
+                                  label:'iPhone',
+                                },
+                                {
+                                  slug:'apple',
+                                  label:'苹果',
+                                },
+                              ]
+                            },           
 
-                        rule:{
-                          //required:true,
-                        },
-                      },        
+                            rule:{
+                              //required:true,
+                            },
+                          },        
+                        }
+                      ],
                     },
                     {
-                      name: 'FormGridItem',
+                      name: 'PortletGridItem',
                       props:{
-                        as:'Combobox',
-                        label:"标签2",
-                        variant:"outlined",
-                        field:'tags2',
-                        multiple:true,
                         xs:12,
-                        //required:true,
-                        data:{
-                          fromUrl:true,
-                          url:'/api/base/items',
-                        },
+                      },
+                      children:[
+                        {
+                          name:'Combobox',
+                          props:{
+                            label:"标签2",
+                            variant:"outlined",
+                            field:'tags2',
+                            multiple:true,
+                            fullWidth:true,
+                            data:{
+                              fromUrl:true,
+                              url:'/api/base/items',
+                            },
 
-                        rule:{
-                          required:true,
-                        },
-                      },        
+                            rule:{
+                              required:true,
+                            },
+                          },                         
+                        }
+                      ]
+       
                     },
 
                     {
-                      name:"FormGridItem",
+                      name:"PortletGridItem",
                       props:{
-                        as:'TextField',
-                        fullWidth: true,
-                        label:'简介',
-                        variant:"outlined",
-                        //size:"small",
-                        multiline:true,
-                        rows:5,
                         xs:12,
-                      }
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            fullWidth: true,
+                            label:'简介',
+                            variant:"outlined",
+                            //size:"small",
+                            multiline:true,
+                            rows:5,
+                          }                        
+                        }
+                      ]
+
                     }
                     
                   ]
@@ -391,7 +461,7 @@ export default {
               },
               children:[
                 {
-                  name:"PortletFormGridBody",
+                  name:"PortletGridContainer",
                 }
               ]
             }

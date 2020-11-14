@@ -1,7 +1,7 @@
-import { Rule } from "../../Rule/Rule";
+import { Rule } from "../Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
-import { IField } from "../../Rule/IRule";
+import { IField } from "../Rules/IRule";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 
 export class HeadRule extends Rule{

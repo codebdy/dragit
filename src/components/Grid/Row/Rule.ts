@@ -1,7 +1,7 @@
-import { Rule } from "../../../Rule/Rule";
+import { Rule } from "../../Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { IField } from "../../../Rule/IRule";
+import { IField } from "../../Rules/IRule";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 
 export class GridRowRule extends Rule{

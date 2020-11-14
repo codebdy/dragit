@@ -1,15 +1,12 @@
 import { Rule } from "../Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 
-export class CanvasRule extends Rule{
+export class SelectRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
-  dropInMargin = 0;
+  empertyPadding = '';
 
   accept(child:INode){
-    if(child.meta.name === 'GridColumn'){
-      return false;
-    }
-    return true;
+    return false;
   }
 }

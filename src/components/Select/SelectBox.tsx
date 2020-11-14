@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import axios from 'axios';
+import InputWithSkeleton from 'components/common/InputWithSkeleton';
+import { RXInputProps } from 'components/RXInputProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,7 +20,7 @@ export interface SelectItems{
   url?:string;
 }
 
-const SelectBox = React.forwardRef((
+const SelectBoxInner = React.forwardRef((
   props:{
     value?:string|[],
     label?:string,
@@ -125,5 +127,11 @@ const SelectBox = React.forwardRef((
     </FormControl>
   )
 })
+
+const SelectBox = React.forwardRef((props:RXInputProps, ref:any) => {
+  return (
+    <InputWithSkeleton as={SelectBoxInner} {...props} ref={ref}/>
+  )
+});
 
 export default SelectBox

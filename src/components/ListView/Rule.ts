@@ -1,6 +1,6 @@
-import { Rule } from "../../Rule/Rule";
+import { Rule } from "../Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import { IField } from "../../Rule/IRule";
+import { IField } from "../Rules/IRule";
 import ListViewColumnsDialog from "designer/Attrebutebox/Inputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "designer/Attrebutebox/Inputs/ListViewFiltersDialog";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";

@@ -1,7 +1,7 @@
-import { Rule } from "../../Rule/Rule";
+import { Rule } from "../Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
-import { IField } from "../../Rule/IRule";
+import { IField } from "../Rules/IRule";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 

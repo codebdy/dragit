@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const PortletFormGridBody = React.forwardRef((props:{children:any, className:any,}, ref:any) => {
+const PortletGridContainer = React.forwardRef((props:{children:any, className:any,}, ref:any) => {
   const {className, children, ...rest} = props
   const classes = useStyles();
   return (
@@ -20,5 +20,5 @@ const PortletFormGridBody = React.forwardRef((props:{children:any, className:any
     </Grid>
   )
 });
-export default  PortletFormGridBody
+export default  PortletGridContainer
 

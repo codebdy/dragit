@@ -1,17 +1,17 @@
-import { Rule } from "../../../Rule/Rule";
+import { Rule } from "../../Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import { IMeta } from "../../../designer/Core/Node/IMeta";
-import { IField } from "../../../Rule/IRule";
+import { IField } from "../../Rules/IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { colWidthOptions } from "../Column/Rule";
+import { colWidthOptions } from "../../Grid/Column/Rule";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 import SelectItemsInput from "designer/Attrebutebox/Inputs/SelectItemsInput";
 
-export class FormGridItemRule extends Rule{
+export class PortletGridItemRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
-  empertyPadding = '';
+  //empertyPadding = '';
   hasData = true;
 
   accept(child:INode){
@@ -19,10 +19,10 @@ export class FormGridItemRule extends Rule{
   }
 
   resolveLabel(meta:IMeta):string|undefined{
-    return 'Form item:' + meta.props?.as;
+    return 'Grid Item';
   }
 
-  getFields(meta?:IMeta): Array<IField>{
+  /*getFields(meta?:IMeta): Array<IField>{
     let options:Array<IField> = []
     
     if(meta?.props?.as === "TextField"){
@@ -111,6 +111,6 @@ export class FormGridItemRule extends Rule{
         input:TextInput,
       }
     ]
-  }
+  }*/
 
 }
