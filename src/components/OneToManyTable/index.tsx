@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
-import Portlet from 'components/Portlet/Portlet';
+import Portlet from 'components/Portlet';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import classNames from 'classnames';

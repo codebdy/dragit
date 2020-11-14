@@ -1,9 +1,9 @@
-import { Rule } from "./Rule";
+import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 import { IField } from "../IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { colWidthOptions } from "./GridItemRule";
+import { colWidthOptions } from "../Rule/GridItemRule";
 import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 import SelectItemsInput from "designer/Attrebutebox/Inputs/SelectItemsInput";
@@ -14,10 +14,6 @@ export class FormGridItemRule extends Rule{
   empertyPadding = '';
   hasData = true;
 
-  match(meta:IMeta){
-    return meta.name === 'FormGridItem';
-  }
-  
   accept(child:INode){
     return false;
   }

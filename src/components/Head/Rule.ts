@@ -1,4 +1,4 @@
-import { Rule } from "./Rule";
+import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 import { IField } from "../IRule";
@@ -8,7 +8,7 @@ export class HeadRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
 
-  match(meta:IMeta){
+/*  match(meta:IMeta){
     let tagName = meta.name.toLowerCase();
     return tagName === 'h1' || 
       tagName === 'h2' || 
@@ -16,7 +16,7 @@ export class HeadRule extends Rule{
       tagName === 'h4' ||
       tagName === 'h5' ||
       tagName === 'h6';
-  }
+  }*/
   
   accept(child:INode){
     return false;

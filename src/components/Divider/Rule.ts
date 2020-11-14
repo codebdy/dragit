@@ -1,4 +1,4 @@
-import { Rule } from "./Rule";
+import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 
@@ -7,10 +7,6 @@ export class DividerRule extends Rule{
   editPaddingX = '0';
   empertyPadding = '2px';
 
-  match(meta:IMeta){
-    return meta.name === 'Divider';
-  }
-  
   accept(child:INode){
     return false;
   }

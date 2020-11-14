@@ -1,5 +1,4 @@
-import { Rule } from "./Rule";
-import { IMeta } from "../../designer/Core/Node/IMeta";
+import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IField } from "../IRule";
 import OneToManyTableColumnsDialog from "designer/Attrebutebox/Inputs/OneToManyTableColumnsDialog";
@@ -9,10 +8,6 @@ import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 export class OneToManyTableRule extends Rule{
   empertyPadding = '';
   
-  match(meta:IMeta){
-     return meta.name === 'OneToManyTable';
-  }
-
   accept(child:INode){
     return false;
   }

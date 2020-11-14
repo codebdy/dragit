@@ -1,5 +1,4 @@
-import { Rule } from "./Rule";
-import { IMeta } from "../../designer/Core/Node/IMeta";
+import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IField } from "../IRule";
 import ListViewColumnsDialog from "designer/Attrebutebox/Inputs/ListViewColumnsDialog";
@@ -11,10 +10,6 @@ import ListViewRowCommandDialog from "designer/Attrebutebox/Inputs/ListViewRowCo
 export class ListViewRule extends Rule{
   empertyPadding = '';
   
-  match(meta:IMeta){
-     return meta.name === 'ListView';
-  }
-
   accept(child:INode){
     return false;
   }

@@ -10,15 +10,12 @@ export class Rule implements IRule{
   labelKey?: string;
   dropInMargin = 8;
   _label?:string;
-  
-  match(meta:IMeta){
-    return true;
-  }
 
   resolveLabel(meta:IMeta):string|undefined{
     let label = this.labelKey ? intl.get(this.labelKey) : this._label;
     return label ? label : meta.name;
   }
+
 
   set label(label:string){
     this._label = label;

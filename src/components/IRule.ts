@@ -15,7 +15,7 @@ export interface IRule{
   
   labelKey?: string;
   dropInMargin: number;
-  match: (meta:IMeta)=>boolean;
+
   accept: (child:INode)=>boolean;
   resolveLabel: (meta:IMeta)=>string|undefined;
 

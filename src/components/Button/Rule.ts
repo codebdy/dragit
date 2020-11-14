@@ -1,4 +1,4 @@
-import { Rule } from "./Rule";
+import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 import { IField } from "../IRule";
@@ -12,10 +12,6 @@ export class ButtonRule extends Rule{
   empertyPadding = '';
   hasAction = true;
 
-  match(meta:IMeta){
-    return meta.name === 'Button';
-  }
-  
   accept(child:INode){
     return false;
   }

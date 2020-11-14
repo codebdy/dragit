@@ -1,5 +1,4 @@
 import { Rule } from "./Rule";
-import { IMeta } from "../../designer/Core/Node/IMeta";
 import { INode } from "../../designer/Core/Node/INode";
 import { IField } from "../IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
@@ -123,13 +122,6 @@ export class GridItemRule extends Rule{
   editPaddingY = '16px';
   editPaddingX = '16px';
   labelKey ="column";
-
-  match(meta:IMeta){
-    if(meta.name === 'Grid' && meta.props?.item === true){
-      return true;
-    }
-    return false;
-  }
 
   accept(child:INode){
     if(child.rule instanceof GridItemRule){

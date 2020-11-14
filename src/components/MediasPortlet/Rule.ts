@@ -1,39 +1,24 @@
-import { Rule } from "./Rule";
-import { IMeta } from "../../designer/Core/Node/IMeta";
+import { Rule } from "../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
 import { IField } from "../IRule";
-import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 
-export class PortletRule extends Rule{
-
-  match(meta:IMeta){
-    return meta.name === 'Portlet';
-  }
-
+export class MediasPortletRule extends Rule{
+  editPaddingY = '';
+  editPaddingX = '';
+  empertyPadding = '';
+  
   accept(child:INode){
-    if(child.meta.name === "PortletFormGridBody"){
-      return true
-    }
-    if(child.meta.name === "PortletFooter"){
-      return true
-    }
     return false;
   }
-
   getFields(): Array<IField>{
     return [
       {
-        name:'collapsible',
-        label:'collapsible',
-        input:SwitchInput,
-      },      
-      {
-        name:'open',
-        label:'defalut-open',
-        input:SwitchInput,
-      },      
+        name:'cols',
+        label:'cols',
+        input:TextInput,
+      },
       {
         name:'spacingTop',
         label:'spacing-top',
@@ -85,16 +70,7 @@ export class PortletRule extends Rule{
           step:1
         }
       },
-      {
-        name:'withHeader',
-        label:'with-header',
-        input:SwitchInput,
-      }, 
-      {
-        name:'title',
-        label:'title',
-        input:TextInput,
-      },
+
     ]
   }
 
