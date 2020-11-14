@@ -1,4 +1,4 @@
-import { Rule } from "../Rule/Rule";
+import { Rule } from "../../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 

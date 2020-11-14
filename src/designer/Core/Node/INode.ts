@@ -1,4 +1,4 @@
-import { IRule } from "../../../components/IRule";
+import { IRule } from "../../../Rule/IRule";
 import { IMeta } from "./IMeta";
 import { IView } from "./IView";
 

@@ -26,6 +26,7 @@ import { DividerRule } from 'components/Divider/Rule';
 import { CanvasRule } from 'components/Canvas/Rule';
 import GridRow from 'components/Grid/Row';
 import GridColumn from 'components/Grid/Column';
+import { TypographyRule } from 'components/Typography/Rule';
 
 const store = configureStore();
 
@@ -40,7 +41,7 @@ register('Portlet', Portlet);
 register('PortletFormGridBody', PortletFormGridBody);
 register('FormGridItem', FormGridItem);
 register('PortletFooter', PortletFooter);
-register('Typography', Typography);
+register('Typography', Typography, TypographyRule);
 register('ListView', ListView);
 register('MediasPortlet', MediasPortlet);
 register('SelectBox', SelectBox);

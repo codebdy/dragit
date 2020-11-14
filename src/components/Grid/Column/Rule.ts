@@ -1,6 +1,6 @@
-import { Rule } from "../../Rule/Rule";
+import { Rule } from "../../../Rule/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
-import { IField } from "../../IRule";
+import { IField } from "../../../Rule/IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 
 const colWidthOptions = [

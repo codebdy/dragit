@@ -1,4 +1,4 @@
-import { Rule } from "./Rule";
+import { Rule } from "../../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 
 export class PortletFormGridBodyRule extends Rule{

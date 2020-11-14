@@ -1,4 +1,4 @@
-import { Rule } from "../Rule/Rule";
+import { Rule } from "../../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 
 export class CanvasRule extends Rule{

@@ -1,7 +1,7 @@
-import { Rule } from "../Rule/Rule";
+import { Rule } from "../../Rule/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
-import { IField } from "../IRule";
+import { IField } from "../../Rule/IRule";
 import TextInput from "designer/Attrebutebox/Inputs/TextInput";
 
 export class MediasPortletRule extends Rule{
