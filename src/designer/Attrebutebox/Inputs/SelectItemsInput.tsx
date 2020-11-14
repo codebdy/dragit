@@ -1,5 +1,5 @@
 import { createStyles, FormControlLabel, makeStyles, Switch, Theme } from '@material-ui/core';
-import { SelectItems } from 'components/Inputs/SelectInput';
+import { SelectItems } from 'components/Select/SelectBox';
 import React from 'react';
 import { InputProps } from './InputProps';
 import {StyledTextAreaInput} from './StyledInput';

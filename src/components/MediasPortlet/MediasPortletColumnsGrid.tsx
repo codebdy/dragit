@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { MediaMeta } from './Medias/MediaGridListImage';
-import MediaAdder from './Medias/MediaAdder';
+import { MediaMeta } from '../Medias/MediaGridListImage';
+import MediaAdder from '../Medias/MediaAdder';
 import { Grid } from '@material-ui/core';
 import MediasPortletMedia from './MediasPortletMedia';
 

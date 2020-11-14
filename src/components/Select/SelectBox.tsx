@@ -18,7 +18,7 @@ export interface SelectItems{
   url?:string;
 }
 
-const SelectInput = React.forwardRef((
+const SelectBox = React.forwardRef((
   props:{
     value?:string|[],
     label?:string,
@@ -126,4 +126,4 @@ const SelectInput = React.forwardRef((
   )
 })
 
-export default SelectInput
+export default SelectBox

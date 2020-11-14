@@ -172,7 +172,7 @@ export default {
                     {
                       name: 'FormGridItem',
                       props:{
-                        as:'SelectInput',
+                        as:'SelectBox',
                         label:"分类",
                         variant:"outlined",
                         //size:"small",
@@ -206,7 +206,7 @@ export default {
                     {
                       name: 'FormGridItem',
                       props:{
-                        as:'SelectInput',
+                        as:'SelectBox',
                         label:"频道",
                         variant:"outlined",
                         field:'channel',
@@ -241,7 +241,7 @@ export default {
                     {
                       name: 'FormGridItem',
                       props:{
-                        as:'ComboboxInput',
+                        as:'Combobox',
                         label:"标签",
                         variant:"outlined",
                         field:'tags',
@@ -274,7 +274,7 @@ export default {
                     {
                       name: 'FormGridItem',
                       props:{
-                        as:'ComboboxInput',
+                        as:'Combobox',
                         label:"标签2",
                         variant:"outlined",
                         field:'tags2',
@@ -329,7 +329,7 @@ export default {
                     field:'image',
                     label:'图片',
                     input:{
-                      name:'MediaInput',
+                      name:'MediaSelect',
                       props:{
                         width:'60px',
                       }
@@ -365,7 +365,7 @@ export default {
                     field:'category',
                     label:'分类',
                     input:{
-                      name:'SelectInput',
+                      name:'SelectBox',
                       props:{
                         variant:"outlined",
                         size:'small',

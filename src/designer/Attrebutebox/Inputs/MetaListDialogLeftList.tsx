@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
-import { ListViewMetaItem } from 'components/ListViewMetaItem';
+import { ListViewMetaItem } from 'components/ListView/ListViewMetaItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

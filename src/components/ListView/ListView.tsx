@@ -17,7 +17,7 @@ import { JUMP_TO_PAGE_ACTION, PageActionHandle, PageJumper } from 'admin/views/P
 import axios from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton } from '@material-ui/core';
-import MdiIcon from './common/MdiIcon';
+import MdiIcon from '../common/MdiIcon';
 import { openSuccessAlertAction } from 'store/alertbar/actions';
 import { useDispatch } from 'react-redux';
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, IconButton } from '@material-ui/core';
-import { MediaMeta } from './Medias/MediaGridListImage';
+import { MediaMeta } from '../Medias/MediaGridListImage';
 import Image from 'components/common/Image'
-import MdiIcon from './common/MdiIcon';
+import MdiIcon from '../common/MdiIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

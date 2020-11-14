@@ -6,7 +6,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import MetaListDialogLeftList from './MetaListDialogLeftList';
 import intl from 'react-intl-universal';
-import { ListViewMetaItem } from 'components/ListViewMetaItem';
+import { ListViewMetaItem } from 'components/ListView/ListViewMetaItem';
 
 const styles = (theme: Theme) =>
   createStyles({

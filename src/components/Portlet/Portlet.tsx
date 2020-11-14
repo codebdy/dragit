@@ -2,7 +2,7 @@ import React, { useRef, Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Typography, Divider, IconButton } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
-import { makeSpaceStyle } from './Util';
+import { makeSpaceStyle } from '../Util';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

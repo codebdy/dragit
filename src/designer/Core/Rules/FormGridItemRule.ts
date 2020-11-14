@@ -53,7 +53,7 @@ export class FormGridItemRule extends Rule{
    
       )
     }
-    if(meta?.props?.as === "SelectInput"){
+    if(meta?.props?.as === "SelectBox"){
       options.push({
           name:'withoutEmpertyItem',
           label:'without-emperty-item',
@@ -61,7 +61,7 @@ export class FormGridItemRule extends Rule{
         });      
     }
 
-    if(meta?.props?.as === "SelectInput" || meta?.props?.as === "ComboboxInput"){
+    if(meta?.props?.as === "SelectBox" || meta?.props?.as === "Combobox"){
       options.push(
         {
           name:'multiple',

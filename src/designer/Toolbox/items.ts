@@ -140,7 +140,7 @@ export default [
         meta:{
           name: 'FormGridItem',
           props:{
-            as:'SelectInput',
+            as:'SelectBox',
             label:"Select",
             variant:"outlined",
             xs:6,
@@ -155,7 +155,7 @@ export default [
         meta:{
           name: 'FormGridItem',
           props:{
-            as:'ComboboxInput',
+            as:'Combobox',
             label:"Combobox",
             variant:"outlined",
             xs:6,

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 
-const MediaInput = React.forwardRef((props: {
+const MediaSelect = React.forwardRef((props: {
   value?:MediaMeta,
   width?:string,
 }, ref:any)=>{
@@ -37,4 +37,4 @@ const MediaInput = React.forwardRef((props: {
   )
 })
 
-export default MediaInput
+export default MediaSelect

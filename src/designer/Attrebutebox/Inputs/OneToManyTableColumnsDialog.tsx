@@ -132,16 +132,16 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
               }}
             >
               <MenuItem value={"TextField"}>{intl.get('text-field')}</MenuItem>
-              <MenuItem value={'SelectInput'}>{intl.get('selectbox')}</MenuItem>
-              <MenuItem value={'ComboboxInput'}>{intl.get('combobox')}</MenuItem>
-              <MenuItem value={'MediaInput'}>{intl.get('media')}</MenuItem>
+              <MenuItem value={'SelectBox'}>{intl.get('selectbox')}</MenuItem>
+              <MenuItem value={'Combobox'}>{intl.get('combobox')}</MenuItem>
+              <MenuItem value={'MediaSelect'}>{intl.get('media')}</MenuItem>
             </Select>
           </FormControl>
           <div className={classes.inputArea}>
             {
               (columns[selectedIndex].input?.name === "TextField" || 
-              columns[selectedIndex].input?.name === "SelectInput" || 
-              columns[selectedIndex].input?.name === "ComboboxInput") &&
+              columns[selectedIndex].input?.name === "SelectBox" || 
+              columns[selectedIndex].input?.name === "Combobox") &&
               <Fragment>
                 <FormControl  fullWidth variant="outlined" size = "small" className={classes.itemInput}>
                   <InputLabel id="align-select-label">{intl.get('size')}</InputLabel>
@@ -183,7 +183,7 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
               </Fragment>
             }
             {
-              columns[selectedIndex].input?.name === "SelectInput" &&
+              columns[selectedIndex].input?.name === "SelectBox" &&
               <FormControlLabel
                 control={
                   <Switch
@@ -200,8 +200,8 @@ export default function OneToManyTableColumnsDialog(props:InputProps){
             
             }
             {
-              (columns[selectedIndex].input?.name === "SelectInput" || 
-              columns[selectedIndex].input?.name === "ComboboxInput" ) &&
+              (columns[selectedIndex].input?.name === "SelectBox" || 
+              columns[selectedIndex].input?.name === "Combobox" ) &&
               <SelectItemsInput field="data" value={columns[selectedIndex].input?.props?.data} onChange = {(field, data)=>{
                 handleChangeInputProps(selectedIndex, field, data)
               }}/>

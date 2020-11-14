@@ -10,16 +10,16 @@ import {
 } from "@material-ui/core";
 
 import FormField from "components/FormField";
-import Portlet from "components/Portlet";
-import PortletFormGridBody from "components/PortletFormGridBody";
-import PortletFooter from "components/PortletFooter";
-import FormGridItem from "components/FormGridItem";
-import ListView from "components/ListView";
-import MediasPortlet from "components/Inputs/MediasPortlet";
-import SelectInput from "./Inputs/SelectInput";
-import ComboboxInput from "./Inputs/ComboboxInput";
-import OneToManyTable from "./Inputs/OneToManyTable";
-import MediaInput from "./Inputs/MediaInput";
+import Portlet from "components/Portlet/Portlet";
+import PortletFormGridBody from "components/Portlet/PortletFormGridBody";
+import PortletFooter from "components/Portlet/PortletFooter";
+import FormGridItem from "components/FormGridItem/FormGridItem";
+import ListView from "components/ListView/ListView";
+import MediasPortlet from "components/MediasPortlet/MediasPortlet";
+import SelectBox from "./Select/SelectBox";
+import Combobox from "./Select/Combobox";
+import OneToManyTable from "./OneToManyTable/OneToManyTable";
+import MediaSelect from "./MediaSelect/MediaSelect";
 
 const nodeMap : { [key: string]: any } = {
   Container,
@@ -41,10 +41,10 @@ const nodeMap : { [key: string]: any } = {
   Typography,
   ListView,
   MediasPortlet,
-  SelectInput,
-  ComboboxInput,
+  SelectBox,
+  Combobox,
   OneToManyTable,
-  MediaInput,
+  MediaSelect,
 }
 
 function resolveNode(name:string): any{

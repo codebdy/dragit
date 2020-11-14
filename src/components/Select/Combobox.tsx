@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { SelectItems } from './SelectInput';
+import { SelectItems } from './SelectBox';
 import axios from 'axios';
 
-const ComboboxInput = React.forwardRef((
+const Combobox = React.forwardRef((
   props:{
     value?:string|[],
     multiple?:boolean,
@@ -97,4 +97,4 @@ const ComboboxInput = React.forwardRef((
   )
 })
 
-export default ComboboxInput
+export default Combobox
