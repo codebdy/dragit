@@ -139,6 +139,7 @@ export class ButtonRule extends Rule{
       {
         name:'rxText',
         label:'text',
+        xs:12,
         input:StringInput,
       },
 

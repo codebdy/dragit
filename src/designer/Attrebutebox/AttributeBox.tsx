@@ -85,7 +85,7 @@ export default function AttributeBox(props:{node:INode|null}){
               <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.pannelDetail}>
-              <Grid container spacing={1}>
+              <Grid container spacing={2}>
                 {
                   node.rule.getFields(node.meta).map((field:IProp)=>{
                     return(
