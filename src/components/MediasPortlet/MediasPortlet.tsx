@@ -223,26 +223,4 @@ const MediasPortlet = React.forwardRef((
   )
 })
 
-/*const FormedMediasPortlet = React.forwardRef((props:any, ref:any)=>{
-  const {control, value, ...rest} = props;
-  const selectPage = (state: RootState) => state.page;
-  const pageInStore = useSelector(selectPage);
-  const skeletonView = resolveSkeleton('MediasPortlet');  
-
-  return (
-    pageInStore.modelLoading ? skeletonView :
-    (control?
-      <Controller
-        as={MediasPortlet}
-        control = {control}
-        defaultValue = {value}
-        value={value}
-        {...rest}
-        ref={ref}
-      />
-    :
-    <MediasPortlet value={value} {...rest} ref = {ref}/>)
-  )
-})*/
-
 export default MediasPortlet;
