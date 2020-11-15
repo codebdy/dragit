@@ -31,7 +31,6 @@ function resolveComponent(meta:IMeta):any{
 
   component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
   component = field ? withFormField(component) : component;
-
   return component;
 }
 

@@ -5,6 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import classNames from 'classnames';
 import { resolveComponent } from 'base/DragRX';
+import { RXInputProps } from 'base/RXInputProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,24 +43,19 @@ var seedId = 1;
 const OneToManyTable = React.forwardRef((
   props: {
     value?:any
-    className?:any,
     onChange:(event:any)=>void,
-    error:boolean,
-    helperText?:string,
-    id?:string,
-    name?:string,
-    inputRef?:any,
     size?:any,
     columns?:Array<ColumnMeta>
-  }, 
+  } & RXInputProps, 
   ref:any
 )=>{
-  const{value, className,  
+  const{
+    loading,
+    value,  
     onChange, 
     error,
     helperText, 
     name,
-    inputRef,
     size,
     columns = [],
      ...rest
@@ -114,10 +110,8 @@ const OneToManyTable = React.forwardRef((
   return (
     <Portlet 
       ref={ref}
-      id = {name}
       withHeader      
       {...rest}
-      className = { className }
     >
 
       <div className={classes.body}>

@@ -8,6 +8,7 @@ import { add, exchange, remove } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
+import { RXInputProps } from 'base/RXInputProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,17 +51,11 @@ export function mergeArray(oldArray:any, newArray:any){
 const MediasPortlet = React.forwardRef((
   props: {
     value?:any
-    className?:any,
     cols?:number,
-    onChange:(event:any)=>void,
-    helperText?:string,
-    id?:string,
-    name?:string,
-    inputRef?:any,
-  }, 
+  } & RXInputProps, 
   ref:any
 )=>{
-  const{value, className, cols, onChange, helperText, name, ...rest
+  const{value, cols, onChange, helperText, loading, ...rest
   } = props;
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -129,9 +124,8 @@ const MediasPortlet = React.forwardRef((
   return (
     <Paper 
       ref={ref}
-      id = {name}
       {...rest}
-      className = { classNames(classes.portlet, className) }
+      className = { classNames(classes.portlet) }
     >
       <div className = {classes.header}>
         <Typography variant="h5">
