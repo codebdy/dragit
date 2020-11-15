@@ -7,16 +7,6 @@ import StringInput from "base/PropsInputs/StringInput";
 export class HeadRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
-
-/*  match(meta:IMeta){
-    let tagName = meta.name.toLowerCase();
-    return tagName === 'h1' || 
-      tagName === 'h2' || 
-      tagName === 'h3' || 
-      tagName === 'h4' ||
-      tagName === 'h5' ||
-      tagName === 'h6';
-  }*/
   
   accept(child:INode){
     return false;
@@ -31,7 +21,12 @@ export class HeadRule extends Rule{
        {
         name:'rxText',
         label:'text',
+        xs:12,        
         input:StringInput,
+        props:{
+          //multiline:true,
+          //rows:2,
+        }
       },
     ]
   }
