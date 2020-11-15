@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, MenuItem, FormControl} from '@material-ui/core';
+import { Select, MenuItem, FormControl, InputLabel} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 import intl from "react-intl-universal";
 
@@ -11,7 +11,7 @@ export interface SelectItem{
 
 export default function OptionSelect(props:PropsInputProps){
   //const classes = useStyles();
-  const {field, value, onChange} = props;
+  const {field, label, value, onChange} = props;
   const items = props.props?.items;
   const [inputValue, setInputValue] = React.useState(value);
 
@@ -21,9 +21,11 @@ export default function OptionSelect(props:PropsInputProps){
   };  
   return (
     <FormControl variant="outlined" size="small" fullWidth>
+      <InputLabel>{label}</InputLabel>
       <Select
         value={inputValue || ''}
         onChange={handleChange}
+        label = {label}
       >
       <MenuItem value="">
         <em>None</em>
