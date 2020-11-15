@@ -1,11 +1,11 @@
-import { Rule } from "../../Rules/Rule";
+import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import { IMeta } from "../../../designer/Core/Node/IMeta";
-import { IField } from "../../Rules/IRule";
+import { IField } from "../../../base/Rules/IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import { colWidthOptions } from "../../Grid/Column/Rule";
-import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
-import TextInput from "designer/Attrebutebox/Inputs/TextInput";
+import SwitchInput from "base/PropsInputs/BooleanInput";
+import StringInput from "base/PropsInputs/StringInput";
 import SelectItemsInput from "designer/Attrebutebox/Inputs/SelectItemsInput";
 
 export class PortletGridItemRule extends Rule{

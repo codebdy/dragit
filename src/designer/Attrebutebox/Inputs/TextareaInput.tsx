@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles} from '@material-ui/core';
-import { InputProps } from './InputProps';
+import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function TextareaInput(props:InputProps){
+export default function TextareaInput(props:PropsInputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [inputValue, setInputValue] = React.useState(value);

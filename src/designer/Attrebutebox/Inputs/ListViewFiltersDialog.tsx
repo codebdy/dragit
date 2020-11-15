@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
-import { InputProps } from './InputProps';
+import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 
@@ -16,7 +16,7 @@ const styles = (theme: Theme) =>
 
 const useStyles = makeStyles(styles);
 
-export default function ListViewFiltersDialog(props:InputProps){
+export default function ListViewFiltersDialog(props:PropsInputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [filters, setFilters] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);

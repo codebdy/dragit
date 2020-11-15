@@ -6,12 +6,12 @@ import { FocusState } from "./States/FocusState";
 import { DraggedState } from "./States/DraggedState";
 import { PreviewState } from "./States/PreviewState";
 import { IMeta } from "./IMeta";
-import { IRule } from "../../../components/Rules/IRule";
+import { IRule } from "../../../base/Rules/IRule";
 import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode, MousePoint } from "./INode";
 import { remove, last, first, before, after, insertBefore, insertAfter } from "../../../ArrayHelper";
 import { DragoverState } from "./States/DragoverState";
-import { resolveRule } from "DragRX";
+import { resolveRule } from "base/DragRX";
 
 export class Node implements INode{
   static idSeed:number = 1;

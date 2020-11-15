@@ -1,8 +1,8 @@
-import { Rule } from "../Rules/Rule";
+import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
-import { IField } from "../Rules/IRule";
-import TextInput from "designer/Attrebutebox/Inputs/TextInput";
+import { IField } from "../../base/Rules/IRule";
+import StringInput from "base/PropsInputs/StringInput";
 
 export class HeadRule extends Rule{
   editPaddingY = '';
@@ -31,7 +31,7 @@ export class HeadRule extends Rule{
        {
         name:'rxText',
         label:'text',
-        input:TextInput,
+        input:StringInput,
       },
     ]
   }

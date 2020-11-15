@@ -1,9 +1,9 @@
-import { Rule } from "../Rules/Rule";
+import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import { IField } from "../Rules/IRule";
+import { IField } from "../../base/Rules/IRule";
 import ListViewColumnsDialog from "designer/Attrebutebox/Inputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "designer/Attrebutebox/Inputs/ListViewFiltersDialog";
-import TextInput from "designer/Attrebutebox/Inputs/TextInput";
+import StringInput from "base/PropsInputs/StringInput";
 import ListViewBatcthCommandDialog from "designer/Attrebutebox/Inputs/ListViewBatcthCommandDialog";
 import ListViewRowCommandDialog from "designer/Attrebutebox/Inputs/ListViewRowCommandDialog";
 
@@ -39,12 +39,12 @@ export class ListViewRule extends Rule{
       {
         name:'rowsPerPageOptions',
         label:'pager-options',
-        input:TextInput,
+        input:StringInput,
       },
       {
         name:'defalutRowsPerPage',
         label:'rows-per-page',
-        input:TextInput,
+        input:StringInput,
       },
     ]
   }

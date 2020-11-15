@@ -1,4 +1,4 @@
-import { Rule } from "../Rules/Rule";
+import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 
 export class TextBoxRule extends Rule{

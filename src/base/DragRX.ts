@@ -1,5 +1,5 @@
-import { IRule } from "components/Rules/IRule";
-import { Rule } from "components/Rules/Rule";
+import { IRule } from "base/Rules/IRule";
+import { Rule } from "base/Rules/Rule";
 
 var compoents : { 
   [key: string]: {

@@ -1,10 +1,10 @@
-import { Rule } from "../Rules/Rule";
+import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
-import { IField } from "../Rules/IRule";
+import { IField } from "../../base/Rules/IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import SwitchInput from "designer/Attrebutebox/Inputs/SwitchInput";
-import TextInput from "designer/Attrebutebox/Inputs/TextInput";
+import SwitchInput from "base/PropsInputs/BooleanInput";
+import StringInput from "base/PropsInputs/StringInput";
 
 export class ButtonRule extends Rule{
   editPaddingY = '';
@@ -81,7 +81,7 @@ export class ButtonRule extends Rule{
       {
         name:'rxText',
         label:'text',
-        input:TextInput,
+        input:StringInput,
       },
       {
         name:'type',

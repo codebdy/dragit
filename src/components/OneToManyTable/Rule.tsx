@@ -1,8 +1,8 @@
-import { Rule } from "../Rules/Rule";
+import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import { IField } from "../Rules/IRule";
+import { IField } from "../../base/Rules/IRule";
 import OneToManyTableColumnsDialog from "designer/Attrebutebox/Inputs/OneToManyTableColumnsDialog";
-import TextInput from "designer/Attrebutebox/Inputs/TextInput";
+import StringInput from "base/PropsInputs/StringInput";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 
 export class OneToManyTableRule extends Rule{
@@ -32,7 +32,7 @@ export class OneToManyTableRule extends Rule{
         name:'helperText',
         label:'helper-text',
         xs:12,
-        input:TextInput,
+        input:StringInput,
       },
     ]
   }

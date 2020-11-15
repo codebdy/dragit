@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch} from '@material-ui/core';
-import { InputProps } from './InputProps';
+import { PropsInputProps } from './PropsEditorProps';
 
-export default function SwitchInput(props:InputProps){
+export default function BooleanInput(props:PropsInputProps){
   const {field, value, onChange} = props;
   const [inputValue, setInputValue] = React.useState(!!value);
 

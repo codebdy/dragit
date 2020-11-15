@@ -1,7 +1,7 @@
 import { createStyles, FormControlLabel, makeStyles, Switch, Theme } from '@material-ui/core';
 import { SelectItems } from 'components/Select/SelectBox';
 import React from 'react';
-import { InputProps } from './InputProps';
+import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import {StyledTextAreaInput} from './StyledInput';
 import intl from 'react-intl-universal';
 import SelectItemsInputItemDialog from './SelectItemsInputItemDialog';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function SelectItemsInput(props:InputProps){
+export default function SelectItemsInput(props:PropsInputProps){
   const {field, value, onChange} = props;
   const classes = useStyles();
   const [inputValue, setInputValue] = React.useState<SelectItems>({...value});

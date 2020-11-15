@@ -4,7 +4,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { SelectItems } from './SelectBox';
 import axios from 'axios';
 import InputWithSkeleton from 'components/common/InputWithSkeleton';
-import { RXInputProps } from 'components/RXInputProps';
+import { RXInputProps } from 'base/RXInputProps';
 
 const ComboboxInner = React.forwardRef((
   props:{

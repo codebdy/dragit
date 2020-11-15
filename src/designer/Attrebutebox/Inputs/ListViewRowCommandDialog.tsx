@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
-import { InputProps } from './InputProps';
+import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 
@@ -18,7 +18,7 @@ const styles = (theme: Theme) =>
 
 const useStyles = makeStyles(styles);
 
-export default function ListViewRowCommandDialog(props:InputProps){
+export default function ListViewRowCommandDialog(props:PropsInputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [commands, setCommands] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);

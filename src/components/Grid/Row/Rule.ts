@@ -1,8 +1,8 @@
-import { Rule } from "../../Rules/Rule";
+import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { IField } from "../../Rules/IRule";
-import NumberInput from "designer/Attrebutebox/Inputs/NumberInput";
+import { IField } from "../../../base/Rules/IRule";
+import NumberInput from "base/PropsInputs/NumberInput";
 
 export class GridRowRule extends Rule{
   editPaddingY = '16px';

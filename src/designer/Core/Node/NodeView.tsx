@@ -5,7 +5,7 @@ import { INode } from './INode';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { resolveNode } from 'DragRX';
+import { resolveNode } from 'base/DragRX';
 
 interface INodeProps{
   node: INode,

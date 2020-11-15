@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuI
 import { Skeleton } from '@material-ui/lab';
 import axios from 'axios';
 import InputWithSkeleton from 'components/common/InputWithSkeleton';
-import { RXInputProps } from 'components/RXInputProps';
+import { RXInputProps } from 'base/RXInputProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

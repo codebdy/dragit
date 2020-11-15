@@ -1,6 +1,6 @@
-import { Rule } from "../../Rules/Rule";
+import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
-import { IField } from "../../Rules/IRule";
+import { IField } from "../../../base/Rules/IRule";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 const sizeSchema = {
   'false':false,

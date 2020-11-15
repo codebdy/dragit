@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, TextField, MenuItem, Select, FormControl, InputLabel, FormControlLabel, Switch} from '@material-ui/core';
-import { InputProps } from './InputProps';
+import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 import { Fragment } from 'react';
@@ -20,7 +20,7 @@ const styles = (theme: Theme) =>
 
   const useStyles = makeStyles(styles);
 
-export default function OneToManyTableColumnsDialog(props:InputProps){
+export default function OneToManyTableColumnsDialog(props:PropsInputProps){
   const classes = useStyles();
   const {field, value, onChange} = props;
   const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);

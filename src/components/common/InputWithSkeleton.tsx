@@ -1,5 +1,5 @@
 import { Skeleton } from '@material-ui/lab';
-import { RXInputProps } from 'components/RXInputProps';
+import { RXInputProps } from 'base/RXInputProps';
 import React from 'react';
 
 const InputWithSkeleton = React.forwardRef((props:{as:any}&RXInputProps, ref:any) => {
