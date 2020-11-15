@@ -3,6 +3,7 @@ import { INode } from "../../designer/Core/Node/INode";
 import NumberInput from "base/PropsInputs/NumberInput";
 import { IProp } from "../../base/IProp";
 import StringInput from "base/PropsInputs/StringInput";
+import OptionSelect from "base/PropsInputs/OptionSelect";
 
 export class MediasPortletRule extends Rule{
   editPaddingY = '';
@@ -61,7 +62,31 @@ export class MediasPortletRule extends Rule{
       {
         name:'cols',
         label:'cols',
-        input:StringInput,
+        input:OptionSelect,
+        props:{
+          items:[
+            {
+              value:1,
+              label:'1',
+            },
+            {
+              value:2,
+              label:'2',
+            },
+            {
+              value:3,
+              label:'3',
+            },
+            {
+              value:4,
+              label:'4',
+            },
+            {
+              value:6,
+              label:'6',
+            },
+          ],
+        }
       },
 
     ]

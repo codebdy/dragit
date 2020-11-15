@@ -3,7 +3,7 @@ import { INode } from "../../designer/Core/Node/INode";
 import { IProp } from "../../base/IProp";
 import OneToManyTableColumnsDialog from "designer/Attrebutebox/Inputs/OneToManyTableColumnsDialog";
 import StringInput from "base/PropsInputs/StringInput";
-import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
+import OptionSelect from "base/PropsInputs/OptionSelect";
 
 export class OneToManyTableRule extends Rule{
   empertyPadding = '';

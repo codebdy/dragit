@@ -1,7 +1,7 @@
 import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import { IProp } from "../../../base/IProp";
-import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
+import OptionSelect from "base/PropsInputs/OptionSelect";
 const sizeSchema = {
   'false':false,
   'auto':'auto',

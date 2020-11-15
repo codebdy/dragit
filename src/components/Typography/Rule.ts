@@ -2,7 +2,7 @@ import { Rule } from "../../base/Rules/Rule";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 import { INode } from "../../designer/Core/Node/INode";
 import { IProp } from "../../base/IProp";
-import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
+import OptionSelect from "base/PropsInputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import TextareaInput from "designer/Attrebutebox/Inputs/TextareaInput";
 
