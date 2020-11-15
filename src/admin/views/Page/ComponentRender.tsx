@@ -17,7 +17,7 @@ export default function ComponentRender(props:{component:RXElement, onPageAction
   };
 
   let metaProps = component.meta.props? component.meta.props :{};
-  const {rxText, rule, withActions, ...rest} = metaProps as any;
+  const {rxText, withActions, ...rest} = metaProps as any;
 
   let elementProps:any = {...rest,  onClick:handleOnClick}
 

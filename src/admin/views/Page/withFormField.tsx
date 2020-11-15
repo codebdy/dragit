@@ -52,43 +52,90 @@ function metaRuleToRegisterRules(rule:ValidateRule){
   }
   return rtRules;
 }
+
+function retrigger(value:any, rule:any){
+  if(rule.required){
+    if(!value){
+      return rule.required;
+    }
+  }
+
+  if(rule.minLength){
+    if(value && value.length < rule.minLength.value){
+      return rule.minLength.message;
+    }
+  }
+
+  if(rule.maxLength){
+    if(value && value.length > rule.maxLength.value){
+      return rule.maxLength.message;
+    }
+  }
+
+  if(rule.min){
+    if(value && value < rule.min.value){
+      return rule.min.message
+    }
+  }
+
+  if(rule.max){
+    if(value && value > rule.max.value){
+      return rule.max.message
+    }
+  }
+
+  if(rule.pattern){
+    if(value && !rule.pattern.value.test(value)){
+      return rule.pattern.message
+    }
+  }
+
+}
+
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
-    const {register, setValue, control, errors} = useFormContext();
-    const {field, forwardedRef, empertyValue, rule, ...rest} = props;
+    const {register, setValue, getValues , errors} = useFormContext();
+    const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
     const value = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
+    const [error, setError] = React.useState(errors[field] && errors[field].message);
     const loading = useModelLoading();
+    const registerRule = rule && metaRuleToRegisterRules(rule);
+
     React.useEffect(() => {
-      register(field, rule); 
+      register(field, registerRule); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [register])
 
     React.useEffect(() => {
-      setValue(field, value);  
+      const currentValue = getValues(field) || value;
+      setValue(field, currentValue);  
+      setInputValue(currentValue )
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading])
 
     const handleChange = (e:any) => {
       let newValue = e.target.value;
-      setInputValue(newValue)
+      setInputValue(newValue);
       setValue(field, newValue);
+      error && setError(retrigger(inputValue, registerRule));
     }
 
-
-    const error = errors && errors[field];
+    const handleBlur = ()=>{
+      setError(retrigger(inputValue, registerRule));
+    }
 
     return (
       <Component
         ref={forwardedRef}
         name = {field}
-        control = {control}
         loading={loading}
         value={inputValue || empertyValue || ''}
         {...rest}
-        rules = {rule && metaRuleToRegisterRules(rule)}
         error={error ? true : undefined}
+        helperText = {error || helperText}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
     )
   }
