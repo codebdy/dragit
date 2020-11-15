@@ -1,5 +1,7 @@
 import { IRule } from "base/Rules/IRule";
 import { Rule } from "base/Rules/Rule";
+import withMargin from "./HOCs/withMargin";
+import { IMeta } from "./IMeta";
 
 var compoents : { 
   [key: string]: {
@@ -21,12 +23,18 @@ function registerHtmlTag(name:string, rule:any = Rule){
   }  
 }
 
-function resolveNode(name:string):any{
-  return compoents[name] && compoents[name].component ? compoents[name].component : name
+function resolveComponent(meta:IMeta):any{
+  const {marginTop, marginRight, marginBottom, marginLeft} = meta.props || {};
+  const name = meta.name;
+  let component = compoents[name] && compoents[name].component ? compoents[name].component : name;
+
+  component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
+
+  return component;
 }
 
 function resolveRule(name:string):IRule{
   return  compoents[name] ? compoents[name].rule : new Rule();
 }
 
-export {register, resolveNode, resolveRule, registerHtmlTag}
+export {register, resolveComponent, resolveRule, registerHtmlTag}

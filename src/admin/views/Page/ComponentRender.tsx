@@ -4,7 +4,7 @@ import { PageActionHandle } from './PageAction';
 import { useFormContext } from 'react-hook-form';
 import { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 import intl from 'react-intl-universal';
-import { resolveNode } from 'base/DragRX';
+import { resolveComponent } from 'base/DragRX';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};
@@ -54,10 +54,10 @@ function metaRuleToRegisterRules(rule:ValidateRule){
   return rtRules;
 }
 
-export default function ElementRender(props:{element:RXElement, formModel:any, onPageAction: PageActionHandle}){
-  const {element, formModel, onPageAction} = props;
-  const onClickAction = element.meta.props?.onClick;
-  const Element = resolveNode(element.meta.name);
+export default function ComponentRender(props:{component:RXElement, formModel:any, onPageAction: PageActionHandle}){
+  const {component, formModel, onPageAction} = props;
+  const onClickAction = component.meta.props?.onClick;
+  const Element = resolveComponent(component.meta);
   const {control, errors} = useFormContext();
   const handleOnClick = ()=>{
     if(!onClickAction){
@@ -67,7 +67,7 @@ export default function ElementRender(props:{element:RXElement, formModel:any, o
   };
 
   //const field = element.meta.props?.field;
-  let metaProps = element.meta.props? element.meta.props :{};
+  let metaProps = component.meta.props? component.meta.props :{};
   const {rxText, rule, field, withActions, ...rest} = metaProps as any;
 
   let elementProps:any = {...rest,  onClick:handleOnClick}
@@ -90,12 +90,12 @@ export default function ElementRender(props:{element:RXElement, formModel:any, o
     elementProps.onAction = onPageAction;
   }
 
-  const elementView = (element.children && element.children.length > 0) || rxText ?
+  const elementView = (component.children && component.children.length > 0) || rxText ?
     (<Element {...elementProps}>
       {rxText}
-      {element.children?.map((child: RXElement)=>{
+      {component.children?.map((child: RXElement)=>{
         return (
-          <ElementRender key={child.id} element={child} formModel={formModel} onPageAction={onPageAction}/>
+          <ComponentRender key={child.id} component={child} formModel={formModel} onPageAction={onPageAction}/>
         )
       })}
     </Element>)

@@ -15,8 +15,8 @@ export class MediasPortletRule extends Rule{
   getFields(): Array<IProp>{
     return [
       {
-        name:'spacingTop',
-        label:'spacing-top',
+        name:'marginTop',
+        label:'margin-top',
         input:NumberInput,
         props:{
           defaultValue:0,          
@@ -25,23 +25,23 @@ export class MediasPortletRule extends Rule{
       },
 
       {
-        name:'spacingRight',
-        label:'spacing-right',
+        name:'marginRight',
+        label:'margin-right',
         input:NumberInput,
         props:{
           defaultValue:0,          
         }
       },
       {
-        name:'spacingBottom',
-        label:'spacing-bottom',
+        name:'marginBottom',
+        label:'margin-bottom',
         input:NumberInput,
         props:{
           defaultValue:0,          
         }
       },
       {
-        name:'spacingLeft',
+        name:'marginLeft',
         label:'spacing-left',
         input:NumberInput,
         props:{

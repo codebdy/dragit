@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import ElementRender from "./ElementRender";
+import ComponentRender from "./ComponentRender";
 import { RXElement } from "./RXElement";
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
@@ -59,9 +59,9 @@ const PageView = (props:{match: any, history:any })=>{
         {
           pageInStore.schema?.map((child:RXElement)=>{
             return (
-              <ElementRender 
+              <ComponentRender 
                 key={child.id} 
-                element={child} 
+                component={child} 
                 formModel={pageInStore.model}
                 onPageAction={formActionHandle}
               />

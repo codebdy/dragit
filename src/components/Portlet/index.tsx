@@ -2,7 +2,6 @@ import React, { useRef, Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Typography, Divider, IconButton } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
-import { makeSpaceStyle } from '../Util';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,30 +46,12 @@ interface PortletProps{
   title?:string;
   collapsible?:boolean;
   className?:any;
-  spacingTop?:number;
-  spacingRight?:number;
-  spacingBottom?:number;
-  spacingLeft?:number;
-  style?:any;
 }
 
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open,withHeader, children, title, collapsible, className, 
-    style,
-    spacingTop,
-    spacingRight,
-    spacingBottom,
-    spacingLeft,
-    ...rest} = props;
+  const {open,withHeader, children, title, collapsible, className, ...rest} = props;
   const [opened, setOpened] = React.useState(open);
-  const mergedStyle = {
-    ...style,
-    marginTop : makeSpaceStyle(spacingTop),
-    marginRight : makeSpaceStyle(spacingRight),
-    marginBottom : makeSpaceStyle(spacingBottom),
-    marginLeft : makeSpaceStyle(spacingLeft),    
-  }
 
   const hendleClickChevronIcon = ()=>{
     setOpened(!opened)
@@ -86,7 +67,6 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   return (
     <Paper
       ref={ref}
-      style={mergedStyle}
       {...rest}
       className = { classNames(classes.portlet, className) }
     >

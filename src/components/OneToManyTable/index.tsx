@@ -4,7 +4,7 @@ import Portlet from 'components/Portlet';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import classNames from 'classnames';
-import { resolveNode } from 'base/DragRX';
+import { resolveComponent } from 'base/DragRX';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,7 +48,6 @@ const OneToManyTable = React.forwardRef((
     helperText?:string,
     id?:string,
     name?:string,
-    style?:any,
     inputRef?:any,
     size?:any,
     columns?:Array<ColumnMeta>
@@ -60,7 +59,6 @@ const OneToManyTable = React.forwardRef((
     error,
     helperText, 
     name,
-    style,
     inputRef,
     size,
     columns = [],
@@ -117,7 +115,6 @@ const OneToManyTable = React.forwardRef((
     <Portlet 
       ref={ref}
       id = {name}
-      style={style}
       withHeader      
       {...rest}
       className = { className }
@@ -148,7 +145,7 @@ const OneToManyTable = React.forwardRef((
                 {
                   columns.map((column, index)=>{
                     const{width = undefined, ...other} = (column.props?column.props : {})
-                    const InputControl = resolveNode(column.input&&column.input.name ? column.input.name :'TextField');
+                    const InputControl = resolveComponent(column.input as any);
                     const theValue = column.field ? row[column.field]:  '';
                     return(
                       <TableCell key={`${column}-${index}-row-${rowIndex}`} style={{width:width}} {...other}>

@@ -1,4 +1,4 @@
-import { IMeta } from "../../designer/Core/Node/IMeta";
+import { IMeta } from "../IMeta";
 import { INode } from "../../designer/Core/Node/INode";
 import { IProp } from "../IProp";
 

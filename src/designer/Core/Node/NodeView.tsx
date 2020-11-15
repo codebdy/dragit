@@ -5,7 +5,7 @@ import { INode } from './INode';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { resolveNode } from 'base/DragRX';
+import { resolveComponent } from 'base/DragRX';
 
 interface INodeProps{
   node: INode,
@@ -60,18 +60,18 @@ export default function NodeView(props:INodeProps){
   return(
     children?.length > 0 || rxText ? 
       React.createElement(
-      resolveNode(node.meta.name),
-      {
-        ref:nodeEl,
-        className:classNames(className, editClassName),
-        ...rest,
-        style:{...style, ...editStyle}
-      },
-      [rxText, ...childrenNodes]
-    )
+        resolveComponent(node.meta),
+        {
+          ref:nodeEl,
+          className:classNames(className, editClassName),
+          ...rest,
+          style:{...style, ...editStyle}
+        },
+        [rxText, ...childrenNodes]
+      )
     :
     React.createElement(
-      resolveNode(node.meta.name),
+      resolveComponent(node.meta),
       {
         ref:nodeEl,
         className:classNames(className, editClassName),

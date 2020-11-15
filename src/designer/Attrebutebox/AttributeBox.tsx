@@ -7,7 +7,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {AttributeRow, RowLabel, RowValue} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
 import { IProp } from "base/IProp";
-import StyleList from './Inputs/StyleList';
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './AttributeBoxActionSection';
 import {StyledTextInput} from './Inputs/StyledInput';
@@ -60,9 +59,6 @@ export default function AttributeBox(props:{node:INode|null}){
     setField(node?.meta.props?.field)
   },[node]);
 
-  const hanleStyleChange = (value:any)=>{
-    node?.updateProp('style', value);
-  }
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let newField = event.target.value as string;
     node?.updateProp('field', newField);
@@ -108,16 +104,6 @@ export default function AttributeBox(props:{node:INode|null}){
                 }
 
               </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel  className={classes.panelPaper}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-            >
-              <Typography className={classes.heading}>{intl.get('style')}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className={classes.pannelDetail}>
-              <StyleList key={node.id} value={node.props.style} onChange={hanleStyleChange} />
             </ExpansionPanelDetails>
           </ExpansionPanel>
           {node.rule.hasData &&

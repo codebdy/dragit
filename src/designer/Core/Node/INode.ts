@@ -1,5 +1,5 @@
 import { IRule } from "../../../base/Rules/IRule";
-import { IMeta } from "./IMeta";
+import { IMeta } from "../../../base/IMeta";
 import { IView } from "./IView";
 
 export interface MousePoint{

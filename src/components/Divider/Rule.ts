@@ -1,6 +1,6 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import { IMeta } from "../../designer/Core/Node/IMeta";
+import { IMeta } from "../../base/IMeta";
 
 export class DividerRule extends Rule{
   editPaddingY = '0';

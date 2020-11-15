@@ -1,4 +1,4 @@
-import { IMeta } from "designer/Core/Node/IMeta";
+import { IMeta } from "base/IMeta";
 
 export class RXElement{
   static idSeed:number = 1;

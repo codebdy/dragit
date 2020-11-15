@@ -1,6 +1,6 @@
 import { IRule } from "./IRule";
 import { IProp } from "../IProp";
-import { IMeta } from "../../designer/Core/Node/IMeta";
+import { IMeta } from "../IMeta";
 import intl from 'react-intl-universal';
 import { INode } from "../../designer/Core/Node/INode";
 

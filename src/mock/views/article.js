@@ -33,10 +33,7 @@ export default {
             props: {
               variant: "outlined",
               rxText: '取消',
-              style: {
-                fontSize: '1.1rem',
-                marginRight: '8px',
-              },
+              size:'large',
               onClick:{
                 name: GO_BACK_ACTION,
                 careDuty: true, //如果有修改，显示保存提示
@@ -50,10 +47,8 @@ export default {
             variant: "contained",
             color: "primary",
             type: "submit",
+            size:'large',
             //size: "large",
-            style: {
-              fontSize: '1.1rem',
-            },
             //onClick:{
             //  name: POST_DATA_ACTION,
             //  slug:'save',
@@ -82,7 +77,7 @@ export default {
                 elevation: 6,
                 //cols:3,
                 field:'medias',
-                //spacingTop:2,  
+                //marginTop:2,  
                },
             },
             {
@@ -93,7 +88,7 @@ export default {
                 withHeader:true,
                 title:'基本信息',
                 collapsible: true,
-                spacingTop:2,              
+                marginTop:2,              
               },
               children:[
                 {
@@ -380,7 +375,7 @@ export default {
                 elevation: 6,
                 title:'规格库存',
                 collapsible: true,
-                spacingTop:2,
+                marginTop:2,
                 open:true,
                 size:"small",
                 field:'specs',

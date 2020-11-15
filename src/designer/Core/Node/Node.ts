@@ -5,7 +5,7 @@ import { NormalState } from "./States/NormalState";
 import { FocusState } from "./States/FocusState";
 import { DraggedState } from "./States/DraggedState";
 import { PreviewState } from "./States/PreviewState";
-import { IMeta } from "./IMeta";
+import { IMeta } from "../../../base/IMeta";
 import { IRule } from "../../../base/Rules/IRule";
 import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode, MousePoint } from "./INode";

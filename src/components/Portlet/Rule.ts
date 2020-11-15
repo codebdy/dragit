@@ -30,8 +30,8 @@ export class PortletRule extends Rule{
         input:SwitchInput,
       },      
       {
-        name:'spacingTop',
-        label:'spacing-top',
+        name:'marginTop',
+        label:'margin-top',
         input:NumberInput,
         props:{
           max:100,
@@ -41,8 +41,8 @@ export class PortletRule extends Rule{
       },
 
       {
-        name:'spacingRight',
-        label:'spacing-right',
+        name:'marginRight',
+        label:'margin-right',
         input:NumberInput,
         props:{
           max:100,
@@ -51,8 +51,8 @@ export class PortletRule extends Rule{
         }
       },
       {
-        name:'spacingBottom',
-        label:'spacing-bottom',
+        name:'marginBottom',
+        label:'margin-bottom',
         input:NumberInput,
         props:{
           max:100,
@@ -61,7 +61,7 @@ export class PortletRule extends Rule{
         }
       },
       {
-        name:'spacingLeft',
+        name:'marginLeft',
         label:'spacing-left',
         input:NumberInput,
         props:{

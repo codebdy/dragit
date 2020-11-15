@@ -61,7 +61,7 @@ export default [
             withHeader:true,
             title:'Portlet',
             collapsible: true,
-            spacingTop:2,              
+            marginTop:2,              
           },
           children:[
             {
@@ -95,7 +95,7 @@ export default [
           name:'MediasPortlet',
           props: {
             elevation: 6,
-            //spacingTop:2,              
+            //marginTop:2,              
           },
         }
       },
