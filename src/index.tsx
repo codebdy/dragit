@@ -32,6 +32,7 @@ import { TextBoxRule } from 'components/TextBox/Rule';
 import { MediasPortletRule } from 'components/MediasPortlet/Rule';
 import { SelectRule } from 'components/Select/Rule';
 import { OneToManyTableRule } from 'components/OneToManyTable/Rule';
+import { PortletRule } from 'components/Portlet/Rule';
 
 const store = configureStore();
 
@@ -41,7 +42,7 @@ register('GridRow', GridRow);
 register('GridColumn', GridColumn);
 register('Button',Button, ButtonRule);
 register('TextBox', TextBox, TextBoxRule);
-register('Portlet', Portlet);
+register('Portlet', Portlet, PortletRule);
 register('PortletGridContainer', PortletGridContainer);
 register('PortletGridItem', PortletGridItem, PortletGridItemRule);
 register('PortletFooter', PortletFooter);

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Switch} from '@material-ui/core';
+import { FormControlLabel, Switch} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
 export default function BooleanInput(props:PropsInputProps){
-  const {field, value, onChange} = props;
+  const {field, label, value, onChange} = props;
   const [inputValue, setInputValue] = React.useState(!!value);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,10 +13,16 @@ export default function BooleanInput(props:PropsInputProps){
   };  
 
   return (
-    <Switch
-      checked={inputValue}
-      onChange={handleChange}
-      color="primary"
+    <FormControlLabel
+      control={
+        <Switch
+          checked={inputValue}
+          onChange={handleChange}
+          color="primary"
+        />
+      }
+      label={label}
     />
+
   )
 }

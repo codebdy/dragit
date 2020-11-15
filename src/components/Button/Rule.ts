@@ -5,6 +5,8 @@ import { IProp } from "../../base/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
+import elevationRules from "base/Rules/elevationRules";
+import marginRules from "base/Rules/marginRules";
 
 export class ButtonRule extends Rule{
   editPaddingY = '';
@@ -22,6 +24,8 @@ export class ButtonRule extends Rule{
 
   getFields(): Array<IProp>{
     return [
+      ...marginRules,
+      ...elevationRules,
       {
         name:'color',
         label:'color',

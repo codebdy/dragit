@@ -6,7 +6,6 @@ const useStyles = makeStyles((theme: Theme) =>
     spacer: {
       flex:1,
     },
-
   }),
 );
 

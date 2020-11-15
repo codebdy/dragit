@@ -1,9 +1,10 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import NumberInput from "base/PropsInputs/NumberInput";
 import { IProp } from "../../base/IProp";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
+import elevationRules from "base/Rules/elevationRules";
+import marginRules from "base/Rules/marginRules";
 
 export class PortletRule extends Rule{
 
@@ -23,73 +24,28 @@ export class PortletRule extends Rule{
         name:'collapsible',
         label:'collapsible',
         input:SwitchInput,
+        xs:12,
       },      
       {
         name:'open',
         label:'defalut-open',
+        xs:12,
         input:SwitchInput,
       },      
       {
-        name:'marginTop',
-        label:'margin-top',
-        input:NumberInput,
-        props:{
-          max:100,
-          min:0,
-          step:1
-        }
-      },
-
-      {
-        name:'marginRight',
-        label:'margin-right',
-        input:NumberInput,
-        props:{
-          max:100,
-          min:0,
-          step:1
-        }
-      },
-      {
-        name:'marginBottom',
-        label:'margin-bottom',
-        input:NumberInput,
-        props:{
-          max:100,
-          min:0,
-          step:1
-        }
-      },
-      {
-        name:'marginLeft',
-        label:'spacing-left',
-        input:NumberInput,
-        props:{
-          max:100,
-          min:0,
-          step:1
-        }
-      },
-      {
-        name:'elevation',
-        label:'elevation',
-        input:NumberInput,
-        props:{
-          max:24,
-          min:0,
-          step:1
-        }
-      },
-      {
         name:'withHeader',
         label:'with-header',
+        xs:12,
         input:SwitchInput,
       }, 
       {
         name:'title',
         label:'title',
+        xs:12,
         input:StringInput,
       },
+      ...marginRules,
+      ...elevationRules,      
     ]
   }
 
