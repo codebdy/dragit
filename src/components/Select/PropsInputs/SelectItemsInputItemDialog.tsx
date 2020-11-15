@@ -5,7 +5,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
-import MetaListInput from './MetaListInput';
+import MetaListInput from '../../../designer/Attrebutebox/Inputs/MetaListInput';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -111,7 +111,9 @@ export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
   return (
 
     <Fragment>
-      <IconButton size="small" className = {classes.more} onClick={handleClickOpen}> ··· </IconButton>
+      <Button variant="outlined"  fullWidth size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> 
+        {intl.get('data')} ···
+      </Button>
       <ThemeProvider theme={theme}>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 
           open={open}

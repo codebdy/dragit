@@ -1,10 +1,10 @@
-import { createStyles, FormControlLabel, makeStyles, Switch, Theme } from '@material-ui/core';
+import { createStyles, FormControlLabel, Grid, makeStyles, Switch, Theme } from '@material-ui/core';
 import { SelectItems } from 'components/Select/SelectBox';
 import React from 'react';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import {StyledTextAreaInput} from '../../../designer/Attrebutebox/Inputs/StyledInput';
 import intl from 'react-intl-universal';
-import SelectItemsInputItemDialog from '../../../designer/Attrebutebox/Inputs/SelectItemsInputItemDialog';
+import SelectItemsInputItemDialog from './SelectItemsInputItemDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize:'0.8rem',
       color:'#cdcfd0', 
     },
-
   }),
 );
 
@@ -39,29 +38,37 @@ export default function SelectItemsInput(props:PropsInputProps){
   }
 
   return (
-    <div>
-      <FormControlLabel
-        control={
-          <Switch
-            checked={inputValue.fromUrl || false}
-            onChange={handleFromUrlChange}
-            name="FromUrl"
-            color="primary"
-          />
-        }
-        label={<span className={classes.switchLabel}>{intl.get("from-url")}</span>}
-      />
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={inputValue.fromUrl || false}
+              onChange={handleFromUrlChange}
+              name="FromUrl"
+              color="primary"
+              size="small"
+            />
+          }
+          style={{margin:'2px'}}
+          label={<span className={classes.switchLabel}>{intl.get("from-url")}</span>}
+        />
+      </Grid>
       {
         inputValue.fromUrl ?
-          <StyledTextAreaInput 
-            value={inputValue.url ||''}
-            onChange={handleUrlChange}
-            rows="2"
-          />
+          <Grid item xs={12}>
+            <StyledTextAreaInput 
+              value={inputValue.url ||''}
+              onChange={handleUrlChange}
+              rows="2"
+            />
+          </Grid>
         :
-        <SelectItemsInputItemDialog value={inputValue.items} onChange={handleItemsChange} />    
+        <Grid item xs={6}>
+          <SelectItemsInputItemDialog value={inputValue.items} onChange={handleItemsChange} />    
+        </Grid>
       }
 
-    </div>
+    </Grid>
   )
 }
