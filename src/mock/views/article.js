@@ -48,6 +48,7 @@ export default {
             color: "primary",
             type: "submit",
             size:'large',
+            marginLeft:2,
             //size: "large",
             //onClick:{
             //  name: POST_DATA_ACTION,

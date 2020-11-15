@@ -24,17 +24,15 @@ export class PortletRule extends Rule{
         name:'collapsible',
         label:'collapsible',
         input:SwitchInput,
-        xs:12,
       },      
       {
         name:'open',
         label:'defalut-open',
-        xs:12,
         input:SwitchInput,
       },      
       {
         name:'withHeader',
-        label:'with-header',
+        label:'title',
         xs:12,
         input:SwitchInput,
       }, 

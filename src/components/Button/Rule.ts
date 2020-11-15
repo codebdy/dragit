@@ -3,10 +3,9 @@ import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../base/IMeta";
 import { IProp } from "../../base/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
-import SwitchInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
-import elevationRules from "base/Rules/elevationRules";
 import marginRules from "base/Rules/marginRules";
+import BooleanInput from "base/PropsInputs/BooleanInput";
 
 export class ButtonRule extends Rule{
   editPaddingY = '';
@@ -25,51 +24,54 @@ export class ButtonRule extends Rule{
   getFields(): Array<IProp>{
     return [
       ...marginRules,
-      ...elevationRules,
       {
         name:'color',
         label:'color',
         input:OptionSelect,
         props:{
-          'Default' : 'default',
-          'Inherit': 'inherit',
-          'Primary' : 'primary',
-          'Secondary' : 'secondary',
+          items:[
+            {
+              value:'default',
+              label:'Default'
+            },
+            {
+              value:'inherit',
+              label:'Inherit'
+            },
+            {
+              value:'primary',
+              label:'Primary'
+            },
+            {
+              value:'secondary',
+              label:'Secondary'
+            },
+          ]
         },
-      },
-      {
-        name:'disabled',
-        label:'disabled',
-        input:SwitchInput,
-      },
-      {
-        name:'disableElevation',
-        label:'disableElevation',
-        input:SwitchInput,
-      },
-      {
-        name:'disableRipple',
-        label:'disableRipple',
-        input:SwitchInput,
-      },
-      {
-        name:'endIcon',
-        label:'endIcon',
-        input:SwitchInput,
-      },
-      {
-        name:'fullWidth',
-        label:'fullWidth',
-        input:SwitchInput,
       },
       {
         name:'size',
         label:'size',
         input:OptionSelect,
         props:{
-          'Large' : 'large',
-          'Medium': 'medium',
-          'Small' : 'small',
+          items:[
+            {
+              value:'large',
+              label:'Large'
+            },
+            {
+              value:'medium',
+              label:'Medium'
+            },
+            {
+              value:'primary',
+              label:'Primary'
+            },
+            {
+              value:'small',
+              label:'Small'
+            },
+          ]
         },
       },
       {
@@ -77,26 +79,74 @@ export class ButtonRule extends Rule{
         label:'variant',
         input:OptionSelect,
         props:{
-          'Contained' : 'contained',
-          'Outlined': 'outlined',
-          'Text' : 'text',
+          items:[
+            {
+              value:'contained',
+              label:'Contained'
+            },
+            {
+              value:'outlined',
+              label:'Outlined'
+            },
+            {
+              value:'text',
+              label:'Text'
+            },
+          ]
         },
-      },
-      {
-        name:'rxText',
-        label:'text',
-        input:StringInput,
       },
       {
         name:'type',
         label:'type',
         input:OptionSelect,
         props:{
-          'Submit' : 'submit',
-          'Reset': 'reset',
-          'Button' : 'button',
+          items:[
+            {
+              value:'submit',
+              label:'Submit'
+            },
+            {
+              value:'reset',
+              label:'Reset'
+            },
+            {
+              value:'button',
+              label:'Button'
+            },
+          ]
         },
       },
+      {
+        name:'disabled',
+        label:'disabled',
+        xs:12,
+        input:BooleanInput,
+      },
+      {
+        name:'disableElevation',
+        label:'disableElevation',
+        xs:12,
+        input:BooleanInput,
+      },
+      {
+        name:'disableRipple',
+        label:'disableRipple',
+        xs:12,
+        input:BooleanInput,
+      },
+      {
+        name:'fullWidth',
+        label:'fullWidth',
+        xs:12,
+        input:BooleanInput,
+      },
+      {
+        name:'rxText',
+        label:'text',
+        xs:12,
+        input:StringInput,
+      },
+
     ]
   }
 

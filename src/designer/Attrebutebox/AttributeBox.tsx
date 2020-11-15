@@ -91,7 +91,7 @@ export default function AttributeBox(props:{node:INode|null}){
                     return(
                       <Grid item key={node.id + '-' + field.name} xs={field.xs || 6}>
                           <field.input
-                            label={intl.get(field.label)||field.label}
+                            label={field.label && (intl.get(field.label)||field.label)}
                             field={field.name}
                             value={node.props[field.name]}
                             onChange= {propChange}

@@ -21,7 +21,7 @@ export default function BooleanInput(props:PropsInputProps){
           color="primary"
         />
       }
-      label={label}
+      label={<span style={{fontSize:'0.9rem'}}>{label}</span>}
     />
 
   )
