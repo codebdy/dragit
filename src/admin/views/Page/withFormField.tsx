@@ -1,8 +1,8 @@
 import { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import useFieldValue from '../../admin/views/Page/useFieldValue';
-import useModelLoading from '../../admin/views/Page/useModelLoading';
+import useFieldValue from './useFieldValue';
+import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
 
 function metaRuleToRegisterRules(rule:ValidateRule){

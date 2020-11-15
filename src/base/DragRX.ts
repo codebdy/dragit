@@ -1,4 +1,3 @@
-import withFormField from "base/HOCs/withFormField";
 import { IRule } from "base/Rules/IRule";
 import { Rule } from "base/Rules/Rule";
 import withMargin from "./HOCs/withMargin";
@@ -25,12 +24,11 @@ function registerHtmlTag(name:string, rule:any = Rule){
 }
 
 function resolveComponent(meta:IMeta):any{
-  const {marginTop, marginRight, marginBottom, marginLeft, field} = meta.props || {};
+  const {marginTop, marginRight, marginBottom, marginLeft} = meta.props || {};
   const name = meta.name;
   let component = compoentsMap[name] && compoentsMap[name].component ? compoentsMap[name].component : name;
 
   component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
-  component = field ? withFormField(component) : component;
   return component;
 }
 
