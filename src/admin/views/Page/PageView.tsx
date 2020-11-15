@@ -62,7 +62,6 @@ const PageView = (props:{match: any, history:any })=>{
               <ComponentRender 
                 key={child.id} 
                 component={child} 
-                formModel={pageInStore.model}
                 onPageAction={formActionHandle}
               />
             )

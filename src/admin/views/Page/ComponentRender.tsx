@@ -4,8 +4,8 @@ import { PageActionHandle } from './PageAction';
 import { resolveComponent } from 'base/DragRX';
 import withFormField from './withFormField';
 
-export default function ComponentRender(props:{component:RXElement, formModel:any, onPageAction: PageActionHandle}){
-  const {component, formModel, onPageAction} = props;
+export default function ComponentRender(props:{component:RXElement, onPageAction: PageActionHandle}){
+  const {component, onPageAction} = props;
   const onClickAction = component.meta.props?.onClick;
   let Component = resolveComponent(component.meta);
   Component = component.meta.props?.field ? withFormField(Component) : Component;
@@ -30,7 +30,7 @@ export default function ComponentRender(props:{component:RXElement, formModel:an
       {rxText}
       {component.children?.map((child: RXElement)=>{
         return (
-          <ComponentRender key={child.id} component={child} formModel={formModel} onPageAction={onPageAction}/>
+          <ComponentRender key={child.id} component={child} onPageAction={onPageAction}/>
         )
       })}
     </Component>)

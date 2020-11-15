@@ -1,6 +1,6 @@
 import { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import useFieldValue from './useFieldValue';
 import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
@@ -54,32 +54,47 @@ function metaRuleToRegisterRules(rule:ValidateRule){
 }
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
-    const {control, errors} = useFormContext();
-    const {field, defaultValue, rule, ...rest} = props
+    const {register, setValue, control, errors} = useFormContext();
+    const {field, forwardedRef, empertyValue, rule, ...rest} = props;
+    const value = useFieldValue(field);    
+    const [inputValue, setInputValue] = React.useState(value);
     const loading = useModelLoading();
+    React.useEffect(() => {
+      register(field, rule); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [register])
+
+    React.useEffect(() => {
+      setValue(field, value);  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loading])
+
+    const handleChange = (e:any) => {
+      let newValue = e.target.value;
+      setInputValue(newValue)
+      setValue(field, newValue);
+    }
+
+
     const error = errors && errors[field];
-    const value = useFieldValue(field);
+
     return (
-      loading ? 
-      <Component loading={loading} {...rest} /> 
-      :
-      <Controller
-        as={Component}
+      <Component
+        ref={forwardedRef}
         name = {field}
         control = {control}
-        defaultValue = {value || defaultValue || ''}
         loading={loading}
-        value={value}
+        value={inputValue || empertyValue || ''}
         {...rest}
         rules = {rule && metaRuleToRegisterRules(rule)}
         error={error ? true : undefined}
+        onChange={handleChange}
       />
     )
   }
-
-  return (props: any) => {
-    return <WithFormField {...props} />;
-  };
+  return React.forwardRef((props, ref) => {
+    return <WithFormField {...props} forwardedRef={ref} />;
+  });
 }
 
 export default withFormField
