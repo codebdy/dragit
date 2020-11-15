@@ -57,7 +57,7 @@ function metaRuleToRegisterRules(rule:ValidateRule){
 export default function ComponentRender(props:{component:RXElement, formModel:any, onPageAction: PageActionHandle}){
   const {component, formModel, onPageAction} = props;
   const onClickAction = component.meta.props?.onClick;
-  const Element = resolveComponent(component.meta);
+  const Component = resolveComponent(component.meta);
   const {control, errors} = useFormContext();
   const handleOnClick = ()=>{
     if(!onClickAction){
@@ -91,16 +91,16 @@ export default function ComponentRender(props:{component:RXElement, formModel:an
   }
 
   const elementView = (component.children && component.children.length > 0) || rxText ?
-    (<Element {...elementProps}>
+    (<Component {...elementProps}>
       {rxText}
       {component.children?.map((child: RXElement)=>{
         return (
           <ComponentRender key={child.id} component={child} formModel={formModel} onPageAction={onPageAction}/>
         )
       })}
-    </Element>)
+    </Component>)
     :
-    <Element {...elementProps} />
+    <Component {...elementProps} />
 
   return(
     <Fragment>

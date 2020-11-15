@@ -3,10 +3,9 @@ import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { SelectItems } from './SelectBox';
 import axios from 'axios';
-import InputWithSkeleton from 'components/common/InputWithSkeleton';
-import { RXInputProps } from 'base/RXInputProps';
+import withSkeleton from 'base/HOCs/withSkeleton';
 
-const ComboboxInner = React.forwardRef((
+const Combobox = React.forwardRef((
   props:{
     value?:string|[],
     multiple?:boolean,
@@ -99,9 +98,4 @@ const ComboboxInner = React.forwardRef((
   )
 })
 
-const Combobox = React.forwardRef((props:RXInputProps, ref:any) => {
-  return (
-    <InputWithSkeleton as={ComboboxInner} {...props} ref={ref}/>
-  )
-});
-export default Combobox
+export default withSkeleton(Combobox);

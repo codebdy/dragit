@@ -1,8 +1,9 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import NumberInput from "base/PropsInputs/NumberInput";
 import { IProp } from "../../base/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
+import marginRules from "base/Rules/marginRules";
+import elevationRules from "base/Rules/elevationRules";
 
 export class MediasPortletRule extends Rule{
   editPaddingY = '';
@@ -14,50 +15,8 @@ export class MediasPortletRule extends Rule{
   }
   getFields(): Array<IProp>{
     return [
-      {
-        name:'marginTop',
-        label:'margin-top',
-        input:NumberInput,
-        props:{
-          defaultValue:0,          
-        }
-
-      },
-
-      {
-        name:'marginRight',
-        label:'margin-right',
-        input:NumberInput,
-        props:{
-          defaultValue:0,          
-        }
-      },
-      {
-        name:'marginBottom',
-        label:'margin-bottom',
-        input:NumberInput,
-        props:{
-          defaultValue:0,          
-        }
-      },
-      {
-        name:'marginLeft',
-        label:'spacing-left',
-        input:NumberInput,
-        props:{
-          defaultValue:0,          
-        }
-      },
-      {
-        name:'elevation',
-        label:'elevation',
-        input:NumberInput,
-        props:{
-          defaultValue:0,
-          min:0,
-          max:24,
-        }
-      },
+      ...marginRules,
+      ...elevationRules,
       {
         name:'cols',
         label:'cols',
@@ -87,7 +46,6 @@ export class MediasPortletRule extends Rule{
           ],
         }
       },
-
     ]
   }
 
