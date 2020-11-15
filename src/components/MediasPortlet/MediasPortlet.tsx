@@ -9,6 +9,7 @@ import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
 import { RXInputProps } from 'base/RXInputProps';
+import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,18 +70,17 @@ const MediasPortlet = React.forwardRef((
   
   useEffect(() => {
     if(medias !== value && !(!value && medias.length === 0)){
-     /* const event = {
+      const event = {
         persist: () => {return {}},
         target: {
           type: "change",
           //id: props.id,
-          name: props.name,
+          //name: props.name,
           value: medias
         }
-      };*/
+      };
  
-      //console.log('useEffect', 'medias:', medias, 'value', value)
-      onChange && onChange(medias);
+      onChange && onChange(event);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[medias]);
@@ -120,6 +120,36 @@ const MediasPortlet = React.forwardRef((
   const handleRemove = (media:MediaMeta)=>{
     setMedias([...remove(media, medias)]);
   }
+
+  const mediasGrid =  (cols ?
+    <MediasPortletColumnsGrid 
+      medias={medias}
+      cols = {cols}
+      onSelectMedias={handleSelectedMedias}
+      onSwap = {handleSwap}
+      onRemove = {handleRemove}            
+    />            
+    :
+      <Fragment>
+        <Hidden smDown>
+          <MediasPortletFeathureGrid 
+            medias={medias} 
+            onSelectMedias={handleSelectedMedias}
+            onSwap = {handleSwap}
+            onRemove = {handleRemove}
+          />
+        </Hidden>
+        <Hidden mdUp>
+          <MediasPortletColumnsGrid 
+            medias={medias} 
+            onSelectMedias={handleSelectedMedias}
+            onSwap = {handleSwap}
+            onRemove = {handleRemove}            
+          />
+        </Hidden>
+      </Fragment>
+  )
+
 
   return (
     <Paper 
@@ -167,34 +197,15 @@ const MediasPortlet = React.forwardRef((
       <div className={classes.body}>
         <Grid container spacing={3}>
           {
-            cols ?
-            <MediasPortletColumnsGrid 
-            medias={medias}
-            cols = {cols}
-            onSelectMedias={handleSelectedMedias}
-            onSwap = {handleSwap}
-            onRemove = {handleRemove}            
-          />            
-          :
-            <Fragment>
-              <Hidden smDown>
-                <MediasPortletFeathureGrid 
-                  medias={medias} 
-                  onSelectMedias={handleSelectedMedias}
-                  onSwap = {handleSwap}
-                  onRemove = {handleRemove}
-                />
-              </Hidden>
-              <Hidden mdUp>
-                <MediasPortletColumnsGrid 
-                  medias={medias} 
-                  onSelectMedias={handleSelectedMedias}
-                  onSwap = {handleSwap}
-                  onRemove = {handleRemove}            
-                />
-              </Hidden>
-            </Fragment>
-
+            loading?
+            [1,2,3,4,5,6].map(i=>{
+              return (
+                <Grid key={i} item xs={2}>
+                  <Skeleton animation="wave" variant="rect" style={{paddingBottom:'100%'}} />
+                </Grid>
+              )
+            })
+            :mediasGrid
           }
         </Grid>
         {
