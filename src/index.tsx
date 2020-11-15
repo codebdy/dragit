@@ -34,13 +34,15 @@ import { SelectRule } from 'components/Select/Rule';
 import { OneToManyTableRule } from 'components/OneToManyTable/Rule';
 import { PortletRule } from 'components/Portlet/Rule';
 import { ListViewRule } from 'components/ListView/Rule';
+import { GridColumnRule } from 'components/Grid/Column/Rule';
+import { GridRowRule } from 'components/Grid/Row/Rule';
 
 const store = configureStore();
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
-register('GridRow', GridRow);
-register('GridColumn', GridColumn);
+register('GridRow', GridRow, GridRowRule);
+register('GridColumn', GridColumn, GridColumnRule);
 register('Button',Button, ButtonRule);
 register('TextBox', TextBox, TextBoxRule);
 register('Portlet', Portlet, PortletRule);

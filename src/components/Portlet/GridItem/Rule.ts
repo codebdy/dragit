@@ -1,12 +1,6 @@
 import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import { IMeta } from "../../../base/IMeta";
-import { IProp } from "../../../base/IProp";
-import OptionSelect from "base/PropsInputs/OptionSelect";
-import { colWidthOptions } from "../../Grid/Column/Rule";
-import SwitchInput from "base/PropsInputs/BooleanInput";
-import StringInput from "base/PropsInputs/StringInput";
-import SelectItemsInput from "components/Select/PropsInputs/SelectItemsInput";
 
 export class PortletGridItemRule extends Rule{
   editPaddingY = '';

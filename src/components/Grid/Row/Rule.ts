@@ -23,12 +23,32 @@ export class GridRowRule extends Rule{
         label:'align-content',
         input:OptionSelect,
         props:{
-          'Stretch':'stretch',
-          'Center':'center',
-          'Flex Start':'flex-start',
-          'Flex End' : 'flex-end',
-          'Space Between':'space-between',
-          'Space Around' : 'space-around'
+          items:[
+            {
+              value:'stretch',
+              label:'Stretch',
+            },
+            {
+              value:'center',
+              label:'Center',
+            },
+            {
+              value:'flex-start',
+              label:'Flex Start',
+            },
+            {
+              value:'flex-end',
+              label:'Flex End',
+            },
+            {
+              value:'space-between',
+              label:'Space Between',
+            },
+            {
+              value:'space-around',
+              label:'Space Around',
+            },
+          ]
         }
       },
       {
@@ -36,11 +56,28 @@ export class GridRowRule extends Rule{
         label:'align-items',
         input:OptionSelect,
         props:{
-          'Flex Start':'flex-start',
-          'Center':'center',
-          'Flex End' : 'flex-end',
-          'Stretch':'stretch',
-          'Baseline' : 'baseline'
+          items:[
+            {
+              value:'flex-start',
+              label:'Flex Start',
+            },
+            {
+              value:'center',
+              label:'Center',
+            },
+            {
+              value:'flex-end',
+              label:'Flex End',
+            },
+            {
+              value:'stretch',
+              label:'Stretch',
+            },
+            {
+              value:'baseline',
+              label:'Baseline',
+            },
+          ],
         }
       },
       {
@@ -48,10 +85,24 @@ export class GridRowRule extends Rule{
         label:'direction',
         input:OptionSelect,
         props:{
-          'Row':'row',
-          'Row Reverse':'row-reverse',
-          'Column' : 'column',
-          'Column Reverse':'column-reverse',
+          items:[
+            {
+              value:'row',
+              label:'Row'
+            },
+            {
+              value:'row-reverse',
+              label:'Row Reverse'
+            },
+            {
+              value:'column',
+              label:'Column'
+            },
+            {
+              value:'column-reverse',
+              label:'Column Reverse'
+            },
+          ]
         }
       },
       {
@@ -59,12 +110,32 @@ export class GridRowRule extends Rule{
         label:'justify',
         input:OptionSelect,
         props:{
-          'Flex Start':'flex-start',
-          'Center':'center',
-          'Flex End' : 'flex-end',
-          'Space Between':'space-between',
-          'Space Around' : 'space-around',
-          'Space Evenly' : 'space-evenly'
+          items:[
+            {
+              value:'flex-start',
+              label:'Flex Start'
+            },
+            {
+              value:'center',
+              label:'Center'
+            },
+            {
+              value:'flex-end',
+              label:'Flex End'
+            },
+            {
+              value:'space-between',
+              label:'Space Between'
+            },
+            {
+              value:'space-around',
+              label:'Space Around'
+            },
+            {
+              value:'space-evenly',
+              label:'Space Evenly'
+            },
+          ]
         }
       },
       {
@@ -74,7 +145,6 @@ export class GridRowRule extends Rule{
         props:{
           'min':0,
           'max':10,
-          'step':1,
         }
       },
     ]
