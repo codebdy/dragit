@@ -8,10 +8,6 @@ import { add, exchange, remove } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
-import { Controller } from 'react-hook-form';
-import resolveSkeleton from 'admin/views/Page/resolveSkeleton';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -222,7 +218,7 @@ const MediasPortlet = React.forwardRef((
   )
 })
 
-const FormedMediasPortlet = React.forwardRef((props:any, ref:any)=>{
+/*const FormedMediasPortlet = React.forwardRef((props:any, ref:any)=>{
   const {control, value, ...rest} = props;
   const selectPage = (state: RootState) => state.page;
   const pageInStore = useSelector(selectPage);
@@ -242,6 +238,6 @@ const FormedMediasPortlet = React.forwardRef((props:any, ref:any)=>{
     :
     <MediasPortlet value={value} {...rest} ref = {ref}/>)
   )
-})
+})*/
 
 export default MediasPortlet;

@@ -7,8 +7,6 @@ import colWidthRules from "base/Rules/colWidthRules";
 export class PortletGridItemRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
-  //empertyPadding = '';
-  hasData = true;
 
   accept(child:INode){
     return false;

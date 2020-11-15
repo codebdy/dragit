@@ -3,7 +3,6 @@ import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import FormikExample from '../FormikExample';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +32,7 @@ export default function Dashboard(props:{children?: any}) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper} elevation={6}>
-            <FormikExample />  
+            
             <div>
                 
                 <div className={classes.margin}>
