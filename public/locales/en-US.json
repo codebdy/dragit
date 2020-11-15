@@ -169,6 +169,10 @@
     "edit-select-items":"Edit select items",
 
     "is-form-page":"Is form page",
-    "api":"API"
+    "api":"API",
+
+    "error":"Error",
+    "input-error":"Some input items error",
+    "please-confirm":"Please confirm!"
 
 }
