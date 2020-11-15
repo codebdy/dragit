@@ -19,8 +19,10 @@ export default function BooleanInput(props:PropsInputProps){
           checked={inputValue}
           onChange={handleChange}
           color="primary"
+          size="small" 
         />
       }
+      style={{margin:'2px'}}
       label={<span style={{fontSize:'0.9rem'}}>{label}</span>}
     />
 

@@ -119,31 +119,26 @@ export class ButtonRule extends Rule{
       {
         name:'disabled',
         label:'disabled',
-        xs:12,
         input:BooleanInput,
       },
       {
         name:'disableElevation',
         label:'disableElevation',
-        xs:12,
         input:BooleanInput,
       },
       {
         name:'disableRipple',
         label:'disableRipple',
-        xs:12,
         input:BooleanInput,
       },
       {
         name:'fullWidth',
         label:'fullWidth',
-        xs:12,
         input:BooleanInput,
       },
       {
         name:'rxText',
         label:'text',
-        xs:12,
         input:StringInput,
       },
 

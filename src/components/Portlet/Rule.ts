@@ -20,6 +20,8 @@ export class PortletRule extends Rule{
 
   getFields(): Array<IProp>{
     return [
+      ...marginRules,
+      ...elevationRules,      
       {
         name:'collapsible',
         label:'collapsible',
@@ -32,8 +34,7 @@ export class PortletRule extends Rule{
       },      
       {
         name:'withHeader',
-        label:'title',
-        xs:12,
+        label:'with-header',
         input:SwitchInput,
       }, 
       {
@@ -42,8 +43,6 @@ export class PortletRule extends Rule{
         xs:12,
         input:StringInput,
       },
-      ...marginRules,
-      ...elevationRules,      
     ]
   }
 
