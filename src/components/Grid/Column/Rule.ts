@@ -1,6 +1,6 @@
 import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
-import { IField } from "../../../base/Rules/IRule";
+import { IProp } from "../../../base/IProp";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 const sizeSchema = {
   'false':false,
@@ -81,7 +81,7 @@ export class GridColumnRule extends Rule{
     return true;
   }
   
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
       ...colWidthOptions
     ]

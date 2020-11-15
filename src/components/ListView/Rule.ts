@@ -1,6 +1,6 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import { IField } from "../../base/Rules/IRule";
+import { IProp } from "../../base/IProp";
 import ListViewColumnsDialog from "designer/Attrebutebox/Inputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "designer/Attrebutebox/Inputs/ListViewFiltersDialog";
 import StringInput from "base/PropsInputs/StringInput";
@@ -14,7 +14,7 @@ export class ListViewRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
       {
         name:'columns',

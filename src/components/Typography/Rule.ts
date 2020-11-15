@@ -1,7 +1,7 @@
 import { Rule } from "../../base/Rules/Rule";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 import { INode } from "../../designer/Core/Node/INode";
-import { IField } from "../../base/Rules/IRule";
+import { IProp } from "../../base/IProp";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import TextareaInput from "designer/Attrebutebox/Inputs/TextareaInput";
@@ -16,13 +16,13 @@ export class TypographyRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
       {
         name:'align',
         label:'align',
         input:OptionSelect,
-        schema:{
+        props:{
           'inherit' : 'inherit',
           'left': 'left',
           'center' : 'center',
@@ -34,7 +34,7 @@ export class TypographyRule extends Rule{
         name:'display',
         label:'display',
         input:OptionSelect,
-        schema:{
+        props:{
           'initial' : 'initial',
           'block': 'block',
           'inline' : 'inline',
@@ -59,7 +59,7 @@ export class TypographyRule extends Rule{
         name:'variant',
         label:'variant',
         input:OptionSelect,
-        schema:{
+        props:{
           'h1' : 'h1',
           'h2': 'h2',
           'h3' : 'h3',

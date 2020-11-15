@@ -1,4 +1,5 @@
-import { IRule, IField } from "./IRule";
+import { IRule } from "./IRule";
+import { IProp } from "../IProp";
 import { IMeta } from "../../designer/Core/Node/IMeta";
 import intl from 'react-intl-universal';
 import { INode } from "../../designer/Core/Node/INode";
@@ -25,7 +26,7 @@ export class Rule implements IRule{
     return true;
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return []
   }
 }

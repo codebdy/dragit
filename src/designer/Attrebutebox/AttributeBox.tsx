@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {AttributeRow, RowLabel, RowValue} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
-import { IField } from 'base/Rules/IRule';
+import { IProp } from "base/IProp";
 import StyleList from './Inputs/StyleList';
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './AttributeBoxActionSection';
@@ -91,7 +91,7 @@ export default function AttributeBox(props:{node:INode|null}){
             <ExpansionPanelDetails className={classes.pannelDetail}>
               <Grid container spacing={1}>
                 {
-                  node.rule.getFields(node.meta).map((field:IField)=>{
+                  node.rule.getFields(node.meta).map((field:IProp)=>{
                     return(
                       <Grid item key={node.id + '-' + field.name} xs={field.xs || 6}>
                           <field.input
@@ -99,7 +99,7 @@ export default function AttributeBox(props:{node:INode|null}){
                             field={field.name}
                             value={node.props[field.name]}
                             onChange= {propChange}
-                            schema={field.schema}
+                            props={field.props}
                           />
 
                       </Grid>                  

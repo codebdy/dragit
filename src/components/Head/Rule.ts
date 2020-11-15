@@ -1,7 +1,7 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
-import { IField } from "../../base/Rules/IRule";
+import { IProp } from "../../base/IProp";
 import StringInput from "base/PropsInputs/StringInput";
 
 export class HeadRule extends Rule{
@@ -26,7 +26,7 @@ export class HeadRule extends Rule{
     return meta.name
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
        {
         name:'rxText',

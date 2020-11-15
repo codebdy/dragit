@@ -1,7 +1,7 @@
 import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import { IMeta } from "../../../designer/Core/Node/IMeta";
-import { IField } from "../../../base/Rules/IRule";
+import { IProp } from "../../../base/IProp";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import { colWidthOptions } from "../../Grid/Column/Rule";
 import SwitchInput from "base/PropsInputs/BooleanInput";

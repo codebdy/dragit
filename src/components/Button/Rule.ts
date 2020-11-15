@@ -1,7 +1,7 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IMeta } from "../../designer/Core/Node/IMeta";
-import { IField } from "../../base/Rules/IRule";
+import { IProp } from "../../base/IProp";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
@@ -20,13 +20,13 @@ export class ButtonRule extends Rule{
     return meta.name
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
       {
         name:'color',
         label:'color',
         input:OptionSelect,
-        schema:{
+        props:{
           'Default' : 'default',
           'Inherit': 'inherit',
           'Primary' : 'primary',
@@ -62,7 +62,7 @@ export class ButtonRule extends Rule{
         name:'size',
         label:'size',
         input:OptionSelect,
-        schema:{
+        props:{
           'Large' : 'large',
           'Medium': 'medium',
           'Small' : 'small',
@@ -72,7 +72,7 @@ export class ButtonRule extends Rule{
         name:'variant',
         label:'variant',
         input:OptionSelect,
-        schema:{
+        props:{
           'Contained' : 'contained',
           'Outlined': 'outlined',
           'Text' : 'text',
@@ -87,7 +87,7 @@ export class ButtonRule extends Rule{
         name:'type',
         label:'type',
         input:OptionSelect,
-        schema:{
+        props:{
           'Submit' : 'submit',
           'Reset': 'reset',
           'Button' : 'button',

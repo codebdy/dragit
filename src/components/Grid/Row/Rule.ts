@@ -1,7 +1,7 @@
 import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/Core/Node/INode";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
-import { IField } from "../../../base/Rules/IRule";
+import { IProp } from "../../../base/IProp";
 import NumberInput from "base/PropsInputs/NumberInput";
 
 export class GridRowRule extends Rule{
@@ -16,13 +16,13 @@ export class GridRowRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
       {
         name:'alignContent',
         label:'align-content',
         input:OptionSelect,
-        schema:{
+        props:{
           'Stretch':'stretch',
           'Center':'center',
           'Flex Start':'flex-start',
@@ -35,7 +35,7 @@ export class GridRowRule extends Rule{
         name:'alignItems',
         label:'align-items',
         input:OptionSelect,
-        schema:{
+        props:{
           'Flex Start':'flex-start',
           'Center':'center',
           'Flex End' : 'flex-end',
@@ -47,7 +47,7 @@ export class GridRowRule extends Rule{
         name:'direction',
         label:'direction',
         input:OptionSelect,
-        schema:{
+        props:{
           'Row':'row',
           'Row Reverse':'row-reverse',
           'Column' : 'column',
@@ -58,7 +58,7 @@ export class GridRowRule extends Rule{
         name:'justify',
         label:'justify',
         input:OptionSelect,
-        schema:{
+        props:{
           'Flex Start':'flex-start',
           'Center':'center',
           'Flex End' : 'flex-end',
@@ -71,7 +71,7 @@ export class GridRowRule extends Rule{
         name:'spacing',
         label:'spacing',
         input:NumberInput,
-        schema:{
+        props:{
           'min':0,
           'max':10,
           'step':1,

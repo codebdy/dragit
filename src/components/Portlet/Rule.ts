@@ -1,7 +1,7 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import NumberInput from "base/PropsInputs/NumberInput";
-import { IField } from "../../base/Rules/IRule";
+import { IProp } from "../../base/IProp";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
 
@@ -17,7 +17,7 @@ export class PortletRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
       {
         name:'collapsible',
@@ -33,7 +33,7 @@ export class PortletRule extends Rule{
         name:'spacingTop',
         label:'spacing-top',
         input:NumberInput,
-        schema:{
+        props:{
           max:100,
           min:0,
           step:1
@@ -44,7 +44,7 @@ export class PortletRule extends Rule{
         name:'spacingRight',
         label:'spacing-right',
         input:NumberInput,
-        schema:{
+        props:{
           max:100,
           min:0,
           step:1
@@ -54,7 +54,7 @@ export class PortletRule extends Rule{
         name:'spacingBottom',
         label:'spacing-bottom',
         input:NumberInput,
-        schema:{
+        props:{
           max:100,
           min:0,
           step:1
@@ -64,7 +64,7 @@ export class PortletRule extends Rule{
         name:'spacingLeft',
         label:'spacing-left',
         input:NumberInput,
-        schema:{
+        props:{
           max:100,
           min:0,
           step:1
@@ -74,7 +74,7 @@ export class PortletRule extends Rule{
         name:'elevation',
         label:'elevation',
         input:NumberInput,
-        schema:{
+        props:{
           max:24,
           min:0,
           step:1

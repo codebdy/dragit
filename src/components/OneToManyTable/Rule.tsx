@@ -1,6 +1,6 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
-import { IField } from "../../base/Rules/IRule";
+import { IProp } from "../../base/IProp";
 import OneToManyTableColumnsDialog from "designer/Attrebutebox/Inputs/OneToManyTableColumnsDialog";
 import StringInput from "base/PropsInputs/StringInput";
 import OptionSelect from "designer/Attrebutebox/Inputs/OptionSelect";
@@ -12,7 +12,7 @@ export class OneToManyTableRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IField>{
+  getFields(): Array<IProp>{
     return [
       {
         name:'columns',
@@ -23,7 +23,7 @@ export class OneToManyTableRule extends Rule{
         name:'size',
         label:'size',
         input:OptionSelect,
-        schema:{
+        props:{
           'Medium' : 'medium',
           'Small': 'small',
         },

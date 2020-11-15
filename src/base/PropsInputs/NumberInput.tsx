@@ -4,10 +4,13 @@ import { PropsInputProps } from './PropsEditorProps';
 
 export default function NumberInput(props:PropsInputProps){
   const {field, label, value, onChange} = props;
+  const {min, max, defaultValue, ...rest} = props.props || {};
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    let newValue = parseInt(event.target.value as string) 
+    let newValue = parseInt(event.target.value as string);
+    newValue = min !== undefined && newValue < min ? min : newValue
+    newValue = max !== undefined && newValue > max ? max : newValue
     setInputValue(newValue);
     onChange(field, newValue);
   };  
@@ -16,12 +19,12 @@ export default function NumberInput(props:PropsInputProps){
     <TextField
       type="number"
       label={label}
-      value={inputValue||props.props?.min}
+      value={inputValue || defaultValue || min || 0}
       onChange={handleChange}
       size="small"
       fullWidth
       variant = "outlined"
-      {...props.props}
+      {...rest}
     />
   )
 }
