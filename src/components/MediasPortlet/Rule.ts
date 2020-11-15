@@ -2,7 +2,6 @@ import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import NumberInput from "base/PropsInputs/NumberInput";
 import { IProp } from "../../base/IProp";
-import StringInput from "base/PropsInputs/StringInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 
 export class MediasPortletRule extends Rule{
