@@ -4,7 +4,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
-import MetaListDialogLeftList from './MetaListDialogLeftList';
+import MetaListDialogLeftList from '../../../designer/Attrebutebox/Inputs/MetaListDialogLeftList';
 import intl from 'react-intl-universal';
 import { ListViewMetaItem } from 'components/ListView/ListViewMetaItem';
 
@@ -81,6 +81,7 @@ const theme = responsiveFontSizes(createMuiTheme({
 }));
 
 export interface MetaListDialogProps{
+  label?:string,
   title:string;
   value:Array<ListViewMetaItem>;
   selectedIndex:number;
@@ -93,7 +94,7 @@ export interface MetaListDialogProps{
 
 export default function MetaListDialog(props:MetaListDialogProps){
   const classes = useStyles();
-  const {title, value, selectedIndex, onAddNew, onChange, onSave, onSelected, children} = props;
+  const {label, title, value, selectedIndex, onAddNew, onChange, onSave, onSelected, children} = props;
   const items = value;
   
   const handleSelected = (index:number)=>{
@@ -134,7 +135,7 @@ export default function MetaListDialog(props:MetaListDialogProps){
   return (
 
     <Fragment>
-      <Button fullWidth variant="outlined" size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> 列 ···</Button>
+      <Button fullWidth variant="outlined" size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> {label}</Button>
       <ThemeProvider theme={theme}>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 
           open={open}

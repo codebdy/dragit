@@ -1,11 +1,11 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IProp } from "../../base/IProp";
-import ListViewColumnsDialog from "designer/Attrebutebox/Inputs/ListViewColumnsDialog";
-import ListViewFiltersDialog from "designer/Attrebutebox/Inputs/ListViewFiltersDialog";
 import StringInput from "base/PropsInputs/StringInput";
-import ListViewBatcthCommandDialog from "designer/Attrebutebox/Inputs/ListViewBatcthCommandDialog";
-import ListViewRowCommandDialog from "designer/Attrebutebox/Inputs/ListViewRowCommandDialog";
+import ListViewBatcthCommandDialog from "components/ListView/PropsInputs/ListViewBatcthCommandDialog";
+import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";
+import ListViewFiltersDialog from "./PropsInputs/ListViewFiltersDialog";
+import ListViewRowCommandDialog from "./PropsInputs/ListViewRowCommandDialog";
 
 export class ListViewRule extends Rule{
   empertyPadding = '';

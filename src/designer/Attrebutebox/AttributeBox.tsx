@@ -1,15 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
-import { makeStyles, Theme, createStyles, ExpansionPanel, Grid } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, ExpansionPanel, Grid, TextField } from '@material-ui/core';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {AttributeRow, RowLabel, RowValue} from './AttributeRow';
+import {AttributeRow} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
 import { IProp } from "base/IProp";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './AttributeBoxActionSection';
-import {StyledTextInput} from './Inputs/StyledInput';
 import AttributeBoxValidateArea, { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -116,12 +115,12 @@ export default function AttributeBox(props:{node:INode|null}){
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails  key={node.id + '-data'} className={classes.pannelDetail}>
                   <AttributeRow>
-                    <RowLabel>{intl.get("field")}</RowLabel>
-                    <RowValue>
-                      <StyledTextInput value={field || ''}
-                        onChange={handleFieldChange}>
-                      </StyledTextInput>
-                    </RowValue>
+                    <TextField
+                      size="small" 
+                      variant = "outlined" 
+                      label={intl.get("field")} value={field || ''}
+                      onChange={handleFieldChange}>
+                    </TextField>
                   </AttributeRow>  
                 </ExpansionPanelDetails>            
               </ExpansionPanel>

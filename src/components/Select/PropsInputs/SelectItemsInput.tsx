@@ -1,8 +1,7 @@
-import { createStyles, FormControlLabel, Grid, makeStyles, Switch, Theme } from '@material-ui/core';
+import { createStyles, FormControlLabel, Grid, makeStyles, Switch, TextField, Theme } from '@material-ui/core';
 import { SelectItems } from 'components/Select/SelectBox';
 import React from 'react';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
-import {StyledTextAreaInput} from '../../../designer/Attrebutebox/Inputs/StyledInput';
 import intl from 'react-intl-universal';
 import SelectItemsInputItemDialog from './SelectItemsInputItemDialog';
 
@@ -57,7 +56,9 @@ export default function SelectItemsInput(props:PropsInputProps){
       {
         inputValue.fromUrl ?
           <Grid item xs={12}>
-            <StyledTextAreaInput 
+            <TextField
+              size="small" 
+              variant = "outlined"
               value={inputValue.url ||''}
               onChange={handleUrlChange}
               rows="2"

@@ -4,8 +4,6 @@ import { AttributeRow, RowLabel, RowValue } from './AttributeRow';
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, POST_DATA_ACTION } from 'admin/views/Page/PageAction';
 import intl from 'react-intl-universal';
 import { INode } from 'designer/Core/Node/INode';
-import {StyledTextInput} from './Inputs/StyledInput';
-
 
 export default function AttributeBoxActionSection(props:{node:INode}){
   const {node} = props;
@@ -75,13 +73,17 @@ export default function AttributeBoxActionSection(props:{node:INode}){
           <AttributeRow>
             <RowLabel nested>{intl.get("module-id")}</RowLabel>
             <RowValue>
-              <StyledTextInput value={action.page?.moduleId} onChange={handleModuleIdChange}/>
+              {
+                //<StyledTextInput value={action.page?.moduleId} onChange={handleModuleIdChange}/>
+              }
             </RowValue>
           </AttributeRow>
           <AttributeRow>
             <RowLabel nested>{intl.get("page-id")}</RowLabel>
             <RowValue>
-              <StyledTextInput  value={action.page?.pageId} onChange={handlePageIdChange}/>
+              {
+                //<StyledTextInput  value={action.page?.pageId} onChange={handlePageIdChange}/>
+              }
             </RowValue>
           </AttributeRow>
         </Fragment>
@@ -92,7 +94,10 @@ export default function AttributeBoxActionSection(props:{node:INode}){
         <AttributeRow>
           <RowLabel nested>{intl.get("action-slug")}</RowLabel>
           <RowValue>
-            <StyledTextInput value={action.slug||''} onChange={handleSlugChange}/>
+            {
+              //<StyledTextInput value={action.slug||''} onChange={handleSlugChange}/>
+            }
+            
           </RowValue>
         </AttributeRow>
         <AttributeRow>

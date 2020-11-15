@@ -20,7 +20,7 @@ const useStyles = makeStyles(styles);
 
 export default function ListViewBatcthCommandDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {field, value, onChange} = props;
+  const {field, label, value, onChange} = props;
   const [commands, setCommands] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
 
@@ -36,6 +36,7 @@ export default function ListViewBatcthCommandDialog(props:PropsInputProps){
   
   return (
     <MetaListDialog
+      label = {label}
       title ={intl.get('action-editor')}
       value = {commands}
       selectedIndex = {selectedIndex}

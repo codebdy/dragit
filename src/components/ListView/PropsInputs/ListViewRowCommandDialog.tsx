@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
-import MetaListDialog from './MetaListDialog';
+import MetaListDialog from 'components/ListView/PropsInputs/MetaListDialog';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -20,7 +20,7 @@ const useStyles = makeStyles(styles);
 
 export default function ListViewRowCommandDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {field, value, onChange} = props;
+  const {field, label, value, onChange} = props;
   const [commands, setCommands] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
   const command = commands[selectedIndex];
@@ -43,6 +43,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
   
   return (
     <MetaListDialog
+      label = {label}
       title ={intl.get('action-editor')}
       value = {commands}
       selectedIndex = {selectedIndex}

@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 import {MenuItem, Select, Switch, FormControl } from '@material-ui/core';
 import { AttributeRow, RowLabel, RowValue } from 'designer/Attrebutebox/AttributeRow';
 import intl from 'react-intl-universal';
-import {StyledTextAreaInput, StyledTextInput} from 'designer/Attrebutebox/Inputs/StyledInput';
-
 
 export interface ValidateRule{
   valueType?:string;
@@ -93,13 +91,17 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
           <AttributeRow>
             <RowLabel nested>{intl.get("min-length")}</RowLabel>
             <RowValue>
-              <StyledTextInput type="number" value={rule.minLength||''} onChange={(e:any)=>{handleRuleChange('minLength', e.target.value)}}/>
+              {
+                //<StyledTextInput type="number" value={rule.minLength||''} onChange={(e:any)=>{handleRuleChange('minLength', e.target.value)}}/>
+              }
             </RowValue>
           </AttributeRow>
           <AttributeRow>
             <RowLabel nested>{intl.get("max-length")}</RowLabel>
             <RowValue>
-              <StyledTextInput type="number" value={rule.maxLength||''} onChange={(e:any)=>{handleRuleChange('maxLength', e.target.value)}}/>
+              {
+                //<StyledTextInput type="number" value={rule.maxLength||''} onChange={(e:any)=>{handleRuleChange('maxLength', e.target.value)}}/>
+              }
             </RowValue>
           </AttributeRow>
           {
@@ -107,18 +109,22 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
               <AttributeRow>
                 <RowLabel nested>{intl.get("matches-regex")}</RowLabel>
                 <RowValue>
-                  <StyledTextInput value={rule.pattern||''} onChange={(e:any)=>{handleRuleChange('pattern', e.target.value)}}/>
+                  {
+                    //<StyledTextInput value={rule.pattern||''} onChange={(e:any)=>{handleRuleChange('pattern', e.target.value)}}/>
+                  }
                 </RowValue>
               </AttributeRow>
           }
           <AttributeRow>
             <RowLabel>{intl.get("error-message")}</RowLabel>
             <RowValue>
-              <StyledTextAreaInput 
+              {
+                /* <StyledTextAreaInput 
                 value={rule?.errorMessage||''} 
                 onChange={(e:any)=>{handleRuleChange('errorMessage', e.target.value)}}
                 rows="2"
-              />
+              /> */
+              }
             </RowValue>
           </AttributeRow>
 
@@ -131,13 +137,17 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
           <AttributeRow>
             <RowLabel nested>{intl.get("min")}</RowLabel>
             <RowValue>
-              <StyledTextInput type="number" value={rule.min||''} onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}/>
+             {
+               // <StyledTextInput type="number" value={rule.min||''} onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}/>
+             }
             </RowValue>
           </AttributeRow>
           <AttributeRow>
             <RowLabel nested>{intl.get("max")}</RowLabel>
             <RowValue>
-              <StyledTextInput type="number" value={rule.max||''} onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}/>
+              {
+                //<StyledTextInput type="number" value={rule.max||''} onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}/>
+              }
             </RowValue>
           </AttributeRow>
         </Fragment>
@@ -148,13 +158,17 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
           <AttributeRow>
             <RowLabel nested>{intl.get("min")}</RowLabel>
             <RowValue>
-              <StyledTextInput type="date" value={rule.min||''} onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}/>
+              {
+                //<StyledTextInput type="date" value={rule.min||''} onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}/>
+              }
             </RowValue>
           </AttributeRow>
           <AttributeRow>
             <RowLabel nested>{intl.get("max")}</RowLabel>
             <RowValue>
-              <StyledTextInput type="date" value={rule.max||''} onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}/>
+              {
+                //<StyledTextInput type="date" value={rule.max||''} onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}/>
+              }
             </RowValue>
           </AttributeRow>
         </Fragment>

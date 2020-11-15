@@ -4,7 +4,7 @@ import { INode } from "../../designer/Core/Node/INode";
 import { IProp } from "../../base/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
-import TextareaInput from "designer/Attrebutebox/Inputs/TextareaInput";
+import TextBox from "components/TextBox";
 
 export class TypographyRule extends Rule{
 
@@ -81,7 +81,7 @@ export class TypographyRule extends Rule{
       {
         name:'rxText',
         label:'text',
-        input:TextareaInput,
+        input:TextBox,
       },
     ]
   }

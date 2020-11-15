@@ -1,8 +1,7 @@
 import React from 'react';
-import {makeStyles, Theme, createStyles, Switch} from '@material-ui/core';
+import {makeStyles, Theme, createStyles, Switch, TextField} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { AttributeRow, RowLabel, RowValue } from './Attrebutebox/AttributeRow';
-import {StyledTextAreaInput} from './Attrebutebox/Inputs/StyledInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +43,9 @@ export default function FieldBox(props:{settings?:PageSettings, onChange:any}){
       <AttributeRow>
       <RowLabel>{intl.get("api")}</RowLabel>
       <RowValue>
-        <StyledTextAreaInput 
+        <TextField
+          size="small" 
+          variant = "outlined" 
           value={api||''} 
           onChange={(e:any)=>{setApi(e.target.value)}} 
           onBlur={()=>onChange({...settings, api:api})}

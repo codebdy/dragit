@@ -33,6 +33,7 @@ import { MediasPortletRule } from 'components/MediasPortlet/Rule';
 import { SelectRule } from 'components/Select/Rule';
 import { OneToManyTableRule } from 'components/OneToManyTable/Rule';
 import { PortletRule } from 'components/Portlet/Rule';
+import { ListViewRule } from 'components/ListView/Rule';
 
 const store = configureStore();
 
@@ -47,7 +48,7 @@ register('PortletGridContainer', PortletGridContainer);
 register('PortletGridItem', PortletGridItem, PortletGridItemRule);
 register('PortletFooter', PortletFooter);
 register('Typography', Typography, TypographyRule);
-register('ListView', ListView);
+register('ListView', ListView, ListViewRule);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);
