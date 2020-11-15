@@ -2,9 +2,9 @@ import { createStyles, FormControlLabel, makeStyles, Switch, Theme } from '@mate
 import { SelectItems } from 'components/Select/SelectBox';
 import React from 'react';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
-import {StyledTextAreaInput} from './StyledInput';
+import {StyledTextAreaInput} from '../../../designer/Attrebutebox/Inputs/StyledInput';
 import intl from 'react-intl-universal';
-import SelectItemsInputItemDialog from './SelectItemsInputItemDialog';
+import SelectItemsInputItemDialog from '../../../designer/Attrebutebox/Inputs/SelectItemsInputItemDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

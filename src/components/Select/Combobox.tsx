@@ -78,7 +78,7 @@ const Combobox = React.forwardRef((
       options = {options}
       freeSolo
       loading = {loading}
-
+      ref = {ref}
       value = {inputValue}
       //defaultValue = {value||empertyValue}
       renderInput={(params) => (

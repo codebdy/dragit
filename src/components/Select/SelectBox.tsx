@@ -95,6 +95,7 @@ const SelectBox = React.forwardRef((
       value={value || empertyValue}
       onChange={onChange}
       label={label}
+      ref = {ref}
     >
       { !withoutEmpertyItem &&
         <MenuItem value={empertyValue}>

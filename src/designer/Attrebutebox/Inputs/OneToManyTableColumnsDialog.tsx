@@ -4,7 +4,7 @@ import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 import { Fragment } from 'react';
-import SelectItemsInput from './SelectItemsInput';
+import SelectItemsInput from '../../../components/Select/PropsInputs/SelectItemsInput';
 
 const styles = (theme: Theme) =>
   createStyles({
