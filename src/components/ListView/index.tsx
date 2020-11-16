@@ -143,7 +143,6 @@ const ListView = React.forwardRef((
   let realtimePage = page;
 
   useEffect(() => {
-    console.log('ListView useEffect')
     emitAction(COMMAND_QUERY);
 
     return () => { 

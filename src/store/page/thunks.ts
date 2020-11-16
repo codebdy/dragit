@@ -24,7 +24,6 @@ const thunkPageSchema = (page:PageJumper
     const url = '/api/page/' + page.pageId;
 
     if(cache[url]){
-      console.log('Cached');
       fetchModelData(cache[url], dispatch, page);
       return
     }
