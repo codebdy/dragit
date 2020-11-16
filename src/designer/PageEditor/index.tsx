@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 import intl from 'react-intl-universal';
-import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
@@ -21,7 +20,8 @@ import ActiveLabel from './Core/Utils/ActiveLabel';
 import FocusLabel from './Core/Utils/FocusLabel';
 import MouseFollower from './Core/Utils/MouseFollower';
 import NodeToolbar from './Core/Utils/NodeToolbar';
-import LeftArea from './LeftArea';
+import DesignerLayout from 'designer/Layout';
+import LeftContent from './LeftContent';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,57 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow: 'row',
       height:'100%',
     },
-    leftArea:{
-      display:'flex',
-      flexFlow:'column',
-      height:'100%',
-      background: '#1a1a27',
-      boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.2), 0px 20px 31px 3px rgba(0,0,0,0.14), 0px 8px 38px 7px rgba(0,0,0,0.12)',
-      zIndex:theme.zIndex.drawer + 1,
-      color:"#f7f7f7",
-    },
-    leftTitle:{
-      padding: theme.spacing(0),
-      //fontSize: '1.1rem',
-      //borderBottom:"rgba(0,0,0, .4) solid 2px",
-      display:'flex',
-      flexFlow:'row',
-      alignItems:"flex-end",
-      height:'63px',
-      background: 'rgba(0,0,0,0.3)',
-      boxShadow: theme.shadows[6],
-    },
 
-    rightArea:{
-      flex:1,
-      display:'flex',
-      flexFlow:'column',
-      justifyContent: 'stretch',
-      height:'100%',
-    },
-    designButton:{
-      boxShadow: theme.shadows[10],
-    },
-
-    designButtonIcon:{
-      marginRight: theme.spacing(1),
-    },
-    pageContentArea:{
-      flex:1,
-      background: theme.palette.background.default,
-      overflow: 'auto',
-      display:'flex',
-      flexFlow:'column',
-    },
 
     toolboxIcon:{
       marginRight:theme.spacing(2),
     },
 
-    toolbar:{
-      background:"#3e3e54",
-      boxShadow: theme.shadows[6],
-    },
     cancelButton:{
       marginRight:theme.spacing(1),
     },
@@ -113,17 +68,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const darkTheme = responsiveFontSizes(createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary:{
-      main:"#5d78ff",
-    },
-    //secondary:{
-      //main:"#ff9e43",
-    //},    
-  },
-}));
 
 export function ToolbarIcon(props:{checked?:boolean, onClick?:()=>void, children?:any}){
   const{checked, onClick, children} = props;
@@ -185,14 +129,13 @@ export default function PageEditor() {
 
   return (
     <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
-      <ThemeProvider theme={darkTheme}>
-        <LeftArea pageSettings={pageSettings} onSettingsChange={handlSettingsChange}/>
-      </ThemeProvider>
-      <div 
-        className = {classes.rightArea}
-      >
-        <ThemeProvider theme={darkTheme}>
-          <TopNavHeightPlaceholder className={classes.toolbar}>
+      <DesignerLayout
+        leftArea = {
+          <LeftContent pageSettings={pageSettings} onSettingsChange={handlSettingsChange}/>
+        }
+
+        toolbar = {
+          <Fragment>
             <ToolbarIcon>
               <MdiIcon iconClass="mdi-layers-outline"/>
             </ToolbarIcon>
@@ -238,16 +181,14 @@ export default function PageEditor() {
             <Button variant="contained" color="primary" onClick={handleSave}>
             {intl.get('save')}
             </Button>
-          </TopNavHeightPlaceholder>
-        </ThemeProvider>
-        <div className={classNames(classes.pageContentArea) }>
-          <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-              <NodeView node={canvas} />
-          </Scrollbar>
-        </div>
-      </div>
+          </Fragment>
+        }
+      >
+        <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
+          <NodeView node={canvas} />
+        </Scrollbar>
+      </DesignerLayout>
       {
-     
         <Fragment>
           <FocusLabel />
           <NodeToolbar />

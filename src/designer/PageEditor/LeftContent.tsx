@@ -1,39 +1,14 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Tabs, Tab } from '@material-ui/core';
-import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
+import { Tabs, Tab } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
-import Scrollbar from 'admin/common/Scrollbar';
 import Toolbox from './Toolbox';
 import Box from '@material-ui/core/Box';
 import AttributeBox from './Attrebutebox';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
 import { INode } from 'designer/PageEditor/Core/Node/INode';
 import SettingsBox, { PageSettings } from './SettingsBox';
+import LeftArea from 'designer/Layout/LeftArea';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    leftArea:{
-      display:'flex',
-      flexFlow:'column',
-      height:'100%',
-      background: '#1a1a27',
-      boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.2), 0px 20px 31px 3px rgba(0,0,0,0.14), 0px 8px 38px 7px rgba(0,0,0,0.12)',
-      zIndex:theme.zIndex.drawer + 1,
-      color:"#f7f7f7",
-    },
-    leftTitle:{
-      padding: theme.spacing(0),
-      //fontSize: '1.1rem',
-      //borderBottom:"rgba(0,0,0, .4) solid 2px",
-      display:'flex',
-      flexFlow:'row',
-      alignItems:"flex-end",
-      height:'63px',
-      background: 'rgba(0,0,0,0.3)',
-      boxShadow: theme.shadows[6],
-    },
-  }),
-);
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -57,9 +32,8 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
-export default function LeftArea(props:{pageSettings?:PageSettings, onSettingsChange:(settings:PageSettings)=>void}){
+export default function LeftContent(props:{pageSettings?:PageSettings, onSettingsChange:(settings:PageSettings)=>void}){
   const {pageSettings, onSettingsChange} = props;
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
 
@@ -85,25 +59,22 @@ export default function LeftArea(props:{pageSettings?:PageSettings, onSettingsCh
   });
 
   return (
-    <SidebarWidthPlaceholder className={classes.leftArea}>
-          
-    <div className={classes.leftTitle}>
-    <Tabs
-      value={value}
-      onChange={handleChange}
-      indicatorColor="primary"
-      textColor="primary"
-      variant="fullWidth"
-      aria-label="full width tabs example"
+    <LeftArea
+      title={
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab icon={<MdiIcon iconClass="mdi-view-dashboard"></MdiIcon>} style={{minWidth:'80px', }}/>
+          <Tab icon={<MdiIcon iconClass="mdi-brush"></MdiIcon>} style={{minWidth:'80px', }}/>
+          <Tab icon={<MdiIcon iconClass="mdi-file-cog-outline"/>}  style={{minWidth:'80px', }}/>
+        </Tabs> 
+      }
     >
-      <Tab icon={<MdiIcon iconClass="mdi-view-dashboard"></MdiIcon>} style={{minWidth:'80px', }}/>
-      <Tab icon={<MdiIcon iconClass="mdi-brush"></MdiIcon>} style={{minWidth:'80px', }}/>
-      <Tab icon={<MdiIcon iconClass="mdi-file-cog-outline"/>}  style={{minWidth:'80px', }}/>
-    </Tabs>          
-    </div>
-
-  
-    <Scrollbar>
       <TabPanel value={value} index={0}>
         <Toolbox></Toolbox>
       </TabPanel>
@@ -113,7 +84,6 @@ export default function LeftArea(props:{pageSettings?:PageSettings, onSettingsCh
       <TabPanel value={value} index={2}>
         <SettingsBox settings = {pageSettings} onChange = {onSettingsChange} />
       </TabPanel>
-    </Scrollbar>
-  </SidebarWidthPlaceholder>
+    </LeftArea>
   )
 }
