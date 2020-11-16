@@ -5,7 +5,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
-import MetaListInput from '../../../designer/Attrebutebox/Inputs/MetaListInput';
+import MetaListInput from '../../ListView/PropsInputs/MetaListInput';
 
 const styles = (theme: Theme) =>
   createStyles({

@@ -4,7 +4,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
-import MetaListDialogLeftList from '../../../designer/Attrebutebox/Inputs/MetaListDialogLeftList';
+import MetaListDialogLeftList from './MetaListDialogLeftList';
 import intl from 'react-intl-universal';
 import { ListViewMetaItem } from 'components/ListView/ListViewMetaItem';
 

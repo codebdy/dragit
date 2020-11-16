@@ -1,7 +1,7 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/Core/Node/INode";
 import { IProp } from "../../base/IProp";
-import OneToManyTableColumnsDialog from "designer/Attrebutebox/Inputs/OneToManyTableColumnsDialog";
+import OneToManyTableColumnsDialog from "components/OneToManyTable/PropsInputs/OneToManyTableColumnsDialog";
 import StringInput from "base/PropsInputs/StringInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 

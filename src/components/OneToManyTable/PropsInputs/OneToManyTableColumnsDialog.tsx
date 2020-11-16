@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, TextField, MenuItem, Select, FormControl, InputLabel, FormControlLabel, Switch} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
-import MetaListDialog from '../../../components/ListView/PropsInputs/MetaListDialog';
+import MetaListDialog from '../../ListView/PropsInputs/MetaListDialog';
 import { Fragment } from 'react';
-import SelectItemsInput from '../../../components/Select/PropsInputs/SelectItemsInput';
+import SelectItemsInput from '../../Select/PropsInputs/SelectItemsInput';
 
 const styles = (theme: Theme) =>
   createStyles({
