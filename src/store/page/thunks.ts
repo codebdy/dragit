@@ -12,6 +12,7 @@ interface AxiosAction{
     [key:string]:string,
   },
 }
+var cache : {[key: string]: any }= {};
 
 const thunkPageSchema = (page:PageJumper
 ): ThunkAction<void, RootState, null, Action<string>> => {
@@ -19,13 +20,21 @@ const thunkPageSchema = (page:PageJumper
     if(!page.pageId){
       return dispatch(thunkModuleDefaultPageSchema(page))
     }
+
+    const url = '/api/page/' + page.pageId;
+
+    if(cache[url]){
+      console.log('Cached');
+      fetchModelData(cache[url], dispatch, page);
+      return
+    }
+    
     dispatch(loadingSchemaAction(page.pageId))
 
-    axios.get('/api/page/' + page.pageId).then(res => {
-      dispatch(receivedSchemaAction(res.data));
+    axios.get(url).then(res => {
       //获取页面数据
-      const axiosAction = res.data.initAction;
-      axiosAction && dispatch(thunkPageModel({...axiosAction, data:{...axiosAction.data, dataId:page.dataId} }));
+      cache[url] = res.data;
+      fetchModelData(res.data, dispatch, page);
     })
     .catch(err => {
       console.log('chunk error');
@@ -34,11 +43,26 @@ const thunkPageSchema = (page:PageJumper
   }
 };
 
+function fetchModelData(data:any, dispatch:any, page: PageJumper) {
+  dispatch(receivedSchemaAction(data));
+  const axiosAction = data.initAction;
+  axiosAction && dispatch(thunkPageModel({ ...axiosAction, data: { ...axiosAction.data, dataId: page.dataId } }));
+}
+
+
 const thunkModuleDefaultPageSchema = (page:PageJumper
   ): ThunkAction<void, RootState, null, Action<string>> => {
   return async dispatch => {
+    const url = '/api/moudle-index/' + page.moduleId;
+    if(cache[url]){
+      dispatch(thunkPageSchema({...page, pageId:cache[url]}));
+      return;
+    }
+    
     dispatch(loadingSchemaAction())
-    axios.get('/api/moudle-index/' + page.moduleId).then(res => {
+
+    axios.get(url).then(res => {
+      cache[url] = res.data;
       dispatch(thunkPageSchema({...page, pageId:res.data}));
     })
     .catch(err => {
@@ -67,3 +91,4 @@ export {
   thunkModuleDefaultPageSchema,
   thunkPageModel
 };
+
