@@ -5,7 +5,7 @@ import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
 import inputRules from "base/Rules/inputRules";
 import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/Core/Node/INode";
+import { INode } from "../../designer/PageEditor/Core/Node/INode";
 
 export class TextBoxRule extends Rule{
   editPaddingY = '';

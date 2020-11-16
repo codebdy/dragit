@@ -9,13 +9,13 @@ import PageContent from 'admin/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Medias from 'components/Medias/Medias';
-import AreaSelect from 'designer/AreaSelect';
-import PageContentDesign from 'designer/PageContentDesign';
+import AreaSelect from 'designer/PageEditor/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
 import SuccessAlertBar from './SuccessAlertBar';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import PageEditor from 'designer/PageEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,7 +78,7 @@ export default function Layout(){
         </PageContent>
       </div>
       <AreaSelect></AreaSelect>
-      {myStore.pageContentDesign && <PageContentDesign></PageContentDesign>}
+      {myStore.pageContentDesign && <PageEditor></PageEditor>}
       {<FixedBar />}
       <SuccessAlertBar />
     </div>

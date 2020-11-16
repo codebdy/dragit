@@ -3,7 +3,7 @@ import { FormControl,  InputLabel, MenuItem, Select, TextField } from '@material
 import { AttributeRow } from './AttributeRow';
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from 'admin/views/Page/PageAction';
 import intl from 'react-intl-universal';
-import { INode } from 'designer/Core/Node/INode';
+import { INode } from 'designer/PageEditor/Core/Node/INode';
 
 export default function AttributeBoxActionSection(props:{node:INode}){
   const {node} = props;

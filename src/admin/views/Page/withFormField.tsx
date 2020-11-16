@@ -1,4 +1,4 @@
-import { ValidateRule } from 'designer/Attrebutebox/ValidateArea';
+import { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import useFieldValue from './useFieldValue';

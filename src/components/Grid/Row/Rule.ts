@@ -1,5 +1,5 @@
 import { Rule } from "../../../base/Rules/Rule";
-import { INode } from "../../../designer/Core/Node/INode";
+import { INode } from "../../../designer/PageEditor/Core/Node/INode";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import { IProp } from "../../../base/IProp";
 import NumberInput from "base/PropsInputs/NumberInput";

@@ -4,11 +4,11 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { INode } from 'designer/Core/Node/INode';
+import { INode } from 'designer/PageEditor/Core/Node/INode';
 import { IProp } from "base/IProp";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
-import AttributeBoxValidateArea, { ValidateRule } from 'designer/Attrebutebox/ValidateArea';
+import AttributeBoxValidateArea, { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

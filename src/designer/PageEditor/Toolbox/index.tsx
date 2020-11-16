@@ -4,7 +4,7 @@ import items from './items'
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import {sideBarSettings} from "utils";
-import { INode } from 'designer/Core/Node/INode';
+import { INode } from 'designer/PageEditor/Core/Node/INode';
 import TreeView from '@material-ui/lab/TreeView';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
@@ -12,8 +12,8 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
-import { parseNode } from 'designer/Core/Node/jsonParser';
-import bus, { WILL_FOCUS_NODE } from 'designer/Core/bus';
+import { parseNode } from 'designer/PageEditor/Core/Node/jsonParser';
+import bus, { WILL_FOCUS_NODE } from 'designer/PageEditor/Core/bus';
 
 declare var window: {draggedNode:INode};
 

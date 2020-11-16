@@ -1,5 +1,5 @@
 import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/Core/Node/INode";
+import { INode } from "../../designer/PageEditor/Core/Node/INode";
 import { IProp } from "../../base/IProp";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";

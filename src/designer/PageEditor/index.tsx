@@ -4,9 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, responsiveFontSizes, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
-
 import intl from 'react-intl-universal';
-
 import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import Scrollbar from 'admin/common/Scrollbar';
@@ -14,17 +12,16 @@ import Spacer from 'components/common/Spacer';
 import { cancelPageContentAction, savePageContentAction, showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import { openFixedBarAction } from 'store/fixedBar/actions';
 import MdiIcon from 'components/common/MdiIcon';
-//import { Schema } from './Core/Schemas/Schema';
+import { PageSettings } from './SettingsBox';
+import bus, { CANVAS_SCROLL } from './Core/bus';
+import { CanvasNode } from './Core/Node/CanvasNode';
+import { parseNodes } from './Core/Node/jsonParser';
 import NodeView from './Core/Node/NodeView';
 import ActiveLabel from './Core/Utils/ActiveLabel';
-import { CanvasNode } from './Core/Node/CanvasNode';
-import NodeToolbar from './Core/Utils/NodeToolbar';
-import MouseFollower from './Core/Utils/MouseFollower';
-import bus, { CANVAS_SCROLL } from './Core/bus';
-import { parseNodes } from './Core/Node/jsonParser';
-import LeftArea from './LeftArea';
 import FocusLabel from './Core/Utils/FocusLabel';
-import { PageSettings } from './SettingsBox';
+import MouseFollower from './Core/Utils/MouseFollower';
+import NodeToolbar from './Core/Utils/NodeToolbar';
+import LeftArea from './LeftArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -141,7 +138,7 @@ export function ToolbarIcon(props:{checked?:boolean, onClick?:()=>void, children
   )
 }
 
-export default function PageContentDesign() {
+export default function PageEditor() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)

@@ -1,5 +1,5 @@
 import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/Core/Node/INode";
+import { INode } from "../../designer/PageEditor/Core/Node/INode";
 
 export class CanvasRule extends Rule{
   editPaddingY = '';

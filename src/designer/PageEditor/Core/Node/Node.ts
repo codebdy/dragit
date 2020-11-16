@@ -5,11 +5,11 @@ import { NormalState } from "./States/NormalState";
 import { FocusState } from "./States/FocusState";
 import { DraggedState } from "./States/DraggedState";
 import { PreviewState } from "./States/PreviewState";
-import { IMeta } from "../../../base/IMeta";
-import { IRule } from "../../../base/Rules/IRule";
+import { IMeta } from "../../../../base/IMeta";
+import { IRule } from "../../../../base/Rules/IRule";
 import bus, { WILL_FOCUS_NODE } from "../bus";
 import { INode, MousePoint } from "./INode";
-import { remove, last, first, before, after, insertBefore, insertAfter } from "../../../ArrayHelper";
+import { remove, last, first, before, after, insertBefore, insertAfter } from "../../../../ArrayHelper";
 import { DragoverState } from "./States/DragoverState";
 import { resolveRule } from "base/DragRX";
 

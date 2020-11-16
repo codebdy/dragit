@@ -7,7 +7,7 @@ import Toolbox from './Toolbox';
 import Box from '@material-ui/core/Box';
 import AttributeBox from './Attrebutebox';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
-import { INode } from 'designer/Core/Node/INode';
+import { INode } from 'designer/PageEditor/Core/Node/INode';
 import SettingsBox, { PageSettings } from './SettingsBox';
 
 const useStyles = makeStyles((theme: Theme) =>
