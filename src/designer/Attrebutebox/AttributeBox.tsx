@@ -4,7 +4,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {AttributeRow} from './AttributeRow';
 import { INode } from 'designer/Core/Node/INode';
 import { IProp } from "base/IProp";
 import intl from 'react-intl-universal';
@@ -105,25 +104,27 @@ export default function AttributeBox(props:{node:INode|null}){
               </Grid>
             </ExpansionPanelDetails>
           </ExpansionPanel>
-          {node.rule.hasData &&
-            <Fragment> 
-              <ExpansionPanel  className={classes.panelPaper}>
-                <ExpansionPanelSummary
-                  expandIcon={<ExpandMoreIcon />}
-                >
-                  <Typography className={classes.heading}>{intl.get('data')}</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails  key={node.id + '-data'} className={classes.pannelDetail}>
-                  <AttributeRow>
-                    <TextField
-                      size="small" 
-                      variant = "outlined" 
-                      label={intl.get("field")} value={field || ''}
-                      onChange={handleFieldChange}>
-                    </TextField>
-                  </AttributeRow>  
-                </ExpansionPanelDetails>            
-              </ExpansionPanel>
+          {node.rule.hasField &&
+            <ExpansionPanel  className={classes.panelPaper}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+              >
+                <Typography className={classes.heading}>{intl.get('data')}</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails  key={node.id + '-data'} className={classes.pannelDetail}>
+               
+                  <TextField
+                    size="small" 
+                    variant = "outlined" 
+                    label={intl.get("field")} value={field || ''}
+                    onChange={handleFieldChange}>
+                  </TextField>
+                
+              </ExpansionPanelDetails>            
+            </ExpansionPanel>
+          }
+          {
+            node.rule.hasValidation && 
               <ExpansionPanel  className={classes.panelPaper}>
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -133,8 +134,7 @@ export default function AttributeBox(props:{node:INode|null}){
                 <ExpansionPanelDetails  key={node.id + '-rule'} className={classes.pannelDetail}>
                   <AttributeBoxValidateArea rule={rule} onChange={handleRuleChange} /> 
                 </ExpansionPanelDetails>            
-              </ExpansionPanel>
-            </Fragment>
+              </ExpansionPanel>            
           }
           {node.rule.hasAction && 
             <ExpansionPanel  className={classes.panelPaper}>

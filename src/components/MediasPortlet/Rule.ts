@@ -9,6 +9,7 @@ export class MediasPortletRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
+  hasField = true;
   
   accept(child:INode){
     return false;

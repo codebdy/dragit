@@ -1,7 +1,7 @@
 import React from 'react';
-import {makeStyles, Theme, createStyles, Switch, TextField} from '@material-ui/core';
+import {makeStyles, Theme, createStyles, Switch, TextField, FormControlLabel} from '@material-ui/core';
 import intl from 'react-intl-universal';
-import { AttributeRow, RowLabel, RowValue } from './Attrebutebox/AttributeRow';
+import { AttributeRow } from './Attrebutebox/AttributeRow';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,27 +31,29 @@ export default function FieldBox(props:{settings?:PageSettings, onChange:any}){
   return (
     <div className={classes.root}>
       <AttributeRow>
-        <RowLabel>{intl.get("is-form-page")}</RowLabel>
-        <RowValue>
-        <Switch
-          checked={settings.isFormPage}
-          onChange={ (e)=>{onChange({...settings, isFormPage:e.target.checked})} }
-          color="primary"
-        />
-        </RowValue>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={settings.isFormPage}
+              onChange={ (e)=>{onChange({...settings, isFormPage:e.target.checked})} }
+              color="primary"
+              //size="small" 
+            />
+          }
+          label={intl.get("is-form-page")}
+        />          
       </AttributeRow>
       <AttributeRow>
-      <RowLabel>{intl.get("api")}</RowLabel>
-      <RowValue>
-        <TextField
+        <TextField variant="outlined"
+          fullWidth
           size="small" 
-          variant = "outlined" 
+          label={intl.get("api")}
           value={api||''} 
           onChange={(e:any)=>{setApi(e.target.value)}} 
           onBlur={()=>onChange({...settings, api:api})}
-          rows="2"
-        />
-      </RowValue>
+          multiline
+          rows={3}
+        ></TextField>
       </AttributeRow>      
     </div>
     

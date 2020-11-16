@@ -7,6 +7,7 @@ import OptionSelect from "base/PropsInputs/OptionSelect";
 
 export class OneToManyTableRule extends Rule{
   empertyPadding = '';
+  hasField = true;
   
   accept(child:INode){
     return false;

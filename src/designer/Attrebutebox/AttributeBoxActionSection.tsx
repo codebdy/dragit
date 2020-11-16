@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
-import { MenuItem, Select, Switch } from '@material-ui/core';
-import { AttributeRow, RowLabel, RowValue } from './AttributeRow';
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, POST_DATA_ACTION } from 'admin/views/Page/PageAction';
+import { FormControl,  InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import { AttributeRow } from './AttributeRow';
+import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from 'admin/views/Page/PageAction';
 import intl from 'react-intl-universal';
 import { INode } from 'designer/Core/Node/INode';
 
@@ -36,7 +36,7 @@ export default function AttributeBoxActionSection(props:{node:INode}){
     node.updateProp('onClick', newAction)
   }; 
 
-  const handleSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  /*const handleSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = (event.target.value as string);
     let newAction:PageAction =  {...action, slug:newValue};
     setAction(newAction);
@@ -48,14 +48,15 @@ export default function AttributeBoxActionSection(props:{node:INode}){
     let newAction:PageAction =  {...action, needGoBack:newValue};
     setAction(newAction);
     node.updateProp('onClick', newAction)
-  }; 
+  }; */
 
   return (
     <Fragment>
       <AttributeRow>
-        <RowLabel>{intl.get("action")}</RowLabel>
-        <RowValue>
+        <FormControl variant="outlined" size="small" fullWidth>
+          <InputLabel>{intl.get("action")}</InputLabel>
           <Select
+            label = {intl.get("action")}
             value={action.name || ''}
             onChange={handleActionChange}
           >
@@ -65,52 +66,58 @@ export default function AttributeBoxActionSection(props:{node:INode}){
             <MenuItem value={GO_BACK_ACTION}>{intl.get("go-back")}</MenuItem>
             <MenuItem value={JUMP_TO_PAGE_ACTION}>{intl.get("jump-to")}</MenuItem>
           </Select>
-        </RowValue>
+        </FormControl>        
       </AttributeRow>  
       {
         JUMP_TO_PAGE_ACTION === action.name &&
         <Fragment>
           <AttributeRow>
-            <RowLabel nested>{intl.get("module-id")}</RowLabel>
-            <RowValue>
-              {
-                //<StyledTextInput value={action.page?.moduleId} onChange={handleModuleIdChange}/>
-              }
-            </RowValue>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label={intl.get("module-id")}
+              value={action.page?.moduleId} 
+              onChange={handleModuleIdChange}
+            ></TextField>
           </AttributeRow>
           <AttributeRow>
-            <RowLabel nested>{intl.get("page-id")}</RowLabel>
-            <RowValue>
-              {
-                //<StyledTextInput  value={action.page?.pageId} onChange={handlePageIdChange}/>
-              }
-            </RowValue>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("page-id")}
+              value = {action.page?.pageId} 
+              onChange = {handlePageIdChange}
+            ></TextField>
           </AttributeRow>
         </Fragment>
       }
       {
-        POST_DATA_ACTION === action.name &&
+        /*POST_DATA_ACTION === action.name &&
         <Fragment>
         <AttributeRow>
-          <RowLabel nested>{intl.get("action-slug")}</RowLabel>
-          <RowValue>
-            {
-              //<StyledTextInput value={action.slug||''} onChange={handleSlugChange}/>
-            }
-            
-          </RowValue>
+          <TextField fullWidth
+            variant="outlined" 
+            size = "small"
+            label = {intl.get("action-slug")}
+            value={action.slug||''} 
+            onChange={handleSlugChange}
+          ></TextField>
         </AttributeRow>
         <AttributeRow>
-          <RowLabel nested>{intl.get("finished-go-back")}</RowLabel>
-          <RowValue>
-          <Switch
-            checked={action.needGoBack||false}
-            onChange={handleNeedGoBack}
-            color="primary"
-          />
-          </RowValue>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={action.needGoBack||false}
+                onChange={handleNeedGoBack}
+                color="primary"
+                //size="small" 
+              />
+            }
+            style={{margin:'2px'}}
+            label={intl.get("finished-go-back")}
+          />     
         </AttributeRow>
-        </Fragment>
+        </Fragment>*/
 
       }
    </Fragment>

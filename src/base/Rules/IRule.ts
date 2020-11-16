@@ -20,5 +20,8 @@ export interface IRule{
   hasAction?:boolean;
 
   //数据
-  hasData?:boolean;
+  hasField?:boolean;
+
+  //验证
+  hasValidation?:boolean;
 }

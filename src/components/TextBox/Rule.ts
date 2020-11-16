@@ -11,6 +11,8 @@ export class TextBoxRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
+  hasField = true;
+  hasValidation = true;
 
   accept(child:INode){
     return false;

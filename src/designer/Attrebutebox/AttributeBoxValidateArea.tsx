@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import {MenuItem, Select, Switch, FormControl } from '@material-ui/core';
-import { AttributeRow, RowLabel, RowValue } from 'designer/Attrebutebox/AttributeRow';
+import {MenuItem, Select, Switch, FormControl, FormControlLabel, InputLabel, TextField } from '@material-ui/core';
+import { AttributeRow, } from 'designer/Attrebutebox/AttributeRow';
 import intl from 'react-intl-universal';
 
 export interface ValidateRule{
@@ -37,97 +37,104 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
   return (
     <div>
       <AttributeRow>
-        <RowLabel>{intl.get("required")}</RowLabel>
-        <RowValue>
-        <Switch
-          checked={rule?.required||false}
-          onChange={ (e)=>{handleRuleChange('required', e.target.checked)} }
-          color="primary"
-        />
-        </RowValue>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={rule?.required||false}
+              onChange={ (e)=>{handleRuleChange('required', e.target.checked)} }
+              color="primary"
+              //size="small" 
+            />
+          }
+          style={{margin:'2px'}}
+          label={<span style={{fontSize:'0.9rem'}}>{intl.get("required")}</span>}
+        />        
       </AttributeRow>
 
       <AttributeRow>
-        <RowLabel>{intl.get("validate-type")}</RowLabel>
-        <RowValue>
-          <FormControl variant="outlined" size="small">
-            <Select
-              value={rule?.valueType || ''}
-              onChange={handleTypeChange}
-              variant="outlined"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value='string'>{intl.get('string')}</MenuItem>
-              <MenuItem value='number'>{intl.get('number')}</MenuItem>
-              <MenuItem value='date'>{intl.get('date')}</MenuItem>
-            </Select>
-          </FormControl>
-        </RowValue>
+        <FormControl variant="outlined" size="small" fullWidth>
+          <InputLabel>{intl.get("validate-type")}</InputLabel>
+          <Select
+            value={rule?.valueType || ''}
+            onChange={handleTypeChange}
+            variant="outlined"
+            label = {intl.get("validate-type")}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value='string'>{intl.get('string')}</MenuItem>
+            <MenuItem value='number'>{intl.get('number')}</MenuItem>
+            <MenuItem value='date'>{intl.get('date')}</MenuItem>
+          </Select>
+        </FormControl>
       </AttributeRow>
       {
         rule?.valueType === 'string' &&
         <Fragment>
           <AttributeRow>
-            <RowLabel>{intl.get("validate-rules")}</RowLabel>
-            <RowValue>
-              <FormControl variant="outlined" size="small">
-                <Select
-                  value={rule?.ruleType || ''}
-                  onChange={handleRuleTypeChange}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value='email'>{intl.get('email')}</MenuItem>
-                  <MenuItem value='url'>{intl.get('url')}</MenuItem>
-                  <MenuItem value='customized'>{intl.get('customized')}</MenuItem>
-                </Select>
-              </FormControl>
-            </RowValue>
+            <FormControl variant="outlined" size="small" fullWidth>
+              <InputLabel>{intl.get("validate-rules")}</InputLabel>
+              <Select
+                label = {intl.get("validate-rules")}
+                value={rule?.ruleType || ''}
+                onChange={handleRuleTypeChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value='email'>{intl.get('email')}</MenuItem>
+                <MenuItem value='url'>{intl.get('url')}</MenuItem>
+                <MenuItem value='customized'>{intl.get('customized')}</MenuItem>
+              </Select>
+            </FormControl>
           </AttributeRow>
 
           <AttributeRow>
-            <RowLabel nested>{intl.get("min-length")}</RowLabel>
-            <RowValue>
-              {
-                //<StyledTextInput type="number" value={rule.minLength||''} onChange={(e:any)=>{handleRuleChange('minLength', e.target.value)}}/>
-              }
-            </RowValue>
-          </AttributeRow>
-          <AttributeRow>
-            <RowLabel nested>{intl.get("max-length")}</RowLabel>
-            <RowValue>
-              {
-                //<StyledTextInput type="number" value={rule.maxLength||''} onChange={(e:any)=>{handleRuleChange('maxLength', e.target.value)}}/>
-              }
-            </RowValue>
+            <TextField 
+              fullWidth
+              variant="outlined" 
+              size = "small"
+              label={intl.get("min-length")}
+              type="number" 
+              value={rule.minLength||''}
+              onChange={(e:any)=>{handleRuleChange('minLength', e.target.value)}}
+            ></TextField>
+            <TextField 
+              size="small"
+              fullWidth
+              variant="outlined" 
+              label={intl.get("max-length")}
+              type="number" 
+              value={rule.maxLength||''}
+              onChange={(e:any)=>{handleRuleChange('maxLength', e.target.value)}}
+            ></TextField>
           </AttributeRow>
           {
             rule?.ruleType === 'customized'&&
-              <AttributeRow>
-                <RowLabel nested>{intl.get("matches-regex")}</RowLabel>
-                <RowValue>
-                  {
-                    //<StyledTextInput value={rule.pattern||''} onChange={(e:any)=>{handleRuleChange('pattern', e.target.value)}}/>
-                  }
-                </RowValue>
-              </AttributeRow>
+            <AttributeRow>
+              <TextField
+                size="small" 
+                fullWidth
+                variant="outlined" 
+                label={intl.get("pattern")}
+                value={rule.pattern||''}
+                onChange={(e:any)=>{handleRuleChange('pattern', e.target.value)}}
+              ></TextField>
+            </AttributeRow>
           }
           <AttributeRow>
-            <RowLabel>{intl.get("error-message")}</RowLabel>
-            <RowValue>
-              {
-                /* <StyledTextAreaInput 
-                value={rule?.errorMessage||''} 
+            <TextField 
+              size="small"
+              fullWidth
+              variant="outlined"
+              multiline
+              rows={2} 
+              label={intl.get("error-message")}
+              value={rule?.errorMessage||''} 
                 onChange={(e:any)=>{handleRuleChange('errorMessage', e.target.value)}}
-                rows="2"
-              /> */
-              }
-            </RowValue>
+            ></TextField>
           </AttributeRow>
-
         </Fragment>    
       }
 
@@ -135,20 +142,24 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
         rule?.valueType === 'number' &&
         <Fragment>
           <AttributeRow>
-            <RowLabel nested>{intl.get("min")}</RowLabel>
-            <RowValue>
-             {
-               // <StyledTextInput type="number" value={rule.min||''} onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}/>
-             }
-            </RowValue>
-          </AttributeRow>
-          <AttributeRow>
-            <RowLabel nested>{intl.get("max")}</RowLabel>
-            <RowValue>
-              {
-                //<StyledTextInput type="number" value={rule.max||''} onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}/>
-              }
-            </RowValue>
+            <TextField 
+              size="small"
+              fullWidth
+              variant="outlined" 
+              label={intl.get("min")}
+              type="number" 
+              value={rule.min||''} 
+              onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}
+            ></TextField>
+            <TextField
+              size="small" 
+              fullWidth
+              variant="outlined" 
+              label={intl.get("max")}
+              type="number" 
+              value={rule.max||''} 
+              onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}
+            ></TextField>
           </AttributeRow>
         </Fragment>
       }
@@ -156,20 +167,28 @@ export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onCh
         rule?.valueType === 'date' &&
         <Fragment>
           <AttributeRow>
-            <RowLabel nested>{intl.get("min")}</RowLabel>
-            <RowValue>
-              {
-                //<StyledTextInput type="date" value={rule.min||''} onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}/>
-              }
-            </RowValue>
+            <TextField
+              size="small" 
+              fullWidth
+              variant="outlined" 
+              label={intl.get("min")}
+              type="date" 
+              InputLabelProps={{ shrink: true }}
+              value={rule.min||''} 
+              onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}
+            ></TextField>
           </AttributeRow>
           <AttributeRow>
-            <RowLabel nested>{intl.get("max")}</RowLabel>
-            <RowValue>
-              {
-                //<StyledTextInput type="date" value={rule.max||''} onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}/>
-              }
-            </RowValue>
+            <TextField 
+              size="small"
+              fullWidth
+              variant="outlined" 
+              label={intl.get("max")}
+              type="date" 
+              InputLabelProps={{ shrink: true }}
+              value={rule.max||''} 
+              onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}
+            ></TextField>
           </AttributeRow>
         </Fragment>
       }
