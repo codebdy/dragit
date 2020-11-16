@@ -19,17 +19,19 @@ const PageView = (props:{match: any, history:any })=>{
   const selectPage = (state: RootState) => state.page;
   const pageInStore = useSelector(selectPage);
   const dispatch = useDispatch()
+  const methods = useForm({mode: 'all'});
+  const {handleSubmit, errors, clearErrors} = methods;
 
   useEffect(() => {
     console.log('PageView useEffect:', moduleId, pageId, dataId);
     dispatch(
       thunkPageSchema({moduleId:moduleId,pageId:pageId, dataId:dataId})
      );
-
-  },[dispatch, moduleId, pageId, dataId]);
+     clearErrors();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[moduleId, pageId, dataId]);
   
-  const methods = useForm({mode: 'all'});
-  const {handleSubmit, errors} = methods;
+
   const onSubmit = (data: any) => console.log('数据提交',data);
   const onValidate = ()=>{
     setSubmitted(true);
