@@ -51,6 +51,7 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
     <MetaListDialog
       title ={intl.get('column-editor')}
       value = {columns}
+      label = {intl.get('data')}
       onAddNew = {handleAddNew}
       selectedIndex = {selectedIndex}
       onChange = {newValue=>{setComuns(newValue)}}

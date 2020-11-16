@@ -25,8 +25,16 @@ export class OneToManyTableRule extends Rule{
         label:'size',
         input:OptionSelect,
         props:{
-          'Medium' : 'medium',
-          'Small': 'small',
+          items:[
+            {
+              value:'medium',
+              label:'Medium'
+            },
+            {
+              value:'small',
+              label:'Small'
+            },
+          ]
         },
       },
       {

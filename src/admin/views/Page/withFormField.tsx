@@ -54,6 +54,10 @@ function metaRuleToRegisterRules(rule:ValidateRule){
 }
 
 function retrigger(value:any, rule:any){
+  if(!rule){
+    return undefined;
+  }
+
   if(rule.required){
     if(!value){
       return rule.required;

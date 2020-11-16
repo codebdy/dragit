@@ -399,7 +399,7 @@ export default {
                     },
 
                     input:{
-                      name:'TextField',
+                      name:'TextBox',
                       props:{
                         variant:'outlined',
                         size:'small',
@@ -410,7 +410,7 @@ export default {
                     field:'color',
                     label:'颜色',
                     input:{
-                      name:'TextField',
+                      name:'TextBox',
                       props:{
                         variant:'outlined',
                         size:'small',
