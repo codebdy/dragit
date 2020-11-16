@@ -7,8 +7,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { INode } from 'designer/Core/Node/INode';
 import { IProp } from "base/IProp";
 import intl from 'react-intl-universal';
-import AttributeBoxActionSection from './AttributeBoxActionSection';
-import AttributeBoxValidateArea, { ValidateRule } from 'designer/Attrebutebox/AttributeBoxValidateArea';
+import AttributeBoxActionSection from './ActionSection';
+import AttributeBoxValidateArea, { ValidateRule } from 'designer/Attrebutebox/ValidateArea';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
