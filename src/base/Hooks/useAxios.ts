@@ -7,7 +7,6 @@ export function useAxios<T>(config:AxiosRequestConfig):[T, boolean, boolean]{
   const [data, setData] = React.useState<T>();
   const [error, setError] = React.useState(false);
   useEffect(() => {
-    console.log('ModuleList');
     setLoading(true);
     axios( config ).then(res => {
       setData(res.data);

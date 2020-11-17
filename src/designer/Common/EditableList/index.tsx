@@ -27,20 +27,28 @@ export interface ItemMeta{
 export default function EditableList(
   props:{
     items:ItemMeta[],
-    onChange?:(newTitle:string, id:number)=>void
+    onChange?:(newTitle:string, id:number)=>void,
+    onRemove?:(id:number)=>void,
   }
 ) {
-  const {items, onChange} = props;
+  const {items, onChange, onRemove} = props;
   const classes = useStyles();
 
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedId, setSelectedId] = React.useState(1);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    setSelectedIndex(index);
+    setSelectedId(index);
   };
+
+  const handleRemove = (id:number)=>{
+    onRemove && onRemove(id);
+    if(id === selectedId){
+      setSelectedId(-1)
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -51,10 +59,11 @@ export default function EditableList(
               <HoverItem
                 key={item.id}
                 button
-                selected={selectedIndex === item.id}
+                selected={selectedId === item.id}
                 onClick={(event:any) => handleListItemClick(event, item.id)}
                 primary={item.title}
                 onChange = {(newTitle:string)=>{onChange && onChange(newTitle, item.id)}}
+                onRemove = {()=> {handleRemove(item.id)}}
               />              
             )
           })

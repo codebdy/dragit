@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 
 export default function HoverItem(props:any){
-  const {primary, selected, onChange, ...rest} = props;
+  const {primary, selected, onChange, onRemove, ...rest} = props;
 
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -69,7 +69,9 @@ export default function HoverItem(props:any){
           >
             <EditIcon fontSize="small"/>
           </IconButton>
-          <IconButton edge="end" aria-label="comments" size="small">
+          <IconButton edge="end" aria-label="comments" size="small"
+            onClick = {onRemove}
+          >
             <DeleteIcon fontSize="small"/>
           </IconButton>
         </ListItemSecondaryAction>

@@ -8,7 +8,6 @@ import article from './views/article'
 import test from './views/test'
 import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
-import {API_CHANGE_MODULE, API_REMOVE_MODULE} from 'APIs/modules'
 
 window.mediaFolderId = 100;
 
@@ -31,6 +30,22 @@ var modules = [
     title:'用户'
   },
 ]
+
+function getQueryVariable(name, oldUrl) {
+  const url = decodeURI(oldUrl); // 获取url中"?"符后的字串(包括问号)
+  //let query = {};
+  if (url.indexOf("?") !== -1) {
+      const str = url.substr(url.indexOf("?") + 1);
+      const pairs = str.split("&");
+      for(let i = 0; i < pairs.length; i ++) {
+           const pair = pairs[i].split("=");
+           
+           if(pair[0] === name) return  pair[1]; // 返回 参数值
+      }
+  }
+ return(false);
+}
+
 
 Mock.mock('/api/drawer', 'get', drawer)
 Mock.mock('/api/page/dashboard', 'get', dashboard)
@@ -67,25 +82,26 @@ Mock.mock('/api/base/items','get', [
 ])
 
 Mock.mock('/api/modules','get', modules)
-Mock.mock(RegExp(API_CHANGE_MODULE + '*'),'post', (request)=>{
-  console.log(request)
+Mock.mock(RegExp('/api/change-module?.*'),'post', (request)=>{
+  let id = getQueryVariable('id', request.url);
+  let title = getQueryVariable('title', request.url);
   modules.forEach(module=>{
-    //if(module.id === request.params.id){
-    //  module.title = request.params.title;
-    //}
+    if(module.id === id){
+      module.title = title;
+    }
 
   })
 
   return [...modules]
 })
 
-Mock.mock(RegExp(API_REMOVE_MODULE + '*'),'post', (request)=>{
+Mock.mock(RegExp('/api/remove-module?.*'),'post', (request)=>{
   let index = -1;
-  console.log('API_REMOVE_MODULE', request, API_REMOVE_MODULE)
+  let id = getQueryVariable('id', request.url);
   modules.forEach((module, i)=>{
-    //if(module.id === request.params.id){
-    //  index = i
-    //}
+    if(module.id === parseInt(id)){
+      index = i
+    }
 
   })
 
