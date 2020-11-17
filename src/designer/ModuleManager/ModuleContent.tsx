@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, createStyles, makeStyles, Theme, LinearProgress, IconButton, Tooltip, Checkbox } from '@material-ui/core';
+import { Container, Grid, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, createStyles, makeStyles, Theme, LinearProgress} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
 import { API_GET_MODULE_BY_ID } from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
-import MdiIcon from 'components/common/MdiIcon';
+import ModulePageRow, { PageMeta } from './ModulePageRow';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,17 +19,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export interface pageMeta{
-  id:number,
-  title?:string, 
-  API?:string, 
-  isFormPage?:boolean
-}
 
 export interface ModuleMeta{
   id:number,
   title:string,
-  pages?:pageMeta[],
+  pages?:PageMeta[],
   indexPageId?:number,
 }
 
@@ -95,54 +89,15 @@ export default function ModuleContent(
                     <TableRow>
                       <TableCell><b>{intl.get('title')}</b></TableCell>
                       <TableCell><b>API</b></TableCell>
-                      <TableCell><b>{intl.get('is-form-page')}</b></TableCell>
-                      <TableCell><b>{intl.get('is-index-page')}</b></TableCell>
+                      <TableCell style={{width:'80px'}}><b>{intl.get('is-form-page')}</b></TableCell>
+                      <TableCell style={{width:'80px'}}><b>{intl.get('is-index-page')}</b></TableCell>
                       <TableCell style={{width:'120px'}}></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {
                       module.pages?.map((page) => (
-                        <TableRow key={page.id}>
-                          <TableCell>
-                          <span>{page.title}</span>
-                          </TableCell>
-                          <TableCell><span>{page.API}</span></TableCell>
-                          <TableCell>
-                            <Checkbox
-                              checked = {page.isFormPage}
-                              color="primary"
-                              inputProps={{ 'aria-label': 'Is form page' }}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Checkbox
-                              checked = {module.indexPageId === page.id}
-                              color="primary"
-                              inputProps={{ 'aria-label': 'Is index page' }}
-                            />
-                          </TableCell>
-                          <TableCell align="right">
-                            <Tooltip title={intl.get('edit')} arrow placement="top">
-                              <IconButton aria-label="edit"                                
-                              >
-                                <MdiIcon iconClass="mdi-pencil" size={16}/>
-                              </IconButton>
-                            </Tooltip>                            
-                            <Tooltip title={intl.get('design-layout')} arrow placement="top">
-                              <IconButton aria-label="design"                                
-                              >
-                                <MdiIcon iconClass="mdi-pencil-ruler" size={16}/>
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip title={intl.get('delete')} arrow placement="top">
-                              <IconButton aria-label="delete"                                
-                              >
-                                <MdiIcon iconClass="mdi-delete" size={16}/>
-                              </IconButton>
-                            </Tooltip>
-                          </TableCell>
-                        </TableRow>
+                        <ModulePageRow key={page.id} page={page} isIndexPage={module.indexPageId === page.id} />
                       ))
                       }
                   </TableBody>
