@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Container, Grid, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, createStyles, makeStyles, Theme, LinearProgress} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
-import { API_GET_MODULE_BY_ID } from 'APIs/modules';
+import { API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_UPDATE_MODULE_PAGE } from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
 import ModulePageRow, { PageMeta } from './ModulePageRow';
 
@@ -40,8 +40,11 @@ export default function ModuleContent(
       id:moduleId
     }
   });
+
+  const [operateConfig, setOperateConfig] = React.useState();
   const [module, loading] = useAxios<ModuleMeta>(loadingConfig);
-  const [operateLoading, setOperateLoading] = useState(false);
+  const [, operateLoading] = useAxios(operateConfig);
+
   useEffect(()=>{
     if(loadingConfig.params.id !== moduleId){
       setLoadingConfig(
@@ -55,6 +58,25 @@ export default function ModuleContent(
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleId])
+
+  const handleChangePage = (page:PageMeta)=>{
+    setOperateConfig({
+      ...API_UPDATE_MODULE_PAGE,
+      data:{
+        page:page
+      }
+    })
+  }
+
+  const handleRemove = (pageId:number)=>{
+    setOperateConfig({
+      ...API_REMOVE_MODULE_PAGE,
+      params:{
+        id:pageId
+      }
+    })
+      
+  }
 
   return (
     <Container>
@@ -97,7 +119,13 @@ export default function ModuleContent(
                   <TableBody>
                     {
                       module.pages?.map((page) => (
-                        <ModulePageRow key={page.id} page={page} isIndexPage={module.indexPageId === page.id} />
+                        <ModulePageRow 
+                          key={page.id} 
+                          page={page} 
+                          isIndexPage={module.indexPageId === page.id} 
+                          onChangePage = {handleChangePage}
+                          onRemove = {handleRemove}
+                        />
                       ))
                       }
                   </TableBody>

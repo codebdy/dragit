@@ -25,11 +25,23 @@ const API_GET_MODULE_BY_ID : AxiosRequestConfig= {
   method:'get',
 }
 
+const API_UPDATE_MODULE_PAGE : AxiosRequestConfig= {
+  url:'/api/update-module-page',
+  method:'post',
+}
+
+const API_REMOVE_MODULE_PAGE : AxiosRequestConfig= {
+  url:'/api/remove-module-page',
+  method:'post',
+}
+
 
 export { 
   API_GET_MODULES,
   API_CHANGE_MODULE, 
   API_REMOVE_MODULE,
   API_ADD_MODULE,
-  API_GET_MODULE_BY_ID
+  API_GET_MODULE_BY_ID,
+  API_UPDATE_MODULE_PAGE,
+  API_REMOVE_MODULE_PAGE
 }

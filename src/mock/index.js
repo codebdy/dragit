@@ -112,6 +112,14 @@ Mock.mock(RegExp('/api/get-module-by-id?.*'),'get', (request)=>{
   }
 })
 
+Mock.mock('/api/update-module-page','post', (request)=>{
+  return true;
+})
+
+Mock.mock('/api/remove-module-page','post', (request)=>{
+  return true;
+})
+
 Mock.setup({
     timeout: 500
 })

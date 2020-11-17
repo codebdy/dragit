@@ -10,8 +10,15 @@ export interface PageMeta{
   isFormPage?:boolean
 }
 
-export default function ModulePageRow(props:{page:PageMeta, isIndexPage:boolean}){
-  const{page, isIndexPage} = props;
+export default function ModulePageRow(
+  props:{
+    page:PageMeta, 
+    isIndexPage:boolean,
+    onChangePage:(newPage:PageMeta)=>void,
+    onRemove:(id:number)=>void,
+  }
+){
+  const{page, isIndexPage, onChangePage, onRemove} = props;
   const[titleEditing, setTitleEditing] = useState(false);
   const[apiEditing, setApiEditing] = useState(false);
   const[title, setTitle] = useState(page.title);
@@ -25,6 +32,7 @@ export default function ModulePageRow(props:{page:PageMeta, isIndexPage:boolean}
   const handleFinishEdit = ()=>{
     setTitleEditing(false);
     setApiEditing(false);
+    onChangePage({...page, title:title, API:api});
   }
 
   return (
@@ -116,7 +124,8 @@ export default function ModulePageRow(props:{page:PageMeta, isIndexPage:boolean}
         </IconButton>
       </Tooltip>
       <Tooltip title={intl.get('delete')} arrow placement="top">
-        <IconButton aria-label="delete"                                
+        <IconButton aria-label="delete"
+          onClick={e=>onRemove(page.id)}                                
         >
           <MdiIcon iconClass="mdi-delete" size={16}/>
         </IconButton>
