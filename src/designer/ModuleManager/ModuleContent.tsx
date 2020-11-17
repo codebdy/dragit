@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { Container, Grid, Button, createStyles, makeStyles, Theme, LinearProgress} from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Container, Grid, createStyles, makeStyles, Theme, LinearProgress} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
-import { API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_UPDATE_MODULE_PAGE } from 'APIs/modules';
+import { API_ADD_MODULE_PAGE, API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_UPDATE_MODULE_PAGE } from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
 import { PageMeta } from './ModulePageRow';
 import ModulePageTable from './ModulePageTable';
@@ -40,8 +40,9 @@ export default function ModuleContent(
   });
 
   const [operateConfig, setOperateConfig] = React.useState<any>();
-  const [module, loading] = useAxios<ModuleMeta>(loadingConfig);
-  const [, operateLoading] = useAxios(operateConfig);
+  const [initModule, loading] = useAxios<ModuleMeta>(loadingConfig);
+  const [operateModule, operateLoading] = useAxios<ModuleMeta>(operateConfig);
+  const [module, setModule] = useState(initModule);
 
   useEffect(()=>{
     if(loadingConfig.params.id !== moduleId){
@@ -57,9 +58,20 @@ export default function ModuleContent(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleId])
 
+  useEffect(()=>{
+    initModule && setModule(initModule);
+  },[initModule]);
+
+  useEffect(()=>{
+    operateModule && setModule({...operateModule})
+  },[operateModule]);
+
   const handleChangePage = (page:PageMeta)=>{
     setOperateConfig({
       ...API_UPDATE_MODULE_PAGE,
+      params:{
+        moduleId
+      },
       data:{
         page:page
       }
@@ -70,10 +82,20 @@ export default function ModuleContent(
     setOperateConfig({
       ...API_REMOVE_MODULE_PAGE,
       params:{
-        id:pageId
+        moduleId,
+        pageId
       }
     })
-      
+  }
+
+  const handleAddPage = ()=>{
+    setOperateConfig({
+      ...API_ADD_MODULE_PAGE,
+      params:{
+        moduleId:moduleId,
+        title:'New Page',
+      }
+    })    
   }
 
   return (
@@ -94,11 +116,6 @@ export default function ModuleContent(
                 {intl.get('module-management')} : {module.title}
               </h2>
             </Grid>
-            <Grid item>
-              <Button variant="contained" color="primary" size="large">
-                {intl.get('add-new')}
-              </Button>   
-            </Grid>
           </Grid>
           {operateLoading && <LinearProgress />}
           <Grid container spacing={2}>
@@ -108,6 +125,7 @@ export default function ModuleContent(
                 onChangePage = {handleChangePage}
                 onRemovePage = {handleRemove}
                 indexPageId = {module.indexPageId || -1}
+                onAddPage = {handleAddPage}
               />
             </Grid>
           </Grid>        

@@ -39,6 +39,9 @@ export default function ModuleList(props:{
     setLoadingConfig(
       {
         ...API_ADD_MODULE,
+        params:{
+          title:'New Module'
+        }
       }
     );   
   }

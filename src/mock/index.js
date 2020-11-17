@@ -98,7 +98,7 @@ Mock.mock(RegExp('/api/remove-module?.*'),'post', (request)=>{
   return [...modules]
 })
 
-Mock.mock('/api/add-module','post', (request)=>{
+Mock.mock(RegExp('/api/add-module?.*'),'post', (request)=>{
   modules.push({id:createId(), title:'New Module'})
   return [...modules]
 })
@@ -112,14 +112,45 @@ Mock.mock(RegExp('/api/get-module-by-id?.*'),'get', (request)=>{
   }
 })
 
-Mock.mock('/api/update-module-page','post', (request)=>{
-  return true;
+function getModuleById(id){
+  for(var i = 0; i < modules.length; i++){
+    let module = modules[i];
+    if(module.id === parseInt(id)){
+      return module;
+    }  
+  }  
+}
+
+Mock.mock(RegExp('/api/update-module-page?.*'),'post', (request)=>{
+  let id = getQueryVariable('moduleId', request.url);
+  let module =getModuleById(id);
+  let page = JSON.parse(request.body).page;
+  //console.log(request.body, request.body.page)
+  for(var i = 0; i < module.pages.length; i ++){
+    if(module.pages[i].id === page.id){
+      module.pages[i] = page;
+    }
+  }
+  return JSON.parse(JSON.stringify(module));;
 })
 
-Mock.mock('/api/remove-module-page','post', (request)=>{
-  return true;
+Mock.mock(RegExp('/api/remove-module-page?.*'),'post', (request)=>{
+  let id = getQueryVariable('moduleId', request.url);
+  let module =getModuleById(id);
+  module.pages = module.pages.filter(page=>{
+    return page.id !== parseInt(id)
+  })
+  console.log(module.pages)
+  return JSON.parse(JSON.stringify(module));
 })
 
+Mock.mock(RegExp('/api/add-page-of-module?.*'),'post', (request)=>{
+  let id = getQueryVariable('moduleId', request.url);
+  let title = getQueryVariable('title', request.url);
+  let module =getModuleById(id);
+  module.pages = [...module.pages, {id:createId(), title:title}]
+  return JSON.parse(JSON.stringify(module));
+})
 Mock.setup({
     timeout: 500
 })

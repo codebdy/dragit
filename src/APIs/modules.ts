@@ -35,6 +35,11 @@ const API_REMOVE_MODULE_PAGE : AxiosRequestConfig= {
   method:'post',
 }
 
+const API_ADD_MODULE_PAGE : AxiosRequestConfig= {
+  url:'/api/add-page-of-module',
+  method:'post',
+}
+
 
 export { 
   API_GET_MODULES,
@@ -43,5 +48,6 @@ export {
   API_ADD_MODULE,
   API_GET_MODULE_BY_ID,
   API_UPDATE_MODULE_PAGE,
-  API_REMOVE_MODULE_PAGE
+  API_REMOVE_MODULE_PAGE,
+  API_ADD_MODULE_PAGE
 }
