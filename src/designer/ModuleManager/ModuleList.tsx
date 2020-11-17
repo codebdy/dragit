@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import EditableList, { ItemMeta } from 'designer/Common/EditableList';
 import { LinearProgress } from '@material-ui/core';
-import { API_CHANGE_MODULE, API_GET_MODULES, API_REMOVE_MODULE } from 'APIs/modules';
+import { API_ADD_MODULE, API_CHANGE_MODULE, API_GET_MODULES, API_REMOVE_MODULE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 
 export default function ModuleList() {
@@ -31,6 +31,14 @@ export default function ModuleList() {
     );    
   }
 
+  const handleAdd = ()=>{
+    setLoadingConfig(
+      {
+        ...API_ADD_MODULE,
+      }
+    );   
+  }
+
   return (
     <Fragment>
       {
@@ -40,6 +48,7 @@ export default function ModuleList() {
       <EditableList items = {items || []} 
         onChange = {handleOnChange}
         onRemove = {handleRemove}
+        onAdd = {handleAdd}
       />      
     </Fragment>
 

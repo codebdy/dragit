@@ -9,11 +9,11 @@ import test from './views/test'
 import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
 
-window.mediaFolderId = 100;
+window.idSeed = 100;
 
-function createFolderId(){
-    window.mediaFolderId = window.mediaFolderId + 1;
-    return window.mediaFolderId;
+function createId(){
+    window.idSeed = window.idSeed + 1;
+    return window.idSeed;
 }
 
 var modules = [
@@ -57,7 +57,7 @@ Mock.mock('/api/moudle-index/articles', 'get', 'articles')
 Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
 Mock.mock('/api/medias/folders', mediaFolders)
 Mock.mock(RegExp('/api/medias/medias?.*'),'get', medias)
-Mock.mock('/api/medias/add-folder','post', {id:()=>createFolderId(), name:"new folder"})
+Mock.mock('/api/medias/add-folder','post', {id:()=>createId(), name:"new folder"})
 Mock.mock('/api/medias/change-folder','post')
 Mock.mock(RegExp('/api/medias/remove-folder?.*'),'post')
 Mock.mock(RegExp('/api/medias/move-to-folder?.*'),'post')
@@ -112,6 +112,10 @@ Mock.mock(RegExp('/api/remove-module?.*'),'post', (request)=>{
   return [...modules]
 })
 
+Mock.mock('/api/add-module','post', (request)=>{
+  modules.push({id:createId(), title:'New Node'})
+  return [...modules]
+})
 Mock.setup({
     timeout: 500
 })

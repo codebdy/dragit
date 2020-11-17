@@ -15,8 +15,14 @@ const API_REMOVE_MODULE : AxiosRequestConfig= {
   method:'post',
 }
 
+const API_ADD_MODULE : AxiosRequestConfig= {
+  url:'/api/add-module',
+  method:'post',
+}
+
 export { 
   API_GET_MODULES,
   API_CHANGE_MODULE, 
-  API_REMOVE_MODULE
+  API_REMOVE_MODULE,
+  API_ADD_MODULE
 }

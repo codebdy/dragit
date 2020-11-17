@@ -29,9 +29,10 @@ export default function EditableList(
     items:ItemMeta[],
     onChange?:(newTitle:string, id:number)=>void,
     onRemove?:(id:number)=>void,
+    onAdd?:()=>void,
   }
 ) {
-  const {items, onChange, onRemove} = props;
+  const {items, onChange, onRemove, onAdd} = props;
   const classes = useStyles();
 
   const [selectedId, setSelectedId] = React.useState(1);
@@ -70,7 +71,9 @@ export default function EditableList(
         }
       </List>
       <div className={classes.addArea}>
-        <Fab color="primary" size="small">
+        <Fab color="primary" size="small" 
+          onClick = {onAdd}
+        >
           <AddIcon />
         </Fab>
        </div>
