@@ -1,65 +1,33 @@
-import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { ListItemSecondaryAction, IconButton } from '@material-ui/core';
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-    },
-  }),
-);
+import React, { Fragment } from 'react';
+import EditableList, { ItemMeta } from 'designer/Common/EditableList';
+import { LinearProgress } from '@material-ui/core';
+import { API_CHANGE_MODULE, API_GET_MODULES } from 'APIs/modules';
+import { useAxios } from 'base/Hooks/useAxios';
 
 export default function ModuleList() {
-  const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [loadingConfig, setLoadingConfig] = React.useState(API_GET_MODULES);
+  const [items, loading] = useAxios<ItemMeta[]>(loadingConfig);
 
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-  ) => {
-    setSelectedIndex(index);
-  };
+  const handleOnChange = (newTitle:string, id:number)=>{
+    setLoadingConfig(
+      {
+        ...API_CHANGE_MODULE,
+        params:{
+          id:id,
+          title:newTitle,
+        }
+      }
+    );
+  }
 
   return (
-    <div className={classes.root}>
-      <List component="nav" aria-label="secondary mailbox folder">
-        <ListItem
-          button
-          selected={selectedIndex === 2}
-          onClick={(event) => handleListItemClick(event, 2)}
-        >
-          <ListItemText primary="新闻" />
-        </ListItem>
-        <ListItem
-          button
-          selected={selectedIndex === 3}
-          onClick={(event) => handleListItemClick(event, 3)}
-        >
-          <ListItemText primary="产品" />
-        </ListItem>
+    <Fragment>
+      {
+        loading &&
+        <LinearProgress />
+      }
+      <EditableList items = {items || []} onChange = {handleOnChange}/>      
+    </Fragment>
 
-        <ListItem
-          button
-          selected={selectedIndex === 4}
-          onClick={(event) => handleListItemClick(event, 4)}
-        >
-          <ListItemText primary="用户" />
-          <ListItemSecondaryAction>
-          <IconButton edge="end" aria-label="comments" size="small">
-                <EditIcon fontSize="small"/>
-              </IconButton>
-              <IconButton edge="end" aria-label="comments" size="small">
-                <DeleteIcon fontSize="small"/>
-              </IconButton>
-            </ListItemSecondaryAction>
-        </ListItem>
-      </List>
-    </div>
   );
 }

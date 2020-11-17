@@ -1,9 +1,4 @@
 
-const API_GET_DRAWER = {
-  url:'/api/drawer',
-  method:'get',
-}
-
 const API_MEDIAS = {
   method: "get",
   url: '/api/medias/medias',
@@ -48,7 +43,6 @@ const API_MEDIAS_REMOVE_MEDIAS = {
 }
 
 export {
-  API_GET_DRAWER,
   API_MEDIAS,
   API_MEDIAS_ADD_FOLDER,
   API_MEDIAS_CHANGE_MEDIA_NAME,

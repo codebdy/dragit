@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, LinearProgress } from '@material-ui/co
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
-import { API_MEDIAS_CHANGE_MEDIA_NAME, API_MEDIAS_REMOVE_MEDIA } from 'Api';
+import { API_MEDIAS_CHANGE_MEDIA_NAME, API_MEDIAS_REMOVE_MEDIA } from 'APIs/medias';
 import axios from 'axios';
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';

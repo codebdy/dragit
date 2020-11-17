@@ -1,8 +1,8 @@
 import React from 'react';
 import LeftArea from 'designer/Layout/LeftArea';
-import { makeStyles, Theme, createStyles, IconButton, Divider, LinearProgress } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import ModuleList from './ModuleList';
-import AddIcon from '@material-ui/icons/Add';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,11 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight:'bold',
     },
 
-    addArea:{
-      display:'flex',
-      justifyContent:'center',
-      padding:theme.spacing(1),
-    }
 
   }),
 );
@@ -35,16 +30,9 @@ export default function LeftContent(){
         </div>
       }
     >
-      <LinearProgress />
       <div>
         <ModuleList />
       </div>
-      <Divider />
-      <div className={classes.addArea}>
-        <IconButton >
-          <AddIcon />
-        </IconButton>
-       </div>
     </LeftArea>
   )
 }

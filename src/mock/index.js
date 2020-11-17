@@ -8,6 +8,7 @@ import article from './views/article'
 import test from './views/test'
 import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
+import {API_CHANGE_MODULE, API_REMOVE_MODULE} from 'APIs/modules'
 
 window.mediaFolderId = 100;
 
@@ -15,6 +16,21 @@ function createFolderId(){
     window.mediaFolderId = window.mediaFolderId + 1;
     return window.mediaFolderId;
 }
+
+var modules = [
+  {
+    id:1,
+    title:'新闻'
+  },
+  {
+    id:2,
+    title:'产品'
+  },
+  {
+    id:3,
+    title:'用户'
+  },
+]
 
 Mock.mock('/api/drawer', 'get', drawer)
 Mock.mock('/api/page/dashboard', 'get', dashboard)
@@ -49,6 +65,36 @@ Mock.mock('/api/base/items','get', [
         name:'条目3',
       },
 ])
+
+Mock.mock('/api/modules','get', modules)
+Mock.mock(RegExp(API_CHANGE_MODULE + '*'),'post', (request)=>{
+  console.log(request)
+  modules.forEach(module=>{
+    //if(module.id === request.params.id){
+    //  module.title = request.params.title;
+    //}
+
+  })
+
+  return [...modules]
+})
+
+Mock.mock(RegExp(API_REMOVE_MODULE + '*'),'post', (request)=>{
+  let index = -1;
+  console.log('API_REMOVE_MODULE', request, API_REMOVE_MODULE)
+  modules.forEach((module, i)=>{
+    //if(module.id === request.params.id){
+    //  index = i
+    //}
+
+  })
+
+  if(index > -1){
+    modules.splice(index, 1);
+  }
+
+  return [...modules]
+})
 
 Mock.setup({
     timeout: 500
