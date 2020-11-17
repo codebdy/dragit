@@ -20,9 +20,16 @@ const API_ADD_MODULE : AxiosRequestConfig= {
   method:'post',
 }
 
+const API_GET_MODULE_BY_ID : AxiosRequestConfig= {
+  url:'/api/get-module-by-id',
+  method:'get',
+}
+
+
 export { 
   API_GET_MODULES,
   API_CHANGE_MODULE, 
   API_REMOVE_MODULE,
-  API_ADD_MODULE
+  API_ADD_MODULE,
+  API_GET_MODULE_BY_ID
 }

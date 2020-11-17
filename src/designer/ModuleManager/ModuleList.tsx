@@ -3,8 +3,12 @@ import EditableList, { ItemMeta } from 'designer/Common/EditableList';
 import { LinearProgress } from '@material-ui/core';
 import { API_ADD_MODULE, API_CHANGE_MODULE, API_GET_MODULES, API_REMOVE_MODULE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
+import { Skeleton } from '@material-ui/lab';
 
-export default function ModuleList() {
+export default function ModuleList(props:{
+  onSelect:(moduleId: number)=>void
+}) {
+  const {onSelect} = props;
   const [loadingConfig, setLoadingConfig] = React.useState(API_GET_MODULES);
   const [items, loading] = useAxios<ItemMeta[]>(loadingConfig);
 
@@ -39,17 +43,35 @@ export default function ModuleList() {
     );   
   }
 
+  const showSkeleton = loadingConfig === API_GET_MODULES && loading;
+
   return (
     <Fragment>
       {
-        loading &&
-        <LinearProgress />
+        showSkeleton ?
+        <div style={{margin:'16px'}}>
+          {
+           (new Array(5).fill('')).map((i,index)=>{
+              return (<Skeleton key={index} animation="wave" height={50}/>)
+            })
+          }
+
+        </div>
+        :
+        <Fragment>
+          {
+            loading &&
+            <LinearProgress />
+          }
+          <EditableList items = {items || []} 
+            onChange = {handleOnChange}
+            onRemove = {handleRemove}
+            onAdd = {handleAdd}
+            onSelect = {onSelect}
+          />      
+        </Fragment>
+  
       }
-      <EditableList items = {items || []} 
-        onChange = {handleOnChange}
-        onRemove = {handleRemove}
-        onAdd = {handleAdd}
-      />      
     </Fragment>
 
   );

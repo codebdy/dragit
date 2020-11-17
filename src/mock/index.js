@@ -8,6 +8,7 @@ import article from './views/article'
 import test from './views/test'
 import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
+import modules from './data/modulesData'
 
 window.idSeed = 100;
 
@@ -15,21 +16,6 @@ function createId(){
     window.idSeed = window.idSeed + 1;
     return window.idSeed;
 }
-
-var modules = [
-  {
-    id:1,
-    title:'新闻'
-  },
-  {
-    id:2,
-    title:'产品'
-  },
-  {
-    id:3,
-    title:'用户'
-  },
-]
 
 function getQueryVariable(name, oldUrl) {
   const url = decodeURI(oldUrl); // 获取url中"?"符后的字串(包括问号)
@@ -113,9 +99,19 @@ Mock.mock(RegExp('/api/remove-module?.*'),'post', (request)=>{
 })
 
 Mock.mock('/api/add-module','post', (request)=>{
-  modules.push({id:createId(), title:'New Node'})
+  modules.push({id:createId(), title:'New Module'})
   return [...modules]
 })
+
+Mock.mock(RegExp('/api/get-module-by-id?.*'),'get', (request)=>{
+  let id = parseInt(getQueryVariable('id', request.url));
+  for(var i = 0; i < modules.length; i++){
+    if(modules[i].id === id){
+      return modules[i];
+    }
+  }
+})
+
 Mock.setup({
     timeout: 500
 })

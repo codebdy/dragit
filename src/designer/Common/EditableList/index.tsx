@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import HoverItem from './HoverItem';
@@ -30,12 +30,18 @@ export default function EditableList(
     onChange?:(newTitle:string, id:number)=>void,
     onRemove?:(id:number)=>void,
     onAdd?:()=>void,
+    onSelect?:(id:number)=>void,
   }
 ) {
-  const {items, onChange, onRemove, onAdd} = props;
+  const {items, onChange, onRemove, onAdd, onSelect} = props;
   const classes = useStyles();
 
-  const [selectedId, setSelectedId] = React.useState(1);
+  const [selectedId, setSelectedId] = React.useState( items && items.length > 0 ? items[0].id : -1 );
+
+  useEffect(()=>{
+    onSelect && onSelect(selectedId)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[selectedId])
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,

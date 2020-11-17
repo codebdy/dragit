@@ -20,7 +20,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function LeftContent(){
+export default function LeftContent(
+  props:{
+    onSelect:(moduleId: number)=>void
+  }
+){
+  const {onSelect} = props;
   const classes = useStyles();
   return (
     <LeftArea
@@ -31,7 +36,7 @@ export default function LeftContent(){
       }
     >
       <div>
-        <ModuleList />
+        <ModuleList  onSelect = {onSelect}/>
       </div>
     </LeftArea>
   )

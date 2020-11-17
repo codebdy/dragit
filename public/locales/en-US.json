@@ -171,6 +171,8 @@
 
     "is-form-page":"Is form page",
     "api":"API",
+    "is-index-page":"Is index page",
+    "module-management":"Module management",
 
     "error":"Error",
     "input-error":"Some input items error",
