@@ -39,7 +39,7 @@ export default function ModuleContent(
     }
   });
 
-  const [operateConfig, setOperateConfig] = React.useState();
+  const [operateConfig, setOperateConfig] = React.useState<any>();
   const [module, loading] = useAxios<ModuleMeta>(loadingConfig);
   const [, operateLoading] = useAxios(operateConfig);
 
