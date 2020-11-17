@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
-import { Container, Grid, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, createStyles, makeStyles, Theme, LinearProgress} from '@material-ui/core';
+import { Container, Grid, Button, createStyles, makeStyles, Theme, LinearProgress} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
 import { API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_UPDATE_MODULE_PAGE } from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
-import ModulePageRow, { PageMeta } from './ModulePageRow';
+import { PageMeta } from './ModulePageRow';
+import ModulePageTable from './ModulePageTable';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    table: {
-      widht: '100%',
-    },
     skeltonBottom:{
       height: 'calc(100vh - 150px)',
     }
@@ -105,32 +103,12 @@ export default function ModuleContent(
           {operateLoading && <LinearProgress />}
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="modules table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell><b>{intl.get('title')}</b></TableCell>
-                      <TableCell><b>API</b></TableCell>
-                      <TableCell style={{width:'80px'}}><b>{intl.get('is-form-page')}</b></TableCell>
-                      <TableCell style={{width:'80px'}}><b>{intl.get('is-index-page')}</b></TableCell>
-                      <TableCell style={{width:'120px'}}></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {
-                      module.pages?.map((page) => (
-                        <ModulePageRow 
-                          key={page.id} 
-                          page={page} 
-                          isIndexPage={module.indexPageId === page.id} 
-                          onChangePage = {handleChangePage}
-                          onRemove = {handleRemove}
-                        />
-                      ))
-                      }
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <ModulePageTable 
+                pages = {module.pages || []} 
+                onChangePage = {handleChangePage}
+                onRemovePage = {handleRemove}
+                indexPageId = {module.indexPageId || -1}
+              />
             </Grid>
           </Grid>        
         </Fragment>
