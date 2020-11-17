@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexFlow: 'row',
       height:'100%',
+      flex:'1',
     },
 
     rightArea:{
