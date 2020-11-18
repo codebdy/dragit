@@ -7,6 +7,7 @@
     "light":"Light",
     "dark":"Dark",
     "semi-dark":"Semi dark",
+    "elevation-strength":"Elevation strength",
     "debug": "Debug",
     "upload": "Upload",
     "filter": "Filter",
