@@ -174,7 +174,7 @@ const Sidebar = function( props:SidebarProps ) {
         <Drawer
           variant = "permanent"
           classes = {{
-            paper: classNames(classes.drawerPaper, classes.boxShadow/*{[classes.boxShadow]:compactable}*/)
+            paper: classNames(classes.drawerPaper, {[classes.boxShadow]:compactable})
           }}       
           open
           onMouseEnter = { handleMouseEnter }

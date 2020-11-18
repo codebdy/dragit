@@ -1,14 +1,11 @@
 import React, { useRef, Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Paper, Typography, Divider, IconButton } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Typography, Divider, IconButton } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
+import HoverablePaper from '../common/HoverablePaper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    portlet: {
-      flex:1,
-    },
-
     header:{
       padding:theme.spacing(2),
       display: 'flex',
@@ -65,10 +62,9 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   maxHeight = collapsible ? (opened ? maxHeight : '0px') : 'auto';
 
   return (
-    <Paper
+    <HoverablePaper
       ref={ref}
       {...rest}
-      className = { classNames(classes.portlet, className) }
     >
       {withHeader && 
         <Fragment>
@@ -100,7 +96,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
           {children}
         </div>
       </div>
-    </Paper>
+    </HoverablePaper>
   )
 });
 

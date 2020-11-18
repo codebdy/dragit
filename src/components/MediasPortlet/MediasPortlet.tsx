@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid, Hidden } from '@material-ui/core';
-import classNames from 'classnames';
 import intl from 'react-intl-universal';
 import MdiIcon from '../common/MdiIcon';
 import { MediaMeta } from '../Medias/MediaGridListImage';
@@ -10,6 +9,7 @@ import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
 import { RXInputProps } from 'base/RXInputProps';
 import { Skeleton } from '@material-ui/lab';
+import HoverablePaper from 'components/common/HoverablePaper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -152,10 +152,9 @@ const MediasPortlet = React.forwardRef((
 
 
   return (
-    <Paper 
+    <HoverablePaper 
       ref={ref}
       {...rest}
-      className = { classNames(classes.portlet) }
     >
       <div className = {classes.header}>
         <Typography variant="h5">
@@ -219,7 +218,7 @@ const MediasPortlet = React.forwardRef((
         }
         <div>{helperText}</div>
       </div>
-    </Paper>
+    </HoverablePaper>
   )
 })
 

@@ -18,20 +18,7 @@ import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      //background: theme.palette.background.default,
-      background:'#5d78ff',
-      //boxShadow:'none',
-      boxShadow: theme.shadows[10],
       color:'#fff',
-      transition: 'all 0.3s',
-    },
-
-    sticky:{
-      //boxShadow:'rgba(25, 42, 70, 0.13) 0px 12px 18px 0px;',
-      boxShadow: theme.shadows[10],
-      //color:'#fff',
-      //background:'#7367f0',
-      //background:'#fff',
     },
 
     grow: {
@@ -46,7 +33,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
   const [sticky, setSticky] = React.useState(false);
   const handleScroll = function(event:any){
     let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0
-    setSticky(topOffset > 30)
+    setSticky(topOffset > 10)
 
   }
 
@@ -89,7 +76,11 @@ export default function TopNav(props:{onSidebarToggle: any}) {
   return (
     <Fragment>
       <TopNavHeightPlaceholder />
-      <AppBar position="fixed" className={classNames(classes.root, {[classes.sticky]:sticky},)}>
+      <AppBar position="fixed" 
+        className={classNames(classes.root)} 
+        variant ={sticky ? "elevation" :"outlined"}
+        elevation = {10}
+      >
         <Toolbar>
           <SidebarWidthPlaceholder />
           <Hidden mdUp>
