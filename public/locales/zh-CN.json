@@ -10,7 +10,7 @@
     "theme-color":"主题颜色",
     "sidebar":"侧边栏",    
     "sidebar-color":"侧边栏颜色",
-    "sidebar-image":"侧边栏图片",
+    "sidebar-image":"侧边栏背景图",
     "debug": "调试",
     "upload": "上传",
     "filter": "过滤",

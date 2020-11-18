@@ -8,6 +8,7 @@ import useSidebarSkin from 'store/theme/useSidebarSkin';
 import classNames from 'classnames';
 import { setSiderbarSkinAction } from 'store/theme/actions';
 import { DARK, LIGHT } from 'store/theme/useThemeSettings';
+import { sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5 } from 'store/theme/reducers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,6 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius:'10px',
       cursor:"pointer",
       margin:theme.spacing(1),
+      backgroundSize: "cover",
+      backgroundPosition: "center center",
     },
     selected:{
       boxShadow: "0 0 0 2px rgba(26, 92,255, 0.4)"
@@ -45,7 +48,6 @@ function MaskBlock(
       maskLinearGradient:mask,
       mode:light ? LIGHT : DARK,
     }))
-    console.log('mode', light ? LIGHT : DARK)
   }
 
   return (
@@ -54,6 +56,37 @@ function MaskBlock(
         backgroundImage : mask,
         borderColor: borderColor||'transparent',
         opacity: ".9",
+      }}
+      onClick={handleClick}
+    ></div>
+  )
+}
+
+function ImageBlock(
+  props:{
+    selectImage:any,
+    image:any,
+  }
+){
+  const {selectImage, image } = props;
+  const classes = useStyles();
+  const dispatch = useDispatch()
+  const selected = image === selectImage;
+  const sidebarSkin = useSidebarSkin()
+
+  const handleClick = ()=>{
+    dispatch(setSiderbarSkinAction({
+      ...sidebarSkin, 
+      image:image,
+    }))
+  }
+
+  return (
+    <div className = {classNames(classes.colorBlock, {[classes.selected]:selected})}
+      style={{
+        backgroundImage:"url(" + image + ")",
+        opacity: ".9",
+        border: 0,
       }}
       onClick={handleClick}
     ></div>
@@ -88,7 +121,11 @@ export default function SidebarSettings(){
         className = {classes.title}
       >{intl.get('sidebar-image')}</Typography>
       <div className = {classes.content}>
-        
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg1}/>
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg2}/>
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg3}/>
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg4}/>
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg5}/>
       </div>
     </Fragment>
   )

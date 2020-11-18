@@ -10,7 +10,7 @@
     "theme-color":"Theme color",
     "sidebar":"Sidebar",
     "sidebar-color":"Sidebar color",
-    "sidebar-image":"Sidebar image",
+    "sidebar-image":"Sidebar background image",
     "debug": "Debug",
     "upload": "Upload",
     "filter": "Filter",
