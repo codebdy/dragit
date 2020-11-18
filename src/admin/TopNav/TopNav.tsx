@@ -79,7 +79,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
       <AppBar position="fixed" 
         className={classNames(classes.root)} 
         variant ={sticky ? "elevation" :"outlined"}
-        elevation = {10}
+        elevation = {8}
       >
         <Toolbar>
           <SidebarWidthPlaceholder />

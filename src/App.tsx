@@ -32,9 +32,9 @@ function App() {
   };
 
   const weakenShadow = (shadow:string)=>{
-    return shadow.replace('rgba(0,0,0,0.14)','rgba(0,0,0,0.042)')
-      .replace('rgba(0,0,0,0.02)','rgba(0,0,0,0.006)')
-      .replace('rgba(0,0,0,0.12)','rgba(0,0,0,0.036)');
+    return shadow.replace('rgba(0,0,0,0.14)','rgba(0,0,0,0.07)')
+      .replace('rgba(0,0,0,0.02)','rgba(0,0,0,0.01)')
+      .replace('rgba(0,0,0,0.12)','rgba(0,0,0,0.06)');
   }
 
   const oldTheme = createMuiTheme({})
