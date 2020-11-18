@@ -30,7 +30,7 @@ export interface SidebarTheme{
 
 }
 
-const useSidebarStyles = (theme:Theme, width:number, fullWidth:number)=> {
+const useSidebarStyles = (theme:Theme, width:number, fullWidth:number, showBorder:boolean)=> {
   const sidebarSkin = useSidebarSkin()
   const useStyles = makeStyles({
     drawerPaper:{
@@ -42,6 +42,7 @@ const useSidebarStyles = (theme:Theme, width:number, fullWidth:number)=> {
       display:'flex',
       flexFlow:'column',
       transition: "width 0.3s",
+      borderRight: showBorder ? 'solid 1px ' + theme.palette.divider : '0',
     },
 
     overDrawer:{

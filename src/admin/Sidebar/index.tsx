@@ -85,7 +85,7 @@ const Sidebar = function( props:SidebarProps ) {
   const width = compactable && !full ? sideBarSettings.sizes['compact'] : fullWidth;
 
   //const useStyles = createStyles(theme, width, fullWidth)
-  const classes = useSidebarStyles(theme, width, fullWidth);
+  const classes = useSidebarStyles(theme, width, fullWidth, !(compactable && full));
   const dispatch = useDispatch()
   const handleToggle = ()=>{
     dispatch(compactableAction())
