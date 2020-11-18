@@ -31,7 +31,7 @@ const API_UPDATE_MODULE_PAGE : AxiosRequestConfig= {
 }
 
 const API_REMOVE_MODULE_PAGE : AxiosRequestConfig= {
-  url:'/api/remove-module-page',
+  url:'/api/remove-page-of-module',
   method:'post',
 }
 

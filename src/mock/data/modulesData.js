@@ -5,13 +5,13 @@ var modules = [
     indexPageId:1,
     pages:[
       {
-        id:'1',
+        id:1,
         title:'新闻列表',
         API:'/api/data/list',
         isFormPage:false,
       },
       {
-        id:'2',
+        id:2,
         title:'新闻编辑',
         API:'/api/data/article',
         isFormPage:true,

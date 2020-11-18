@@ -134,13 +134,13 @@ Mock.mock(RegExp('/api/update-module-page?.*'),'post', (request)=>{
   return JSON.parse(JSON.stringify(module));;
 })
 
-Mock.mock(RegExp('/api/remove-module-page?.*'),'post', (request)=>{
+Mock.mock(RegExp('/api/remove-page-of-module?.*'),'post', (request)=>{
   let id = getQueryVariable('moduleId', request.url);
+  let pageId = parseInt(getQueryVariable('pageId', request.url));
   let module =getModuleById(id);
   module.pages = module.pages.filter(page=>{
-    return page.id !== parseInt(id)
+    return page.id !== pageId
   })
-  console.log(module.pages)
   return JSON.parse(JSON.stringify(module));
 })
 
