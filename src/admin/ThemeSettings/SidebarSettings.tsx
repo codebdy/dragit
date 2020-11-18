@@ -65,10 +65,11 @@ function MaskBlock(
 function ImageBlock(
   props:{
     selectImage:any,
-    image:any,
+    image?:any,
+    borderColor?:string,
   }
 ){
-  const {selectImage, image } = props;
+  const {selectImage, image, borderColor } = props;
   const classes = useStyles();
   const dispatch = useDispatch()
   const selected = image === selectImage;
@@ -86,7 +87,7 @@ function ImageBlock(
       style={{
         backgroundImage:"url(" + image + ")",
         opacity: ".9",
-        border: 0,
+        borderColor: borderColor||'transparent',
       }}
       onClick={handleClick}
     ></div>
@@ -106,8 +107,8 @@ export default function SidebarSettings(){
       <div className = {classes.content}>
         <MaskBlock 
           selectedLinerGradient= {sidebarSkin.maskLinearGradient} 
-          mask="linear-gradient(45deg,#ffffff,#ffffff)" 
-          borderColor="#000"
+          mask="linear-gradient(45deg,#fafafa,#fafafa)" 
+          borderColor="#111"
           light
         />
         <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask="linear-gradient(45deg,#780206,#061161)"/>
@@ -121,6 +122,7 @@ export default function SidebarSettings(){
         className = {classes.title}
       >{intl.get('sidebar-image')}</Typography>
       <div className = {classes.content}>
+        <ImageBlock selectImage = {sidebarSkin.image} borderColor="#111"/>
         <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg1}/>
         <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg2}/>
         <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg3}/>
