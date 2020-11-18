@@ -17,8 +17,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
 import useThemeSettings from "store/theme/useThemeSettings";
-//import useShadows from "store/theme/useShadows";
-//import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{
   small = "small",
@@ -26,46 +24,7 @@ export enum SidebarSize{
   large = "large"
 }
 
-/**
- * 侧边栏主题创建函数
- * @param settings 
- */
-export function createSidebarTheme(settings = {}) : SidebarTheme{
-  return { dark: true, ...settings }
-}
-//interface RootState {
-//  menu:any,
-//}
-
-//const mapStateToProps = (state: RootState) => {
-//  return {
-//    items: state.menu.menuItems
-//  }
-//}
-
-//const mapDispatchToProps = () => {
-//  return {
-
-//  }
-//}
-
-
-//const connector = connect(mapStateToProps, mapDispatchToProps)
-
-//type PropsFromRedux = ConnectedProps<typeof connector>
 type SidebarProps = /*PropsFromRedux &*/ {
-  /**
-   * if is it dark theme
-   * @default true
-   */
-  dark?: boolean,
-
-  /**
-   * Drawer size in open state
-   * @default medium
-   */
-  //size?: SidebarSize,
-
 
   /**
    * 是否显示
@@ -77,11 +36,6 @@ type SidebarProps = /*PropsFromRedux &*/ {
    * 移动设备，隐藏事件
    */
   onMobileClose?: ModalProps['onClose'],
-
-  /**
-   * 侧边栏主题
-   */
-  sidebarTheme?: SidebarTheme,
 
   /**
    * 菜单项，树形结构
@@ -98,19 +52,15 @@ type SidebarProps = /*PropsFromRedux &*/ {
  */
 const Sidebar = function( props:SidebarProps ) {
   const {
-    dark = true, 
-    //size = SidebarSize.medium, 
     mobileOpen = false, 
     onMobileClose,
-    sidebarTheme,
-    //items = []
   } = props
   //const [compactable, setCompactable] = React.useState(false);
   const [full, setFull] = React.useState(true);
   const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
-      type: dark ? 'dark' : 'light',
+      type: themeSettings.siderbarSkin.mode as any,
       primary:{
         main:themeSettings.primary,
       },
@@ -134,10 +84,9 @@ const Sidebar = function( props:SidebarProps ) {
   const compactable = sidebar.compactable
   
   const fullWidth = sideBarSettings.sizes[sidebar.size]
+  const width = compactable && !full ? sideBarSettings.sizes['compact'] : fullWidth;
 
-   const width = compactable && !full ? sideBarSettings.sizes['compact'] : fullWidth;
-
-  const useStyles = styles(theme, width, fullWidth, sidebarTheme)
+  const useStyles = styles(theme, width, fullWidth)
   const classes = useStyles();
   const dispatch = useDispatch()
   const handleToggle = ()=>{

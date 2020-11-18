@@ -9,6 +9,8 @@
     "dark":"Dark",
     "theme-color":"Theme color",
     "sidebar":"Sidebar",
+    "sidebar-color":"Sidebar color",
+    "sidebar-image":"Sidebar image",
     "debug": "Debug",
     "upload": "Upload",
     "filter": "Filter",

@@ -1,7 +1,6 @@
 import React from 'react';
 import { CssBaseline, makeStyles, Theme, createStyles } from '@material-ui/core';
-import Sidebar, { createSidebarTheme } from 'admin/Sidebar';
-import image5 from 'assets/img/sidebar-5.jpg';
+import Sidebar from 'admin/Sidebar';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import TopNav from 'admin/TopNav/TopNav';
 import FixedBar from 'admin/FixedBar';
@@ -36,11 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const sidebarTheme1 = createSidebarTheme({
-  backgroundImage: image5,
-  maskLinearGradient: 'linear-gradient(45deg,#780206,#061161)',
-})
-
 export default function Layout(){
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const selectMyStore = (state: RootState) => state.designer
@@ -56,9 +50,7 @@ export default function Layout(){
     <div className={classes.root}>
       <CssBaseline />      
       <Sidebar 
-        sidebarTheme={sidebarTheme1} 
         mobileOpen={mobileOpen} 
-        //size={SidebarSize.large}
         onMobileClose={handleDrawerToggle}
       />
       <TopNav onSidebarToggle = {handleDrawerToggle}/>

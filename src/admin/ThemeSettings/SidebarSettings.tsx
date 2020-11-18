@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, Divider, makeStyles, Theme, Typography } from '@material-ui/core';
 
 import useThemeSettings from 'store/theme/useThemeSettings';
 import { useDispatch } from 'react-redux';
@@ -9,29 +9,30 @@ import useRowStyles from './useRowStyles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     colorBlock:{
-      width:'30px',
-      height:'30px',
+      width:'50px',
+      height:'80px',
       border:'solid 1px',
-      borderRadius:'6px',
+      borderRadius:'10px',
       cursor:"pointer",
       margin:theme.spacing(1),
     },
   }),
 );
 
-function ColorBlock(
+function MaskBlock(
   props:{
-    color:string,
+    mask:string,
     borderColor?:string,
   }
 ){
-  const {color, borderColor} = props;
+  const {mask, borderColor} = props;
   const classes = useStyles();
   return (
     <div className = {classes.colorBlock} 
       style={{
-        backgroundColor : color,
-        borderColor: borderColor||color
+        backgroundImage : mask,
+        borderColor: borderColor||'transparent',
+        opacity: ".9",
       }}
     ></div>
   )
@@ -47,15 +48,21 @@ export default function SidebarSettings(){
       <Typography 
         variant="subtitle1"
         className = {classes.title}
-      >{intl.get('sidebar')}</Typography>
+      >{intl.get('sidebar-color')}</Typography>
       <div className = {classes.content}>
-        <ColorBlock color="#ffffff" borderColor="#000"/>
-        <ColorBlock color="#5d78ff"/>
-        <ColorBlock color="#28c76f"/>
-        <ColorBlock color="#ea5455"/>
-        <ColorBlock color="#ff9f43"/>
-        <ColorBlock color="#3dc9b3"/>
-        <ColorBlock color="#1e1e1e" borderColor="#fff"/>
+        <MaskBlock mask="linear-gradient(45deg,#ffffff,#ffffff)" borderColor="#000"/>
+        <MaskBlock mask="linear-gradient(45deg,#780206,#061161)"/>
+        <MaskBlock mask="linear-gradient(45deg,#33001b,#ff0084)"/>
+        <MaskBlock mask="linear-gradient(45deg,#360033,#0b8793)"/>
+        <MaskBlock mask="linear-gradient(45deg,#000000,#000000)" borderColor="#fff"/>
+      </div>
+      <Divider />
+      <Typography 
+        variant="subtitle1"
+        className = {classes.title}
+      >{intl.get('sidebar-image')}</Typography>
+      <div className = {classes.content}>
+        
       </div>
     </Fragment>
   )
