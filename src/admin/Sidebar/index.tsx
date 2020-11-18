@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
 import useThemeSettings from "store/theme/useThemeSettings";
+//import useShadows from "store/theme/useShadows";
 //import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{
@@ -124,6 +125,8 @@ const Sidebar = function( props:SidebarProps ) {
       },
 
     },
+
+    //shadows:[...useShadows()] as any
   }));
 
   const selectSidebar = (state: RootState) => state.sidebar

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { createMuiTheme, responsiveFontSizes, Theme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,20 +13,7 @@ import { RootState } from 'store';
 import Layout from 'admin/Layout';
 import ModuleManager from 'designer/ModuleManager';
 import useThemeSettings from 'store/theme/useThemeSettings';
-
-const weakenShadow = (shadow:string)=>{
-  return shadow.replace('rgba(0,0,0,0.14)','rgba(0,0,0,0.042)')
-    .replace('rgba(0,0,0,0.02)','rgba(0,0,0,0.006)')
-    .replace('rgba(0,0,0,0.12)','rgba(0,0,0,0.036)');
-}
-
-const generateShadows = (theme: Theme) => {
-  return theme.shadows.reduce(function(result, item, index, array) {
-    result[index] = weakenShadow(item) ;
-    return result;
-  }, new Array<string>());
-};
-
+import useShadows from 'store/theme/useShadows';
 
 function App() {
   const dispatch = useDispatch()
@@ -40,17 +27,16 @@ function App() {
 
   const themeSettings = useThemeSettings();
   
-  const oldTheme = createMuiTheme({})
-
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
       type: themeSettings.themeMode as any,
       primary:{
         main: themeSettings.primary,
       },
+
     },
 
-    shadows:[...generateShadows(oldTheme)] as any
+    shadows:[...useShadows()] as any
   }));
 
 
