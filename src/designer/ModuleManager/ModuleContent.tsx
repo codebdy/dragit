@@ -3,7 +3,7 @@ import { Container, Grid, createStyles, makeStyles, Theme, LinearProgress} from 
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
-import { API_ADD_MODULE_PAGE, API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_UPDATE_MODULE_PAGE } from 'APIs/modules';
+import { API_ADD_MODULE_PAGE, API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_UPDATE_MODULE_INDEX_PAGE, API_UPDATE_MODULE_PAGE } from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
 import { PageMeta } from './ModulePageRow';
 import ModulePageTable from './ModulePageTable';
@@ -98,6 +98,16 @@ export default function ModuleContent(
     })    
   }
 
+  const handelChangeIndexPage = (pageId:number, indexed:boolean)=>{
+    setOperateConfig({
+      ...API_UPDATE_MODULE_INDEX_PAGE,
+      params:{
+        moduleId:moduleId,
+        indexPageId: indexed ? pageId : -1,
+      }
+    })  
+  }
+
   return (
     <Container>
       {
@@ -126,6 +136,7 @@ export default function ModuleContent(
                 onRemovePage = {handleRemove}
                 indexPageId = {module.indexPageId || -1}
                 onAddPage = {handleAddPage}
+                onChangeIndexPage = {handelChangeIndexPage}
               />
             </Grid>
           </Grid>        

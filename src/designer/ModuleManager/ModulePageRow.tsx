@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
@@ -16,13 +16,19 @@ export default function ModulePageRow(
     isIndexPage:boolean,
     onChangePage:(newPage:PageMeta)=>void,
     onRemove:(id:number)=>void,
+    onChangeIndexPage:(indexed:boolean)=>void
   }
 ){
-  const{page, isIndexPage, onChangePage, onRemove} = props;
+  const{page, isIndexPage, onChangePage, onRemove, onChangeIndexPage} = props;
   const[titleEditing, setTitleEditing] = useState(false);
   const[apiEditing, setApiEditing] = useState(false);
   const[title, setTitle] = useState(page.title);
+  //const[isIndexPage, setIsIndexPage] = useState(props.isIndexPage);
   const[api, setApi] = useState(page.API);
+
+  //useEffect(()=>{
+  //  setIsIndexPage(props.isIndexPage);
+  //},[props.isIndexPage])
 
   const handleBeginEdit = ()=>{
     setTitleEditing(true);
@@ -35,6 +41,12 @@ export default function ModulePageRow(
     onChangePage({...page, title:title, API:api});
   }
 
+  const handleChangIndexPage = (event: React.ChangeEvent<HTMLInputElement>)=>{
+    let newValue = !isIndexPage;
+    //setIsIndexPage(newValue);
+    onChangeIndexPage(newValue)
+  }
+
   return (
   <TableRow>
     <TableCell
@@ -44,7 +56,7 @@ export default function ModulePageRow(
         titleEditing?
         <TextField
           autoFocus 
-          value = {title} 
+          value = {title || ''} 
           size = "small" 
           variant = "outlined"
           onKeyUp = {e=>{
@@ -66,7 +78,7 @@ export default function ModulePageRow(
         apiEditing?
         <TextField
           autoFocus 
-          value = {api} 
+          value = {api || ''} 
           size = "small" 
           variant = "outlined"
           onKeyUp = {
@@ -94,6 +106,7 @@ export default function ModulePageRow(
         checked = {isIndexPage}
         color="primary"
         inputProps={{ 'aria-label': 'Is index page' }}
+        onChange = {handleChangIndexPage}
       />
     </TableCell>
     <TableCell align="right">

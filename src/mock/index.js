@@ -151,6 +151,15 @@ Mock.mock(RegExp('/api/add-page-of-module?.*'),'post', (request)=>{
   module.pages = [...module.pages, {id:createId(), title:title}]
   return JSON.parse(JSON.stringify(module));
 })
+
+Mock.mock(RegExp('/api/update-index-page-of-module?.*'),'post', (request)=>{
+  let id = getQueryVariable('moduleId', request.url);
+  let indexPageId = getQueryVariable('indexPageId', request.url);
+  let module =getModuleById(id);
+  module.indexPageId = parseInt(indexPageId);
+  return JSON.parse(JSON.stringify(module));
+})
+
 Mock.setup({
     timeout: 500
 })
