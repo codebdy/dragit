@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
@@ -10,6 +10,7 @@ import { openAreaSelectAction } from "store/designer/actions";
 import { closeFixedBarAction } from "store/fixedBar/actions";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
+import ThemeSettings from "./ThemeSettings";
 
 interface FixedBarProps{
 }
@@ -37,6 +38,7 @@ export default function FixedBar(
   props:FixedBarProps = {}
 ) {
   const classes = useStyles();
+  const [showSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch()
   
   const selectMyStore = (state: RootState) => state.fixedBar
@@ -68,7 +70,9 @@ export default function FixedBar(
             </IconButton>
           </NavLink>
         </Tooltip>
-        <Tooltip title={intl.get('theme-settings')} arrow placement="bottom">
+        <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"
+          onClick = {()=>setShowSettings(!showSettings)}
+        >
           <IconButton aria-label={intl.get('theme-settings')}>
             <MdiIcon iconClass="mdi-image-filter-black-white" />
           </IconButton>
@@ -80,6 +84,11 @@ export default function FixedBar(
         </Tooltip>
       </Paper >
     }
+
+    <ThemeSettings
+      open = {showSettings}
+      onClose = {()=>setShowSettings(false)}
+    />
     </Hidden>
   )
 }

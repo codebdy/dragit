@@ -3,6 +3,7 @@
     "design-layout": "布局设计",
     "modules": "模块管理",
     "theme-settings": "主题配置",
+    "theme-mode":"主题模式",
     "debug": "调试",
     "upload": "上传",
     "filter": "过滤",

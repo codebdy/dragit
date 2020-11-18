@@ -44,7 +44,7 @@ const sidebarStyle = (theme:Theme, width:number, fullWidth:number, sidebarTheme:
   overDrawer:{
     marginTop:'-2px',
     marginLeft:'-2px',
-    boxShadow: theme.shadows[12],
+    boxShadow: theme.shadows[20],
     height:"calc(100vh + 2px)",
   },
 
