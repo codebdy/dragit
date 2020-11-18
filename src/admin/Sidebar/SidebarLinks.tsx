@@ -16,7 +16,6 @@ import FontIcon from "components/common/MdiIcon"
 import LoadingSkeleton from "./LoadingSkeleton";
 import { NavLink } from "react-router-dom";
 
-const whiteColor = '#fff';
 const openBackground = "rgba(255,255,255, 0.05)";
 const openBackgroundLight = "rgba(0,0,0, 0.05)";
 const activeBackground = "rgba(255,255,255, 0.2)";
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: '23px',
       transition: 'all 0.3s',
       fontSize:"1.05rem",
-      color: whiteColor,
+      color: theme.palette.text.primary,
     },
     itemLink: {
       textDecoration: "none",

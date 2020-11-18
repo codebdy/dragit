@@ -6,8 +6,6 @@ import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Hidden from '@material-ui/core/Hidden';
 import { ModalProps } from '@material-ui/core/Modal';
-import styles, {SidebarTheme} from './sidebarStyle';
-
 import Brand from './SidebarBrand'
 import Switch from '@material-ui/core/Switch';
 import ListNav from "./SidebarLinks"
@@ -17,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
 import useThemeSettings from "store/theme/useThemeSettings";
+import useSidebarStyles from "./useSidebarStyles";
 
 export enum SidebarSize{
   small = "small",
@@ -55,7 +54,6 @@ const Sidebar = function( props:SidebarProps ) {
     mobileOpen = false, 
     onMobileClose,
   } = props
-  //const [compactable, setCompactable] = React.useState(false);
   const [full, setFull] = React.useState(true);
   const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
@@ -86,8 +84,8 @@ const Sidebar = function( props:SidebarProps ) {
   const fullWidth = sideBarSettings.sizes[sidebar.size]
   const width = compactable && !full ? sideBarSettings.sizes['compact'] : fullWidth;
 
-  const useStyles = styles(theme, width, fullWidth)
-  const classes = useStyles();
+  //const useStyles = createStyles(theme, width, fullWidth)
+  const classes = useSidebarStyles(theme, width, fullWidth);
   const dispatch = useDispatch()
   const handleToggle = ()=>{
     dispatch(compactableAction())
