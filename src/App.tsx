@@ -12,6 +12,20 @@ import { RootState } from 'store';
 
 import Layout from 'admin/Layout';
 import ModuleManager from 'designer/ModuleManager';
+import useThemeSettings from 'store/theme/useThemeSettings';
+
+const weakenShadow = (shadow:string)=>{
+  return shadow.replace('rgba(0,0,0,0.14)','rgba(0,0,0,0.042)')
+    .replace('rgba(0,0,0,0.02)','rgba(0,0,0,0.006)')
+    .replace('rgba(0,0,0,0.12)','rgba(0,0,0,0.036)');
+}
+
+const generateShadows = (theme: Theme) => {
+  return theme.shadows.reduce(function(result, item, index, array) {
+    result[index] = weakenShadow(item) ;
+    return result;
+  }, new Array<string>());
+};
 
 
 function App() {
@@ -24,42 +38,23 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
-  const generateShadows = (theme: Theme) => {
-    return theme.shadows.reduce(function(result, item, index, array) {
-      result[index] = weakenShadow(item) ;
-      return result;
-    }, new Array<string>());
-  };
-
-  const weakenShadow = (shadow:string)=>{
-    return shadow.replace('rgba(0,0,0,0.14)','rgba(0,0,0,0.07)')
-      .replace('rgba(0,0,0,0.02)','rgba(0,0,0,0.01)')
-      .replace('rgba(0,0,0,0.12)','rgba(0,0,0,0.06)');
-  }
-
+  const themeSettings = useThemeSettings();
+  
   const oldTheme = createMuiTheme({})
 
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
-      type: 'light',
-      background:{
-        default:'#f4f5fa',
-      },
+      type: themeSettings.themeMode as any,
       primary:{
-        main:"#5d78ff",
+        main: themeSettings.primary,
       },
-      //secondary:{
-        //main:"#ff9e43",
-      //},    
     },
 
     shadows:[...generateShadows(oldTheme)] as any
   }));
 
-  generateShadows(oldTheme)
 
   const selectIntl = (state: RootState) => state.intl
-
   const intLang = useSelector(selectIntl)
 
   return (

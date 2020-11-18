@@ -1,9 +1,10 @@
 import { Action } from 'redux-actions';
-import {setElevationStrengthAction, setThemeModeAction} from "./actions";
+import {setElevationStrengthAction, setPrimaryColorAction, setThemeModeAction} from "./actions";
 
 const initialState = {
-  themeMode: 'semi-dark',
+  themeMode: 'light',
   elevationStrength: 4,
+  primary:'#5d78ff',
 };
 
 type State = typeof initialState
@@ -24,6 +25,13 @@ function reducer(
     return {
       ...state,
       elevationStrength: action.payload,
+    };
+  }
+  
+  if(action.type === setPrimaryColorAction().type){
+    return {
+      ...state,
+      primary: action.payload,
     };
   }
   return state

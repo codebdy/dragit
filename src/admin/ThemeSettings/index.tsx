@@ -7,6 +7,8 @@ import { Close } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import ThemeMode from './ThemeMode';
 import ElevationStrength from './ElevationStrength';
+import ThemeColor from './ThemeColor';
+import SidebarSettings from './SidebarSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,6 +71,10 @@ export default function ThemeSettings(
       <Divider />
       <Scrollbar className={classes.content}>
         <ThemeMode />
+        <Divider />
+        <ThemeColor />
+        <Divider />
+        <SidebarSettings/>
         <Divider />
         <ElevationStrength />
       </Scrollbar>

@@ -18,7 +18,7 @@ import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      color:'#fff',
+      //color:'#fff',
     },
 
     grow: {
@@ -79,7 +79,9 @@ export default function TopNav(props:{onSidebarToggle: any}) {
       <AppBar position="fixed" 
         className={classNames(classes.root)} 
         variant ={sticky ? "elevation" :"outlined"}
-        elevation = {8}
+        elevation = {12}
+        color = {sticky ? "inherit" : "transparent"}
+        style={{borderColor:'transparent'}}
       >
         <Toolbar>
           <SidebarWidthPlaceholder />
@@ -101,7 +103,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
 
           
           <a href="https://github.com/rxwater/dragit" target="_blank" rel="noopener noreferrer">
-            <MdiIcon iconClass = "mdi-github" color="#fff"/>
+            <MdiIcon iconClass = "mdi-github"/>
           </a>
           <IconButton aria-label="show 17 new notifications" color="inherit">
             <Badge badgeContent={17} color="secondary">

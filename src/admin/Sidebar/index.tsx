@@ -16,6 +16,7 @@ import {sideBarSettings} from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
+import useThemeSettings from "store/theme/useThemeSettings";
 //import { connect, ConnectedProps } from 'react-redux'
 
 export enum SidebarSize{
@@ -105,11 +106,15 @@ const Sidebar = function( props:SidebarProps ) {
   } = props
   //const [compactable, setCompactable] = React.useState(false);
   const [full, setFull] = React.useState(true);
- 
+  const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
       type: dark ? 'dark' : 'light',
+      primary:{
+        main:themeSettings.primary,
+      },
     },
+    
     typography: {
 
       body1: {
@@ -186,8 +191,10 @@ const Sidebar = function( props:SidebarProps ) {
           ></div>
           <Brand fullWidth={fullWidth}>
             <Switch 
+              color = "primary"
               checked={!compactable}
               onClick = {handleToggle} 
+              size = "small"
             />
           </Brand>
           <ListNav 

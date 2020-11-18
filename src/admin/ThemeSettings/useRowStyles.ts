@@ -6,9 +6,10 @@ const useRowStyles = makeStyles((theme: Theme) =>
       marginTop:theme.spacing(2),
     },
     content:{
-      padding:theme.spacing(1),
+      padding:theme.spacing(2),
       display:'flex',
-      justifyContent:"space-around",
+      flexWrap:'wrap',
+      //justifyContent:"space-around",
     }
   }),
 );
