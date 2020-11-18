@@ -1,7 +1,6 @@
 import React from "react";
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import classNames from "classnames";
-import logo from "assets/img/logo-256-o.png"
+import { createStyles, Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import MdiIcon from "components/common/MdiIcon";
 
 interface BrandProps{
   fullWidth?: number,
@@ -49,10 +48,14 @@ export default function Brand(
 ) {
   const {fullWidth = 260, children} = props
   const classes = useStyles();
+  const theme = useTheme()
   return(
     <div className={classes.root} style={{width:fullWidth + 'px'}}>
       <div className={classes.logo}>
-        <img className={classNames(classes.img)} src={logo} alt="logo" />
+        {
+        //<img className={classNames(classes.img)} src={logo} alt="logo" />
+        }
+        <MdiIcon iconClass = "mdi-feather" color = {theme.palette.text.primary} size={36} />
         <div className={classes.logoText}>DragRX</div>
       </div>
       {children}

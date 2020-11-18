@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import React, { Fragment, useState } from "react";
 import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
-import { Paper, Tooltip, Hidden } from "@material-ui/core";
+import { Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +9,9 @@ import { openAreaSelectAction } from "store/designer/actions";
 import { closeFixedBarAction } from "store/fixedBar/actions";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
-import ThemeSettings from "./ThemeSettings";
+import ThemeSettings from "../ThemeSettings";
 
-interface FixedBarProps{
-}
-
-const useStyles = makeStyles((theme: Theme) =>
+/*const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'fixed',
@@ -32,12 +28,12 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex:theme.zIndex.appBar,
     },
   }),
-);
+);*/
 
-export default function FixedBar(
-  props:FixedBarProps = {}
+export default function DesignButtons(
+
 ) {
-  const classes = useStyles();
+  //const classes = useStyles();
   const [showSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch()
   
@@ -45,7 +41,7 @@ export default function FixedBar(
   const myStore = useSelector(selectMyStore)  
 
   const selectSidebar = (state: RootState) => state.sidebar
-  const sidebarStore = useSelector(selectSidebar)  
+  const sidebarStore = useSelector(selectSidebar) 
 
   const handleOpen = () => {
     dispatch(openAreaSelectAction());
@@ -57,7 +53,7 @@ export default function FixedBar(
     <Hidden smDown>{}
     {
       myStore.open && 
-      <Paper  className={classes.root} elevation={24}>
+      <Fragment  /*className={classes.root} elevation={24}*/>
         <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
           <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>
             <MdiIcon iconClass="mdi-pencil-ruler" />
@@ -65,15 +61,15 @@ export default function FixedBar(
         </Tooltip>
         <Tooltip title={intl.get('modules')} arrow placement="bottom">
           <NavLink to={'/design'}>
-            <IconButton aria-label={intl.get('modules')}>
-              <MdiIcon iconClass="mdi-view-grid-plus" />
+            <IconButton aria-label={intl.get('modules')} >
+              <MdiIcon iconClass="mdi-view-grid-plus"  />
             </IconButton>
           </NavLink>
         </Tooltip>
         <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"
           onClick = {()=>setShowSettings(!showSettings)}
         >
-          <IconButton aria-label={intl.get('theme-settings')}>
+          <IconButton aria-label={intl.get('theme-settings')} >
             <MdiIcon iconClass="mdi-image-filter-black-white" />
           </IconButton>
         </Tooltip>
@@ -82,7 +78,7 @@ export default function FixedBar(
             <MdiIcon iconClass="mdi-android-debug-bridge"/>
           </IconButton>
         </Tooltip>
-      </Paper >
+      </Fragment >
     }
 
     <ThemeSettings

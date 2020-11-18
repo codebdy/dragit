@@ -14,16 +14,22 @@ import { Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
+import DesignButtons from 'admin/TopNav/DesignButtons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      //color:'#fff',
+      color: theme.palette.text.primary,
     },
 
     grow: {
       flexGrow: 1,
     },
+
+    githubLink:{
+      color: theme.palette.text.primary,
+      marginRight:theme.spacing(1),
+    }
 
   }),
 );
@@ -85,6 +91,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
       >
         <Toolbar>
           <SidebarWidthPlaceholder />
+          {<DesignButtons />}
           <Hidden mdUp>
             <IconButton
               color="inherit"
@@ -102,7 +109,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
           <div className={classes.grow} />
 
           
-          <a href="https://github.com/rxwater/dragit" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/rxwater/dragit" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
             <MdiIcon iconClass = "mdi-github"/>
           </a>
           <IconButton aria-label="show 17 new notifications" color="inherit">
