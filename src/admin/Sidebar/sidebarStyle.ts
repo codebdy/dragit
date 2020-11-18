@@ -38,15 +38,19 @@ const sidebarStyle = (theme:Theme, width:number, fullWidth:number, sidebarTheme:
     overflowX:'hidden',
     display:'flex',
     flexFlow:'column',
-    transition: "all 0.3s",
+    transition: "width 0.3s",
   },
 
-  boxShadow:{
-    boxShadow: theme.shadows[20],
+  compactableDrawer:{
+    marginTop:'-2px',
+    marginLeft:'-2px',
+    boxShadow: theme.shadows[12],
+    height:"calc(100vh + 2px)",
   },
 
   drawerPaperMobile:{
     width:fullWidth + "px",
+    display:'flex',
   },
 
   background: {
