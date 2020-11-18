@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
@@ -23,12 +23,7 @@ export default function ModulePageRow(
   const[titleEditing, setTitleEditing] = useState(false);
   const[apiEditing, setApiEditing] = useState(false);
   const[title, setTitle] = useState(page.title);
-  //const[isIndexPage, setIsIndexPage] = useState(props.isIndexPage);
   const[api, setApi] = useState(page.API);
-
-  //useEffect(()=>{
-  //  setIsIndexPage(props.isIndexPage);
-  //},[props.isIndexPage])
 
   const handleBeginEdit = ()=>{
     setTitleEditing(true);
@@ -43,8 +38,11 @@ export default function ModulePageRow(
 
   const handleChangIndexPage = (event: React.ChangeEvent<HTMLInputElement>)=>{
     let newValue = !isIndexPage;
-    //setIsIndexPage(newValue);
-    onChangeIndexPage(newValue)
+    onChangeIndexPage(newValue);
+  }
+
+  const handleChangeIsFormPage = (event: React.ChangeEvent<HTMLInputElement>)=>{
+    onChangePage({...page, isFormPage:!page.isFormPage});
   }
 
   return (
@@ -99,6 +97,7 @@ export default function ModulePageRow(
         checked = {page.isFormPage}
         color="primary"
         inputProps={{ 'aria-label': 'Is form page' }}
+        onChange = {handleChangeIsFormPage}
       />
     </TableCell>
     <TableCell>
