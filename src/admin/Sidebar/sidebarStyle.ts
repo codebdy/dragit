@@ -41,7 +41,7 @@ const sidebarStyle = (theme:Theme, width:number, fullWidth:number, sidebarTheme:
     transition: "width 0.3s",
   },
 
-  compactableDrawer:{
+  overDrawer:{
     marginTop:'-2px',
     marginLeft:'-2px',
     boxShadow: theme.shadows[12],
