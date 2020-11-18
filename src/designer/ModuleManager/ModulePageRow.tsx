@@ -94,7 +94,7 @@ export default function ModulePageRow(
     </TableCell>
     <TableCell>
       <Checkbox
-        checked = {page.isFormPage}
+        checked = {page.isFormPage || false}
         color="primary"
         inputProps={{ 'aria-label': 'Is form page' }}
         onChange = {handleChangeIsFormPage}
@@ -102,7 +102,7 @@ export default function ModulePageRow(
     </TableCell>
     <TableCell>
       <Checkbox
-        checked = {isIndexPage}
+        checked = {isIndexPage || false}
         color="primary"
         inputProps={{ 'aria-label': 'Is index page' }}
         onChange = {handleChangIndexPage}
