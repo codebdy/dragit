@@ -7,6 +7,12 @@ import sidebarImg4 from 'assets/img/sidebar-4.jpg';
 import sidebarImg5 from 'assets/img/sidebar-5.jpg';
 import { DARK } from './useThemeSettings';
 
+export const linearGradient1 = "linear-gradient(45deg,#fafafa,#fafafa)";
+export const linearGradient2 = "linear-gradient(45deg,#780206,#061161)";
+export const linearGradient3 = "linear-gradient(45deg,#33001b,#ff0084)";
+export const linearGradient4 = "linear-gradient(45deg,#360033,#0b8793)";
+export const linearGradient5 = "linear-gradient(45deg,#303030,#303030)";
+
 const initialState = {
   themeMode: 'light',
   elevationStrength: 4,

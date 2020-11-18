@@ -8,7 +8,7 @@ import useSidebarSkin from 'store/theme/useSidebarSkin';
 import classNames from 'classnames';
 import { setSiderbarSkinAction } from 'store/theme/actions';
 import { DARK, LIGHT } from 'store/theme/useThemeSettings';
-import { sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5 } from 'store/theme/reducers';
+import { linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5 } from 'store/theme/reducers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -107,14 +107,14 @@ export default function SidebarSettings(){
       <div className = {classes.content}>
         <MaskBlock 
           selectedLinerGradient= {sidebarSkin.maskLinearGradient} 
-          mask="linear-gradient(45deg,#fafafa,#fafafa)" 
+          mask= {linearGradient1}
           borderColor="#111"
           light
         />
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask="linear-gradient(45deg,#780206,#061161)"/>
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask="linear-gradient(45deg,#33001b,#ff0084)"/>
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask="linear-gradient(45deg,#360033,#0b8793)"/>
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask="linear-gradient(45deg,#000000,#000000)" borderColor="#fff"/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient2}/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient3}/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient4}/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient5} borderColor="#fff"/>
       </div>
       <Divider />
       <Typography 
