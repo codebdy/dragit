@@ -12,12 +12,13 @@ const useStyles = makeStyles((theme: Theme) =>
 const HoverablePaper = React.forwardRef((
   props:{
     elevation?:number,
-    children?:any;
+    children?:any,
+    style?:any,
   }, 
   ref
 )=>{
+  const {elevation, children, style, ...rest} = props;
   const classes = useStyles();
-  const {elevation, children, ...rest} = props;
   const [hover, setHover] = React.useState(false);
   return (
     <Paper 
@@ -28,6 +29,7 @@ const HoverablePaper = React.forwardRef((
       className = { classes.portlet }
       onMouseOver = {()=>setHover(true)}
       onMouseLeave = {()=>setHover(false)} 
+      style={{...style, border:(hover?'transparent solid 1px':undefined)}}
     >
       {children}
     </Paper>
