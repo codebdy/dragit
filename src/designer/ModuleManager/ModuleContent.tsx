@@ -7,6 +7,7 @@ import { API_ADD_MODULE_PAGE, API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_
 import { Skeleton } from '@material-ui/lab';
 import { PageMeta } from './ModulePageRow';
 import ModulePageTable from './ModulePageTable';
+import PageEditor from 'designer/PageEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
-
 
 export interface ModuleMeta{
   id:number,
@@ -32,6 +32,7 @@ export default function ModuleContent(
 ){
   const {moduleId} = props;
   const classes = useStyles();
+  const [designedPage, setDesignedPage] = React.useState<PageMeta>();
   const [loadingConfig, setLoadingConfig] = React.useState({
     ...API_GET_MODULE_BY_ID,
     params:{
@@ -108,6 +109,14 @@ export default function ModuleContent(
     })  
   }
 
+  const handleDesignerClose = ()=>{
+    setDesignedPage(undefined);
+  }
+
+  const handelDesign = (page:PageMeta)=>{
+    setDesignedPage(page);
+  }
+
   return (
     <Container>
       {
@@ -137,6 +146,7 @@ export default function ModuleContent(
                 indexPageId = {module.indexPageId || -1}
                 onAddPage = {handleAddPage}
                 onChangeIndexPage = {handelChangeIndexPage}
+                onDesign = {handelDesign}
               />
             </Grid>
           </Grid>        
@@ -144,7 +154,12 @@ export default function ModuleContent(
         :
         <div></div>
       }
-      
+      {designedPage &&
+        <PageEditor 
+          pageJson = {designedPage.jsonSchema} 
+          onClose = {handleDesignerClose}
+        ></PageEditor>
+      }
     </Container>
 
   )

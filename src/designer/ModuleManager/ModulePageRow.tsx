@@ -7,7 +7,8 @@ export interface PageMeta{
   id:number,
   title?:string, 
   API?:string, 
-  isFormPage?:boolean
+  isFormPage?:boolean,
+  jsonSchema?:any,
 }
 
 export default function ModulePageRow(
@@ -16,10 +17,11 @@ export default function ModulePageRow(
     isIndexPage:boolean,
     onChangePage:(newPage:PageMeta)=>void,
     onRemove:(id:number)=>void,
-    onChangeIndexPage:(indexed:boolean)=>void
+    onChangeIndexPage:(indexed:boolean)=>void,
+    onDesign:()=>void,
   }
 ){
-  const{page, isIndexPage, onChangePage, onRemove, onChangeIndexPage} = props;
+  const{page, isIndexPage, onChangePage, onRemove, onChangeIndexPage, onDesign} = props;
   const[titleEditing, setTitleEditing] = useState(false);
   const[apiEditing, setApiEditing] = useState(false);
   const[title, setTitle] = useState(page.title);
@@ -130,7 +132,7 @@ export default function ModulePageRow(
                            
       <Tooltip title={intl.get('design-layout')} arrow placement="top">
         <IconButton aria-label="design"
-                                         
+          onClick = {onDesign}                
         >
           <MdiIcon iconClass="mdi-pencil-ruler" size={16}/>
         </IconButton>

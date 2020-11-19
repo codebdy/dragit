@@ -30,11 +30,12 @@ export default function ModulePageTable(
     onChangePage:(newPage:PageMeta)=>void,
     onRemovePage:(id:number)=>void,
     onAddPage:()=>void,
-    onChangeIndexPage : (pageId:number, indexed:boolean)=>void
+    onChangeIndexPage : (pageId:number, indexed:boolean)=>void,
+    onDesign: (page:PageMeta)=>void,
   }
 ){
+  const {pages, indexPageId, onChangePage, onRemovePage, onAddPage, onChangeIndexPage, onDesign} = props;
   const classes = useStyles();
-  const {pages, indexPageId, onChangePage, onRemovePage, onAddPage, onChangeIndexPage} = props;
   
   const handleRemove = (id:number)=>{
     onRemovePage(id);
@@ -69,6 +70,8 @@ export default function ModulePageTable(
                   onChangeIndexPage = {(indexed)=>{
                     onChangeIndexPage(page.id, indexed);
                   }}
+
+                  onDesign = {()=>onDesign(page)}
                 />
               ))
               }
