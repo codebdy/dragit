@@ -14,6 +14,7 @@ import Layout from 'admin/Layout';
 import ModuleManager from 'designer/ModuleManager';
 import useThemeSettings from 'store/theme/useThemeSettings';
 import useShadows from 'store/theme/useShadows';
+import DrawerEditor from 'designer/DrawerEditor';
 
 function App() {
   const dispatch = useDispatch()
@@ -52,6 +53,7 @@ function App() {
           <Switch> 
             <Route path="/admin" component={Layout}></Route>
             <Route path="/design" component={ModuleManager}></Route>
+            <Route path="/drawer-edit" component={DrawerEditor}></Route>
             <Redirect to="/admin" from='/' /> 
           </Switch>
         </BrowserRouter>

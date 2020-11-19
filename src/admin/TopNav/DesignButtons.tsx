@@ -6,7 +6,6 @@ import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { openAreaSelectAction } from "store/designer/actions";
-import { closeFixedBarAction } from "store/fixedBar/actions";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
 import ThemeSettings from "../ThemeSettings";
@@ -40,22 +39,17 @@ export default function DesignButtons(
   const [showSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch()
   
-  const selectMyStore = (state: RootState) => state.fixedBar
-  const myStore = useSelector(selectMyStore)  
-
   const selectSidebar = (state: RootState) => state.sidebar
   const sidebarStore = useSelector(selectSidebar) 
 
   const handleOpen = () => {
     dispatch(openAreaSelectAction());
-    dispatch(closeFixedBarAction());
     sidebarStore.compactable && dispatch(compactableAction());
   };
 
   return(
     <Hidden smDown>{}
     {
-      myStore.open && 
       <Fragment  /*className={classes.root} elevation={24}*/>
         <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
           <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>

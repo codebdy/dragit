@@ -5,12 +5,12 @@ import { Button, fade } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeAreaSelectAction, designPageContentAction } from 'store/designer/actions';
-import { openFixedBarAction } from 'store/fixedBar/actions';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,9 +59,10 @@ export default function AreaSelect() {
   const pageStore = useSelector(selectPageStore);
   const dispatch = useDispatch();
   
+  const history = useHistory();
+
   const handleClose = () => {
     dispatch(closeAreaSelectAction());
-    dispatch(openFixedBarAction());
   };
 
   const handleDesignPageContent = (event:any) =>{
@@ -70,10 +71,18 @@ export default function AreaSelect() {
     event.stopPropagation()
   }
 
+  const handleDesignDrawer = (event:any)=>{
+    dispatch(closeAreaSelectAction());
+    history.push('/drawer-edit');
+    event.stopPropagation()
+  }
+
   return (
     <Backdrop className={classes.backdrop} open={myStore.areaSelect} onClick={handleClose}>
       <SidebarWidthPlaceholder className={classes.area}>
-        <Button variant="contained" color="primary" size="large" className={classes.designButton}>
+        <Button variant="contained" color="primary" size="large" className={classes.designButton}
+          onClick={handleDesignDrawer}
+        >
           <MdiIcon iconClass="mdi-pencil-ruler" className={classes.designButtonIcon} />
           {intl.get('design')}
         </Button>

@@ -4,7 +4,6 @@ import classNames from "classnames";
 import PageEditor from "designer/PageEditor";
 import useDesigner from "store/designer/useDesigner";
 import { cancelPageContentAction } from "store/designer/actions";
-import { openFixedBarAction } from "store/fixedBar/actions";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,7 +26,6 @@ export default function PageContent(props:{children?: any}) {
   
   const handleDesignerClose = ()=>{
     dispatch(cancelPageContentAction());
-    dispatch(openFixedBarAction());
   }
 
   return (

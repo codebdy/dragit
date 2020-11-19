@@ -8,7 +8,7 @@ import PageContent from 'admin/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Medias from 'components/Medias/Medias';
-import AreaSelect from 'designer/PageEditor/AreaSelect';
+import AreaSelect from 'designer/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
 import SuccessAlertBar from './SuccessAlertBar';
