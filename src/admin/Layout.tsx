@@ -12,9 +12,6 @@ import AreaSelect from 'designer/PageEditor/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
 import SuccessAlertBar from './SuccessAlertBar';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
-import PageEditor from 'designer/PageEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,8 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Layout(){
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const selectMyStore = (state: RootState) => state.designer
-  const myStore = useSelector(selectMyStore)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -70,8 +65,6 @@ export default function Layout(){
         </PageContent>
       </div>
       <AreaSelect></AreaSelect>
-      {myStore.pageContentDesign && <PageEditor></PageEditor>}
-      
       <SuccessAlertBar />
     </div>
   )

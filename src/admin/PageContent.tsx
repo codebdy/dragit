@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import classNames from "classnames";
-import { RootState } from "store";
-import { useSelector } from "react-redux";
+import PageEditor from "designer/PageEditor";
+import useDesigner from "store/designer/useDesigner";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,18 +16,22 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PageContent(props:{spacing?:number, children?: any}) {
-  const {/*spacing = 5,*/ children} = props;
+export default function PageContent(props:{children?: any}) {
+  const {children} = props;
   const classes = useStyles();
-  const selectMyStore = (state: RootState) => state.designer
-  const myStore = useSelector(selectMyStore)  
-    return (
+  const designer = useDesigner();
+  return (
     <div className = {classNames( 
         classes.pageContent,
       )}
       //style={{padding: (spacing*4) + 'px'}}
     >
-      { !myStore.pageContentDesign && children}
+      {
+        designer.pageContentDesign ?
+          <PageEditor></PageEditor>
+        :
+          children
+      }
     </div>
   )
 }
