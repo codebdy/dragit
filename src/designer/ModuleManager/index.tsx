@@ -4,13 +4,13 @@ import DesignerLayout from "designer/Layout";
 import React, { Fragment, useState } from "react";
 import LeftContent from "./LeftContent";
 import intl from "react-intl-universal";
-import { withRouter } from 'react-router-dom';
 import ModuleContent from "./ModuleContent";
+import { useHistory } from "react-router";
 
 
 
-const ModuleManager = (props:{children?: any, history:any})=>{
-  const{history} = props;
+const ModuleManager = (props:{children?: any})=>{
+  const history = useHistory();
 
   const [selectedModuleId, setSelectedModuleId] = useState(-1);
 
@@ -41,4 +41,4 @@ const ModuleManager = (props:{children?: any, history:any})=>{
   )
 }
 
-export default  withRouter(ModuleManager)
+export default  ModuleManager

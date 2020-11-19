@@ -189,6 +189,8 @@
 
     "error":"Error",
     "input-error":"Some input items error",
-    "please-confirm":"Please confirm!"
+    "please-confirm":"Please confirm!",
+
+    "edit-drawer" : "Edit navigation menu"
 
 }

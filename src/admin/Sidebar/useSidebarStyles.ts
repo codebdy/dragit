@@ -35,7 +35,6 @@ const useSidebarStyles = (theme:Theme, width:number, fullWidth:number, showBorde
   const useStyles = makeStyles({
     drawerPaper:{
       width:width + "px",
-      
       border: 0,
       position:"fixed",
       overflowX:'hidden',

@@ -194,5 +194,7 @@
 
     "error":"错误",
     "input-error":"部分输入项有错误",
-    "please-confirm":"请检查确认！"
+    "please-confirm":"请检查确认！",
+
+    "edit-drawer" : "编辑导航菜单"
 }

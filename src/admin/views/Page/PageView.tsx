@@ -4,7 +4,7 @@ import { RXElement } from "./RXElement";
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { thunkPageSchema } from "store/page/thunks";
-import { withRouter } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, Dialog } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, PageJumper } from './PageAction';
@@ -13,9 +13,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
 
-const PageView = (props:{match: any, history:any })=>{
-  const{history} = props;
-  const{moduleId, pageId, dataId} = props.match.params;
+const PageView = ()=>{
+  const history =  useHistory();
+  const match = useRouteMatch()
+  const{moduleId, pageId, dataId} = match.params as any;
   const selectPage = (state: RootState) => state.page;
   const pageInStore = useSelector(selectPage);
   const dispatch = useDispatch()
@@ -114,4 +115,4 @@ const PageView = (props:{match: any, history:any })=>{
   )
 }
 
-export default withRouter(PageView)
+export default PageView

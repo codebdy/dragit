@@ -5,7 +5,7 @@ import sidebarImg2 from 'assets/img/sidebar-2.jpg';
 import sidebarImg3 from 'assets/img/sidebar-3.jpg';
 import sidebarImg4 from 'assets/img/sidebar-4.jpg';
 import sidebarImg5 from 'assets/img/sidebar-5.jpg';
-import { DARK } from './useThemeSettings';
+import { DARK, LIGHT } from './useThemeSettings';
 
 export const linearGradient1 = "linear-gradient(45deg,#fafafa,#fafafa)";
 export const linearGradient2 = "linear-gradient(45deg,#780206,#061161)";
@@ -14,7 +14,7 @@ export const linearGradient4 = "linear-gradient(45deg,#360033,#0b8793)";
 export const linearGradient5 = "linear-gradient(45deg,#303030,#303030)";
 
 const initialState = {
-  themeMode: 'light',
+  themeMode: LIGHT,
   elevationStrength: 4,
   primary:'#5d78ff',
   siderbarSkin:{
