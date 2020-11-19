@@ -18,7 +18,7 @@ import PortletGridContainer from 'components/Portlet/GridContainer';
 import Combobox from 'components/Select/Combobox';
 import SelectBox from 'components/Select/SelectBox';
 import Canvas from 'designer/PageEditor/Core/Canvas';
-import MediasPortlet from 'components/MediasPortlet/MediasPortlet';
+import MediasPortlet from 'components/MediasPortlet';
 import { HeadRule } from 'components/Head/Rule';
 import { ButtonRule } from 'components/Button/Rule';
 import { DividerRule } from 'components/Divider/Rule';

@@ -64,6 +64,7 @@ export default {
                 //field:'paginate',
                 //noValidation: true,
                 withActions:true,
+                elevation:6,
                 columns:[
                   {
                     field:'name',

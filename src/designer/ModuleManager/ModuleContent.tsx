@@ -13,8 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     skeltonBottom:{
       height: 'calc(100vh - 150px)',
+    },
+    title:{
+      color:theme.palette.text.primary,
     }
-
   }),
 );
 
@@ -131,7 +133,7 @@ export default function ModuleContent(
         <Fragment>
           <Grid container spacing={2} justify="space-between" alignItems="center">
             <Grid item>
-              <h2>
+              <h2 className={classes.title}>
                 {intl.get('module-management')} : {module.title}
               </h2>
             </Grid>

@@ -6,7 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import classNames from 'classnames';
 import { FieldOrder, ListViewHead } from './ListViewHead';
@@ -20,6 +19,7 @@ import { Tooltip, IconButton } from '@material-ui/core';
 import MdiIcon from '../common/MdiIcon';
 import { openSuccessAlertAction } from 'store/alertbar/actions';
 import { useDispatch } from 'react-redux';
+import HoverablePaper from 'components/common/HoverablePaper';
 
 export const COMMAND_QUERY = "query";
 
@@ -103,7 +103,8 @@ const ListView = React.forwardRef((
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
-      bind:BindMeta
+      bind:BindMeta,
+      elevation:number,
     }, 
     ref:any
   )=>{
@@ -119,6 +120,7 @@ const ListView = React.forwardRef((
     defalutRowsPerPage = 10,
     onAction,
     bind,
+    elevation,
     ...rest
   } = props
   
@@ -266,7 +268,7 @@ const ListView = React.forwardRef((
 
   return (
     <div className={classNames(classes.root, className)} {...rest} ref={ref}>
-      <Paper>
+      <HoverablePaper elevation = {elevation}>
         <ListViewToolbar
           keyword = {keyword}
           numSelected={selected.length}
@@ -390,7 +392,7 @@ const ListView = React.forwardRef((
             inputProps: { 'aria-label': 'rows per page' },
           }}
         />
-      </Paper>
+      </HoverablePaper>
     </div>
   );
 })

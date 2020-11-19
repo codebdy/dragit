@@ -1,8 +1,9 @@
 import React from "react";
-import {makeStyles, Theme, createStyles, Container, Grid, Paper} from "@material-ui/core";
+import {makeStyles, Theme, createStyles, Container, Grid} from "@material-ui/core";
 import MediasContent from "./MediasContent";
 import intl from 'react-intl-universal';
 import classNames from "classnames";
+import HoverablePaper from "components/common/HoverablePaper";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,9 +43,12 @@ export default function Medias(props:{children?: any}) {
       </Grid>
       <Grid container className={classes.flex1}>
         <Grid item xs={12} className={classes.mainCol}>
-          <Paper className = {classNames(classes.paper, classes.flex1)} elevation={6}>
+          <HoverablePaper 
+            className = {classNames(classes.paper, classes.flex1)} 
+            elevation={6}
+          >
             <MediasContent />
-            </Paper>
+          </HoverablePaper>
         </Grid>
       </Grid>
     </Container>
