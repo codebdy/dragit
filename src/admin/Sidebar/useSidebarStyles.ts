@@ -46,9 +46,6 @@ const useSidebarStyles = (theme:Theme, width:number, fullWidth:number, showBorde
     },
 
     overDrawer:{
-      transition:'box-shadow 0.3s, margin 0.3s',
-      //marginTop:'-1px',
-      //marginLeft:'-1px',
       boxShadow: theme.shadows[20],
       height:"calc(100vh + 2px)",
     },
