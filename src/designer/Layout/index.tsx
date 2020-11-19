@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     toolbar:{
       background:"#3e3e54",
-      boxShadow: theme.shadows[6],
+      //boxShadow: theme.shadows[6],
     },
     cancelButton:{
       marginRight:theme.spacing(1),
