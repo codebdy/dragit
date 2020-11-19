@@ -202,6 +202,8 @@
     "preorder-modules":"预定制模块",
     "fold-group":"折叠组",
     "subheader" : "子标题",
-    "divider" : "分割线"
+    "divider" : "分割线",
+    "dashboard": "仪表盘",
+    "users-management" :"用户管理"
 
 }

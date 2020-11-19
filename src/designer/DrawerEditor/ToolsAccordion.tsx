@@ -84,10 +84,17 @@ export default function ToolsAccordion() {
           <Typography >{intl.get('preorder-modules')}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
+          <List className={classes.list}>
+            <ListItem className={classes.item}>
+              <ListItemText primary={intl.get('dashboard')} />
+            </ListItem>
+            <ListItem className={classes.item}>
+              <ListItemText primary={intl.get('medias')} />
+            </ListItem>
+            <ListItem className={classes.item}>
+              <ListItemText primary={intl.get('users-management')} />
+            </ListItem>
+          </List>
         </AccordionDetails>
       </Accordion>
     </div>

@@ -197,6 +197,8 @@
     "preorder-modules":"Preorder modules",
     "fold-group":"Fold group",
     "subheader" : "Sub header",
-    "divider" : "Divider"
+    "divider" : "Divider",
+    "dashboard": "Dashboard",
+    "users-management" :"Users management"
 
 }
