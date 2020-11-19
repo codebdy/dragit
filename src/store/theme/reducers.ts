@@ -1,5 +1,5 @@
 import { Action } from 'redux-actions';
-import {setElevationStrengthAction, setPrimaryColorAction, setSiderbarSkinAction, setThemeModeAction} from "./actions";
+import {setElevationStrengthAction, setPrimaryColorAction, setSiderbarSkinAction, setThemeModeAction, setToolbarSkinAction} from "./actions";
 import sidebarImg1 from 'assets/img/sidebar-1.jpg';
 import sidebarImg2 from 'assets/img/sidebar-2.jpg';
 import sidebarImg3 from 'assets/img/sidebar-3.jpg';
@@ -22,6 +22,10 @@ const initialState = {
     maskLinearGradient:'linear-gradient(45deg,#780206,#061161)',
     mode:DARK,
   },
+  toolbarSkin:{
+    floatStyle:false,
+    colored:false,
+  }
 };
 
 type State = typeof initialState
@@ -56,6 +60,13 @@ function reducer(
     return {
       ...state,
       siderbarSkin: action.payload,
+    };
+  }
+
+  if(action.type === setToolbarSkinAction().type){
+    return {
+      ...state,
+      toolbarSkin: action.payload,
     };
   }
   return state

@@ -9,6 +9,7 @@ import ThemeMode from './ThemeMode';
 import ElevationStrength from './ElevationStrength';
 import ThemeColor from './ThemeColor';
 import SidebarSettings from './SidebarSettings';
+import ToolbarSettings from './ToolbarSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,6 +76,8 @@ export default function ThemeSettings(
         <ThemeColor />
         <Divider />
         <SidebarSettings/>
+        <Divider />
+        <ToolbarSettings />
         <Divider />
         <ElevationStrength />
       </Scrollbar>

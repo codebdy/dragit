@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 import DesignButtons from 'admin/TopNav/DesignButtons';
+import useToolbarSkin from 'store/theme/useToolbarSkin';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function TopNav(props:{onSidebarToggle: any}) {
   const classes = useStyles();
   const [sticky, setSticky] = React.useState(false);
+  const toolbarSkin = useToolbarSkin();
+  
   const handleScroll = function(event:any){
     let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0
     setSticky(topOffset > 10)
@@ -79,6 +82,8 @@ export default function TopNav(props:{onSidebarToggle: any}) {
     </Menu>
   );
   
+  const color = toolbarSkin.colored ? 'primary' :'inherit';
+
   return (
     <Fragment>
       <TopNavHeightPlaceholder />
@@ -86,8 +91,8 @@ export default function TopNav(props:{onSidebarToggle: any}) {
         className={classNames(classes.root)} 
         variant ={sticky ? "elevation" :"outlined"}
         elevation = {12}
-        color = {sticky ? "inherit" : "transparent"}
-        style={{borderColor:'transparent'}}
+        color = {sticky ? color : "transparent"}
+        style={{borderColor:  toolbarSkin.floatStyle ? undefined :'transparent' }}
       >
         <Toolbar>
           <SidebarWidthPlaceholder />
