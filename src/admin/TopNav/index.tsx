@@ -51,7 +51,12 @@ export default function TopNav(props:{onSidebarToggle: any}) {
         variant ={toolbarSkin.floatStyle || sticky ? "elevation" :"outlined"}
         elevation = {12}
         color = { backgroundColor}
+        style = {{
+          transition:'box-shadow 0.3s',
+          border:(toolbarSkin.floatStyle || sticky ? 'transparent solid 1px':undefined)
+        }}
         //style={{borderColor: (toolbarSkin.outlined ? '': 'transparent') }}
+        //style={{ border:(toolbarSkin.floatStyle || sticky ? 'transparent solid 1px':undefined)}}
       >
         <Toolbar>
           <SidebarWidthPlaceholder />
