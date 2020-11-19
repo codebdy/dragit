@@ -191,6 +191,9 @@
     "input-error":"Some input items error",
     "please-confirm":"Please confirm!",
 
-    "edit-drawer" : "Edit navigation menu"
+    "edit-drawer" : "Edit navigation menu",
+    "assist-items" : "Assist items",
+    "customized-modules":"Customized modules",
+    "preorder-modules":"Preorder modules"
 
 }

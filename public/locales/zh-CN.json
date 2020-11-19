@@ -196,5 +196,8 @@
     "input-error":"部分输入项有错误",
     "please-confirm":"请检查确认！",
 
-    "edit-drawer" : "编辑导航菜单"
+    "edit-drawer" : "编辑导航菜单",
+    "assist-items" : "辅助项目",
+    "customized-modules":"自定义模块",
+    "preorder-modules":"预定制模块"
 }

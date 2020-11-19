@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
+import intl from "react-intl-universal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,7 +31,7 @@ export default function ToolsAccordion() {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography>General settings</Typography>
+          <Typography>{intl.get('assist-items')}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -45,7 +46,7 @@ export default function ToolsAccordion() {
           aria-controls="panel2bh-content"
           id="panel2bh-header"
         >
-          <Typography >Users</Typography>
+          <Typography >{intl.get('customized-modules')}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -60,22 +61,7 @@ export default function ToolsAccordion() {
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
-          <Typography >Advanced settings</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography>Personal data</Typography>
+          <Typography >{intl.get('preorder-modules')}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
