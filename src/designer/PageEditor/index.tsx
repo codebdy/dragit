@@ -2,14 +2,12 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { RootState } from 'store';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
 import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
-import { cancelPageContentAction, savePageContentAction, showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
-import { openFixedBarAction } from 'store/fixedBar/actions';
+import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import { PageSettings } from './SettingsBox';
 import bus, { CANVAS_SCROLL } from './Core/bus';
@@ -22,6 +20,7 @@ import MouseFollower from './Core/Utils/MouseFollower';
 import NodeToolbar from './Core/Utils/NodeToolbar';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
+import useDesigner from 'store/designer/useDesigner';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,27 +81,32 @@ export function ToolbarIcon(props:{checked?:boolean, onClick?:()=>void, children
   )
 }
 
-export default function PageEditor() {
+export default function PageEditor(
+  props:{
+    pageJson:any,
+    onClose:()=>void
+  }
+) {
+  const {pageJson, onClose} = props;
   const classes = useStyles();
-  const selectMyStore = (state: RootState) => state.designer
-  const myStore = useSelector(selectMyStore)
-  const{showOutline, showPaddingX, showPaddingY} = myStore;
+  const designer = useDesigner();
+  const{showOutline, showPaddingX, showPaddingY} = designer;
   //相当于复制一个Json副本，不保存的话直接扔掉
-  let nodes = parseNodes(myStore.pageJson?.layout);
+  let nodes = parseNodes(pageJson?.layout);
   let canvas = new CanvasNode(nodes);
   const [pageSettings, setPageSettings] = useState<PageSettings|undefined>();
 
   useEffect(() => {
-  let settingsData = myStore.pageJson?.settings
+  let settingsData = pageJson?.settings
     ?
-    JSON.parse(JSON.stringify(myStore.pageJson?.settings))
+    JSON.parse(JSON.stringify(pageJson?.settings))
     :
     {
       isFormPage:false,
       api:'',
     };   
     setPageSettings(settingsData)
-  },[myStore.pageJson]);
+  },[pageJson]);
   //复制一份出来，不保存的话直接扔掉
 
 
@@ -110,13 +114,12 @@ export default function PageEditor() {
   const dispatch = useDispatch()
   
   const handleCancel = () => {
-    dispatch(cancelPageContentAction());
-    dispatch(openFixedBarAction());
+    onClose();
+
   };
 
   const handleSave = () => {
-    dispatch(savePageContentAction());
-    dispatch(openFixedBarAction());
+    onClose();
   };
 
   const handleScroll = ()=>{
@@ -128,7 +131,7 @@ export default function PageEditor() {
   }
 
   return (
-    <Backdrop className={classes.backdrop} open={myStore.opened}>
+    <Backdrop className={classes.backdrop} open={true}>
       <DesignerLayout
         leftArea = {
           <LeftContent pageSettings={pageSettings} onSettingsChange={handlSettingsChange}/>
