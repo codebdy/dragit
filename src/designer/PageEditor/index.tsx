@@ -128,7 +128,7 @@ export default function PageEditor() {
   }
 
   return (
-    <Backdrop className={classes.backdrop} open={myStore.pageContentDesign}>
+    <Backdrop className={classes.backdrop} open={myStore.opened}>
       <DesignerLayout
         leftArea = {
           <LeftContent pageSettings={pageSettings} onSettingsChange={handlSettingsChange}/>

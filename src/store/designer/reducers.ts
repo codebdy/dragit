@@ -3,7 +3,7 @@ import {closeAreaSelectAction, openAreaSelectAction, designPageContentAction, ca
 
 const initialState:{
   areaSelect:boolean, 
-  pageContentDesign:boolean,
+  opened:boolean,
   pageId:string,
   pageJson:any,
   showOutline:boolean,
@@ -12,7 +12,7 @@ const initialState:{
 } = 
   {
     areaSelect: false,
-    pageContentDesign: false,
+    opened: false,
     pageId:'',
     pageJson:undefined,
     showOutline:true,
@@ -40,7 +40,7 @@ const actionMap={
   [designPageContentAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,
-      pageContentDesign: true,
+      opened: true,
       pageId: action.payload.pageId,
       pageJson: action.payload.pageJson,
     };
@@ -48,7 +48,7 @@ const actionMap={
   [cancelPageContentAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,
-      pageContentDesign: false,
+      opened: false,
     };
   },
 

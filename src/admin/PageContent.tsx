@@ -27,7 +27,7 @@ export default function PageContent(props:{children?: any}) {
       //style={{padding: (spacing*4) + 'px'}}
     >
       {
-        designer.pageContentDesign ?
+        designer.opened ?
           <PageEditor></PageEditor>
         :
           children
