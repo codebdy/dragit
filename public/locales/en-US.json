@@ -194,6 +194,9 @@
     "edit-drawer" : "Edit navigation menu",
     "assist-items" : "Assist items",
     "customized-modules":"Customized modules",
-    "preorder-modules":"Preorder modules"
+    "preorder-modules":"Preorder modules",
+    "fold-group":"Fold group",
+    "subheader" : "Sub header",
+    "divider" : "Divider"
 
 }

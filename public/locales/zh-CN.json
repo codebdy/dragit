@@ -199,5 +199,9 @@
     "edit-drawer" : "编辑导航菜单",
     "assist-items" : "辅助项目",
     "customized-modules":"自定义模块",
-    "preorder-modules":"预定制模块"
+    "preorder-modules":"预定制模块",
+    "fold-group":"折叠组",
+    "subheader" : "子标题",
+    "divider" : "分割线"
+
 }

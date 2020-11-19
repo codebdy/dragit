@@ -6,12 +6,25 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import intl from "react-intl-universal";
+import { List, ListItem, ListItemText } from '@material-ui/core';
+import { openBackground, openBackgroundLight } from 'admin/Sidebar/SidebarLinks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100%',
+      width: '300px',
     },
+    list:{
+      width:'100%',
+    },
+    item:{
+      userSelect:'none',
+      cursor:'move',
+      "&:hover,&:focus": {
+        backgroundColor:  theme.palette.type === 'dark' ? openBackground : openBackgroundLight,
+      }
+    },
+
   }),
 );
 
@@ -34,10 +47,17 @@ export default function ToolsAccordion() {
           <Typography>{intl.get('assist-items')}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
-          </Typography>
+          <List className={classes.list}>
+            <ListItem className={classes.item}>
+              <ListItemText primary={intl.get('fold-group')} />
+            </ListItem>
+            <ListItem className={classes.item}>
+              <ListItemText primary={intl.get('subheader')} />
+            </ListItem>
+            <ListItem className={classes.item}>
+              <ListItemText primary={intl.get('divider')} />
+            </ListItem>
+          </List>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
