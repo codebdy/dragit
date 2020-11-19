@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     },
     panelPaper:{
-      background:'transparent',
+      background:'rgba(255,255,255, 0.02)',
     },
     pannelDetail:{
       display:'flex',
@@ -76,6 +76,7 @@ export default function AttributeBox(props:{node:INode|null}){
             {intl.get('selected-node')}
             <span style={{color:'#5d78ff'}}>{node.label}</span>
           </div>
+          
           <ExpansionPanel className={classes.panelPaper}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}

@@ -4,6 +4,7 @@ import { Close } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import intl from "react-intl-universal";
 import DrawerItemList from './DrawerItemList';
+import ToolsAccordion from './ToolsAccordion';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     left:{
       flex:'1',
+      paddingRight:theme.spacing(3),
     },
     center:{
       width:'360px',
@@ -37,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     right:{
       flex:'1',
+      paddingLeft:theme.spacing(5),
     }
   }),
 );
@@ -81,7 +84,7 @@ export default function DrawerEditor(){
           <DrawerItemList />
         </div>
         <div className = {classes.right}>
-          3
+          <ToolsAccordion />
         </div>
       </Container>
     </div>
