@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import Scrollbar from 'admin/common/Scrollbar';
+import { sideBarSettings } from 'utils';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,9 +10,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
       height:'100%',
       background: '#1a1a27',
-      boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.2), 0px 20px 31px 3px rgba(0,0,0,0.14), 0px 8px 38px 7px rgba(0,0,0,0.12)',
+      //boxShadow: '0px 10px 13px -6px rgba(0,0,0,0.2), 0px 20px 31px 3px rgba(0,0,0,0.14), 0px 8px 38px 7px rgba(0,0,0,0.12)',
       zIndex:theme.zIndex.drawer + 1,
       color:"#f7f7f7",
+      width:sideBarSettings.sizes.medium,
     },
     leftTitle:{
       padding: theme.spacing(0),
@@ -40,13 +41,13 @@ export default function LeftArea(props:{title?:any, children?:any}){
   const classes = useStyles();
 
   return (
-    <SidebarWidthPlaceholder className={classes.leftArea}>
+    <div className={classes.leftArea}>
       <div className={classes.leftTitle}>
         {title}
       </div>
       <Scrollbar>
         {children}
       </Scrollbar>
-  </SidebarWidthPlaceholder>
+  </div>
   )
 }
