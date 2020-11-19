@@ -11,10 +11,11 @@ import classNames from "classnames";
 import Scrollbar from "../common/Scrollbar";
 import Badge from '@material-ui/core/Badge';
 import Chip from '@material-ui/core/Chip';
-import { useSelector } from "react-redux";
 import FontIcon from "components/common/MdiIcon"
 import LoadingSkeleton from "./LoadingSkeleton";
 import { NavLink } from "react-router-dom";
+import { API_GET_DRAWER } from "APIs/drawer";
+import { useAxios } from "base/Hooks/useAxios";
 
 export const openBackground = "rgba(255,255,255, 0.05)";
 export const openBackgroundLight = "rgba(0,0,0, 0.05)";
@@ -104,36 +105,36 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface ItemJson{
-  id: string,
-  type:'subheader' | 'item' | 'group',
+
+interface MenuItemMeta{
+  id: number,
+  type: "group" | "subheader" | "divider" | "item",
   title?:string,
   icon?:string,
   badge?:{
+    isBound:false,
+    text?:string,
+    field?:string,
     props:any
   },
   chip?:{
     props:any
   },
-  children: Array<ItemJson>,
+  children: Array<MenuItemMeta>,
   to?: string,
-}
-
-interface RootState {
-  menu:any,
 }
 
 interface SidebarLinksProps{
   fullWidth:number,
   mini:boolean,
-  items?:Array<ItemJson>,
+  items?:Array<MenuItemMeta>,
 }
 
 interface ListItemProps{
   fullWidth?:number,
   mini?:boolean,
   nested?:boolean,
-  item:ItemJson,
+  item:MenuItemMeta,
 }
 
 interface ItemProps extends ListItemProps{
@@ -144,8 +145,8 @@ interface ItemProps extends ListItemProps{
 }
 
 interface GroupProps extends ListItemProps{
-  openedId?:string,
-  onOpened: (id:string)=>void,
+  openedId?: number,
+  onOpened: (id:number)=>void,
 }
 
 function Subheader(props:ListItemProps){
@@ -251,18 +252,18 @@ function getBadge(children:Array<any>): any{
 
 function Group(props:GroupProps){
   const open = props.openedId === props.item.id
-  const [openedId, setOpenedId] = React.useState('');
-  const handleOpened = (id:string)=>{
+  const [openedId, setOpenedId] = React.useState(-1);
+  const handleOpened = (id:number)=>{
     setOpenedId(id)
   }
 
   const handleClick = () => {
-    open ? props.onOpened('') : props.onOpened(props.item.id)
+    open ? props.onOpened(-1) : props.onOpened(props.item.id)
   };
   const classes = useStyles();
   const dotBadge = getBadge(props.item.children)
 
-  const listItems = props.item.children?.map((item:ItemJson)=>{
+  const listItems = props.item.children?.map((item:MenuItemMeta)=>{
     return (
     <Fragment key={item.id}>
       {
@@ -293,17 +294,14 @@ function Group(props:GroupProps){
 
 export default function SidebarLinks(props : SidebarLinksProps) {
   const classes = useStyles();
-  const [openedId, setOpenedId] = React.useState('');
+  const [openedId, setOpenedId] = React.useState(-1);
+  const [items, loading] = useAxios<Array<MenuItemMeta>>(API_GET_DRAWER);
   
-  const handleOpened = (id:string)=>{
+  const handleOpened = (id:number)=>{
     setOpenedId(id)
   }
 
-  const selectMenu = (state: RootState) => state.menu
-
-  const menu = useSelector(selectMenu)
-
-  const listItems = menu.menuItems?.map((item:ItemJson)=>{
+  const listItems =items?.map((item:MenuItemMeta)=>{
     return (
     <Fragment key={item.id}>
       {
@@ -325,7 +323,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
           width: (props.fullWidth) + 'px',
         }}
       >
-        {menu.loading?
+        {loading?
           <LoadingSkeleton/>
           :
           listItems

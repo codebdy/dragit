@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Loading from 'admin/common/Loading'
-import {thunkMenuItems} from 'store/menu/thunks';
 import {thunkIntl} from 'store/intl/thunks';
 import { RootState } from 'store';
 
@@ -22,7 +21,6 @@ function App() {
   useEffect(() => {
     console.log('App Init');
     dispatch(thunkIntl());
-    dispatch(thunkMenuItems());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
