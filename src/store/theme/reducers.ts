@@ -25,6 +25,8 @@ const initialState = {
   toolbarSkin:{
     floatStyle:false,
     colored:false,
+    mode:DARK,
+    //outlined:true,
   }
 };
 

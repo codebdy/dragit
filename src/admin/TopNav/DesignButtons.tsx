@@ -31,8 +31,11 @@ import ThemeSettings from "../ThemeSettings";
 );*/
 
 export default function DesignButtons(
-
+  props:{
+    color?:string,
+  }
 ) {
+  const {color} = props;
   //const classes = useStyles();
   const [showSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch()
@@ -56,13 +59,13 @@ export default function DesignButtons(
       <Fragment  /*className={classes.root} elevation={24}*/>
         <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
           <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>
-            <MdiIcon iconClass="mdi-pencil-ruler" />
+            <MdiIcon iconClass="mdi-pencil-ruler" color={color}/>
           </IconButton>
         </Tooltip>
         <Tooltip title={intl.get('modules')} arrow placement="bottom">
           <NavLink to={'/design'}>
             <IconButton aria-label={intl.get('modules')} >
-              <MdiIcon iconClass="mdi-view-grid-plus"  />
+              <MdiIcon iconClass="mdi-view-grid-plus" color={color} />
             </IconButton>
           </NavLink>
         </Tooltip>
@@ -70,12 +73,12 @@ export default function DesignButtons(
           onClick = {()=>setShowSettings(!showSettings)}
         >
           <IconButton aria-label={intl.get('theme-settings')} >
-            <MdiIcon iconClass="mdi-image-filter-black-white" />
+            <MdiIcon iconClass="mdi-image-filter-black-white" color={color} />
           </IconButton>
         </Tooltip>
         <Tooltip title={intl.get('debug')} arrow placement="bottom">
           <IconButton  aria-label={intl.get('debug')}>
-            <MdiIcon iconClass="mdi-android-debug-bridge"/>
+            <MdiIcon iconClass="mdi-android-debug-bridge" color={color} />
           </IconButton>
         </Tooltip>
       </Fragment >

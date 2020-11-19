@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeStyles, Theme, createStyles, Drawer, IconButton, Typography, Divider} from '@material-ui/core';
+import {makeStyles, Theme, createStyles, Drawer, IconButton, Typography, Divider, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
 import Scrollbar from 'admin/common/Scrollbar';
 import classNames from 'classnames';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -10,6 +10,8 @@ import ElevationStrength from './ElevationStrength';
 import ThemeColor from './ThemeColor';
 import SidebarSettings from './SidebarSettings';
 import ToolbarSettings from './ToolbarSettings';
+import useShadows from 'store/theme/useShadows';
+import useThemeSettings from 'store/theme/useThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: "all 0.3s",
       display:'flex',
       flexFlow:'column',
+      marginRight:'-1px',
     },
 
     openStatus:{
@@ -50,37 +53,52 @@ export default function ThemeSettings(
 ){
   const {open, onClose} = props;
   const classes = useStyles();
+  const themeSettings = useThemeSettings();
   
+  const theme = responsiveFontSizes(createMuiTheme({
+    palette: {
+      type: themeSettings.themeMode as any,
+      primary:{
+        main: themeSettings.primary,
+      },
+
+    },
+
+    shadows:[...useShadows()] as any
+  }));
+
   return (
-    <Drawer
-      variant = "permanent"
-      anchor="right" 
-      open={true}
-      elevation = {12}
-      classes = {{
-        paper: classNames(classes.root, open ? classes.openStatus : classes.closeStatus)
-      }}
-    >
-      <MuiDialogTitle disableTypography className = {classes.title}>
-        <Typography variant="h6">{intl.get('theme-settings')}</Typography>
-        {onClose ? (
-          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-            <Close />
-          </IconButton>
-        ) : null}
-      </MuiDialogTitle>
-      <Divider />
-      <Scrollbar className={classes.content}>
-        <ThemeMode />
+    <ThemeProvider theme={theme}>
+      <Drawer
+        variant = "permanent"
+        anchor="right" 
+        open={true}
+        elevation = {12}
+        classes = {{
+          paper: classNames(classes.root, open ? classes.openStatus : classes.closeStatus)
+        }}
+      >
+        <MuiDialogTitle disableTypography className = {classes.title}>
+          <Typography variant="h6">{intl.get('theme-settings')}</Typography>
+          {onClose ? (
+            <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+              <Close />
+            </IconButton>
+          ) : null}
+        </MuiDialogTitle>
         <Divider />
-        <ThemeColor />
-        <Divider />
-        <SidebarSettings/>
-        <Divider />
-        <ToolbarSettings />
-        <Divider />
-        <ElevationStrength />
-      </Scrollbar>
-    </Drawer>
+        <Scrollbar className={classes.content}>
+          <ThemeMode />
+          <Divider />
+          <ThemeColor />
+          <Divider />
+          <SidebarSettings/>
+          <Divider />
+          <ToolbarSettings />
+          <Divider />
+          <ElevationStrength />
+        </Scrollbar>
+      </Drawer>
+    </ThemeProvider>
   )
 }

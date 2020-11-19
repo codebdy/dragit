@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 
-import useThemeSettings from 'store/theme/useThemeSettings';
+import useThemeSettings, { DARK, LIGHT } from 'store/theme/useThemeSettings';
 import { useDispatch } from 'react-redux';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
-import { setPrimaryColorAction } from 'store/theme/actions';
+import { setPrimaryColorAction, setToolbarSkinAction } from 'store/theme/actions';
+import useToolbarSkin from 'store/theme/useToolbarSkin';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,16 +30,20 @@ function ColorBlock(
     selectedColor:string,
     color:string,
     borderColor?:string,
+    toolbarMode?:string,
   }
   
 ){
-  const {selectedColor, color, borderColor} = props;
+  const {selectedColor, color, borderColor, toolbarMode} = props;
   const classes = useStyles();
   const dispatch = useDispatch()
   const selected = color === selectedColor;
   
+  const toolbarSkin = useToolbarSkin()
+
   const handleClick = ()=>{
     dispatch(setPrimaryColorAction(color))
+    toolbarMode && dispatch(setToolbarSkinAction({...toolbarSkin, mode:toolbarMode}))
   }
   
   return (
@@ -63,13 +68,13 @@ export default function ThemeColor(){
         className = {classes.title}
       >{intl.get('theme-color')}</Typography>
       <div className = {classes.content}>
-        <ColorBlock selectedColor={themeSettings.primary} color="#ffffff" borderColor="#000"/>
-        <ColorBlock selectedColor={themeSettings.primary} color="#5d78ff"/>
-        <ColorBlock selectedColor={themeSettings.primary} color="#28c76f"/>
-        <ColorBlock selectedColor={themeSettings.primary} color="#ea5455"/>
-        <ColorBlock selectedColor={themeSettings.primary} color="#ff9f43"/>
-        <ColorBlock selectedColor={themeSettings.primary} color="#3dc9b3"/>
-        <ColorBlock selectedColor={themeSettings.primary} color="#1e1e1e" borderColor="#fff"/>
+        <ColorBlock selectedColor={themeSettings.primary} color="#fafafa" toolbarMode={LIGHT} borderColor="#000" />
+        <ColorBlock selectedColor={themeSettings.primary} color="#5d78ff" toolbarMode={DARK}/>
+        <ColorBlock selectedColor={themeSettings.primary} color="#28c76f" toolbarMode={LIGHT}/>
+        <ColorBlock selectedColor={themeSettings.primary} color="#ea5455" toolbarMode={DARK}/>
+        <ColorBlock selectedColor={themeSettings.primary} color="#ff9f43" toolbarMode={LIGHT}/>
+        <ColorBlock selectedColor={themeSettings.primary} color="#3dc9b3" toolbarMode={LIGHT}/>
+        <ColorBlock selectedColor={themeSettings.primary} color="#1e1e1e" toolbarMode={DARK} borderColor="#fff"/>
       </div>
     </Fragment>
   )

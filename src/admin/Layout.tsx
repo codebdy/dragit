@@ -2,7 +2,7 @@ import React from 'react';
 import { CssBaseline, makeStyles, Theme, createStyles } from '@material-ui/core';
 import Sidebar from 'admin/Sidebar';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
-import TopNav from 'admin/TopNav/TopNav';
+import TopNav from 'admin/TopNav';
 //import FixedBar from 'admin/FixedBar';
 import PageContent from 'admin/PageContent';
 //import Dashboard from 'views/Dashboard/Dashboard';
