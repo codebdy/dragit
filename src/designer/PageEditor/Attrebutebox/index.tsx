@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
-import { makeStyles, Theme, createStyles, ExpansionPanel, Grid, TextField } from '@material-ui/core';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import { makeStyles, Theme, createStyles, Accordion, Grid, TextField } from '@material-ui/core';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { INode } from 'designer/PageEditor/Core/Node/INode';
@@ -77,13 +77,13 @@ export default function AttributeBox(props:{node:INode|null}){
             <span style={{color:'#5d78ff'}}>{node.label}</span>
           </div>
           
-          <ExpansionPanel className={classes.panelPaper}>
-            <ExpansionPanelSummary
+          <Accordion className={classes.panelPaper}>
+            <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
             >
               <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className={classes.pannelDetail}>
+            </AccordionSummary>
+            <AccordionDetails className={classes.pannelDetail}>
               <Grid container spacing={2}>
                 {
                   node.rule.getFields(node.meta).map((field:IProp)=>{
@@ -103,16 +103,16 @@ export default function AttributeBox(props:{node:INode|null}){
                 }
 
               </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+            </AccordionDetails>
+          </Accordion>
           {node.rule.hasField &&
-            <ExpansionPanel  className={classes.panelPaper}>
-              <ExpansionPanelSummary
+            <Accordion  className={classes.panelPaper}>
+              <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
               >
                 <Typography className={classes.heading}>{intl.get('data')}</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails  key={node.id + '-data'} className={classes.pannelDetail}>
+              </AccordionSummary>
+              <AccordionDetails  key={node.id + '-data'} className={classes.pannelDetail}>
                
                   <TextField
                     size="small" 
@@ -121,45 +121,45 @@ export default function AttributeBox(props:{node:INode|null}){
                     onChange={handleFieldChange}>
                   </TextField>
                 
-              </ExpansionPanelDetails>            
-            </ExpansionPanel>
+              </AccordionDetails>            
+            </Accordion>
           }
           {
             node.rule.hasValidation && 
-              <ExpansionPanel  className={classes.panelPaper}>
-                <ExpansionPanelSummary
+              <Accordion  className={classes.panelPaper}>
+                <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                 >
                   <Typography className={classes.heading}>{intl.get('validate')}</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails  key={node.id + '-rule'} className={classes.pannelDetail}>
+                </AccordionSummary>
+                <AccordionDetails  key={node.id + '-rule'} className={classes.pannelDetail}>
                   <AttributeBoxValidateArea rule={rule} onChange={handleRuleChange} /> 
-                </ExpansionPanelDetails>            
-              </ExpansionPanel>            
+                </AccordionDetails>            
+              </Accordion>            
           }
           {node.rule.hasAction && 
-            <ExpansionPanel  className={classes.panelPaper}>
-              <ExpansionPanelSummary
+            <Accordion  className={classes.panelPaper}>
+              <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
               >
                 <Typography className={classes.heading}>{intl.get('action')}</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails key={node.id + '-action'} className={classes.pannelDetail}>
+              </AccordionSummary>
+              <AccordionDetails key={node.id + '-action'} className={classes.pannelDetail}>
                 <AttributeBoxActionSection node={node} />
-              </ExpansionPanelDetails>            
-            </ExpansionPanel>
+              </AccordionDetails>            
+            </Accordion>
           }
-          <ExpansionPanel  className={classes.panelPaper}>
-            <ExpansionPanelSummary
+          <Accordion  className={classes.panelPaper}>
+            <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
             >
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className={classes.pannelDetail}>
+            </AccordionSummary>
+            <AccordionDetails className={classes.pannelDetail}>
               可见<br/>
               可编辑
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+            </AccordionDetails>
+          </Accordion>
         </Fragment>
       }
     </div>
