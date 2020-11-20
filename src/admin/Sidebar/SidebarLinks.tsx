@@ -10,7 +10,7 @@ import { Divider } from "@material-ui/core";
 import { parseRXNodeList } from "base/RXNodeParser";
 import { RXNode } from "base/RXNode";
 import Subheader from "./MenuItems/Subheader";
-import MenuNode from "./MenuItems/MenuINode";
+import MenuNode from "./MenuItems/MenuNode";
 import MenuNodeGroup from "./MenuItems/MenuNodeGroup";
 
 const useStyles = makeStyles((theme: Theme) =>

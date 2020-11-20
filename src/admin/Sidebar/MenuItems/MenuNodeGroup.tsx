@@ -5,7 +5,7 @@ import classNames from "classnames"
 import React, { Fragment } from "react"
 import Subheader from "./Subheader";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MenuNode from "./MenuINode";
+import MenuNode from "./MenuNode";
 
 export const openBackground = "rgba(255,255,255, 0.05)";
 export const openBackgroundLight = "rgba(0,0,0, 0.05)";
