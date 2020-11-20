@@ -44,6 +44,17 @@ const API_UPDATE_MODULE_INDEX_PAGE : AxiosRequestConfig= {
   url:'/api/update-index-page-of-module',
   method:'post',
 }
+
+const API_GET_PAGE : AxiosRequestConfig= {
+  url:'/api/get-page/',
+  method:'get',
+}
+
+const API_GET_MODULE_INDEX_PAGE : AxiosRequestConfig= {
+  url:'/api/get-module-index-page',
+  method:'get',
+}
+
 export { 
   API_GET_MODULES,
   API_CHANGE_MODULE, 
@@ -53,5 +64,7 @@ export {
   API_UPDATE_MODULE_PAGE,
   API_REMOVE_MODULE_PAGE,
   API_ADD_MODULE_PAGE,
-  API_UPDATE_MODULE_INDEX_PAGE
+  API_UPDATE_MODULE_INDEX_PAGE,
+  API_GET_PAGE,
+  API_GET_MODULE_INDEX_PAGE
 }

@@ -54,8 +54,7 @@ export default function Layout(){
         <SidebarWidthPlaceholder />
         <PageContent>
           <Switch>
-            <Route path="/admin/module/:moduleId/:pageId?/:dataId?" component={PageView}></Route> 
-            <Route path="/admin/page/:pageId/:dataId?" component={PageView}></Route>
+            <Route path="/admin/module/:moduleId/:pageId?/:id?" component={PageView}></Route> 
             <Route path="/admin/dashboard" component={Dashboard}></Route>
             <Route path="/admin/medias" component={Medias}></Route>
             {//<Redirect to="/admin/module/:moduleId/page/index" from='/admin/module/:moduleId/' />

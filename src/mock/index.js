@@ -8,7 +8,7 @@ import article from './views/article'
 import test from './views/test'
 import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
-import modules from './data/modulesData'
+import modules, {getModuleIndexPage, getModulePage} from './views/modules'
 
 window.idSeed = 100;
 
@@ -24,9 +24,8 @@ function getQueryVariable(name, oldUrl) {
       const str = url.substr(url.indexOf("?") + 1);
       const pairs = str.split("&");
       for(let i = 0; i < pairs.length; i ++) {
-           const pair = pairs[i].split("=");
-           
-           if(pair[0] === name) return  pair[1]; // 返回 参数值
+        const pair = pairs[i].split("=");
+        if(pair[0] === name) return  pair[1]; // 返回 参数值
       }
   }
  return(false);
@@ -34,8 +33,19 @@ function getQueryVariable(name, oldUrl) {
 
 
 Mock.mock('/api/drawer', 'get', drawer)
+
+Mock.mock(RegExp('/api/get-module-index-page?.*'),'get', (request)=>{
+  let id = parseInt(getQueryVariable('moduleId', request.url));
+  return getModuleIndexPage(id);
+})
+
+Mock.mock(RegExp('api/get-page/?.*'),'get', (request)=>{
+  let id = parseInt(getQueryVariable('pageId', request.url));
+  return getModulePage(id);
+})
+
 Mock.mock('/api/page/dashboard', 'get', dashboard)
-Mock.mock('/api/data/article', 'get', formData)
+Mock.mock(RegExp('/api/data/model?.*'), 'get', formData)
 Mock.mock('/api/page/articles', 'get', articles)
 Mock.mock('/api/page/article', 'get', article)
 Mock.mock('/api/page/test', 'get', test)

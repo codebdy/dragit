@@ -1,9 +1,6 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ComponentRender from "./ComponentRender";
-import { RXElement } from "./RXElement";
-import { RootState } from "store";
-import { useSelector, useDispatch } from "react-redux";
-import { thunkPageSchema } from "store/page/thunks";
+import { RXComponent } from "../../../base/RXComponent";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, Dialog } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
@@ -12,26 +9,35 @@ import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, PageJumper } from './P
 import { FormProvider, useForm } from "react-hook-form";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
+import { parseComponents } from "base/PageParser";
+import usePageMeta from "./usePageMeta";
+import usePageModel from "./usePageModel";
 
 const PageView = ()=>{
   const history =  useHistory();
   const match = useRouteMatch()
-  const{moduleId, pageId, dataId} = match.params as any;
-  const selectPage = (state: RootState) => state.page;
-  const pageInStore = useSelector(selectPage);
-  const dispatch = useDispatch()
+  const{moduleId, pageId, id} = match.params as any;
   const methods = useForm({mode: 'all'});
   const {handleSubmit, errors, clearErrors} = methods;
 
-  useEffect(() => {
-    console.log('PageView useEffect:', moduleId, pageId, dataId);
-    dispatch(
-      thunkPageSchema({moduleId:moduleId,pageId:pageId, dataId:dataId})
-     );
-     clearErrors();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[moduleId, pageId, dataId]);
+  const [pageLayout, setPageLayout] = useState<Array<RXComponent>>([]);
+  const [pageMeta, loadingPage] = usePageMeta(moduleId, pageId,)
   
+  usePageModel(pageMeta?.jsonSchema, id);
+
+  useEffect(() => {
+    console.log('PageView useEffect:', moduleId, pageId, id);
+    clearErrors();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[moduleId, pageId, id]);
+  
+  useEffect(()=>{
+    if(pageMeta){
+      let schema = pageMeta.jsonSchema?.layout;
+      setPageLayout(parseComponents(schema))
+    }
+  }, [pageMeta])
 
   const onSubmit = (data: any) => console.log('数据提交',data);
   const onValidate = ()=>{
@@ -67,12 +73,12 @@ const PageView = ()=>{
 
   const openAlert = Object.keys(errors).length > 0 && submitted;
 
-  const pageContent =  pageInStore.schemaLoading ?
+  const pageContent = loadingPage ?
       <PageSkeleton />
       :
       <Fragment>
         {
-          pageInStore.schema?.map((child:RXElement)=>{
+          pageLayout?.map((child:RXComponent)=>{
             return (
               <ComponentRender 
                 key={child.id} 
@@ -89,7 +95,7 @@ const PageView = ()=>{
     <Container>
       <FormProvider {...methods}>      
         {
-          pageInStore.pageJson?.settings?.isFormPage 
+          pageMeta?.jsonSchema?.isFormPage 
           ?
             <form onSubmit={handleSubmit(onSubmit, onValidate)}>
               {pageContent}

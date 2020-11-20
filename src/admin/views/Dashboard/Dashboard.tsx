@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Paper, makeStyles, Theme, createStyles, Container, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Card, Input, FormControl, InputLabel, InputAdornment, CardHeader, CardActions, CardContent, MenuItem, Select } from "@material-ui/core";
+import { Grid, Paper, makeStyles, Theme, createStyles, Container, Accordion, AccordionSummary, Typography, AccordionDetails, Card, Input, FormControl, InputLabel, InputAdornment, CardHeader, CardActions, CardContent, MenuItem, Select } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -106,22 +106,22 @@ export default function Dashboard(props:{children?: any}) {
             </Paper>
           </Grid>
           <Grid item xs={6}>
-            <ExpansionPanel elevation={6}>
-              <ExpansionPanelSummary
+            <Accordion elevation={6}>
+              <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
                 <h2>基本信息</h2>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+              </AccordionSummary>
+              <AccordionDetails>
                 <Typography>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
                   sit amet blandit leo lobortis eget.
                 </Typography>
-              </ExpansionPanelDetails>
+              </AccordionDetails>
               <CardActions>Action</CardActions>
-            </ExpansionPanel>
+            </Accordion>
           </Grid>
           <Grid item xs={6}>
             <Card elevation={6}>

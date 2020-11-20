@@ -1,14 +1,7 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
+import {API_GET_MODEL_BY_ID} from "APIs/model"
 
 export default {
-  initAction:{
-      method:'get',
-      url:'/api/data/article',
-      data:{
-        modelName:'/RXDrag/Model/Article',
-      },      
-  },
-
   layout:[{
     name: 'GridRow',
     props: {
@@ -467,9 +460,14 @@ export default {
     }
   ],
 
-  settings:{
-    isFormPage:true,
-    api:'',
-  }
+
+  isFormPage:true,
+  api:{
+    ...API_GET_MODEL_BY_ID,
+    params:{
+      modelName:'/RXDrag/Model/Article',
+    },      
+  },
+
   
 }

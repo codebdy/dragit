@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { RXElement } from './RXElement';
+import { RXComponent } from '../../../base/RXComponent';
 import { PageActionHandle } from './PageAction';
 import { resolveComponent } from 'base/DragRX';
 import withFormField from './withFormField';
 
-export default function ComponentRender(props:{component:RXElement, onPageAction: PageActionHandle}){
+export default function ComponentRender(props:{component:RXComponent, onPageAction: PageActionHandle}){
   const {component, onPageAction} = props;
   const onClickAction = component.meta.props?.onClick;
   let Component = resolveComponent(component.meta);
@@ -28,7 +28,7 @@ export default function ComponentRender(props:{component:RXElement, onPageAction
   const elementView = (component.children && component.children.length > 0) || rxText ?
     (<Component {...elementProps}>
       {rxText}
-      {component.children?.map((child: RXElement)=>{
+      {component.children?.map((child: RXComponent)=>{
         return (
           <ComponentRender key={child.id} component={child} onPageAction={onPageAction}/>
         )

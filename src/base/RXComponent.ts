@@ -1,19 +1,19 @@
 import { IMeta } from "base/IMeta";
 
-export class RXElement{
+export class RXComponent{
   static idSeed:number = 1;
   id: number = 0;  
   meta:IMeta;
-  children?: Array<RXElement>;
+  children?: Array<RXComponent>;
 
-  constructor(meta:IMeta, children?:Array<RXElement> ){
+  constructor(meta:IMeta, children?:Array<RXComponent> ){
     this.seedId();
     this.meta = meta;
     this.children = children;
   }
 
   seedId(){
-    this.id = RXElement.idSeed
-    RXElement.idSeed ++
+    this.id = RXComponent.idSeed
+    RXComponent.idSeed ++
   }
 } 

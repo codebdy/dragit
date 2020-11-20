@@ -5,9 +5,9 @@ import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
 import { API_ADD_MODULE_PAGE, API_GET_MODULE_BY_ID, API_REMOVE_MODULE_PAGE, API_UPDATE_MODULE_INDEX_PAGE, API_UPDATE_MODULE_PAGE } from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
-import { PageMeta } from './ModulePageRow';
 import ModulePageTable from './ModulePageTable';
 import PageEditor from 'designer/PageEditor';
+import { IPage } from 'base/IPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface ModuleMeta{
   id:number,
   title:string,
-  pages?:PageMeta[],
+  pages?:IPage[],
   indexPageId?:number,
 }
 
@@ -34,7 +34,7 @@ export default function ModuleContent(
 ){
   const {moduleId} = props;
   const classes = useStyles();
-  const [designedPage, setDesignedPage] = React.useState<PageMeta>();
+  const [designedPage, setDesignedPage] = React.useState<IPage>();
   const [loadingConfig, setLoadingConfig] = React.useState({
     ...API_GET_MODULE_BY_ID,
     params:{
@@ -69,7 +69,7 @@ export default function ModuleContent(
     operateModule && setModule({...operateModule})
   },[operateModule]);
 
-  const handleChangePage = (page:PageMeta)=>{
+  const handleChangePage = (page:IPage)=>{
     setOperateConfig({
       ...API_UPDATE_MODULE_PAGE,
       params:{
@@ -115,7 +115,7 @@ export default function ModuleContent(
     setDesignedPage(undefined);
   }
 
-  const handelDesign = (page:PageMeta)=>{
+  const handelDesign = (page:IPage)=>{
     setDesignedPage(page);
   }
 

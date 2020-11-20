@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, fade } from '@material-ui/core';
 import { RootState } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
-import { closeAreaSelectAction, designPageContentAction } from 'store/designer/actions';
+import { closeAreaSelectAction } from 'store/designer/actions';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
@@ -55,8 +55,8 @@ export default function AreaSelect() {
   const classes = useStyles();
   const selectMyStore = (state: RootState) => state.designer;
   const myStore = useSelector(selectMyStore);
-  const selectPageStore = (state: RootState) => state.page;
-  const pageStore = useSelector(selectPageStore);
+  //const selectPageStore = (state: RootState) => state.page;
+  //const pageStore = useSelector(selectPageStore);
   const dispatch = useDispatch();
   
   const history = useHistory();
@@ -67,7 +67,7 @@ export default function AreaSelect() {
 
   const handleDesignPageContent = (event:any) =>{
     dispatch(closeAreaSelectAction());
-    dispatch(designPageContentAction({pageId:pageStore.pageId, pageJson:pageStore.pageJson}));
+    //dispatch(designPageContentAction({pageId:pageStore.pageId, pageJson:pageStore.pageJson}));
     event.stopPropagation()
   }
 

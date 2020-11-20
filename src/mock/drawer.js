@@ -29,7 +29,7 @@ export default [{
         id: "t2test",
         type: 'item',
         title: '文章管理',
-        to: '/admin/module/articles/',
+        to: '/admin/module/1/',
         icon: 'mdi-home',
     },
     {

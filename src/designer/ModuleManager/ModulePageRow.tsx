@@ -2,20 +2,13 @@ import React, { useState } from 'react';
 import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
-
-export interface PageMeta{
-  id:number,
-  title?:string, 
-  API?:string, 
-  isFormPage?:boolean,
-  jsonSchema?:any,
-}
+import { IPage } from 'base/IPage';
 
 export default function ModulePageRow(
   props:{
-    page:PageMeta, 
+    page:IPage, 
     isIndexPage:boolean,
-    onChangePage:(newPage:PageMeta)=>void,
+    onChangePage:(newPage:IPage)=>void,
     onRemove:(id:number)=>void,
     onChangeIndexPage:(indexed:boolean)=>void,
     onDesign:()=>void,
@@ -25,7 +18,7 @@ export default function ModulePageRow(
   const[titleEditing, setTitleEditing] = useState(false);
   const[apiEditing, setApiEditing] = useState(false);
   const[title, setTitle] = useState(page.title);
-  const[api, setApi] = useState(page.API);
+  //const[api, setApi] = useState(page.api);
 
   const handleBeginEdit = ()=>{
     setTitleEditing(true);
@@ -35,16 +28,12 @@ export default function ModulePageRow(
   const handleFinishEdit = ()=>{
     setTitleEditing(false);
     setApiEditing(false);
-    onChangePage({...page, title:title, API:api});
+    onChangePage({...page, title:title});
   }
 
   const handleChangIndexPage = (event: React.ChangeEvent<HTMLInputElement>)=>{
     let newValue = !isIndexPage;
     onChangeIndexPage(newValue);
-  }
-
-  const handleChangeIsFormPage = (event: React.ChangeEvent<HTMLInputElement>)=>{
-    onChangePage({...page, isFormPage:!page.isFormPage});
   }
 
   return (
@@ -70,37 +59,6 @@ export default function ModulePageRow(
         :
         <span>{title}</span>
       }
-    </TableCell>
-    <TableCell
-      onDoubleClick = {e=>setApiEditing(true)}
-    >
-    {
-        apiEditing?
-        <TextField
-          autoFocus 
-          value = {api || ''} 
-          size = "small" 
-          variant = "outlined"
-          onKeyUp = {
-            e=>{
-              if(e.keyCode === 13) {
-                handleFinishEdit()
-              }
-            }
-          }
-          onChange = {e=>setApi(e.target.value)}         
-        />
-        :
-        <span>{api}</span>
-      }
-    </TableCell>
-    <TableCell>
-      <Checkbox
-        checked = {page.isFormPage || false}
-        color="primary"
-        inputProps={{ 'aria-label': 'Is form page' }}
-        onChange = {handleChangeIsFormPage}
-      />
     </TableCell>
     <TableCell>
       <Checkbox

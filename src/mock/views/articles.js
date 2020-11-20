@@ -7,8 +7,6 @@ export default {
   //    modelName:'/RXDrag/Model/Article',
   //  },      
   //},
-  fields:[
-  ],
   withoutForm:true,
   layout:[
     {
@@ -45,8 +43,8 @@ export default {
                 onClick:{
                   name: JUMP_TO_PAGE_ACTION,
                   page:{
-                    moduleId:'articles',
-                    pageId:'article',
+                    moduleId:'1',
+                    pageId:'2',
                     dataId:'1',
                   }
                 }
