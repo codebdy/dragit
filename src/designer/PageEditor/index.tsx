@@ -95,7 +95,8 @@ export default function PageEditor(
   const classes = useStyles();
   const designer = useDesigner();
   const {showOutline, showPaddingX, showPaddingY} = designer;
-  const [pageMeta] = useAxios<IPage>({...API_GET_PAGE, params:{pageId}});
+  const [pageRequest] = useState({...API_GET_PAGE, params:{pageId}});
+  const [pageMeta] = useAxios<IPage>(pageRequest);
 
   //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(pageMeta?.jsonSchema?.layout);
