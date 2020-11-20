@@ -1,11 +1,10 @@
 import { Action, handleActions } from 'redux-actions';
-import {closeAreaSelectAction, openAreaSelectAction, designPageContentAction, cancelPageContentAction, showOutlineActon, showPaddingXActon, showPaddingYActon } from "./actions";
+import {closeAreaSelectAction, openAreaSelectAction, openDesignerAction, cancelPageContentAction, showOutlineActon, showPaddingXActon, showPaddingYActon, setDesingerPageAction } from "./actions";
 
 const initialState:{
   areaSelect:boolean, 
   opened:boolean,
-  pageId:string,
-  pageJson:any,
+  pageId:number,
   showOutline:boolean,
   showPaddingX:boolean,
   showPaddingY:boolean,
@@ -13,8 +12,7 @@ const initialState:{
   {
     areaSelect: false,
     opened: false,
-    pageId:'',
-    pageJson:undefined,
+    pageId:-1,
     showOutline:true,
     showPaddingX:true,
     showPaddingY:true,  
@@ -37,14 +35,20 @@ const actionMap={
     };
   },
 
-  [designPageContentAction().type]: (state:State, action:Action<any>) => {
+  [openDesignerAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,
       opened: true,
-      pageId: action.payload.pageId,
-      pageJson: action.payload.pageJson,
     };
   },
+  [setDesingerPageAction().type]: (state:State, action:Action<any>) => {
+    return {
+      ...state,
+      pageId: action.payload,
+    };
+  },
+
+  
   [cancelPageContentAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,

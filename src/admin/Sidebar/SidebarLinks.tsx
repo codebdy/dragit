@@ -16,6 +16,8 @@ import LoadingSkeleton from "./LoadingSkeleton";
 import { NavLink } from "react-router-dom";
 import { API_GET_DRAWER } from "APIs/drawer";
 import { useAxios } from "base/Hooks/useAxios";
+import MenuItemMeta from "base/MenuItemMeta";
+import { Divider } from "@material-ui/core";
 
 export const openBackground = "rgba(255,255,255, 0.05)";
 export const openBackgroundLight = "rgba(0,0,0, 0.05)";
@@ -105,24 +107,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-interface MenuItemMeta{
-  id: number,
-  type: "group" | "subheader" | "divider" | "item",
-  title?:string,
-  icon?:string,
-  badge?:{
-    isBound:false,
-    text?:string,
-    field?:string,
-    props:any
-  },
-  chip?:{
-    props:any
-  },
-  children: Array<MenuItemMeta>,
-  to?: string,
-}
 
 interface SidebarLinksProps{
   fullWidth:number,
@@ -271,7 +255,7 @@ function Group(props:GroupProps){
       }
       {item.type === 'item' && <Item nested mini = {props.mini} item={item}/> }
       {item.type === 'group' && <Group nested mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
-
+      {item.type === 'divider' && <Divider />}
     </Fragment>
     )
   })
@@ -309,7 +293,7 @@ export default function SidebarLinks(props : SidebarLinksProps) {
       }
       {item.type === 'item' && <Item mini = {props.mini} item={item}/>}
       {item.type === 'group' && <Group mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
-
+      {item.type === 'divider' && <Divider />}
     </Fragment>
     )
   })

@@ -21,6 +21,10 @@ import NodeToolbar from './Core/Utils/NodeToolbar';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
 import useDesigner from 'store/designer/useDesigner';
+import usePageMeta from 'admin/views/Page/usePageMeta';
+import { API_GET_PAGE } from 'APIs/modules';
+import { useAxios } from 'base/Hooks/useAxios';
+import { IPage } from 'base/IPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,20 +87,24 @@ export function ToolbarIcon(props:{checked?:boolean, onClick?:()=>void, children
 
 export default function PageEditor(
   props:{
-    pageJson:any,
+    pageId:number,
     onClose:()=>void
   }
 ) {
-  const {pageJson, onClose} = props;
+  const {pageId, onClose} = props;
   const classes = useStyles();
   const designer = useDesigner();
-  const{showOutline, showPaddingX, showPaddingY} = designer;
-  //相当于复制一个Json副本，不保存的话直接扔掉
-  let nodes = parseNodes(pageJson?.layout);
-  let canvas = new CanvasNode(nodes);
-  const [pageSettings, setPageSettings] = useState<PageSettings|undefined>();
+  const {showOutline, showPaddingX, showPaddingY} = designer;
+  const [pageMeta] = useAxios<IPage>({...API_GET_PAGE, params:{pageId}});
 
-  useEffect(() => {
+  //相当于复制一个Json副本，不保存的话直接扔掉
+  let nodes = parseNodes(pageMeta?.jsonSchema?.layout);
+  let canvas = new CanvasNode(nodes);
+  //const [pageSettings, setPageSettings] = useState<PageSettings|undefined>();
+
+  const pageJson = pageMeta?.jsonSchema;
+
+ /* useEffect(() => {
   let settingsData = pageJson?.settings
     ?
     JSON.parse(JSON.stringify(pageJson?.settings))
@@ -106,7 +114,7 @@ export default function PageEditor(
       api:'',
     };   
     setPageSettings(settingsData)
-  },[pageJson]);
+  },[pageJson]);*/
   //复制一份出来，不保存的话直接扔掉
  
   const dispatch = useDispatch()
@@ -125,14 +133,14 @@ export default function PageEditor(
   }
 
   const handlSettingsChange = (newSettings:PageSettings)=>{
-    setPageSettings(newSettings)
+    //setPageSettings(newSettings)
   }
 
   return (
     <Backdrop className={classes.backdrop} open={true}>
       <DesignerLayout
         leftArea = {
-          <LeftContent pageSettings={pageSettings} onSettingsChange={handlSettingsChange}/>
+          <LeftContent pageSchema={pageJson} onSettingsChange={handlSettingsChange}/>
         }
 
         toolbar = {

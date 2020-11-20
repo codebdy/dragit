@@ -8,6 +8,9 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import intl from "react-intl-universal";
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { openBackground, openBackgroundLight } from 'admin/Sidebar/SidebarLinks';
+import { API_GET_MODULES } from 'APIs/modules';
+import { useAxios } from 'base/Hooks/useAxios';
+import { ItemMeta } from 'designer/Common/EditableList';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ToolsAccordion() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string | false>(false);
+
+  const [customizedModules] = useAxios<ItemMeta[]>(API_GET_MODULES);
 
   const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
@@ -69,10 +74,17 @@ export default function ToolsAccordion() {
           <Typography >{intl.get('customized-modules')}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
+          <List className={classes.list}>
+            {
+              customizedModules?.map(module=>{
+                return (
+                  <ListItem key={module.id} className={classes.item}>
+                    <ListItemText primary={module.title} />
+                  </ListItem>                  
+                )
+              })
+            }
+          </List>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>

@@ -158,7 +158,7 @@ export default function ModuleContent(
       }
       {designedPage &&
         <PageEditor 
-          pageJson = {designedPage.jsonSchema} 
+          pageId = {designedPage.id} 
           onClose = {handleDesignerClose}
         ></PageEditor>
       }

@@ -49,7 +49,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
       <AppBar position="fixed" 
         className={classNames(classes.root)} 
         variant ={toolbarSkin.floatStyle || sticky ? "elevation" :"outlined"}
-        elevation = {12}
+        elevation = {10}
         color = { backgroundColor}
         style = {{
           transition:'box-shadow 0.3s',

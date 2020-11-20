@@ -2,15 +2,15 @@ import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, fade } from '@material-ui/core';
-import { RootState } from 'store';
-import { useSelector, useDispatch } from 'react-redux';
-import { closeAreaSelectAction } from 'store/designer/actions';
+import { useDispatch } from 'react-redux';
+import { closeAreaSelectAction, openDesignerAction } from 'store/designer/actions';
 import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
+import useDesigner from 'store/designer/useDesigner';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,10 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AreaSelect() {
   const classes = useStyles();
-  const selectMyStore = (state: RootState) => state.designer;
-  const myStore = useSelector(selectMyStore);
-  //const selectPageStore = (state: RootState) => state.page;
-  //const pageStore = useSelector(selectPageStore);
+  const designer = useDesigner();
   const dispatch = useDispatch();
   
   const history = useHistory();
@@ -67,7 +64,7 @@ export default function AreaSelect() {
 
   const handleDesignPageContent = (event:any) =>{
     dispatch(closeAreaSelectAction());
-    //dispatch(designPageContentAction({pageId:pageStore.pageId, pageJson:pageStore.pageJson}));
+    dispatch(openDesignerAction());
     event.stopPropagation()
   }
 
@@ -78,7 +75,7 @@ export default function AreaSelect() {
   }
 
   return (
-    <Backdrop className={classes.backdrop} open={myStore.areaSelect} onClick={handleClose}>
+    <Backdrop className={classes.backdrop} open={designer.areaSelect} onClick={handleClose}>
       <SidebarWidthPlaceholder className={classes.area}>
         <Button variant="contained" color="primary" size="large" className={classes.designButton}
           onClick={handleDesignDrawer}

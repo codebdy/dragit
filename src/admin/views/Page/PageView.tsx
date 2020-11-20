@@ -12,6 +12,8 @@ import intl from "react-intl-universal";
 import { parseComponents } from "base/PageParser";
 import usePageMeta from "./usePageMeta";
 import usePageModel from "./usePageModel";
+import { useDispatch } from "react-redux";
+import { setDesingerPageAction } from "store/designer/actions";
 
 const PageView = ()=>{
   const history =  useHistory();
@@ -24,6 +26,7 @@ const PageView = ()=>{
   const [pageMeta, loadingPage] = usePageMeta(moduleId, pageId,)
   
   usePageModel(pageMeta?.jsonSchema, id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('PageView useEffect:', moduleId, pageId, id);
@@ -36,8 +39,9 @@ const PageView = ()=>{
     if(pageMeta){
       let schema = pageMeta.jsonSchema?.layout;
       setPageLayout(parseComponents(schema))
+      dispatch(setDesingerPageAction(pageMeta.id))
     }
-  }, [pageMeta])
+  }, [dispatch, pageMeta])
 
   const onSubmit = (data: any) => console.log('数据提交',data);
   const onValidate = ()=>{

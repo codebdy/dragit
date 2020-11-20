@@ -36,7 +36,7 @@ export default function PageContent(props:{children?: any}) {
     >
       {
         designer.opened ?
-          <PageEditor pageJson = {designer.pageJson} onClose = {handleDesignerClose}></PageEditor>
+          <PageEditor pageId = {designer.pageId} onClose = {handleDesignerClose}></PageEditor>
         :
           children
       }

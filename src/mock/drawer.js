@@ -26,6 +26,10 @@ export default [{
         icon: 'mdi-speedometer',
     },
     {
+        id:'divider1',
+        type:'divider',
+    },
+    {
         id: "t2test",
         type: 'item',
         title: '文章管理',
@@ -46,7 +50,6 @@ export default [{
         icon: 'mdi-text-box-outline',
         children: [{
                 id: "h2-1",
-                //type:subheader, item, group
                 type: 'subheader',
                 title: '二级应用',
             },
