@@ -10,7 +10,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 import { API_GET_MODULES } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ItemMeta } from 'designer/Common/EditableList';
-import { openBackground, openBackgroundLight } from './DrawerItemList';
+import { openBackground, openBackgroundLight } from 'admin/Sidebar/MenuItems/MenuNodeGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

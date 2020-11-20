@@ -3,9 +3,9 @@ import IMenuItem from "base/IMenuItem";
 import { RXNode } from "base/RXNode";
 import classNames from "classnames";
 import MdiIcon from "components/common/MdiIcon";
-import { activeBackground, activeBackgroundLight } from "designer/DrawerEditor/DrawerItemList";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { activeBackground, activeBackgroundLight } from "./MenuNodeGroup";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
