@@ -1,4 +1,4 @@
-export default interface MenuItemMeta{
+export default interface IMenuItem{
   id: number,
   type: "group" | "subheader" | "divider" | "item",
   title?:string,
@@ -12,6 +12,6 @@ export default interface MenuItemMeta{
   chip?:{
     props:any
   },
-  children: Array<MenuItemMeta>,
+  children: Array<IMenuItem>,
   to?: string,
 }

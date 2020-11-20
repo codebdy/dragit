@@ -21,7 +21,6 @@ import NodeToolbar from './Core/Utils/NodeToolbar';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
 import useDesigner from 'store/designer/useDesigner';
-import usePageMeta from 'admin/views/Page/usePageMeta';
 import { API_GET_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { IPage } from 'base/IPage';

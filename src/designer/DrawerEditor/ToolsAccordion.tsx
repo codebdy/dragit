@@ -7,10 +7,10 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import intl from "react-intl-universal";
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { openBackground, openBackgroundLight } from 'admin/Sidebar/SidebarLinks';
 import { API_GET_MODULES } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ItemMeta } from 'designer/Common/EditableList';
+import { openBackground, openBackgroundLight } from './DrawerItemList';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

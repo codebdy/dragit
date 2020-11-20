@@ -11,12 +11,13 @@ import classNames from "classnames";
 import Badge from '@material-ui/core/Badge';
 import Chip from '@material-ui/core/Chip';
 import FontIcon from "components/common/MdiIcon"
-import { NavLink } from "react-router-dom";
 import { API_GET_DRAWER } from "APIs/drawer";
 import { useAxios } from "base/Hooks/useAxios";
-import MenuItemMeta from "base/MenuItemMeta";
+import IMenuItem from "base/IMenuItem";
 import { Divider } from "@material-ui/core";
 import Scrollbar from "admin/common/Scrollbar";
+import { TreeView } from "@material-ui/lab";
+import { getBadge } from "admin/Sidebar/MenuItems/MenuNodeGroup";
 
 export const openBackground = "rgba(255,255,255, 0.05)";
 export const openBackgroundLight = "rgba(0,0,0, 0.05)";
@@ -49,18 +50,11 @@ const useStyles = makeStyles((theme: Theme) =>
       textDecoration: "none",
     },
 
-    activeItem: {
-      width:'100%',
-      height:'100%',
-      display:'block',
-      background: theme.palette.type === 'dark' ? activeBackground : activeBackgroundLight,
-      "&:hover,&:focus": {
-        backgroundColor: theme.palette.type === 'dark' ? activeBackground : activeBackgroundLight,
-      }
-    },
 
     itemText: {
       fontSize:"1.1rem",
+      userSelect:"none",
+      cursor:'defalut',
     },
   
     nested: {
@@ -86,13 +80,6 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
 
-    itemOpenedLight:{
-      background:'rgba(0,0,0, 0.1)',
-      "&:hover,&:focus": {
-        backgroundColor: 'rgba(0,0,0, 0.1)',
-      }
-
-    },
 
     itemIcon:{
       minWidth:'48px',
@@ -108,10 +95,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ListItemProps{
-  fullWidth?:number,
-  mini?:boolean,
   nested?:boolean,
-  item:MenuItemMeta,
+  item:IMenuItem,
 }
 
 interface ItemProps extends ListItemProps{
@@ -130,48 +115,21 @@ function Subheader(props:ListItemProps){
   const classes = useStyles();
   return (
     <Fragment>
-      {!props.mini &&
-        <ListSubheader component="div"
-          disableSticky
-          className = {classes.subHeader}
-        >
-            {props.item.title}
-        </ListSubheader>
-      }
-
+      <ListSubheader component="div"
+        disableSticky
+        className = {classes.subHeader}
+      >
+          {props.item.title}
+      </ListSubheader>
     </Fragment>
-  )
-}
-
-function ItemTo(props: {to?:string, children:any}){
-  const classes = useStyles();
-  return(
-    props.to?
-    <NavLink to={ props.to} activeClassName={ classes.activeItem}
-      className={classes.itemLink}
-    >
-      {props.children}
-    </NavLink>
-    :
-    props.children
   )
 }
 
 function Item(props:ItemProps){
   const classes = useStyles();
-  const {item, mini, dotBadge, className, children, onClick} = props
+  const {item, dotBadge, className, children, onClick} = props
   const {badge, chip, title, icon} = item
-  let iconTsx = (badge ? 
-      <Badge 
-        color={badge.props.color} 
-        badgeContent={badge.props.label} 
-        invisible={!mini || !badge.props.label}
-      >
-        <FontIcon iconClass = {icon} />
-      </Badge>
-      :
-      <FontIcon iconClass = {icon} />
-    )
+  let iconTsx =  <FontIcon iconClass = {icon} />
   if(dotBadge){
     iconTsx = (<Badge 
       color={dotBadge.props.color} 
@@ -183,48 +141,28 @@ function Item(props:ItemProps){
   }
 
   const text = <span className={classes.itemText}>{title}</span>;
-
   
   return (
-    <ItemTo to={item.to}>
-      <ListItem 
-        button 
-        className = {classNames(classes.listItem, className)}
-        onClick = {onClick}
-      >
-          {item.icon && <ListItemIcon className = {classes.itemIcon}>
-            { iconTsx }
-          </ListItemIcon>
-          }
-          <ListItemText primary={text} >
-          </ListItemText>
-          {(badge && badge.props.label && !mini) &&
-            <Chip {... badge.props} />          
-          }
-          {chip&&
-            <Chip {... chip.props}/>          
-          }
-          {children}      
-      </ListItem>
-    </ItemTo>    
+    <ListItem 
+      className = {classNames(classes.listItem, className)}
+      onClick = {onClick}
+    >
+        {item.icon && <ListItemIcon className = {classes.itemIcon}>
+          { iconTsx }
+        </ListItemIcon>
+        }
+        <ListItemText primary={text} >
+        </ListItemText>
+        {(badge && badge.props.label) &&
+          <Chip {... badge.props} />          
+        }
+        {chip&&
+          <Chip {... chip.props}/>          
+        }
+        {children}      
+    </ListItem>
   )
 
-}
-
-
-function getBadge(children:Array<any>): any{
-  for(let item of children){
-    if(item.badge){
-      return item.badge
-    }
-    if(item.children){
-      let badge = getBadge(item.children)
-      if(badge){
-        return badge
-      }
-    }
-  }
-  return null
 }
 
 function Group(props:GroupProps){
@@ -240,28 +178,32 @@ function Group(props:GroupProps){
   const classes = useStyles();
   const dotBadge = getBadge(props.item.children)
 
-  const listItems = props.item.children?.map((item:MenuItemMeta)=>{
+  const listItems = props.item.children?.map((item:IMenuItem)=>{
     return (
     <Fragment key={item.id}>
       {
-        item.type === 'subheader' && <Subheader nested mini = {props.mini} item={item} />
+        item.type === 'subheader' && <Subheader nested item={item} />
       }
-      {item.type === 'item' && <Item nested mini = {props.mini} item={item}/> }
-      {item.type === 'group' && <Group nested mini = {props.mini} item={item} onOpened={handleOpened} openedId={openedId}/>}
+      {item.type === 'item' && <Item nested item={item}/> }
+      {item.type === 'group' && <Group nested item={item} onOpened={handleOpened} openedId={openedId}/>}
       {item.type === 'divider' && <Divider />}
     </Fragment>
     )
   })
   return (
     <Fragment>
-      <Item className={open ? classes.itemOpened :''} item={props.item} dotBadge={!open && dotBadge} onClick={handleClick}>
+      <Item 
+        className={open ? classes.itemOpened :''} 
+        item={props.item} dotBadge={!open && dotBadge} 
+        onClick={handleClick}
+      >
         <ChevronRightIcon className={
             classNames(classes.indicator, {[classes.opened] : open}) 
           } 
         />
       </Item>
       <Collapse in={props.openedId === props.item.id} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding className={props.mini ? '' : classes.nested}>
+        <List component="div" disablePadding className={classes.nested}>
           {listItems}
         </List>
       </Collapse>
@@ -269,16 +211,16 @@ function Group(props:GroupProps){
   )  
 }
 
-export default function DrawerItemList(props : {items?:Array<MenuItemMeta>}) {
+export default function DrawerItemList(props : {items?:Array<IMenuItem>}) {
   const classes = useStyles();
   const [openedId, setOpenedId] = React.useState(-1);
-  const [items] = useAxios<Array<MenuItemMeta>>(API_GET_DRAWER);
+  const [items] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
   
   const handleOpened = (id:number)=>{
     setOpenedId(id)
   }
 
-  const listItems = items?.map((item:MenuItemMeta)=>{
+  const listItems = items?.map((item:IMenuItem)=>{
     return (
     <Fragment key={item.id}>
       {
@@ -293,13 +235,12 @@ export default function DrawerItemList(props : {items?:Array<MenuItemMeta>}) {
 
   return (
     <Scrollbar>
-      <List
-        component="nav"
+      <TreeView
         className={classes.root}
       >
         { listItems}
 
-      </List>
+      </TreeView>
     </Scrollbar>
   );
 }

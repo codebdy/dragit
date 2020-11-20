@@ -7,7 +7,7 @@ import DrawerItemList from './DrawerItemList';
 import ToolsAccordion from './ToolsAccordion';
 import { API_GET_DRAWER } from 'APIs/drawer';
 import { useAxios } from 'base/Hooks/useAxios';
-import MenuItemMeta from 'base/MenuItemMeta';
+import IMenuItem from 'base/IMenuItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function DrawerEditor(){
   const classes = useStyles();
   const history = useHistory();
-  const [items] = useAxios<Array<MenuItemMeta>>(API_GET_DRAWER);
+  const [items] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
 
   const handleClose = ()=>{
     history.goBack();
