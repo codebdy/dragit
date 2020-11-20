@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Container } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
@@ -25,6 +25,8 @@ import usePageMeta from 'admin/views/Page/usePageMeta';
 import { API_GET_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { IPage } from 'base/IPage';
+import { AxiosRequestConfig } from 'axios';
+import PageSkeleton from 'admin/views/Page/PageSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,8 +97,8 @@ export default function PageEditor(
   const classes = useStyles();
   const designer = useDesigner();
   const {showOutline, showPaddingX, showPaddingY} = designer;
-  const [pageRequest] = useState({...API_GET_PAGE, params:{pageId}});
-  const [pageMeta] = useAxios<IPage>(pageRequest);
+  const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
+  const [pageMeta, loading] = useAxios<IPage>(pageRequest);
 
   //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(pageMeta?.jsonSchema?.layout);
@@ -105,17 +107,9 @@ export default function PageEditor(
 
   const pageJson = pageMeta?.jsonSchema;
 
- /* useEffect(() => {
-  let settingsData = pageJson?.settings
-    ?
-    JSON.parse(JSON.stringify(pageJson?.settings))
-    :
-    {
-      isFormPage:false,
-      api:'',
-    };   
-    setPageSettings(settingsData)
-  },[pageJson]);*/
+  useEffect(() => {
+    setPageRequest({...API_GET_PAGE, params:{pageId}})
+  },[pageId]);
   //复制一份出来，不保存的话直接扔掉
  
   const dispatch = useDispatch()
@@ -138,74 +132,73 @@ export default function PageEditor(
   }
 
   return (
-    <Backdrop className={classes.backdrop} open={true}>
-      <DesignerLayout
-        leftArea = {
-          <LeftContent pageSchema={pageJson} onSettingsChange={handlSettingsChange}/>
-        }
+    loading? <Container><PageSkeleton /></Container> :
+      <Backdrop className={classes.backdrop} open={true}>        
+        <DesignerLayout
+          leftArea = {
+            <LeftContent pageSchema={pageJson} onSettingsChange={handlSettingsChange}/>
+          }
 
-        toolbar = {
-          <Fragment>
-            <ToolbarIcon>
-              <MdiIcon iconClass="mdi-layers-outline"/>
-            </ToolbarIcon>
-            {//<ToolbarIcon>
-             // <MdiIcon iconClass="mdi-dock-bottom"/>
-              //</ToolbarIcon>
-            }
-            <ToolbarIcon 
-              checked={showOutline}
-              onClick = {()=>{
-                dispatch(showOutlineActon(!showOutline))
-              }}
-            >
-              <MdiIcon iconClass="mdi-border-none-variant"/>
-            </ToolbarIcon>
-            <ToolbarIcon checked={showPaddingX}
-              onClick = {()=>{
-                dispatch(showPaddingXActon(!showPaddingX))
-              }}
-            >
-              <MdiIcon iconClass="mdi-arrow-expand-horizontal"/>
-            </ToolbarIcon>
-            <ToolbarIcon checked={showPaddingY}
-              onClick = {()=>{
-                dispatch(showPaddingYActon(!showPaddingY))
-              }}
+          toolbar = {
+            <Fragment>
+              <ToolbarIcon>
+                <MdiIcon iconClass="mdi-layers-outline"/>
+              </ToolbarIcon>
+              {//<ToolbarIcon>
+              // <MdiIcon iconClass="mdi-dock-bottom"/>
+                //</ToolbarIcon>
+              }
+              <ToolbarIcon 
+                checked={showOutline}
+                onClick = {()=>{
+                  dispatch(showOutlineActon(!showOutline))
+                }}
               >
-              <MdiIcon iconClass="mdi-arrow-expand-vertical"/>
-            </ToolbarIcon>
-            <ToolbarIcon>
-              <MdiIcon iconClass="mdi-undo"/>
-            </ToolbarIcon>
-            <ToolbarIcon>
-              <MdiIcon iconClass="mdi-redo"/>
-            </ToolbarIcon>
-            <ToolbarIcon>
-              <MdiIcon iconClass="mdi-delete-outline"/>
-            </ToolbarIcon>
-            <Spacer></Spacer>
-            <Button onClick={handleCancel} className = {classes.cancelButton}>
-              {intl.get('cancel')}
-            </Button>
-            <Button variant="contained" color="primary" onClick={handleSave}>
-            {intl.get('save')}
-            </Button>
-          </Fragment>
-        }
-      >
-        <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-          <NodeView node={canvas} />
-        </Scrollbar>
-      </DesignerLayout>
-      {
+                <MdiIcon iconClass="mdi-border-none-variant"/>
+              </ToolbarIcon>
+              <ToolbarIcon checked={showPaddingX}
+                onClick = {()=>{
+                  dispatch(showPaddingXActon(!showPaddingX))
+                }}
+              >
+                <MdiIcon iconClass="mdi-arrow-expand-horizontal"/>
+              </ToolbarIcon>
+              <ToolbarIcon checked={showPaddingY}
+                onClick = {()=>{
+                  dispatch(showPaddingYActon(!showPaddingY))
+                }}
+                >
+                <MdiIcon iconClass="mdi-arrow-expand-vertical"/>
+              </ToolbarIcon>
+              <ToolbarIcon>
+                <MdiIcon iconClass="mdi-undo"/>
+              </ToolbarIcon>
+              <ToolbarIcon>
+                <MdiIcon iconClass="mdi-redo"/>
+              </ToolbarIcon>
+              <ToolbarIcon>
+                <MdiIcon iconClass="mdi-delete-outline"/>
+              </ToolbarIcon>
+              <Spacer></Spacer>
+              <Button onClick={handleCancel} className = {classes.cancelButton}>
+                {intl.get('cancel')}
+              </Button>
+              <Button variant="contained" color="primary" onClick={handleSave}>
+              {intl.get('save')}
+              </Button>
+            </Fragment>
+          }
+        >
+          <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
+            <NodeView node={canvas} />
+          </Scrollbar>
+        </DesignerLayout>
         <Fragment>
           <FocusLabel />
           <NodeToolbar />
           <ActiveLabel />
           <MouseFollower />
-        </Fragment>
-      }
-    </Backdrop>
+        </Fragment>      
+      </Backdrop>
   );
 }
