@@ -53,6 +53,7 @@ export default function ModulePageTable(
           <TableHead>
             <TableRow>
               <TableCell><b>{intl.get('title')}</b></TableCell>
+              <TableCell style={{width:'80px'}}><b>{intl.get('is-form-page')}</b></TableCell>
               <TableCell style={{width:'80px'}}><b>{intl.get('is-index-page')}</b></TableCell>
               <TableCell style={{width:'120px'}}></TableCell>
             </TableRow>

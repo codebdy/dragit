@@ -1,9 +1,8 @@
 import { AxiosRequestConfig } from "axios";
 
 export interface PageSchema{
-  withoutForm:boolean,
-  layout:Array<any>,
-  isFormPage:boolean,
+  layout?:Array<any>,
+  isFormPage?:boolean,
   api?:AxiosRequestConfig, 
 }
 
