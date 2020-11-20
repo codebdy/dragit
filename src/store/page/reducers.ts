@@ -15,13 +15,12 @@ const actionMap={
   [setModelLoadingAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,
-      modelLoading: true,
+      modelLoading: action.payload,
     };
   },
   [setModelAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,
-      modelLoading: false,
       model: action.payload,
     };
   },
