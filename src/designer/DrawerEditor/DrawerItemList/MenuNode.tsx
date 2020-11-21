@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+
+  moreButton:{
+    cursor:'pointer',
+  }
 })
 );
 
@@ -23,24 +27,23 @@ export function MenuNode(
 {
   const classes = useStyles();
   const { node} = props;
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const isGroup = node.meta.type === 'group';
   
-  const handleClick = ()=>{
+  const handleOpenClick = (event: React.MouseEvent<unknown>)=>{
     setOpen(!open);
+    event.stopPropagation();
   }
 
   return (
     <Fragment>
-      {
-        node.meta.type === 'divider'?
-        <MenuDivider/>
-        :
-        <MenuItem item={node.meta} onClick = {handleClick}>
-          {isGroup && (open ? <ExpandLess /> : <ExpandMore />)}
-        </MenuItem>  
-      }
+      <MenuItem item={node.meta}>
+        {isGroup && (open ? 
+          <ExpandLess className={classes.moreButton} onClick = {handleOpenClick} /> 
+          : 
+          <ExpandMore className={classes.moreButton} onClick = {handleOpenClick} />)}
+      </MenuItem>  
         
       {
         node.children &&

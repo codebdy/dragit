@@ -1,18 +1,17 @@
-import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Chip, Divider, ListItemIcon, ListItemText, ListItem } from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, createStyles, Chip, ListItemIcon, ListItemText, ListItem } from '@material-ui/core';
 import IMenuItem from 'base/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
+import MenuDivider from './MenuDivider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    labelIcon: {
-      marginRight: theme.spacing(1),
+    item: {
+      "&:hover":{
+        outline:'dashed 1px',
+        outlineColor: theme.palette.primary.main,
+      }
     },
-    //labelText: {
-    //  fontWeight: 'inherit',
-    //  flexGrow: 1,
-    //},
-
   }),
 );
 
@@ -28,14 +27,17 @@ export default function MenuItem(
 
   const classes = useStyles();
   return (
-    <ListItem button onClick = {onClick}>
+    type === 'divider'?
+    <MenuDivider className = {classes.item}/>
+    :
+    <ListItem className = {classes.item} onClick = {onClick}>
       {
-        type !== 'subheader' && type !== 'divider' &&
+        type !== 'subheader' &&
         <ListItemIcon>
-          <MdiIcon className={classes.labelIcon} iconClass = {icon} />
+          <MdiIcon iconClass = {icon} />
         </ListItemIcon>
       }
-
+  
       <ListItemText primary={title} >
       </ListItemText>
       {
@@ -48,5 +50,6 @@ export default function MenuItem(
         children
       }
     </ListItem>
+   
   )
 }
