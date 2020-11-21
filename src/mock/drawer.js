@@ -11,11 +11,9 @@ export default [{
         to: '/admin/dashboard',
         icon: 'mdi-speedometer',
         chip: {
-            props: {
-                color: 'primary',
-                label: '新',
-                size: 'small',
-            }
+            color: 'primary',
+            label: '新',
+            size: 'small',
         }
     },
     {
@@ -67,11 +65,9 @@ export default [{
                 to: { name: 'dashboard' },
                 icon: 'mdi-circle-small',
                 badge: {
-                    props: {
-                        color: 'secondary',
-                        label: '15',
-                        size: 'small',
-                    }
+                    color: 'secondary',
+                    label: '15',
+                    size: 'small',
                 }
             },
 
@@ -95,11 +91,10 @@ export default [{
                         to: { name: 'dashboard' },
                         icon: 'mdi-brightness-percent',
                         badge: {
-                            props: {
-                                color: 'secondary',
-                                label: '3',
-                                size: 'small',
-                            }
+
+                            color: 'secondary',
+                            label: '3',
+                            size: 'small',
                         }
                     },
 

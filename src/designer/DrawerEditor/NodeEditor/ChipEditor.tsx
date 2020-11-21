@@ -1,14 +1,18 @@
 import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select, FormControlLabel, Switch } from '@material-ui/core';
-import IMenuItem from 'base/IMenuItem';
+import { IMenuChip } from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
 import intl from "react-intl-universal";
 import PrimaryText from 'base/PropsInputs/PrimaryText';
 
 export default function ChipEditor(
   props:{
+    chip:IMenuChip|undefined
   }
 ){
+  const {chip} = props;
+
+  const hasChip = !!chip;
 
   return (
     <Fragment>
@@ -16,7 +20,7 @@ export default function ChipEditor(
         <FormControlLabel
           control={
             <Switch
-              //checked={inputValue}
+              checked={hasChip}
               //onChange={handleChange}
               color="primary"
             />

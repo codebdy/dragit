@@ -82,7 +82,7 @@ export default function NodeEditor(
                   onChange = {handleIconChange}
                 />
               </Grid>
-              <ChipEditor/> 
+              <ChipEditor chip = {node.meta.chip}/> 
               <BadgeEditor />       
             </Fragment>
           }

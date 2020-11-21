@@ -37,11 +37,11 @@ export default function MenuItem(
   
       <ListItemText primary={title} >
       </ListItemText>
-      {
-        chip && <Chip {... chip.props}/>
+      {(badge && badge.field) &&
+        <Chip color={badge.color} label={'B'} size={badge.size}/>          
       }
-      {
-        badge && <Chip {... badge.props}/>
+      {chip&&
+        <Chip color={chip.color} label={chip.label} size={chip.size}/>          
       }
       {
         children

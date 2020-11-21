@@ -1,4 +1,5 @@
 import { Badge, ListItem, ListItemIcon, ListItemText, Chip, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { useAppInfo } from "base/Hooks/useAppInfo";
 import IMenuItem from "base/IMenuItem";
 import { RXNode } from "base/RXNode";
 import classNames from "classnames";
@@ -75,11 +76,13 @@ export default function MenuNode(
   const {node, mini, dotBadge, className, children, onClick} = props;
   const item = node.meta;
   const {badge, chip, title, icon} = item;
+  const baggeLabel = useAppInfo(badge?.field);
+
   let iconTsx = (badge ? 
       <Badge 
-        color={badge.props.color} 
-        badgeContent={badge.props.label} 
-        invisible={!mini || !badge.props.label}
+        color={badge.color} 
+        badgeContent={baggeLabel} 
+        invisible={!mini || !baggeLabel}
       >
         <MdiIcon iconClass = {icon} />
       </Badge>
@@ -88,9 +91,9 @@ export default function MenuNode(
     )
   if(dotBadge){
     iconTsx = (<Badge 
-      color={dotBadge.props.color} 
+      color={dotBadge.color} 
       variant="dot"
-      invisible={!dotBadge.props.label}
+      invisible={!dotBadge.label}
     >
       <MdiIcon iconClass = {icon} />
     </Badge>)
@@ -111,11 +114,11 @@ export default function MenuNode(
           }
           <ListItemText primary={text} >
           </ListItemText>
-          {(badge && badge.props.label && !mini) &&
-            <Chip {... badge.props} />          
+          {(badge && baggeLabel && !mini) &&
+            <Chip color={badge.color} label={baggeLabel} size={badge.size}/>          
           }
           {chip&&
-            <Chip {... chip.props}/>          
+            <Chip color={chip.color} label={chip.label} size={chip.size}/>          
           }
           {children}      
       </ListItem>
