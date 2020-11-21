@@ -1,12 +1,10 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import TreeView from '@material-ui/lab/TreeView';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import IMenuItem from 'base/IMenuItem';
 import { MenuNode } from './MenuNode';
 import { RXNode } from 'base/RXNode';
 import Scrollbar from 'admin/common/Scrollbar';
+import { List } from '@material-ui/core';
 
 const useStyles = makeStyles(
   createStyles({
@@ -24,21 +22,22 @@ export default function DrawerItemList(props : {items?:Array<RXNode<IMenuItem>>}
 
   return (
     <Scrollbar>
-      <TreeView
+      <List
         className={classes.root}
-        defaultExpanded={['3']}
-        defaultCollapseIcon={<ArrowDropDownIcon />}
-        defaultExpandIcon={<ArrowRightIcon />}
-        defaultEndIcon={<div style={{ width: 24 }} />}
+        component="div"
+        //defaultExpanded={['3']}
+        //defaultCollapseIcon={<ArrowDropDownIcon />}
+        //defaultExpandIcon={<ArrowRightIcon />}
+        //defaultEndIcon={<div style={{ width: 24 }} />}
       >
         {
           items?.map(item=>{
             return (
-              <MenuNode key={item.id} node = {item} nodeId = {item.id.toString()}/>
+              <MenuNode key={item.id} node = {item}/>
             )
           })
         }
-      </TreeView>
+      </List>
     </Scrollbar>
   );
 }

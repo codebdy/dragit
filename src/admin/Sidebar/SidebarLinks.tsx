@@ -18,24 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
     },
-
-    //nestedList:{
-    //  transition:'all 0.3s',
-    //},
-
-    //itemOpenedLight:{
-    //  background:'rgba(0,0,0, 0.1)',
-    //  "&:hover,&:focus": {
-    //    backgroundColor: 'rgba(0,0,0, 0.1)',
-    //  }
-
-    //},
-
-    //scrollable:{
-    //  flex:1,
-    //  overflowY: 'auto',
-    //  position: 'relative',
-    //},
   }),
 );
 
