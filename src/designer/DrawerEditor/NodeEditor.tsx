@@ -26,7 +26,7 @@ export default function NodeEditor(
   }
 
   return (
-    <Fragment>
+    <Grid container spacing = {2}>
       <Grid item xs={12}>
         <FormControl variant="outlined" size="small">
           <InputLabel>{intl.get('type')}</InputLabel>
@@ -77,6 +77,6 @@ export default function NodeEditor(
 
         </Fragment>
       }
-    </Fragment>
+    </Grid>
   )
 }

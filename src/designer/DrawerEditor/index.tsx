@@ -104,9 +104,9 @@ export default function DrawerEditor(){
         </Toolbar>
       </AppBar>
       <Container className={classes.content}>
-        <Grid container className = {classes.left} spacing = {2}>
+        <div className = {classes.left}>
           {selectedNode && <NodeEditor node = {selectedNode} onChange = {handleMetaChange} />}
-        </Grid>
+        </div>
         <div className = {classes.center}>
           {
             loading?
