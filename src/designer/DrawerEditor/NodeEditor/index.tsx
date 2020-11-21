@@ -31,6 +31,10 @@ export default function NodeEditor(
     onChange(node, 'chip', chip);
   }
 
+  const handleChangeBadge = (badge:IMenuChip|undefined) =>{
+    onChange(node, 'badge', badge);
+  }
+
   return (
     <Grid container spacing = {2}>
       <Grid item xs={6}>
@@ -87,7 +91,7 @@ export default function NodeEditor(
                 />
               </Grid>
               <ChipEditor chip = {node.meta.chip} onChange={handleChangeChip}/> 
-              <BadgeEditor />       
+              <BadgeEditor badge = {node.meta.badge} onChange={handleChangeBadge}/>       
             </Fragment>
           }
         </Fragment>

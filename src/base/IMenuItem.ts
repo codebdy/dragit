@@ -1,5 +1,5 @@
 
-export interface IMenuBage {
+export interface IMenuBadge {
   color?: 'primary' | 'secondary' | 'default';
   field?: string;
   size?: 'small' | 'medium';
@@ -16,7 +16,7 @@ export default interface IMenuItem{
   type: "group" | "subheader" | "divider" | "item",
   title?:string,
   icon?:string,
-  badge?:IMenuBage,
+  badge?:IMenuBadge,
   chip?:IMenuChip,
   children: Array<IMenuItem>,
   to?: string,
