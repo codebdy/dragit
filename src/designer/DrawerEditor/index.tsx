@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container, TextField, Grid } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useHistory } from 'react-router';
@@ -8,6 +8,9 @@ import ToolsAccordion from './ToolsAccordion';
 import { API_GET_DRAWER } from 'APIs/drawer';
 import { useAxios } from 'base/Hooks/useAxios';
 import IMenuItem from 'base/IMenuItem';
+import { RXNode } from 'base/RXNode';
+import { parseRXNodeList } from 'base/RXNodeParser';
+import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,7 +60,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function DrawerEditor(){
   const classes = useStyles();
   const history = useHistory();
-  const [items] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
+  const [jsonData, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
+  const [items,setItems] = React.useState<Array<RXNode<IMenuItem>>>([]);
+
+  useEffect(()=>{
+    jsonData && setItems(parseRXNodeList<IMenuItem>(jsonData));    
+  },[jsonData]);
 
   const handleClose = ()=>{
     history.goBack();
@@ -92,7 +100,12 @@ export default function DrawerEditor(){
           </Grid>
         </Grid>
         <div className = {classes.center}>
-          <DrawerItemList items={items} />
+          {
+            loading?
+            <SiderBarLoadingSkeleton />
+            :
+            <DrawerItemList items={items} />
+          }
         </div>
         <div className = {classes.right}>
           <ToolsAccordion />

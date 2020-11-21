@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Scrollbar from "../common/Scrollbar";
-import LoadingSkeleton from "./LoadingSkeleton";
+import SiderBarLoadingSkeleton from "./LoadingSkeleton";
 import { API_GET_DRAWER } from "APIs/drawer";
 import { useAxios } from "base/Hooks/useAxios";
 import IMenuItem from "base/IMenuItem";
@@ -57,7 +57,7 @@ export default function SidebarLinks(
   }
 
   useEffect(()=>{
-    setItems(parseRXNodeList<IMenuItem>(jsonData));    
+    jsonData && setItems(parseRXNodeList<IMenuItem>(jsonData));    
   },[jsonData]);
 
   const listItems =items?.map((node:RXNode<IMenuItem>)=>{
@@ -84,7 +84,7 @@ export default function SidebarLinks(
         }}
       >
         {loading?
-          <LoadingSkeleton/>
+          <SiderBarLoadingSkeleton/>
           :
           listItems
         }
