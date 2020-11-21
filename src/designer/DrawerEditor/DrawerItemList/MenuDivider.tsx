@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { makeStyles, Theme, createStyles, Divider } from '@material-ui/core';
 import classNames from 'classnames';
 
@@ -20,8 +20,10 @@ export default function MenuDivider(
 )
 {
   const classes = useStyles();
+  const nodeEl = useRef(null);
   return (
     <div
+      ref={nodeEl}
       draggable = {props.draggable} 
       className = {classNames(classes.root, props.className)} 
       onClick = {props.onClick}

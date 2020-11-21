@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Chip, ListItemIcon, ListItemText, ListItem, createStyles, makeStyles, Theme } from '@material-ui/core';
 import IMenuItem from 'base/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
@@ -26,6 +26,16 @@ export default function MenuItem(
   const item = node.meta;
   const {title, type, icon, chip, badge} = item;
   const classes = useStyles();
+  const nodeEl = useRef(null);
+
+  const handleDragover = (event: React.DragEvent<unknown>)=>{
+    if(draggedNode &&(draggedNode.id !== node.id)){
+      event.preventDefault();
+      event.stopPropagation();
+      //nodeEl.current;
+    }
+  }
+
   return (
     type === 'divider'?
     <MenuDivider
@@ -35,9 +45,12 @@ export default function MenuItem(
     />
     :
     <ListItem 
+      ref={nodeEl}
       draggable = {true}
       className = {classNames(classes.itemText, className)} 
-      onClick = {onClick}>
+      onClick = {onClick}
+      onDragOver = {handleDragover}
+    >
       {
         type !== 'subheader' &&
         <ListItemIcon>
