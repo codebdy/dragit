@@ -23,7 +23,7 @@ export default function NodeEditor(
   const handleTitleChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const newTitle = event.target.value as any;
     setTitle(newTitle);
-    onChange(node, 'title', title);
+    onChange(node, 'title', newTitle);
   }
 
   return (

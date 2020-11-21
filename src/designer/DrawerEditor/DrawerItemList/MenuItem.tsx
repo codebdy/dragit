@@ -23,7 +23,6 @@ export default function MenuItem(
   const {item,className,  onClick, children} = props;
   const {title, type, icon, chip, badge} = item;
   const classes = useStyles();
-
   return (
     type === 'divider'?
     <MenuDivider className = {className} onClick = {onClick}/>

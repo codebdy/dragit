@@ -12,7 +12,7 @@ import { RXNode } from 'base/RXNode';
 import { parseRXNodeList } from 'base/RXNodeParser';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
-import { number } from 'yup';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
