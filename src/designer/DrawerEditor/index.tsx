@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container, Grid } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import intl from "react-intl-universal";

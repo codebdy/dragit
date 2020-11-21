@@ -27,8 +27,8 @@ export default function NodeEditor(
 
   return (
     <Grid container spacing = {2}>
-      <Grid item xs={12}>
-        <FormControl variant="outlined" size="small">
+      <Grid item xs={6}>
+        <FormControl variant="outlined" size="small" fullWidth>
           <InputLabel>{intl.get('type')}</InputLabel>
           <Select
             value={type || 'item'}
@@ -53,11 +53,13 @@ export default function NodeEditor(
         </Select>
         </FormControl>
       </Grid>
+      <Grid item xs={6}></Grid>
       {
         type !== 'divider' &&
         <Fragment>
           <Grid item xs={6}>
             <TextField 
+              fullWidth
               variant="outlined" 
               label = {intl.get('name')} 
               size="small"
@@ -67,6 +69,7 @@ export default function NodeEditor(
           </Grid>
           <Grid item xs={6}>
             <TextField 
+              fullWidth
               variant="outlined" 
               label = {intl.get('icon')} 
               size="small"
