@@ -13,6 +13,7 @@ const useStyles = makeStyles(
     root: {
       flexGrow: 1,
       width:'100%',
+      userSelect:'none',
     },
   }),
 );
@@ -33,39 +34,10 @@ export default function DrawerItemList(props : {items?:Array<RXNode<IMenuItem>>}
         {
           items?.map(item=>{
             return (
-              <MenuNode key={item.id} item = {item} nodeId = {item.id.toString()}/>
+              <MenuNode key={item.id} node = {item} nodeId = {item.id.toString()}/>
             )
           })
         }
-        {/*<MenuNode nodeId="1" labelText="All Mail" labelIcon={MailIcon} />
-        <MenuNode nodeId="2" labelText="Trash" labelIcon={DeleteIcon} />
-        <MenuNode nodeId="3" labelText="Categories" labelIcon={Label}>
-          <MenuNode
-            nodeId="5"
-            labelText="Social"
-            labelIcon={SupervisorAccountIcon}
-            labelInfo="90"
-          />
-          <MenuNode
-            nodeId="6"
-            labelText="Updates"
-            labelIcon={InfoIcon}
-            labelInfo="2,294"
-          />
-          <MenuNode
-            nodeId="7"
-            labelText="Forums"
-            labelIcon={ForumIcon}
-            labelInfo="3,566"
-          />
-          <MenuNode
-            nodeId="8"
-            labelText="Promotions"
-            labelIcon={LocalOfferIcon}
-            labelInfo="733"
-          />
-        </MenuNode>
-      <MenuNode nodeId="4" labelText="History" labelIcon={Label} />*/}
       </TreeView>
     </Scrollbar>
   );
