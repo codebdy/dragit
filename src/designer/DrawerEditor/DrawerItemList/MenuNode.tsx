@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(2),
   },
 
   moreButton:{
@@ -31,20 +31,27 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       outline:'solid 2px',
       outlineColor: theme.palette.primary.main,
     }    
+  },
+
+  collapse:{
+    padding:theme.spacing(2),
+    outline:'dashed 1px',
+    outlineColor: theme.palette.grey[300],
   }
+
 })
 );
 
 export function MenuNode(
   props: {
     node:RXNode<IMenuItem>,
-    selectedId:number,
-    onSelected:(selectedId:number)=>void
+    selectedNode?:RXNode<IMenuItem>,
+    onSelected:(selectedNode:RXNode<IMenuItem>)=>void
   }
 ) 
 {
   const classes = useStyles();
-  const { node, selectedId, onSelected } = props;
+  const { node, selectedNode, onSelected } = props;
   const [open, setOpen] = useState(false);
 
   const isGroup = node.meta.type === 'group';
@@ -56,8 +63,8 @@ export function MenuNode(
 
   return (
     <Fragment>
-      <MenuItem item={node.meta} onClick = {()=>onSelected(node.id)} 
-        className={classNames(classes.itemHoverable, {[classes.selected]:selectedId === node.id})}
+      <MenuItem item={node.meta} onClick = {()=>onSelected(node)} 
+        className={classNames(classes.itemHoverable, {[classes.selected]:selectedNode?.id === node.id})}
       >
         {isGroup && (open ? 
           <ExpandLess className={classes.moreButton} onClick = {handleOpenClick} /> 
@@ -67,12 +74,12 @@ export function MenuNode(
         
       {
         node.children &&
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={open} timeout="auto" unmountOnExit className = {classes.collapse}>
           <List component="div" disablePadding className={classes.nested}>
             {
               node.children.map(child=>{
                 return(
-                  <MenuNode key={child.id} node = {child} selectedId = {selectedId} onSelected={onSelected}/>
+                  <MenuNode key={child.id} node = {child} selectedNode = {selectedNode} onSelected={onSelected}/>
                 )
               })
             }

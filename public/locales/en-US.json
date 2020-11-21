@@ -199,6 +199,8 @@
     "subheader" : "Sub header",
     "divider" : "Divider",
     "dashboard": "Dashboard",
-    "users-management" :"Users management"
+    "users-management" :"Users management",
+
+    "module-index":"Module index"
 
 }

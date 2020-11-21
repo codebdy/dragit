@@ -12,14 +12,23 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     userSelect:'none',
     padding:theme.spacing(1),
   },
-})
-);
+}));
 
 
-export default function DrawerItemList(props : {items?:Array<RXNode<IMenuItem>>}) {
-  const {items} = props;
+export default function DrawerItemList(
+  props : {
+    nodes? : Array<RXNode<IMenuItem>>,
+    onSelected : (node:RXNode<IMenuItem>)=>void,
+  }
+) {
+  const {nodes, onSelected} = props;
   const classes = useStyles();
-  const [selectedId, setSelectedId] = useState(-1);
+  const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
+
+  const handleSelected = (node:RXNode<IMenuItem>)=>{
+    setSelectedNode(node);
+    onSelected(node);
+  }
 
   return (
     <Scrollbar>
@@ -28,9 +37,11 @@ export default function DrawerItemList(props : {items?:Array<RXNode<IMenuItem>>}
         component="div"
       >
         {
-          items?.map(item=>{
+          nodes?.map(item=>{
             return (
-              <MenuNode key={item.id} node = {item} selectedId = {selectedId} onSelected={setSelectedId}/>
+              <MenuNode key={item.id} node = {item} selectedNode = {selectedNode} 
+                onSelected={handleSelected}
+              />
             )
           })
         }

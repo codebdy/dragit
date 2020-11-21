@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container, TextField, Grid } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container, Grid } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import intl from "react-intl-universal";
@@ -11,6 +11,7 @@ import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
 import { parseRXNodeList } from 'base/RXNodeParser';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
+import NodeEditor from './NodeEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,12 +37,12 @@ const useStyles = makeStyles((theme: Theme) =>
       //flex:1,
       height:'100%',
       display:'flex',
-
       padding:theme.spacing(2),
     },
     left:{
       flex:'1',
       paddingRight:theme.spacing(3),
+      marginTop:theme.spacing(2),
     },
     center:{
       width:'360px',
@@ -61,11 +62,13 @@ export default function DrawerEditor(){
   const classes = useStyles();
   const history = useHistory();
   const [jsonData, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
-  const [items,setItems] = React.useState<Array<RXNode<IMenuItem>>>([]);
+  const [nodes,setNodes] = React.useState<Array<RXNode<IMenuItem>>>([]);
+  const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
 
   useEffect(()=>{
-    jsonData && setItems(parseRXNodeList<IMenuItem>(jsonData));    
+    jsonData && setNodes(parseRXNodeList<IMenuItem>(jsonData));    
   },[jsonData]);
+
 
   const handleClose = ()=>{
     history.goBack();
@@ -73,6 +76,10 @@ export default function DrawerEditor(){
 
   const handleSave = ()=>{
 
+  }
+
+  const handleSelectedNode = (node:RXNode<IMenuItem>)=>{
+    setSelectedNode(node);
   }
 
   return (
@@ -92,19 +99,14 @@ export default function DrawerEditor(){
       </AppBar>
       <Container className={classes.content}>
         <Grid container className = {classes.left} spacing = {2}>
-          <Grid item xs={6}>
-            <TextField variant="outlined" label = "名称" size="small"/>
-          </Grid>
-          <Grid item xs={6}>
-            <TextField variant="outlined" label = "名称" size="small"/>
-          </Grid>
+          {selectedNode && <NodeEditor node = {selectedNode} />}
         </Grid>
         <div className = {classes.center}>
           {
             loading?
             <SiderBarLoadingSkeleton />
             :
-            <DrawerItemList items={items} />
+            <DrawerItemList nodes={nodes} onSelected = {handleSelectedNode} />
           }
         </div>
         <div className = {classes.right}>
