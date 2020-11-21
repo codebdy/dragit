@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
-import IMenuItem from 'base/IMenuItem';
+import IMenuItem, { IMenuChip } from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
 import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';
@@ -25,6 +25,10 @@ export default function NodeEditor(
   const handleIconChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const newValue = event.target.value as any;
     onChange(node, 'icon', newValue);
+  }
+
+  const handleChangeChip = (chip:IMenuChip|undefined) =>{
+    onChange(node, 'chip', chip);
   }
 
   return (
@@ -82,7 +86,7 @@ export default function NodeEditor(
                   onChange = {handleIconChange}
                 />
               </Grid>
-              <ChipEditor chip = {node.meta.chip}/> 
+              <ChipEditor chip = {node.meta.chip} onChange={handleChangeChip}/> 
               <BadgeEditor />       
             </Fragment>
           }

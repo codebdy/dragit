@@ -66,7 +66,7 @@ export default [{
                 icon: 'mdi-circle-small',
                 badge: {
                     color: 'secondary',
-                    label: '15',
+                    field: 'temp',
                     size: 'small',
                 }
             },
@@ -93,7 +93,7 @@ export default [{
                         badge: {
 
                             color: 'secondary',
-                            label: '3',
+                            label: 'temp2',
                             size: 'small',
                         }
                     },

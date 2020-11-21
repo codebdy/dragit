@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Grid, TextField, FormControl, InputLabel, MenuItem, Select, FormControlLabel, Switch } from '@material-ui/core';
+import { Grid, TextField, FormControl, InputLabel, MenuItem, Select, FormControlLabel, Switch, Divider } from '@material-ui/core';
 import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
 import intl from "react-intl-universal";
