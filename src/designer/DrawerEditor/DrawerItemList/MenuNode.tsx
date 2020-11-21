@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   collapse:{
     padding:theme.spacing(2),
     outline:'dashed 1px',
-    outlineColor: theme.palette.grey[300],
+    outlineColor: theme.palette.divider,
   }
 
 }));
