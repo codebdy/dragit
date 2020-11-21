@@ -12,6 +12,7 @@ import { RXNode } from 'base/RXNode';
 import { parseRXNodeList } from 'base/RXNodeParser';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
+import { number } from 'yup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,6 +83,11 @@ export default function DrawerEditor(){
     setSelectedNode(node);
   }
 
+  const handleMetaChange = (node:RXNode<IMenuItem>, field:string, value:any)=>{
+    node.meta[field] = value;
+    setNodes([...nodes])
+  }
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="inherit">
@@ -99,7 +105,7 @@ export default function DrawerEditor(){
       </AppBar>
       <Container className={classes.content}>
         <Grid container className = {classes.left} spacing = {2}>
-          {selectedNode && <NodeEditor node = {selectedNode} />}
+          {selectedNode && <NodeEditor node = {selectedNode} onChange = {handleMetaChange} />}
         </Grid>
         <div className = {classes.center}>
           {

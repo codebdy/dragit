@@ -1,28 +1,29 @@
-import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
 import intl from "react-intl-universal";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-
-
-  }),
-);
-
 export default function NodeEditor(
   props:{
     node:RXNode<IMenuItem>,
+    onChange:(node:RXNode<IMenuItem>, field:string, value:any)=>void,
   }
 ){
-  const {node} = props;
-  const {title, type} = node.meta;
+  const {node, onChange} = props;
+  const [type, setType] = useState(node.meta.type);
+  const [title, setTitle] = useState(node.meta.title);
 
-  const classes = useStyles();
+  useEffect(()=>{
+    setType(node.meta.type);
+    setTitle(node.meta.title);
+  },[node])
 
-  const handleChangeType = ()=>{
-    
+
+  const handleTitleChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    const newTitle = event.target.value as any;
+    setTitle(newTitle);
+    onChange(node, 'title', title);
   }
 
   return (
@@ -32,8 +33,9 @@ export default function NodeEditor(
           <InputLabel>{intl.get('type')}</InputLabel>
           <Select
             value={type || 'item'}
-            onChange={handleChangeType}
+            //onChange={handleChangeType}
             label = {intl.get('type')}
+            disabled
           >
           <MenuItem value="item">
             {intl.get('module-index')}
@@ -52,14 +54,21 @@ export default function NodeEditor(
         </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={6}>
-        <TextField 
-          variant="outlined" 
-          label = {intl.get('name')} 
-          size="small"
-          value = {title || ''}
-        />
-      </Grid>
+      {
+        type !== 'divider' &&
+        <Fragment>
+          <Grid item xs={6}>
+            <TextField 
+              variant="outlined" 
+              label = {intl.get('name')} 
+              size="small"
+              value = {title || ''}
+              onChange = {handleTitleChange}
+            />
+          </Grid>
+
+        </Fragment>
+      }
     </Fragment>
   )
 }

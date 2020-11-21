@@ -14,4 +14,5 @@ export default interface IMenuItem{
   },
   children: Array<IMenuItem>,
   to?: string,
+  [key:string]:any,
 }
