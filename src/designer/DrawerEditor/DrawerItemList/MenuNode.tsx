@@ -4,9 +4,9 @@ import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
 import MenuItem from './MenuItem';
 import { Collapse, List } from '@material-ui/core';
-import MenuDivider from './MenuDivider';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   nested: {
@@ -15,18 +15,36 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
   moreButton:{
     cursor:'pointer',
+  },
+
+  itemHoverable: {
+    "&:hover":{
+      outline:'dashed 1px',
+      outlineColor: theme.palette.primary.main,
+    }
+  },
+
+  selected:{
+    outline:'solid 2px',
+    outlineColor: theme.palette.primary.main,
+    "&:hover":{
+      outline:'solid 2px',
+      outlineColor: theme.palette.primary.main,
+    }    
   }
 })
 );
 
 export function MenuNode(
   props: {
-    node:RXNode<IMenuItem>
+    node:RXNode<IMenuItem>,
+    selectedId:number,
+    onSelected:(selectedId:number)=>void
   }
 ) 
 {
   const classes = useStyles();
-  const { node} = props;
+  const { node, selectedId, onSelected } = props;
   const [open, setOpen] = useState(false);
 
   const isGroup = node.meta.type === 'group';
@@ -38,7 +56,9 @@ export function MenuNode(
 
   return (
     <Fragment>
-      <MenuItem item={node.meta}>
+      <MenuItem item={node.meta} onClick = {()=>onSelected(node.id)} 
+        className={classNames(classes.itemHoverable, {[classes.selected]:selectedId === node.id})}
+      >
         {isGroup && (open ? 
           <ExpandLess className={classes.moreButton} onClick = {handleOpenClick} /> 
           : 
@@ -52,7 +72,7 @@ export function MenuNode(
             {
               node.children.map(child=>{
                 return(
-                  <MenuNode key={child.id} node = {child}/>
+                  <MenuNode key={child.id} node = {child} selectedId = {selectedId} onSelected={onSelected}/>
                 )
               })
             }

@@ -1,36 +1,25 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, Chip, ListItemIcon, ListItemText, ListItem } from '@material-ui/core';
+import { Chip, ListItemIcon, ListItemText, ListItem } from '@material-ui/core';
 import IMenuItem from 'base/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
 import MenuDivider from './MenuDivider';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    item: {
-      "&:hover":{
-        outline:'dashed 1px',
-        outlineColor: theme.palette.primary.main,
-      }
-    },
-  }),
-);
-
 export default function MenuItem(
   props:{
     item:IMenuItem, 
+    className?:any,
     onClick?:()=>void,
     children?:any
   }
 ){
-  const {item, onClick, children} = props;
+  const {item,className,  onClick, children} = props;
   const {title, type, icon, chip, badge} = item;
 
-  const classes = useStyles();
   return (
     type === 'divider'?
-    <MenuDivider className = {classes.item}/>
+    <MenuDivider className = {className} onClick = {onClick}/>
     :
-    <ListItem className = {classes.item} onClick = {onClick}>
+    <ListItem className = {className} onClick = {onClick}>
       {
         type !== 'subheader' &&
         <ListItemIcon>
