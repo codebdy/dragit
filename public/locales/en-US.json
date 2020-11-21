@@ -201,6 +201,8 @@
     "dashboard": "Dashboard",
     "users-management" :"Users management",
 
-    "module-index":"Module index"
+    "module-index":"Module index",
+
+    "icon":"Icon"
 
 }

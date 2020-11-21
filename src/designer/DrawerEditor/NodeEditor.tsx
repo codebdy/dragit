@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
@@ -11,25 +11,24 @@ export default function NodeEditor(
   }
 ){
   const {node, onChange} = props;
-  const [type, setType] = useState(node.meta.type);
-  const [title, setTitle] = useState(node.meta.title);
-
-  useEffect(()=>{
-    setType(node.meta.type);
-    setTitle(node.meta.title);
-  },[node])
+  const type = node.meta.type;
+  const {title, icon} = node.meta;
 
 
   const handleTitleChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const newTitle = event.target.value as any;
-    setTitle(newTitle);
     onChange(node, 'title', newTitle);
+  }
+
+  const handleIconChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    const newValue = event.target.value as any;
+    onChange(node, 'icon', newValue);
   }
 
   return (
     <Fragment>
-      <Grid item xs={6}>
-        <FormControl variant="outlined" size="small" fullWidth>
+      <Grid item xs={12}>
+        <FormControl variant="outlined" size="small">
           <InputLabel>{intl.get('type')}</InputLabel>
           <Select
             value={type || 'item'}
@@ -64,6 +63,15 @@ export default function NodeEditor(
               size="small"
               value = {title || ''}
               onChange = {handleTitleChange}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField 
+              variant="outlined" 
+              label = {intl.get('icon')} 
+              size="small"
+              value = {icon || ''}
+              onChange = {handleIconChange}
             />
           </Grid>
 
