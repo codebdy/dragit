@@ -4,6 +4,7 @@ import IMenuItem from 'base/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
 import MenuDivider from './MenuDivider';
 import classNames from 'classnames';
+import { RXNode } from 'base/RXNode';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   itemText: {
@@ -14,20 +15,29 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export default function MenuItem(
   props:{
-    item:IMenuItem, 
+    node: RXNode<IMenuItem>, 
     className?:any,
+    draggedNode?: RXNode<IMenuItem>,
     onClick?:()=>void,
     children?:any
   }
 ){
-  const {item,className,  onClick, children} = props;
+  const {node,className, draggedNode, onClick, children} = props;
+  const item = node.meta;
   const {title, type, icon, chip, badge} = item;
   const classes = useStyles();
   return (
     type === 'divider'?
-    <MenuDivider className = {className} onClick = {onClick}/>
+    <MenuDivider
+      draggable = {true} 
+      className = {className} 
+      onClick = {onClick}
+    />
     :
-    <ListItem className = {classNames(classes.itemText, className)} onClick = {onClick}>
+    <ListItem 
+      draggable = {true}
+      className = {classNames(classes.itemText, className)} 
+      onClick = {onClick}>
       {
         type !== 'subheader' &&
         <ListItemIcon>

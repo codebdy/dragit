@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -11,6 +11,8 @@ import { API_GET_MODULES } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ItemMeta } from 'designer/Common/EditableList';
 import { openBackground, openBackgroundLight } from 'admin/Sidebar/MenuItems/MenuNodeGroup';
+import IMenuItem from 'base/IMenuItem';
+import { RXNode } from 'base/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,15 +33,50 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ToolsAccordion() {
+
+export default function ToolsAccordion(
+  props:{
+    onStartDragNode:(node:RXNode<IMenuItem>)=>void,
+  }
+) {
+  const {onStartDragNode} = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const [customizedModules] = useAxios<ItemMeta[]>(API_GET_MODULES);
+  const [assistItems] = useState([
+    {
+      label:intl.get('fold-group'),
+      meta:{
+        type:"group",
+        title:intl.get('fold-group'),
+        icon:"mdi-help",
+      }
+    },
+    {
+      label:intl.get('subheader'),
+      meta:{
+        type:"subheader",
+        title:intl.get('subheader'),
+      }
+    },
+  
+    {
+      label:intl.get('divider'),
+      meta:{
+        type:"divider",
+      }
+    },
+  ])
 
   const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  const handleDragStart = (itemMeta:IMenuItem) => {
+    let draggedNode = new RXNode<IMenuItem>(itemMeta);
+    onStartDragNode(draggedNode);
+  }
 
   return (
     <div className={classes.root}>
@@ -53,15 +90,20 @@ export default function ToolsAccordion() {
         </AccordionSummary>
         <AccordionDetails>
           <List className={classes.list}>
-            <ListItem className={classes.item}>
-              <ListItemText primary={intl.get('fold-group')} />
-            </ListItem>
-            <ListItem className={classes.item}>
-              <ListItemText primary={intl.get('subheader')} />
-            </ListItem>
-            <ListItem className={classes.item}>
-              <ListItemText primary={intl.get('divider')} />
-            </ListItem>
+            {
+              assistItems.map((item, index)=>{
+                return (
+                  <ListItem 
+                    key={index} 
+                    draggable = {true}  
+                    className={classes.item}
+                    onDragStart = {()=>handleDragStart(item.meta as any)}
+                  >
+                    <ListItemText primary={item.label} />
+                  </ListItem>
+                )
+              })
+            }
           </List>
         </AccordionDetails>
       </Accordion>
@@ -78,7 +120,7 @@ export default function ToolsAccordion() {
             {
               customizedModules?.map(module=>{
                 return (
-                  <ListItem key={module.id} className={classes.item}>
+                  <ListItem key={module.id} draggable = {true}  className={classes.item}>
                     <ListItemText primary={module.title} />
                   </ListItem>                  
                 )
@@ -97,14 +139,8 @@ export default function ToolsAccordion() {
         </AccordionSummary>
         <AccordionDetails>
           <List className={classes.list}>
-            <ListItem className={classes.item}>
-              <ListItemText primary={intl.get('dashboard')} />
-            </ListItem>
-            <ListItem className={classes.item}>
+            <ListItem className={classes.item} draggable = {true} >
               <ListItemText primary={intl.get('medias')} />
-            </ListItem>
-            <ListItem className={classes.item}>
-              <ListItemText primary={intl.get('users-management')} />
             </ListItem>
           </List>
         </AccordionDetails>

@@ -65,6 +65,7 @@ export default function DrawerEditor(){
   const [jsonData, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
   const [nodes,setNodes] = React.useState<Array<RXNode<IMenuItem>>>([]);
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
+  const [draggedNode, setDraggedNode] =  useState<RXNode<IMenuItem>>();
 
   useEffect(()=>{
     jsonData && setNodes(parseRXNodeList<IMenuItem>(jsonData));    
@@ -86,6 +87,10 @@ export default function DrawerEditor(){
   const handleMetaChange = (node:RXNode<IMenuItem>, field:string, value:any)=>{
     node.meta[field] = value;
     setNodes([...nodes])
+  }
+
+  const handleStartDragNode = (node:RXNode<IMenuItem>)=>{
+    setDraggedNode(node);
   }
 
   return (
@@ -112,13 +117,17 @@ export default function DrawerEditor(){
             loading?
             <SiderBarLoadingSkeleton />
             :
-            <DrawerItemList nodes={nodes} onSelected = {handleSelectedNode} />
+            <DrawerItemList 
+              nodes={nodes} 
+              draggedNode = {draggedNode}
+              onSelected = {handleSelectedNode} 
+            />
           }
         </div>
         <div className = {classes.right}>
-          <ToolsAccordion />
+          <ToolsAccordion onStartDragNode={handleStartDragNode} />
         </div>
       </Container>
     </div>
-  )
+  ) 
 }

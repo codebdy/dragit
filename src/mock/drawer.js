@@ -1,11 +1,9 @@
 export default [{
-        id: "h1",
         //type:subheader, item, group
         type: 'subheader',
         title: '应用',
     },
     {
-        id: "1",
         type: 'item',
         title: '仪表盘',
         to: '/admin/dashboard',
@@ -17,7 +15,6 @@ export default [{
         }
     },
     {
-        id: "t2",
         type: 'item',
         title: 'test',
         to: '/admin/page/test',
@@ -28,26 +25,22 @@ export default [{
         type:'divider',
     },
     {
-        id: "t2test",
         type: 'item',
         title: '文章管理',
         to: '/admin/module/1/',
         icon: 'mdi-home',
     },
     {
-        id: "m2",
         type: 'item',
         title: '媒体库',
         to: '/admin/medias',
         icon: 'mdi-image-auto-adjust',
     },
     {
-        id: "2",
         title: '文章管理',
         type: 'group',
         icon: 'mdi-text-box-outline',
         children: [{
-                id: "h2-1",
                 type: 'subheader',
                 title: '二级应用',
             },

@@ -3,6 +3,7 @@ export class RXNode<T>{
   id: number = 0;  
   meta:T;
   children?: Array<RXNode<T>>;
+  parent?:RXNode<T>;
 
   constructor(meta:T, children?:Array<RXNode<T>> ){
     this.seedId();

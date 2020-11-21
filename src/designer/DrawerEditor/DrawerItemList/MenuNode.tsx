@@ -45,12 +45,13 @@ export function MenuNode(
   props: {
     node:RXNode<IMenuItem>,
     selectedNode?:RXNode<IMenuItem>,
+    draggedNode?: RXNode<IMenuItem>,
     onSelected:(selectedNode:RXNode<IMenuItem>)=>void
   }
 ) 
 {
   const classes = useStyles();
-  const { node, selectedNode, onSelected } = props;
+  const { node, selectedNode, draggedNode, onSelected } = props;
   const [open, setOpen] = useState(false);
 
   const isGroup = node.meta.type === 'group';
@@ -62,7 +63,7 @@ export function MenuNode(
 
   return (
     <Fragment>
-      <MenuItem item={node.meta} onClick = {()=>onSelected(node)} 
+      <MenuItem node={node} draggedNode = {draggedNode} onClick = {()=>onSelected(node)} 
         className={classNames(classes.itemHoverable, {[classes.selected]:selectedNode?.id === node.id})}
       >
         {isGroup && (open ? 

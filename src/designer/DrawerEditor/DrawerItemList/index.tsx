@@ -18,10 +18,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 export default function DrawerItemList(
   props : {
     nodes? : Array<RXNode<IMenuItem>>,
+    draggedNode?: RXNode<IMenuItem>,
     onSelected : (node:RXNode<IMenuItem>)=>void,
   }
 ) {
-  const {nodes, onSelected} = props;
+  const {nodes, draggedNode, onSelected} = props;
   const classes = useStyles();
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
 
@@ -39,7 +40,9 @@ export default function DrawerItemList(
         {
           nodes?.map(item=>{
             return (
-              <MenuNode key={item.id} node = {item} selectedNode = {selectedNode} 
+              <MenuNode key={item.id} node = {item} 
+                selectedNode = {selectedNode}
+                draggedNode = {draggedNode}
                 onSelected={handleSelected}
               />
             )

@@ -1,13 +1,17 @@
 import { RXNode } from "./RXNode";
 
 export function parseRXNode<T>(json:any):RXNode<T>{
-  return new RXNode(json, parseRXNodeList(json.children))
+  let node = new RXNode(json)
+  node.children = parseRXNodeList(json.children, node)
+  return node;
 }
 
-export function parseRXNodeList<T>( jsons:any ) : Array<RXNode<T>>{
+export function parseRXNodeList<T>( jsons:any, parent?:RXNode<T> ) : Array<RXNode<T>>{
   let nodes = new Array<RXNode<T>>();
   jsons && jsons.forEach((json: any)=>{
-    nodes.push(parseRXNode(json))
+    let node = parseRXNode<T>(json);
+    node.parent = parent;
+    nodes.push(node);
   })
   return nodes
 }

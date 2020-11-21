@@ -15,12 +15,14 @@ export default function MenuDivider(
   props:{
     className:any,
     onClick?:()=>void,
+    draggable?:boolean,
   }
 )
-  {
+{
   const classes = useStyles();
   return (
-    <div 
+    <div
+      draggable = {props.draggable} 
       className = {classNames(classes.root, props.className)} 
       onClick = {props.onClick}
     >
