@@ -203,6 +203,8 @@
 
     "module-index":"Module index",
 
-    "icon":"Icon"
+    "icon":"Icon",
+    "menu-chip":"Chip",
+    "menu-badge":"Badge"
 
 }

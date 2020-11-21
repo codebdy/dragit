@@ -208,6 +208,8 @@
 
     "module-index":"模块索引",
 
-    "icon":"图标"
+    "icon":"图标",
+    "menu-chip":"特色文字",
+    "menu-badge":"通知文字"
 
 }

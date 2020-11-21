@@ -3,6 +3,8 @@ import { Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@mat
 import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode';
 import intl from "react-intl-universal";
+import ChipEditor from './ChipEditor';
+import BadgeEditor from './BadgeEditor';
 
 export default function NodeEditor(
   props:{
@@ -67,17 +69,23 @@ export default function NodeEditor(
               onChange = {handleTitleChange}
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField 
-              fullWidth
-              variant="outlined" 
-              label = {intl.get('icon')} 
-              size="small"
-              value = {icon || ''}
-              onChange = {handleIconChange}
-            />
-          </Grid>
-
+          {
+            type !== 'subheader' &&
+            <Fragment>
+              <Grid item xs={6}>
+                <TextField 
+                  fullWidth
+                  variant="outlined" 
+                  label = {intl.get('icon')} 
+                  size="small"
+                  value = {icon || ''}
+                  onChange = {handleIconChange}
+                />
+              </Grid>
+              <ChipEditor/> 
+              <BadgeEditor />       
+            </Fragment>
+          }
         </Fragment>
       }
     </Grid>
