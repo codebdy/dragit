@@ -10,7 +10,7 @@ type MenuNodeProps = TreeItemProps & {
   item:RXNode<IMenuItem>
 };
 
-const useTreeItemStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
   label: {
     fontWeight: 'inherit',
     color: 'inherit',
@@ -30,7 +30,7 @@ const useTreeItemStyles = makeStyles((theme: Theme) => createStyles({
 })
 );
 export function MenuNode(props: MenuNodeProps) {
-  const classes = useTreeItemStyles();
+  const classes = useStyles();
   const { item, ...other } = props;
 
   return (
