@@ -54,7 +54,8 @@ export default function usePageMeta(moduleId:number, pageId:number):[IPage|undef
       }      
     }
     else{
-      setCachedPageMeta(page);
+      let pageCopy = JSON.parse(JSON.stringify(page))
+      setCachedPageMeta(pageCopy);
     }
      
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,10 +63,11 @@ export default function usePageMeta(moduleId:number, pageId:number):[IPage|undef
   
   useEffect(()=>{
     if(pageMeta){
+      let pageMetaCopy = JSON.parse(JSON.stringify(pageMeta))
       if(pageId){
-        pagesCache.addPage(pageMeta)
+        pagesCache.addPage(pageMetaCopy)
       }else{
-        pagesCache.addModuleIndexPage(moduleId, pageMeta)
+        pagesCache.addModuleIndexPage(moduleId, pageMetaCopy)
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
