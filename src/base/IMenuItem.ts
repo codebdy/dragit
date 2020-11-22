@@ -1,4 +1,3 @@
-import { IAuth } from "./IAuth";
 
 export interface IMenuBadge {
   color?: 'primary' | 'secondary' | 'default';
