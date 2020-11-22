@@ -1,5 +1,4 @@
 import { createStyles, FormControlLabel, Grid, makeStyles, Switch, TextField, Theme } from '@material-ui/core';
-import { SelectItems } from 'components/Select/SelectBox';
 import React from 'react';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
@@ -13,6 +12,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+
+export interface SelectItems{
+  fromUrl?:boolean;
+  items?:Array<any>;
+  url?:string;
+}
 
 export default function SelectItemsInput(props:PropsInputProps){
   const {field, value, onChange} = props;

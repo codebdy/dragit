@@ -70,6 +70,11 @@ const API_REMOVE_MODULE_AUTH : AxiosRequestConfig= {
   method:'post',
 }
 
+const API_GET_AUTHS : AxiosRequestConfig= {
+  url:'/api/get-auths',
+  method:'get',
+}
+
 
 export { 
   API_GET_MODULES,
@@ -86,5 +91,6 @@ export {
 
   API_ADD_MODULE_AUTH,
   API_UPDATE_MODULE_AUTH,
-  API_REMOVE_MODULE_AUTH
+  API_REMOVE_MODULE_AUTH,
+  API_GET_AUTHS
 }

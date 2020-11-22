@@ -9,6 +9,7 @@ import test from './views/test'
 import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
 import modules, {getModuleIndexPage, getModulePage} from './views/modules'
+import auths from './data/auths'
 
 window.idSeed = 100;
 
@@ -210,6 +211,9 @@ Mock.mock(RegExp('/api/update-module-auth?.*'),'post', (request)=>{
   }
   return JSON.parse(JSON.stringify(module));;
 })
+
+Mock.mock('/api/get-auths','get', auths)
+
 
 
 Mock.setup({

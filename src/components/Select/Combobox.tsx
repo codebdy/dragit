@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { SelectItems } from './SelectBox';
 import axios from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
 
@@ -9,10 +8,17 @@ const Combobox = React.forwardRef((
   props:{
     value?:string|[],
     multiple?:boolean,
-    onChange:any,
+    onChange?:any,
     itemKey?:string,
     itemName?:string,
-    data:SelectItems,  
+    fullWidth?:boolean,
+    fromUrl?:boolean;
+    items?:Array<any>;
+    url?:string,
+    label?:string, 
+    variant?:any, 
+    size?:any,
+    groupBy?:string,
   },
   ref:any
 )=>{
@@ -20,14 +26,13 @@ const Combobox = React.forwardRef((
     multiple, 
     onChange, 
     itemName = 'name',
-    data,
+    fullWidth,
+    fromUrl,
+    items,
+    url,
     ...rest
   } = props;
 
-  const {
-    fromUrl,
-    url,
-  } = data;
 
   let name = fromUrl ? itemName : 'label';
   const mountedRef = useRef(true);
@@ -35,10 +40,10 @@ const Combobox = React.forwardRef((
 
   const empertyValue = multiple ? []:'';
   
-  const [items, setItems] = React.useState(data.items||[]);
+  const [itemsData, setItemsData] = React.useState(items||[]);
   const [inputValue, setInputValue] = React.useState<any>(value||empertyValue);
 
-  let options = items.map((item:any)=>item[name]);
+  let options = itemsData.map((item:any)=>item[name]);
 
   useEffect(() => {
     if(!fromUrl || !url){
@@ -52,7 +57,7 @@ const Combobox = React.forwardRef((
       }
     ).then(res => {
       if(mountedRef.current){
-        setItems(res.data);
+        setItemsData(res.data);
         setLoading(false);
       }
     })
@@ -76,10 +81,11 @@ const Combobox = React.forwardRef((
     <Autocomplete
       multiple = {multiple}
       options = {options}
-      freeSolo
       loading = {loading}
       ref = {ref}
       value = {inputValue}
+      freeSolo
+      fullWidth = {fullWidth}
       //defaultValue = {value||empertyValue}
       renderInput={(params) => (
         <TextField
@@ -98,4 +104,7 @@ const Combobox = React.forwardRef((
   )
 })
 
-export default withSkeleton(Combobox);
+//显式调用报错的缓兵之计，以后再改
+let ComboboxAny  =  withSkeleton(Combobox) as any
+
+export default ComboboxAny;
