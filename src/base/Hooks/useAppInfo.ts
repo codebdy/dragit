@@ -1,4 +1,4 @@
 
 export function useAppInfo( field: string|undefined ){
-  return "0";
+  return "7";
 }

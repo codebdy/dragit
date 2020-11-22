@@ -190,7 +190,8 @@
     "is-form-page":"表单页",
     "api":"页面接口",
     "is-index-page":"索引页",
-    "module-management":"模块管理",
+    "module-pages":"模块页面",
+    "module-auth-points":"权限点",
 
     "error":"错误",
     "input-error":"部分输入项有错误",
