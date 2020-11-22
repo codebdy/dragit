@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container, CircularProgress } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import intl from "react-intl-universal";
 import DrawerItemList from './DrawerItemList';
 import ToolsAccordion from './ToolsAccordion';
-import { API_GET_DRAWER } from 'APIs/drawer';
+import { API_GET_DRAWER, API_SAVE_DRAWER } from 'APIs/drawer';
 import { useAxios } from 'base/Hooks/useAxios';
 import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
 import { RXNodeRoot } from 'base/RXNode/Root';
-
+import { AxiosRequestConfig } from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,7 +55,18 @@ const useStyles = makeStyles((theme: Theme) =>
     right:{
       flex:'1',
       paddingLeft:theme.spacing(5),
-    }
+    },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: 'relative',
+    },    
+    buttonProgress: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginTop: -12,
+      marginLeft: -12,
+    },
   }),
 );
 
@@ -66,19 +77,21 @@ export default function DrawerEditor(){
   const [rootNode,setRootNode] = React.useState(new RXNodeRoot<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RXNode<IMenuItem>>();
+  const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
+  const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
 
   useEffect(()=>{
     metas && rootNode.parse(metas);    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[metas]);
 
-
   const handleClose = ()=>{
     history.goBack();
   }
 
   const handleSave = ()=>{
-
+    const drawerData = rootNode.getRootMetas();
+    setSaveRequest({...API_SAVE_DRAWER, data:drawerData})
   }
 
   const handleSelectedNode = (node:RXNode<IMenuItem>)=>{
@@ -169,9 +182,15 @@ export default function DrawerEditor(){
           <Typography variant="h6" className={classes.title}>
             {intl.get('edit-drawer')}
           </Typography>
-          <Button className={classes.saveButton} onClick={handleSave} size="large"style={{fontSize:'1.2rem'}}>
-            {intl.get('save')}
-          </Button>
+          <div className={classes.wrapper}>
+            <Button className={classes.saveButton} 
+              onClick={handleSave} size="large"style={{fontSize:'1.2rem'}}
+              disabled={saving}
+            >
+              {intl.get('save')}
+            </Button>
+            {saving && <CircularProgress color = "primary" size={24} className={classes.buttonProgress} />}
+          </div>
         </Toolbar>
       </AppBar>
       <Container className={classes.content} onDragOver={handleOverTopDragOver} onDrop={handleOverTopDop}>

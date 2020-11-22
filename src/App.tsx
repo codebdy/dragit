@@ -14,6 +14,7 @@ import ModuleManager from 'designer/ModuleManager';
 import useThemeSettings from 'store/theme/useThemeSettings';
 import useShadows from 'store/theme/useShadows';
 import DrawerEditor from 'designer/DrawerEditor';
+import SuccessAlertBar from 'base/SuccessAlertBar';
 
 function App() {
   const dispatch = useDispatch()
@@ -55,6 +56,7 @@ function App() {
             <Redirect to="/admin" from='/' /> 
           </Switch>
         </BrowserRouter>
+        <SuccessAlertBar />
       </ThemeProvider>)
   );
 }

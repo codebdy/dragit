@@ -88,4 +88,14 @@ export class RXNode<T>{
     this.parent = target;
   }
 
+  getMeta(){
+    let metaAny = JSON.parse(JSON.stringify(this.meta));
+    metaAny.children = [];
+    this.children.forEach(child=>{
+      metaAny.children.push(child.getMeta());
+    })
+
+    return metaAny;
+  }
+
 } 

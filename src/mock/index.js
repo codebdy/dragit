@@ -17,6 +17,8 @@ function createId(){
     return window.idSeed;
 }
 
+window.drawerData = drawer;
+
 function getQueryVariable(name, oldUrl) {
   const url = decodeURI(oldUrl); // 获取url中"?"符后的字串(包括问号)
   //let query = {};
@@ -32,7 +34,14 @@ function getQueryVariable(name, oldUrl) {
 }
 
 
-Mock.mock('/api/drawer', 'get', drawer)
+Mock.mock('/api/drawer', 'get', window.drawerData)
+
+Mock.mock('/api/save-drawer','post', (request)=>{
+  window.drawerData = request.body; 
+  return true;
+})
+
+
 
 Mock.mock(RegExp('/api/get-module-index-page?.*'),'get', (request)=>{
   let id = parseInt(getQueryVariable('moduleId', request.url));

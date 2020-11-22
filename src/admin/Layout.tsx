@@ -11,7 +11,6 @@ import Medias from 'components/Medias/Medias';
 import AreaSelect from 'designer/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
-import SuccessAlertBar from './SuccessAlertBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,7 +63,6 @@ export default function Layout(){
         </PageContent>
       </div>
       <AreaSelect></AreaSelect>
-      <SuccessAlertBar />
     </div>
   )
 }
