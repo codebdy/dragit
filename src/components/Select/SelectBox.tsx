@@ -23,17 +23,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const groupBy = (array:any, name:string)=>{
   let groups = {} as any
+  let retValue: any[] = [];  
   array?.forEach(function (o:any) {
     const group = o[name]
     groups[group] = groups[group] || []
     groups[group].push(o)
   })
-  //return groups;
-  let retValue: any[] = [];
+
   Object.keys(groups).forEach(groupName =>{
     retValue.push({type:'groupTitle', title:groupName})
-    groups[groupName].forEach((row:any) =>{
-      retValue.push(row)
+    groups[groupName].forEach((item:any) =>{
+      retValue.push(item)
     })
   })
 
@@ -79,10 +79,15 @@ const SelectBox = React.forwardRef((
   let name = fromUrl ? itemName : 'label';
 
   const classes = useStyles();
-  const [request] = React.useState<AxiosRequestConfig>({
-    method:"get",
-    url:url,
-  })
+  const [request] = React.useState<AxiosRequestConfig|undefined>(
+    fromUrl?
+    {
+      method:"get",
+      url:url,
+    }
+    :
+    undefined
+  )
   const [menuItems, loading] = useAxios(request);
 
   const empertyValue = multiple?[]:'';

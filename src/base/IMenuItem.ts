@@ -20,6 +20,6 @@ export default interface IMenuItem{
   chip?:IMenuChip,
   children?: Array<IMenuItem>,
   to?: string,
-  auths?:IAuth[],
+  auths?:string[],
   [key:string]:any,
 }
