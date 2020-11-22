@@ -217,5 +217,5 @@ Mock.mock('/api/get-auths','get', auths)
 
 
 Mock.setup({
-    timeout: 500
+    timeout: 50
 })

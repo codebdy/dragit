@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuI
 import { Skeleton } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
-import { useAxios } from 'base/Hooks/useAxios';
+import { useBaseItems } from 'base/Hooks/useBaseItems';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -88,7 +88,7 @@ const SelectBox = React.forwardRef((
     :
     undefined
   )
-  const [menuItems, loading] = useAxios(request);
+  const [menuItems, loading] = useBaseItems(request);
 
   const empertyValue = multiple?[]:'';
 

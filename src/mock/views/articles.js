@@ -141,8 +141,8 @@ export default {
                     icon:"mdi-pencil",
                     jumpToPage:{
                       //name: JUMP_TO_PAGE_ACidTION,
-                      moduleId:'articles',
-                      pageId:'article',
+                      moduleId:'1',
+                      pageId:'2',
                       param:'id',
                       paramField:'id',
                     }
