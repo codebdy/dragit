@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
       border:'solid 2px rgba(0,0,0, 0.3)',
       backgroundColor: theme.palette.background.paper,
       display:'flex',
-      flexFlow:'column',    
+      flexFlow:'column', 
     },
     right:{
       flex:'1',
@@ -148,6 +148,17 @@ export default function DrawerEditor(){
     setRootNode(copy); 
   }
 
+  const handleDragOver = (event: React.DragEvent<unknown>)=>{
+    event.preventDefault();
+    event.stopPropagation();
+    if(!draggedNode || rootNode.children.length > 0){
+      return;
+    }
+    let copy = rootNode.copy();
+    draggedNode?.moveIn(copy);
+    setRootNode(copy);     
+  }
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="inherit">
@@ -169,6 +180,7 @@ export default function DrawerEditor(){
         </div>
         <div className = {classes.center}
           onDrop = {(event: React.DragEvent<unknown>)=>{event.stopPropagation()}}
+          onDragOver = {handleDragOver}
         >
           {
             loading?
