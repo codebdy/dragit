@@ -4,6 +4,7 @@ import IMenuItem from 'base/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
 import { RXNode } from 'base/RXNode/RXNode';
+import MenuNodeOperateProps from './MenuNodeOperateProps';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   itemText: {
@@ -18,12 +19,8 @@ export default function MenuItem(
   props:{
     node: RXNode<IMenuItem>, 
     className?:any,
-    draggedNode?: RXNode<IMenuItem>,
-    onClick?:()=>void,
-    children?:any,
-    onDragToBefore:(targetId: number)=>void,
-    onDragToAfter:(targetId: number)=>void,
-  }
+    children:any,
+  }&MenuNodeOperateProps
 ){
   const {node,
     className, 
@@ -31,7 +28,9 @@ export default function MenuItem(
     onClick, 
     children,
     onDragToBefore,
-    onDragToAfter
+    onDragToAfter,
+    onDragStart,
+    onDragEnd,
   } = props;
   const item = node.meta;
   const {title, type, icon, chip, badge} = item;
@@ -39,8 +38,9 @@ export default function MenuItem(
   const nodeEl = useRef(null);
 
   const handleDragover = (event: React.DragEvent<unknown>)=>{
-    if(draggedNode &&(draggedNode.id !== node.id)){
-      event.preventDefault();
+      event.preventDefault();    
+      if(draggedNode &&(draggedNode.id !== node.id)){
+
       event.stopPropagation();
       let domElement = nodeEl?.current as unknown as HTMLElement;
       if(domElement){
@@ -52,20 +52,23 @@ export default function MenuItem(
         else{
           onDragToAfter(node.id);
         }
-
       }
 
     }
   }
+
+  const draggedClassName = draggedNode?.id === node.id ? 'dragged-node' : '';
 
   return (
     type === 'divider'?
       <div
         ref={nodeEl}
         draggable = {true} 
-        className = {classNames(classes.divider, className)} 
+        className = {classNames(classes.divider, className, draggedClassName)} 
         onClick = {onClick}
         onDragOver = {handleDragover}
+        onDragStart = {()=>onDragStart(node)}
+        onDragEnd = {onDragEnd}
       >
         <Divider />      
       </div>
@@ -73,9 +76,11 @@ export default function MenuItem(
     <ListItem 
       ref={nodeEl}
       draggable = {true}
-      className = {classNames(classes.itemText, className)} 
+      className = {classNames(classes.itemText, className, draggedClassName)} 
       onClick = {onClick}
       onDragOver = {handleDragover}
+      onDragStart = {()=>onDragStart(node)}
+      onDragEnd = {onDragEnd}
     >
       {
         type !== 'subheader' &&

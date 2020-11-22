@@ -7,6 +7,7 @@ import { Collapse, List } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import classNames from 'classnames';
+import MenuNodeOperateProps from './MenuNodeOperateProps';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   nested: {
@@ -44,16 +45,19 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 export function MenuNode(
   props: {
     node:RXNode<IMenuItem>,
-    selectedNode?:RXNode<IMenuItem>,
-    draggedNode?: RXNode<IMenuItem>,
-    onSelected:(selectedNode:RXNode<IMenuItem>)=>void,
-    onDragToBefore:(targetId: number)=>void,
-    onDragToAfter:(targetId: number)=>void,
-  }
+  }&MenuNodeOperateProps
 ) 
 {
   const classes = useStyles();
-  const { node, selectedNode, draggedNode, onSelected, onDragToBefore, onDragToAfter } = props;
+  const { node, 
+    selectedNode, 
+    draggedNode, 
+    onSelected, 
+    onDragToBefore,
+    onDragToAfter,
+    onDragStart,
+    onDragEnd 
+  } = props;
   const [open, setOpen] = useState(false);
 
   const isGroup = node.meta.type === 'group';
@@ -68,10 +72,12 @@ export function MenuNode(
       <MenuItem 
         node={node} 
         draggedNode = {draggedNode} 
-        onClick = {()=>onSelected(node)} 
+        onClick = {()=>{onSelected && onSelected(node)}} 
         className={classNames(classes.itemHoverable, {[classes.selected]:selectedNode?.id === node.id})}
         onDragToBefore = {onDragToBefore}
         onDragToAfter = {onDragToAfter}
+        onDragStart = {onDragStart}
+        onDragEnd = {onDragEnd}
       >
         {isGroup && (open ? 
           <ExpandLess className={classes.moreButton} onClick = {handleOpenClick} /> 
@@ -89,10 +95,13 @@ export function MenuNode(
                   <MenuNode 
                     key={child.id} 
                     node = {child} 
+                    draggedNode = {draggedNode}
                     selectedNode = {selectedNode} 
                     onSelected={onSelected}
                     onDragToBefore = {onDragToBefore}
                     onDragToAfter = {onDragToAfter}
+                    onDragStart = {onDragStart}
+                    onDragEnd = {onDragEnd}
                   />
                 )
               })

@@ -37,9 +37,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ToolsAccordion(
   props:{
     onStartDragNode:(node:RXNode<IMenuItem>)=>void,
+    onEndDragNode:()=>void,
   }
 ) {
-  const {onStartDragNode} = props;
+  const {onStartDragNode, onEndDragNode} = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -98,6 +99,7 @@ export default function ToolsAccordion(
                     draggable = {true}  
                     className={classes.item}
                     onDragStart = {()=>handleDragStart(item.meta as any)}
+                    onDragEnd = {onEndDragNode}
                   >
                     <ListItemText primary={item.label} />
                   </ListItem>

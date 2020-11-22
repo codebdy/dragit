@@ -5,6 +5,7 @@ import { MenuNode } from './MenuNode';
 import { RXNode } from 'base/RXNode/RXNode';
 import Scrollbar from 'admin/common/Scrollbar';
 import { List, Theme } from '@material-ui/core';
+import MenuNodeOperateProps from './MenuNodeOperateProps';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -16,21 +17,23 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 export default function DrawerItemList(
-  props : {
-    nodes? : Array<RXNode<IMenuItem>>,
-    draggedNode?: RXNode<IMenuItem>,
-    onSelected : (node:RXNode<IMenuItem>)=>void,
-    onDragToBefore:(targetId: number)=>void,
-    onDragToAfter:(targetId: number)=>void,
-  }
+  props : {nodes?: Array<RXNode<IMenuItem>>}
+    &MenuNodeOperateProps
 ) {
-  const {nodes, draggedNode, onSelected, onDragToBefore, onDragToAfter} = props;
+  const {nodes, 
+    draggedNode,
+    onSelected, 
+    onDragToBefore, 
+    onDragToAfter,
+    onDragStart,
+    onDragEnd
+  } = props;
   const classes = useStyles();
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
 
   const handleSelected = (node:RXNode<IMenuItem>)=>{
     setSelectedNode(node);
-    onSelected(node);
+    onSelected && onSelected(node);
   }
 
   return (
@@ -48,6 +51,8 @@ export default function DrawerItemList(
                 onSelected={handleSelected}
                 onDragToBefore = {onDragToBefore}
                 onDragToAfter = {onDragToAfter}
+                onDragStart = {onDragStart}
+                onDragEnd = {onDragEnd}
               />
             )
           })

@@ -96,26 +96,42 @@ export default function DrawerEditor(){
     setDraggedNode(node);
   }
 
+  const handleDragEnd = ()=>{
+    setDraggedNode(undefined);
+  }
+
   const handleDragToBefore = (targetId:number)=>{
+    if(!draggedNode){
+      return;
+    }
+
     let copy = rootNode.copy()
     let targetNode = copy.getNode(targetId);
-    let node = copy.getNode(draggedNode?.id);
-    if(targetNode){
-      node?.moveBefore(targetNode);      
+    if(!targetNode){
+      return;
     }
+
+    let node = copy.getNode(draggedNode.id) || draggedNode
+    node.moveBefore(targetNode);      
 
     setRootNode(copy);
   }
 
   const handleDragToAfter = (targetId:number)=>{
-    let copy = rootNode.copy()
-    let targetNode = copy.getNode(targetId);
-    let node = copy.getNode(draggedNode?.id);
-    if(targetNode){
-      node?.moveAfter(targetNode);      
+    if(!draggedNode){
+      return;
     }
 
-    setRootNode(copy);    
+    let copy = rootNode.copy()
+    let targetNode = copy.getNode(targetId);
+    if(!targetNode){
+      return;
+    }
+    
+    let node = copy.getNode(draggedNode.id) || draggedNode
+    node.moveAfter(targetNode);      
+
+    setRootNode(copy);
   }
 
   return (
@@ -148,11 +164,13 @@ export default function DrawerEditor(){
               onSelected = {handleSelectedNode}
               onDragToBefore = {handleDragToBefore}
               onDragToAfter = {handleDragToAfter}
+              onDragStart = {handleStartDragNode}
+              onDragEnd = {handleDragEnd}
             />
           }
         </div>
         <div className = {classes.right}>
-          <ToolsAccordion onStartDragNode={handleStartDragNode} />
+          <ToolsAccordion onStartDragNode={handleStartDragNode} onEndDragNode = {handleDragEnd}/>
         </div>
       </Container>
     </div>
