@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
-import { Chip, ListItemIcon, ListItemText, ListItem, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Chip, ListItemIcon, ListItemText, ListItem, createStyles, makeStyles, Theme, Divider } from '@material-ui/core';
 import IMenuItem from 'base/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
-import MenuDivider from './MenuDivider';
 import classNames from 'classnames';
 import { RXNode } from 'base/RXNode/RXNode';
 
@@ -10,7 +9,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   itemText: {
     color:theme.palette.text.primary,
   },
-
+  divider: {
+    padding:theme.spacing(1, 0),
+  },
 }));
 
 export default function MenuItem(
@@ -19,10 +20,19 @@ export default function MenuItem(
     className?:any,
     draggedNode?: RXNode<IMenuItem>,
     onClick?:()=>void,
-    children?:any
+    children?:any,
+    onDragToBefore:(targetId: number)=>void,
+    onDragToAfter:(targetId: number)=>void,
   }
 ){
-  const {node,className, draggedNode, onClick, children} = props;
+  const {node,
+    className, 
+    draggedNode, 
+    onClick, 
+    children,
+    onDragToBefore,
+    onDragToAfter
+  } = props;
   const item = node.meta;
   const {title, type, icon, chip, badge} = item;
   const classes = useStyles();
@@ -32,17 +42,33 @@ export default function MenuItem(
     if(draggedNode &&(draggedNode.id !== node.id)){
       event.preventDefault();
       event.stopPropagation();
-      //nodeEl.current;
+      let domElement = nodeEl?.current as unknown as HTMLElement;
+      if(domElement){
+        let rect = domElement.getBoundingClientRect();
+        
+        if((event.clientY - rect.y)/rect.height > 0.5){
+          onDragToBefore(node.id);
+        }
+        else{
+          onDragToAfter(node.id);
+        }
+
+      }
+
     }
   }
 
   return (
     type === 'divider'?
-    <MenuDivider
-      draggable = {true} 
-      className = {className} 
-      onClick = {onClick}
-    />
+      <div
+        ref={nodeEl}
+        draggable = {true} 
+        className = {classNames(classes.divider, className)} 
+        onClick = {onClick}
+        onDragOver = {handleDragover}
+      >
+        <Divider />      
+      </div>
     :
     <ListItem 
       ref={nodeEl}

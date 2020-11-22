@@ -87,13 +87,35 @@ export default function DrawerEditor(){
 
   const handleMetaChange = (node:RXNode<IMenuItem>, field:string, value:any)=>{
     let copy = rootNode.copy()
-    let meta = copy.getMeta(node.id);
-    meta && (meta[field] = value);
+    let targetNode = copy.getNode(node.id);
+    targetNode?.meta && (targetNode.meta[field] = value);
     setRootNode(copy);
   }
 
   const handleStartDragNode = (node:RXNode<IMenuItem>)=>{
     setDraggedNode(node);
+  }
+
+  const handleDragToBefore = (targetId:number)=>{
+    let copy = rootNode.copy()
+    let targetNode = copy.getNode(targetId);
+    let node = copy.getNode(draggedNode?.id);
+    if(targetNode){
+      node?.moveBefore(targetNode);      
+    }
+
+    setRootNode(copy);
+  }
+
+  const handleDragToAfter = (targetId:number)=>{
+    let copy = rootNode.copy()
+    let targetNode = copy.getNode(targetId);
+    let node = copy.getNode(draggedNode?.id);
+    if(targetNode){
+      node?.moveAfter(targetNode);      
+    }
+
+    setRootNode(copy);    
   }
 
   return (
@@ -123,7 +145,9 @@ export default function DrawerEditor(){
             <DrawerItemList 
               nodes={rootNode.children} 
               draggedNode = {draggedNode}
-              onSelected = {handleSelectedNode} 
+              onSelected = {handleSelectedNode}
+              onDragToBefore = {handleDragToBefore}
+              onDragToAfter = {handleDragToAfter}
             />
           }
         </div>

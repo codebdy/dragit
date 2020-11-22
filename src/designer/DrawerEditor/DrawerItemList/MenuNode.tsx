@@ -46,12 +46,14 @@ export function MenuNode(
     node:RXNode<IMenuItem>,
     selectedNode?:RXNode<IMenuItem>,
     draggedNode?: RXNode<IMenuItem>,
-    onSelected:(selectedNode:RXNode<IMenuItem>)=>void
+    onSelected:(selectedNode:RXNode<IMenuItem>)=>void,
+    onDragToBefore:(targetId: number)=>void,
+    onDragToAfter:(targetId: number)=>void,
   }
 ) 
 {
   const classes = useStyles();
-  const { node, selectedNode, draggedNode, onSelected } = props;
+  const { node, selectedNode, draggedNode, onSelected, onDragToBefore, onDragToAfter } = props;
   const [open, setOpen] = useState(false);
 
   const isGroup = node.meta.type === 'group';
@@ -63,8 +65,13 @@ export function MenuNode(
 
   return (
     <Fragment>
-      <MenuItem node={node} draggedNode = {draggedNode} onClick = {()=>onSelected(node)} 
+      <MenuItem 
+        node={node} 
+        draggedNode = {draggedNode} 
+        onClick = {()=>onSelected(node)} 
         className={classNames(classes.itemHoverable, {[classes.selected]:selectedNode?.id === node.id})}
+        onDragToBefore = {onDragToBefore}
+        onDragToAfter = {onDragToAfter}
       >
         {isGroup && (open ? 
           <ExpandLess className={classes.moreButton} onClick = {handleOpenClick} /> 
@@ -79,7 +86,14 @@ export function MenuNode(
             {
               node.children.map(child=>{
                 return(
-                  <MenuNode key={child.id} node = {child} selectedNode = {selectedNode} onSelected={onSelected}/>
+                  <MenuNode 
+                    key={child.id} 
+                    node = {child} 
+                    selectedNode = {selectedNode} 
+                    onSelected={onSelected}
+                    onDragToBefore = {onDragToBefore}
+                    onDragToAfter = {onDragToAfter}
+                  />
                 )
               })
             }

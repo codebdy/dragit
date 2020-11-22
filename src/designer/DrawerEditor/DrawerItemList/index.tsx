@@ -20,9 +20,11 @@ export default function DrawerItemList(
     nodes? : Array<RXNode<IMenuItem>>,
     draggedNode?: RXNode<IMenuItem>,
     onSelected : (node:RXNode<IMenuItem>)=>void,
+    onDragToBefore:(targetId: number)=>void,
+    onDragToAfter:(targetId: number)=>void,
   }
 ) {
-  const {nodes, draggedNode, onSelected} = props;
+  const {nodes, draggedNode, onSelected, onDragToBefore, onDragToAfter} = props;
   const classes = useStyles();
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
 
@@ -44,6 +46,8 @@ export default function DrawerItemList(
                 selectedNode = {selectedNode}
                 draggedNode = {draggedNode}
                 onSelected={handleSelected}
+                onDragToBefore = {onDragToBefore}
+                onDragToAfter = {onDragToAfter}
               />
             )
           })

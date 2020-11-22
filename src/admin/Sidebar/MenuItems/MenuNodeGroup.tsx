@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles, Divider, Collapse, List } from "@material-ui/core";
-import IMenuItem from "base/IMenuItem"
+import IMenuItem, { IMenuBadge } from "base/IMenuItem"
 import { RXNode } from "base/RXNode/RXNode"
 import classNames from "classnames"
 import React, { Fragment } from "react"
@@ -31,19 +31,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-export function getBadge(children:Array<any>): any{
-  for(let item of children){
-    if(item.badge){
-      return item.badge
+export function getBadge(children:Array<RXNode<IMenuItem>>): IMenuBadge|undefined{
+  for(let node of children){
+    if(node.meta.badge){
+      return node.meta.badge
     }
-    if(item.children){
-      let badge = getBadge(item.children)
+    if(node.children){
+      let badge = getBadge(node.children)
       if(badge){
         return badge
       }
     }
   }
-  return null
+  return undefined
 }
 
 export default function MenuNodeGroup(
@@ -66,7 +66,7 @@ export default function MenuNodeGroup(
     open ? props.onOpened(-1) : props.onOpened(props.node.id)
   };
   const classes = useStyles();
-  const dotBadge = getBadge(props.node.meta.children)
+  const dotBadge = getBadge(props.node.children)
 
   const listItems = props.node.children?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;
