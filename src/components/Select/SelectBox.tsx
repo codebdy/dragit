@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText, ListSubheader } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
@@ -11,24 +11,33 @@ const useStyles = makeStyles((theme: Theme) =>
       width:"100%",
     },
 
-    group:{
+    nest:{
       paddingLeft:theme.spacing(2),
+    },
+    nest2:{
+      paddingLeft:theme.spacing(4),
     }
 
   }),
 );
 
 const groupBy = (array:any, name:string)=>{
-  const groups = {} as any
+  let groups = {} as any
   array?.forEach(function (o:any) {
     const group = o[name]
     groups[group] = groups[group] || []
     groups[group].push(o)
   })
-  return groups;
-  //return Object.keys(groups).map(function (group) {
-  //  return groups[group]
-  //})
+  //return groups;
+  let retValue: any[] = [];
+  Object.keys(groups).forEach(groupName =>{
+    retValue.push({type:'groupTitle', title:groupName})
+    groups[groupName].forEach((row:any) =>{
+      retValue.push(row)
+    })
+  })
+
+  return retValue;
 }
 
 const SelectBox = React.forwardRef((
@@ -80,7 +89,7 @@ const SelectBox = React.forwardRef((
 
   const itemsData = (fromUrl? menuItems : items) as any;
 
-  const groups = groupByField ? groupBy(itemsData, groupByField) :{};
+  const groups = groupByField ? groupBy(itemsData, groupByField) :[];
 
   const select =  <Select
       multiple = {multiple}
@@ -95,19 +104,12 @@ const SelectBox = React.forwardRef((
         </MenuItem>
       }
       {
-        groupByField && Object.keys(groups).map((groupName, index)=>{
-          let group = groups[groupName];
+        groupByField &&groups.map((item:any, index)=>{
           return (
-            <div key={groupName + index} className={classes.group}>
-              <div><b>{groupName}</b></div>
-              {
-                group?.map((item:any, index: any)=>{
-                  return (
-                  <MenuItem key = {`${item[key]}-${index}`} value={item[key]}>{item[name]}</MenuItem>
-                  )
-                })
-              }
-            </div>
+            item.type==='groupTitle'?
+            <div key={index} className={classes.nest}><b>{item.title}</b></div>
+            :
+            <MenuItem key = {`${item[key]}-${index}`} value={item[key]} className={classes.nest2}>{item[name]}</MenuItem>
           )
         })
       }

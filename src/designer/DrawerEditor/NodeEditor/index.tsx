@@ -16,7 +16,7 @@ export default function NodeEditor(
 ){
   const {node, onChange} = props;
   const type = node.meta.type;
-  const {title, icon} = node.meta;
+  const {title, icon, auths} = node.meta;
 
 
   const handleTitleChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
@@ -35,6 +35,10 @@ export default function NodeEditor(
 
   const handleChangeBadge = (badge:IMenuChip|undefined) =>{
     onChange(node, 'badge', badge);
+  }
+
+  const handleChangeAuths = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    onChange(node, 'auths', event.target.value);
   }
 
   return (
@@ -106,7 +110,9 @@ export default function NodeEditor(
           url = {API_GET_AUTHS.url}
           itemKey = "slug"
           groupByField = "module"
+          value = {auths || []}
           multiple
+          onChange = {handleChangeAuths}
         />
       </Grid>
     </Grid>
