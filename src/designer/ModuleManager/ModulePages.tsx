@@ -2,7 +2,7 @@ import React from 'react';
 import {  Grid, LinearProgress } from '@material-ui/core';
 import PrimaryText from 'base/PropsInputs/PrimaryText';
 import intl from 'react-intl-universal';
-import { ModuleMeta } from './ModuleContent';
+import { IModule } from "../../base/IModule";
 import ModulePageTable from './ModulePageTable';
 import { API_UPDATE_MODULE_PAGE, API_REMOVE_MODULE_PAGE, API_ADD_MODULE_PAGE, API_UPDATE_MODULE_INDEX_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
@@ -10,11 +10,11 @@ import { IPage } from 'base/IPage';
 import PageEditor from 'designer/PageEditor';
 
 
-export default function ModulePages(props:{module:ModuleMeta}){
+export default function ModulePages(props:{module:IModule}){
   //const {module} = props;
   const [designedPage, setDesignedPage] = React.useState<IPage>();
   const [operateConfig, setOperateConfig] = React.useState<any>();
-  const [operateModule, operateLoading] = useAxios<ModuleMeta>(operateConfig);
+  const [operateModule, operateLoading] = useAxios<IModule>(operateConfig);
   
   const module = operateModule || props.module;
 
@@ -77,8 +77,8 @@ export default function ModulePages(props:{module:ModuleMeta}){
             </PrimaryText>
           </h2>
         </Grid>
-        {operateLoading && <LinearProgress />}
         <Grid item xs={12}>
+          {operateLoading && <LinearProgress />}
           <ModulePageTable 
             pages = {module.pages || []} 
             onChangePage = {handleChangePage}

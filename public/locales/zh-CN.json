@@ -191,7 +191,7 @@
     "api":"页面接口",
     "is-index-page":"索引页",
     "module-pages":"模块页面",
-    "module-auth-points":"权限点",
+    "module-auth":"权限",
 
     "error":"错误",
     "input-error":"部分输入项有错误",

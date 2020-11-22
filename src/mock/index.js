@@ -179,6 +179,39 @@ Mock.mock(RegExp('/api/update-index-page-of-module?.*'),'post', (request)=>{
   return JSON.parse(JSON.stringify(module));
 })
 
+Mock.mock(RegExp('/api/add-auth-of-module?.*'),'post', (request)=>{
+  let id = getQueryVariable('moduleId', request.url);
+  let name = getQueryVariable('name', request.url);
+  let slug = getQueryVariable('slug', request.url);
+  let module =getModuleById(id);
+  module.auths = [...module.auths, {id:createId(), name:name, slug:slug}]
+  return JSON.parse(JSON.stringify(module));
+})
+
+Mock.mock(RegExp('/api/remove-auth-of-module?.*'),'post', (request)=>{
+  let id = getQueryVariable('moduleId', request.url);
+  let authId = parseInt(getQueryVariable('authId', request.url));
+  let module =getModuleById(id);
+  module.auths = module.pages.filter(auth=>{
+    return auth.id !== authId
+  })
+  return JSON.parse(JSON.stringify(module));
+})
+
+Mock.mock(RegExp('/api/update-module-auth?.*'),'post', (request)=>{
+  let id = getQueryVariable('moduleId', request.url);
+  let module =getModuleById(id);
+  let auth = JSON.parse(request.body).auth;
+  //console.log(request.body, request.body.page)
+  for(var i = 0; i < module.auths.length; i ++){
+    if(module.auths[i].id === auth.id){
+      module.auths[i] = auth;
+    }
+  }
+  return JSON.parse(JSON.stringify(module));;
+})
+
+
 Mock.setup({
     timeout: 500
 })

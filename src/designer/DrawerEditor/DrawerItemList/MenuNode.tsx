@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   nested: {
     padding:theme.spacing(2),    
     paddingLeft: theme.spacing(4),
-    outline:'dashed 1px',
-    outlineColor: theme.palette.divider,  
+    //outline:'dashed 1px',
+    //outlineColor: theme.palette.divider,  
   },
 
   moreButton:{

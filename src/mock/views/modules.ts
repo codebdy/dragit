@@ -17,6 +17,23 @@ var modules = [
         title:'文章编辑',
         jsonSchema: article,
       },
+    ],
+    auths:[
+      {
+        id:1,
+        slug:"view-articles",
+        name:'查看列表',
+      },
+      {
+        id:2,
+        slug:"create-article",
+        name:'新建文章',        
+      },
+      {
+        id:3,
+        slug:"edit-article",
+        name:"文章编辑"
+      }
     ]
   },
   {

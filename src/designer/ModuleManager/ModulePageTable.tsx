@@ -49,7 +49,7 @@ export default function ModulePageTable(
   return(
     <Fragment>
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="modules table">
+        <Table className={classes.table} aria-label="modules table" size="small">
           <TableHead>
             <TableRow>
               <TableCell><b>{intl.get('title')}</b></TableCell>

@@ -4,9 +4,9 @@ import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
 import { API_GET_MODULE_BY_ID} from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
-import { IPage } from 'base/IPage';
 import ModulePages from './ModulePages';
 import ModuleAuths from './ModuleAuths';
+import { IModule } from '../../base/IModule';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,13 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
-export interface ModuleMeta{
-  id:number,
-  title:string,
-  pages?:IPage[],
-  indexPageId?:number,
-}
 
 export default function ModuleContent(
   props:{
@@ -37,7 +30,7 @@ export default function ModuleContent(
     }
   });
 
-  const [initModule, loading] = useAxios<ModuleMeta>(loadingConfig);
+  const [initModule, loading] = useAxios<IModule>(loadingConfig);
 
   useEffect(()=>{
     if(loadingConfig.params.id !== moduleId){
@@ -65,11 +58,11 @@ export default function ModuleContent(
       {
         initModule && !loading ? 
         <Fragment>
-          <Grid container spacing = {4}>
-            <Grid item md={6}> 
+          <Grid container spacing = {4} direction="column">
+            <Grid item md={7}> 
               <ModulePages module = {initModule} />          
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={7}>
               <ModuleAuths module = {initModule} />
             </Grid>
           </Grid>

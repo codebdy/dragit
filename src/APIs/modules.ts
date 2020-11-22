@@ -55,6 +55,22 @@ const API_GET_MODULE_INDEX_PAGE : AxiosRequestConfig= {
   method:'get',
 }
 
+const API_ADD_MODULE_AUTH : AxiosRequestConfig= {
+  url:'/api/add-auth-of-module',
+  method:'post',
+}
+
+const API_UPDATE_MODULE_AUTH : AxiosRequestConfig= {
+  url:'/api/update-module-auth',
+  method:'post',
+}
+
+const API_REMOVE_MODULE_AUTH : AxiosRequestConfig= {
+  url:'/api/remove-auth-of-module',
+  method:'post',
+}
+
+
 export { 
   API_GET_MODULES,
   API_CHANGE_MODULE, 
@@ -66,5 +82,9 @@ export {
   API_ADD_MODULE_PAGE,
   API_UPDATE_MODULE_INDEX_PAGE,
   API_GET_PAGE,
-  API_GET_MODULE_INDEX_PAGE
+  API_GET_MODULE_INDEX_PAGE,
+
+  API_ADD_MODULE_AUTH,
+  API_UPDATE_MODULE_AUTH,
+  API_REMOVE_MODULE_AUTH
 }
