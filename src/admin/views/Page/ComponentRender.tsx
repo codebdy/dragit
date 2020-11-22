@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { RXNode } from '../../../base/RXNode';
+import { RXNode } from '../../../base/RXNode/RXNode';
 import { PageActionHandle } from './PageAction';
 import { resolveComponent } from 'base/DragRX';
 import withFormField from './withFormField';

@@ -12,7 +12,7 @@ import { useAxios } from 'base/Hooks/useAxios';
 import { ItemMeta } from 'designer/Common/EditableList';
 import { openBackground, openBackgroundLight } from 'admin/Sidebar/MenuItems/MenuNodeGroup';
 import IMenuItem from 'base/IMenuItem';
-import { RXNode } from 'base/RXNode';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,7 +74,7 @@ export default function ToolsAccordion(
   };
 
   const handleDragStart = (itemMeta:IMenuItem) => {
-    let draggedNode = new RXNode<IMenuItem>(itemMeta);
+    let draggedNode = RXNode.make<IMenuItem>(itemMeta);
     onStartDragNode(draggedNode);
   }
 

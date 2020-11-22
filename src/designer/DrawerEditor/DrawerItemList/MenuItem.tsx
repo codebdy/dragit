@@ -4,7 +4,7 @@ import IMenuItem from 'base/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
 import MenuDivider from './MenuDivider';
 import classNames from 'classnames';
-import { RXNode } from 'base/RXNode';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   itemText: {

@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles, ListSubheader } from "@material-ui/core";
 import IMenuItem from "base/IMenuItem";
-import { RXNode } from "base/RXNode";
+import { RXNode } from "base/RXNode/RXNode";
 import React, { Fragment } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>

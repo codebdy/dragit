@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import IMenuItem from 'base/IMenuItem';
-import { RXNode } from 'base/RXNode';
+import { RXNode } from 'base/RXNode/RXNode';
 import MenuItem from './MenuItem';
 import { Collapse, List } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';

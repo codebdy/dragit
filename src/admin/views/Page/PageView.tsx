@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import ComponentRender from "./ComponentRender";
-import { RXNode } from "../../../base/RXNode";
+import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, Dialog } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
@@ -9,12 +9,12 @@ import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, PageJumper } from './P
 import { FormProvider, useForm } from "react-hook-form";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
-import { parseRXNodeList } from "base/RXNodeParser";
 import usePageMeta from "./usePageMeta";
 import usePageModel from "./usePageModel";
 import { useDispatch } from "react-redux";
 import { setDesingerPageAction } from "store/designer/actions";
 import { IMeta } from "base/IMeta";
+import { RXNodeRoot } from "base/RXNode/Root";
 
 const PageView = ()=>{
   const history =  useHistory();
@@ -39,7 +39,9 @@ const PageView = ()=>{
   useEffect(()=>{
     if(pageMeta){
       let schema = pageMeta.jsonSchema?.layout;
-      setPageLayout(parseRXNodeList(schema))
+      let root = new RXNodeRoot<IMeta>();
+      root.parse(schema);
+      setPageLayout(root.children);
       dispatch(setDesingerPageAction(pageMeta.id))
     }
   }, [dispatch, pageMeta])

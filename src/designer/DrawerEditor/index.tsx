@@ -8,10 +8,10 @@ import ToolsAccordion from './ToolsAccordion';
 import { API_GET_DRAWER } from 'APIs/drawer';
 import { useAxios } from 'base/Hooks/useAxios';
 import IMenuItem from 'base/IMenuItem';
-import { RXNode } from 'base/RXNode';
-import { parseRXNodeList } from 'base/RXNodeParser';
+import { RXNode } from 'base/RXNode/RXNode';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
+import { RXNodeRoot } from 'base/RXNode/Root';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,14 +62,15 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function DrawerEditor(){
   const classes = useStyles();
   const history = useHistory();
-  const [jsonData, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
-  const [nodes,setNodes] = React.useState<Array<RXNode<IMenuItem>>>([]);
+  const [metas, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
+  const [rootNode,setRootNode] = React.useState(new RXNodeRoot<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RXNode<IMenuItem>>();
 
   useEffect(()=>{
-    jsonData && setNodes(parseRXNodeList<IMenuItem>(jsonData));    
-  },[jsonData]);
+    metas && rootNode.parse(metas);    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[metas]);
 
 
   const handleClose = ()=>{
@@ -85,8 +86,10 @@ export default function DrawerEditor(){
   }
 
   const handleMetaChange = (node:RXNode<IMenuItem>, field:string, value:any)=>{
-    node.meta[field] = value;
-    setNodes([...nodes])
+    let copy = rootNode.copy()
+    let meta = copy.getMeta(node.id);
+    meta && (meta[field] = value);
+    setRootNode(copy);
   }
 
   const handleStartDragNode = (node:RXNode<IMenuItem>)=>{
@@ -118,7 +121,7 @@ export default function DrawerEditor(){
             <SiderBarLoadingSkeleton />
             :
             <DrawerItemList 
-              nodes={nodes} 
+              nodes={rootNode.children} 
               draggedNode = {draggedNode}
               onSelected = {handleSelectedNode} 
             />

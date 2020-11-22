@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles, Divider, Collapse, List } from "@material-ui/core";
 import IMenuItem from "base/IMenuItem"
-import { RXNode } from "base/RXNode"
+import { RXNode } from "base/RXNode/RXNode"
 import classNames from "classnames"
 import React, { Fragment } from "react"
 import Subheader from "./Subheader";

@@ -1,7 +1,7 @@
 import { Badge, ListItem, ListItemIcon, ListItemText, Chip, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useAppInfo } from "base/Hooks/useAppInfo";
 import IMenuItem from "base/IMenuItem";
-import { RXNode } from "base/RXNode";
+import { RXNode } from "base/RXNode/RXNode";
 import classNames from "classnames";
 import MdiIcon from "components/common/MdiIcon";
 import React from "react";

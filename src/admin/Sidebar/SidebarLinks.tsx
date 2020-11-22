@@ -7,11 +7,11 @@ import { API_GET_DRAWER } from "APIs/drawer";
 import { useAxios } from "base/Hooks/useAxios";
 import IMenuItem from "base/IMenuItem";
 import { Divider } from "@material-ui/core";
-import { parseRXNodeList } from "base/RXNodeParser";
-import { RXNode } from "base/RXNode";
+import { RXNode } from "base/RXNode/RXNode";
 import Subheader from "./MenuItems/Subheader";
 import MenuNode from "./MenuItems/MenuNode";
 import MenuNodeGroup from "./MenuItems/MenuNodeGroup";
+import { RXNodeRoot } from "base/RXNode/Root";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +39,9 @@ export default function SidebarLinks(
   }
 
   useEffect(()=>{
-    jsonData && setItems(parseRXNodeList<IMenuItem>(jsonData));    
+    let root = new RXNodeRoot<IMenuItem>();
+    root.parse(jsonData);
+    jsonData && setItems(root.children);    
   },[jsonData]);
 
   const listItems =items?.map((node:RXNode<IMenuItem>)=>{

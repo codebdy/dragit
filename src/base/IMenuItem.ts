@@ -12,6 +12,7 @@ export interface IMenuChip {
 }
 
 export default interface IMenuItem{
+  id?:number,
   type: "group" | "subheader" | "divider" | "item",
   title?:string,
   icon?:string,

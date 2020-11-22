@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import IMenuItem from 'base/IMenuItem';
 import { MenuNode } from './MenuNode';
-import { RXNode } from 'base/RXNode';
+import { RXNode } from 'base/RXNode/RXNode';
 import Scrollbar from 'admin/common/Scrollbar';
 import { List, Theme } from '@material-ui/core';
 
