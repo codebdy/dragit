@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, AppBar, Dialog, IconButton, Toolbar, Typography, Button, DialogActions, DialogContent } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, AppBar, Dialog, IconButton, Toolbar, Typography, Button, DialogActions, DialogContent, useTheme } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import { TransitionProps } from '@material-ui/core/transitions';
 import Grow from '@material-ui/core/Grow/Grow';
@@ -10,6 +10,7 @@ import MediasContent from './MediasContent';
 import { MediaMeta } from './MediaGridListImage';
 import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,10 +43,10 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom:'100%',
       position:"relative",
       borderRadius:"5px",
-      background:"rgba(93, 32, 255, 0.2)",
+      background: fade(theme.palette.primary.main, 0.1),
       cursor:"pointer",
       "&:hover":{
-        background:"rgba(93, 32, 255, 0.3)",
+        background:fade(theme.palette.primary.main, 0.2),
       }
     },
 
@@ -53,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) =>
       position:"absolute",
       width:"calc(100% - 20px)",
       height:"calc(100% - 20px)",
-      border:"#5d78ff dashed 2px",
+      border:theme.palette.primary.main + " dashed 2px",
+      //borderColor:theme.palette.primary.main,
       top:'10px',
       left:'10px',
       display:"flex",
@@ -92,6 +94,7 @@ export default function MediaAdder(props:{value?:Array<MediaMeta>, onSelectMedia
   const [open, setOpen] = React.useState(false);
   const [hover, setHover] = React.useState(false);
   const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>(value || []);
+  const theme = useTheme();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -134,7 +137,7 @@ export default function MediaAdder(props:{value?:Array<MediaMeta>, onSelectMedia
         :        
         <div className={classes.root} onClick = {handleClickOpen}>
           <div className={classes.inner}>
-            <MdiIcon iconClass="mdi-plus" color="#5d78ff" size="50"/>
+            <MdiIcon iconClass="mdi-plus" color={theme.palette.primary.main} size="50"/>
           </div>      
         </div>      
       }
