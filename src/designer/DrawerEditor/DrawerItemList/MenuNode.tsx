@@ -69,6 +69,11 @@ export function MenuNode(
     node.children.length === 0 && onDragIn && onDragIn(node.id);
   }
 
+  const handleDrop = (event: React.DragEvent<unknown>)=>{
+    event.stopPropagation();
+  }
+
+
   return (
     <Fragment>
       <MenuItem 
@@ -95,6 +100,7 @@ export function MenuNode(
           disablePadding 
           className={classes.nested}
           onDragOver = {handleGroupDrageOver}
+          onDrop = {handleDrop}
         >
           {
             node.children?.map(child=>{

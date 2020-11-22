@@ -54,6 +54,10 @@ export default function MenuItem(
     }
   }
 
+  const handleDrop = (event: React.DragEvent<unknown>)=>{
+    event.stopPropagation();
+  }
+
   return (
     type === 'divider'?
       <div
@@ -64,6 +68,7 @@ export default function MenuItem(
         onDragOver = {handleDragover}
         onDragStart = {()=>onDragStart(node)}
         onDragEnd = {onDragEnd}
+        onDrop = {handleDrop}
       >
         <Divider />      
       </div>
@@ -76,6 +81,7 @@ export default function MenuItem(
       onDragOver = {handleDragover}
       onDragStart = {()=>onDragStart(node)}
       onDragEnd = {onDragEnd}
+      onDrop = {handleDrop}
     >
       {
         type !== 'subheader' &&

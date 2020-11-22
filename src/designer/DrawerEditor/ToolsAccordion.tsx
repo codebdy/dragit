@@ -121,8 +121,17 @@ export default function ToolsAccordion(
           <List className={classes.list}>
             {
               customizedModules?.map(module=>{
+                const meta:IMenuItem ={
+                  type:'item',
+                  title:module.title,
+                  icon:"mdi-circle-small",
+                  to:`/admin/module/${module.id}/`,
+                }
                 return (
-                  <ListItem key={module.id} draggable = {true}  className={classes.item}>
+                  <ListItem key={module.id} draggable = {true}  className={classes.item}
+                    onDragStart = {()=>handleDragStart(meta)}
+                    onDragEnd = {onEndDragNode}
+                  >
                     <ListItemText primary={module.title} />
                   </ListItem>                  
                 )
@@ -141,7 +150,15 @@ export default function ToolsAccordion(
         </AccordionSummary>
         <AccordionDetails>
           <List className={classes.list}>
-            <ListItem className={classes.item} draggable = {true} >
+            <ListItem className={classes.item} draggable = {true} 
+              onDragStart = {()=>handleDragStart({
+                type: 'item',
+                title: intl.get('medias'),
+                to: '/admin/medias',
+                icon: 'mdi-image-auto-adjust',
+              })}
+              onDragEnd = {onEndDragNode}
+            >
               <ListItemText primary={intl.get('medias')} />
             </ListItem>
           </List>

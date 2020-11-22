@@ -18,7 +18,7 @@ export default interface IMenuItem{
   icon?:string,
   badge?:IMenuBadge,
   chip?:IMenuChip,
-  children: Array<IMenuItem>,
+  children?: Array<IMenuItem>,
   to?: string,
   [key:string]:any,
 }

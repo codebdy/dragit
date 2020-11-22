@@ -167,7 +167,9 @@ export default function DrawerEditor(){
         <div className = {classes.left}>
           {selectedNode && <NodeEditor node = {selectedNode} onChange = {handleMetaChange} />}
         </div>
-        <div className = {classes.center}>
+        <div className = {classes.center}
+          onDrop = {(event: React.DragEvent<unknown>)=>{event.stopPropagation()}}
+        >
           {
             loading?
             <SiderBarLoadingSkeleton />
