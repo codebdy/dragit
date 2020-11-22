@@ -11,7 +11,10 @@ import MenuNodeOperateProps from './MenuNodeOperateProps';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   nested: {
-    paddingLeft: theme.spacing(2),
+    padding:theme.spacing(2),    
+    paddingLeft: theme.spacing(4),
+    outline:'dashed 1px',
+    outlineColor: theme.palette.divider,  
   },
 
   moreButton:{
@@ -34,12 +37,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     }    
   },
 
-  collapse:{
-    padding:theme.spacing(2),
-    outline:'dashed 1px',
-    outlineColor: theme.palette.divider,
-  }
-
 }));
 
 export function MenuNode(
@@ -56,7 +53,8 @@ export function MenuNode(
     onDragToBefore,
     onDragToAfter,
     onDragStart,
-    onDragEnd 
+    onDragEnd,
+    onDragIn 
   } = props;
   const [open, setOpen] = useState(false);
 
@@ -67,13 +65,17 @@ export function MenuNode(
     event.stopPropagation();
   }
 
+  const handleGroupDrageOver = ()=>{
+    node.children.length === 0 && onDragIn && onDragIn(node.id);
+  }
+
   return (
     <Fragment>
       <MenuItem 
         node={node} 
         draggedNode = {draggedNode} 
         onClick = {()=>{onSelected && onSelected(node)}} 
-        className={classNames(classes.itemHoverable, {[classes.selected]:selectedNode?.id === node.id})}
+        className={classNames({[classes.selected]:selectedNode?.id === node.id})}
         onDragToBefore = {onDragToBefore}
         onDragToAfter = {onDragToAfter}
         onDragStart = {onDragStart}
@@ -84,31 +86,35 @@ export function MenuNode(
           : 
           <ExpandMore className={classes.moreButton} onClick = {handleOpenClick} />)}
       </MenuItem>  
-        
-      {
-        node.children &&
-        <Collapse in={open} timeout="auto" unmountOnExit className = {classes.collapse}>
-          <List component="div" disablePadding className={classes.nested}>
-            {
-              node.children.map(child=>{
-                return(
-                  <MenuNode 
-                    key={child.id} 
-                    node = {child} 
-                    draggedNode = {draggedNode}
-                    selectedNode = {selectedNode} 
-                    onSelected={onSelected}
-                    onDragToBefore = {onDragToBefore}
-                    onDragToAfter = {onDragToAfter}
-                    onDragStart = {onDragStart}
-                    onDragEnd = {onDragEnd}
-                  />
-                )
-              })
-            }
-          </List>
-        </Collapse>
-      }
+      <Collapse 
+        in={open} 
+        timeout="auto" 
+        unmountOnExit 
+      >
+        <List component="div" 
+          disablePadding 
+          className={classes.nested}
+          onDragOver = {handleGroupDrageOver}
+        >
+          {
+            node.children?.map(child=>{
+              return(
+                <MenuNode 
+                  key={child.id} 
+                  node = {child} 
+                  draggedNode = {draggedNode}
+                  selectedNode = {selectedNode} 
+                  onSelected={onSelected}
+                  onDragToBefore = {onDragToBefore}
+                  onDragToAfter = {onDragToAfter}
+                  onDragStart = {onDragStart}
+                  onDragEnd = {onDragEnd}
+                />
+              )
+            })
+          }
+        </List>
+      </Collapse>
     </Fragment>
 
   );

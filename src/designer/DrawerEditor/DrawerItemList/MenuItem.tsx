@@ -38,14 +38,12 @@ export default function MenuItem(
   const nodeEl = useRef(null);
 
   const handleDragover = (event: React.DragEvent<unknown>)=>{
-      event.preventDefault();    
-      if(draggedNode &&(draggedNode.id !== node.id)){
-
-      event.stopPropagation();
+    event.preventDefault();    
+    event.stopPropagation();
+    if(draggedNode &&(draggedNode.id !== node.id)){
       let domElement = nodeEl?.current as unknown as HTMLElement;
       if(domElement){
         let rect = domElement.getBoundingClientRect();
-        
         if((event.clientY - rect.y)/rect.height > 0.5){
           onDragToBefore(node.id);
         }
@@ -53,18 +51,15 @@ export default function MenuItem(
           onDragToAfter(node.id);
         }
       }
-
     }
   }
-
-  const draggedClassName = draggedNode?.id === node.id ? 'dragged-node' : '';
 
   return (
     type === 'divider'?
       <div
         ref={nodeEl}
         draggable = {true} 
-        className = {classNames(classes.divider, className, draggedClassName)} 
+        className = {classNames(classes.divider, className)} 
         onClick = {onClick}
         onDragOver = {handleDragover}
         onDragStart = {()=>onDragStart(node)}
@@ -76,7 +71,7 @@ export default function MenuItem(
     <ListItem 
       ref={nodeEl}
       draggable = {true}
-      className = {classNames(classes.itemText, className, draggedClassName)} 
+      className = {classNames(classes.itemText, className)} 
       onClick = {onClick}
       onDragOver = {handleDragover}
       onDragStart = {()=>onDragStart(node)}

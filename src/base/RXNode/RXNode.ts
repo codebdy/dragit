@@ -82,4 +82,10 @@ export class RXNode<T>{
     this.parent = target.parent;
   }
 
+  moveIn(target:RXNode<T>){
+    this.removeFormParent();    
+    target.children.push(this);
+    this.parent = target;
+  }
+
 } 

@@ -10,4 +10,5 @@ export default interface MenuNodeOperateProps {
   onDragToAfter: (targetId: number) => void;
   onDragStart: (node: RXNode<IMenuItem>) => void;
   onDragEnd: () => void;
+  onDragIn?: (targetId: number)=>void;
 }

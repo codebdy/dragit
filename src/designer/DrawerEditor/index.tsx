@@ -100,7 +100,7 @@ export default function DrawerEditor(){
     setDraggedNode(undefined);
   }
 
-  const handleDragToBefore = (targetId:number)=>{
+  const doDrag = (funciontName :string, targetId:number)=>{
     if(!draggedNode){
       return;
     }
@@ -111,27 +111,41 @@ export default function DrawerEditor(){
       return;
     }
 
-    let node = copy.getNode(draggedNode.id) || draggedNode
-    node.moveBefore(targetNode);      
+    let node = copy.getNode(draggedNode.id) || draggedNode;
+    let nodeAny = node as any;
+    nodeAny[funciontName](targetNode);      
 
-    setRootNode(copy);
+    setRootNode(copy);    
+  }
+
+  const handleDragToBefore = (targetId:number)=>{
+    doDrag('moveBefore', targetId);
   }
 
   const handleDragToAfter = (targetId:number)=>{
+    doDrag('moveAfter', targetId);
+  }
+
+  const handleDragIn = (targetId:number)=>{
+    doDrag('moveIn', targetId);
+  }
+
+  const handleOverTopDragOver = (event: React.DragEvent<unknown>)=>{
+    event.preventDefault();
+  }
+
+  const handleOverTopDop = (event: React.DragEvent<unknown>)=>{
+    event.preventDefault();
     if(!draggedNode){
       return;
     }
-
-    let copy = rootNode.copy()
-    let targetNode = copy.getNode(targetId);
-    if(!targetNode){
-      return;
+    let copy = rootNode.copy();
+    let node = copy.getNode(draggedNode.id);
+    node?.removeFormParent();
+    if(draggedNode.id === selectedNode?.id){
+      setSelectedNode(undefined);
     }
-    
-    let node = copy.getNode(draggedNode.id) || draggedNode
-    node.moveAfter(targetNode);      
-
-    setRootNode(copy);
+    setRootNode(copy); 
   }
 
   return (
@@ -149,7 +163,7 @@ export default function DrawerEditor(){
           </Button>
         </Toolbar>
       </AppBar>
-      <Container className={classes.content}>
+      <Container className={classes.content} onDragOver={handleOverTopDragOver} onDrop={handleOverTopDop}>
         <div className = {classes.left}>
           {selectedNode && <NodeEditor node = {selectedNode} onChange = {handleMetaChange} />}
         </div>
@@ -166,6 +180,7 @@ export default function DrawerEditor(){
               onDragToAfter = {handleDragToAfter}
               onDragStart = {handleStartDragNode}
               onDragEnd = {handleDragEnd}
+              onDragIn = {handleDragIn}
             />
           }
         </div>

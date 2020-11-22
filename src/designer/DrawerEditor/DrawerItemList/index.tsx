@@ -26,7 +26,8 @@ export default function DrawerItemList(
     onDragToBefore, 
     onDragToAfter,
     onDragStart,
-    onDragEnd
+    onDragEnd,
+    onDragIn
   } = props;
   const classes = useStyles();
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
@@ -53,6 +54,7 @@ export default function DrawerItemList(
                 onDragToAfter = {onDragToAfter}
                 onDragStart = {onDragStart}
                 onDragEnd = {onDragEnd}
+                onDragIn = {onDragIn}
               />
             )
           })
