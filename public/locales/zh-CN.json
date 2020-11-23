@@ -211,6 +211,11 @@
 
     "icon":"图标",
     "menu-chip":"特色文字",
-    "menu-badge":"通知文字"
+    "menu-badge":"通知文字",
+
+    "params":"参数",
+    "edit-params":"编辑参数",
+    "param":"参数",
+    "value":"值"
 
 }

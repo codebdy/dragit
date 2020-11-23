@@ -8,6 +8,7 @@ import intl from 'react-intl-universal';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     itemInput:{
+      flex:1,
       margin: theme.spacing(1),
     },
     nameValueItem:{
@@ -26,9 +27,15 @@ export interface MetaItem{
 }
 
 export default function MetaListInput(
-    props:{ label:string, value:Array<MetaItem>|undefined, onChange:(value:Array<MetaItem>)=>void }
-  ) {
-  const {label, value, onChange} = props; 
+  props:{ 
+    label?:string, 
+    value:Array<MetaItem>|undefined, 
+    onChange:(value:Array<MetaItem>)=>void,
+    slugLabel?:string,
+    valueLabel?:string,
+  }
+) {
+  const {label, value, onChange, slugLabel, valueLabel} = props; 
   const classes = useStyles();
   let metas = value ? JSON.parse(JSON.stringify(value)) : [];
 
@@ -54,7 +61,7 @@ export default function MetaListInput(
   return (
     
     <Fragment>
-      <div className = {classes.itemInput}>{ label }</div>
+      {label && <div className = {classes.itemInput}>{ label }</div>}
       {
         metas.map((meta:MetaItem, index:number)=>{
           return(
@@ -63,7 +70,7 @@ export default function MetaListInput(
             >
               <TextField 
                 className = {classes.itemInput} 
-                label={intl.get('slug')} 
+                label={slugLabel || intl.get('slug')} 
                 variant="outlined" 
                 size="small"
                 value = {meta.slug || ''}
@@ -73,7 +80,7 @@ export default function MetaListInput(
               />
                 <TextField 
                 className = {classes.itemInput} 
-                label={intl.get('name')} 
+                label={valueLabel || intl.get('name')} 
                 variant="outlined" 
                 size="small"
                 value = {meta.label ||''}

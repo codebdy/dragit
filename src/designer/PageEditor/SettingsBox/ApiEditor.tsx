@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { AxiosRequestConfig } from 'axios';
 import intl from "react-intl-universal";
+import ApiEditorParamsDialog from './ApiEditorParamsDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +25,20 @@ export default function ApiEditor(
     onChange: (api:AxiosRequestConfig)=>void,
   }
 ){
-  const [api, setApi] = useState<AxiosRequestConfig>(props.value ||{});
+  const {onChange} = props;
+  const api = props.value ||{};
+
+  const handleChangeParams = (params:any)=>{
+    onChange({...api, params:params})
+  }
+
+  const handleChangeUrl = (event:React.ChangeEvent<{ value: unknown }>)=>{
+    onChange({...api, url:event.target.value as string})
+  }
+
+  const handleChangeMethod = (event:React.ChangeEvent<{ value: unknown }>)=>{
+    onChange({...api, method:event.target.value as any})
+  }
 
   const classes = useStyles();
   return (
@@ -36,8 +50,8 @@ export default function ApiEditor(
             <InputLabel>Method</InputLabel>
             <Select
               label ="Method"
-              value={'' || 'get'}
-              //onChange={handleActionChange}
+              value={api.method || 'get'}
+              onChange={handleChangeMethod}
             >
               <MenuItem value={'get'}>get</MenuItem>
               <MenuItem value={'post'}>post</MenuItem>
@@ -45,20 +59,18 @@ export default function ApiEditor(
           </FormControl>             
         </Grid>
         <Grid item className = {classes.item}>
-          <TextField fullWidth label = "URL" variant = "outlined"  size = "small" />
+          <TextField 
+            fullWidth 
+            label = "URL" 
+            variant = "outlined"  
+            size = "small" 
+            multiline rows={3} 
+            value = {api.url || ''}
+            onChange = {handleChangeUrl}
+          />
         </Grid>
-        <Grid item className = {classes.item}>
-          <div>
-            Params
-          </div>
-        </Grid>
-        <Grid container item className = {classes.item}>
-          <Grid item xs={6}>
-            <TextField fullWidth variant = "outlined"  size = "small" />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth variant = "outlined"  size = "small" />
-          </Grid>
+        <Grid  item className = {classes.item}>
+          <ApiEditorParamsDialog value = {api.params} onChange = {handleChangeParams}/>
         </Grid>
       </div>
     </div>

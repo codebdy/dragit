@@ -13,6 +13,7 @@ const styles = (theme: Theme) =>
       display:'flex',
       flexFlow:'row',
       width:'560px',
+      minHeight:'200px',
     },
     closeButton: {
       position: 'absolute',
@@ -62,9 +63,10 @@ export default function PropsDialog(props:{
   title:string,
   children?:React.ReactNode,
   onSave:()=>void,
+  onCancel?:()=>void,
 }){
   const classes = useStyles();
-  const {label, title, onSave, children} = props;
+  const {label, title, onSave, onCancel, children} = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -72,6 +74,7 @@ export default function PropsDialog(props:{
   };
   const handleClose = () => {
     setOpen(false);
+    onCancel && onCancel();
   };
   const handleSave = () => {
     onSave();

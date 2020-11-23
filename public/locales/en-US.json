@@ -206,6 +206,11 @@
 
     "icon":"Icon",
     "menu-chip":"Chip",
-    "menu-badge":"Badge"
+    "menu-badge":"Badge",
+
+    "params":"Params",
+    "edit-params":"Edit params",
+    "param":"Param",
+    "value":"Value"
 
 }

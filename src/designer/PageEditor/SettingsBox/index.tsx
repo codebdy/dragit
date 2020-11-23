@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
   const classes = useStyles();
   const {pageSchema, onChange} = props;
-  console.log(pageSchema);
+
   return (
     <div className={classes.root}>
       <AttributeRow>
