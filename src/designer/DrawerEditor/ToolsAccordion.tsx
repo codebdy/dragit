@@ -10,7 +10,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 import { API_GET_MODULES } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ItemMeta } from 'designer/Common/EditableList';
-import { openBackground, openBackgroundLight } from 'admin/Sidebar/MenuItems/MenuNodeGroup';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'base/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       userSelect:'none',
       cursor:'move',
       "&:hover,&:focus": {
-        backgroundColor:  theme.palette.type === 'dark' ? openBackground : openBackgroundLight,
+        backgroundColor:  fade(theme.palette.primary.main, 0.1),
       }
     },
 

@@ -6,11 +6,7 @@ import React, { Fragment } from "react"
 import Subheader from "./Subheader";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuNode from "./MenuNode";
-
-export const openBackground = "rgba(255,255,255, 0.05)";
-export const openBackgroundLight = "rgba(0,0,0, 0.05)";
-export const activeBackground = "rgba(255,255,255, 0.2)";
-export const activeBackgroundLight = "rgba(0,0,0, 0.2)";
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,9 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: theme.spacing(4),
     },
     itemOpened:{
-      background: theme.palette.type === 'dark' ? openBackground : openBackgroundLight,
+      background: fade(theme.palette.primary.main, 0.1),
       "&:hover,&:focus": {
-        backgroundColor:  theme.palette.type === 'dark' ? openBackground : openBackgroundLight,
+        backgroundColor: fade(theme.palette.primary.main, 0.3),
       }
     },
     indicator:{

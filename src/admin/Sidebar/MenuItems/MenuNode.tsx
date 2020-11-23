@@ -6,7 +6,7 @@ import classNames from "classnames";
 import MdiIcon from "components/common/MdiIcon";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { activeBackground, activeBackgroundLight } from "./MenuNodeGroup";
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width:'100%',
       height:'100%',
       display:'block',
-      background: theme.palette.type === 'dark' ? activeBackground : activeBackgroundLight,
+      background: fade(theme.palette.primary.main, 0.2),
       "&:hover,&:focus": {
-        backgroundColor: theme.palette.type === 'dark' ? activeBackground : activeBackgroundLight,
+        backgroundColor: fade(theme.palette.primary.main, 0.3),
       }
     },
 
