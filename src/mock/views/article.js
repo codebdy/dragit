@@ -196,7 +196,7 @@ export default {
                             rule:{
                               required:true,
                             },
-                            data:{
+                            
                               fromUrl:false,           
                               items:[
                                 {
@@ -212,7 +212,7 @@ export default {
                                   label:'经验',
                                 },
                               ]
-                            }           
+                                      
                           }
                         }
                       ],
@@ -233,10 +233,10 @@ export default {
                             xs:6,
                             required:true,
                             withoutEmpertyItem:true,                        
-                            data:{
+                            
                               fromUrl:true,
                               url:'/api/base/items',
-                            },
+                            
 
                             rule:{
                               required:true,
@@ -281,7 +281,7 @@ export default {
                             field:'tags',
                             multiple:false,
                             //required:true,
-                            data:{
+                           
                               fromUrl:false,           
                               items:[
                                 {
@@ -296,8 +296,8 @@ export default {
                                   slug:'apple',
                                   label:'苹果',
                                 },
-                              ]
-                            },           
+                              ],
+                             
 
                             rule:{
                               //required:true,
@@ -320,10 +320,9 @@ export default {
                             field:'tags2',
                             multiple:true,
                             fullWidth:true,
-                            data:{
+                            
                               fromUrl:true,
                               url:'/api/base/items',
-                            },
 
                             rule:{
                               required:true,
@@ -419,10 +418,10 @@ export default {
                         variant:"outlined",
                         size:'small',
                         withoutEmpertyItem:false,                        
-                        data:{
+                       
                           fromUrl:true,
                           url:'/api/base/items',
-                        },
+                        
                       }
                     },        
                   },

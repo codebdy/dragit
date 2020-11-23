@@ -74,7 +74,12 @@ const Combobox = React.forwardRef((
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
 
-    onChange && (onChange(newValue && newValue.length === 0 ? '' : newValue));
+    let value = newValue && newValue.length === 0 ? '' : newValue;
+    onChange && onChange({
+      target:{
+        value:value,
+      }
+    });
   }
 
   return (
