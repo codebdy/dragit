@@ -9,6 +9,9 @@ import { IProp } from "base/IProp";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
 import AttributeBoxValidateArea, { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
+import { API_GET_AUTHS } from 'APIs/modules';
+import SelectBox from "components/Select/SelectBox";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +52,7 @@ export default function AttributeBox(props:{node:INode|null}){
   const {node} = props;
   const [field, setField] = React.useState(node?.meta.props?.field);
   const [rule, setRule] = React.useState(node?.meta.props?.rule);
+  const [auths, setAuths] = React.useState(node?.meta.props?.auths);
   const propChange = (field:string, value:any) => {
     node?.updateProp(field, value);
   };
@@ -66,6 +70,11 @@ export default function AttributeBox(props:{node:INode|null}){
   const handleRuleChange = (rule:ValidateRule)=>{
     node?.updateProp('rule', rule);
     setRule(rule);
+  }
+
+  const handleChangeAuths = (auths : string[]|undefined)=>{
+    node?.updateProp('auths', auths);
+    setAuths(auths);
   }
 
   return (
@@ -156,9 +165,18 @@ export default function AttributeBox(props:{node:INode|null}){
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
             </AccordionSummary>
             <AccordionDetails className={classes.pannelDetail}>
-              可见<br/>
-              可编辑
-            </AccordionDetails>
+              <SelectBox label={'权限'} 
+                variant="outlined" 
+                size="small"
+                fromUrl = {true}
+                url = {API_GET_AUTHS.url}
+                itemKey = "slug"
+                groupByField = "module"
+                value = {auths || []}
+                multiple
+                onChange = {(e:any)=>handleChangeAuths(e.target.value)}
+              />
+                </AccordionDetails>
           </Accordion>
         </Fragment>
       }
