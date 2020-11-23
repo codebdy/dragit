@@ -135,7 +135,7 @@ const SelectBox = React.forwardRef((
         loading ?
         <Skeleton animation="wave" height={50} width="80%" />
         :
-        select
+        (itemsData && select)
       }
 
       <FormHelperText>{helperText}</FormHelperText>

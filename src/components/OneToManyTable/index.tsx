@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import Portlet from 'components/Portlet';
 import AddIcon from '@material-ui/icons/Add';
@@ -40,6 +40,7 @@ interface ColumnMeta{
 }
 var seedId = 1;
 
+//新建记录时，添加TEMP-作为ID，需要后端处理，或者提交表单数据时处理
 const OneToManyTable = React.forwardRef((
   props: {
     value?:any
@@ -61,51 +62,52 @@ const OneToManyTable = React.forwardRef((
      ...rest
   } = props;
   const classes = useStyles();
-  const [rows, setRows] = React.useState<Array<any>>(value? value :[]);
+  //const [rows, setRows] = React.useState<Array<any>>(value? value :[]);
+  const rows = value? value :[];
 
-
-  useEffect(() => {
-    setRows(value? value :[])
-  },[value]);
+  //useEffect(() => {
+  //  setRows(value? value :[])
+ // },[value]);
   
-  useEffect(() => {
-    if(rows !== value && !(!value && rows.length === 0)){
-      const event = {
-        persist: () => {return {}},
-        target: {
-          type: "change",
-          name: props.name,
-          value: rows.map(row=>{
-            const newId = (row.id && row.id.toString().startsWith('TEMP-'))? undefined: row.id;
-            return {...rows, id: newId }
-          })
-        }
-      };
- 
-      //console.log('useEffect',onChange, event)
-      onChange && onChange(event);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[rows]);
+  const emitValueChangded = (newValue:any) => {
+    const event = {
+      persist: () => {return {}},
+      target: {
+        type: "change",
+        name: props.name,
+        value: newValue/*?.map((row:any)=>{
+          const newId = (row.id && row.id.toString().startsWith('TEMP-'))? undefined: row.id;
+          return {...row, id: newId }
+        })*/
+      }
+    };
+    //console.log('useEffect',onChange, event)
+    onChange && onChange(event);
+  }
+
 
   const handleAddNew = ()=>{
-    setRows([...rows, {id:`TEMP-${seedId++}`}]);
+    const newValue = [...rows, {id:`TEMP-${seedId++}`}]
+    //setRows(newValue);
+    emitValueChangded(newValue)
   }
 
   const handelRemove = (index:number)=>{
     let tempRows = [...rows];
     tempRows.splice(index, 1);
-    setRows(tempRows);
+    //setRows(tempRows);
+    emitValueChangded(tempRows);
   }
 
   const handleChange = (index: number, field?:string, value?:any)=>{
+    //console.log('OneToManyTable', field, value)    
     if(field){
       let tempRows = [...rows];
       tempRows[index][field] = value;
-      setRows(tempRows);      
+      //setRows(tempRows); 
+      emitValueChangded(tempRows);     
     }
   }
-
 
   return (
     <Portlet 
@@ -113,6 +115,7 @@ const OneToManyTable = React.forwardRef((
       withHeader      
       {...rest}
     >
+
       <div className={classes.body}>
         <Table className={classes.table} size={size}>
           <TableHead>
@@ -133,17 +136,16 @@ const OneToManyTable = React.forwardRef((
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row:any, rowIndex) => (
-              <TableRow key={`row-${rowIndex}-${row.id}`} >
+            {rows.map((row:any, rowIndex:any) => (
+              <TableRow key={`row-${row.id}`} >
                 {
                   columns.map((column, index)=>{
                     const{width = undefined, ...other} = (column.props?column.props : {})
                     const InputControl = resolveComponent(column.input as any);
-                    const theValue = column.field ? row[column.field]:  '';
                     return(
                       <TableCell key={`${column}-${index}-row-${rowIndex}`} style={{width:width}} {...other}>
                         <InputControl 
-                          value={theValue||''} 
+                          value={(column.field && row[column.field]) ||''} 
                           {...column.input?.props}
                           onChange={(e:any)=>handleChange(rowIndex, column.field, e.target.value)}
                         />
