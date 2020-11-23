@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
+import { useBaseItems } from 'base/Hooks/useBaseItems';
 
 const Combobox = React.forwardRef((
   props:{
@@ -35,17 +36,26 @@ const Combobox = React.forwardRef((
 
 
   let name = fromUrl ? itemName : 'label';
-  const mountedRef = useRef(true);
-  const [loading, setLoading] = React.useState(false);
-
+  //const mountedRef = useRef(true);
   const empertyValue = multiple ? []:'';
+  const [request] = React.useState<AxiosRequestConfig|undefined>(
+    fromUrl?
+    {
+      method:"get",
+      url:url,
+    }
+    :
+    undefined
+  )
+  const [menuItems, loading] = useBaseItems(request);
+
+  const itemsData = (fromUrl? menuItems : items) as any;
   
-  const [itemsData, setItemsData] = React.useState(items||[]);
   const [inputValue, setInputValue] = React.useState<any>(value||empertyValue);
 
-  let options = itemsData.map((item:any)=>item[name]);
+  let options = itemsData?.map((item:any)=>item[name]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if(!fromUrl || !url){
       return;
     }
@@ -69,7 +79,7 @@ const Combobox = React.forwardRef((
       mountedRef.current = false
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  },[]);*/
 
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
@@ -85,8 +95,8 @@ const Combobox = React.forwardRef((
   return (
     <Autocomplete
       multiple = {multiple}
-      options = {options}
-      loading = {loading}
+      options = {options||[]}
+      loading = {!!loading }
       ref = {ref}
       value = {inputValue}
       freeSolo
