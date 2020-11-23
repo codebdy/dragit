@@ -119,7 +119,7 @@ const withFormField = (Component:any)=>{
     }, [loading])
 
     const handleChange = (e:any) => {
-      let newValue = e.target.value;
+      let newValue = e?.target?.value;
       setInputValue(newValue);
       setValue(field, newValue);
       error && setError(retrigger(inputValue, registerRule));
