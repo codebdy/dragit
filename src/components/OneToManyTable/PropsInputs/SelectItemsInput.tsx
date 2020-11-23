@@ -2,7 +2,7 @@ import { createStyles, FormControlLabel, Grid, makeStyles, Switch, TextField, Th
 import React from 'react';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
-import SelectItemsInputItemDialog from './SelectItemsInputItemDialog';
+import SelectItemsInputItemDialog from '../../Select/PropsInputs/SelectItemsInputItemDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

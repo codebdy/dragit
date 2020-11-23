@@ -5,7 +5,7 @@ import StringInput from "base/PropsInputs/StringInput";
 import inputRules from "base/Rules/inputRules";
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/PageEditor/Core/Node/INode";
-import SelectItemsInput from "./PropsInputs/SelectItemsInput";
+import SelectItemsInputItemDialog from "./PropsInputs/SelectItemsInputItemDialog";
 
 export class SelectRule extends Rule{
   editPaddingY = '';
@@ -41,9 +41,27 @@ export class SelectRule extends Rule{
       {
         name:'multiple',
         label:'multiple-select',
-        xs:12,
+        xs:6,
         input:BooleanInput,
       },
+      {
+        name:'fromUrl',
+        label:'from-url',
+        xs:6,
+        input:BooleanInput,
+      },
+      {
+        name:'url',
+        label:'url',
+        xs:12,
+        input:StringInput,
+      },
+      {
+        name:'items',
+        label:'items-data',
+        xs:12,
+        input:SelectItemsInputItemDialog,
+      },      
       {
         name:'itemKey',
         label:'item-key',
@@ -54,12 +72,7 @@ export class SelectRule extends Rule{
         label:'item-name',
         input:StringInput,
       },
-      {
-        name:'data',
-        label:'items-data',
-        xs:12,
-        input:SelectItemsInput,
-      },
+
       {
         name:'helperText',
         label:'helper-text',
