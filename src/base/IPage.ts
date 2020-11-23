@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 
-export interface PageSchema{
+export interface IPageSchema{
   layout?:Array<any>,
   isFormPage?:boolean,
   api?:AxiosRequestConfig, 
@@ -9,5 +9,5 @@ export interface PageSchema{
 export interface IPage{
   id:number,
   title?:string, 
-  jsonSchema?:PageSchema,  
+  jsonSchema?:IPageSchema,  
 }

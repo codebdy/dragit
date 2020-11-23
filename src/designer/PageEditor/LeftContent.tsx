@@ -6,9 +6,9 @@ import Box from '@material-ui/core/Box';
 import AttributeBox from './Attrebutebox';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
 import { INode } from 'designer/PageEditor/Core/Node/INode';
-import SettingsBox, { PageSettings } from './SettingsBox';
+import SettingsBox from './SettingsBox';
 import LeftArea from 'designer/Layout/LeftArea';
-import { PageSchema } from 'base/IPage';
+import { IPageSchema } from 'base/IPage';
 
 
 interface TabPanelProps {
@@ -33,8 +33,8 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
-export default function LeftContent(props:{pageSchema?:PageSchema, onSettingsChange:(settings:PageSettings)=>void}){
-  const {pageSchema, onSettingsChange} = props;
+export default function LeftContent(props:{pageSchema?:IPageSchema, onChange:(pageSchema:IPageSchema)=>void}){
+  const {pageSchema, onChange} = props;
   const [value, setValue] = React.useState(0);
   const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
 
@@ -83,7 +83,8 @@ export default function LeftContent(props:{pageSchema?:PageSchema, onSettingsCha
        <AttributeBox node = {focusedNode}></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {//<SettingsBox settings = {pageSettings} onChange = {onSettingsChange} />
+        {
+          <SettingsBox pageSchema = {pageSchema} onChange = {onChange} />
         }
       </TabPanel>
     </LeftArea>

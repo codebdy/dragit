@@ -1,84 +1,22 @@
-import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider} from '@material-ui/core';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import CloseIcon from '@material-ui/icons/Close';
+import React from 'react';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MetaListDialogLeftList from './MetaListDialogLeftList';
-import intl from 'react-intl-universal';
 import { ListViewMetaItem } from 'components/ListView/ListViewMetaItem';
+
+import PropsDialog from 'base/PropsInputs/PropsDialog';
 
 const styles = (theme: Theme) =>
   createStyles({
-    more:{
-      width:'24px',
-    },
-    dilogContent:{
-      display:'flex',
-      flexFlow:'row',
-      width:'560px',
-    },
     itemContent:{
       flex:1,
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1),
     },
+  }
+);
 
-    closeButton: {
-      position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: theme.palette.grey[500],
-    },
-  });
+const useStyles = makeStyles(styles);
 
-  const useStyles = makeStyles(styles);
-
-export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string;
-  children: React.ReactNode;
-  onClose: () => void;
-}
-
-const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme: Theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme: Theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-const theme = responsiveFontSizes(createMuiTheme({
-  palette: {
-    type: 'light',
-    background:{
-      //default:'#f4f5fa',
-    },
-    primary:{
-      main:"#5d78ff",
-    },  
-  },
-
-}));
 
 export interface MetaListDialogProps{
   label?:string,
@@ -101,17 +39,9 @@ export default function MetaListDialog(props:MetaListDialogProps){
     onSelected(index);
   }
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
   const handleSave = () => {
     onSave();
-    setOpen(false);
+
   };
   const handleRemove = (index:number) => {
     if(index === selectedIndex){
@@ -132,44 +62,22 @@ export default function MetaListDialog(props:MetaListDialogProps){
     onChange([...items]);
   };
 
+
   return (
 
-    <Fragment>
-      <Button fullWidth variant="outlined" size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> {label}</Button>
-      <ThemeProvider theme={theme}>
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 
-          open={open}
-          scroll = 'paper'
-        >
-          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            {title}
-          </DialogTitle>
-          <DialogContent dividers className={classes.dilogContent}>
-              <MetaListDialogLeftList 
-                items={items} 
-                selectedIndex={selectedIndex} 
-                onSelected ={handleSelected}
-                onAddNew = {onAddNew} 
-                onRemove = {handleRemove}
-                onChangePosition = {handleChangePosition}
-              />
-              <div className = {classes.itemContent}>
-                {children}
-              
-              </div>
-            </DialogContent>
-          <DialogActions>
-              <Button autoFocus onClick={handleClose}>
-                {intl.get('cancel')}
-              </Button>
-              <Button autoFocus onClick={handleSave} color="primary">
-                {intl.get('save')}
-              </Button>
-            </DialogActions>
-        </Dialog>      
-      </ThemeProvider>      
-    </Fragment>
-
-    
+    <PropsDialog label={label} title = {title} onSave = {handleSave}>
+      <MetaListDialogLeftList 
+        items={items} 
+        selectedIndex={selectedIndex} 
+        onSelected ={handleSelected}
+        onAddNew = {onAddNew} 
+        onRemove = {handleRemove}
+        onChangePosition = {handleChangePosition}
+      />
+      <div className = {classes.itemContent}>
+        {children}
+      
+      </div>
+    </PropsDialog>       
   )
 }

@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from 'components/ListView/PropsInputs/MetaListDialog';
-import MetaListInput, { MetaItem } from 'components/ListView/PropsInputs/MetaListInput';
+import MetaListInput, { MetaItem } from 'base/PropsInputs/MetaListInput';
 
 const styles = (theme: Theme) =>
   createStyles({

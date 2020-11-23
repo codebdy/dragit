@@ -5,29 +5,15 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
-import MetaListInput from '../../../base/PropsInputs/MetaListInput';
+import useThemeSettings from 'store/theme/useThemeSettings';
 
 const styles = (theme: Theme) =>
   createStyles({
-    more:{
-      width:'24px',
-    },
     dilogContent:{
       display:'flex',
       flexFlow:'row',
-      width:'460px',
+      width:'560px',
     },
-    dlgBody:{
-      display:'flex',
-      flexFlow:'column',
-      minHeight:'300px',
-    },
-    itemContent:{
-      flex:1,
-      paddingLeft: theme.spacing(1),
-      paddingRight: theme.spacing(1),
-    },
-
     closeButton: {
       position: 'absolute',
       right: theme.spacing(1),
@@ -71,29 +57,14 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-const theme = responsiveFontSizes(createMuiTheme({
-  palette: {
-    type: 'light',
-    background:{
-      //default:'#f4f5fa',
-    },
-    primary:{
-      main:"#5d78ff",
-    },  
-  },
-
-}));
-
-export interface MetaListDialogProps{
-  value?:Array<any>;
-  onChange:(newValue:Array<any>)=>void;
-}
-
-export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
+export default function PropsDialog(props:{
+  label?:string,
+  title:string,
+  children?:React.ReactNode,
+  onSave:()=>void,
+}){
   const classes = useStyles();
-  const {value,  onChange} = props;
-  const [inpuValue, setInputValue] = React.useState<Array<any>>(value?JSON.parse(JSON.stringify(value)):[]);
- 
+  const {label, title, onSave, children} = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -103,42 +74,48 @@ export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
     setOpen(false);
   };
   const handleSave = () => {
-    onChange(inpuValue);
+    onSave();
     setOpen(false);
   };
 
 
+  const themeSettings = useThemeSettings();
+  
+  const theme = responsiveFontSizes(createMuiTheme({
+    palette: {
+      type: themeSettings.themeMode as any,
+      primary:{
+        main: themeSettings.primary,
+      },
+
+    },
+  }));
+
   return (
 
     <Fragment>
-      <Button variant="outlined"  fullWidth size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> 
-        {intl.get('data')} ···
-      </Button>
+      <Button fullWidth variant="outlined" size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> {label}</Button>
       <ThemeProvider theme={theme}>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 
           open={open}
           scroll = 'paper'
         >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            {intl.get('edit-select-items')}
+            {title}
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>
-            <div className={classes.dlgBody}>
-              <MetaListInput label="" value = {inpuValue} onChange = {setInputValue}/>
-            </div>
+            {children}
           </DialogContent>
           <DialogActions>
-              <Button autoFocus onClick={handleClose}>
-                {intl.get('cancel')}
-              </Button>
-              <Button autoFocus onClick={handleSave} color="primary">
-                {intl.get('save')}
-              </Button>
-            </DialogActions>
+            <Button autoFocus onClick={handleClose}>
+              {intl.get('cancel')}
+            </Button>
+            <Button autoFocus onClick={handleSave} color="primary">
+              {intl.get('save')}
+            </Button>
+          </DialogActions>
         </Dialog>      
       </ThemeProvider>      
     </Fragment>
-
-    
   )
 }

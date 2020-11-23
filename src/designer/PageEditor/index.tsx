@@ -9,7 +9,6 @@ import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
-import { PageSettings } from './SettingsBox';
 import bus, { CANVAS_SCROLL } from './Core/bus';
 import { CanvasNode } from './Core/Node/CanvasNode';
 import { parseNodes } from './Core/Node/jsonParser';
@@ -23,7 +22,7 @@ import LeftContent from './LeftContent';
 import useDesigner from 'store/designer/useDesigner';
 import { API_GET_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
-import { IPage } from 'base/IPage';
+import { IPage, IPageSchema } from 'base/IPage';
 import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'admin/views/Page/PageSkeleton';
 
@@ -98,18 +97,19 @@ export default function PageEditor(
   const {showOutline, showPaddingX, showPaddingY} = designer;
   const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   const [pageMeta, loading] = useAxios<IPage>(pageRequest);
+  const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(pageMeta?.jsonSchema);
 
   //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(pageMeta?.jsonSchema?.layout);
   let canvas = new CanvasNode(nodes);
-  //const [pageSettings, setPageSettings] = useState<PageSettings|undefined>();
-
-  const pageJson = pageMeta?.jsonSchema;
 
   useEffect(() => {
     setPageRequest({...API_GET_PAGE, params:{pageId}})
   },[pageId]);
-  //复制一份出来，不保存的话直接扔掉
+
+  useEffect(() => {
+    setPageSchema(pageMeta?.jsonSchema)
+  },[pageMeta]);
  
   const dispatch = useDispatch()
   
@@ -126,8 +126,8 @@ export default function PageEditor(
     bus.emit(CANVAS_SCROLL)
   }
 
-  const handlSettingsChange = (newSettings:PageSettings)=>{
-    //setPageSettings(newSettings)
+  const handlPageChange = (page:IPageSchema)=>{
+    setPageSchema(page)
   }
 
   return (
@@ -135,7 +135,7 @@ export default function PageEditor(
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
-            <LeftContent pageSchema={pageJson} onSettingsChange={handlSettingsChange}/>
+            <LeftContent pageSchema={pageSchema} onChange={handlPageChange}/>
           }
 
           toolbar = {

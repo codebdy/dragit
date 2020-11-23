@@ -1,11 +1,11 @@
 import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
-import { IPage, PageSchema } from "base/IPage";
+import { IPage, IPageSchema } from "base/IPage";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModelAction, setModelLoadingAction } from "store/page/actions";
 
-export default function usePageModel(page:PageSchema|undefined, id:number|undefined){
+export default function usePageModel(page:IPageSchema|undefined, id:number|undefined){
   
   const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   const [pageModel, loadingModel, error] = useAxios<IPage>(pageRequest)
