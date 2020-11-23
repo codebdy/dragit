@@ -113,7 +113,6 @@ const OneToManyTable = React.forwardRef((
       withHeader      
       {...rest}
     >
-
       <div className={classes.body}>
         <Table className={classes.table} size={size}>
           <TableHead>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, TextField, MenuItem, Select, FormControl, InputLabel, FormControlLabel, Switch} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, TextField, MenuItem, Select, FormControl, InputLabel, FormControlLabel, Switch, Grid} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from '../../ListView/PropsInputs/MetaListDialog';
 import { Fragment } from 'react';
-import SelectItemsInput from './SelectItemsInput';
+import SelectItemsInputItemDialog from 'components/Select/PropsInputs/SelectItemsInputItemDialog';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
 
 export default function OneToManyTableColumnsDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {field, value, onChange} = props;
+  const {field, value, label, onChange} = props;
   const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
@@ -51,7 +51,7 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
     <MetaListDialog
       title ={intl.get('column-editor')}
       value = {columns}
-      label = {intl.get('data')}
+      label = {label}
       onAddNew = {handleAddNew}
       selectedIndex = {selectedIndex}
       onChange = {newValue=>{setComuns(newValue)}}
@@ -127,12 +127,12 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
               labelId="size-select-label"
               id="size-select"
               label = {intl.get('input-type')}
-              value = {columns[selectedIndex].input?.name || 'TextField'}
+              value = {columns[selectedIndex].input?.name || 'TextBox'}
               onChange = {event=>{
                 handleChangeAttribute(selectedIndex, 'input', {...columns[selectedIndex].input, name:event.target.value, props:{}})
               }}
             >
-              <MenuItem value={"TextField"}>{intl.get('text-field')}</MenuItem>
+              <MenuItem value={"TextBox"}>{intl.get('text-field')}</MenuItem>
               <MenuItem value={'SelectBox'}>{intl.get('selectbox')}</MenuItem>
               <MenuItem value={'Combobox'}>{intl.get('combobox')}</MenuItem>
               <MenuItem value={'MediaSelect'}>{intl.get('media')}</MenuItem>
@@ -203,9 +203,37 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
             {
               (columns[selectedIndex].input?.name === "SelectBox" || 
               columns[selectedIndex].input?.name === "Combobox" ) &&
-              <SelectItemsInput field="data" value={columns[selectedIndex].input?.props?.data} onChange = {(field, data)=>{
-                handleChangeInputProps(selectedIndex, field, data)
-              }}/>
+
+              <Fragment>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={columns[selectedIndex].input?.props?.fromUrl || false}
+                      onChange={e=>handleChangeInputProps(selectedIndex, 'fromUrl', e.target.checked)}
+                      name="FromUrl"
+                      color="primary"
+                    />
+                  }
+                  label={<span>{intl.get("from-url")}</span>}
+                />
+                {
+                  columns[selectedIndex].input?.props?.fromUrl ?
+                    <Grid item xs={12}>
+                      <TextField
+                        size="small" 
+                        variant = "outlined"
+                        value={columns[selectedIndex].input?.props?.url ||''}
+                        onChange={e=>handleChangeInputProps(selectedIndex, 'url', e.target.value as any)}
+                        rows="2"
+                      />
+                    </Grid>
+                  :
+                  <Grid item xs={12}>
+                    <SelectItemsInputItemDialog value={columns[selectedIndex].input?.props?.items} 
+                    onChange={items=>handleChangeInputProps(selectedIndex, 'items', items)} />    
+                  </Grid>
+                }
+              </Fragment>
             }
           </div>
         </Fragment>

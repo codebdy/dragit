@@ -418,10 +418,8 @@ export default {
                         variant:"outlined",
                         size:'small',
                         withoutEmpertyItem:false,                        
-                       
-                          fromUrl:true,
-                          url:'/api/base/items',
-                        
+                        fromUrl:true,
+                        url:'/api/base/items',
                       }
                     },        
                   },
