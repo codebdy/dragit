@@ -40,6 +40,10 @@ interface ColumnMeta{
 }
 var seedId = 1;
 
+const creatId = ()=>{
+  return `TEMP-${seedId++}`;
+}
+
 //新建记录时，添加TEMP-作为ID，需要后端处理，或者提交表单数据时处理
 const OneToManyTable = React.forwardRef((
   props: {
@@ -62,12 +66,15 @@ const OneToManyTable = React.forwardRef((
      ...rest
   } = props;
   const classes = useStyles();
-  //const [rows, setRows] = React.useState<Array<any>>(value? value :[]);
-  const rows = value? value :[];
+  //const [rows, setRows] = React.useState<Array<any>>();
+  //console.log(rows, value);
+  const rows = value? value.map((item:any)=>{
+    return {...item, id:item.id? item.id: creatId()}
+  }) :[]
 
   //useEffect(() => {
   //  setRows(value? value :[])
- // },[value]);
+  //},[value]);
   
   const emitValueChangded = (newValue:any) => {
     const event = {
@@ -75,10 +82,10 @@ const OneToManyTable = React.forwardRef((
       target: {
         type: "change",
         name: props.name,
-        value: newValue/*?.map((row:any)=>{
+        value: newValue?.map((row:any)=>{
           const newId = (row.id && row.id.toString().startsWith('TEMP-'))? undefined: row.id;
           return {...row, id: newId }
-        })*/
+        })
       }
     };
     //console.log('useEffect',onChange, event)
@@ -87,7 +94,7 @@ const OneToManyTable = React.forwardRef((
 
 
   const handleAddNew = ()=>{
-    const newValue = [...rows, {id:`TEMP-${seedId++}`}]
+    const newValue = [...rows, {id:creatId()}]
     //setRows(newValue);
     emitValueChangded(newValue)
   }
