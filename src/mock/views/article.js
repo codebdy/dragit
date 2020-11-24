@@ -428,6 +428,16 @@ export default {
                 ]         
               },            
             },
+            {
+              name:'OneToManyPortlet',
+              props:{
+                title:'工厂合同',
+                elevation: 6,
+                marginTop: 2,
+                collapsible:true,
+                open:true,
+              }
+            }
           ]
         },
         {

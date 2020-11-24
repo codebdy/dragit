@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface PortletProps{
-  withHeader:boolean;
+  withHeader?:boolean;
   children?:any;
   open?:boolean;
   title?:string;

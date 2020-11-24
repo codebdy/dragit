@@ -1,31 +1,15 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
-import Portlet from 'components/Portlet';
-import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import classNames from 'classnames';
 import { resolveComponent } from 'base/DragRX';
 import { RXInputProps } from 'base/RXInputProps';
+import MutiContentPotlet from 'components/common/MutiContentPotlet';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    body:{
-      //padding:theme.spacing(2),
-    },
     table: {
       width: '100%',
     },
-    addNewArea:{
-      display:'flex',
-      justifyContent:'center',
-      padding:theme.spacing(1),
-    },
-    helperText:{
-      padding:theme.spacing(1),
-    },
-    error:{
-      color:'red',
-    }
   }),
 );
 
@@ -69,9 +53,6 @@ const OneToManyTable = React.forwardRef((
     return {...item, id:item.id? item.id: creatId()}
   }) :[]
 
-  //useEffect(() => {
-  //  setRows(value? value :[])
-  //},[value]);
   
   const emitValueChangded = (newValue:any) => {
     const event = {
@@ -114,13 +95,11 @@ const OneToManyTable = React.forwardRef((
   }
 
   return (
-    <Portlet 
+    <MutiContentPotlet 
       ref={ref}
-      withHeader      
+      onAddNew = {handleAddNew}
       {...rest}
     >
-
-      <div className={classes.body}>
         <Table className={classes.table} size={size}>
           <TableHead>
             <TableRow>
@@ -168,14 +147,7 @@ const OneToManyTable = React.forwardRef((
             ))}
           </TableBody>
         </Table>    
-        <div className={classes.addNewArea}>
-          <IconButton onClick={handleAddNew} >
-            <AddIcon />
-          </IconButton>
-        </div>
-        <div className={classNames(classes.helperText, {[classes.error]:error})}>{helperText}</div>
-      </div>
-    </Portlet>
+    </MutiContentPotlet>
   )
 })
 
