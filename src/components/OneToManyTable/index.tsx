@@ -4,6 +4,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { resolveComponent } from 'base/DragRX';
 import { RXInputProps } from 'base/RXInputProps';
 import MutiContentPotlet from 'components/common/MutiContentPotlet';
+import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +28,7 @@ interface ColumnMeta{
 const OneToManyTable = React.forwardRef((
   props: {
     value?:any
-    onChange:(event:any)=>void,
+    onChange:(event:React.ChangeEvent<any>)=>void,
     size?:any,
     columns?:Array<ColumnMeta>
   } & RXInputProps, 
@@ -45,14 +46,7 @@ const OneToManyTable = React.forwardRef((
      ...rest
   } = props;
   const classes = useStyles();
-  var seedId = 1;
-  const creatId = ()=>{
-    return `TEMP-${seedId++}`;
-  }
-  const rows = value? value.map((item:any)=>{
-    return {...item, id:item.id? item.id: creatId()}
-  }) :[]
-
+  const rows = value? addTempIdToTable(value) :[]
   
   const emitValueChangded = (newValue:any) => {
     const event = {
@@ -60,27 +54,21 @@ const OneToManyTable = React.forwardRef((
       target: {
         type: "change",
         name: props.name,
-        value: newValue?.map((row:any)=>{
-          const newId = (row.id && row.id.toString().startsWith('TEMP-'))? undefined: row.id;
-          return {...row, id: newId }
-        })
+        value: removeTempIdToTable(newValue),
       }
     };
-    //console.log('useEffect',onChange, event)
     onChange && onChange(event);
   }
 
 
   const handleAddNew = ()=>{
     const newValue = [...rows, {id:creatId()}]
-    //setRows(newValue);
     emitValueChangded(newValue)
   }
 
   const handelRemove = (index:number)=>{
     let tempRows = [...rows];
     tempRows.splice(index, 1);
-    //setRows(tempRows);
     emitValueChangded(tempRows);
   }
 

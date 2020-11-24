@@ -430,13 +430,21 @@ export default {
             },
             {
               name:'OneToManyPortlet',
+              designProps:{
+                isDeisgning:true,
+              },
               props:{
-                title:'工厂合同',
+                title:'1对多面板',
                 elevation: 6,
                 marginTop: 2,
                 collapsible:true,
                 open:true,
-              }
+              },
+              children:[
+                {
+                  name:'PortletGridContainer',
+                }
+              ],
             }
           ]
         },

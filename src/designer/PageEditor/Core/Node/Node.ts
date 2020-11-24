@@ -84,6 +84,7 @@ export class Node implements INode{
       onMouseMove : this.handleMouseMove,
       onMouseOut : this.handleMouseOut,
       onClick : this.handleClick,
+      ...this.meta.designProps
     };
 
   }
