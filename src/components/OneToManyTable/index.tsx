@@ -26,12 +26,12 @@ interface ColumnMeta{
 
 //新建记录时，添加TEMP-作为ID，需要后端处理，或者提交表单数据时处理
 const OneToManyTable = React.forwardRef((
-  props: {
+  props: RXInputProps& {
     value?:any
     onChange:(event:React.ChangeEvent<any>)=>void,
     size?:any,
     columns?:Array<ColumnMeta>
-  } & RXInputProps, 
+  }, 
   ref:any
 )=>{
   const{

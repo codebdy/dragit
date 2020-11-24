@@ -4,6 +4,7 @@ import MutiContentPotlet from 'components/common/MutiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';
+import { RXInputProps } from 'base/RXInputProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,8 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const OneToManyPortlet = React.forwardRef((
-  props:{
-    name?:string,
+  props: RXInputProps& {
     value?:Array<any>,   
     title?:string,
     isDeisgning?:boolean,
@@ -31,7 +31,7 @@ const OneToManyPortlet = React.forwardRef((
   },
   ref:any
 )=>{
-  const {value, title, isDeisgning, children, onChange, ...rest} = props;
+  const {loading, value, title, isDeisgning, children, onChange, ...rest} = props;
   const classes = useStyles();
   
   const emitValueChangded = (newValue:any) => {
@@ -45,10 +45,13 @@ const OneToManyPortlet = React.forwardRef((
     };
     onChange && onChange(event);
   }
-
-  const rows = value? addTempIdToTable(value) :[];
+  const valueRows =  value? addTempIdToTable(value) :[];
+  const rows = isDeisgning ? [{id:1}] : valueRows;
 
   const handleAddNew = ()=>{
+    if(isDeisgning){
+      return;
+    }
     const newValue = [...rows, {id:creatId()}]
     emitValueChangded(newValue)
   }
@@ -68,7 +71,7 @@ const OneToManyPortlet = React.forwardRef((
           return(
             <Grid container key = {item.id}>
               <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
-                <Grid item>{title} #</Grid>
+                <Grid item>{title} #{index + 1}</Grid>
                 <Grid item>
                   <IconButton aria-label="delete"
                     onClick = {(event) => {handelRemove(index)}}

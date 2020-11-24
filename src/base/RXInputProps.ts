@@ -1,8 +1,8 @@
 
 export interface RXInputProps{
-  loading:boolean;
-  onChange:(value:unknown)=>void;
+  loading?:boolean;
+  onChange?:(value:unknown)=>void;
   name?:string;
-  error:boolean;
+  error?:boolean;
   helperText?:string;
 }

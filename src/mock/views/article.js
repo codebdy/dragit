@@ -430,10 +430,12 @@ export default {
             },
             {
               name:'OneToManyPortlet',
+
               designProps:{
                 isDeisgning:true,
               },
               props:{
+                field:'onetoManyField',                
                 title:'1对多面板',
                 elevation: 6,
                 marginTop: 2,
@@ -443,6 +445,67 @@ export default {
               children:[
                 {
                   name:'PortletGridContainer',
+                  children:[
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:3,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'合同号',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            field:'no',
+                            rule:{
+                              valueType:'string',
+                              required:true,
+                            }                      
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:6,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'供应商',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'supplier',
+                            size:"small",
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:3,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            field:'date',
+                          }
+                        }
+                      ]
+                    },
+
+                  ],
                 }
               ],
             }
@@ -466,6 +529,9 @@ export default {
               children:[
                 {
                   name:"PortletGridContainer",
+                  children:[
+
+                  ]
                 }
               ]
             }
