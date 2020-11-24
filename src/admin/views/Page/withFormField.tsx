@@ -1,9 +1,10 @@
 import { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { useContext } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import useFieldValue from './useFieldValue';
 import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
+import { RowModelContext } from './RowModelContext';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};
@@ -98,13 +99,21 @@ function retrigger(value:any, rule:any){
 
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
-    const {register, setValue, getValues , errors} = useFormContext();
+    const {register, control, setValue, getValues , errors} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
     const value = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
     const [error, setError] = React.useState(errors[field] && errors[field].message);
     const loading = useModelLoading();
     const registerRule = rule && metaRuleToRegisterRules(rule);
+
+    const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+      control,
+      name: field
+    });
+
+    const rowModelContext = useContext(RowModelContext);
+    console.log('rowModelContext', rowModelContext);
 
     React.useEffect(() => {
       register(field, registerRule); 

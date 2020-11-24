@@ -5,6 +5,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';
 import { RXInputProps } from 'base/RXInputProps';
+import { creatRowModel, RowModelContext } from 'admin/views/Page/RowModelContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,9 +32,14 @@ const OneToManyPortlet = React.forwardRef((
   },
   ref:any
 )=>{
-  const {loading, value, title, isDeisgning, children, onChange, ...rest} = props;
+  const {name, loading, value, title, isDeisgning, children, onChange, ...rest} = props;
   const classes = useStyles();
   
+  //const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+  //  control,
+  //  name: name
+  //});
+
   const emitValueChangded = (newValue:any) => {
     const event = {
       persist: () => {return {}},
@@ -69,23 +75,25 @@ const OneToManyPortlet = React.forwardRef((
       {
         rows.map((item, index)=>{
           return(
-            <Grid container key = {item.id}>
-              <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
-                <Grid item>{title} #{index + 1}</Grid>
-                <Grid item>
-                  <IconButton aria-label="delete"
-                    onClick = {(event) => {handelRemove(index)}}
-                    size="small"
-                  >
-                    <CloseIcon fontSize="small" />
-                  </IconButton>
+            <RowModelContext.Provider value={creatRowModel(name, index, item)} key = {item.id}>
+              <Grid container key = {item.id}>
+                <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
+                  <Grid item>{title} #{index + 1}</Grid>
+                  <Grid item>
+                    <IconButton aria-label="delete"
+                      onClick = {(event) => {handelRemove(index)}}
+                      size="small"
+                    >
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Divider />
+                  {children}
                 </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Divider />
-                {children}
-              </Grid>
-            </Grid>            
+            </RowModelContext.Provider>            
           )
         })
       }
