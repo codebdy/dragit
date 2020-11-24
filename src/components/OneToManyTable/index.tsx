@@ -38,11 +38,6 @@ interface ColumnMeta{
     props:any,
   };
 }
-var seedId = 1;
-
-const creatId = ()=>{
-  return `TEMP-${seedId++}`;
-}
 
 //新建记录时，添加TEMP-作为ID，需要后端处理，或者提交表单数据时处理
 const OneToManyTable = React.forwardRef((
@@ -66,8 +61,10 @@ const OneToManyTable = React.forwardRef((
      ...rest
   } = props;
   const classes = useStyles();
-  //const [rows, setRows] = React.useState<Array<any>>();
-  //console.log(rows, value);
+  var seedId = 1;
+  const creatId = ()=>{
+    return `TEMP-${seedId++}`;
+  }
   const rows = value? value.map((item:any)=>{
     return {...item, id:item.id? item.id: creatId()}
   }) :[]
