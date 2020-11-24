@@ -65,6 +65,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
     <HoverablePaper
       ref={ref}
       {...rest}
+      className = {className}
     >
       {withHeader && 
         <Fragment>

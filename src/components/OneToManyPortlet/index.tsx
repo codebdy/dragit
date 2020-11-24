@@ -1,16 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import Portlet from 'components/Portlet';
+import MutiContentPotlet from 'components/common/MutiContentPotlet';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      position:'absolute',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width:'100%',
-      height:'100%',
     },
 
   }),
@@ -19,16 +13,21 @@ const useStyles = makeStyles((theme: Theme) =>
 const OneToManyPortlet = React.forwardRef((
   props:{
     title?:string,
-    withHeader?:string
   },
   ref:any
 )=>{
-  const {title, withHeader=true, ...rest} = props;
+  const {title,...rest} = props;
   const classes = useStyles();
+  const handleAddNew = ()=>{
+
+  }
+
   return (
-    <Portlet title={title} withHeader {...rest}>
+    <MutiContentPotlet title={title} ref={ref} {...rest}
+      onAddNew = {handleAddNew}
+    >
       ddd
-    </Portlet>
+    </MutiContentPotlet>
   )
 })
 

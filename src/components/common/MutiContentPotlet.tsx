@@ -33,12 +33,12 @@ const MutiContentPotlet = React.forwardRef((
   },
   ref:any
 )=>{
-  const {title, withHeader = true, onAddNew, helperText, error, children, ...rest} = props;
+  const {withHeader = true, onAddNew, helperText, error, children, ...rest} = props;
   const classes = useStyles();
   return (
     <Portlet 
       ref={ref}
-      withHeader = {withHeader}     
+      withHeader = {withHeader}
       {...rest}
     >
 
