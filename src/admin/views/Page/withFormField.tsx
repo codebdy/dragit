@@ -1,10 +1,10 @@
 import { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
 import React, { useContext } from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
 import useFieldValue from './useFieldValue';
 import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
 import { RowModelContext } from './RowModelContext';
+import { useFormContext } from 'react-hook-form';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};
@@ -99,30 +99,26 @@ function retrigger(value:any, rule:any){
 
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
-    const {register, control, setValue, getValues , errors} = useFormContext();
+    const modelContext = useContext(RowModelContext);
+    const {register, setValue, getValues , errors} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
+    const fieldName = modelContext.parentField ? `${modelContext.parentField}[${modelContext.rowIndex}].${field}`: field;
+    
     const value = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
-    const [error, setError] = React.useState(errors[field] && errors[field].message);
+    const [error, setError] = React.useState(errors[fieldName] && errors[fieldName].message);
     const loading = useModelLoading();
     const registerRule = rule && metaRuleToRegisterRules(rule);
 
-    const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-      control,
-      name: field
-    });
-
-    const rowModelContext = useContext(RowModelContext);
-    console.log('rowModelContext', rowModelContext);
 
     React.useEffect(() => {
-      register(field, registerRule); 
+      register(fieldName, registerRule); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [register])
 
     React.useEffect(() => {
-      const currentValue = getValues(field) || value;
-      setValue(field, currentValue);  
+      const currentValue = getValues(fieldName) || value;
+      setValue(fieldName, currentValue);  
       setInputValue(currentValue )
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading])
@@ -130,7 +126,7 @@ const withFormField = (Component:any)=>{
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
       setInputValue(newValue);
-      setValue(field, newValue);
+      setValue(fieldName, newValue);
       error && setError(retrigger(inputValue, registerRule));
     }
 
@@ -141,7 +137,7 @@ const withFormField = (Component:any)=>{
     return (
       <Component
         ref={forwardedRef}
-        name = {field}
+        name = {fieldName}
         loading={loading}
         value={inputValue || empertyValue || ''}
         {...rest}

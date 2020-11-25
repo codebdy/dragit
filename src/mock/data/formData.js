@@ -26,5 +26,24 @@ export default{
       title: 'Camera',
     },
   
+  ],
+
+  onetoManyField:[
+    {
+      id:'1',
+      no:'合同1',
+      supplier:'苹果科技',
+    },
+    {
+      id:'2',
+      no:'合同3',
+      supplier:'苹果科技',
+    },
+    {
+      id:'3',
+      no:'合同3',
+      supplier:'华为荣耀',
+    },
   ]
+
 }
