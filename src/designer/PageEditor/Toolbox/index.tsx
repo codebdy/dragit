@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import items from './items'
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
-import {sideBarSettings} from "utils";
+import {sideBarSettings} from "utils/sideBarSettings";
 import { INode } from 'designer/PageEditor/Core/Node/INode';
 import TreeView from '@material-ui/lab/TreeView';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';

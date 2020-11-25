@@ -10,7 +10,7 @@ import Brand from './SidebarBrand'
 import Switch from '@material-ui/core/Switch';
 import ListNav from "./SidebarLinks"
 
-import {sideBarSettings} from "utils";
+import {sideBarSettings} from "utils/sideBarSettings";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";

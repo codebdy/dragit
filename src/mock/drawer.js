@@ -14,16 +14,7 @@ export default [{
             size: 'small',
         }
     },
-    {
-        type: 'item',
-        title: 'test',
-        to: '/admin/page/test',
-        icon: 'mdi-speedometer',
-    },
-    {
-        id:'divider1',
-        type:'divider',
-    },
+
     {
         type: 'item',
         title: '文章管理',
@@ -67,6 +58,10 @@ export default [{
         ],
     },
     {
+        id:'divider1',
+        type:'divider',
+    },
+    {
         id: "3",
         title: '多级嵌套',
         type: 'group',
@@ -104,10 +99,32 @@ export default [{
         ],
     },
     {
-        id: "4",
         title: '询盘',
         type: 'item',
         to: { name: 'dashboard' },
         icon: 'mdi-email-outline',
+        badge: {
+            color: 'secondary',
+            field: 'inquiries',
+            size: 'small',
+        }    
     },
+    {
+        title:"用户",
+        type: 'group',
+        icon: 'mdi-account-circle',
+        children: [
+            {
+                title:"管理员",
+                type:'item',
+                icon: 'mdi-account'
+            },
+            {
+                title:"角色",
+                type:'item',
+                icon: 'mdi-account-key'
+            }
+
+        ]
+    }
 ]

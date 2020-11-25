@@ -1,6 +1,6 @@
 import React from "react";
 import { Hidden } from "@material-ui/core";
-import {sideBarSettings} from "utils";
+import {sideBarSettings} from "utils/sideBarSettings";
 import { RootState } from "store";
 import { useSelector } from "react-redux";
 

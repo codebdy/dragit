@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { INode } from '../Node/INode';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE, CANVAS_SCROLL } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
-import { sideBarSettings } from 'utils';
+import { sideBarSettings } from 'utils/sideBarSettings';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import classNames from 'classnames';
