@@ -4,6 +4,7 @@ import background from "assets/img/background2.jpg";
 import leftImage from "assets/img/design-team.png";
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,11 +62,13 @@ export default function Login(){
   const classes = useStyles();
 
   const [values, setValues] = React.useState<any>({
-    amount: '',
-    password: '',
+    account: 'demo',
+    password: 'demo',
     showPassword: false,
     rememberMe:false,
   });
+
+  const history = useHistory();
 
   const handleChange = (prop: any) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -78,6 +81,10 @@ export default function Login(){
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  const handleLogin = ()=>{
+    history.push("/admin/dashboard");
+  }
   
   return (
     <div className={classes.root}>
@@ -102,6 +109,7 @@ export default function Login(){
                 fullWidth
                 id="name"
                 label={intl.get('user-name')}
+                value={values.account}
                 variant="outlined"
               />
             </Grid>
@@ -142,7 +150,9 @@ export default function Login(){
                 <a href="#forgot"> {intl.get('forgot-password')}</a>
             </Grid>
             <Grid item xs={6}>
-                <Button fullWidth variant="contained" color="primary" size = "large" style={{fontSize:'1.2rem'}}>
+                <Button fullWidth variant="contained" color="primary" size = "large" style={{fontSize:'1.2rem'}}
+                  onClick = {handleLogin}
+                >
                   {intl.get('login')}
                 </Button>
             </Grid>            
