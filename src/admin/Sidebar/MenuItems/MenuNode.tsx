@@ -1,5 +1,5 @@
 import { Badge, ListItem, ListItemIcon, ListItemText, Chip, createStyles, makeStyles, Theme } from "@material-ui/core";
-import { useAppInfo } from "base/Hooks/useAppInfo";
+import { useAppValue } from "base/Hooks/useAppValue";
 import IMenuItem from "base/IMenuItem";
 import { RXNode } from "base/RXNode/RXNode";
 import classNames from "classnames";
@@ -76,7 +76,7 @@ export default function MenuNode(
   const {node, mini, dotBadge, className, children, onClick} = props;
   const item = node.meta;
   const {badge, chip, title, icon} = item;
-  const baggeLabel = useAppInfo(badge?.field);
+  const baggeLabel = useAppValue(badge?.field);
 
   let iconTsx = (badge ? 
       <Badge 

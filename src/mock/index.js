@@ -10,6 +10,7 @@ import mediaFolders from './medias/mediaFolders'
 import medias from './medias/medias'
 import modules, {getModuleIndexPage, getModulePage} from './views/modules'
 import auths from './data/auths'
+import appInfo from './data/appInfo'
 
 window.idSeed = 100;
 
@@ -214,6 +215,23 @@ Mock.mock(RegExp('/api/update-module-auth?.*'),'post', (request)=>{
 
 Mock.mock('/api/get-auths','get', auths)
 
+Mock.mock('/api/login', 'post',  (request)=>{
+  let data = JSON.parse(request.body)
+  if(data.account === 'demo' && data.password === 'demo'){
+    return{
+      success:true,
+      appInfo:appInfo,
+    }   
+  }
+  else{
+    return{
+      status:false,
+      errorMessage:'用户名或密码错误',
+    }
+  }
+})
+
+Mock.mock('/api/get-app-info','get', appInfo)
 
 
 Mock.setup({

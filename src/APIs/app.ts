@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios"
 
-const API_POST_LOGIN : AxiosRequestConfig= {
+const API_LOGIN : AxiosRequestConfig= {
   url:'/api/login',
   method:'post',
 }
@@ -25,7 +25,7 @@ function getIntlApi(lang:string): AxiosRequestConfig{
 
 
 export { 
-  API_POST_LOGIN,
+  API_LOGIN,
   API_GET_APP_INFO, 
   API_SET_ENGRY_MODULE_ID,
   getIntlApi

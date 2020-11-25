@@ -25,6 +25,7 @@ import { useAxios } from 'base/Hooks/useAxios';
 import { IPage, IPageSchema } from 'base/IPage';
 import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'admin/views/Page/PageSkeleton';
+import { useAuthCheck } from 'base/Hooks/useAuthCheck';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -102,7 +103,8 @@ export default function PageEditor(
   //相当于复制一个Json副本，不保存的话直接扔掉
   let nodes = parseNodes(pageMeta?.jsonSchema?.layout);
   let canvas = new CanvasNode(nodes);
-
+  useAuthCheck();
+  
   useEffect(() => {
     setPageRequest({...API_GET_PAGE, params:{pageId}})
   },[pageId]);

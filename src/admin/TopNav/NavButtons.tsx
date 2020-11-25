@@ -4,6 +4,10 @@ import IconButton from '@material-ui/core/IconButton';
 import { Hidden, Badge, Typography, Menu, MenuItem, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import MenuIcon from '@material-ui/icons/Menu';
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import { setAppInfoAction } from "store/app/actions";
+import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +31,8 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
 
   const isMenuOpen = Boolean(anchorEl);
   const menuId = 'primary-search-account-menu';
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -35,6 +41,12 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleLogout = ()=>{
+    dispatch(setAppInfoAction(undefined));
+    localStorage.setItem(TOKEN_NAME, '');
+    history.push(LOGIN_URL);
+  }
 
   const renderMenu = (
     <Menu
@@ -48,6 +60,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
   

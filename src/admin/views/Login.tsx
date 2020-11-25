@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles, Grid, Typography, InputAdornment, TextField, FormControl, IconButton, InputLabel, OutlinedInput, Checkbox, FormControlLabel, Button } from '@material-ui/core';
 import background from "assets/img/background2.jpg";
 import leftImage from "assets/img/design-team.png";
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
+import { useAxios } from 'base/Hooks/useAxios';
+import { AxiosRequestConfig } from 'axios';
+import { API_LOGIN } from 'APIs/app';
+import IAppInfo from 'base/IAppInfo';
+import { useDispatch } from 'react-redux';
+import { setAppInfoAction } from 'store/app/actions';
+import { TOKEN_NAME } from 'utils/consts';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     loginBox:{
       background: theme.palette.background.default,
       height:'60vh',
-      minHeight:'420px',
+      minHeight:'460px',
       boxShadow:theme.shadows[23],
 
     },
@@ -58,17 +65,41 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface CheckResult{
+  success:boolean,
+  appInfo:IAppInfo,
+  errorMessage:string,
+}
+
 export default function Login(){
   const classes = useStyles();
 
-  const [values, setValues] = React.useState<any>({
+  const [values, setValues] = useState<any>({
     account: 'demo',
     password: 'demo',
     showPassword: false,
     rememberMe:false,
   });
 
+  const [request, setRequest] = useState<AxiosRequestConfig>();
+  const [authResult, checking] = useAxios<CheckResult>(request);
+  const [error, setError] = useState<string>();
+
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(authResult?.success){
+      localStorage.setItem(TOKEN_NAME, authResult.appInfo.authToken);
+      dispatch(setAppInfoAction(authResult.appInfo));
+      history.push(authResult.appInfo.entryUrl);
+    }
+    if(authResult && !authResult.success){
+      setError(authResult.errorMessage)
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authResult])
 
   const handleChange = (prop: any) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -87,7 +118,11 @@ export default function Login(){
   }
 
   const handleLogin = ()=>{
-    history.push("/admin/dashboard");
+    //history.push("/admin/dashboard");
+    setRequest({
+      ...API_LOGIN,
+      data:values
+    })
   }
 
   
@@ -108,6 +143,7 @@ export default function Login(){
             <Grid item xs={12}>
               <h2 className = {classes.title} >{intl.get('login')}</h2>
               <Typography variant="subtitle1" color="textSecondary">{intl.get('login-tip')}</Typography>
+              {error&&<span style={{color:'red'}}>{error}</span>}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -156,7 +192,9 @@ export default function Login(){
                 <a href="#forgot"> {intl.get('forgot-password')}</a>
             </Grid>
             <Grid item xs={6}>
-                <Button fullWidth variant="contained" color="primary" size = "large" style={{fontSize:'1.2rem'}}
+                <Button fullWidth variant="contained" color="primary" size = "large" 
+                  style={{fontSize:'1.2rem'}}
+                  disabled = {checking}
                   onClick = {handleLogin}
                 >
                   {intl.get('login')}

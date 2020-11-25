@@ -13,6 +13,7 @@ import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { AxiosRequestConfig } from 'axios';
+import { useAuthCheck } from 'base/Hooks/useAuthCheck';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,6 +81,8 @@ export default function DrawerEditor(){
   const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
   const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
 
+  useAuthCheck();
+  
   useEffect(()=>{
     metas && rootNode.parse(metas);    
   // eslint-disable-next-line react-hooks/exhaustive-deps
