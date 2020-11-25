@@ -16,18 +16,18 @@ export default function ModulePageRow(
 ){
   const{page, isIndexPage, onChangePage, onRemove, onChangeIndexPage, onDesign} = props;
   const[titleEditing, setTitleEditing] = useState(false);
-  const[apiEditing, setApiEditing] = useState(false);
+  const[slugEditing, setSlugEditing] = useState(false);
   const[title, setTitle] = useState(page.title);
-  //const[api, setApi] = useState(page.api);
+  const[slug, setSlug] = useState(page.slug);
 
   const handleBeginEdit = ()=>{
     setTitleEditing(true);
-    setApiEditing(true);
+    setSlugEditing(true);
   }
 
   const handleFinishEdit = ()=>{
     setTitleEditing(false);
-    setApiEditing(false);
+    setSlugEditing(false);
     onChangePage({...page, title:title});
   }
 
@@ -43,6 +43,28 @@ export default function ModulePageRow(
 
   return (
   <TableRow>
+    <TableCell
+      onDoubleClick = {e=>setSlugEditing(true)}
+    >
+      {
+        slugEditing?
+        <TextField
+          autoFocus 
+          value = {slug || ''} 
+          size = "small" 
+          variant = "outlined"
+          onKeyUp = {e=>{
+              if(e.keyCode === 13) {
+                handleFinishEdit()
+              }
+            }
+          }
+          onChange = {e=>setSlug(e.target.value)}         
+        />
+        :
+        <span>{slug}</span>
+      }
+    </TableCell>
     <TableCell
       onDoubleClick = {e=>setTitleEditing(true)}
     >
@@ -83,7 +105,7 @@ export default function ModulePageRow(
     </TableCell>
     <TableCell align="right">
       {
-        titleEditing||apiEditing?
+        titleEditing||slugEditing?
         <Tooltip title={intl.get('finish-edit')} arrow placement="top">
           <IconButton aria-label="Finish edit"
             onClick = {handleFinishEdit}                                 

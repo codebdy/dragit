@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     fab:{
       position:'absolute',
-      right:'20%',
+      right:'120px',
       top:theme.spacing(-3),
     }
 
@@ -52,6 +52,7 @@ export default function ModulePageTable(
         <Table className={classes.table} aria-label="modules table" size="small">
           <TableHead>
             <TableRow>
+              <TableCell><b>{intl.get('slug')}</b></TableCell>
               <TableCell><b>{intl.get('title')}</b></TableCell>
               <TableCell style={{width:'80px'}}><b>{intl.get('is-form-page')}</b></TableCell>
               <TableCell style={{width:'80px'}}><b>{intl.get('is-index-page')}</b></TableCell>

@@ -10,11 +10,13 @@ var modules = [
       {
         id:1,
         title:'文章列表',
+        slug:'articles',
         jsonSchema: articles,
       },
       {
         id:2,
         title:'文章编辑',
+        slug:'article',
         jsonSchema: article,
       },
     ],

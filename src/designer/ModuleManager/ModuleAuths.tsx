@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     fab:{
       position:'absolute',
-      right:'20%',
+      right:'120px',
       top:theme.spacing(-3),
     }
 

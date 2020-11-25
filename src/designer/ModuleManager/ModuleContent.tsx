@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Grid, createStyles, makeStyles, Theme, FormControlLabel, Switch } from '@material-ui/core';
+import { Container, Grid, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
 import { API_GET_MODULE_BY_ID} from 'APIs/modules';
@@ -13,9 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
     skeltonBottom:{
       height: 'calc(100vh - 150px)',
     },
-    entryModuleSwitch:{
-      marginTop:theme.spacing(4),
-    }
   }),
 );
 
@@ -32,7 +29,6 @@ export default function ModuleContent(
       id:moduleId
     }
   });
-  const entryMuodleId = 1;
 
   const [initModule, loading] = useAxios<IModule>(loadingConfig);
 
@@ -50,10 +46,6 @@ export default function ModuleContent(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleId])
 
-  const handleEngtryChange = ()=>{
-
-  }
-
   return (
     <Container>
       {
@@ -67,23 +59,10 @@ export default function ModuleContent(
         initModule && !loading ? 
         <Fragment>
           <Grid container spacing = {4} direction="column">
-            <Grid item xs={12} className = {classes.entryModuleSwitch}>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={entryMuodleId === moduleId}
-                    onChange={handleEngtryChange}
-                    name="engryModule"
-                    color="primary"
-                  />
-                }
-                label="入口模块"
-              />
-            </Grid>
-            <Grid item md={7}> 
+            <Grid item md={10}> 
               <ModulePages module = {initModule} />          
             </Grid>
-            <Grid item md={7}>
+            <Grid item md={10}>
               <ModuleAuths module = {initModule} />
             </Grid>
           </Grid>
