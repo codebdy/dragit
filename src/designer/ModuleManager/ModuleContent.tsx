@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Grid, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Container, Grid, createStyles, makeStyles, Theme, TextField, Button } from '@material-ui/core';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
 import { API_GET_MODULE_BY_ID} from 'APIs/modules';
@@ -7,12 +7,16 @@ import { Skeleton } from '@material-ui/lab';
 import ModulePages from './ModulePages';
 import ModuleAuths from './ModuleAuths';
 import { IModule } from '../../base/IModule';
+import intl from "react-intl-universal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     skeltonBottom:{
       height: 'calc(100vh - 150px)',
     },
+    title:{
+      marginTop:theme.spacing(4),
+    }
   }),
 );
 
@@ -30,7 +34,7 @@ export default function ModuleContent(
     }
   });
 
-  const [initModule, loading] = useAxios<IModule>(loadingConfig);
+  const [module, loading] = useAxios<IModule>(loadingConfig);
 
   useEffect(()=>{
     if(loadingConfig.params.id !== moduleId){
@@ -56,14 +60,52 @@ export default function ModuleContent(
         </Fragment>
       }
       {
-        initModule && !loading ? 
+        module && !loading ? 
         <Fragment>
           <Grid container spacing = {4} direction="column">
+            <Grid container item md={10} className={classes.title} spacing = {2}>
+              <Grid item xs={5}>
+                <TextField
+                  autoFocus 
+                  fullWidth
+                  value = {module.slug || ''} 
+                  size = "small" 
+                  variant = "outlined"
+                  label = {intl.get('slug')}
+                  onKeyUp = {e=>{
+                      if(e.keyCode === 13) {
+                        //handleFinishEdit()
+                      }
+                    }
+                  }
+                  //onChange = {e=>setSlug(e.target.value)}         
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  value = {module.title || ''} 
+                  size = "small" 
+                  variant = "outlined"
+                  label = {intl.get('title')}
+                  onKeyUp = {e=>{
+                      if(e.keyCode === 13) {
+                        //handleFinishEdit()
+                      }
+                    }
+                  }
+                  //onChange = {e=>setSlug(e.target.value)}         
+                />
+              </Grid>
+              <Grid container item xs={1}>
+                <Button variant = "contained" color="primary">{intl.get('save')}</Button>
+              </Grid>
+            </Grid>
             <Grid item md={10}> 
-              <ModulePages module = {initModule} />          
+              <ModulePages module = {module} />          
             </Grid>
             <Grid item md={10}>
-              <ModuleAuths module = {initModule} />
+              <ModuleAuths module = {module} />
             </Grid>
           </Grid>
           

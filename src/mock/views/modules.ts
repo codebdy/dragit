@@ -5,6 +5,7 @@ var modules = [
   {
     id:1,
     title:'文章管理',
+    slug:'article',
     indexPageId:1,
     pages:[
       {
@@ -40,15 +41,18 @@ var modules = [
   },
   {
     id:2,
+    slug:'product',
     title:'产品',
   },
   {
     id:3,
+    slug:'user',
     title:'用户'
   },
 
   {
     id:21,
+    slug:'dashboard',
     title:'仪表盘'
   },
 
