@@ -211,6 +211,13 @@
     "params":"Params",
     "edit-params":"Edit params",
     "param":"Param",
-    "value":"Value"
+    "value":"Value",
+
+    "login":"Login",
+    "login-tip":"Welcome to DragRX, please login to your account.",
+    "user-name":"User name or email address",
+    "password":"Password",
+    "remember-me":"Remember me",
+    "forgot-password":"Forgot Password?"
 
 }
