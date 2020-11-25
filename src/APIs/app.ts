@@ -16,8 +16,17 @@ const API_SET_ENGRY_MODULE_ID : AxiosRequestConfig= {
 }
 
 
+function getIntlApi(lang:string): AxiosRequestConfig{
+  return {
+    url:`/locales/${lang}.json`,
+    method:'get',
+  }
+}
+
+
 export { 
   API_POST_LOGIN,
   API_GET_APP_INFO, 
-  API_SET_ENGRY_MODULE_ID
+  API_SET_ENGRY_MODULE_ID,
+  getIntlApi
 }

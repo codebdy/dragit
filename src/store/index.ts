@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import intlReducer from './intl/reducers';
 import sidebarReducer from './sidebar/reducers';
 import designReducer from './designer/reducers';
 import pageReducer from './page/reducers';
@@ -9,7 +8,6 @@ import alertbarReducer from './alertbar/reducers';
 import themeSetingsReducer from './theme/reducers';
 
 const rootReducer = combineReducers({
-  intl: intlReducer,
   sidebar: sidebarReducer,
   designer: designReducer,
   page: pageReducer,

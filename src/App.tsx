@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { useDispatch, useSelector } from 'react-redux'
-
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Loading from 'admin/common/Loading'
-import {thunkIntl} from 'store/intl/thunks';
-import { RootState } from 'store';
 
 import Layout from 'admin/Layout';
 import ModuleManager from 'designer/ModuleManager';
@@ -16,15 +12,10 @@ import useShadows from 'store/theme/useShadows';
 import DrawerEditor from 'designer/DrawerEditor';
 import SuccessAlertBar from 'base/SuccessAlertBar';
 import Login from 'admin/views/Login';
+import { useIntl } from 'base/Hooks/useIntl';
 
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    console.log('App Init');
-    dispatch(thunkIntl());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  const [langLoading] = useIntl();
 
   const themeSettings = useThemeSettings();
   
@@ -41,11 +32,8 @@ function App() {
   }));
 
 
-  const selectIntl = (state: RootState) => state.intl
-  const intLang = useSelector(selectIntl)
-
   return (
-    intLang.loading?
+    langLoading?
       (<Loading />)
     :
       (<ThemeProvider theme={theme}>
