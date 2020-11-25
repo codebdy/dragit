@@ -5,6 +5,7 @@ import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
 import { RowModelContext } from './RowModelContext';
 import { useFormContext } from 'react-hook-form';
+import useFieldError from './useFieldError';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};
@@ -100,16 +101,16 @@ function retrigger(value:any, rule:any){
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
     const modelContext = useContext(RowModelContext);
-    const {register, setValue, getValues , errors} = useFormContext();
+    const {register, setValue, getValues} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
     const fieldName = modelContext.parentField ? `${modelContext.parentField}[${modelContext.rowIndex}].${field}`: field;
     
     const value = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
-    const [error, setError] = React.useState(errors[fieldName] && errors[fieldName].message);
+    const fieldError = useFieldError(field);
+    const [error, setError] = React.useState(fieldError && fieldError.message);
     const loading = useModelLoading();
     const registerRule = rule && metaRuleToRegisterRules(rule);
-
 
     React.useEffect(() => {
       register(fieldName, registerRule); 
