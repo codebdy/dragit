@@ -30,7 +30,7 @@ const PageView = ()=>{
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('PageView useEffect:', moduleId, pageId, id);
+    console.log('PageView useEffect:', moduleId, pageId, id, pageMeta);
     clearErrors();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
