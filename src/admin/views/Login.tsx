@@ -82,9 +82,14 @@ export default function Login(){
     event.preventDefault();
   };
 
+  const handleRememberMe = (event: React.ChangeEvent<HTMLInputElement>)=>{
+    setValues({ ...values, rememberMe: event.target.checked });
+  }
+
   const handleLogin = ()=>{
     history.push("/admin/dashboard");
   }
+
   
   return (
     <div className={classes.root}>
@@ -111,6 +116,7 @@ export default function Login(){
                 label={intl.get('user-name')}
                 value={values.account}
                 variant="outlined"
+                onChange={handleChange('account')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -140,9 +146,9 @@ export default function Login(){
                   control={
                     <Checkbox
                       checked={values.rememberMe}
-                      onChange={handleChange}
                       name="rememberMe"
                       color="primary"
+                      onChange={handleRememberMe}
                     />
                   }
                   label={<Typography variant="subtitle1" color="textSecondary"> {intl.get('remember-me')}</Typography>}
