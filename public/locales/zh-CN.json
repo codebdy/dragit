@@ -223,6 +223,10 @@
     "user-name":"用户名或邮箱",
     "password":"密码",
     "remember-me":"记住我",
-    "forgot-password":"忘记密码？"
+    "forgot-password":"忘记密码？",
+
+    "profile":"个人信息",
+    "change-password":"修改密码",
+    "logout":"注销登录"
 
 }

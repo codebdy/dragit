@@ -1,13 +1,14 @@
 import React, { Fragment } from "react";
 import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
-import { Hidden, Badge, Typography, Menu, MenuItem, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Hidden, Badge, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import MenuIcon from '@material-ui/icons/Menu';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { setAppInfoAction } from "store/app/actions";
 import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
+import intl from "react-intl-universal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
     githubLink:{
       color: theme.palette.text.secondary,
       marginRight:theme.spacing(1),
-    }  
+    },
+    accountMenuItem:{
+      padding:theme.spacing(1, 3),
+    },
   }),
 );
 
@@ -48,19 +52,52 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     history.push(LOGIN_URL);
   }
 
+  const handleShowProfile = ()=>{
+    history.push("/admin/module/user/profile");
+    setAnchorEl(null);
+  }
+
+  const handleChangePassword = ()=>{
+    history.push("/admin/module/user/change-password");
+    setAnchorEl(null);
+  }
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      <MenuItem onClick={handleShowProfile} className = {classes.accountMenuItem}>
+        <ListItemIcon>
+          <MdiIcon iconClass = "mdi-account" />
+        </ListItemIcon>
+        {intl.get('profile')} 
+      </MenuItem>
+      <MenuItem className = {classes.accountMenuItem} onClick={handleChangePassword}>
+        <ListItemIcon>
+          <MdiIcon iconClass = "mdi-lock" />
+        </ListItemIcon>
+        {intl.get('change-password')} 
+      </MenuItem>
+      <MenuItem onClick={handleLogout} className = {classes.accountMenuItem}>
+        <ListItemIcon>
+          <MdiIcon iconClass = "mdi-logout-variant" />
+        </ListItemIcon>
+        {intl.get('logout')} 
+      </MenuItem>
     </Menu>
   );
   

@@ -218,6 +218,11 @@
     "user-name":"User name or email address",
     "password":"Password",
     "remember-me":"Remember me",
-    "forgot-password":"Forgot Password?"
+    "forgot-password":"Forgot Password?",
+
+    "profile":"Profile",
+    "change-password":"Change Password",
+    "logout":"Logout"
+
 
 }
