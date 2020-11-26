@@ -1,4 +1,4 @@
 export default {
   authToken:'zhishiyicuanburenshidewenzi',
-  entryUrl:'/admin/dashboard',
+  unreadMessagesCount:18,
 }

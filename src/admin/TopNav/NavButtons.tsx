@@ -9,6 +9,7 @@ import { useHistory } from "react-router";
 import { setAppInfoAction } from "store/app/actions";
 import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
 import intl from "react-intl-universal";
+import useAppInfo from "store/app/useAppInfo";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,6 +63,9 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     setAnchorEl(null);
   }
 
+  const appInfo = useAppInfo();
+  console.log(appInfo);
+  
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -82,13 +86,13 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     >
       <MenuItem onClick={handleShowProfile} className = {classes.accountMenuItem}>
         <ListItemIcon>
-          <MdiIcon iconClass = "mdi-account" />
+          <MdiIcon iconClass = "mdi-account-outline" />
         </ListItemIcon>
         {intl.get('profile')} 
       </MenuItem>
       <MenuItem className = {classes.accountMenuItem} onClick={handleChangePassword}>
         <ListItemIcon>
-          <MdiIcon iconClass = "mdi-lock" />
+          <MdiIcon iconClass = "mdi-lock-outline" />
         </ListItemIcon>
         {intl.get('change-password')} 
       </MenuItem>
@@ -100,9 +104,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
       </MenuItem>
     </Menu>
   );
-  
-
-
+ 
   return(
     <Fragment>
       <Hidden mdUp>
@@ -126,9 +128,14 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
         <MdiIcon iconClass = "mdi-github"/>
       </a>
       <IconButton aria-label="show 17 new notifications">
-        <Badge badgeContent={17} color="secondary">
-        <MdiIcon iconClass = "mdi-bell-outline" color={color}/>
-        </Badge>
+        {
+          appInfo?.unreadMessagesCount ?
+            <Badge badgeContent={appInfo.unreadMessagesCount} color="secondary">
+              <MdiIcon iconClass = "mdi-bell-outline" color={color}/>
+            </Badge>
+          :
+          <MdiIcon iconClass = "mdi-bell-outline" color={color}/>
+        }
       </IconButton>
       <IconButton
         edge="end"
@@ -138,7 +145,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
         onClick={handleProfileMenuOpen}
         
       >
-        <AccountCircle style={{color:color}}/>
+        <MdiIcon iconClass = "mdi-account-circle" color={color} />
       </IconButton>
       {renderMenu}        
     </Fragment>

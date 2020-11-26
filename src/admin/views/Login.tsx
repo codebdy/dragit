@@ -112,7 +112,7 @@ export default function Login(){
       }
 
       dispatch(setAppInfoAction(authResult.appInfo));
-      history.push(authResult.appInfo.entryUrl);
+      history.push('/admin/dashboard');
     }
     if(authResult && !authResult.success){
       setError(authResult.errorMessage)
