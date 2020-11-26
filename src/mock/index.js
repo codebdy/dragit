@@ -11,6 +11,7 @@ import medias from './medias/medias'
 import modules, {getModuleIndexPage, getModulePage} from './views/modules'
 import auths from './data/auths'
 import appInfo from './data/appInfo'
+import notifications from './data/notifications'
 
 window.idSeed = 100;
 
@@ -239,7 +240,8 @@ Mock.mock('/api/get-app-info','get', (request)=>{
   return appInfo
 })
 
+Mock.mock('/api/get-lasted-notifications', notifications);
 
 Mock.setup({
-    timeout: 50
+    timeout: 500
 })

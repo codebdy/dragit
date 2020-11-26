@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import { API_GET_LASTED_NOTIFICATIONS } from 'APIs/app';
+import { AxiosRequestConfig } from 'axios';
+import { useAxios } from 'base/Hooks/useAxios';
+import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,7 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function NotificationsList(){
   const classes = useStyles();
+  const [request] = useState<AxiosRequestConfig>(API_GET_LASTED_NOTIFICATIONS);
+
+  const [notifications, loading] = useAxios(request)
+
   return (
+    loading?
+    <div className={classes.root}><SiderBarLoadingSkeleton /></div>
+    :
     <List className={classes.root}>
 
       <ListItem button>

@@ -15,6 +15,11 @@ const API_SET_ENGRY_MODULE_ID : AxiosRequestConfig= {
   method:'post',
 }
 
+const API_GET_LASTED_NOTIFICATIONS : AxiosRequestConfig= {
+  url:'/api/get-lasted-notifications',
+  method:'get',
+}
+
 
 function getIntlApi(lang:string): AxiosRequestConfig{
   return {
@@ -28,5 +33,6 @@ export {
   API_LOGIN,
   API_GET_APP_INFO, 
   API_SET_ENGRY_MODULE_ID,
+  API_GET_LASTED_NOTIFICATIONS,
   getIntlApi
 }

@@ -5,7 +5,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 export default function SiderBarLoadingSkeleton() {
   return (
     <Fragment>
-      {[1,2,3,4,5,6].map((index)=>{
+      {[1,2,3,4,5].map((index)=>{
         return(
           <ListItem 
             button
