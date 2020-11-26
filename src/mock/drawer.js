@@ -117,12 +117,12 @@ export default [{
             {
                 title:"管理员",
                 type:'item',
-                icon: 'mdi-account'
+                icon: 'mdi-circle-small'
             },
             {
                 title:"角色",
                 type:'item',
-                icon: 'mdi-account-key'
+                icon: 'mdi-circle-small'
             }
 
         ]

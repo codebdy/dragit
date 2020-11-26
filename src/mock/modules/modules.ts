@@ -1,5 +1,5 @@
-import articles from './articles'
-import article from './article'
+import articles from '../views/articles'
+import article from '../views/article'
 
 var modules = [
   {
@@ -75,18 +75,5 @@ export function getModuleIndexPage(moduleSlug:string){
   }
 }
 
-export function getModulePage(pageSlug:string){
-  for(var i = 0; i < modules.length; i++){
-    let module = modules[i]
-    let pages = module.pages
-    if(pages){
-      for(var j=0; j < pages.length; j++){
-        if(pages[j].slug === pageSlug){
-          return JSON.parse(JSON.stringify(pages[j]));
-        }
-      }
-    }
-  }
-}
 
 export default modules;
