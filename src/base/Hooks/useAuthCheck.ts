@@ -12,7 +12,7 @@ export function useAuthCheck() {
   const [request, setRequest] = useState<AxiosRequestConfig>();
   const appInfo = useAppInfo();
   const [localToken] = useState(localStorage.getItem(TOKEN_NAME));
-  const lastAppInfo = useAxios(request);
+  const [lastAppInfo] = useAxios(request);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -33,5 +33,4 @@ export function useAuthCheck() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastAppInfo])
-
 }

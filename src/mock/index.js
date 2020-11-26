@@ -235,7 +235,9 @@ Mock.mock('/api/login', 'post',  (request)=>{
   }
 })
 
-Mock.mock('/api/get-app-info','get', appInfo)
+Mock.mock('/api/get-app-info','get', (request)=>{
+  return appInfo
+})
 
 
 Mock.setup({

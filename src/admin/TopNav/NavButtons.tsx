@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Hidden, Badge, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon } from "@material-ui/core";
-import { AccountCircle } from "@material-ui/icons";
 import MenuIcon from '@material-ui/icons/Menu';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
@@ -64,7 +63,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   }
 
   const appInfo = useAppInfo();
-  console.log(appInfo);
+  //console.log(appInfo);
   
   const renderMenu = (
     <Menu
