@@ -42,7 +42,6 @@ const PageView = ()=>{
       let root = new RXNodeRoot<IMeta>();
       root.parse(schema);
       setPageLayout(root.children);
-      console.log('setDesingerPageAction', pageMeta.slug);
       dispatch(setDesingerPageAction(pageMeta.slug))
     }
   }, [dispatch, pageMeta])

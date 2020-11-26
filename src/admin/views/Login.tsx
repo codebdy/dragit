@@ -12,7 +12,7 @@ import IAppInfo from 'base/IAppInfo';
 import { useDispatch } from 'react-redux';
 import { setAppInfoAction } from 'store/app/actions';
 import { TOKEN_NAME } from 'utils/consts';
-import { LIGHT } from 'store/theme/useThemeSettings';
+import useThemeSettings, { LIGHT } from 'store/theme/useThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -90,9 +90,13 @@ export default function Login(){
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
       type: LIGHT,
+      primary:{
+        main: themeSettings.primary,
+      },
 
     },
 
