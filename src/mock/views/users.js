@@ -1,5 +1,5 @@
 import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/PageAction"
-import {API_QUERY_MODELS} from "APIs/model"
+import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
 export default {
   layout:[
     {
@@ -158,7 +158,7 @@ export default {
                 ],
                 bind:{
                   method:'post',
-                  url:API_QUERY_MODELS.url,
+                  url:API_QUERY_AND_OPERATE_MODELS.url,
                   params:{
                     modelName:'/Model/User',
                     command:'query',//'PAGE-ACTION'

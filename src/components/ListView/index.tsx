@@ -8,7 +8,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import classNames from 'classnames';
-import { FieldOrder, ListViewHead } from './ListViewHead';
+import { ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
@@ -21,6 +21,7 @@ import { openSuccessAlertAction } from 'store/alertbar/actions';
 import { useDispatch } from 'react-redux';
 import HoverablePaper from 'components/common/HoverablePaper';
 import { IPageJumper } from 'base/Model/IPageJumper';
+import { FieldOrder } from 'APIs/model';
 
 export const COMMAND_QUERY = "query";
 

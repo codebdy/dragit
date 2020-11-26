@@ -1,9 +1,10 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import { FieldOrder } from "APIs/model";
 import React from "react";
 import { ListViewMetaItem } from "./ListViewMetaItem";
 
-type Order = 'asc' | 'desc';
+
 
 export interface ListViewHeadProps {
   numSelected: number;
@@ -14,11 +15,6 @@ export interface ListViewHeadProps {
   columns:Array<ListViewMetaItem>;
   loading:boolean;
   hasRowCommands:boolean;
-}
-
-export interface FieldOrder{
-  field:string;
-  direction: Order;
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
