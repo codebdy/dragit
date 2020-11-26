@@ -46,13 +46,13 @@ Mock.mock('/api/save-drawer','post', (request)=>{
 
 
 Mock.mock(RegExp('/api/get-module-index-page?.*'),'get', (request)=>{
-  let id = parseInt(getQueryVariable('moduleId', request.url));
-  return getModuleIndexPage(id);
+  let slug = getQueryVariable('moduleSlug', request.url);
+  return getModuleIndexPage(slug);
 })
 
-Mock.mock(RegExp('api/get-page/?.*'),'get', (request)=>{
-  let id = parseInt(getQueryVariable('pageId', request.url));
-  return getModulePage(id);
+Mock.mock(RegExp('/api/get-page/?.*'),'get', (request)=>{
+  let slug =getQueryVariable('pageSlug', request.url);
+  return getModulePage(slug);
 })
 
 Mock.mock('/api/page/dashboard', 'get', dashboard)

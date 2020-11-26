@@ -29,17 +29,17 @@ class PagesCache{
 
 var pagesCache = new PagesCache()
 
-export default function usePageMeta(moduleId:number, pageId:number):[IPage|undefined, boolean, boolean]{
+export default function usePageMeta(moduleSlug:number, pageSlug:number):[IPage|undefined, boolean, boolean]{
   
   const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   const [pageMeta, loadingPage, error] = useAxios<IPage>(pageRequest)
   const [cachedPageMeta, setCachedPageMeta] = useState<IPage>();
 
   const getCachedPage = ():IPage=>{
-    if(pageId){
-      return pagesCache.getPage(pageId);
+    if(pageSlug){
+      return pagesCache.getPage(pageSlug);
     }else{
-      return pagesCache.getModuleIndexPage(moduleId);      
+      return pagesCache.getModuleIndexPage(moduleSlug);      
     }
 
   }
@@ -47,10 +47,10 @@ export default function usePageMeta(moduleId:number, pageId:number):[IPage|undef
   useEffect(() => {
     let page = getCachedPage();
     if(!page){
-      if(pageId){
-        setPageRequest({...API_GET_PAGE, params:{pageId}})      
+      if(pageSlug){
+        setPageRequest({...API_GET_PAGE, params:{pageSlug: pageSlug}})      
       }else{
-        setPageRequest({...API_GET_MODULE_INDEX_PAGE, params:{moduleId}})
+        setPageRequest({...API_GET_MODULE_INDEX_PAGE, params:{moduleSlug: moduleSlug}})
       }      
     }
     else{
@@ -59,15 +59,15 @@ export default function usePageMeta(moduleId:number, pageId:number):[IPage|undef
     }
      
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[moduleId, pageId]);
+  },[moduleSlug, pageSlug]);
   
   useEffect(()=>{
     if(pageMeta){
       let pageMetaCopy = JSON.parse(JSON.stringify(pageMeta))
-      if(pageId){
+      if(pageSlug){
         pagesCache.addPage(pageMetaCopy)
       }else{
-        pagesCache.addModuleIndexPage(moduleId, pageMetaCopy)
+        pagesCache.addModuleIndexPage(moduleSlug, pageMetaCopy)
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

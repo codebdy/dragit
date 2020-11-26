@@ -43,8 +43,8 @@ export default {
                 onClick:{
                   name: JUMP_TO_PAGE_ACTION,
                   page:{
-                    moduleId:'1',
-                    pageId:'2',
+                    moduleSlug:'article',
+                    pageSlug:'article',
                     dataId:'1',
                   }
                 }

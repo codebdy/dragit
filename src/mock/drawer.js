@@ -18,7 +18,7 @@ export default [{
     {
         type: 'item',
         title: '文章管理',
-        to: '/admin/module/1/',
+        to: '/admin/module/article/',
         icon: 'mdi-home',
     },
     {

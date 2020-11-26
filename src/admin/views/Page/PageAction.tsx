@@ -6,8 +6,8 @@ export const POST_DATA_ACTION = "POST_DATA_ACTION";
 //export const PAGE_ACTION = "PAGE_ACTION";
 
 export interface PageJumper{
-  moduleId:string,
-  pageId:string,
+  moduleSlug:string,
+  pageSlug:string,
   dataId?:string,
 }
 

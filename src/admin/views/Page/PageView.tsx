@@ -19,22 +19,22 @@ import { RXNodeRoot } from "base/RXNode/Root";
 const PageView = ()=>{
   const history =  useHistory();
   const match = useRouteMatch()
-  const{moduleId, pageId, id} = match.params as any;
+  const{moduleSlug, pageSlug, id} = match.params as any;
   const methods = useForm({mode: 'all'});
   const {handleSubmit, errors, clearErrors} = methods;
 
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
-  const [pageMeta, loadingPage] = usePageMeta(moduleId, pageId,)
+  const [pageMeta, loadingPage] = usePageMeta(moduleSlug, pageSlug,)
   
   usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('PageView useEffect:', moduleId, pageId, id, pageMeta);
+    console.log('PageView useEffect:', moduleSlug, pageSlug, id, pageMeta);
     clearErrors();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[moduleId, pageId, id]);
+  },[moduleSlug, pageSlug, id]);
   
   useEffect(()=>{
     if(pageMeta){
@@ -53,7 +53,7 @@ const PageView = ()=>{
   const [submitted, setSubmitted] = React.useState(false);
   
   const resolvePageUrl=(page:PageJumper)=>{
-    return `/admin/module/${page.moduleId}/${page.pageId}` + (page.dataId ? '/' + page.dataId : '' );
+    return `/admin/module/${page.moduleSlug}/${page.pageSlug}` + (page.dataId ? '/' + page.dataId : '' );
   }
   
   const formActionHandle = (action:PageAction)=>{

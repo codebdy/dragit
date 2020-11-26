@@ -58,10 +58,10 @@ var modules = [
 
 ]
 
-export function getModuleIndexPage(moduleId:number){
+export function getModuleIndexPage(moduleSlug:string){
   for(var i = 0; i < modules.length; i++){
     let module = modules[i]
-    if(module.id === moduleId){
+    if(module.slug === moduleSlug){
       let pages = module.pages
       if(pages){
         for(var j=0; j < pages.length; j++){
@@ -75,13 +75,13 @@ export function getModuleIndexPage(moduleId:number){
   }
 }
 
-export function getModulePage(pageId:number){
+export function getModulePage(pageSlug:string){
   for(var i = 0; i < modules.length; i++){
     let module = modules[i]
     let pages = module.pages
     if(pages){
       for(var j=0; j < pages.length; j++){
-        if(pages[j].id === pageId){
+        if(pages[j].slug === pageSlug){
           return pages[j];
         }
       }
