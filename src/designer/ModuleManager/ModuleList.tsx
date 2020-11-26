@@ -4,16 +4,19 @@ import { LinearProgress } from '@material-ui/core';
 import { API_ADD_MODULE, API_CHANGE_MODULE, API_GET_MODULES, API_REMOVE_MODULE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { Skeleton } from '@material-ui/lab';
+import { AxiosRequestConfig } from 'axios';
 
 export default function ModuleList(props:{
   onSelect:(moduleId: number)=>void
 }) {
   const {onSelect} = props;
-  const [loadingConfig, setLoadingConfig] = React.useState(API_GET_MODULES);
+  const [loadingConfig, setLoadingConfig] = React.useState<AxiosRequestConfig>(API_GET_MODULES);
+  const [operateConfig, setOperateConfig] = React.useState<AxiosRequestConfig>();
   const [items, loading] = useAxios<ItemMeta[]>(loadingConfig);
+  const [, operateLoading] = useAxios<ItemMeta>(operateConfig);
 
   const handleOnChange = (newTitle:string, id:number)=>{
-    setLoadingConfig(
+    setOperateConfig(
       {
         ...API_CHANGE_MODULE,
         params:{
@@ -63,7 +66,7 @@ export default function ModuleList(props:{
         :
         <Fragment>
           {
-            loading &&
+            (loading || operateLoading)&&
             <LinearProgress />
           }
           <EditableList items = {items || []} 

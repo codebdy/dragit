@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Grid, createStyles, makeStyles, Theme, TextField, Button } from '@material-ui/core';
 import { Fragment } from 'react';
 import { useAxios } from 'base/Hooks/useAxios';
-import { API_GET_MODULE_BY_ID} from 'APIs/modules';
+import { API_CHANGE_MODULE, API_GET_MODULE_BY_ID} from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
 import ModulePages from './ModulePages';
 import ModuleAuths from './ModuleAuths';
 import { IModule } from '../../base/IModule';
 import intl from "react-intl-universal";
+import { AxiosRequestConfig } from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +28,7 @@ export default function ModuleContent(
 ){
   const {moduleId} = props;
   const classes = useStyles();
-  const [loadingConfig, setLoadingConfig] = React.useState({
+  const [loadingConfig, setLoadingConfig] = useState<AxiosRequestConfig>({
     ...API_GET_MODULE_BY_ID,
     params:{
       id:moduleId
@@ -35,6 +36,7 @@ export default function ModuleContent(
   });
 
   const [module, loading] = useAxios<IModule>(loadingConfig);
+  const [slug, setSlug] = useState('');
 
   useEffect(()=>{
     if(loadingConfig.params.id !== moduleId){
@@ -49,6 +51,26 @@ export default function ModuleContent(
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleId])
+
+  useEffect(()=>{
+    if(module){
+      setSlug(module.slug);
+    }
+  },[module])
+
+  const handleSave = ()=>{
+    setLoadingConfig(
+      {
+        ...API_CHANGE_MODULE,
+        params:{
+          id:module?.id,
+          title:module?.title,
+          slug:slug,
+        }
+      }        
+    )
+  }
+
 
   return (
     <Container>
@@ -65,10 +87,9 @@ export default function ModuleContent(
           <Grid container spacing = {4} direction="column">
             <Grid container item md={10} className={classes.title} spacing = {2}>
               <Grid item xs={5}>
-                <TextField
-                  autoFocus 
+                <TextField 
                   fullWidth
-                  value = {module.slug || ''} 
+                  value = {slug || ''} 
                   size = "small" 
                   variant = "outlined"
                   label = {intl.get('slug')}
@@ -78,27 +99,13 @@ export default function ModuleContent(
                       }
                     }
                   }
-                  //onChange = {e=>setSlug(e.target.value)}         
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  value = {module.title || ''} 
-                  size = "small" 
-                  variant = "outlined"
-                  label = {intl.get('title')}
-                  onKeyUp = {e=>{
-                      if(e.keyCode === 13) {
-                        //handleFinishEdit()
-                      }
-                    }
-                  }
-                  //onChange = {e=>setSlug(e.target.value)}         
+                  onChange = {e=>setSlug(e.target.value)}         
                 />
               </Grid>
               <Grid container item xs={1}>
-                <Button variant = "contained" color="primary">{intl.get('save')}</Button>
+                <Button variant = "contained" color="primary"
+                  onClick = {handleSave}
+                >{intl.get('save')}</Button>
               </Grid>
             </Grid>
             <Grid item md={10}> 

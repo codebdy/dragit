@@ -44,7 +44,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
 
   const handleLogout = ()=>{
     dispatch(setAppInfoAction(undefined));
-    localStorage.setItem(TOKEN_NAME, '');
+    localStorage.removeItem(TOKEN_NAME);
     history.push(LOGIN_URL);
   }
 

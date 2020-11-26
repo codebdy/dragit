@@ -92,14 +92,18 @@ Mock.mock('/api/modules','get', modules)
 Mock.mock(RegExp('/api/change-module?.*'),'post', (request)=>{
   let id = getQueryVariable('id', request.url);
   let title = getQueryVariable('title', request.url);
-  modules.forEach(module=>{
-    if(module.id === id){
+  let slug = getQueryVariable('slug', request.url);
+  
+  for(var i = 0; i < modules.length; i++){
+    let module = modules[i];
+    if(module.id.toString() === id){
       module.title = title;
+      module.slug = slug;
+      return module
     }
+  }
 
-  })
-
-  return [...modules]
+  //return [...modules]
 })
 
 Mock.mock(RegExp('/api/remove-module?.*'),'post', (request)=>{

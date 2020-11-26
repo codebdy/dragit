@@ -79,8 +79,9 @@ export default function Login(){
     account: 'demo',
     password: 'demo',
     showPassword: false,
-    rememberMe:false,
   });
+
+  const [rememberMe, setRememberMe] = useState(false);
 
   const [request, setRequest] = useState<AxiosRequestConfig>();
   const [authResult, checking] = useAxios<CheckResult>(request);
@@ -100,7 +101,12 @@ export default function Login(){
   }));
   useEffect(()=>{
     if(authResult?.success){
-      localStorage.setItem(TOKEN_NAME, authResult.appInfo.authToken);
+      if(rememberMe){
+        localStorage.setItem(TOKEN_NAME, authResult.appInfo.authToken);        
+      }else{
+        localStorage.removeItem(TOKEN_NAME);
+      }
+
       dispatch(setAppInfoAction(authResult.appInfo));
       history.push(authResult.appInfo.entryUrl);
     }
@@ -124,7 +130,7 @@ export default function Login(){
   };
 
   const handleRememberMe = (event: React.ChangeEvent<HTMLInputElement>)=>{
-    setValues({ ...values, rememberMe: event.target.checked });
+    setRememberMe(event.target.checked);
   }
 
   const handleLogin = ()=>{
@@ -192,7 +198,7 @@ export default function Login(){
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={values.rememberMe}
+                        checked={rememberMe}
                         name="rememberMe"
                         color="primary"
                         onChange={handleRememberMe}
