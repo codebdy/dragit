@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
-import { Hidden, Badge, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon } from "@material-ui/core";
+import { Hidden, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon, Avatar } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { setAppInfoAction } from "store/app/actions";
 import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
 import intl from "react-intl-universal";
-import useAppInfo from "store/app/useAppInfo";
+import EvenNotification from "./Notifications"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +24,12 @@ const useStyles = makeStyles((theme: Theme) =>
     accountMenuItem:{
       padding:theme.spacing(1, 3),
     },
+    avatar:{
+      marginLeft:theme.spacing(1),
+      cursor:"pointer",
+      width:theme.spacing(4),
+      height:theme.spacing(4),
+    }
   }),
 );
 
@@ -62,9 +68,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     setAnchorEl(null);
   }
 
-  const appInfo = useAppInfo();
-  //console.log(appInfo);
-  
+ 
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -126,26 +130,12 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
       <a href="https://github.com/rxwater/dragit" className={classes.githubLink} style={{color:color}} target="_blank" rel="noopener noreferrer">
         <MdiIcon iconClass = "mdi-github"/>
       </a>
-      <IconButton aria-label="show 17 new notifications">
-        {
-          appInfo?.unreadMessagesCount ?
-            <Badge badgeContent={appInfo.unreadMessagesCount} color="secondary">
-              <MdiIcon iconClass = "mdi-bell-outline" color={color}/>
-            </Badge>
-          :
-          <MdiIcon iconClass = "mdi-bell-outline" color={color}/>
-        }
-      </IconButton>
-      <IconButton
-        edge="end"
-        aria-label="account of current user"
-        aria-controls={menuId}
-        aria-haspopup="true"
-        onClick={handleProfileMenuOpen}
-        
-      >
-        <MdiIcon iconClass = "mdi-account-circle" color={color} />
-      </IconButton>
+      <EvenNotification color={color} />
+
+      <Avatar className={classes.avatar} onClick={handleProfileMenuOpen}>
+        <MdiIcon iconClass = "mdi-account" color={color} />
+      </Avatar>
+
       {renderMenu}        
     </Fragment>
   )

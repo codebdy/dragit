@@ -3,6 +3,7 @@ import { AxiosRequestConfig } from "axios";
 export interface IPageSchema{
   layout?:Array<any>,
   isFormPage?:boolean,
+  refreshAppInfo?:boolean,
   api?:AxiosRequestConfig, 
 }
 
