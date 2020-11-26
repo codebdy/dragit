@@ -6,8 +6,7 @@ export interface FieldOrder{
   direction: Order;
 }
 
-export interface IListOperateParam{
-  model:string,
+export interface IOperateListParam{
   command: string | 'query',
   keywords?: string,
   filterValues?: Array<string>,
@@ -34,8 +33,8 @@ const API_GET_MODEL_BY_ID : AxiosRequestConfig= {
   method:'get',
 }
 
-export function createQueryAndOperateModelsRequest(data:IListOperateParam){
-  return {...API_QUERY_AND_OPERATE_MODELS, data};
+export function createListOperateRequest(config:AxiosRequestConfig, data:IOperateListParam){
+  return {...config, data:{...config.data, ...data}};
 }
 
 export { 
