@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
     loginBox:{
       background: "#FFF",
       height:'60vh',
-      minHeight:'460px',
+      minHeight:'480px',
       boxShadow:theme.shadows[23],
 
     },
