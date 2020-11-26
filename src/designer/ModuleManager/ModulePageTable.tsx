@@ -4,7 +4,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 import intl from 'react-intl-universal';
 import ModulePageRow from './ModulePageRow';
 import { Add } from '@material-ui/icons';
-import { IPage } from 'base/IPage';
+import { IPage } from 'base/Model/IPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

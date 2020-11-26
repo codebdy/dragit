@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton, TableCell, TableRow, TextField, Tooltip } from '@material-ui/core';
-import { IAuth } from '../../base/IAuth';
+import { IAuth } from 'base/Model/IAuth';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
 

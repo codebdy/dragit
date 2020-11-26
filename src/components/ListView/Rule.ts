@@ -1,6 +1,6 @@
-import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
-import { IProp } from "../../base/IProp";
+import { Rule } from "base/Rules/Rule";
+import { INode } from "designer/PageEditor/Core/Node/INode";
+import { IProp } from "base/Model/IProp";
 import StringInput from "base/PropsInputs/StringInput";
 import ListViewBatcthCommandDialog from "components/ListView/PropsInputs/ListViewBatcthCommandDialog";
 import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";

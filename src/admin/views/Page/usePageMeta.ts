@@ -1,7 +1,7 @@
 import { API_GET_PAGE, API_GET_MODULE_INDEX_PAGE } from "APIs/modules";
 import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
-import { IPage } from "base/IPage";
+import { IPage } from "base//Model/IPage";
 import { useEffect, useState } from "react";
 
 //const modulePrix = "module-index-";

@@ -11,7 +11,7 @@ import { API_GET_MODULES } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ItemMeta } from 'designer/Common/EditableList';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import IMenuItem from 'base/IMenuItem';
+import IMenuItem from 'base/Model/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>

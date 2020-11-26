@@ -1,4 +1,4 @@
-import { IProp } from "base/IProp";
+import { IProp } from "base/Model/IProp";
 import NumberInput from "base/PropsInputs/NumberInput";
 
 const marginRules:Array<IProp> = [

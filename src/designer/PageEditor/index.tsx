@@ -22,7 +22,7 @@ import LeftContent from './LeftContent';
 import useDesigner from 'store/designer/useDesigner';
 import { API_GET_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
-import { IPage, IPageSchema } from 'base/IPage';
+import { IPage, IPageSchema } from 'base/Model/IPage';
 import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'admin/views/Page/PageSkeleton';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';

@@ -1,4 +1,4 @@
-import IMenuItem from "base/IMenuItem";
+import IMenuItem from "base/Model/IMenuItem";
 import { RXNode } from "./RXNode";
 
 export class RXNodeRoot<T> extends RXNode<T>{

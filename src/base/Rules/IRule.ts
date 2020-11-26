@@ -1,6 +1,6 @@
-import { IMeta } from "../IMeta";
+import { IMeta } from "../Model/IMeta";
 import { INode } from "../../designer/PageEditor/Core/Node/INode";
-import { IProp } from "../IProp";
+import { IProp } from "../Model/IProp";
 
 export interface IRule{
   editPaddingY?: string;

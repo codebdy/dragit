@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import { createStyles, Fab, Grid, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme } from "@material-ui/core";
 import PrimaryText from "base/PropsInputs/PrimaryText";
-import { IModule } from "../../base/IModule";
+import { IModule } from "base/Model/IModule";
 import intl from "react-intl-universal";
 import { Add } from "@material-ui/icons";
 import ModuleAuthsRow from "./ModuleAuthsRow";
-import { IAuth } from "base/IAuth";
+import { IAuth } from "base/Model/IAuth";
 import { useAxios } from "base/Hooks/useAxios";
 import { API_ADD_MODULE_AUTH, API_REMOVE_MODULE_AUTH, API_UPDATE_MODULE_AUTH } from "APIs/modules";
 

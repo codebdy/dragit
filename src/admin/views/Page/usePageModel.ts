@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
-import { IPage, IPageSchema } from "base/IPage";
+import { IPage, IPageSchema } from "base//Model/IPage";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModelAction, setModelLoadingAction } from "store/page/actions";

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select, FormControlLabel, Switch } from '@material-ui/core';
-import { IMenuBadge } from 'base/IMenuItem';
+import { IMenuBadge } from 'base/Model/IMenuItem';
 import intl from "react-intl-universal";
 import PrimaryText from 'base/PropsInputs/PrimaryText';
 

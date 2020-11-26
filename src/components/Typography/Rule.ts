@@ -1,7 +1,7 @@
-import { Rule } from "../../base/Rules/Rule";
-import { IMeta } from "../../base/IMeta";
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
-import { IProp } from "../../base/IProp";
+import { Rule } from "base/Rules/Rule";
+import { IMeta } from "base/Model/IMeta";
+import { INode } from "designer/PageEditor/Core/Node/INode";
+import { IProp } from "base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import TextBox from "components/TextBox";

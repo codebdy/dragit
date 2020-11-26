@@ -7,7 +7,7 @@ import DrawerItemList from './DrawerItemList';
 import ToolsAccordion from './ToolsAccordion';
 import { API_GET_DRAWER, API_SAVE_DRAWER } from 'APIs/drawer';
 import { useAxios } from 'base/Hooks/useAxios';
-import IMenuItem from 'base/IMenuItem';
+import IMenuItem from 'base/Model/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';

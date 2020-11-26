@@ -8,7 +8,7 @@ import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
 import { INode } from 'designer/PageEditor/Core/Node/INode';
 import SettingsBox from './SettingsBox';
 import LeftArea from 'designer/Layout/LeftArea';
-import { IPageSchema } from 'base/IPage';
+import { IPageSchema } from 'base/Model/IPage';
 
 
 interface TabPanelProps {

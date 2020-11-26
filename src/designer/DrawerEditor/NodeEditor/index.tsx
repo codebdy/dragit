@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
-import IMenuItem, { IMenuChip } from 'base/IMenuItem';
+import IMenuItem, { IMenuChip } from 'base/Model/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
 import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';

@@ -1,4 +1,4 @@
-import IAppInfo from "base/IAppInfo";
+import IAppInfo from "base/Model/IAppInfo";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 

@@ -20,7 +20,7 @@ import MdiIcon from '../common/MdiIcon';
 import { openSuccessAlertAction } from 'store/alertbar/actions';
 import { useDispatch } from 'react-redux';
 import HoverablePaper from 'components/common/HoverablePaper';
-import { IPageJumper } from 'base/IPageJumper';
+import { IPageJumper } from 'base/Model/IPageJumper';
 
 export const COMMAND_QUERY = "query";
 

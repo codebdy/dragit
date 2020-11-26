@@ -5,7 +5,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { INode } from 'designer/PageEditor/Core/Node/INode';
-import { IProp } from "base/IProp";
+import { IProp } from "base/Model/IProp";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
 import AttributeBoxValidateArea, { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';

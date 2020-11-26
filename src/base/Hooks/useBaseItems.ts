@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { IPage } from "base/IPage";
+import { IPage } from "base/Model/IPage";
 import { useState, useEffect } from "react";
 import { useAxios } from "./useAxios";
 

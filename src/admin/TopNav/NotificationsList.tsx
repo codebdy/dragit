@@ -6,7 +6,7 @@ import { API_GET_LASTED_NOTIFICATIONS } from 'APIs/app';
 import { AxiosRequestConfig } from 'axios';
 import { useAxios } from 'base/Hooks/useAxios';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
-import { INotification } from 'base/INotification';
+import { INotification } from 'base//Model/INotification';
 import { useHistory } from 'react-router-dom';
 import { resolvePageUrl } from 'utils/resolvePageUrl';
 

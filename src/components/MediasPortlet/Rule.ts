@@ -1,6 +1,6 @@
-import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
-import { IProp } from "../../base/IProp";
+import { Rule } from "base/Rules/Rule";
+import { INode } from "designer/PageEditor/Core/Node/INode";
+import { IProp } from "base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import marginRules from "base/Rules/marginRules";
 import elevationRules from "base/Rules/elevationRules";

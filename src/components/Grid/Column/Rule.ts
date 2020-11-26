@@ -1,6 +1,6 @@
 import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/PageEditor/Core/Node/INode";
-import { IProp } from "../../../base/IProp";
+import { IProp } from "../../../base/Model/IProp";
 import colWidthRules from "base/Rules/colWidthRules";
 
 

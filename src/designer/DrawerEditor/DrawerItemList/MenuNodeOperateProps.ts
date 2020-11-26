@@ -1,4 +1,4 @@
-import IMenuItem from "base/IMenuItem";
+import IMenuItem from "base/Model/IMenuItem";
 import { RXNode } from "base/RXNode/RXNode";
 
 export default interface MenuNodeOperateProps {

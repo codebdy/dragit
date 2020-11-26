@@ -1,11 +1,11 @@
-import { IProp } from "base/IProp";
+import { IProp } from "base/Model/IProp";
 import BooleanInput from "base/PropsInputs/BooleanInput";
 import NumberInput from "base/PropsInputs/NumberInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
 import inputRules from "base/Rules/inputRules";
-import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
+import { Rule } from "base/Rules/Rule";
+import { INode } from "designer/PageEditor/Core/Node/INode";
 
 export class TextBoxRule extends Rule{
   editPaddingY = '';

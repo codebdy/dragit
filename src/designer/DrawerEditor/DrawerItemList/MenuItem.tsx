@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Chip, ListItemIcon, ListItemText, ListItem, createStyles, makeStyles, Theme, Divider } from '@material-ui/core';
-import IMenuItem from 'base/IMenuItem';
+import IMenuItem from 'base/Model/IMenuItem';
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
 import { RXNode } from 'base/RXNode/RXNode';

@@ -1,7 +1,7 @@
 import { IRule } from "base/Rules/IRule";
 import { Rule } from "base/Rules/Rule";
 import withMargin from "./HOCs/withMargin";
-import { IMeta } from "./IMeta";
+import { IMeta } from "./Model/IMeta";
 
 var compoentsMap : { 
   [key: string]: {

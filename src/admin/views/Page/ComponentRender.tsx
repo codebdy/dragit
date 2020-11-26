@@ -3,7 +3,7 @@ import { RXNode } from '../../../base/RXNode/RXNode';
 import { PageActionHandle } from './PageAction';
 import { resolveComponent } from 'base/DragRX';
 import withFormField from './withFormField';
-import { IMeta } from 'base/IMeta';
+import { IMeta } from 'base//Model/IMeta';
 
 export default function ComponentRender(props:{component:RXNode<IMeta>, onPageAction: PageActionHandle}){
   const {component, onPageAction} = props;

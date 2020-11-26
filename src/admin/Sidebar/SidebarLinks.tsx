@@ -5,7 +5,7 @@ import Scrollbar from "../common/Scrollbar";
 import SiderBarLoadingSkeleton from "./LoadingSkeleton";
 import { API_GET_DRAWER } from "APIs/drawer";
 import { useAxios } from "base/Hooks/useAxios";
-import IMenuItem from "base/IMenuItem";
+import IMenuItem from "base/Model/IMenuItem";
 import { Divider } from "@material-ui/core";
 import { RXNode } from "base/RXNode/RXNode";
 import Subheader from "./MenuItems/Subheader";

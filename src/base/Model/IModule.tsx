@@ -1,5 +1,5 @@
-import { IPage } from 'base/IPage';
-import { IAuth } from 'base/IAuth';
+import { IPage } from 'base/Model/IPage';
+import { IAuth } from 'base/Model/IAuth';
 
 
 export interface IModule {

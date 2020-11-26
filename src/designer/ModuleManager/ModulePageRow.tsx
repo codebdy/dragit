@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
-import { IPage } from 'base/IPage';
+import { IPage } from 'base/Model/IPage';
 
 export default function ModulePageRow(
   props:{

@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles, Theme, createStyles, Switch, FormControlLabel} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { AttributeRow } from '../Attrebutebox/AttributeRow';
-import { IPageSchema } from 'base/IPage';
+import { IPageSchema } from 'base/Model/IPage';
 import ApiEditor from './ApiEditor';
 
 const useStyles = makeStyles((theme: Theme) =>

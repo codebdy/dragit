@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles, Divider, Collapse, List } from "@material-ui/core";
-import IMenuItem, { IMenuBadge } from "base/IMenuItem"
+import IMenuItem, { IMenuBadge } from "base/Model/IMenuItem"
 import { RXNode } from "base/RXNode/RXNode"
 import classNames from "classnames"
 import React, { Fragment } from "react"

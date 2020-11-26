@@ -1,7 +1,7 @@
 import { Rule } from "../../base/Rules/Rule";
 import { INode } from "../../designer/PageEditor/Core/Node/INode";
-import { IMeta } from "../../base/IMeta";
-import { IProp } from "../../base/IProp";
+import { IMeta } from "../../base/Model/IMeta";
+import { IProp } from "../../base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
 import marginRules from "base/Rules/marginRules";

@@ -13,7 +13,7 @@ import usePageMeta from "./usePageMeta";
 import usePageModel from "./usePageModel";
 import { useDispatch } from "react-redux";
 import { setDesingerPageAction } from "store/designer/actions";
-import { IMeta } from "base/IMeta";
+import { IMeta } from "base//Model/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
 import { resolvePageUrl } from "utils/resolvePageUrl";
 

@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 import { useAxios } from 'base/Hooks/useAxios';
 import { AxiosRequestConfig } from 'axios';
 import { API_LOGIN } from 'APIs/app';
-import IAppInfo from 'base/IAppInfo';
+import IAppInfo from 'base/Model/IAppInfo';
 import { useDispatch } from 'react-redux';
 import { setAppInfoAction } from 'store/app/actions';
 import { TOKEN_NAME } from 'utils/consts';

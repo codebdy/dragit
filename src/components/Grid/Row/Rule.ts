@@ -1,7 +1,7 @@
 import { Rule } from "../../../base/Rules/Rule";
 import { INode } from "../../../designer/PageEditor/Core/Node/INode";
 import OptionSelect from "base/PropsInputs/OptionSelect";
-import { IProp } from "../../../base/IProp";
+import { IProp } from "../../../base/Model/IProp";
 import NumberInput from "base/PropsInputs/NumberInput";
 
 export class GridRowRule extends Rule{

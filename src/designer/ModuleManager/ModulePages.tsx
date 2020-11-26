@@ -2,11 +2,11 @@ import React from 'react';
 import {  Grid, LinearProgress } from '@material-ui/core';
 import PrimaryText from 'base/PropsInputs/PrimaryText';
 import intl from 'react-intl-universal';
-import { IModule } from "../../base/IModule";
+import { IModule } from "base/Model/IModule";
 import ModulePageTable from './ModulePageTable';
 import { API_UPDATE_MODULE_PAGE, API_REMOVE_MODULE_PAGE, API_ADD_MODULE_PAGE, API_UPDATE_MODULE_INDEX_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
-import { IPage } from 'base/IPage';
+import { IPage } from 'base/Model/IPage';
 import PageEditor from 'designer/PageEditor';
 
 

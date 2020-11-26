@@ -6,7 +6,7 @@ import { API_CHANGE_MODULE, API_GET_MODULE_BY_ID} from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
 import ModulePages from './ModulePages';
 import ModuleAuths from './ModuleAuths';
-import { IModule } from '../../base/IModule';
+import { IModule } from 'base/Model/IModule';
 import intl from "react-intl-universal";
 import { AxiosRequestConfig } from 'axios';
 
