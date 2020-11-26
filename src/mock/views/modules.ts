@@ -66,7 +66,7 @@ export function getModuleIndexPage(moduleSlug:string){
       if(pages){
         for(var j=0; j < pages.length; j++){
           if(pages[j].id === module.indexPageId){
-            return pages[j];
+            return JSON.parse(JSON.stringify(pages[j]));
           }
         }
       }
@@ -82,7 +82,7 @@ export function getModulePage(pageSlug:string){
     if(pages){
       for(var j=0; j < pages.length; j++){
         if(pages[j].slug === pageSlug){
-          return pages[j];
+          return JSON.parse(JSON.stringify(pages[j]));
         }
       }
     }

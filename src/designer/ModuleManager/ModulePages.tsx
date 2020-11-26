@@ -91,7 +91,7 @@ export default function ModulePages(props:{module:IModule}){
         </Grid>
         {designedPage &&
           <PageEditor 
-            pageId = {designedPage.id} 
+            pageSlug = {designedPage.slug} 
             onClose = {handleDesignerClose}
           ></PageEditor>
         }

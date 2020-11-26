@@ -88,11 +88,11 @@ export function ToolbarIcon(props:{checked?:boolean, onClick?:()=>void, children
 
 export default function PageEditor(
   props:{
-    pageId:number,
+    pageSlug:string,
     onClose:()=>void
   }
 ) {
-  const {pageId, onClose} = props;
+  const {pageSlug, onClose} = props;
   const classes = useStyles();
   const designer = useDesigner();
   const {showOutline, showPaddingX, showPaddingY} = designer;
@@ -106,8 +106,8 @@ export default function PageEditor(
   useAuthCheck();
   
   useEffect(() => {
-    setPageRequest({...API_GET_PAGE, params:{pageId}})
-  },[pageId]);
+    setPageRequest({...API_GET_PAGE, params:{pageSlug}})
+  },[pageSlug]);
 
   useEffect(() => {
     setPageSchema(pageMeta?.jsonSchema)

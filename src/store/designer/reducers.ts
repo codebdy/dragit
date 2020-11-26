@@ -4,7 +4,7 @@ import {closeAreaSelectAction, openAreaSelectAction, openDesignerAction, cancelP
 const initialState:{
   areaSelect:boolean, 
   opened:boolean,
-  pageId:number,
+  pageSlug:string,
   showOutline:boolean,
   showPaddingX:boolean,
   showPaddingY:boolean,
@@ -12,7 +12,7 @@ const initialState:{
   {
     areaSelect: false,
     opened: false,
-    pageId:-1,
+    pageSlug:'',
     showOutline:true,
     showPaddingX:true,
     showPaddingY:true,  
@@ -44,7 +44,7 @@ const actionMap={
   [setDesingerPageAction().type]: (state:State, action:Action<any>) => {
     return {
       ...state,
-      pageId: action.payload,
+      pageSlug: action.payload,
     };
   },
 
