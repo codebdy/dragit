@@ -1,7 +1,14 @@
 import articles from '../views/articles'
 import article from '../views/article'
+import users from '../views/users'
+import user from '../views/user'
 
 var modules = [
+  {
+    id:21,
+    slug:'dashboard',
+    title:'仪表盘'
+  },
   {
     id:1,
     title:'文章管理',
@@ -47,13 +54,27 @@ var modules = [
   {
     id:3,
     slug:'user',
-    title:'用户'
+    title:'管理员',
+    indexPageId:31,
+    pages:[
+      {
+        id:31,
+        title:'管理员列表',
+        slug:'urser-list',
+        jsonSchema: users,
+      },
+      {
+        id:32,
+        title:'管理员编辑',
+        slug:'edit-user',
+        jsonSchema: user,
+      },
+    ],
   },
-
   {
-    id:21,
-    slug:'dashboard',
-    title:'仪表盘'
+    id:4,
+    slug:'role',
+    title:'角色'
   },
 
 ]

@@ -19,9 +19,10 @@ export function useAxios<T>(config?:AxiosRequestConfig, tipSuccess?:string|true)
         tipSuccess && dispatch(openSuccessAlertAction())
       })
       .catch(err => {
-        console.log('server error:useAxios');
+        console.log('server error:useAxios', err);
         setLoading(false);
         setError(true);
+        //dispatch(openErrorDialogAction())
       })       
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

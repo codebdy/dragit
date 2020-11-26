@@ -117,7 +117,8 @@ export default [{
             {
                 title:"管理员",
                 type:'item',
-                icon: 'mdi-circle-small'
+                icon: 'mdi-circle-small',
+                to: '/admin/module/user/',
             },
             {
                 title:"角色",

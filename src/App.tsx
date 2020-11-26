@@ -10,7 +10,7 @@ import ModuleManager from 'designer/ModuleManager';
 import useThemeSettings from 'store/theme/useThemeSettings';
 import useShadows from 'store/theme/useShadows';
 import DrawerEditor from 'designer/DrawerEditor';
-import SuccessAlertBar from 'base/SuccessAlertBar';
+import SuccessAlertBar from 'base/Widgets/SuccessAlertBar';
 import Login from 'admin/views/Login';
 import { useIntl } from 'base/Hooks/useIntl';
 import { LOGIN_URL } from 'utils/consts';

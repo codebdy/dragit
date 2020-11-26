@@ -67,7 +67,7 @@ export default function ModuleContent(
           title:module?.title,
           slug:slug,
         }
-      }        
+      }     
     )
   }
 

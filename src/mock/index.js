@@ -12,6 +12,7 @@ import notifications from './data/notifications'
 import mockMedias from './medias/mock'
 import modules from './modules/modules'
 import mockModules from './modules/mock'
+import mockModel from './modules/mock'
 
 window.drawerData = drawer;
 window.modules = modules;
@@ -34,6 +35,7 @@ Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
 
 mockMedias();
 mockModules();
+mockModel();
 
 Mock.mock('/api/base/items','get', [
     {
