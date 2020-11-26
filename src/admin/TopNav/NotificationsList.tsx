@@ -52,7 +52,7 @@ export default function NotificationsList(props:{onClose:()=>void}){
             <Fragment key={note.id}>
               <ListItem button onClick={e=>handleClick(note.id)}>
                 <ListItemAvatar>
-                  <Avatar className={classes.avatar}>
+                  <Avatar className={note.read ? '' : classes.avatar}>
                     <MdiIcon iconClass = {note.read? "mdi-email-open" : "mdi-email"} />
                   </Avatar>
                 </ListItemAvatar>
