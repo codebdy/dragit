@@ -222,7 +222,11 @@
 
     "profile":"Profile",
     "change-password":"Change Password",
-    "logout":"Logout"
+    "logout":"Logout",
+
+    "new-notifications":"New notifications",
+    "no-notifications":"No notifications",
+    "view-all":"View All"
 
 
 }

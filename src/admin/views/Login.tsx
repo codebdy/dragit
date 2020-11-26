@@ -81,7 +81,7 @@ export default function Login(){
     showPassword: false,
   });
 
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
 
   const [request, setRequest] = useState<AxiosRequestConfig>();
   const [authResult, checking] = useAxios<CheckResult>(request);

@@ -227,6 +227,10 @@
 
     "profile":"个人信息",
     "change-password":"修改密码",
-    "logout":"注销登录"
+    "logout":"注销登录",
+
+    "new-notifications":"最新通知",
+    "no-notifications":"没有任何消息",
+    "view-all":"查看全部"
 
 }

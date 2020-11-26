@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Badge, IconButton, Popover, Typography, Avatar, List, ListItem, ListItemAvatar, ListItemText, Divider, Button } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Badge, IconButton, Popover, Typography, Divider, Button } from '@material-ui/core';
 import useAppInfo from "store/app/useAppInfo";
 import MdiIcon from "components/common/MdiIcon"
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import NotificationsList from './NotificationsList';
+import intl from "react-intl-universal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,13 +11,14 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       fontWeight:'bold',
     },
-    root: {
-      width: 360,
-      backgroundColor: theme.palette.background.paper,
-    },
     viewAll:{
       width:'100%',
-    }
+    },
+    emperty: {
+      width: 360,
+      backgroundColor: theme.palette.background.paper,
+      padding:theme.spacing(4),
+    },
   }),
 );
 
@@ -70,38 +70,17 @@ export default function Notifications(
           vertical: 'top',
           horizontal: 'center',
         }}
+        //className = {classes.root}
       >
         <Typography className={classes.typography} variant = "subtitle1">最新通知</Typography>
-        <Divider />        
-        <List className={classes.root}>
+        <Divider /> 
+        {
+          (appInfo && appInfo.unreadMessagesCount) ?
+          <NotificationsList />
+          :
+          <div className={classes.emperty}>{intl.get('no-notifications')}</div>          
+        }       
 
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={<b>{"Photos"}</b>} secondary="Jan 9, 2014" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar>
-                <WorkIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Work" secondary="Jan 7, 2014" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Vacation" secondary="July 20, 2014" />
-          </ListItem>
-        </List>
         <Divider />
         <Button className={classes.viewAll}>查看全部</Button>
       </Popover>            
