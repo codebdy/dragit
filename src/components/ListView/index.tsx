@@ -12,7 +12,7 @@ import { FieldOrder, ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
-import { JUMP_TO_PAGE_ACTION, PageActionHandle, PageJumper } from 'admin/views/Page/PageAction';
+import { JUMP_TO_PAGE_ACTION, PageActionHandle } from 'admin/views/Page/PageAction';
 import axios from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton } from '@material-ui/core';
@@ -20,6 +20,7 @@ import MdiIcon from '../common/MdiIcon';
 import { openSuccessAlertAction } from 'store/alertbar/actions';
 import { useDispatch } from 'react-redux';
 import HoverablePaper from 'components/common/HoverablePaper';
+import { IPageJumper } from 'base/IPageJumper';
 
 export const COMMAND_QUERY = "query";
 
@@ -225,7 +226,7 @@ const ListView = React.forwardRef((
     })
   };
 
-  const jumpToPage = (pageParams:PageJumper, row:any)=>{
+  const jumpToPage = (pageParams:IPageJumper, row:any)=>{
     onAction({name:JUMP_TO_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
   }
 
@@ -354,7 +355,7 @@ const ListView = React.forwardRef((
                                     <Tooltip title={command.label} key={command.slug}>
                                       <IconButton aria-label={command.label} name={'batch-action-' + command.slug}
                                         onClick = {(e)=>{
-                                          command.jumpToPage ? jumpToPage(command.jumpToPage as PageJumper, row) : handleRowAction(command.slug, row.id);
+                                          command.jumpToPage ? jumpToPage(command.jumpToPage as IPageJumper, row) : handleRowAction(command.slug, row.id);
                                           e.stopPropagation();
                                         }}
                                         size = "small"

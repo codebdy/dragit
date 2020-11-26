@@ -5,12 +5,6 @@ export const GET_DATA_ACTION = "GET_DATA_ACTION";
 export const POST_DATA_ACTION = "POST_DATA_ACTION";
 //export const PAGE_ACTION = "PAGE_ACTION";
 
-export interface PageJumper{
-  moduleSlug:string,
-  pageSlug:string,
-  dataId?:string,
-}
-
 export interface PageAction{
   name:string;
   [key:string]: any;

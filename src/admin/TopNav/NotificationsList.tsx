@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -6,6 +6,9 @@ import { API_GET_LASTED_NOTIFICATIONS } from 'APIs/app';
 import { AxiosRequestConfig } from 'axios';
 import { useAxios } from 'base/Hooks/useAxios';
 import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
+import { INotification } from 'base/INotification';
+import { useHistory } from 'react-router-dom';
+import { resolvePageUrl } from 'utils/resolvePageUrl';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,44 +23,54 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function NotificationsList(){
+export default function NotificationsList(props:{onClose:()=>void}){
+  const {onClose} = props;
   const classes = useStyles();
   const [request] = useState<AxiosRequestConfig>(API_GET_LASTED_NOTIFICATIONS);
+  const history = useHistory();
 
-  const [notifications, loading] = useAxios(request)
+  const [notifications, loading] = useAxios<Array<INotification>>(request)
+
+  const handleClick = (id:number)=>{
+    history.push(resolvePageUrl({
+      moduleSlug:'notifications',
+      pageSlug:'view',
+      dataId:id,
+    }));
+    onClose();
+  }
 
   return (
     loading?
     <div className={classes.root}><SiderBarLoadingSkeleton /></div>
     :
     <List className={classes.root}>
+      {
+        notifications?.map((note, index)=>{
+          return(
+            index < 5 &&
+            <Fragment key={note.id}>
+              <ListItem button onClick={e=>handleClick(note.id)}>
+                <ListItemAvatar>
+                  <Avatar className={classes.avatar}>
+                    <MdiIcon iconClass = {note.read? "mdi-email-open" : "mdi-email"} />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary=
+                {
+                  note.read ?
+                  note.title
+                  :
+                  <b>{note.title}</b>
+                } 
+                  secondary={note.dateTime} />
+              </ListItem>
+              <Divider />            
+            </Fragment>
 
-      <ListItem button>
-        <ListItemAvatar>
-          <Avatar className={classes.avatar}>
-            <MdiIcon iconClass = "mdi-email" />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary={<b>{"Photos"}</b>} secondary="Jan 9, 2014" />
-      </ListItem>
-      <Divider />
-      <ListItem button>
-        <ListItemAvatar>
-          <Avatar>
-            <MdiIcon iconClass = "mdi-email-open" />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <Divider />
-      <ListItem button>
-        <ListItemAvatar>
-          <Avatar>
-          <MdiIcon iconClass = "mdi-email-open" />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
+          )
+        })
+      }
     </List>
   )
 }

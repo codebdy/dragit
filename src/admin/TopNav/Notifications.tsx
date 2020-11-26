@@ -4,6 +4,8 @@ import useAppInfo from "store/app/useAppInfo";
 import MdiIcon from "components/common/MdiIcon"
 import NotificationsList from './NotificationsList';
 import intl from "react-intl-universal";
+import { useHistory } from 'react-router';
+import { resolvePageUrl } from 'utils/resolvePageUrl';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,8 +42,16 @@ export default function Notifications(
     setAnchorEl(null);
   };
 
+  const history = useHistory();
+
+  const handleViewAll = ()=>{
+    history.push(resolvePageUrl({
+      moduleSlug:'notifications',
+    }));
+  }
+
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? 'notification-popover' : undefined;
   const appInfo = useAppInfo();
  
   return (
@@ -76,13 +86,15 @@ export default function Notifications(
         <Divider /> 
         {
           (appInfo && appInfo.unreadMessagesCount) ?
-          <NotificationsList />
+          <NotificationsList onClose = {()=>setAnchorEl(null)} />
           :
-          <div className={classes.emperty}>{intl.get('no-notifications')}</div>          
+          <Fragment>
+            <div className={classes.emperty}>{intl.get('no-notifications')}</div>
+            <Divider />            
+          </Fragment>
+       
         }       
-
-        <Divider />
-        <Button className={classes.viewAll}>查看全部</Button>
+        <Button className={classes.viewAll} onClick = {handleViewAll}>查看全部</Button>
       </Popover>            
     </Fragment>
   )

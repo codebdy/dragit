@@ -4,7 +4,7 @@ import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, Dialog } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, PageJumper } from './PageAction';
+import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from './PageAction';
 
 import { FormProvider, useForm } from "react-hook-form";
 import { Alert, AlertTitle } from "@material-ui/lab";
@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setDesingerPageAction } from "store/designer/actions";
 import { IMeta } from "base/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
+import { resolvePageUrl } from "utils/resolvePageUrl";
 
 const PageView = ()=>{
   const history =  useHistory();
@@ -51,10 +52,6 @@ const PageView = ()=>{
     setSubmitted(true);
   }
   const [submitted, setSubmitted] = React.useState(false);
-  
-  const resolvePageUrl=(page:PageJumper)=>{
-    return `/admin/module/${page.moduleSlug}/${page.pageSlug}` + (page.dataId ? '/' + page.dataId : '' );
-  }
   
   const formActionHandle = (action:PageAction)=>{
     switch (action.name){
