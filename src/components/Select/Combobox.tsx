@@ -55,32 +55,6 @@ const Combobox = React.forwardRef((
 
   let options = itemsData?.map((item:any)=>item[name]);
 
-  /*useEffect(() => {
-    if(!fromUrl || !url){
-      return;
-    }
-    setLoading(true);
-    axios(
-      {
-        method:"get",
-        url:url,
-      }
-    ).then(res => {
-      if(mountedRef.current){
-        setItemsData(res.data);
-        setLoading(false);
-      }
-    })
-    .catch(err => {
-      setLoading(false);
-    })
-    
-    return () => { 
-      mountedRef.current = false
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);*/
-
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
 

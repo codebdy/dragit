@@ -6,6 +6,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     portletFooter: {
       padding:theme.spacing(2),
+      display:'flex',
+      justifyContent:'center',
     },
 
   }),
