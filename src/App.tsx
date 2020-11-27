@@ -14,6 +14,7 @@ import SuccessAlertBar from 'base/Widgets/SuccessAlertBar';
 import Login from 'admin/views/Login';
 import { useIntl } from 'base/Hooks/useIntl';
 import { LOGIN_URL } from 'utils/consts';
+import ErrorDialog from 'base/Widgets/ErrorDialog';
 
 function App() {
   const [langLoading] = useIntl();
@@ -47,6 +48,7 @@ function App() {
           </Switch>
         </BrowserRouter>
         <SuccessAlertBar />
+        <ErrorDialog />
       </ThemeProvider>)
   );
 }

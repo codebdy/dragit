@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios, { AxiosRequestConfig } from 'axios';
 import { openSuccessAlertAction } from "store/alertbar/actions";
 import { useDispatch } from "react-redux";
+import { openErrorDialogAction } from "store/error/actions";
 
 
 export function useAxios<T>(config?:AxiosRequestConfig, tipSuccess?:string|boolean):[T|undefined, boolean, boolean]{
@@ -20,11 +21,11 @@ export function useAxios<T>(config?:AxiosRequestConfig, tipSuccess?:string|boole
           tipSuccess && dispatch(openSuccessAlertAction())          
         }
       })
-      .catch(err => {
-        console.log('server error:useAxios', err);
+      .catch(error => {
+        console.log('server error:useAxios', error);
         setLoading(false);
         setError(true);
-        //dispatch(openErrorDialogAction())
+        dispatch(openErrorDialogAction(error.message))
       })       
     }
 
