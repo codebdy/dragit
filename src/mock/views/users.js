@@ -89,41 +89,26 @@ export default {
                 defalutRowsPerPage:'10',
                 filters:[
                   {
-                    slug:'gender',
-                    label:'性别',
+                    slug:'status',
+                    label:'状态',
                     searchable:true,
                     conditions:[
                       {
-                        slug:'male',
-                        label:'男'
+                        slug:'normal',
+                        label:'正常'
                       },
                       {
-                        slug:'female',
-                        label:'女'
+                        slug:'forbid',
+                        label:'禁用'
                       },
                     ]
                   },
-                  {
-                    slug:'publish',
-                    label:'已发布',
-                    conditions:[
-                      {
-                        slug:'published',
-                        label:'已发布男'
-                      },
-                      {
-                        slug:'not-published',
-                        label:'未发布'
-                      },
-                    ]
-
-                  }
                 ],
                 batchCommands:[
                   {
                     slug:"forbid",
-                    label:"审核",
-                    icon:"mdi-check-bold",
+                    label:"禁用",
+                    icon:"mdi-cancel",
                   },
                   {
                     slug:"delete",

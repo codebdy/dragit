@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles, lighten, Toolbar, Typography, TextField, InputAdornment, Tooltip, IconButton } from "@material-ui/core";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import MdiIcon from "../common/MdiIcon";
 import ListViewFilter from "./ListViewFilter";
 import clsx from 'clsx';
@@ -25,6 +25,9 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
     title: {
       flex: '1 1 100%',
     },
+    keyword:{
+      transition:'width 0.1s',
+    },
   }),
 );
 
@@ -42,7 +45,8 @@ interface ListViewToolbarProps {
 const ListViewToolbar = (props: ListViewToolbarProps) => {
   const classes = useToolbarStyles();
   const { numSelected, filters, batchCommands, filterValues, onKeywordChange, onFilterChange, onBatchAction } = props;
-  const [keyword, setKeyword] = React.useState(props.keyword)
+  const [keyword, setKeyword] = useState(props.keyword)
+  const [keywordFocused, setKeywordFocused] = useState(false);
 
   return (
     <Toolbar
@@ -65,9 +69,10 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
               </InputAdornment>
             ),
           }}
+          className={classes.keyword}
           variant = "outlined"
           size = "small"
-          value = {keyword}
+          value = {keyword || ''}
           onChange = {e=>{setKeyword(e.target.value as string)}}
           onKeyUp = {e=>{
               if(e.keyCode === 13) {
@@ -75,6 +80,13 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
               }
             }
           }
+
+          onFocus = {()=>setKeywordFocused(true)}
+          onBlur = {()=>setKeywordFocused(false)}
+
+          style={{width:keywordFocused ? '300px' : '200px'}}
+
+          placeholder = {intl.get('please-input-and-press-enter')}
         />
         </div>
       )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -119,29 +119,14 @@ const ListView = React.forwardRef((
     setRequest({...bind, data:{...bind.data, operateParam}})
   }, [bind, operateParam])
 
-  const updateOperateParam = (field:string, value:any)=>{
-    setOperateParam({...operateParam, [field]:value})
+  const updateOperateParam = (field:string, value:any, showAlert = false)=>{
+    setShowSuccessAlert(showAlert);
+    setOperateParam({...operateParam, [field]:value, selected:[...selected]});
+    setSelected([]);
   }
 
-  const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
-  const [selected, setSelected] = React.useState<string[]>([]);
-
-  //const [loading, setLoading] = React.useState(false);
-  //const mountedRef = useRef(true);
-  //const [successAlert, setSuccessAlert] = React.useState(false);
-
-  const rows = loading ? creatEmpertyRows(rowsPerPage) : paginate.data;
-
-  //let realtimePage = page;
-
-  //useEffect(() => {
-  //  emitAction(COMMAND_QUERY);
-
-  //  return () => { 
-  //    mountedRef.current = false
-  //  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  //},[keyword, filterValues, orders, rowsPerPage]);
+  const [selected, setSelected] = React.useState<number[]>([]);
+  const rows = loading ? creatEmpertyRows(paginate.perPage) : paginate.data;
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -160,9 +145,9 @@ const ListView = React.forwardRef((
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+  const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
     const selectedIndex = selected.indexOf(id);
-    let newSelected: string[] = [];
+    let newSelected: number[] = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
@@ -180,65 +165,29 @@ const ListView = React.forwardRef((
     setSelected(newSelected);
   };
 
- /*  const dispatch = useDispatch()
-
- const emitAction = (command:string, showAlert?:boolean, rowID?:string)=>{
-    console.log('ListView提交数据：',command, keyword)
-    setSelected([]);
-    setLoading(true);
-    axios(
-      {
-        method:"get",
-        url:bind.url,
-        params:bind.params,
-        data:{
-          command:command,
-          keyword:keyword,
-          filterValues:filterValues,
-          orders:orders,
-          selected:rowID ? [rowID] : selected,
-          page:realtimePage,
-          pageRows:rowsPerPage,
-        }
-      }
-    ).then(res => {
-      if(mountedRef.current){
-        setPaginate(res.data);
-        setPage(res.data?.page)
-        setLoading(false);
-        showAlert && dispatch(openSuccessAlertAction())
-      }
-    })
-    .catch(err => {
-      console.log('server error');
-      setLoading(false);
-    })
-  };*/
-
   const jumpToPage = (pageParams:IPageJumper, row:any)=>{
     onAction({name:JUMP_TO_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
   }
 
 
   const handleBatchAction = (commandSlug:string)=>{
-    //emitAction(commandSlug, true);
+    updateOperateParam('command', commandSlug, true);
   }
   const handleRowAction = (commandSlug:string, rowId:string)=>{
-    //emitAction(commandSlug, true, rowId);
+    updateOperateParam('command', commandSlug, true);
+    updateOperateParam('selected', [rowId], true);
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    //setPage(0);
+    updateOperateParam('rowsPerPage', parseInt(event.target.value, 10));
   };
 
   const hasRowCommands = rowCommands && rowCommands.length > 0;
   
 
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
+  const isSelected = (name: number) => selected.indexOf(name) !== -1;
 
   //const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
     <div className={classNames(classes.root, className)} {...rest} ref={ref}>
       <HoverablePaper elevation = {elevation}>
@@ -357,7 +306,7 @@ const ListView = React.forwardRef((
           component="div"
           labelRowsPerPage = {intl.get('rows-per-page') + ':'}
           count={paginate.total}
-          rowsPerPage={rowsPerPage}
+          rowsPerPage={paginate.perPage}
           page={paginate.currentPage}
           onChangePage={(event, newPage)=>updateOperateParam('page', newPage)}
           onChangeRowsPerPage={handleChangeRowsPerPage}
