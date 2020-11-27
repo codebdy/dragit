@@ -84,6 +84,7 @@
     "batch-actions":"批量指令",
     "rows-per-page":"每页行数",
     "pager-options":"分页选项",
+    "operations":"操作",
 
     "operate-success":"操作成功！",
 

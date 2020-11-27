@@ -1,6 +1,4 @@
-export default{
-
-    data:[
+export default[
       {
         id:'1',
         name:'name1',
@@ -77,4 +75,3 @@ export default{
         title:'汇集漫天星星，星星之火可以燎原',
       },
     ]
-}

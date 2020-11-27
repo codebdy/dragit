@@ -58,20 +58,29 @@ export default {
                 elevation:6,
                 columns:[
                   {
+                    field:'login_name',
+                    label:'登录名',
+                    //searchable:true,
+                    //sortable:true,
+                  },
+                  {
                     field:'name',
                     label:'名称',
                     searchable:true,
                     sortable:true,
-                    props:{
-                      align:'right',
-                    }
-
                   },
                   {
-                    field:'title',
-                    label:'标题',
-                    sortable:true,
-                    template:'<span style="color:red;">{$title}</span>',
+                    field:'email',
+                    label:'邮箱',
+                  },
+                  {
+                    field:'roles',
+                    label:'角色',
+                  },
+                  {
+                    field:'status',
+                    label:'状态',
+                    isHtml:true,
                     props:{
                     }
                   }
@@ -112,12 +121,7 @@ export default {
                 ],
                 batchCommands:[
                   {
-                    slug:"publish",
-                    label:"发布",
-                    icon:"mdi-publish",
-                  },
-                  {
-                    slug:"check",
+                    slug:"forbid",
                     label:"审核",
                     icon:"mdi-check-bold",
                   },
@@ -134,21 +138,11 @@ export default {
                     icon:"mdi-pencil",
                     jumpToPage:{
                       //name: JUMP_TO_PAGE_ACidTION,
-                      moduleSlug:'article',
-                      pageSlug:'article',
+                      moduleSlug:'user',
+                      pageSlug:'edit-user',
                       param:'id',
                       paramField:'id',
                     }
-                  },
-                  {
-                    slug:"publish",
-                    label:"发布",
-                    icon:"mdi-publish",
-                  },
-                  {
-                    slug:"check",
-                    label:"审核",
-                    icon:"mdi-check-bold",
                   },
                   {
                     slug:"delete",
@@ -159,14 +153,8 @@ export default {
                 bind:{
                   method:'post',
                   url:API_QUERY_AND_OPERATE_MODELS.url,
-                  params:{
+                  data:{
                     modelName:'/Model/User',
-                    command:'query',//'PAGE-ACTION'
-                    //commandSlug:'delete',
-                    selected:[],
-                    query:{
-                      keyword:'text',
-                    },
                   },      
                 },
 

@@ -1,20 +1,5 @@
 import { AxiosRequestConfig } from "axios"
-
-type Order = 'asc' | 'desc';
-export interface FieldOrder{
-  field:string;
-  direction: Order;
-}
-
-export interface IOperateListParam{
-  command: string | 'query',
-  keywords?: string,
-  filterValues?: Array<string>,
-  orders?: Array<FieldOrder>,
-  selected?: Array<number>,
-  rowsPerPage: number,
-  page:number,//第几页
-}
+import { IOperateListParam } from "base/Model/IOperateListParam";
 
 //全部列出Model，常用于下拉选择等
 const API_LIST_MODEL : AxiosRequestConfig= {

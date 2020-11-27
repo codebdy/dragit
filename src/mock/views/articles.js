@@ -165,15 +165,9 @@ export default {
                 ],
                 bind:{
                   method:'post',
-                  url:'/api/data/list',
-                  params:{
-                    modelName:'/RXDrag/Model/Article',
-                    command:'query',//'PAGE-ACTION'
-                    //commandSlug:'delete',
-                    selected:[],
-                    query:{
-                      keyword:'text',
-                    },
+                  url:'/api/data/query-operate-models',
+                  data:{
+                    modelName:'/Model/Article',
                   },      
                 },
 

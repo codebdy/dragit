@@ -29,12 +29,12 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 );
 
 interface ListViewToolbarProps {
-  keyword:string,
+  keyword?:string,
   numSelected: number;
   filters:Array<ListViewMetaItem>,
   batchCommands:Array<ListViewMetaItem>,
   filterValues:any, 
-  onKeywordChange:(keyword:string)=>void,
+  onKeywordChange:(keyword?:string)=>void,
   onFilterChange:(filterValues:any)=>void,
   onBatchAction:(actionSlug:string)=>void,
 }

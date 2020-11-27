@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,15 +13,16 @@ import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
 import { JUMP_TO_PAGE_ACTION, PageActionHandle } from 'admin/views/Page/PageAction';
-import axios from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton } from '@material-ui/core';
 import MdiIcon from '../common/MdiIcon';
-import { openSuccessAlertAction } from 'store/alertbar/actions';
-import { useDispatch } from 'react-redux';
 import HoverablePaper from 'components/common/HoverablePaper';
 import { IPageJumper } from 'base/Model/IPageJumper';
-import { FieldOrder } from 'APIs/model';
+import { IOperateListParam } from 'base/Model/IOperateListParam';
+import { IPaginate } from 'base/Model/IPaginate';
+import { ListViewCell } from './ListViewCell';
+import { useAxios } from 'base/Hooks/useAxios';
 
 export const COMMAND_QUERY = "query";
 
@@ -57,12 +58,6 @@ export interface ListViewForm{
   sortBy:Array<string>
 }
 
-export interface BindMeta{
-  method:"POST"|"GET",
-  url:string,
-  params:unknown,
-}
-
 function creatEmpertyRows(length:number){
   let rows = []
   for(var i = 0; i < length; i++){
@@ -70,28 +65,6 @@ function creatEmpertyRows(length:number){
   }
 
   return rows;
-}
-
-const ListViewCell = (props:{row:any, columns:Array<ListViewMetaItem>, colIndex:number})=>{
-  const {row, columns, colIndex} = props;
-  const column = columns[colIndex]
-  const parseTemplate = ()=>{
-    let cellValue = column.template;
-    columns.forEach((col)=>{
-      cellValue = cellValue.replace(`{$${col.field}}`, row[col.field]);
-    })
-    return cellValue
-  }
-  return(
-    column.template?
-    <TableCell {... column.props} 
-      dangerouslySetInnerHTML={{__html:parseTemplate()}} >
-    </TableCell>
-    :
-    <TableCell {... column.props}>
-      {row[column.field]}
-    </TableCell>
-  )
 }
 
 const ListView = React.forwardRef((
@@ -105,7 +78,7 @@ const ListView = React.forwardRef((
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
-      bind:BindMeta,
+      bind:AxiosRequestConfig,
       elevation:number,
     }, 
     ref:any
@@ -127,33 +100,48 @@ const ListView = React.forwardRef((
   } = props
   
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
-  const [paginate, setPaginate] = React.useState<any>({
-    page:0,
-    data:[],
+  const [operateParam, setOperateParam] = useState<IOperateListParam>({
+    page : 0,
+    rowsPerPage: defalutRowsPerPage,
   });
 
-  const [keyword, setKeyword] = React.useState('');
-  const [filterValues, setFilterValues] = React.useState({});
-  const [orders, setOrders] = React.useState<Array<FieldOrder>>([])
+  const [request, setRequest] = useState<AxiosRequestConfig>();
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  const [paginate = {
+    total:0,
+    perPage:0,
+    currentPage:0,
+    data:[],
+  }, loading] = useAxios<IPaginate>(request, showSuccessAlert);
+
+  useEffect(()=>{
+    setRequest({...bind, data:{...bind.data, operateParam}})
+  }, [bind, operateParam])
+
+  const updateOperateParam = (field:string, value:any)=>{
+    setOperateParam({...operateParam, [field]:value})
+  }
+
+  const [rowsPerPage, setRowsPerPage] = React.useState(parseInt(defalutRowsPerPage.toString()));
   const [selected, setSelected] = React.useState<string[]>([]);
-  const [loading, setLoading] = React.useState(false);
-  const mountedRef = useRef(true);
+
+  //const [loading, setLoading] = React.useState(false);
+  //const mountedRef = useRef(true);
   //const [successAlert, setSuccessAlert] = React.useState(false);
 
   const rows = loading ? creatEmpertyRows(rowsPerPage) : paginate.data;
 
-  let realtimePage = page;
+  //let realtimePage = page;
 
-  useEffect(() => {
-    emitAction(COMMAND_QUERY);
+  //useEffect(() => {
+  //  emitAction(COMMAND_QUERY);
 
-    return () => { 
-      mountedRef.current = false
-    }
+  //  return () => { 
+  //    mountedRef.current = false
+  //  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[keyword, filterValues, orders, rowsPerPage]);
+  //},[keyword, filterValues, orders, rowsPerPage]);
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -165,8 +153,8 @@ const ListView = React.forwardRef((
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n:Row) => n.id);
-      setSelected(newSelecteds);
+      const newSelecteds = rows?.map((n:Row) => n.id);
+      setSelected(newSelecteds||[]);
       return;
     }
     setSelected([]);
@@ -192,9 +180,9 @@ const ListView = React.forwardRef((
     setSelected(newSelected);
   };
 
-  const dispatch = useDispatch()
+ /*  const dispatch = useDispatch()
 
-  const emitAction = (command:string, showAlert?:boolean, rowID?:string)=>{
+ const emitAction = (command:string, showAlert?:boolean, rowID?:string)=>{
     console.log('ListView提交数据：',command, keyword)
     setSelected([]);
     setLoading(true);
@@ -225,40 +213,23 @@ const ListView = React.forwardRef((
       console.log('server error');
       setLoading(false);
     })
-  };
+  };*/
 
   const jumpToPage = (pageParams:IPageJumper, row:any)=>{
     onAction({name:JUMP_TO_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
   }
 
-  const handleKeywordChange = (keyword:string)=>{
-    setKeyword(keyword);
-  }
-
-  const handleFilterChange = (values:any)=>{
-    setFilterValues(values);
-  }
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-    realtimePage = newPage;
-    emitAction(COMMAND_QUERY)
-  };
-
-  const handleRequestSort = (newOrders:Array<FieldOrder>) => {
-    setOrders(newOrders)
-  };
 
   const handleBatchAction = (commandSlug:string)=>{
-    emitAction(commandSlug, true);
+    //emitAction(commandSlug, true);
   }
   const handleRowAction = (commandSlug:string, rowId:string)=>{
-    emitAction(commandSlug, true, rowId);
+    //emitAction(commandSlug, true, rowId);
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    //setPage(0);
   };
 
   const hasRowCommands = rowCommands && rowCommands.length > 0;
@@ -272,13 +243,13 @@ const ListView = React.forwardRef((
     <div className={classNames(classes.root, className)} {...rest} ref={ref}>
       <HoverablePaper elevation = {elevation}>
         <ListViewToolbar
-          keyword = {keyword}
+          keyword = {operateParam.keywords}
           numSelected={selected.length}
           filters = {filters}
           batchCommands = {batchCommands}
-          filterValues = {filterValues}
-          onFilterChange = {handleFilterChange}
-          onKeywordChange = {handleKeywordChange}
+          filterValues = {operateParam.filterValues}
+          onFilterChange = {values=>updateOperateParam('filterValues', values)}
+          onKeywordChange = {keywords =>updateOperateParam('keywords', keywords)}
           onBatchAction = {handleBatchAction}
         />
         <TableContainer>
@@ -289,16 +260,16 @@ const ListView = React.forwardRef((
           >
             <ListViewHead
               numSelected={selected.length}
-              orders = {orders}
+              orders = {operateParam.orders}
               onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length || 0}
+              onRequestSort={orders=>updateOperateParam('orders', orders)}
+              rowCount={rows?.length || 0}
               columns = {columns}
               loading = {loading}
               hasRowCommands = {hasRowCommands}
             />
             <TableBody>
-              {rows.map((row:Row, index: any) => {
+              {rows?.map((row:Row, index: any) => {
                   const isItemSelected = isSelected(row.id);
                   const labelId = `listview-${index}`;
                   return (
@@ -318,7 +289,7 @@ const ListView = React.forwardRef((
                           <Skeleton animation="wave" height={50} width="60%" />
                           :
                           <Checkbox
-                            id = {row.id}
+                            id = {row.id.toString()}
                             checked={isItemSelected}
                             inputProps={{ 'aria-labelledby': labelId }}
                           />
@@ -385,10 +356,10 @@ const ListView = React.forwardRef((
           rowsPerPageOptions={parseRowsPerPageOptions()}
           component="div"
           labelRowsPerPage = {intl.get('rows-per-page') + ':'}
-          count={rows.length || 0}
+          count={paginate.total}
           rowsPerPage={rowsPerPage}
-          page={realtimePage||0}
-          onChangePage={handleChangePage}
+          page={paginate.currentPage}
+          onChangePage={(event, newPage)=>updateOperateParam('page', newPage)}
           onChangeRowsPerPage={handleChangeRowsPerPage}
           SelectProps={{
             inputProps: { 'aria-label': 'rows per page' },

@@ -1,16 +1,16 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { FieldOrder } from "APIs/model";
+import { FieldOrder } from "base/Model/IOperateListParam";
 import React from "react";
 import { ListViewMetaItem } from "./ListViewMetaItem";
-
+import intl from "react-intl-universal";
 
 
 export interface ListViewHeadProps {
   numSelected: number;
   onRequestSort: (orders:Array<FieldOrder>) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  orders: Array<FieldOrder>;
+  orders?: Array<FieldOrder>;
   rowCount: number;
   columns:Array<ListViewMetaItem>;
   loading:boolean;
@@ -18,7 +18,7 @@ export interface ListViewHeadProps {
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, orders, numSelected, rowCount, onRequestSort, columns, loading, hasRowCommands: hasRowCommand } = props;
+  const { onSelectAllClick, orders = [], numSelected, rowCount, onRequestSort, columns, loading, hasRowCommands: hasRowCommand } = props;
 
   const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
     let order = getOrder(field);
@@ -106,7 +106,7 @@ export function ListViewHead(props: ListViewHeadProps) {
               <Skeleton animation="wave" height={50} width="50%" />
             </TableCell>
             :
-            <TableCell></TableCell>
+            <TableCell align="right">{intl.get('operations')}</TableCell>
           )
         }
       </TableRow>

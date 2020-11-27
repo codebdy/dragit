@@ -3,7 +3,6 @@ import drawer from './drawer'
 import dashboard from './views/dashboard'
 import articles from './views/articles'
 import formData from './data/formData'
-import listData from './data/listData'
 import article from './views/article'
 import test from './views/test'
 import auths from './data/auths'
@@ -12,7 +11,7 @@ import notifications from './data/notifications'
 import mockMedias from './medias/mock'
 import modules from './modules/modules'
 import mockModules from './modules/mock'
-import mockModel from './modules/mock'
+import mockModel from './model/mock'
 
 window.drawerData = drawer;
 window.modules = modules;
@@ -30,8 +29,8 @@ Mock.mock(RegExp('/api/data/model?.*'), 'get', formData)
 Mock.mock('/api/page/articles', 'get', articles)
 Mock.mock('/api/page/article', 'get', article)
 Mock.mock('/api/page/test', 'get', test)
-Mock.mock('/api/moudle-index/articles', 'get', 'articles')
-Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
+//Mock.mock('/api/moudle-index/articles', 'get', 'articles')
+//Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
 
 mockMedias();
 mockModules();
