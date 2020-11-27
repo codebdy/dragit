@@ -110,7 +110,7 @@ const ListView = React.forwardRef((
 
   const [paginate = {
     total:0,
-    perPage:0,
+    perPage:10,
     currentPage:0,
     data:[],
   }, loading] = useAxios<IPaginate>(request, showSuccessAlert);
