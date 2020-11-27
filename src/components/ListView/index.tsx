@@ -215,7 +215,7 @@ const ListView = React.forwardRef((
               rowCount={rows?.length || 0}
               columns = {columns}
               loading = {loading}
-              hasRowCommands = {hasRowCommands}
+              rowCommandsCount = {batchCommands?.length}
             />
             <TableBody>
               {rows?.map((row:Row, index: any) => {

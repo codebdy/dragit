@@ -14,11 +14,11 @@ export interface ListViewHeadProps {
   rowCount: number;
   columns:Array<ListViewMetaItem>;
   loading:boolean;
-  hasRowCommands:boolean;
+  rowCommandsCount:number;
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, orders = [], numSelected, rowCount, onRequestSort, columns, loading, hasRowCommands: hasRowCommand } = props;
+  const { onSelectAllClick, orders = [], numSelected, rowCount, onRequestSort, columns, loading, rowCommandsCount} = props;
 
   const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
     let order = getOrder(field);
@@ -99,14 +99,14 @@ export function ListViewHead(props: ListViewHeadProps) {
           </TableCell>
         ))}
         {
-          hasRowCommand&&
+          rowCommandsCount&&
           (
             loading ? 
             <TableCell  align="right">
               <Skeleton animation="wave" height={50} width="50%" />
             </TableCell>
             :
-            <TableCell align="right">{intl.get('operations')}</TableCell>
+            <TableCell align="center" style={{width:(40 * rowCommandsCount)+"px"}}>{intl.get('operations')}</TableCell>
           )
         }
       </TableRow>
