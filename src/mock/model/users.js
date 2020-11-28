@@ -13,7 +13,8 @@ export default[
     login_name:'demo',
     name:'演示账号',
     email:'demo@drag.fit',
-    roles:[1,2],
+    roles:'编辑, 读者',
+    roleIds:[1,2],
     avatar:{
       id:'8',
       thumbnail: '/static/images/grid-list/plant.jpg',

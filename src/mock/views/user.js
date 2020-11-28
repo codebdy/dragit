@@ -122,7 +122,7 @@ export default {
                           props:{
                             label:"角色",
                             variant:"outlined",
-                            field:'roles',
+                            field:'roleIds',
                             itemName:'name',
                             multiple:true,
                             fullWidth:true,
