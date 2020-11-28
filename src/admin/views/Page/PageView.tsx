@@ -16,16 +16,21 @@ import { setDesingerPageAction } from "store/designer/actions";
 import { IMeta } from "base//Model/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
 import { resolvePageUrl } from "utils/resolvePageUrl";
+import { AxiosRequestConfig } from "axios";
+import { useAxios } from "base/Hooks/useAxios";
+import { API_SUBMIT_MODEL } from "APIs/model";
 
 const PageView = ()=>{
   const history =  useHistory();
-  const match = useRouteMatch()
+  const match = useRouteMatch();
   const{moduleSlug, pageSlug, id} = match.params as any;
   const methods = useForm({mode: 'all'});
   const {handleSubmit, errors, clearErrors} = methods;
 
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
-  const [pageMeta, loadingPage] = usePageMeta(moduleSlug, pageSlug,)
+  const [pageMeta, loadingPage] = usePageMeta(moduleSlug, pageSlug,);
+  const [submitRequest, setSubmitRequest] = useState<AxiosRequestConfig>();
+  const [submitResult/*, submiting*/] = useAxios(submitRequest, true);
   
   usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
@@ -47,10 +52,18 @@ const PageView = ()=>{
     }
   }, [dispatch, pageMeta])
 
+  useEffect(()=>{
+    if(submitResult &&  pageMeta?.jsonSchema?.closeAfterSubmit){
+      history.goBack();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitResult])
+
   const onSubmit = (data: any) => {
-    console.log('数据提交',data)
+    console.log('数据提交',data);
+    setSubmitRequest({...API_SUBMIT_MODEL, data});
   };
-  
+
   const onValidate = ()=>{
     setSubmitted(true);
   }

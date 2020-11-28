@@ -48,6 +48,11 @@ export default function mockModel(){
     return JSON.parse(JSON.stringify(window.listModels[modelName]));
   })
 
+  Mock.mock('/api/submit-model','post', (request)=>{
+    console.log('serve received data:', JSON.parse(request.body));
+    return true;
+  })
+
   Mock.mock(RegExp('/api/data/model?.*'), 'get', (request)=>{
     let modelName = getModelName(request.url);
     let id = getId(request.url);
@@ -60,3 +65,4 @@ export default function mockModel(){
     console.log('model/mock:no data')
   })
 }
+

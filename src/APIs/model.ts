@@ -18,6 +18,11 @@ const API_GET_MODEL_BY_ID : AxiosRequestConfig= {
   method:'get',
 }
 
+const API_SUBMIT_MODEL : AxiosRequestConfig= {
+  url:'/api/submit-model',
+  method:'post',
+}
+
 export function createListOperateRequest(config:AxiosRequestConfig, data:IOperateListParam){
   return {...config, data:{...config.data, ...data}};
 }
@@ -25,5 +30,6 @@ export function createListOperateRequest(config:AxiosRequestConfig, data:IOperat
 export { 
   API_LIST_MODEL, 
   API_QUERY_AND_OPERATE_MODELS,
-  API_GET_MODEL_BY_ID
+  API_GET_MODEL_BY_ID,
+  API_SUBMIT_MODEL
 }
