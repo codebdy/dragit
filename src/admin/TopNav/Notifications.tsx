@@ -46,8 +46,9 @@ export default function Notifications(
 
   const handleViewAll = ()=>{
     history.push(resolvePageUrl({
-      moduleSlug:'notifications',
+      moduleSlug:'notification',
     }));
+    handleClose();
   }
 
   const open = Boolean(anchorEl);

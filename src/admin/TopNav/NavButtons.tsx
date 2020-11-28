@@ -10,6 +10,7 @@ import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
 import intl from "react-intl-universal";
 import EvenNotification from "./Notifications"
 import useLoggedUser from "store/app/useLoggedUser";
+import { resolvePageUrl } from "utils/resolvePageUrl";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,12 +62,20 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   }
 
   const handleShowProfile = ()=>{
-    history.push("/admin/module/user/edit-user/" + user.meta.id);
+    history.push(resolvePageUrl({
+      moduleSlug:'user',
+      pageSlug:'edit-user',
+      dataId:user.meta.id
+    }));
     setAnchorEl(null);
   }
 
   const handleChangePassword = ()=>{
-    history.push("/admin/module/user/edit-user/" + user.meta.id);
+    history.push(resolvePageUrl({
+      moduleSlug:'user',
+      pageSlug:'edit-user',
+      dataId:user.meta.id
+    }));
     setAnchorEl(null);
   }
 

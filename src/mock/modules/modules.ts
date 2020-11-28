@@ -4,6 +4,8 @@ import users from '../views/users'
 import user from '../views/user'
 import rolesPage from '../views/rolesPage'
 import rolePage from '../views/rolePage'
+import notificationPage from '../views/notificationPage'
+import notificationViewPage from '../views/notificationViewPage'
 
 var modules = [
   {
@@ -93,6 +95,28 @@ var modules = [
       },
     ],
   },
+
+  {
+    id:5,
+    slug:'notification',
+    title:'通知',
+    indexPageId:51,
+    pages:[
+      {
+        id:51,
+        title:'通知列表',
+        slug:'notification-list',
+        jsonSchema: notificationPage,
+      },
+      {
+        id:52,
+        title:'查看通知',
+        slug:'view-notification',
+        jsonSchema: notificationViewPage,
+      },
+    ],
+  },
+
 
 ]
 
