@@ -10,7 +10,7 @@ import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
 import AttributeBoxValidateArea, { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
 import { API_GET_AUTHS } from 'APIs/modules';
-import SelectBox from "components/Select/SelectBox";
+import MultiSelectBox from 'components/Select/MultiSelectBox';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -165,7 +165,7 @@ export default function AttributeBox(props:{node:INode|null}){
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
             </AccordionSummary>
             <AccordionDetails className={classes.pannelDetail}>
-              <SelectBox label={'权限'} 
+              <MultiSelectBox label={'权限'} 
                 variant="outlined" 
                 size="small"
                 fromUrl = {true}
