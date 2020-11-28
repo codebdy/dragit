@@ -8,6 +8,11 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flex:1,
     },
+    label:{
+      padding:theme.spacing(1),
+      fontSize:'1.1rem',
+      color:theme.palette.text.primary,
+    }
 
   }),
 );
@@ -15,10 +20,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 const MediaSelect = React.forwardRef((props: {
+  label?:string,
   value?:MediaMeta,
   width?:string,
+  avatar?:boolean,
 }, ref:any)=>{
-  const {value, width} = props;
+  const {label, value, width, avatar} = props;
   const classes = useStyles();
 
   const [media, setMedia] = React.useState(value);
@@ -29,8 +36,14 @@ const MediaSelect = React.forwardRef((props: {
 
   return (
     <div className={classes.root} ref = {ref} style={{width:width}}>
+      <div className = {classes.label}>{label}</div>
       {
-        <MediaAdder value={media ? [media] :[]} onSelectMedias={handleSelectMedias} single/>      
+        <MediaAdder 
+          value={media ? [media] :[]} 
+          onSelectMedias={handleSelectMedias} 
+          single 
+          avatar = {avatar}
+        />      
       }
 
     </div>

@@ -87,8 +87,15 @@ const Transition = React.forwardRef(function Transition(
   return  <Grow ref={ref} {...props} />;
 });
 
-export default function MediaAdder(props:{value?:Array<MediaMeta>, onSelectMedias:(medias?:Array<MediaMeta>)=>void, single?:boolean}){
-  const {value, onSelectMedias, single} = props;
+export default function MediaAdder(
+  props:{
+    value?:Array<MediaMeta>, 
+    onSelectMedias:(medias?:Array<MediaMeta>)=>void, 
+    single?:boolean,
+    avatar?:boolean,
+  }
+){
+  const {value, onSelectMedias, single, avatar} = props;
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -121,6 +128,9 @@ export default function MediaAdder(props:{value?:Array<MediaMeta>, onSelectMedia
           onMouseLeave = {()=>setHover(false)} 
         >
           <Image 
+            style={{
+              borderRadius:avatar ? '50%' :''
+            }}
             src={firstValue?.thumbnail}
           />
           {

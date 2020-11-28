@@ -142,14 +142,12 @@ export default {
                       },
                       children:[
                         {
-                          name:'TextBox',
+                          name:'MediaSelect',
                           props:{
-                            fullWidth: true,
-                            label:'简介',
-                            variant:"outlined",
-                            //size:"small",
-                            multiline:true,
-                            rows:5,
+                            field:'avatar',
+                            width:'120px',
+                            label:'头像',
+                            avatar:true,
                           }                        
                         }
                       ]
