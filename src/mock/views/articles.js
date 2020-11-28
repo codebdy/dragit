@@ -166,7 +166,7 @@ export default {
                 bind:{
                   method:'post',
                   url:'/api/data/query-operate-models',
-                  data:{
+                  params:{
                     modelName:'/Model/Article',
                   },      
                 },

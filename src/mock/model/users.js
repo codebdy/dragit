@@ -6,7 +6,7 @@ export default[
     email:'super@drag.fit',
     isSuper:true,
     //roles:'',
-    forbid:'<span style="background:#eee; border-radius:12px; padding:6px;">正常</span>',
+    //forbid:'<span style="background:#eee; border-radius:12px; padding:6px;">正常</span>',
     created_at:'2019-02-22 10:52:44',
   },
   {
@@ -22,7 +22,7 @@ export default[
       title: 'Water plant',
       author: 'BkrmadtyaKarki',
     },
-    forbid:'<span style="background:#eee; border-radius:12px; padding:6px;">正常</span>',
+    //forbid:'<span style="background:#eee; border-radius:12px; padding:6px;">正常</span>',
     created_at:'2019-02-22 13:30:49',
   },
   {

@@ -61,12 +61,12 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   }
 
   const handleShowProfile = ()=>{
-    history.push("/admin/module/user/profile");
+    history.push("/admin/module/user/edit-user/" + user.meta.id);
     setAnchorEl(null);
   }
 
   const handleChangePassword = ()=>{
-    history.push("/admin/module/user/change-password");
+    history.push("/admin/module/user/edit-user/" + user.meta.id);
     setAnchorEl(null);
   }
 
