@@ -38,6 +38,7 @@ import { GridColumnRule } from 'components/Grid/Column/Rule';
 import { GridRowRule } from 'components/Grid/Row/Rule';
 import OneToManyPortlet from 'components/OneToManyPortlet';
 import { OneToManyPortletRule } from 'components/OneToManyPortlet/Rule';
+import MultiSelectBox from 'components/Select/MultiSelectBox';
 
 const store = configureStore();
 
@@ -57,6 +58,7 @@ register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);
+register('MultiSelectBox', MultiSelectBox, SelectRule)
 register('OneToManyTable', OneToManyTable, OneToManyTableRule);
 register('MediaSelect', MediaSelect);
 registerHtmlTag('h1', HeadRule);

@@ -12,7 +12,7 @@ export default {
       children: [{
           name: 'GridColumn',
           props: {
-            md: 8,
+            md: 6,
           },
           children: [
             {
@@ -38,10 +38,11 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'标题',
+                            label:'登录名',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'title',
+                            required:true,
+                            field:'login_name',
                             rule:{
                               valueType:'string',
                               required:true,
@@ -59,14 +60,14 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'Slug',
+                            label:'用户名',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'slug',
-                            //required:true,
+                            field:'name',
+                            required:true,
                             rule:{
-                              //valueType:'string',
-                              //required:true,
+                              valueType:'string',
+                              required:true,
                             }                      
                           },
                         }
@@ -75,30 +76,7 @@ export default {
                     {
                       name: 'PortletGridItem',
                       props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'作者',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'auther',
-                            //required:true,
-                            helperText:'作者提示',
-                            rule:{
-                              //valueType:'string',
-                              //required:true,
-                            }                      
-                          },
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
+                        xs:12,
                       },
                       children:[
                         {
@@ -111,7 +89,6 @@ export default {
                             rule:{
                               valueType:'string',
                               ruleType:'email',
-                              required:true,
                             },
                           },
                         }
@@ -121,74 +98,19 @@ export default {
                     {
                       name: 'PortletGridItem',
                       props:{
-                        xs:6,
-                      },
-                      children:[
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
                         xs:12,
                       },
                       children:[
                         {
-                          name:'Combobox',
+                          name:'MultiSelectBox',
                           props:{
-                            label:"标签",
+                            label:"角色",
                             variant:"outlined",
-                            field:'tags',
-                            multiple:false,
-                            //required:true,
-                           
-                              fromUrl:false,           
-                              items:[
-                                {
-                                  slug:'product',
-                                  label:'产品',
-                                },
-                                {
-                                  slug: 'iPhone',
-                                  label:'iPhone',
-                                },
-                                {
-                                  slug:'apple',
-                                  label:'苹果',
-                                },
-                              ],
-                             
-
-                            rule:{
-                              //required:true,
-                            },
-                          },        
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:12,
-                      },
-                      children:[
-                        {
-                          name:'Combobox',
-                          props:{
-                            label:"标签2",
-                            variant:"outlined",
-                            field:'tags2',
+                            field:'roles',
                             multiple:true,
                             fullWidth:true,
-                            
-                              fromUrl:true,
-                              url:'/api/base/items',
-
+                            fromUrl:true,
+                            url:'/api/base/items',
                             rule:{
                               required:true,
                             },
