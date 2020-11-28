@@ -9,6 +9,7 @@ import { setAppInfoAction } from "store/app/actions";
 import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
 import intl from "react-intl-universal";
 import EvenNotification from "./Notifications"
+import useLoggedUser from "store/app/useLoggedUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +39,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   const {color} = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const user = useLoggedUser();
 
   const isMenuOpen = Boolean(anchorEl);
   const menuId = 'primary-search-account-menu';
@@ -132,8 +134,12 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
       </a>
       <EvenNotification color={color} />
 
-      <Avatar className={classes.avatar} onClick={handleProfileMenuOpen}>
-        <MdiIcon iconClass = "mdi-account" color={color} />
+      <Avatar className={classes.avatar} onClick={handleProfileMenuOpen} src={user?.meta?.avatar?.thumbnail}>
+        {
+          !user?.meta?.avatar?.thumbnail &&
+          <MdiIcon iconClass = "mdi-account" color={color} />
+        }
+        
       </Avatar>
 
       {renderMenu}        
