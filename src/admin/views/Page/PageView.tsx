@@ -40,6 +40,9 @@ const PageView = ()=>{
   useEffect(() => {
     console.log('PageView useEffect:', moduleSlug, pageSlug, id, pageMeta);
     clearErrors();
+    if(!id){
+      dispatch(setModelAction(undefined));
+    }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[moduleSlug, pageSlug, id]);
