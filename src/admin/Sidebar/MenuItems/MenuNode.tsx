@@ -93,7 +93,7 @@ export default function MenuNode(
     iconTsx = (<Badge 
       color={dotBadge.color} 
       variant="dot"
-      invisible={!dotBadge.label}
+      invisible={!baggeLabel}
     >
       <MdiIcon iconClass = {icon} />
     </Badge>)

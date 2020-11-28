@@ -15,13 +15,6 @@ export default [{
         },
         auths:['view-article', 'products-list']
     },
-
-    {
-        type: 'item',
-        title: '文章管理',
-        to: '/admin/module/article/',
-        icon: 'mdi-home',
-    },
     {
         type: 'item',
         title: '媒体库',
@@ -32,28 +25,29 @@ export default [{
         title: '文章管理',
         type: 'group',
         icon: 'mdi-text-box-outline',
-        children: [{
-                type: 'subheader',
-                title: '二级应用',
-            },
+        children: [
             {
-                id: "2-1",
-                title: '添加文章',
+                title: '文章',
                 type: 'item',
-                to: { name: 'dashboard' },
                 icon: 'mdi-circle-small',
-            },
-            {
-                id: "2-2",
-                title: '文章列表',
-                type: 'item',
-                to: { name: 'dashboard' },
-                icon: 'mdi-circle-small',
+                to: '/admin/module/article/',
                 badge: {
                     color: 'secondary',
                     field: 'temp',
                     size: 'small',
                 }
+            },
+            {
+                title: '频道',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
+            {
+                title: '标签',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
             },
 
         ],
@@ -80,7 +74,6 @@ export default [{
                         to: { name: 'dashboard' },
                         icon: 'mdi-brightness-percent',
                         badge: {
-
                             color: 'secondary',
                             label: 'temp2',
                             size: 'small',

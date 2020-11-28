@@ -63,7 +63,6 @@ export default function MenuNodeGroup(
   };
   const classes = useStyles();
   const dotBadge = getBadge(props.node.children)
-
   const listItems = props.node.children?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;
     return (
