@@ -31,6 +31,7 @@ window.modelsList = {
 window.listModels = {
   '/Model/Role':roles,
   '/Model/User':users,
+  '/Model/Article':articles,
 }
 
 function getModelName(url){

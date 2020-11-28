@@ -546,7 +546,7 @@ export default {
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
-      modelName:'/RXDrag/Model/Article',
+      modelName:'/Model/Article',
     },      
   },
 
