@@ -2,7 +2,6 @@ import Mock from 'mockjs'
 import drawer from './drawer'
 import dashboard from './views/dashboard'
 import articles from './views/articles'
-import formData from './data/formData'
 import article from './views/article'
 import test from './views/test'
 import auths from './data/auths'
@@ -25,7 +24,6 @@ Mock.mock('/api/save-drawer','post', (request)=>{
 })
 
 Mock.mock('/api/page/dashboard', 'get', dashboard)
-Mock.mock(RegExp('/api/data/model?.*'), 'get', formData)
 Mock.mock('/api/page/articles', 'get', articles)
 Mock.mock('/api/page/article', 'get', article)
 Mock.mock('/api/page/test', 'get', test)

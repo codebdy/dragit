@@ -61,14 +61,14 @@ const MultiSelect = React.forwardRef((
     setInputValue(keysToItem(value||[]))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsData, value])
-
   const keysToItem = (values:Array<any>)=>{
     if(!itemsData){
       return [];
     }
     return values.map((oneValue:any)=>{
         for(var i = 0; i < itemsData.length; i++){
-          if(itemsData[i][key] === oneValue){
+          // eslint-disable-next-line eqeqeq
+          if(itemsData[i][key] == oneValue){
             return itemsData[i];
           }
         }

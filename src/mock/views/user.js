@@ -123,6 +123,7 @@ export default {
                             label:"角色",
                             variant:"outlined",
                             field:'roles',
+                            itemName:'name',
                             multiple:true,
                             fullWidth:true,
                             fromUrl:true,
@@ -207,6 +208,4 @@ export default {
       modelName:'/Model/User',
     },      
   },
-
-  
 }
