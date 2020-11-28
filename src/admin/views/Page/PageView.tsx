@@ -47,7 +47,10 @@ const PageView = ()=>{
     }
   }, [dispatch, pageMeta])
 
-  const onSubmit = (data: any) => console.log('数据提交',data);
+  const onSubmit = (data: any) => {
+    console.log('数据提交',data)
+  };
+  
   const onValidate = ()=>{
     setSubmitted(true);
   }

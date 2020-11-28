@@ -26,7 +26,7 @@ export default function NodeView(props:INodeProps){
   }
 
   const nodeProps = node.getProps(myStore.showOutline, myStore.showPaddingX, myStore.showPaddingY);
-  const {style, editStyle, className, editClassName, rxText, withActions, ...rest} = nodeProps;
+  const {style, editStyle, className, editClassName, rxText, withActions, empertyValue, ...rest} = nodeProps;
 
   const refresh = ()=>{
     setChildren([...node.children]);
