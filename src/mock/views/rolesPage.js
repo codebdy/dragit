@@ -68,7 +68,7 @@ export default {
                     label:'描述',
                   },
                   {
-                    field:'status',
+                    field:'forbid',
                     label:'状态',
                     isHtml:true,
                     props:{

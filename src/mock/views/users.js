@@ -78,7 +78,7 @@ export default {
                     label:'角色',
                   },
                   {
-                    field:'status',
+                    field:'forbid',
                     label:'状态',
                     isHtml:true,
                     props:{

@@ -136,7 +136,22 @@ export default {
                         }
                       ]
                     },
-
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'SwitchBox',
+                          props:{
+                            label:'禁用',
+                            fullWidth:true,
+                            field:'forbid',
+                          },
+                        }
+                      ]
+                    },
                     {
                       name:"PortletGridItem",
                       props:{

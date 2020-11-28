@@ -39,6 +39,8 @@ import { GridRowRule } from 'components/Grid/Row/Rule';
 import OneToManyPortlet from 'components/OneToManyPortlet';
 import { OneToManyPortletRule } from 'components/OneToManyPortlet/Rule';
 import MultiSelectBox from 'components/Select/MultiSelectBox';
+import SwitchBox from 'components/SwitchBox';
+import { SwitchBoxRule } from 'components/SwitchBox/Rule';
 
 const store = configureStore();
 
@@ -48,6 +50,7 @@ register('GridRow', GridRow, GridRowRule);
 register('GridColumn', GridColumn, GridColumnRule);
 register('Button',Button, ButtonRule);
 register('TextBox', TextBox, TextBoxRule);
+register('SwitchBox', SwitchBox, SwitchBoxRule);
 register('Portlet', Portlet, PortletRule);
 register('PortletGridContainer', PortletGridContainer);
 register('PortletGridItem', PortletGridItem, PortletGridItemRule);

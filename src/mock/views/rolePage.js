@@ -65,7 +65,6 @@ export default {
                         }
                       ]
                     },
-
                     {
                       name: 'PortletGridItem',
                       props:{
@@ -73,22 +72,15 @@ export default {
                       },
                       children:[
                         {
-                          name:'TextBox',
+                          name:'SwitchBox',
                           props:{
-                            label:'Email',
-                            variant:"outlined",
+                            label:'禁用',
                             fullWidth:true,
-                            field:'email',
-                            empertyValue:'',
-                            rule:{
-                              valueType:'string',
-                              ruleType:'email',
-                            },
+                            field:'forbid',
                           },
                         }
                       ]
-
-                    },
+                    },                    
                     {
                       name: 'PortletGridItem',
                       props:{
