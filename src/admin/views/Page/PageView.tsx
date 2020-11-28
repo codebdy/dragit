@@ -29,7 +29,7 @@ const PageView = ()=>{
   const {handleSubmit, errors, clearErrors} = methods;
 
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
-  const [pageMeta, loadingPage] = usePageMeta(moduleSlug, pageSlug,);
+  const [pageMeta, loadingPage, error] = usePageMeta(moduleSlug, pageSlug,);
   const [submitRequest, setSubmitRequest] = useState<AxiosRequestConfig>();
   const [submitResult/*, submiting*/] = useAxios(submitRequest, true);
   const [submitted, setSubmitted] = React.useState(false);
@@ -67,6 +67,13 @@ const PageView = ()=>{
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitResult])
+
+  useEffect(()=>{
+    if(error){
+      history.push('/admin/error-404');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error])
 
   const onSubmit = (data: any) => {
     setSubmitRequest({...API_SUBMIT_MODEL, data});

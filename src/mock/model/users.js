@@ -4,6 +4,7 @@ export default[
     login_name:'admin',
     name:'超级管理员',
     email:'super@drag.fit',
+    isSuper:true,
     //roles:'',
     status:'<span style="background:#eee; border-radius:12px; padding:6px;">正常</span>',
     created_at:'2019-02-22 10:52:44',

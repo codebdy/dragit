@@ -58,11 +58,14 @@ export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>, v
 
   return (
     <div>
-      <Tooltip title="Filter list">
+      {
+        filters && filters.length > 0 &&
+        <Tooltip title="Filter list">
           <IconButton aria-label="filter list"  name="list-view-filter-icon-button" onClick={handleClick}>
             <FilterListIcon />
           </IconButton>
         </Tooltip>
+      }
 
       <Popover
         id="filter-menu"

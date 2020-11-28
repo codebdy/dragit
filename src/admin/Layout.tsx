@@ -10,6 +10,7 @@ import AreaSelect from 'designer/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import Page404 from './views/Page404';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -57,6 +58,7 @@ export default function Layout(){
             <Route path="/admin/module/:moduleSlug/:pageSlug?/:id?" component={PageView}></Route> 
             <Route path="/admin/dashboard" component={Dashboard}></Route>
             <Route path="/admin/medias" component={Medias}></Route>
+            <Route path="/admin/error-404" component={Page404}></Route>
             {//<Redirect to="/admin/module/:moduleId/page/index" from='/admin/module/:moduleId/' />
             } 
             <Redirect to="/admin/page/dashboard" from='/admin' /> 

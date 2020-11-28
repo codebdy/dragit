@@ -19,6 +19,12 @@ window.modelsList = {
     perPage:10,
     currentPage:0,
     data:users,
+  },
+  '/Model/Role':{
+    total:12,
+    perPage:10,
+    currentPage:0,
+    data:roles,
   }
 }
 

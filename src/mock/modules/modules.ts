@@ -2,6 +2,8 @@ import articles from '../views/articles'
 import article from '../views/article'
 import users from '../views/users'
 import user from '../views/user'
+import rolesPage from '../views/rolesPage'
+import rolePage from '../views/rolePage'
 
 var modules = [
   {
@@ -74,7 +76,22 @@ var modules = [
   {
     id:4,
     slug:'role',
-    title:'角色'
+    title:'角色',
+    indexPageId:41,
+    pages:[
+      {
+        id:41,
+        title:'管理员列表',
+        slug:'role-list',
+        jsonSchema: rolesPage,
+      },
+      {
+        id:42,
+        title:'管理员编辑',
+        slug:'edit-role',
+        jsonSchema: rolePage,
+      },
+    ],
   },
 
 ]

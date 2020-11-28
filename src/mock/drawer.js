@@ -124,7 +124,8 @@ export default [{
             {
                 title:"角色",
                 type:'item',
-                icon: 'mdi-circle-small'
+                icon: 'mdi-circle-small',
+                to: '/admin/module/role/',
             }
 
         ]

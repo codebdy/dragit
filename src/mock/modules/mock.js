@@ -3,7 +3,6 @@ import createId from 'mock/utils/createId'
 import {getModuleIndexPage} from './modules'
 import getQueryVariable from 'mock/utils/getQueryVariable'
 
-
 export function getModulePage(pageSlug){
   let modules = window.modules
   for(var i = 0; i < modules.length; i++){
@@ -156,18 +155,22 @@ export default function mockModules(){
   
   Mock.mock(RegExp('/api/get-page/?.*'),'get', (request)=>{
     let slug =getQueryVariable('pageSlug', request.url);
-    return getModulePage(slug);
+    let module = getModulePage(slug);
+    if(module) {
+      return module;
+    }
+    new Error("404");
   })
 
   
   Mock.mock(RegExp('/api/get-module-index-page?.*'),'get', (request)=>{
     let slug = getQueryVariable('moduleSlug', request.url);
-    return getModuleIndexPage(slug);
-  })
-
-  Mock.mock(RegExp('/api/get-page/?.*'),'get', (request)=>{
-    let slug =getQueryVariable('pageSlug', request.url);
-    return getModulePage(slug);
+    let module =  getModuleIndexPage(slug);
+    if(module) {
+      return module;
+    }
+    console.log('not found page');
+    new Error("404");
   })
   
 }
