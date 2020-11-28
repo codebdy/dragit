@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
@@ -7,7 +7,7 @@ import { useBaseItems } from 'base/Hooks/useBaseItems';
 
 const MultiSelect = React.forwardRef((
   props:{
-    value?:string|[],
+    value?:[],
     multiple?:boolean,
     onChange?:any,
     itemKey?:string,
@@ -19,7 +19,7 @@ const MultiSelect = React.forwardRef((
     label?:string, 
     variant?:any, 
     size?:any,
-    groupBy?:string,
+    groupByField?:string,
   },
   ref:any
 )=>{
@@ -30,14 +30,15 @@ const MultiSelect = React.forwardRef((
     fullWidth,
     fromUrl,
     items,
+    itemKey = 'id',
+    groupByField,
     url,
     ...rest
   } = props;
 
-
+  let key = fromUrl ? itemKey : 'slug';
   let name = fromUrl ? itemName : 'label';
   //const mountedRef = useRef(true);
-  const empertyValue = multiple ? []:'';
   const [request] = React.useState<AxiosRequestConfig|undefined>(
     fromUrl?
     {
@@ -48,20 +49,34 @@ const MultiSelect = React.forwardRef((
     undefined
   )
   const [menuItems, loading] = useBaseItems(request);
+  const itemsData = (fromUrl? menuItems : items) as any;  
+  const [inputValue, setInputValue] = React.useState<Array<any>>([]);
 
-  const itemsData = (fromUrl? menuItems : items) as any;
-  
-  const [inputValue, setInputValue] = React.useState<any>(value||empertyValue);
+  useEffect(()=>{
+    setInputValue(keysToItem(value||[]))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemsData, value])
 
-  let options = itemsData?.map((item:any)=>item[name]);
+  const keysToItem = (values:Array<any>)=>{
+    if(!itemsData){
+      return [];
+    }
+    return values.map((oneValue:any)=>{
+        for(var i = 0; i < itemsData.length; i++){
+          if(itemsData[i][key] === oneValue){
+            return itemsData[i];
+          }
+        }
+        return {};        
+      })
+  }
 
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
 
-    let value = newValue && newValue.length === 0 ? '' : newValue;
     onChange && onChange({
       target:{
-        value:value,
+        value:newValue?.map((value:any)=>value[key]),
       }
     });
   }
@@ -69,10 +84,11 @@ const MultiSelect = React.forwardRef((
   return (
     <Autocomplete
       multiple = {multiple}
-      options = {options||[]}
+      options = {itemsData||[]}
       loading = {!!loading }
       ref = {ref}
       value = {inputValue}
+
       fullWidth = {fullWidth}
       //defaultValue = {value||empertyValue}
       renderInput={(params) => (
@@ -83,6 +99,15 @@ const MultiSelect = React.forwardRef((
       />
       )}
 
+      getOptionSelected = {(option, value)=>{
+        return option[key] === value[key]
+      }}
+
+      getOptionLabel={(option) => {
+        return option[name]
+      }}
+
+      groupBy = {(option) => option.module}
       onChange={(event, newValue) => {
         handleChange(newValue);
       }}

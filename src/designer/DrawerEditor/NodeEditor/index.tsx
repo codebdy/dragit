@@ -6,7 +6,7 @@ import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';
 import BadgeEditor from './BadgeEditor';
 import { API_GET_AUTHS } from 'APIs/modules';
-import SelectBox from 'components/Select/SelectBox';
+import MultiSelectBox from 'components/Select/MultiSelectBox';
 
 export default function NodeEditor(
   props:{
@@ -103,7 +103,7 @@ export default function NodeEditor(
         </Fragment>
       }
       <Grid item xs={12}>
-        <SelectBox label={'权限'} 
+        <MultiSelectBox label={'权限'} 
           variant="outlined" 
           size="small"
           fromUrl = {true}

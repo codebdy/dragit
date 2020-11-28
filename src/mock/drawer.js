@@ -12,7 +12,8 @@ export default [{
             color: 'primary',
             label: '新',
             size: 'small',
-        }
+        },
+        auths:['view-article', 'products-list']
     },
 
     {
