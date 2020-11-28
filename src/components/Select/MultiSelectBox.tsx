@@ -62,7 +62,7 @@ const MultiSelect = React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsData, value])
   const keysToItem = (values:Array<any>)=>{
-    if(!itemsData){
+    if(!itemsData || !values){
       return [];
     }
     return values.map((oneValue:any)=>{

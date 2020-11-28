@@ -1,5 +1,5 @@
 import { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import useFieldValue from './useFieldValue';
 import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
@@ -101,7 +101,7 @@ function retrigger(value:any, rule:any){
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
     const modelContext = useContext(RowModelContext);
-    const {register, setValue, getValues} = useFormContext();
+    const {register, setValue} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
     const fieldName = modelContext.parentField ? `${modelContext.parentField}[${modelContext.rowIndex}].${field}`: field;
     
@@ -112,17 +112,23 @@ const withFormField = (Component:any)=>{
     const loading = useModelLoading();
     const registerRule = rule && metaRuleToRegisterRules(rule);
 
-    React.useEffect(() => {
+    useEffect(()=>{
+      setInputValue(value);
+      setValue(fieldName, value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value])
+
+    useEffect(() => {
       register(fieldName, registerRule); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [register])
 
-    React.useEffect(() => {
-      const currentValue = getValues(fieldName) || value || empertyValue;
-      setValue(fieldName, currentValue);  
-      setInputValue(currentValue )
+    //useEffect(() => {
+      //const currentValue = getValues(fieldName) || value || empertyValue;
+      //setValue(fieldName, currentValue);  
+      //setInputValue(currentValue )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loading])
+    //}, [loading])
 
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;

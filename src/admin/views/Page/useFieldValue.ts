@@ -9,7 +9,6 @@ export default function useFieldValue(field:string){
   const selectPage = (state: RootState) => state.page;
   const pageInStore = useSelector(selectPage);
 
-  
   if(!pageInStore?.model){
     return undefined;
   }
@@ -21,5 +20,6 @@ export default function useFieldValue(field:string){
       ) 
     :  
     pageInStore.model[field]
+
   return value;
 }
