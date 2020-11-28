@@ -138,7 +138,7 @@ export default {
                 bind:{
                   method:'post',
                   url:API_QUERY_AND_OPERATE_MODELS.url,
-                  data:{
+                  params:{
                     modelName:'/Model/User',
                   },      
                 },

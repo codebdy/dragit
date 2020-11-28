@@ -20,6 +20,8 @@ const MultiSelect = React.forwardRef((
     variant?:any, 
     size?:any,
     groupByField?:string,
+    method?:any,
+    params?:any
   },
   ref:any
 )=>{
@@ -32,6 +34,8 @@ const MultiSelect = React.forwardRef((
     items,
     itemKey = 'id',
     groupByField,
+    method,
+    params,
     url,
     ...rest
   } = props;
@@ -42,7 +46,8 @@ const MultiSelect = React.forwardRef((
   const [request] = React.useState<AxiosRequestConfig|undefined>(
     fromUrl?
     {
-      method:"get",
+      method: method,
+      params: params,
       url:url,
     }
     :

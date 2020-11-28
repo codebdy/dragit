@@ -60,19 +60,34 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'用户名',
+                            label:'姓名',
                             variant:"outlined",
                             fullWidth:true,
                             field:'name',
-                            required:true,
-                            rule:{
-                              valueType:'string',
-                              required:true,
-                            }                      
                           },
                         }
                       ]
                     },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,                      
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'密码',
+                            variant:"outlined",
+                            type:'password',
+                            fullWidth:true,
+                            field:'password',
+                            placeholder:'保持为空表示不修改',
+                          },
+                        }
+                      ]
+                    },
+
                     {
                       name: 'PortletGridItem',
                       props:{
@@ -110,14 +125,14 @@ export default {
                             multiple:true,
                             fullWidth:true,
                             fromUrl:true,
-                            url:'/api/base/items',
-                            rule:{
-                              required:true,
-                            },
+                            method:'get',
+                            url:'/api/data/list_model',
+                            params:{
+                              modelName:'/Model/Role',
+                            }
                           },                         
                         }
                       ]
-       
                     },
 
                     {
