@@ -50,7 +50,7 @@ export default function mockModel(){
 
   Mock.mock('/api/submit-model','post', (request)=>{
     console.log('serve received data:', JSON.parse(request.body));
-    return true;
+    return JSON.parse(JSON.stringify(request.body));
   })
 
   Mock.mock(RegExp('/api/data/model?.*'), 'get', (request)=>{

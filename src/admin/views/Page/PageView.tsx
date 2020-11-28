@@ -19,6 +19,7 @@ import { resolvePageUrl } from "utils/resolvePageUrl";
 import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
 import { API_SUBMIT_MODEL } from "APIs/model";
+import { setModelAction } from "store/page/actions";
 
 const PageView = ()=>{
   const history =  useHistory();
@@ -31,7 +32,8 @@ const PageView = ()=>{
   const [pageMeta, loadingPage] = usePageMeta(moduleSlug, pageSlug,);
   const [submitRequest, setSubmitRequest] = useState<AxiosRequestConfig>();
   const [submitResult/*, submiting*/] = useAxios(submitRequest, true);
-  
+  const [submitted, setSubmitted] = React.useState(false);
+
   usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
 
@@ -56,18 +58,20 @@ const PageView = ()=>{
     if(submitResult &&  pageMeta?.jsonSchema?.closeAfterSubmit){
       history.goBack();
     }
+
+    if(submitResult && !pageMeta?.jsonSchema?.closeAfterSubmit){
+      dispatch(setModelAction(submitResult));
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitResult])
 
   const onSubmit = (data: any) => {
-    console.log('数据提交',data);
     setSubmitRequest({...API_SUBMIT_MODEL, data});
   };
 
   const onValidate = ()=>{
     setSubmitted(true);
   }
-  const [submitted, setSubmitted] = React.useState(false);
   
   const formActionHandle = (action:PageAction)=>{
     switch (action.name){
