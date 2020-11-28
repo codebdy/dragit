@@ -1,5 +1,6 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
 import {API_GET_MODEL_BY_ID} from "APIs/model"
+import {API_GET_AUTHS} from "APIs/modules"
 
 export default {
   layout:[
@@ -98,10 +99,9 @@ export default {
                             fullWidth:true,
                             fromUrl:true,
                             method:'get',
-                            url:'/api/data/list_model',
-                            params:{
-                              modelName:'/Model/Role',
-                            }
+                            url:API_GET_AUTHS.url,
+                            itemKey:"slug",
+                            groupByField:"module",
                           },                         
                         }
                       ]
@@ -156,7 +156,7 @@ export default {
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
-      modelName:'/Model/User',
+      modelName:'/Model/Role',
     },      
   },
 }
