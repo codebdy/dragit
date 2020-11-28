@@ -101,6 +101,7 @@ export default {
                             variant:"outlined",
                             fullWidth:true,
                             field:'email',
+                            empertyValue:'',
                             rule:{
                               valueType:'string',
                               ruleType:'email',

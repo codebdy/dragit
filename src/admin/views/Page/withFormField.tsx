@@ -118,7 +118,7 @@ const withFormField = (Component:any)=>{
     }, [register])
 
     React.useEffect(() => {
-      const currentValue = getValues(fieldName) || value;
+      const currentValue = getValues(fieldName) || value || empertyValue;
       setValue(fieldName, currentValue);  
       setInputValue(currentValue )
     // eslint-disable-next-line react-hooks/exhaustive-deps
