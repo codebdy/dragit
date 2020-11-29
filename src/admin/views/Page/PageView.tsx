@@ -26,7 +26,7 @@ const PageView = ()=>{
   const match = useRouteMatch();
   const{moduleSlug, pageSlug, id} = match.params as any;
   const methods = useForm({mode: 'all'});
-  const {handleSubmit, errors, clearErrors} = methods;
+  const {handleSubmit, errors, clearErrors, reset} = methods;
 
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
   const [pageMeta, loadingPage, error] = usePageMeta(moduleSlug, pageSlug,);
@@ -77,6 +77,7 @@ const PageView = ()=>{
 
   const onSubmit = (data: any) => {
     setSubmitRequest({...API_SUBMIT_MODEL, data});
+    reset();
   };
 
   const onValidate = ()=>{

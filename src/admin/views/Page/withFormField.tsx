@@ -101,7 +101,7 @@ function retrigger(value:any, rule:any){
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
     const modelContext = useContext(RowModelContext);
-    const {register, setValue} = useFormContext();
+    const {register, setValue, getValues} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
     const fieldName = modelContext.parentField ? `${modelContext.parentField}[${modelContext.rowIndex}].${field}`: field;
     
@@ -123,12 +123,15 @@ const withFormField = (Component:any)=>{
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [register])
 
-    //useEffect(() => {
-      //const currentValue = getValues(fieldName) || value || empertyValue;
-      //setValue(fieldName, currentValue);  
-      //setInputValue(currentValue )
+    //数据加载完成
+    useEffect(() => {
+      if(!loading){
+        const currentValue = getValues(fieldName) || value || empertyValue;
+        setValue(fieldName, currentValue);  
+        setInputValue(currentValue )        
+      }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    //}, [loading])
+    }, [loading])
 
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;

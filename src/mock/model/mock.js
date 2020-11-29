@@ -67,7 +67,7 @@ export default function mockModel(){
     let models = window.listModels[modelName];
     for(var i = 0; i < models.length; i++){
       if(models[i].id === id){
-        return JSON.parse(JSON.stringify(models[i]));
+        return JSON.parse(JSON.stringify({...models[i], forbid:false}));
       }
     }
     console.log('model/mock:no data')
