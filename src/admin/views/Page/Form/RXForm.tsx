@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { Regeister, ValidationRules } from "./validator";
+import { Regeister, ValidationRules } from "./Regeister";
 
 export interface IForm{
   defaultValues?:any,
