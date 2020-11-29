@@ -4,7 +4,7 @@ import useFieldValue from './useFieldValue';
 import intl from 'react-intl-universal';
 import { RowModelContext } from '../../../components/OneToManyPortlet/RowModelContext';
 import useFieldError from './useFieldError';
-import { useFormContext } from './Form/RXForm';
+import { useFormContext } from './Form/useFormContext';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};
