@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import useModel from '../useModel';
 import useModelLoading from '../useModelLoading';
-import { IForm, FormContext } from './RXForm';
+import { IForm, FormContext, defultForm } from './RXForm';
 
 export default function PageForm(
   props:{
@@ -9,31 +9,27 @@ export default function PageForm(
   }
 ){
   const {children} = props;
-  const [form, setForm] = useState<IForm>({});
+  const [form, setForm] = useState<IForm>(defultForm);
   const model = useModel();
   const loading = useModelLoading();
 
-  const forceUpdate = ()=>{
-    setForm({...form});
+  const forceUpdate = (newForm:IForm)=>{
+    setForm({...newForm});
   }
-
+  //console.log('form',form.values)
   useEffect(()=>{
     if(!loading){
       if(model){
         setForm({
+          ...defultForm,
           defaultValues:model,
           values:JSON.parse(JSON.stringify(model)),
-          errors:{},
-          status:{},
           forceUpdate:forceUpdate,
         })
       }
       else{
         setForm({
-          defaultValues:{},
-          values:{},
-          errors:{},
-          status:{},
+          ...defultForm,
           forceUpdate:forceUpdate,
         })
       }

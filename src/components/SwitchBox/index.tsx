@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const SwitchBox = (props:any)=>{
-  const {label, name, onChange,  value,  fullWidth, helperText, ...rest} = props;
+  const {label, name, onChange,  value,  fullWidth, error, helperText, ...rest} = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = event.target.checked

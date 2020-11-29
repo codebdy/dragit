@@ -1,11 +1,10 @@
 import { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
 import React, { useContext, useEffect } from 'react';
 import useFieldValue from './useFieldValue';
-import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
 import { RowModelContext } from '../../../components/OneToManyPortlet/RowModelContext';
-import { useFormContext } from 'react-hook-form';
 import useFieldError from './useFieldError';
+import { useFormContext } from './Form/RXForm';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};
@@ -55,94 +54,39 @@ function metaRuleToRegisterRules(rule:ValidateRule){
   return rtRules;
 }
 
-function retrigger(value:any, rule:any){
-  if(!rule){
-    return undefined;
-  }
-
-  if(rule.required){
-    if(!value){
-      return rule.required;
-    }
-  }
-
-  if(rule.minLength){
-    if(value && value.length < rule.minLength.value){
-      return rule.minLength.message;
-    }
-  }
-
-  if(rule.maxLength){
-    if(value && value.length > rule.maxLength.value){
-      return rule.maxLength.message;
-    }
-  }
-
-  if(rule.min){
-    if(value && value < rule.min.value){
-      return rule.min.message
-    }
-  }
-
-  if(rule.max){
-    if(value && value > rule.max.value){
-      return rule.max.message
-    }
-  }
-
-  if(rule.pattern){
-    if(value && !rule.pattern.value.test(value)){
-      return rule.pattern.message
-    }
-  }
-
-}
-
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
     const modelContext = useContext(RowModelContext);
-    //const {register, setValue, getValues} = useFormContext();
+    const {register, setValue, validate} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
     const fieldName = modelContext.parentField ? `${modelContext.parentField}[${modelContext.rowIndex}].${field}`: field;
     
     const [value, loading] = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
     const fieldError = useFieldError(field);
-    const [error, setError] = React.useState(fieldError && fieldError.message);
+    //const [error, setError] = React.useState(fieldError && fieldError.message);
     const registerRule = rule && metaRuleToRegisterRules(rule);
+
+    useEffect(()=>{
+      register(field, registerRule)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     useEffect(()=>{
       setInputValue(value);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value])
 
-    //useEffect(() => {
-     // register(fieldName, registerRule); 
-    //  return ()=>{
-        //unregister(fieldName)
-    //  }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-   // }, [register])
-
-    //数据加载完成
-   // useEffect(() => {
-   //   if(!loading){
-   //     const currentValue = getValues(fieldName) || value || empertyValue;
-   //     setValue(fieldName, currentValue);  
-   //     setInputValue(currentValue )        
-  //    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-   // }, [loading])
+    //console.log('useFormField', value);
 
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
       setInputValue(newValue);
-      //setValue(fieldName, newValue);
-      error && setError(retrigger(inputValue, registerRule));
+      setValue(fieldName, newValue);
     }
 
     const handleBlur = ()=>{
-      setError(retrigger(inputValue, registerRule));
+      validate(fieldName);
     }
 
     return (
@@ -152,8 +96,8 @@ const withFormField = (Component:any)=>{
         loading={loading}
         value={inputValue || empertyValue || ''}
         {...rest}
-        error={error ? true : undefined}
-        helperText = {error || helperText}
+        error={!!fieldError}
+        helperText = {fieldError || helperText}
         onChange={handleChange}
         onBlur={handleBlur}
       />

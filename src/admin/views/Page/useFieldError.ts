@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { RowModelContext } from "../../../components/OneToManyPortlet/RowModelContext";
-import { useErrors } from "./Form/RXForm";
+import { useFormContext } from "./Form/RXForm";
 
 export default function useFieldError(field:string){
 
-  const {errors} = useErrors();
+  const {errors} = useFormContext();
   const modelContext = useContext(RowModelContext);
 
   if(!errors){

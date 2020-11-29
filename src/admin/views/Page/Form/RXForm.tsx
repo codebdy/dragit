@@ -1,37 +1,47 @@
 import React from "react";
 import { useContext } from "react";
-import { ValidationRules } from "./validator";
+import { Regeister, ValidationRules } from "./validator";
 
 export interface IForm{
   defaultValues?:any,
-  values?:any,
+  values:any,
   errors?:any,
   status?:any,
-  forceUpdate?:()=>void,
+  forceUpdate?:(newForm:IForm)=>void,
+  registers:{[key:string]:Regeister},
 }
-export const FormContext = React.createContext<IForm>({});
 
-export function useForm(){
+export const defultForm = {
+  defaultValues:{},
+  values:{},
+  errors:{},  
+  registers:{}
+};
+
+export const FormContext = React.createContext<IForm>(defultForm);
+
+export function useFormContext():IForm&{
+  setValue:(field:string, value:any)=>void,
+  validate:(field:string)=>void,
+  register:(field:string, rules:ValidationRules)=>void,
+}{
   const formContext = useContext(FormContext);
-  return formContext;
+  const setValue = (field:string, value:any) =>{
+    formContext.values = formContext.values ? formContext.values : {};
+    formContext.values[field] = value;
+  }
+
+  //该方法会导致重新渲染
+  const validate =  (field:string) =>{
+    const errorMessage = formContext.registers[field]?.validate(formContext.values[field]);
+    formContext.errors = formContext.errors ? formContext.errors : {};
+    formContext.errors[field] = errorMessage;
+    formContext.forceUpdate && formContext.forceUpdate(formContext);
+  }
+
+  const register = (field:string, rules:ValidationRules) => {
+    formContext.registers[field] = new Regeister(rules);
+  }
+  return {...formContext, setValue, validate, register};
 }
 
-export function useErrors(){
-  const formContext = useContext(FormContext);
-  return formContext.errors;
-}
-
-export function useSetValue(field:string, value:string){
-  const formContext = useContext(FormContext);
-  formContext.values[field] = value;
-}
-
-export function useSetRule(field:string, rule:ValidationRules){
-
-}
-
-export function useSetError(field:string, errorMessage:string){
-  const formContext = useContext(FormContext);
-  formContext.errors[field] = errorMessage;
-  formContext.forceUpdate && formContext.forceUpdate();
-}
