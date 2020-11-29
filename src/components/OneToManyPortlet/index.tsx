@@ -5,7 +5,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';
 import { RXInputProps } from 'base/RXInputProps';
-import { creatRowModel, RowModelContext } from 'admin/views/Page/RowModelContext';
+import { creatRowModel, RowModelContext } from 'components/OneToManyPortlet/RowModelContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

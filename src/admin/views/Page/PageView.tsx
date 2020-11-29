@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { FormEvent, Fragment, useEffect, useState } from "react";
 import ComponentRender from "./ComponentRender";
 import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
 import usePageMeta from "./usePageMeta";
-import usePageModel from "./usePageModel";
+import usePageModel from "./useFecthPageModel";
 import { useDispatch } from "react-redux";
 import { setDesingerPageAction } from "store/designer/actions";
 import { IMeta } from "base//Model/IMeta";
@@ -20,13 +20,14 @@ import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
 import { API_SUBMIT_MODEL } from "APIs/model";
 import { setModelAction } from "store/page/actions";
+import PageForm from "./Form/PageForm";
 
 const PageView = ()=>{
   const history =  useHistory();
   const match = useRouteMatch();
   const{moduleSlug, pageSlug, id} = match.params as any;
   const methods = useForm({mode: 'all'});
-  const {handleSubmit, errors, clearErrors, reset} = methods;
+  const {errors, clearErrors} = methods;
 
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
   const [pageMeta, loadingPage, error] = usePageMeta(moduleSlug, pageSlug,);
@@ -77,7 +78,6 @@ const PageView = ()=>{
 
   const onSubmit = (data: any) => {
     setSubmitRequest({...API_SUBMIT_MODEL, data});
-    reset();
   };
 
   const onValidate = ()=>{
@@ -106,6 +106,11 @@ const PageView = ()=>{
     setSubmitted(false);
   }
 
+  const handleSubmit = (event:FormEvent<HTMLFormElement>)=>{
+    console.log(event);
+    event.preventDefault();
+  }
+
   const openAlert = Object.keys(errors).length > 0 && submitted;
 
   const pageContent = loadingPage ?
@@ -132,9 +137,9 @@ const PageView = ()=>{
         {
           pageMeta?.jsonSchema?.isFormPage 
           ?
-            <form onSubmit={handleSubmit(onSubmit, onValidate)}>
+            <PageForm>
               {pageContent}
-            </form>
+            </PageForm>
           :
             pageContent
         }

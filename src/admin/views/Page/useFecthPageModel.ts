@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModelAction, setModelLoadingAction } from "store/page/actions";
 
-export default function usePageModel(page:IPageSchema|undefined, id:number|undefined){
+export default function useFecthPageModel(page:IPageSchema|undefined, id:number|undefined){
   
   const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   const [pageModel, loadingModel, error] = useAxios<IPage>(pageRequest)

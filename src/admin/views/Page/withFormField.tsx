@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import useFieldValue from './useFieldValue';
 import useModelLoading from './useModelLoading';
 import intl from 'react-intl-universal';
-import { RowModelContext } from './RowModelContext';
+import { RowModelContext } from '../../../components/OneToManyPortlet/RowModelContext';
 import { useFormContext } from 'react-hook-form';
 import useFieldError from './useFieldError';
 
@@ -101,42 +101,43 @@ function retrigger(value:any, rule:any){
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
     const modelContext = useContext(RowModelContext);
-    const {register, setValue, getValues} = useFormContext();
+    //const {register, setValue, getValues} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
     const fieldName = modelContext.parentField ? `${modelContext.parentField}[${modelContext.rowIndex}].${field}`: field;
     
-    const value = useFieldValue(field);    
+    const [value, loading] = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
     const fieldError = useFieldError(field);
     const [error, setError] = React.useState(fieldError && fieldError.message);
-    const loading = useModelLoading();
     const registerRule = rule && metaRuleToRegisterRules(rule);
 
     useEffect(()=>{
       setInputValue(value);
-      setValue(fieldName, value);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value])
 
-    useEffect(() => {
-      register(fieldName, registerRule); 
+    //useEffect(() => {
+     // register(fieldName, registerRule); 
+    //  return ()=>{
+        //unregister(fieldName)
+    //  }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [register])
+   // }, [register])
 
     //数据加载完成
-    useEffect(() => {
-      if(!loading){
-        const currentValue = getValues(fieldName) || value || empertyValue;
-        setValue(fieldName, currentValue);  
-        setInputValue(currentValue )        
-      }
+   // useEffect(() => {
+   //   if(!loading){
+   //     const currentValue = getValues(fieldName) || value || empertyValue;
+   //     setValue(fieldName, currentValue);  
+   //     setInputValue(currentValue )        
+  //    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loading])
+   // }, [loading])
 
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
       setInputValue(newValue);
-      setValue(fieldName, newValue);
+      //setValue(fieldName, newValue);
       error && setError(retrigger(inputValue, registerRule));
     }
 

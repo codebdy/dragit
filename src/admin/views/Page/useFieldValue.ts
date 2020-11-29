@@ -1,25 +1,24 @@
 import { useContext } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
-import { RowModelContext } from "./RowModelContext";
+import { RowModelContext } from "../../../components/OneToManyPortlet/RowModelContext";
+import { FormContext } from "./Form/RXForm";
+import useModelLoading from "./useModelLoading";
 
-export default function useFieldValue(field:string){
-  const modelContext = useContext(RowModelContext);
+export default function useFieldValue(field:string):[any, boolean]{
+  const rowModelContext = useContext(RowModelContext);
+  const formContext = useContext(FormContext);
+  const loading = useModelLoading();
 
-  const selectPage = (state: RootState) => state.page;
-  const pageInStore = useSelector(selectPage);
-
-  if(!pageInStore?.model){
-    return undefined;
+  if(!formContext.values){
+    return [undefined, loading];
   }
 
-  let value = modelContext.parentField ?  
-      (pageInStore.model[modelContext.parentField] && 
-        pageInStore.model[modelContext.parentField][modelContext.rowIndex] && 
-        pageInStore.model[modelContext.parentField][modelContext.rowIndex][field]
+  let value = rowModelContext.parentField ?  
+      (formContext.values[rowModelContext.parentField] && 
+        formContext.values[rowModelContext.parentField][rowModelContext.rowIndex] && 
+        formContext.values[rowModelContext.parentField][rowModelContext.rowIndex][field]
       ) 
     :  
-    pageInStore.model[field]
-
-  return value;
+    formContext.values[field]
+  
+  return [value, loading];
 }
