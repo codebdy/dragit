@@ -41,7 +41,7 @@ export default {
                             label:'标题',
                             variant:"outlined",
                             fullWidth:true,
-                            disabled:true,
+                            readOnly:true,
                             field:'title',
                           },
                         }
@@ -59,7 +59,7 @@ export default {
                             label:'时间',
                             variant:"outlined",
                             fullWidth:true,
-                            disabled:true,
+                            readOnly:true,
                             field:'created_at',
                           },
                         }
@@ -79,7 +79,7 @@ export default {
                             fullWidth:true,
                             field:'content',
                             multiline:true,
-                            disabled:true,
+                            readOnly:true,
                             rows:10,
                           },
                         }
