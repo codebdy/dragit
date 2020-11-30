@@ -63,13 +63,17 @@ const withFormField = (Component:any)=>{
     const [value, loading] = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
     const fieldError = useFieldError(field);
-    //const [error, setError] = React.useState(fieldError && fieldError.message);
+    const [error, setError] = React.useState(fieldError && fieldError.message);
     const registerRule = rule && metaRuleToRegisterRules(rule);
 
     useEffect(()=>{
       register(field, registerRule)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
+
+    useEffect(()=>{
+      setError(fieldError);
+    },[fieldError])
 
     useEffect(()=>{
       setInputValue(value);
@@ -85,7 +89,10 @@ const withFormField = (Component:any)=>{
     }
 
     const handleBlur = ()=>{
-      validate(fieldName);
+      const newError = validate(fieldName);
+      if(newError){
+        setError(newError)
+      }
     }
 
     return (
@@ -95,8 +102,8 @@ const withFormField = (Component:any)=>{
         loading={loading}
         value={inputValue || empertyValue || ''}
         {...rest}
-        error={!!fieldError}
-        helperText = {fieldError || helperText}
+        error={!!error}
+        helperText = {error || helperText}
         onChange={handleChange}
         onBlur={handleBlur}
       />

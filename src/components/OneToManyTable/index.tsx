@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { resolveComponent } from 'base/DragRX';
@@ -46,8 +46,8 @@ const OneToManyTable = React.forwardRef((
      ...rest
   } = props;
   const classes = useStyles();
-  const rows = value? addTempIdToTable(value) :[]
-  
+  const [rows, setRows] = useState(value? addTempIdToTable(value) :[]);
+ 
   const emitValueChangded = (newValue:any) => {
     const event = {
       persist: () => {return {}},
@@ -63,12 +63,15 @@ const OneToManyTable = React.forwardRef((
 
   const handleAddNew = ()=>{
     const newValue = [...rows, {id:creatId()}]
+    setRows(newValue);
     emitValueChangded(newValue)
   }
 
   const handelRemove = (index:number)=>{
+    console.log('handelRemove')
     let tempRows = [...rows];
     tempRows.splice(index, 1);
+    setRows(tempRows);
     emitValueChangded(tempRows);
   }
 
@@ -77,7 +80,7 @@ const OneToManyTable = React.forwardRef((
     if(field){
       let tempRows = [...rows];
       tempRows[index][field] = value;
-      //setRows(tempRows); 
+      setRows(tempRows); 
       emitValueChangded(tempRows);     
     }
   }
