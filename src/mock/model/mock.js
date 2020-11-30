@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 //import createId from 'mock/utils/createId'
 //import {getModuleIndexPage} from './modules'
 import getQueryVariable from 'mock/utils/getQueryVariable'
-import articles from 'mock/data/listData';
+import articles from 'mock/data/articles';
 import notifications from 'mock/data/notifications'
 import users from './users';
 import roles from './roles';
@@ -69,7 +69,7 @@ export default function mockModel(){
 
   Mock.mock('/api/submit-model','post', (request)=>{
     console.log('serve received data:', JSON.parse(request.body));
-    return JSON.parse(JSON.stringify(request.body));
+    return JSON.parse(request.body);
   })
 
   Mock.mock(RegExp('/api/data/model?.*'), 'get', (request)=>{

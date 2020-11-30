@@ -102,7 +102,7 @@ export default [{
 
         ]
     },
-    {
+    /*{
         id:'divider1',
         type:'divider',
     },
@@ -141,6 +141,6 @@ export default [{
             },
 
         ],
-    },
+    },*/
 
 ]

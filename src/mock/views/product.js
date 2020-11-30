@@ -231,7 +231,7 @@ export default {
                             field:'channel',
                             fullWidth:true,
                             xs:6,
-                            //required:true,
+                            required:true,
                             withoutEmpertyItem:true,                        
                             
                               fromUrl:true,
