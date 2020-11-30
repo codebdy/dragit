@@ -56,10 +56,10 @@ const PageView = ()=>{
       history.goBack();
     }
 
-    //if(submitResult && !pageMeta?.jsonSchema?.closeAfterSubmit){
+    if(submitResult && !pageMeta?.jsonSchema?.closeAfterSubmit){
       //console.log(submitResult);
-      //dispatch(setModelAction(submitResult));
-    //}
+      dispatch(setModelAction(submitResult));
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitResult])
 
