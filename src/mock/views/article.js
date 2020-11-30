@@ -66,15 +66,6 @@ export default {
           },
           children: [
             {
-              name:'MediasPortlet',
-              props: {
-                elevation: 6,
-                //cols:3,
-                field:'medias',
-                //marginTop:2,  
-               },
-            },
-            {
               name:'Portlet',
               props: {
                 elevation: 6,
@@ -82,7 +73,6 @@ export default {
                 withHeader:true,
                 title:'基本信息',
                 collapsible: true,
-                marginTop:2,              
               },
               children:[
                 {
@@ -534,7 +524,16 @@ export default {
                   ]
                 }
               ]
-            }
+            },
+            {
+              name:'MediasPortlet',
+              props: {
+                elevation: 6,
+                cols:3,
+                field:'medias',
+                marginTop:2,  
+               },
+            },
           ]
         }
       ]

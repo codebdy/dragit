@@ -102,7 +102,11 @@ export default [{
 
         ]
     },
-    /*{
+    {
+        type: 'subheader',
+        title: '菜单演示',
+    },
+    {
         id:'divider1',
         type:'divider',
     },
@@ -138,9 +142,14 @@ export default [{
                 type: 'item',
                 to: { name: 'dashboard' },
                 icon: 'mdi-tree-outline',
+                chip: {
+                    color: 'primary',
+                    label: '很牛',
+                    size: 'small',
+                },
             },
 
         ],
-    },*/
+    },
 
 ]
