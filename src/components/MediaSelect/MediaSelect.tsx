@@ -17,8 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-
 const MediaSelect = React.forwardRef((props: {
   name?:string,
   label?:string,

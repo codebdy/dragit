@@ -30,21 +30,24 @@ export function useFormContext():IForm&{
   const formContext = useContext(FormContext);
   const setValue = (field:string, value:any) =>{
     formContext.values = formContext.values ? formContext.values : {};
-    formContext.values[field] = value;
+    // eslint-disable-next-line no-eval
+    eval('formContext.values.' + field + ' = value');
   }
 
   
   const validate =  (field:string):string|undefined | ValidationRule<boolean> =>{
-    const errorMessage = formContext.registers[field]?.validate(formContext.values[field]);
+    // eslint-disable-next-line no-eval
+    const value = eval('formContext.values.' + field);
+    const errorMessage = formContext.registers[field]?.validate(value);
     formContext.errors = formContext.errors ? formContext.errors : {};
     formContext.errors[field] = errorMessage;
-    //formContext.forceUpdate && formContext.forceUpdate(formContext);
     return errorMessage;
   }
 
   const register = (field:string, rules:ValidationRules) => {
     formContext.registers[field] = new Regeister(rules);
   }
+
   return {...formContext, setValue, validate, register};
 }
 

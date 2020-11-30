@@ -46,7 +46,8 @@ export default function PageForm(
     let passed = true;
     form.errors = {};
     for (let validateField in form.registers){
-      const value = form.values[validateField];
+      // eslint-disable-next-line no-eval
+      const value = eval('form.values.' + validateField);
       const errorMsg = form.registers[validateField].validate(value);
       if(errorMsg){
         passed = false;
