@@ -34,7 +34,7 @@ export default function NotificationsList(props:{onClose:()=>void}){
   const handleClick = (id:number)=>{
     history.push(resolvePageUrl({
       moduleSlug:'notifications',
-      pageSlug:'view',
+      pageSlug:'view-notification',
       dataId:id,
     }));
     onClose();
@@ -63,7 +63,7 @@ export default function NotificationsList(props:{onClose:()=>void}){
                   :
                   <b>{note.title}</b>
                 } 
-                  secondary={note.dateTime} />
+                  secondary={note.created_at} />
               </ListItem>
               <Divider />            
             </Fragment>

@@ -3,5 +3,5 @@ export interface INotification{
   title?:string,
   content?:string,
   read:boolean,
-  dateTime:string,
+  created_at:string,
 }

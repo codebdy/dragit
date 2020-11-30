@@ -1,4 +1,3 @@
-import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/PageAction"
 import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
 export default {
   layout:[
@@ -22,30 +21,6 @@ export default {
           },
           {
             name: 'GridColumn',
-            children: [
-            {
-              name: 'Button',
-              props: {
-                variant: "contained",
-                color: "primary",
-                rxText: '新建',
-                //size: "large",
-                style: {
-                  fontSize: '1.1rem',
-                },
-                onClick:{
-                  name: JUMP_TO_PAGE_ACTION,
-                  page:{
-                    moduleSlug:'role',
-                    pageSlug:'edit-role',
-                    //dataId:'1',
-                  }
-                }
-              }
-            }]
-          },
-          {
-            name: 'GridColumn',
             props: {
               xs:12,
             },
@@ -58,30 +33,23 @@ export default {
                 elevation:6,
                 columns:[
                   {
-                    field:'name',
+                    field:'title',
                     label:'名称',
                     searchable:true,
                     sortable:true,
                   },
                   {
-                    field:'description',
-                    label:'描述',
+                    field:'created_at',
+                    label:'时间',
                   },
-                  {
-                    field:'forbid',
-                    label:'状态',
-                    isHtml:true,
-                    props:{
-                    }
-                  }
                 ],
                 rowsPerPageOptions:'10,25,50',
                 defalutRowsPerPage:'10',
                 batchCommands:[
                   {
-                    slug:"forbid",
-                    label:"禁用",
-                    icon:"mdi-cancel",
+                    slug:"setRead",
+                    label:"设为以读",
+                    icon:"mdi-email-open",
                   },
                   {
                     slug:"delete",
@@ -91,13 +59,12 @@ export default {
                 ],
                 rowCommands:[
                   {
-                    slug:"edit",
-                    label:"编辑",
-                    icon:"mdi-pencil",
+                    slug:"view",
+                    label:"查看",
+                    icon:"mdi-magnify",
                     jumpToPage:{
-                      //name: JUMP_TO_PAGE_ACidTION,
-                      moduleSlug:'role',
-                      pageSlug:'edit-role',
+                      moduleSlug:'notification',
+                      pageSlug:'view-notification',
                       param:'id',
                       paramField:'id',
                     }
@@ -112,7 +79,7 @@ export default {
                   method:'post',
                   url:API_QUERY_AND_OPERATE_MODELS.url,
                   params:{
-                    modelName:'/Model/Role',
+                    modelName:'/Model/Notification',
                   },      
                 },
 

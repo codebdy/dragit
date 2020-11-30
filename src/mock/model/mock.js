@@ -3,6 +3,7 @@ import Mock from 'mockjs'
 //import {getModuleIndexPage} from './modules'
 import getQueryVariable from 'mock/utils/getQueryVariable'
 import articles from 'mock/data/listData';
+import notifications from 'mock/data/notifications'
 import users from './users';
 import roles from './roles';
 
@@ -20,18 +21,28 @@ window.modelsList = {
     currentPage:0,
     data:users,
   },
+
   '/Model/Role':{
     total:12,
     perPage:10,
     currentPage:0,
     data:roles,
+  },
+
+  '/Model/Notification':{
+    total:12,
+    perPage:10,
+    currentPage:0,
+    data:notifications,
   }
+
 }
 
 window.listModels = {
   '/Model/Role':roles,
   '/Model/User':users,
   '/Model/Article':articles,
+  '/Model/Notification':notifications,
 }
 
 function getModelName(url){

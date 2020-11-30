@@ -1,6 +1,5 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
 import {API_GET_MODEL_BY_ID} from "APIs/model"
-import {API_GET_AUTHS} from "APIs/modules"
 
 export default {
   layout:[
@@ -39,10 +38,11 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'名称',
+                            label:'标题',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'name',
+                            disabled:true,
+                            field:'title',
                           },
                         }
                       ]
@@ -56,56 +56,36 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'描述',
+                            label:'时间',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'description',
+                            disabled:true,
+                            field:'created_at',
+                          },
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,                      
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'内容',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'content',
                             multiline:true,
-                            rows:3,
+                            disabled:true,
+                            rows:10,
                           },
                         }
                       ]
                     },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:12,
-                      },
-                      children:[
-                        {
-                          name:'SwitchBox',
-                          props:{
-                            label:'禁用',
-                            fullWidth:true,
-                            field:'forbid',
-                          },
-                        }
-                      ]
-                    },                    
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:12,
-                      },
-                      children:[
-                        {
-                          name:'MultiSelectBox',
-                          props:{
-                            label:"权限",
-                            variant:"outlined",
-                            field:'roleIds',
-                            itemName:'name',
-                            multiple:true,
-                            fullWidth:true,
-                            fromUrl:true,
-                            method:'get',
-                            url:API_GET_AUTHS.url,
-                            itemKey:"slug",
-                            groupByField:"module",
-                          },                         
-                        }
-                      ]
-                    },
+                 
                   ]
                 },
                 {
@@ -114,8 +94,9 @@ export default {
                     {
                       name: 'Button',
                       props: {
-                        variant: "outlined",
-                        rxText: '取消',
+                        variant: "contained",
+                        rxText: '返回',
+                        color: "primary",
                         size:'large',
                         onClick:{
                           name: GO_BACK_ACTION,
@@ -123,23 +104,8 @@ export default {
                         }
                       }
                     },
-                    {
-                    name: 'Button',
-                    props: {
-                      rxText: '保存',
-                      variant: "contained",
-                      color: "primary",
-                      type: "submit",
-                      size:'large',
-                      marginLeft:2,
-                      //size: "large",
-                      //onClick:{
-                      //  name: POST_DATA_ACTION,
-                      //  slug:'save',
-                      //  needGoBack:true,
-                      //}            
-                    }
-                  }]
+
+                  ]
           
                 }
               ]
@@ -156,7 +122,7 @@ export default {
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
-      modelName:'/Model/Role',
+      modelName:'/Model/Notification',
     },      
   },
 }
