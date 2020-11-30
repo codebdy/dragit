@@ -43,7 +43,6 @@ export default function PageForm(
   }, [model, loading])
 
   const validate =():boolean=>{
-    console.log(form.registers);
     let passed = true;
     form.errors = {};
     for (let validateField in form.registers){
@@ -51,7 +50,6 @@ export default function PageForm(
       const errorMsg = form.registers[validateField].validate(value);
       if(errorMsg){
         passed = false;
-        console.log('error field', validateField, value, errorMsg)
         form.errors[validateField] = errorMsg;
       }
     }
