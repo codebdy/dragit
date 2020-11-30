@@ -4,7 +4,7 @@ import { IProp } from "base/Model/IProp";
 import StringInput from "base/PropsInputs/StringInput";
 
 export class OneToOnePortletRule extends Rule{
-  empertyPadding = '';
+  //empertyPadding = '';
   hasField = true;
   
   accept(child:INode){

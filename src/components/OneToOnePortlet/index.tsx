@@ -17,15 +17,18 @@ const OneToOnePortlet = React.forwardRef((
     children?:any,
     style?:any,
     withHeader:boolean,
+    error?:any,
+    helperText?:string,
   },
   ref:any
 )=>{
-  const {name, loading, value, title, withHeader, children, onChange, ...rest} = props;
+  const {name, loading, value, title, withHeader, error, helperText, children, onChange, ...rest} = props;
   const classes = useStyles();
   
   return (
     <Portlet 
       ref={ref}
+      title = {title}
       withHeader = {withHeader}
       {...rest}
     >

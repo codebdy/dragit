@@ -41,6 +41,8 @@ import { OneToManyPortletRule } from 'components/OneToManyPortlet/Rule';
 import MultiSelectBox from 'components/Select/MultiSelectBox';
 import SwitchBox from 'components/SwitchBox';
 import { SwitchBoxRule } from 'components/SwitchBox/Rule';
+import OneToOnePortlet from 'components/OneToOnePortlet';
+import { OneToOnePortletRule } from 'components/OneToOnePortlet/Rule';
 
 const store = configureStore();
 
@@ -57,12 +59,13 @@ register('PortletGridItem', PortletGridItem, PortletGridItemRule);
 register('PortletFooter', PortletFooter);
 register('Typography', Typography, TypographyRule);
 register('ListView', ListView, ListViewRule);
-register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);
 register('MultiSelectBox', MultiSelectBox, SelectRule)
 register('OneToManyTable', OneToManyTable, OneToManyTableRule);
+register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule);
+register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
 register('MediaSelect', MediaSelect);
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);
