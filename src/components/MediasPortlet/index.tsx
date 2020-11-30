@@ -56,7 +56,7 @@ const MediasPortlet = React.forwardRef((
   } & RXInputProps, 
   ref:any
 )=>{
-  const{value, cols, onChange, helperText, loading, ...rest
+  const{value, cols, onChange, error, helperText, loading, ...rest
   } = props;
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);

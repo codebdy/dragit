@@ -31,11 +31,6 @@ export default [{
                 type: 'item',
                 icon: 'mdi-circle-small',
                 to: '/admin/module/article/',
-                badge: {
-                    color: 'secondary',
-                    field: 'temp',
-                    size: 'small',
-                }
             },
             {
                 title: '频道',
@@ -51,6 +46,61 @@ export default [{
             },
 
         ],
+    },
+    {
+        title: '询盘管理',
+        type: 'group',
+        //to: '/admin/module/role/',
+        icon: 'mdi-email-outline',
+ 
+        children: [
+            {
+                title:"询盘",
+                type:'item',
+                icon: 'mdi-circle-small',
+                //to: '/admin/module/user/',
+                badge: {
+                    color: 'secondary',
+                    field: 'inquiries',
+                    size: 'small',
+                }               
+            },
+            {
+                title:"垃圾箱",
+                type:'item',
+                icon: 'mdi-circle-small',
+                //to: '/admin/module/role/',
+            },
+            {
+                title:"拦截设置",
+                type:'item',
+                icon: 'mdi-circle-small',
+                //to: '/admin/module/role/',
+            }
+
+
+        ]
+
+    },
+    {
+        title:"用户",
+        type: 'group',
+        icon: 'mdi-account-circle',
+        children: [
+            {
+                title:"管理员",
+                type:'item',
+                icon: 'mdi-circle-small',
+                to: '/admin/module/user/',
+            },
+            {
+                title:"角色",
+                type:'item',
+                icon: 'mdi-circle-small',
+                to: '/admin/module/role/',
+            }
+
+        ]
     },
     {
         id:'divider1',
@@ -92,35 +142,5 @@ export default [{
 
         ],
     },
-    {
-        title: '询盘',
-        type: 'item',
-        to: { name: 'dashboard' },
-        icon: 'mdi-email-outline',
-        badge: {
-            color: 'secondary',
-            field: 'inquiries',
-            size: 'small',
-        }    
-    },
-    {
-        title:"用户",
-        type: 'group',
-        icon: 'mdi-account-circle',
-        children: [
-            {
-                title:"管理员",
-                type:'item',
-                icon: 'mdi-circle-small',
-                to: '/admin/module/user/',
-            },
-            {
-                title:"角色",
-                type:'item',
-                icon: 'mdi-circle-small',
-                to: '/admin/module/role/',
-            }
 
-        ]
-    }
 ]

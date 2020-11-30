@@ -33,7 +33,7 @@ const PageView = ()=>{
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('PageView useEffect:', moduleSlug, pageSlug, id, pageMeta);
+    console.log('PageView useEffect:', moduleSlug, pageSlug, id);
     if(!id){
       dispatch(setModelAction(undefined));
     }
