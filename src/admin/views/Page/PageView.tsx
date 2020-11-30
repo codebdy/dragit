@@ -1,14 +1,11 @@
-import React, { FormEvent, Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ComponentRender from "./ComponentRender";
 import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { Container, Dialog } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from './PageAction';
 
-import { FormProvider, useForm } from "react-hook-form";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import intl from "react-intl-universal";
 import usePageMeta from "./usePageMeta";
 import usePageModel from "./useFecthPageModel";
 import { useDispatch } from "react-redux";
@@ -26,21 +23,17 @@ const PageView = ()=>{
   const history =  useHistory();
   const match = useRouteMatch();
   const{moduleSlug, pageSlug, id} = match.params as any;
-  const methods = useForm({mode: 'all'});
-  const {errors, clearErrors} = methods;
 
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
   const [pageMeta, loadingPage, error] = usePageMeta(moduleSlug, pageSlug,);
   const [submitRequest, setSubmitRequest] = useState<AxiosRequestConfig>();
   const [submitResult/*, submiting*/] = useAxios(submitRequest, true);
-  const [submitted, setSubmitted] = React.useState(false);
 
   usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('PageView useEffect:', moduleSlug, pageSlug, id, pageMeta);
-    clearErrors();
     if(!id){
       dispatch(setModelAction(undefined));
     }
@@ -76,13 +69,9 @@ const PageView = ()=>{
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error])
 
-  const onSubmit = (data: any) => {
+  const handleSubmit = (data: any) => {
     setSubmitRequest({...API_SUBMIT_MODEL, data});
   };
-
-  const onValidate = ()=>{
-    setSubmitted(true);
-  }
   
   const formActionHandle = (action:PageAction)=>{
     switch (action.name){
@@ -102,61 +91,34 @@ const PageView = ()=>{
     
   }
 
-  const handleCloseAlert = ()=>{
-    setSubmitted(false);
-  }
-
-  const handleSubmit = (event:FormEvent<HTMLFormElement>)=>{
-    console.log(event);
-    event.preventDefault();
-  }
-
-  const openAlert = Object.keys(errors).length > 0 && submitted;
-
   const pageContent = loadingPage ?
-      <PageSkeleton />
-      :
-      <Fragment>
-        {
-          pageLayout?.map((child:RXNode<IMeta>)=>{
-            return (
-              <ComponentRender 
-                key={child.id} 
-                component={child} 
-                onPageAction={formActionHandle}
-              />
-            )
-          })
-        }
-      </Fragment>
+    <PageSkeleton />
+    :
+    <Fragment>
+      {
+        pageLayout?.map((child:RXNode<IMeta>)=>{
+          return (
+            <ComponentRender 
+              key={child.id} 
+              component={child} 
+              onPageAction={formActionHandle}
+            />
+          )
+        })
+      }
+    </Fragment>
 
-
-  return (
+return (
     <Container>
-      <FormProvider {...methods}>      
-        {
-          pageMeta?.jsonSchema?.isFormPage 
-          ?
-            <PageForm>
-              {pageContent}
-            </PageForm>
-          :
-            pageContent
-        }
-
-      <Dialog
-        open={openAlert}
-        onClose={handleCloseAlert}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <Alert severity="error"  onClose={handleCloseAlert}>
-          <AlertTitle>{intl.get('error')}</AlertTitle>
-          {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
-        </Alert>      
-      </Dialog>
-
-      </FormProvider>    
+      {
+        pageMeta?.jsonSchema?.isFormPage 
+        ?
+          <PageForm onSubmit = {handleSubmit}>
+            {pageContent}
+          </PageForm>
+        :
+          pageContent
+      }
     </Container>
   )
 }

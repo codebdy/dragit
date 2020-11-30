@@ -44,8 +44,7 @@ function metaRuleToRegisterRules(rule:ValidateRule){
     }
     if(rule.ruleType === "custumized" && rule.pattern){
       rtRules['pattern'] = {
-        // eslint-disable-next-line no-eval
-        value:eval(rule.pattern||''),
+        value:RegExp(rule.pattern||''),
         message:rule.errorMessage
       }
     }

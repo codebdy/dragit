@@ -11,14 +11,16 @@ export interface IForm{
   registers:{[key:string]:Regeister},
 }
 
-export const defultForm = {
-  defaultValues:{},
-  values:{},
-  errors:{},  
-  registers:{}
+export const defultForm = ()=>{
+  return {
+    defaultValues:{},
+    values:{},
+    errors:{},  
+    registers:{}
+  }
 };
 
-export const FormContext = React.createContext<IForm>(defultForm);
+export const FormContext = React.createContext<IForm>(defultForm());
 
 export function useFormContext():IForm&{
   setValue:(field:string, value:any)=>void,
