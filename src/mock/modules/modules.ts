@@ -83,13 +83,13 @@ var modules = [
     pages:[
       {
         id:41,
-        title:'管理员列表',
+        title:'角色列表',
         slug:'role-list',
         jsonSchema: rolesPage,
       },
       {
         id:42,
-        title:'管理员编辑',
+        title:'角色编辑',
         slug:'edit-role',
         jsonSchema: rolePage,
       },
