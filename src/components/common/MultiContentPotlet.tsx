@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MutiContentPotlet = React.forwardRef((
+const MultiContentPotlet = React.forwardRef((
   props:{
     title?:string,
     withHeader?:boolean,
@@ -56,4 +56,4 @@ const MutiContentPotlet = React.forwardRef((
   )
 })
 
-export default MutiContentPotlet
+export default MultiContentPotlet

@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead
 import CloseIcon from '@material-ui/icons/Close';
 import { resolveComponent } from 'base/DragRX';
 import { RXInputProps } from 'base/RXInputProps';
-import MutiContentPotlet from 'components/common/MutiContentPotlet';
+import MultiContentPotlet from 'components/common/MultiContentPotlet';
 import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -86,7 +86,7 @@ const OneToManyTable = React.forwardRef((
   }
 
   return (
-    <MutiContentPotlet 
+    <MultiContentPotlet 
       ref={ref}
       onAddNew = {handleAddNew}
       {...rest}
@@ -138,7 +138,7 @@ const OneToManyTable = React.forwardRef((
             ))}
           </TableBody>
         </Table>    
-    </MutiContentPotlet>
+    </MultiContentPotlet>
   )
 })
 

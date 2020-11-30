@@ -45,7 +45,6 @@ export default {
                   page:{
                     moduleSlug:'article',
                     pageSlug:'article',
-                    dataId:'1',
                   }
                 }
               }

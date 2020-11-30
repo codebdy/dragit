@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const OneToManyPortlet = React.forwardRef((
+const OneToOnePortlet = React.forwardRef((
   props: RXInputProps& {
     value?:Array<any>,   
     title?:string,
@@ -35,11 +35,6 @@ const OneToManyPortlet = React.forwardRef((
   const {name, loading, value, title, isDeisgning, children, onChange, ...rest} = props;
   const classes = useStyles();
   
-  //const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-  //  control,
-  //  name: name
-  //});
-
   const emitValueChangded = (newValue:any) => {
     const event = {
       persist: () => {return {}},
@@ -102,4 +97,4 @@ const OneToManyPortlet = React.forwardRef((
   )
 })
 
-export default OneToManyPortlet
+export default OneToOnePortlet
