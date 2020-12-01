@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events'    
- 
+
+declare var window: {$bus:EventEmitter};
 const bus = new EventEmitter();
 export const WILL_FOCUS_NODE = "WILL_FOCUS_NODE";
 export const FOCUS_NODE = "FOCUS_NODE";
@@ -10,4 +11,5 @@ export const DRAGE_NODE = "DRAGE_NODE";
 export const UN_DRAGE_NODE = "UN_DRAGE_NODE";
 export const CANVAS_SCROLL = "CANVAS_SCROLL";
 bus.setMaxListeners(10000);
-export default bus       
+window.$bus = bus;
+export default bus;   

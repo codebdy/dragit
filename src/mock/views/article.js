@@ -439,9 +439,10 @@ export default {
               children:[
                 {
                   name:"TinyMCE",
-                  children:[
+                  props:{
+                    field:'content'
+                  }
 
-                  ]
                 }
               ]
             },

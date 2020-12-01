@@ -1,16 +1,11 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, AppBar, Dialog, IconButton, Toolbar, Typography, Button, DialogActions, DialogContent, useTheme } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
-import { TransitionProps } from '@material-ui/core/transitions';
-import Grow from '@material-ui/core/Grow/Grow';
-import CloseIcon from '@material-ui/icons/Close';
-import Intl from "react-intl-universal";
-import Spacer from 'components/common/Spacer';
-import MediasContent from './MediasContent';
 import { MediaMeta } from './MediaGridListImage';
 import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import MediasSelectDialog from './MediasSelectDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,29 +58,8 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems:"center",
       borderRadius:'4px',
     },
-    appBar: {
-      position: 'relative',
-      padding:"0",
-    },
-    title: {
-      flex: 1,
-    },
-    closeButton:{
-      marginRight:'-30px',
-    },
-    dialogContent:{
-      display:'flex',
-      padding:0,
-    },
   }),
 );
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement },
-  ref: React.Ref<unknown>,
-) {
-  return  <Grow ref={ref} {...props} />;
-});
 
 export default function MediaAdder(
   props:{
@@ -100,7 +74,7 @@ export default function MediaAdder(
 
   const [open, setOpen] = React.useState(false);
   const [hover, setHover] = React.useState(false);
-  const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>(value || []);
+
   const theme = useTheme();
 
   const handleClickOpen = () => {
@@ -111,11 +85,6 @@ export default function MediaAdder(
     setOpen(false);
   };
   const firstValue = value && (value.length > 0 ? value[0] :  undefined);
-
-  const handleSelect = ()=>{
-    onSelectMedias([...selectedMedias]);
-    setOpen(false);
-  }
 
   return (
     <Fragment>
@@ -151,39 +120,13 @@ export default function MediaAdder(
           </div>      
         </div>      
       }
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              {Intl.get('medias')}
-            </Typography>
-            <IconButton color="inherit" onClick={handleClose} aria-label="close" className={classes.closeButton}>
-              <CloseIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <DialogContent dividers className={classes.dialogContent}>
-          <MediasContent  onSelectedChange = {setSelectedMedias} single = {single}/>
-        </DialogContent>
-        <DialogActions>
-          <Spacer />
-          <Button onClick={handleClose} size="large" variant="outlined">
-            {Intl.get('cancel')}
-          </Button>          
-          <Button onClick={handleSelect} size="large" variant="contained" color="primary"
-            disabled = {selectedMedias.length === 0}
-          >
-            {Intl.get('select')} 
-            {
-              selectedMedias.length > 0 &&
-              <Fragment>
-                ({selectedMedias.length})
-              </Fragment>
-            }
-          </Button>
-          <Spacer />
-        </DialogActions>
-      </Dialog>      
+      <MediasSelectDialog
+        open = {open}
+        value = {value}
+        single = {single} 
+        onClose = {handleClose}
+        onSelectMedias = {onSelectMedias}
+      />
     </Fragment>
   )
 }
