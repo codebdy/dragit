@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { RXInputProps } from 'base/RXInputProps';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import { Editor } from '@tinymce/tinymce-react';
 import MediasSelectDialog from 'components/Medias/MediasSelectDialog';
 import { IMedia } from 'base/Model/IMedia';
+import { EventEmitter } from 'events';
+
+declare var window: {$bus:EventEmitter};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +35,16 @@ const TinyMCE = React.forwardRef((
 
   const [id] = useState( 'drag-rx-tinymce-' + new Date() + ((Math.random() * 1000).toFixed(0) + ''));
   const [open, setOpen] = React.useState(false);
+  const openMediaDialog = ()=>{
+    setOpen(true);
+  }
+
+  useEffect(()=>{
+    window.$bus.on('selectImage', openMediaDialog);
+    return ()=>{
+      window.$bus.off('selectImage', openMediaDialog);
+    }
+  },[])
 
   const handleEditorChange = ()=>{
 
@@ -42,7 +55,7 @@ const TinyMCE = React.forwardRef((
   }
 
   const handleSelectMedias = (medias?:Array<IMedia>)=>{
-    
+    window.$bus.emit('selectedImages', medias, id );
   }
 
   return (
