@@ -74,15 +74,15 @@ const TinyMCE = React.forwardRef((
           plugins: [
             'advlist autolink lists link image charmap print preview anchor',
             'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount dragimages'
+            'insertdatetime media table paste code help wordcount dragimages table'
           ],
           external_plugins: {
             'dragimages': '/plugins/dragimages/plugin.min.js',
           },
           toolbar:
             `undo redo | formatselect | bold italic backcolor | 
-            alignleft aligncenter alignright alignjustify | 
-            bullist numlist outdent indent | removeformat | dragimages | help`,
+            alignleft aligncenter alignright alignjustify | removeformat | dragimages table | 
+            bullist numlist outdent indent | help`,
           init_instance_callback: (editor:any) => {
               editor.dragId = id
             },
