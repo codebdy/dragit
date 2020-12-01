@@ -3,7 +3,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { RXInputProps } from 'base/RXInputProps';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import { Editor } from '@tinymce/tinymce-react';
-import { tinyMCEKey } from './key';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,8 +38,8 @@ const TinyMCE = React.forwardRef((
       {...rest}
     >
       <Editor
-        key={tinyMCEKey}
         initialValue="<p>This is the initial content of the editor</p>"
+        tinymceScriptSrc = {'/tinymce_5.6.1/js/tinymce/tinymce.min.js'}
         init={{
           height: height,
           menubar: false,
