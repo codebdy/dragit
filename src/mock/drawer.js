@@ -36,7 +36,7 @@ export default [{
                 title: '频道',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/article-chanel',
             },
             {
                 title: '标签',

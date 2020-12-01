@@ -47,6 +47,8 @@ import FieldView from 'components/FieldView';
 import { FieldViewRule } from 'components/FieldView/Rule';
 import TinyMCE from 'components/TinyMCE';
 import {TinyMCERule} from 'components/TinyMCE/Rule';
+import TreeEditor from 'components/Tree/TreeEditor';
+import { TreeEditorRule } from 'components/Tree/TreeEditor/Rule';
 
 const store = configureStore();
 
@@ -72,6 +74,7 @@ register('OneToManyTable', OneToManyTable, OneToManyTableRule);
 register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule);
 register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
 register('TinyMCE', TinyMCE, TinyMCERule);
+register('TreeEditor', TreeEditor, TreeEditorRule);
 register('MediaSelect', MediaSelect);
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);

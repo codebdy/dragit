@@ -43,11 +43,12 @@ interface PortletProps{
   title?:string;
   collapsible?:boolean;
   className?:any;
+  actions?:any;
 }
 
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
-  const {open,withHeader, children, title, collapsible, className, ...rest} = props;
+  const {open,withHeader, children, title, collapsible, className, actions, ...rest} = props;
   const [opened, setOpened] = React.useState(open);
 
   const hendleClickChevronIcon = ()=>{
@@ -73,16 +74,19 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
             <Typography variant="h5">
               {title}
             </Typography>
-            {
-              collapsible &&
-              <IconButton onClick ={hendleClickChevronIcon} style={{zIndex:0}} size="small" >              
-                <ChevronRightIcon 
-                  className={
-                    classNames(classes.indicator,  {[classes.opened] : opened})
-                  } 
-                />
-              </IconButton>
-            }
+            <div>
+              {actions}
+              {
+                collapsible &&
+                <IconButton onClick ={hendleClickChevronIcon} style={{zIndex:0}} size="small" >              
+                  <ChevronRightIcon 
+                    className={
+                      classNames(classes.indicator,  {[classes.opened] : opened})
+                    } 
+                  />
+                </IconButton>
+              }
+            </div>
           </div>
           <Divider></Divider>
         </Fragment>

@@ -6,6 +6,7 @@ import rolesPage from '../views/rolesPage'
 import rolePage from '../views/rolePage'
 import notificationPage from '../views/notificationPage'
 import notificationViewPage from '../views/notificationViewPage'
+import articleChannel from '../views/articleChannel'
 
 var modules = [
   {
@@ -52,8 +53,17 @@ var modules = [
   },
   {
     id:2,
-    slug:'product',
-    title:'产品',
+    slug:'article-chanel',
+    title:'文章频道',
+    indexPageId:21,
+    pages:[
+      {
+        id:21,
+        title:'频道编辑',
+        slug:'article-channel-tree',
+        jsonSchema: articleChannel,
+      },
+    ],
   },
   {
     id:3,

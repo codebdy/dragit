@@ -88,7 +88,8 @@ const TinyMCE = React.forwardRef((
             alignleft aligncenter alignright alignjustify | removeformat | dragimages table | 
             bullist numlist outdent indent | help`,
           init_instance_callback: (editor:any) => {
-              editor.dragId = id
+              editor.dragId = id;
+              editor.getBody().style.border= "0";
             },
         }}
         onEditorChange={handleEditorChange}
