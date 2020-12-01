@@ -46,8 +46,12 @@ const TinyMCE = React.forwardRef((
     }
   },[])
 
-  const handleEditorChange = ()=>{
-
+  const handleEditorChange = (content: any)=>{
+    onChange && onChange({
+      target:{
+        value:content,
+      }
+    });
   }
 
   const handleClose = ()=>{
