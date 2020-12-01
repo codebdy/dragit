@@ -5,7 +5,7 @@ import Spacer from 'components/common/Spacer';
 import MediasContent from './MediasContent';
 import { Close } from '@material-ui/icons';
 import { TransitionProps } from '@material-ui/core/transitions';
-import { MediaMeta } from './MediaGridListImage';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,14 +40,14 @@ const Transition = React.forwardRef(function Transition(
 export default function MediasSelectDialog(
   props:{
     open:boolean,
-    value?:Array<MediaMeta>,
+    value?:Array<IMedia>,
     single?:boolean,
     onClose:()=>void,
-    onSelectMedias:(medias?:Array<MediaMeta>)=>void, 
+    onSelectMedias:(medias?:Array<IMedia>)=>void, 
   }
 ){
   const {open,value, single, onClose, onSelectMedias} = props;
-  const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>(value || []);
+  const [selectedMedias, setSelectedMedias] = React.useState<Array<IMedia>>(value || []);
   const handleSelect = ()=>{
     onSelectMedias([...selectedMedias]);
     onClose();

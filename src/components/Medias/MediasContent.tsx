@@ -5,12 +5,12 @@ import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { batchRemove, remove, toggle } from "ArrayHelper";
-import { MediaMeta } from "./MediaGridListImage";
 import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
+import { IMedia } from "base/Model/IMedia";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -89,19 +89,19 @@ function getByIdFromTree(id:string, folders?:Array<FolderNode>):FolderNode|undef
 export default function MediasContent(
   props:{
     single?:boolean,
-    onSelectedChange?:(medias:Array<MediaMeta>)=>void
+    onSelectedChange?:(medias:Array<IMedia>)=>void
   }
 ){
   const {single, onSelectedChange} = props;
   const classes = useStyles();
   const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
-  const [draggedMedia, setDraggedMedia] = React.useState<MediaMeta|undefined>();
+  const [draggedMedia, setDraggedMedia] = React.useState<IMedia|undefined>();
   const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
   const [selectedFolder, setSelectedFolder] = React.useState('root');
   const [gridLoading, setGridLoading] = React.useState(false);
-  const [medias, setMedias] = React.useState<Array<MediaMeta>>([]);
-  const [selectedMedias, setSelectedMedias] = React.useState<Array<MediaMeta>>([]);
+  const [medias, setMedias] = React.useState<Array<IMedia>>([]);
+  const [selectedMedias, setSelectedMedias] = React.useState<Array<IMedia>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
   const [haseData] = React.useState(true);
   const [batchActionLoading, setBatchActionLoading] = React.useState(false);
@@ -146,7 +146,7 @@ export default function MediasContent(
     }
   }
 
-  const loadMedias = (oldMedias:Array<MediaMeta> = []) => {
+  const loadMedias = (oldMedias:Array<IMedia> = []) => {
     axios(
       {
         method: API_MEDIAS.method as any,
@@ -286,7 +286,7 @@ export default function MediasContent(
 
   }
 
-  const handelMoveMediaTo = (media:MediaMeta, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
+  const handelMoveMediaTo = (media:IMedia, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
     if(targetFolder?.id === selectedFolder || (!targetFolder && selectedFolder==='root')){
       return
     }    
@@ -312,14 +312,14 @@ export default function MediasContent(
     });
   }
 
-  const handeRemoveMedia = (media:MediaMeta)=>{
+  const handeRemoveMedia = (media:IMedia)=>{
     remove(media, medias);
     remove(media, selectedMedias);
     setMedias([...medias]);
     setSelectedMedias([...selectedMedias]);
   }
 
-  const handleToggleSelectMedia = (media:MediaMeta)=>{
+  const handleToggleSelectMedia = (media:IMedia)=>{
     if(single){
       if(selectedMedias.length > 0 && media === selectedMedias[0]){
         setSelectedMedias([])

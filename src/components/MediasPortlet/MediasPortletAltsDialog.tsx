@@ -4,10 +4,10 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import Spacer from '../common/Spacer';
 import CloseIcon from '@material-ui/icons/Close';
 import Intl from "react-intl-universal";
-import { MediaMeta } from '../Medias/MediaGridListImage';
 import Image from 'components/common/Image';
 import classNames from 'classnames';
 import MdiIcon from '../common/MdiIcon';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,17 +63,17 @@ const Transition = React.forwardRef(function Transition(
 
 export default function MediasPortletAltsDialog(
   props:{
-    medias:Array<MediaMeta>, 
+    medias:Array<IMedia>, 
     open:boolean, 
     onClose:()=>void, 
-    onChange:(medias:Array<MediaMeta>)=>void,
+    onChange:(medias:Array<IMedia>)=>void,
   }
 ){
   const {open, onClose, onChange} = props;
   const classes = useStyles();
-  const [medias, setMedias] = React.useState<Array<MediaMeta>>(JSON.parse(JSON.stringify(props.medias)));
+  const [medias, setMedias] = React.useState<Array<IMedia>>(JSON.parse(JSON.stringify(props.medias)));
 
-  const handleChange = (alt:string, media:MediaMeta)=>{
+  const handleChange = (alt:string, media:IMedia)=>{
     media.alt = alt;
     setMedias([...medias]);
   }

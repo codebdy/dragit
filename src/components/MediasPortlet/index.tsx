@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid, Hidden } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import MdiIcon from '../common/MdiIcon';
-import { MediaMeta } from '../Medias/MediaGridListImage';
 import { add, exchange, remove } from 'ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
@@ -10,6 +9,7 @@ import MediasPortletAltsDialog from './MediasPortletAltsDialog';
 import { RXInputProps } from 'base/RXInputProps';
 import { Skeleton } from '@material-ui/lab';
 import HoverablePaper from 'components/common/HoverablePaper';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,7 +61,7 @@ const MediasPortlet = React.forwardRef((
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [medias, setMedias] = React.useState<Array<MediaMeta>>(value? value :[]);
+  const [medias, setMedias] = React.useState<Array<IMedia>>(value? value :[]);
   const [altsOpen, setAltsOpen] = React.useState(false); 
 
   useEffect(() => {
@@ -109,15 +109,15 @@ const MediasPortlet = React.forwardRef((
     setMenuOpen(false);  
   }
 
-  const handleSelectedMedias = (selectedMedias?:Array<MediaMeta>|MediaMeta)=>{
+  const handleSelectedMedias = (selectedMedias?:Array<IMedia>|IMedia)=>{
     setMedias(mergeArray(medias,selectedMedias ));
   }
 
-  const handleSwap = (first:MediaMeta, second:MediaMeta)=>{
+  const handleSwap = (first:IMedia, second:IMedia)=>{
     setMedias(exchange(first, second, medias));
   }
 
-  const handleRemove = (media:MediaMeta)=>{
+  const handleRemove = (media:IMedia)=>{
     setMedias([...remove(media, medias)]);
   }
 

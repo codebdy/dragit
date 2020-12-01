@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
-import { MediaMeta } from './MediaGridListImage';
 import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import MediasSelectDialog from './MediasSelectDialog';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,8 +63,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediaAdder(
   props:{
-    value?:Array<MediaMeta>, 
-    onSelectMedias:(medias?:Array<MediaMeta>)=>void, 
+    value?:Array<IMedia>, 
+    onSelectMedias:(medias?:Array<IMedia>)=>void, 
     single?:boolean,
     avatar?:boolean,
   }

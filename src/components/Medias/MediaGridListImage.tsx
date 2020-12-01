@@ -8,6 +8,7 @@ import axios from 'axios';
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
 import { contains } from 'ArrayHelper';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,22 +61,15 @@ const useStyles = makeStyles((theme: Theme) =>
     }  
   }),
 );
-export interface MediaMeta{
-  id:string;
-  thumbnail: string,
-  title: string,
-  alt?:string,
-}
-
 
 export default function MediaGridListImage(
   props:{
-    selectedMedias:Array<MediaMeta>, 
-    image:MediaMeta, 
-    onRemoveMedia:(media:MediaMeta)=>void,
-    onDragStart:(media:MediaMeta)=>void,
+    selectedMedias:Array<IMedia>, 
+    image:IMedia, 
+    onRemoveMedia:(media:IMedia)=>void,
+    onDragStart:(media:IMedia)=>void,
     onDragEnd:()=>void,
-    onToggleSelect:(media:MediaMeta)=>void,
+    onToggleSelect:(media:IMedia)=>void,
   }
 ){
   const {selectedMedias, image, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;

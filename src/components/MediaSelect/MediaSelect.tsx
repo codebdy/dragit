@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MediaAdder from 'components/Medias/MediaAdder';
-import { MediaMeta } from 'components/Medias/MediaGridListImage';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const MediaSelect = React.forwardRef((props: {
   name?:string,
   label?:string,
-  value?:MediaMeta,
+  value?:IMedia,
   width?:string,
   avatar?:boolean,
   onChange?:(event:any)=>void,

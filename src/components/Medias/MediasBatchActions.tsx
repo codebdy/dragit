@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, lighten, Typography, IconButton, Tooltip } from '@material-ui/core';
-import { MediaMeta } from './MediaGridListImage';
 import classNames from 'classnames';
 import intl from "react-intl-universal";
 import MdiIcon from 'components/common/MdiIcon';
 import Spacer from 'components/common/Spacer';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediasBatchActions(
   props:{
-    selectedMedias:Array<MediaMeta>,
+    selectedMedias:Array<IMedia>,
     onClearSelected:()=>void,
     onRemoveSelected:()=>void,
   }

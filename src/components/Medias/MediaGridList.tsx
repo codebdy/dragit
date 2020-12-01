@@ -5,7 +5,8 @@ import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'admin/common/Scrollbar';
 import { FolderNode } from './MediaFolder';
 import MediaGridListFolder from './MediaGridListFolder';
-import MediaGridListImage, { MediaMeta } from './MediaGridListImage';
+import MediaGridListImage from './MediaGridListImage';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,21 +40,21 @@ export default function MediasGridList(props:{
     loading:boolean, 
     folderLoading:string|boolean,
     draggedFolder:FolderNode|undefined,
-    draggedMedia:MediaMeta|undefined,
+    draggedMedia:IMedia|undefined,
     folders:Array<FolderNode>|undefined,
-    medias:Array<MediaMeta>, 
-    selectedMedias:Array<MediaMeta>, 
+    medias:Array<IMedia>, 
+    selectedMedias:Array<IMedia>, 
     onScrollToEnd:()=>void,
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
-    onRemoveMedia:(media:MediaMeta)=>void,
+    onRemoveMedia:(media:IMedia)=>void,
     onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
-    onMoveMediaTo:(media:MediaMeta, targetFolder:FolderNode|undefined)=>void,
+    onMoveMediaTo:(media:IMedia, targetFolder:FolderNode|undefined)=>void,
     onDragFolder:(folder:FolderNode|undefined)=>void,
-    onMediaDragStart:(media:MediaMeta) =>void,
+    onMediaDragStart:(media:IMedia) =>void,
     onMediaDragEnd:()=>void,
-    onToggleSelectMedia:(media:MediaMeta)=>void,
+    onToggleSelectMedia:(media:IMedia)=>void,
   }) {
   const {
     loading, 

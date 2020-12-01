@@ -4,7 +4,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import { FolderNode } from './MediaFolder';
 import MediaGridListIconButton from './MediaGridListIconButton';
-import { MediaMeta } from './MediaGridListImage';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,12 +53,12 @@ export default function MediaGridListFolder(props:{
     folder:FolderNode, 
     folderLoading:boolean|string,
     draggedFolder:FolderNode|undefined,
-    draggedMedia:MediaMeta|undefined,
+    draggedMedia:IMedia|undefined,
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
     onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
-    onMoveMediaTo:(media:MediaMeta, targetFolder:FolderNode|undefined)=>void,
+    onMoveMediaTo:(media:IMedia, targetFolder:FolderNode|undefined)=>void,
     onDragStart:(folder:FolderNode)=>void,
     onDragEnd:()=>void,
   

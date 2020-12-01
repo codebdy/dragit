@@ -5,8 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { MediaMeta } from './MediaGridListImage';
-
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,12 +68,12 @@ export function FolderActions(props:{children:any}){
 export default function MediaFolder (props:{
   node:FolderNode,
   draggedFolder:FolderNode|undefined,
-  draggedMedia:MediaMeta|undefined,
+  draggedMedia:IMedia|undefined,
   onFolderNameChange:(name:string, folder:FolderNode)=>void,
   onAddFolder:(parentFolder?:FolderNode)=>void,
   onRemoveFolder:(folder:FolderNode)=>void,
   onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode)=>void,
-  onMoveMediaTo:(media:MediaMeta, targetFolder:FolderNode|undefined)=>void,
+  onMoveMediaTo:(media:IMedia, targetFolder:FolderNode|undefined)=>void,
   onDragStart:(folder:FolderNode)=>void,
   onDragEnd:()=>void,
 }){

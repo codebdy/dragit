@@ -3,6 +3,8 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { RXInputProps } from 'base/RXInputProps';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import { Editor } from '@tinymce/tinymce-react';
+import MediasSelectDialog from 'components/Medias/MediasSelectDialog';
+import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,12 +31,20 @@ const TinyMCE = React.forwardRef((
   const classes = useStyles();
 
   const [id] = useState( 'drag-rx-tinymce-' + new Date() + ((Math.random() * 1000).toFixed(0) + ''));
+  const [open, setOpen] = React.useState(false);
 
   const handleEditorChange = ()=>{
 
   }
 
-  
+  const handleClose = ()=>{
+    setOpen(false);
+  }
+
+  const handleSelectMedias = (medias?:Array<IMedia>)=>{
+    
+  }
+
   return (
     <div 
       ref={ref}
@@ -65,6 +75,11 @@ const TinyMCE = React.forwardRef((
             },
         }}
         onEditorChange={handleEditorChange}
+      />
+      <MediasSelectDialog
+        open = {open}
+        onClose = {handleClose}
+        onSelectMedias = {handleSelectMedias}
       />
     </div>
   )
