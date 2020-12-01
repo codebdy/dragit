@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@tinymce/tinymce-react": "^3.8.1",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.42",

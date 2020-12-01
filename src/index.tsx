@@ -43,6 +43,10 @@ import SwitchBox from 'components/SwitchBox';
 import { SwitchBoxRule } from 'components/SwitchBox/Rule';
 import OneToOnePortlet from 'components/OneToOnePortlet';
 import { OneToOnePortletRule } from 'components/OneToOnePortlet/Rule';
+import FieldView from 'components/FieldView';
+import { FieldViewRule } from 'components/FieldView/Rule';
+import TinyMCE from 'components/TinyMCE';
+import {TinyMCERule} from 'components/TinyMCE/Rule';
 
 const store = configureStore();
 
@@ -53,6 +57,7 @@ register('GridColumn', GridColumn, GridColumnRule);
 register('Button',Button, ButtonRule);
 register('TextBox', TextBox, TextBoxRule);
 register('SwitchBox', SwitchBox, SwitchBoxRule);
+register('FieldView', FieldView, FieldViewRule);
 register('Portlet', Portlet, PortletRule);
 register('PortletGridContainer', PortletGridContainer);
 register('PortletGridItem', PortletGridItem, PortletGridItemRule);
@@ -66,6 +71,7 @@ register('MultiSelectBox', MultiSelectBox, SelectRule)
 register('OneToManyTable', OneToManyTable, OneToManyTableRule);
 register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule);
 register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
+register('TinyMCE', TinyMCE, TinyMCERule);
 register('MediaSelect', MediaSelect);
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);

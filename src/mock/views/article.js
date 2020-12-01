@@ -427,152 +427,24 @@ export default {
               ],
             },
             {
-              name:'OneToManyTable',
+              name:'Portlet',
               props: {
                 elevation: 6,
-                title:'规格库存',
+                open:true,
+                withHeader:true,
+                title:'内容',
                 collapsible: true,
                 marginTop:2,
-                open:true,
-                size:"small",
-                field:'specs',
-                columns:[
-                  {
-                    field:'image',
-                    label:'图片',
-                    input:{
-                      name:'MediaSelect',
-                      props:{
-                        width:'60px',
-                      }
-                    }
-                  },
-                  {
-                    field:'name',
-                    label:'名称',
-                    props:{
-                      width:'200px',
-                    },
-
-                    input:{
-                      name:'TextBox',
-                      props:{
-                        variant:'outlined',
-                        size:'small',
-                      }
-                    }
-                  },
-                  {
-                    field:'color',
-                    label:'颜色',
-                    input:{
-                      name:'TextBox',
-                      props:{
-                        variant:'outlined',
-                        size:'small',
-                      }
-                    }
-                  },
-                  {
-                    field:'category',
-                    label:'分类',
-                    input:{
-                      name:'SelectBox',
-                      props:{
-                        variant:"outlined",
-                        size:'small',
-                        withoutEmpertyItem:false,                        
-                        fromUrl:true,
-                        url:'/api/base/items',
-                      }
-                    },        
-                  },
-
-
-                ]         
-              },            
-            },
-            {
-              name:'OneToManyPortlet',
-
-              designProps:{
-                isDeisgning:true,
-              },
-              props:{
-                field:'onetoManyField',                
-                title:'1对多面板',
-                elevation: 6,
-                marginTop: 2,
-                collapsible:true,
-                open:true,
               },
               children:[
                 {
-                  name:'PortletGridContainer',
+                  name:"TinyMCE",
                   children:[
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:3,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'合同号',
-                            variant:"outlined",
-                            fullWidth:true,
-                            size:"small",
-                            field:'no',
-                            rule:{
-                              valueType:'string',
-                              required:true,
-                            }                      
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'供应商',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'supplier',
-                            size:"small",
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:3,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'日期',
-                            variant:"outlined",
-                            fullWidth:true,
-                            size:"small",
-                            field:'date',
-                          }
-                        }
-                      ]
-                    },
 
-                  ],
+                  ]
                 }
-              ],
-            }
+              ]
+            },
           ]
         },
         {
