@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, createStyles} from '@material-ui/core';
 import { RXInputProps } from 'base/RXInputProps';
 import Portlet from 'components/Portlet';
+import { creatSubModel, SubModelContext } from './SubModelContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,9 @@ const OneToOnePortlet = React.forwardRef((
       {...rest}
     >
       <div className={classes.body}>
-        {children}
+        <SubModelContext.Provider value={creatSubModel(name, value)}>
+          {children}
+        </SubModelContext.Provider>
       </div>
     </Portlet>
   )

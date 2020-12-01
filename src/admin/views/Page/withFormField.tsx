@@ -2,9 +2,10 @@ import { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
 import React, { useContext, useEffect } from 'react';
 import useFieldValue from './useFieldValue';
 import intl from 'react-intl-universal';
-import { RowModelContext } from '../../../components/OneToManyPortlet/RowModelContext';
 import useFieldError from './useFieldError';
 import { useFormContext } from './Form/useFormContext';
+import useFieldName from './useFieldName';
+import { SubModelContext } from 'components/OneToOnePortlet/SubModelContext';
 
 function metaRuleToRegisterRules(rule:ValidateRule){
   let rtRules:any = {};
@@ -55,10 +56,12 @@ function metaRuleToRegisterRules(rule:ValidateRule){
 
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
-    const modelContext = useContext(RowModelContext);
+
     const {register, setValue, validate} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
-    const fieldName = modelContext.parentField ? `${modelContext.parentField}[${modelContext.rowIndex}].${field}`: field;
+
+    const fieldName = useFieldName(field);
+    const subModelContext = useContext(SubModelContext);
     
     const [value, loading] = useFieldValue(field);    
     const [inputValue, setInputValue] = React.useState(value);
@@ -73,7 +76,15 @@ const withFormField = (Component:any)=>{
 
     useEffect(()=>{
       setError(fieldError);
-    },[fieldError])
+    },[fieldError]);
+
+    //针对1对1面板
+    useEffect(()=>{
+      if(subModelContext.parentField && !subModelContext.model){
+        setValue(subModelContext.parentField, {});
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[field, subModelContext.parentField, subModelContext.model]);
 
     useEffect(()=>{
       setInputValue(value);
