@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tips:{
       padding:theme.spacing(2),
-      color:"rgba(0,0,0, 0.7)"
+      color:theme.palette.text.secondary,
     },
     margin: {
       margin: theme.spacing(1),
