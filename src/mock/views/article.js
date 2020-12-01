@@ -467,7 +467,57 @@ export default {
                 {
                   name:"PortletGridContainer",
                   children:[
-
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'顺序',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'order',
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,                      
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'附加属性',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'attributes',
+                          },
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'SwitchBox',
+                          props:{
+                            label:'发布',
+                            fullWidth:true,
+                            field:'published',
+                            color:'primary',
+                          },                     
+                        }
+                      ]
+                    },
                   ]
                 }
               ]

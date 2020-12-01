@@ -44,8 +44,65 @@ export default [{
                 icon: 'mdi-circle-small',
                 to: '',
             },
-
+            {
+                title: '属性',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
         ],
+    },
+    {
+        title: '产品管理',
+        type: 'group',
+        icon: 'mdi-basket-outline',
+        children:[
+            {
+                title: '产品',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
+            {
+                title: '分类',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
+            {
+                title: '属性',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
+        ]
+
+    },
+    {
+        title: '客户关系',
+        type: 'group',
+        icon: 'mdi-account-cash-outline',
+        children:[
+            {
+                title: '订单',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
+            {
+                title: '客户',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
+            {
+                title: '供应商',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                to: '',
+            },
+        ]
+
     },
     {
         title: '询盘管理',

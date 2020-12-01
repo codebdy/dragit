@@ -3,12 +3,12 @@ import withSkeleton from 'base/HOCs/withSkeleton';
 import React from 'react';
 
 
-const SwitchBox = (props:any)=>{
+const SwitchBox = React.forwardRef((props:any, ref:any)=>{
   const {label, name, onChange,  value,  fullWidth, error, helperText, ...rest} = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = event.target.checked
-    onChange({
+    onChange && onChange({
       target:{
         name:name,
         value:newValue,        
@@ -20,6 +20,7 @@ const SwitchBox = (props:any)=>{
     <FormControlLabel
       control={
         <Switch
+          ref = {ref}
           checked = {value||false}
           onChange = {handleChange}
           {...rest}
@@ -29,7 +30,7 @@ const SwitchBox = (props:any)=>{
     />
 
   )
-}
+})
 
 
 const SwitchBoxAny = withSkeleton(SwitchBox) as any;
