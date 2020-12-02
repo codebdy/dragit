@@ -74,15 +74,22 @@ export default function TreeNode(
   }
 
   const handleDragChangeOver = (event: React.DragEvent<HTMLDivElement>)=>{
-    if(draggedNode?.id !== node.id){
+    if(draggedNode && draggedNode?.id !== node.id
+        && !node.isAncestorOf(draggedNode.id)
+        && !node.isPosterityOf(draggedNode.id)
+      ){
       event.preventDefault();
       setDraggedOver(true);
       setDragChangedOver(true);      
     }
+    else{
+      setDragChangedOver(false);
+    }
   }
 
   const handleDragInOver = (event: React.DragEvent<HTMLDivElement>)=>{
-    if(draggedNode?.id !== node.id){
+    if(draggedNode && draggedNode?.id !== node.id
+      && !draggedNode.isAncestorOf(node.id) ){
       event.preventDefault();
       setDraggedOver(true);
       setDragInOver(true);      

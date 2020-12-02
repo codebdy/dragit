@@ -1,5 +1,5 @@
 export interface ITreeNode{
-  id:number,
+  id?:number,
   [key:string]:any,
   children?:Array<ITreeNode>,
 }

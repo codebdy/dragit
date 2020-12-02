@@ -98,4 +98,33 @@ export class RXNode<T>{
     return metaAny;
   }
 
+  //判断是否是某个节点的祖先
+  isAncestorOf(targetId:number):boolean{
+    if(!this.children){
+      return false;
+    }
+
+    for(var i = 0; i < this.children.length; i++){
+      if(this.children[i].id === targetId){
+        return true;
+      }
+      if(this.children[i].isAncestorOf(targetId)){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  //判断是否是某个节点的后代
+  isPosterityOf(targetId:number):boolean{
+    if(this.parent){
+      if(this.parent.id === targetId){
+        return true;
+      }
+      return this.parent.isPosterityOf(targetId)
+    }
+    return false;
+  }
+
 } 
