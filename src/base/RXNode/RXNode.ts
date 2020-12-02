@@ -129,7 +129,10 @@ export class RXNode<T>{
 
   exchangeTo(target:RXNode<T>){
     let targetMeta = target.meta;
+    let targetChildren = target.children;
     target.meta = this.meta;
+    target.children = this.children;
     this.meta = targetMeta;
+    this.children = targetChildren;
   }
 } 
