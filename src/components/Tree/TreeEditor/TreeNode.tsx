@@ -72,6 +72,7 @@ export default function TreeNode(
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>)=>{
     if(draggedNode?.id !== node.id){
+      event.stopPropagation();
       //event.preventDefault();
       setDraggedOver(true);      
     }

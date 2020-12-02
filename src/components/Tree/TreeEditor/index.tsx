@@ -100,6 +100,20 @@ const TreeEditor = React.forwardRef((
     setRoot(rootCopy); 
   }
 
+  const handleAddRootChild = ()=>{
+    let rootCopy = root?.copy();
+
+    if(!rootCopy){
+      return;
+    }
+    
+    let newNode = RXNode.make<ITreeNode>({
+      [nameKey]:'New Node',
+    })
+    newNode.moveIn(rootCopy);    
+    setRoot(rootCopy); 
+  }
+
 
   return (
     <Portlet 
@@ -130,7 +144,7 @@ const TreeEditor = React.forwardRef((
             </Grid>
             
             <Grid item container justify = "center" alignContent = "center" direction = "column" xs = {true}>
-              <IconButton>
+              <IconButton onClick = {handleAddRootChild}>
                 <Add />
               </IconButton>
             </Grid>
