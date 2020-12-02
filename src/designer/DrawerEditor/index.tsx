@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, AppBar, Button, IconButton, Toolbar, Typography, Container, CircularProgress } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, AppBar, IconButton, Toolbar, Typography, Container } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import intl from "react-intl-universal";
@@ -14,6 +14,7 @@ import NodeEditor from './NodeEditor';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { AxiosRequestConfig } from 'axios';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import SubmitButton from 'components/common/SubmitButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,9 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       marginLeft: theme.spacing(2),
       flex: 1,
-      color: theme.palette.text.primary,
-    },
-    saveButton:{
       color: theme.palette.text.primary,
     },
     content:{
@@ -56,17 +54,6 @@ const useStyles = makeStyles((theme: Theme) =>
     right:{
       flex:'1',
       paddingLeft:theme.spacing(5),
-    },
-    wrapper: {
-      margin: theme.spacing(1),
-      position: 'relative',
-    },    
-    buttonProgress: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      marginTop: -12,
-      marginLeft: -12,
     },
   }),
 );
@@ -185,15 +172,16 @@ export default function DrawerEditor(){
           <Typography variant="h6" className={classes.title}>
             {intl.get('edit-drawer')}
           </Typography>
-          <div className={classes.wrapper}>
-            <Button className={classes.saveButton} 
-              onClick={handleSave} size="large"style={{fontSize:'1.2rem'}}
-              disabled={saving}
-            >
-              {intl.get('save')}
-            </Button>
-            {saving && <CircularProgress color = "primary" size={24} className={classes.buttonProgress} />}
-          </div>
+          
+          <SubmitButton
+            variant = "contained"
+            color = "primary"         
+            size="large"
+            onClick={handleSave} 
+            submitting={saving}
+          >
+            {intl.get('save')}
+          </SubmitButton>
         </Toolbar>
       </AppBar>
       <Container className={classes.content} onDragOver={handleOverTopDragOver} onDrop={handleOverTopDop}>

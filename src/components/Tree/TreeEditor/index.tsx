@@ -1,11 +1,13 @@
-import { Button, Divider, Grid, IconButton } from '@material-ui/core';
+import { Divider, Grid, IconButton, ListItem, ListItemText } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
+import { Skeleton } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { RXNode } from 'base/RXNode/RXNode';
+import SubmitButton from 'components/common/SubmitButton';
 import Portlet from 'components/Portlet';
 import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";
@@ -19,10 +21,11 @@ const TreeEditor = React.forwardRef((
     apiForGet:AxiosRequestConfig,
     apiForSave:AxiosRequestConfig,
     nameKey:string,
+    children:any,
   }, 
   ref:any
 )=>{
-  const {apiForGet, apiForSave, nameKey = 'name', ...rest} = props;
+  const {apiForGet, apiForSave, nameKey = 'name', children, ...rest} = props;
 
   const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
   const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
@@ -106,7 +109,7 @@ const TreeEditor = React.forwardRef((
     if(!rootCopy){
       return;
     }
-    
+
     let newNode = RXNode.make<ITreeNode>({
       [nameKey]:'New Node',
     })
@@ -120,7 +123,12 @@ const TreeEditor = React.forwardRef((
       withHeader={true} 
       {...rest}
       actions = {
-        <Button variant = "contained" color = "primary" size = "large">{intl.get("save")}</Button>
+        <SubmitButton 
+          variant = "contained" 
+          color = "primary" 
+          size = "large" 
+          submitting = {saving}
+        >{intl.get("save")}</SubmitButton>
       }
     >
       <Grid container>
@@ -130,17 +138,34 @@ const TreeEditor = React.forwardRef((
             onDrop = {handelRootDrop}
           >
             <Grid item>
-              <TreeList 
-                nodes={root?.children} 
-                nameKey = {nameKey}
-                draggedNode = {draggedNode}
-                onNodeDragStart = {handleNodeDragStart}
-                onDragEnd = {()=>setDraggedNode(undefined)}
-                onDragIn = {handleDragIn}
-                onExchange = {handleExchange}
-                onRemove = {handelRemove}
-                onAddChild = {handleAddChild}
-              />
+              {
+                loading?
+                (new Array(4).fill('')).map((item,index)=>{
+                  return(
+                    <ListItem 
+                      button
+                      key={index} 
+                    >
+                        <ListItemText>
+                          <Skeleton animation="wave" variant="rect" width={'60%'} height={30} />
+                        </ListItemText>
+                    </ListItem>
+                  )
+                })
+                :
+                <TreeList 
+                  nodes={root?.children} 
+                  nameKey = {nameKey}
+                  draggedNode = {draggedNode}
+                  onNodeDragStart = {handleNodeDragStart}
+                  onDragEnd = {()=>setDraggedNode(undefined)}
+                  onDragIn = {handleDragIn}
+                  onExchange = {handleExchange}
+                  onRemove = {handelRemove}
+                  onAddChild = {handleAddChild}
+                />              
+              }
+
             </Grid>
             
             <Grid item container justify = "center" alignContent = "center" direction = "column" xs = {true}>
@@ -153,7 +178,7 @@ const TreeEditor = React.forwardRef((
 
         </Grid>
         <Grid item xs={7}>
-          item content
+          {children}
         </Grid>
       </Grid>
     </Portlet>
