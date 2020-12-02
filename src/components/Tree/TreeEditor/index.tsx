@@ -1,8 +1,10 @@
-import { Button, Divider, FormControlLabel, Grid, Switch } from '@material-ui/core';
+import { Button, Divider, Grid, IconButton } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import Portlet from 'components/Portlet';
 import React from 'react';
 import intl from "react-intl-universal";
+import TreeList from './TreeList';
 
 
 const TreeEditor = React.forwardRef((
@@ -14,10 +16,6 @@ const TreeEditor = React.forwardRef((
 )=>{
   const {...rest} = props;
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue = event.target.checked
-  }; 
-  
   return (
     <Portlet 
       withHeader={true} 
@@ -28,8 +26,16 @@ const TreeEditor = React.forwardRef((
     >
       <Grid container>
         <Grid container item xs={5}>
-          <Grid item xs={true}>
-          tree<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <Grid item container xs={true} direction="column">
+            <Grid item>
+              <TreeList />
+            </Grid>
+            
+            <Grid item container justify = "center" alignContent = "center" direction = "column" xs = {true}>
+              <IconButton>
+                <Add />
+              </IconButton>
+            </Grid>
           </Grid>
           <Divider orientation="vertical" flexItem />  
 

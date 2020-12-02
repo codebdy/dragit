@@ -12,7 +12,7 @@ export default {
         {
           name: 'GridColumn',
           props: {
-            xs:12,
+            xs:10,
           },
           children: [          {
             name:'TreeEditor',
