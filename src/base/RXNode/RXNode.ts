@@ -127,4 +127,9 @@ export class RXNode<T>{
     return false;
   }
 
+  exchangeTo(target:RXNode<T>){
+    let targetMeta = target.meta;
+    target.meta = this.meta;
+    this.meta = targetMeta;
+  }
 } 

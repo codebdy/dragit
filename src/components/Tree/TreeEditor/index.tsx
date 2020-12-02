@@ -28,19 +28,78 @@ const TreeEditor = React.forwardRef((
   const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
   const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
   const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
-  const [rootNodes, setRootNodes] = useState<Array<RXNode<ITreeNode>>>([]);
-  
+  const [root, setRoot] = useState<RXNodeRoot<ITreeNode>>();
 
   useEffect(()=>{
     const items = itemsJustSaved ? itemsJustSaved : itemsGot;
     let root = new RXNodeRoot<ITreeNode>(); 
     root.parse(items);
-    setRootNodes(root.children);
+    setRoot(root);
   },[itemsJustSaved, itemsGot]);
 
   const handleNodeDragStart = (node?:RXNode<ITreeNode>)=>{
     setDraggedNode(node);
   }
+
+  const handleDragIn = (node:RXNode<ITreeNode>)=>{
+    let rootCopy = root?.copy();
+    let draggedNodeCopy = rootCopy?.getNode(draggedNode?.id);
+    let nodeCopy = rootCopy?.getNode(node.id);
+    if(nodeCopy){
+      draggedNodeCopy?.moveIn(nodeCopy);      
+    }
+    setRoot(rootCopy);
+  }
+
+  const handleExchange = (node:RXNode<ITreeNode>)=>{
+    let rootCopy = root?.copy();
+    let draggedNodeCopy = rootCopy?.getNode(draggedNode?.id);
+    let nodeCopy = rootCopy?.getNode(node.id);
+    if(nodeCopy){
+      draggedNodeCopy?.exchangeTo(nodeCopy);      
+    }
+    setRoot(rootCopy);
+  }
+
+  const handleRootDragOver = (event: React.MouseEvent<unknown>)=>{
+    if(draggedNode){
+      event.preventDefault();
+    }
+  }
+
+  const handelRootDrop =  (event: React.MouseEvent<unknown>)=>{
+    if(draggedNode){
+      let rootCopy = root?.copy();
+      let draggedNodeCopy = rootCopy?.getNode(draggedNode?.id);
+      if(draggedNodeCopy && rootCopy){
+        draggedNodeCopy.moveIn(rootCopy);
+        setRoot(rootCopy);        
+      }
+      event.preventDefault();
+    }
+  }
+
+  const handelRemove = (node:RXNode<ITreeNode>)=>{
+    let rootCopy = root?.copy();
+    let nodeCopy = rootCopy?.getNode(node.id);
+    nodeCopy?.removeFormParent();
+    setRoot(rootCopy); 
+  }
+
+  const handleAddChild = (node:RXNode<ITreeNode>)=>{
+    let rootCopy = root?.copy();
+    let nodeCopy = rootCopy?.getNode(node.id);
+    if(!nodeCopy){
+      return;
+    }
+    
+    let newNode = RXNode.make<ITreeNode>({
+      [nameKey]:'New Node',
+    })
+    newNode.moveIn(nodeCopy);    
+    setRoot(rootCopy); 
+  }
+
 
   return (
     <Portlet 
@@ -52,15 +111,21 @@ const TreeEditor = React.forwardRef((
     >
       <Grid container>
         <Grid container item xs={5}>
-          <Grid item container xs={true} direction="column">
+          <Grid item container xs={true} direction="column"
+            onDragOver = {handleRootDragOver}
+            onDrop = {handelRootDrop}
+          >
             <Grid item>
               <TreeList 
-                nodes={rootNodes} 
+                nodes={root?.children} 
                 nameKey = {nameKey}
                 draggedNode = {draggedNode}
                 onNodeDragStart = {handleNodeDragStart}
                 onDragEnd = {()=>setDraggedNode(undefined)}
-            
+                onDragIn = {handleDragIn}
+                onExchange = {handleExchange}
+                onRemove = {handelRemove}
+                onAddChild = {handleAddChild}
               />
             </Grid>
             

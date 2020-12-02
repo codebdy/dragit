@@ -53,9 +53,13 @@ export default function TreeNode(
     draggedNode?:RXNode<ITreeNode>,
     onNodeDragStart:(node?:RXNode<ITreeNode>)=>void,
     onDragEnd:()=>void,
+    onDragIn:(node:RXNode<ITreeNode>)=>void,
+    onExchange:(node:RXNode<ITreeNode>)=>void,
+    onRemove:(node:RXNode<ITreeNode>)=>void,
+    onAddChild:(node:RXNode<ITreeNode>)=>void,
   }
 ){
-  const {node, nameKey, draggedNode, onNodeDragStart, onDragEnd} = props;
+  const {node, nameKey, draggedNode, onNodeDragStart, onDragEnd, onDragIn, onExchange, onRemove, onAddChild} = props;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [draggedOver, setDraggedOver] = useState(false);
@@ -92,11 +96,12 @@ export default function TreeNode(
       && !draggedNode.isAncestorOf(node.id) ){
       event.preventDefault();
       setDraggedOver(true);
-      setDragInOver(true);      
+      setDragInOver(true);
     }
     else{
       setDragInOver(false);
     }
+    event.stopPropagation();
   }
 
   const handleMouseOver = (event: React.MouseEvent<unknown>)=>{
@@ -112,6 +117,7 @@ export default function TreeNode(
     onDragEnd();
     setDragChangedOver(false);
     event.stopPropagation();
+    onExchange(node);
   }
 
   const handleDropIn = (event: React.MouseEvent<unknown>)=>{
@@ -119,6 +125,7 @@ export default function TreeNode(
     onDragEnd();
     setDragInOver(false);
     event.stopPropagation();
+    onDragIn(node);     
   }
 
   return (
@@ -142,13 +149,13 @@ export default function TreeNode(
               <div className = {classes.editActions}>
                 <IconButton size = "small" onClick={(e)=>{
                   e.stopPropagation();
-                  //onAddFolder(node);
+                  onAddChild(node);
                 }}>
                   <Add fontSize = "small" />
                 </IconButton>
                 <IconButton size = "small"  onClick={(e)=>{
                   e.stopPropagation();
-                  //onRemoveFolder(node);
+                  onRemove(node);
                 }}>
                   <Delete fontSize = "small" />
                 </IconButton>
@@ -193,7 +200,11 @@ export default function TreeNode(
               nameKey = {nameKey}
               draggedNode = {draggedNode}
               onNodeDragStart = {onNodeDragStart}
-              onDragEnd = {onDragEnd} 
+              onDragEnd = {onDragEnd}
+              onDragIn = {onDragIn} 
+              onExchange = {onExchange}
+              onRemove = {onRemove}
+              onAddChild = {onAddChild}
             />
           )
         })

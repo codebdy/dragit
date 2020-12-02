@@ -24,9 +24,13 @@ export default function TreeList(
     draggedNode?:RXNode<ITreeNode>,
     onNodeDragStart:(node?:RXNode<ITreeNode>)=>void,
     onDragEnd:()=>void,
+    onDragIn:(node:RXNode<ITreeNode>)=>void,
+    onExchange:(node:RXNode<ITreeNode>)=>void,
+    onRemove:(node:RXNode<ITreeNode>)=>void,
+    onAddChild:(node:RXNode<ITreeNode>)=>void,
   }
 ) {
-  const {nodes, nameKey, draggedNode, onNodeDragStart, onDragEnd} = props;
+  const {nodes, nameKey, draggedNode, onNodeDragStart, onDragEnd, onDragIn, onExchange, onRemove, onAddChild} = props;
   const classes = useStyles();
 
   return (
@@ -45,6 +49,10 @@ export default function TreeList(
               draggedNode = {draggedNode}
               onNodeDragStart = {onNodeDragStart}
               onDragEnd = {onDragEnd}
+              onDragIn = {onDragIn}
+              onExchange = {onExchange}
+              onRemove = {onRemove}
+              onAddChild = {onAddChild}
             ></TreeNode>
           )
         })
