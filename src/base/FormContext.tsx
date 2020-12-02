@@ -8,6 +8,7 @@ export interface IForm {
   errors?: any;
   status?: any;
   forceUpdate?: (newForm: IForm) => void;
+  valueChanged?: (field:string, value:any) =>void;
   registers: { [key: string]: Regeister; };
 }
 

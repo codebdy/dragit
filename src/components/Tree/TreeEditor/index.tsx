@@ -47,6 +47,13 @@ const TreeEditor = React.forwardRef((
     setDraggedNode(node);
   }
 
+  //form值改变刷新树列表
+  const valueChanged = ()=>{
+    let newRoot = new RXNodeRoot<ITreeNode>();
+    newRoot.children = [...(root?.children||[])];
+    setRoot(newRoot);
+  }
+
   const handleDragIn = (node:RXNode<ITreeNode>)=>{
     let rootCopy = root?.copy();
     let draggedNodeCopy = rootCopy?.getNode(draggedNode?.id);
@@ -127,6 +134,7 @@ const TreeEditor = React.forwardRef((
         ...form,
         defaultValues:node.meta,
         values:node.meta,
+        valueChanged:valueChanged
       })
     }
     else{
