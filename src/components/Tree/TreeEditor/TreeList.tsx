@@ -28,9 +28,10 @@ export default function TreeList(
     onExchange:(node:RXNode<ITreeNode>)=>void,
     onRemove:(node:RXNode<ITreeNode>)=>void,
     onAddChild:(node:RXNode<ITreeNode>)=>void,
+    onSelect:(nodeId:number)=>void,
   }
 ) {
-  const {nodes, nameKey, draggedNode, onNodeDragStart, onDragEnd, onDragIn, onExchange, onRemove, onAddChild} = props;
+  const {nodes, nameKey, draggedNode, onNodeDragStart, onDragEnd, onDragIn, onExchange, onRemove, onAddChild, onSelect} = props;
   const classes = useStyles();
 
   return (
@@ -38,6 +39,9 @@ export default function TreeList(
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
+      onNodeSelect = {(e: any, nodeId: string) =>{
+        onSelect(parseInt(nodeId));
+      }} 
     >
       {
         nodes?.map(node=>{

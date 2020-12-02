@@ -1,26 +1,6 @@
-import React from "react";
 import { useContext } from "react";
+import { IForm, FormContext } from "../../../../base/FormContext";
 import { Regeister, ValidationRule, ValidationRules } from "./Regeister";
-
-export interface IForm{
-  defaultValues?:any,
-  values:any,
-  errors?:any,
-  status?:any,
-  forceUpdate?:(newForm:IForm)=>void,
-  registers:{[key:string]:Regeister},
-}
-
-export const defultForm = ()=>{
-  return {
-    defaultValues:{},
-    values:{},
-    errors:{},  
-    registers:{}
-  }
-};
-
-export const FormContext = React.createContext<IForm>(defultForm());
 
 export function useFormContext():IForm&{
   setValue:(field:string, value:any)=>void,

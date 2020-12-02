@@ -15,4 +15,8 @@ export default function mockTrees(){
     return JSON.parse(JSON.stringify(window.trees[modelName]));
   })
 
+  Mock.mock(RegExp('/api/data/save-model-tree?.*'),'post', (request)=>{
+    let modelName = getModelName(request.url);
+    console.log('server received tree:', modelName, JSON.parse(request.body));
+  })
 }

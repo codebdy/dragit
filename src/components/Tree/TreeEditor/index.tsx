@@ -1,6 +1,7 @@
 import { Divider, Grid, IconButton, ListItem, ListItemText } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
+import { IForm, defultForm, FormContext } from "base/FormContext";
 import { AxiosRequestConfig } from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import { useAxios } from 'base/Hooks/useAxios';
@@ -32,6 +33,8 @@ const TreeEditor = React.forwardRef((
   const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
   const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
   const [root, setRoot] = useState<RXNodeRoot<ITreeNode>>();
+  const [form, setForm] = useState<IForm>(defultForm());
+  const [selectedNode, setSelectedNode] = useState<RXNode<ITreeNode>|undefined>();
 
   useEffect(()=>{
     const items = itemsJustSaved ? itemsJustSaved : itemsGot;
@@ -117,6 +120,34 @@ const TreeEditor = React.forwardRef((
     setRoot(rootCopy); 
   }
 
+  const handleSelect = (nodeId:number)=>{
+    let node = root?.getNode(nodeId);
+    if(node){
+      setForm({
+        ...form,
+        defaultValues:node.meta,
+        values:node.meta,
+      })
+    }
+    else{
+      setForm({
+        ...form,
+        defaultValues:{},
+        values:{},
+      })      
+    }
+
+    setSelectedNode(node)
+  }
+
+  const handleSave = ()=>{
+    setConfigForSave(
+      {
+        ...apiForSave,
+        data:root?.getRootMetas()
+      }
+    )
+  }
 
   return (
     <Portlet 
@@ -128,6 +159,7 @@ const TreeEditor = React.forwardRef((
           color = "primary" 
           size = "large" 
           submitting = {saving}
+          onClick = {handleSave}
         >{intl.get("save")}</SubmitButton>
       }
     >
@@ -146,9 +178,9 @@ const TreeEditor = React.forwardRef((
                       button
                       key={index} 
                     >
-                        <ListItemText>
-                          <Skeleton animation="wave" variant="rect" width={'60%'} height={30} />
-                        </ListItemText>
+                      <ListItemText>
+                        <Skeleton animation="wave" variant="rect" width={'60%'} height={30} />
+                      </ListItemText>
                     </ListItem>
                   )
                 })
@@ -163,6 +195,7 @@ const TreeEditor = React.forwardRef((
                   onExchange = {handleExchange}
                   onRemove = {handelRemove}
                   onAddChild = {handleAddChild}
+                  onSelect = {handleSelect}
                 />              
               }
 
@@ -178,7 +211,9 @@ const TreeEditor = React.forwardRef((
 
         </Grid>
         <Grid item xs={7}>
-          {children}
+          <FormContext.Provider value = {form}>
+            {selectedNode && children}
+          </FormContext.Provider>
         </Grid>
       </Grid>
     </Portlet>
