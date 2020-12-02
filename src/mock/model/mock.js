@@ -6,6 +6,7 @@ import articles from 'mock/data/articles';
 import notifications from 'mock/data/notifications'
 import users from './users';
 import roles from './roles';
+import { getModelName } from '../utils/getModelName';
 
 window.modelsList = {
   '/Model/Article':{
@@ -43,13 +44,6 @@ window.listModels = {
   '/Model/User':users,
   '/Model/Article':articles,
   '/Model/Notification':notifications,
-}
-
-function getModelName(url){
-  let modelName = getQueryVariable('modelName',url)
-  console.log(modelName, url);
-  modelName = modelName?.replaceAll('%2F', '/');
-  return modelName;
 }
 
 function getId(url){

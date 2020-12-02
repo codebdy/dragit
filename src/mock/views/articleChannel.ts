@@ -1,3 +1,5 @@
+import { API_GET_MODEL_TREE, API_SAVE_MODEL_TREE } from "APIs/tree";
+
 export default {
   withoutForm:true,
   layout:[
@@ -20,18 +22,21 @@ export default {
               title:'文章频道',
               elevation:6,
               marginTop:4,
-              bind:{
-                method:'post',
-                url:'/api/data/query-operate-models',
+              apiForGet:{
+                ...API_GET_MODEL_TREE,
                 params:{
-                  modelName:'/Model/Article',
+                  modelName:'/Model/ArticleChannel',
                 },      
               },
-
+              apiForSave:{
+                ...API_SAVE_MODEL_TREE,
+                params:{
+                  modelName:'/Model/ArticleChannel',
+                },
+              }
             }
           }],
         }
-
       ]
     },
   ] 

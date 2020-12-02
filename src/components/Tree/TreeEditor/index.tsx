@@ -1,8 +1,11 @@
 import { Button, Divider, Grid, IconButton } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
+import { AxiosRequestConfig } from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
+import { useAxios } from 'base/Hooks/useAxios';
+import { ITreeNode } from 'base/Model/ITreeNode';
 import Portlet from 'components/Portlet';
-import React from 'react';
+import React, { useState } from 'react';
 import intl from "react-intl-universal";
 import TreeList from './TreeList';
 
@@ -11,10 +14,19 @@ const TreeEditor = React.forwardRef((
   props:{
     title:string,
     elevation:number,
+    apiForGet:AxiosRequestConfig,
+    apiForSave:AxiosRequestConfig,
+    nameKey:string,
   }, 
   ref:any
 )=>{
-  const {...rest} = props;
+  const {apiForGet, apiForSave, nameKey = 'name', ...rest} = props;
+
+  const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
+  const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
+  const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
+
+  const items = itemsJustSaved ? itemsJustSaved : itemsGot;
 
   return (
     <Portlet 
@@ -28,7 +40,7 @@ const TreeEditor = React.forwardRef((
         <Grid container item xs={5}>
           <Grid item container xs={true} direction="column">
             <Grid item>
-              <TreeList />
+              <TreeList nodes={items} nameKey = {nameKey}/>
             </Grid>
             
             <Grid item container justify = "center" alignContent = "center" direction = "column" xs = {true}>

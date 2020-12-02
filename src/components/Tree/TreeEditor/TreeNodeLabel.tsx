@@ -5,12 +5,13 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     itemLabel:{
       padding:theme.spacing(1, 0),
+      userSelect:'none',
     }
 
   }),
 );
 
-export default function TreeListLabel(
+export default function TreeNodeLabel(
   props:{
     children?:any
   }

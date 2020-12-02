@@ -3,8 +3,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
-import TreeListLabel from './TreeListLabel';
+import { ITreeNode } from 'base/Model/ITreeNode';
+import TreeNode from './TreeNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function TreeList() {
+export default function TreeList(
+  props:{
+    nodes?:Array<ITreeNode>,
+    nameKey:string,
+  }
+) {
+  const {nodes, nameKey} = props;
   const classes = useStyles();
 
   return (
@@ -26,23 +32,13 @@ export default function TreeList() {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
     >
-      <TreeItem nodeId="1" 
-        label={
-          <TreeListLabel>哈哈</TreeListLabel> 
-        }>
-        <TreeItem nodeId="2" label={<TreeListLabel>喜喜</TreeListLabel> } />
-        <TreeItem nodeId="3" label="Chrome" />
-        <TreeItem nodeId="4" label="Webstorm" />
-      </TreeItem>
-      <TreeItem nodeId="5" label="Documents">
-        <TreeItem nodeId="10" label="OSS" />
-        <TreeItem nodeId="6" label="Material-UI">
-          <TreeItem nodeId="7" label="src">
-            <TreeItem nodeId="8" label="index.js" />
-            <TreeItem nodeId="9" label="tree-view.js" />
-          </TreeItem>
-        </TreeItem>
-      </TreeItem>
+      {
+        nodes?.map(node=>{
+          return(
+            <TreeNode key={node.id} node={node} nameKey = {nameKey}></TreeNode>
+          )
+        })
+      }
     </TreeView>
   );
 }

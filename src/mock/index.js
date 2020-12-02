@@ -11,6 +11,7 @@ import mockMedias from './medias/mock'
 import modules from './modules/modules'
 import mockModules from './modules/mock'
 import mockModel from './model/mock'
+import mockTrees from './tree/mock'
 
 window.drawerData = drawer;
 window.modules = modules;
@@ -33,6 +34,7 @@ Mock.mock('/api/page/test', 'get', test)
 mockMedias();
 mockModules();
 mockModel();
+mockTrees();
 
 Mock.mock('/api/base/items','get', [
     {
