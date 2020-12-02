@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, IconButton } from '@material-ui/core';
 import { TreeItem } from '@material-ui/lab';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { green, grey } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
+import { Add, Delete } from '@material-ui/icons';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,35 +17,47 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
     },
     itemLabel:{
-      padding:theme.spacing(1, 0),
+      padding:theme.spacing(0.5, 0),
       userSelect:'none',
       display:'flex',
       justifyContent:'space-between'
+    },
+    labelText:{
+      padding:theme.spacing(0.5, 0),
     },
     draggedHover:{
       outline: grey[500] + ' dashed 1px',
     },
     dragInTip:{
       outline:grey[500] + ' dashed 1px',
-      marginLeft:theme.spacing(1),
+      marginRight:theme.spacing(1),
+      padding:theme.spacing(0, 1),
+      display:'flex',
+      alignItems:'center',
     },
     tipDraggedOver:{
       outline:theme.palette.primary.main + ' solid 1px',
     },
+    editActions:{
+      display:'flex',
+      alignItems:'center',
+      marginRight:theme.spacing(1),
+    }
   }),
 );
 
 export default function TreeNode(
   props:{
-    node:ITreeNode,
+    node:RXNode<ITreeNode>,
     nameKey:string,
-    draggedNode?:ITreeNode,
-    onNodeDragStart:(node?:ITreeNode)=>void,
+    draggedNode?:RXNode<ITreeNode>,
+    onNodeDragStart:(node?:RXNode<ITreeNode>)=>void,
     onDragEnd:()=>void,
   }
 ){
   const {node, nameKey, draggedNode, onNodeDragStart, onDragEnd} = props;
   const classes = useStyles();
+  const [hover, setHover] = useState(false);
   const [draggedOver, setDraggedOver] = useState(false);
   const [dragChangedOver, setDragChangedOver] = useState(false);
   const [dragInOver, setDragInOver] = useState(false);
@@ -82,6 +95,14 @@ export default function TreeNode(
     setDraggedOver(false);
   }
 
+  const handleMouseOver = (event: React.MouseEvent<unknown>)=>{
+    setHover(true);
+  }
+
+  const handleMouseOut = (event: React.MouseEvent<unknown>)=>{
+    setHover(false);
+  }
+
   return (
     <TreeItem 
       nodeId = {node.id.toString()}
@@ -94,9 +115,29 @@ export default function TreeNode(
           onDragLeave = {()=>setDraggedOver(false)}
           onDragEnd = {onDragEnd}
           onDrop = {handleDropOnLabel}
+
+          onMouseOver = {handleMouseOver}
+          onMouseLeave = {handleMouseOut}
         >
-          {node[nameKey]}
+          <div className = {classes.labelText}>{node.meta[nameKey]}</div>
           <div className={classes.actions}>
+            {
+              hover && !draggedNode &&
+              <div className = {classes.editActions}>
+                <IconButton size = "small" onClick={(e)=>{
+                  e.stopPropagation();
+                  //onAddFolder(node);
+                }}>
+                  <Add fontSize = "small" />
+                </IconButton>
+                <IconButton size = "small"  onClick={(e)=>{
+                  e.stopPropagation();
+                  //onRemoveFolder(node);
+                }}>
+                  <Delete fontSize = "small" />
+                </IconButton>
+              </div>
+            }
             {
               draggedNode &&
               <Fragment>

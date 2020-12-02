@@ -5,6 +5,7 @@ export class RXNodeRoot<T> extends RXNode<T>{
   children = new Array<RXNode<T>>();
 
   parse(metas?:Array<T>){
+    this.children = [];
     metas && metas.forEach((meta: any)=>{
       let node = RXNode.make<T>(meta);
       node.parent = this;

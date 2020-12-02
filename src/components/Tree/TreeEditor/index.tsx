@@ -4,8 +4,10 @@ import { AxiosRequestConfig } from 'axios';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ITreeNode } from 'base/Model/ITreeNode';
+import { RXNodeRoot } from 'base/RXNode/Root';
+import { RXNode } from 'base/RXNode/RXNode';
 import Portlet from 'components/Portlet';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";
 import TreeList from './TreeList';
 
@@ -25,11 +27,18 @@ const TreeEditor = React.forwardRef((
   const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
   const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
   const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
-  const [draggedNode, setDraggedNode] = useState<ITreeNode|undefined>();
+  const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
+  const [rootNodes, setRootNodes] = useState<RXNodeRoot<ITreeNode>>(new RXNodeRoot<ITreeNode>())
+  
 
-  const items = itemsJustSaved ? itemsJustSaved : itemsGot;
+  useEffect(()=>{
+    const items = itemsJustSaved ? itemsJustSaved : itemsGot;
+    let root = new RXNodeRoot<ITreeNode>(); 
+    root.parse(items);
+    setRootNodes(root);
+  },[itemsJustSaved, itemsGot]);
 
-  const handleNodeDragStart = (node?:ITreeNode)=>{
+  const handleNodeDragStart = (node?:RXNode<ITreeNode>)=>{
     setDraggedNode(node);
   }
 
@@ -46,7 +55,7 @@ const TreeEditor = React.forwardRef((
           <Grid item container xs={true} direction="column">
             <Grid item>
               <TreeList 
-                nodes={items} 
+                nodes={rootNodes.children} 
                 nameKey = {nameKey}
                 draggedNode = {draggedNode}
                 onNodeDragStart = {handleNodeDragStart}

@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import TreeNode from './TreeNode';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,10 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function TreeList(
   props:{
-    nodes?:Array<ITreeNode>,
+    nodes?:Array<RXNode<ITreeNode>>,
     nameKey:string,
-    draggedNode?:ITreeNode,
-    onNodeDragStart:(node?:ITreeNode)=>void,
+    draggedNode?:RXNode<ITreeNode>,
+    onNodeDragStart:(node?:RXNode<ITreeNode>)=>void,
     onDragEnd:()=>void,
   }
 ) {
