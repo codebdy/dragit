@@ -28,14 +28,14 @@ const TreeEditor = React.forwardRef((
   const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
   const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
   const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
-  const [rootNodes, setRootNodes] = useState<RXNodeRoot<ITreeNode>>(new RXNodeRoot<ITreeNode>())
+  const [rootNodes, setRootNodes] = useState<Array<RXNode<ITreeNode>>>([]);
   
 
   useEffect(()=>{
     const items = itemsJustSaved ? itemsJustSaved : itemsGot;
     let root = new RXNodeRoot<ITreeNode>(); 
     root.parse(items);
-    setRootNodes(root);
+    setRootNodes(root.children);
   },[itemsJustSaved, itemsGot]);
 
   const handleNodeDragStart = (node?:RXNode<ITreeNode>)=>{
@@ -55,7 +55,7 @@ const TreeEditor = React.forwardRef((
           <Grid item container xs={true} direction="column">
             <Grid item>
               <TreeList 
-                nodes={rootNodes.children} 
+                nodes={rootNodes} 
                 nameKey = {nameKey}
                 draggedNode = {draggedNode}
                 onNodeDragStart = {handleNodeDragStart}

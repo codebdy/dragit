@@ -94,12 +94,9 @@ export default function TreeNode(
       setDraggedOver(true);
       setDragInOver(true);      
     }
-  }
-
-  const handleDropOnLabel =(event: React.DragEvent<HTMLDivElement>)=>{
-    event.stopPropagation();
-    event.preventDefault();
-    setDraggedOver(false);
+    else{
+      setDragInOver(false);
+    }
   }
 
   const handleMouseOver = (event: React.MouseEvent<unknown>)=>{
@@ -108,6 +105,20 @@ export default function TreeNode(
 
   const handleMouseOut = (event: React.MouseEvent<unknown>)=>{
     setHover(false);
+  }
+
+  const handleDropChange = (event: React.MouseEvent<unknown>)=>{
+    setDraggedOver(false);
+    onDragEnd();
+    setDragChangedOver(false);
+    event.stopPropagation();
+  }
+
+  const handleDropIn = (event: React.MouseEvent<unknown>)=>{
+    setDraggedOver(false);
+    onDragEnd();
+    setDragInOver(false);
+    event.stopPropagation();
   }
 
   return (
@@ -121,8 +132,6 @@ export default function TreeNode(
           onDragOver = {handleDragOver}
           onDragLeave = {()=>setDraggedOver(false)}
           onDragEnd = {onDragEnd}
-          onDrop = {handleDropOnLabel}
-
           onMouseOver = {handleMouseOver}
           onMouseLeave = {handleMouseOut}
         >
@@ -152,6 +161,7 @@ export default function TreeNode(
                   className={classNames(classes.dragInTip, {[classes.tipDraggedOver]:dragChangedOver})}
                   onDragOver = {handleDragChangeOver}
                   onDragLeave = {()=>setDragChangedOver(false)}
+                  onDrop = {handleDropChange}
                   style={{opacity:draggedOver ? 1 : 0}}
                 >
                   {intl.get('drag-to-replace')}
@@ -160,6 +170,7 @@ export default function TreeNode(
                   className={classNames(classes.dragInTip, {[classes.tipDraggedOver]:dragInOver})}
                   onDragOver = {handleDragInOver}
                   onDragLeave = {()=>setDragInOver(false)}
+                  onDrop = {handleDropIn}
                   style={{opacity:draggedOver ? 1 : 0}}
                 >
                   {intl.get('drag-to-sub-node')}
