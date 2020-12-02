@@ -21,9 +21,12 @@ export default function TreeList(
   props:{
     nodes?:Array<ITreeNode>,
     nameKey:string,
+    draggedNode?:ITreeNode,
+    onNodeDragStart:(node?:ITreeNode)=>void,
+    onDragEnd:()=>void,
   }
 ) {
-  const {nodes, nameKey} = props;
+  const {nodes, nameKey, draggedNode, onNodeDragStart, onDragEnd} = props;
   const classes = useStyles();
 
   return (
@@ -35,7 +38,14 @@ export default function TreeList(
       {
         nodes?.map(node=>{
           return(
-            <TreeNode key={node.id} node={node} nameKey = {nameKey}></TreeNode>
+            <TreeNode 
+              key={node.id} 
+              node={node} 
+              nameKey = {nameKey}
+              draggedNode = {draggedNode}
+              onNodeDragStart = {onNodeDragStart}
+              onDragEnd = {onDragEnd}
+            ></TreeNode>
           )
         })
       }

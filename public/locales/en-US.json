@@ -228,7 +228,9 @@
 
     "new-notifications":"New notifications",
     "no-notifications":"No notifications",
-    "view-all":"View All"
+    "view-all":"View All",
+    "drag-to-replace":"Replace",
+    "drag-to-sub-node":"Become to subnode"
 
 
 }

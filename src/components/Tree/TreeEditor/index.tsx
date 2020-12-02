@@ -25,8 +25,13 @@ const TreeEditor = React.forwardRef((
   const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
   const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
   const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
+  const [draggedNode, setDraggedNode] = useState<ITreeNode|undefined>();
 
   const items = itemsJustSaved ? itemsJustSaved : itemsGot;
+
+  const handleNodeDragStart = (node?:ITreeNode)=>{
+    setDraggedNode(node);
+  }
 
   return (
     <Portlet 
@@ -40,7 +45,14 @@ const TreeEditor = React.forwardRef((
         <Grid container item xs={5}>
           <Grid item container xs={true} direction="column">
             <Grid item>
-              <TreeList nodes={items} nameKey = {nameKey}/>
+              <TreeList 
+                nodes={items} 
+                nameKey = {nameKey}
+                draggedNode = {draggedNode}
+                onNodeDragStart = {handleNodeDragStart}
+                onDragEnd = {()=>setDraggedNode(undefined)}
+            
+              />
             </Grid>
             
             <Grid item container justify = "center" alignContent = "center" direction = "column" xs = {true}>
