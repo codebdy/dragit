@@ -73,9 +73,9 @@ export default function ChipsInput(
   }, [focused])
 
   useEffect(() => {
-    document.addEventListener('click', handleBlur);
+    document.addEventListener('mousedown', handleBlur);
     return () => {
-      document.removeEventListener('click', handleBlur)
+      document.removeEventListener('mousedown', handleBlur)
     };
   });
 
@@ -127,7 +127,7 @@ export default function ChipsInput(
       </ul>
       <div className = {classes.actions}>
         {
-          hover && (!value || value.length > 0) &&
+          (focused || hover) && (!value || value.length > 0) &&
           <IconButton size="small">
             <CloseIcon fontSize="small"/>
           </IconButton>
