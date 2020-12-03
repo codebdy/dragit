@@ -1,7 +1,7 @@
 import { createStyles, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, makeStyles, OutlinedInput, Switch, Theme } from '@material-ui/core';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import React from 'react';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ChipsInput from './ChipsInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,15 +32,11 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
         id={name}
         //value={values.weight}
         onChange={handleChange}
-        endAdornment={<InputAdornment position="end">
-          <IconButton size="small" className={classes.dropDownButton}>
-            <ArrowDropDownIcon/>
-          </IconButton>
-        </InputAdornment>}
+
         inputProps={{
           'aria-label': label,
         }}
-        inputComponent = {'input'}
+        inputComponent = {ChipsInput}
         labelWidth={0}
       />
       <FormHelperText id={`${name}-helper-text`}>helperText</FormHelperText>
