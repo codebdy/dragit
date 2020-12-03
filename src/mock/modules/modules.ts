@@ -7,6 +7,8 @@ import rolePage from '../views/rolePage'
 import notificationPage from '../views/notificationPage'
 import notificationViewPage from '../views/notificationViewPage'
 import articleChannel from '../views/articleChannel'
+import articleTags from '../views/articleTags'
+import articleTagEdit from '../views/articleTagEdit'
 
 var modules = [
   {
@@ -67,18 +69,38 @@ var modules = [
   },
   {
     id:3,
-    slug:'user',
-    title:'管理员',
+    slug:'article-tag',
+    title:'文章标签',
     indexPageId:31,
     pages:[
       {
         id:31,
+        title:'标签列表',
+        slug:'article-tag-list',
+        jsonSchema: articleTags,
+      },
+      {
+        id:32,
+        title:'标签编辑',
+        slug:'article-tag-edit',
+        jsonSchema: articleTagEdit,
+      },
+    ],
+  },
+  {
+    id:7,
+    slug:'user',
+    title:'管理员',
+    indexPageId:71,
+    pages:[
+      {
+        id:71,
         title:'管理员列表',
         slug:'urser-list',
         jsonSchema: users,
       },
       {
-        id:32,
+        id:72,
         title:'管理员编辑',
         slug:'edit-user',
         jsonSchema: user,
@@ -86,19 +108,19 @@ var modules = [
     ],
   },
   {
-    id:4,
+    id:8,
     slug:'role',
     title:'角色',
-    indexPageId:41,
+    indexPageId:81,
     pages:[
       {
-        id:41,
+        id:81,
         title:'角色列表',
         slug:'role-list',
         jsonSchema: rolesPage,
       },
       {
-        id:42,
+        id:82,
         title:'角色编辑',
         slug:'edit-role',
         jsonSchema: rolePage,
@@ -107,19 +129,19 @@ var modules = [
   },
 
   {
-    id:5,
+    id:9,
     slug:'notification',
     title:'通知',
-    indexPageId:51,
+    indexPageId:91,
     pages:[
       {
-        id:51,
+        id:91,
         title:'通知列表',
         slug:'notification-list',
         jsonSchema: notificationPage,
       },
       {
-        id:52,
+        id:92,
         title:'查看通知',
         slug:'view-notification',
         jsonSchema: notificationViewPage,

@@ -42,7 +42,7 @@ export default [{
                 title: '标签',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/article-tag',
             },
             {
                 title: '属性',

@@ -215,7 +215,7 @@ const ListView = React.forwardRef((
               rowCount={rows?.length || 0}
               columns = {columns}
               loading = {loading}
-              rowCommandsCount = {batchCommands?.length}
+              rowCommandsCount = {rowCommands?.length}
             />
             <TableBody>
               {rows?.map((row:Row, index: any) => {
@@ -274,7 +274,7 @@ const ListView = React.forwardRef((
                                 rowCommands?.map((command, index)=>{
                                   return(
                                     <Tooltip title={command.label} key={command.slug}>
-                                      <IconButton aria-label={command.label} name={'batch-action-' + command.slug}
+                                      <IconButton aria-label={command.label} name={'row-action-' + command.slug}
                                         onClick = {(e)=>{
                                           command.jumpToPage ? jumpToPage(command.jumpToPage as IPageJumper, row) : handleRowAction(command.slug, row.id);
                                           e.stopPropagation();
