@@ -1,5 +1,6 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
 import {API_GET_MODEL_BY_ID} from "APIs/model"
+import { API_GET_MODEL_TREE } from "APIs/tree";
 
 export default {
   layout:[{
@@ -174,36 +175,18 @@ export default {
                       },
                       children:[
                         {
-                          name:'SelectBox',
+                          name:'TextBox',
                           props:{
-                            label:"分类",
+                            label:'创作日期',
                             variant:"outlined",
-                            field:'category',
-                            //required:true,
-                            helperText:'请选择分类',
                             fullWidth:true,
-                            multiple:true,
-                            rule:{
-                              //required:true,
+                            //size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
                             },
-                            
-                              fromUrl:false,           
-                              items:[
-                                {
-                                  slug:'news',
-                                  label:'新闻',
-                                },
-                                {
-                                  slug:'tech',
-                                  label:'技术',
-                                },
-                                {
-                                  slug:'jingyan‘',
-                                  label:'经验',
-                                },
-                              ]
-                                      
-                          }
+                            field:'create_date',
+                          },
                         }
                       ],
                     },
@@ -220,40 +203,20 @@ export default {
                             variant:"outlined",
                             field:'channel',
                             fullWidth:true,
+                            multiSelect:true,
+                            //size:"small",
                             xs:6,
-                            //required:true,
-                            withoutEmpertyItem:true,                        
-                            
-                              fromUrl:true,
-                              url:'/api/base/items',
-                            
+                            dataApi:{
+                              ...API_GET_MODEL_TREE,
+                              params:{
+                                modelName:'/Model/ArticleChannel',
+                              },                               
+                            },
 
                             rule:{
                               //required:true,
                             },
                           },        
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'创作日期',
-                            variant:"outlined",
-                            fullWidth:true,
-                            //size:"small",
-                            type:'date',
-                            InputLabelProps:{
-                              shrink: true,
-                            },
-                            field:'create_date',
-                          },
                         }
                       ],
                     },

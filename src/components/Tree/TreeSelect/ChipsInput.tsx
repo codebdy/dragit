@@ -1,29 +1,30 @@
-import React, { createRef, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
-import Paper from '@material-ui/core/Paper';
-import TagFacesIcon from '@material-ui/icons/TagFaces';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseIcon from '@material-ui/icons/Close';
-import { IconButton } from '@material-ui/core';
-
-interface ChipData {
-  key: number;
-  label: string;
-}
+import { IconButton, Popover, useTheme } from '@material-ui/core';
+import { ITreeNode } from 'base/Model/ITreeNode';
+import TreeList from './TreeList';
+import { isPointInRect } from 'mock/utils/isPointInRect';
+import { remove } from 'ArrayHelper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root:{
+      width:'100%',
       display: 'flex',
+      justifyContent: 'space-between'
     },
     chips: {
       flex: 1,
       display: 'flex',
       flexWrap: 'wrap',
       listStyle: 'none',
-      padding: theme.spacing(0.5),
+      justifyContent:' flex-start',
+      alignItems: 'center',
       margin: 0,
+      padding:0,
     },
     chip: {
       margin: theme.spacing(0.5),
@@ -31,35 +32,69 @@ const useStyles = makeStyles((theme: Theme) =>
     actions:{
       display:'flex',
       alignItems:'center',
+    },
+    treePopover:{
+      display:'flex',
+      justifyContent:'center',
+      padding:theme.spacing(1),
     }
   }),
 );
+
+function getNodeById(id:number, rootNodes?:Array<ITreeNode>):ITreeNode|undefined{
+  if(!rootNodes){
+    return undefined;
+  }
+
+  for(let i = 0; i < rootNodes.length; i++){
+    if(rootNodes[i].id === id){
+      return rootNodes[i];
+    }
+    let foundChild = getNodeById(id, rootNodes[i].children)
+    if(foundChild){
+      return foundChild;
+    }
+  }
+
+  return undefined;
+}
 
 export default function ChipsInput(
   props:{
     onFocus?:(event?: any)=>void,
     onBlur?:(event?: any)=>void,
-    value?:Array<number>,
+    value?:{
+      values?:Array<number>, 
+      rootNodes?:Array<ITreeNode>,
+      nameKey?:string,
+      height?:string,
+      size?:any,
+      multiSelect?:true,
+    },
+    name?:string,
+    itemKey?:string,
+    onChange:(value?:any)=>void,
   }
 ) {
 
-  const {value, onFocus, onBlur} = props;
+  const {value, name, onFocus, onBlur, onChange} = props;
+  const {values, rootNodes, nameKey = 'name', height, size, multiSelect} = value || {} as any;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [focused,setFocused] = useState(false);
   const refEl = useRef(null);
+  const refPoperEl = useRef(null);
+  const theme = useTheme();
 
   const handleBlur = (event: any)=>{
-    let inside = false;
     let domElement = refEl?.current as any;
-    let rect = domElement.getBoundingClientRect()
-    if(rect.left < event.clientX && rect.right >  event.clientX 
-      && rect.top <event.clientY && rect.bottom >  event.clientY){
-      inside = true;
+    let rect = domElement.getBoundingClientRect();
+
+    let popDomElement = refPoperEl?.current as any;
+    let rect2 = popDomElement?.getBoundingClientRect();
+    if(!isPointInRect(event, rect) && !isPointInRect(event, rect2)){
+      setFocused(false); 
     }
-    if(!inside){
-      setFocused(false);     
-    } 
   }
 
   useEffect(()=>{
@@ -78,64 +113,141 @@ export default function ChipsInput(
       document.removeEventListener('mousedown', handleBlur)
     };
   });
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const open = Boolean(anchorEl);
+  const id = open ? 'tree-popover-' + name : undefined;
 
-  const handleClick = (event:React.MouseEvent<unknown>)=>{
+  const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
+    setAnchorEl(event.currentTarget);
     setFocused(true);
     event.preventDefault();
     event.stopPropagation();
   }
-  
 
-  const [chipData, setChipData] = React.useState<ChipData[]>([
-    { key: 0, label: 'Angular' },
-    { key: 1, label: 'jQuery' },
-    { key: 2, label: 'Polymer' },
-    { key: 3, label: 'React' },
-    { key: 4, label: 'Vue.js' },
-  ]);
-
-  const handleDelete = (chipToDelete: ChipData) => () => {
-    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+  const handleDelete = (id:number) => () => {
+    let valuesCopy = [...values];
+    remove(id, valuesCopy);
+    onChange(
+      {
+        target:{
+          value:valuesCopy,
+        }
+      }
+    );
   };
 
+  const handleSelectChange = (id:number|undefined, isSelected:boolean)=>{
+    let valuesCopy = [...values];
+    if(isSelected){
+      valuesCopy.push(id);
+    }
+    else{
+      remove(id, valuesCopy)
+    }
+
+    onChange(
+      {
+        target:{
+          value:valuesCopy,
+        }
+      }
+    );
+  }
+
+  const handleClear = (event:React.MouseEvent<unknown>)=>{
+    event.stopPropagation();
+    onChange({
+      target:{
+        value:[],
+      }
+    });
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const getName = (id:number)=>{
+    let node = getNodeById(id, rootNodes);
+    return node ? node[nameKey] : id;
+  }
+
   return (
-    <div className={classes.root}
-      onMouseMove = {()=>setHover(true)}
-      onMouseLeave = {()=>setHover(false)}
-      onClick = {handleClick}
-      ref = {refEl}
-    >
-      <ul className={classes.chips}>
-        {chipData.map((data) => {
-          let icon;
-
-          if (data.label === 'React') {
-            icon = <TagFacesIcon />;
-          }
-
-          return (
-            <li key={data.key}>
-              <Chip
-                icon={icon}
-                label={data.label}
-                onDelete={data.label === 'React' ? undefined : handleDelete(data)}
-                className={classes.chip}
-              />
-            </li>
-          );
-        })}
-      </ul>
-      <div className = {classes.actions}>
-        {
-          (focused || hover) && (!value || value.length > 0) &&
+    <Fragment>
+      <div className={classes.root}
+        onMouseMove = {()=>setHover(true)}
+        onMouseLeave = {()=>setHover(false)}
+        onClick = {handleClick}
+        ref = {refEl}
+        style={{minHeight:size==="small" ? theme.spacing(4.6) : theme.spacing(6.6)}}
+      >
+        <ul className={classes.chips}>
+          {values && values.map((id:number) => {
+            return (
+              <li key={id}>
+                <Chip
+                  label={getName(id)}
+                  onDelete={handleDelete(id)}
+                  className={classes.chip}
+                  size = {size}
+                />
+              </li>
+            );
+          })}
+        </ul>
+        <div className = {classes.actions}>
+          {
+            (focused || hover) &&
+            <IconButton size="small" onClick={handleClear}>
+              <CloseIcon fontSize="small"/>
+            </IconButton>
+          }        
           <IconButton size="small">
-            <CloseIcon fontSize="small"/>
+            <ArrowDropDownIcon/>
           </IconButton>
-        }        
-        <IconButton size="small">
-          <ArrowDropDownIcon/>
-        </IconButton>
+        </div>
       </div>
-    </div>
+      {
+        open &&
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <div
+            className = {classes.treePopover}
+            style={{
+              minWidth: Math.round(anchorEl?.getBoundingClientRect().width || 100) + 'px',
+              height:height ? height : '300px',
+            }}
+            ref = {refPoperEl}
+          >
+            {
+              rootNodes && rootNodes.length > 0 ?
+              <TreeList 
+                selected = {values}
+                rootNodes = {rootNodes}
+                nameKey = {nameKey}
+                multiSelect = {multiSelect}
+                onSelectChange = {handleSelectChange}
+              />
+              :
+              "No Data"              
+            }
+
+          </div>
+        </Popover>       
+      }
+
+    </Fragment>
   );
 }
