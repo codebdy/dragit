@@ -214,7 +214,7 @@ export default {
                       },
                       children:[
                         {
-                          name:'SelectBox',
+                          name:'TreeSelect',
                           props:{
                             label:"频道",
                             variant:"outlined",
@@ -269,45 +269,6 @@ export default {
                             label:"标签",
                             variant:"outlined",
                             field:'tags',
-                            multiple:false,
-                            //required:true,
-                           
-                              fromUrl:false,           
-                              items:[
-                                {
-                                  slug:'product',
-                                  label:'产品',
-                                },
-                                {
-                                  slug: 'iPhone',
-                                  label:'iPhone',
-                                },
-                                {
-                                  slug:'apple',
-                                  label:'苹果',
-                                },
-                              ],
-                             
-
-                            rule:{
-                              //required:true,
-                            },
-                          },        
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:12,
-                      },
-                      children:[
-                        {
-                          name:'Combobox',
-                          props:{
-                            label:"标签2",
-                            variant:"outlined",
-                            field:'tags2',
                             multiple:true,
                             fullWidth:true,
                             

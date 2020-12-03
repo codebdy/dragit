@@ -49,6 +49,8 @@ import TinyMCE from 'components/TinyMCE';
 import {TinyMCERule} from 'components/TinyMCE/Rule';
 import TreeEditor from 'components/Tree/TreeEditor';
 import { TreeEditorRule } from 'components/Tree/TreeEditor/Rule';
+import TreeSelect from 'components/Tree/TreeSelect';
+import { TreeSelectRule } from 'components/Tree/TreeSelect/Rule';
 
 const store = configureStore();
 
@@ -75,6 +77,7 @@ register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule);
 register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
 register('TinyMCE', TinyMCE, TinyMCERule);
 register('TreeEditor', TreeEditor, TreeEditorRule);
+register('TreeSelect', TreeSelect, TreeSelectRule);
 register('MediaSelect', MediaSelect);
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);
