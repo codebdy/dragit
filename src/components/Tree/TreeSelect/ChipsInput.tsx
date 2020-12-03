@@ -145,6 +145,12 @@ export default function ChipsInput(
       remove(id, valuesCopy)
     }
 
+    if(!multiSelect){
+      valuesCopy = [id];
+      setFocused(false);
+      setAnchorEl(null);    
+    }
+
     onChange(
       {
         target:{
@@ -152,6 +158,8 @@ export default function ChipsInput(
         }
       }
     );
+
+
   }
 
   const handleClear = (event:React.MouseEvent<unknown>)=>{
