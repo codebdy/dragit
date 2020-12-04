@@ -949,7 +949,6 @@ export default {
                       input:{
                         name:'SelectBox',
                         props:{
-                          label:'币种',
                           variant:"outlined",
                           fullWidth:true,
                           size:'small',
