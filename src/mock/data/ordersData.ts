@@ -7,6 +7,14 @@ export default[
         amount:205396,
         percent:'30%',
         created_at:'2020-11-30 14:38',
+        factoryOrders:[
+          {id:1},
+          {id:2},
+        ],
+        fees:[
+          {id:1},
+          {id:2},
+        ],
       },
       {
         id:2,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { resolveComponent } from 'base/DragRX';
@@ -46,7 +46,14 @@ const OneToManyTable = React.forwardRef((
      ...rest
   } = props;
   const classes = useStyles();
-  const [rows, setRows] = useState(value? addTempIdToTable(value) :[]);
+  const [rows, setRows] = useState<Array<any>>([]);
+  useEffect(()=>{
+    //第一次传入有值的数据时，使用value作为初始值
+    if(rows.length === 0 && value){
+      setRows(addTempIdToTable(value));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[value])
  
   const emitValueChangded = (newValue:any) => {
     const event = {

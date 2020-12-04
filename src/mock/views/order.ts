@@ -513,7 +513,7 @@ export default {
                   isDeisgning:true,
                 },
                 props:{
-                  field:'onetoManyField',                
+                  field:'factoryOrders',                
                   title:'工厂合同',
                   elevation: 6,
                   marginTop: 2,
@@ -915,7 +915,7 @@ export default {
                   marginTop:2,
                   open:true,
                   size:"small",
-                  field:'specs',
+                  field:'fees',
                   columns:[
                     {
                       field:'payment_date',
@@ -1166,7 +1166,7 @@ export default {
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
-      modelName:'/Model/Product',
+      modelName:'/Model/Order',
     },      
   },
 
