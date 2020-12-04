@@ -48,7 +48,7 @@ export default [{
                 title: '属性',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/article-attribute',
             },
         ],
     },

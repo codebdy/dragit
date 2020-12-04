@@ -8,6 +8,7 @@ import users from './users';
 import roles from './roles';
 import { getModelName } from '../utils/getModelName';
 import tags from 'mock/data/tags';
+import articleAttributes from 'mock/data/articleAttributes';
 
 window.modelsList = {
   '/Model/Article':{
@@ -43,7 +44,15 @@ window.modelsList = {
     perPage:10,
     currentPage:0,
     data:tags,
+  },
+
+  '/Model/ArticleAttribute':{
+    total:12,
+    perPage:10,
+    currentPage:0,
+    data:articleAttributes,
   }
+
 
 
 }
@@ -54,6 +63,7 @@ window.listModels = {
   '/Model/Article':articles,
   '/Model/Notification':notifications,
   '/Model/Tag':tags,
+  '/Model/ArticleAttribute':articleAttributes
 }
 
 function getId(url){

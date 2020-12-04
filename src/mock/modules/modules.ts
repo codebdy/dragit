@@ -9,6 +9,8 @@ import notificationViewPage from '../views/notificationViewPage'
 import articleChannel from '../views/articleChannel'
 import articleTags from '../views/articleTags'
 import articleTagEdit from '../views/articleTagEdit'
+import articleAttributes from 'mock/views/articleAttributes'
+import articleAttributeEdit from 'mock/views/articleAttributeEdit'
 
 var modules = [
   {
@@ -84,6 +86,26 @@ var modules = [
         title:'标签编辑',
         slug:'article-tag-edit',
         jsonSchema: articleTagEdit,
+      },
+    ],
+  },
+  {
+    id:4,
+    slug:'article-attribute',
+    title:'文章属性',
+    indexPageId:41,
+    pages:[
+      {
+        id:41,
+        title:'属性列表',
+        slug:'article-attribute-list',
+        jsonSchema: articleAttributes,
+      },
+      {
+        id:42,
+        title:'属性编辑',
+        slug:'article-attribute-edit',
+        jsonSchema: articleAttributeEdit,
       },
     ],
   },
