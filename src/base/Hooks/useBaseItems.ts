@@ -10,7 +10,7 @@ function resolveRequestKey(config?:AxiosRequestConfig){
     return undefined;
   }
   var key = config.url + '?';
-  Object.keys(config.params).forEach((param:any)=>{
+  Object.keys(config.params||{}).forEach((param:any)=>{
     key = key + '&' + param + '=' + config.params[param];
   });
 
