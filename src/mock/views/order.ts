@@ -162,13 +162,33 @@ export default {
                       },
                       children:[
                         {
-                          name:'TextBox',
+                          name:'SelectBox',
                           props:{
                             label:'付款方式',
                             variant:"outlined",
                             fullWidth:true,
                             size:'small',
                             field:'payment_term',
+                            withoutEmpertyItem:true,
+                            items:[
+                              {
+                                slug:'100-0',
+                                label:'T/T 100%/0%'
+                              },
+                              {
+                                slug:'50-50',
+                                label:'T/T 50%/50%'
+                              },                              
+                              {
+                                slug:'30-70',
+                                label:'T/T 30%/70%'
+                              },
+
+                              {
+                                slug:'20-80',
+                                label:'T/T 20%/80%'
+                              },
+                            ]
                           }
                         }
                       ]
@@ -181,13 +201,29 @@ export default {
                       },
                       children:[
                         {
-                          name:'TextBox',
+                          name:'SelectBox',
                           props:{
                             label:'币种',
                             variant:"outlined",
                             fullWidth:true,
                             size:'small',
                             field:'currency',
+                            withoutEmpertyItem:true,
+                            items:[
+                              {
+                                slug:'dollor',
+                                label:'美元'
+                              },
+                              {
+                                slug:'euro',
+                                label:'欧元'
+                              },                              
+                              {
+                                slug:'rmb',
+                                label:'人民币'
+                              },
+
+                            ]
                           }
                         }
                       ]
@@ -236,155 +272,21 @@ export default {
                     {
                       name: 'PortletGridItem',
                       props:{
-                        xs:12,                      
+                        xs:3,
                       },
                       children:[
                         {
                           name:'TextBox',
                           props:{
-                            label:'Slug',
+                            label:'预计发货日期',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'slug',
-                            //required:true,
-                            rule:{
-                              //valueType:'string',
-                              //required:true,
-                            }                      
-                          },
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'作者',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'auther',
-                            //required:true,
-                            helperText:'作者提示',
-                            rule:{
-                              //valueType:'string',
-                              //required:true,
-                            }                      
-                          },
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'Email',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'email',
-                            rule:{
-                              valueType:'string',
-                              ruleType:'email',
-                              required:true,
-                            },
-                          },
-                        }
-                      ]
-
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'SelectBox',
-                          props:{
-                            label:"分类",
-                            variant:"outlined",
-                            field:'category',
-                            //required:true,
-                            helperText:'请选择分类',
-                            fullWidth:true,
-                            multiple:true,
-                            rule:{
-                              //required:true,
-                            },
-                            
-                              items:[
-                                {
-                                  slug:'news',
-                                  label:'新闻',
-                                },
-                                {
-                                  slug:'tech',
-                                  label:'技术',
-                                },
-                                {
-                                  slug:'jingyan‘',
-                                  label:'经验',
-                                },
-                              ]
-                                      
-                          }
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'SelectBox',
-                          props:{
-                            label:"频道",
-                            variant:"outlined",
-                            field:'channel',
-                            fullWidth:true,
-                            xs:6,
-                            required:true,
-                            withoutEmpertyItem:true,                        
-                            
-                              url:'/api/base/items',
-                            
-
-                            rule:{
-                              //required:true,
-                            },
-                          },        
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'创作日期',
-                            variant:"outlined",
-                            fullWidth:true,
-                            //size:"small",
+                            size:"small",
                             type:'date',
                             InputLabelProps:{
                               shrink: true,
                             },
-                            field:'create_date',
+                            field:'date1',
                           },
                         }
                       ],
@@ -392,66 +294,190 @@ export default {
                     {
                       name: 'PortletGridItem',
                       props:{
-                        xs:12,
+                        xs:3,
                       },
                       children:[
                         {
-                          name:'Combobox',
+                          name:'TextBox',
                           props:{
-                            label:"标签",
+                            label:'实际发货日期',
                             variant:"outlined",
-                            field:'tags',
-                            multiple:false,
-                            //required:true,
-                           
-       
-                              items:[
-                                {
-                                  slug:'product',
-                                  label:'产品',
-                                },
-                                {
-                                  slug: 'iPhone',
-                                  label:'iPhone',
-                                },
-                                {
-                                  slug:'apple',
-                                  label:'苹果',
-                                },
-                              ],
-                             
-
-                            rule:{
-                              //required:true,
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
                             },
-                          },        
+                            field:'date2',
+                          },
                         }
                       ],
                     },
                     {
                       name: 'PortletGridItem',
                       props:{
-                        xs:12,
+                        xs:3,
                       },
                       children:[
                         {
-                          name:'Combobox',
+                          name:'TextBox',
                           props:{
-                            label:"标签2",
+                            label:'预计到港日期',
                             variant:"outlined",
-                            field:'tags2',
-                            multiple:true,
                             fullWidth:true,
-                            
-                              url:'/api/base/items',
-
-                            rule:{
-                              //required:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
                             },
-                          },                         
+                            field:'date4',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:3,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'实际到港日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'date4',
+                          },
+                        }
+                      ],
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第一次收汇日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'first_receive_date',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第一次收费金额',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'payment1',
+                          }
                         }
                       ]
-       
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第一次结汇汇率',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'exchange1',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第二次收汇日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'receive_date2',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第二次收费金额',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'payment2',
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第二次结汇汇率',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'exchange2',
+                          }
+                        }
+                      ]
                     },
 
                     {
@@ -464,11 +490,11 @@ export default {
                           name:'TextBox',
                           props:{
                             fullWidth: true,
-                            label:'简介',
+                            label:'备注',
                             variant:"outlined",
                             //size:"small",
                             multiline:true,
-                            rows:5,
+                            rows:3,
                           }                        
                         }
                       ]
@@ -483,6 +509,406 @@ export default {
                 }
               ]
             },
+            {
+              name:'OneToManyPortlet',
+
+              designProps:{
+                isDeisgning:true,
+              },
+              props:{
+                field:'onetoManyField',                
+                title:'工厂合同',
+                elevation: 6,
+                marginTop: 2,
+                collapsible:true,
+                open:true,
+              },
+              children:[
+                {
+                  name:'PortletGridContainer',
+                  children:[
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'SelectBox',
+                          props:{
+                            label:'工厂',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'title',
+                            size:'small',
+                            rule:{
+                              valueType:'string',
+                              required:true,
+                            },
+                            api:{
+                              url: API_LIST_MODEL.url,
+                              params:{
+                                modelName:'/Model/Supplier',
+                              }
+                            },                            
+                            
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'合同日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'contract_date',
+                          },
+                        }
+                      ],
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'合同号',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:'small',
+                            field:'contract_no',
+                            rule:{
+                              valueType:'string',
+                              required:true,
+                            }                      
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'SelectBox',
+                          props:{
+                            label:'付款方式',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:'small',
+                            field:'payment_term',
+                            withoutEmpertyItem:true,
+                            items:[
+                              {
+                                slug:'100-0',
+                                label:'T/T 100%/0%'
+                              },
+                              {
+                                slug:'50-50',
+                                label:'T/T 50%/50%'
+                              },                              
+                              {
+                                slug:'30-70',
+                                label:'T/T 30%/70%'
+                              },
+
+                              {
+                                slug:'20-80',
+                                label:'T/T 20%/80%'
+                              },
+                            ]
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'SelectBox',
+                          props:{
+                            label:'币种',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:'small',
+                            field:'currency',
+                            withoutEmpertyItem:true,
+                            items:[
+                              {
+                                slug:'dollor',
+                                label:'美元'
+                              },
+                              {
+                                slug:'euro',
+                                label:'欧元'
+                              },                              
+                              {
+                                slug:'rmb',
+                                label:'人民币'
+                              },
+
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'合同金额',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'amount',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'货物描述',
+                            variant:"outlined",
+                            fullWidth:true,
+                            multiline:true,
+                            size:'small',
+                            rows:5,
+                            field:'cargo_description',
+                          },
+                        }
+                      ],
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:6,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'预计发货日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'date1',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:6,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'实际发货日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'date2',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第一次付款日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'pay_date1',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第一次付款金额',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'payment1',
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'汇率',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'exchange1',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第二次付款日期',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'pay_date2',
+                          },
+                        }
+                      ],
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'第二次付款金额',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'payment2',
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'汇率',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'exchange2',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name:"PortletGridItem",
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            fullWidth: true,
+                            label:'备注',
+                            variant:"outlined",
+                            //size:"small",
+                            multiline:true,
+                            rows:3,
+                          }                        
+                        }
+                      ]
+
+                    },
+                    
+                  ],
+                }
+              ],
+            },
+
             {
               name:'OneToManyTable',
               props: {
@@ -548,87 +974,6 @@ export default {
                 ]         
               },            
             },
-            {
-              name:'OneToManyPortlet',
-
-              designProps:{
-                isDeisgning:true,
-              },
-              props:{
-                field:'onetoManyField',                
-                title:'1对多面板',
-                elevation: 6,
-                marginTop: 2,
-                collapsible:true,
-                open:true,
-              },
-              children:[
-                {
-                  name:'PortletGridContainer',
-                  children:[
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:3,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'合同号',
-                            variant:"outlined",
-                            fullWidth:true,
-                            size:"small",
-                            field:'no',
-                            rule:{
-                              valueType:'string',
-                              required:true,
-                            }                      
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'供应商',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'supplier',
-                            size:"small",
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:3,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'日期',
-                            variant:"outlined",
-                            fullWidth:true,
-                            size:"small",
-                            field:'date',
-                          }
-                        }
-                      ]
-                    },
-
-                  ],
-                }
-              ],
-            }
           ]
         },
       ]
