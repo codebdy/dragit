@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 //import createId from 'mock/utils/createId'
 //import {getModuleIndexPage} from './modules'
 import getQueryVariable from 'mock/utils/getQueryVariable'
-import articles from 'mock/data/articles';
+import articles from 'mock/data/articlesData';
 import notifications from 'mock/data/notifications'
 import users from './users';
 import roles from './roles';
