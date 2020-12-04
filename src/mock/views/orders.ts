@@ -32,8 +32,8 @@ export default {
                 onClick:{
                   name: JUMP_TO_PAGE_ACTION,
                   page:{
-                    moduleSlug:'product',
-                    pageSlug:'product-edit',
+                    moduleSlug:'order',
+                    pageSlug:'order-edit',
                   }
                 }
               }
@@ -144,22 +144,11 @@ export default {
                     label:"编辑",
                     icon:"mdi-pencil",
                     jumpToPage:{
-                      //name: JUMP_TO_PAGE_ACidTION,
-                      moduleSlug:'product',
-                      pageSlug:'product-edit',
+                      moduleSlug:'order',
+                      pageSlug:'order-edit',
                       param:'id',
                       paramField:'id',
                     }
-                  },
-                  {
-                    slug:"publish",
-                    label:"发布",
-                    icon:"mdi-publish",
-                  },
-                  {
-                    slug:"check",
-                    label:"审核",
-                    icon:"mdi-check-bold",
                   },
                   {
                     slug:"delete",

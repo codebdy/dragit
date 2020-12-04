@@ -12,6 +12,8 @@ import articleAttributes from 'mock/data/articleAttributes';
 import products from 'mock/data/products';
 import productAttributes from 'mock/data/productAttributes'
 import ordersData from 'mock/data/ordersData';
+import customerData from 'mock/data/customerData';
+import suppliersData from 'mock/data/suppliersData';
 
 window.modelsList = {
   '/Model/Article':{
@@ -75,8 +77,21 @@ window.modelsList = {
     perPage:10,
     currentPage:0,
     data:ordersData,
-  }
+  },
 
+  '/Model/Customer':{
+    total:12,
+    perPage:10,
+    currentPage:0,
+    data:customerData,
+  },
+
+  '/Model/Supplier':{
+    total:12,
+    perPage:10,
+    currentPage:0,
+    data:suppliersData,
+  },
 
 }
 
@@ -90,6 +105,8 @@ window.listModels = {
   '/Model/Product':products,
   '/Model/ProductAttribute':productAttributes,
   '/Model/Order': ordersData,
+  '/Model/Customer':customerData,
+  '/Model/Supplier':suppliersData,
 }
 
 function getId(url){

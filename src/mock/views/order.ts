@@ -1,5 +1,5 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import {API_GET_MODEL_BY_ID, API_LIST_MODEL} from "APIs/model"
 
 export default {
   layout:[{
@@ -62,25 +62,16 @@ export default {
       children: [{
           name: 'GridColumn',
           props: {
-            md: 8,
+            xs: 12,
           },
           children: [
-            {
-              name:'MediasPortlet',
-              props: {
-                elevation: 6,
-                //cols:3,
-                field:'medias',
-                //marginTop:2,  
-               },
-            },
             {
               name:'Portlet',
               props: {
                 elevation: 6,
                 open:true,
                 withHeader:true,
-                title:'基本信息',
+                title:'客户合同',
                 collapsible: true,
                 marginTop:2,              
               },
@@ -91,16 +82,70 @@ export default {
                     {
                       name: 'PortletGridItem',
                       props:{
-                        xs:12,
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'SelectBox',
+                          props:{
+                            label:'客户',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'title',
+                            size:'small',
+                            rule:{
+                              valueType:'string',
+                              required:true,
+                            },
+                            api:{
+                              url: API_LIST_MODEL.url,
+                              params:{
+                                modelName:'/Model/Customer',
+                              }
+                            },                            
+                            
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:4,
                       },
                       children:[
                         {
                           name:'TextBox',
                           props:{
-                            label:'标题',
+                            label:'合同日期',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'title',
+                            size:"small",
+                            type:'date',
+                            InputLabelProps:{
+                              shrink: true,
+                            },
+                            field:'contract_date',
+                          },
+                        }
+                      ],
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'合同号',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:'small',
+                            field:'contract_no',
                             rule:{
                               valueType:'string',
                               required:true,
@@ -109,6 +154,85 @@ export default {
                         }
                       ]
                     },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'付款方式',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:'small',
+                            field:'payment_term',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'币种',
+                            variant:"outlined",
+                            fullWidth:true,
+                            size:'small',
+                            field:'currency',
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:4,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'合同金额',
+                            variant:"outlined",
+                            type:'number',
+                            fullWidth:true,
+                            size:'small',
+                            field:'amount',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        md:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'货物描述',
+                            variant:"outlined",
+                            fullWidth:true,
+                            multiline:true,
+                            size:'small',
+                            rows:5,
+                            field:'cargo_description',
+                          },
+                        }
+                      ],
+                    },
+
                     {
                       name: 'PortletGridItem',
                       props:{
@@ -507,32 +631,6 @@ export default {
             }
           ]
         },
-        {
-          name: 'GridColumn',
-          props: {
-            md: 4,
-          },
-          children: [
-            {
-              name:'Portlet',
-              props: {
-                elevation: 6,
-                open:true,
-                withHeader:true,
-                title:'显示',
-                collapsible: true,
-              },
-              children:[
-                {
-                  name:"PortletGridContainer",
-                  children:[
-
-                  ]
-                }
-              ]
-            }
-          ]
-        }
       ]
     }
   ],
