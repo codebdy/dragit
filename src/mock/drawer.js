@@ -67,13 +67,13 @@ export default [{
                 title: '分类',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/product-category',
             },
             {
                 title: '属性',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/product-attribute',
             },
         ]
 

@@ -10,6 +10,7 @@ import { getModelName } from '../utils/getModelName';
 import tags from 'mock/data/tags';
 import articleAttributes from 'mock/data/articleAttributes';
 import products from 'mock/data/products';
+import productAttributes from 'mock/data/productAttributes'
 
 window.modelsList = {
   '/Model/Article':{
@@ -59,10 +60,14 @@ window.modelsList = {
     perPage:10,
     currentPage:0,
     data:products,
+  },
+
+  '/Model/ProductAttribute':{
+    total:12,
+    perPage:10,
+    currentPage:0,
+    data:productAttributes,
   }
-
-
-
 
 }
 
@@ -74,6 +79,7 @@ window.listModels = {
   '/Model/Tag':tags,
   '/Model/ArticleAttribute':articleAttributes,
   '/Model/Product':products,
+  '/Model/ProductAttribute':productAttributes,
 }
 
 function getId(url){

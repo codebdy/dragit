@@ -28,16 +28,12 @@ export default {
                 variant: "contained",
                 color: "primary",
                 rxText: '新建',
-                //size: "large",
-                style: {
-                  fontSize: '1.1rem',
-                },
+                size: "large",
                 onClick:{
                   name: JUMP_TO_PAGE_ACTION,
                   page:{
                     moduleSlug:'product',
                     pageSlug:'product-edit',
-                    dataId:'1',
                   }
                 }
               }
@@ -57,8 +53,8 @@ export default {
                 elevation:6,
                 columns:[
                   {
-                    field:'title',
-                    label:'标题',
+                    field:'name',
+                    label:'名称',
                     sortable:true,
                     //template:'<span style="color:red;">{$title}</span>',
                     props:{

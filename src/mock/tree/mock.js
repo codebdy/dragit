@@ -1,9 +1,11 @@
 import Mock from 'mockjs'
 import articleChannels from './articleChannels'
+import productCategories from './productCategories'
 import { getModelName } from '../utils/getModelName';
 
 var trees = {
   '/Model/ArticleChannel':articleChannels,
+  '/Model/ProductCategory':productCategories,
 }
 
 window.trees = trees;

@@ -1,3 +1,4 @@
+import { JUMP_TO_PAGE_ACTION } from "admin/views/Page/PageAction"
 import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
 export default {
   layout:[
@@ -9,19 +10,51 @@ export default {
           spacing: 1,
       },
       children: [
-          {
+        {
+          name: 'GridColumn',
+          props: {
+            xs:8,
+            container:true,
+            justify: 'space-between',
+            alignItems: "center",
+          },
+          children: [
+            {
               name: 'GridColumn',
-              props: {
-                xs:12,
-              },
-              children: [{
+              children:[
+                {
                   name: 'h2',
                   props:{
                     rxText: '标签列表',
+                  }                    
+                },
+                
+              ]
+            },
+            {
+              name: 'GridColumn',
+              children: [
+              {
+                name: 'Button',
+                props: {
+                  variant: "contained",
+                  color: "primary",
+                  rxText: '新建',
+                  //size: "large",
+                  onClick:{
+                    name: JUMP_TO_PAGE_ACTION,
+                    page:{
+                      moduleSlug:'article-tag',
+                      pageSlug:'article-tag-edit',
+                    }
                   }
-                  
-              }],
-          },
+                }
+              }]
+            },
+  
+          ],
+        },
+
           {
             name: 'GridColumn',
             props: {

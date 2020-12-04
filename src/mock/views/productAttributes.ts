@@ -5,56 +5,57 @@ export default {
     {
       name: 'GridRow',
       props: {
-          justify: 'space-between',
-          alignItems: "center",
-          spacing: 1,
+        alignItems: "center",
+        spacing: 1,
+        
       },
       children: [
-        {
-          name: 'GridColumn',
-          props: {
-            xs:8,
-            container:true,
-            justify: 'space-between',
-            alignItems: "center",
-          },
-          children: [
-            {
-              name: 'GridColumn',
-              children:[
-                {
-                  name: 'h2',
-                  props:{
-                    rxText: '属性列表',
-                  }                    
-                },
-                
-              ]
+          {
+            name: 'GridColumn',
+            props: {
+              xs:8,
+              container:true,
+              justify: 'space-between',
+              alignItems: "center",
             },
-            {
-              name: 'GridColumn',
-              children: [
+            children: [
               {
-                name: 'Button',
-                props: {
-                  variant: "contained",
-                  color: "primary",
-                  rxText: '新建',
-                  size: "large",
-                  onClick:{
-                    name: JUMP_TO_PAGE_ACTION,
-                    page:{
-                      moduleSlug:'article-attribute',
-                      pageSlug:'article-attribute-edit',
+                name: 'GridColumn',
+                children:[
+                  {
+                    name: 'h2',
+                    props:{
+                      rxText: '属性列表',
+                    }                    
+                  },
+                  
+                ]
+              },
+              {
+                name: 'GridColumn',
+                children: [
+                {
+                  name: 'Button',
+                  props: {
+                    variant: "contained",
+                    color: "primary",
+                    rxText: '新建',
+                    size: "large",
+                    onClick:{
+                      name: JUMP_TO_PAGE_ACTION,
+                      page:{
+                        moduleSlug:'product-attribute',
+                        pageSlug:'product-attribute-edit',
+                      }
                     }
                   }
-                }
-              }]
-            },
-  
-          ],
-        },
-        {
+                }]
+              },
+    
+            ],
+          },
+
+          {
             name: 'GridColumn',
             props: {
               xs:8,
@@ -95,8 +96,8 @@ export default {
                     label:"编辑",
                     icon:"mdi-pencil",
                     jumpToPage:{
-                      moduleSlug:'article-attribute',
-                      pageSlug:'article-attribute-edit',
+                      moduleSlug:'product-attribute',
+                      pageSlug:'product-attribute-edit',
                       param:'id',
                       paramField:'id',
                     }
@@ -111,7 +112,7 @@ export default {
                   method:'post',
                   url:API_QUERY_AND_OPERATE_MODELS.url,
                   params:{
-                    modelName:'/Model/ArticleAttribute',
+                    modelName:'/Model/ProductAttribute',
                   },      
                 },
 

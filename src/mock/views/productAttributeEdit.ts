@@ -9,8 +9,7 @@ export default {
         spacing: 3,
       },
   
-      children: [
-          {
+      children: [{
           name: 'GridColumn',
           props: {
             md: 6,
@@ -115,7 +114,7 @@ export default {
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
-      modelName:'/Model/ArticleAttribute',
+      modelName:'/Model/ProductAttribute',
     },      
   },
 }

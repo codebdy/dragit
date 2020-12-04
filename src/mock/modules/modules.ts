@@ -13,6 +13,9 @@ import articleAttributes from 'mock/views/articleAttributes'
 import articleAttributeEdit from 'mock/views/articleAttributeEdit'
 import products from 'mock/views/products'
 import product from 'mock/views/product'
+import productAttributes from 'mock/views/productAttributes'
+import productAttributeEdit from 'mock/views/productAttributeEdit'
+import productCategories from 'mock/views/productCategories'
 
 var modules = [
   {
@@ -148,6 +151,42 @@ var modules = [
       }
     ]
   },
+
+  {
+    id:6,
+    slug:'product-category',
+    title:'产品分类',
+    indexPageId:61,
+    pages:[
+      {
+        id:61,
+        title:'产品分类编辑',
+        slug:'product-category-tree',
+        jsonSchema: productCategories,
+      },
+    ],
+  },
+  {
+    id:10,
+    slug:'product-attribute',
+    title:'产品属性',
+    indexPageId:101,
+    pages:[
+      {
+        id:101,
+        title:'属性列表',
+        slug:'product-attribute-list',
+        jsonSchema: productAttributes,
+      },
+      {
+        id:102,
+        title:'属性编辑',
+        slug:'product-attribute-edit',
+        jsonSchema: productAttributeEdit,
+      },
+    ],
+  },
+
   {
     id:7,
     slug:'user',

@@ -1,71 +1,131 @@
 export default[
       {
         id:1,
-        title:'只要在心里留一块空地，爱就会自然地注入心中',
+        name:'鞋子250',
         is_published:'未发布',
         created_at:'2020-11-30 14:38',
         content:"<p>轻轻的，我来了</p><p>正如我轻轻的走</p>",
+        medias:[
+          {
+            id:2,
+            thumbnail: '/static/images/grid-list/burgers.jpg',
+            name: 'Tasty burger',
+            src: '/static/images/grid-list/burgers.jpg',
+          },
+          {
+            id:3,
+            thumbnail: '/static/images/grid-list/camera.jpg',
+            name: 'Camera',
+            src: '/static/images/grid-list/camera.jpg',
+          },
+          {
+            id:4,
+            thumbnail: '/static/images/grid-list/morning.jpg',
+            name: 'Morning',
+            src: '/static/images/grid-list/morning.jpg',
+          },
+        ],
         channel:[1,3,32],
       },
       {
         id:2,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'iPhone89',
         is_published:'未发布',
+        medias:[
+          {
+            id:2,
+            thumbnail: '/static/images/grid-list/burgers.jpg',
+            name: 'Tasty burger',
+            src: '/static/images/grid-list/burgers.jpg',
+          },
+          {
+            id:5,
+            thumbnail: '/static/images/grid-list/camera.jpg',
+            name: 'Camera',
+            src: '/static/images/grid-list/camera.jpg',
+          },
+          {
+            id:4,
+            thumbnail: '/static/images/grid-list/morning.jpg',
+            name: 'Morning',
+            src: '/static/images/grid-list/morning.jpg',
+          },
+        ],
         created_at:'2020-10-30 14:38'
       },
       {
         id:3,
-        title:'人有时像蒲公英，看似自由自在，实则身不由己',
+        name:'小米无敌拖鞋',
         is_published:'已发布',
+        medias:[
+          {
+            id:7,
+            thumbnail: '/static/images/grid-list/burgers.jpg',
+            name: 'Tasty burger',
+            src: '/static/images/grid-list/burgers.jpg',
+          },
+          {
+            id:3,
+            thumbnail: '/static/images/grid-list/camera.jpg',
+            name: 'Camera',
+            src: '/static/images/grid-list/camera.jpg',
+          },
+          {
+            id:4,
+            thumbnail: '/static/images/grid-list/morning.jpg',
+            name: 'Morning',
+            src: '/static/images/grid-list/morning.jpg',
+          },
+        ],
         created_at:'2020-9-28 8:26'
       },
       {
         id:4,
 
-        title:'只是一片秋叶，随风飘落',
+        name:'苍蝇手套',
       },
       {
         id:5,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'新冠病毒1号',
       },
       {
         id:6,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'蟑螂的拖鞋',
       },
       {
         id:7,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'老鼠的耳罩',
       },
       {
         id:8,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'鸭子的口罩',
       },
       {
         id:9,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'茶品',
       },
       {
         id:10,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'肉夹馍',
       },
       {
         id:11,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'豆芽炒土豆',
       },
       {
         id:12,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'都炖肉',
       },
       {
         id:13,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'火车轮子',
       },
       {
         id:14,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'火箭',
       },
       {
         id:15,
-        title:'汇集漫天星星，星星之火可以燎原',
+        name:'飞机',
       },
     ]

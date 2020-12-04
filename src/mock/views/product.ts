@@ -1,5 +1,6 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import {API_GET_MODEL_BY_ID, API_LIST_MODEL} from "APIs/model"
+import { API_GET_MODEL_TREE } from "APIs/tree";
 
 export default {
   layout:[{
@@ -97,10 +98,10 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'标题',
+                            label:'名称',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'title',
+                            field:'name',
                             rule:{
                               valueType:'string',
                               required:true,
@@ -131,205 +132,6 @@ export default {
                         }
                       ]
                     },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'作者',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'auther',
-                            //required:true,
-                            helperText:'作者提示',
-                            rule:{
-                              //valueType:'string',
-                              //required:true,
-                            }                      
-                          },
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'Email',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'email',
-                            rule:{
-                              valueType:'string',
-                              ruleType:'email',
-                              required:true,
-                            },
-                          },
-                        }
-                      ]
-
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'SelectBox',
-                          props:{
-                            label:"分类",
-                            variant:"outlined",
-                            field:'category',
-                            //required:true,
-                            helperText:'请选择分类',
-                            fullWidth:true,
-                            multiple:true,
-                            rule:{
-                              //required:true,
-                            },
-                            
-                              items:[
-                                {
-                                  slug:'news',
-                                  label:'新闻',
-                                },
-                                {
-                                  slug:'tech',
-                                  label:'技术',
-                                },
-                                {
-                                  slug:'jingyan‘',
-                                  label:'经验',
-                                },
-                              ]
-                                      
-                          }
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'SelectBox',
-                          props:{
-                            label:"频道",
-                            variant:"outlined",
-                            field:'channel',
-                            fullWidth:true,
-                            xs:6,
-                            required:true,
-                            withoutEmpertyItem:true,                        
-                            
-                              url:'/api/base/items',
-                            
-
-                            rule:{
-                              //required:true,
-                            },
-                          },        
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'创作日期',
-                            variant:"outlined",
-                            fullWidth:true,
-                            //size:"small",
-                            type:'date',
-                            InputLabelProps:{
-                              shrink: true,
-                            },
-                            field:'create_date',
-                          },
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:12,
-                      },
-                      children:[
-                        {
-                          name:'Combobox',
-                          props:{
-                            label:"标签",
-                            variant:"outlined",
-                            field:'tags',
-                            multiple:false,
-                            //required:true,
-                           
-       
-                              items:[
-                                {
-                                  slug:'product',
-                                  label:'产品',
-                                },
-                                {
-                                  slug: 'iPhone',
-                                  label:'iPhone',
-                                },
-                                {
-                                  slug:'apple',
-                                  label:'苹果',
-                                },
-                              ],
-                             
-
-                            rule:{
-                              //required:true,
-                            },
-                          },        
-                        }
-                      ],
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:12,
-                      },
-                      children:[
-                        {
-                          name:'Combobox',
-                          props:{
-                            label:"标签2",
-                            variant:"outlined",
-                            field:'tags2',
-                            multiple:true,
-                            fullWidth:true,
-                            
-                              url:'/api/base/items',
-
-                            rule:{
-                              //required:true,
-                            },
-                          },                         
-                        }
-                      ]
-       
-                    },
-
                     {
                       name:"PortletGridItem",
                       props:{
@@ -408,103 +210,68 @@ export default {
                   },
                   {
                     field:'category',
-                    label:'分类',
+                    label:'型号',
                     input:{
                       name:'SelectBox',
                       props:{
                         variant:"outlined",
                         size:'small',
                         withoutEmpertyItem:false,                        
-                        url:'/api/base/items',
+                        items:[
+                          {
+                            slug:'100',
+                            label:'100'
+                          },
+                          {
+                            slug:'200',
+                            label:'200'
+                          },
+                          {
+                            slug:'300',
+                            label:'300'
+                          }
+                        ]
                       }
-                    },        
+                    },
+                  },
+                  {
+                    field:'stock',
+                    label:'库存',
+                    input:{
+                      name:'TextBox',
+                      props:{
+                        variant:'outlined',
+                        size:'small',
+                      }
+                    }
                   },
 
 
                 ]         
               },            
             },
-            {
-              name:'OneToManyPortlet',
 
-              designProps:{
-                isDeisgning:true,
-              },
-              props:{
-                field:'onetoManyField',                
-                title:'1对多面板',
+            {
+              name:'Portlet',
+              props: {
                 elevation: 6,
-                marginTop: 2,
-                collapsible:true,
                 open:true,
+                withHeader:true,
+                title:'产品详情',
+                collapsible: true,
+                marginTop:2,
               },
               children:[
                 {
-                  name:'PortletGridContainer',
-                  children:[
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:3,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'合同号',
-                            variant:"outlined",
-                            fullWidth:true,
-                            size:"small",
-                            field:'no',
-                            rule:{
-                              valueType:'string',
-                              required:true,
-                            }                      
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:6,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'供应商',
-                            variant:"outlined",
-                            fullWidth:true,
-                            field:'supplier',
-                            size:"small",
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      name: 'PortletGridItem',
-                      props:{
-                        xs:3,
-                      },
-                      children:[
-                        {
-                          name:'TextBox',
-                          props:{
-                            label:'日期',
-                            variant:"outlined",
-                            fullWidth:true,
-                            size:"small",
-                            field:'date',
-                          }
-                        }
-                      ]
-                    },
+                  name:"TinyMCE",
+                  props:{
+                    field:'content'
+                  }
 
-                  ],
                 }
-              ],
-            }
+              ]
+            },
+
           ]
         },
         {
@@ -526,11 +293,177 @@ export default {
                 {
                   name:"PortletGridContainer",
                   children:[
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'顺序',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'order',
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'TreeSelect',
+                          props:{
+                            label:"分类",
+                            variant:"outlined",
+                            field:'channel',
+                            fullWidth:true,
+                            multiSelect:true,
+                            //size:"small",
+                            dataApi:{
+                              ...API_GET_MODEL_TREE,
+                              params:{
+                                modelName:'/Model/ProductCategory',
+                              },                               
+                            },
 
+                            rule:{
+                              //required:true,
+                            },
+                          },        
+                        }
+                      ],
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,                      
+                      },
+                      children:[
+                        {
+                          name:'MultiSelectBox',
+                          props:{
+                            label:"附加属性",
+                            variant:"outlined",
+                            field:'attributes',
+                            itemName:'name',
+                            multiple:true,
+                            fullWidth:true,
+                            api:{
+                              ...API_LIST_MODEL,
+                              params:{
+                                modelName:'/Model/ProductAttribute',
+                              }                              
+                            }
+                          },                         
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'SwitchBox',
+                          props:{
+                            label:'发布',
+                            fullWidth:true,
+                            field:'published',
+                            color:'primary',
+                          },                     
+                        }
+                      ]
+                    },
                   ]
                 }
               ]
-            }
+            },
+
+            {
+              name:'OneToOnePortlet',
+              props: {
+                elevation: 6,
+                open:true,
+                withHeader:true,
+                title:'SEO Meta',
+                collapsible: true,
+                marginTop:2,
+                field:'seoMeta',
+              },
+              children:[
+                {
+                  name:'PortletGridContainer',
+                  children:[
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'标题',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'title',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'关键词',
+                            variant:"outlined",
+                            fullWidth:true,
+                            multiline:true,
+                            rows:2,
+                            field:'keywords',
+                          }
+                        }
+                      ]
+                    },
+
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'描述',
+                            variant:"outlined",
+                            fullWidth:true,
+                            multiline:true,
+                            rows:3,
+                            field:'description',
+                          }
+                        }
+                      ]
+                    },
+                  ],
+                }
+              ],
+            },
+
           ]
         }
       ]
