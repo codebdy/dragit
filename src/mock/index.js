@@ -3,7 +3,6 @@ import drawer from './drawer'
 import dashboard from './views/dashboard'
 import articles from './views/articles'
 import article from './views/article'
-import test from './views/test'
 import auths from './data/auths'
 import appInfo from './data/appInfo'
 import notifications from './data/notifications'
@@ -27,7 +26,6 @@ Mock.mock('/api/save-drawer','post', (request)=>{
 Mock.mock('/api/page/dashboard', 'get', dashboard)
 Mock.mock('/api/page/articles', 'get', articles)
 Mock.mock('/api/page/article', 'get', article)
-Mock.mock('/api/page/test', 'get', test)
 //Mock.mock('/api/moudle-index/articles', 'get', 'articles')
 //Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
 
