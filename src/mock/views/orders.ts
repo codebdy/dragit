@@ -14,7 +14,7 @@ export default {
               children: [{
                   name: 'h2',
                   props:{
-                    rxText: '产品列表',
+                    rxText: '订单列表',
                   }
                   
               }],
@@ -53,23 +53,34 @@ export default {
                 elevation:6,
                 columns:[
                   {
-                    field:'name',
-                    label:'名称',
+                    field:'contract_no',
+                    label:'合同号',
                     sortable:true,
                     //template:'<span style="color:red;">{$title}</span>',
                     props:{
                     }
                   },
                   {
-                    field:'is_published',
-                    label:'状态',
+                    field:'customer',
+                    label:'客户',
                     sortable:true,
-                    props:{
-                    }
+                  },
+                  {
+                    field:'amount',
+                    label:'合同金额',
+                    sortable:true,
+                  },
+                  {
+                    field:'percent',
+                    label:'收款比例',
+                  },
+                  {
+                    field:'commission',
+                    label:'已付提成',
                   },
                   {
                     field:'created_at',
-                    label:'时间',
+                    label:'合同日期',
                     sortable:true,
                     props:{
                     }
@@ -160,7 +171,7 @@ export default {
                   method:'post',
                   url:'/api/data/query-operate-models',
                   params:{
-                    modelName:'/Model/Product',
+                    modelName:'/Model/Order',
                   },      
                 },
 

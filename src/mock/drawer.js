@@ -87,7 +87,7 @@ export default [{
                 title: '订单',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/order',
             },
             {
                 title: '客户',

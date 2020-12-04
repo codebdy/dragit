@@ -170,7 +170,7 @@ export default function mockModules(){
       return module;
     }
     console.log('not found page');
-    new Error("404");
+    throw new Error("404");
   })
   
 }

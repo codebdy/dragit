@@ -16,6 +16,8 @@ import product from 'mock/views/product'
 import productAttributes from 'mock/views/productAttributes'
 import productAttributeEdit from 'mock/views/productAttributeEdit'
 import productCategories from 'mock/views/productCategories'
+import orders from '../views/orders'
+import order from '../views/order'
 
 var modules = [
   {
@@ -185,6 +187,48 @@ var modules = [
         jsonSchema: productAttributeEdit,
       },
     ],
+  },
+  {
+    id:11,
+    title:'订单管理',
+    slug:'order',
+    indexPageId:111,
+    pages:[
+      {
+        id:111,
+        title:'订单列表',
+        slug:'orders',
+        jsonSchema: orders,
+      },
+      {
+        id:112,
+        title:'订单编辑',
+        slug:'order-edit',
+        jsonSchema: order,
+      },
+    ],
+    auths:[
+      {
+        id:111,
+        slug:"orders-all",
+        name:'订单模块',
+      },
+      {
+        id:112,
+        slug:"edit-order",
+        name:'编辑产品',        
+      },
+      {
+        id:113,
+        slug:"delete-order",
+        name:"删除订单"
+      },
+      {
+        id:114,
+        slug:"finished-order",
+        name:"完结订单"
+      },      
+    ]
   },
 
   {
