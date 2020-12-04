@@ -93,13 +93,13 @@ export default [{
                 title: '客户',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/customer',
             },
             {
                 title: '供应商',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/supplier',
             },
         ]
 

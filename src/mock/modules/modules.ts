@@ -18,6 +18,8 @@ import productAttributeEdit from 'mock/views/productAttributeEdit'
 import productCategories from 'mock/views/productCategories'
 import orders from '../views/orders'
 import order from '../views/order'
+import customers from 'mock/views/customers'
+import customer from 'mock/views/customer'
 
 var modules = [
   {
@@ -228,6 +230,52 @@ var modules = [
         slug:"finished-order",
         name:"完结订单"
       },      
+    ]
+  },
+  {
+    id:12,
+    title:'客户管理',
+    slug:'customer',
+    indexPageId:121,
+    pages:[
+      {
+        id:121,
+        title:'客户列表',
+        slug:'customers',
+        jsonSchema: customers,
+      },
+      {
+        id:122,
+        title:'客户编辑',
+        slug:'customer-edit',
+        jsonSchema: customer,
+      },
+    ],
+    auths:[
+     
+    ]
+  },
+  {
+    id:13,
+    title:'供应商管理',
+    slug:'supplier',
+    indexPageId:131,
+    pages:[
+      {
+        id:131,
+        title:'客户列表',
+        slug:'suppliers',
+        jsonSchema: 'suppliers',
+      },
+      {
+        id:132,
+        title:'客户编辑',
+        slug:'supplier-edit',
+        jsonSchema: 'supplier',
+      },
+    ],
+    auths:[
+     
     ]
   },
 

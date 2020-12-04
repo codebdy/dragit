@@ -923,6 +923,7 @@ export default {
                       input:{
                         name:'TextBox',
                         props:{
+                          type:'date',
                           variant:'outlined',
                           size:'small',
                         }
