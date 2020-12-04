@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import ComponentRender from "./ComponentRender";
 import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { Container } from "@material-ui/core";
+import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from './PageAction';
 
@@ -19,7 +19,18 @@ import { API_SUBMIT_MODEL } from "APIs/model";
 import { setModelAction } from "store/page/actions";
 import PageForm from "./Form/PageForm";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flex: 1,
+      display:'flex',
+      flexFlow:'column',
+    },
+  })
+);
+
 const PageView = ()=>{
+  const classes = useStyles();
   const history =  useHistory();
   const match = useRouteMatch();
   const{moduleSlug, pageSlug, id} = match.params as any;
@@ -110,7 +121,7 @@ const PageView = ()=>{
     </Fragment>
 
 return (
-    <Container>
+    <Container className = {classes.root}>
       {
         pageMeta?.jsonSchema?.isFormPage 
         ?

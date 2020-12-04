@@ -5,7 +5,6 @@ import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import TopNav from 'admin/TopNav';
 import PageContent from 'admin/PageContent';
 import { Redirect, Switch, Route } from 'react-router-dom';
-import Medias from 'components/Medias/Medias';
 import AreaSelect from 'designer/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
 import Dashboard from 'admin/views/Dashboard/Dashboard';
@@ -57,7 +56,6 @@ export default function Layout(){
           <Switch>
             <Route path="/admin/module/:moduleSlug/:pageSlug?/:id?" component={PageView}></Route> 
             <Route path="/admin/dashboard" component={Dashboard}></Route>
-            <Route path="/admin/medias" component={Medias}></Route>
             <Route path="/admin/error-404" component={Page404}></Route>
             {//<Redirect to="/admin/module/:moduleId/page/index" from='/admin/module/:moduleId/' />
             } 

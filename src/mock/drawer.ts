@@ -18,7 +18,7 @@ export default [{
     {
         type: 'item',
         title: '媒体库',
-        to: '/admin/medias',
+        to: '/admin/module/medias',
         icon: 'mdi-image-auto-adjust',
     },
     {

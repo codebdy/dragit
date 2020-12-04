@@ -24,6 +24,7 @@ import suppliers from 'mock/views/suppliers'
 import supplier from 'mock/views/supplier'
 import enqueriesPage from 'mock/views/enqueriesPage'
 import enqueryViewPage from 'mock/views/enqueryViewPage'
+import meidaPage from 'mock/views/meidaPage'
 
 var modules = [
   {
@@ -305,7 +306,23 @@ var modules = [
      
     ]
   },
-
+  {
+    id:15,
+    title:'媒体管理',
+    slug:'medias',
+    indexPageId:151,
+    pages:[
+      {
+        id:151,
+        title:'媒体库',
+        slug:'medias',
+        jsonSchema: meidaPage,
+      },
+    ],
+    auths:[
+     
+    ]
+  },
   {
     id:7,
     slug:'user',
