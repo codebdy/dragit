@@ -13,7 +13,7 @@ export default {
         children: [{
           name: 'h2',
           props:{
-            rxText: '文章编辑',            
+            rxText: '产品编辑',            
           }
 
         }],
@@ -197,7 +197,6 @@ export default {
                               //required:true,
                             },
                             
-                              fromUrl:false,           
                               items:[
                                 {
                                   slug:'news',
@@ -234,7 +233,6 @@ export default {
                             required:true,
                             withoutEmpertyItem:true,                        
                             
-                              fromUrl:true,
                               url:'/api/base/items',
                             
 
@@ -282,7 +280,7 @@ export default {
                             multiple:false,
                             //required:true,
                            
-                              fromUrl:false,           
+       
                               items:[
                                 {
                                   slug:'product',
@@ -321,7 +319,6 @@ export default {
                             multiple:true,
                             fullWidth:true,
                             
-                              fromUrl:true,
                               url:'/api/base/items',
 
                             rule:{
@@ -418,7 +415,6 @@ export default {
                         variant:"outlined",
                         size:'small',
                         withoutEmpertyItem:false,                        
-                        fromUrl:true,
                         url:'/api/base/items',
                       }
                     },        
@@ -546,7 +542,7 @@ export default {
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
-      modelName:'/Model/Article',
+      modelName:'/Model/Product',
     },      
   },
 

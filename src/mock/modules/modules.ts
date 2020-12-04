@@ -11,6 +11,8 @@ import articleTags from '../views/articleTags'
 import articleTagEdit from '../views/articleTagEdit'
 import articleAttributes from 'mock/views/articleAttributes'
 import articleAttributeEdit from 'mock/views/articleAttributeEdit'
+import products from 'mock/views/products'
+import product from 'mock/views/product'
 
 var modules = [
   {
@@ -113,19 +115,19 @@ var modules = [
     id:5,
     title:'产品管理',
     slug:'product',
-    indexPageId:1,
+    indexPageId:51,
     pages:[
       {
         id:51,
         title:'产品列表',
         slug:'products',
-        jsonSchema: articles,
+        jsonSchema: products,
       },
       {
         id:52,
         title:'产品编辑',
         slug:'product-edit',
-        jsonSchema: article,
+        jsonSchema: product,
       },
     ],
     auths:[

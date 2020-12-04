@@ -97,8 +97,6 @@ export default {
                             itemName:'name',
                             multiple:true,
                             fullWidth:true,
-                            fromUrl:true,
-                            method:'get',
                             api:API_GET_AUTHS,
                             itemKey:"slug",
                             groupByField:"module",

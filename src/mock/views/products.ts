@@ -35,8 +35,8 @@ export default {
                 onClick:{
                   name: JUMP_TO_PAGE_ACTION,
                   page:{
-                    moduleSlug:'article',
-                    pageSlug:'article',
+                    moduleSlug:'product',
+                    pageSlug:'product-edit',
                     dataId:'1',
                   }
                 }
@@ -138,8 +138,8 @@ export default {
                     icon:"mdi-pencil",
                     jumpToPage:{
                       //name: JUMP_TO_PAGE_ACidTION,
-                      moduleSlug:'article',
-                      pageSlug:'article',
+                      moduleSlug:'product',
+                      pageSlug:'product-edit',
                       param:'id',
                       paramField:'id',
                     }
@@ -164,7 +164,7 @@ export default {
                   method:'post',
                   url:'/api/data/query-operate-models',
                   params:{
-                    modelName:'/Model/Article',
+                    modelName:'/Model/Product',
                   },      
                 },
 
