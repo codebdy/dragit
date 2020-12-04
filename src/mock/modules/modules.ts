@@ -20,6 +20,8 @@ import orders from '../views/orders'
 import order from '../views/order'
 import customers from 'mock/views/customers'
 import customer from 'mock/views/customer'
+import suppliers from 'mock/views/suppliers'
+import supplier from 'mock/views/supplier'
 
 var modules = [
   {
@@ -265,13 +267,13 @@ var modules = [
         id:131,
         title:'客户列表',
         slug:'suppliers',
-        jsonSchema: 'suppliers',
+        jsonSchema: suppliers,
       },
       {
         id:132,
         title:'客户编辑',
         slug:'supplier-edit',
-        jsonSchema: 'supplier',
+        jsonSchema: supplier,
       },
     ],
     auths:[

@@ -1,5 +1,5 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import {API_GET_MODEL_BY_ID, API_LIST_MODEL} from "APIs/model"
 
 export default {
   layout:[{
@@ -13,7 +13,7 @@ export default {
         children: [{
           name: 'h2',
           props:{
-            rxText: '客户编辑',            
+            rxText: '供应商编辑',            
           }
 
         }],
@@ -81,7 +81,7 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'名称',
+                            label:'中文名称',
                             variant:"outlined",
                             fullWidth:true,
                             field:'name',
@@ -103,10 +103,10 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'简称',
+                            label:'英文名称',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'short_name',
+                            field:'name_en',
                             size:"small",
                           },
                         }
@@ -121,15 +121,53 @@ export default {
                         {
                           name:'TextBox',
                           props:{
-                            label:'国家',
+                            label:'省',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'country',
+                            field:'province',
                             size:"small",
                           },
                         }
                       ]
                     },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:6,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'城市',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'city',
+                            size:"small",
+                          },
+                        }
+                      ]
+                    },
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:6,
+                      },
+                      children:[
+                        {
+                          name:'TextBox',
+                          props:{
+                            label:'电话',
+                            variant:"outlined",
+                            fullWidth:true,
+                            field:'tel',
+                            size:"small",
+                          },
+                        }
+                      ]
+
+                    },
+
                     {
                       name: 'PortletGridItem',
                       props:{
@@ -152,39 +190,45 @@ export default {
                     {
                       name:"PortletGridItem",
                       props:{
-                        xs:6,
+                        xs:12,
                       },
                       children:[
                         {
-                          name:'TextBox',
+                          name:'MultiSelectBox',
                           props:{
-                            fullWidth: true,
-                            label:'收获地址',
+                            label:"主营产品",
                             variant:"outlined",
-                            size:"small",
-                            multiline:true,
-                            rows:5,
-                            field:'cargo_address',
-                          }                        
-                        }
+                            field:'product_ids',
+                            itemName:'name',
+                            multiple:true,
+                            fullWidth:true,
+                            api:{
+                              ...API_LIST_MODEL,
+                              params:{
+                                modelName:'/Model/Product',
+                              }                              
+                            }
+                          },                         
+                        },
+
                       ]
                     },
                     {
                       name:"PortletGridItem",
                       props:{
-                        xs:6,
+                        xs:12,
                       },
                       children:[
                         {
                           name:'TextBox',
                           props:{
                             fullWidth: true,
-                            label:'快递地址',
+                            label:'地址',
                             variant:"outlined",
                             size:"small",
                             multiline:true,
-                            rows:5,
-                            field:'express_address',
+                            rows:2,
+                            field:'address',
                           }                        
                         }
                       ]
@@ -261,8 +305,20 @@ export default {
                     }
                   },
                   {
-                    field:'linkedin',
-                    label:'领英',
+                    field:'weichat',
+                    label:'微信',
+                    input:{
+                      name:'TextBox',
+                      props:{
+                        variant:'outlined',
+                        size:'small',
+                      }
+                    }
+                  },
+
+                  {
+                    field:'qq',
+                    label:'QQ',
                     input:{
                       name:'TextBox',
                       props:{
@@ -300,7 +356,7 @@ export default {
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
-      modelName:'/Model/Customer',
+      modelName:'/Model/Supplier',
     },      
   },
 

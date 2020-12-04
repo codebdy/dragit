@@ -1,26 +1,21 @@
 export default[
       {
         id:1,
-        contract_no:'DX19LR11',
-        customer:'MicroSoft co.,LTd',
-        is_published:'未发布',
-        amount:205396,
-        percent:'30%',
+        name:'中粮集团有限公司',
+        products:"玉米，小麦，淀粉",
         created_at:'2020-11-30 14:38',
+        user:'张三',
       },
       {
         id:2,
-        contract_no:'DX17LR10',
-        customer:'Xiaomi tech co.,LTd',
-        is_published:'未发布',
-        amount:205396,
-        percent:'30%',
-        created_at:'2020-10-30 14:38'
+        name:'中国石化',
+        products:"柴油，汽油，煤油",
+        created_at:'2020-10-30 14:38',
+        user:'李四',
       },
       {
         id:3,
-        contract_no:'DX19LP01',
-        customer:'Sun Java Primary LTD.',
+        name:'黑龙江黑土地',
         is_published:'已发布',
         amount:205396,
         percent:'30%',
@@ -29,7 +24,7 @@ export default[
       {
         id:4,
         contract_no:'DX19LR10',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -38,7 +33,7 @@ export default[
       {
         id:5,
         contract_no:'DX19LR09',
-        customer:'DragIt Tech Co.,Ltd.',
+        name:'DragIt Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -47,7 +42,7 @@ export default[
       {
         id:6,
         contract_no:'DX19LR11',
-        customer:'Drag Laravel Tech Co.,Ltd.',
+        name:'Drag Laravel Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -56,7 +51,7 @@ export default[
       {
         id:7,
         contract_no:'DX19LR11',
-        customer:'Drag C# Tech Co.,Ltd.',
+        name:'Drag C# Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -65,7 +60,7 @@ export default[
       {
         id:8,
         contract_no:'DX19LR11',
-        customer:'Drag Java Tech Co.,Ltd.',
+        name:'Drag Java Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -74,7 +69,7 @@ export default[
       {
         id:9,
         contract_no:'DX19LR11',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -83,7 +78,7 @@ export default[
       {
         id:10,
         contract_no:'DX19LR11',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -92,7 +87,7 @@ export default[
       {
         id:11,
         contract_no:'DX19LR11',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -101,7 +96,7 @@ export default[
       {
         id:12,
         contract_no:'DX19LR11',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -110,7 +105,7 @@ export default[
       {
         id:13,
         contract_no:'DX19LR11',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -119,7 +114,7 @@ export default[
       {
         id:14,
         contract_no:'DX19LR11',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
@@ -128,7 +123,7 @@ export default[
       {
         id:15,
         contract_no:'DX19LR11',
-        customer:'DragRx Tech Co.,Ltd.',
+        name:'DragRx Tech Co.,Ltd.',
         amount:205396,
         percent:'100%',
         commission:'101020',
