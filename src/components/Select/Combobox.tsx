@@ -2,7 +2,6 @@ import React from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
-import withSkeleton from 'base/HOCs/withSkeleton';
 import { useBaseItems } from 'base/Hooks/useBaseItems';
 
 const Combobox = React.forwardRef((
@@ -83,7 +82,4 @@ const Combobox = React.forwardRef((
   )
 })
 
-//显式调用报错的缓兵之计，以后再改
-let ComboboxAny  =  withSkeleton(Combobox) as any
-
-export default ComboboxAny;
+export default Combobox;

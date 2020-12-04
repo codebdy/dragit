@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
-import withSkeleton from 'base/HOCs/withSkeleton';
 import { useBaseItems } from 'base/Hooks/useBaseItems';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -144,7 +143,4 @@ const SelectBox = React.forwardRef((
   )
 })
 
-//显示调用的缓兵之计
-const SelectBoxAny = withSkeleton(SelectBox) as any;
-
-export default SelectBoxAny;
+export default SelectBox;

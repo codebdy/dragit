@@ -1,6 +1,5 @@
 import { createStyles, FilledInput, FormControl, FormHelperText, Input, InputLabel, makeStyles, OutlinedInput, Theme } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import withSkeleton from 'base/HOCs/withSkeleton';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import React from 'react';
@@ -79,4 +78,4 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
   )
 })
 
-export default withSkeleton(TreeSelect);
+export default TreeSelect;

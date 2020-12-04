@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { RXInputProps } from 'base/RXInputProps';
-import withSkeleton from 'base/HOCs/withSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +36,4 @@ const FieldView = React.forwardRef((
   )
 })
 
-const FieldViewAny = withSkeleton(FieldView) as any;
-
-export default FieldViewAny
+export default FieldView

@@ -1,6 +1,7 @@
 import { IRule } from "base/Rules/IRule";
 import { Rule } from "base/Rules/Rule";
 import withMargin from "./HOCs/withMargin";
+import withSkeleton from "./HOCs/withSkeleton";
 import { IMeta } from "./Model/IMeta";
 
 var compoentsMap : { 
@@ -29,6 +30,10 @@ function resolveComponent(meta:IMeta):any{
   let component = compoentsMap[name] && compoentsMap[name].component ? compoentsMap[name].component : name;
 
   component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
+
+  if(meta.props?.field){
+    component = withSkeleton(component);
+  }
   return component;
 }
 

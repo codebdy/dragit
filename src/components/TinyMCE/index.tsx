@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { RXInputProps } from 'base/RXInputProps';
-import withSkeleton from 'base/HOCs/withSkeleton';
 import { Editor } from '@tinymce/tinymce-react';
 import MediasSelectDialog from 'components/Medias/MediasSelectDialog';
 import { IMedia } from 'base/Model/IMedia';
@@ -103,6 +102,4 @@ const TinyMCE = React.forwardRef((
   )
 })
 
-const TinyMCEAny = withSkeleton(TinyMCE) as any;
-
-export default TinyMCEAny
+export default TinyMCE

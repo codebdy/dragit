@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
-import withSkeleton from 'base/HOCs/withSkeleton';
 import { useBaseItems } from 'base/Hooks/useBaseItems';
 
 const MultiSelect = React.forwardRef((
   props:{
-    value?:[],
+    value?:Array<number|string>,
     multiple?:boolean,
     onChange?:any,
     itemKey?:string,
@@ -111,7 +110,4 @@ const MultiSelect = React.forwardRef((
   )
 })
 
-//显式调用报错的缓兵之计，以后再改
-let MultiSelectBox  =  withSkeleton(MultiSelect) as any
-
-export default MultiSelectBox;
+export default MultiSelect;

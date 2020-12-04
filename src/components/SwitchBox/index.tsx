@@ -1,5 +1,4 @@
 import { FormControlLabel, Switch } from '@material-ui/core';
-import withSkeleton from 'base/HOCs/withSkeleton';
 import React from 'react';
 
 
@@ -33,6 +32,4 @@ const SwitchBox = React.forwardRef((props:any, ref:any)=>{
 })
 
 
-const SwitchBoxAny = withSkeleton(SwitchBox) as any;
-
-export default SwitchBoxAny
+export default SwitchBox

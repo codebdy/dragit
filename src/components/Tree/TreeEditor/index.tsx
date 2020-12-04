@@ -3,7 +3,6 @@ import { Add } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
 import { IForm, defultForm, FormContext } from "base/FormContext";
 import { AxiosRequestConfig } from 'axios';
-import withSkeleton from 'base/HOCs/withSkeleton';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import { RXNodeRoot } from 'base/RXNode/Root';
@@ -230,4 +229,4 @@ const TreeEditor = React.forwardRef((
 })
 
 
-export default withSkeleton(TreeEditor);
+export default TreeEditor;
