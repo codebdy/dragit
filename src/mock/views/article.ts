@@ -1,5 +1,5 @@
 import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import {API_GET_MODEL_BY_ID, API_LIST_MODEL} from "APIs/model"
 import { API_GET_MODEL_TREE } from "APIs/tree";
 
 export default {
@@ -234,10 +234,12 @@ export default {
                             field:'tags',
                             multiple:true,
                             fullWidth:true,
-                            
-                              fromUrl:true,
-                              url:'/api/base/items',
-
+                            api:{
+                              url: API_LIST_MODEL.url,
+                              params:{
+                                modelName:'/Model/Tag',
+                              }
+                            },
                             rule:{
                               //required:true,
                             },
@@ -415,13 +417,21 @@ export default {
                       },
                       children:[
                         {
-                          name:'TextBox',
+                          name:'MultiSelectBox',
                           props:{
-                            label:'附加属性',
+                            label:"附加属性",
                             variant:"outlined",
-                            fullWidth:true,
                             field:'attributes',
-                          },
+                            itemName:'name',
+                            multiple:true,
+                            fullWidth:true,
+                            api:{
+                              ...API_LIST_MODEL,
+                              params:{
+                                modelName:'/Model/ArticleAttribute',
+                              }                              
+                            }
+                          },                         
                         }
                       ]
                     },

@@ -99,7 +99,7 @@ export default {
                             fullWidth:true,
                             fromUrl:true,
                             method:'get',
-                            url:API_GET_AUTHS.url,
+                            api:API_GET_AUTHS,
                             itemKey:"slug",
                             groupByField:"module",
                           },                         

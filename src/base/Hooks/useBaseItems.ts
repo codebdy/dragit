@@ -5,15 +5,27 @@ import { useAxios } from "./useAxios";
 
 var dataCache : {[key: string]: IPage }= {}
 
+function resolveRequestKey(config?:AxiosRequestConfig){
+  if(!config || config.data || config.method === 'post'){
+    return undefined;
+  }
+  var key = config.url + '?';
+  Object.keys(config.params).forEach((param:any)=>{
+    key = key + '&' + param + '=' + config.params[param];
+  });
+
+  return key
+}
+
 //获取基础项目数据，带缓存机制
 export function useBaseItems(config?:AxiosRequestConfig){
   const [request, setRequest] = useState<AxiosRequestConfig>();
   const [items, loading, error] = useAxios<IPage>(request)
   const [cachedItemsData, setCachedItemsData] = useState<any[]>();
-
+  const key = resolveRequestKey(config);
   useEffect(() => {
-    if(config?.url){
-      let data = dataCache[config.url];
+    if(key){
+      let data = dataCache[key];
       if(!data){
         setRequest(config)
       }
@@ -28,8 +40,8 @@ export function useBaseItems(config?:AxiosRequestConfig){
   },[config]);
   
   useEffect(()=>{
-    if(items && config?.url){
-      dataCache[config.url] = items;
+    if(items && key){
+      dataCache[key] = items;
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items])

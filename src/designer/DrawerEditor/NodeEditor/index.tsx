@@ -106,8 +106,7 @@ export default function NodeEditor(
         <MultiSelectBox label={'权限'} 
           variant="outlined" 
           size="small"
-          fromUrl = {true}
-          url = {API_GET_AUTHS.url}
+          api = {API_GET_AUTHS}
           itemKey = "slug"
           groupByField = "module"
           value = {auths || []}
