@@ -14,6 +14,7 @@ import productAttributes from 'mock/data/productAttributes'
 import ordersData from 'mock/data/ordersData';
 import customerData from 'mock/data/customerData';
 import suppliersData from 'mock/data/suppliersData';
+import enqueries from 'mock/data/enqueries';
 
 window.modelsList = {
   '/Model/Article':{
@@ -93,6 +94,13 @@ window.modelsList = {
     data:suppliersData,
   },
 
+  '/Model/Enquery':{
+    total:12,
+    perPage:10,
+    currentPage:0,
+    data:enqueries,
+  },
+
 }
 
 window.listModels = {
@@ -107,6 +115,7 @@ window.listModels = {
   '/Model/Order': ordersData,
   '/Model/Customer':customerData,
   '/Model/Supplier':suppliersData,
+  '/Model/Enquery' :enqueries,
 }
 
 function getId(url){

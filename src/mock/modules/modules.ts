@@ -22,6 +22,8 @@ import customers from 'mock/views/customers'
 import customer from 'mock/views/customer'
 import suppliers from 'mock/views/suppliers'
 import supplier from 'mock/views/supplier'
+import enqueriesPage from 'mock/views/enqueriesPage'
+import enqueryViewPage from 'mock/views/enqueryViewPage'
 
 var modules = [
   {
@@ -274,6 +276,29 @@ var modules = [
         title:'客户编辑',
         slug:'supplier-edit',
         jsonSchema: supplier,
+      },
+    ],
+    auths:[
+     
+    ]
+  },
+  {
+    id:14,
+    title:'询盘管理',
+    slug:'enquery',
+    indexPageId:141,
+    pages:[
+      {
+        id:141,
+        title:'询盘列表',
+        slug:'enqueries',
+        jsonSchema: enqueriesPage,
+      },
+      {
+        id:142,
+        title:'询盘查看',
+        slug:'enquery-view',
+        jsonSchema: enqueryViewPage,
       },
     ],
     auths:[

@@ -115,7 +115,7 @@ export default [{
                 title:"询盘",
                 type:'item',
                 icon: 'mdi-circle-small',
-                //to: '/admin/module/user/',
+                to: '/admin/module/enquery/',
                 badge: {
                     color: 'secondary',
                     field: 'inquiries',
