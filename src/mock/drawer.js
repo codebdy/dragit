@@ -61,7 +61,7 @@ export default [{
                 title: '产品',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                to: '',
+                to: '/admin/module/product',
             },
             {
                 title: '分类',

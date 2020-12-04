@@ -75,7 +75,7 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                bind:{
+                api:{
                   method:'post',
                   url:API_QUERY_AND_OPERATE_MODELS.url,
                   params:{

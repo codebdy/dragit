@@ -1,13 +1,5 @@
 import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/PageAction"
 export default {
-  //initAction:{
-  //  method:'get',
-  //  url:'/api/data/list',
-  //  data:{
-  //    modelName:'/RXDrag/Model/Article',
-  //  },      
-  //},
-  withoutForm:true,
   layout:[
     {
       name: 'GridRow',
@@ -22,7 +14,7 @@ export default {
               children: [{
                   name: 'h2',
                   props:{
-                    rxText: '文章列表',
+                    rxText: '产品列表',
                   }
                   
               }],
@@ -168,7 +160,7 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                bind:{
+                api:{
                   method:'post',
                   url:'/api/data/query-operate-models',
                   params:{

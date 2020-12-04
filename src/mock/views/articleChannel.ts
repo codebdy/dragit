@@ -1,7 +1,6 @@
 import { API_GET_MODEL_TREE, API_SAVE_MODEL_TREE } from "APIs/tree";
 
 export default {
-  withoutForm:true,
   layout:[
     {
       name: 'GridRow',

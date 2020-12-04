@@ -110,6 +110,43 @@ var modules = [
     ],
   },
   {
+    id:5,
+    title:'产品管理',
+    slug:'product',
+    indexPageId:1,
+    pages:[
+      {
+        id:51,
+        title:'产品列表',
+        slug:'products',
+        jsonSchema: articles,
+      },
+      {
+        id:52,
+        title:'产品编辑',
+        slug:'product-edit',
+        jsonSchema: article,
+      },
+    ],
+    auths:[
+      {
+        id:1,
+        slug:"product-all",
+        name:'产品模块',
+      },
+      {
+        id:2,
+        slug:"create-product",
+        name:'新建产品',        
+      },
+      {
+        id:3,
+        slug:"edit-product",
+        name:"产品编辑"
+      }
+    ]
+  },
+  {
     id:7,
     slug:'user',
     title:'管理员',
