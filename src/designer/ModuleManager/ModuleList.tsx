@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { createStyles, Fab, IconButton, LinearProgress, makeStyles, Theme } from '@material-ui/core';
-import { API_ADD_MODULE, API_ADD_MODULE_CATEGORY, API_CHANGE_CATEGORY, API_CHANGE_MODULE, API_CLONE_CATEGORY, API_CLONE_MODULE, API_GET_MODULES, API_REMOVE_MODULE, API_REMOVE_MODULE_CATEGORY } from 'APIs/modules';
+import { API_ADD_MODULE, API_ADD_MODULE_CATEGORY, API_CHANGE_CATEGORY, API_CHANGE_MODULE, API_CLONE_CATEGORY, API_CLONE_MODULE, API_GET_MODULES, API_MOVE_MODULE_TO_CATEGORY, API_REMOVE_MODULE, API_REMOVE_MODULE_CATEGORY } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { Skeleton, TreeItem, TreeView } from '@material-ui/lab';
 import axios, { AxiosRequestConfig } from 'axios';
@@ -39,6 +39,7 @@ export default function ModuleList(props:{
   const [categories, setCategories] = useState<IModuleCategory[]>([]);
   //const [, operateLoading] = useAxios<ItemMeta>(operateConfig);
   const [operateLoading, setOperateLoading] = useState(false);
+  const [draggedId, setDraggedId] = useState(0);
 
   useEffect(()=>{
     if(moduleCategories){
@@ -153,6 +154,42 @@ export default function ModuleList(props:{
     );    
   }
 
+  const handleDragStart = (id:number)=>{
+    setDraggedId(id)
+  }
+
+  const handleDragEnd = ()=>{
+    setDraggedId(0);
+  }
+
+  const handleDragOver = (event:React.DragEvent<HTMLElement>, category:IModuleCategory)=>{
+    var sameCategory = false;
+    category.modules && category.modules.forEach(module=>{
+      if(module.id === draggedId){
+        sameCategory = true;
+      }
+    })
+    
+    if(!sameCategory){
+      event.preventDefault();
+    }
+  }
+
+  const handleDrop = (id:number)=>{
+    if(draggedId){
+      submitOperate(
+        {
+          ...API_MOVE_MODULE_TO_CATEGORY,
+          params:{
+            moduleId:draggedId,
+            cagegoryId:id,
+          }
+        }
+      );    
+  
+    }
+  }  
+
   const showSkeleton = loadingConfig === API_GET_MODULES && loading;
 
   return (
@@ -188,6 +225,8 @@ export default function ModuleList(props:{
                       <TreeItem 
                         key = {'category-' + category.id}
                         nodeId= {'category-' + category.id}
+                        onDragOver = {(e)=>handleDragOver(e, category)}
+                        onDrop = {()=>handleDrop(category.id)}
                         label = {
                           <TreeItemLabel
                             label = {category.name}
@@ -211,6 +250,9 @@ export default function ModuleList(props:{
                                 key = {module.id} 
                                 nodeId={module.id.toString()} 
                                 className = {classes.item}
+                                draggable
+                                onDragStart = {()=>handleDragStart(module.id)}
+                                onDragEnd = {handleDragEnd}
                                 label = {
                                   <TreeItemLabel label = {module.name}
                                     onChangeName = {(name?:string)=>handleChangeModuleName(name, module)}

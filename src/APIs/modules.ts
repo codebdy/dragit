@@ -100,7 +100,10 @@ const API_CLONE_MODULE: AxiosRequestConfig= {
   method:'post',
 }
 
-
+const API_MOVE_MODULE_TO_CATEGORY: AxiosRequestConfig= {
+  url:'/api/move-module-to-category',
+  method:'post',
+}
 
 export { 
   API_GET_MODULES,
@@ -124,5 +127,6 @@ export {
   API_GET_AUTHS,
 
   API_CLONE_CATEGORY,
-  API_CLONE_MODULE
+  API_CLONE_MODULE,
+  API_MOVE_MODULE_TO_CATEGORY
 }

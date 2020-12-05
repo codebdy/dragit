@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent:'flex-end',
       paddingRight:theme.spacing(1),
     },
+    title:{
+      userSelect:'none',
+    }
   }),
 );
 
@@ -73,7 +76,7 @@ export default function TreeItemLabel(
           onClick = {e=>{e.stopPropagation()}}
         />
         :
-        <div>
+        <div className = {classes.title}>
           {title}
         </div>        
       }

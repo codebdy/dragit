@@ -280,4 +280,16 @@ export default function mockModules(){
     cagegory.modules&&cagegory.modules.push(module);
   })
 
+  Mock.mock(RegExp('/api/move-module-to-category?.*'),'post', (request)=>{
+    let moduleId = getQueryVariable('moduleId', request.url);
+    let cagegoryId = getQueryVariable('cagegoryId', request.url);
+    let module = getModuleById(moduleId);
+    let oldCategory = getCategoryOfModule(moduleId);
+    let newCagtegory = getCagegoryById(cagegoryId)
+    remove(module, oldCategory.modules);
+    newCagtegory.modules = newCagtegory.modules ? newCagtegory.modules :[];
+    newCagtegory.modules.push(module);
+  })
+  
+
 }
