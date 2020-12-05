@@ -5,7 +5,7 @@ import { IAuth } from 'base/Model/IAuth';
 export interface IModule {
   id: number;
   slug: string;
-  title: string;
+  name: string;
   pages?: IPage[];
   indexPageId?: number;
   auths?: IAuth[];

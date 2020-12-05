@@ -7,13 +7,11 @@ import auths from './data/auths'
 import appInfo from './data/appInfo'
 import notifications from './data/notifications'
 import mockMedias from './medias/mock'
-import modules from './modules/modules'
 import mockModules from './modules/mock'
 import mockModel from './model/mock'
 import mockTrees from './tree/mock'
 
 window.drawerData = drawer;
-window.modules = modules;
 
 
 Mock.mock('/api/drawer', 'get', window.drawerData)

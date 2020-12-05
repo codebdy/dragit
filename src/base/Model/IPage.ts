@@ -11,6 +11,6 @@ export interface IPageSchema{
 export interface IPage{
   id:number,
   slug:string,
-  title?:string, 
+  name?:string, 
   jsonSchema?:IPageSchema,  
 }

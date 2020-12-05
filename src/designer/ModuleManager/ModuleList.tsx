@@ -1,19 +1,47 @@
-import React, { Fragment } from 'react';
-import EditableList, { ItemMeta } from 'designer/Common/EditableList';
-import { LinearProgress } from '@material-ui/core';
+import React, { Fragment, useEffect, useState } from 'react';
+import { ItemMeta } from 'designer/Common/EditableList';
+import { createStyles, Fab, IconButton, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 import { API_ADD_MODULE, API_CHANGE_MODULE, API_GET_MODULES, API_REMOVE_MODULE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
-import { Skeleton } from '@material-ui/lab';
+import { Skeleton, TreeItem, TreeView } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import TreeItemLabel from './TreeItemLabel';
+import { Add } from '@material-ui/icons';
+import { IModuleCategory } from 'base/Model/IModuleCategory';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    treeRoot: {
+      padding:theme.spacing(1),
+    },
+    addArea:{
+      display:'flex',
+      justifyContent:'center',
+      //padding:theme.spacing(1),
+    },
+    item:{
+      margin:theme.spacing(0.5, 0),
+    }
+  }),
+);
 
 export default function ModuleList(props:{
   onSelect:(moduleId: number)=>void
 }) {
   const {onSelect} = props;
+  const classes = useStyles();
+  const [selectedId, setSelected] = useState(-1);
   const [loadingConfig, setLoadingConfig] = React.useState<AxiosRequestConfig>(API_GET_MODULES);
   const [operateConfig, setOperateConfig] = React.useState<AxiosRequestConfig>();
-  const [items, loading] = useAxios<ItemMeta[]>(loadingConfig);
+  const [moduleCategories, loading] = useAxios<IModuleCategory[]>(loadingConfig);
   const [, operateLoading] = useAxios<ItemMeta>(operateConfig);
+
+  const handleClick = (id:number)=>{
+    setSelected(id);
+    onSelect(id);
+  }
 
   const handleOnChange = (newTitle:string, id:number)=>{
     setOperateConfig(
@@ -69,12 +97,69 @@ export default function ModuleList(props:{
             (loading || operateLoading)&&
             <LinearProgress />
           }
-          <EditableList items = {items || []} 
-            onChange = {handleOnChange}
-            onRemove = {handleRemove}
-            onAdd = {handleAdd}
-            onSelect = {onSelect}
-          />      
+          <TreeView
+            defaultCollapseIcon={<ExpandMoreIcon />}
+            defaultExpandIcon={<ChevronRightIcon />}
+            className = {classes.treeRoot}
+            disableSelection
+            selected = {'' + selectedId}
+          >
+            {
+              moduleCategories?.map(((category,index)=>{
+                return(
+                  <TreeItem 
+                    key = {'category-' + category.id}
+                    nodeId= {'category-' + category.id}
+                    label = {
+                      <TreeItemLabel
+                        actions={
+                          <IconButton edge="end" aria-label="comments" size="small">
+                            <Add fontSize="small"/>
+                          </IconButton>
+                        }
+                      >
+                        {category.name}
+                      </TreeItemLabel>
+                    }
+                  >
+                    {
+                      category.modules?.map((module)=>{
+                        return (
+                          <TreeItem
+                            key = {module.id} 
+                            nodeId={module.id.toString()} 
+                            className = {classes.item}
+                            label = {
+                              <TreeItemLabel>
+                                {module.name}
+                              </TreeItemLabel>
+                            }
+                            onClick = {()=>handleClick(module.id)}
+                          />
+                        )
+                      })
+                    }
+                  </TreeItem>                  
+                )
+              }))
+
+            }
+          </TreeView>
+          {
+            /*<EditableList items = {items || []} 
+              onChange = {handleOnChange}
+              onRemove = {handleRemove}
+              onAdd = {handleAdd}
+              onSelect = {onSelect}
+            /> */ 
+          }
+          <div className={classes.addArea}>
+            <Fab color="primary" size="small" 
+              //onClick = {onAdd}
+            >
+              <Add />
+            </Fab>
+          </div>
         </Fragment>
   
       }

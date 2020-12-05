@@ -17,7 +17,7 @@ export default function ModulePageRow(
   const{page, isIndexPage, onChangePage, onRemove, onChangeIndexPage, onDesign} = props;
   const[titleEditing, setTitleEditing] = useState(false);
   const[slugEditing, setSlugEditing] = useState(false);
-  const[title, setTitle] = useState(page.title);
+  const[title, setTitle] = useState(page.name);
   const[slug, setSlug] = useState(page.slug);
 
   const handleBeginEdit = ()=>{
@@ -28,7 +28,7 @@ export default function ModulePageRow(
   const handleFinishEdit = ()=>{
     setTitleEditing(false);
     setSlugEditing(false);
-    onChangePage({...page, title:title});
+    onChangePage({...page, name:title});
   }
 
   const handleChangIndexPage = (event: React.ChangeEvent<HTMLInputElement>)=>{

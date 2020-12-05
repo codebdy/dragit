@@ -64,7 +64,7 @@ export default function ModuleContent(
         ...API_CHANGE_MODULE,
         params:{
           id:module?.id,
-          title:module?.title,
+          title:module?.name,
           slug:slug,
         }
       }     

@@ -45,7 +45,8 @@ export default function ModulePages(props:{module:IModule}){
       ...API_ADD_MODULE_PAGE,
       params:{
         moduleId:module.id,
-        title:'New Page',
+        name:'New Page',
+        slug:'new-slug',
       }
     })    
   }

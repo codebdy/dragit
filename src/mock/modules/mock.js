@@ -1,17 +1,51 @@
 import Mock from 'mockjs'
 import createId from 'mock/utils/createId'
-import {getModuleIndexPage} from './modules'
 import getQueryVariable from 'mock/utils/getQueryVariable'
+import moduleCategories from './moduleCategories'
+
+export function getModuleIndexPage(moduleSlug){
+  for(var index = 0; index < moduleCategories.length; index++){
+    let modules = moduleCategories[index].modules;
+    for(var i = 0; i < modules.length; i++){
+      let module = modules[i]
+      if(module.slug === moduleSlug){
+        let pages = module.pages
+        if(pages){
+          for(var j=0; j < pages.length; j++){
+            if(pages[j].id === module.indexPageId){
+              return JSON.parse(JSON.stringify(pages[j]));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+export function getModuleById(muduleId){
+  for(var index = 0; index < moduleCategories.length; index++){
+    let modules = moduleCategories[index].modules;
+    for(var i = 0; i < modules.length; i++){
+      let module = modules[i]
+      if(module.id.toString() === muduleId){
+        return module;
+      }
+    }
+  }
+
+}
 
 export function getModulePage(pageSlug){
-  let modules = window.modules
-  for(var i = 0; i < modules.length; i++){
-    let module = modules[i]
-    let pages = module.pages
-    if(pages){
-      for(var j=0; j < pages.length; j++){
-        if(pages[j].slug === pageSlug){
-          return JSON.parse(JSON.stringify(pages[j]));
+  for(var index = 0; index < moduleCategories.length; index++){
+    let modules = moduleCategories[index].modules;
+    for(var i = 0; i < modules.length; i++){
+      let module = modules[i]
+      let pages = module.pages
+      if(pages){
+        for(var j=0; j < pages.length; j++){
+          if(pages[j].slug === pageSlug){
+            return JSON.parse(JSON.stringify(pages[j]));
+          }
         }
       }
     }
@@ -19,27 +53,22 @@ export function getModulePage(pageSlug){
 }
 
 export default function mockModules(){
-  let modules = window.modules;
-  Mock.mock('/api/modules','get', modules)
+  Mock.mock('/api/modules','get', moduleCategories)
   Mock.mock(RegExp('/api/change-module?.*'),'post', (request)=>{
     let id = getQueryVariable('id', request.url);
     let title = getQueryVariable('title', request.url);
     let slug = getQueryVariable('slug', request.url);
     
-    for(var i = 0; i < modules.length; i++){
-      let module = modules[i];
-      if(module.id.toString() === id){
-        module.title = title;
-        module.slug = slug;
-        return module
-      }
+    let module = getModuleById(id);
+    if(module){
+      module.title = title;
+      module.slug = slug;
+      return module      
     }
-  
-    //return [...modules]
   })
   
   Mock.mock(RegExp('/api/remove-module?.*'),'post', (request)=>{
-    let index = -1;
+    /*let index = -1;
     let id = getQueryVariable('id', request.url);
     modules.forEach((module, i)=>{
       if(module.id === parseInt(id)){
@@ -52,32 +81,20 @@ export default function mockModules(){
       modules.splice(index, 1);
     }
   
-    return [...modules]
+    return [...modules]*/
   })
   
   Mock.mock(RegExp('/api/add-module?.*'),'post', (request)=>{
-    modules.push({id:createId(), title:'New Module'})
-    return [...modules]
+    /*modules.push({id:createId(), title:'New Module'})
+    return [...modules]*/
   })
   
   Mock.mock(RegExp('/api/get-module-by-id?.*'),'get', (request)=>{
-    let id = parseInt(getQueryVariable('id', request.url));
-    for(var i = 0; i < modules.length; i++){
-      if(modules[i].id === id){
-        return modules[i];
-      }
-    }
+    let id = getQueryVariable('id', request.url);
+    return getModuleById(id);
   })
   
-  function getModuleById(id){
-    for(var i = 0; i < modules.length; i++){
-      let module = modules[i];
-      if(module.id === parseInt(id)){
-        return module;
-      }  
-    }  
-  }
-  
+ 
   Mock.mock(RegExp('/api/update-module-page?.*'),'post', (request)=>{
     let id = getQueryVariable('moduleId', request.url);
     let module =getModuleById(id);
@@ -103,9 +120,10 @@ export default function mockModules(){
   
   Mock.mock(RegExp('/api/add-page-of-module?.*'),'post', (request)=>{
     let id = getQueryVariable('moduleId', request.url);
-    let title = getQueryVariable('title', request.url);
+    let name = getQueryVariable('name', request.url);
+    let slug = getQueryVariable('slug', request.url);
     let module =getModuleById(id);
-    module.pages = [...module.pages, {id:createId(), title:title}]
+    module.pages = [...module.pages, {id:createId(), name, slug}]
     return JSON.parse(JSON.stringify(module));
   })
   
