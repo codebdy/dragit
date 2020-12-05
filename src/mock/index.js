@@ -14,10 +14,12 @@ import mockTrees from './tree/mock'
 window.drawerData = drawer;
 
 
-Mock.mock('/api/drawer', 'get', window.drawerData)
+Mock.mock('/api/drawer', 'get', (request)=>{
+  return window.drawerData;
+})
 
 Mock.mock('/api/save-drawer','post', (request)=>{
-  window.drawerData = request.body; 
+  window.drawerData = JSON.parse(request.body); 
   return true;
 })
 
