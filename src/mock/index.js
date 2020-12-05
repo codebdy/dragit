@@ -28,7 +28,9 @@ mockModules();
 mockModel();
 mockTrees();
 
-Mock.mock('/api/get-auths','get', auths)
+Mock.mock('/api/get-auths','get', (request)=>{
+  return auths
+})
 
 Mock.mock('/api/login', 'post',  (request)=>{
   let data = JSON.parse(request.body)
