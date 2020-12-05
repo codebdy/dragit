@@ -1,8 +1,6 @@
 import Mock from 'mockjs'
 import drawer from './drawer'
 import dashboard from './views/dashboard'
-import articles from './views/articles'
-import article from './views/article'
 import auths from './data/auths'
 import appInfo from './data/appInfo'
 import notifications from './data/notifications'
@@ -24,31 +22,11 @@ Mock.mock('/api/save-drawer','post', (request)=>{
 })
 
 Mock.mock('/api/page/dashboard', 'get', dashboard)
-Mock.mock('/api/page/articles', 'get', articles)
-Mock.mock('/api/page/article', 'get', article)
-//Mock.mock('/api/moudle-index/articles', 'get', 'articles')
-//Mock.mock(RegExp('/api/data/list?.*'), 'get', listData)
 
 mockMedias();
 mockModules();
 mockModel();
 mockTrees();
-
-Mock.mock('/api/base/items','get', [
-    {
-        id:'base1',
-        name:'条目1',
-      },
-      {
-        id:'base2',
-        name:'条目2',
-      },
-      {
-        id:'base3',
-        name:'条目3',
-      },
-])
-
 
 Mock.mock('/api/get-auths','get', auths)
 
