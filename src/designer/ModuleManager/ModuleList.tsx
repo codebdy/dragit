@@ -112,14 +112,13 @@ export default function ModuleList(props:{
                     nodeId= {'category-' + category.id}
                     label = {
                       <TreeItemLabel
+                        label = {category.name}
                         actions={
                           <IconButton edge="end" aria-label="comments" size="small">
                             <Add fontSize="small"/>
                           </IconButton>
                         }
-                      >
-                        {category.name}
-                      </TreeItemLabel>
+                      />                        
                     }
                   >
                     {
@@ -130,9 +129,7 @@ export default function ModuleList(props:{
                             nodeId={module.id.toString()} 
                             className = {classes.item}
                             label = {
-                              <TreeItemLabel>
-                                {module.name}
-                              </TreeItemLabel>
+                              <TreeItemLabel label = {module.name} />
                             }
                             onClick = {()=>handleClick(module.id)}
                           />
