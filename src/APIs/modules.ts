@@ -90,6 +90,17 @@ const API_GET_AUTHS : AxiosRequestConfig= {
   method:'get',
 }
 
+const API_CLONE_CATEGORY : AxiosRequestConfig= {
+  url:'/api/clone-category',
+  method:'post',
+}
+
+const API_CLONE_MODULE: AxiosRequestConfig= {
+  url:'/api/clone-module',
+  method:'post',
+}
+
+
 
 export { 
   API_GET_MODULES,
@@ -110,5 +121,8 @@ export {
   API_ADD_MODULE_AUTH,
   API_UPDATE_MODULE_AUTH,
   API_REMOVE_MODULE_AUTH,
-  API_GET_AUTHS
+  API_GET_AUTHS,
+
+  API_CLONE_CATEGORY,
+  API_CLONE_MODULE
 }

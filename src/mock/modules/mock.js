@@ -238,4 +238,46 @@ export default function mockModules(){
     throw new Error("404");
   })
   
+  Mock.mock(RegExp('/api/clone-category?.*'),'post', (request)=>{
+    let id =getQueryVariable('id', request.url);
+    let category = getCagegoryById(id);
+    category = JSON.parse(JSON.stringify(category));
+    category.id = createId();
+    category.name = category.name + " of copy";
+    category.modules && category.modules.forEach((module)=>{
+      module.id = createId();
+      module.slug = module.slug + '-' + createId();
+      module.pages && module.pages.forEach((page)=>{
+        page.id = createId();
+        page.slug = page.slug + '-' + createId()
+      });
+      module.auths && module.auths.forEach((auth)=>{
+        auth.id = createId();
+        auth.slug = auth.slug + '-' + createId()
+      });
+    });
+
+    moduleCategories.push(category)
+  })
+  
+  Mock.mock(RegExp('/api/clone-module?.*'),'post', (request)=>{
+    let id =getQueryVariable('id', request.url);
+    let module = getModuleById(id);
+    let cagegory = getCategoryOfModule(id);
+    module = JSON.parse(JSON.stringify(module));
+    module.id = createId();
+    module.name = module.name + " of copy";
+    module.slug = module.slug + '-' + createId();
+    module.pages && module.pages.forEach((page)=>{
+      page.id = createId();
+      page.slug = page.slug + '-' + createId();
+    });
+    module.auths && module.auths.forEach((auth)=>{
+      auth.id = createId();
+      auth.slug = auth.slug + '-' + createId()
+    });
+
+    cagegory.modules&&cagegory.modules.push(module);
+  })
+
 }

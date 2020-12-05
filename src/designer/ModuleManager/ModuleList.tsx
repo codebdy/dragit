@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { createStyles, Fab, IconButton, LinearProgress, makeStyles, Theme } from '@material-ui/core';
-import { API_ADD_MODULE, API_ADD_MODULE_CATEGORY, API_CHANGE_CATEGORY, API_CHANGE_MODULE, API_GET_MODULES, API_REMOVE_MODULE, API_REMOVE_MODULE_CATEGORY } from 'APIs/modules';
+import { API_ADD_MODULE, API_ADD_MODULE_CATEGORY, API_CHANGE_CATEGORY, API_CHANGE_MODULE, API_CLONE_CATEGORY, API_CLONE_MODULE, API_GET_MODULES, API_REMOVE_MODULE, API_REMOVE_MODULE_CATEGORY } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { Skeleton, TreeItem, TreeView } from '@material-ui/lab';
 import axios, { AxiosRequestConfig } from 'axios';
@@ -131,6 +131,28 @@ export default function ModuleList(props:{
     );    
   }
 
+  const handleCloneCategory = (id:number)=>{
+    submitOperate(
+      {
+        ...API_CLONE_CATEGORY,
+        params:{
+          id:id,
+        }
+      }
+    );    
+  }
+
+  const handleCloneModule = (id:number)=>{
+    submitOperate(
+      {
+        ...API_CLONE_MODULE,
+        params:{
+          id:id,
+        }
+      }
+    );    
+  }
+
   const showSkeleton = loadingConfig === API_GET_MODULES && loading;
 
   return (
@@ -171,6 +193,7 @@ export default function ModuleList(props:{
                             label = {category.name}
                             onChangeName = {(name?:string)=>handleChangeCategoryName(name, category)}
                             onRemove = {()=>{handleRemoveCategory(category.id)}}
+                            onClone = {()=>handleCloneCategory(category.id)}
                             actions={
                               <IconButton edge="end" aria-label="comments" size="small"
                                 onClick = {()=>handleAddModule(category.id)}
@@ -192,6 +215,7 @@ export default function ModuleList(props:{
                                   <TreeItemLabel label = {module.name}
                                     onChangeName = {(name?:string)=>handleChangeModuleName(name, module)}
                                     onRemove = {()=>{handleRemoveModule(module.id)}}
+                                    onClone = {()=>handleCloneModule(module.id)}
                                   />
                                 }
                                 onClick = {()=>handleClick(module.id)}

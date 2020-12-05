@@ -26,9 +26,10 @@ export default function TreeItemLabel(
     actions?:any,
     onChangeName:(name?:string)=>void,
     onRemove:()=>void,
+    onClone:()=>void,
   }
 ){
-  const {label, actions, onChangeName, onRemove} = props
+  const {label, actions, onChangeName, onRemove, onClone} = props
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -88,7 +89,7 @@ export default function TreeItemLabel(
           >
             <Edit fontSize="small"/>
           </IconButton>
-          <IconButton size="small">
+          <IconButton size="small" onClick={onClone}>
             <MdiIcon iconClass= "mdi-content-copy" size={14}/>
           </IconButton>
           {actions}
