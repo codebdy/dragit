@@ -8,6 +8,7 @@ import ModuleAuthsRow from "./ModuleAuthsRow";
 import { IAuth } from "base/Model/IAuth";
 import { useAxios } from "base/Hooks/useAxios";
 import { API_ADD_MODULE_AUTH, API_REMOVE_MODULE_AUTH, API_UPDATE_MODULE_AUTH } from "APIs/modules";
+import createId from "utils/createId";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +44,7 @@ export default function ModuleAuths(props:{module:IModule}){
       params:{
         moduleId:module.id,
         name:'New Auth',
-        slug:'auth-slug' + module.id,
+        slug:'auth-slug' + createId(),
       }
     })    
 

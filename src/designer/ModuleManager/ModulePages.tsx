@@ -8,6 +8,7 @@ import { API_UPDATE_MODULE_PAGE, API_REMOVE_MODULE_PAGE, API_ADD_MODULE_PAGE, AP
 import { useAxios } from 'base/Hooks/useAxios';
 import { IPage } from 'base/Model/IPage';
 import PageEditor from 'designer/PageEditor';
+import createId from 'utils/createId';
 
 
 export default function ModulePages(props:{module:IModule}){
@@ -46,7 +47,7 @@ export default function ModulePages(props:{module:IModule}){
       params:{
         moduleId:module.id,
         name:'New Page',
-        slug:'new-slug',
+        slug:'new-slug' + createId(),
       }
     })    
   }

@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 import mediaFolders from './mediaFolders'
 import medias from './medias'
-import createId from 'mock/utils/createId'
+import createId from 'utils/createId'
 
 export default function mockMedias(){
   Mock.mock('/api/medias/folders', mediaFolders)

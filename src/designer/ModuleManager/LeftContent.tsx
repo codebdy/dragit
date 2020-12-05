@@ -35,9 +35,7 @@ export default function LeftContent(
         </div>
       }
     >
-      <div>
-        <ModuleList  onSelect = {onSelect}/>
-      </div>
+      <ModuleList  onSelect = {onSelect}/>
     </LeftArea>
   )
 }

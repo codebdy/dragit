@@ -5,13 +5,28 @@ const API_GET_MODULES : AxiosRequestConfig= {
   method:'get',
 }
 
+const API_CHANGE_CATEGORY : AxiosRequestConfig= {
+  url:'/api/change-cagegory',
+  method:'post',
+}
+
 const API_CHANGE_MODULE : AxiosRequestConfig= {
   url:'/api/change-module',
   method:'post',
 }
 
+const API_REMOVE_MODULE_CATEGORY : AxiosRequestConfig= {
+  url:'/api/remove-cagegory-module',
+  method:'post',
+}
+
 const API_REMOVE_MODULE : AxiosRequestConfig= {
   url:'/api/remove-module',
+  method:'post',
+}
+
+const API_ADD_MODULE_CATEGORY : AxiosRequestConfig= {
+  url:'/api/add-module-category',
   method:'post',
 }
 
@@ -78,8 +93,11 @@ const API_GET_AUTHS : AxiosRequestConfig= {
 
 export { 
   API_GET_MODULES,
+  API_CHANGE_CATEGORY,
   API_CHANGE_MODULE, 
+  API_REMOVE_MODULE_CATEGORY,
   API_REMOVE_MODULE,
+  API_ADD_MODULE_CATEGORY,
   API_ADD_MODULE,
   API_GET_MODULE_BY_ID,
   API_UPDATE_MODULE_PAGE,

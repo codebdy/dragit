@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import Scrollbar from 'admin/common/Scrollbar';
 import { sideBarSettings } from 'utils/sideBarSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,9 +44,7 @@ export default function LeftArea(props:{title?:any, children?:any}){
       <div className={classes.leftTitle}>
         {title}
       </div>
-      <Scrollbar>
-        {children}
-      </Scrollbar>
+      {children}
   </div>
   )
 }

@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width:'100px',
       display:'flex',
       justifyContent:'flex-end',
+      paddingRight:theme.spacing(1),
     },
   }),
 );
@@ -23,12 +24,25 @@ export default function TreeItemLabel(
   props:{
     label?:string,
     actions?:any,
+    onChangeName:(name?:string)=>void,
+    onRemove:()=>void,
   }
 ){
+  const {label, actions, onChangeName, onRemove} = props
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [title, setTitle] = useState(props.label);
+  const [title, setTitle] = useState(label);
+
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
+    let netTitle = event.target.value as string;
+    setTitle(netTitle);
+  }
+
+  const handleEndEditing = ()=>{
+    setEditing(false);
+    onChangeName(title);
+  }
 
   return (
     <div 
@@ -36,38 +50,36 @@ export default function TreeItemLabel(
       onMouseMove = {()=>setHover(true)}
       onMouseLeave = {()=>setHover(false)}
     >
-      <div onClick = {e=>{e.stopPropagation()}} onDoubleClick={e=>{setEditing(true)}}>
+      <div onDoubleClick={e=>{setEditing(true)}}>
       {
         editing?
         <TextField 
           value = {title} 
           variant = "outlined" 
           size="small" 
+          fullWidth
           autoFocus
-          onBlur = {()=>setEditing(false)}
+          onBlur = {handleEndEditing}
           onKeyUp = {
             e=>{
               if(e.keyCode === 13) {
-                setEditing(false)
+                handleEndEditing()
               }
             }
           }
 
-          onChange = { 
-            (e)=>{
-              setTitle(e.target.value)
-            } 
-          }
+          onChange = { handleChange  }
+          onClick = {e=>{e.stopPropagation()}}
         />
         :
         <div>
-          {props.label}
+          {title}
         </div>        
       }
       </div>
       {
-        hover &&
-        <div className={classes.actions}>
+        hover && !editing &&
+        <div onClick = {e=>{e.stopPropagation()}} className={classes.actions}>
           <IconButton edge="end" aria-label="comments" size="small"
             onClick = {(e)=>{
               e.stopPropagation();
@@ -79,9 +91,9 @@ export default function TreeItemLabel(
           <IconButton size="small">
             <MdiIcon iconClass= "mdi-content-copy" size={14}/>
           </IconButton>
-          {props.actions}
+          {actions}
           <IconButton edge="end" aria-label="comments" size="small"
-            //onClick = {onRemove}
+            onClick = {onRemove}
           >
             <Delete fontSize="small"/>
           </IconButton>
