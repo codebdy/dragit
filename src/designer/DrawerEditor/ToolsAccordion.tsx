@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -9,11 +8,14 @@ import intl from "react-intl-universal";
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { API_GET_MODULES } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
-import { ItemMeta } from 'designer/Common/EditableList';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'base/Model/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
 import Scrollbar from 'admin/common/Scrollbar';
+import { IModuleCategory } from 'base/Model/IModuleCategory';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { TreeItem, TreeView } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
     list:{
       width:'100%',
     },
+    category:{
+      padding:theme.spacing(1.5, 0),
+    },
     item:{
       userSelect:'none',
       cursor:'move',
@@ -33,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor:  fade(theme.palette.primary.main, 0.1),
       }
     },
+    subItem:{
+      marginLeft:theme.spacing(1),
+    }
 
   }),
 );
@@ -48,7 +56,7 @@ export default function ToolsAccordion(
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
-  const [customizedModules] = useAxios<ItemMeta[]>(API_GET_MODULES);
+  const [moduleCategories] = useAxios<IModuleCategory[]>(API_GET_MODULES);
   const [assistItems] = useState([
     {
       label:intl.get('fold-group'),
@@ -123,26 +131,45 @@ export default function ToolsAccordion(
             <Typography >{intl.get('customized-modules')}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <List className={classes.list}>
+            <TreeView 
+              defaultCollapseIcon={<ExpandMoreIcon />}
+              defaultExpandIcon={<ChevronRightIcon />}
+              disableSelection
+              className = {classes.list}
+            >
               {
-                customizedModules?.map(module=>{
-                  const meta:IMenuItem ={
-                    type:'item',
-                    title:module.title,
-                    icon:"mdi-circle-small",
-                    to:`/admin/module/${module.id}/`,
-                  }
+                moduleCategories?.map(category=>{
                   return (
-                    <ListItem key={module.id} draggable = {true}  className={classes.item}
-                      onDragStart = {()=>handleDragStart(meta)}
-                      onDragEnd = {onEndDragNode}
+                    <TreeItem nodeId = {'' + category.id} key={category.id} 
+                      label = {
+                        <div className={classes.category}>{category.name}</div>
+                      }
                     >
-                      <ListItemText primary={module.title} />
-                    </ListItem>                  
+                        {
+                          category.modules?.map(module=>{
+                            const meta:IMenuItem ={
+                              type:'item',
+                              title:module.name,
+                              icon:"mdi-circle-small",
+                              to:`/admin/module/${module.id}/`,
+                            }
+                            return (
+                              <ListItem key={module.id} draggable = {true}  className={classes.item}
+                                onDragStart = {()=>handleDragStart(meta)}
+                                onDragEnd = {onEndDragNode}
+                              >
+                                <ListItemText primary={module.name} className = {classes.subItem} />
+                              </ListItem>                  
+                            )
+                          })
+                        }
+  
+                    </TreeItem>                  
                   )
                 })
               }
-            </List>
+            </TreeView>
+
           </AccordionDetails>
         </Accordion>
       </Scrollbar>
