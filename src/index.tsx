@@ -52,6 +52,7 @@ import { TreeEditorRule } from 'components/Tree/TreeEditor/Rule';
 import TreeSelect from 'components/Tree/TreeSelect';
 import { TreeSelectRule } from 'components/Tree/TreeSelect/Rule';
 import Medias from 'components/Medias';
+import AntDesignChart from 'components/AntDesignChart';
 
 const store = configureStore();
 
@@ -81,6 +82,7 @@ register('TreeEditor', TreeEditor, TreeEditorRule);
 register('TreeSelect', TreeSelect, TreeSelectRule);
 register('MediaSelect', MediaSelect);
 register('Medias', Medias);
+register('AntDesignChart', AntDesignChart);
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);
 registerHtmlTag('h3', HeadRule);
