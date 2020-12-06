@@ -12,6 +12,8 @@ export default {
             name: 'GridColumn',
             props:{
               md:12,
+              xs:12,
+              xm:12,
             },
             children:[
               {
@@ -60,6 +62,8 @@ export default {
           name: 'GridColumn',
           props:{
             md:8,
+            sm:12,
+            xs:12,
           },
           children:[
             {
@@ -122,6 +126,8 @@ export default {
           name: 'GridColumn',
           props:{
             md:4,
+            sm:12,
+            xs:12
           },
           children:[
             {
