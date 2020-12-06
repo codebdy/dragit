@@ -13,35 +13,32 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const charts :{
+  [key:string]:React.FC<any>
+}= {
+  'Area':Area,
+}
+
 const AntDesignChart = React.forwardRef((
   props: {
-
+    chart:string,
+    api:AxiosRequestConfig,
   },
   ref:any
 )=>{
-  //const {...rest} = props;
-  const [request] = useState<AxiosRequestConfig>({
-    url:'https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json',
-    method:'get',
-  })
+  const {chart, api, ...rest} = props;
+  const Chart = charts[chart];
+
+  const [request] = useState<AxiosRequestConfig>(api)
   const classes = useStyles();
   const [data, loading] = useAxios<any>(request)
 
-  var config = {
-    data: data||[],
-    xField: 'Date',
-    yField: 'scales',
-    xAxis: { tickCount: 5 },
-    areaStyle: function areaStyle() {
-      return { fill: 'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff' };
-    },
-  };
-
   return (
-    <Area 
+    <Chart 
       className = {classes.root}
       ref={ref}
-      {...config}
+      data = {data || []}
+      {...rest}
       loading = {loading}
     />
   )
