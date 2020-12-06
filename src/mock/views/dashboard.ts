@@ -11,7 +11,7 @@ export default {
         {
             name: 'GridColumn',
             props:{
-              xs:12,
+              md:12,
             },
             children:[
               {
@@ -59,43 +59,114 @@ export default {
         {
           name: 'GridColumn',
           props:{
-            xs:6,
+            md:8,
           },
-          children: [{
-              name: 'h2',
-              props:{
-                rxText: '66',
-              }
-              
-          }],
+          children:[
+            {
+              name:'Portlet',
+              props: {
+                elevation: 6,
+                open:true,
+                withHeader:true,
+                title:'客户增长',
+                //collapsible: true,
+                marginTop:2,
+              },
+              children:[
+                {
+                  name:"PortletGridContainer",
+                  children:[
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'AntDesignChart',
+                          props:{
+                            chart:'Line',
+                            api:{
+                              url:'https://gw.alipayobjects.com/os/bmw-prod/e00d52f4-2fa6-47ee-a0d7-105dd95bde20.json',
+                              method:'get',
+                            },
+                            xField: 'year',
+                            yField: 'gdp',
+                            seriesField: 'name',
+                            yAxis: `{
+                              label: {
+                                formatter: function formatter(v) {
+                                  return ''.concat((v / 1000000000).toFixed(1), ' B');
+                                },
+                              },
+                            }`,
+                            legend: { position: 'top' },
+                            smooth: true,
+                            animation: {
+                              appear: {
+                                animation: 'path-in',
+                                duration: 5000,
+                              },
+                            },
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           name: 'GridColumn',
           props:{
-            xs:3,
+            md:4,
           },
-          children: [{
-              name: 'h2',
-              props:{
-                rxText: '33',
-              }
-              
-          }],
+          children:[
+            {
+              name:'Portlet',
+              props: {
+                elevation: 6,
+                open:true,
+                withHeader:true,
+                title:'盈利率',
+                //collapsible: true,
+                marginTop:2,
+              },
+              children:[
+                {
+                  name:"PortletGridContainer",
+                  children:[
+                    {
+                      name: 'PortletGridItem',
+                      props:{
+                        xs:12,
+                      },
+                      children:[
+                        {
+                          name:'AntDesignChart',
+                          props:{
+                            chart:'Liquid',
+                            percent: 0.65,
+                            statistic: {
+                              content: {
+                                style: {
+                                  fontSize: 60,
+                                  fill: 'black',
+                                },
+                              },
+                            },
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
-        {
-          name: 'GridColumn',
-          props:{
-            xs:3,
-          },
-          children: [{
-              name: 'h2',
-              props:{
-                rxText: '33',
-              }
-              
-          }],
-        },
-
       ]
     },
   ] 
