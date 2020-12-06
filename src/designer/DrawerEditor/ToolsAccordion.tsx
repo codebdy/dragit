@@ -151,7 +151,7 @@ export default function ToolsAccordion(
                               type:'item',
                               title:module.name,
                               icon:"mdi-circle-small",
-                              to:`/admin/module/${module.id}/`,
+                              to:`/admin/module/${module.slug}/`,
                             }
                             return (
                               <ListItem key={module.id} draggable = {true}  className={classes.item}
