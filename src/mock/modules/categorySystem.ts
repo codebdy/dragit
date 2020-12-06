@@ -1,3 +1,4 @@
+import dashboard from "mock/views/dashboard";
 import meidaPage from "mock/views/meidaPage";
 import notificationPage from "mock/views/notificationPage";
 import notificationViewPage from "mock/views/notificationViewPage";
@@ -6,7 +7,16 @@ export default[
   {
     id:21,
     slug:'dashboard',
-    name:'仪表盘'
+    name:'仪表盘',
+    indexPageId:211,
+    pages:[
+      {
+        id:211,
+        name:'分析看板',
+        slug:'dashboard1',
+        jsonSchema:dashboard,
+      },
+    ],
   },
   {
     id:15,

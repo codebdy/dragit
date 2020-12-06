@@ -5,8 +5,8 @@ export default [{
     },
     {
         type: 'item',
-        title: '仪表盘',
-        to: '/admin/dashboard',
+        title: '分析看板',
+        to: '/admin/module/dashboard',
         icon: 'mdi-speedometer',
         chip: {
             color: 'primary',

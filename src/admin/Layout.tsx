@@ -7,7 +7,6 @@ import PageContent from 'admin/PageContent';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import AreaSelect from 'designer/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
-import Dashboard from 'admin/views/Dashboard/Dashboard';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
 import Page404 from './views/Page404';
 
@@ -55,7 +54,6 @@ export default function Layout(){
         <PageContent>
           <Switch>
             <Route path="/admin/module/:moduleSlug/:pageSlug?/:id?" component={PageView}></Route> 
-            <Route path="/admin/dashboard" component={Dashboard}></Route>
             <Route path="/admin/error-404" component={Page404}></Route>
             {//<Redirect to="/admin/module/:moduleId/page/index" from='/admin/module/:moduleId/' />
             } 
