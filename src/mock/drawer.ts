@@ -7,7 +7,7 @@ export default [{
         type: 'item',
         title: '分析看板',
         to: '/admin/module/dashboard',
-        icon: 'mdi-speedometer',
+        icon: 'mdi-view-dashboard',
         chip: {
             color: 'primary',
             label: '新',
