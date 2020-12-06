@@ -147,16 +147,37 @@ export default {
                         {
                           name:'AntDesignChart',
                           props:{
-                            chart:'Liquid',
-                            percent: 0.65,
-                            statistic: {
-                              content: {
-                                style: {
-                                  fontSize: 60,
-                                  fill: 'black',
-                                },
+                            chart:'Radar',
+                            data:[
+                              { name: 'G2', star: 10178 },
+                              { name: 'G6', star: 7077 },
+                              { name: 'F2', star: 7345 },
+                              { name: 'L7', star: 2029 },
+                              { name: 'X6', star: 298 },
+                              { name: 'AVA', star: 806 },
+                            ],
+                            xField: 'name',
+                            yField: 'star',
+                            meta: {
+                              star: {
+                                alias: '分数',
+                                min: 0,
+                                nice: true,
                               },
                             },
+                            xAxis: {
+                              line: null,
+                              tickLine: null,
+                            },
+                            yAxis: {
+                              label: false,
+                              grid: {
+                                alternateColor: 'rgba(0, 0, 0, 0.04)',
+                              },
+                            },
+                            // 开启辅助点
+                            point: {},
+                            area: {},
                           }
                         }
                       ]

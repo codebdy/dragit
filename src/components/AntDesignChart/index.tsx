@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { Area, Line, Liquid } from '@ant-design/charts';
+import { Area, Line, Liquid, Radar } from '@ant-design/charts';
 import { useAxios } from 'base/Hooks/useAxios';
 import { AxiosRequestConfig } from 'axios';
 
@@ -19,6 +19,7 @@ const charts :{
   'Area':Area,
   'Line':Line,
   'Liquid':Liquid,
+  'Radar':Radar,
 }
 
 const AntDesignChart = React.forwardRef((
