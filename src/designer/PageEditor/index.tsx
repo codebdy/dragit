@@ -204,7 +204,7 @@ export default function PageEditor(
   }
 
   const handleSelectParent = ()=>{
-
+    setSelectedNode(selectedNode?.parent);
   }
 
   return (
