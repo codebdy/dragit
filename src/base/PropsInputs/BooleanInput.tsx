@@ -7,7 +7,7 @@ export default function BooleanInput(props:PropsInputProps){
   const [inputValue, setInputValue] = React.useState(!!value);
   
   useEffect(()=>{
-    setInputValue(value);
+    setInputValue(!!value);
   },[value])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

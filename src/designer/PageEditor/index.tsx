@@ -132,7 +132,6 @@ export default function PageEditor(
       }
     ]);    
     let canvasCopy = canvas.copy();
-    canvasCopy.seedId();
     let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
     if(selectNodeCopy){
       selectNodeCopy.meta.props = selectNodeCopy.meta.props || {};
@@ -182,6 +181,19 @@ export default function PageEditor(
     }    
   }
 
+  const handleClear = ()=>{
+    setUndoList([...undoList, 
+      {
+        canvasNode: canvas,
+        selectedNodeId: selectedNode?.id,
+      }
+    ]);    
+    let newCanvas = makeCanvas();
+    setCanvas(newCanvas);      
+    setSelectedNode(undefined);
+    setRedoList([]);
+  }
+
   
   const handleBeginDrag = ()=>{
 
@@ -210,13 +222,6 @@ export default function PageEditor(
 
           toolbar = {
             <Fragment>
-              <IconButton>
-                <MdiIcon iconClass="mdi-layers-outline"/>
-              </IconButton>
-              {//<IconButton>
-              // <MdiIcon iconClass="mdi-dock-bottom"/>
-                //</IconButton>
-              }
               <IconButton 
                 onClick = {()=>{
                   dispatch(showOutlineActon(!showOutline))
@@ -249,7 +254,7 @@ export default function PageEditor(
               >
                 <MdiIcon iconClass="mdi-redo"/>
               </IconButton>
-              <IconButton>
+              <IconButton onClick = {handleClear}>
                 <MdiIcon iconClass="mdi-delete-outline"/>
               </IconButton>
               <Spacer></Spacer>
