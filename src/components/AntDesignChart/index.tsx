@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       //去掉水平滚动条
-      width:'calc(100% - 1px)',
+      flex:1,
+      width:'calc(100% - 38px)',
     },
   }),
 );

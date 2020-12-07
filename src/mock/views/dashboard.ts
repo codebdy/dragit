@@ -5,7 +5,7 @@ export default {
       props: {
         justify: 'space-between',
         alignItems: "center",
-        spacing: 1,
+        spacing: 2,
       },
       children: [
         {

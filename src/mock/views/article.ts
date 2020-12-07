@@ -58,7 +58,7 @@ export default {
   {
       name: 'GridRow',
       props: {
-        spacing: 3,
+        spacing: 2,
       },
   
       children: [{
