@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Tabs, Tab } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox';
 import Box from '@material-ui/core/Box';
 import AttributeBox from './AttrebuteBox';
-import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
-import { INode } from 'designer/PageEditor/Core/Node/INode';
 import SettingsBox from './SettingsBox';
 import LeftArea from 'designer/Layout/LeftArea';
 import { IPageSchema } from 'base/Model/IPage';
-
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -33,31 +32,18 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
-export default function LeftContent(props:{pageSchema?:IPageSchema, onChange:(pageSchema:IPageSchema)=>void}){
-  const {pageSchema, onChange} = props;
+export default function LeftContent(
+  props:{
+    selectedNode?:RXNode<IMeta>,
+    pageSchema?:IPageSchema, 
+    onChange:(pageSchema:IPageSchema)=>void
+  }
+){
+  const {selectedNode, pageSchema, onChange} = props;
   const [value, setValue] = React.useState(0);
-  const [focusedNode, setFocusedNode] = React.useState<INode|null>(null);
-
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
-
-  const follow = (node:INode)=>{
-    //console.log(node);
-    setFocusedNode(node);
-  }
-  const unFollow = ()=>{
-    setFocusedNode(null)
-  }
-
-  useEffect(() => {
-    bus.on(FOCUS_NODE, follow);
-    bus.on(UN_FOCUS_NODE, unFollow);
-    return () => {
-      bus.off(FOCUS_NODE, follow);
-      bus.off(UN_FOCUS_NODE, unFollow);
-    };
-  });
 
   return (
     <LeftArea
@@ -80,7 +66,7 @@ export default function LeftContent(props:{pageSchema?:IPageSchema, onChange:(pa
         <Toolbox></Toolbox>
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <AttributeBox node = {focusedNode}></AttributeBox>
+       <AttributeBox node = {selectedNode}></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
         {

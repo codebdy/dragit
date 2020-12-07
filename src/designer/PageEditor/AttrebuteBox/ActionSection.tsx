@@ -3,9 +3,14 @@ import { FormControl,  InputLabel, MenuItem, Select, TextField } from '@material
 import { AttributeRow } from './AttributeRow';
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from 'admin/views/Page/PageAction';
 import intl from 'react-intl-universal';
-import { INode } from 'designer/PageEditor/Core/Node/INode';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
 
-export default function AttributeBoxActionSection(props:{node:INode}){
+export default function AttributeBoxActionSection(
+  props:{
+    node:RXNode<IMeta>
+  }
+){
   const {node} = props;
   const [action, setAction] = React.useState(node.meta.props?.onClick||{});
 
@@ -19,36 +24,23 @@ export default function AttributeBoxActionSection(props:{node:INode}){
     let newAction:PageAction =  {...action, name: actionName};
 
     setAction(newAction);
-    node.updateProp('onClick', newAction)
+    //node.updateProp('onClick', newAction)
   }
 
   const handleModuleIdChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = (event.target.value as string);
     let newAction:PageAction =  {...action, page:{...action.page, moduleId:newValue}};
     setAction(newAction);
-    node.updateProp('onClick', newAction)
+    //node.updateProp('onClick', newAction)
   }; 
 
   const handlePageIdChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = (event.target.value as string);
     let newAction:PageAction =  {...action, page:{...action.page, pageId:newValue}};
     setAction(newAction);
-    node.updateProp('onClick', newAction)
+    //node.updateProp('onClick', newAction)
   }; 
 
-  /*const handleSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    let newValue = (event.target.value as string);
-    let newAction:PageAction =  {...action, slug:newValue};
-    setAction(newAction);
-    node.updateProp('onClick', newAction)
-  }; 
-
-  const handleNeedGoBack = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue =  event.target.checked;
-    let newAction:PageAction =  {...action, needGoBack:newValue};
-    setAction(newAction);
-    node.updateProp('onClick', newAction)
-  }; */
 
   return (
     <Fragment>

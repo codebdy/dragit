@@ -4,13 +4,16 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { INode } from 'designer/PageEditor/Core/Node/INode';
 import { IProp } from "base/Model/IProp";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
 import AttributeBoxValidateArea, { ValidateRule } from 'designer/PageEditor/AttrebuteBox/ValidateArea';
 import { API_GET_AUTHS } from 'APIs/modules';
 import MultiSelectBox from 'components/Select/MultiSelectBox';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
+import { resolveRule } from 'base/DragRX';
+import { IRule } from 'base/Rules/IRule';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,33 +50,39 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function AttributeBox(props:{node:INode|null}){
+export default function AttributeBox(
+  props:{
+    node?:RXNode<IMeta>
+  }
+){
   const classes = useStyles();
   const {node} = props;
   const [field, setField] = React.useState(node?.meta.props?.field);
-  const [rule, setRule] = React.useState(node?.meta.props?.rule);
+  const [nodeRule, setNodeRule] = React.useState<IRule>();
+  const [validateRule, setValidateRule] = React.useState<ValidateRule>();
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
   const propChange = (field:string, value:any) => {
-    node?.updateProp(field, value);
+    //node?.updateProp(field, value);
   };
 
   useEffect(() => {
-    setField(node?.meta.props?.field)
+    setField(node?.meta.props?.field);
+    node?.meta.name && setNodeRule(resolveRule(node?.meta.name))
   },[node]);
 
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let newField = event.target.value as string;
-    node?.updateProp('field', newField);
+    //node?.updateProp('field', newField);
     setField(newField);
   }
 
   const handleRuleChange = (rule:ValidateRule)=>{
-    node?.updateProp('rule', rule);
-    setRule(rule);
+    //node?.updateProp('rule', rule);
+    setValidateRule(rule);
   }
 
   const handleChangeAuths = (auths : string[]|undefined)=>{
-    node?.updateProp('auths', auths);
+    //node?.updateProp('auths', auths);
     setAuths(auths);
   }
 
@@ -83,7 +92,7 @@ export default function AttributeBox(props:{node:INode|null}){
         <Fragment>
           <div className={classes.nodeLabel}>
             {intl.get('selected-node')}
-            <span style={{color:'#5d78ff'}}>{node.label}</span>
+            <span style={{color:'#5d78ff'}}>{node.meta.name}</span>
           </div>
           
           <Accordion className={classes.panelPaper}>
@@ -95,13 +104,13 @@ export default function AttributeBox(props:{node:INode|null}){
             <AccordionDetails className={classes.pannelDetail}>
               <Grid container spacing={2}>
                 {
-                  node.rule.getFields(node.meta).map((field:IProp)=>{
+                  nodeRule?.getFields(node.meta).map((field:IProp)=>{
                     return(
                       <Grid item key={node.id + '-' + field.name} xs={field.xs || 6}>
                           <field.input
                             label={field.label && (intl.get(field.label)||field.label)}
                             field={field.name}
-                            value={node.props[field.name]}
+                            value={node.meta.props && node.meta.props[field.name]}
                             onChange= {propChange}
                             props={field.props}
                           />
@@ -114,7 +123,7 @@ export default function AttributeBox(props:{node:INode|null}){
               </Grid>
             </AccordionDetails>
           </Accordion>
-          {node.rule.hasField &&
+          {nodeRule?.hasField &&
             <Accordion  className={classes.panelPaper}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -134,7 +143,7 @@ export default function AttributeBox(props:{node:INode|null}){
             </Accordion>
           }
           {
-            node.rule.hasValidation && 
+            nodeRule?.hasValidation && 
               <Accordion  className={classes.panelPaper}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -142,11 +151,11 @@ export default function AttributeBox(props:{node:INode|null}){
                   <Typography className={classes.heading}>{intl.get('validate')}</Typography>
                 </AccordionSummary>
                 <AccordionDetails  key={node.id + '-rule'} className={classes.pannelDetail}>
-                  <AttributeBoxValidateArea rule={rule} onChange={handleRuleChange} /> 
+                  <AttributeBoxValidateArea rule={validateRule} onChange={handleRuleChange} /> 
                 </AccordionDetails>            
               </Accordion>            
           }
-          {node.rule.hasAction && 
+          {nodeRule?.hasAction && 
             <Accordion  className={classes.panelPaper}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

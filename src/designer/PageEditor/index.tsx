@@ -19,7 +19,10 @@ import { IPage, IPageSchema } from 'base/Model/IPage';
 import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'admin/views/Page/PageSkeleton';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
-import DragRXEditor from './Core/DragRXEditor';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNodeRoot } from 'base/RXNode/Root';
+import ComponentView from './Core/ComponentView';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,6 +50,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+function makeCanvas(){
+  return new RXNodeRoot<IMeta>(
+    {
+      name:'Canvas'
+    }
+  )
+}
+
 
 export default function PageEditor(
   props:{
@@ -61,23 +72,35 @@ export default function PageEditor(
   const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   const [pageMeta, loading] = useAxios<IPage>(pageRequest);
   const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(pageMeta?.jsonSchema);
-
+  const [metas, seMetas] = useState<Array<IMeta>>([])
+  const [canvas, setCanvas] = useState<RXNodeRoot<IMeta>>(makeCanvas());
+  const [selectedNode, setSelectedNode] = useState<RXNode<IMeta>>();
+  const dispatch = useDispatch()
+  const theme = useTheme(); 
+  useAuthCheck();  
   //相当于复制一个Json副本，不保存的话直接扔掉
-  let nodes = JSON.parse(JSON.stringify(pageMeta?.jsonSchema?.layout || []));
-  //let canvas = new CanvasNode(nodes);
-  useAuthCheck();
+  useEffect(()=>{
+    
+  },[pageMeta])
+
   
   useEffect(() => {
     setPageRequest({...API_GET_PAGE, params:{pageSlug}})
   },[pageSlug]);
 
   useEffect(() => {
-    setPageSchema(pageMeta?.jsonSchema)
+    setPageSchema(pageMeta?.jsonSchema);
+    seMetas(JSON.parse(JSON.stringify(pageMeta?.jsonSchema?.layout || [])))
   },[pageMeta]);
  
-  const dispatch = useDispatch()
-  const theme = useTheme();
-  
+
+  useEffect(()=>{
+    let newCanvas = makeCanvas();
+    newCanvas.parse(metas);
+    setCanvas(newCanvas);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[metas])
+
   const handleCancel = () => {
     onClose();
 
@@ -95,12 +118,16 @@ export default function PageEditor(
     setPageSchema(page)
   }
 
+  const handleSelectedNode = (node?:RXNode<IMeta>)=>{
+    setSelectedNode(node);
+  }
+
   return (
     loading? <Container><PageSkeleton /></Container> :
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
-            <LeftContent pageSchema={pageSchema} onChange={handlPageChange}/>
+            <LeftContent pageSchema={pageSchema} selectedNode = {selectedNode} onChange={handlPageChange}/>
           }
 
           toolbar = {
@@ -153,7 +180,7 @@ export default function PageEditor(
           }
         >
           <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-            <DragRXEditor metas ={nodes}/>
+            <ComponentView node ={canvas} selectedNode = {selectedNode} onSelectNode = {handleSelectedNode}/>
           </Scrollbar>
         </DesignerLayout>
         <Fragment>
