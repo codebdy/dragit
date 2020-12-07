@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles, TextField, FormControlLabel, Checkbox}
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from 'components/ListView/PropsInputs/MetaListDialog';
+import { useEffect } from 'react';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -21,9 +22,13 @@ const useStyles = makeStyles(styles);
 export default function ListViewRowCommandDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [commands, setCommands] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [commands, setCommands] = React.useState<Array<any>>(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
   const command = commands[selectedIndex];
+
+  useEffect(()=>{
+    setCommands(value ? JSON.parse(JSON.stringify(value)) : [])
+  },[value])
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean|Object|undefined)=>{
     commands[selectedIndex][name] = value;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
@@ -6,6 +6,10 @@ export default function NumberInput(props:PropsInputProps){
   const {label, value, onChange} = props;
   const {min, max, defaultValue, ...rest} = props.props || {};
   const [inputValue, setInputValue] = React.useState(value);
+  
+  useEffect(()=>{
+    setInputValue(value);
+  },[value])
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = parseInt(event.target.value as string);

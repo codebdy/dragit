@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Select, MenuItem, FormControl, InputLabel} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 import intl from "react-intl-universal";
@@ -15,6 +15,10 @@ export default function OptionSelect(props:PropsInputProps){
   const items = props.props?.items;
   const [inputValue, setInputValue] = React.useState(value);
 
+  useEffect(()=>{
+    setInputValue(value);
+  },[value])
+  
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setInputValue(event.target.value);
     onChange(event.target.value);

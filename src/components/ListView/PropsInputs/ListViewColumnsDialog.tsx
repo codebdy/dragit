@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, TextField, Switch, FormControlLabel, MenuItem, Select, FormControl, InputLabel} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
@@ -18,8 +18,12 @@ const styles = (theme: Theme) =>
 export default function ListViewColumnsDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [columns, setComuns] = React.useState<Array<any>>(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
+
+  useEffect(()=>{
+    setComuns(value ? JSON.parse(JSON.stringify(value)) : [])
+  },[value])
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
     columns[selectedIndex][name] = value;

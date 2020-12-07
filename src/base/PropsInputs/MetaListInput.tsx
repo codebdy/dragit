@@ -39,6 +39,7 @@ export default function MetaListInput(
   const classes = useStyles();
   let metas = value ? JSON.parse(JSON.stringify(value)) : [];
 
+  
   const handleChangeSlug = (index:number, slug:string)=>{
     metas[index].slug = slug;
     onChange([...metas]);

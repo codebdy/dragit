@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormControlLabel, Switch} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
 export default function BooleanInput(props:PropsInputProps){
   const {label, value, onChange} = props;
   const [inputValue, setInputValue] = React.useState(!!value);
+  
+  useEffect(()=>{
+    setInputValue(value);
+  },[value])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = event.target.checked

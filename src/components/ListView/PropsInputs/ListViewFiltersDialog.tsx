@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
@@ -18,8 +18,12 @@ const useStyles = makeStyles(styles);
 export default function ListViewFiltersDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [filters, setFilters] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [filters, setFilters] = React.useState<Array<any>>(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(filters.length > 0 ? 0 : -1);
+
+  useEffect(()=>{
+    setFilters(value ? JSON.parse(JSON.stringify(value)) : [])
+  },[value])
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
     filters[selectedIndex][name] = value;

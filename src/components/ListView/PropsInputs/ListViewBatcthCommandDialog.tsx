@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
@@ -21,8 +21,12 @@ const useStyles = makeStyles(styles);
 export default function ListViewBatcthCommandDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [commands, setCommands] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [commands, setCommands] = React.useState<Array<any>>(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
+
+  useEffect(()=>{
+    setCommands(value ? JSON.parse(JSON.stringify(value)) : [])
+  },[value])
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
     commands[selectedIndex][name] = value;
