@@ -3,6 +3,11 @@ import { RXNode } from "./RXNode";
 
 export class RXNodeRoot<T> extends RXNode<T>{
   children = new Array<RXNode<T>>();
+  constructor(meta?:T){
+    super();
+    this.seedId();
+    this.meta = meta || ({} as any);
+  }
 
   parse(metas?:Array<T>){
     this.children = [];

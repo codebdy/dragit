@@ -38,6 +38,10 @@ export default {
                         children:[
                           {
                             name:'AntDesignChart',
+                            designProps:{
+                              api:null,
+                              designing:true,
+                            },
                             props:{
                               chart:'Area',
                               api:{
@@ -88,6 +92,10 @@ export default {
                       children:[
                         {
                           name:'AntDesignChart',
+                          designProps:{
+                            api:null,
+                            designing:true,
+                          },
                           props:{
                             chart:'Line',
                             api:{
@@ -152,6 +160,10 @@ export default {
                       children:[
                         {
                           name:'AntDesignChart',
+                          designProps:{
+                            api:null,
+                            designing:true,
+                          },
                           props:{
                             chart:'Radar',
                             data:[

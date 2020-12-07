@@ -1,7 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { INode } from '../Node/INode';
-import bus, { FOCUS_NODE, UN_FOCUS_NODE, CANVAS_SCROLL } from '../bus';
+import bus, {CANVAS_SCROLL } from '../bus';
 import MdiIcon from 'components/common/MdiIcon';
 import { sideBarSettings } from 'utils/sideBarSettings';
 import { useSelector } from 'react-redux';
@@ -44,10 +43,18 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function NodeToolbar(){
+export default function NodeToolbar(
+  props:{
+    followDom:HTMLElement|null|undefined,
+    onBeginDrag:()=>void,
+    onRemove:()=>void,
+    onSelectParent:()=>void,
+  }
+){
+  const {followDom, onBeginDrag, onRemove, onSelectParent} = props;
   const iconSize = 16;
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<INode|undefined>(undefined);
+  //const [following, setFollowing] = React.useState<INode|undefined>(undefined);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
@@ -59,13 +66,11 @@ export default function NodeToolbar(){
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)
 
-  const doFollow = (node?:INode)=>{
-    let domElement = node?.view?.getDom();
-    if(!domElement){
+  const doFollow = ()=>{
+    if(!followDom){
       return 
     }
-
-    let rect = domElement.getBoundingClientRect();
+    let rect = followDom.getBoundingClientRect();
     let left = rect.x + rect.width - barWidth;
     left = left < sideBarWidth ? sideBarWidth : left;
     left = left + barWidth > document.body.clientWidth ? document.body.clientWidth - barWidth : left;
@@ -74,31 +79,15 @@ export default function NodeToolbar(){
     setTop(top);
   }
 
-  const follow = (node:INode)=>{
-    setFollowing(node);
-    doFollow(node);
-  }
-
-  const unFollow = (node:INode)=>{
-    if(following && following.id === node.id){
-      setFollowing(undefined)
-    }
-  }
 
   const hangdePositionChange = ()=>{
-    doFollow(following);
+    doFollow();
   }
 
   useEffect(() => {
-    bus.on(FOCUS_NODE, follow);
-    bus.on(UN_FOCUS_NODE, unFollow);
-    document.addEventListener('mouseup', handleMouseUp);
     bus.on(CANVAS_SCROLL, hangdePositionChange);
     window.addEventListener('resize', hangdePositionChange)
     return () => {
-      bus.off(FOCUS_NODE, follow)
-      bus.off(UN_FOCUS_NODE, unFollow)
-      document.removeEventListener('mouseup', handleMouseUp)
       bus.off(CANVAS_SCROLL, hangdePositionChange);
       window.removeEventListener('resize', hangdePositionChange)
     };
@@ -109,35 +98,10 @@ export default function NodeToolbar(){
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[myStore.showPaddingX, myStore.showPaddingY]);
 
-  const handleToParent=(event:any)=>{
-    following?.parent?.toFocusState();
-    event.stopPropagation()
-  };
-
-  const handleBeginDrag=()=>{
-    window.draggedNode = following;
-    following?.toDraggedState();
-  }
-
-  const handleRemove = ()=>{
-    following?.toNormalState();
-    following?.removeFormParent();
-  }
-
-  const handleMouseUp=()=>{
-    if(window.draggedNode?.parent){
-      window.draggedNode?.toFocusState();      
-    }
-    else{
-      window.draggedNode?.toNormalState();
-    }
-
-    window.draggedNode = null;
-  }
 
   return (
     <Fragment>
-      {!!following && 
+      {followDom && 
         <div className={classes.toolbar}
           style={{
             left:left + 'px',
@@ -146,13 +110,13 @@ export default function NodeToolbar(){
         >
           <div 
             className={classes.button}
-            onClick = {handleToParent}
+            onClick = {onSelectParent}
           >
             <MdiIcon iconClass='mdi-arrow-up' size={iconSize} />
           </div>
           <div 
             className={ classNames(classes.button, classes.move) }
-            onMouseDown = {handleBeginDrag}
+            onMouseDown = {onBeginDrag}
           >
             <MdiIcon iconClass='mdi-arrow-all' size={iconSize} />
           </div>
@@ -164,7 +128,7 @@ export default function NodeToolbar(){
             <MdiIcon iconClass='mdi-content-copy' size={14} />
           </div>
           <div className={classes.button}
-            onClick={ handleRemove }
+            onClick={ onRemove }
           >
             <MdiIcon iconClass='mdi-delete-outline' size={iconSize} />
           </div>

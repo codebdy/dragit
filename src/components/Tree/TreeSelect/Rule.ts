@@ -3,6 +3,7 @@ import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
 
 export class TreeSelectRule extends Rule{
+  empertyPadding = '';
 
   accept(child:INode){
     return false;

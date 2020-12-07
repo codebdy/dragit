@@ -24,14 +24,14 @@ function registerHtmlTag(name:string, rule:any = Rule){
   }  
 }
 
-function resolveComponent(meta:IMeta):any{
+function resolveComponent(meta:IMeta, withField = true):any{
   const {marginTop, marginRight, marginBottom, marginLeft} = meta.props || {};
   const name = meta.name;
   let component = compoentsMap[name] && compoentsMap[name].component ? compoentsMap[name].component : name;
 
   component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
 
-  if(meta.props?.field){
+  if(meta.props?.field && withField){
     component = withSkeleton(component);
   }
   return component;

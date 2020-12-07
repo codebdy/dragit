@@ -1,5 +1,5 @@
 import { State } from "./State";
-import bus, {UN_FOCUS_NODE, FOCUS_NODE} from "../../bus";
+//import bus, {UN_FOCUS_NODE, FOCUS_NODE} from "../../bus";
 
 export class FocusState extends State{
   style = {
@@ -8,11 +8,11 @@ export class FocusState extends State{
   
 
   enter(){
-    bus.emit(FOCUS_NODE, this.node);
+   // bus.emit(FOCUS_NODE, this.node);
   }
 
   leave(){
-    bus.emit(UN_FOCUS_NODE, this.node);
+    //bus.emit(UN_FOCUS_NODE, this.node);
   }
 
 }

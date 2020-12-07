@@ -1,22 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Button, Container } from '@material-ui/core';
+import { Button, Container, IconButton, useTheme } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import intl from 'react-intl-universal';
-import classNames from 'classnames';
 import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus, { CANVAS_SCROLL } from './Core/bus';
-import { CanvasNode } from './Core/Node/CanvasNode';
-import { parseNodes } from './Core/Node/jsonParser';
-import NodeView from './Core/Node/NodeView';
-import ActiveLabel from './Core/Utils/ActiveLabel';
-import FocusLabel from './Core/Utils/FocusLabel';
 import MouseFollower from './Core/Utils/MouseFollower';
-import NodeToolbar from './Core/Utils/NodeToolbar';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
 import useDesigner from 'store/designer/useDesigner';
@@ -26,6 +19,7 @@ import { IPage, IPageSchema } from 'base/Model/IPage';
 import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'admin/views/Page/PageSkeleton';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import DragRXEditor from './Core/DragRXEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,41 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow: 'column',
     },
 
-    toolbarButton:{
-      display:'flex',
-      alignItems:'center',
-      justifyContent:'center',
-      width:'40px',
-      height:'40px',
-      borderRadius:'3px',
-      margin:'1px',
-      "&:hover":{
-        background:"rgba(255,255,255, 0.1)",
-      },
-      cursor:"pointer",
-    },
-    checkedButton:{
-      background:"rgba(255,255,255, 0.15)",
-      "&:hover":{
-        background:"rgba(255,255,255, 0.2)",
-      },
-    }
   }),
 );
 
-
-export function ToolbarIcon(props:{checked?:boolean, onClick?:()=>void, children?:any}){
-  const{checked, onClick, children} = props;
-  const classes = useStyles();
-
-  return (
-    <div className={ classNames(classes.toolbarButton, {[classes.checkedButton]:checked}) }
-      onClick = {onClick}
-    >
-      {children}
-    </div>
-  )
-}
 
 export default function PageEditor(
   props:{
@@ -101,8 +63,8 @@ export default function PageEditor(
   const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(pageMeta?.jsonSchema);
 
   //相当于复制一个Json副本，不保存的话直接扔掉
-  let nodes = parseNodes(pageMeta?.jsonSchema?.layout);
-  let canvas = new CanvasNode(nodes);
+  let nodes = JSON.parse(JSON.stringify(pageMeta?.jsonSchema?.layout || []));
+  //let canvas = new CanvasNode(nodes);
   useAuthCheck();
   
   useEffect(() => {
@@ -114,6 +76,7 @@ export default function PageEditor(
   },[pageMeta]);
  
   const dispatch = useDispatch()
+  const theme = useTheme();
   
   const handleCancel = () => {
     onClose();
@@ -142,44 +105,43 @@ export default function PageEditor(
 
           toolbar = {
             <Fragment>
-              <ToolbarIcon>
+              <IconButton>
                 <MdiIcon iconClass="mdi-layers-outline"/>
-              </ToolbarIcon>
-              {//<ToolbarIcon>
+              </IconButton>
+              {//<IconButton>
               // <MdiIcon iconClass="mdi-dock-bottom"/>
-                //</ToolbarIcon>
+                //</IconButton>
               }
-              <ToolbarIcon 
-                checked={showOutline}
+              <IconButton 
                 onClick = {()=>{
                   dispatch(showOutlineActon(!showOutline))
                 }}
               >
-                <MdiIcon iconClass="mdi-border-none-variant"/>
-              </ToolbarIcon>
-              <ToolbarIcon checked={showPaddingX}
+                <MdiIcon iconClass="mdi-border-none-variant" color={showOutline ? theme.palette.primary.main : ''}/>
+              </IconButton>
+              <IconButton
                 onClick = {()=>{
                   dispatch(showPaddingXActon(!showPaddingX))
                 }}
               >
-                <MdiIcon iconClass="mdi-arrow-expand-horizontal"/>
-              </ToolbarIcon>
-              <ToolbarIcon checked={showPaddingY}
+                <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={showPaddingX ? theme.palette.primary.main : ''}/>
+              </IconButton>
+              <IconButton
                 onClick = {()=>{
                   dispatch(showPaddingYActon(!showPaddingY))
                 }}
                 >
-                <MdiIcon iconClass="mdi-arrow-expand-vertical"/>
-              </ToolbarIcon>
-              <ToolbarIcon>
+                <MdiIcon iconClass="mdi-arrow-expand-vertical" color={showPaddingY ? theme.palette.primary.main : ''}/>
+              </IconButton>
+              <IconButton>
                 <MdiIcon iconClass="mdi-undo"/>
-              </ToolbarIcon>
-              <ToolbarIcon>
+              </IconButton>
+              <IconButton>
                 <MdiIcon iconClass="mdi-redo"/>
-              </ToolbarIcon>
-              <ToolbarIcon>
+              </IconButton>
+              <IconButton>
                 <MdiIcon iconClass="mdi-delete-outline"/>
-              </ToolbarIcon>
+              </IconButton>
               <Spacer></Spacer>
               <Button onClick={handleCancel} className = {classes.cancelButton}>
                 {intl.get('cancel')}
@@ -191,13 +153,10 @@ export default function PageEditor(
           }
         >
           <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-            <NodeView node={canvas} />
+            <DragRXEditor metas ={nodes}/>
           </Scrollbar>
         </DesignerLayout>
         <Fragment>
-          <FocusLabel />
-          <NodeToolbar />
-          <ActiveLabel />
           <MouseFollower />
         </Fragment>      
       </Backdrop>

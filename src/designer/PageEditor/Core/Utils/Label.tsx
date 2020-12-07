@@ -1,9 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { INode } from '../Node/INode';
 import bus, { CANVAS_SCROLL } from '../bus';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
+import useDesigner from 'store/designer/useDesigner';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,48 +20,41 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function Label(props:{showEvent:string, hideEvent:string}){
-  const{showEvent, hideEvent} = props;
+export default function Label(
+  props:{
+    followDom:HTMLElement|null|undefined, 
+    label:string,
+  }
+){
+  const{followDom, label} = props;
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<INode|undefined>(undefined);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const selectMyStore = (state: RootState) => state.designer
-  const myStore = useSelector(selectMyStore)
+  const designer = useDesigner();
   
-  const doFollow = (node:INode|undefined)=>{
-    let domElement = node?.view?.getDom()
-    if(!domElement){
-      return 
-    }
-    let rect = domElement.getBoundingClientRect()
-    setLeft(rect.x)
-    let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
-    setTop(top)
-  }
-
-  const follow = (node:INode)=>{
-    setFollowing(node);
-    doFollow(node);
-}
-
-  const unFollow = (node:INode)=>{
-    if(following && following.id === node.id){
-      setFollowing(undefined)
+  const doFollow = ()=>{
+    if(followDom){
+      let rect = followDom.getBoundingClientRect()
+      setLeft(rect.x)
+      let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
+      setTop(top)
     }
   }
+
+  useEffect(()=>{
+    doFollow()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[followDom])
+
+  
   const hangdePositionChange = ()=>{
-    doFollow(following);
+    doFollow();
   }
 
   useEffect(() => {
-    bus.on(showEvent, follow)
-    bus.on(hideEvent, unFollow)
       bus.on(CANVAS_SCROLL, hangdePositionChange);
       window.addEventListener('resize', hangdePositionChange)
     return () => {
-      bus.off(showEvent, follow)
-      bus.off(hideEvent, unFollow)
       bus.off(CANVAS_SCROLL, hangdePositionChange);
       window.removeEventListener('resize', hangdePositionChange)
      };
@@ -72,18 +63,18 @@ export default function Label(props:{showEvent:string, hideEvent:string}){
   useEffect(() => {
     hangdePositionChange();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[myStore.showPaddingX, myStore.showPaddingY]);
+  },[designer.showPaddingX, designer.showPaddingY]);
 
   return (
     <Fragment>
-      {!!following && following.label &&
+      {followDom &&
         <div className={classes.label}
           style={{
             left:left + 'px',
             top: top + 'px',
           }}
         >
-          {following.label}
+          {label}
         </div>
       }
 

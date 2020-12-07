@@ -198,6 +198,9 @@ export default {
                       children:[
                         {
                           name:'TreeSelect',
+                          designProps:{
+                            dataApi:null,
+                          },
                           props:{
                             label:"频道",
                             variant:"outlined",
