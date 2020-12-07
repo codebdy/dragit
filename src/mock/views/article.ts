@@ -9,6 +9,7 @@ export default {
       justify: 'space-between',
       alignItems: "center",
       marginTop: 2,
+      spacing: 2,
     },
     children: [{
         name: 'GridColumn',
