@@ -8,6 +8,7 @@ import classNames from "classnames";
 import bus, { ACTIVE_NODE } from './bus';
 import Label from './Utils/Label';
 import NodeToolbar from './Utils/NodeToolbar';
+import { makeSpaceStyle } from 'base/HOCs/withMargin';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,7 +61,18 @@ export default function ComponentView(
   let Component = resolveComponent(node.meta, false);
 
   let metaProps = node.meta.props? node.meta.props :{};
-  const {rxText, withActions, onClick, className, style, ...rest} = metaProps as any;
+  const {
+    rxText, 
+    withActions, 
+    onClick, 
+    className,     
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    style, 
+    ...rest
+  } = metaProps as any;
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
@@ -90,9 +102,8 @@ export default function ComponentView(
   }
 
   const handleSelectParent = ()=>{
-    
-  }
 
+  }
 
   //解决鼠标移动过快时mouseout事件不起作用的问题
   useEffect(() => {
@@ -100,7 +111,8 @@ export default function ComponentView(
     return () => {
       bus.off(ACTIVE_NODE, handleActive)
     };
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   const selected = selectedNode?.id === node.id;
 
@@ -116,7 +128,11 @@ export default function ComponentView(
     ),
     style:{
       ...style,
-      ...(getEditStyle(node, designer.showPaddingX, designer.showPaddingY))
+      ...(getEditStyle(node, designer.showPaddingX, designer.showPaddingY)),
+      marginTop: makeSpaceStyle(marginTop),
+      marginRight: makeSpaceStyle(marginRight),
+      marginBottom: makeSpaceStyle(marginBottom),
+      marginLeft: makeSpaceStyle(marginLeft),
     },
     onMouseMove : handleMouseMove,
     onMouseOut : handleMouseOut,

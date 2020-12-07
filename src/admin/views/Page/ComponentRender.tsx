@@ -4,6 +4,7 @@ import { PageActionHandle } from './PageAction';
 import { resolveComponent } from 'base/DragRX';
 import withFormField from './withFormField';
 import { IMeta } from 'base//Model/IMeta';
+import { makeSpaceStyle } from 'base/HOCs/withMargin';
 
 export default function ComponentRender(props:{component:RXNode<IMeta>, onPageAction: PageActionHandle}){
   const {component, onPageAction} = props;
@@ -18,9 +19,28 @@ export default function ComponentRender(props:{component:RXNode<IMeta>, onPageAc
   };
 
   let metaProps = component.meta.props? component.meta.props :{};
-  const {rxText, withActions, ...rest} = metaProps as any;
+  const {
+    rxText, 
+    withActions,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    style, 
+    ...rest
+  } = metaProps as any;
 
-  let elementProps:any = {...rest,  onClick:handleOnClick}
+  let elementProps:any = {
+    ...rest,
+    style:{
+      ...style,
+      marginTop: makeSpaceStyle(marginTop),
+      marginRight: makeSpaceStyle(marginRight),
+      marginBottom: makeSpaceStyle(marginBottom),
+      marginLeft: makeSpaceStyle(marginLeft),
+    },
+    onClick:handleOnClick
+  }
 
   if(withActions){
     elementProps.onAction = onPageAction;

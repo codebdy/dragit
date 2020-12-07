@@ -1,9 +1,10 @@
 import React from 'react';
 
-const makeSpaceStyle = (spacing:any)=>{
+export const makeSpaceStyle = (spacing:any)=>{
   return ((spacing?spacing:0) * 8) + 'px'
 }
 
+//转出来的ref实时性不能满足要求，暂时弃用改高阶组件，上面的函数还在使用
 const withMargin = (Component:any)=>{
   const WithMargin = (props:any)=>{
     const {

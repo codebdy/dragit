@@ -66,11 +66,12 @@ export default function NodeToolbar(
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)
 
+  const rect = followDom?.getBoundingClientRect();
   const doFollow = ()=>{
-    if(!followDom){
+    if(!rect){
       return 
     }
-    let rect = followDom.getBoundingClientRect();
+    //let rect = followDom.getBoundingClientRect();
     let left = rect.x + rect.width - barWidth;
     left = left < sideBarWidth ? sideBarWidth : left;
     left = left + barWidth > document.body.clientWidth ? document.body.clientWidth - barWidth : left;
@@ -79,10 +80,14 @@ export default function NodeToolbar(
     setTop(top);
   }
 
-
   const hangdePositionChange = ()=>{
     doFollow();
   }
+
+  useEffect(()=>{
+    doFollow()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[rect])
 
   useEffect(() => {
     bus.on(CANVAS_SCROLL, hangdePositionChange);
@@ -91,7 +96,8 @@ export default function NodeToolbar(
       bus.off(CANVAS_SCROLL, hangdePositionChange);
       window.removeEventListener('resize', hangdePositionChange)
     };
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   useEffect(() => {
     hangdePositionChange();

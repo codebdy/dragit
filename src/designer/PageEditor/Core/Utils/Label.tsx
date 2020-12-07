@@ -32,9 +32,10 @@ export default function Label(
   const [top, setTop] = React.useState(0);
   const designer = useDesigner();
   
+  let rect = followDom?.getBoundingClientRect()  
   const doFollow = ()=>{
-    if(followDom){
-      let rect = followDom.getBoundingClientRect()
+    if(rect){
+
       setLeft(rect.x)
       let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
       setTop(top)
@@ -44,7 +45,7 @@ export default function Label(
   useEffect(()=>{
     doFollow()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[followDom])
+  },[rect])
 
   
   const hangdePositionChange = ()=>{
@@ -58,7 +59,8 @@ export default function Label(
       bus.off(CANVAS_SCROLL, hangdePositionChange);
       window.removeEventListener('resize', hangdePositionChange)
      };
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     hangdePositionChange();
