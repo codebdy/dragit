@@ -67,7 +67,6 @@ const Combobox = React.forwardRef((
       //defaultValue = {value||empertyValue}
       renderInput={(params) => (
         <TextField
-          ref={ref}
           {...params}
           {...rest}        
       />

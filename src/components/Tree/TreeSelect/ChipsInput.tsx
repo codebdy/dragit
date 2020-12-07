@@ -121,8 +121,10 @@ export default function ChipsInput(
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     setAnchorEl(event.currentTarget);
     setFocused(true);
-    event.preventDefault();
-    event.stopPropagation();
+    if(!isDeisgning){
+      event.preventDefault();
+      event.stopPropagation();      
+    }
   }
 
   const handleDelete = (id:number) => () => {
