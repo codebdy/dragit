@@ -1,4 +1,4 @@
-import { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
+import { ValidateRule } from 'designer/PageEditor/AttrebuteBox2/ValidateArea';
 import React, { useContext, useEffect } from 'react';
 import useFieldValue from './useFieldValue';
 import intl from 'react-intl-universal';

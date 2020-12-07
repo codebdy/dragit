@@ -8,6 +8,7 @@ export default {
     props: {
       justify: 'space-between',
       alignItems: "center",
+      marginTop: 2,
     },
     children: [{
         name: 'GridColumn',

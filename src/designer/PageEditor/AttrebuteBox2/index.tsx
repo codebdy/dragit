@@ -8,7 +8,7 @@ import { INode } from 'designer/PageEditor/Core/Node/INode';
 import { IProp } from "base/Model/IProp";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
-import AttributeBoxValidateArea, { ValidateRule } from 'designer/PageEditor/Attrebutebox/ValidateArea';
+import AttributeBoxValidateArea, { ValidateRule } from 'designer/PageEditor/AttrebuteBox2/ValidateArea';
 import { API_GET_AUTHS } from 'APIs/modules';
 import MultiSelectBox from 'components/Select/MultiSelectBox';
 
