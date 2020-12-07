@@ -1,4 +1,4 @@
-import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/PageAction"
+import {JUMP_TO_PAGE_ACTION} from "base/PageAction"
 export default {
   layout:[
     {

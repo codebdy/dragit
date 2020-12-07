@@ -12,7 +12,7 @@ import { ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ListViewMetaItem } from './ListViewMetaItem';
 import intl from 'react-intl-universal';
-import { JUMP_TO_PAGE_ACTION, PageActionHandle } from 'admin/views/Page/PageAction';
+import { JUMP_TO_PAGE_ACTION, PageActionHandle } from 'base/PageAction';
 import { AxiosRequestConfig } from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton } from '@material-ui/core';

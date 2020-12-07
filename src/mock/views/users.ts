@@ -1,4 +1,4 @@
-import {JUMP_TO_PAGE_ACTION} from "admin/views/Page/PageAction"
+import {JUMP_TO_PAGE_ACTION} from "base/PageAction"
 import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
 export default {
   layout:[

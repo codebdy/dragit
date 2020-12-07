@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { FormControl,  InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { AttributeRow } from './AttributeRow';
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from 'admin/views/Page/PageAction';
+import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from 'base/PageAction';
 import intl from 'react-intl-universal';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';

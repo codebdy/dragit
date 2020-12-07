@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "admin/views/Page/PageAction";
+import {GO_BACK_ACTION} from "base/PageAction";
 import {API_GET_MODEL_BY_ID} from "APIs/model"
 import {API_GET_AUTHS} from "APIs/modules"
 

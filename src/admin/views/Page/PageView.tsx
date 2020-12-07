@@ -4,7 +4,7 @@ import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from './PageAction';
+import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from '../../../base/PageAction';
 
 import usePageMeta from "./usePageMeta";
 import usePageModel from "./useFecthPageModel";
