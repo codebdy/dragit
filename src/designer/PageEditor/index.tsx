@@ -23,6 +23,8 @@ import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import ComponentView from './Core/ComponentView';
 import { RXNode } from 'base/RXNode/RXNode';
+import NodeToolbar from './Core/Utils/NodeToolbar';
+import NodeLabel from './Core/Utils/NodeLabel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +60,10 @@ function makeCanvas(){
   )
 }
 
-type Metas = Array<IMeta>;
+interface Snapshot{
+  canvasNode:RXNodeRoot<IMeta>;
+  selectedNodeId?:number;
+}
 
 export default function PageEditor(
   props:{
@@ -76,8 +81,9 @@ export default function PageEditor(
   const [metas, seMetas] = useState<Array<IMeta>>([])
   const [canvas, setCanvas] = useState<RXNodeRoot<IMeta>>(makeCanvas());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMeta>>();
-  const [undoList, setUndoList] = useState<Array<Metas>>([]);
-  const [redoList, setredoList] = useState<Array<Metas>>([]);
+  const [undoList, setUndoList] = useState<Array<Snapshot>>([]);
+  const [redoList, setRedoList] = useState<Array<Snapshot>>([]);
+  const [selectedDom, setSelectedDom] = useState<HTMLElement>();
 
   const dispatch = useDispatch()
   const theme = useTheme(); 
@@ -113,16 +119,27 @@ export default function PageEditor(
     bus.emit(CANVAS_SCROLL)
   }
 
+  const handleSelectNodeDom = (dom?:HTMLElement)=>{
+    //console.log('dom',dom)
+    setSelectedDom(dom);
+  }
+
   const handlePropChange = (propName:string, value:any)=>{
-    let undo = JSON.parse(JSON.stringify(canvas.getRootMetas()));
-    setUndoList([...undoList, undo]);
+    setUndoList([...undoList, 
+      {
+        canvasNode: canvas,
+        selectedNodeId: selectedNode?.id,
+      }
+    ]);    
     let canvasCopy = canvas.copy();
+    canvasCopy.seedId();
     let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
     if(selectNodeCopy){
       selectNodeCopy.meta.props = selectNodeCopy.meta.props || {};
       selectNodeCopy.meta.props[propName] = value;
+      setCanvas(canvasCopy);      
       setSelectedNode(selectNodeCopy);
-      setCanvas(canvasCopy);
+      setRedoList([]);
     }
 
   }
@@ -133,6 +150,49 @@ export default function PageEditor(
 
   const handleSelectedNode = (node?:RXNode<IMeta>)=>{
     setSelectedNode(node);
+  }
+
+  const handleUndo = ()=>{
+    let cmd = undoList.pop();
+    if(cmd){
+      setUndoList([...undoList]);
+      setRedoList([...redoList, 
+        {
+          canvasNode:canvas,
+          selectedNodeId: selectedNode?.id,
+        }
+      ]);
+      setCanvas(cmd.canvasNode);
+      setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));     
+    }
+  }
+
+  const handleRedo = ()=>{
+    let cmd = redoList.pop();
+    if(cmd){
+      setUndoList([...undoList, 
+        {
+          canvasNode:canvas,
+          selectedNodeId: selectedNode?.id,
+        }
+      ]);
+      setRedoList([...redoList]);
+      setCanvas(cmd.canvasNode);
+      setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));      
+    }    
+  }
+
+  
+  const handleBeginDrag = ()=>{
+
+  }
+
+  const handleRemove = ()=>{
+
+  }
+
+  const handleSelectParent = ()=>{
+
   }
 
   return (
@@ -178,10 +238,15 @@ export default function PageEditor(
                 >
                 <MdiIcon iconClass="mdi-arrow-expand-vertical" color={showPaddingY ? theme.palette.primary.main : ''}/>
               </IconButton>
-              <IconButton disabled = {undoList.length === 0}>
+              <IconButton 
+                disabled = {undoList.length === 0}
+                onClick = {handleUndo}
+              >
                 <MdiIcon iconClass="mdi-undo"/>
               </IconButton>
-              <IconButton disabled = {redoList.length === 0}>
+              <IconButton disabled = {redoList.length === 0}
+                onClick = {handleRedo}
+              >
                 <MdiIcon iconClass="mdi-redo"/>
               </IconButton>
               <IconButton>
@@ -198,7 +263,27 @@ export default function PageEditor(
           }
         >
           <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-            <ComponentView node ={canvas} selectedNode = {selectedNode} onSelectNode = {handleSelectedNode}/>
+            <ComponentView 
+              key={canvas.id} 
+              node ={canvas} 
+              selectedNode = {selectedNode} 
+              onSelectNode = {handleSelectedNode}
+              onSelectNodeDom = {handleSelectNodeDom}
+            />
+            {
+              selectedNode &&
+              <Fragment>
+                <NodeLabel followDom = {selectedDom} label = {selectedNode.meta.name} />
+                <NodeToolbar 
+                  followDom = {selectedDom}
+                  onBeginDrag = {handleBeginDrag}
+                  onRemove = {handleRemove}
+                  onSelectParent = {handleSelectParent}
+                />
+              </Fragment>
+
+            }
+
           </Scrollbar>
         </DesignerLayout>
         <Fragment>

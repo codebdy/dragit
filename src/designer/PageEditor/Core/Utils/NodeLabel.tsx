@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function Label(
+export default function NodeLabel(
   props:{
     followDom:HTMLElement|null|undefined, 
     label:string,
@@ -33,7 +33,7 @@ export default function Label(
   const designer = useDesigner();
   
   const doFollow = ()=>{
-    let rect = followDom?.getBoundingClientRect()  
+    let rect = followDom?.getBoundingClientRect()
     if(rect){
       setLeft(rect.x)
       let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20

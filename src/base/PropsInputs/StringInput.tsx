@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
@@ -11,6 +11,10 @@ export default function StringInput(props:PropsInputProps){
     setInputValue(newValue);
   }; 
   
+  useEffect(()=>{
+    setInputValue(value);
+  },[value])
+
   const handleEndInput = ()=>{
     if(value !== inputValue){
       onChange(inputValue);      

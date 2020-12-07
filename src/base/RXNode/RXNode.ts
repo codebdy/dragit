@@ -35,10 +35,10 @@ export class RXNode<T>{
     RXNode.idSeed ++
   }
 
-  //完全复制包括ID的复制，META并没有被复制
+  //完全复制包括ID的复制
   copy(){
     let copy = new RXNode<T>();
-    copy.meta = this.meta;
+    copy.meta = JSON.parse(JSON.stringify(this.meta));
     copy.id = this.id;
     copy.children = [];
     this.children.forEach(child=>{

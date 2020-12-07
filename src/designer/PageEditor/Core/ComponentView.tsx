@@ -6,9 +6,9 @@ import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import bus, { ACTIVE_NODE } from './bus';
-import Label from './Utils/Label';
-import NodeToolbar from './Utils/NodeToolbar';
+
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
+import NodeLabel from './Utils/NodeLabel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,13 +51,14 @@ export default function ComponentView(
     node:RXNode<IMeta>,
     selectedNode?:RXNode<IMeta>,
     onSelectNode:(node?:RXNode<IMeta>)=>void,
+    onSelectNodeDom:(dom?:HTMLElement)=>void,
   }
 ){
-  const {node, selectedNode, onSelectNode} = props;
+  const {node, selectedNode, onSelectNode, onSelectNodeDom} = props;
   const classes = useStyles();
   const [actived, setActived] = useState(false);
   const designer = useDesigner();
-  const refEl = useRef(null);
+  const refEl = useRef(undefined);
   let Component = resolveComponent(node.meta, false);
 
   let metaProps = node.meta.props? node.meta.props :{};
@@ -74,6 +75,15 @@ export default function ComponentView(
     ...rest
   } = metaProps as any;
 
+  const selected = selectedNode?.id === node.id;
+  useEffect(()=>{
+    if(selected){
+      onSelectNodeDom(refEl?.current)      
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[selectedNode]);
+  
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     if(selectedNode?.id !== node.id){
@@ -87,22 +97,11 @@ export default function ComponentView(
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     onSelectNode(node);
+    onSelectNodeDom(refEl?.current);
   }
 
   const handleActive = (activeNode:RXNode<IMeta>)=>{
     setActived(activeNode.id === node.id);
-  }
-
-  const handleBeginDrag = ()=>{
-
-  }
-
-  const handleRemove = ()=>{
-
-  }
-
-  const handleSelectParent = ()=>{
-
   }
 
   //解决鼠标移动过快时mouseout事件不起作用的问题
@@ -113,8 +112,6 @@ export default function ComponentView(
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
-
-  const selected = selectedNode?.id === node.id;
 
   let elementProps:any = {
     ...rest, 
@@ -149,6 +146,7 @@ export default function ComponentView(
             key={child.id} node={child}
             selectedNode = {selectedNode}
             onSelectNode = {onSelectNode}
+            onSelectNodeDom = {onSelectNodeDom}
           />
         )
       })}
@@ -160,17 +158,8 @@ export default function ComponentView(
     <Fragment>
     { elementView }
     {
-      (actived ||selected) &&
-      <Label followDom = {refEl?.current} label = {node.meta.name} />
-    }
-    {
-      selected && 
-      <NodeToolbar 
-        followDom = {refEl?.current}
-        onBeginDrag = {handleBeginDrag}
-        onRemove = {handleRemove}
-        onSelectParent = {handleSelectParent}
-      />
+      (actived) &&
+      <NodeLabel followDom = {refEl?.current} label = {node.meta.name} />
     }
     </Fragment>
   )
