@@ -3,7 +3,7 @@ import { TextField} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
 export default function NumberInput(props:PropsInputProps){
-  const {field, label, value, onChange} = props;
+  const {label, value, onChange} = props;
   const {min, max, defaultValue, ...rest} = props.props || {};
   const [inputValue, setInputValue] = React.useState(value);
 
@@ -12,7 +12,7 @@ export default function NumberInput(props:PropsInputProps){
     newValue = min !== undefined && newValue < min ? min : newValue
     newValue = max !== undefined && newValue > max ? max : newValue
     setInputValue(newValue);
-    onChange(field, newValue);
+    onChange(newValue);
   };  
 
   return (

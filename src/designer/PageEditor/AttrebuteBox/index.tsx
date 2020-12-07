@@ -52,27 +52,32 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AttributeBox(
   props:{
-    node?:RXNode<IMeta>
+    node?:RXNode<IMeta>,
+    onPropChange:(propName:string, value:any)=>void
   }
 ){
+  const {node, onPropChange} = props;  
   const classes = useStyles();
-  const {node} = props;
   const [field, setField] = React.useState(node?.meta.props?.field);
   const [nodeRule, setNodeRule] = React.useState<IRule>();
   const [validateRule, setValidateRule] = React.useState<ValidateRule>();
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
-  const propChange = (field:string, value:any) => {
-    //node?.updateProp(field, value);
-  };
+
 
   useEffect(() => {
     setField(node?.meta.props?.field);
     node?.meta.name && setNodeRule(resolveRule(node?.meta.name))
   },[node]);
 
+  const handlePropChange = (field:string, value:any) => {
+    onPropChange(field, value);
+    //node?.updateProp(field, value);
+  };
+
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let newField = event.target.value as string;
     //node?.updateProp('field', newField);
+    onPropChange('field', newField);
     setField(newField);
   }
 
@@ -107,14 +112,12 @@ export default function AttributeBox(
                   nodeRule?.getFields(node.meta).map((field:IProp)=>{
                     return(
                       <Grid item key={node.id + '-' + field.name} xs={field.xs || 6}>
-                          <field.input
-                            label={field.label && (intl.get(field.label)||field.label)}
-                            field={field.name}
-                            value={node.meta.props && node.meta.props[field.name]}
-                            onChange= {propChange}
-                            props={field.props}
-                          />
-
+                        <field.input
+                          label={field.label && (intl.get(field.label)||field.label)}
+                          value={node.meta.props && node.meta.props[field.name]}
+                          onChange= {(value:any)=>handlePropChange(field.name, value)}
+                          props={field.props}
+                        />
                       </Grid>                  
                     )
                   })

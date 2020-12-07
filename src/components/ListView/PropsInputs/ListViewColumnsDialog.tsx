@@ -17,7 +17,7 @@ const styles = (theme: Theme) =>
 
 export default function ListViewColumnsDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {label, field, value, onChange} = props;
+  const {label, value, onChange} = props;
   const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
@@ -43,7 +43,7 @@ export default function ListViewColumnsDialog(props:PropsInputProps){
       onAddNew = {handleAddNew}
       selectedIndex = {selectedIndex}
       onChange = {newValue=>{setComuns(newValue)}}
-      onSave = {()=>{onChange(field, JSON.parse(JSON.stringify(columns)))}}
+      onSave = {()=>{onChange(JSON.parse(JSON.stringify(columns)))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >
       {selectedIndex >= 0 &&

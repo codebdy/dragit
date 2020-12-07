@@ -35,6 +35,7 @@ export class RXNodeRoot<T> extends RXNode<T>{
 
   copy(){
     let copy = new RXNodeRoot<T>()
+    copy.meta = this.meta;
     this.children.forEach(child=>{
       let childCopy = child.copy();
       childCopy.parent = copy;

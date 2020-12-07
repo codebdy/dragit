@@ -3,14 +3,19 @@ import { TextField } from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
 export default function StringInput(props:PropsInputProps){
-  const {field, label, value, onChange} = props;
+  const {label, value, onChange} = props;
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = (event.target.value as string).trim();
     setInputValue(newValue);
-    onChange(field, newValue);
-  };  
+  }; 
+  
+  const handleEndInput = ()=>{
+    if(value !== inputValue){
+      onChange(inputValue);      
+    }
+  }
 
   return (
     <TextField
@@ -20,6 +25,13 @@ export default function StringInput(props:PropsInputProps){
       size="small"
       fullWidth
       variant = "outlined"
+      onBlur = {handleEndInput}
+      onKeyUp = {e=>{
+        if(e.keyCode === 13) {
+          handleEndInput()
+        }
+      }
+    }
       {...props.props}
     />
   )

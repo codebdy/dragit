@@ -36,14 +36,16 @@ export default function LeftContent(
   props:{
     selectedNode?:RXNode<IMeta>,
     pageSchema?:IPageSchema, 
-    onChange:(pageSchema:IPageSchema)=>void
+    onPropChange:(propName:string, value:any)=>void,
+    onSettingsChange:(pageSchema:IPageSchema)=>void,
   }
 ){
-  const {selectedNode, pageSchema, onChange} = props;
+  const {selectedNode, pageSchema, onPropChange, onSettingsChange} = props;
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+
 
   return (
     <LeftArea
@@ -66,11 +68,14 @@ export default function LeftContent(
         <Toolbox></Toolbox>
       </TabPanel>
       <TabPanel value={value} index={1}>
-       <AttributeBox node = {selectedNode}></AttributeBox>
+       <AttributeBox 
+        node = {selectedNode}
+        onPropChange = {onPropChange}
+      ></AttributeBox>
       </TabPanel>
       <TabPanel value={value} index={2}>
         {
-          <SettingsBox pageSchema = {pageSchema} onChange = {onChange} />
+          <SettingsBox pageSchema = {pageSchema} onChange = {onSettingsChange} />
         }
       </TabPanel>
     </LeftArea>

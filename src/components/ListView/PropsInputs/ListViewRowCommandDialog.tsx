@@ -20,7 +20,7 @@ const useStyles = makeStyles(styles);
 
 export default function ListViewRowCommandDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {field, label, value, onChange} = props;
+  const {label, value, onChange} = props;
   const [commands, setCommands] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
   const command = commands[selectedIndex];
@@ -49,7 +49,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
       onChange = {newValue=>{setCommands(newValue)}}
-      onSave = {()=>{onChange(field, JSON.parse(JSON.stringify(commands)))}}
+      onSave = {()=>{onChange(JSON.parse(JSON.stringify(commands)))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >{selectedIndex >= 0 &&
         <Fragment>

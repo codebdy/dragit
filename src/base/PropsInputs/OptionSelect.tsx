@@ -11,13 +11,13 @@ export interface SelectItem{
 
 export default function OptionSelect(props:PropsInputProps){
   //const classes = useStyles();
-  const {field, label, value, onChange} = props;
+  const {label, value, onChange} = props;
   const items = props.props?.items;
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setInputValue(event.target.value);
-    onChange(field, event.target.value);
+    onChange(event.target.value);
   };  
   return (
     <FormControl variant="outlined" size="small" fullWidth>

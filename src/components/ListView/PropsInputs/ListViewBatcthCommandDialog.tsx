@@ -20,7 +20,7 @@ const useStyles = makeStyles(styles);
 
 export default function ListViewBatcthCommandDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {field, label, value, onChange} = props;
+  const {label, value, onChange} = props;
   const [commands, setCommands] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
 
@@ -42,7 +42,7 @@ export default function ListViewBatcthCommandDialog(props:PropsInputProps){
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
       onChange = {newValue=>{setCommands(newValue)}}
-      onSave = {()=>{onChange(field, JSON.parse(JSON.stringify(commands)))}}
+      onSave = {()=>{onChange(JSON.parse(JSON.stringify(commands)))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >{selectedIndex >= 0 &&
         <Fragment>

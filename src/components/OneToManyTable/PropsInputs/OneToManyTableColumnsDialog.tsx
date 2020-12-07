@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
 
 export default function OneToManyTableColumnsDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {field, value, label, onChange} = props;
+  const {value, label, onChange} = props;
   const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
@@ -55,7 +55,7 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
       onAddNew = {handleAddNew}
       selectedIndex = {selectedIndex}
       onChange = {newValue=>{setComuns(newValue)}}
-      onSave = {()=>{onChange(field, JSON.parse(JSON.stringify(columns)))}}
+      onSave = {()=>{onChange(JSON.parse(JSON.stringify(columns)))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >
       {selectedIndex >= 0 &&

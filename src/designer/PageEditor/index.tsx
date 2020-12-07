@@ -58,6 +58,7 @@ function makeCanvas(){
   )
 }
 
+type Metas = Array<IMeta>;
 
 export default function PageEditor(
   props:{
@@ -75,25 +76,23 @@ export default function PageEditor(
   const [metas, seMetas] = useState<Array<IMeta>>([])
   const [canvas, setCanvas] = useState<RXNodeRoot<IMeta>>(makeCanvas());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMeta>>();
+  const [undoList, setUndoList] = useState<Array<Metas>>([]);
+  const [redoList, setredoList] = useState<Array<Metas>>([]);
+
   const dispatch = useDispatch()
   const theme = useTheme(); 
   useAuthCheck();  
-  //相当于复制一个Json副本，不保存的话直接扔掉
-  useEffect(()=>{
     
-  },[pageMeta])
-
-  
   useEffect(() => {
     setPageRequest({...API_GET_PAGE, params:{pageSlug}})
   },[pageSlug]);
 
   useEffect(() => {
     setPageSchema(pageMeta?.jsonSchema);
+    //相当于复制一个Json副本，不保存的话直接扔掉
     seMetas(JSON.parse(JSON.stringify(pageMeta?.jsonSchema?.layout || [])))
   },[pageMeta]);
  
-
   useEffect(()=>{
     let newCanvas = makeCanvas();
     newCanvas.parse(metas);
@@ -114,6 +113,20 @@ export default function PageEditor(
     bus.emit(CANVAS_SCROLL)
   }
 
+  const handlePropChange = (propName:string, value:any)=>{
+    let undo = JSON.parse(JSON.stringify(canvas.getRootMetas()));
+    setUndoList([...undoList, undo]);
+    let canvasCopy = canvas.copy();
+    let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
+    if(selectNodeCopy){
+      selectNodeCopy.meta.props = selectNodeCopy.meta.props || {};
+      selectNodeCopy.meta.props[propName] = value;
+      setSelectedNode(selectNodeCopy);
+      setCanvas(canvasCopy);
+    }
+
+  }
+
   const handlPageChange = (page:IPageSchema)=>{
     setPageSchema(page)
   }
@@ -127,7 +140,12 @@ export default function PageEditor(
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
-            <LeftContent pageSchema={pageSchema} selectedNode = {selectedNode} onChange={handlPageChange}/>
+            <LeftContent 
+              pageSchema={pageSchema} 
+              selectedNode = {selectedNode}
+              onPropChange = {handlePropChange}
+              onSettingsChange={handlPageChange}
+            />
           }
 
           toolbar = {
@@ -160,10 +178,10 @@ export default function PageEditor(
                 >
                 <MdiIcon iconClass="mdi-arrow-expand-vertical" color={showPaddingY ? theme.palette.primary.main : ''}/>
               </IconButton>
-              <IconButton>
+              <IconButton disabled = {undoList.length === 0}>
                 <MdiIcon iconClass="mdi-undo"/>
               </IconButton>
-              <IconButton>
+              <IconButton disabled = {redoList.length === 0}>
                 <MdiIcon iconClass="mdi-redo"/>
               </IconButton>
               <IconButton>

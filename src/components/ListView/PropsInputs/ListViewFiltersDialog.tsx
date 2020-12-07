@@ -17,7 +17,7 @@ const useStyles = makeStyles(styles);
 
 export default function ListViewFiltersDialog(props:PropsInputProps){
   const classes = useStyles();
-  const {label, field, value, onChange} = props;
+  const {label, value, onChange} = props;
   const [filters, setFilters] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(filters.length > 0 ? 0 : -1);
 
@@ -44,7 +44,7 @@ export default function ListViewFiltersDialog(props:PropsInputProps){
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
       onChange = {newValue=>{setFilters(newValue)}}
-      onSave = {()=>{onChange(field, JSON.parse(JSON.stringify(filters)))}}
+      onSave = {()=>{onChange(JSON.parse(JSON.stringify(filters)))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >{selectedIndex >= 0 &&
         <Fragment>
