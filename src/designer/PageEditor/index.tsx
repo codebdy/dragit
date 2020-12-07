@@ -199,7 +199,15 @@ export default function PageEditor(
   }
 
   const handleRemove = ()=>{
-
+    backupToUndoList();
+    let canvasCopy = canvas.copy();
+    let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
+    if(selectNodeCopy){
+      selectNodeCopy.remove();
+      setCanvas(canvasCopy);      
+      setSelectedNode(undefined);
+      setRedoList([]);
+    }
   }
 
   const handleDupliate = ()=>{

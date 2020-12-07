@@ -144,7 +144,7 @@ export default function DrawerEditor(){
     }
     let copy = rootNode.copy();
     let node = copy.getNode(draggedNode.id);
-    node?.removeFormParent();
+    node?.remove();
     if(draggedNode.id === selectedNode?.id){
       setSelectedNode(undefined);
     }

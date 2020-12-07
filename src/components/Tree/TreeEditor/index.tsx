@@ -94,7 +94,7 @@ const TreeEditor = React.forwardRef((
   const handelRemove = (node:RXNode<ITreeNode>)=>{
     let rootCopy = root?.copy();
     let nodeCopy = rootCopy?.getNode(node.id);
-    nodeCopy?.removeFormParent();
+    nodeCopy?.remove();
     setRoot(rootCopy); 
   }
 

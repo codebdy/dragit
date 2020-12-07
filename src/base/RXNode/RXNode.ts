@@ -73,25 +73,25 @@ export class RXNode<T>{
     return undefined;
   }
 
-  removeFormParent(){
+  remove(){
     this.parent && remove(this, this.parent?.children);
     this.parent = undefined;
   }
 
   moveBefore(target:RXNode<T>){
-    this.removeFormParent();
+    this.remove();
     insertBefore(this, target, target.parent?.children);
     this.parent = target.parent;
   }
 
   moveAfter(target:RXNode<T>){
-    this.removeFormParent();
+    this.remove();
     insertAfter(this, target, target.parent?.children);
     this.parent = target.parent;
   }
 
   moveIn(target:RXNode<T>){
-    this.removeFormParent();    
+    this.remove();    
     target.children.push(this);
     this.parent = target;
   }
