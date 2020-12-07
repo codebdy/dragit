@@ -6,13 +6,17 @@ import TreeNodeLabel from "./TreeNodeLabel";
 import intl from "react-intl-universal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import MdiIcon from 'components/common/MdiIcon';
+import classNames from "classnames";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding:theme.spacing(0.5, 0),
+      userSelect:'none',
     },
-
+    leaf:{
+      marginLeft:theme.spacing(-2),
+    },
     leafText:{
       marginLeft:theme.spacing(1),
     }
@@ -27,14 +31,14 @@ export default function TreeNode(
   const {node} = props;
   const classes = useStyles();
 
-  const isLeaf =  node.children.length === 0 && !node.meta.metas;
+  const isLeaf =  node.children.length === 0 && node.meta.metas;
   const labelText = node?.meta?.title || (node?.meta?.titleKey && intl.get(node?.meta?.titleKey));
 
   return(
     <TreeItem 
       nodeId= {'' + node.id}
       label = {
-        <TreeNodeLabel isLeaf = {isLeaf}>
+        <TreeNodeLabel>
           {
             !isLeaf ?
               labelText
@@ -48,7 +52,7 @@ export default function TreeNode(
           }
         </TreeNodeLabel>
       }
-      className={classes.root}
+      className={classNames(classes.root,{[classes.leaf]:isLeaf})}
     >
       {
         node?.children?.map((child=>{

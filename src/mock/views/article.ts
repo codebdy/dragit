@@ -1,5 +1,5 @@
 import {API_GET_MODEL_BY_ID} from "APIs/model"
-import ArticleMeta from "designer/PageEditor/Toolbox/Metas/ArticleMeta";
+import ArticleMeta from "designer/PageEditor/Toolbox/metas2/aritcle";
 
 export default {
   layout:ArticleMeta,

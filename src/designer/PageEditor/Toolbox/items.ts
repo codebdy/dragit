@@ -1,5 +1,72 @@
 export default [
   {
+    titleKey: "template",
+    children:[
+      {
+        titleKey:'article',
+        children:[
+          {
+            title:'文章列表页',
+            metas:[],
+            children:[
+              {
+                titleKey:'grid',
+                metas:[],
+              },              
+              {
+                title:'页面标题',
+                metas:[],
+              },
+              {
+                title:'列表控件',
+                metas:[],
+              },
+            ]        
+          },
+          {
+            title:'文章编辑页',
+            metas:[],
+            children:[
+              {
+                titleKey:'grid',
+                metas:[],
+              },
+              {
+                title:'页面标题',
+                metas:[],
+              },
+              {
+                title:'基本信息',
+                metas:[],
+              },
+              {
+                title:'基本信息',
+                metas:[],
+              },
+              {
+                title:'SEO数据',
+                metas:[],
+              },
+              {
+                title:'内容',
+                metas:[],
+              },
+              {
+                title:'显示',
+                metas:[],
+              },
+              {
+                title:'媒体',
+                metas:[],
+              },
+
+            ]            
+          },
+        ]
+      }
+    ]
+  },
+  {
     titleKey: "layout",
     children:[
       {

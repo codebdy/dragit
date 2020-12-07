@@ -33,6 +33,9 @@
     "relations": "关联",
     "customized": "自定义",
     "component-box": "组件箱",
+
+    "template":"模板",
+    "article":"文章",
     "layout": "布局",
     "page":"页面",
     "page-title":"标题",

@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import items from './items'
-import {sideBarSettings} from "utils/sideBarSettings";
 import { INode } from 'designer/PageEditor/Core/Node/INode';
 import TreeView from '@material-ui/lab/TreeView';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-
-import TreeItem from '@material-ui/lab/TreeItem';
-
-import intl from 'react-intl-universal';
-import { parseNode } from 'designer/PageEditor/Core/Node/jsonParser';
-import bus, { WILL_FOCUS_NODE } from 'designer/PageEditor/Core/bus';
 import { RXNode } from 'base/RXNode/RXNode';
 import { IToolboxItem } from './IToolboxItem';
 import { RXNodeRoot } from 'base/RXNode/Root';

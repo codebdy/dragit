@@ -33,6 +33,9 @@
     "relations": "Relations",
     "customized": "Customized",
     "component-box": "Component box",
+
+    "template":"Template",
+    "article":"Article",
     "layout": "Layout",
     "page":"Page",
     "page-title":"Title",
