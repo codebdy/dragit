@@ -124,13 +124,17 @@ export default function PageEditor(
     setSelectedDom(dom);
   }
 
+  const backupToUndoList = () => {
+    setUndoList([...undoList,
+    {
+      canvasNode: canvas,
+      selectedNodeId: selectedNode?.id,
+    }
+    ]);
+  }
+
   const handlePropChange = (propName:string, value:any)=>{
-    setUndoList([...undoList, 
-      {
-        canvasNode: canvas,
-        selectedNodeId: selectedNode?.id,
-      }
-    ]);    
+    backupToUndoList();    
     let canvasCopy = canvas.copy();
     let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
     if(selectNodeCopy){
@@ -182,12 +186,7 @@ export default function PageEditor(
   }
 
   const handleClear = ()=>{
-    setUndoList([...undoList, 
-      {
-        canvasNode: canvas,
-        selectedNodeId: selectedNode?.id,
-      }
-    ]);    
+    backupToUndoList();    
     let newCanvas = makeCanvas();
     setCanvas(newCanvas);      
     setSelectedNode(undefined);
@@ -201,6 +200,18 @@ export default function PageEditor(
 
   const handleRemove = ()=>{
 
+  }
+
+  const handleDupliate = ()=>{
+    backupToUndoList();
+    let canvasCopy = canvas.copy();
+    let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
+    if(selectNodeCopy){
+      let newNode = selectNodeCopy.duplicate();
+      setCanvas(canvasCopy);      
+      setSelectedNode(newNode);
+      setRedoList([]);
+    }
   }
 
   const handleSelectParent = ()=>{
@@ -284,6 +295,7 @@ export default function PageEditor(
                   onBeginDrag = {handleBeginDrag}
                   onRemove = {handleRemove}
                   onSelectParent = {handleSelectParent}
+                  onDuplicate = {handleDupliate}
                 />
               </Fragment>
 

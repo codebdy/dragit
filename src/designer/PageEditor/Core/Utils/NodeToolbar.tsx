@@ -49,9 +49,10 @@ export default function NodeToolbar(
     onBeginDrag:()=>void,
     onRemove:()=>void,
     onSelectParent:()=>void,
+    onDuplicate:()=>void,
   }
 ){
-  const {followDom, onBeginDrag, onRemove, onSelectParent} = props;
+  const {followDom, onBeginDrag, onRemove, onSelectParent, onDuplicate} = props;
   const iconSize = 16;
   const classes = useStyles();
   //const [following, setFollowing] = React.useState<INode|undefined>(undefined);
@@ -126,11 +127,9 @@ export default function NodeToolbar(
           >
             <MdiIcon iconClass='mdi-arrow-all' size={iconSize} />
           </div>
-          {//<div className={classes.button}>
-            //<MdiIcon iconClass='mdi-square-edit-outline' size={iconSize} />
-          //</div>
-          }
-          <div className={classes.button}>
+          <div className={classes.button}
+            onClick = {onDuplicate}
+          >
             <MdiIcon iconClass='mdi-content-copy' size={14} />
           </div>
           <div className={classes.button}

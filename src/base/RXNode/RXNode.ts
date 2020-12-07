@@ -50,6 +50,14 @@ export class RXNode<T>{
     return copy;
   }
 
+  duplicate(){
+    let metaCopy = JSON.parse(JSON.stringify(this.getMeta()));
+    let newNode = RXNode.make<T>(metaCopy);
+    newNode.parent = this.parent;
+    newNode.moveAfter(this);
+    return newNode;
+  }
+
   getNode(id:number):RXNode<T>|undefined{
     if(id === this.id){
       return this;
