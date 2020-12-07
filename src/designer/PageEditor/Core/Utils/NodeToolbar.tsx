@@ -66,8 +66,8 @@ export default function NodeToolbar(
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)
 
-  const rect = followDom?.getBoundingClientRect();
   const doFollow = ()=>{
+    let rect = followDom?.getBoundingClientRect();
     if(!rect){
       return 
     }
@@ -87,7 +87,7 @@ export default function NodeToolbar(
   useEffect(()=>{
     doFollow()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[rect])
+  },[followDom])
 
   useEffect(() => {
     bus.on(CANVAS_SCROLL, hangdePositionChange);

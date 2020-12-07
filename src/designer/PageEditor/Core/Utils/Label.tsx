@@ -32,10 +32,9 @@ export default function Label(
   const [top, setTop] = React.useState(0);
   const designer = useDesigner();
   
-  let rect = followDom?.getBoundingClientRect()  
   const doFollow = ()=>{
+    let rect = followDom?.getBoundingClientRect()  
     if(rect){
-
       setLeft(rect.x)
       let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
       setTop(top)
@@ -45,7 +44,7 @@ export default function Label(
   useEffect(()=>{
     doFollow()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[rect])
+  },[followDom])
 
   
   const hangdePositionChange = ()=>{
