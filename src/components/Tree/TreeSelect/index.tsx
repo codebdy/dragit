@@ -20,7 +20,21 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TreeSelect = React.forwardRef((props:any, ref:any)=>{
-  const {label, name, variant, onChange,  value,  fullWidth, error, helperText, nameKey, multiSelect, height, dataApi,size, ...rest} = props;
+  const {label, 
+    name, 
+    variant, 
+    onChange,  
+    value,  
+    fullWidth, 
+    error, 
+    helperText, 
+    nameKey, 
+    multiSelect, 
+    height,
+    dataApi,
+    size, 
+    isDeisgning,
+    ...rest} = props;
   const classes = useStyles();
   const [rootNodes, loading] = useAxios<Array<ITreeNode>>(dataApi)
   let InputControl = Input;
@@ -44,7 +58,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
   }; 
 
   return (
-    <FormControl variant="outlined" error = {error} fullWidth = {fullWidth}>
+    <FormControl variant="outlined" error = {error} fullWidth = {fullWidth} ref={ref}>
       <InputLabel htmlFor={name} shrink={values.length > 0} className = {classes.label}>{label}</InputLabel>
       {
         loading?
@@ -60,6 +74,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
                 height:height,
                 size:size,
                 multiSelect:multiSelect,
+                isDeisgning:isDeisgning,
               }
             }
             onChange={handleChange}

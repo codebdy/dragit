@@ -9,7 +9,7 @@ import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus, { CANVAS_SCROLL } from './Core/bus';
-import MouseFollower from './Core/Utils/MouseFollower';
+import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
 import useDesigner from 'store/designer/useDesigner';
@@ -23,8 +23,8 @@ import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import ComponentView from './Core/ComponentView';
 import { RXNode } from 'base/RXNode/RXNode';
-import NodeToolbar from './Core/Utils/NodeToolbar';
-import NodeLabel from './Core/Utils/NodeLabel';
+import NodeToolbar from './Core/NodeToolbar';
+import NodeLabel from './Core/NodeLabel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

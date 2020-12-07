@@ -70,6 +70,7 @@ export default function ChipsInput(
       height?:string,
       size?:any,
       multiSelect?:true,
+      isDeisgning?:boolean,
     },
     name?:string,
     itemKey?:string,
@@ -78,7 +79,7 @@ export default function ChipsInput(
 ) {
 
   const {value, name, onFocus, onBlur, onChange} = props;
-  const {values, rootNodes, nameKey = 'name', height, size, multiSelect} = value || {} as any;
+  const {values, rootNodes, nameKey = 'name', height, size, multiSelect, isDeisgning} = value || {} as any;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [focused,setFocused] = useState(false);
@@ -216,7 +217,7 @@ export default function ChipsInput(
         </div>
       </div>
       {
-        open &&
+        open && !isDeisgning &&
         <Popover
           id={id}
           open={open}

@@ -201,6 +201,7 @@ export default {
                           name:'TreeSelect',
                           designProps:{
                             dataApi:null,
+                            isDeisgning:true,
                           },
                           props:{
                             label:"频道",

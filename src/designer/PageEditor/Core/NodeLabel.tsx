@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import bus, { CANVAS_SCROLL } from '../bus';
+import bus, { CANVAS_SCROLL } from './bus';
 import useDesigner from 'store/designer/useDesigner';
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import bus, {CANVAS_SCROLL } from '../bus';
+import bus, {CANVAS_SCROLL } from './bus';
 import MdiIcon from 'components/common/MdiIcon';
 import { sideBarSettings } from 'utils/sideBarSettings';
 import { useSelector } from 'react-redux';

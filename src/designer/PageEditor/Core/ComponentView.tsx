@@ -8,7 +8,7 @@ import classNames from "classnames";
 import bus, { ACTIVE_NODE } from './bus';
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
-import NodeLabel from './Utils/NodeLabel';
+import NodeLabel from './NodeLabel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

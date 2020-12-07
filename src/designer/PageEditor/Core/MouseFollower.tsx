@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import bus, { DRAGE_NODE, UN_DRAGE_NODE } from '../bus';
-import { INode } from '../Node/INode';
+import bus, { DRAGE_NODE, UN_DRAGE_NODE } from './bus';
+import { INode } from './Node/INode';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
