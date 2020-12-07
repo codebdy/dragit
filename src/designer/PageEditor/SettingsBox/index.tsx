@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles, Theme, createStyles, Switch, FormControlLabel} from '@material-ui/core';
 import intl from 'react-intl-universal';
-import { AttributeRow } from '../AttrebuteBox2/AttributeRow';
+import { AttributeRow } from '../AttrebuteBox/AttributeRow';
 import { IPageSchema } from 'base/Model/IPage';
 import ApiEditor from './ApiEditor';
 

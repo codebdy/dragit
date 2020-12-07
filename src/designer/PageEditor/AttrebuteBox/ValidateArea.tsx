@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {MenuItem, Select, Switch, FormControl, FormControlLabel, InputLabel, TextField } from '@material-ui/core';
-import { AttributeRow, } from 'designer/PageEditor/AttrebuteBox2/AttributeRow';
+import { AttributeRow, } from 'designer/PageEditor/AttrebuteBox/AttributeRow';
 import intl from 'react-intl-universal';
 
 export interface ValidateRule{

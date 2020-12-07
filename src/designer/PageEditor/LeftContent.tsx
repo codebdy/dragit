@@ -3,7 +3,7 @@ import { Tabs, Tab } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import Toolbox from './Toolbox';
 import Box from '@material-ui/core/Box';
-import AttributeBox from './AttrebuteBox2';
+import AttributeBox from './AttrebuteBox';
 import bus, { FOCUS_NODE, UN_FOCUS_NODE } from './Core/bus';
 import { INode } from 'designer/PageEditor/Core/Node/INode';
 import SettingsBox from './SettingsBox';
