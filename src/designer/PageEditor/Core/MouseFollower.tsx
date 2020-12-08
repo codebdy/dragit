@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import bus, { DRAGE_NODE, UN_DRAGE_NODE } from './bus';
-import { INode } from './Node/INode';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,19 +18,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
-export default function MouseFollower(){
+export default function MouseFollower(
+  props:{
+    label:string,
+  }
+){
+  const {label} = props;
   const classes = useStyles();
-  const [following, setFollowing] = React.useState<INode|null>(null);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-
-  const makeFollower = (node:INode)=>{
-    setFollowing(node);
-  }
-
-  const unFollow = (node:INode)=>{
-    setFollowing(null)
-  }
 
   const handleMouseMove = (event:MouseEvent)=>{
     setLeft(event.clientX);
@@ -40,24 +34,22 @@ export default function MouseFollower(){
   }
 
   useEffect(() => {
-    bus.on(DRAGE_NODE, makeFollower);
-    bus.on(UN_DRAGE_NODE, unFollow);
     document.addEventListener('mousemove', handleMouseMove);
     return () => {
-      bus.off(DRAGE_NODE, makeFollower)
-      bus.off(UN_DRAGE_NODE, unFollow)
       document.removeEventListener('mousemove', handleMouseMove)
     };
   });
 
   return(
-    following &&
+    left !== 0 && top !== 0 ?
     <div 
       className={classes.mouseFollower}
       style={{
         left:left + 'px',
         top: top + 'px',
       }}
-    >{following.label}</div>
+    >{label}</div>
+    :
+    <span></span>
   )
 }

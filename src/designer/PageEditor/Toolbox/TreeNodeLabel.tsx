@@ -13,12 +13,18 @@ export default function TreeNodeLabel(
   props:{
     children?:any,
     style?:any,
+    onMouseDown?:()=>void
   }
 ){
-  const {children, style} = props;
+  const {children, style, onMouseDown} = props;
   const classes = useStyles();
+
   return (
-    <div className={classes.root} style={style}>
+    <div 
+      className={classes.root} 
+      style={style}
+      onMouseDown = {onMouseDown}
+    >
       {children}
     </div>
   )

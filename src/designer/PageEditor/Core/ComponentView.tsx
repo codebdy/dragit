@@ -9,6 +9,7 @@ import bus, { ACTIVE_NODE } from './bus';
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import NodeLabel from './NodeLabel';
+import { IToolboxItem } from '../Toolbox/IToolboxItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,9 +53,10 @@ export default function ComponentView(
     selectedNode?:RXNode<IMeta>,
     onSelectNode:(node?:RXNode<IMeta>)=>void,
     onSelectNodeDom:(dom?:HTMLElement)=>void,
+    draggedToolboxItem?:IToolboxItem,
   }
 ){
-  const {node, selectedNode, onSelectNode, onSelectNodeDom} = props;
+  const {node, selectedNode, onSelectNode, onSelectNodeDom, draggedToolboxItem} = props;
   const classes = useStyles();
   const [actived, setActived] = useState(false);
   const designer = useDesigner();
@@ -80,13 +82,12 @@ export default function ComponentView(
     if(selected){
       onSelectNodeDom(refEl?.current)      
     }
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selectedNode]);
   
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    if(selectedNode?.id !== node.id){
+    if(selectedNode?.id !== node.id && !draggedToolboxItem){
       setActived(true);
     }
   }
@@ -147,6 +148,7 @@ export default function ComponentView(
             selectedNode = {selectedNode}
             onSelectNode = {onSelectNode}
             onSelectNodeDom = {onSelectNodeDom}
+            draggedToolboxItem = {draggedToolboxItem}
           />
         )
       })}

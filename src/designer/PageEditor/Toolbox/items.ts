@@ -1,3 +1,4 @@
+
 export default [
   {
     titleKey: "template",
@@ -6,7 +7,7 @@ export default [
         titleKey:'article',
         children:[
           {
-            title:'文章列表页',
+            title:'列表页',
             metas:[],
             children:[
               {
@@ -24,7 +25,7 @@ export default [
             ]        
           },
           {
-            title:'文章编辑页',
+            title:'编辑页',
             metas:[],
             children:[
               {
@@ -70,26 +71,13 @@ export default [
     titleKey: "layout",
     children:[
       {
-        titleKey:"row",
-        meta:{
-          name:"Grid",
-          props:{
-            container:true,
-          },
-        }
-      },  
+        titleKey:'row',
+        metas:[{name:'GridColumn'}],
+      },
       {
         titleKey:"column",
-        meta:{
-          name:"Grid",
-          props:{
-            item:true,
-            xs:12,
-            md:true,
-          },
-        }
+        metas:[{name:'GridColumn'}],
       },  
-  
     ]
   },
   {

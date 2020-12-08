@@ -31,7 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function Toolbox() {
+export default function Toolbox(
+  props:{
+    onStartDragToolboxItem: (metas:IToolboxItem)=>void,
+  }
+) {
+  const {onStartDragToolboxItem} = props;
   const classes = useStyles();
   const [root, setRoot] = useState<RXNodeRoot<IToolboxItem>>();
   
@@ -41,6 +46,7 @@ export default function Toolbox() {
     setRoot(aRoot);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+
 
   return (
       <TreeView
@@ -55,7 +61,11 @@ export default function Toolbox() {
         {
           root?.children.map((node:RXNode<IToolboxItem>)=>{
             return (
-              <TreeNode key={node.id + ''} node={node} />
+              <TreeNode 
+                key={node.id + ''} 
+                node={node}
+                onStartDragToolboxItem = {onStartDragToolboxItem}
+              />
             )
           })
         }

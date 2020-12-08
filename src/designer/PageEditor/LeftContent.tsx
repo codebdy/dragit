@@ -9,6 +9,8 @@ import LeftArea from 'designer/Layout/LeftArea';
 import { IPageSchema } from 'base/Model/IPage';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
+import Scrollbar from 'admin/common/Scrollbar';
+import { IToolboxItem } from './Toolbox/IToolboxItem';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -38,9 +40,10 @@ export default function LeftContent(
     pageSchema?:IPageSchema, 
     onPropChange:(propName:string, value:any)=>void,
     onSettingsChange:(pageSchema:IPageSchema)=>void,
+    onStartDragToolboxItem: (item:IToolboxItem)=>void,
   }
 ){
-  const {selectedNode, pageSchema, onPropChange, onSettingsChange} = props;
+  const {selectedNode, pageSchema, onPropChange, onSettingsChange, onStartDragToolboxItem} = props;
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -64,20 +67,22 @@ export default function LeftContent(
         </Tabs> 
       }
     >
-      <TabPanel value={value} index={0}>
-        <Toolbox></Toolbox>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-       <AttributeBox 
-        node = {selectedNode}
-        onPropChange = {onPropChange}
-      ></AttributeBox>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        {
-          <SettingsBox pageSchema = {pageSchema} onChange = {onSettingsChange} />
-        }
-      </TabPanel>
+      <Scrollbar>
+        <TabPanel value={value} index={0}>
+          <Toolbox onStartDragToolboxItem = {onStartDragToolboxItem}></Toolbox>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+        <AttributeBox 
+          node = {selectedNode}
+          onPropChange = {onPropChange}
+        ></AttributeBox>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          {
+            <SettingsBox pageSchema = {pageSchema} onChange = {onSettingsChange} />
+          }
+        </TabPanel>
+      </Scrollbar>
     </LeftArea>
   )
 }

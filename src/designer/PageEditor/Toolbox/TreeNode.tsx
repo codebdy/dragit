@@ -25,20 +25,29 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function TreeNode(
   props:{
-    node:RXNode<IToolboxItem>
+    node: RXNode<IToolboxItem>,
+    onStartDragToolboxItem: (item:IToolboxItem)=>void,
   }
 ) {
-  const {node} = props;
+  const {node, onStartDragToolboxItem} = props;
   const classes = useStyles();
 
   const isLeaf =  node.children.length === 0 && node.meta.metas;
   const labelText = node?.meta?.title || (node?.meta?.titleKey && intl.get(node?.meta?.titleKey));
 
+  const handleMouseDown = ()=>{
+    if(node?.meta.metas){
+      onStartDragToolboxItem(node?.meta);      
+    }
+  }
+
   return(
     <TreeItem 
       nodeId= {'' + node.id}
       label = {
-        <TreeNodeLabel>
+        <TreeNodeLabel
+          onMouseDown = {handleMouseDown}
+        >
           {
             !isLeaf ?
               labelText
@@ -57,7 +66,11 @@ export default function TreeNode(
       {
         node?.children?.map((child=>{
           return(
-            <TreeNode key={child.id} node = {child} />
+            <TreeNode 
+              key={child.id} 
+              node = {child}
+              onStartDragToolboxItem = {onStartDragToolboxItem}
+            />
           )
         }))
       }

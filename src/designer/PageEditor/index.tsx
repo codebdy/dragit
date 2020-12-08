@@ -25,6 +25,7 @@ import ComponentView from './Core/ComponentView';
 import { RXNode } from 'base/RXNode/RXNode';
 import NodeToolbar from './Core/NodeToolbar';
 import NodeLabel from './Core/NodeLabel';
+import { IToolboxItem } from './Toolbox/IToolboxItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,11 +85,23 @@ export default function PageEditor(
   const [undoList, setUndoList] = useState<Array<Snapshot>>([]);
   const [redoList, setRedoList] = useState<Array<Snapshot>>([]);
   const [selectedDom, setSelectedDom] = useState<HTMLElement>();
+  const [draggedToolboxItem, setDraggedToolboxItem] = useState<IToolboxItem>();
 
   const dispatch = useDispatch()
   const theme = useTheme(); 
   useAuthCheck();  
-    
+  
+  const handleMouseUp = ()=>{
+    setDraggedToolboxItem(undefined);
+  }
+
+  useEffect(()=>{
+    document.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp)
+    };
+  },[])
+  
   useEffect(() => {
     setPageRequest({...API_GET_PAGE, params:{pageSlug}})
   },[pageSlug]);
@@ -108,7 +121,6 @@ export default function PageEditor(
 
   const handleCancel = () => {
     onClose();
-
   };
 
   const handleSave = () => {
@@ -117,6 +129,10 @@ export default function PageEditor(
 
   const handleScroll = ()=>{
     bus.emit(CANVAS_SCROLL)
+  }
+
+  const handleStartDragMetas = (item:IToolboxItem)=>{
+    setDraggedToolboxItem(item);
   }
 
   const handleSelectNodeDom = (dom?:HTMLElement)=>{
@@ -236,6 +252,7 @@ export default function PageEditor(
               selectedNode = {selectedNode}
               onPropChange = {handlePropChange}
               onSettingsChange={handlPageChange}
+              onStartDragToolboxItem = {handleStartDragMetas}
             />
           }
 
@@ -293,6 +310,7 @@ export default function PageEditor(
               selectedNode = {selectedNode} 
               onSelectNode = {handleSelectedNode}
               onSelectNodeDom = {handleSelectNodeDom}
+              draggedToolboxItem = {draggedToolboxItem}
             />
             {
               selectedNode &&
@@ -312,7 +330,11 @@ export default function PageEditor(
           </Scrollbar>
         </DesignerLayout>
         <Fragment>
-          <MouseFollower />
+          {
+            draggedToolboxItem&&
+            <MouseFollower label={draggedToolboxItem.title || intl.get(draggedToolboxItem.titleKey||'')} />
+          }
+          
         </Fragment>      
       </Backdrop>
   );
