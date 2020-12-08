@@ -8,7 +8,7 @@ import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
-import bus, { CANVAS_SCROLL } from './Core/bus';
+import bus, { CANVAS_SCROLL, DRAG_OVER_EVENT } from './Core/bus';
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
@@ -26,6 +26,7 @@ import { RXNode } from 'base/RXNode/RXNode';
 import NodeToolbar from './Core/NodeToolbar';
 import NodeLabel from './Core/NodeLabel';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
+import DragCusor from './Core/DragCusor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -93,6 +94,7 @@ export default function PageEditor(
   
   const handleMouseUp = ()=>{
     setDraggedToolboxItem(undefined);
+    bus.emit(DRAG_OVER_EVENT, {})
   }
 
   useEffect(()=>{
@@ -133,6 +135,7 @@ export default function PageEditor(
 
   const handleStartDragMetas = (item:IToolboxItem)=>{
     setDraggedToolboxItem(item);
+    setSelectedNode(undefined);
   }
 
   const handleSelectNodeDom = (dom?:HTMLElement)=>{
@@ -311,6 +314,7 @@ export default function PageEditor(
               onSelectNode = {handleSelectedNode}
               onSelectNodeDom = {handleSelectNodeDom}
               draggedToolboxItem = {draggedToolboxItem}
+              //onLocateCursor = {handleLocateCuror}
             />
             {
               selectedNode &&
@@ -331,10 +335,13 @@ export default function PageEditor(
         </DesignerLayout>
         <Fragment>
           {
-            draggedToolboxItem&&
+            draggedToolboxItem &&
             <MouseFollower label={draggedToolboxItem.title || intl.get(draggedToolboxItem.titleKey||'')} />
           }
-          
+          {
+            draggedToolboxItem &&
+            <DragCusor />
+          }
         </Fragment>      
       </Backdrop>
   );

@@ -12,13 +12,14 @@ export default [{
   },
   children: [{
       name: 'GridColumn',
-      children: [{
-        name: 'h2',
-        props:{
-          rxText: '文章编辑',            
+      children: [
+        {
+          name: 'h2',
+          props:{
+            rxText: '文章编辑',            
+          }
         }
-
-      }],
+      ],
     },
     {
       name: 'GridColumn',

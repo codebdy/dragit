@@ -5,7 +5,7 @@ import { IMeta } from 'base//Model/IMeta';
 import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
-import bus, { ACTIVE_NODE } from './bus';
+import bus, { ACTIVE_NODE, DRAG_OVER_EVENT } from './bus';
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import NodeLabel from './NodeLabel';
@@ -47,6 +47,25 @@ function getEditStyle(
 
 }
 
+export interface IRect{
+  bottom:number,
+  height:number,
+  left:number,
+  right:number,
+  top:number,
+  width:number,
+  x:number,
+  y:number,
+}
+
+export type CursorPosition = "in-left"|"in-top"|"in-right"|"in-bottom"|"in-center"|"out-left"|"out-top"|"out-right"|"out-bottom";
+
+export interface IDragOverEvent{
+  rect?:IRect,
+  position?:CursorPosition,
+  targetNode?:RXNode<IMeta>,
+}
+
 export default function ComponentView(
   props:{
     node:RXNode<IMeta>,
@@ -54,6 +73,7 @@ export default function ComponentView(
     onSelectNode:(node?:RXNode<IMeta>)=>void,
     onSelectNodeDom:(dom?:HTMLElement)=>void,
     draggedToolboxItem?:IToolboxItem,
+    //onLocateCursor:(rect:IRect, position:CursorPosition)=>void,
   }
 ){
   const {node, selectedNode, onSelectNode, onSelectNodeDom, draggedToolboxItem} = props;
@@ -86,10 +106,22 @@ export default function ComponentView(
   },[selectedNode]);
   
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
-    event.stopPropagation();
+    event.stopPropagation();    
     if(selectedNode?.id !== node.id && !draggedToolboxItem){
-      setActived(true);
+        setActived(true);        
     }
+    else{
+      let dom :any = refEl.current
+      let rect : IRect = dom?.getBoundingClientRect();
+      if(rect){
+        bus.emit(DRAG_OVER_EVENT, {
+          rect:rect,
+          position:'out-top',
+          targetNode:node,
+        })
+      }
+    }
+
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{
     //event.stopPropagation();
@@ -132,9 +164,9 @@ export default function ComponentView(
       marginBottom: makeSpaceStyle(marginBottom),
       marginLeft: makeSpaceStyle(marginLeft),
     },
-    onMouseMove : handleMouseMove,
-    onMouseOut : handleMouseOut,
-    onClick : handleClick,
+    onMouseMove: handleMouseMove,
+    onMouseOut: handleMouseOut,
+    onClick: handleClick,
     ...node.meta.designProps,
   }
 
@@ -149,6 +181,7 @@ export default function ComponentView(
             onSelectNode = {onSelectNode}
             onSelectNodeDom = {onSelectNodeDom}
             draggedToolboxItem = {draggedToolboxItem}
+            //onLocateCursor = {onLocateCursor}
           />
         )
       })}
