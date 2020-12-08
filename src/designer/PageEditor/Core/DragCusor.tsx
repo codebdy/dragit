@@ -5,9 +5,10 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import bus, { DRAG_OVER_EVENT } from './bus';
+import bus, { CANVAS_SCROLL, DRAG_OVER_EVENT } from './bus';
 import React from 'react';
 import classNames from 'classnames';
+import { IRect } from 'base/Model/IRect';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,19 +55,28 @@ const useStyles = makeStyles((theme: Theme) =>
 //基于事件来实现，用React组件参数的话，会卡顿
 export default function DragCusor(){
   const [dragOverParam, setDragOverParam] = useState<IDragOverParam>();
+  const [rect, setRect] = useState<IRect>();
   const classes = useStyles();
   
   const handleDragOverEvent = (param:IDragOverParam)=>{
     setDragOverParam(param);
+    setRect(param?.targetNode?.rect);
   }
 
+  const hangdePositionChange = ()=>{
+    setRect(dragOverParam?.targetNode?.rect);
+  }
+  
   useEffect(()=>{
     bus.on(DRAG_OVER_EVENT, handleDragOverEvent);
+    bus.on(CANVAS_SCROLL, hangdePositionChange);
     return ()=>{
       bus.off(DRAG_OVER_EVENT, handleDragOverEvent);
+      bus.off(CANVAS_SCROLL, hangdePositionChange);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-  const rect = dragOverParam?.targetNode?.rect;
+
   const isvertical = dragOverParam?.position ==='out-left' || dragOverParam?.position ==='out-right'
     ||dragOverParam?.position ==='in-left' || dragOverParam?.position ==='in-right';
 

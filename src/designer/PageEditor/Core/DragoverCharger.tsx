@@ -1,5 +1,6 @@
 import React from 'react';
-import { IDragOverParam, IRect } from "./IDragOverParam";
+import { IDragOverParam } from "./IDragOverParam";
+import { IRect } from "../../../base/Model/IRect";
 import { resolveRule } from 'base/DragRX';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';

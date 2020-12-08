@@ -10,7 +10,6 @@ import bus, { ACTIVE_NODE, DRAG_OVER_EVENT } from './bus';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import NodeLabel from './NodeLabel';
 import { IToolboxItem } from '../Toolbox/IToolboxItem';
-import { IRect } from './IDragOverParam';
 import { DragoverCharger } from './DragoverCharger';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -88,9 +87,8 @@ export default function ComponentView(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selectedNode]);
   
-  let dom :any = refEl.current
-  let rect : IRect = dom?.getBoundingClientRect();
-  node.rect = rect;
+  let dom : any = refEl.current;
+  node.dom = dom;
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
@@ -100,8 +98,7 @@ export default function ComponentView(
     }
     else{
       let dom :any = refEl.current
-      let rect : IRect = dom?.getBoundingClientRect();
-      if(rect){
+      if(dom){
         bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
       }
     }

@@ -1,5 +1,5 @@
 import { after, before, first, insertAfter, insertBefore, last, remove } from "ArrayHelper";
-import { IRect } from "designer/PageEditor/Core/IDragOverParam";
+import { IRect } from "base/Model/IRect";
 
 export class RXNode<T>{
   static idSeed:number = 1;
@@ -7,7 +7,7 @@ export class RXNode<T>{
   meta!: T;
   children: Array<RXNode<T>>;
   parent?:RXNode<T>;
-  rect?:IRect;
+  dom?:HTMLElement;
 
   static make<T>(meta:T){
     let node = new RXNode<T>();
@@ -35,6 +35,10 @@ export class RXNode<T>{
   seedId(){
     this.id = RXNode.idSeed
     RXNode.idSeed ++
+  }
+
+  get rect():IRect|undefined{
+    return this.dom?.getBoundingClientRect();
   }
 
   //完全复制包括ID的复制
