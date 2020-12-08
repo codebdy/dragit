@@ -1,5 +1,5 @@
 import React from 'react';
-import { IDragOverParam } from "./IDragOverParam";
+import { CursorPosition, IDragOverParam } from "./IDragOverParam";
 import { IRect } from "../../../base/Model/IRect";
 import { resolveRule } from 'base/DragRX';
 import { IMeta } from 'base/Model/IMeta';
@@ -54,6 +54,48 @@ class Rect {
 
     return this.rect.bottom < event.clientY ;
   }
+
+
+  atPosition(event: React.MouseEvent<HTMLElement>|undefined, prefix:'in'|'out'):CursorPosition{
+    if (!event || !this.isIn(event)) {
+      return undefined;
+    }
+    
+    let xRatio = (event.clientX - this.rect.x)/(this.rect.x + this.rect.width - event.clientX) 
+    let yRatio = (event.clientY - this.rect.y)/(this.rect.y + this.rect.height - event.clientY)
+    
+    //左半部分
+    if(xRatio <= 1){
+      //上方
+      if(yRatio <=1){
+        if(xRatio < yRatio  ){
+          return `${prefix}-left` as any;
+        }  
+        return `${prefix}-top` as any;      
+      }//下方
+      else{
+        if(xRatio < 1/yRatio  ){
+          return `${prefix}-left` as any;
+        }  
+        return `${prefix}-bottom` as any;   
+      }
+    }//右半部分
+    else{
+      //上方
+      if(yRatio <=1){
+        if(1/xRatio < yRatio  ){
+          return `${prefix}-right` as any;
+        }  
+        return `${prefix}-top` as any;      
+      }//下方
+      else{
+        if(1/xRatio < 1/yRatio  ){
+          return `${prefix}-right` as any;
+        }  
+        return `${prefix}-bottom` as any;   
+      }
+    }
+  }
 }
 
 export class DragoverCharger {
@@ -90,50 +132,12 @@ export class DragoverCharger {
     });
   }
 
-
-  get dragOutRectTopArea() {
+  get rect(){
     const rect = this.node.rect;
     if (!rect) {
       return undefined;
     }
-    return new Rect({
-      ...rect,
-      bottom: rect.top + this.dropInMargin,
-    });
-  }
-
-  get dragOutRectRightArea() {
-    const rect = this.node.rect;
-    if (!rect) {
-      return undefined;
-    }
-    return new Rect({
-      ...rect,
-      left: rect.right - this.dropInMargin,
-    });
-  }
-
-  get dragOutRectBottomArea() {
-    const rect = this.node.rect;
-    if (!rect) {
-      return undefined;
-    }
-    return new Rect({
-      ...rect,
-      top: rect.bottom - this.dropInMargin,
-    });
-  }
-
-  get dragOutRectLeftArea() {
-    const rect = this.node.rect;
-    if (!rect) {
-      return undefined;
-    }
-
-    return new Rect({
-      ...rect,
-      right: rect.left + this.dropInMargin,
-    });
+    return  new Rect(rect);
   }
 
   //判断一个节点是否接受被拖动的数据，不输入参数代表判断本节点
@@ -153,20 +157,6 @@ export class DragoverCharger {
   }
   isDragIn(event: React.MouseEvent<HTMLElement>) {
     return this.dragInRect?.isIn(event) && this.isNodeAcceptMetas();
-  }
-
-  onBefore(event: React.MouseEvent<HTMLElement>) {
-    if (this.isNodeAcceptMetas(this.node.parent)) {
-      return this.dragOutRectTopArea?.isIn(event) || this.dragOutRectLeftArea?.isIn(event);
-    }
-    return false;
-  }
-
-  onAfter(event: React.MouseEvent<HTMLElement>) {
-    if (this.isNodeAcceptMetas(this.node.parent)) {
-      return this.dragOutRectBottomArea?.isIn(event) || this.dragOutRectRightArea?.isIn(event);
-    }
-    return false;
   }
 
   firstChildAfterMouse(event: React.MouseEvent<HTMLElement>, node?: RXNode<IMeta>) {
@@ -249,24 +239,23 @@ export class DragoverCharger {
           }
         }
       }
+      if(this.node.children?.length > 0){
+        return{
+          targetNode: this.node,
+          position:this.dragInRect?.atPosition(event, 'in'),
+        };
+      }
       return{
         targetNode: this.node,
         position:"in-center",
       };
     }
-
-    return {
-      targetNode: this.node,
-      position:"in-right",
-    };
-    //if(this.onBefore(event)){
-    //  this.node.beforeBrother !== draggedNode && draggedNode.moveBefore(this.node);
-    //  return;
-    //}
-    //if(this.onAfter(event)){
-    //  this.node.afterBrother !== draggedNode && draggedNode.moveAfter(this.node);
-    //  return;
-    //}
+    else{
+      return{
+        targetNode: this.node,
+        position:this.rect?.atPosition(event, 'out'),
+      };      
+    }
   }
 
 }
