@@ -1,7 +1,7 @@
 import { Rule } from "../../../base/Rules/Rule";
-import { INode } from "../../../designer/PageEditor/Core/Node/INode";
 import { IProp } from "../../../base/Model/IProp";
 import colWidthRules from "base/Rules/colWidthRules";
+import { IMeta } from "base/Model/IMeta";
 
 
 export class GridColumnRule extends Rule{
@@ -9,8 +9,8 @@ export class GridColumnRule extends Rule{
   editPaddingX = '16px';
   labelKey ="column";
 
-  accept(child:INode){
-    if(child.meta.name === 'GridColumn'){
+  accept(child:IMeta){
+    if(child.name === 'GridColumn'){
       return false;
     }
     return true;

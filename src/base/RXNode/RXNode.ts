@@ -1,4 +1,5 @@
-import { insertAfter, insertBefore, remove } from "ArrayHelper";
+import { after, before, first, insertAfter, insertBefore, last, remove } from "ArrayHelper";
+import { IRect } from "designer/PageEditor/Core/IDragOverParam";
 
 export class RXNode<T>{
   static idSeed:number = 1;
@@ -6,6 +7,7 @@ export class RXNode<T>{
   meta!: T;
   children: Array<RXNode<T>>;
   parent?:RXNode<T>;
+  rect?:IRect;
 
   static make<T>(meta:T){
     let node = new RXNode<T>();
@@ -96,6 +98,22 @@ export class RXNode<T>{
     this.parent = target;
   }
 
+  firstChild(){
+    return first(this.children);
+  }
+
+  lastChild(){
+    return last(this.children);
+  }
+
+  beforeBrother(){
+    return before(this, this.parent?.children)
+  }
+
+  afterBrother(){
+    return after(this, this.parent?.children)
+  }
+
   getMeta(){
     let metaAny = JSON.parse(JSON.stringify(this.meta));
     metaAny.children = [];
@@ -146,4 +164,5 @@ export class RXNode<T>{
     this.children = targetChildren;
     this.id = targetId;
   }
+
 } 

@@ -1,18 +1,18 @@
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
 import SwitchInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
 import elevationRules from "base/Rules/elevationRules";
 import marginRules from "base/Rules/marginRules";
+import { IMeta } from "base/Model/IMeta";
 
 export class PortletRule extends Rule{
 
-  accept(child:INode){
-    if(child.meta.name === "PortletFormGridBody"){
+  accept(child:IMeta){
+    if(child.name === "PortletFormGridBody"){
       return true
     }
-    if(child.meta.name === "PortletFooter"){
+    if(child.name === "PortletFooter"){
       return true
     }
     return false;

@@ -1,9 +1,9 @@
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import marginRules from "base/Rules/marginRules";
 import elevationRules from "base/Rules/elevationRules";
+import { IMeta } from "base/Model/IMeta";
 
 export class MediasPortletRule extends Rule{
   editPaddingY = '';
@@ -11,7 +11,7 @@ export class MediasPortletRule extends Rule{
   empertyPadding = '';
   hasField = true;
   
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
   getFields(): Array<IProp>{

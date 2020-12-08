@@ -1,3 +1,4 @@
+import { IMeta } from "base/Model/IMeta";
 import { IProp } from "base/Model/IProp";
 import BooleanInput from "base/PropsInputs/BooleanInput";
 import NumberInput from "base/PropsInputs/NumberInput";
@@ -5,7 +6,6 @@ import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
 import inputRules from "base/Rules/inputRules";
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 
 export class TextBoxRule extends Rule{
   editPaddingY = '';
@@ -14,7 +14,7 @@ export class TextBoxRule extends Rule{
   hasField = true;
   hasValidation = true;
 
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

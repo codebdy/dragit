@@ -1,15 +1,15 @@
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
 import OneToManyTableColumnsDialog from "components/OneToManyTable/PropsInputs/OneToManyTableColumnsDialog";
 import StringInput from "base/PropsInputs/StringInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
+import { IMeta } from "base/Model/IMeta";
 
 export class OneToManyTableRule extends Rule{
   empertyPadding = '';
   hasField = true;
   
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

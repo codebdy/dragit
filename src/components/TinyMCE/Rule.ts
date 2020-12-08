@@ -1,12 +1,12 @@
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
+import { IMeta } from "base/Model/IMeta";
 
 export class TinyMCERule extends Rule{
   //empertyPadding = '';
   hasField = true;
   
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

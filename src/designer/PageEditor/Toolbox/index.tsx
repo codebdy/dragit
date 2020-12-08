@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import items from './items'
-import { INode } from 'designer/PageEditor/Core/Node/INode';
 import TreeView from '@material-ui/lab/TreeView';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
@@ -10,7 +9,6 @@ import { IToolboxItem } from './IToolboxItem';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import TreeNode from './TreeNode';
 
-declare var window: {draggedNode:INode};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

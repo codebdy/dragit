@@ -1,5 +1,4 @@
 import { IMeta } from "../Model/IMeta";
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
 import { IProp } from "../Model/IProp";
 
 export interface IRule{
@@ -10,7 +9,7 @@ export interface IRule{
   labelKey?: string;
   dropInMargin: number;
 
-  accept: (child:INode)=>boolean;
+  accept: (child:IMeta)=>boolean;
   resolveLabel: (meta:IMeta)=>string|undefined;
 
   //属性字段

@@ -1,16 +1,16 @@
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
 import StringInput from "base/PropsInputs/StringInput";
 import ListViewBatcthCommandDialog from "components/ListView/PropsInputs/ListViewBatcthCommandDialog";
 import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "./PropsInputs/ListViewFiltersDialog";
 import ListViewRowCommandDialog from "./PropsInputs/ListViewRowCommandDialog";
+import { IMeta } from "base/Model/IMeta";
 
 export class ListViewRule extends Rule{
   empertyPadding = '';
   
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

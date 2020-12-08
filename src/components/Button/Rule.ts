@@ -1,5 +1,4 @@
 import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
 import { IMeta } from "../../base/Model/IMeta";
 import { IProp } from "../../base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
@@ -13,7 +12,7 @@ export class ButtonRule extends Rule{
   empertyPadding = '';
   hasAction = true;
 
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

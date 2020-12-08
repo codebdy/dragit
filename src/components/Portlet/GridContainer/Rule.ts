@@ -1,10 +1,10 @@
+import { IMeta } from "base/Model/IMeta";
 import { Rule } from "../../../base/Rules/Rule";
-import { INode } from "../../../designer/PageEditor/Core/Node/INode";
 
 export class PortletGridContainerRule extends Rule{
 
-  accept(child:INode){
-    if(child.meta.name === "FormGridItem"){
+  accept(child:IMeta){
+    if(child.name === "FormGridItem"){
       return true
     }
     return false;

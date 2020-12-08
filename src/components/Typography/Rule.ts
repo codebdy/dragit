@@ -1,6 +1,5 @@
 import { Rule } from "base/Rules/Rule";
 import { IMeta } from "base/Model/IMeta";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
@@ -12,7 +11,7 @@ export class TypographyRule extends Rule{
     return meta.name === 'Typography';
   }
 
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

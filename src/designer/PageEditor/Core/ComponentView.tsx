@@ -10,6 +10,8 @@ import bus, { ACTIVE_NODE, DRAG_OVER_EVENT } from './bus';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import NodeLabel from './NodeLabel';
 import { IToolboxItem } from '../Toolbox/IToolboxItem';
+import { IRect } from './IDragOverParam';
+import { DragoverCharger } from './DragoverCharger';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,25 +47,6 @@ function getEditStyle(
     ...paddingY,
   };
 
-}
-
-export interface IRect{
-  bottom:number,
-  height:number,
-  left:number,
-  right:number,
-  top:number,
-  width:number,
-  x:number,
-  y:number,
-}
-
-export type CursorPosition = "in-left"|"in-top"|"in-right"|"in-bottom"|"in-center"|"out-left"|"out-top"|"out-right"|"out-bottom";
-
-export interface IDragOverEvent{
-  rect?:IRect,
-  position?:CursorPosition,
-  targetNode?:RXNode<IMeta>,
 }
 
 export default function ComponentView(
@@ -105,8 +88,13 @@ export default function ComponentView(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selectedNode]);
   
+  let dom :any = refEl.current
+  let rect : IRect = dom?.getBoundingClientRect();
+  node.rect = rect;
+
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
-    event.stopPropagation();    
+    event.stopPropagation();
+    let dragoverCharger = new DragoverCharger(node, draggedToolboxItem?.metas);
     if(selectedNode?.id !== node.id && !draggedToolboxItem){
         setActived(true);        
     }
@@ -114,14 +102,9 @@ export default function ComponentView(
       let dom :any = refEl.current
       let rect : IRect = dom?.getBoundingClientRect();
       if(rect){
-        bus.emit(DRAG_OVER_EVENT, {
-          rect:rect,
-          position:'out-top',
-          targetNode:node,
-        })
+        bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
       }
     }
-
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{
     //event.stopPropagation();

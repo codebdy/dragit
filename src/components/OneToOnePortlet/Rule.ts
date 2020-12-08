@@ -1,13 +1,13 @@
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import { IProp } from "base/Model/IProp";
 import StringInput from "base/PropsInputs/StringInput";
+import { IMeta } from "base/Model/IMeta";
 
 export class OneToOnePortletRule extends Rule{
   //empertyPadding = '';
   hasField = true;
   
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

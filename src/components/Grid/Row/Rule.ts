@@ -1,16 +1,16 @@
 import { Rule } from "../../../base/Rules/Rule";
-import { INode } from "../../../designer/PageEditor/Core/Node/INode";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import { IProp } from "../../../base/Model/IProp";
 import NumberInput from "base/PropsInputs/NumberInput";
+import { IMeta } from "base/Model/IMeta";
 
 export class GridRowRule extends Rule{
   editPaddingY = '16px';
   editPaddingX = '16px';
   labelKey ="row";
 
-  accept(child:INode){
-    if(child.meta.name === 'GridColumn'){
+  accept(child:IMeta){
+    if(child.name === 'GridColumn'){
       return true;
     }
     return false;

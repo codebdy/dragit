@@ -1,10 +1,10 @@
+import { IMeta } from "base/Model/IMeta";
 import { IProp } from "base/Model/IProp";
 import BooleanInput from "base/PropsInputs/BooleanInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
 import inputRules from "base/Rules/inputRules";
 import { Rule } from "base/Rules/Rule";
-import { INode } from "designer/PageEditor/Core/Node/INode";
 import SelectItemsInputItemDialog from "./PropsInputs/SelectItemsInputItemDialog";
 
 export class SelectRule extends Rule{
@@ -14,7 +14,7 @@ export class SelectRule extends Rule{
   hasField = true;
   hasValidation = true;
 
-  accept(child:INode){
+  accept(child:IMeta){
     return false;
   }
 

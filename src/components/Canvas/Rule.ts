@@ -1,13 +1,13 @@
+import { IMeta } from "base/Model/IMeta";
 import { Rule } from "../../base/Rules/Rule";
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
 
 export class CanvasRule extends Rule{
   editPaddingY = '';
   editPaddingX = '';
   dropInMargin = 0;
 
-  accept(child:INode){
-    if(child.meta.name === 'GridColumn'){
+  accept(child:IMeta){
+    if(child.name === 'GridColumn'){
       return false;
     }
     return true;

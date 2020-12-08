@@ -2,7 +2,6 @@ import { IRule } from "./IRule";
 import { IProp } from "../Model/IProp";
 import { IMeta } from "../Model/IMeta";
 import intl from 'react-intl-universal';
-import { INode } from "../../designer/PageEditor/Core/Node/INode";
 
 export class Rule implements IRule{
   editPaddingY = '';
@@ -22,7 +21,7 @@ export class Rule implements IRule{
     this._label = label;
   }
 
-  accept(child:INode){
+  accept(child:IMeta){
     return true;
   }
 
