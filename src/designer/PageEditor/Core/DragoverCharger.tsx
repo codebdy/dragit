@@ -55,7 +55,6 @@ class Rect {
     return this.rect.bottom < event.clientY ;
   }
 
-
   atPosition(event: React.MouseEvent<HTMLElement>|undefined, prefix:'in'|'out'):CursorPosition{
     if (!event || !this.isIn(event)) {
       return undefined;

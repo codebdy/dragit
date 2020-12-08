@@ -5,7 +5,8 @@ import { IMeta } from 'base//Model/IMeta';
 import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
-import bus, { ACTIVE_NODE, DRAG_OVER_EVENT } from './bus';
+import bus from '../../../base/bus';
+import { ACTIVE_NODE, DRAG_OVER_EVENT } from "./busEvents";
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import NodeLabel from './NodeLabel';
