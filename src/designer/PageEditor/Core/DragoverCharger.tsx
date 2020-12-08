@@ -254,7 +254,10 @@ export class DragoverCharger {
       };
     }
 
-    return {};
+    return {
+      targetNode: this.node,
+      position:"in-right",
+    };
     //if(this.onBefore(event)){
     //  this.node.beforeBrother !== draggedNode && draggedNode.moveBefore(this.node);
     //  return;

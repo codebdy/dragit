@@ -45,7 +45,6 @@ export default function DragCusor(){
   const classes = useStyles();
   
   const handleDragOverEvent = (param:IDragOverParam)=>{
-    console.log('DragCusor', param);
     setDragOverParam(param);
   }
 
@@ -60,14 +59,50 @@ export default function DragCusor(){
     ||dragOverParam?.position ==='in-left' || dragOverParam?.position ==='in-right';
 
   const cursorWidth = isvertical ? (rect?.height) : (rect?.width)
-  const cursorLeft = isvertical ? ((rect?.x || 0) + (rect?.width||0)) : (rect?.x)
+  let cursorLeft = rect?.x;
+  let marginLeft = '0px';
+  let marginTop = '-1px';
+  let cursorTop = rect?.y;  
+  
+  if(dragOverParam?.position ==='out-top'){
+    marginTop = "-3px";
+  }
 
-  const top = Math.round(rect?.y||0) + 'px';
+  if(dragOverParam?.position ==='out-bottom'){
+    cursorTop = (rect?.y||0) + (rect?.height||0);
+    marginTop = "-1px";
+  }
+
+  if(dragOverParam?.position ==='in-top'){
+    marginTop = "1px";
+  }
+  if(dragOverParam?.position ==='in-bottom'){
+    cursorTop = (rect?.y||0) + (rect?.height||0);
+    marginTop = "-4px";
+  }
+
+  if(dragOverParam?.position ==='in-left'){
+    marginTop = "1px";
+    marginLeft = '4px';
+  }
+  if(dragOverParam?.position === 'in-right'){
+    cursorLeft = (rect?.x || 0) + (rect?.width||0);
+    marginTop = "1px";
+  }
+
+  if(dragOverParam?.position ==='out-right'){
+    cursorLeft = (rect?.x || 0) + (rect?.width||0)
+    marginLeft = '2px'
+  }
+
+  if(dragOverParam?.position ==='out-left'){
+    marginLeft = '2px'
+  }
+
+
+  const top = Math.round(cursorTop||0) + 'px';
   const left = Math.round(cursorLeft||0) + 'px';
   const width = Math.round(cursorWidth||0) + 'px';
-
-  const marginTop = dragOverParam?.position ==='out-top' ? '-3px' : '-1px';
-  const marginLeft = dragOverParam?.position ==='out-right' ? '3px' : '0px';
 
   return (
     <Fragment>
@@ -87,8 +122,14 @@ export default function DragCusor(){
             width: width,
           }}
         >
-          <ArrowDropUpIcon className={classes.upArrow}/>
-          <ArrowDropDownIcon className = {classes.downArrow} />
+          {
+            dragOverParam?.position !=='in-top' && dragOverParam?.position !=='in-right' &&
+            <ArrowDropUpIcon className={classes.upArrow}/>            
+          }
+          {
+             dragOverParam?.position !=='in-bottom' && dragOverParam?.position !=='in-left' &&
+            <ArrowDropDownIcon className = {classes.downArrow} />
+          }
         </div>
       }
     </Fragment>
