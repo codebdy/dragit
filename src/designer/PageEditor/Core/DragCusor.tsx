@@ -3,6 +3,8 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { IDragOverParam } from "./IDragOverParam";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import bus, { DRAG_OVER_EVENT } from './bus';
 import React from 'react';
 import classNames from 'classnames';
@@ -34,6 +36,16 @@ const useStyles = makeStyles((theme: Theme) =>
       position:'absolute',
       left:'calc(50% - 10px)',
       top:'-5px',
+    },
+    leftArrow:{
+      position:'absolute',
+      right:'-13px',
+      top:'-14px',
+    },
+    rightArrow:{
+      position:'absolute',
+      left:'-13px',
+      top:'-14px',
     }
 
   }),
@@ -99,6 +111,9 @@ export default function DragCusor(){
     marginLeft = '2px'
   }
 
+  if(dragOverParam?.position ==='in-center'){
+    cursorTop =  (rect?.y||0) + (rect?.height||0)/2;
+  }
 
   const top = Math.round(cursorTop||0) + 'px';
   const left = Math.round(cursorLeft||0) + 'px';
@@ -124,11 +139,20 @@ export default function DragCusor(){
         >
           {
             dragOverParam?.position !=='in-top' && dragOverParam?.position !=='in-right' &&
+            dragOverParam?.position !=='in-center'&&
             <ArrowDropUpIcon className={classes.upArrow}/>            
           }
           {
              dragOverParam?.position !=='in-bottom' && dragOverParam?.position !=='in-left' &&
+             dragOverParam?.position !=='in-center'&&
             <ArrowDropDownIcon className = {classes.downArrow} />
+          }
+          {
+            dragOverParam?.position ==='in-center'&&
+            <Fragment>
+              <ArrowLeftIcon className = {classes.leftArrow} fontSize="large"/>
+              <ArrowRightIcon className = {classes.rightArrow} fontSize="large"/>
+            </Fragment>
           }
         </div>
       }
