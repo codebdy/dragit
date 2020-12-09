@@ -6,7 +6,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import bus from '../../../base/bus';
-import { CANVAS_SCROLL, DRAG_OVER_EVENT } from "./busEvents";
+import { CANVAS_SCROLL, DRAG_OVER_EVENT, MOUSE_UP } from "./busEvents";
 import React from 'react';
 import classNames from 'classnames';
 import { IRect } from 'base/Model/IRect';
@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+//bus事件中，回调拿不到state数据，用全局变量变通解决
+declare var window:{dragOverParam?:IDragOverParam};
+
 //1、基于Bust event来实现，用React组件参数的话，会卡顿
 //2、避免画面卡顿，drop动作在此组件内触发
 export default function DragCusor(
@@ -66,23 +69,17 @@ export default function DragCusor(
   const classes = useStyles();
   
   const handleDragOverEvent = (param:IDragOverParam)=>{
-    if(param?.targetNode?.rect){
-      if(param?.targetNode !== dragOverParam?.targetNode || param?.position !== dragOverParam?.position){
-        //onPositionChange(param)        
-      }
-    }
-    else{//如果不显示光标，则不触发拖放动作
-      //onPositionChange(undefined);
-    }    
     setDragOverParam(param);
     setRect(param?.targetNode?.rect);
+    window.dragOverParam = param;
   }
 
   const hangdeScroll = ()=>{
-    setRect(dragOverParam?.targetNode?.rect);
+    setRect(window.dragOverParam?.targetNode?.rect);
   }
   
   const handleMouseUp = ()=>{
+    onDrop(window.dragOverParam);
     setDragOverParam(undefined);
     setRect(undefined);
   }
@@ -90,11 +87,11 @@ export default function DragCusor(
   useEffect(()=>{
     bus.on(DRAG_OVER_EVENT, handleDragOverEvent);
     bus.on(CANVAS_SCROLL, hangdeScroll);
-    document.addEventListener('mouseup', handleMouseUp);
+    bus.on(MOUSE_UP, handleMouseUp);
     return ()=>{
       bus.off(DRAG_OVER_EVENT, handleDragOverEvent);
       bus.off(CANVAS_SCROLL, hangdeScroll);
-      document.removeEventListener('mouseup', handleMouseUp)
+      bus.off(MOUSE_UP, handleMouseUp);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])

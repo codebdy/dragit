@@ -9,7 +9,7 @@ import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus from '../../base/bus';
-import { CANVAS_SCROLL } from "./Core/busEvents";
+import { CANVAS_SCROLL, MOUSE_UP } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
@@ -95,8 +95,9 @@ export default function PageEditor(
   useAuthCheck();  
   
   const handleMouseUp = ()=>{
+    //指示光标组件触发drop动作
+    bus.emit(MOUSE_UP);
     setDraggedToolboxItem(undefined);
-    //bus.emit(DRAG_OVER_EVENT, {})
   }
 
   useEffect(()=>{
@@ -248,7 +249,7 @@ export default function PageEditor(
   }
 
   const handleDrop = (param?:IDragOverParam)=>{
-    //setCursorParam(param);
+    console.log('handleDrop', param);
   }
 
   return (
