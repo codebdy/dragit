@@ -134,7 +134,7 @@ export default function PageEditor(
         dragNode = RXNode.make<IMeta>(window.draggedToolboxItem?.meta);
       }
       if(dragNode && targetNode) {
-        backupToUndoList(); 
+        backupToUndoList(dragNode.id); 
         let dragParentId = dragNode.parent?.id;
         let targetParentId = targetNode.parent?.id;
         operateNode(targetNode, dragNode, window.dragOverParam.position);
@@ -190,18 +190,18 @@ export default function PageEditor(
     setSelectedNode(undefined);
   }
 
-  const backupToUndoList = () => {
+  const backupToUndoList = (operateId:number|undefined) => {
     setUndoList([...window.undoList,
     {
       canvasNode: window.canvas.copy(),
-      selectedNodeId: window.selectedNode?.id,
+      selectedNodeId: window.selectedNode?.id || operateId,
     }
     ]);
   }
 
   const handlePropChange = (propName:string, value:any)=>{
-    backupToUndoList();    
     if(selectedNode){
+      backupToUndoList(selectedNode.id);        
       selectedNode.meta.props = selectedNode.meta.props || {};
       selectedNode.meta.props[propName] = value;
       setSelectedNode(selectedNode);
@@ -225,11 +225,11 @@ export default function PageEditor(
       setRedoList([...redoList, 
         {
           canvasNode:canvas.copy(),
-          selectedNodeId: selectedNode?.id,
+          selectedNodeId: cmd.selectedNodeId,
         }
       ]);
       setCanvas(cmd.canvasNode);
-      setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));     
+      setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));    
     }
   }
 
@@ -239,17 +239,17 @@ export default function PageEditor(
       setUndoList([...undoList, 
         {
           canvasNode:canvas.copy(),
-          selectedNodeId: selectedNode?.id,
+          selectedNodeId: cmd.selectedNodeId,
         }
       ]);
       setRedoList([...redoList]);
-      setCanvas(cmd.canvasNode);
-      setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));      
+      setCanvas(cmd.canvasNode);      
+      setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));  
     }    
   }
 
   const handleClear = ()=>{
-    backupToUndoList();    
+    backupToUndoList(undefined);    
     canvas.children = [];
     bus.emit(REFRESH_NODE, canvas.id);      
     setSelectedNode(undefined);
@@ -262,8 +262,8 @@ export default function PageEditor(
   }
 
   const handleRemove = ()=>{
-    backupToUndoList();
     if(selectedNode){
+      backupToUndoList(undefined);
       selectedNode.remove();
       setSelectedNode(undefined);
       setRedoList([]);
@@ -272,9 +272,9 @@ export default function PageEditor(
   }
 
   const handleDupliate = ()=>{
-    backupToUndoList();
     if(selectedNode){
       let newNode = selectedNode.duplicate();
+      backupToUndoList(newNode.id);
       setSelectedNode(newNode);
       setRedoList([]);
       bus.emit(REFRESH_NODE, selectedNode.parent?.id);
