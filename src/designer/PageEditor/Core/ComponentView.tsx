@@ -9,17 +9,18 @@ import bus from '../../../base/bus';
 import { DRAG_OVER_EVENT, REFRESH_NODE } from "./busEvents";
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
-import NodeLabel from './NodeLabel';
+import ActiveLabel from './ActiveLabel';
 import { IToolboxItem } from '../Toolbox/IToolboxItem';
 import { DragoverCharger } from './DragoverCharger';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     outline: {
-      outline: theme.palette.primary.main + ' dashed 1px',
+      outline: fade(theme.palette.primary.main, 0.8) + ' dashed 1px',
     },
     active:{
-      outline: theme.palette.primary.main + ' solid 1px',
+      outline: fade(theme.palette.primary.main, 0.8) + ' solid 1px',
     },
     selected:{
       outline: theme.palette.primary.main + ' solid 2px',
@@ -169,7 +170,7 @@ export default function ComponentView(
     { elementView }
     {
       (actived) &&
-      <NodeLabel followDom = {refEl?.current} label = {node.meta.name} />
+      <ActiveLabel followDom = {refEl?.current} label = {node.meta.name} />
     }
     </Fragment>
   )

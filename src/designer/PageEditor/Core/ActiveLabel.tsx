@@ -3,12 +3,13 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
 import { CANVAS_SCROLL } from "./busEvents";
 import useDesigner from 'store/designer/useDesigner';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     label: {
       position:'fixed',
-      background:'#5d78ff',
+      background:fade(theme.palette.primary.main, 0.8),
       color:'#fff',
       padding:' 0 5px',
       fontSize:'0.8rem',
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function NodeLabel(
+export default function ActiveLabel(
   props:{
     followDom:HTMLElement|null|undefined, 
     label:string,

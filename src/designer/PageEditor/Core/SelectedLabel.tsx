@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     label: {
       position:'fixed',
-      background:'#5d78ff',
+      background:theme.palette.primary.main,
       color:'#fff',
       padding:' 0 5px',
       fontSize:'0.8rem',

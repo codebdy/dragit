@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     toolbar: {
       position:'fixed',
-      background:'#5d78ff',
+      background:theme.palette.primary.main,
       color:'#fff',
       fontSize:'0.8rem',
       height:height + 'px',
