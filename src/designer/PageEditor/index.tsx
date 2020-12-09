@@ -132,7 +132,7 @@ export default function PageEditor(
       let targetNode = window?.dragOverParam?.targetNode;
       let dragNode = window.draggedNode;
       if(!dragNode && window.draggedToolboxItem?.meta){
-        dragNode = RXNode.make<IMeta>(window.draggedToolboxItem?.meta);
+        dragNode = RXNode.make<IMeta>(cloneObject(window.draggedToolboxItem?.meta));
       }
       if(dragNode && targetNode) {
         backupToUndoList(dragNode.id); 
