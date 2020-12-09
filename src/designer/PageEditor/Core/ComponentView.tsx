@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { RXNode } from '../../../base/RXNode/RXNode';
 import { resolveComponent, resolveRule } from 'base/DragRX';
 import { IMeta } from 'base//Model/IMeta';
@@ -6,7 +6,7 @@ import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import bus from '../../../base/bus';
-import { DRAG_OVER_EVENT } from "./busEvents";
+import { DRAG_OVER_EVENT, REFRESH_NODE } from "./busEvents";
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import NodeLabel from './NodeLabel';
@@ -60,6 +60,7 @@ export default function ComponentView(
   const {node, selectedNode, onSelectNode, draggedToolboxItem} = props;
   const classes = useStyles();
   const [actived, setActived] = useState(false);
+  const [editStyle, setEditStyle] = useState<any>({});
   const designer = useDesigner();
   const refEl = useRef(undefined);
   let Component = resolveComponent(node.meta, false);
@@ -83,6 +84,24 @@ export default function ComponentView(
   let dom : any = refEl.current;
   node.dom = dom;
 
+  useEffect(()=>{
+    setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));
+  },[node, designer]);
+
+  const handleRefresh=(nodeId:number)=>{
+    if(node.id === nodeId){
+      setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));      
+    }
+  }
+
+  useEffect(()=>{
+    bus.on(REFRESH_NODE, handleRefresh);
+    return ()=>{
+      bus.off(REFRESH_NODE, handleRefresh);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     let dragoverCharger = new DragoverCharger(node, draggedToolboxItem?.meta);
@@ -90,8 +109,7 @@ export default function ComponentView(
         setActived(true);        
     }
     else{
-      let dom :any = refEl.current
-      if(dom){
+      if(refEl.current){
         bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
       }
     }
@@ -117,7 +135,7 @@ export default function ComponentView(
     ),
     style:{
       ...style,
-      ...(getEditStyle(node, designer.showPaddingX, designer.showPaddingY)),
+      ...editStyle,
       marginTop: makeSpaceStyle(marginTop),
       marginRight: makeSpaceStyle(marginRight),
       marginBottom: makeSpaceStyle(marginBottom),

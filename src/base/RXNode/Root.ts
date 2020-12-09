@@ -1,4 +1,3 @@
-import IMenuItem from "base/Model/IMenuItem";
 import { RXNode } from "./RXNode";
 
 export class RXNodeRoot<T> extends RXNode<T>{
@@ -45,7 +44,7 @@ export class RXNodeRoot<T> extends RXNode<T>{
   }
 
   getRootMetas(){
-    let metas:Array<IMenuItem> = [];
+    let metas:Array<T> = [];
     this.children.forEach(child=>{
       metas.push(child.getMeta());
     })

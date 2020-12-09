@@ -9,7 +9,7 @@ import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus from '../../base/bus';
-import { CANVAS_SCROLL } from "./Core/busEvents";
+import { CANVAS_SCROLL, REFRESH_NODE } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
@@ -91,7 +91,7 @@ export default function PageEditor(
   const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   const [pageMeta, loading] = useAxios<IPage>(pageRequest);
   const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(pageMeta?.jsonSchema);
-  const [metas, seMetas] = useState<Array<IMeta>>([])
+  const [metas, setMetas] = useState<Array<IMeta>>([])
   const [canvas, setCanvas] = useState<RXNodeRoot<IMeta>>(makeCanvas());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMeta>>();
   const [undoList, setUndoList] = useState<Array<Snapshot>>([]);
@@ -128,20 +128,20 @@ export default function PageEditor(
 
   const handleMouseUp = ()=>{
     if(window.dragOverParam && window.draggedToolboxItem){
-      backupToUndoList();  
-      let canvasCopy = window.canvas.copy();
-      let targetNodeCopy = canvasCopy.getNode(window?.dragOverParam?.targetNode?.id);
+      let targetNode = window?.dragOverParam?.targetNode;
       let dragNode = window.draggedNode;
       if(!dragNode && window.draggedToolboxItem?.meta){
         dragNode = RXNode.make<IMeta>(window.draggedToolboxItem?.meta);
-      }else{
-        dragNode = canvasCopy.getNode(window.draggedNode?.id);
       }
-      if(dragNode && targetNodeCopy) {
-        operateNode(targetNodeCopy, dragNode, window.dragOverParam.position);
+      if(dragNode && targetNode) {
+        backupToUndoList(); 
+        let dragParentId = dragNode.parent?.id;
+        let targetParentId = targetNode.parent?.id;
+        operateNode(targetNode, dragNode, window.dragOverParam.position);
         setSelectedNode(dragNode);
+        bus.emit(REFRESH_NODE, dragParentId);
+        bus.emit(REFRESH_NODE, targetParentId)
       }
-      setCanvas(canvasCopy);
     }
     window.dragOverParam = undefined;
     setDraggedNode(undefined);
@@ -163,7 +163,7 @@ export default function PageEditor(
   useEffect(() => {
     setPageSchema(pageMeta?.jsonSchema);
     //相当于复制一个Json副本，不保存的话直接扔掉
-    seMetas(JSON.parse(JSON.stringify(pageMeta?.jsonSchema?.layout || [])))
+    setMetas(JSON.parse(JSON.stringify(pageMeta?.jsonSchema?.layout || [])))
   },[pageMeta]);
  
   useEffect(()=>{
@@ -193,7 +193,7 @@ export default function PageEditor(
   const backupToUndoList = () => {
     setUndoList([...window.undoList,
     {
-      canvasNode: window.canvas,
+      canvasNode: window.canvas.copy(),
       selectedNodeId: window.selectedNode?.id,
     }
     ]);
@@ -201,16 +201,13 @@ export default function PageEditor(
 
   const handlePropChange = (propName:string, value:any)=>{
     backupToUndoList();    
-    let canvasCopy = canvas.copy();
-    let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
-    if(selectNodeCopy){
-      selectNodeCopy.meta.props = selectNodeCopy.meta.props || {};
-      selectNodeCopy.meta.props[propName] = value;
-      setCanvas(canvasCopy);      
-      setSelectedNode(selectNodeCopy);
+    if(selectedNode){
+      selectedNode.meta.props = selectedNode.meta.props || {};
+      selectedNode.meta.props[propName] = value;
+      setSelectedNode(selectedNode);
       setRedoList([]);
+      bus.emit(REFRESH_NODE, selectedNode.id);
     }
-
   }
 
   const handlPageChange = (page:IPageSchema)=>{
@@ -227,7 +224,7 @@ export default function PageEditor(
       setUndoList([...undoList]);
       setRedoList([...redoList, 
         {
-          canvasNode:canvas,
+          canvasNode:canvas.copy(),
           selectedNodeId: selectedNode?.id,
         }
       ]);
@@ -241,7 +238,7 @@ export default function PageEditor(
     if(cmd){
       setUndoList([...undoList, 
         {
-          canvasNode:canvas,
+          canvasNode:canvas.copy(),
           selectedNodeId: selectedNode?.id,
         }
       ]);
@@ -253,8 +250,8 @@ export default function PageEditor(
 
   const handleClear = ()=>{
     backupToUndoList();    
-    let newCanvas = makeCanvas();
-    setCanvas(newCanvas);      
+    canvas.children = [];
+    bus.emit(REFRESH_NODE, canvas.id);      
     setSelectedNode(undefined);
     setRedoList([]);
   }
@@ -266,25 +263,21 @@ export default function PageEditor(
 
   const handleRemove = ()=>{
     backupToUndoList();
-    let canvasCopy = canvas.copy();
-    let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
-    if(selectNodeCopy){
-      selectNodeCopy.remove();
-      setCanvas(canvasCopy);      
+    if(selectedNode){
+      selectedNode.remove();
       setSelectedNode(undefined);
       setRedoList([]);
+      bus.emit(REFRESH_NODE, selectedNode.id);
     }
   }
 
   const handleDupliate = ()=>{
     backupToUndoList();
-    let canvasCopy = canvas.copy();
-    let selectNodeCopy = canvasCopy.getNode(selectedNode?.id)
-    if(selectNodeCopy){
-      let newNode = selectNodeCopy.duplicate();
-      setCanvas(canvasCopy);      
+    if(selectedNode){
+      let newNode = selectedNode.duplicate();
       setSelectedNode(newNode);
       setRedoList([]);
+      bus.emit(REFRESH_NODE, selectedNode.parent?.id);
     }
   }
 

@@ -1,3 +1,4 @@
 
 export const DRAG_OVER_EVENT = "DRAG_OVER_EVENT";
 export const CANVAS_SCROLL = "CANVAS_SCROLL";
+export const REFRESH_NODE = "REFRESH_NODE";
