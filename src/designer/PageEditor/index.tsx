@@ -277,8 +277,8 @@ export default function PageEditor(
 
   const handleDupliate = ()=>{
     if(selectedNode){
+      backupToUndoList(undefined);      
       let newNode = selectedNode.duplicate();
-      backupToUndoList(newNode.id);
       setSelectedNode(newNode);
       setRedoList([]);
       bus.emit(REFRESH_NODE, selectedNode.parent?.id);

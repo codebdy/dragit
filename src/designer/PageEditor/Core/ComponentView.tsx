@@ -6,7 +6,7 @@ import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import bus from '../../../base/bus';
-import { DRAG_OVER_EVENT, REFRESH_NODE } from "./busEvents";
+import { DRAG_OVER_EVENT, REFRESH_NODE, REFRESH_SELECT_STATE } from "./busEvents";
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import ActiveLabel from './ActiveLabel';
@@ -84,6 +84,10 @@ export default function ComponentView(
   
   let dom : any = refEl.current;
   node.dom = dom;
+
+  useEffect(()=>{
+    bus.emit(REFRESH_SELECT_STATE);
+  })
 
   useEffect(()=>{
     setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));

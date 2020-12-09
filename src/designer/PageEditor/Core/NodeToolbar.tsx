@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
-import { CANVAS_SCROLL, SELECT_NODE } from "./busEvents";
+import { CANVAS_SCROLL, REFRESH_SELECT_STATE, SELECT_NODE } from "./busEvents";
 import MdiIcon from 'components/common/MdiIcon';
 import { sideBarSettings } from 'utils/sideBarSettings';
 import { useSelector } from 'react-redux';
@@ -87,29 +87,22 @@ export default function NodeToolbar(
     setTop(top);
   }
 
-  const hangdePositionChange = ()=>{
-    doFollow();
-  }
-
-
-  const handleSelect = (selectedNode:RXNode<IMeta>)=>{
-    doFollow();
-  }
-
   useEffect(() => {
-    bus.on(CANVAS_SCROLL, hangdePositionChange);
-    bus.on(SELECT_NODE, handleSelect);
-    window.addEventListener('resize', hangdePositionChange)
+    bus.on(CANVAS_SCROLL, doFollow);
+    bus.on(SELECT_NODE, doFollow);
+    bus.on(REFRESH_SELECT_STATE, doFollow);
+    window.addEventListener('resize', doFollow)
     return () => {
-      bus.off(CANVAS_SCROLL, hangdePositionChange);
-      bus.off(SELECT_NODE, handleSelect);
-      window.removeEventListener('resize', hangdePositionChange)
+      bus.off(CANVAS_SCROLL, doFollow);
+      bus.off(SELECT_NODE, doFollow);
+      bus.off(REFRESH_SELECT_STATE, doFollow);
+      window.removeEventListener('resize', doFollow)
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   useEffect(() => {
-    hangdePositionChange();
+    doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[myStore.showPaddingX, myStore.showPaddingY]);
 
