@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
     treeItemLabel: {
       fontSize:'0.9rem',
       padding:theme.spacing(1,0),
-      cursor:'default',
     },
 
     title:{

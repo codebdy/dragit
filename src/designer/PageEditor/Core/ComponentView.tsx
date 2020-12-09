@@ -56,9 +56,10 @@ export default function ComponentView(
     selectedNode?:RXNode<IMeta>,
     onSelectNode:(node?:RXNode<IMeta>)=>void,
     draggedToolboxItem?:IToolboxItem,
+    draggedNode?:RXNode<IMeta>,
   }
 ){
-  const {node, selectedNode, onSelectNode, draggedToolboxItem} = props;
+  const {node, selectedNode, onSelectNode, draggedToolboxItem, draggedNode} = props;
   const classes = useStyles();
   const [actived, setActived] = useState(false);
   const [editStyle, setEditStyle] = useState<any>({});
@@ -109,8 +110,8 @@ export default function ComponentView(
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    let dragoverCharger = new DragoverCharger(node, draggedToolboxItem?.meta);
-    if(selectedNode?.id !== node.id && !draggedToolboxItem){
+    let dragoverCharger = new DragoverCharger(node, draggedToolboxItem?.meta || draggedNode?.meta);
+    if(selectedNode?.id !== node.id && !draggedToolboxItem && !draggedNode){
         setActived(true);        
     }
     else{
@@ -162,6 +163,7 @@ export default function ComponentView(
             selectedNode = {selectedNode}
             onSelectNode = {onSelectNode}
             draggedToolboxItem = {draggedToolboxItem}
+            draggedNode = {draggedNode}
           />
         )
       })}

@@ -28,28 +28,6 @@ body.one-element-dragged {
     user-select: none;
 }
 
-.dragged-node {
-    position: relative;
-}
-
-.rx-drag-over *{
-    cursor: default;
-}
-
-
-/*遮住内部子元素，不让其响应dragover事件*/
-
-.dragged-node::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: repeating-linear-gradient(135deg, #DADADA, #F5F5F5 5px);
-    border: #5d78ff dashed 1px;
-}
-
 .dragit-scrollbar ::-webkit-scrollbar {
     display: none;
     width: 0.3rem;
@@ -80,28 +58,10 @@ body.one-element-dragged {
     transition: all .2s;
 }
 
-.dragit-page-content::-webkit-scrollbar {
-    display: block;
-    width: 0.4rem;
-    height: 0.4rem;
-}
-
-.dragit-page-content::-webkit-scrollbar-track {
-    border-radius: 0;
-}
-
-.dragit-page-content::-webkit-scrollbar-thumb {
-    border-radius: 0.2rem;
-    background: rgba(255, 255, 255, 0.3);
-    transition: all .2s;
-}
-
-.dragit-page-content.light::-webkit-scrollbar-thumb {
-    border-radius: 0.2rem;
-    background: rgba(0, 0, 0, 0.3);
-    transition: all .2s;
-}
-
-.drag-node-outline {
-    outline: #5d78ff dashed 1px;
-}
+.can-not-be-selected{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor:default;
+  }

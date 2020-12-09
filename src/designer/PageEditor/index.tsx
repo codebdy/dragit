@@ -127,7 +127,7 @@ export default function PageEditor(
   },[draggedNode, canvas, draggedToolboxItem, selectedNode, undoList])
 
   const handleMouseUp = ()=>{
-    if(window.dragOverParam && window.draggedToolboxItem){
+    if(window.dragOverParam && (window.draggedToolboxItem || window.draggedNode)){
       let targetNode = window?.dragOverParam?.targetNode;
       let dragNode = window.draggedNode;
       if(!dragNode && window.draggedToolboxItem?.meta){
@@ -146,6 +146,7 @@ export default function PageEditor(
     window.dragOverParam = undefined;
     setDraggedNode(undefined);
     setDraggedToolboxItem(undefined);
+    document.body.classList.remove('can-not-be-selected');
   }
 
   useEffect(()=>{
@@ -192,6 +193,7 @@ export default function PageEditor(
   const handleStartDragMetas = (item:IToolboxItem)=>{
     setDraggedToolboxItem(item);
     setSelectedNode(undefined);
+    document.body.classList.add('can-not-be-selected');
   }
 
   const backupToUndoList = (operateId:number|undefined) => {
@@ -262,7 +264,9 @@ export default function PageEditor(
 
   
   const handleBeginDrag = ()=>{
-
+    setDraggedNode(selectedNode);
+    setSelectedNode(undefined);
+    document.body.classList.add('can-not-be-selected')
   }
 
   const handleRemove = ()=>{
@@ -288,6 +292,8 @@ export default function PageEditor(
   const handleSelectParent = ()=>{
     setSelectedNode(selectedNode?.parent);
   }
+
+  let draggedLabel = draggedToolboxItem ?draggedToolboxItem?.title || intl.get(draggedToolboxItem?.titleKey||'') : draggedNode?.meta.name;
 
   return (
     loading? <Container><PageSkeleton /></Container> :
@@ -357,7 +363,7 @@ export default function PageEditor(
               selectedNode = {selectedNode} 
               onSelectNode = {handleSelectedNode}
               draggedToolboxItem = {draggedToolboxItem}
-              //onLocateCursor = {handleLocateCuror}
+              draggedNode = {draggedNode}
             />
             {
               selectedNode &&
@@ -377,11 +383,11 @@ export default function PageEditor(
         </DesignerLayout>
         <Fragment>
           {
-            draggedToolboxItem &&
-            <MouseFollower label={draggedToolboxItem.title || intl.get(draggedToolboxItem.titleKey||'')} />
+            (draggedToolboxItem || draggedNode) &&
+            <MouseFollower label={ draggedLabel || 'unknow'} />
           }
           {
-            draggedToolboxItem &&
+            (draggedToolboxItem || draggedNode) &&
             <DragCusor/>
           }
         </Fragment>      
