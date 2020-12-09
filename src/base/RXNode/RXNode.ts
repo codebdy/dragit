@@ -1,5 +1,6 @@
 import { after, before, first, insertAfter, insertBefore, last, remove } from "ArrayHelper";
 import { IRect } from "base/Model/IRect";
+import { cloneObject } from "utils/cloneObject";
 
 export class RXNode<T>{
   static idSeed:number = 1;
@@ -44,7 +45,7 @@ export class RXNode<T>{
   //完全复制包括ID的复制
   copy(){
     let copy = new RXNode<T>();
-    copy.meta = JSON.parse(JSON.stringify(this.meta));
+    copy.meta = cloneObject(this.meta);
     copy.id = this.id;
     copy.children = [];
     this.children.forEach(child=>{
@@ -57,7 +58,7 @@ export class RXNode<T>{
   }
 
   duplicate(){
-    let metaCopy = JSON.parse(JSON.stringify(this.getMeta()));
+    let metaCopy = cloneObject(this.getMeta());
     let newNode = RXNode.make<T>(metaCopy);
     newNode.parent = this.parent;
     newNode.moveAfter(this);
@@ -125,7 +126,7 @@ export class RXNode<T>{
   }
 
   getMeta(){
-    let metaAny = JSON.parse(JSON.stringify(this.meta));
+    let metaAny = cloneObject(this.meta);
     metaAny.children = [];
     this.children.forEach(child=>{
       metaAny.children.push(child.getMeta());

@@ -1,3 +1,4 @@
+import { cloneObject } from "utils/cloneObject";
 import { RXNode } from "./RXNode";
 
 export class RXNodeRoot<T> extends RXNode<T>{
@@ -34,7 +35,7 @@ export class RXNodeRoot<T> extends RXNode<T>{
 
   copy(){
     let copy = new RXNodeRoot<T>()
-    copy.meta = JSON.parse(JSON.stringify(this.meta));
+    copy.meta = cloneObject(this.meta);
     this.children.forEach(child=>{
       let childCopy = child.copy();
       childCopy.parent = copy;

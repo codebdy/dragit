@@ -8,6 +8,7 @@ import Image from 'components/common/Image';
 import classNames from 'classnames';
 import MdiIcon from '../common/MdiIcon';
 import { IMedia } from 'base/Model/IMedia';
+import { cloneObject } from 'utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,7 +72,7 @@ export default function MediasPortletAltsDialog(
 ){
   const {open, onClose, onChange} = props;
   const classes = useStyles();
-  const [medias, setMedias] = React.useState<Array<IMedia>>(JSON.parse(JSON.stringify(props.medias)));
+  const [medias, setMedias] = React.useState<Array<IMedia>>(cloneObject(props.medias));
 
   const handleChange = (alt:string, media:IMedia)=>{
     media.alt = alt;

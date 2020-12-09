@@ -5,6 +5,7 @@ import useModel from '../useModel';
 import useModelLoading from '../useModelLoading';
 import { IForm, FormContext, defultForm } from "../../../../base/FormContext";
 import intl from 'react-intl-universal';
+import { cloneObject } from 'utils/cloneObject';
 
 export default function PageForm(
   props:{
@@ -28,7 +29,7 @@ export default function PageForm(
         setForm({
           ...form,
           defaultValues:model,
-          values:JSON.parse(JSON.stringify(model)),
+          values:cloneObject(model),
           forceUpdate:forceUpdate,
         })
       }

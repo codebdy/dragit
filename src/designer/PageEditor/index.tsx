@@ -29,6 +29,7 @@ import { IToolboxItem } from './Toolbox/IToolboxItem';
 import DragCusor from './Core/DragCusor';
 import { CursorPosition, IDragOverParam } from './Core/IDragOverParam';
 import SelectedLabel from './Core/SelectedLabel';
+import { cloneObject } from '../../utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -164,7 +165,7 @@ export default function PageEditor(
   useEffect(() => {
     setPageSchema(pageMeta?.jsonSchema);
     //相当于复制一个Json副本，不保存的话直接扔掉
-    setMetas(JSON.parse(JSON.stringify(pageMeta?.jsonSchema?.layout || [])))
+    setMetas(cloneObject(pageMeta?.jsonSchema?.layout || []));
   },[pageMeta]);
  
   useEffect(()=>{

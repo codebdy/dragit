@@ -103,7 +103,7 @@
     "align-content":"内容对齐",
     "align-items":"项目对齐",
     "direction" : "方向",
-    "justify" : "Justify",
+    "justify" : "排列",
     "spacing" : "间距",
 
     "xl":"超大屏",

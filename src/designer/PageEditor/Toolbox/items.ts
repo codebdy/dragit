@@ -59,7 +59,7 @@ export default [
     children:[
       {
         titleKey:'row',
-        meta:{name:'GridColumn'},
+        meta:{name:'GridRow'},
       },
       {
         titleKey:"column",

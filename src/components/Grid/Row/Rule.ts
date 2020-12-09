@@ -19,6 +19,65 @@ export class GridRowRule extends Rule{
   getFields(): Array<IProp>{
     return [
       {
+        name:'direction',
+        label:'direction',
+        input:OptionSelect,
+        props:{
+          items:[
+            {
+              value:'row',
+              label:'Row'
+            },
+            {
+              value:'row-reverse',
+              label:'Row Reverse'
+            },
+            {
+              value:'column',
+              label:'Column'
+            },
+            {
+              value:'column-reverse',
+              label:'Column Reverse'
+            },
+          ]
+        }
+      },
+      {
+        name:'justify',
+        label:'justify',
+        input:OptionSelect,
+        props:{
+          items:[
+            {
+              value:'flex-start',
+              label:'Flex Start'
+            },
+            {
+              value:'center',
+              label:'Center'
+            },
+            {
+              value:'flex-end',
+              label:'Flex End'
+            },
+            {
+              value:'space-between',
+              label:'Space Between'
+            },
+            {
+              value:'space-around',
+              label:'Space Around'
+            },
+            {
+              value:'space-evenly',
+              label:'Space Evenly'
+            },
+          ]
+        }
+      },
+
+      {
         name:'alignContent',
         label:'align-content',
         input:OptionSelect,
@@ -78,64 +137,6 @@ export class GridRowRule extends Rule{
               label:'Baseline',
             },
           ],
-        }
-      },
-      {
-        name:'direction',
-        label:'direction',
-        input:OptionSelect,
-        props:{
-          items:[
-            {
-              value:'row',
-              label:'Row'
-            },
-            {
-              value:'row-reverse',
-              label:'Row Reverse'
-            },
-            {
-              value:'column',
-              label:'Column'
-            },
-            {
-              value:'column-reverse',
-              label:'Column Reverse'
-            },
-          ]
-        }
-      },
-      {
-        name:'justify',
-        label:'justify',
-        input:OptionSelect,
-        props:{
-          items:[
-            {
-              value:'flex-start',
-              label:'Flex Start'
-            },
-            {
-              value:'center',
-              label:'Center'
-            },
-            {
-              value:'flex-end',
-              label:'Flex End'
-            },
-            {
-              value:'space-between',
-              label:'Space Between'
-            },
-            {
-              value:'space-around',
-              label:'Space Around'
-            },
-            {
-              value:'space-evenly',
-              label:'Space Evenly'
-            },
-          ]
         }
       },
       {

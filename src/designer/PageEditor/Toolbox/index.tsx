@@ -8,6 +8,7 @@ import { RXNode } from 'base/RXNode/RXNode';
 import { IToolboxItem } from './IToolboxItem';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import TreeNode from './TreeNode';
+import { cloneObject } from 'utils/cloneObject';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,7 +40,7 @@ export default function Toolbox(
   
   useEffect(()=>{
     let aRoot = new RXNodeRoot<IToolboxItem>();
-    aRoot.parse(JSON.parse(JSON.stringify(items)));
+    aRoot.parse(cloneObject(items));
     setRoot(aRoot);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])

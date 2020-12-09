@@ -4,6 +4,7 @@ import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from 'components/ListView/PropsInputs/MetaListDialog';
 import MetaListInput, { MetaItem } from 'base/PropsInputs/MetaListInput';
+import { cloneObject } from 'utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -18,11 +19,11 @@ const useStyles = makeStyles(styles);
 export default function ListViewFiltersDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [filters, setFilters] = React.useState<Array<any>>(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [filters, setFilters] = React.useState<Array<any>>(value ? cloneObject(value) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(filters.length > 0 ? 0 : -1);
 
   useEffect(()=>{
-    setFilters(value ? JSON.parse(JSON.stringify(value)) : [])
+    setFilters(value ? cloneObject(value) : [])
   },[value])
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
@@ -48,7 +49,7 @@ export default function ListViewFiltersDialog(props:PropsInputProps){
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
       onChange = {newValue=>{setFilters(newValue)}}
-      onSave = {()=>{onChange(JSON.parse(JSON.stringify(filters)))}}
+      onSave = {()=>{onChange(cloneObject(filters))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >{selectedIndex >= 0 &&
         <Fragment>

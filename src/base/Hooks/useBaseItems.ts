@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { IPage } from "base/Model/IPage";
 import { useState, useEffect } from "react";
+import { cloneObject } from "utils/cloneObject";
 import { useAxios } from "./useAxios";
 
 var dataCache : {[key: string]: IPage }= {}
@@ -30,7 +31,7 @@ export function useBaseItems(config?:AxiosRequestConfig){
         setRequest(config)
       }
       else{
-        let dataCopy = JSON.parse(JSON.stringify(data))
+        let dataCopy = cloneObject(data);
         setCachedItemsData(dataCopy);
       }
 

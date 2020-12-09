@@ -4,6 +4,7 @@ import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import MetaListDialog from 'components/ListView/PropsInputs/MetaListDialog';
+import { cloneObject } from 'utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -18,11 +19,11 @@ const styles = (theme: Theme) =>
 export default function ListViewColumnsDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [columns, setComuns] = React.useState<Array<any>>(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [columns, setComuns] = React.useState<Array<any>>(value ? cloneObject(value) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
   useEffect(()=>{
-    setComuns(value ? JSON.parse(JSON.stringify(value)) : [])
+    setComuns(value ? cloneObject(value) : [])
   },[value])
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
@@ -47,7 +48,7 @@ export default function ListViewColumnsDialog(props:PropsInputProps){
       onAddNew = {handleAddNew}
       selectedIndex = {selectedIndex}
       onChange = {newValue=>{setComuns(newValue)}}
-      onSave = {()=>{onChange(JSON.parse(JSON.stringify(columns)))}}
+      onSave = {()=>{onChange(cloneObject(columns))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >
       {selectedIndex >= 0 &&

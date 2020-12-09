@@ -6,6 +6,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
 import MetaListInput from '../../../base/PropsInputs/MetaListInput';
+import { cloneObject } from 'utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -92,7 +93,7 @@ export interface MetaListDialogProps{
 export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
   const classes = useStyles();
   const {value,  onChange} = props;
-  const [inpuValue, setInputValue] = React.useState<Array<any>>(value?JSON.parse(JSON.stringify(value)):[]);
+  const [inpuValue, setInputValue] = React.useState<Array<any>>(value?cloneObject(value):[]);
  
   const [open, setOpen] = React.useState(false);
 

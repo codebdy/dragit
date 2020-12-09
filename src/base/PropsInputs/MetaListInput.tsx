@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
+import { cloneObject } from 'utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +38,7 @@ export default function MetaListInput(
 ) {
   const {label, value, onChange, slugLabel, valueLabel} = props; 
   const classes = useStyles();
-  let metas = value ? JSON.parse(JSON.stringify(value)) : [];
+  let metas = value ? cloneObject(value) : [];
 
   
   const handleChangeSlug = (index:number, slug:string)=>{

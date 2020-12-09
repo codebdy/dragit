@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
 import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
+import { cloneObject } from 'utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -21,11 +22,11 @@ const useStyles = makeStyles(styles);
 export default function ListViewBatcthCommandDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [commands, setCommands] = React.useState<Array<any>>(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [commands, setCommands] = React.useState<Array<any>>(value ? cloneObject(value) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
 
   useEffect(()=>{
-    setCommands(value ? JSON.parse(JSON.stringify(value)) : [])
+    setCommands(value ? cloneObject(value) : [])
   },[value])
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
@@ -46,7 +47,7 @@ export default function ListViewBatcthCommandDialog(props:PropsInputProps){
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
       onChange = {newValue=>{setCommands(newValue)}}
-      onSave = {()=>{onChange(JSON.parse(JSON.stringify(commands)))}}
+      onSave = {()=>{onChange(cloneObject(commands))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >{selectedIndex >= 0 &&
         <Fragment>

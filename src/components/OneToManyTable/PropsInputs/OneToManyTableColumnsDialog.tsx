@@ -5,6 +5,7 @@ import intl from 'react-intl-universal';
 import MetaListDialog from '../../ListView/PropsInputs/MetaListDialog';
 import { Fragment } from 'react';
 import SelectItemsInputItemDialog from 'components/Select/PropsInputs/SelectItemsInputItemDialog';
+import { cloneObject } from 'utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const styles = (theme: Theme) =>
 export default function OneToManyTableColumnsDialog(props:PropsInputProps){
   const classes = useStyles();
   const {value, label, onChange} = props;
-  const [columns, setComuns] = React.useState(value ? JSON.parse(JSON.stringify(value)) : []);
+  const [columns, setComuns] = React.useState(value ? cloneObject(value) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(columns.length > 0? 0 : -1);
 
   const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
@@ -55,7 +56,7 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
       onAddNew = {handleAddNew}
       selectedIndex = {selectedIndex}
       onChange = {newValue=>{setComuns(newValue)}}
-      onSave = {()=>{onChange(JSON.parse(JSON.stringify(columns)))}}
+      onSave = {()=>{onChange(cloneObject(columns))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >
       {selectedIndex >= 0 &&

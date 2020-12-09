@@ -3,6 +3,7 @@ import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
 import { IPage } from "base//Model/IPage";
 import { useEffect, useState } from "react";
+import { cloneObject } from "utils/cloneObject";
 
 declare var window: {schemaCache: {[key: string]: IPage }};
 
@@ -28,7 +29,7 @@ export default function usePageMeta(moduleSlug:number, pageSlug:number):[IPage|u
       }      
     }
     else{
-      let pageCopy = JSON.parse(JSON.stringify(page))
+      let pageCopy = cloneObject(page)
       setCachedPageMeta(pageCopy);
     }
      
@@ -37,7 +38,7 @@ export default function usePageMeta(moduleSlug:number, pageSlug:number):[IPage|u
   
   useEffect(()=>{
     if(pageMeta){
-      let pageMetaCopy = JSON.parse(JSON.stringify(pageMeta))
+      let pageMetaCopy = cloneObject(pageMeta);
       window.schemaCache[pageKey] = pageMetaCopy;
       //console.log(pageKey, pageMetaCopy)
     }
