@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     selected:{
       outline: theme.palette.primary.main + ' solid 2px',
+    },
+    dragged:{
+      opacity:"0.5",
+      outline:theme.palette.secondary.main + ' dashed 1px',
     }
   }),
 );
@@ -82,6 +86,7 @@ export default function ComponentView(
   } = metaProps as any;
 
   const selected = selectedNode?.id === node.id;
+  const dragged = draggedNode?.id === node.id;
   
   let dom : any = refEl.current;
   node.dom = dom;
@@ -137,6 +142,7 @@ export default function ComponentView(
         [classes.outline]: designer.showOutline,
         [classes.active]: actived,
         [classes.selected]: selected,
+        [classes.dragged]:dragged,
       }
     ),
     style:{
