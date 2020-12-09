@@ -9,7 +9,7 @@ import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus from '../../base/bus';
-import { CANVAS_SCROLL, MOUSE_UP } from "./Core/busEvents";
+import { CANVAS_SCROLL } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
@@ -69,6 +69,8 @@ interface Snapshot{
   selectedNodeId?:number;
 }
 
+declare var window:{dragOverParam?:IDragOverParam};
+
 export default function PageEditor(
   props:{
     pageSlug:string,
@@ -95,8 +97,8 @@ export default function PageEditor(
   useAuthCheck();  
   
   const handleMouseUp = ()=>{
-    //指示光标组件触发drop动作
-    bus.emit(MOUSE_UP);
+    console.log('handleMouseUp', window.dragOverParam);
+    window.dragOverParam = undefined;
     setDraggedToolboxItem(undefined);
   }
 
@@ -248,10 +250,6 @@ export default function PageEditor(
     setSelectedNode(selectedNode?.parent);
   }
 
-  const handleDrop = (param?:IDragOverParam)=>{
-    console.log('handleDrop', param);
-  }
-
   return (
     loading? <Container><PageSkeleton /></Container> :
       <Backdrop className={classes.backdrop} open={true}>        
@@ -347,7 +345,7 @@ export default function PageEditor(
           }
           {
             draggedToolboxItem &&
-            <DragCusor onDrop = {handleDrop}/>
+            <DragCusor/>
           }
         </Fragment>      
       </Backdrop>

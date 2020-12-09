@@ -6,7 +6,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import bus from '../../../base/bus';
-import { CANVAS_SCROLL, DRAG_OVER_EVENT, MOUSE_UP } from "./busEvents";
+import { CANVAS_SCROLL, DRAG_OVER_EVENT } from "./busEvents";
 import React from 'react';
 import classNames from 'classnames';
 import { IRect } from 'base/Model/IRect';
@@ -57,13 +57,8 @@ const useStyles = makeStyles((theme: Theme) =>
 declare var window:{dragOverParam?:IDragOverParam};
 
 //1、基于Bust event来实现，用React组件参数的话，会卡顿
-//2、避免画面卡顿，drop动作在此组件内触发
-export default function DragCusor(
-  props:{
-    onDrop:(param?:IDragOverParam)=>void,
-  },
-){
-  const {onDrop} = props;
+//2、避免画面卡顿，全局变量存储拖动参数
+export default function DragCusor(){
   const [dragOverParam, setDragOverParam] = useState<IDragOverParam>();
   const [rect, setRect] = useState<IRect>();
   const classes = useStyles();
@@ -78,20 +73,12 @@ export default function DragCusor(
     setRect(window.dragOverParam?.targetNode?.rect);
   }
   
-  const handleMouseUp = ()=>{
-    onDrop(window.dragOverParam);
-    setDragOverParam(undefined);
-    setRect(undefined);
-  }
-
   useEffect(()=>{
     bus.on(DRAG_OVER_EVENT, handleDragOverEvent);
     bus.on(CANVAS_SCROLL, hangdeScroll);
-    bus.on(MOUSE_UP, handleMouseUp);
     return ()=>{
       bus.off(DRAG_OVER_EVENT, handleDragOverEvent);
       bus.off(CANVAS_SCROLL, hangdeScroll);
-      bus.off(MOUSE_UP, handleMouseUp);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
