@@ -93,7 +93,7 @@ export default function ComponentView(
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    let dragoverCharger = new DragoverCharger(node, draggedToolboxItem?.metas);
+    let dragoverCharger = new DragoverCharger(node, draggedToolboxItem?.meta);
     if(selectedNode?.id !== node.id && !draggedToolboxItem){
         setActived(true);        
     }

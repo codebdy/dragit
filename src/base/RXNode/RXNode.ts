@@ -102,6 +102,12 @@ export class RXNode<T>{
     this.parent = target;
   }
 
+  moveInTop(target:RXNode<T>){
+    this.remove();    
+    target.children = [this, ...target.children];
+    this.parent = target;
+  }  
+
   firstChild(){
     return first(this.children);
   }

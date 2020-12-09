@@ -8,57 +8,44 @@ export default [
         children:[
           {
             title:'列表页',
-            metas:[],
             children:[
               {
                 titleKey:'grid',
-                metas:[],
               },              
               {
                 title:'页面标题',
-                metas:[],
               },
               {
                 title:'列表控件',
-                metas:[],
               },
             ]        
           },
           {
             title:'编辑页',
-            metas:[],
             children:[
               {
                 titleKey:'grid',
-                metas:[],
               },
               {
                 title:'页面标题',
-                metas:[],
               },
               {
                 title:'基本信息',
-                metas:[],
               },
               {
                 title:'基本信息',
-                metas:[],
               },
               {
                 title:'SEO数据',
-                metas:[],
               },
               {
                 title:'内容',
-                metas:[],
               },
               {
                 title:'显示',
-                metas:[],
               },
               {
                 title:'媒体',
-                metas:[],
               },
 
             ]            
@@ -72,11 +59,11 @@ export default [
     children:[
       {
         titleKey:'row',
-        metas:[{name:'GridColumn'}],
+        meta:{name:'GridColumn'},
       },
       {
         titleKey:"column",
-        metas:[{name:'GridColumn'}],
+        meta:{name:'GridColumn'},
       },  
     ]
   },

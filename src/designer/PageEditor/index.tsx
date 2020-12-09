@@ -28,7 +28,7 @@ import NodeToolbar from './Core/NodeToolbar';
 import NodeLabel from './Core/NodeLabel';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
 import DragCusor from './Core/DragCusor';
-import { IDragOverParam } from './Core/IDragOverParam';
+import { CursorPosition, IDragOverParam } from './Core/IDragOverParam';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,7 +69,14 @@ interface Snapshot{
   selectedNodeId?:number;
 }
 
-declare var window:{dragOverParam?:IDragOverParam};
+declare var window:{
+  dragOverParam?:IDragOverParam,
+  draggedNode?:RXNode<IMeta>,
+  canvas:RXNodeRoot<IMeta>,
+  draggedToolboxItem?:IToolboxItem,
+  selectedNode?:RXNode<IMeta>,
+  undoList:Array<Snapshot>,
+};
 
 export default function PageEditor(
   props:{
@@ -91,14 +98,54 @@ export default function PageEditor(
   const [redoList, setRedoList] = useState<Array<Snapshot>>([]);
   const [selectedDom, setSelectedDom] = useState<HTMLElement>();
   const [draggedToolboxItem, setDraggedToolboxItem] = useState<IToolboxItem>();
+  const [draggedNode, setDraggedNode] = useState<RXNode<IMeta>>();
 
   const dispatch = useDispatch()
   const theme = useTheme(); 
   useAuthCheck();  
   
+  const operateNode = (targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>, position:CursorPosition)=>{
+    if(position === 'in-bottom' || position === 'in-right' || position === 'in-center'){
+      draggedNode.moveIn(targetNode);
+    }
+    if(position === 'in-top' || position === 'in-left'){
+      draggedNode.moveInTop(targetNode);
+    }
+    if(position === 'out-bottom' || position === 'out-right'){
+      draggedNode.moveAfter(targetNode);
+    }
+    if(position === 'out-top' || position === 'out-left'){
+      draggedNode.moveBefore(targetNode);
+    }
+  }
+
+  useEffect(()=>{
+    window.canvas = canvas;
+    window.draggedNode = draggedNode;
+    window.draggedToolboxItem = draggedToolboxItem;
+    window.selectedNode = selectedNode;
+    window.undoList = undoList;
+  },[draggedNode, canvas, draggedToolboxItem, selectedNode, undoList])
+
   const handleMouseUp = ()=>{
-    console.log('handleMouseUp', window.dragOverParam);
+    if(window.dragOverParam && window.draggedToolboxItem){
+      backupToUndoList();  
+      let canvasCopy = window.canvas.copy();
+      let targetNodeCopy = canvasCopy.getNode(window?.dragOverParam?.targetNode?.id);
+      let dragNode = window.draggedNode;
+      if(!dragNode && window.draggedToolboxItem?.meta){
+        dragNode = RXNode.make<IMeta>(window.draggedToolboxItem?.meta);
+      }else{
+        dragNode = canvasCopy.getNode(window.draggedNode?.id);
+      }
+      if(dragNode && targetNodeCopy) {
+        operateNode(targetNodeCopy, dragNode, window.dragOverParam.position);
+        setSelectedNode(dragNode);
+      }
+      setCanvas(canvasCopy);
+    }
     window.dragOverParam = undefined;
+    setDraggedNode(undefined);
     setDraggedToolboxItem(undefined);
   }
 
@@ -107,6 +154,7 @@ export default function PageEditor(
     return () => {
       document.removeEventListener('mouseup', handleMouseUp)
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
   useEffect(() => {
@@ -149,10 +197,10 @@ export default function PageEditor(
   }
 
   const backupToUndoList = () => {
-    setUndoList([...undoList,
+    setUndoList([...window.undoList,
     {
-      canvasNode: canvas,
-      selectedNodeId: selectedNode?.id,
+      canvasNode: window.canvas,
+      selectedNodeId: window.selectedNode?.id,
     }
     ]);
   }

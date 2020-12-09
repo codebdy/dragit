@@ -32,11 +32,11 @@ export default function TreeNode(
   const {node, onStartDragToolboxItem} = props;
   const classes = useStyles();
 
-  const isLeaf =  node.children.length === 0 && node.meta.metas;
+  const isLeaf =  node.children.length === 0 && node.meta.meta;
   const labelText = node?.meta?.title || (node?.meta?.titleKey && intl.get(node?.meta?.titleKey));
 
   const handleMouseDown = ()=>{
-    if(node?.meta.metas){
+    if(node?.meta.meta){
       onStartDragToolboxItem(node?.meta);      
     }
   }

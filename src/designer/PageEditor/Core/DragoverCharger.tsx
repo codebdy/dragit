@@ -99,10 +99,10 @@ class Rect {
 
 export class DragoverCharger {
   node: RXNode<IMeta>;
-  draggedMetas?: Array<IMeta>;
-  constructor(node: RXNode<IMeta>, draggedMetas?: Array<IMeta>) {
+  draggedMeta?: IMeta;
+  constructor(node: RXNode<IMeta>, draggedMeta?: IMeta) {
     this.node = node;
-    this.draggedMetas = draggedMetas;
+    this.draggedMeta = draggedMeta;
   }
 
   get dropInMargin() {
@@ -140,22 +140,18 @@ export class DragoverCharger {
   }
 
   //判断一个节点是否接受被拖动的数据，不输入参数代表判断本节点
-  isNodeAcceptMetas(node?: RXNode<IMeta>) {
-    const metas = this.draggedMetas;
+  isNodeAcceptMeta(node?: RXNode<IMeta>, meta?:IMeta) {
+    const childMeta = meta || this.draggedMeta;
     let targetNodeName = node?.meta.name || this.node.meta.name;
-    if (!targetNodeName || !metas) {
+    if (!targetNodeName || !childMeta) {
       return false;
     }
     const rule = resolveRule(targetNodeName);
-    for (var i = 0; i < metas.length; i++) {
-      if (!rule.accept(metas[i])) {
-        return false;
-      }
-    }
-    return true;
+    return rule.accept(childMeta);
   }
+
   isDragIn(event: React.MouseEvent<HTMLElement>) {
-    return this.dragInRect?.isIn(event) && this.isNodeAcceptMetas();
+    return this.dragInRect?.isIn(event) && this.isNodeAcceptMeta();
   }
 
   firstChildAfterMouse(event: React.MouseEvent<HTMLElement>, node?: RXNode<IMeta>) {
@@ -198,7 +194,7 @@ export class DragoverCharger {
 
   judgePosition(event: React.MouseEvent<HTMLElement>): IDragOverParam{
     event.stopPropagation();
-    if (!this.draggedMetas) {
+    if (!this.draggedMeta) {
       return{};
     }
 
