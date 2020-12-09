@@ -246,6 +246,12 @@ export class DragoverCharger {
       };
     }
     else{
+      if(!this.node.parent){
+        return {};
+      }
+      if(!this.isNodeAcceptMeta(this.node.parent)){
+        return {};
+      }
       return{
         targetNode: this.node,
         position:this.rect?.atPosition(event, 'out'),
