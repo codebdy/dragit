@@ -9,7 +9,7 @@ import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus from '../../base/bus';
-import { CANVAS_SCROLL, REFRESH_NODE } from "./Core/busEvents";
+import { CANVAS_SCROLL, REFRESH_NODE, SELECT_NODE } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
@@ -25,10 +25,10 @@ import { RXNodeRoot } from 'base/RXNode/Root';
 import ComponentView from './Core/ComponentView';
 import { RXNode } from 'base/RXNode/RXNode';
 import NodeToolbar from './Core/NodeToolbar';
-import NodeLabel from './Core/NodeLabel';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
 import DragCusor from './Core/DragCusor';
 import { CursorPosition, IDragOverParam } from './Core/IDragOverParam';
+import SelectedLabel from './Core/SelectedLabel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -173,6 +173,10 @@ export default function PageEditor(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[metas])
 
+  useEffect(()=>{
+    bus.emit(SELECT_NODE, selectedNode);
+  }, [selectedNode])
+
   const handleCancel = () => {
     onClose();
   };
@@ -243,7 +247,7 @@ export default function PageEditor(
         }
       ]);
       setRedoList([...redoList]);
-      setCanvas(cmd.canvasNode);      
+      setCanvas(cmd.canvasNode); 
       setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));  
     }    
   }
@@ -358,9 +362,8 @@ export default function PageEditor(
             {
               selectedNode &&
               <Fragment>
-                <NodeLabel followDom = {selectedNode?.dom} label = {selectedNode.meta.name} />
+                <SelectedLabel label = {selectedNode.meta.name} />
                 <NodeToolbar 
-                  followDom = {selectedNode?.dom}
                   onBeginDrag = {handleBeginDrag}
                   onRemove = {handleRemove}
                   onSelectParent = {handleSelectParent}

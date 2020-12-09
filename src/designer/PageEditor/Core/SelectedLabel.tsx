@@ -1,8 +1,10 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
-import { CANVAS_SCROLL } from "./busEvents";
+import { CANVAS_SCROLL, SELECT_NODE } from "./busEvents";
 import useDesigner from 'store/designer/useDesigner';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,21 +22,29 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
+declare var window:{ 
+  selectedNode?:RXNode<IMeta>,
+  addEventListener:any,
+  removeEventListener:any,
+};
 
-export default function NodeLabel(
+export default function SelectedLabel(
   props:{
-    followDom:HTMLElement|null|undefined, 
     label:string,
   }
 ){
-  const{followDom, label} = props;
+  const{label} = props;
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
   const designer = useDesigner();
   
+  const handleSelect = (selectedNode:RXNode<IMeta>)=>{
+    doFollow();
+  }
+
   const doFollow = ()=>{
-    let rect = followDom?.getBoundingClientRect()
+    let rect = window.selectedNode?.dom?.getBoundingClientRect();
     if(rect){
       setLeft(rect.x)
       let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
@@ -45,13 +55,15 @@ export default function NodeLabel(
   useEffect(()=>{
     doFollow();
     bus.on(CANVAS_SCROLL, hangdePositionChange);
+    bus.on(SELECT_NODE, handleSelect);
     window.addEventListener('resize', hangdePositionChange)
     return () => {
       bus.off(CANVAS_SCROLL, hangdePositionChange);
+      bus.off(SELECT_NODE, handleSelect);
       window.removeEventListener('resize', hangdePositionChange)
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[followDom])
+  },[])
 
   
   const hangdePositionChange = ()=>{
@@ -65,7 +77,7 @@ export default function NodeLabel(
 
   return (
     <Fragment>
-      {followDom &&
+      {window.selectedNode?.dom &&
         <div className={classes.label}
           style={{
             left:left + 'px',

@@ -1,16 +1,24 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
-import { CANVAS_SCROLL } from "./busEvents";
+import { CANVAS_SCROLL, SELECT_NODE } from "./busEvents";
 import MdiIcon from 'components/common/MdiIcon';
 import { sideBarSettings } from 'utils/sideBarSettings';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import classNames from 'classnames';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const height = 28;
-declare var window: any;
 const barWidth = height*4;
+
+declare var window:{ 
+  selectedNode?:RXNode<IMeta>,
+  addEventListener:any,
+  removeEventListener:any,
+};
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     toolbar: {
@@ -43,20 +51,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
-
 export default function NodeToolbar(
   props:{
-    followDom:HTMLElement|null|undefined,
     onBeginDrag:()=>void,
     onRemove:()=>void,
     onSelectParent:()=>void,
     onDuplicate:()=>void,
   }
 ){
-  const {followDom, onBeginDrag, onRemove, onSelectParent, onDuplicate} = props;
+  const {onBeginDrag, onRemove, onSelectParent, onDuplicate} = props;
   const iconSize = 16;
   const classes = useStyles();
-  //const [following, setFollowing] = React.useState<INode|undefined>(undefined);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
@@ -69,7 +74,7 @@ export default function NodeToolbar(
   const myStore = useSelector(selectMyStore)
 
   const doFollow = ()=>{
-    let rect = followDom?.getBoundingClientRect();
+    let rect = window.selectedNode?.dom?.getBoundingClientRect();
     if(!rect){
       return 
     }
@@ -86,16 +91,18 @@ export default function NodeToolbar(
     doFollow();
   }
 
-  useEffect(()=>{
-    doFollow()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[followDom])
+
+  const handleSelect = (selectedNode:RXNode<IMeta>)=>{
+    doFollow();
+  }
 
   useEffect(() => {
     bus.on(CANVAS_SCROLL, hangdePositionChange);
+    bus.on(SELECT_NODE, handleSelect);
     window.addEventListener('resize', hangdePositionChange)
     return () => {
       bus.off(CANVAS_SCROLL, hangdePositionChange);
+      bus.off(SELECT_NODE, handleSelect);
       window.removeEventListener('resize', hangdePositionChange)
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +116,7 @@ export default function NodeToolbar(
 
   return (
     <Fragment>
-      {followDom && 
+      {window.selectedNode?.dom && 
         <div className={classes.toolbar}
           style={{
             left:left + 'px',
