@@ -9,7 +9,7 @@ import Spacer from 'components/common/Spacer';
 import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus from '../../base/bus';
-import { CANVAS_SCROLL, DRAG_OVER_EVENT } from "./Core/busEvents";
+import { CANVAS_SCROLL } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
@@ -28,6 +28,7 @@ import NodeToolbar from './Core/NodeToolbar';
 import NodeLabel from './Core/NodeLabel';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
 import DragCusor from './Core/DragCusor';
+import { IDragOverParam } from './Core/IDragOverParam';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,7 +96,7 @@ export default function PageEditor(
   
   const handleMouseUp = ()=>{
     setDraggedToolboxItem(undefined);
-    bus.emit(DRAG_OVER_EVENT, {})
+    //bus.emit(DRAG_OVER_EVENT, {})
   }
 
   useEffect(()=>{
@@ -246,6 +247,10 @@ export default function PageEditor(
     setSelectedNode(selectedNode?.parent);
   }
 
+  const handleDrop = (param?:IDragOverParam)=>{
+    //setCursorParam(param);
+  }
+
   return (
     loading? <Container><PageSkeleton /></Container> :
       <Backdrop className={classes.backdrop} open={true}>        
@@ -341,7 +346,7 @@ export default function PageEditor(
           }
           {
             draggedToolboxItem &&
-            <DragCusor />
+            <DragCusor onDrop = {handleDrop}/>
           }
         </Fragment>      
       </Backdrop>

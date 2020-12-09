@@ -53,27 +53,48 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-//基于事件来实现，用React组件参数的话，会卡顿
-export default function DragCusor(){
+//1、基于Bust event来实现，用React组件参数的话，会卡顿
+//2、避免画面卡顿，drop动作在此组件内触发
+export default function DragCusor(
+  props:{
+    onDrop:(param?:IDragOverParam)=>void,
+  },
+){
+  const {onDrop} = props;
   const [dragOverParam, setDragOverParam] = useState<IDragOverParam>();
   const [rect, setRect] = useState<IRect>();
   const classes = useStyles();
   
   const handleDragOverEvent = (param:IDragOverParam)=>{
+    if(param?.targetNode?.rect){
+      if(param?.targetNode !== dragOverParam?.targetNode || param?.position !== dragOverParam?.position){
+        //onPositionChange(param)        
+      }
+    }
+    else{//如果不显示光标，则不触发拖放动作
+      //onPositionChange(undefined);
+    }    
     setDragOverParam(param);
     setRect(param?.targetNode?.rect);
   }
 
-  const hangdePositionChange = ()=>{
+  const hangdeScroll = ()=>{
     setRect(dragOverParam?.targetNode?.rect);
   }
   
+  const handleMouseUp = ()=>{
+    setDragOverParam(undefined);
+    setRect(undefined);
+  }
+
   useEffect(()=>{
     bus.on(DRAG_OVER_EVENT, handleDragOverEvent);
-    bus.on(CANVAS_SCROLL, hangdePositionChange);
+    bus.on(CANVAS_SCROLL, hangdeScroll);
+    document.addEventListener('mouseup', handleMouseUp);
     return ()=>{
       bus.off(DRAG_OVER_EVENT, handleDragOverEvent);
-      bus.off(CANVAS_SCROLL, hangdePositionChange);
+      bus.off(CANVAS_SCROLL, hangdeScroll);
+      document.removeEventListener('mouseup', handleMouseUp)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
