@@ -96,7 +96,6 @@ export default function PageEditor(
   const [selectedNode, setSelectedNode] = useState<RXNode<IMeta>>();
   const [undoList, setUndoList] = useState<Array<Snapshot>>([]);
   const [redoList, setRedoList] = useState<Array<Snapshot>>([]);
-  const [selectedDom, setSelectedDom] = useState<HTMLElement>();
   const [draggedToolboxItem, setDraggedToolboxItem] = useState<IToolboxItem>();
   const [draggedNode, setDraggedNode] = useState<RXNode<IMeta>>();
 
@@ -189,11 +188,6 @@ export default function PageEditor(
   const handleStartDragMetas = (item:IToolboxItem)=>{
     setDraggedToolboxItem(item);
     setSelectedNode(undefined);
-  }
-
-  const handleSelectNodeDom = (dom?:HTMLElement)=>{
-    //console.log('dom',dom)
-    setSelectedDom(dom);
   }
 
   const backupToUndoList = () => {
@@ -365,16 +359,15 @@ export default function PageEditor(
               node ={canvas} 
               selectedNode = {selectedNode} 
               onSelectNode = {handleSelectedNode}
-              onSelectNodeDom = {handleSelectNodeDom}
               draggedToolboxItem = {draggedToolboxItem}
               //onLocateCursor = {handleLocateCuror}
             />
             {
               selectedNode &&
               <Fragment>
-                <NodeLabel followDom = {selectedDom} label = {selectedNode.meta.name} />
+                <NodeLabel followDom = {selectedNode?.dom} label = {selectedNode.meta.name} />
                 <NodeToolbar 
-                  followDom = {selectedDom}
+                  followDom = {selectedNode?.dom}
                   onBeginDrag = {handleBeginDrag}
                   onRemove = {handleRemove}
                   onSelectParent = {handleSelectParent}

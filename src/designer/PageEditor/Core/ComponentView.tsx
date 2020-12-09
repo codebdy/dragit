@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { RXNode } from '../../../base/RXNode/RXNode';
 import { resolveComponent, resolveRule } from 'base/DragRX';
 import { IMeta } from 'base//Model/IMeta';
@@ -6,7 +6,7 @@ import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import bus from '../../../base/bus';
-import { ACTIVE_NODE, DRAG_OVER_EVENT } from "./busEvents";
+import { DRAG_OVER_EVENT } from "./busEvents";
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import NodeLabel from './NodeLabel';
@@ -54,12 +54,10 @@ export default function ComponentView(
     node:RXNode<IMeta>,
     selectedNode?:RXNode<IMeta>,
     onSelectNode:(node?:RXNode<IMeta>)=>void,
-    onSelectNodeDom:(dom?:HTMLElement)=>void,
     draggedToolboxItem?:IToolboxItem,
-    //onLocateCursor:(rect:IRect, position:CursorPosition)=>void,
   }
 ){
-  const {node, selectedNode, onSelectNode, onSelectNodeDom, draggedToolboxItem} = props;
+  const {node, selectedNode, onSelectNode, draggedToolboxItem} = props;
   const classes = useStyles();
   const [actived, setActived] = useState(false);
   const designer = useDesigner();
@@ -81,12 +79,6 @@ export default function ComponentView(
   } = metaProps as any;
 
   const selected = selectedNode?.id === node.id;
-  useEffect(()=>{
-    if(selected){
-      onSelectNodeDom(refEl?.current)      
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selectedNode]);
   
   let dom : any = refEl.current;
   node.dom = dom;
@@ -111,21 +103,7 @@ export default function ComponentView(
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     onSelectNode(node);
-    onSelectNodeDom(refEl?.current);
   }
-
-  const handleActive = (activeNode:RXNode<IMeta>)=>{
-    setActived(activeNode.id === node.id);
-  }
-
-  //解决鼠标移动过快时mouseout事件不起作用的问题
-  useEffect(() => {
-    bus.on(ACTIVE_NODE, handleActive)
-    return () => {
-      bus.off(ACTIVE_NODE, handleActive)
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
 
   let elementProps:any = {
     ...rest, 
@@ -160,9 +138,7 @@ export default function ComponentView(
             key={child.id} node={child}
             selectedNode = {selectedNode}
             onSelectNode = {onSelectNode}
-            onSelectNodeDom = {onSelectNodeDom}
             draggedToolboxItem = {draggedToolboxItem}
-            //onLocateCursor = {onLocateCursor}
           />
         )
       })}
