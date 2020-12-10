@@ -184,7 +184,6 @@ export default function AttributeBox(
                 itemKey = "slug"
                 groupByField = "module"
                 value = {auths || []}
-                multiple
                 onChange = {(e:any)=>handleChangeAuths(e.target.value)}
               />
                 </AccordionDetails>

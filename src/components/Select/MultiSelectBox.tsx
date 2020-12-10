@@ -7,7 +7,6 @@ import { useBaseItems } from 'base/Hooks/useBaseItems';
 const MultiSelect = React.forwardRef((
   props:{
     value?:Array<number|string>,
-    multiple?:boolean,
     onChange?:any,
     itemKey?:string,
     itemName?:string,
@@ -24,7 +23,6 @@ const MultiSelect = React.forwardRef((
   ref:any
 )=>{
   const{value, 
-    multiple, 
     onChange, 
     itemName = 'name',
     fullWidth,
@@ -76,7 +74,7 @@ const MultiSelect = React.forwardRef((
 
   return (
     <Autocomplete
-      multiple = {multiple}
+      multiple = {true}
       options = {itemsData||[]}
       loading = {!!loading }
       ref = {ref}

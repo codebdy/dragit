@@ -55,8 +55,8 @@
     "row": "行",
     "column": "列",
 
-    "selectbox":"选择框",
-    "chips-selectbox":"标签式选择框",
+    "selectbox":"下拉选择框",
+    "multi-selectbox":"多选下拉框",
     "combobox":"组合框",
     "tree-select":"树状选择框",
     "switch":"开关",

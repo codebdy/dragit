@@ -56,7 +56,7 @@
     "column": "Column",
 
     "selectbox":"Select",
-    "chips-selectbox":"Chips style select",
+    "multi-selectbox":"Multi select",
     "combobox":"ComboBox",
     "tree-select":"Tree select",
     "switch":"Switch",

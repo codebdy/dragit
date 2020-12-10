@@ -110,7 +110,6 @@ export default function NodeEditor(
           itemKey = "slug"
           groupByField = "module"
           value = {auths || []}
-          multiple
           onChange = {handleChangeAuths}
         />
       </Grid>

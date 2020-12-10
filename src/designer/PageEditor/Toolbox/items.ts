@@ -269,21 +269,18 @@ export default [
           props:{
             label:"Select",
             variant:"outlined",
-            xs:6,
             fullWidth:true,
           }
         },
       },
       {
-        titleKey:"chips-selectbox",
+        titleKey:"multi-selectbox",
         meta:{
-          name: 'SelectBox',
+          name: 'MultiSelectBox',
           props:{
             label:"Select",
             variant:"outlined",
-            xs:6,
-            data:{
-            }          
+            fullWidth:true,
           }
         },
       },
@@ -294,9 +291,6 @@ export default [
           props:{
             label:"Select",
             variant:"outlined",
-            xs:6,
-            data:{
-            }          
           }
         },
       },
