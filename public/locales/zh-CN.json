@@ -42,12 +42,14 @@
     "cards":"卡片",
     "portlet":"通用卡片",
     "portlet-body":"卡片布局容器",
-    "portlet-grid-item":"卡片布局项目",
+    "grid-item":"布局项目",
     "portlet-footer":"卡片页脚",
     "medias-portlet":"媒体卡片",
     "one-to-one-portlet":"一对一卡片",
     "one-to-many-portlet":"一对多卡片",
     "one-to-many-table":"一对多表格",
+    "charts":"图表",
+    "line-chart":"折线图",
 
     "page-container": "页面容器",
     "row": "行",
@@ -97,6 +99,7 @@
 
     "operate-success":"操作成功！",
 
+    "full-width":"填满宽度",
     "color": "颜色",
     "disabled":"禁用",
     "disableElevation":"禁用阴影",

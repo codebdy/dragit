@@ -42,11 +42,14 @@
     "cards":"Cards",
     "portlet":"Portlet",
     "portlet-body":"Portlet body",
+    "grid-item":"Grid item",
     "portlet-footer":"Portlet footer",    
     "medias-portlet":"Medias portlet",
     "one-to-one-portlet":"One to one portlet",
     "one-to-many-portlet":"One to many portlet",
     "one-to-many-table":"One to many table",
+    "charts":"Charts",
+    "line-chart":"Line",
 
     "page-container": "Page container",
     "row": "Row",
@@ -96,6 +99,7 @@
 
     "operate-success":"Operate Success!",
 
+    "full-width":"Full width",
     "color": "Color",
     "disabled":"Disabled",
     "disableElevation":"Disable Elevation",

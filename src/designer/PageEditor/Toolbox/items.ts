@@ -113,12 +113,6 @@ export default [
             }
           },
           {
-            titleKey:'portlet-grid-item',
-            meta:{
-              name:'PortletGridItem',
-            }
-          },
-          {
             titleKey:"portlet-footer",
             meta:{
               name:'PortletFooter',
@@ -195,22 +189,27 @@ export default [
     titleKey: "form",
     children:[
       {
+        titleKey:'grid-item',
+        meta:{
+          name:'PortletGridItem',
+        }
+      },
+      {
         titleKey:"text-field",
         meta:{
-          name:"FormGridItem",
+          name:"TextBox",
           props:{
-            as:"TextField",
             label:"TextField",
             variant:"outlined",
+            fullWidth:true,
           }
         }
       },
       {
         titleKey:"date",
         meta:{
-          name: 'FormGridItem',
+          name: 'TextBox',
           props:{
-            as:'TextField',
             label:"Date",
             variant:"outlined",
             type:'date',
@@ -273,9 +272,11 @@ export default [
   },
 
   {
-    titleKey: "relations",
-  },
-  {
-    titleKey: "customized",
+    titleKey: "charts",
+    children:[
+      {
+        titleKey:'line-chart'
+      }
+    ]
   },
 ]

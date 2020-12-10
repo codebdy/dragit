@@ -31,6 +31,11 @@ const inputRules:Array<IProp> =[
     input:StringInput,
   }, 
   {
+    name:'fullWidth',
+    label:'full-width',
+    input:BooleanInput,
+  },
+  {
     name:'required',
     label:'required',
     input:BooleanInput,
