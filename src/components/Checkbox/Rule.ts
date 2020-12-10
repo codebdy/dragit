@@ -1,8 +1,9 @@
 import { IMeta } from "base/Model/IMeta";
 import { IProp } from "base/Model/IProp";
-import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
+import colorRule from "base/Rules/colorRule";
 import { Rule } from "base/Rules/Rule";
+import sizeRule from "base/Rules/sizeRule";
 
 export class CheckboxRule extends Rule{
   editPaddingY = '';
@@ -22,23 +23,8 @@ export class CheckboxRule extends Rule{
         label:'label',
         input:StringInput,
       },
-      {
-        name:'size',
-        label:'size',
-        input:OptionSelect,
-        props:{
-          items:[
-            {
-              value:'medium',
-              label:'Medium'
-            },
-            {
-              value:'small',
-              label:'Small'
-            },
-          ]
-        },
-      },
+      colorRule,
+      sizeRule,
       {
         name:'helperText',
         label:'helper-text',

@@ -128,6 +128,8 @@
 
     "type":"类型",
     "finished-go-back":"提交后返回",
+    
+    "row-show":"横向显示",
 
     "validate" : "验证",
     "validate-rules":"验证规则",

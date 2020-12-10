@@ -124,6 +124,8 @@
     "type":"Type",
     "finished-go-back":"Go Back",
 
+    "row-show":"Row",
+
     "validate" : "Validate",
     "validate-rules":"Validate Rules",
     "validate-type":"Validate Type",

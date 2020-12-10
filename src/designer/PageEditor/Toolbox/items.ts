@@ -226,11 +226,26 @@ export default [
       {
         titleKey:"checkbox-group",
         meta:{
+          name:'CheckboxGroup',
+          props:{
+            label:"Checkbox group",
+            items:[
+              {
+                slug:'option1',
+                label:'Option 1',
+              },
+              {
+                slug:'option2',
+                label:'Option 2',
+              },
+            ]
+          }
         },
       },
       {
         titleKey:"radio-group",
         meta:{
+          
         },
       },
 

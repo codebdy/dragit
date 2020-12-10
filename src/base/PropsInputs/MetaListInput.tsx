@@ -5,6 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { IconButton, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { cloneObject } from 'utils/cloneObject';
+import { MetaItem } from '../Model/MetaItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,11 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   }),
 );
-
-export interface MetaItem{
-  slug:string;
-  label:string;
-}
 
 export default function MetaListInput(
   props:{ 

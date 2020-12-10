@@ -1,14 +1,15 @@
 import { IMeta } from "base/Model/IMeta";
 import { IProp } from "base/Model/IProp";
+import BooleanInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
 import colorRule from "base/Rules/colorRule";
 import { Rule } from "base/Rules/Rule";
 import sizeRule from "base/Rules/sizeRule";
 
-export class SwitchBoxRule extends Rule{
-  editPaddingY = '';
-  editPaddingX = '';
-  empertyPadding = '';
+export class CheckboxGroupRule extends Rule{
+  //editPaddingY = '';
+  //editPaddingX = '';
+  //empertyPadding = '';
   hasField = true;
   hasValidation = true;
 
@@ -25,6 +26,11 @@ export class SwitchBoxRule extends Rule{
       },
       colorRule,
       sizeRule,
+      {
+        name:'row',
+        label:'row-show',
+        input:BooleanInput,
+      },
       {
         name:'helperText',
         label:'helper-text',

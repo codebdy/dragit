@@ -55,6 +55,8 @@ import Medias from 'components/Medias';
 import AntDesignChart from 'components/AntDesignChart';
 import Checkbox from 'components/Checkbox';
 import { CheckboxRule } from 'components/Checkbox/Rule';
+import CheckboxGroup from 'components/CheckboxGroup';
+import { CheckboxGroupRule } from 'components/CheckboxGroup/Rule';
 
 const store = configureStore();
 
@@ -66,6 +68,7 @@ register('Button',Button, ButtonRule);
 register('TextBox', TextBox, TextBoxRule);
 register('SwitchBox', SwitchBox, SwitchBoxRule);
 register('Checkbox', Checkbox, CheckboxRule);
+register('CheckboxGroup', CheckboxGroup, CheckboxGroupRule);
 register('FieldView', FieldView, FieldViewRule);
 register('Portlet', Portlet, PortletRule);
 register('FormGridContainer', FormGridContainer);
