@@ -87,10 +87,10 @@ const ListView = React.forwardRef((
   const {
     className, 
     //value, 
-    columns, 
-    filters, 
-    rowCommands, 
-    batchCommands, 
+    columns = [], 
+    filters = [], 
+    rowCommands = [], 
+    batchCommands = [], 
     rowsPerPageOptions = "10,25,50", 
     defalutRowsPerPage = 10,
     onAction,
@@ -116,7 +116,7 @@ const ListView = React.forwardRef((
   }, loading] = useAxios<IPaginate>(request, showSuccessAlert);
 
   useEffect(()=>{
-    setRequest({...api, data:{...api.data, operateParam}})
+    api && api.url && setRequest({...api, data:{...api.data, operateParam}})
   }, [api, operateParam])
 
   const updateOperateParam = (field:string, value:any, showAlert = false)=>{

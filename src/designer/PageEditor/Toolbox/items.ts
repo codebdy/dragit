@@ -120,6 +120,12 @@ export default [
           },          
         ]     
       },  
+      {
+        titleKey:"list-view",
+        meta:{
+          name:'ListView',
+        },
+      },
 
       {
         titleKey:"medias-portlet",

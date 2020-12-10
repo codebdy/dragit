@@ -99,7 +99,7 @@ export function ListViewHead(props: ListViewHeadProps) {
           </TableCell>
         ))}
         {
-          rowCommandsCount&&
+          rowCommandsCount > 0&&
           (
             loading ? 
             <TableCell  align="right">
