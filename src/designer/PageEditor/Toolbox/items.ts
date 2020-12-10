@@ -245,7 +245,20 @@ export default [
       {
         titleKey:"radio-group",
         meta:{
-          
+          name:'RadioGroup',
+          props:{
+            label:"Radio group",
+            items:[
+              {
+                slug:'option1',
+                label:'Option 1',
+              },
+              {
+                slug:'option2',
+                label:'Option 2',
+              },
+            ]
+          }
         },
       },
 

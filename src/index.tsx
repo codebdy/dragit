@@ -57,6 +57,8 @@ import Checkbox from 'components/Checkbox';
 import { CheckboxRule } from 'components/Checkbox/Rule';
 import CheckboxGroup from 'components/CheckboxGroup';
 import { CheckboxGroupRule } from 'components/CheckboxGroup/Rule';
+import RadioGroup from 'components/RadioGroup';
+import { RadioGroupRule } from 'components/RadioGroup/Rule';
 
 const store = configureStore();
 
@@ -69,6 +71,7 @@ register('TextBox', TextBox, TextBoxRule);
 register('SwitchBox', SwitchBox, SwitchBoxRule);
 register('Checkbox', Checkbox, CheckboxRule);
 register('CheckboxGroup', CheckboxGroup, CheckboxGroupRule);
+register('RadioGroup', RadioGroup, RadioGroupRule);
 register('FieldView', FieldView, FieldViewRule);
 register('Portlet', Portlet, PortletRule);
 register('FormGridContainer', FormGridContainer);

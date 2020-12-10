@@ -61,7 +61,7 @@
     "tree-select":"树状选择框",
     "switch":"开关",
     "checkbox":"复选框",
-    "checkbox-group":"复选框组",
+    "checkbox-group":"复选组",
     "radio-group":"单选组",
 
     "selected-node":"选中的节点：",
@@ -128,7 +128,7 @@
 
     "type":"类型",
     "finished-go-back":"提交后返回",
-    
+
     "row-show":"横向显示",
 
     "validate" : "验证",
