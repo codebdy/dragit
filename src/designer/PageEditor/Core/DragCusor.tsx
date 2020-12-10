@@ -64,9 +64,12 @@ export default function DragCusor(){
   const classes = useStyles();
   
   const handleDragOverEvent = (param:IDragOverParam)=>{
-    setDragOverParam(param);
-    setRect(param?.targetNode?.rect);
-    window.dragOverParam = param;
+    //只有可拖释放时，才记录拖动信息，避免释放无效的bug
+    if(param.position){
+      setDragOverParam(param);
+      setRect(param?.targetNode?.rect);
+      window.dragOverParam = param;
+    }
   }
 
   const hangdeScroll = ()=>{

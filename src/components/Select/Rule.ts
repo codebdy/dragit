@@ -45,12 +45,6 @@ export class SelectRule extends Rule{
         input:BooleanInput,
       },
       {
-        name:'fromUrl',
-        label:'from-url',
-        xs:6,
-        input:BooleanInput,
-      },
-      {
         name:'url',
         label:'url',
         xs:12,
