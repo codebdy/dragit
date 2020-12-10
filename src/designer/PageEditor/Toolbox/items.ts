@@ -287,10 +287,11 @@ export default [
       {
         titleKey:"tree-select",
         meta:{
-          name: 'SelectBox',
+          name: 'TreeSelect',
           props:{
-            label:"Select",
+            label:"Tree Select",
             variant:"outlined",
+            fullWidth:true,
           }
         },
       },
