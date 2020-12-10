@@ -6,10 +6,6 @@ import { useBaseItems } from 'base/Hooks/useBaseItems';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      width:"100%",
-    },
-
     nest:{
       paddingLeft:theme.spacing(2),
     },
@@ -66,7 +62,7 @@ const SelectBox = React.forwardRef((
     itemKey = 'id',
     itemName = 'name',
     api,
-    items,
+    items = [],
     groupByField,
     ...rest
   } = props;
@@ -117,7 +113,7 @@ const SelectBox = React.forwardRef((
     </Select>
   //console.log(props);
   return (
-    <FormControl variant={variant as any} className={classes.root} {...rest}>
+    <FormControl variant={variant as any} {...rest}>
       <InputLabel 
       >{label}</InputLabel>
       {

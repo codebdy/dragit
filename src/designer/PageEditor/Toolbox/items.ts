@@ -270,8 +270,7 @@ export default [
             label:"Select",
             variant:"outlined",
             xs:6,
-            data:{
-            }          
+            fullWidth:true,
           }
         },
       },
