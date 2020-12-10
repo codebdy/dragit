@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight:'20px',
       userSelect:'none',
       cursor: 'default',
+      pointerEvents: 'none',
     },
 
   }),

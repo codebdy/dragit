@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position:'fixed',
-      pointerEvents: 'none',
+      //pointerEvents: 'none',
       height:'4px',
       color:theme.palette.primary.main,
       background:theme.palette.primary.main,
