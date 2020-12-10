@@ -105,18 +105,26 @@ export default function PageEditor(
   useAuthCheck();  
   
   const operateNode = (targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>, position:CursorPosition)=>{
+    if(targetNode.id === draggedNode.id){
+      return false;
+    }
     if(position === 'in-bottom' || position === 'in-right' || position === 'in-center'){
       draggedNode.moveIn(targetNode);
+      return true;        
     }
     if(position === 'in-top' || position === 'in-left'){
       draggedNode.moveInTop(targetNode);
+      return true;  
     }
     if(position === 'out-bottom' || position === 'out-right'){
       draggedNode.moveAfter(targetNode);
+      return true;  
     }
     if(position === 'out-top' || position === 'out-left'){
       draggedNode.moveBefore(targetNode);
+      return true;  
     }
+    return false;  
   }
 
   useEffect(()=>{
@@ -138,7 +146,10 @@ export default function PageEditor(
         backupToUndoList(dragNode.id); 
         let dragParentId = dragNode.parent?.id;
         let targetParentId = targetNode.parent?.id;
-        operateNode(targetNode, dragNode, window.dragOverParam.position);
+        if(!operateNode(targetNode, dragNode, window.dragOverParam.position)){
+          window.undoList.pop();
+          setUndoList([...window.undoList]);
+        }
         setSelectedNode(dragNode);
         bus.emit(REFRESH_NODE, dragParentId);
         bus.emit(REFRESH_NODE, targetParentId)

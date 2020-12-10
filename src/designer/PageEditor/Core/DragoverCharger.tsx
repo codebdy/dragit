@@ -202,7 +202,7 @@ export class DragoverCharger {
       const afterChild = this.firstChildAfterMouse(event);
       let bother = afterChild?.beforeBrother() || afterChild;
       
-      if(bother){
+      if(bother && bother.id !== this.node.id){
         if(bother.rect){
           let rect = new Rect(bother.rect)
           if(rect.isOnLeft(event)){

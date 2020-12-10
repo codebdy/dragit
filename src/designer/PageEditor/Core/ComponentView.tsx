@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
     dragged:{
       opacity:"0.5",
       outline:theme.palette.secondary.main + ' dashed 1px',
+      pointerEvents:'none',
     }
   }),
 );
@@ -38,14 +39,14 @@ function getEditStyle(
   showPaddingY?:boolean,
 ){
   const rule = resolveRule(node.meta.name);
-  const hasChildren = node.children.length === 0 && !node.meta?.props?.rxText
+  const hasNodChildren = node.children.length === 0 && !node.meta?.props?.rxText
   const paddingX={
-    paddingLeft : hasChildren ? rule.empertyPadding : showPaddingX && rule.editPaddingX,
-    paddingRight : hasChildren ? rule.empertyPadding : showPaddingX && rule.editPaddingX,    
+    paddingLeft : hasNodChildren ? rule.empertyPadding : showPaddingX && rule.editPaddingX,
+    paddingRight : hasNodChildren ? rule.empertyPadding : showPaddingX && rule.editPaddingX,    
   }
   const paddingY={
-    paddingTop : hasChildren ? rule.empertyPadding : showPaddingY && rule.editPaddingY,
-    paddingBottom : hasChildren ? rule.empertyPadding : showPaddingY && rule.editPaddingY,
+    paddingTop : hasNodChildren ? rule.empertyPadding : showPaddingY && rule.editPaddingY,
+    paddingBottom : hasNodChildren ? rule.empertyPadding : showPaddingY && rule.editPaddingY,
   }
   return {
     ...paddingX,
@@ -121,7 +122,9 @@ export default function ComponentView(
     }
     else{
       if(refEl.current){
-        bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
+        if(draggedNode?.id !== node.id){
+          bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
+        }
       }
     }
   }
