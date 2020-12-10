@@ -10,7 +10,7 @@ export default{
   },
   children:[
     {
-      name:'PortletGridContainer',
+      name:'FormGridContainer',
     },
     {
       name:'PortletFooter',

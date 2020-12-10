@@ -87,7 +87,7 @@ export default {
               },
               children:[
                 {
-                  name:'PortletGridContainer',
+                  name:'FormGridContainer',
                   children:[
                     {
                       name: 'PortletGridItem',
@@ -291,7 +291,7 @@ export default {
               },
               children:[
                 {
-                  name:"PortletGridContainer",
+                  name:"FormGridContainer",
                   children:[
                     {
                       name: 'PortletGridItem',
@@ -400,7 +400,7 @@ export default {
               },
               children:[
                 {
-                  name:'PortletGridContainer',
+                  name:'FormGridContainer',
                   children:[
                     {
                       name: 'PortletGridItem',

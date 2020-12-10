@@ -107,9 +107,9 @@ export default [
         meta:portlet,
         children:[
           {
-            titleKey:"portlet-body",
+            titleKey:"form-grid-container",
             meta: {
-              name:'PortletGridContainer',
+              name:'FormGridContainer',
             }
           },
           {
@@ -144,7 +144,7 @@ export default [
           },
           children:[
             {
-              name:'PortletGridContainer',
+              name:'FormGridContainer',
             }
           ]
         }
@@ -163,7 +163,7 @@ export default [
           },
           children:[
             {
-              name:'PortletGridContainer',
+              name:'FormGridContainer',
             }
           ]
         }
@@ -189,7 +189,7 @@ export default [
     titleKey: "form",
     children:[
       {
-        titleKey:'grid-item',
+        titleKey:'form-grid-item',
         meta:{
           name:'PortletGridItem',
         }
