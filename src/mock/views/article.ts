@@ -1,8 +1,8 @@
 import {API_GET_MODEL_BY_ID} from "APIs/model"
-import ArticleMeta from "designer/PageEditor/Toolbox/metas/aritcle";
+import ArticleMeta from "designer/PageEditor/Toolbox/metas/aritcle/editPage";
 
 export default {
-  layout:ArticleMeta,
+  layout:[ArticleMeta],
 
   isFormPage:true,
   api:{

@@ -1,4 +1,7 @@
 
+import article from './metas/aritcle/editPage';
+import artilceList from './metas/aritcle/listPage'
+
 export default [
   {
     titleKey: "template",
@@ -8,9 +11,10 @@ export default [
         children:[
           {
             title:'列表页',
+            meta:artilceList,
             children:[
               {
-                titleKey:'grid',
+                titleKey:'栅格布局',
               },              
               {
                 title:'页面标题',
@@ -22,6 +26,7 @@ export default [
           },
           {
             title:'编辑页',
+            meta:article,
             children:[
               {
                 titleKey:'grid',

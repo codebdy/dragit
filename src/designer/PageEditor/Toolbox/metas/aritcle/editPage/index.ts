@@ -5,12 +5,11 @@ import header from "./header"
 import mediasPortlet from "./mediasPortlet"
 import seoPortlet from "./seoPortlet"
 
-export default [
-  {
-    name: 'GridRow',
-    props: {
-    },
-    children: [
+export default {
+  name: 'GridRow',
+  props: {
+  },
+  children: [
       {
         name: 'GridColumn',
         props: {
@@ -49,6 +48,5 @@ export default [
           }
         ]
       }
-    ]
-  },
-]
+  ]
+}
