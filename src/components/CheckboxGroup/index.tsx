@@ -33,7 +33,7 @@ const CheckboxGroup = React.forwardRef((props:any, ref:any)=>{
 
 
   return (
-    <FormControl component="fieldset" error = {error} {...rest}>
+    <FormControl ref={ref} component="fieldset" error = {error} {...rest}>
       <FormLabel component="legend">{label}</FormLabel>
       <FormGroup row = {row}>
         {
