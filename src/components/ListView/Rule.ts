@@ -6,6 +6,8 @@ import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "./PropsInputs/ListViewFiltersDialog";
 import ListViewRowCommandDialog from "./PropsInputs/ListViewRowCommandDialog";
 import { IMeta } from "base/Model/IMeta";
+import marginRules from "base/Rules/marginRules";
+import elevationRules from "base/Rules/elevationRules";
 
 export class ListViewRule extends Rule{
   empertyPadding = '';
@@ -16,6 +18,8 @@ export class ListViewRule extends Rule{
 
   getFields(): Array<IProp>{
     return [
+      ...marginRules,
+      ...elevationRules,
       {
         name:'columns',
         label:'columns',

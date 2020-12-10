@@ -124,6 +124,9 @@ export default [
         titleKey:"list-view",
         meta:{
           name:'ListView',
+          props:{
+            elevation: 6,
+          }
         },
       },
 
