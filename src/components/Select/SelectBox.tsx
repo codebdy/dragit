@@ -46,7 +46,7 @@ const SelectBox = React.forwardRef((
     withoutEmpertyItem?:boolean,
     itemKey?:string,
     itemName?:string,
-    api?:AxiosRequestConfig;
+    dataApi?:AxiosRequestConfig;
     items?:Array<any>;
     groupByField?:string,
   },
@@ -61,23 +61,23 @@ const SelectBox = React.forwardRef((
     withoutEmpertyItem, 
     itemKey = 'id',
     itemName = 'name',
-    api,
+    dataApi,
     items = [],
     groupByField,
     ...rest
   } = props;
 
   //如果不从服务器读取数据，itemKey跟itemName设置无效
-  let key = api ? itemKey : 'slug';
-  let name = api ? itemName : 'label';
+  let key = dataApi ? itemKey : 'slug';
+  let name = dataApi ? itemName : 'label';
 
   const classes = useStyles();
-  const [request] = React.useState<AxiosRequestConfig|undefined>(api)
+  const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi)
   const [menuItems, loading] = useBaseItems(request);
 
   const empertyValue = multiple?[]:'';
 
-  const itemsData = (api? menuItems : items) as any;
+  const itemsData = (dataApi? menuItems : items) as any;
 
   const groups = groupByField ? groupBy(itemsData, groupByField) :[];
 

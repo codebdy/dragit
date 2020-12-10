@@ -113,7 +113,7 @@ export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
 
     <Fragment>
       <Button variant="outlined"  fullWidth size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> 
-        {intl.get('data')} ···
+        {intl.get('items-data')} ···
       </Button>
       <ThemeProvider theme={theme}>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 

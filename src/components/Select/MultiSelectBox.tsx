@@ -11,7 +11,7 @@ const MultiSelect = React.forwardRef((
     itemKey?:string,
     itemName?:string,
     fullWidth?:boolean,
-    api?:AxiosRequestConfig;
+    dataApi?:AxiosRequestConfig;
     items?:Array<any>;
     label?:string, 
     variant?:any, 
@@ -26,7 +26,7 @@ const MultiSelect = React.forwardRef((
     onChange, 
     itemName = 'name',
     fullWidth,
-    api,
+    dataApi,
     items,
     itemKey = 'id',
     groupByField,
@@ -35,12 +35,12 @@ const MultiSelect = React.forwardRef((
     ...rest
   } = props;
 
-  let key = api ? itemKey : 'slug';
-  let name = api ? itemName : 'label';
+  let key = dataApi ? itemKey : 'slug';
+  let name = dataApi ? itemName : 'label';
   //const mountedRef = useRef(true);
-  const [request] = React.useState<AxiosRequestConfig|undefined>(api)
+  const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi)
   const [menuItems, loading] = useBaseItems(request);
-  const itemsData = (api? menuItems : items) as any;  
+  const itemsData = (dataApi? menuItems : items) as any;  
   const [inputValue, setInputValue] = React.useState<Array<any>>([]);
 
   useEffect(()=>{

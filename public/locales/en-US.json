@@ -202,11 +202,11 @@
     "item-key":"Itme key",
     "item-name":"Item name",
     "items-data":"Items data",
-    "from-url":"From url",
     "edit-select-items":"Edit select items",
 
     "is-form-page":"Is form page",
     "api":"API",
+    "data-api":"Data API",
     "get-api":"Get API",
     "submit-api":"Submit API",
     "is-index-page":"Is index page",

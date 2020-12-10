@@ -12,7 +12,7 @@ const Combobox = React.forwardRef((
     itemKey?:string,
     itemName?:string,
     fullWidth?:boolean,
-    api?:AxiosRequestConfig;
+    dataApi?:AxiosRequestConfig;
     items?:Array<any>;
     label?:string, 
     variant?:any, 
@@ -26,19 +26,19 @@ const Combobox = React.forwardRef((
     onChange, 
     itemName = 'name',
     fullWidth,
-    api,
+    dataApi,
     items,
     ...rest
   } = props;
 
 
-  let name = api ? itemName : 'label';
+  let name = dataApi ? itemName : 'label';
   //const mountedRef = useRef(true);
   const empertyValue = multiple ? []:'';
-  const [request] = React.useState<AxiosRequestConfig|undefined>(api);
+  const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi);
   const [menuItems, loading] = useBaseItems(request);
 
-  const itemsData = (api? menuItems : items) as any;
+  const itemsData = (dataApi? menuItems : items) as any;
   
   const [inputValue, setInputValue] = React.useState<any>(value||empertyValue);
 

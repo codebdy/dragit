@@ -1,8 +1,8 @@
 import { IMeta } from "base/Model/IMeta";
 import { IProp } from "base/Model/IProp";
-import BooleanInput from "base/PropsInputs/BooleanInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
+import apiRule from "base/Rules/apiRule";
 import inputRules from "base/Rules/inputRules";
 import itemsRule from "base/Rules/itemsRule";
 import { Rule } from "base/Rules/Rule";
@@ -38,19 +38,12 @@ export class SelectRule extends Rule{
           ]
         },
       },
-      {
+      /*{
         name:'multiple',
         label:'multiple-select',
         xs:6,
         input:BooleanInput,
-      },
-      {
-        name:'url',
-        label:'url',
-        xs:12,
-        input:StringInput,
-      },
-      itemsRule,      
+      },*/
       {
         name:'itemKey',
         label:'item-key',
@@ -67,7 +60,9 @@ export class SelectRule extends Rule{
         label:'helper-text',
         xs:12,
         input:StringInput,
-      }
+      },
+      itemsRule,
+      apiRule,
     ]
   }
 

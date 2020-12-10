@@ -45,7 +45,7 @@ export default{
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
-                api:{
+                dataApi:{
                   ...API_LIST_MODEL,
                   params:{
                     modelName:'/Model/ArticleAttribute',

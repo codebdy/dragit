@@ -3,7 +3,7 @@ import {makeStyles, Theme, createStyles, Switch, FormControlLabel} from '@materi
 import intl from 'react-intl-universal';
 import { AttributeRow } from '../AttrebuteBox/AttributeRow';
 import { IPageSchema } from 'base/Model/IPage';
-import ApiEditor from './ApiEditor';
+import ApiEditor from '../../../base/PropsInputs/ApiEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

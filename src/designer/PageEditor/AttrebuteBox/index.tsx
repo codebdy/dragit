@@ -180,7 +180,7 @@ export default function AttributeBox(
               <MultiSelectBox label={'权限'} 
                 variant="outlined" 
                 size="small"
-                api = {API_GET_AUTHS}
+                dataApi = {API_GET_AUTHS}
                 itemKey = "slug"
                 groupByField = "module"
                 value = {auths || []}
