@@ -3,6 +3,7 @@ import { IProp } from "base/Model/IProp";
 import BooleanInput from "base/PropsInputs/BooleanInput";
 import StringInput from "base/PropsInputs/StringInput";
 import colorRule from "base/Rules/colorRule";
+import itemsRule from "base/Rules/itemsRule";
 import { Rule } from "base/Rules/Rule";
 import sizeRule from "base/Rules/sizeRule";
 
@@ -36,7 +37,8 @@ export class CheckboxGroupRule extends Rule{
         label:'helper-text',
         xs:12,
         input:StringInput,
-      }
+      },
+      itemsRule
     ]
   }
 

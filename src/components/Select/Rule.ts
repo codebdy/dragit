@@ -4,8 +4,8 @@ import BooleanInput from "base/PropsInputs/BooleanInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
 import inputRules from "base/Rules/inputRules";
+import itemsRule from "base/Rules/itemsRule";
 import { Rule } from "base/Rules/Rule";
-import SelectItemsInputItemDialog from "./PropsInputs/SelectItemsInputItemDialog";
 
 export class SelectRule extends Rule{
   editPaddingY = '';
@@ -56,12 +56,7 @@ export class SelectRule extends Rule{
         xs:12,
         input:StringInput,
       },
-      {
-        name:'items',
-        label:'items-data',
-        xs:12,
-        input:SelectItemsInputItemDialog,
-      },      
+      itemsRule,      
       {
         name:'itemKey',
         label:'item-key',
