@@ -150,7 +150,6 @@ export default {
 
 
   isFormPage:true,
-  closeAfterSubmit:true,
   api:{
     ...API_GET_MODEL_BY_ID,
     params:{
