@@ -94,7 +94,7 @@ export class ButtonRule extends Rule{
           ]
         },
       },
-      {
+      /*{
         name:'type',
         label:'type',
         input:OptionSelect,
@@ -114,7 +114,7 @@ export class ButtonRule extends Rule{
             },
           ]
         },
-      },
+      },*/
       {
         name:'disabled',
         label:'disabled',

@@ -71,7 +71,8 @@
     "data":"数据",
     "action":"动作",
     "go-back":"返回",
-    "sumbit-data":"提交数据",
+    "sumbit":"提交",
+    "sumbit-and-close":"提交并关闭",
     "action-slug":"动作标识",
 
     "column-editor":"表格列编辑器",

@@ -71,7 +71,8 @@
     "data":"Data",
     "action":"Action",
     "go-back":"Go Back",
-    "sumbit-data":"Sumbit Data",
+    "sumbit":"Submit",
+    "sumbit-and-close":"Submit and close",
     "action-slug":"Action Slug",
 
     "column-editor":"Table Cell Editor",

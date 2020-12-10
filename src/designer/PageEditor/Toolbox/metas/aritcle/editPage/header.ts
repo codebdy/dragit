@@ -1,4 +1,4 @@
-import { GO_BACK_ACTION } from "base/PageAction";
+import { GO_BACK_ACTION, SUBMIT_ACTION } from "base/PageAction";
 
 export default{
   name: 'GridRow',
@@ -40,9 +40,11 @@ export default{
           rxText: '保存',
           variant: "contained",
           color: "primary",
-          type: "submit",
           size:'large',
           marginLeft:2,
+          onClick:{
+            name:SUBMIT_ACTION,
+          }
         }
       }]
     },

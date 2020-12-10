@@ -1,23 +1,22 @@
-import { Dialog } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import React, { FormEvent, useEffect, useState } from 'react';
 import useModel from '../useModel';
 import useModelLoading from '../useModelLoading';
 import { IForm, FormContext, defultForm } from "../../../../base/FormContext";
-import intl from 'react-intl-universal';
 import { cloneObject } from 'utils/cloneObject';
 
 export default function PageForm(
   props:{
     children:any,
     onSubmit:(data:any)=>void,
+    submit:boolean,
+    onSubmitError:()=>void,
   }
 ){
-  const {onSubmit, children} = props;
+  const {onSubmit, children, submit, onSubmitError} = props;
   const [form, setForm] = useState<IForm>(defultForm());
   const model = useModel();
   const loading = useModelLoading();
-  const [openAlert, setOpentAlert] = useState(false);
+
 
   const forceUpdate = (newForm:IForm)=>{
     setForm({...newForm});
@@ -58,37 +57,30 @@ export default function PageForm(
     return passed;
   }
 
-  const handleSubmit =  (event:FormEvent<HTMLFormElement>)=>{
-    event.preventDefault();    
+  const handleSubmit =  (event?:FormEvent<HTMLFormElement>)=>{
+    event && event.preventDefault();    
     if(!validate()){
-      setOpentAlert(true);
       setForm({...form});
+      onSubmitError();
       return;
     }
 
     onSubmit(form.values);
   }
 
-  const handleCloseAlert = ()=>{
-    setOpentAlert(false);
-  }
+  //根据父组件指示提交表单
+  useEffect(()=>{
+    if(submit){
+      handleSubmit()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submit])
 
   return (
-      <form onSubmit={handleSubmit}>
+      <form /*onSubmit={handleSubmit}*/>
         <FormContext.Provider value = {form}>
           {children}
-        </FormContext.Provider>
-        <Dialog
-          open={openAlert}
-          onClose={handleCloseAlert}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <Alert severity="error"  onClose={handleCloseAlert}>
-            <AlertTitle>{intl.get('error')}</AlertTitle>
-            {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
-          </Alert>      
-        </Dialog>        
+        </FormContext.Provider>       
       </form>
   )
 }

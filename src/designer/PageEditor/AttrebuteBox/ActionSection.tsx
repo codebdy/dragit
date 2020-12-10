@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { FormControl,  InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { AttributeRow } from './AttributeRow';
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from 'base/PageAction';
+import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from 'base/PageAction';
 import intl from 'react-intl-universal';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
@@ -55,6 +55,8 @@ export default function AttributeBoxActionSection(
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
+            <MenuItem value={SUBMIT_ACTION}>{intl.get("sumbit")}</MenuItem>
+            <MenuItem value={SUBMIT_AND_NOT_CLOSE_ACTION}>{intl.get("sumbit-and-close")}</MenuItem>
             <MenuItem value={GO_BACK_ACTION}>{intl.get("go-back")}</MenuItem>
             <MenuItem value={JUMP_TO_PAGE_ACTION}>{intl.get("jump-to")}</MenuItem>
           </Select>

@@ -2,9 +2,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import ComponentRender from "./ComponentRender";
 import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Container, createStyles, Dialog, makeStyles, Theme } from "@material-ui/core";
 import PageSkeleton from "./PageSkeleton";
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from '../../../base/PageAction';
+import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
 
 import usePageMeta from "./usePageMeta";
 import usePageModel from "./useFecthPageModel";
@@ -17,6 +17,8 @@ import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
 import { setModelAction } from "store/page/actions";
 import PageForm from "./Form/PageForm";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import intl from "react-intl-universal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +40,10 @@ const PageView = ()=>{
   const [pageMeta, loadingPage, error] = usePageMeta(moduleSlug, pageSlug,);
   const [submitRequest, setSubmitRequest] = useState<AxiosRequestConfig>();
   const [submitResult/*, submiting*/] = useAxios(submitRequest, true);
+  //指示提交表单的标识，表单提交后置为false
+  const [submit, setSubmit] = useState(false);
+  const [openAlert, setOpentAlert] = useState(false);
+  const [closeAfterSubmit, setCloseAfterSubmit] = useState(false);
 
   usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
@@ -62,11 +68,11 @@ const PageView = ()=>{
   }, [dispatch, pageMeta])
 
   useEffect(()=>{
-    if(submitResult &&  pageMeta?.jsonSchema?.closeAfterSubmit){
+    if(submitResult &&  closeAfterSubmit){
       history.goBack();
     }
 
-    if(submitResult && !pageMeta?.jsonSchema?.closeAfterSubmit){
+    if(submitResult && !closeAfterSubmit){
       //console.log(submitResult);
       dispatch(setModelAction(submitResult));
     }
@@ -81,10 +87,20 @@ const PageView = ()=>{
   }, [error])
 
   const handleSubmit = (data: any) => {
+    setSubmit(false);
     if(pageMeta?.jsonSchema?.submitApi){
       setSubmitRequest({...pageMeta?.jsonSchema?.submitApi, data});      
     }
   };
+
+  const handleSubmitError = ()=>{
+    setOpentAlert(true);
+    setSubmit(false);
+  }
+
+  const handleCloseAlert = ()=>{
+    setOpentAlert(false);
+  }
   
   const formActionHandle = (action:PageAction)=>{
     switch (action.name){
@@ -96,10 +112,17 @@ const PageView = ()=>{
       case GO_BACK_ACTION:
         history.goBack();
         return;
-        
-      //case POST_DATA_ACTION:
-      //  console.log('POST_DATA_ACTION', action)
-      //  return;
+      
+      case SUBMIT_ACTION:
+        setCloseAfterSubmit(false);
+        setSubmit(true);
+        return;
+      
+      case SUBMIT_AND_NOT_CLOSE_ACTION:
+        setCloseAfterSubmit(true);
+        setSubmit(true);
+        return;
+
     }
     
   }
@@ -126,12 +149,23 @@ return (
       {
         pageMeta?.jsonSchema?.isFormPage 
         ?
-          <PageForm onSubmit = {handleSubmit}>
+          <PageForm onSubmit = {handleSubmit} submit={submit} onSubmitError = {handleSubmitError}>
             {pageContent}
           </PageForm>
         :
           pageContent
       }
+      <Dialog
+          open={openAlert}
+          onClose={handleCloseAlert}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <Alert severity="error"  onClose={handleCloseAlert}>
+            <AlertTitle>{intl.get('error')}</AlertTitle>
+            {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
+          </Alert>      
+        </Dialog> 
     </Container>
   )
 }
