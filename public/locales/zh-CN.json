@@ -194,7 +194,8 @@
     "display":"显示",
     "gutter-bottom":"底部空白",
     "no-wrap":"不换行",
-    "paragraph":"paragraph",
+    "paragraph":"段落",
+    "height":"高度",
 
     "multiline":"多行",
     "rows":"行数",

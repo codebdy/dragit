@@ -29,7 +29,7 @@ const TinyMCE = React.forwardRef((
   },
   ref:any
 )=>{
-  const {fullWidth, name, loading, value, error, helperText, height = 500, children, onChange, ...rest} = props;
+  const {name, value, error, helperText, height = 500, onChange, ...rest} = props;
   const classes = useStyles();
 
   const [id] = useState( 'drag-rx-tinymce-' + new Date() + ((Math.random() * 1000).toFixed(0) + ''));
@@ -47,6 +47,7 @@ const TinyMCE = React.forwardRef((
 
   const handleEditorChange = (content: any)=>{
     onChange && onChange({
+      name:name,
       target:{
         value:content,
       }
@@ -64,7 +65,7 @@ const TinyMCE = React.forwardRef((
   return (
     <div 
       ref={ref}
-      className = {fullWidth ? classes.fullWidth : ''}
+      className = {classes.fullWidth}
       {...rest}
     >
       <Editor

@@ -12,6 +12,7 @@ export default{
     {
       name:"TinyMCE",
       props:{
+        height:500,
         field:'content'
       }
 
