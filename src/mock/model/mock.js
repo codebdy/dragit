@@ -122,6 +122,7 @@ function getId(url){
   return parseInt(getQueryVariable('id', url))
 }
 
+
 export default function mockModel(){
   Mock.mock(RegExp('/api/data/query-operate-models?.*'),'post', (request)=>{
     let modelName = getModelName(request.url);
@@ -133,9 +134,16 @@ export default function mockModel(){
     return JSON.parse(JSON.stringify(window.listModels[modelName]));
   })
 
-  Mock.mock('/api/submit-model','post', (request)=>{
-    console.log('serve received data:', JSON.parse(request.body));
-    return JSON.parse(request.body);
+  Mock.mock(RegExp('/api/submit-model?.*'),'post', (request)=>{
+    let model = JSON.parse(request.body)
+    let modelName = getModelName(request.url);
+    let models = window.listModels[modelName];
+    for(var i = 0; i < models.length; i++){
+      if(models[i].id === model.id){
+        return models[i] = model;
+      }
+    }
+    return model;
   })
 
   Mock.mock(RegExp('/api/data/model?.*'), 'get', (request)=>{

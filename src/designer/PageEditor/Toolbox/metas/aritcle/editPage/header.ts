@@ -26,7 +26,7 @@ export default{
           name: 'Button',
           props: {
             variant: "outlined",
-            rxText: '取消',
+            rxText: '返回',
             size:'large',
             onClick:{
               name: GO_BACK_ACTION,
@@ -43,12 +43,6 @@ export default{
           type: "submit",
           size:'large',
           marginLeft:2,
-          //size: "large",
-          //onClick:{
-          //  name: POST_DATA_ACTION,
-          //  slug:'save',
-          //  needGoBack:true,
-          //}            
         }
       }]
     },

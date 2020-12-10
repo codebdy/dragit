@@ -15,7 +15,6 @@ import { RXNodeRoot } from "base/RXNode/Root";
 import { resolvePageUrl } from "utils/resolvePageUrl";
 import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
-import { API_SUBMIT_MODEL } from "APIs/model";
 import { setModelAction } from "store/page/actions";
 import PageForm from "./Form/PageForm";
 
@@ -82,7 +81,9 @@ const PageView = ()=>{
   }, [error])
 
   const handleSubmit = (data: any) => {
-    setSubmitRequest({...API_SUBMIT_MODEL, data});
+    if(pageMeta?.jsonSchema?.submitApi){
+      setSubmitRequest({...pageMeta?.jsonSchema?.submitApi, data});      
+    }
   };
   
   const formActionHandle = (action:PageAction)=>{

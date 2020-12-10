@@ -1,16 +1,21 @@
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
 import ArticleMeta from "designer/PageEditor/Toolbox/metas/aritcle/editPage";
 
 export default {
   layout:[ArticleMeta],
 
   isFormPage:true,
-  api:{
+  getApi:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/Article',
     },      
   },
 
-  
+  submitApi:{
+    ...API_SUBMIT_MODEL,
+    params:{
+      modelName:'/Model/Article',
+    },      
+  }
 }

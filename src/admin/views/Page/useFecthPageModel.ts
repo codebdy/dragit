@@ -13,7 +13,7 @@ export default function useFecthPageModel(page:IPageSchema|undefined, id:number|
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let api = page?.api;
+    let api = page?.getApi;
     if(id && api){
       setPageRequest({...api, params:{...api.params, id}})        
     }

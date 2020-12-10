@@ -5,7 +5,8 @@ export interface IPageSchema{
   isFormPage?:boolean,
   closeAfterSubmit?:boolean,
   refreshAppInfo?:boolean,
-  api?:AxiosRequestConfig, 
+  getApi?:AxiosRequestConfig, 
+  submitApi?:AxiosRequestConfig,
 }
 
 export interface IPage{
