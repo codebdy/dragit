@@ -212,6 +212,8 @@
 
     "is-form-page":"表单页",
     "api":"接口",
+    "get-api":"获取数据API",
+    "submit-api":"提交数据API",
     "is-index-page":"索引页",
     "module-pages":"模块页面",
     "module-auth":"权限",

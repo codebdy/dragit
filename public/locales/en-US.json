@@ -207,6 +207,8 @@
 
     "is-form-page":"Is form page",
     "api":"API",
+    "get-api":"Get API",
+    "submit-api":"Submit API",
     "is-index-page":"Is index page",
     "module-pages":"Module pages",
     "module-auth":"Module Auth",

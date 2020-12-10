@@ -1,31 +1,31 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { AxiosRequestConfig } from 'axios';
-import intl from "react-intl-universal";
 import ApiEditorParamsDialog from './ApiEditorParamsDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex:1,
-      
     },
-    content:{
-      //paddingLeft:theme.spacing(2),
+    label:{
+      marginTop:theme.spacing(1),
+      paddingBottom:theme.spacing(2),
     },
-    item:{
-      margin:theme.spacing(2,0,2,1),
+    container:{
+      paddingLeft:theme.spacing(2),
     }
   }),
 );
 
 export default function ApiEditor(
   props:{
+    label?:string,
     value?: AxiosRequestConfig
     onChange: (api:AxiosRequestConfig)=>void,
   }
 ){
-  const {onChange} = props;
+  const {label, onChange} = props;
   const api = props.value ||{};
 
   const handleChangeParams = (params:any)=>{
@@ -43,9 +43,20 @@ export default function ApiEditor(
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div>{intl.get("api")}</div>
-      <div className = {classes.content}>
-        <Grid item className = {classes.item}>
+      <div className={classes.label}>{label}</div>
+      <Grid container spacing = {2} className={classes.container}>
+        <Grid item xs={12}>
+          <TextField 
+            fullWidth 
+            label = "URL" 
+            variant = "outlined"  
+            size = "small" 
+            multiline rows={2} 
+            value = {api.url || ''}
+            onChange = {handleChangeUrl}
+          />
+        </Grid>
+        <Grid item xs={6}>
           <FormControl variant="outlined" size="small" fullWidth>
             <InputLabel>Method</InputLabel>
             <Select
@@ -58,21 +69,11 @@ export default function ApiEditor(
             </Select>
           </FormControl>             
         </Grid>
-        <Grid item className = {classes.item}>
-          <TextField 
-            fullWidth 
-            label = "URL" 
-            variant = "outlined"  
-            size = "small" 
-            multiline rows={3} 
-            value = {api.url || ''}
-            onChange = {handleChangeUrl}
-          />
-        </Grid>
-        <Grid  item className = {classes.item}>
+
+        <Grid  item xs={6}>
           <ApiEditorParamsDialog value = {api.params} onChange = {handleChangeParams}/>
         </Grid>
-      </div>
+      </Grid>
     </div>
   )
 }

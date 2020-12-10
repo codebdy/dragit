@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {makeStyles, Theme, createStyles, Switch, FormControlLabel} from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { AttributeRow } from '../AttrebuteBox/AttributeRow';
@@ -39,12 +39,25 @@ export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
           label={intl.get("is-form-page")}
         />          
       </AttributeRow>
-      <AttributeRow>
-        <ApiEditor
-          value = {pageSchema?.getApi}
-          onChange={(api)=>onChange({...pageSchema, api:api})}
-        />
-      </AttributeRow>
+      {
+        pageSchema?.isFormPage &&
+        <Fragment>
+          <AttributeRow>
+            <ApiEditor
+              label = {intl.get("get-api")}
+              value = {pageSchema?.getApi}
+              onChange={(api)=>onChange({...pageSchema, getApi:api})}
+            />
+          </AttributeRow>
+          <AttributeRow>
+            <ApiEditor
+              label = {intl.get("submit-api")}
+              value = {pageSchema?.submitApi}
+              onChange={(api)=>onChange({...pageSchema, submitApi:api})}
+            />
+          </AttributeRow>
+        </Fragment>
+      }
     </div>
     
   )
