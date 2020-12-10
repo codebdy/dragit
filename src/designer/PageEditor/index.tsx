@@ -152,7 +152,9 @@ export default function PageEditor(
         }
         setSelectedNode(dragNode);
         bus.emit(REFRESH_NODE, dragParentId);
-        bus.emit(REFRESH_NODE, targetParentId)
+        bus.emit(REFRESH_NODE, targetParentId);
+        bus.emit(REFRESH_NODE, targetNode.id);
+        bus.emit(REFRESH_NODE, dragNode.id);
       }
     }
     window.dragOverParam = undefined;
