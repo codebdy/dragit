@@ -208,11 +208,19 @@ export default [
       {
         titleKey:"switch",
         meta:{
+          name:'SwitchBox',
+          props:{
+            label:'switch label',
+          }
         },
       },
       {
         titleKey:"checkbox",
         meta:{
+          name:'Checkbox',
+          props:{
+            label:'checkbox label',
+          }
         },
       },
       {

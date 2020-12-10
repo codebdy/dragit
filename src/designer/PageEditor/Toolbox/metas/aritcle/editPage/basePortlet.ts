@@ -117,9 +117,7 @@ export default{
                 fullWidth:true,
                 //size:"small",
                 type:'date',
-                InputLabelProps:{
-                  shrink: true,
-                },
+                shrinkLabel:true,
                 field:'create_date',
               },
             }

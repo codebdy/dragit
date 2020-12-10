@@ -53,6 +53,8 @@ import TreeSelect from 'components/Tree/TreeSelect';
 import { TreeSelectRule } from 'components/Tree/TreeSelect/Rule';
 import Medias from 'components/Medias';
 import AntDesignChart from 'components/AntDesignChart';
+import Checkbox from 'components/Checkbox';
+import { CheckboxRule } from 'components/Checkbox/Rule';
 
 const store = configureStore();
 
@@ -63,6 +65,7 @@ register('GridColumn', GridColumn, GridColumnRule);
 register('Button',Button, ButtonRule);
 register('TextBox', TextBox, TextBoxRule);
 register('SwitchBox', SwitchBox, SwitchBoxRule);
+register('Checkbox', Checkbox, CheckboxRule);
 register('FieldView', FieldView, FieldViewRule);
 register('Portlet', Portlet, PortletRule);
 register('FormGridContainer', FormGridContainer);
