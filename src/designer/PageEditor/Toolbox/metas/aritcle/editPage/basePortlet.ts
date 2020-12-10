@@ -171,7 +171,7 @@ export default{
                 field:'tags',
                 multiple:true,
                 fullWidth:true,
-                api:{
+                dataApi:{
                   url: API_LIST_MODEL.url,
                   params:{
                     modelName:'/Model/Tag',
