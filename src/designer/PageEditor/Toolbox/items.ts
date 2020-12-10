@@ -287,6 +287,12 @@ export default [
         },
       },
       {
+        title:"TinyMCE",
+        meta:{
+          name:"TinyMCE",
+        }
+      },
+      {
         titleKey:"button",
         meta:{
           name:"Button",          
