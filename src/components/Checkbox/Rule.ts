@@ -2,7 +2,6 @@ import { IMeta } from "base/Model/IMeta";
 import { IProp } from "base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
-import inputRules from "base/Rules/inputRules";
 import { Rule } from "base/Rules/Rule";
 
 export class CheckboxRule extends Rule{
@@ -18,7 +17,11 @@ export class CheckboxRule extends Rule{
 
   getFields(): Array<IProp>{
     return [
-      ...inputRules,
+      {
+        name:'label',
+        label:'label',
+        input:StringInput,
+      },
       {
         name:'size',
         label:'size',
