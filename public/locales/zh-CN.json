@@ -113,7 +113,7 @@
     "disableRipple" : "禁用波纹",
     "endIcon" : "结束图标",
     "fullWidth": "宽填满",
-    "variant":"变量",
+    "variant":"风格",
     "text":"文本",
     "align-content":"内容对齐",
     "align-items":"项目对齐",
@@ -190,6 +190,11 @@
     "spacing-left":"左边距",
     "with-header":"显示标题",
     "title":"标题",
+
+    "display":"显示",
+    "gutter-bottom":"底部空白",
+    "no-wrap":"不换行",
+    "paragraph":"paragraph",
 
     "multiline":"多行",
     "rows":"行数",

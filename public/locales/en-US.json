@@ -186,6 +186,11 @@
     "with-header":"with-header",
     "title":"Title",
 
+    "display":"Display",
+    "gutter-bottom":"Gutter bottom",
+    "no-wrap":"No wrap",
+    "paragraph":"Paragraph",
+
     "multiline":"Multiline",
     "rows":"rows",
     "label":"label",

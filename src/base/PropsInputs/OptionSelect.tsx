@@ -35,7 +35,7 @@ export default function OptionSelect(props:PropsInputProps){
         <em>None</em>
       </MenuItem>
       {
-        items.map((item:SelectItem)=>{
+        items?.map((item:SelectItem)=>{
           return (
             <MenuItem key={item.value} value={item.value}>
               {item.localLabelKey ? intl.get(item.localLabelKey) : item.label}

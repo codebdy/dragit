@@ -3,7 +3,7 @@ import { IMeta } from "base/Model/IMeta";
 import { IProp } from "base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import SwitchInput from "base/PropsInputs/BooleanInput";
-import TextBox from "components/TextBox";
+import StringInput from "base/PropsInputs/StringInput";
 
 export class TypographyRule extends Rule{
 
@@ -21,12 +21,30 @@ export class TypographyRule extends Rule{
         name:'align',
         label:'align',
         input:OptionSelect,
+
         props:{
-          'inherit' : 'inherit',
-          'left': 'left',
-          'center' : 'center',
-          'right' : 'right',
-          'justify' : 'justify',
+          items:[
+            {
+              value:'inherit',
+              label:'inherit',
+            },
+            {
+              value:'left',
+              label:'Left'
+            },
+            {
+              value:'center',
+              label:'Center'
+            },
+            {
+              value:'right',
+              label:'Right'
+            },
+            {
+              value:'justify',
+              label:'Justify'
+            }
+          ],          
         },
       },
       {
@@ -34,19 +52,30 @@ export class TypographyRule extends Rule{
         label:'display',
         input:OptionSelect,
         props:{
-          'initial' : 'initial',
-          'block': 'block',
-          'inline' : 'inline',
+          items:[
+            {
+              value:'initial',
+              label:'Initial'
+            },
+            {
+              value:'block',
+              label:'Block'
+            },
+            {
+              value:'inline',
+              label:'Inline'
+            }
+          ],
         },
       },
       {
         name:'gutterBottom',
-        label:'gutterBottom',
+        label:'gutter-bottom',
         input:SwitchInput,
       },
       {
         name:'noWrap',
-        label:'noWrap',
+        label:'no-wrap',
         input:SwitchInput,
       },
       {
@@ -59,28 +88,77 @@ export class TypographyRule extends Rule{
         label:'variant',
         input:OptionSelect,
         props:{
-          'h1' : 'h1',
-          'h2': 'h2',
-          'h3' : 'h3',
-          'h4' : 'h4',
-          'h5' : 'h5',
-          'h6' : 'h6',
-          'subtitle1' : 'subtitle1',
-          'subtitle2' : 'subtitle2',
-          'body1' : 'body1',
-          'body2' : 'body2',
-          'caption' : 'caption',
-          'button' : 'button',
-          'overline' : 'overline',
-          'srOnly' : 'srOnly',
-          'inherit' : 'inherit',
+          items:[
+            {
+              value:'h1',
+              label:'h1',              
+            },
+            {
+              value:'h2',
+              label:'h2',              
+            },
+            {
+              value:'h3',
+              label:'h3',              
+            },
+            {
+              value:'h4',
+              label:'h4',              
+            },
+            {
+              value:'h5',
+              label:'h5',              
+            },
+            {
+              value:'h6',
+              label:'h6',              
+            },
+            {
+              value:'subtitle1',
+              label:'subtitle1',              
+            },
+            {
+              value:'subtitle2',
+              label:'subtitle2',              
+            },
+            {
+              value:'body1',
+              label:'body1',              
+            },
+            {
+              value:'body2',
+              label:'body2',              
+            },
+            {
+              value:'caption',
+              label:'caption',              
+            },
+            {
+              value:'button',
+              label:'button',              
+            },
+            {
+              value:'overline',
+              label:'overline',              
+            },
+            {
+              value:'srOnly',
+              label:'srOnly',              
+            },
+            {
+              value:'inherit',
+              label:'inherit',              
+            },
+
+          ]
         },
       },
 
       {
         name:'rxText',
         label:'text',
-        input:TextBox,
+        xs:12,
+        input:StringInput,
       },
     ]
   }
