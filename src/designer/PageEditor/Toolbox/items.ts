@@ -206,26 +206,57 @@ export default [
         }
       },
       {
-        titleKey:"date",
+        titleKey:"switch",
         meta:{
-          name: 'TextBox',
+        },
+      },
+      {
+        titleKey:"checkbox",
+        meta:{
+        },
+      },
+      {
+        titleKey:"checkbox-group",
+        meta:{
+        },
+      },
+      {
+        titleKey:"radio-group",
+        meta:{
+        },
+      },
+
+      {
+        titleKey:"selectbox",
+        meta:{
+          name: 'SelectBox',
           props:{
-            label:"Date",
+            label:"Select",
             variant:"outlined",
-            type:'date',
-            InputLabelProps:{
-              shrink: true,
-            },
             xs:6,
+            data:{
+            }          
           }
         },
       },
       {
-        titleKey:"selectbox",
+        titleKey:"chips-selectbox",
         meta:{
-          name: 'FormGridItem',
+          name: 'SelectBox',
           props:{
-            as:'SelectBox',
+            label:"Select",
+            variant:"outlined",
+            xs:6,
+            data:{
+            }          
+          }
+        },
+      },
+      {
+        titleKey:"tree-select",
+        meta:{
+          name: 'SelectBox',
+          props:{
             label:"Select",
             variant:"outlined",
             xs:6,
@@ -237,9 +268,8 @@ export default [
       {
         titleKey:"combobox",
         meta:{
-          name: 'FormGridItem',
+          name: 'Combobox',
           props:{
-            as:'Combobox',
             label:"Combobox",
             variant:"outlined",
             xs:6,

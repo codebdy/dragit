@@ -286,10 +286,11 @@ export default function PageEditor(
   const handleRemove = ()=>{
     if(selectedNode){
       backupToUndoList(undefined);
+      let parentId = selectedNode.parent?.id;
       selectedNode.remove();
       setSelectedNode(undefined);
       setRedoList([]);
-      bus.emit(REFRESH_NODE, selectedNode.id);
+      bus.emit(REFRESH_NODE, parentId);
     }
   }
 

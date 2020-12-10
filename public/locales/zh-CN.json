@@ -56,7 +56,13 @@
     "column": "列",
 
     "selectbox":"选择框",
+    "chips-selectbox":"标签式选择框",
     "combobox":"组合框",
+    "tree-select":"树状选择框",
+    "switch":"开关",
+    "checkbox":"复选框",
+    "checkbox-group":"复选框组",
+    "radio-group":"单选组",
 
     "selected-node":"选中的节点：",
     "attributes":"属性",
@@ -187,6 +193,7 @@
     "label":"标签",
     "text-field":"文本框",
     "date":"日期",
+    "date-time":"日期时间",
     "button":"按钮",
     "typography":"文字",
     "helper-text":"提示文字",

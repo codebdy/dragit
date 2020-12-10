@@ -56,7 +56,13 @@
     "column": "Column",
 
     "selectbox":"Select",
+    "chips-selectbox":"Chips style select",
     "combobox":"ComboBox",
+    "tree-select":"Tree select",
+    "switch":"Switch",
+    "checkbox":"Checkbox",
+    "checkbox-group":"Checkbox group",
+    "radio-group":"Radio group",
 
     "selected-node":"Selected Node:",
     "attributes":"Attributes",
@@ -182,6 +188,7 @@
     "label":"label",
     "text-field":"TextField",
     "date":"Date",
+    "date-time":"Date time",
     "button":"Button",
     "typography":"Typography",
     "helper-text":"Helper text",

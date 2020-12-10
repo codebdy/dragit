@@ -22,6 +22,67 @@ export class TextBoxRule extends Rule{
     return [
       ...inputRules,
       {
+        name:'type',
+        label:'type',
+        input:OptionSelect,
+        props:{
+          items:[
+            {
+              value:'date',
+              label:'date'
+            },
+            {
+              value:'datetime-local',
+              label:'datetime-local'
+            },
+            {
+              value:'email',
+              label:'email'
+            },
+            {
+              value:'month',
+              label:'month'
+            },
+            {
+              value:'number',
+              label:'number'
+            },
+            {
+              value:'password',
+              label:'password'
+            },
+            {
+              value:'search',
+              label:'search'
+            },
+            {
+              value:'tel',
+              label:'tel'
+            },
+            {
+              value:'text',
+              label:'text'
+            },
+            {
+              value:'time',
+              label:'time'
+            },
+            {
+              value:'url',
+              label:'url'
+            },
+            {
+              value:'week',
+              label:'week'
+            },
+            {
+              value:'color',
+              label:'color'
+            },            
+          ]
+        },
+      },
+      {
         name:'size',
         label:'size',
         input:OptionSelect,
