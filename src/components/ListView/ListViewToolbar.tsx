@@ -62,6 +62,7 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
         <div className={classes.title}>
         <TextField
           name="table-search"
+          type="search"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

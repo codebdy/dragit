@@ -1,8 +1,6 @@
 export default {
   name:'ListView',
   props:{
-    //field:'paginate',
-    //noValidation: true,
     withActions:true,
     elevation:6,
     columns:[
@@ -117,6 +115,5 @@ export default {
         modelName:'/Model/Article',
       },      
     },
-
   }
 }
