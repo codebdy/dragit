@@ -15,7 +15,7 @@ export class PortletRule extends Rule{
     if(child.name === "PortletFooter"){
       return true
     }
-    return false;
+    return true;
   }
 
   getFields(): Array<IProp>{

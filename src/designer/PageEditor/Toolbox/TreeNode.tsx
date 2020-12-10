@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       userSelect:'none',
     },
     leaf:{
-      marginLeft:theme.spacing(-2),
+      marginLeft:theme.spacing(-2.2),
     },
     leafText:{
       marginLeft:theme.spacing(1),

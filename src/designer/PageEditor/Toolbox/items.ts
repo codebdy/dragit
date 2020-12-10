@@ -11,6 +11,7 @@ import artilceList from './metas/aritcle/listPage';
 import articleListHeader from './metas/aritcle/listPage/header';
 import articleListLayout from './metas/aritcle/listPage/layout';
 import aritcleListList from './metas/aritcle/listPage/list';
+import portlet from './metas/portlet'
 
 export default [
   {
@@ -87,11 +88,6 @@ export default [
         titleKey:"column",
         meta:{name:'GridColumn'},
       },  
-    ]
-  },
-  {
-    titleKey: "page",
-    children:[
       {
         titleKey:"page-title",
         meta:{
@@ -100,52 +96,99 @@ export default [
             rxText:'Page title',
           }
         }
-      },  
+      },      
+    ]
+  },
+  {
+    titleKey: "cards",
+    children:[
       {
         titleKey:"portlet",
-        meta:      {
-          name:'Portlet',
+        meta:portlet,
+        children:[
+          {
+            titleKey:"portlet-body",
+            meta: {
+              name:'PortletGridContainer',
+            }
+          },
+          {
+            titleKey:'portlet-grid-item',
+            meta:{
+              name:'PortletGridItem',
+            }
+          },
+          {
+            titleKey:"portlet-footer",
+            meta:{
+              name:'PortletFooter',
+            }
+          },          
+        ]     
+      },  
+
+      {
+        titleKey:"medias-portlet",
+        meta:{
+          name:'MediasPortlet',
+          props: {
+            elevation: 6,
+          },
+        }
+      },
+
+      {
+        titleKey:"one-to-one-portlet",
+        meta: {
+          name:'OneToOnePortlet',
           props: {
             elevation: 6,
             open:true,
             withHeader:true,
-            title:'Portlet',
+            title:'One to One Portlet',
             collapsible: true,
-            marginTop:2,              
           },
           children:[
             {
-              name:'PortletFormGridBody',
-            },
-            {
-              name:'PortletFooter',
-              text:'Footer',
+              name:'PortletGridContainer',
             }
           ]
-        },
-      },  
-      {
-        titleKey:"portlet-body",
-        meta:      {
-          name:'PortletFormGridBody',
         }
       },
+
       {
-        titleKey:"portlet-footer",
-        meta:      {
-          name:'PortletFooter',
-        }
-      },
-      {
-        titleKey:"medias-portlet",
-        meta:      {
-          name:'MediasPortlet',
+        titleKey:"one-to-many-portlet",
+        meta: {
+          name:'OneToManyPortlet',
           props: {
             elevation: 6,
-            //marginTop:2,              
+            open:true,
+            withHeader:true,
+            title:'One to Many Portlet',
+            collapsible: true,
+          },
+          children:[
+            {
+              name:'PortletGridContainer',
+            }
+          ]
+        }
+      },
+
+      {
+        titleKey:"one-to-many-table",
+        meta: {
+          name:'OneToManyTable',
+          props: {
+            elevation: 6,
+            open:true,
+            withHeader:true,
+            title:'One to Many Table',
+            collapsible: true,
           },
         }
       },
+
     ]
   },
   {

@@ -8,7 +8,7 @@ export class PortletGridItemRule extends Rule{
   editPaddingX = '';
 
   accept(child:IMeta){
-    return false;
+    return true;
   }
 
   resolveLabel(meta:IMeta):string|undefined{
