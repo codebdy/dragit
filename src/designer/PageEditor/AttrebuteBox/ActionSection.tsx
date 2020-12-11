@@ -69,8 +69,8 @@ export default function AttributeBoxActionSection(
             <TextField fullWidth
               variant="outlined" 
               size = "small"
-              label={intl.get("module-id")}
-              value={action.page?.moduleId} 
+              label={intl.get("module-slug")}
+              value={action.page?.moduleSlug} 
               onChange={handleModuleIdChange}
             ></TextField>
           </AttributeRow>
@@ -78,8 +78,8 @@ export default function AttributeBoxActionSection(
             <TextField fullWidth
               variant="outlined" 
               size = "small"
-              label = {intl.get("page-id")}
-              value = {action.page?.pageId} 
+              label = {intl.get("page-slug")}
+              value = {action.page?.pageSlug} 
               onChange = {handlePageIdChange}
             ></TextField>
           </AttributeRow>

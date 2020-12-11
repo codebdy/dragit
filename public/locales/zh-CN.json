@@ -86,6 +86,8 @@
     "jump-to":"页面跳转",
     "module-id":"模块ID",
     "page-id":"页面ID",
+    "module-slug":"模块标识",
+    "page-slug":"页面标识",
     "page-param":"页面参数",
     "param-field":"参数字段",
 

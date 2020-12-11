@@ -86,6 +86,8 @@
     "jump-to":"Jump To",
     "module-id":"Module ID",
     "page-id":"Page ID",
+    "module-slug":"Module slug",
+    "page-slug":"Page slug",
     "page-param":"Page Param",
     "param-field":"Param Field",
 
