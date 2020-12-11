@@ -32,6 +32,7 @@ import SelectedLabel from './Core/SelectedLabel';
 import { cloneObject } from '../../utils/cloneObject';
 import SubmitButton from 'components/common/SubmitButton';
 import { clearPageSchemaCache } from 'base/Hooks/usePageMeta';
+import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -103,10 +104,18 @@ export default function PageEditor(
   const [draggedNode, setDraggedNode] = useState<RXNode<IMeta>>();
   const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
   const [, saving] = useAxios(saveRequest, true);
+  const [isDirty, setIsDirty] = useState(false);
+  const [saveConfirmOpen, setSaveConfirmOpen] = useState(false);
 
   const dispatch = useDispatch()
   const theme = useTheme(); 
-  useAuthCheck();  
+  useAuthCheck();
+  useEffect(()=>{
+    if(undoList.length > 0 && (redoList.length !== 0 || undoList.length !== 0)){
+      setIsDirty(true);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[undoList])  
   
   const operateNode = (targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>, position:CursorPosition)=>{
     if(targetNode.id === draggedNode.id){
@@ -197,7 +206,9 @@ export default function PageEditor(
   }, [selectedNode])
 
   const handleCancel = () => {
-    onClose();
+    if(isDirty){
+      setSaveConfirmOpen(true);
+    }
   };
 
   const handleSave = () => {
@@ -213,7 +224,13 @@ export default function PageEditor(
       }
     })
     clearPageSchemaCache();
+    setIsDirty(false);    
   };
+
+  const handleBackConfirm = ()=>{
+    setSaveConfirmOpen(false);
+    onClose();
+  }
 
   const handleScroll = ()=>{
     bus.emit(CANVAS_SCROLL)
@@ -386,6 +403,7 @@ export default function PageEditor(
                 size="large"
                 onClick={handleSave} 
                 submitting={saving}
+                disabled = {!isDirty}
               >
                 {intl.get('save')}
               </SubmitButton>
@@ -425,6 +443,12 @@ export default function PageEditor(
             (draggedToolboxItem || draggedNode) &&
             <DragCusor/>
           }
+          <ConfirmDialog 
+            message = {intl.get('changing-not-save-message')}
+            open = {saveConfirmOpen}
+            onCancel ={()=>{setSaveConfirmOpen(false)}}
+            onConfirm = {handleBackConfirm}
+          />
         </Fragment>      
       </Backdrop>
   );

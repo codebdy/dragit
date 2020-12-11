@@ -268,6 +268,9 @@
     "no-notifications":"没有任何消息",
     "view-all":"查看全部",
     "drag-to-replace":"交换位置",
-    "drag-to-sub-node":"成为子节点"
+    "drag-to-sub-node":"成为子节点",
+
+    "operation-confirm":"操作确认",
+    "changing-not-save-message":"修改还没有保存，确实要返回吗？"
 
 }

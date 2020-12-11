@@ -26,15 +26,16 @@ export default function SubmitButton(
     onClick?:()=>void,
     submitting?:boolean,
     children?:any,
+    disabled?:boolean,
   }
 ){
-  const {submitting = false, onClick, children, ...rest} = props;
+  const {submitting = false, onClick, children, disabled, ...rest} = props;
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
       <Button
         onClick = {onClick} 
-        disabled = {submitting}
+        disabled = {submitting || disabled}
         {...rest}
       >
         {children}

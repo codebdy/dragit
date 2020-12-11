@@ -263,7 +263,8 @@
     "no-notifications":"No notifications",
     "view-all":"View All",
     "drag-to-replace":"Replace",
-    "drag-to-sub-node":"Become to subnode"
+    "drag-to-sub-node":"Become to subnode",
 
-
+    "operation-confirm":"Operation Confirm",
+    "changing-not-save-message":"Changing not be saved, are you sure to go back?"
 }
