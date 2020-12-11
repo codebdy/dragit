@@ -234,7 +234,7 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
                 </Grid>
 
                 <ApiEditor
-                  label = {intl.get("get-api")}
+                  label = {intl.get("data-api")}
                   value = {columns[selectedIndex].input?.props?.dataApi}
                   onChange={(api)=>handleChangeInputProps(selectedIndex, 'dataApi', api)}
                 />

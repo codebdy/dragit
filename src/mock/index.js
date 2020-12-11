@@ -12,6 +12,20 @@ import mockTrees from './tree/mock'
 window.drawerData = drawer;
 
 
+function login(account, password){
+  let users = window.listModels['/Model/User']
+  if(!users){
+    return undefined
+  }
+
+  for(var i = 0; i < users.length; i++){
+    let user = users[i];
+    if(user.login_name === account && user.password === password){
+      return user;
+    }
+  }
+}
+
 Mock.mock('/api/drawer', 'get', (request)=>{
   return window.drawerData;
 })
@@ -34,10 +48,11 @@ Mock.mock('/api/get-auths','get', (request)=>{
 
 Mock.mock('/api/login', 'post',  (request)=>{
   let data = JSON.parse(request.body)
-  if(data.account === 'demo' && data.password === 'demo'){
+  let user = login(data.account,  data.password)
+  if(user){
     return{
       success:true,
-      appInfo:appInfo,
+      appInfo:{...appInfo, user:user},
     }   
   }
   else{

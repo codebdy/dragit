@@ -150,7 +150,19 @@ export default function Login(){
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <Grid container justify = "center">
-          <Grid container item md={7} sm={8} xs={10} className = {classes.loginBox} alignContent = "stretch">
+          <Grid 
+            container 
+            item md={7} 
+            sm={8}
+            xs={10} 
+            className = {classes.loginBox} 
+            alignContent = "stretch"
+            onKeyUp = {e=>{
+              if(e.keyCode === 13) {
+                handleLogin()
+              }
+            }}
+          >
             <Grid item md={6} className = {classes.leftImage}>
               <img src={leftImage} alt="" width="80%"/>
             </Grid>
@@ -178,7 +190,7 @@ export default function Login(){
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth variant = "outlined">
-                  <InputLabel htmlFor="standard-adornment-password">{intl.get('password')}</InputLabel>
+                  <InputLabel htmlFor="standard-adornment-password" style={{background:"#fff",padding:"0 8px"}}>{intl.get('password')}</InputLabel>
                   <OutlinedInput
                     id="standard-adornment-password"
                     type={values.showPassword ? 'text' : 'password'}

@@ -1,7 +1,8 @@
-export default[
+var users = [
   {
     id:1,
     login_name:'admin',
+    password:'admin',
     name:'超级管理员',
     email:'super@drag.fit',
     isSuper:true,
@@ -12,10 +13,12 @@ export default[
   {
     id:2,
     login_name:'demo',
+    password:'demo',
     name:'演示账号',
     email:'demo@drag.fit',
     roles:'编辑, 读者',
     roleIds:[1,2],
+    isDemo:true,
     avatar:{
       id:'8',
       thumbnail: '/static/images/grid-list/plant.jpg',
@@ -28,12 +31,13 @@ export default[
   {
     id:3,
     login_name:'test',
+    password:'test',
     name:'测试',
     email:'test@drag.fit',
     roles:['测试员'],
     forbid:true,
     created_at:'2019-02-22 13:31:23',
   }
-
-
 ]
+
+export default users;

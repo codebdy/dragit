@@ -4,8 +4,8 @@ import Mock from 'mockjs'
 import getQueryVariable from 'mock/utils/getQueryVariable'
 import articles from 'mock/data/articlesData';
 import notifications from 'mock/data/notifications'
-import users from './users';
-import roles from './roles';
+import users from '../data/users';
+import roles from '../data/roles';
 import { getModelName } from '../utils/getModelName';
 import tags from 'mock/data/tags';
 import articleAttributes from 'mock/data/articleAttributes';

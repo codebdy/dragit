@@ -1,4 +1,4 @@
-export default [
+var roles = [
   {
     id:1,
     name:'管理员',
@@ -27,3 +27,5 @@ export default [
     ],
   }
 ]
+
+export default roles;
