@@ -74,7 +74,7 @@ export default {
                     label:'邮箱',
                   },
                   {
-                    field:'roles',
+                    field:'roleNames',
                     label:'角色',
                   },
                   {
@@ -135,7 +135,7 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                api:{
+                dataApi:{
                   method:'post',
                   url:API_QUERY_AND_OPERATE_MODELS.url,
                   params:{

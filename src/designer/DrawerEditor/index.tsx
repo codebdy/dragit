@@ -13,8 +13,9 @@ import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { AxiosRequestConfig } from 'axios';
-import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import { useLoginCheck } from 'base/Hooks/useLoginCheck';
 import SubmitButton from 'components/common/SubmitButton';
+import { useAuthCheck } from 'base/Hooks/useAuthCheck';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,7 +69,8 @@ export default function DrawerEditor(){
   const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
   const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
 
-  useAuthCheck();
+  useLoginCheck();
+  useAuthCheck(['customize']);
   
   useEffect(()=>{
     metas && rootNode.parse(metas);    

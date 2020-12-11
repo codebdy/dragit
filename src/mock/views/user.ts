@@ -1,5 +1,5 @@
 import {GO_BACK_ACTION} from "base/PageAction";
-import {API_GET_MODEL_BY_ID, API_LIST_MODEL} from "APIs/model"
+import {API_GET_MODEL_BY_ID, API_LIST_MODEL, API_SUBMIT_MODEL} from "APIs/model"
 
 export default {
   layout:[
@@ -126,7 +126,7 @@ export default {
                             itemName:'name',
                             multiple:true,
                             fullWidth:true,
-                            api:{
+                            dataApi:{
                               ...API_LIST_MODEL,
                               params:{
                                 modelName:'/Model/Role',
@@ -217,10 +217,17 @@ export default {
 
 
   isFormPage:true,
-  api:{
+  getApi:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/User',
     },      
   },
+
+  submitApi:{
+    ...API_SUBMIT_MODEL,
+    params:{
+      modelName:'/Model/User',
+    },      
+  }
 }

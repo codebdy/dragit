@@ -1,5 +1,5 @@
 import {GO_BACK_ACTION} from "base/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
 import {API_GET_AUTHS} from "APIs/modules"
 
 export default {
@@ -150,10 +150,17 @@ export default {
 
 
   isFormPage:true,
-  api:{
+  getApi:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/Role',
     },      
   },
+
+  submitApi:{
+    ...API_SUBMIT_MODEL,
+    params:{
+      modelName:'/Model/Role',
+    },      
+  }
 }

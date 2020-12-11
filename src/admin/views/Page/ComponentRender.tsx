@@ -5,6 +5,7 @@ import { resolveComponent } from 'base/DragRX';
 import withFormField from './withFormField';
 import { IMeta } from 'base//Model/IMeta';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
+import useLoggedUser from 'store/app/useLoggedUser';
 
 export default function ComponentRender(
   props:{
@@ -13,6 +14,7 @@ export default function ComponentRender(
     onDirty:()=>void,
   }){
   const {component, onPageAction, onDirty} = props;
+  const loggedUser = useLoggedUser();
   const onClickAction = component.meta.props?.onClick;
   let Component = resolveComponent(component.meta);
   Component = component.meta.props?.field ? withFormField(Component) : Component;
@@ -55,7 +57,7 @@ export default function ComponentRender(
     elementProps.onAction = onPageAction;
   }
 
-  const elementView = (component.children && component.children.length > 0) || rxText ?
+  let elementView:any = (component.children && component.children.length > 0) || rxText ?
     (<Component {...elementProps}>
       {rxText}
       {component.children?.map((child: RXNode<IMeta>)=>{
@@ -67,6 +69,7 @@ export default function ComponentRender(
     :
     <Component {...elementProps} />
 
+  elementView = loggedUser.authCheck(component.meta.auths) ? elementView : undefined; 
   return(
     <Fragment>
     { elementView }

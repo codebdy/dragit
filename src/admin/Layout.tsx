@@ -7,7 +7,7 @@ import PageContent from 'admin/PageContent';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import AreaSelect from 'designer/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
-import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import { useLoginCheck } from 'base/Hooks/useLoginCheck';
 import Page404 from './views/Page404';
 
 const useStyles = makeStyles(() =>
@@ -32,7 +32,7 @@ const useStyles = makeStyles(() =>
 export default function Layout(){
   const [mobileOpen, setMobileOpen] = React.useState(false);
   
-  useAuthCheck();
+  useLoginCheck();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

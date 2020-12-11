@@ -8,9 +8,23 @@ import mockMedias from './medias/mock'
 import mockModules from './modules/mock'
 import mockModel from './model/mock'
 import mockTrees from './tree/mock'
+import getQueryVariable from './utils/getQueryVariable'
 
 window.drawerData = drawer;
 
+function getUser(account){
+  let users = window.listModels['/Model/User']
+  if(!users){
+    return undefined
+  }
+
+  for(var i = 0; i < users.length; i++){
+    let user = users[i];
+    if(user.login_name === account){
+      return user;
+    }
+  }
+}
 
 function login(account, password){
   let users = window.listModels['/Model/User']
@@ -24,6 +38,24 @@ function login(account, password){
       return user;
     }
   }
+}
+
+function addAuthsToUser(user){
+  let roles = window.listModels['/Model/Role'] 
+  user.auths = [];
+  if(!user.roleIds){
+    return user;
+  }
+
+  user.roleIds&&user.roleIds.forEach((roleId)=>{
+    roles.forEach((role)=>{
+      if(roleId === role.id){
+        user.auths = [ ...user.auths, ...(role.auths||[])];
+      }
+    })
+  })
+
+  return user
 }
 
 Mock.mock('/api/drawer', 'get', (request)=>{
@@ -52,7 +84,7 @@ Mock.mock('/api/login', 'post',  (request)=>{
   if(user){
     return{
       success:true,
-      appInfo:{...appInfo, user:user},
+      appInfo:{...appInfo, authToken:user.login_name, user:addAuthsToUser(user)},
     }   
   }
   else{
@@ -63,8 +95,10 @@ Mock.mock('/api/login', 'post',  (request)=>{
   }
 })
 
-Mock.mock('/api/get-app-info','get', (request)=>{
-  return appInfo
+Mock.mock(RegExp('/api/get-app-info?.*'),'get', (request)=>{
+  let token = getQueryVariable('token', request.url);
+  let user = getUser(token);
+  return {...appInfo, authToken:user.login_name, user:addAuthsToUser(user)}
 })
 
 Mock.mock('/api/get-lasted-notifications', notifications);

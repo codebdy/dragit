@@ -7,7 +7,7 @@ export default[
   {
     id:21,
     slug:'dashboard',
-    name:'仪表盘',
+    name:'系统',
     indexPageId:211,
     pages:[
       {
@@ -17,6 +17,23 @@ export default[
         jsonSchema:dashboard,
       },
     ],
+    auths:[
+      {
+        id:211,
+        slug:"customize",
+        name:'定制系统',
+      },
+      {
+        id:212,
+        slug:"debug",
+        name:'调试',
+      },
+      {
+        id:213,
+        slug:"theme-settings",
+        name:'主题设置',
+      },
+    ]
   },
   {
     id:15,

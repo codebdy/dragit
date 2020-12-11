@@ -1,5 +1,5 @@
 export default {
-  authToken:'zhishiyicuanburenshidewenzi',
+  authToken:'',
   unreadMessagesCount:18,
   user:{
     id:'2',

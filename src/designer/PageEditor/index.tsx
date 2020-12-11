@@ -19,7 +19,7 @@ import { useAxios } from 'base/Hooks/useAxios';
 import { IPage, IPageSchema } from 'base/Model/IPage';
 import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'admin/views/Page/PageSkeleton';
-import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import { useLoginCheck } from 'base/Hooks/useLoginCheck';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import ComponentView from './Core/ComponentView';
@@ -33,6 +33,7 @@ import { cloneObject } from '../../utils/cloneObject';
 import SubmitButton from 'components/common/SubmitButton';
 import { clearPageSchemaCache } from 'base/Hooks/usePageMeta';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
+import { useAuthCheck } from 'base/Hooks/useAuthCheck';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -109,7 +110,10 @@ export default function PageEditor(
 
   const dispatch = useDispatch()
   const theme = useTheme(); 
-  useAuthCheck();
+
+  useLoginCheck();
+  useAuthCheck(['customize']);
+
   useEffect(()=>{
     if(undoList.length > 0 && (redoList.length !== 0 || undoList.length !== 0)){
       setIsDirty(true);

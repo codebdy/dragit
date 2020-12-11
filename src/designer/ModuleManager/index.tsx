@@ -6,16 +6,16 @@ import LeftContent from "./LeftContent";
 import intl from "react-intl-universal";
 import ModuleContent from "./ModuleContent";
 import { useHistory } from "react-router";
+import { useLoginCheck } from "base/Hooks/useLoginCheck";
 import { useAuthCheck } from "base/Hooks/useAuthCheck";
-
-
 
 const ModuleManager = (props:{children?: any})=>{
   const history = useHistory();
 
   const [selectedModuleId, setSelectedModuleId] = useState(-1);
 
-  useAuthCheck();
+  useLoginCheck();
+  useAuthCheck(['customize']);
 
   const handleReturn = ()=>{
     history.goBack();
