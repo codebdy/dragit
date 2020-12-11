@@ -10,7 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import classNames from 'classnames';
 import { ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
-import { ListViewMetaItem } from './ListViewMetaItem';
+import { ILabelItem } from '../../base/Model/ILabelItem';
 import intl from 'react-intl-universal';
 import { JUMP_TO_PAGE_ACTION, PageActionHandle } from 'base/PageAction';
 import { AxiosRequestConfig } from 'axios';
@@ -23,6 +23,8 @@ import { IOperateListParam } from 'base/Model/IOperateListParam';
 import { IPaginate } from 'base/Model/IPaginate';
 import { ListViewCell } from './ListViewCell';
 import { useAxios } from 'base/Hooks/useAxios';
+import ConfirmDialog from 'base/Widgets/ConfirmDialog';
+import { ICommand } from 'base/Model/ICommand';
 
 export const COMMAND_QUERY = "query";
 
@@ -58,6 +60,11 @@ export interface ListViewForm{
   sortBy:Array<string>
 }
 
+interface Command{
+  command:ICommand,
+  rowId?:number,
+}
+
 function creatEmpertyRows(length:number){
   let rows = []
   for(var i = 0; i < length; i++){
@@ -71,10 +78,10 @@ const ListView = React.forwardRef((
     props: {
       className:string, 
       value?:Paginate, 
-      columns:Array<ListViewMetaItem>, 
-      filters:Array<ListViewMetaItem>,
-      batchCommands:Array<ListViewMetaItem>,
-      rowCommands:Array<ListViewMetaItem>,
+      columns:Array<ILabelItem>, 
+      filters:Array<ILabelItem>,
+      batchCommands:Array<ICommand>,
+      rowCommands:Array<ICommand>,
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
@@ -107,6 +114,7 @@ const ListView = React.forwardRef((
 
   const [request, setRequest] = useState<AxiosRequestConfig>();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [confirmCommand, setConfirmCommand] = useState<Command>();
 
   const [paginate = {
     total:0,
@@ -169,13 +177,30 @@ const ListView = React.forwardRef((
     onAction({name:JUMP_TO_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
   }
 
-
-  const handleBatchAction = (commandSlug:string)=>{
-    updateOperateParam('command', commandSlug, true);
+  const handleBatchAction = (command:ICommand)=>{
+    if(command.confirmMessage){
+      setConfirmCommand({command:command})
+    }
+    else{
+      updateOperateParam('command', command.slug, true);      
+    }
   }
-  const handleRowAction = (commandSlug:string, rowId:string)=>{
-    updateOperateParam('command', commandSlug, true);
-    updateOperateParam('selected', [rowId], true);
+  const handleRowAction = (command:ICommand, rowId:number)=>{
+    if(command.confirmMessage){
+      setConfirmCommand({command:command, rowId:rowId});
+    }
+    else{
+      updateOperateParam('command', command.slug, true);
+      updateOperateParam('selected', [rowId], true);
+    }
+  }
+
+  const handleConfirm = ()=>{
+    if(confirmCommand){
+      updateOperateParam('command', confirmCommand?.command.slug, true);
+      updateOperateParam('selected', [confirmCommand?.rowId], true);      
+    }
+    setConfirmCommand(undefined);
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -276,7 +301,7 @@ const ListView = React.forwardRef((
                                     <Tooltip title={command.label} key={command.slug}>
                                       <IconButton aria-label={command.label} name={'row-action-' + command.slug}
                                         onClick = {(e)=>{
-                                          command.jumpToPage ? jumpToPage(command.jumpToPage as IPageJumper, row) : handleRowAction(command.slug, row.id);
+                                          command.jumpToPage ? jumpToPage(command.jumpToPage as IPageJumper, row) : handleRowAction(command, row.id);
                                           e.stopPropagation();
                                         }}
                                         size = "small"
@@ -315,6 +340,12 @@ const ListView = React.forwardRef((
           }}
         />
       </HoverablePaper>
+      <ConfirmDialog 
+        message = {confirmCommand?.command.confirmMessage||'Confirm message'}
+        open = {!!confirmCommand}
+        onCancel ={()=>{setConfirmCommand(undefined)}}
+        onConfirm = {handleConfirm}
+      /> 
     </div>
   );
 })

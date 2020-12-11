@@ -271,6 +271,7 @@
     "drag-to-sub-node":"成为子节点",
 
     "operation-confirm":"操作确认",
-    "changing-not-save-message":"修改还没有保存，确实要返回吗？"
+    "changing-not-save-message":"修改还没有保存，确实要返回吗？",
+    "confirm-message":"确认消息"
 
 }

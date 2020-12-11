@@ -1,8 +1,8 @@
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
-import { ListViewMetaItem } from './ListViewMetaItem';
+import { ILabelItem } from '../../base/Model/ILabelItem';
 
-export const ListViewCell = (props: { row: any; columns: Array<ListViewMetaItem>; colIndex: number; }) => {
+export const ListViewCell = (props: { row: any; columns: Array<ILabelItem>; colIndex: number; }) => {
   const { row, columns, colIndex } = props;
   const column = columns[colIndex];
   const parseTemplate = () => {

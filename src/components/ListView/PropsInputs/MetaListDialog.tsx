@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MetaListDialogLeftList from './MetaListDialogLeftList';
-import { ListViewMetaItem } from 'components/ListView/ListViewMetaItem';
+import { ILabelItem } from 'base/Model/ILabelItem';
 
 import PropsDialog from 'base/PropsInputs/PropsDialog';
 
@@ -21,11 +21,11 @@ const useStyles = makeStyles(styles);
 export interface MetaListDialogProps{
   label?:string,
   title:string;
-  value:Array<ListViewMetaItem>;
+  value:Array<ILabelItem>;
   selectedIndex:number;
   children:React.ReactNode;
   onAddNew:()=>void;  
-  onChange:(newValue:Array<ListViewMetaItem>)=>void;
+  onChange:(newValue:Array<ILabelItem>)=>void;
   onSave:()=>void;
   onSelected:(number:number)=>void;
 }

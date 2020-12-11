@@ -5,6 +5,8 @@ import intl from 'react-intl-universal';
 import MetaListDialog from 'components/ListView/PropsInputs/MetaListDialog';
 import { useEffect } from 'react';
 import { cloneObject } from 'utils/cloneObject';
+import { ICommand } from 'base/Model/ICommand';
+import { IPageJumper } from 'base/Model/IPageJumper';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -23,7 +25,7 @@ const useStyles = makeStyles(styles);
 export default function ListViewRowCommandDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [commands, setCommands] = React.useState<Array<any>>(value ? cloneObject(value) : []);
+  const [commands, setCommands] = React.useState<Array<ICommand>>(value ? cloneObject(value) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
   const command = commands[selectedIndex];
 
@@ -31,7 +33,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
     setCommands(value ? cloneObject(value) : [])
   },[value])
 
-  const handleChangeAttribute = (index:number, name:string, value:string|boolean|Object|undefined)=>{
+  const handleChangeAttribute = (index:number, name:string, value:string|IPageJumper|undefined)=>{
     commands[selectedIndex][name] = value;
     setCommands([...commands]);
   };
@@ -43,7 +45,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
   };
 
   const hanldeJumpParams = (name:string, value:string)=>{
-    commands[selectedIndex].jumpToPage[name] = value;
+    commands[selectedIndex].jumpToPage = {...commands[selectedIndex].jumpToPage, [name]:value};
     setCommands([...commands]);
   }
   
@@ -54,7 +56,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
       value = {commands}
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
-      onChange = {newValue=>{setCommands(newValue)}}
+      onChange = {newValue=>{setCommands(newValue as any)}}
       onSave = {()=>{onChange(cloneObject(commands))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >{selectedIndex >= 0 &&
@@ -64,6 +66,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
             label={intl.get('slug')}
             variant="outlined" 
             fullWidth
+            size = "small"
             value = {command.slug || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'slug', event.target.value.trim())
@@ -74,6 +77,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
             label={intl.get('name')} 
             variant="outlined" 
             fullWidth
+            size = "small"
             value = {command.label || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'label', event.target.value.trim())
@@ -84,9 +88,23 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
             label={intl.get('action-icon')} 
             variant="outlined" 
             fullWidth
+            size = "small"
             value = {command.icon || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'icon', event.target.value.trim())
+            }}
+          />
+          <TextField 
+            className = {classes.itemInput} 
+            label={intl.get('confirm-message')} 
+            variant="outlined" 
+            fullWidth
+            size = "small"
+            value = {command.confirmMessage || ''} 
+            multiline
+            rows = {2}
+            onChange = {event=>{
+              handleChangeAttribute(selectedIndex, 'confirmMessage', event.target.value.trim())
             }}
           />
           <FormControlLabel
@@ -107,12 +125,13 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
             <Fragment>
               <TextField 
                 className = {classes.itemInput} 
-                label={intl.get('module-id')} 
+                label={intl.get('module-slug')} 
                 variant="outlined" 
                 fullWidth
-                value = {command.jumpToPage.moduleId || ''} 
+                size = "small"
+                value = {command.jumpToPage.moduleSlug || ''} 
                 onChange = {event=>{
-                  hanldeJumpParams('moduleId', event.target.value.trim())
+                  hanldeJumpParams('moduleSlug', event.target.value.trim())
                 }}
               />
               <TextField 
@@ -120,9 +139,10 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
                 label={intl.get('page-id')} 
                 variant="outlined" 
                 fullWidth
-                value = {command.jumpToPage.pageId || ''} 
+                size = "small"
+                value = {command.jumpToPage.pageSlug || ''} 
                 onChange = {event=>{
-                  hanldeJumpParams('pageId', event.target.value.trim())
+                  hanldeJumpParams('pageSlug', event.target.value.trim())
                 }}
               />
               {/*<TextField 

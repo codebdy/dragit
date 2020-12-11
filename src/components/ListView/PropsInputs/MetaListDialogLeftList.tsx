@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
-import { ListViewMetaItem } from 'components/ListView/ListViewMetaItem';
+import { ILabelItem } from 'base/Model/ILabelItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MetaListDialogLeftList(
     props:{
-        items:Array<ListViewMetaItem>, 
+        items:Array<ILabelItem>, 
         selectedIndex:number, 
         onSelected:(index:number)=>void,
         onAddNew:()=>void,

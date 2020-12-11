@@ -82,6 +82,7 @@ export default {
         slug:"delete",
         label:"删除",
         icon:"mdi-delete",
+        confirmMessage:"删除后将不可恢复，您确定要删除吗？",
       },
     ],
     rowCommands:[
@@ -111,6 +112,7 @@ export default {
         slug:"delete",
         label:"删除",
         icon:"mdi-delete",
+        confirmMessage:"删除后将不可恢复，您确定要删除吗？",
       },
     ],
     dataApi:{

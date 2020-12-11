@@ -1,4 +1,4 @@
-export interface ListViewMetaItem{
+export interface ILabelItem{
   label:string;
   [key:string]:any;
 }

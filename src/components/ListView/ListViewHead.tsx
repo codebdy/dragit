@@ -2,7 +2,7 @@ import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@materi
 import { Skeleton } from "@material-ui/lab";
 import { FieldOrder } from "base/Model/IOperateListParam";
 import React from "react";
-import { ListViewMetaItem } from "./ListViewMetaItem";
+import { ILabelItem } from "../../base/Model/ILabelItem";
 import intl from "react-intl-universal";
 
 
@@ -12,7 +12,7 @@ export interface ListViewHeadProps {
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   orders?: Array<FieldOrder>;
   rowCount: number;
-  columns:Array<ListViewMetaItem>;
+  columns:Array<ILabelItem>;
   loading:boolean;
   rowCommandsCount:number;
 }

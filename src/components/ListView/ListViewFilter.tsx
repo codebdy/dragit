@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Tooltip, IconButton, FormLabel, RadioGroup, FormControlLabel, Radio, Button, makeStyles, Theme, createStyles, Popover } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { ListViewMetaItem } from './ListViewMetaItem';
+import { ILabelItem } from '../../base/Model/ILabelItem';
 import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ListViewFilter(props:{filters:Array<ListViewMetaItem>, values:any, onChange:(values:any)=>void}) {
+export default function ListViewFilter(props:{filters:Array<ILabelItem>, values:any, onChange:(values:any)=>void}) {
   const {filters, values = {}, onChange} = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();

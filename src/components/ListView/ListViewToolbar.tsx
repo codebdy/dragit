@@ -3,8 +3,9 @@ import React, { Fragment, useState } from "react";
 import MdiIcon from "../common/MdiIcon";
 import ListViewFilter from "./ListViewFilter";
 import clsx from 'clsx';
-import { ListViewMetaItem } from "./ListViewMetaItem";
+import { ILabelItem } from "../../base/Model/ILabelItem";
 import intl from 'react-intl-universal';
+import { ICommand } from "base/Model/ICommand";
 
 const useToolbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,12 +35,12 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
 interface ListViewToolbarProps {
   keyword?:string,
   numSelected: number;
-  filters:Array<ListViewMetaItem>,
-  batchCommands:Array<ListViewMetaItem>,
+  filters:Array<ILabelItem>,
+  batchCommands:Array<ICommand>,
   filterValues:any, 
   onKeywordChange:(keyword?:string)=>void,
   onFilterChange:(filterValues:any)=>void,
-  onBatchAction:(actionSlug:string)=>void,
+  onBatchAction:(action:ICommand)=>void,
 }
 
 const ListViewToolbar = (props: ListViewToolbarProps) => {
@@ -98,7 +99,7 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
               return(
                 <Tooltip title={command.label} key={command.slug}>
                   <IconButton aria-label={command.label} name={'batch-action-' + command.slug}
-                    onClick = {()=>{onBatchAction(command.slug)}}
+                    onClick = {()=>{onBatchAction(command)}}
                   >
                     <MdiIcon iconClass = {command.icon} size="20" />
                   </IconButton>

@@ -266,5 +266,6 @@
     "drag-to-sub-node":"Become to subnode",
 
     "operation-confirm":"Operation Confirm",
-    "changing-not-save-message":"Changing not be saved, are you sure to go back?"
+    "changing-not-save-message":"Changing not be saved, are you sure to go back?",
+    "confirm-message":"Confirm message"
 }

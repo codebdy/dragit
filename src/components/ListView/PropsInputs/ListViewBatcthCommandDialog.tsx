@@ -4,6 +4,7 @@ import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 import { cloneObject } from 'utils/cloneObject';
+import { ICommand } from 'base/Model/ICommand';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -22,14 +23,14 @@ const useStyles = makeStyles(styles);
 export default function ListViewBatcthCommandDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [commands, setCommands] = React.useState<Array<any>>(value ? cloneObject(value) : []);
+  const [commands, setCommands] = React.useState<Array<ICommand>>(value ? cloneObject(value) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
 
   useEffect(()=>{
     setCommands(value ? cloneObject(value) : [])
   },[value])
 
-  const handleChangeAttribute = (index:number, name:string, value:string|boolean)=>{
+  const handleChangeAttribute = (index:number, name:string, value:string)=>{
     commands[selectedIndex][name] = value;
     setCommands([...commands]);
   };
@@ -46,7 +47,7 @@ export default function ListViewBatcthCommandDialog(props:PropsInputProps){
       value = {commands}
       selectedIndex = {selectedIndex}
       onAddNew = {handleAddNew}
-      onChange = {newValue=>{setCommands(newValue)}}
+      onChange = {newValue=>{setCommands(newValue as any)}}
       onSave = {()=>{onChange(cloneObject(commands))}}
       onSelected = {index=>{setSelectedIndex(index)}}
     >{selectedIndex >= 0 &&
@@ -82,6 +83,19 @@ export default function ListViewBatcthCommandDialog(props:PropsInputProps){
             value = {commands[selectedIndex].icon || ''} 
             onChange = {event=>{
               handleChangeAttribute(selectedIndex, 'icon', event.target.value.trim())
+            }}
+          />
+          <TextField 
+            className = {classes.itemInput} 
+            label={intl.get('confirm-message')} 
+            variant="outlined" 
+            fullWidth
+            size = "small"
+            value = {commands[selectedIndex].confirmMessage || ''} 
+            multiline
+            rows = {2}
+            onChange = {event=>{
+              handleChangeAttribute(selectedIndex, 'confirmMessage', event.target.value.trim())
             }}
           />
         </Fragment>
