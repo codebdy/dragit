@@ -209,6 +209,9 @@ export default function PageEditor(
     if(isDirty){
       setSaveConfirmOpen(true);
     }
+    else{
+      onClose();
+    }
   };
 
   const handleSave = () => {
