@@ -58,7 +58,7 @@ const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
 
     const {register, setValue, validate} = useFormContext();
-    const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
+    const {field, forwardedRef, empertyValue, rule, helperText, onDirty, ...rest} = props;
 
     const fieldName = useFieldName(field);
     const subModelContext = useContext(SubModelContext);
@@ -95,6 +95,7 @@ const withFormField = (Component:any)=>{
       let newValue = e?.target?.value;
       setInputValue(newValue);
       setValue(fieldName, newValue);
+      onDirty && onDirty();
     }
 
     const handleBlur = ()=>{

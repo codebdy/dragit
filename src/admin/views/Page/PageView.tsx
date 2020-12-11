@@ -46,7 +46,7 @@ const PageView = ()=>{
   const [submit, setSubmit] = useState(false);
   const [openAlert, setOpentAlert] = useState(false);
   const [closeAfterSubmit, setCloseAfterSubmit] = useState(false);
-  const [isDirty, setIsDirty] = useState(false);
+  const [isDirty] = useState({value:false});
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
   const [, loadingModel] = usePageModel(pageMeta?.jsonSchema, id);
@@ -117,7 +117,7 @@ const PageView = ()=>{
 
   const handleBackConfirm = ()=>{
     history.goBack();
-    setIsDirty(false);
+    isDirty.value = false;
     setBackConfirmOpen(false);
   }
   
@@ -129,7 +129,7 @@ const PageView = ()=>{
         return;
         
       case GO_BACK_ACTION:
-        if(isDirty){
+        if(isDirty.value){
           setBackConfirmOpen(true);
         }
         else{
@@ -140,14 +140,20 @@ const PageView = ()=>{
       case SUBMIT_ACTION:
         setCloseAfterSubmit(false);
         setSubmit(true);
+        isDirty.value = false;
         return;
       
       case SUBMIT_AND_NOT_CLOSE_ACTION:
         setCloseAfterSubmit(true);
         setSubmit(true);
+        isDirty.value = false;
         return;
     }
     
+  }
+
+  const handleDirty = ()=>{
+    isDirty.value = true;
   }
 
   const pageContent = loadingPage ?
@@ -161,6 +167,7 @@ const PageView = ()=>{
               key={child.id} 
               component={child} 
               onPageAction={formActionHandle}
+              onDirty = {handleDirty}
             />
           )
         })
@@ -176,7 +183,6 @@ return (
             onSubmit = {handleSubmit} 
             submit={submit} 
             onSubmitError = {handleSubmitError}
-            onDirty = {()=>setIsDirty(true)}
           >
             {pageContent}
           </PageForm>
