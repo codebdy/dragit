@@ -29,18 +29,6 @@ export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
   return (
     <div className={classes.root}>
       <AttributeRow>
-        <MultiSelectBox label={'权限'} 
-          variant="outlined" 
-          size="small"
-          fullWidth
-          dataApi = {API_GET_AUTHS}
-          itemKey = "slug"
-          groupByField = "module"
-          value = {pageSchema?.auths || []}
-          onChange = {(e:any)=>{onChange({...pageSchema, auths:e.target.value})}}
-        />
-      </AttributeRow>
-      <AttributeRow>
         <FormControlLabel
           control={
             <Switch
@@ -85,6 +73,18 @@ export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
           </AttributeRow>
         </Fragment>
       }
+      <AttributeRow>
+        <MultiSelectBox label={'权限'} 
+          variant="outlined" 
+          size="small"
+          fullWidth
+          dataApi = {API_GET_AUTHS}
+          itemKey = "slug"
+          groupByField = "module"
+          value = {pageSchema?.auths || []}
+          onChange = {(e:any)=>{onChange({...pageSchema, auths:e.target.value})}}
+        />
+      </AttributeRow>
     </div>
     
   )

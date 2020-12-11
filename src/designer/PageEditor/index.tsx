@@ -71,6 +71,7 @@ function makeCanvas(){
 
 interface Snapshot{
   canvasNode:RXNodeRoot<IMeta>;
+  pageSchema?:IPageSchema;
   selectedNodeId?:number;
 }
 
@@ -253,6 +254,7 @@ export default function PageEditor(
     setUndoList([...window.undoList,
     {
       canvasNode: window.canvas.copy(),
+      pageSchema: cloneObject(pageSchema),
       selectedNodeId: window.selectedNode?.id || operateId,
     }
     ]);
@@ -270,7 +272,8 @@ export default function PageEditor(
   }
 
   const handlPageChange = (page:IPageSchema)=>{
-    setPageSchema(page)
+    backupToUndoList(undefined);
+    setPageSchema(page);
   }
 
   const handleSelectedNode = (node?:RXNode<IMeta>)=>{
@@ -284,10 +287,12 @@ export default function PageEditor(
       setRedoList([...redoList, 
         {
           canvasNode:canvas.copy(),
+          pageSchema:cloneObject(pageSchema),
           selectedNodeId: cmd.selectedNodeId,
         }
       ]);
       setCanvas(cmd.canvasNode);
+      setPageSchema(cmd.pageSchema);
       setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));    
     }
   }
@@ -298,11 +303,13 @@ export default function PageEditor(
       setUndoList([...undoList, 
         {
           canvasNode:canvas.copy(),
+          pageSchema:cloneObject(pageSchema),
           selectedNodeId: cmd.selectedNodeId,
         }
       ]);
       setRedoList([...redoList]);
       setCanvas(cmd.canvasNode); 
+      setPageSchema(cmd.pageSchema);
       setSelectedNode(cmd.canvasNode.getNode(cmd.selectedNodeId));  
     }    
   }
