@@ -10,17 +10,18 @@ export default function PageForm(
     onSubmit:(data:any)=>void,
     submit:boolean,
     onSubmitError:()=>void,
+    onDirty:()=>void,
   }
 ){
-  const {onSubmit, children, submit, onSubmitError} = props;
-  const [form, setForm] = useState<IForm>(defultForm());
+  const {onSubmit, children, submit, onSubmitError, onDirty} = props;
+  const [form, setForm] = useState<IForm>(defultForm(onDirty));
   const model = useModel();
   const loading = useModelLoading();
 
 
-  const forceUpdate = (newForm:IForm)=>{
-    setForm({...newForm});
-  }
+  //const forceUpdate = (newForm:IForm)=>{
+  //  setForm({...newForm});
+  //}
 
   useEffect(()=>{
     if(!loading){
@@ -29,13 +30,13 @@ export default function PageForm(
           ...form,
           defaultValues:model,
           values:cloneObject(model),
-          forceUpdate:forceUpdate,
+          //forceUpdate:forceUpdate,
         })
       }
       else{
         setForm({
           ...form,
-          forceUpdate:forceUpdate,
+          //forceUpdate:forceUpdate,
         })
       }
     }

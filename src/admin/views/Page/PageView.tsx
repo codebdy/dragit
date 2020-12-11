@@ -20,6 +20,7 @@ import PageForm from "./Form/PageForm";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
 import { thunkAppInfo } from "store/app/thunk";
+import ConfirmDialog from "base/Widgets/ConfirmDialog";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,6 +46,8 @@ const PageView = ()=>{
   const [submit, setSubmit] = useState(false);
   const [openAlert, setOpentAlert] = useState(false);
   const [closeAfterSubmit, setCloseAfterSubmit] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
+  const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
   const [, loadingModel] = usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
@@ -111,6 +114,11 @@ const PageView = ()=>{
   const handleCloseAlert = ()=>{
     setOpentAlert(false);
   }
+
+  const handleBackConfirm = ()=>{
+    history.goBack();
+    setBackConfirmOpen(false);
+  }
   
   const formActionHandle = (action:PageAction)=>{
     switch (action.name){
@@ -120,7 +128,12 @@ const PageView = ()=>{
         return;
         
       case GO_BACK_ACTION:
-        history.goBack();
+        if(isDirty){
+          setBackConfirmOpen(true);
+        }
+        else{
+          history.goBack();
+        }
         return;
       
       case SUBMIT_ACTION:
@@ -158,7 +171,12 @@ return (
       {
         pageMeta?.jsonSchema?.isFormPage 
         ?
-          <PageForm onSubmit = {handleSubmit} submit={submit} onSubmitError = {handleSubmitError}>
+          <PageForm 
+            onSubmit = {handleSubmit} 
+            submit={submit} 
+            onSubmitError = {handleSubmitError}
+            onDirty = {()=>setIsDirty(true)}
+          >
             {pageContent}
           </PageForm>
         :
@@ -174,7 +192,13 @@ return (
             <AlertTitle>{intl.get('error')}</AlertTitle>
             {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
           </Alert>      
-        </Dialog> 
+        </Dialog>
+        <ConfirmDialog 
+          message = {intl.get('changing-not-save-message')}
+          open = {backConfirmOpen}
+          onCancel ={()=>{setBackConfirmOpen(false)}}
+          onConfirm = {handleBackConfirm}
+        /> 
     </Container>
   )
 }

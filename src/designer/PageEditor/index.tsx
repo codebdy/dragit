@@ -105,7 +105,7 @@ export default function PageEditor(
   const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
   const [, saving] = useAxios(saveRequest, true);
   const [isDirty, setIsDirty] = useState(false);
-  const [saveConfirmOpen, setSaveConfirmOpen] = useState(false);
+  const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
   const dispatch = useDispatch()
   const theme = useTheme(); 
@@ -207,7 +207,7 @@ export default function PageEditor(
 
   const handleCancel = () => {
     if(isDirty){
-      setSaveConfirmOpen(true);
+      setBackConfirmOpen(true);
     }
     else{
       onClose();
@@ -231,7 +231,7 @@ export default function PageEditor(
   };
 
   const handleBackConfirm = ()=>{
-    setSaveConfirmOpen(false);
+    setBackConfirmOpen(false);
     onClose();
   }
 
@@ -448,8 +448,8 @@ export default function PageEditor(
           }
           <ConfirmDialog 
             message = {intl.get('changing-not-save-message')}
-            open = {saveConfirmOpen}
-            onCancel ={()=>{setSaveConfirmOpen(false)}}
+            open = {backConfirmOpen}
+            onCancel ={()=>{setBackConfirmOpen(false)}}
             onConfirm = {handleBackConfirm}
           />
         </Fragment>      
