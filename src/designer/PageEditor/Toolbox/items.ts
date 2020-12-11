@@ -96,7 +96,11 @@ export default [
             rxText:'Page title',
           }
         }
-      },      
+      }, 
+      {
+        titleKey:"medias",
+        meta:{name:'Medias'},
+      },       
     ]
   },
   {
