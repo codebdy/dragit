@@ -7,6 +7,7 @@ import Subheader from "./Subheader";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuNode from "./MenuNode";
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import useLoggedUser from "store/app/useLoggedUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,6 +55,8 @@ export default function MenuNodeGroup(
 {
   const open = props.openedId === props.node.id
   const [openedId, setOpenedId] = React.useState(-1);
+  const loggedUser = useLoggedUser();
+
   const handleOpened = (id:number)=>{
     setOpenedId(id)
   }
@@ -65,14 +68,15 @@ export default function MenuNodeGroup(
   const dotBadge = getBadge(props.node.children)
   const listItems = props.node.children?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;
+    const authed = loggedUser.authCheck(...node.meta?.auths||[]);
     return (
     <Fragment key={node.id}>
       {
-        item.type === 'subheader' && <Subheader nested mini = {props.mini} node={node} />
+        item.type === 'subheader' && authed && <Subheader nested mini = {props.mini} node={node} />
       }
-      {item.type === 'item' && <MenuNode nested mini = {props.mini} node={node}/> }
-      {item.type === 'group' && <MenuNodeGroup nested mini = {props.mini} node={node} onOpened={handleOpened} openedId={openedId}/>}
-      {item.type === 'divider' && <Divider />}
+      {item.type === 'item' && authed && <MenuNode nested mini = {props.mini} node={node}/> }
+      {item.type === 'group' && authed && <MenuNodeGroup nested mini = {props.mini} node={node} onOpened={handleOpened} openedId={openedId}/>}
+      {item.type === 'divider' && authed && <Divider />}
     </Fragment>
     )
   })

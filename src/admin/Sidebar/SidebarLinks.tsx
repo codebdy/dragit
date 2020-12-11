@@ -12,6 +12,7 @@ import Subheader from "./MenuItems/Subheader";
 import MenuNode from "./MenuItems/MenuNode";
 import MenuNodeGroup from "./MenuItems/MenuNodeGroup";
 import { RXNodeRoot } from "base/RXNode/Root";
+import useLoggedUser from "store/app/useLoggedUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,8 @@ export default function SidebarLinks(
   const [openedId, setOpenedId] = React.useState(-1);
   const [jsonData, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
   const [items,setItems] = React.useState<Array<RXNode<IMenuItem>>>([]);
-  
+  const loggedUser = useLoggedUser();
+
   const handleOpened = (id:number)=>{
     setOpenedId(id)
   }
@@ -46,14 +48,15 @@ export default function SidebarLinks(
 
   const listItems =items?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;
+    const authed = loggedUser.authCheck(...node.meta?.auths||[]);
     return (
     <Fragment key={node.id}>
       {
-        item.type === 'subheader' && <Subheader mini = {props.mini} node={node} />
+        item.type === 'subheader' && authed && <Subheader mini = {props.mini} node={node} />
       }
-      {item.type === 'item' && <MenuNode mini = {props.mini} node={node}/>}
-      {item.type === 'group' && <MenuNodeGroup mini = {props.mini} node={node} onOpened={handleOpened} openedId={openedId}/>}
-      {item.type === 'divider' && <Divider />}
+      {item.type === 'item' && authed && <MenuNode mini = {props.mini} node={node}/>}
+      {item.type === 'group' && authed && <MenuNodeGroup mini = {props.mini} node={node} onOpened={handleOpened} openedId={openedId}/>}
+      {item.type === 'divider' && authed && <Divider />}
     </Fragment>
     )
   })
