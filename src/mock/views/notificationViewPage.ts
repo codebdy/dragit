@@ -116,9 +116,9 @@ export default {
     }
   ],
 
-
+  refreshAppInfo:true,
   isFormPage:true,
-  api:{
+  getApi:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/Notification',

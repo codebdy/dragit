@@ -30,6 +30,19 @@ export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
         <FormControlLabel
           control={
             <Switch
+              checked={pageSchema?.refreshAppInfo || false}
+              onChange={ (e)=>{onChange({...pageSchema, refreshAppInfo:e.target.checked})} }
+              color="primary"
+              //size="small" 
+            />
+          }
+          label={intl.get("refresh-app-info")}
+        />          
+      </AttributeRow>
+      <AttributeRow>
+        <FormControlLabel
+          control={
+            <Switch
               checked={pageSchema?.isFormPage || false}
               onChange={ (e)=>{onChange({...pageSchema, isFormPage:e.target.checked})} }
               color="primary"

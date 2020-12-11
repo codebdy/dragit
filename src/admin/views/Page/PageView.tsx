@@ -19,6 +19,7 @@ import { setModelAction } from "store/page/actions";
 import PageForm from "./Form/PageForm";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
+import { thunkAppInfo } from "store/app/thunk";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,8 +46,17 @@ const PageView = ()=>{
   const [openAlert, setOpentAlert] = useState(false);
   const [closeAfterSubmit, setCloseAfterSubmit] = useState(false);
 
-  usePageModel(pageMeta?.jsonSchema, id);
+  const [, loadingModel] = usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(loadingModel){
+      if(pageMeta?.jsonSchema?.refreshAppInfo){
+        dispatch(thunkAppInfo());
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[loadingModel]);
 
   useEffect(() => {
     console.log('PageView useEffect:', moduleSlug, pageSlug, id);
@@ -122,7 +132,6 @@ const PageView = ()=>{
         setCloseAfterSubmit(true);
         setSubmit(true);
         return;
-
     }
     
   }
