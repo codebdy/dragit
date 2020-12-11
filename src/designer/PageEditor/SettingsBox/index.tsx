@@ -4,6 +4,8 @@ import intl from 'react-intl-universal';
 import { AttributeRow } from '../AttrebuteBox/AttributeRow';
 import { IPageSchema } from 'base/Model/IPage';
 import ApiEditor from '../../../base/PropsInputs/ApiEditor';
+import { API_GET_AUTHS } from 'APIs/modules';
+import MultiSelectBox from 'components/Select/MultiSelectBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +28,18 @@ export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
 
   return (
     <div className={classes.root}>
+      <AttributeRow>
+        <MultiSelectBox label={'权限'} 
+          variant="outlined" 
+          size="small"
+          fullWidth
+          dataApi = {API_GET_AUTHS}
+          itemKey = "slug"
+          groupByField = "module"
+          value = {pageSchema?.auths || []}
+          onChange = {(e:any)=>{onChange({...pageSchema, auths:e.target.value})}}
+        />
+      </AttributeRow>
       <AttributeRow>
         <FormControlLabel
           control={

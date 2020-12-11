@@ -4,6 +4,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     attrRow:{
+      width:'100%',
       display:'flex',
       flexFlow:'row',
       padding:theme.spacing(0.6, 0),

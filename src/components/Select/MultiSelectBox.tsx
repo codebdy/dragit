@@ -4,7 +4,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
 import { useBaseItems } from 'base/Hooks/useBaseItems';
 
-const MultiSelect = React.forwardRef((
+const MultiSelectBox = React.forwardRef((
   props:{
     value?:Array<number|string>,
     onChange?:any,
@@ -108,4 +108,4 @@ const MultiSelect = React.forwardRef((
   )
 })
 
-export default MultiSelect;
+export default MultiSelectBox;
