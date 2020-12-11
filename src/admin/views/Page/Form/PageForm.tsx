@@ -3,6 +3,7 @@ import useModel from '../useModel';
 import useModelLoading from '../useModelLoading';
 import { IForm, FormContext, defultForm } from "../../../../base/FormContext";
 import { cloneObject } from 'utils/cloneObject';
+import { valueEqual } from 'utils/isNone';
 
 export default function PageForm(
   props:{
@@ -14,14 +15,15 @@ export default function PageForm(
   }
 ){
   const {onSubmit, children, submit, onSubmitError, onDirty} = props;
-  const [form, setForm] = useState<IForm>(defultForm(onDirty));
+  const [form, setForm] = useState<IForm>(defultForm());
   const model = useModel();
   const loading = useModelLoading();
 
-
-  //const forceUpdate = (newForm:IForm)=>{
-  //  setForm({...newForm});
-  //}
+  const valueChanged = (field:string, value:any)=>{
+    if(!valueEqual(form.defaultValues[field], form.values[field])){
+      onDirty();
+    }
+  }
 
   useEffect(()=>{
     if(!loading){
@@ -30,13 +32,13 @@ export default function PageForm(
           ...form,
           defaultValues:model,
           values:cloneObject(model),
-          //forceUpdate:forceUpdate,
+          valueChanged:valueChanged,
         })
       }
       else{
         setForm({
           ...form,
-          //forceUpdate:forceUpdate,
+          valueChanged:valueChanged,
         })
       }
     }

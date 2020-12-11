@@ -117,6 +117,7 @@ const PageView = ()=>{
 
   const handleBackConfirm = ()=>{
     history.goBack();
+    setIsDirty(false);
     setBackConfirmOpen(false);
   }
   

@@ -7,19 +7,16 @@ export interface IForm {
   values: any;
   errors?: any;
   status?: any;
-  //forceUpdate?: (newForm: IForm) => void;
   valueChanged?: (field:string, value:any) =>void;
   registers: { [key: string]: Regeister; };
-  onDirty?:()=>void;
 }
 
-export const defultForm = (onDirty?:()=>void) => {
+export const defultForm = () => {
   return {
     defaultValues: {},
     values: {},
     errors: {},
     registers: {},
-    onDirty:onDirty,
   };
 };
 

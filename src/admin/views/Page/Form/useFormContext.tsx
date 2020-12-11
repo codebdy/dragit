@@ -13,7 +13,6 @@ export function useFormContext():IForm&{
     // eslint-disable-next-line no-eval
     eval('formContext.values.' + field + ' = value');
     formContext.valueChanged && formContext.valueChanged(field, value);
-    formContext.onDirty && formContext.onDirty();
   }
   
   const validate =  (field:string):string|undefined | ValidationRule<boolean> =>{
