@@ -163,6 +163,9 @@ export default [
         titleKey:"one-to-many-portlet",
         meta: {
           name:'OneToManyPortlet',
+          designProps:{
+            isDeisgning:true,
+          },
           props: {
             elevation: 6,
             open:true,

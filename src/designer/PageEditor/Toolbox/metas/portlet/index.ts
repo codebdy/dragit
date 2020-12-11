@@ -6,7 +6,6 @@ export default{
     withHeader:true,
     title:'Portlet',
     collapsible: true,
-    marginTop:2,              
   },
   children:[
     {

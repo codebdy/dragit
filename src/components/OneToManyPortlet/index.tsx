@@ -35,11 +35,6 @@ const OneToManyPortlet = React.forwardRef((
   const {name, loading, value, title, isDeisgning, children, onChange, ...rest} = props;
   const classes = useStyles();
   
-  //const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
-  //  control,
-  //  name: name
-  //});
-
   const emitValueChangded = (newValue:any) => {
     const event = {
       persist: () => {return {}},

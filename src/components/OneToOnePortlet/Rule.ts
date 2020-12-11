@@ -8,6 +8,9 @@ export class OneToOnePortletRule extends Rule{
   hasField = true;
   
   accept(child:IMeta){
+    if(child.name === 'FormGridContainer'){
+      return true;
+    }
     return false;
   }
 
