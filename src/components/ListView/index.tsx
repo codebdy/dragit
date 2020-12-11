@@ -78,7 +78,7 @@ const ListView = React.forwardRef((
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
-      api:AxiosRequestConfig,
+      dataApi:AxiosRequestConfig,
       elevation:number,
     }, 
     ref:any
@@ -94,7 +94,7 @@ const ListView = React.forwardRef((
     rowsPerPageOptions = "10,25,50", 
     defalutRowsPerPage = 10,
     onAction,
-    api,
+    dataApi,
     elevation,
     ...rest
   } = props
@@ -116,8 +116,8 @@ const ListView = React.forwardRef((
   }, loading] = useAxios<IPaginate>(request, showSuccessAlert);
 
   useEffect(()=>{
-    api && api.url && setRequest({...api, data:{...api.data, operateParam}})
-  }, [api, operateParam])
+    dataApi && dataApi.url && setRequest({...dataApi, data:{...dataApi.data, operateParam}})
+  }, [dataApi, operateParam])
 
   const updateOperateParam = (field:string, value:any, showAlert = false)=>{
     setShowSuccessAlert(showAlert);

@@ -8,6 +8,7 @@ import ListViewRowCommandDialog from "./PropsInputs/ListViewRowCommandDialog";
 import { IMeta } from "base/Model/IMeta";
 import marginRules from "base/Rules/marginRules";
 import elevationRules from "base/Rules/elevationRules";
+import apiRule from "base/Rules/apiRule";
 
 export class ListViewRule extends Rule{
   empertyPadding = '';
@@ -50,6 +51,7 @@ export class ListViewRule extends Rule{
         label:'rows-per-page',
         input:StringInput,
       },
+      apiRule,
     ]
   }
 

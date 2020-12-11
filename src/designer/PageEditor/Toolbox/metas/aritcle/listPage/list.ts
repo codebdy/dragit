@@ -1,5 +1,10 @@
+import { API_QUERY_AND_OPERATE_MODELS } from "APIs/model";
+
 export default {
   name:'ListView',
+  designProps:{
+    dataApi:null,
+  },
   props:{
     withActions:true,
     elevation:6,
@@ -108,9 +113,8 @@ export default {
         icon:"mdi-delete",
       },
     ],
-    api:{
-      method:'post',
-      url:'/api/data/query-operate-models',
+    dataApi:{
+      ...API_QUERY_AND_OPERATE_MODELS,
       params:{
         modelName:'/Model/Article',
       },      
