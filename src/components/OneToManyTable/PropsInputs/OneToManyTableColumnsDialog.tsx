@@ -6,11 +6,18 @@ import MetaListDialog from '../../ListView/PropsInputs/MetaListDialog';
 import { Fragment } from 'react';
 import SelectItemsInputItemDialog from 'components/Select/PropsInputs/SelectItemsInputItemDialog';
 import { cloneObject } from 'utils/cloneObject';
+import ApiEditor from 'base/PropsInputs/ApiEditor';
+import StringInput from 'base/PropsInputs/StringInput';
 
 const styles = (theme: Theme) =>
   createStyles({
     inputArea:{
-      paddingLeft:theme.spacing(2),
+      //paddingLeft:theme.spacing(2),
+      display:'flex',
+      flexFlow:'column',
+    },
+    selectArea:{
+      paddingLeft:theme.spacing(1.5),
       display:'flex',
       flexFlow:'column',
     },
@@ -184,6 +191,7 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
                 </FormControl>
               </Fragment>
             }
+            <div className = {classes.selectArea}>
             {
               columns[selectedIndex].input?.name === "SelectBox" &&
               <FormControlLabel
@@ -206,36 +214,33 @@ export default function OneToManyTableColumnsDialog(props:PropsInputProps){
               columns[selectedIndex].input?.name === "Combobox" ) &&
 
               <Fragment>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={columns[selectedIndex].input?.props?.fromUrl || false}
-                      onChange={e=>handleChangeInputProps(selectedIndex, 'fromUrl', e.target.checked)}
-                      name="FromUrl"
-                      color="primary"
+                <Grid container spacing = {1}>
+                  <Grid item xs={6}>
+                    <StringInput label = {intl.get('item-key')} 
+                      value = {columns[selectedIndex].input?.props?.itemKey} 
+                      onChange={value=>handleChangeInputProps(selectedIndex, 'itemKey', value)}
                     />
-                  }
-                  label={<span>{intl.get("from-url")}</span>}
-                />
-                {
-                  columns[selectedIndex].input?.props?.fromUrl ?
-                    <Grid item xs={12}>
-                      <TextField
-                        size="small" 
-                        variant = "outlined"
-                        value={columns[selectedIndex].input?.props?.url ||''}
-                        onChange={e=>handleChangeInputProps(selectedIndex, 'url', e.target.value as any)}
-                        rows="2"
-                      />
-                    </Grid>
-                  :
+                  </Grid>
+                  <Grid item xs={6}>
+                    <StringInput label = {intl.get('item-name')} 
+                      value = {columns[selectedIndex].input?.props?.itemName} 
+                      onChange={value=>handleChangeInputProps(selectedIndex, 'itemName', value)}
+                    />
+                  </Grid>
                   <Grid item xs={12}>
                     <SelectItemsInputItemDialog value={columns[selectedIndex].input?.props?.items} 
                     onChange={items=>handleChangeInputProps(selectedIndex, 'items', items)} />    
                   </Grid>
-                }
+                </Grid>
+
+                <ApiEditor
+                  label = {intl.get("get-api")}
+                  value = {columns[selectedIndex].input?.props?.dataApi}
+                  onChange={(api)=>handleChangeInputProps(selectedIndex, 'dataApi', api)}
+                />
               </Fragment>
             }
+            </div>
           </div>
         </Fragment>
       }
