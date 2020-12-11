@@ -1,3 +1,5 @@
+import { AUTH_DASHBOARD, AUTH_MEDIAS } from "APIs/authSlugs";
+
 export default [{
         //type:subheader, item, group
         type: 'subheader',
@@ -13,13 +15,14 @@ export default [{
             label: '新',
             size: 'small',
         },
-        auths:['view-article', 'products-list']
+        auths:[AUTH_DASHBOARD]
     },
     {
         type: 'item',
         title: '媒体库',
         to: '/admin/module/medias',
         icon: 'mdi-image-auto-adjust',
+        auths:[AUTH_MEDIAS]
     },
     {
         title: '文章管理',

@@ -1,3 +1,4 @@
+import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_DASHBOARD, AUTH_THEME_SETTINGS, AUTH_MEDIAS } from "APIs/authSlugs";
 import dashboard from "mock/views/dashboard";
 import meidaPage from "mock/views/meidaPage";
 import notificationPage from "mock/views/notificationPage";
@@ -20,19 +21,24 @@ export default[
     auths:[
       {
         id:211,
-        slug:"customize",
+        slug:AUTH_CUSTOMIZE,
         name:'定制系统',
       },
       {
         id:212,
-        slug:"debug",
+        slug:AUTH_DEBUG,
         name:'调试',
       },
       {
         id:213,
-        slug:"theme-settings",
+        slug:AUTH_THEME_SETTINGS,
         name:'主题设置',
       },
+      {
+        id:214,
+        slug:AUTH_DASHBOARD,
+        name:'分析看板',
+      }
     ]
   },
   {
@@ -49,7 +55,7 @@ export default[
       },
     ],
     auths:[
-     
+      AUTH_MEDIAS,
     ]
   },
 

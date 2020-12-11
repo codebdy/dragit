@@ -25,6 +25,14 @@ export default function ComponentRender(
     onPageAction(onClickAction);
   };
 
+  const authChecked = ()=>{
+    //如果不设置权限，则所有用户可见
+    if(!component.meta.auths || component.meta.auths.length === 0){
+      return true;
+    }
+    return loggedUser.authCheck(...component.meta.auths||[]);
+  }
+
   let metaProps = component.meta.props? component.meta.props :{};
   const {
     rxText, 
@@ -69,7 +77,7 @@ export default function ComponentRender(
     :
     <Component {...elementProps} />
 
-  elementView = loggedUser.authCheck(component.meta.auths) ? elementView : undefined; 
+  elementView = authChecked() ? elementView : undefined; 
   return(
     <Fragment>
     { elementView }

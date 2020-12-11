@@ -1,3 +1,5 @@
+import { AUTH_DASHBOARD } from "APIs/authSlugs";
+
 export default {
   layout:[
     {
@@ -208,5 +210,8 @@ export default {
         },
       ]
     },
+  ],
+  auths:[
+    AUTH_DASHBOARD
   ] 
 }

@@ -16,7 +16,7 @@ export class LoggedUser{
     this.meta = user;
   }
 
-  authCheck(auths?:string[]) {
+  authCheck(...auths:string[]) {
     if(!this.meta){
       return false;
     }

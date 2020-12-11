@@ -8,6 +8,7 @@ import ModuleContent from "./ModuleContent";
 import { useHistory } from "react-router";
 import { useLoginCheck } from "base/Hooks/useLoginCheck";
 import { useAuthCheck } from "base/Hooks/useAuthCheck";
+import { AUTH_CUSTOMIZE } from "APIs/authSlugs";
 
 const ModuleManager = (props:{children?: any})=>{
   const history = useHistory();
@@ -15,7 +16,7 @@ const ModuleManager = (props:{children?: any})=>{
   const [selectedModuleId, setSelectedModuleId] = useState(-1);
 
   useLoginCheck();
-  useAuthCheck(['customize']);
+  useAuthCheck(AUTH_CUSTOMIZE);
 
   const handleReturn = ()=>{
     history.goBack();

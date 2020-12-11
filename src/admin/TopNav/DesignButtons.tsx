@@ -10,6 +10,7 @@ import { RootState } from "store";
 import { compactableAction } from "store/sidebar/actions";
 import ThemeSettings from "../ThemeSettings";
 import useLoggedUser from "store/app/useLoggedUser";
+import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_THEME_SETTINGS } from "APIs/authSlugs";
 
 /*const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,7 +55,7 @@ export default function DesignButtons(
     {
       <Fragment  /*className={classes.root} elevation={24}*/>
         {
-          loggedUser.authCheck(['customize'])&&
+          loggedUser.authCheck(AUTH_CUSTOMIZE)&&
           <Fragment>
             <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
               <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>
@@ -72,7 +73,7 @@ export default function DesignButtons(
         }
 
         {
-          loggedUser.authCheck(['theme-settings'])&&
+          loggedUser.authCheck(AUTH_THEME_SETTINGS)&&
           <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"
             onClick = {()=>setShowSettings(!showSettings)}
           >
@@ -82,7 +83,7 @@ export default function DesignButtons(
           </Tooltip>          
         }
         {
-          loggedUser.authCheck(['debug'])&&
+          loggedUser.authCheck(AUTH_DEBUG)&&
           <Tooltip title={intl.get('debug')} arrow placement="bottom">
             <IconButton  aria-label={intl.get('debug')}>
               <MdiIcon iconClass="mdi-android-debug-bridge" color={color} />

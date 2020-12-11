@@ -16,6 +16,7 @@ import { AxiosRequestConfig } from 'axios';
 import { useLoginCheck } from 'base/Hooks/useLoginCheck';
 import SubmitButton from 'components/common/SubmitButton';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,7 +71,7 @@ export default function DrawerEditor(){
   const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
 
   useLoginCheck();
-  useAuthCheck(['customize']);
+  useAuthCheck(AUTH_CUSTOMIZE);
   
   useEffect(()=>{
     metas && rootNode.parse(metas);    

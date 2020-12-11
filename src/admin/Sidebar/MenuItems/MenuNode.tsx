@@ -7,6 +7,7 @@ import MdiIcon from "components/common/MdiIcon";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import useLoggedUser from "store/app/useLoggedUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,6 +78,7 @@ export default function MenuNode(
   const item = node.meta;
   const {badge, chip, title, icon} = item;
   const baggeLabel = useAppValue(badge?.field);
+  const loggedUser = useLoggedUser();
 
   let iconTsx = (badge ? 
       <Badge 
@@ -102,6 +104,7 @@ export default function MenuNode(
   const text = <span className={classes.itemText}>{title}</span>;
  
   return (
+    loggedUser.authCheck(...node.meta?.auths||[])?
     <ItemTo to={item.to}>
       <ListItem 
         button 
@@ -122,7 +125,9 @@ export default function MenuNode(
           }
           {children}      
       </ListItem>
-    </ItemTo>    
+    </ItemTo>
+    :
+    <span></span>    
   )
 
 }

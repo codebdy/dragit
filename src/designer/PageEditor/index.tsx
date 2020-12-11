@@ -34,6 +34,7 @@ import SubmitButton from 'components/common/SubmitButton';
 import { clearPageSchemaCache } from 'base/Hooks/usePageMeta';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -113,7 +114,7 @@ export default function PageEditor(
   const theme = useTheme(); 
 
   useLoginCheck();
-  useAuthCheck(['customize']);
+  useAuthCheck(AUTH_CUSTOMIZE);
 
   useEffect(()=>{
     if(undoList.length > 0 && (redoList.length !== 0 || undoList.length !== 0)){

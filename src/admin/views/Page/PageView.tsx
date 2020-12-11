@@ -21,6 +21,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
 import { thunkAppInfo } from "store/app/thunk";
 import ConfirmDialog from "base/Widgets/ConfirmDialog";
+import useLoggedUser from "store/app/useLoggedUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,6 +52,7 @@ const PageView = ()=>{
 
   const [, loadingModel] = usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
+  const loggedUser = useLoggedUser();
 
   useEffect(()=>{
     if(loadingModel){
@@ -156,7 +158,7 @@ const PageView = ()=>{
     isDirty.value = true;
   }
 
-  const pageContent = loadingPage ?
+  let pageContent:any = loadingPage ?
     <PageSkeleton />
     :
     <Fragment>
@@ -173,7 +175,7 @@ const PageView = ()=>{
         })
       }
     </Fragment>
-
+  pageContent = loggedUser.authCheck(...pageMeta?.jsonSchema?.auths || [])&&pageContent;
 return (
     <Container className = {classes.root}>
       {
