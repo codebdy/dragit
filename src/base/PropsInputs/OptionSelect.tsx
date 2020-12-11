@@ -21,7 +21,7 @@ export default function OptionSelect(props:PropsInputProps){
   
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setInputValue(event.target.value);
-    onChange(event.target.value);
+    onChange(event.target.value || undefined);
   };  
   return (
     <FormControl variant="outlined" size="small" fullWidth>

@@ -11,8 +11,9 @@ export default{
       name: 'GridColumn',
       children: [
         {
-          name: 'h2',
+          name: 'Typography',
           props:{
+            variant:'h5',
             rxText: '文章列表',            
           }
         }
