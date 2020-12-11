@@ -27,16 +27,16 @@ export default function AttributeBoxActionSection(
     //node.updateProp('onClick', newAction)
   }
 
-  const handleModuleIdChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleModuleSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = (event.target.value as string);
-    let newAction:PageAction =  {...action, page:{...action.page, moduleId:newValue}};
+    let newAction:PageAction =  {...action, page:{...action.page, moduleSlug:newValue}};
     setAction(newAction);
     //node.updateProp('onClick', newAction)
   }; 
 
-  const handlePageIdChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handlePageSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     let newValue = (event.target.value as string);
-    let newAction:PageAction =  {...action, page:{...action.page, pageId:newValue}};
+    let newAction:PageAction =  {...action, page:{...action.page, pageSlug:newValue}};
     setAction(newAction);
     //node.updateProp('onClick', newAction)
   }; 
@@ -71,7 +71,7 @@ export default function AttributeBoxActionSection(
               size = "small"
               label={intl.get("module-slug")}
               value={action.page?.moduleSlug} 
-              onChange={handleModuleIdChange}
+              onChange={handleModuleSlugChange}
             ></TextField>
           </AttributeRow>
           <AttributeRow>
@@ -80,7 +80,7 @@ export default function AttributeBoxActionSection(
               size = "small"
               label = {intl.get("page-slug")}
               value = {action.page?.pageSlug} 
-              onChange = {handlePageIdChange}
+              onChange = {handlePageSlugChange}
             ></TextField>
           </AttributeRow>
         </Fragment>
