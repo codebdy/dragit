@@ -22,9 +22,9 @@ export default function ModulePages(props:{module:IModule}){
   const handleChangePage = (page:IPage)=>{
     setOperateConfig({
       ...API_UPDATE_MODULE_PAGE,
-      params:{
-        moduleId:module.id
-      },
+      //params:{
+      //  moduleId:module.id
+      //},
       data:{
         page:page
       }

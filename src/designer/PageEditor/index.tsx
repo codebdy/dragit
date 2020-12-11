@@ -14,7 +14,7 @@ import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
 import useDesigner from 'store/designer/useDesigner';
-import { API_GET_PAGE } from 'APIs/modules';
+import { API_GET_PAGE, API_UPDATE_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { IPage, IPageSchema } from 'base/Model/IPage';
 import { AxiosRequestConfig } from 'axios';
@@ -30,6 +30,8 @@ import DragCusor from './Core/DragCusor';
 import { CursorPosition, IDragOverParam } from './Core/IDragOverParam';
 import SelectedLabel from './Core/SelectedLabel';
 import { cloneObject } from '../../utils/cloneObject';
+import SubmitButton from 'components/common/SubmitButton';
+import { clearPageSchemaCache } from 'base/Hooks/usePageMeta';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -99,6 +101,8 @@ export default function PageEditor(
   const [redoList, setRedoList] = useState<Array<Snapshot>>([]);
   const [draggedToolboxItem, setDraggedToolboxItem] = useState<IToolboxItem>();
   const [draggedNode, setDraggedNode] = useState<RXNode<IMeta>>();
+  const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
+  const [, saving] = useAxios(saveRequest, true);
 
   const dispatch = useDispatch()
   const theme = useTheme(); 
@@ -197,7 +201,18 @@ export default function PageEditor(
   };
 
   const handleSave = () => {
-    onClose();
+    setSaveRequest({...API_UPDATE_PAGE, 
+      data:{
+        page:{
+          ...pageMeta,
+          jsonSchema:{
+            ...pageSchema,
+            layout:canvas.getRootMetas(),
+          },
+        }
+      }
+    })
+    clearPageSchemaCache();
   };
 
   const handleScroll = ()=>{
@@ -363,11 +378,17 @@ export default function PageEditor(
               </IconButton>
               <Spacer></Spacer>
               <Button onClick={handleCancel} className = {classes.cancelButton}>
-                {intl.get('cancel')}
+                {intl.get('go-back')}
               </Button>
-              <Button variant="contained" color="primary" onClick={handleSave}>
-              {intl.get('save')}
-              </Button>
+              <SubmitButton
+                variant = "contained"
+                color = "primary"         
+                size="large"
+                onClick={handleSave} 
+                submitting={saving}
+              >
+                {intl.get('save')}
+              </SubmitButton>
             </Fragment>
           }
         >
@@ -391,7 +412,6 @@ export default function PageEditor(
                   onDuplicate = {handleDupliate}
                 />
               </Fragment>
-
             }
 
           </Scrollbar>

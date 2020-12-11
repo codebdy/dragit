@@ -40,6 +40,12 @@ const API_GET_MODULE_BY_ID : AxiosRequestConfig= {
   method:'get',
 }
 
+const API_UPDATE_PAGE : AxiosRequestConfig= {
+  url:'/api/update-page',
+  method:'post',
+}
+
+//操作成功后返回page所在模块
 const API_UPDATE_MODULE_PAGE : AxiosRequestConfig= {
   url:'/api/update-module-page',
   method:'post',
@@ -114,6 +120,7 @@ export {
   API_ADD_MODULE_CATEGORY,
   API_ADD_MODULE,
   API_GET_MODULE_BY_ID,
+  API_UPDATE_PAGE,
   API_UPDATE_MODULE_PAGE,
   API_REMOVE_MODULE_PAGE,
   API_ADD_MODULE_PAGE,

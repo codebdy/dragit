@@ -142,17 +142,40 @@ export default function mockModules(){
   })
   
  
-  Mock.mock(RegExp('/api/update-module-page?.*'),'post', (request)=>{
-    let id = getQueryVariable('moduleId', request.url);
-    let module =getModuleById(id);
+  Mock.mock(RegExp('/api/update-page?.*'),'post', (request)=>{
     let page = JSON.parse(request.body).page;
-    //console.log(request.body, request.body.page)
-    for(var i = 0; i < module.pages.length; i ++){
-      if(module.pages[i].id === page.id){
-        module.pages[i] = page;
+    console.log('server recieved page update rquest', page);
+    for(var index = 0; index < moduleCategories.length; index++){
+      let modules = moduleCategories[index].modules;
+      for(var i = 0; i < modules.length; i++){
+        let module = modules[i];
+        for(var pi = 0; pi < module.pages.length; pi ++){
+          if(module.pages[pi].id === page.id){
+            module.pages[pi] = page;
+            console.log('found!', module.pages[pi]);
+          }
+        }
       }
     }
-    return JSON.parse(JSON.stringify(module));;
+    return true;//JSON.parse(JSON.stringify(module));;
+  })
+
+  //操作成功后返回page所在模块
+  Mock.mock(RegExp('/api/update-module-page?.*'),'post', (request)=>{
+    let page = JSON.parse(request.body).page;
+    for(var index = 0; index < moduleCategories.length; index++){
+      let modules = moduleCategories[index].modules;
+      for(var i = 0; i < modules.length; i++){
+        let module = modules[i];
+        for(var pi = 0; pi < module.pages.length; pi ++){
+          if(module.pages[pi].id === page.id){
+            module.pages[pi] = page;
+            return JSON.parse(JSON.stringify(module));
+          }
+        }
+      }
+    }
+    throw new Error('not found!') ;
   })
   
   Mock.mock(RegExp('/api/remove-page-of-module?.*'),'post', (request)=>{
@@ -220,9 +243,9 @@ export default function mockModules(){
   
   Mock.mock(RegExp('/api/get-page/?.*'),'get', (request)=>{
     let slug =getQueryVariable('pageSlug', request.url);
-    let module = getModulePage(slug);
-    if(module) {
-      return module;
+    let page = getModulePage(slug);
+    if(page) {
+      return page;
     }
     new Error("404");
   })

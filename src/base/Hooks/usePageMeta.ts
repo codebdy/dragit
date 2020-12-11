@@ -47,3 +47,7 @@ export default function usePageMeta(moduleSlug:number, pageSlug:number):[IPage|u
   
   return [cachedPageMeta ? cachedPageMeta : pageMeta, loadingPage, error];
 }
+
+export function clearPageSchemaCache(){
+  window.schemaCache = {}
+}

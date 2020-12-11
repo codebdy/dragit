@@ -6,7 +6,7 @@ import { Container, createStyles, Dialog, makeStyles, Theme } from "@material-ui
 import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
 
-import usePageMeta from "./usePageMeta";
+import usePageMeta from "../../../base/Hooks/usePageMeta";
 import usePageModel from "./useFecthPageModel";
 import { useDispatch } from "react-redux";
 import { setDesingerPageAction } from "store/designer/actions";
