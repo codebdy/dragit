@@ -6,10 +6,10 @@ import axios from 'axios';
 import {setAppInfoAction} from './actions'
 import { API_GET_APP_INFO } from "APIs/app";
 
-const thunkAppInfo = (): ThunkAction<void, RootState, null, Action<string>> => {
+const thunkAppInfo = (token?:string): ThunkAction<void, RootState, null, Action<string>> => {
   return async dispatch => {
     console.log('thunkAppInfo');
-    axios({...API_GET_APP_INFO}).then(res => {
+    axios({...API_GET_APP_INFO, params:{token}}).then(res => {
       dispatch(setAppInfoAction(res.data));
     })
     .catch(err => {

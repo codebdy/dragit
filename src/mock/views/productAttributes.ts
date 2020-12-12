@@ -7,7 +7,7 @@ export default {
       props: {
         alignItems: "center",
         spacing: 1,
-        
+        marginTop:2,
       },
       children: [
           {
@@ -108,9 +108,8 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                api:{
-                  method:'post',
-                  url:API_QUERY_AND_OPERATE_MODELS.url,
+                dataApi:{
+                  ...API_QUERY_AND_OPERATE_MODELS,
                   params:{
                     modelName:'/Model/ProductAttribute',
                   },      

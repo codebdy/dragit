@@ -109,8 +109,7 @@ export default {
                   },
                 ],
                 dataApi:{
-                  method:'post',
-                  url:API_QUERY_AND_OPERATE_MODELS.url,
+                  ...API_QUERY_AND_OPERATE_MODELS,
                   params:{
                     modelName:'/Model/Role',
                   },      

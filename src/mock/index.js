@@ -41,6 +41,9 @@ function login(account, password){
 }
 
 function addAuthsToUser(user){
+  if(!user){
+    return user;
+  }
   let roles = window.listModels['/Model/Role'] 
   user.auths = [];
   if(!user.roleIds){
@@ -98,7 +101,7 @@ Mock.mock('/api/login', 'post',  (request)=>{
 Mock.mock(RegExp('/api/get-app-info?.*'),'get', (request)=>{
   let token = getQueryVariable('token', request.url);
   let user = getUser(token);
-  return {...appInfo, authToken:user.login_name, user:addAuthsToUser(user)}
+  return {...appInfo, authToken:user?.login_name, user:addAuthsToUser(user)}
 })
 
 Mock.mock('/api/get-lasted-notifications', notifications);

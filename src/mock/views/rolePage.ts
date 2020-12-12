@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "base/PageAction";
+import {GO_BACK_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION} from "base/PageAction";
 import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
 import {API_GET_AUTHS} from "APIs/modules"
 
@@ -127,15 +127,11 @@ export default {
                       rxText: '保存',
                       variant: "contained",
                       color: "primary",
-                      type: "submit",
                       size:'large',
                       marginLeft:2,
-                      //size: "large",
-                      //onClick:{
-                      //  name: POST_DATA_ACTION,
-                      //  slug:'save',
-                      //  needGoBack:true,
-                      //}            
+                      onClick:{
+                        name: SUBMIT_AND_NOT_CLOSE_ACTION,
+                      }          
                     }
                   }]
           

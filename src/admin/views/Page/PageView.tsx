@@ -22,6 +22,7 @@ import intl from "react-intl-universal";
 import { thunkAppInfo } from "store/app/thunk";
 import ConfirmDialog from "base/Widgets/ConfirmDialog";
 import useLoggedUser from "store/app/useLoggedUser";
+import useAppInfo from "store/app/useAppInfo";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,11 +54,12 @@ const PageView = ()=>{
   const [, loadingModel] = usePageModel(pageMeta?.jsonSchema, id);
   const dispatch = useDispatch();
   const loggedUser = useLoggedUser();
+  const appInfo = useAppInfo();
 
   useEffect(()=>{
     if(loadingModel){
       if(pageMeta?.jsonSchema?.refreshAppInfo){
-        dispatch(thunkAppInfo());
+        dispatch(thunkAppInfo(appInfo?.authToken));
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

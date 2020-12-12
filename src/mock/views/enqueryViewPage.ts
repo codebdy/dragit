@@ -118,7 +118,7 @@ export default {
 
 
   isFormPage:true,
-  api:{
+  apiForGet:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/Enquery',

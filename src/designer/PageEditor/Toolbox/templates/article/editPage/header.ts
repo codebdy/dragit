@@ -31,7 +31,6 @@ export default{
             size:'large',
             onClick:{
               name: GO_BACK_ACTION,
-              careDuty: true, //如果有修改，显示保存提示
             }
           }
         },
