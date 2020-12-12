@@ -134,10 +134,7 @@ export default [
           name:'TreeEditor',
           props: {
             elevation: 6,
-            open:true,
-            withHeader:true,
             title:'Tree edit card',
-            collapsible: true,
           },
         }
       },

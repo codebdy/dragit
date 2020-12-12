@@ -5,14 +5,14 @@ export default {
   layout:[ArticleMeta],
 
   isFormPage:true,
-  getApi:{
+  apiForGet:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/Article',
     },      
   },
 
-  submitApi:{
+  apiForSave:{
     ...API_SUBMIT_MODEL,
     params:{
       modelName:'/Model/Article',

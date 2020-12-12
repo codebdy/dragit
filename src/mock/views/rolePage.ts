@@ -150,14 +150,14 @@ export default {
 
 
   isFormPage:true,
-  getApi:{
+  apiForGet:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/Role',
     },      
   },
 
-  submitApi:{
+  apiForSave:{
     ...API_SUBMIT_MODEL,
     params:{
       modelName:'/Model/Role',

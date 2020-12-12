@@ -103,8 +103,8 @@ const PageView = ()=>{
 
   const handleSubmit = (data: any) => {
     setSubmit(false);
-    if(pageMeta?.jsonSchema?.submitApi){
-      setSubmitRequest({...pageMeta?.jsonSchema?.submitApi, data});      
+    if(pageMeta?.jsonSchema?.apiForSave){
+      setSubmitRequest({...pageMeta?.jsonSchema?.apiForSave, data});      
     }
   };
 

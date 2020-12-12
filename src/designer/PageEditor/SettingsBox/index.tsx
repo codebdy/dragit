@@ -60,15 +60,15 @@ export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
           <AttributeRow>
             <ApiEditor
               label = {intl.get("get-api")}
-              value = {pageSchema?.getApi}
-              onChange={(api)=>onChange({...pageSchema, getApi:api})}
+              value = {pageSchema?.apiForGet}
+              onChange={(api)=>onChange({...pageSchema, apiForGet:api})}
             />
           </AttributeRow>
           <AttributeRow>
             <ApiEditor
               label = {intl.get("submit-api")}
-              value = {pageSchema?.submitApi}
-              onChange={(api)=>onChange({...pageSchema, submitApi:api})}
+              value = {pageSchema?.apiForSave}
+              onChange={(api)=>onChange({...pageSchema, apiForSave:api})}
             />
           </AttributeRow>
         </Fragment>
