@@ -26,6 +26,30 @@ export default[
           },
         ],
         channel:[1,3,32],
+        specs:[
+          {
+            image: {
+              id:5,
+              thumbnail: '/static/images/grid-list/hats.jpg',
+              title: 'Hats',
+              src: '/static/images/grid-list/hats.jpg',
+            },
+            name:'XO500',
+            color:'红',
+            category:'100',
+          },
+          {
+            image: {
+              id:6,
+              thumbnail: '/static/images/grid-list/honey.jpg',
+              title: 'Honey',
+              src: '/static/images/grid-list/honey.jpg',
+            },
+            name:'规格3',
+            color:'水绿',
+            stock:120,
+          },
+        ]
       },
       {
         id:2,
