@@ -358,76 +358,76 @@ export default function MediasContent(
   return (
     <div className={classes.root}>
       <div className = {classes.left}>
-              <div className ={classes.toolbar}>
-                {
-                  selectedMedias.length > 0 ?
-                  <MediasBatchActions 
-                    selectedMedias = {selectedMedias}
-                    onClearSelected = {()=>setSelectedMedias([])}
-                    onRemoveSelected = {handleRemoveSelected}
-                  />
-                  :
-                  <MediasToolbar />
-                }
-              </div>
-              <Divider></Divider>
-              <MediasBreadCrumbs 
-                selectedFolder = {selectedFolder}
-                selectedFolderNode = {selectedFolderNode}
-                onSelect={setSelectedFolder}
-              />
-              {batchActionLoading && <LinearProgress />}
-              <div className ={classes.mediasGrid}>
-                <MediaGridList 
-                  loading={gridLoading}
-                  folderLoading = {folderLoading}
-                  draggedFolder = {draggedFolder}
-                  draggedMedia = {draggedMedia}
-                  folders = {selectedFolderNode? selectedFolderNode.children : folders}
-                  medias = {medias}
-                  selectedMedias = {selectedMedias}
-                  onScrollToEnd = {handleScrollToEnd}
-                  onSelect = {(folder)=>{
-                    setSelectedFolder(folder);
-                  }}
-                  onFolderNameChange = {(name, folder)=>handleFolderNameChange(name, folder, true)}
-                  onRemoveFolder = {(folder)=>handleRemoveFolder(folder, true)}
-                  onMoveFolderTo = {(folder, targetFolder)=>handleMoveToFolderTo(folder, targetFolder, true)}
-                  onMoveMediaTo = {(media, folder)=>handelMoveMediaTo(media, folder, true)}
-                  onRemoveMedia = {handeRemoveMedia}
-                  onDragFolder = {setDraggedFolder}
-                  onMediaDragStart = {setDraggedMedia}
-                  onMediaDragEnd = {()=>setDraggedMedia(undefined)}
-                  onToggleSelectMedia = {handleToggleSelectMedia}
-                ></MediaGridList>
-              </div>
-            </div>
+        <div className ={classes.toolbar}>
+          {
+            selectedMedias.length > 0 ?
+            <MediasBatchActions 
+              selectedMedias = {selectedMedias}
+              onClearSelected = {()=>setSelectedMedias([])}
+              onRemoveSelected = {handleRemoveSelected}
+            />
+            :
+            <MediasToolbar />
+          }
+        </div>
+        <Divider></Divider>
+        <MediasBreadCrumbs 
+          selectedFolder = {selectedFolder}
+          selectedFolderNode = {selectedFolderNode}
+          onSelect={setSelectedFolder}
+        />
+        {batchActionLoading && <LinearProgress />}
+        <div className ={classes.mediasGrid}>
+            <MediaGridList 
+              loading={gridLoading}
+              folderLoading = {folderLoading}
+              draggedFolder = {draggedFolder}
+              draggedMedia = {draggedMedia}
+              folders = {selectedFolderNode? selectedFolderNode.children : folders}
+              medias = {medias}
+              selectedMedias = {selectedMedias}
+              onScrollToEnd = {handleScrollToEnd}
+              onSelect = {(folder)=>{
+                setSelectedFolder(folder);
+              }}
+              onFolderNameChange = {(name, folder)=>handleFolderNameChange(name, folder, true)}
+              onRemoveFolder = {(folder)=>handleRemoveFolder(folder, true)}
+              onMoveFolderTo = {(folder, targetFolder)=>handleMoveToFolderTo(folder, targetFolder, true)}
+              onMoveMediaTo = {(media, folder)=>handelMoveMediaTo(media, folder, true)}
+              onRemoveMedia = {handeRemoveMedia}
+              onDragFolder = {setDraggedFolder}
+              onMediaDragStart = {setDraggedMedia}
+              onMediaDragEnd = {()=>setDraggedMedia(undefined)}
+              onToggleSelectMedia = {handleToggleSelectMedia}
+            ></MediaGridList>
+          </div>
+      </div>
       <Divider orientation="vertical" flexItem />
       <Hidden mdDown>
         <div className = {classes.right}>
-                <div className = {classes.folderTitle}>
-                  {intl.get('folder')}
-                </div>
-                <Divider></Divider>
-                  {
-                    folderLoading === true && <LinearProgress />
-                  }
-                <MediaFolders
-                  draggedFolder = {draggedFolder} 
-                  draggedMedia = {draggedMedia}
-                  folders = {folders} 
-                  selectedFolder={selectedFolder}
-                  onSelect = {(folder)=>{
-                      setSelectedFolder(folder);
-                  }}
-                  onAddFolder = {handleAddFolder}
-                  onFolderNameChange = {handleFolderNameChange}
-                  onRemoveFolder = {handleRemoveFolder}
-                  onMoveFolderTo = {handleMoveToFolderTo}
-                  onMoveMediaTo = {handelMoveMediaTo}
-                  onDragFolder = {setDraggedFolder}
-                />
-              </div>
+          <div className = {classes.folderTitle}>
+              {intl.get('folder')}
+            </div>
+            <Divider></Divider>
+              {
+                folderLoading === true && <LinearProgress />
+              }
+            <MediaFolders
+              draggedFolder = {draggedFolder} 
+              draggedMedia = {draggedMedia}
+              folders = {folders} 
+              selectedFolder={selectedFolder}
+              onSelect = {(folder)=>{
+                  setSelectedFolder(folder);
+              }}
+              onAddFolder = {handleAddFolder}
+              onFolderNameChange = {handleFolderNameChange}
+              onRemoveFolder = {handleRemoveFolder}
+              onMoveFolderTo = {handleMoveToFolderTo}
+              onMoveMediaTo = {handelMoveMediaTo}
+              onDragFolder = {setDraggedFolder}
+            />
+          </div>
       </Hidden>
     </div>
   )

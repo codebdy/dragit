@@ -126,7 +126,7 @@ export default function MediasGridList(props:{
         {medias.map((tile:any, index) => (
           <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
             <MediaGridListImage 
-              image = {tile} 
+              media = {tile} 
               selectedMedias = {selectedMedias}
               onRemoveMedia = {onRemoveMedia} 
               onDragStart={onMediaDragStart}

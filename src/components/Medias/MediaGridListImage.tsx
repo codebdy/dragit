@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, LinearProgress } from '@material-ui/core';
+import React, { Fragment, useState } from 'react';
+import { makeStyles, Theme, createStyles, LinearProgress, Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@material-ui/core';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
@@ -9,6 +9,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
 import { contains } from 'ArrayHelper';
 import { IMedia } from 'base/Model/IMedia';
+import Close from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,31 +59,38 @@ const useStyles = makeStyles((theme: Theme) =>
       display:"flex",
       justifyContent:"center",
       alignItems:"center",
-    }  
+    },
+    closeButton: {
+      position: 'absolute',
+      right: theme.spacing(0),
+      top: theme.spacing(0),
+      color: theme.palette.grey[500],
+    },  
   }),
 );
 
 export default function MediaGridListImage(
   props:{
     selectedMedias:Array<IMedia>, 
-    image:IMedia, 
+    media:IMedia, 
     onRemoveMedia:(media:IMedia)=>void,
     onDragStart:(media:IMedia)=>void,
     onDragEnd:()=>void,
     onToggleSelect:(media:IMedia)=>void,
   }
 ){
-  const {selectedMedias, image, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;
+  const {selectedMedias, media, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;
   const classes = useStyles();
-  const [hover, setHover] = React.useState(false);
-  const [editing, setEditing] = React.useState(false);
-  const [imageTitle, setImageTitle] = React.useState(image.title);
-  const [loading, setLoading] = React.useState(false);
+  const [hover, setHover] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [mediaTitle, setMediaTitle] = useState(media.title);
+  const [loading, setLoading] = useState(false);
+  const [viewOpen, setViewOpen] = useState(false);
 
-  const selected = contains(image, selectedMedias);
+  const selected = contains(media, selectedMedias);
 
   const changeImageTitleOnServer = ()=>{
-    if(imageTitle === image.title){
+    if(mediaTitle === media.title){
       return
     }
     setLoading(true)
@@ -92,12 +100,12 @@ export default function MediaGridListImage(
         method: API_MEDIAS_CHANGE_MEDIA_NAME.method as any,
         url: API_MEDIAS_CHANGE_MEDIA_NAME.url,
         params:{
-          imageId:image.id,
-          name:imageTitle,
+          imageId:media.id,
+          name:mediaTitle,
         },
       }
     ).then(res => {
-      image.title = imageTitle
+      media.title = mediaTitle
       setLoading(false);
     })
     .catch(err => {
@@ -115,12 +123,12 @@ export default function MediaGridListImage(
         method: API_MEDIAS_REMOVE_MEDIA.method as any,
         url: API_MEDIAS_REMOVE_MEDIA.url,
         params:{
-          imageId:image.id,
+          imageId:media.id,
         },
       }
     ).then(res => {
       setLoading(false);
-      onRemoveMedia(image);
+      onRemoveMedia(media);
     })
     .catch(err => {
       console.log('server error');
@@ -135,8 +143,12 @@ export default function MediaGridListImage(
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = (event.target as HTMLInputElement).value;
-    setImageTitle(value);
+    setMediaTitle(value);
   };
+
+  const handleView = ()=>{
+    setViewOpen(true);
+  }
 
   return (
     <Fragment>
@@ -146,20 +158,20 @@ export default function MediaGridListImage(
         onMouseLeave = {()=>setHover(false)}          
         onDragStart={()=>{
           setHover(false);
-          onDragStart(image);
+          onDragStart(media);
         }}
         onDragEnd = {onDragEnd}
-        onClick = {()=>onToggleSelect(image)}
+        onClick = {()=>onToggleSelect(media)}
       >
         <Image 
-          src={image.thumbnail}
+          src={media.thumbnail}
           className = { selected? classes.checked : classes.notChecked } 
         />
         {
           hover&&
           <div className={classes.mask}>
             <div className={classes.toolbar}>
-              <MediaGridListIconButton icon = "mdi-magnify" onClick={()=>{}} />
+              <MediaGridListIconButton icon = "mdi-magnify" onClick={handleView} />
               <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>setEditing(true)} />
               <MediaGridListIconButton icon = "mdi-delete-outline" onClick={removeMedia} />
             </div>
@@ -179,7 +191,7 @@ export default function MediaGridListImage(
       {
         editing?
         <input 
-          value={imageTitle} 
+          value={mediaTitle} 
           autoFocus= {true} 
           className={classes.titleInput}
           onBlur = {handleEndEditing}
@@ -191,9 +203,34 @@ export default function MediaGridListImage(
           onChange = {handleChange}
         />
         :
-        <MediaGridListItemTitle title={imageTitle} />
+        <MediaGridListItemTitle title={mediaTitle} />
       }
 
+      {
+        viewOpen &&
+        <Dialog
+          fullWidth
+          maxWidth='md'
+          open={viewOpen}
+          onClose={()=>{setViewOpen(false)}}
+        >
+          <DialogTitle>
+            <IconButton aria-label="close" 
+              className={classes.closeButton} 
+              onClick={()=>{setViewOpen(false)}}
+              size="small"
+            >
+              <Close />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent>
+            <img width="100%" src={media.src} alt={'view ' + media.title} />
+          </DialogContent>
+          <DialogActions>
+            url:{media.src}
+          </DialogActions>
+        </Dialog>
+      }
     </Fragment>
   )
 }
