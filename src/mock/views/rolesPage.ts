@@ -30,10 +30,6 @@ export default {
                 variant: "contained",
                 color: "primary",
                 rxText: '新建',
-                //size: "large",
-                style: {
-                  fontSize: '1.1rem',
-                },
                 onClick:{
                   name: JUMP_TO_PAGE_ACTION,
                   page:{
@@ -49,6 +45,7 @@ export default {
             name: 'GridColumn',
             props: {
               xs:12,
+              marginTop: 1,
             },
             children: [          {
               name:'ListView',

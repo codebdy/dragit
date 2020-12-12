@@ -49,6 +49,7 @@ export default {
             name: 'GridColumn',
             props: {
               xs:12,
+              marginTop: 1,
             },
             children: [          {
               name:'ListView',
