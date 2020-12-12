@@ -297,7 +297,17 @@ export default [
     titleKey: "charts",
     children:[
       {
-        titleKey:'line-chart'
+        titleKey:'antv-chart',
+        meta:{
+          name:'AntDesignChart',
+          designProps:{
+            isDeisgning:true,
+          },
+          props:{
+            chart:'Line',
+            jsonProps:{},
+          }
+        }
       }
     ]
   },

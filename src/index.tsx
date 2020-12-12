@@ -59,6 +59,7 @@ import CheckboxGroup from 'components/CheckboxGroup';
 import { CheckboxGroupRule } from 'components/CheckboxGroup/Rule';
 import RadioGroup from 'components/RadioGroup';
 import { RadioGroupRule } from 'components/RadioGroup/Rule';
+import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
 
 const store = configureStore();
 
@@ -91,7 +92,7 @@ register('TreeEditor', TreeEditor, TreeEditorRule);
 register('TreeSelect', TreeSelect, TreeSelectRule);
 register('MediaSelect', MediaSelect);
 register('Medias', Medias);
-register('AntDesignChart', AntDesignChart);
+register('AntDesignChart', AntDesignChart, AntDesignChartRule);
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);
 registerHtmlTag('h3', HeadRule);

@@ -26,24 +26,32 @@ const charts :{
 const AntDesignChart = React.forwardRef((
   props: {
     chart:string,
-    api:AxiosRequestConfig,
+    dataApi:AxiosRequestConfig,
+    jsonProps?:any,
+    isDeisgning?:boolean,
   },
   ref:any
 )=>{
-  const {chart, api, ...rest} = props;
+  const {chart, dataApi, isDeisgning, jsonProps, ...rest} = props;
   const Chart = charts[chart];
 
-  const [request] = useState<AxiosRequestConfig>(api)
+  const [request] = useState<AxiosRequestConfig>(dataApi)
   const classes = useStyles();
   const [data, loading] = useAxios<any>(request);
   // eslint-disable-next-line no-eval
   //(rest as any).yAxis = eval((rest as any).yAxis)
 
   return (
+    isDeisgning?
+    <div ref={ref} {...rest}>
+      {chart} Chart Design
+    </div>
+    :
     <Chart 
       className = {classes.root}
       ref={ref}
       data = {data || []}
+      {...jsonProps}
       {...rest}
       loading = {loading}
     />

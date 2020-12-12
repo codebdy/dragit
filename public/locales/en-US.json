@@ -271,5 +271,10 @@
 
     "operation-confirm":"Operation Confirm",
     "changing-not-save-message":"Changing not be saved, are you sure to go back?",
-    "confirm-message":"Confirm message"
+    "confirm-message":"Confirm message",
+
+    "antv-chart":"AntV Chart",
+    "chart-type":"Chart",
+    "json-props":"JSON",
+    "edit-json":"Edit JSON"
 }

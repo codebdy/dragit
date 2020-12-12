@@ -12,7 +12,7 @@ const styles = (theme: Theme) =>
     dilogContent:{
       display:'flex',
       flexFlow:'row',
-      width:'560px',
+      minWidth:'560px',
       minHeight:'200px',
     },
     closeButton: {

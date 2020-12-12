@@ -41,20 +41,23 @@ export default {
                           {
                             name:'AntDesignChart',
                             designProps:{
-                              api:null,
-                              designing:true,
+                              dataApi:null,
+                              isDeisgning:true,
                             },
                             props:{
                               chart:'Area',
-                              api:{
+                              dataApi:{
                                 url:'https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json',
                                 method:'get',
-                              },
-                              xField: 'Date',
-                              yField: 'scales',
-                              xAxis: { tickCount: 5 },
-                              areaStyle:{ fill: 'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff' },
+                              },                             
+                              jsonProps:{
+                                xField: 'Date',
+                                yField: 'scales',
+                                xAxis: { tickCount: 5 },
+                                areaStyle:{ fill: 'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff' },
+                              }                              
                             }
+
                           }
                         ]
                       }
@@ -95,33 +98,36 @@ export default {
                         {
                           name:'AntDesignChart',
                           designProps:{
-                            api:null,
-                            designing:true,
+                            dataApi:null,
+                            isDeisgning:true,
                           },
                           props:{
                             chart:'Line',
-                            api:{
+                            dataApi:{
                               url:'https://gw.alipayobjects.com/os/bmw-prod/e00d52f4-2fa6-47ee-a0d7-105dd95bde20.json',
                               method:'get',
-                            },
-                            xField: 'year',
-                            yField: 'gdp',
-                            seriesField: 'name',
-                            yAxis: `{
-                              label: {
-                                formatter: function formatter(v) {
-                                  return ''.concat((v / 1000000000).toFixed(1), ' B');
+                            },                            
+                            jsonProps:{
+                              xField: 'year',
+                              yField: 'gdp',
+                              seriesField: 'name',
+                              yAxis: `{
+                                label: {
+                                  formatter: function formatter(v) {
+                                    return ''.concat((v / 1000000000).toFixed(1), ' B');
+                                  },
+                                },
+                              }`,
+                              legend: { position: 'top' },
+                              smooth: true,
+                              animation: {
+                                appear: {
+                                  animation: 'path-in',
+                                  duration: 5000,
                                 },
                               },
-                            }`,
-                            legend: { position: 'top' },
-                            smooth: true,
-                            animation: {
-                              appear: {
-                                animation: 'path-in',
-                                duration: 5000,
-                              },
-                            },
+                            }
+
                           }
                         }
                       ]
@@ -163,41 +169,44 @@ export default {
                         {
                           name:'AntDesignChart',
                           designProps:{
-                            api:null,
-                            designing:true,
+                            dataApi:null,
+                            isDeisgning:true,
                           },
                           props:{
-                            chart:'Radar',
-                            data:[
-                              { name: 'G2', star: 10178 },
-                              { name: 'G6', star: 7077 },
-                              { name: 'F2', star: 7345 },
-                              { name: 'L7', star: 2029 },
-                              { name: 'X6', star: 298 },
-                              { name: 'AVA', star: 806 },
-                            ],
-                            xField: 'name',
-                            yField: 'star',
-                            meta: {
-                              star: {
-                                alias: '分数',
-                                min: 0,
-                                nice: true,
+                            chart:'Radar',                            
+                            jsonProps:{
+                              data:[
+                                { name: 'G2', star: 10178 },
+                                { name: 'G6', star: 7077 },
+                                { name: 'F2', star: 7345 },
+                                { name: 'L7', star: 2029 },
+                                { name: 'X6', star: 298 },
+                                { name: 'AVA', star: 806 },
+                              ],
+                              xField: 'name',
+                              yField: 'star',
+                              meta: {
+                                star: {
+                                  alias: '分数',
+                                  min: 0,
+                                  nice: true,
+                                },
                               },
-                            },
-                            xAxis: {
-                              line: null,
-                              tickLine: null,
-                            },
-                            yAxis: {
-                              label: false,
-                              grid: {
-                                alternateColor: 'rgba(0, 0, 0, 0.04)',
+                              xAxis: {
+                                line: null,
+                                tickLine: null,
                               },
-                            },
-                            // 开启辅助点
-                            point: {},
-                            area: {},
+                              yAxis: {
+                                label: false,
+                                grid: {
+                                  alternateColor: 'rgba(0, 0, 0, 0.04)',
+                                },
+                              },
+                              // 开启辅助点
+                              point: {},
+                              area: {},
+                            }
+
                           }
                         }
                       ]
