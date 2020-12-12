@@ -62,7 +62,7 @@ export default{
           meta:calcPortlet,
         },
         {
-          title:'显示',
+          title:'页脚',
           meta:footer,
         },
 
