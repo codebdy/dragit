@@ -1,12 +1,12 @@
-import { GO_BACK_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from "base/PageAction";
+import { JUMP_TO_PAGE_ACTION } from "base/PageAction";
 
 export default{
   name: 'GridRow',
   props: {
     justify: 'space-between',
     alignItems: "center",
-    marginTop: 2,
     spacing: 2,
+    marginTop: 2,
   },
   children: [{
       name: 'GridColumn',
@@ -15,7 +15,7 @@ export default{
           name: 'Typography',
           props:{
             variant:'h5',
-            rxText: '文章编辑',            
+            rxText: '订单列表',            
           }
         }
       ],
@@ -23,27 +23,19 @@ export default{
     {
       name: 'GridColumn',
       children: [
-        {
-          name: 'Button',
-          props: {
-            variant: "outlined",
-            rxText: '返回',
-            size:'large',
-            onClick:{
-              name: GO_BACK_ACTION,
-            }
-          }
-        },
-        {
+      {
         name: 'Button',
         props: {
-          rxText: '保存',
           variant: "contained",
           color: "primary",
-          size:'large',
-          marginLeft:2,
+          rxText: '新建',
+          size: "large",
           onClick:{
-            name:SUBMIT_AND_NOT_CLOSE_ACTION,
+            name: JUMP_TO_PAGE_ACTION,
+            page:{
+              moduleSlug:'order',
+              pageSlug:'order-edit',
+            }
           }
         }
       }]

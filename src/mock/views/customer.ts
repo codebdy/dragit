@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "base/PageAction";
+import {GO_BACK_ACTION, SUBMIT_ACTION} from "base/PageAction";
 import {API_GET_MODEL_BY_ID} from "APIs/model"
 
 export default {
@@ -7,6 +7,8 @@ export default {
     props: {
       justify: 'space-between',
       alignItems: "center",
+      spacing: 2,
+      marginTop:2,
     },
     children: [{
         name: 'GridColumn',
@@ -15,7 +17,6 @@ export default {
           props:{
             rxText: '客户编辑',            
           }
-
         }],
       },
       {
@@ -39,9 +40,11 @@ export default {
             rxText: '保存',
             variant: "contained",
             color: "primary",
-            type: "submit",
             size:'large',
             marginLeft:2,
+            onClick:{
+              name:SUBMIT_ACTION,
+            }
           }
         }]
       },
@@ -50,7 +53,7 @@ export default {
   {
       name: 'GridRow',
       props: {
-        spacing: 3,
+        spacing: 2,
       },
   
       children: [{
@@ -297,12 +300,17 @@ export default {
 
 
   isFormPage:true,
-  api:{
+  apiForGet:{
     ...API_GET_MODEL_BY_ID,
     params:{
       modelName:'/Model/Customer',
     },      
   },
 
-  
+  apiForSave:{
+    ...API_GET_MODEL_BY_ID,
+    params:{
+      modelName:'/Model/Customer',
+    },      
+  }
 }

@@ -142,13 +142,13 @@ const PageView = ()=>{
         return;
       
       case SUBMIT_ACTION:
-        setCloseAfterSubmit(false);
+        setCloseAfterSubmit(true);
         setSubmit(true);
         isDirty.value = false;
         return;
       
       case SUBMIT_AND_NOT_CLOSE_ACTION:
-        setCloseAfterSubmit(true);
+        setCloseAfterSubmit(false);
         setSubmit(true);
         isDirty.value = false;
         return;

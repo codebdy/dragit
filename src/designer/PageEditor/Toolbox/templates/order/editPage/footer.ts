@@ -1,25 +1,15 @@
 import { GO_BACK_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from "base/PageAction";
 
-export default{
+export default {
   name: 'GridRow',
   props: {
-    justify: 'space-between',
+    justify: 'flex-end',
     alignItems: "center",
     marginTop: 2,
+    marginBottom: 2,
     spacing: 2,
   },
-  children: [{
-      name: 'GridColumn',
-      children: [
-        {
-          name: 'Typography',
-          props:{
-            variant:'h5',
-            rxText: '文章编辑',            
-          }
-        }
-      ],
-    },
+  children: [
     {
       name: 'GridColumn',
       children: [

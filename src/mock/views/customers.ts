@@ -1,3 +1,4 @@
+import { API_QUERY_AND_OPERATE_MODELS } from "APIs/model"
 import {JUMP_TO_PAGE_ACTION} from "base/PageAction"
 export default {
   layout:[
@@ -7,6 +8,7 @@ export default {
           justify: 'space-between',
           alignItems: "center",
           spacing: 1,
+          marginTop:2,
       },
       children: [
           {
@@ -144,18 +146,15 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                api:{
-                  method:'post',
-                  url:'/api/data/query-operate-models',
+                dataApi:{
+                  ...API_QUERY_AND_OPERATE_MODELS,
                   params:{
                     modelName:'/Model/Customer',
                   },      
                 },
-
               }
             }],
           }
-
       ]
     },
   ] 

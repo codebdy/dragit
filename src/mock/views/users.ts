@@ -51,9 +51,10 @@ export default {
             },
             children: [          {
               name:'ListView',
+              designProps:{
+                dataApi:null,
+              },
               props:{
-                //field:'paginate',
-                //noValidation: true,
                 withActions:true,
                 elevation:6,
                 columns:[
