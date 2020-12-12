@@ -3,6 +3,7 @@ import OptionSelect from "base/PropsInputs/OptionSelect";
 import { IProp } from "../../../base/Model/IProp";
 import NumberInput from "base/PropsInputs/NumberInput";
 import { IMeta } from "base/Model/IMeta";
+import marginRules from "base/Rules/marginRules";
 
 export class GridRowRule extends Rule{
   editPaddingY = '16px';
@@ -18,6 +19,7 @@ export class GridRowRule extends Rule{
 
   getFields(): Array<IProp>{
     return [
+      ...marginRules,
       {
         name:'direction',
         label:'direction',

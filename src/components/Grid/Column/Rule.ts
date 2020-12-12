@@ -2,6 +2,7 @@ import { Rule } from "../../../base/Rules/Rule";
 import { IProp } from "../../../base/Model/IProp";
 import colWidthRules from "base/Rules/colWidthRules";
 import { IMeta } from "base/Model/IMeta";
+import marginRules from "base/Rules/marginRules";
 
 
 export class GridColumnRule extends Rule{
@@ -18,6 +19,7 @@ export class GridColumnRule extends Rule{
   
   getFields(): Array<IProp>{
     return [
+      ...marginRules,
       ...colWidthRules
     ]
   }
