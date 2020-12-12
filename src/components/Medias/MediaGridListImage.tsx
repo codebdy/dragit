@@ -62,9 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     closeButton: {
       position: 'absolute',
-      right: theme.spacing(0),
-      top: theme.spacing(0),
-      color: theme.palette.grey[500],
+      right: theme.spacing(0.5),
+      top: theme.spacing(0.5),
     },  
   }),
 );
@@ -210,7 +209,7 @@ export default function MediaGridListImage(
         viewOpen &&
         <Dialog
           fullWidth
-          maxWidth='md'
+          maxWidth='sm'
           open={viewOpen}
           onClose={()=>{setViewOpen(false)}}
         >
