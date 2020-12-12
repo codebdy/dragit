@@ -1,81 +1,11 @@
 
-import article from './metas/aritcle/editPage';
-import articleLayout from './metas/aritcle/editPage/layout';
-import articleHeader from './metas/aritcle/editPage/header';
-import articleBasePortlet from './metas/aritcle/editPage/basePortlet';
-import articleSeoPortlet from './metas/aritcle/editPage/seoPortlet';
-import articleContentPortLet from './metas/aritcle/editPage/contentPortlet';
-import articleAppearancePortlet from './metas/aritcle/editPage/appearancePortlet';
-import articleMedias from './metas/aritcle/editPage/mediasPortlet';
-import artilceList from './metas/aritcle/listPage';
-import articleListHeader from './metas/aritcle/listPage/header';
-import articleListLayout from './metas/aritcle/listPage/layout';
-import aritcleListList from './metas/aritcle/listPage/list';
-import portlet from './metas/portlet'
+import portlet from './portlet'
+import templates from './templates'
 
 export default [
   {
     titleKey: "template",
-    children:[
-      {
-        titleKey:'article',
-        children:[
-          {
-            title:'列表页',
-            meta:artilceList,
-            children:[
-              {
-                title:'栅格布局',
-                meta:articleListLayout,
-              },              
-              {
-                title:'页面标题',
-                meta:articleListHeader,
-              },
-              {
-                title:'列表控件',
-                meta:aritcleListList,
-              },
-            ]        
-          },
-          {
-            title:'编辑页',
-            meta:article,
-            children:[
-              {
-                title: '栅格布局',
-                meta: articleLayout,
-              },
-              {
-                title:'页面标题',
-                meta: articleHeader,
-              },
-              {
-                title:'基本信息',
-                meta:articleBasePortlet,
-              },
-              {
-                title:'SEO数据',
-                meta:articleSeoPortlet,
-              },
-              {
-                title:'内容',
-                meta:articleContentPortLet,
-              },
-              {
-                title:'显示',
-                meta:articleAppearancePortlet,
-              },
-              {
-                title:'媒体',
-                meta:articleMedias,
-              },
-
-            ]            
-          },
-        ]
-      }
-    ]
+    children:templates,
   },
   {
     titleKey: "layout",
@@ -194,6 +124,19 @@ export default [
             open:true,
             withHeader:true,
             title:'One to Many Table',
+            collapsible: true,
+          },
+        }
+      },
+      {
+        titleKey:"tree-edit-portlet",
+        meta: {
+          name:'TreeEditor',
+          props: {
+            elevation: 6,
+            open:true,
+            withHeader:true,
+            title:'Tree edit card',
             collapsible: true,
           },
         }

@@ -36,6 +36,8 @@
 
     "template":"模板",
     "article":"文章",
+    "product":"产品",
+    "order":"订单",
     "layout": "布局",
     "page":"页面",
     "page-title":"标题",
@@ -45,10 +47,11 @@
     "form-grid-container":"表单布局容器",
     "form-grid-item":"表单布局项目",
     "portlet-footer":"卡片页脚",
-    "medias-portlet":"媒体卡片",
+    "medias-portlet":"媒体选择卡",
     "one-to-one-portlet":"一对一卡片",
     "one-to-many-portlet":"一对多卡片",
     "one-to-many-table":"一对多表格",
+    "tree-edit-portlet":"树编辑卡",
     "charts":"图表",
     "line-chart":"折线图",
 

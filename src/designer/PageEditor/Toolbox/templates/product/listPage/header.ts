@@ -6,6 +6,7 @@ export default{
     justify: 'space-between',
     alignItems: "center",
     spacing: 2,
+    marginTop: 2,
   },
   children: [{
       name: 'GridColumn',
@@ -14,7 +15,7 @@ export default{
           name: 'Typography',
           props:{
             variant:'h5',
-            rxText: '文章列表',            
+            rxText: '产品列表',            
           }
         }
       ],
@@ -32,8 +33,8 @@ export default{
           onClick:{
             name: JUMP_TO_PAGE_ACTION,
             page:{
-              moduleSlug:'article',
-              pageSlug:'article',
+              moduleSlug:'product',
+              pageSlug:'product-edit',
             }
           }
         }

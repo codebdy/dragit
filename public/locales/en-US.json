@@ -36,6 +36,8 @@
 
     "template":"Template",
     "article":"Article",
+    "product":"Product",
+    "order":"Order",
     "layout": "Layout",
     "page":"Page",
     "page-title":"Title",
@@ -49,6 +51,7 @@
     "one-to-one-portlet":"One to one portlet",
     "one-to-many-portlet":"One to many portlet",
     "one-to-many-table":"One to many table",
+    "tree-edit-portlet":"Tree edit portlet",
     "charts":"Charts",
     "line-chart":"Line",
 
