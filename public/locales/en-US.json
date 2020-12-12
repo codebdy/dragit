@@ -201,6 +201,7 @@
     "multiline":"Multiline",
     "rows":"rows",
     "label":"label",
+    "shrink-label":"Shrink label",
     "text-field":"TextField",
     "date":"Date",
     "date-time":"Date time",

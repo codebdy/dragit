@@ -206,6 +206,7 @@
     "multiline":"多行",
     "rows":"行数",
     "label":"标签",
+    "shrink-label":"收缩标签",
     "text-field":"文本框",
     "date":"日期",
     "date-time":"日期时间",

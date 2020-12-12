@@ -122,9 +122,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'contract_date',
                             },
                           }
@@ -282,9 +280,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'date1',
                             },
                           }
@@ -304,9 +300,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'date2',
                             },
                           }
@@ -326,9 +320,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'date4',
                             },
                           }
@@ -348,9 +340,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'date4',
                             },
                           }
@@ -371,9 +361,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'first_receive_date',
                             },
                           }
@@ -432,9 +420,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'receive_date2',
                             },
                           }
@@ -570,9 +556,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'contract_date',
                             },
                           }
@@ -730,9 +714,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'date1',
                             },
                           }
@@ -752,9 +734,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'date2',
                             },
                           }
@@ -774,9 +754,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'pay_date1',
                             },
                           }
@@ -835,9 +813,7 @@ export default {
                               fullWidth:true,
                               size:"small",
                               type:'date',
-                              InputLabelProps:{
-                                shrink: true,
-                              },
+                              shrinkLabel:true,
                               field:'pay_date2',
                             },
                           }

@@ -83,6 +83,11 @@ export class TextBoxRule extends Rule{
         },
       },
       {
+        name:'shrinkLabel',
+        label:'shrink-label',
+        input:BooleanInput,
+      },
+      {
         name:'size',
         label:'size',
         input:OptionSelect,
