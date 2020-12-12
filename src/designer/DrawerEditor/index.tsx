@@ -96,6 +96,7 @@ export default function DrawerEditor(){
     let targetNode = copy.getNode(node.id);
     targetNode?.meta && (targetNode.meta[field] = value);
     setRootNode(copy);
+    setSelectedNode(targetNode);
   }
 
   const handleStartDragNode = (node:RXNode<IMenuItem>)=>{
