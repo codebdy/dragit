@@ -111,13 +111,6 @@ export default {
                               xField: 'year',
                               yField: 'gdp',
                               seriesField: 'name',
-                              yAxis: `{
-                                label: {
-                                  formatter: function formatter(v) {
-                                    return ''.concat((v / 1000000000).toFixed(1), ' B');
-                                  },
-                                },
-                              }`,
                               legend: { position: 'top' },
                               smooth: true,
                               animation: {
