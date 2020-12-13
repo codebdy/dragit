@@ -1,5 +1,12 @@
 可视化构建前端 [演示地址](https://dragit.vercel.app/).  
+包含权限跟Form校验  
 QQ群：957619750  
+
+演示账号：
+admin/admin 
+demo/demo 
+test/test 
+ 
 ## Available Scripts
 
 In the project directory, you can run:
