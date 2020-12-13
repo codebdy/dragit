@@ -2,10 +2,10 @@
 包含权限跟Form校验  
 QQ群：957619750  
 
-演示账号：
-admin/admin 
-demo/demo 
-test/test 
+演示账号： 
+admin/admin  
+demo/demo  
+test/test  
  
 ## Available Scripts
 
