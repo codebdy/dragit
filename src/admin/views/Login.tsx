@@ -175,7 +175,7 @@ export default function Login(){
             >
               <Grid item xs={12}>
                 <h2 className = {classes.title} >{intl.get('login')}</h2>
-                <Typography variant="subtitle1" color="textSecondary">{intl.get('login-tip')}</Typography>
+                <Typography variant="subtitle1" color="textSecondary">GraphQL Version {intl.get('login-tip')}</Typography>
                 {error&&<span style={{color:'red'}}>{error}</span>}
               </Grid>
               <Grid item xs={12}>
