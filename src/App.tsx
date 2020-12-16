@@ -1,5 +1,5 @@
 import React from 'react';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ function App() {
   const [langLoading] = useIntl();
   const themeSettings = useThemeSettings();
   
-  const theme = responsiveFontSizes(createMuiTheme({
+  const theme = createMuiTheme({
     palette: {
       type: themeSettings.themeMode as any,
       primary:{
@@ -30,7 +30,7 @@ function App() {
     },
 
     shadows:[...useShadows()] as any
-  }));
+  });
 
 
   return (

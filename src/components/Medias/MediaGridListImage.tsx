@@ -7,7 +7,7 @@ import { API_MEDIAS_CHANGE_MEDIA_NAME, API_MEDIAS_REMOVE_MEDIA } from 'APIs/medi
 import axios from 'axios';
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
-import { contains } from 'ArrayHelper';
+import { contains } from 'utils/ArrayHelper';
 import { IMedia } from 'base/Model/IMedia';
 import Close from '@material-ui/icons/Close';
 

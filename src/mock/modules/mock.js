@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import createId from 'utils/createId'
 import getQueryVariable from 'mock/utils/getQueryVariable'
 import moduleCategories from './moduleCategories'
-import { remove } from 'ArrayHelper';
+import { remove } from 'utils/ArrayHelper';
 
 export function getCagegoryById(id){
   for(var index = 0; index < moduleCategories.length; index++){

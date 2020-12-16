@@ -1,4 +1,4 @@
-import { after, before, first, insertAfter, insertBefore, last, remove } from "ArrayHelper";
+import { after, before, first, insertAfter, insertBefore, last, remove } from "utils/ArrayHelper";
 import { IRect } from "base/Model/IRect";
 import { cloneObject } from "utils/cloneObject";
 

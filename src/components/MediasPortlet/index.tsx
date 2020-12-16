@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Divider, IconButton, Typography, ClickAwayListener, Grow, MenuItem, MenuList, Popper, ListItemIcon, ListItemText, Grid, Hidden } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import MdiIcon from '../common/MdiIcon';
-import { add, exchange, remove } from 'ArrayHelper';
+import { add, exchange, remove } from 'utils/ArrayHelper';
 import MediasPortletFeathureGrid from './MediasPortletFeathureGrid';
 import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';

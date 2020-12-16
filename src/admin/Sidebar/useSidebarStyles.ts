@@ -5,13 +5,6 @@ import useSidebarSkin from "store/theme/useSidebarSkin";
  * Sidebar theme
  */
 export interface SidebarTheme{
-
-  /**
-   * 是否暗色主题
-   * @default true
-   */
-  dark?: boolean,
-
   /**
    * 背景图片
    */

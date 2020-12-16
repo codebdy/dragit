@@ -4,7 +4,7 @@ import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
-import { batchRemove, remove, toggle } from "ArrayHelper";
+import { batchRemove, remove, toggle } from "utils/ArrayHelper";
 import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';

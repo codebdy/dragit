@@ -7,7 +7,7 @@ import { IconButton, Popover, useTheme } from '@material-ui/core';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import TreeList from './TreeList';
 import { isPointInRect } from 'mock/utils/isPointInRect';
-import { remove } from 'ArrayHelper';
+import { remove } from 'utils/ArrayHelper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

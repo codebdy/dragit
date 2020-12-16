@@ -6,6 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import './mock'
 import { Provider } from 'react-redux'
 import configureStore from "./store";
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from './mock/client-mock';
+
 import {register, registerHtmlTag} from "./base/DragRX";
 import { Button, Divider, Typography } from '@material-ui/core';
 import PortletGridItem from 'components/Portlet/GridItem';
@@ -101,8 +104,10 @@ registerHtmlTag('h5', HeadRule);
 registerHtmlTag('h6', HeadRule);
 
 ReactDOM.render(
-  <Provider store={store}>  
-    <App />
+  <Provider store={store}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>  
   </Provider>
   ,
   document.getElementById('root')

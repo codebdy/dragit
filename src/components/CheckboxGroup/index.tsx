@@ -1,5 +1,5 @@
 import { FormControlLabel,Checkbox, FormControl, FormGroup, FormHelperText, FormLabel } from '@material-ui/core';
-import { remove } from 'ArrayHelper';
+import { remove } from 'utils/ArrayHelper';
 import { MetaItem } from 'base/Model/MetaItem';
 import React from 'react';
 
