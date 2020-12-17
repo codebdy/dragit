@@ -48,8 +48,14 @@ export function insertAfter(child, refence, array) {
 }
 
 export function remove(node, array) {
-    array && array.splice(array.indexOf(node), 1);
-    return array;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === node) {
+            array.splice(i, 1)
+            break
+        }
+    }
+
+    return array
 }
 
 export function batchRemove(nodes, array) {
