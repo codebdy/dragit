@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { RXNode } from '../../../base/RXNode/RXNode';
 import { PageActionHandle } from '../../../base/PageAction';
-import { resolveComponent } from 'base/DragRX';
+import { resolveComponent } from 'base/RxDrag';
 import withFormField from './withFormField';
 import { IMeta } from 'base//Model/IMeta';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';

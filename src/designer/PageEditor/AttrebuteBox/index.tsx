@@ -12,7 +12,7 @@ import { API_GET_AUTHS } from 'APIs/modules';
 import MultiSelectBox from 'components/Select/MultiSelectBox';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
-import { resolveRule } from 'base/DragRX';
+import { resolveRule } from 'base/RxDrag';
 import { IRule } from 'base/Rules/IRule';
 
 

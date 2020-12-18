@@ -131,7 +131,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
           <MenuIcon style={{color:color}}/>
         </IconButton>
         <Typography variant="h6" noWrap  style={{color:color}}>
-          DragRX
+          RxDrag
         </Typography>          
       </Hidden>
 

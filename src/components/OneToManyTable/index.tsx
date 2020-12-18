@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { resolveComponent } from 'base/DragRX';
+import { resolveComponent } from 'base/RxDrag';
 import { RXInputProps } from 'base/RXInputProps';
 import MultiContentPotlet from 'components/common/MultiContentPotlet';
 import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';

@@ -16,3 +16,9 @@
   * 充分学习GraphQL, 前后端接口基于GraphQL，基于此重构前端代码
 
 2020-12-14 开一个Git分支，开始重构
+
+2020-12-17 重构备忘： 
+  * 深入学习useMemo, useCallback, useRef等钩子，基于这些功能重构代码。 
+  * 学习RxJs，看能不能基于这个优化实现 
+  * 尝试用useLayoutEffect 解决折叠组件渲染问题
+  * 学习Mobx并使用

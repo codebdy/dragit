@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { RXNode } from '../../../base/RXNode/RXNode';
-import { resolveComponent, resolveRule } from 'base/DragRX';
+import { resolveComponent, resolveRule } from 'base/RxDrag';
 import { IMeta } from 'base//Model/IMeta';
 import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';

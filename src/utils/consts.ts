@@ -1,2 +1,2 @@
-export const TOKEN_NAME="DragRXAuthToken";
+export const TOKEN_NAME="RxDragAuthToken";
 export const LOGIN_URL = "/login";

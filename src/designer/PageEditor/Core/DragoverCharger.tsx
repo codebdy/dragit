@@ -1,7 +1,7 @@
 import React from 'react';
 import { CursorPosition, IDragOverParam } from "./IDragOverParam";
 import { IRect } from "../../../base/Model/IRect";
-import { resolveRule } from 'base/DragRX';
+import { resolveRule } from 'base/RxDrag';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
 

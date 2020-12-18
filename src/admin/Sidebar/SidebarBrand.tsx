@@ -56,7 +56,7 @@ export default function Brand(
         //<img className={classNames(classes.img)} src={logo} alt="logo" />
         }
         <MdiIcon iconClass = "mdi-feather" color = {theme.palette.text.primary} size={36} />
-        <div className={classes.logoText}>DragRX</div>
+        <div className={classes.logoText}>RxDrag</div>
       </div>
       {children}
     </div>
