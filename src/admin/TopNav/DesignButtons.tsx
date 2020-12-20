@@ -4,13 +4,12 @@ import IconButton from '@material-ui/core/IconButton';
 import { Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { openAreaSelectAction } from "store/designer/actions";
-import { RootState } from "store";
-import { compactableAction } from "store/sidebar/actions";
 import ThemeSettings from "../ThemeSettings";
 import useLoggedUser from "store/app/useLoggedUser";
 import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_THEME_SETTINGS } from "APIs/authSlugs";
+import { useLeftDrawer } from "store/helpers/useAppStore";
 
 /*const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,12 +41,11 @@ export default function DesignButtons(
   const loggedUser = useLoggedUser();
   const dispatch = useDispatch()
   
-  const selectSidebar = (state: RootState) => state.sidebar
-  const sidebarStore = useSelector(selectSidebar) 
+  const lefDrawer = useLeftDrawer();
 
   const handleOpen = () => {
     dispatch(openAreaSelectAction());
-    sidebarStore.compactable && dispatch(compactableAction());
+    lefDrawer.compactable && lefDrawer.toggleCompactable();
   };
 
   return(

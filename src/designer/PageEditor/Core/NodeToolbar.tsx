@@ -3,12 +3,12 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
 import { CANVAS_SCROLL, REFRESH_SELECT_STATE, SELECT_NODE } from "./busEvents";
 import MdiIcon from 'components/common/MdiIcon';
-import { sideBarSettings } from 'utils/sideBarSettings';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import classNames from 'classnames';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
+import { useLeftDrawer } from 'store/helpers/useAppStore';
 
 const height = 28;
 const barWidth = height*4;
@@ -65,10 +65,9 @@ export default function NodeToolbar(
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const selectSidebar = (state: RootState) => state.sidebar
-  const sidebar = useSelector(selectSidebar)  
+  const sidebar = useLeftDrawer() 
   
-  const sideBarWidth = sideBarSettings.sizes[sidebar.size]
+  const sideBarWidth = sidebar.width;
   
   const selectMyStore = (state: RootState) => state.designer
   const myStore = useSelector(selectMyStore)
