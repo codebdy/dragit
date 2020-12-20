@@ -3,8 +3,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Scrollbar from "../common/Scrollbar";
 import SiderBarLoadingSkeleton from "./LoadingSkeleton";
-import { API_GET_DRAWER } from "APIs/drawer";
-import { useAxios } from "base/Hooks/useAxios";
 import IMenuItem from "base/Model/IMenuItem";
 import { Divider } from "@material-ui/core";
 import { RXNode } from "base/RXNode/RXNode";
@@ -15,21 +13,12 @@ import { RXNodeRoot } from "base/RXNode/Root";
 import useLoggedUser from "store/app/useLoggedUser";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { cloneObject } from "utils/cloneObject";
 
 // 定义查询语句
+//String代替树形结构
 const GET_DRAWER_ITEMS = gql`
   query GetDrawerItems {
-    drawerItems{
-      type
-      title
-      icon
-      badge
-      chip
-      children
-      to
-      auths
-    }
+    drawerItemsStringData
   }
 `;
 const useStyles = makeStyles((theme: Theme) =>
@@ -59,9 +48,13 @@ export default function SidebarLinks(
   }
 
   useEffect(()=>{
+    error && console.log( error);
+  },[error])
+
+  useEffect(()=>{
     let root = new RXNodeRoot<IMenuItem>();
-    root.parse( cloneObject(data?.drawerItems) || []);
-    data && setItems(root.children);    
+    root.parse( JSON.parse(data?.drawerItemsStringData||'[]'));
+    data && setItems(root.children);          
   },[data]);
 
   const listItems =items?.map((node:RXNode<IMenuItem>)=>{

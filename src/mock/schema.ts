@@ -41,9 +41,15 @@ export const schema = `
     users: [User!]!
     "根据 name 查询对应的用户信息"
     user(name: String!): User,
-    drawerItems:[MenuItem]!
+    drawerItemsStringData:String!
   }
 `;
+
+function sleep(ms:number) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms)
+  })
+}
 
 // A map of functions which return data for the schema.
 export const resolvers = {
@@ -55,6 +61,10 @@ export const resolvers = {
       return { name, gender: 'MALE', tags: [ name ] };
     },
 
-    drawerItems:()=>drawer,
+    //不能返回树形结构，用String代替
+    drawerItemsStringData:async ()=>{
+      await sleep(2000);
+      return JSON.stringify(drawer)
+    },
   },
 };
