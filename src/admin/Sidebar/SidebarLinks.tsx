@@ -13,7 +13,25 @@ import MenuNode from "./MenuItems/MenuNode";
 import MenuNodeGroup from "./MenuItems/MenuNodeGroup";
 import { RXNodeRoot } from "base/RXNode/Root";
 import useLoggedUser from "store/app/useLoggedUser";
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { cloneObject } from "utils/cloneObject";
 
+// 定义查询语句
+const GET_DRAWER_ITEMS = gql`
+  query GetDrawerItems {
+    drawerItems{
+      type
+      title
+      icon
+      badge
+      chip
+      children
+      to
+      auths
+    }
+  }
+`;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -25,14 +43,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SidebarLinks(
   props : {
-    items?:Array<IMenuItem>,
     fullWidth:number,
     mini:boolean,
   }
 ) {
   const classes = useStyles();
   const [openedId, setOpenedId] = React.useState(-1);
-  const [jsonData, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
+  //const [jsonData, ] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
+  const { loading, error, data } = useQuery(GET_DRAWER_ITEMS);
   const [items,setItems] = React.useState<Array<RXNode<IMenuItem>>>([]);
   const loggedUser = useLoggedUser();
 
@@ -42,9 +60,9 @@ export default function SidebarLinks(
 
   useEffect(()=>{
     let root = new RXNodeRoot<IMenuItem>();
-    root.parse(jsonData);
-    jsonData && setItems(root.children);    
-  },[jsonData]);
+    root.parse( cloneObject(data?.drawerItems) || []);
+    data && setItems(root.children);    
+  },[data]);
 
   const listItems =items?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;

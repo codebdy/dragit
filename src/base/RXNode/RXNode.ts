@@ -25,7 +25,6 @@ export class RXNode<T>{
 
     //去掉Meta的Children，避免后期数据污染
     metaAny.children = undefined;
-
     return node;
   }
 

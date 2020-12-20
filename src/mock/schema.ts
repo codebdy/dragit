@@ -1,3 +1,4 @@
+import drawer from "./drawer"
 // The GraphQL schema
 export const schema = `
   enum Gender {
@@ -12,11 +13,35 @@ export const schema = `
     tags: [String!]!
   }
 
+  type MenuBadge {
+    color: String
+    field: String
+    size: String
+  }
+  
+  type MenuChip {
+    color: String
+    label: String
+    size: String
+  }
+  
+  type MenuItem{
+    type: String!
+    title: String
+    icon: String
+    badge: MenuBadge
+    chip: MenuChip
+    children: [MenuItem]
+    to: String
+    auths:[String]
+  }
+
   type Query {
     "查询所有用户列表"
     users: [User!]!
     "根据 name 查询对应的用户信息"
-    user(name: String!): User
+    user(name: String!): User,
+    drawerItems:[MenuItem]!
   }
 `;
 
@@ -29,5 +54,7 @@ export const resolvers = {
       // find user by name...
       return { name, gender: 'MALE', tags: [ name ] };
     },
+
+    drawerItems:()=>drawer,
   },
 };
