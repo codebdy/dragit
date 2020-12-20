@@ -1,17 +1,14 @@
 import React, { Fragment } from 'react';
 import { Slider, Typography } from '@material-ui/core';
-
-import useThemeSettings from 'store/theme/useThemeSettings';
-import { useDispatch } from 'react-redux';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
-import { setElevationStrengthAction } from 'store/theme/actions';
+import {observer} from 'mobx-react-lite';
+import { useThemeSettings } from 'store/helpers/useAppStore';
 
 
-export default function ElevationStrength(){
+export const ElevationStrength = observer(()=>{
   const classes = useRowStyles();
   const themeSettings = useThemeSettings();
-  const dispatch = useDispatch()
   
   return (
     <Fragment>
@@ -25,9 +22,9 @@ export default function ElevationStrength(){
           max = {10}
           step={1}
           valueLabelDisplay="on"
-          onChange = {(e,value)=>dispatch(setElevationStrengthAction(value))}
+          onChange = {(e,value)=>{themeSettings.setSlevationStrength(value as any)}}
         />
       </div>
     </Fragment>
   )
-}
+})

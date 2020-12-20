@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react';
 import { createStyles, Divider, makeStyles, Theme, Typography } from '@material-ui/core';
-
-import { useDispatch } from 'react-redux';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
-import useSidebarSkin from 'store/theme/useSidebarSkin';
 import classNames from 'classnames';
-import { setSiderbarSkinAction } from 'store/theme/actions';
-import { DARK, LIGHT } from 'store/theme/useThemeSettings';
-import { linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5 } from 'store/theme/reducers';
+import { useThemeSettings } from 'store/helpers/useAppStore';
+import { DARK, LIGHT, linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5 } from 'store/ThemeSettings';
+import {observer} from "mobx-react-lite";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,26 +25,22 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function MaskBlock(
+const MaskBlock = observer((
   props:{
     selectedLinerGradient:string,
     mask:string,
     borderColor?:string,
     light?:boolean,
   }
-){
+)=>{
   const {mask, selectedLinerGradient, borderColor, light=false} = props;
   const classes = useStyles();
-  const dispatch = useDispatch()
   const selected = mask === selectedLinerGradient;
-  const sidebarSkin = useSidebarSkin()
+  const sidebarSkin = useThemeSettings().leftDrawerSkin;
 
   const handleClick = ()=>{
-    dispatch(setSiderbarSkinAction({
-      ...sidebarSkin, 
-      maskLinearGradient:mask,
-      mode:light ? LIGHT : DARK,
-    }))
+    sidebarSkin.setMask(mask);
+    sidebarSkin.setMode(light ? LIGHT : DARK);
   }
 
   return (
@@ -60,26 +53,22 @@ function MaskBlock(
       onClick={handleClick}
     ></div>
   )
-}
+})
 
-function ImageBlock(
+const ImageBlock = observer((
   props:{
     selectImage:any,
     image?:any,
     borderColor?:string,
   }
-){
+)=>{
   const {selectImage, image, borderColor } = props;
   const classes = useStyles();
-  const dispatch = useDispatch()
   const selected = image === selectImage;
-  const sidebarSkin = useSidebarSkin()
+  const sidebarSkin = useThemeSettings().leftDrawerSkin;
 
   const handleClick = ()=>{
-    dispatch(setSiderbarSkinAction({
-      ...sidebarSkin, 
-      image:image,
-    }))
+    sidebarSkin.setImage(image);
   }
 
   return (
@@ -92,11 +81,11 @@ function ImageBlock(
       onClick={handleClick}
     ></div>
   )
-}
+})
 
-export default function SidebarSettings(){
+export const SidebarSettings = observer(()=>{
   const classes = useRowStyles();
-  const sidebarSkin = useSidebarSkin()
+  const sidebarSkin = useThemeSettings().leftDrawerSkin;
  
   return (
     <Fragment>
@@ -106,15 +95,15 @@ export default function SidebarSettings(){
       >{intl.get('sidebar-color')}</Typography>
       <div className = {classes.content}>
         <MaskBlock 
-          selectedLinerGradient= {sidebarSkin.maskLinearGradient} 
+          selectedLinerGradient= {sidebarSkin.mask} 
           mask= {linearGradient1}
           borderColor="#111"
           light
         />
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient2}/>
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient3}/>
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient4}/>
-        <MaskBlock selectedLinerGradient= {sidebarSkin.maskLinearGradient} mask = {linearGradient5} borderColor="#fff"/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.mask} mask = {linearGradient2}/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.mask} mask = {linearGradient3}/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.mask} mask = {linearGradient4}/>
+        <MaskBlock selectedLinerGradient= {sidebarSkin.mask} mask = {linearGradient5} borderColor="#fff"/>
       </div>
       <Divider />
       <Typography 
@@ -131,4 +120,4 @@ export default function SidebarSettings(){
       </div>
     </Fragment>
   )
-}
+})

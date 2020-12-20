@@ -1,24 +1,21 @@
 import React, { Fragment } from 'react';
 import { FormControlLabel, Switch, Typography } from '@material-ui/core';
-import { setToolbarSkinAction } from 'store/theme/actions';
-import { useDispatch } from 'react-redux';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
-import useToolbarSkin from 'store/theme/useToolbarSkin';
+import { useThemeSettings } from 'store/helpers/useAppStore';
+import {observer} from "mobx-react-lite";
 
-export default function ToolbarSettings(){
+export const ToolbarSettings = observer(()=>{
   const classes = useRowStyles();
-  const dispatch = useDispatch();
 
-  const toolbarSkin = useToolbarSkin();
+  const toolbarSkin = useThemeSettings().toolbarSkin;
 
   const handleFloatChange = (floatStyle:boolean)=>{
-
-    dispatch(setToolbarSkinAction({...toolbarSkin, floatStyle}))
+    toolbarSkin.setFloatStyle(floatStyle);
   }
 
   const hangdeColorChange = (colored:boolean)=>{
-    dispatch(setToolbarSkinAction({...toolbarSkin, colored}))
+    toolbarSkin.setColored(colored);
   }
   
   return (
@@ -56,4 +53,4 @@ export default function ToolbarSettings(){
       </div>
     </Fragment>
   )
-}
+})

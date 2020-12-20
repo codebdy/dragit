@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from '@material-ui/core';
 import Brand from '../SidebarBrand';
-import { useLeftDrawer } from 'store/helpers/useAppStore';
+import { useLeftDrawer, useThemeSettings } from 'store/helpers/useAppStore';
 import StyledDrawer from './StyledDrawer';
 import {observer} from "mobx-react-lite";
 
@@ -12,6 +12,7 @@ export const PCDrawer = observer((
 )=>{
   const {children} = props;
   const leftDrawer = useLeftDrawer();
+  const themeSettings = useThemeSettings();
 
   const handleMouseEnter = ()=>{
     leftDrawer.mouseEnter();
@@ -34,8 +35,8 @@ export const PCDrawer = observer((
       width = {leftDrawer.hover ? leftDrawer.fullWidth : leftDrawer.width}
       elevation = {leftDrawer.compactable ? 20 : 0}
       showBorder = {!leftDrawer.compactable}
-      backgroundImage = {leftDrawer.backgroundImage}
-      backgroundMask = {leftDrawer.backgroundMask}
+      backgroundImage = {themeSettings.leftDrawerSkin.image}
+      backgroundMask = {themeSettings.leftDrawerSkin.mask}
     >
       <Brand fullWidth={leftDrawer.fullWidth}>
         <Switch 

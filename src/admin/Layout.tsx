@@ -1,7 +1,7 @@
 import React from 'react';
 import { CssBaseline, makeStyles, createStyles } from '@material-ui/core';
 import Sidebar from 'admin/Sidebar';
-import TopNav from 'admin/TopNav';
+import {TopNav} from 'admin/TopNav';
 import PageContent from 'admin/PageContent';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import AreaSelect from 'designer/AreaSelect';

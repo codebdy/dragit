@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-
-import useThemeSettings, { DARK, LIGHT } from 'store/theme/useThemeSettings';
-import { useDispatch } from 'react-redux';
+import {observer} from "mobx-react-lite";
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
-import { setPrimaryColorAction, setToolbarSkinAction } from 'store/theme/actions';
-import useToolbarSkin from 'store/theme/useToolbarSkin';
+import { useThemeSettings } from 'store/helpers/useAppStore';
+import { LIGHT, DARK } from 'store/ThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function ColorBlock(
+const ColorBlock = observer((
   props:{
     selectedColor:string,
     color:string,
@@ -33,17 +31,16 @@ function ColorBlock(
     toolbarMode?:string,
   }
   
-){
+)=>{
   const {selectedColor, color, borderColor, toolbarMode} = props;
   const classes = useStyles();
-  const dispatch = useDispatch()
   const selected = color === selectedColor;
-  
-  const toolbarSkin = useToolbarSkin()
+  const themeSettings = useThemeSettings();
+  const toolbarSkin = themeSettings.toolbarSkin;
 
   const handleClick = ()=>{
-    dispatch(setPrimaryColorAction(color))
-    toolbarMode && dispatch(setToolbarSkinAction({...toolbarSkin, mode:toolbarMode}))
+    themeSettings.setPrimary(color);
+    toolbarMode && (toolbarSkin.setMode(toolbarMode as any));
   }
   
   return (
@@ -55,9 +52,9 @@ function ColorBlock(
       onClick={handleClick}
     ></div>
   )
-}
+})
 
-export default function ThemeColor(){
+export const ThemeColor = observer(()=>{
   const classes = useRowStyles();
   const themeSettings = useThemeSettings();
  
@@ -78,4 +75,4 @@ export default function ThemeColor(){
       </div>
     </Fragment>
   )
-}
+})

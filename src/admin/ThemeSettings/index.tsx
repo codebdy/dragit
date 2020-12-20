@@ -5,13 +5,13 @@ import classNames from 'classnames';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { Close } from '@material-ui/icons';
 import intl from "react-intl-universal";
-import ThemeMode from './ThemeMode';
-import ElevationStrength from './ElevationStrength';
-import ThemeColor from './ThemeColor';
-import SidebarSettings from './SidebarSettings';
-import ToolbarSettings from './ToolbarSettings';
-import useShadows from 'store/theme/useShadows';
-import useThemeSettings from 'store/theme/useThemeSettings';
+import useShadows from 'utils/useShadows';
+import { useThemeSettings } from 'store/helpers/useAppStore';
+import { ThemeMode } from './ThemeMode';
+import { ThemeColor } from './ThemeColor';
+import { ToolbarSettings } from './ToolbarSettings';
+import { ElevationStrength } from './ElevationStrength';
+import { SidebarSettings } from './SidebarSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

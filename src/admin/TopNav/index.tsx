@@ -5,10 +5,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 import DesignButtons from 'admin/TopNav/DesignButtons';
-import useToolbarSkin from 'store/theme/useToolbarSkin';
 import NavButtons from './NavButtons';
-import { DARK } from 'store/theme/useThemeSettings';
 import { LeftDrawerWidthPlaceholder } from 'admin/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
+import { DARK } from 'store/ThemeSettings';
+import { useThemeSettings } from 'store/helpers/useAppStore';
+import {observer} from "mobx-react-lite";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,10 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function TopNav(props:{onSidebarToggle: any}) {
+export const TopNav = observer((props:{onSidebarToggle: any}) => {
   const classes = useStyles();
   const [sticky, setSticky] = React.useState(false);
-  const toolbarSkin = useToolbarSkin();
+  const toolbarSkin = useThemeSettings().toolbarSkin;
   
   const handleScroll = function(event:any){
     let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0
@@ -66,4 +67,4 @@ export default function TopNav(props:{onSidebarToggle: any}) {
       </AppBar>
     </Fragment>
   )
-}
+})

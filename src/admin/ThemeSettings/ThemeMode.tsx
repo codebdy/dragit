@@ -1,28 +1,27 @@
 import React, { Fragment } from 'react';
 import { FormControlLabel, Radio, Typography } from '@material-ui/core';
-import { setSiderbarSkinAction, setThemeModeAction } from 'store/theme/actions';
-import useThemeSettings, { LIGHT, DARK } from 'store/theme/useThemeSettings';
-import { useDispatch } from 'react-redux';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
-import useSidebarSkin from 'store/theme/useSidebarSkin';
-import { linearGradient1, linearGradient5 } from 'store/theme/reducers';
+import { useThemeSettings } from 'store/helpers/useAppStore';
+import {observer} from "mobx-react-lite";
+import { DARK, LIGHT, linearGradient1, linearGradient5 } from 'store/ThemeSettings';
 
-export default function ThemeMode(){
+export const ThemeMode = observer(()=>{
   const classes = useRowStyles();
   const themeSettings = useThemeSettings();
-  const dispatch = useDispatch();
 
-  const sidebarSkin = useSidebarSkin();
+  const sidebarSkin = themeSettings.leftDrawerSkin;
 
   const handleChangeToLignt = ()=>{
-    dispatch(setThemeModeAction(LIGHT))
-    dispatch(setSiderbarSkinAction({...sidebarSkin, mode:LIGHT, maskLinearGradient:linearGradient1}))
+    themeSettings.setThemeMode(LIGHT);
+    sidebarSkin.setMode(LIGHT);
+    sidebarSkin.setMask(linearGradient1);
   }
 
   const hangdeChangeToDark = ()=>{
-    dispatch(setThemeModeAction(DARK));
-    dispatch(setSiderbarSkinAction({...sidebarSkin, mode:DARK, maskLinearGradient:linearGradient5}))
+    themeSettings.setThemeMode(DARK);
+    sidebarSkin.setMode(DARK);
+    sidebarSkin.setMask(linearGradient5);
   }
   
   return (
@@ -58,4 +57,4 @@ export default function ThemeMode(){
       </div>
     </Fragment>
   )
-}
+})

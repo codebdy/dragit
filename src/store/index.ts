@@ -5,7 +5,6 @@ import sidebarReducer from './sidebar/reducers';
 import designReducer from './designer/reducers';
 import pageReducer from './page/reducers';
 import alertbarReducer from './alertbar/reducers';
-import themeSetingsReducer from './theme/reducers';
 import appReducer from './app/reducers';
 import errorReducer from './error/reducers';
 
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   designer: designReducer,
   page: pageReducer,
   alertbar:alertbarReducer,
-  themeSettings:themeSetingsReducer,
   app:appReducer,
   error:errorReducer,
 })

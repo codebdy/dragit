@@ -12,7 +12,8 @@ import IAppInfo from 'base/Model/IAppInfo';
 import { useDispatch } from 'react-redux';
 import { setAppInfoAction } from 'store/app/actions';
 import { TOKEN_NAME } from 'utils/consts';
-import useThemeSettings, { LIGHT } from 'store/theme/useThemeSettings';
+import { useThemeSettings } from 'store/helpers/useAppStore';
+import { LIGHT } from 'store/ThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

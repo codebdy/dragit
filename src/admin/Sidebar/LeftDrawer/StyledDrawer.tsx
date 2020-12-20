@@ -18,7 +18,7 @@ const useStyles = (
       overflowX:'hidden',
       display:'flex',
       flexFlow:'column',
-      transition: "all 0.3s",
+      transition: "width 0.3s, box-shadow 0.3s",
       boxShadow: theme.shadows[elevation],
       borderRight: showBorder ? 'solid 1px ' + theme.palette.divider : '0',
     },

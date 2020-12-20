@@ -2,10 +2,9 @@ import React from "react";
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import ListNav from "./SidebarLinks"
-import useThemeSettings from "store/theme/useThemeSettings";
 import LeftDrawer from "./LeftDrawer";
 import {observer} from "mobx-react-lite";
-import { useLeftDrawer } from "store/helpers/useAppStore";
+import { useLeftDrawer, useThemeSettings } from "store/helpers/useAppStore";
 
 export enum SidebarSize{
   small = "small",
@@ -43,7 +42,7 @@ const Sidebar = observer((props:SidebarProps) => {
   const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
-      type: themeSettings.siderbarSkin.mode as any,
+      type: themeSettings.leftDrawerSkin.mode as any,
       primary:{
         main:themeSettings.primary,
       },

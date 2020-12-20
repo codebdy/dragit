@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLeftDrawer } from 'store/helpers/useAppStore';
+import { useLeftDrawer, useThemeSettings } from 'store/helpers/useAppStore';
 import StyledDrawer from './StyledDrawer';
 
 export default function MobileDrawer(
@@ -11,6 +11,8 @@ export default function MobileDrawer(
 ){
   const {children, open, onClose} = props;
   const leftDrawer = useLeftDrawer();
+  const themeSettings = useThemeSettings();
+  
   return (
     <StyledDrawer
       variant="temporary"
@@ -23,8 +25,8 @@ export default function MobileDrawer(
       }}
 
       width = {leftDrawer.fullWidth}
-      backgroundImage = {leftDrawer.backgroundImage}
-      backgroundMask = {leftDrawer.backgroundMask}
+      backgroundImage = {themeSettings.leftDrawerSkin.image}
+      backgroundMask = {themeSettings.leftDrawerSkin.mask}
     >
       {children}
     </StyledDrawer>

@@ -1,6 +1,5 @@
 import { createMuiTheme, Theme } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
+import { useThemeSettings } from "store/helpers/useAppStore";
 
 const weakenShadow = (shadow:string, strength:number)=>{
   return shadow.replace('rgba(0,0,0,0.14)',`rgba(0,0,0,${0.14*strength/10})`)
@@ -18,9 +17,8 @@ const generateShadows = (theme: Theme, strength:number) => {
 
 
 export default function useShadows(){
-  const themeSettings = (state: RootState) => state.themeSettings;
-  const commonSetings =  useSelector(themeSettings);
+  const themeSettings = useThemeSettings();
   const oldTheme = createMuiTheme({})
 
-  return generateShadows(oldTheme, commonSetings.elevationStrength);
+  return generateShadows(oldTheme, themeSettings.elevationStrength);
 }
