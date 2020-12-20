@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { RXNode } from '../../../base/RXNode/RXNode';
 import { resolveComponent, resolveRule } from 'base/RxDrag';
 import { IMeta } from 'base//Model/IMeta';
-import useDesigner from 'store/designer/useDesigner';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import bus from '../../../base/bus';
@@ -13,6 +12,8 @@ import ActiveLabel from './ActiveLabel';
 import { IToolboxItem } from '../Toolbox/IToolboxItem';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import {observer} from 'mobx-react-lite';
+import { useDesigner } from 'store/helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,7 +56,7 @@ function getEditStyle(
 
 }
 
-export default function ComponentView(
+export const ComponentView = observer((
   props:{
     node:RXNode<IMeta>,
     selectedNode?:RXNode<IMeta>,
@@ -63,7 +64,7 @@ export default function ComponentView(
     draggedToolboxItem?:IToolboxItem,
     draggedNode?:RXNode<IMeta>,
   }
-){
+)=>{
   const {node, selectedNode, onSelectNode, draggedToolboxItem, draggedNode} = props;
   const classes = useStyles();
   const [actived, setActived] = useState(false);
@@ -189,4 +190,4 @@ export default function ComponentView(
     }
     </Fragment>
   )
-}
+})

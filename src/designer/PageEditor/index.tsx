@@ -2,18 +2,15 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, Container, IconButton, useTheme } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import intl from 'react-intl-universal';
 import Scrollbar from 'admin/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
-import { showOutlineActon, showPaddingXActon, showPaddingYActon } from 'store/designer/actions';
 import MdiIcon from 'components/common/MdiIcon';
 import bus from '../../base/bus';
 import { CANVAS_SCROLL, REFRESH_NODE, SELECT_NODE } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'designer/Layout';
 import LeftContent from './LeftContent';
-import useDesigner from 'store/designer/useDesigner';
 import { API_GET_PAGE, API_UPDATE_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { IPage, IPageSchema } from 'base/Model/IPage';
@@ -22,19 +19,21 @@ import PageSkeleton from 'admin/views/Page/PageSkeleton';
 import { useLoginCheck } from 'base/Hooks/useLoginCheck';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
-import ComponentView from './Core/ComponentView';
+import { ComponentView } from './Core/ComponentView';
 import { RXNode } from 'base/RXNode/RXNode';
-import NodeToolbar from './Core/NodeToolbar';
+import { NodeToolbar } from './Core/NodeToolbar';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
 import DragCusor from './Core/DragCusor';
 import { CursorPosition, IDragOverParam } from './Core/IDragOverParam';
-import SelectedLabel from './Core/SelectedLabel';
+import { SelectedLabel } from './Core/SelectedLabel';
 import { cloneObject } from '../../utils/cloneObject';
 import SubmitButton from 'components/common/SubmitButton';
 import { clearPageSchemaCache } from 'base/Hooks/usePageMeta';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import { useAuthCheck } from 'base/Hooks/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
+import { observer } from 'mobx-react-lite';
+import { useDesigner } from 'store/helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,12 +84,12 @@ declare var window:{
   undoList:Array<Snapshot>,
 };
 
-export default function PageEditor(
+export const PageEditor = observer((
   props:{
     pageSlug:string,
     onClose:()=>void
   }
-) {
+) =>{
   const {pageSlug, onClose} = props;
   const classes = useStyles();
   const designer = useDesigner();
@@ -110,7 +109,6 @@ export default function PageEditor(
   const [isDirty, setIsDirty] = useState(false);
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
-  const dispatch = useDispatch()
   const theme = useTheme(); 
 
   useLoginCheck();
@@ -375,21 +373,21 @@ export default function PageEditor(
             <Fragment>
               <IconButton 
                 onClick = {()=>{
-                  dispatch(showOutlineActon(!showOutline))
+                  designer.setShowOutline(!showOutline)
                 }}
               >
                 <MdiIcon iconClass="mdi-border-none-variant" color={showOutline ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  dispatch(showPaddingXActon(!showPaddingX))
+                  designer.setShowPaddingX(!showPaddingX)
                 }}
               >
                 <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={showPaddingX ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  dispatch(showPaddingYActon(!showPaddingY))
+                  designer.setShowPaddingY(!showPaddingY)
                 }}
                 >
                 <MdiIcon iconClass="mdi-arrow-expand-vertical" color={showPaddingY ? theme.palette.primary.main : ''}/>
@@ -467,4 +465,4 @@ export default function PageEditor(
         </Fragment>      
       </Backdrop>
   );
-}
+})

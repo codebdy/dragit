@@ -1,22 +1,20 @@
 import React from 'react';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import { useDispatch } from 'react-redux';
 import { Dialog } from '@material-ui/core';
-import useError from 'store/error/useError';
-import { closeErrorDialogAction } from 'store/error/actions';
+import {observer} from 'mobx-react-lite';
+import { useAppStore } from 'store/helpers/useAppStore';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function ErrorDialog(){
+export const ErrorDialog = observer(()=>{
 
   //const [open, setOpen] = React.useState(true);
-
-  const errorMessage = useError();
-  const dispatch = useDispatch()
+  const appStore = useAppStore();
+  const errorMessage = appStore.errorMessage;
   const handleClose = () => {
-    dispatch(closeErrorDialogAction())
+    appStore.setErrorMessage('');
   };  
   
   return (
@@ -31,4 +29,4 @@ export default function ErrorDialog(){
       </Alert>
     </Dialog>
   )
-}
+})

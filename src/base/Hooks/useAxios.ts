@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosRequestConfig } from 'axios';
-import { openSuccessAlertAction } from "store/alertbar/actions";
-import { useDispatch } from "react-redux";
-import { openErrorDialogAction } from "store/error/actions";
+import { useAppStore } from "store/helpers/useAppStore";
 
 
 export function useAxios<T>(config?:AxiosRequestConfig, tipSuccess?:string|boolean):[T|undefined, boolean, boolean]{
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<T>();
   const [error, setError] = useState(false);
+  const appStore = useAppStore();
   let destroied = false;
-  const dispatch = useDispatch();
   useEffect(() => {
     if(config){
       setLoading(true);
@@ -18,14 +16,14 @@ export function useAxios<T>(config?:AxiosRequestConfig, tipSuccess?:string|boole
         if(!destroied){
           setData(res.data);
           setLoading(false);
-          tipSuccess && dispatch(openSuccessAlertAction())          
+          tipSuccess && appStore.setSuccessAlert(true);          
         }
       })
       .catch(error => {
         console.log('server error:useAxios', error);
         setLoading(false);
         setError(true);
-        dispatch(openErrorDialogAction(error.message))
+        appStore.setErrorMessage(error.message);
       })       
     }
 

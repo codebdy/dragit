@@ -2,7 +2,6 @@ import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
 import { CANVAS_SCROLL } from "./busEvents";
-import useDesigner from 'store/designer/useDesigner';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +31,6 @@ export default function ActiveLabel(
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const designer = useDesigner();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect()
@@ -59,10 +57,6 @@ export default function ActiveLabel(
     doFollow();
   }
 
-  useEffect(() => {
-    hangdePositionChange();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[designer.showPaddingX, designer.showPaddingY]);
 
   return (
     <Fragment>

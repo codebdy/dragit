@@ -2,15 +2,14 @@ import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, fade } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { closeAreaSelectAction, openDesignerAction } from 'store/designer/actions';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
-import useDesigner from 'store/designer/useDesigner';
 import { LeftDrawerWidthPlaceholder } from 'admin/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
+import { useDesigner } from 'store/helpers/useAppStore';
+import {observer} from 'mobx-react-lite';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,25 +50,24 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function AreaSelect() {
+export const AreaSelect = observer(()=>{
   const classes = useStyles();
   const designer = useDesigner();
-  const dispatch = useDispatch();
   
   const history = useHistory();
 
   const handleClose = () => {
-    dispatch(closeAreaSelectAction());
+    designer.setAreaSelect(false);
   };
 
   const handleDesignPageContent = (event:any) =>{
-    dispatch(closeAreaSelectAction());
-    dispatch(openDesignerAction());
-    event.stopPropagation()
+    designer.setAreaSelect(false);
+    designer.open();
+    event.stopPropagation();
   }
 
   const handleDesignDrawer = (event:any)=>{
-    dispatch(closeAreaSelectAction());
+    designer.setAreaSelect(false);
     history.push('/drawer-edit');
     event.stopPropagation()
   }
@@ -100,4 +98,4 @@ export default function AreaSelect() {
       </div>
     </Backdrop>
   );
-}
+})

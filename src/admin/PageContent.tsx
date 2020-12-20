@@ -1,10 +1,9 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import classNames from "classnames";
-import PageEditor from "designer/PageEditor";
-import useDesigner from "store/designer/useDesigner";
-import { cancelPageContentAction } from "store/designer/actions";
-import { useDispatch } from "react-redux";
+import { PageEditor } from "designer/PageEditor";
+import {observer} from 'mobx-react-lite';
+import { useDesigner } from "store/helpers/useAppStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,14 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PageContent(props:{children?: any}) {
+export const PageContent = observer((props:{children?: any})=>{
   const {children} = props;
   const classes = useStyles();
   const designer = useDesigner();
-  const dispatch = useDispatch();
   
   const handleDesignerClose = ()=>{
-    dispatch(cancelPageContentAction());
+    designer.close();
   }
 
   return (
@@ -42,4 +40,4 @@ export default function PageContent(props:{children?: any}) {
       }
     </div>
   )
-}
+})

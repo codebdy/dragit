@@ -7,7 +7,7 @@ import ModulePageTable from './ModulePageTable';
 import { API_UPDATE_MODULE_PAGE, API_REMOVE_MODULE_PAGE, API_ADD_MODULE_PAGE, API_UPDATE_MODULE_INDEX_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { IPage } from 'base/Model/IPage';
-import PageEditor from 'designer/PageEditor';
+import { PageEditor } from 'designer/PageEditor';
 import createId from 'utils/createId';
 
 

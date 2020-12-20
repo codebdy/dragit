@@ -9,13 +9,13 @@ import Layout from 'admin/Layout';
 import ModuleManager from 'designer/ModuleManager';
 import useShadows from 'utils/useShadows';
 import DrawerEditor from 'designer/DrawerEditor';
-import SuccessAlertBar from 'base/Widgets/SuccessAlertBar';
+import {SuccessAlertBar} from 'base/Widgets/SuccessAlertBar';
 import Login from 'admin/views/Login';
 import { useIntl } from 'base/Hooks/useIntl';
 import { LOGIN_URL } from 'utils/consts';
-import ErrorDialog from 'base/Widgets/ErrorDialog';
 import { useThemeSettings } from 'store/helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
+import { ErrorDialog } from 'base/Widgets/ErrorDialog';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();

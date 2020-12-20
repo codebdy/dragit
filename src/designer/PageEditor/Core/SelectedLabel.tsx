@@ -2,9 +2,10 @@ import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
 import { CANVAS_SCROLL, REFRESH_SELECT_STATE, SELECT_NODE } from "./busEvents";
-import useDesigner from 'store/designer/useDesigner';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
+import { observer} from 'mobx-react-lite';
+import { useDesigner } from 'store/helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,11 +30,11 @@ declare var window:{
   removeEventListener:any,
 };
 
-export default function SelectedLabel(
+export const SelectedLabel = observer((
   props:{
     label:string,
   }
-){
+)=>{
   const{label} = props;
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
@@ -84,4 +85,4 @@ export default function SelectedLabel(
 
     </Fragment>
   )
-}
+})

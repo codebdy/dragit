@@ -3,12 +3,11 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
 import { CANVAS_SCROLL, REFRESH_SELECT_STATE, SELECT_NODE } from "./busEvents";
 import MdiIcon from 'components/common/MdiIcon';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
 import classNames from 'classnames';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
-import { useLeftDrawer } from 'store/helpers/useAppStore';
+import { useDesigner, useLeftDrawer } from 'store/helpers/useAppStore';
+import {observer} from 'mobx-react-lite';
 
 const height = 28;
 const barWidth = height*4;
@@ -51,14 +50,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
-export default function NodeToolbar(
+export const NodeToolbar = observer((
   props:{
     onBeginDrag:()=>void,
     onRemove:()=>void,
     onSelectParent:()=>void,
     onDuplicate:()=>void,
   }
-){
+)=>{
   const {onBeginDrag, onRemove, onSelectParent, onDuplicate} = props;
   const iconSize = 16;
   const classes = useStyles();
@@ -69,8 +68,7 @@ export default function NodeToolbar(
   
   const sideBarWidth = sidebar.width;
   
-  const selectMyStore = (state: RootState) => state.designer
-  const myStore = useSelector(selectMyStore)
+  const designer = useDesigner();
 
   const doFollow = ()=>{
     let rect = window.selectedNode?.dom?.getBoundingClientRect();
@@ -103,7 +101,7 @@ export default function NodeToolbar(
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[myStore.showPaddingX, myStore.showPaddingY]);
+  },[designer.showPaddingX, designer.showPaddingY]);
 
 
   return (
@@ -142,4 +140,4 @@ export default function NodeToolbar(
 
     </Fragment>
   )
-}
+})

@@ -9,7 +9,6 @@ import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_
 import usePageMeta from "../../../base/Hooks/usePageMeta";
 import usePageModel from "./useFecthPageModel";
 import { useDispatch } from "react-redux";
-import { setDesingerPageAction } from "store/designer/actions";
 import { IMeta } from "base//Model/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
 import { resolvePageUrl } from "utils/resolvePageUrl";
@@ -23,6 +22,7 @@ import { thunkAppInfo } from "store/app/thunk";
 import ConfirmDialog from "base/Widgets/ConfirmDialog";
 import useLoggedUser from "store/app/useLoggedUser";
 import useAppInfo from "store/app/useAppInfo";
+import { useDesigner } from "store/helpers/useAppStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,6 +55,7 @@ const PageView = ()=>{
   const dispatch = useDispatch();
   const loggedUser = useLoggedUser();
   const appInfo = useAppInfo();
+  const designer = useDesigner();
 
   useEffect(()=>{
     if(loadingModel){
@@ -80,9 +81,10 @@ const PageView = ()=>{
       let root = new RXNodeRoot<IMeta>();
       root.parse(schema);
       setPageLayout(root.children);
-      dispatch(setDesingerPageAction(pageMeta.slug))
+      designer.setPageSlug(pageMeta.slug);
     }
-  }, [dispatch, pageMeta])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageMeta])
 
   useEffect(()=>{
     if(submitResult &&  closeAfterSubmit){
