@@ -48,10 +48,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function ItemTo(props: {to?:string, children:any}){
   const classes = useStyles();
+  const handleClick = ()=>{
+    console.log('ItemTo click')
+  }
   return(
     props.to?
     <NavLink to={ props.to} activeClassName={ classes.activeItem}
       className={classes.itemLink}
+      onClick = {handleClick}
     >
       {props.children}
     </NavLink>

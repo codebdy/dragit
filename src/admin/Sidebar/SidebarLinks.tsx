@@ -15,12 +15,14 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
 // 定义查询语句
-//String代替树形结构
+//String代替JSON
 const GET_DRAWER_ITEMS = gql`
   query GetDrawerItems {
     drawerItemsStringData
   }
 `;
+
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -32,13 +34,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SidebarLinks(
   props : {
-    fullWidth:number,
+    fullWidth?:number,
     mini:boolean,
   }
 ) {
   const classes = useStyles();
   const [openedId, setOpenedId] = React.useState(-1);
-  //const [jsonData, ] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
   const { loading, error, data } = useQuery(GET_DRAWER_ITEMS);
   const [items,setItems] = React.useState<Array<RXNode<IMenuItem>>>([]);
   const loggedUser = useLoggedUser();

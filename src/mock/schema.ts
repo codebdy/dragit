@@ -63,7 +63,7 @@ export const resolvers = {
 
     //不能返回树形结构，用String代替
     drawerItemsStringData:async ()=>{
-      await sleep(2000);
+      await sleep(1000);
       return JSON.stringify(drawer)
     },
   },

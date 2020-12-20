@@ -2,13 +2,13 @@ import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import classNames from 'classnames';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 import DesignButtons from 'admin/TopNav/DesignButtons';
 import useToolbarSkin from 'store/theme/useToolbarSkin';
 import NavButtons from './NavButtons';
 import { DARK } from 'store/theme/useThemeSettings';
+import { LeftDrawerWidthPlaceholder } from 'admin/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,7 +59,7 @@ export default function TopNav(props:{onSidebarToggle: any}) {
         //style={{ border:(toolbarSkin.floatStyle || sticky ? 'transparent solid 1px':undefined)}}
       >
         <Toolbar>
-          <SidebarWidthPlaceholder />
+          <LeftDrawerWidthPlaceholder />
           <DesignButtons color={color}/>
           <NavButtons color={color} onSidebarToggle = {props.onSidebarToggle}/>
         </Toolbar>

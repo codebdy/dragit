@@ -63,8 +63,11 @@ import { CheckboxGroupRule } from 'components/CheckboxGroup/Rule';
 import RadioGroup from 'components/RadioGroup';
 import { RadioGroupRule } from 'components/RadioGroup/Rule';
 import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
+import { AppStoreProdivider }from 'store/helpers/AppStoreProdivider';
+import {AppStore} from 'store/AppStore' 
 
 const store = configureStore();
+const appStore = new AppStore();
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -105,9 +108,11 @@ registerHtmlTag('h6', HeadRule);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>  
+    <AppStoreProdivider value = {appStore}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </AppStoreProdivider>  
   </Provider>
   ,
   document.getElementById('root')

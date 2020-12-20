@@ -1,7 +1,6 @@
 import React from 'react';
 import { CssBaseline, makeStyles, createStyles } from '@material-ui/core';
 import Sidebar from 'admin/Sidebar';
-import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import TopNav from 'admin/TopNav';
 import PageContent from 'admin/PageContent';
 import { Redirect, Switch, Route } from 'react-router-dom';
@@ -9,6 +8,7 @@ import AreaSelect from 'designer/AreaSelect';
 import PageView from 'admin/views/Page/PageView';
 import { useLoginCheck } from 'base/Hooks/useLoginCheck';
 import Page404 from './views/Page404';
+import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -50,7 +50,7 @@ export default function Layout(){
       <TopNav onSidebarToggle = {handleDrawerToggle}/>
 
       <div className={classes.content}>
-        <SidebarWidthPlaceholder />
+        <LeftDrawerWidthPlaceholder />
         <PageContent>
           <Switch>
             <Route path="/admin/module/:moduleSlug/:pageSlug?/:id?" component={PageView}></Route> 

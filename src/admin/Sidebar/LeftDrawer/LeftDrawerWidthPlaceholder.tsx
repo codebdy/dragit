@@ -1,16 +1,13 @@
 import React from "react";
 import { Hidden } from "@material-ui/core";
-import {sideBarSettings} from "utils/sideBarSettings";
-import { RootState } from "store";
-import { useSelector } from "react-redux";
+import {observer} from "mobx-react-lite";
+import { useLeftDrawer } from "store/helpers/useAppStore";
 
-export default function SidebarWidthPlaceholder(
+export const LeftDrawerWidthPlaceholder = observer((
   props:{children?:any, className?:string, style?:any}
-){
-  const selectSidebar = (state: RootState) => state.sidebar
-  const sidebar = useSelector(selectSidebar)  
-  
-  const fullWidth = sideBarSettings.sizes[sidebar.size]
+) => {
+
+  const leftDrawer = useLeftDrawer();
 
   return (
     <Hidden smDown>
@@ -18,7 +15,7 @@ export default function SidebarWidthPlaceholder(
         //左边栏占位DIV，APP基于flex布局
       }
       <div style={{
-          width: sidebar.compactable ? sideBarSettings.sizes['compact'] : fullWidth + 'px',
+          width: leftDrawer.width + 'px',
           transition: "width 0.3s",
           flexGrow: 0,
           flexShrink: 0,
@@ -30,4 +27,4 @@ export default function SidebarWidthPlaceholder(
       </div>
     </Hidden>
 )
-}
+})

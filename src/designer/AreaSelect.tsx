@@ -4,13 +4,13 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, fade } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { closeAreaSelectAction, openDesignerAction } from 'store/designer/actions';
-import SidebarWidthPlaceholder from 'admin/Sidebar/SidebarWidthPlaceholder';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
 import TopNavHeightPlaceholder from 'admin/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import useDesigner from 'store/designer/useDesigner';
+import { LeftDrawerWidthPlaceholder } from 'admin/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,14 +76,14 @@ export default function AreaSelect() {
 
   return (
     <Backdrop className={classes.backdrop} open={designer.areaSelect} onClick={handleClose}>
-      <SidebarWidthPlaceholder className={classes.area}>
+      <LeftDrawerWidthPlaceholder className={classes.area}>
         <Button variant="contained" color="primary" size="large" className={classes.designButton}
           onClick={handleDesignDrawer}
         >
           <MdiIcon iconClass="mdi-pencil-ruler" className={classes.designButtonIcon} />
           {intl.get('design')}
         </Button>
-      </SidebarWidthPlaceholder>
+      </LeftDrawerWidthPlaceholder>
       <div 
         className = {classes.rightArea}
       >
