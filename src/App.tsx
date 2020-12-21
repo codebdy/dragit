@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Loading from 'admin/common/Loading'
 
-import Layout from 'admin/Layout';
+import {Layout} from 'admin/Layout';
 import ModuleManager from 'designer/ModuleManager';
 import useShadows from 'utils/useShadows';
 import DrawerEditor from 'designer/DrawerEditor';

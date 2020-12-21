@@ -1,24 +1,26 @@
 import React from 'react';
 import { useLeftDrawer, useThemeSettings } from 'store/helpers/useAppStore';
 import StyledDrawer from './StyledDrawer';
+import {observer} from 'mobx-react-lite';
 
-export default function MobileDrawer(
+export const MobileDrawer = observer((
   props:{
     children:any,
-    open?:boolean,
-    onClose?:()=>void,
   }
-){
-  const {children, open, onClose} = props;
+)=>{
+  const {children} = props;
   const leftDrawer = useLeftDrawer();
   const themeSettings = useThemeSettings();
-  
+  const handleClose = ()=>{
+    leftDrawer.closeOnMobile();
+  }
+
   return (
     <StyledDrawer
       variant="temporary"
       anchor="left"
-      open={open}
-      onClose={onClose}
+      open={leftDrawer.mobileOpen}
+      onClose={handleClose}
      
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.
@@ -31,4 +33,4 @@ export default function MobileDrawer(
       {children}
     </StyledDrawer>
   )
-}
+})

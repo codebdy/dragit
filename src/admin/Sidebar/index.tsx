@@ -12,32 +12,13 @@ export enum SidebarSize{
   large = "large"
 }
 
-type SidebarProps = /*PropsFromRedux &*/ {
-
-  /**
-   * 是否显示
-   * @default false
-   */
-  mobileOpen?: boolean,
-
-  /**
-   * 移动设备，隐藏事件
-   */
-  onMobileClose?: ()=>void,
-}
-
-
 /**
  * Sidebar Component, 侧边栏导航组件
  * @version package.json
  * @visibleName Sidebar 组件名称
  * @props
  */
-const Sidebar = observer((props:SidebarProps) => {
-  const {
-    mobileOpen = false, 
-    onMobileClose,
-  } = props
+const Sidebar = observer(() => {
   const leftDrawer = useLeftDrawer();
   const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
@@ -60,7 +41,7 @@ const Sidebar = observer((props:SidebarProps) => {
 
   return(
     <ThemeProvider theme={theme}>
-      <LeftDrawer mobileOpen = {mobileOpen} onMobileClose = {onMobileClose}>
+      <LeftDrawer>
         <ListNav 
           mini ={leftDrawer.isMini}
           fullWidth = {leftDrawer.fullWidth}

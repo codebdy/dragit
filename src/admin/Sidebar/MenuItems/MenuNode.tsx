@@ -7,6 +7,7 @@ import MdiIcon from "components/common/MdiIcon";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import { useLeftDrawer } from "store/helpers/useAppStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,8 +49,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function ItemTo(props: {to?:string, children:any}){
   const classes = useStyles();
+  const leftDrawer = useLeftDrawer();
   const handleClick = ()=>{
-    console.log('ItemTo click')
+    leftDrawer.closeOnMobile();
   }
   return(
     props.to?

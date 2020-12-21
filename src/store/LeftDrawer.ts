@@ -5,6 +5,7 @@ export class LeftDrawer{
   compactWidth:number = 70;
   fullWidth:number = 260;
   hover:boolean = true;
+  mobileOpen:boolean = false;
 
   constructor() {
     makeAutoObservable(this)
@@ -28,5 +29,13 @@ export class LeftDrawer{
 
   mouseOut(){
     this.hover = false;
+  }
+
+  openOnMobile(){
+    this.mobileOpen = true;
+  }
+
+  closeOnMobile(){
+    this.mobileOpen = false;
   }
 }

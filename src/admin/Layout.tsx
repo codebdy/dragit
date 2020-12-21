@@ -9,6 +9,8 @@ import { useLoginCheck } from 'base/Hooks/useLoginCheck';
 import Page404 from './views/Page404';
 import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { AreaSelect } from 'designer/AreaSelect';
+import { useLeftDrawer } from 'store/helpers/useAppStore';
+import {observer} from 'mobx-react-lite';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -29,13 +31,12 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export default function Layout(){
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  
+export const Layout = observer(()=>{
   useLoginCheck();
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const leftDrawer = useLeftDrawer();
+  const handleOpenMobileDrawer = () => {
+    leftDrawer.openOnMobile();
   };
 
   const classes = useStyles();
@@ -43,11 +44,8 @@ export default function Layout(){
   return (
     <div className={classes.root}>
       <CssBaseline />      
-      <Sidebar 
-        mobileOpen={mobileOpen} 
-        onMobileClose={handleDrawerToggle}
-      />
-      <TopNav onSidebarToggle = {handleDrawerToggle}/>
+      <Sidebar />
+      <TopNav onSidebarToggle = {handleOpenMobileDrawer}/>
 
       <div className={classes.content}>
         <LeftDrawerWidthPlaceholder />
@@ -64,4 +62,4 @@ export default function Layout(){
       <AreaSelect></AreaSelect>
     </div>
   )
-}
+})
