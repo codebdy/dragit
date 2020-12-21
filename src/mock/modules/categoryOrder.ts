@@ -16,13 +16,13 @@ export default[
         id:111,
         name:'订单列表',
         slug:'orders',
-        jsonSchema: orders,
+        schema: orders,
       },
       {
         id:112,
         name:'订单编辑',
         slug:'order-edit',
-        jsonSchema: order,
+        schema: order,
       },
     ],
     auths:[
@@ -58,13 +58,13 @@ export default[
         id:121,
         name:'客户列表',
         slug:'customers',
-        jsonSchema: customers,
+        schema: customers,
       },
       {
         id:122,
         name:'客户编辑',
         slug:'customer-edit',
-        jsonSchema: customer,
+        schema: customer,
       },
     ],
     auths:[
@@ -81,13 +81,13 @@ export default[
         id:131,
         name:'客户列表',
         slug:'suppliers',
-        jsonSchema: suppliers,
+        schema: suppliers,
       },
       {
         id:132,
         name:'客户编辑',
         slug:'supplier-edit',
-        jsonSchema: supplier,
+        schema: supplier,
       },
     ],
     auths:[

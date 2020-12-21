@@ -6,7 +6,6 @@ import { Container, createStyles, Dialog, makeStyles, Theme } from "@material-ui
 import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
 
-import usePageMeta from "../../../base/Hooks/usePageMeta";
 import { IMeta } from "base//Model/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
 import { resolvePageUrl } from "utils/resolvePageUrl";
@@ -18,6 +17,9 @@ import intl from "react-intl-universal";
 import ConfirmDialog from "base/Widgets/ConfirmDialog";
 import { useDesigner } from "store/helpers/useAppStore";
 import { useLoggedUser } from "store/helpers/useLoggedUser";
+import gql from 'graphql-tag';
+import { useQuery } from "@apollo/react-hooks";
+import { cloneObject } from "utils/cloneObject";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,14 +31,27 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+// 定义查询语句
+const QUERY_PAGE_META = gql`
+  query pageQuery($moduleSlug: String!, $pageSlug: String){
+    modulePage(moduleSlug:$moduleSlug, pageSlug:$pageSlug){
+      id
+      slug
+      name
+      schema
+    }
+  }
+`;
 const PageView = ()=>{
   const classes = useStyles();
   const history =  useHistory();
   const match = useRouteMatch();
   const{moduleSlug, pageSlug, id} = match.params as any;
 
+  const { loading:loadingPageMeta , error, data } = useQuery(QUERY_PAGE_META, {variables:{moduleSlug, pageSlug}});
+
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
-  const [pageMeta, loadingPage, error] = usePageMeta(moduleSlug, pageSlug,);
+  //const [pageMeta, loadingPage, error] = usePageMeta(moduleSlug, pageSlug,);
   const [submitRequest, setSubmitRequest] = useState<AxiosRequestConfig>();
   const [submitResult/*, submiting*/] = useAxios(submitRequest, true);
   //指示提交表单的标识，表单提交后置为false
@@ -46,7 +61,7 @@ const PageView = ()=>{
   const [isDirty] = useState({value:false});
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
-  //usePageModel(pageMeta?.jsonSchema, id);
+  //usePageModel(pageMeta?.schema, id);
   //const dispatch = useDispatch();
   const loggedUser = useLoggedUser();
   const designer = useDesigner();
@@ -61,15 +76,16 @@ const PageView = ()=>{
   },[moduleSlug, pageSlug, id]);
   
   useEffect(()=>{
-    if(pageMeta){
-      let schema = pageMeta.jsonSchema?.layout;
+    if(data){
+      console.log('PageView', data);
+      let schema = cloneObject(data.modulePage.schema?.layout);
       let root = new RXNodeRoot<IMeta>();
       root.parse(schema);
       setPageLayout(root.children);
-      designer.setPageSlug(pageMeta.slug);
+      designer.setPageSlug(data.modulePage.slug);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageMeta])
+  }, [data])
 
   useEffect(()=>{
     if(submitResult &&  closeAfterSubmit){
@@ -92,9 +108,9 @@ const PageView = ()=>{
 
   const handleSubmit = (data: any) => {
     setSubmit(false);
-    if(pageMeta?.jsonSchema?.apiForSave){
-      setSubmitRequest({...pageMeta?.jsonSchema?.apiForSave, data});      
-    }
+    //if(pageMeta?.schema?.apiForSave){
+    //  setSubmitRequest({...pageMeta?.schema?.apiForSave, data});      
+    //}
   };
 
   const handleSubmitError = ()=>{
@@ -147,7 +163,7 @@ const PageView = ()=>{
     isDirty.value = true;
   }
 
-  let pageContent:any = loadingPage ?
+  let pageContent:any = loadingPageMeta ?
     <PageSkeleton />
     :
     <Fragment>
@@ -164,11 +180,11 @@ const PageView = ()=>{
         })
       }
     </Fragment>
-  pageContent = loggedUser?.authCheck(...pageMeta?.jsonSchema?.auths || [])&&pageContent;
-return (
+  pageContent = loggedUser?.authCheck(...data?.modulePage?.schema?.auths || [])&&pageContent;
+  return (
     <Container className = {classes.root}>
       {
-        pageMeta?.jsonSchema?.isFormPage 
+        data?.modulePage?.schema?.isFormPage 
         ?
           <PageForm 
             onSubmit = {handleSubmit} 

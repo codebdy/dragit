@@ -1,6 +1,7 @@
 import drawer from "./drawer"
 import { getUser } from "./getUser";
 import { login } from "./login/login";
+import { getModulePage } from "./modules/getModulePage";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -23,39 +24,25 @@ export const schema = `
     auths:[String] 
   }
 
-  type MenuBadge {
-    color: String
-    field: String
-    size: String
-  }
-  
-  type MenuChip {
-    color: String
-    label: String
-    size: String
-  }
-  
-  type MenuItem{
-    type: String!
-    title: String
-    icon: String
-    badge: MenuBadge
-    chip: MenuChip
-    children: [MenuItem]
-    to: String
-    auths:[String]
-  }
-
   type LoginData{
     user:User! 
     token:String!
   }
 
+  type Page{
+    id:ID!
+    slug:String!
+    name:String 
+    schema:JSON  
+  }
+
   type Query {
-    "查询所有用户列表"
+    "登录"
     login(login_name:String!, password:String!):LoginData
     userByToken(token: String!): User
     drawerItems:JSON!
+    modulePage(moduleSlug:String!, pageSlug:String):Page
+    page(id:ID!):Page
   }
 `;
 
@@ -85,6 +72,17 @@ export const resolvers = {
     drawerItems:async ()=>{
       await sleep(1000);
       return drawer
+    },
+
+    modulePage:async (parent:any, args:any, context:any, info:any)=>{
+      await sleep(1000);
+      const page = getModulePage(args.moduleSlug, args.pageSlug);
+      return page
+    },
+
+    page:async (parent:any, args:any, context:any, info:any)=>{
+      await sleep(1000);
+      return null
     },
   },
 };

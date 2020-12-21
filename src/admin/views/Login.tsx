@@ -128,7 +128,7 @@ export default function Login(){
       }
 
     }
-    console.log(data, error)
+    //console.log(data, error)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[called, loading, data, error])
 

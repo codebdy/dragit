@@ -3,6 +3,8 @@ import createId from 'utils/createId'
 import getQueryVariable from 'mock/utils/getQueryVariable'
 import moduleCategories from './moduleCategories'
 import { remove } from 'utils/ArrayHelper';
+import { getModuleIndexPage } from './getModuleIndexPage';
+import { getPageBySlug } from './getPageBySlug';
 
 export function getCagegoryById(id){
   for(var index = 0; index < moduleCategories.length; index++){
@@ -24,25 +26,6 @@ export function getCategoryOfModule(id){
   }
 }
 
-export function getModuleIndexPage(moduleSlug){
-  for(var index = 0; index < moduleCategories.length; index++){
-    let modules = moduleCategories[index].modules;
-    for(var i = 0; i < modules.length; i++){
-      let module = modules[i]
-      if(module.slug === moduleSlug){
-        let pages = module.pages
-        if(pages){
-          for(var j=0; j < pages.length; j++){
-            if(pages[j].id === module.indexPageId){
-              return JSON.parse(JSON.stringify(pages[j]));
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 export function getModuleById(muduleId){
   for(var index = 0; index < moduleCategories.length; index++){
     let modules = moduleCategories[index].modules;
@@ -54,23 +37,6 @@ export function getModuleById(muduleId){
     }
   }
 
-}
-
-export function getModulePage(pageSlug){
-  for(var index = 0; index < moduleCategories.length; index++){
-    let modules = moduleCategories[index].modules;
-    for(var i = 0; i < modules.length; i++){
-      let module = modules[i]
-      let pages = module.pages
-      if(pages){
-        for(var j=0; j < pages.length; j++){
-          if(pages[j].slug === pageSlug){
-            return JSON.parse(JSON.stringify(pages[j]));
-          }
-        }
-      }
-    }
-  }
 }
 
 export default function mockModules(){
@@ -243,7 +209,7 @@ export default function mockModules(){
   
   Mock.mock(RegExp('/api/get-page/?.*'),'get', (request)=>{
     let slug =getQueryVariable('pageSlug', request.url);
-    let page = getModulePage(slug);
+    let page = getPageBySlug(slug);
     if(page) {
       return page;
     }

@@ -96,7 +96,7 @@ export const PageEditor = observer((
   const {showOutline, showPaddingX, showPaddingY} = designer;
   const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   const [pageMeta, loading] = useAxios<IPage>(pageRequest);
-  const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(pageMeta?.jsonSchema);
+  const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(pageMeta?.schema);
   const [metas, setMetas] = useState<Array<IMeta>>([])
   const [canvas, setCanvas] = useState<RXNodeRoot<IMeta>>(makeCanvas());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMeta>>();
@@ -193,9 +193,9 @@ export const PageEditor = observer((
   },[pageSlug]);
 
   useEffect(() => {
-    setPageSchema(pageMeta?.jsonSchema);
+    setPageSchema(pageMeta?.schema);
     //相当于复制一个Json副本，不保存的话直接扔掉
-    setMetas(cloneObject(pageMeta?.jsonSchema?.layout || []));
+    setMetas(cloneObject(pageMeta?.schema?.layout || []));
   },[pageMeta]);
  
   useEffect(()=>{
@@ -223,7 +223,7 @@ export const PageEditor = observer((
       data:{
         page:{
           ...pageMeta,
-          jsonSchema:{
+          schema:{
             ...pageSchema,
             layout:canvas.getRootMetas(),
           },

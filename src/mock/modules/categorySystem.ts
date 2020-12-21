@@ -15,7 +15,7 @@ export default[
         id:211,
         name:'分析看板',
         slug:'dashboard1',
-        jsonSchema:dashboard,
+        schema:dashboard,
       },
     ],
     auths:[
@@ -51,7 +51,7 @@ export default[
         id:151,
         name:'媒体库',
         slug:'medias',
-        jsonSchema: meidaPage,
+        schema: meidaPage,
       },
     ],
     auths:[
@@ -69,13 +69,13 @@ export default[
         id:91,
         name:'通知列表',
         slug:'notification-list',
-        jsonSchema: notificationPage,
+        schema: notificationPage,
       },
       {
         id:92,
         name:'查看通知',
         slug:'view-notification',
-        jsonSchema: notificationViewPage,
+        schema: notificationViewPage,
       },
     ],
   },

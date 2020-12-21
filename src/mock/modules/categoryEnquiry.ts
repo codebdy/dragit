@@ -12,13 +12,13 @@ export default[
         id:141,
         name:'询盘列表',
         slug:'enqueries',
-        jsonSchema: enqueriesPage,
+        schema: enqueriesPage,
       },
       {
         id:142,
         name:'询盘查看',
         slug:'enquery-view',
-        jsonSchema: enqueryViewPage,
+        schema: enqueryViewPage,
       },
     ],
     auths:[
