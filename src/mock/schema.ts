@@ -1,14 +1,11 @@
 import drawer from "./drawer"
 import { getUser } from "./getUser";
 import { login } from "./login/login";
+const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
-  enum Gender {
-    MALE
-    FEMALE
-    NONE
-  }
-
+  scalar JSON
+  
   type Media {
     id:ID!
     thumbnail: String!
@@ -58,7 +55,7 @@ export const schema = `
     "查询所有用户列表"
     login(login_name:String!, password:String!):LoginData
     userByToken(token: String!): User
-    drawerItemsStringData:String!
+    drawerItemsStringData:JSON!
   }
 `;
 
@@ -70,6 +67,7 @@ function sleep(ms:number) {
 
 // A map of functions which return data for the schema.
 export const resolvers = {
+  JSON: GraphQLJSON,
   Query: {
     userByToken: async(parent:any, args:any, context:any, info:any) => {
       await sleep(1000);
@@ -86,7 +84,7 @@ export const resolvers = {
     //不能返回树形结构，用String代替
     drawerItemsStringData:async ()=>{
       await sleep(1000);
-      return JSON.stringify(drawer)
+      return drawer
     },
   },
 };

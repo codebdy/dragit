@@ -13,6 +13,7 @@ import { RXNodeRoot } from "base/RXNode/Root";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { useLoggedUser } from "store/helpers/useLoggedUser";
+import { cloneObject } from "utils/cloneObject";
 
 // 定义查询语句
 //String代替JSON
@@ -54,7 +55,7 @@ export default function SidebarLinks(
 
   useEffect(()=>{
     let root = new RXNodeRoot<IMenuItem>();
-    root.parse( JSON.parse(data?.drawerItemsStringData||'[]'));
+    root.parse(cloneObject(data?.drawerItemsStringData||[]));
     data && setItems(root.children);          
   },[data]);
 
