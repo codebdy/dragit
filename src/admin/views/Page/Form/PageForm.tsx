@@ -1,6 +1,4 @@
 import React, { FormEvent, useEffect, useState } from 'react';
-import useModel from '../useModel';
-import useModelLoading from '../useModelLoading';
 import { IForm, FormContext, defultForm } from "../../../../base/FormContext";
 import { cloneObject } from 'utils/cloneObject';
 
@@ -14,8 +12,8 @@ export default function PageForm(
 ){
   const {onSubmit, children, submit, onSubmitError} = props;
   const [form, setForm] = useState<IForm>(defultForm());
-  const model = useModel();
-  const loading = useModelLoading();
+  const model = {};
+  const loading = false;
 
 
   useEffect(()=>{

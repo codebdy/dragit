@@ -5,7 +5,7 @@ import { resolveComponent } from 'base/RxDrag';
 import withFormField from './withFormField';
 import { IMeta } from 'base//Model/IMeta';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
-import useLoggedUser from 'store/app/useLoggedUser';
+import { useLoggedUser } from 'store/helpers/useLoggedUser';
 
 export default function ComponentRender(
   props:{
@@ -30,7 +30,7 @@ export default function ComponentRender(
     if(!component.meta.auths || component.meta.auths.length === 0){
       return true;
     }
-    return loggedUser.authCheck(...component.meta.auths||[]);
+    return loggedUser?.authCheck(...component.meta.auths||[]);
   }
 
   let metaProps = component.meta.props? component.meta.props :{};

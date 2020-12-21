@@ -1,15 +1,14 @@
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { setAppInfoAction } from "store/app/actions";
-import useLoggedUser from "store/app/useLoggedUser";
+import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
+import { useAppStore } from "./useAppStore";
 
 export function useAuthCheck(...auths:string[]){
   const loggedUser = useLoggedUser();
+  const appStore = useAppStore()
   const history = useHistory();
-  const dispatch = useDispatch();
-  if(!loggedUser.authCheck(...auths)){
-    dispatch(setAppInfoAction(undefined));
+  if(!loggedUser || !loggedUser.authCheck(...auths)){
+    appStore.setLoggedUser(undefined);
     localStorage.removeItem(TOKEN_NAME);
     history.push(LOGIN_URL);    
   }

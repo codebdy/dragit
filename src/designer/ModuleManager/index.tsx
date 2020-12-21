@@ -6,8 +6,8 @@ import LeftContent from "./LeftContent";
 import intl from "react-intl-universal";
 import ModuleContent from "./ModuleContent";
 import { useHistory } from "react-router";
-import { useLoginCheck } from "base/Hooks/useLoginCheck";
-import { useAuthCheck } from "base/Hooks/useAuthCheck";
+import { useLoginCheck } from "store/helpers/useLoginCheck";
+import { useAuthCheck } from "store/helpers/useAuthCheck";
 import { AUTH_CUSTOMIZE } from "APIs/authSlugs";
 
 const ModuleManager = (props:{children?: any})=>{

@@ -3,14 +3,13 @@ import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Hidden, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon, Avatar } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { setAppInfoAction } from "store/app/actions";
 import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
 import intl from "react-intl-universal";
 import EvenNotification from "./Notifications"
-import useLoggedUser from "store/app/useLoggedUser";
 import { resolvePageUrl } from "utils/resolvePageUrl";
+import { useLoggedUser } from "store/helpers/useLoggedUser";
+import { useAppStore } from "store/helpers/useAppStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,11 +39,11 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   const {color} = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const appStore = useAppStore();
   const user = useLoggedUser();
 
   const isMenuOpen = Boolean(anchorEl);
   const menuId = 'primary-search-account-menu';
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleMenuClose = () => {
@@ -56,7 +55,8 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   };
 
   const handleLogout = ()=>{
-    dispatch(setAppInfoAction(undefined));
+    appStore.setToken('');
+    appStore.setLoggedUser(undefined);
     localStorage.removeItem(TOKEN_NAME);
     history.push(LOGIN_URL);
   }
@@ -65,7 +65,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     history.push(resolvePageUrl({
       moduleSlug:'user',
       pageSlug:'edit-user',
-      dataId:user.meta.id
+      dataId:user?.meta.id
     }));
     setAnchorEl(null);
   }
@@ -74,7 +74,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     history.push(resolvePageUrl({
       moduleSlug:'user',
       pageSlug:'edit-user',
-      dataId:user.meta.id
+      dataId:user?.meta.id
     }));
     setAnchorEl(null);
   }

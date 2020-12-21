@@ -2,13 +2,12 @@ import { SubModelContext } from "components/OneToOnePortlet/SubModelContext";
 import { useContext } from "react";
 import { RowModelContext } from "../../../components/OneToManyPortlet/RowModelContext";
 import { FormContext } from "../../../base/FormContext";
-import useModelLoading from "./useModelLoading";
 
 export default function useFieldValue(field:string):[any, boolean]{
   const rowModelContext = useContext(RowModelContext);
   const subModelContext = useContext(SubModelContext);
   const formContext = useContext(FormContext);
-  const loading = useModelLoading();
+  const loading = false//useModelLoading();
 
   if(!formContext.values){
     return [undefined, loading];

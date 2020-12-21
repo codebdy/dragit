@@ -10,9 +10,9 @@ import Subheader from "./MenuItems/Subheader";
 import MenuNode from "./MenuItems/MenuNode";
 import MenuNodeGroup from "./MenuItems/MenuNodeGroup";
 import { RXNodeRoot } from "base/RXNode/Root";
-import useLoggedUser from "store/app/useLoggedUser";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { useLoggedUser } from "store/helpers/useLoggedUser";
 
 // 定义查询语句
 //String代替JSON
@@ -60,7 +60,7 @@ export default function SidebarLinks(
 
   const listItems =items?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;
-    const authed = loggedUser.authCheck(...node.meta?.auths||[]);
+    const authed = loggedUser?.authCheck(...node.meta?.auths||[]);
     return (
     <Fragment key={node.id}>
       {

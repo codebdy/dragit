@@ -4,8 +4,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './mock'
-import { Provider } from 'react-redux'
-import configureStore from "./store";
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './mock/client-mock';
 
@@ -66,7 +64,6 @@ import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
 import { AppStoreProdivider }from 'store/helpers/AppStoreProdivider';
 import {AppStore} from 'store/AppStore' 
 
-const store = configureStore();
 const appStore = new AppStore();
 
 register('Canvas', Canvas, CanvasRule);
@@ -107,13 +104,11 @@ registerHtmlTag('h5', HeadRule);
 registerHtmlTag('h6', HeadRule);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppStoreProdivider value = {appStore}>
-      <ApolloProvider client={client}>
-        <App />
-      </ApolloProvider>
-    </AppStoreProdivider>  
-  </Provider>
+  <AppStoreProdivider value = {appStore}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </AppStoreProdivider>  
   ,
   document.getElementById('root')
 );

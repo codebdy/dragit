@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Badge, IconButton, Popover, Typography, Divider, Button } from '@material-ui/core';
-import useAppInfo from "store/app/useAppInfo";
 import MdiIcon from "components/common/MdiIcon"
 import NotificationsList from './NotificationsList';
 import intl from "react-intl-universal";
@@ -53,18 +52,18 @@ export default function Notifications(
 
   const open = Boolean(anchorEl);
   const id = open ? 'notification-popover' : undefined;
-  const appInfo = useAppInfo();
+  //const appInfo = useAppInfo();
  
   return (
     <Fragment>
       <IconButton aria-label="notifications" onClick={handleClick}>
         {
-          appInfo?.unreadMessagesCount ?
-            <Badge badgeContent={appInfo.unreadMessagesCount} color="secondary">
+          //appInfo?.unreadMessagesCount ?
+            <Badge badgeContent={2} color="secondary">
               <MdiIcon iconClass = "mdi-bell-outline" color={color}/>
             </Badge>
-          :
-          <MdiIcon iconClass = "mdi-bell-outline" color={color}/>
+          //:
+          //<MdiIcon iconClass = "mdi-bell-outline" color={color}/>
         }
       </IconButton>
 
@@ -86,13 +85,13 @@ export default function Notifications(
         <Typography className={classes.typography} variant = "subtitle1">最新通知</Typography>
         <Divider /> 
         {
-          (appInfo && appInfo.unreadMessagesCount) ?
+          //(appInfo && appInfo.unreadMessagesCount) ?
           <NotificationsList onClose = {()=>setAnchorEl(null)} />
-          :
+          /*:
           <Fragment>
             <div className={classes.emperty}>{intl.get('no-notifications')}</div>
             <Divider />            
-          </Fragment>
+          </Fragment>*/
        
         }       
         <Button className={classes.viewAll} onClick = {handleViewAll}>查看全部</Button>

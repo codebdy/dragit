@@ -7,22 +7,17 @@ import PageSkeleton from "./PageSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
 
 import usePageMeta from "../../../base/Hooks/usePageMeta";
-import usePageModel from "./useFecthPageModel";
-import { useDispatch } from "react-redux";
 import { IMeta } from "base//Model/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
 import { resolvePageUrl } from "utils/resolvePageUrl";
 import { AxiosRequestConfig } from "axios";
 import { useAxios } from "base/Hooks/useAxios";
-import { setModelAction } from "store/page/actions";
 import PageForm from "./Form/PageForm";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import intl from "react-intl-universal";
-import { thunkAppInfo } from "store/app/thunk";
 import ConfirmDialog from "base/Widgets/ConfirmDialog";
-import useLoggedUser from "store/app/useLoggedUser";
-import useAppInfo from "store/app/useAppInfo";
 import { useDesigner } from "store/helpers/useAppStore";
+import { useLoggedUser } from "store/helpers/useLoggedUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,25 +46,15 @@ const PageView = ()=>{
   const [isDirty] = useState({value:false});
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
-  const [, loadingModel] = usePageModel(pageMeta?.jsonSchema, id);
-  const dispatch = useDispatch();
+  //usePageModel(pageMeta?.jsonSchema, id);
+  //const dispatch = useDispatch();
   const loggedUser = useLoggedUser();
-  const appInfo = useAppInfo();
   const designer = useDesigner();
-
-  useEffect(()=>{
-    if(loadingModel){
-      if(pageMeta?.jsonSchema?.refreshAppInfo){
-        dispatch(thunkAppInfo(appInfo?.authToken));
-      }
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[loadingModel]);
 
   useEffect(() => {
     console.log('PageView useEffect:', moduleSlug, pageSlug, id);
     if(!id){
-      dispatch(setModelAction(undefined));
+      //dispatch(setModelAction(undefined));
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,7 +78,7 @@ const PageView = ()=>{
 
     if(submitResult && !closeAfterSubmit){
       //console.log(submitResult);
-      dispatch(setModelAction(submitResult));
+      //dispatch(setModelAction(submitResult));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitResult])
@@ -179,7 +164,7 @@ const PageView = ()=>{
         })
       }
     </Fragment>
-  pageContent = loggedUser.authCheck(...pageMeta?.jsonSchema?.auths || [])&&pageContent;
+  pageContent = loggedUser?.authCheck(...pageMeta?.jsonSchema?.auths || [])&&pageContent;
 return (
     <Container className = {classes.root}>
       {

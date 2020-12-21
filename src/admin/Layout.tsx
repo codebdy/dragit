@@ -5,7 +5,7 @@ import {TopNav} from 'admin/TopNav';
 import {PageContent} from 'admin/PageContent';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import PageView from 'admin/views/Page/PageView';
-import { useLoginCheck } from 'base/Hooks/useLoginCheck';
+import { useLoginCheck } from 'store/helpers/useLoginCheck';
 import Page404 from './views/Page404';
 import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { AreaSelect } from 'designer/AreaSelect';

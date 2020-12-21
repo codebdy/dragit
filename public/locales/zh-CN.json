@@ -259,6 +259,7 @@
 
     "login":"登录",
     "login-tip":"欢迎使用RxDrag， 轻松定制应用。",
+    "login-failure":"用户面或密码错误，登录失败！",
     "user-name":"用户名或邮箱",
     "password":"密码",
     "remember-me":"记住我",

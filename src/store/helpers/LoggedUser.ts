@@ -1,13 +1,4 @@
-import { IMedia } from "./Model/IMedia";
-
-export interface IUser{
-  id:number,
-  login_name:string,
-  is_supper?:boolean,
-  is_demo?:boolean,
-  avatar:IMedia,
-  auths?:string[],
-}
+import { IUser } from "../../base/Model/IUser";
 
 export class LoggedUser{
   meta:IUser;

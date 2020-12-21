@@ -1,4 +1,6 @@
 import drawer from "./drawer"
+import { getUser } from "./getUser";
+import { login } from "./login/login";
 // The GraphQL schema
 export const schema = `
   enum Gender {
@@ -7,10 +9,21 @@ export const schema = `
     NONE
   }
 
+  type Media {
+    id:ID!
+    thumbnail: String!
+    title: String
+    src: String
+  }
+
   type User {
-    name: String!
-    gender: Gender!
-    tags: [String!]!
+    id:ID!
+    login_name:String!
+    name:String
+    avatar:Media
+    is_supper:Boolean
+    is_demo:Boolean
+    auths:[String] 
   }
 
   type MenuBadge {
@@ -36,11 +49,15 @@ export const schema = `
     auths:[String]
   }
 
+  type LoginData{
+    user:User! 
+    token:String!
+  }
+
   type Query {
     "查询所有用户列表"
-    users: [User!]!
-    "根据 name 查询对应的用户信息"
-    user(name: String!): User,
+    login(login_name:String!, password:String!):LoginData
+    userByToken(token: String!): User
     drawerItemsStringData:String!
   }
 `;
@@ -54,11 +71,16 @@ function sleep(ms:number) {
 // A map of functions which return data for the schema.
 export const resolvers = {
   Query: {
-    users: () => [{ name: 'Jack', gender: 'MALE', tags: [ 'Alibaba' ] }, { name: 'Joe', gender: 'MALE', tags: [] }],
-    user: (parent:any, args:any, context:any, info:any) => {
-      const { name } = args;
-      // find user by name...
-      return { name, gender: 'MALE', tags: [ name ] };
+    userByToken: async(parent:any, args:any, context:any, info:any) => {
+      await sleep(1000);
+      return getUser(args.token);
+    },
+
+    login:async(parent:any, args:any, context:any, info:any)=>{
+      //console.log("Login mock", parent, context, info,  args);
+      await sleep(1000);
+      const user = login(args.login_name, args.password);
+      return {user, token:user.login_name};
     },
 
     //不能返回树形结构，用String代替

@@ -13,9 +13,9 @@ import SiderBarLoadingSkeleton from 'admin/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { AxiosRequestConfig } from 'axios';
-import { useLoginCheck } from 'base/Hooks/useLoginCheck';
+import { useLoginCheck } from 'store/helpers/useLoginCheck';
 import SubmitButton from 'components/common/SubmitButton';
-import { useAuthCheck } from 'base/Hooks/useAuthCheck';
+import { useAuthCheck } from 'store/helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -254,6 +254,7 @@
 
     "login":"Login",
     "login-tip":"Welcome to RxDrag, please login to your account.",
+    "login-failure":"User account or password wrong, login failed!",
     "user-name":"User name or email address",
     "password":"Password",
     "remember-me":"Remember me",
