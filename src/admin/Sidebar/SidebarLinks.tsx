@@ -19,7 +19,7 @@ import { cloneObject } from "utils/cloneObject";
 //String代替JSON
 const GET_DRAWER_ITEMS = gql`
   query GetDrawerItems {
-    drawerItemsStringData
+    drawerItems
   }
 `;
 
@@ -55,7 +55,7 @@ export default function SidebarLinks(
 
   useEffect(()=>{
     let root = new RXNodeRoot<IMenuItem>();
-    root.parse(cloneObject(data?.drawerItemsStringData||[]));
+    root.parse(cloneObject(data?.drawerItems||[]));
     data && setItems(root.children);          
   },[data]);
 

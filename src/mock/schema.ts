@@ -55,7 +55,7 @@ export const schema = `
     "查询所有用户列表"
     login(login_name:String!, password:String!):LoginData
     userByToken(token: String!): User
-    drawerItemsStringData:JSON!
+    drawerItems:JSON!
   }
 `;
 
@@ -82,7 +82,7 @@ export const resolvers = {
     },
 
     //不能返回树形结构，用String代替
-    drawerItemsStringData:async ()=>{
+    drawerItems:async ()=>{
       await sleep(1000);
       return drawer
     },
