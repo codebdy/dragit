@@ -45,7 +45,7 @@ export function useLoginCheck() {
   }, [])
 
   useEffect(()=>{
-    appStore.setLoading(loading);
+    //appStore.setLoading(loading);
     if(data){
       appStore.setLoggedUser(data.userByToken);
     }

@@ -5,7 +5,7 @@ import { Designer } from "./Designer";
 import { IUser } from "base/Model/IUser";
 
 export class AppStore{
-  loading:boolean = false;
+  //loading:boolean = false;
   token:string = "";
   loggedUser: IUser|undefined = undefined;
   leftDrawer: LeftDrawer = new LeftDrawer();
@@ -18,9 +18,9 @@ export class AppStore{
     makeAutoObservable(this)
   }
 
-  setLoading(loading:boolean){
-    this.loading = loading;
-  }
+  //setLoading(loading:boolean){
+  //  this.loading = loading;
+  //}
 
   setSuccessAlert(alert:boolean|string){
     this.successAlert = alert;
