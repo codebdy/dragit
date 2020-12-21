@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, Button, CircularProgress } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Button, CircularProgress, ButtonProps } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,14 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SubmitButton(
   props:{
-    variant:'contained' | 'outlined' | 'text',
-    color:'default' | 'inherit' | 'primary' | 'secondary',
-    size:'large' | 'medium' | 'small',
-    onClick?:()=>void,
     submitting?:boolean,
-    children?:any,
-    disabled?:boolean,
-  }
+  }&ButtonProps
 ){
   const {submitting = false, onClick, children, disabled, ...rest} = props;
   const classes = useStyles();

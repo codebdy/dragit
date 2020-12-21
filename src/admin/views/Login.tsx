@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, Grid, Typography, InputAdornment, TextField, FormControl, IconButton, InputLabel, OutlinedInput, Checkbox, FormControlLabel, Button, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Grid, Typography, InputAdornment, TextField, FormControl, IconButton, InputLabel, OutlinedInput, Checkbox, FormControlLabel, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import background from "assets/img/background2.jpg";
 import leftImage from "assets/img/design-team.png";
 import { Visibility, VisibilityOff } from '@material-ui/icons';
@@ -10,6 +10,7 @@ import { useAppStore, useThemeSettings } from 'store/helpers/useAppStore';
 import { LIGHT } from 'store/ThemeSettings';
 import { useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import SubmitButton from 'components/common/SubmitButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -254,13 +255,13 @@ export default function Login(){
                     <a href="#forgot"> {intl.get('forgot-password')}</a>
                 </Grid>
                 <Grid item xs={6}>
-                    <Button fullWidth variant="contained" color="primary" size = "large" 
+                    <SubmitButton fullWidth variant="contained" color="primary" size = "large" 
                       style={{fontSize:'1.2rem'}}
-                      disabled = {called && loading}
+                      submitting = {called && loading}
                       type = "submit"
                     >
                       {intl.get('login')}
-                    </Button>
+                    </SubmitButton>
                 </Grid>            
               </Grid>
                 

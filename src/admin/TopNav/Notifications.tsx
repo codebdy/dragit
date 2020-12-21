@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Badge, IconButton, Popover, Typography, Divider, Button } from '@material-ui/core';
 import MdiIcon from "components/common/MdiIcon"
 import NotificationsList from './NotificationsList';
-import intl from "react-intl-universal";
+//import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
 import { resolvePageUrl } from 'utils/resolvePageUrl';
 
