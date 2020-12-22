@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import {observer} from "mobx-react-lite";
-import { IModule } from 'base/Model/IModule';
+import { ModuleProps } from './common/ModuleProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,9 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const PopupStyleModule = observer((
-  props:{
-    module:IModule
-  }
+  props:ModuleProps
 )=>{
   const classes = useStyles();
   return (

@@ -15,7 +15,7 @@ import { API_GET_PAGE, API_UPDATE_PAGE } from 'APIs/modules';
 import { useAxios } from 'base/Hooks/useAxios';
 import { IPage, IPageSchema } from 'base/Model/IPage';
 import { AxiosRequestConfig } from 'axios';
-import PageSkeleton from 'AdminBoard/Workspace/ModuleSkeleton';
+import PageSkeleton from 'AdminBoard/Workspace/common/ModuleSkeleton';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { ComponentView } from './Core/ComponentView';

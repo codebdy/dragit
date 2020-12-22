@@ -4,7 +4,7 @@ import {observer} from 'mobx-react-lite';
 import gql from 'graphql-tag';
 import { useAppStore } from "store/helpers/useAppStore";
 import { useQuery } from "@apollo/react-hooks";
-import PageSkeleton from "AdminBoard/Workspace/ModuleSkeleton";
+import PageSkeleton from "AdminBoard/Workspace/common/ModuleSkeleton";
 import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 import { JumpStyleModule } from "./JumpStyleModule";
 import { Fragment } from "react";
@@ -55,7 +55,6 @@ export const Workspace = observer(()=>{
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[error])
 
-  console.log('Workspace', data, appStore.moduleSlug)
   const module = data?.moduleBySlug;
   return (
     <Container className={classes.root} maxWidth = {module?.maxWidth ==='false' ? false : module?.maxWidth}>

@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react-lite";
-import { IModule } from 'base/Model/IModule';
 import { Fragment } from 'react';
 import { useAppStore } from 'store/helpers/useAppStore';
-import { getModulePageBySlug } from './getModulePageBySlug';
+import { getModulePageBySlug } from './common/getModulePageBySlug';
 import { cloneObject } from 'utils/cloneObject';
 import ComponentRender from 'AdminBoard/views/Page/ComponentRender';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
 import { RXNodeRoot } from 'base/RXNode/Root';
+import { ModuleProps } from './common/ModuleProps';
 
 export const JumpStyleModule = observer((
-  props:{
-    module:IModule
-  }
+  props:ModuleProps
 )=>{
   const {module} = props;
   const appStore = useAppStore();
@@ -36,7 +34,7 @@ export const JumpStyleModule = observer((
   const handleDirty = ()=>{
 
   }
-  
+
   return (
     <Fragment>
       {

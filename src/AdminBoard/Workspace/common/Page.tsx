@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import {observer} from "mobx-react-lite";
-import { ModuleProps } from './common/ModuleProps';
+import { IModule } from 'base/Model/IModule';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,13 +12,15 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const TabStyleModule = observer((
-  props:ModuleProps
+export const DrawerStyleModule = observer((
+  props:{
+    module:IModule
+  }
 )=>{
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      Tab styled
+      Dawer Styled
     </div>
   )
 })
