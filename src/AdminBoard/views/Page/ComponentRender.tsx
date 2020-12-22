@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
 import { RXNode } from '../../../base/RXNode/RXNode';
-import { PageActionHandle } from '../../../base/PageAction';
 import { resolveComponent } from 'base/RxDrag';
 import withFormField from './withFormField';
 import { IMeta } from 'base//Model/IMeta';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import { useLoggedUser } from 'store/helpers/useLoggedUser';
+import { PageAction } from 'base/PageAction';
 
 export default function ComponentRender(
   props:{
     component:RXNode<IMeta>, 
-    onPageAction: PageActionHandle,
+    onPageAction?: (pageAction:PageAction)=> void,
     onDirty:()=>void,
   }){
   const {component, onPageAction, onDirty} = props;
@@ -22,7 +22,7 @@ export default function ComponentRender(
     if(!onClickAction){
       return
     }
-    onPageAction(onClickAction);
+    onPageAction && onPageAction(onClickAction);
   };
 
   const authChecked = ()=>{

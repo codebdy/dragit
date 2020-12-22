@@ -32,10 +32,7 @@ export default{
           size: "large",
           onClick:{
             name: JUMP_TO_PAGE_ACTION,
-            page:{
-              moduleSlug:'article',
-              pageSlug:'article',
-            }
+            pageSlug:'article',
           }
         }
       }]
