@@ -1,26 +1,49 @@
-import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import React, { Fragment, useEffect, useState } from 'react';
 import {observer} from "mobx-react-lite";
-import { IModule } from 'base/Model/IModule';
+import { IPage } from 'base/Model/IPage';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
+import { RXNodeRoot } from 'base/RXNode/Root';
+import { cloneObject } from 'utils/cloneObject';
+import ComponentRender from 'AdminBoard/views/Page/ComponentRender';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-    },
-
-  }),
-);
-
-export const DrawerStyleModule = observer((
+export const Page = observer((
   props:{
-    module:IModule
+    page?:IPage
   }
 )=>{
-  const classes = useStyles();
+  const {page} = props;
+  const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
+
+  useEffect(()=>{
+    const layout = page?.schema?.layout || [];
+    let root = new RXNodeRoot<IMeta>();
+    root.parse(cloneObject(layout));
+
+    setPageLayout(root.children);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[page])
+  const formActionHandle = ()=>{
+
+  }
+
+  const handleDirty = ()=>{
+
+  }
   return (
-    <div className={classes.root}>
-      Dawer Styled
-    </div>
+    <Fragment>
+      {
+        pageLayout?.map((child:RXNode<IMeta>)=>{
+          return (
+            <ComponentRender 
+              key={child.id} 
+              component={child} 
+              onPageAction={formActionHandle}
+              onDirty = {handleDirty}
+            />
+          )
+        })
+      }
+    </Fragment>
   )
 })
