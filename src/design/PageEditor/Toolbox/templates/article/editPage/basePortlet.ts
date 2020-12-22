@@ -4,7 +4,7 @@ import { API_GET_MODEL_TREE } from "APIs/tree";
 export default{
   name:'Portlet',
   props: {
-    elevation: 6,
+    variant:'outlined',
     open:true,
     withHeader:true,
     title:'基本信息',

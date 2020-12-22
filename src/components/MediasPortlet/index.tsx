@@ -8,7 +8,6 @@ import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
 import { RXInputProps } from 'base/RXInputProps';
 import { Skeleton } from '@material-ui/lab';
-import HoverablePaper from 'components/common/HoverablePaper';
 import { IMedia } from 'base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -152,7 +151,7 @@ const MediasPortlet = React.forwardRef((
 
 
   return (
-    <HoverablePaper 
+    <Paper 
       ref={ref}
       {...rest}
     >
@@ -218,7 +217,7 @@ const MediasPortlet = React.forwardRef((
         }
         <div>{helperText}</div>
       </div>
-    </HoverablePaper>
+    </Paper>
   )
 })
 

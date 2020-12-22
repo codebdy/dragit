@@ -1,7 +1,7 @@
 export default{
   name:'OneToOnePortlet',
   props: {
-    elevation: 6,
+    variant:'outlined',
     open:true,
     withHeader:true,
     title:'SEO Meta',

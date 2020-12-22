@@ -7,7 +7,8 @@ export default {
   },
   props:{
     withActions:true,
-    elevation:6,
+    variant:'outlined',
+    //elevation:6,
     columns:[
       {
         field:'title',

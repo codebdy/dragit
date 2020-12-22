@@ -122,7 +122,6 @@ function getId(url){
   return parseInt(getQueryVariable('id', url))
 }
 
-
 export default function mockModel(){
   Mock.mock(RegExp('/api/data/query-operate-models?.*'),'post', (request)=>{
     let modelName = getModelName(request.url);

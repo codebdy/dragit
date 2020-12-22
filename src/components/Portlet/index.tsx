@@ -1,8 +1,7 @@
 import React, { useRef, Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Typography, Divider, IconButton } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Typography, Divider, IconButton, Paper, Collapse } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
-import HoverablePaper from '../common/HoverablePaper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,18 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
     opened:{
       transform:'rotate(90deg)',
     },
-
-    body:{
-      transition:'all 0.3s',
-    },
-
-    bodyClose:{
-      height:'0px',
-      overflow:'hidden',
-    },
-    bodyInner:{
-      //padding:theme.spacing(2),
-    }
 
   }),
 );
@@ -63,7 +50,7 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   //maxHeight = collapsible ? (opened ? maxHeight : '0px') : 'auto';
 
   return (
-    <HoverablePaper
+    <Paper
       ref={ref}
       {...rest}
       className = {className}
@@ -91,17 +78,12 @@ const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
           <Divider></Divider>
         </Fragment>
       }
-      <div className ={classNames(classes.body,  {[classes.bodyClose] : !opened})}
-        style ={{
-          height: (opened || !collapsible) ? 'auto' :'0px',
-          //maxHeight:maxHeight
-        }}
-      >
-        <div ref={bodyInnerRef} className={classes.bodyInner}>
+      <Collapse in={opened} timeout="auto" unmountOnExit>
+        <div ref={bodyInnerRef}>
           {children}
         </div>
-      </div>
-    </HoverablePaper>
+      </Collapse>
+    </Paper>
   )
 });
 

@@ -15,9 +15,8 @@ import intl from 'react-intl-universal';
 import { JUMP_TO_PAGE_ACTION, PageActionHandle } from 'base/PageAction';
 import { AxiosRequestConfig } from 'axios';
 import { Skeleton } from '@material-ui/lab';
-import { Tooltip, IconButton } from '@material-ui/core';
+import { Tooltip, IconButton, Paper } from '@material-ui/core';
 import MdiIcon from '../common/MdiIcon';
-import HoverablePaper from 'components/common/HoverablePaper';
 import { IPageJumper } from 'base/Model/IPageJumper';
 import { IOperateListParam } from 'base/Model/IOperateListParam';
 import { IPaginate } from 'base/Model/IPaginate';
@@ -86,6 +85,7 @@ const ListView = React.forwardRef((
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
       dataApi:AxiosRequestConfig,
+      variant?:'elevation' | 'outlined',
       elevation:number,
     }, 
     ref:any
@@ -102,6 +102,7 @@ const ListView = React.forwardRef((
     defalutRowsPerPage = 10,
     onAction,
     dataApi,
+    variant,
     elevation,
     ...rest
   } = props
@@ -215,7 +216,7 @@ const ListView = React.forwardRef((
   //const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   return (
     <div className={classNames(classes.root, className)} {...rest} ref={ref}>
-      <HoverablePaper elevation = {elevation}>
+      <Paper variant = {variant} elevation = {elevation}>
         <ListViewToolbar
           keyword = {operateParam.keywords}
           numSelected={selected.length}
@@ -339,7 +340,7 @@ const ListView = React.forwardRef((
             inputProps: { 'aria-label': 'rows per page' },
           }}
         />
-      </HoverablePaper>
+      </Paper>
       <ConfirmDialog 
         message = {confirmCommand?.command.confirmMessage||'Confirm message'}
         open = {!!confirmCommand}

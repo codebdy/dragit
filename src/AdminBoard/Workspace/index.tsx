@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: '1',
       display:'flex',
       flexFlow:'column',
+      background:theme.palette.background.default,
+      color:theme.palette.text.primary,
     },
 
   }),

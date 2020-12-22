@@ -1,7 +1,7 @@
 export default{
   name:'Portlet',
   props: {
-    elevation: 6,
+    variant:'outlined',
     open:true,
     withHeader:true,
     title:'内容',

@@ -3,7 +3,7 @@ import { API_LIST_MODEL } from "APIs/model";
 export default{
   name:'Portlet',
   props: {
-    elevation: 6,
+    variant:'outlined',
     open:true,
     withHeader:true,
     title:'显示',
