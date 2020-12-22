@@ -11,10 +11,11 @@ import { PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from 'base/Pag
 export const Page = observer((
   props:{
     page?:IPage,
+    pageParams?:any,
     onPageAction?: (pageAction:PageAction)=> void,
   }
 )=>{
-  const {page, onPageAction} = props;
+  const {page, /*pageParams,*/ onPageAction} = props;
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
 
   useEffect(()=>{

@@ -93,7 +93,6 @@ export default {
         icon:"mdi-pencil",
         jumpToPage:{
           //name: JUMP_TO_PAGE_ACidTION,
-          moduleSlug:'article',
           pageSlug:'article',
           param:'id',
           paramField:'id',

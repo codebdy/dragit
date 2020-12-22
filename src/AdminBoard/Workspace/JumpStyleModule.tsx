@@ -12,10 +12,12 @@ export const JumpStyleModule = observer((
   const {module} = props;
   const appStore = useAppStore();
   const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
+  const [pageParams, setPageParams] = useState<any>();
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case JUMP_TO_PAGE_ACTION:
-        setPageSlug(action.pageSlug);
+        setPageSlug(action.page?.pageSlug);
+        setPageParams(action.page)
         return;        
       case GO_BACK_ACTION:
         setPageSlug(module.entryPage?.slug);
@@ -27,6 +29,7 @@ export const JumpStyleModule = observer((
     <Page 
       page={getModulePageBySlug(module, pageSlug)}
       onPageAction = {hanlePageAction}
+      pageParams = {pageParams}
     />
   )
 })
