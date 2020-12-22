@@ -3,7 +3,6 @@ import { makeStyles, createStyles } from '@material-ui/core';
 import Sidebar from 'AdminBoard/Sidebar';
 import {TopNav} from 'AdminBoard/TopNav';
 import { Workspace } from 'AdminBoard/Workspace';
-import { useLoginCheck } from 'store/helpers/useLoginCheck';
 import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { AreaSelect } from 'design/AreaSelect';
 import { useLeftDrawer } from 'store/helpers/useAppStore';
@@ -29,8 +28,6 @@ const useStyles = makeStyles(() =>
 );
 
 export const AdminBoard = observer(()=>{
-  useLoginCheck();
-
   const leftDrawer = useLeftDrawer();
   const handleOpenMobileDrawer = () => {
     leftDrawer.openOnMobile();

@@ -65,7 +65,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     history.push(resolvePageUrl({
       moduleSlug:'user',
       pageSlug:'edit-user',
-      dataId:user?.meta.id
+      dataId:user.meta?.id
     }));
     setAnchorEl(null);
   }
@@ -74,7 +74,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
     history.push(resolvePageUrl({
       moduleSlug:'user',
       pageSlug:'edit-user',
-      dataId:user?.meta.id
+      dataId:user.meta?.id
     }));
     setAnchorEl(null);
   }

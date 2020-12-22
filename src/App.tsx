@@ -16,11 +16,14 @@ import { LOGIN_URL } from 'utils/consts';
 import { useThemeSettings } from 'store/helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
 import { ErrorDialog } from 'base/Widgets/ErrorDialog';
+import { useLoginCheck } from 'store/helpers/useLoginCheck';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();
   const themeSettings = useThemeSettings();
   
+  useLoginCheck();
+
   const theme = createMuiTheme({
     palette: {
       type: themeSettings.themeMode as any,

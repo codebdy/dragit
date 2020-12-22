@@ -1,7 +1,7 @@
 import React from "react";
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import ListNav from "./SidebarLinks"
+import { SidebarLinks } from "./SidebarLinks"
 import LeftDrawer from "./LeftDrawer";
 import {observer} from "mobx-react-lite";
 import { useLeftDrawer, useThemeSettings } from "store/helpers/useAppStore";
@@ -42,7 +42,7 @@ const Sidebar = observer(() => {
   return(
     <ThemeProvider theme={theme}>
       <LeftDrawer>
-        <ListNav 
+        <SidebarLinks 
           mini ={leftDrawer.isMini}
           fullWidth = {leftDrawer.fullWidth}
         />  

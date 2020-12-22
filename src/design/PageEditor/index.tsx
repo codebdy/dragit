@@ -16,7 +16,6 @@ import { useAxios } from 'base/Hooks/useAxios';
 import { IPage, IPageSchema } from 'base/Model/IPage';
 import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'AdminBoard/views/Page/PageSkeleton';
-import { useLoginCheck } from 'store/helpers/useLoginCheck';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { ComponentView } from './Core/ComponentView';
@@ -111,7 +110,6 @@ export const PageEditor = observer((
 
   const theme = useTheme(); 
 
-  useLoginCheck();
   useAuthCheck(AUTH_CUSTOMIZE);
 
   useEffect(()=>{

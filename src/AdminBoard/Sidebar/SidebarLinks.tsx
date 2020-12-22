@@ -8,12 +8,13 @@ import { Divider } from "@material-ui/core";
 import { RXNode } from "base/RXNode/RXNode";
 import Subheader from "./MenuItems/Subheader";
 import { MenuNode } from "./MenuItems/MenuNode";
-import MenuNodeGroup from "./MenuItems/MenuNodeGroup";
+import { MenuNodeGroup } from "./MenuItems/MenuNodeGroup";
 import { RXNodeRoot } from "base/RXNode/Root";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { cloneObject } from "utils/cloneObject";
+import {observer} from "mobx-react-lite";
 
 // 定义查询语句
 //String代替JSON
@@ -33,12 +34,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function SidebarLinks(
+export const SidebarLinks = observer((
   props : {
     fullWidth?:number,
     mini:boolean,
   }
-) {
+)=>{
   const classes = useStyles();
   const [openedId, setOpenedId] = React.useState(-1);
   const { loading, error, data } = useQuery(GET_DRAWER_ITEMS);
@@ -61,7 +62,7 @@ export default function SidebarLinks(
 
   const listItems =items?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;
-    const authed = loggedUser?.authCheck(...node.meta?.auths||[]);
+    const authed = loggedUser.authCheck(...node.meta?.auths||[]);
     return (
     <Fragment key={node.id}>
       {
@@ -92,4 +93,4 @@ export default function SidebarLinks(
       </List>
     </Scrollbar>
   );
-}
+})

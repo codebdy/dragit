@@ -8,6 +8,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { MenuNode } from "./MenuNode";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { useLoggedUser } from "store/helpers/useLoggedUser";
+import { observer } from "mobx-react-lite"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +44,7 @@ export function getBadge(children:Array<RXNode<IMenuItem>>): IMenuBadge|undefine
   return undefined
 }
 
-export default function MenuNodeGroup(
+export const MenuNodeGroup = observer((
   props:{
     node:RXNode<IMenuItem>,
     openedId?: number,
@@ -51,7 +52,7 @@ export default function MenuNodeGroup(
     mini:boolean,
     nested?:boolean,
   }
-)
+)=>
 {
   const open = props.openedId === props.node.id
   const [openedId, setOpenedId] = React.useState(-1);
@@ -68,7 +69,7 @@ export default function MenuNodeGroup(
   const dotBadge = getBadge(props.node.children)
   const listItems = props.node.children?.map((node:RXNode<IMenuItem>)=>{
     let item = node.meta;
-    const authed = loggedUser?.authCheck(...node.meta?.auths||[]);
+    const authed = loggedUser.authCheck(...node.meta?.auths||[]);
     return (
     <Fragment key={node.id}>
       {
@@ -100,4 +101,4 @@ export default function MenuNodeGroup(
       </Collapse>
     </Fragment>
   )  
-}
+})

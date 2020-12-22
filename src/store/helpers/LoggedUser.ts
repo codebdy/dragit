@@ -1,14 +1,14 @@
 import { IUser } from "../../base/Model/IUser";
 
 export class LoggedUser{
-  meta:IUser;
+  meta?:IUser;
 
-  constructor(user: IUser){
+  constructor(user: IUser|undefined){
     this.meta = user;
   }
 
   authCheck(...auths:string[]) {
-    if(!this.meta){
+    if(!this.meta || !this.meta.login_name){
       return false;
     }
 

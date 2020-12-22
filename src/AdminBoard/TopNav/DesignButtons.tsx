@@ -8,6 +8,7 @@ import ThemeSettings from "../ThemeSettings";
 import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_THEME_SETTINGS } from "APIs/authSlugs";
 import { useDesigner, useLeftDrawer } from "store/helpers/useAppStore";
 import { useLoggedUser } from "store/helpers/useLoggedUser";
+import { observer } from "mobx-react-lite";
 
 /*const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,11 +29,11 @@ import { useLoggedUser } from "store/helpers/useLoggedUser";
   }),
 );*/
 
-export default function DesignButtons(
+export const DesignButtons = observer((
   props:{
     color?:string,
   }
-) {
+)=>{
   const {color} = props;
   //const classes = useStyles();
   const [showSettings, setShowSettings] = useState(false);
@@ -52,7 +53,7 @@ export default function DesignButtons(
     {
       <Fragment  /*className={classes.root} elevation={24}*/>
         {
-          loggedUser?.authCheck(AUTH_CUSTOMIZE)&&
+          loggedUser.authCheck(AUTH_CUSTOMIZE)&&
           <Fragment>
             <Tooltip title={intl.get('design-layout')} arrow placement="bottom">
               <IconButton aria-label={intl.get('design-layout')} onClick={handleOpen}>
@@ -70,7 +71,7 @@ export default function DesignButtons(
         }
 
         {
-          loggedUser?.authCheck(AUTH_THEME_SETTINGS)&&
+          loggedUser.authCheck(AUTH_THEME_SETTINGS)&&
           <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"
             onClick = {()=>setShowSettings(!showSettings)}
           >
@@ -80,7 +81,7 @@ export default function DesignButtons(
           </Tooltip>          
         }
         {
-          loggedUser?.authCheck(AUTH_DEBUG)&&
+          loggedUser.authCheck(AUTH_DEBUG)&&
           <Tooltip title={intl.get('debug')} arrow placement="bottom">
             <IconButton  aria-label={intl.get('debug')}>
               <MdiIcon iconClass="mdi-android-debug-bridge" color={color} />
@@ -97,4 +98,4 @@ export default function DesignButtons(
     />
     </Hidden>
   )
-}
+})

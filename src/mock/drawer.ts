@@ -27,7 +27,7 @@ export default [{
     {
         title: '模块样式',
         type: 'group',
-        icon: 'mdi-card',
+        icon: 'mdi-palette-swatch-outline',
         children: [
             {
                 title: '页面跳转式',
