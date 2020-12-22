@@ -13,7 +13,7 @@ export class AppStore{
   successAlert: boolean|string = false;
   errorMessage: string|undefined = '';
 
-  moduleSlug: string|undefined;
+  moduleSlug: string|undefined = 'dashboard';
   pageSlug: string|undefined;
 
   constructor() {

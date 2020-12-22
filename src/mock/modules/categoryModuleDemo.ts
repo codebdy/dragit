@@ -5,13 +5,15 @@ import articleChannel from "mock/views/articleChannel";
 import articles from "mock/views/articles";
 import articleTagEdit from "mock/views/articleTagEdit";
 import articleTags from "mock/views/articleTags";
+import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 
 export default[
   {
     id:1,
     name:'页面跳转式',
-    slug:'jump-style-module',
-    indexPageId:1,
+    slug:JUMP_STYLE_MODULE,
+    moduleType:JUMP_STYLE_MODULE,
+    entryPageId:1,
     pages:[
       {
         id:1,
@@ -31,9 +33,10 @@ export default[
   },
   {
     id:2,
-    slug:'popup-style-module',
+    slug:POPUP_STYLE_MODULE,
+    moduleType:POPUP_STYLE_MODULE,
     name:'对话框式',
-    indexPageId:21,
+    entryPageId:21,
     pages:[
       {
         id:21,
@@ -45,9 +48,10 @@ export default[
   },
   {
     id:3,
-    slug:'drawer-style-module',
+    slug:DRAWER_STYLE_MODULE,
+    moduleType:DRAWER_STYLE_MODULE,
     name:'右侧滑出式',
-    indexPageId:31,
+    entryPageId:31,
     pages:[
       {
         id:31,
@@ -65,9 +69,10 @@ export default[
   },
   {
     id:4,
-    slug:'tab-style-module',
+    slug:TAB_STYLE_MODULE,
+    moduleType:TAB_STYLE_MODULE,
     name:'选项卡式',
-    indexPageId:41,
+    entryPageId:41,
     pages:[
       {
         id:41,

@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Skeleton from "@material-ui/lab/Skeleton";
+import { Fragment } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PageSkeleton(){
+export default function ModuleSkeleton(){
   const classes = useStyles();
   return (
     <Fragment>

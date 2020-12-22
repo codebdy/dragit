@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 // 定义查询语句
 const LOGIN = gql`
-  query loginQuery($login_name: String!, $password: String!){
+  query ($login_name: String!, $password: String!){
     login(login_name:$login_name, password:$password){
       token,
       user{

@@ -3,7 +3,7 @@ import ComponentRender from "./ComponentRender";
 import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, createStyles, Dialog, makeStyles, Theme } from "@material-ui/core";
-import PageSkeleton from "./PageSkeleton";
+import PageSkeleton from "../../Workspace/ModuleSkeleton";
 import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
 
 import { IMeta } from "base//Model/IMeta";

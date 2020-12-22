@@ -5,6 +5,7 @@ import moduleCategories from './moduleCategories'
 import { remove } from 'utils/ArrayHelper';
 import { getModuleIndexPage } from './getModuleIndexPage';
 import { getPageBySlug } from './getPageBySlug';
+import { getModuleById } from './getModuleById';
 
 export function getCagegoryById(id){
   for(var index = 0; index < moduleCategories.length; index++){
@@ -24,19 +25,6 @@ export function getCategoryOfModule(id){
       }
     }
   }
-}
-
-export function getModuleById(muduleId){
-  for(var index = 0; index < moduleCategories.length; index++){
-    let modules = moduleCategories[index].modules;
-    for(var i = 0; i < modules.length; i++){
-      let module = modules[i]
-      if(module.id.toString() === muduleId){
-        return module;
-      }
-    }
-  }
-
 }
 
 export default function mockModules(){

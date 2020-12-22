@@ -1,25 +1,26 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, CircularProgress } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import {observer} from "mobx-react-lite";
+import { IModule } from 'base/Model/IModule';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      position:'absolute',
       display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width:'100%',
-      height:'100%',
     },
 
   }),
 );
 
-export default function DrawerStyleModule(){
+export const DrawerStyleModule = observer((
+  props:{
+    module:IModule
+  }
+)=>{
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <CircularProgress />
+      Dawer Styled
     </div>
   )
-}
+})

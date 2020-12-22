@@ -1,6 +1,7 @@
 import drawer from "./drawer"
 import { getUser } from "./getUser";
 import { login } from "./login/login";
+import { getModuleBySlug } from "./modules/getModuleBySlug";
 import { getModulePage } from "./modules/getModulePage";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
@@ -33,8 +34,20 @@ export const schema = `
     id:ID!
     slug:String!
     name:String 
-    schema:JSON  
+    schema:JSON
+    auths:[String]  
   }
+
+  type Module {
+    id: ID!
+    slug: String
+    name: String
+    moduleType: String
+    "'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
+    maxWidth:String
+    pages: [Page]
+    entryPage: Page
+  }  
 
   type Query {
     "登录"
@@ -43,6 +56,7 @@ export const schema = `
     drawerItems:JSON!
     modulePage(moduleSlug:String!, pageSlug:String):Page
     page(id:ID!):Page
+    moduleBySlug(slug:String):Module
   }
 `;
 
@@ -84,5 +98,12 @@ export const resolvers = {
       await sleep(1000);
       return null
     },
+
+    moduleBySlug:async (parent:any, args:any, context:any, info:any)=>{
+      await sleep(1000);
+      const module = getModuleBySlug(args.slug);
+      return module
+    },
+
   },
 };

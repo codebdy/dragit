@@ -7,7 +7,7 @@ import { useLazyQuery } from "@apollo/react-hooks";
 
 // 定义查询语句
 const QUERY_USER = gql`
-  query queryUser($token: String!){
+  query ($token: String!){
     userByToken(token:$token){
       id
       login_name

@@ -19,7 +19,7 @@ import {observer} from "mobx-react-lite";
 // 定义查询语句
 //String代替JSON
 const GET_DRAWER_ITEMS = gql`
-  query GetDrawerItems {
+  query {
     drawerItems
   }
 `;

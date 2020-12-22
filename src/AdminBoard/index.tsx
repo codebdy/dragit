@@ -42,15 +42,7 @@ export const AdminBoard = observer(()=>{
 
       <div className={classes.content}>
         <LeftDrawerWidthPlaceholder />
-        <Workspace>
-          {/*<Switch>
-            <Route path="/admin/module/:moduleSlug/:pageSlug?/:id?" component={PageView}></Route> 
-            <Route path="/admin/error-404" component={Page404}></Route>
-            {//<Redirect to="/admin/module/:moduleId/page/index" from='/admin/module/:moduleId/' />
-            } 
-            <Redirect to="/admin/page/dashboard" from='/admin' /> 
-          </Switch>*/}
-        </Workspace>
+        <Workspace />
       </div>
       <AreaSelect></AreaSelect>
     </div>

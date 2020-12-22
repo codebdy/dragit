@@ -1,15 +1,21 @@
-import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core";
-import classNames from "classnames";
-import { PageEditor } from "design/PageEditor";
+import React, { useEffect } from "react";
+import { makeStyles, createStyles, Theme, Container } from "@material-ui/core";
 import {observer} from 'mobx-react-lite';
-import { useDesigner } from "store/helpers/useAppStore";
+import gql from 'graphql-tag';
+import { useAppStore } from "store/helpers/useAppStore";
+import { useQuery } from "@apollo/react-hooks";
+import PageSkeleton from "AdminBoard/Workspace/ModuleSkeleton";
+import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
+import { JumpStyleModule } from "./JumpStyleModule";
+import { Fragment } from "react";
+import { PopupStyleModule } from "./PopupStyleModule";
+import { DrawerStyleModule } from "./DrawerStyleModule";
+import { TabStyleModule } from "./TabStyleModule";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    pageContent: {
+    root: {
       flex: '1',
-      //padding:'20px',
       display:'flex',
       flexFlow:'column',
     },
@@ -17,27 +23,66 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const Workspace = observer((props:{children?: any})=>{
-  const {children} = props;
-  const classes = useStyles();
-  //const designer = useDesigner();
-  
-  //const handleDesignerClose = ()=>{
-  //  designer.close();
-  //}
-
-  return (
-    <div className = {classNames( 
-        classes.pageContent,
-      )}
-      //style={{padding: (spacing*4) + 'px'}}
-    >
-      {
-        //designer.opened ?
-        //  <PageEditor pageSlug = {designer.pageSlug} onClose = {handleDesignerClose}></PageEditor>
-        //:
-          children
+const QUERY_MODULE = gql`
+  query ($slug: String!){
+    moduleBySlug(slug:$slug){
+      id
+      slug
+      name
+      moduleType
+      maxWidth
+      pages{
+        id
+        slug
+        name
+        schema
+        auths
       }
-    </div>
+      entryPage{
+        id
+        slug
+      }
+    }
+  }
+`;
+
+export const Workspace = observer(()=>{
+  const classes = useStyles();
+  const appStore = useAppStore();
+  const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
+
+  useEffect(()=>{
+    appStore.setErrorMessage(error?.message)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[error])
+
+  console.log('Workspace', data, appStore.moduleSlug)
+  const module = data?.moduleBySlug;
+  return (
+    <Container className={classes.root} maxWidth = {module?.maxWidth ==='false' ? false : module?.maxWidth}>
+    {
+      loading?
+      <PageSkeleton />
+      :
+      <Fragment>
+        {
+          data?.moduleBySlug?.moduleType === JUMP_STYLE_MODULE &&
+          <JumpStyleModule module={data?.moduleBySlug} />
+        }
+        {
+          data?.moduleBySlug?.moduleType === POPUP_STYLE_MODULE &&
+          <PopupStyleModule module={data?.moduleBySlug} />
+        }
+        {
+          data?.moduleBySlug?.moduleType === DRAWER_STYLE_MODULE &&
+          <DrawerStyleModule module={data?.moduleBySlug} />
+        }
+        {
+          data?.moduleBySlug?.moduleType === TAB_STYLE_MODULE &&
+          <TabStyleModule module={data?.moduleBySlug} />
+        }
+      </Fragment>
+    }
+    </Container>
   )
 })
