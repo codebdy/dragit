@@ -39,7 +39,6 @@ const QUERY_MODULE = gql`
         auths
       }
       entryPage{
-        id
         slug
       }
     }
