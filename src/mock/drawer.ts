@@ -25,6 +25,37 @@ export default [{
         auths:[AUTH_MEDIAS]
     },
     {
+        title: '模块样式',
+        type: 'group',
+        icon: 'mdi-card',
+        children: [
+            {
+                title: '页面跳转式',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                moduleSlug: 'jump-style-module',
+            },
+            {
+                title: '对话框式',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                moduleSlug: 'popup-style-module',
+            },
+            {
+                title: '右侧滑出式',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                moduleSlug: 'drawer-style-module',
+            },
+            {
+                title: '选项卡式',
+                type: 'item',
+                icon: 'mdi-circle-small',
+                moduleSlug: 'tab-style-module',
+            },
+        ],
+    },
+    {
         title: '文章管理',
         type: 'group',
         icon: 'mdi-text-box-outline',

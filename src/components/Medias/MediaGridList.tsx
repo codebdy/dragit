@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { CircularProgress, Grid} from '@material-ui/core';
-import Scrollbar from 'admin/common/Scrollbar';
+import Scrollbar from 'AdminBoard/common/Scrollbar';
 import { FolderNode } from './MediaFolder';
 import MediaGridListFolder from './MediaGridListFolder';
 import MediaGridListImage from './MediaGridListImage';

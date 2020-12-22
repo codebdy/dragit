@@ -1,5 +1,5 @@
 import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
-import editPage from "designer/PageEditor/Toolbox/templates/order/editPage";
+import editPage from "design/PageEditor/Toolbox/templates/order/editPage";
 
 export default {
   layout:[

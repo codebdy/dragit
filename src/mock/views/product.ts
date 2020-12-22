@@ -1,5 +1,5 @@
 import { API_GET_MODEL_BY_ID, API_SUBMIT_MODEL } from "APIs/model"
-import productPage from "designer/PageEditor/Toolbox/templates/product/editPage"
+import productPage from "design/PageEditor/Toolbox/templates/product/editPage"
 
 export default {
   layout:[

@@ -5,7 +5,6 @@ import { Designer } from "./Designer";
 import { IUser } from "base/Model/IUser";
 
 export class AppStore{
-  //loading:boolean = false;
   token:string = "";
   loggedUser: IUser|undefined = undefined;
   leftDrawer: LeftDrawer = new LeftDrawer();
@@ -14,13 +13,12 @@ export class AppStore{
   successAlert: boolean|string = false;
   errorMessage: string|undefined = '';
 
+  moduleSlug: string|undefined;
+  pageSlug: string|undefined;
+
   constructor() {
     makeAutoObservable(this)
   }
-
-  //setLoading(loading:boolean){
-  //  this.loading = loading;
-  //}
 
   setSuccessAlert(alert:boolean|string){
     this.successAlert = alert;
@@ -36,6 +34,11 @@ export class AppStore{
 
   setToken(token:string){
     this.token = token;
+  }
+
+  showModule(moduleSlug:string, pageSlug?:string){
+    this.moduleSlug = moduleSlug;
+    this.pageSlug = pageSlug;
   }
 
 }

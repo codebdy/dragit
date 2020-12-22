@@ -8,7 +8,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import client from './mock/client-mock';
 
 import {register, registerHtmlTag} from "./base/RxDrag";
-import { Button, Divider, Typography } from '@material-ui/core';
+import { Button, CssBaseline, Divider, Typography } from '@material-ui/core';
 import PortletGridItem from 'components/Portlet/GridItem';
 import ListView from 'components/ListView';
 import MediaSelect from 'components/MediaSelect/MediaSelect';
@@ -106,6 +106,7 @@ registerHtmlTag('h6', HeadRule);
 ReactDOM.render(
   <AppStoreProdivider value = {appStore}>
     <ApolloProvider client={client}>
+      <CssBaseline />      
       <App />
     </ApolloProvider>
   </AppStoreProdivider>  

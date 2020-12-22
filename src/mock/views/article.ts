@@ -1,5 +1,5 @@
 import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
-import ArticleMeta from "designer/PageEditor/Toolbox/templates/article/editPage";
+import ArticleMeta from "design/PageEditor/Toolbox/templates/article/editPage";
 
 export default {
   layout:[ArticleMeta],

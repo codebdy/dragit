@@ -1,5 +1,5 @@
 import React from "react";
-import { Regeister } from "../admin/views/Page/Form/Regeister";
+import { Regeister } from "../AdminBoard/views/Page/Form/Regeister";
 
 
 export interface IForm {

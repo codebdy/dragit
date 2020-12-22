@@ -1,4 +1,4 @@
-import aritcleList from "designer/PageEditor/Toolbox/templates/article/listPage"
+import aritcleList from "design/PageEditor/Toolbox/templates/article/listPage"
 
 export default {
   layout:[

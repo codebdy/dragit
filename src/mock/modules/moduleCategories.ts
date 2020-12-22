@@ -1,5 +1,6 @@
 import categoryArticle from "./categoryArticle";
 import categoryEnquiry from "./categoryEnquiry";
+import categoryModuleDemo from "./categoryModuleDemo";
 import categoryOrder from "./categoryOrder";
 import categoryProduct from "./categoryProduct";
 import categorySystem from "./categorySystem";
@@ -40,6 +41,11 @@ var moduleCategories = [
     id:7,
     name:'标准CRUD',
     modules:[]
+  },
+  {
+    id:8,
+    name:'模块样式',
+    modules:categoryModuleDemo
   }
 
 ]
