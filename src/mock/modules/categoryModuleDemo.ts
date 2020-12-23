@@ -45,7 +45,7 @@ export default[
         id:111,
         name:'管理员列表',
         slug:'urser-list',
-        maxWidth:'md',
+        maxWidth:'lg',
         schema: users,
       },
       {

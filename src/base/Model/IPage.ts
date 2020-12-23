@@ -1,5 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 
+export type MaxWidth = 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
+
 export interface IPageSchema{
   layout?:Array<any>,
   auths?:string[],
@@ -13,6 +15,6 @@ export interface IPage{
   id:number,
   slug:string,
   name?:string, 
-  maxWidth?: 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
+  maxWidth?: MaxWidth;
   schema?:IPageSchema,  
 }

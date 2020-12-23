@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, createStyles, Container, Dialog } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import {observer} from "mobx-react-lite";
 import { ModuleProps } from './common/ModuleProps';
 import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { getModulePageBySlug } from './common/getModulePageBySlug';
 import { Page } from './common/Page';
-import { Fragment } from 'react';
+import PageDialog from './common/PageDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       flexFlow:'column',
     },
-
   }),
 );
+
 
 export const PopupStyleModule = observer((
   props:ModuleProps
@@ -24,7 +24,7 @@ export const PopupStyleModule = observer((
   const {module} = props;
   const classes = useStyles();
   const appStore = useAppStore();
-  const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
+  const [pageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
   const [popupSlug, setPopupSlug] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<any>();
   const hanlePageAction = (action:PageAction)=>{
@@ -52,20 +52,21 @@ export const PopupStyleModule = observer((
         onPageAction = {hanlePageAction}
         //pageParams = {pageParams}
       />
-      <Dialog
-        fullWidth
-        maxWidth = {popupPage?.maxWidth ==='false' ? false : popupPage?.maxWidth}
-        open={!!popupSlug}
-        onClose={handleClose}
-        aria-labelledby="max-width-dialog-title"
-      >
-        <Page 
-        page={popupPage}
-        onPageAction = {hanlePageAction}
-        //pageParams = {pageParams}
-        />
-      </Dialog>        
-
+      {
+        popupSlug&&
+        <PageDialog
+          maxWidth = {popupPage?.maxWidth}
+          open={!!popupSlug}
+          onClose={handleClose}
+          title = {popupPage?.name}
+        >
+          <Page 
+            page={popupPage}
+            onPageAction = {hanlePageAction}
+            //pageParams = {pageParams}
+          />
+        </PageDialog>        
+      }
     </Container>
   )
 })
