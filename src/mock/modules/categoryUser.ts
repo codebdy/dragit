@@ -8,7 +8,7 @@ export default[
     id:7,
     slug:'user',
     name:'管理员',
-    indexPageId:71,
+    entryPageId:71,
     pages:[
       {
         id:71,
@@ -28,7 +28,7 @@ export default[
     id:8,
     slug:'role',
     name:'角色',
-    indexPageId:81,
+    entryPageId:81,
     pages:[
       {
         id:81,

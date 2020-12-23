@@ -4,18 +4,31 @@ import { useAppStore } from 'store/helpers/useAppStore';
 import { getModulePageBySlug } from './common/getModulePageBySlug';
 import { ModuleProps } from './common/ModuleProps';
 import { Page } from './common/Page';
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction } from 'base/PageAction';
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'base/PageAction';
+import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flex: '1',
+      display:'flex',
+      flexFlow:'column',
+    },
+
+  }),
+);
 
 export const JumpStyleModule = observer((
   props:ModuleProps
 )=>{
   const {module} = props;
+  const classes = useStyles();
   const appStore = useAppStore();
   const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
   const [pageParams, setPageParams] = useState<any>();
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
-      case JUMP_TO_PAGE_ACTION:
+      case OPEN_PAGE_ACTION:
         setPageSlug(action.page?.pageSlug);
         setPageParams(action.page)
         return;        
@@ -25,11 +38,15 @@ export const JumpStyleModule = observer((
     }
   }
 
+  const page = getModulePageBySlug(module, pageSlug);
+
   return (
-    <Page 
-      page={getModulePageBySlug(module, pageSlug)}
-      onPageAction = {hanlePageAction}
-      pageParams = {pageParams}
-    />
+    <Container className={classes.root} maxWidth = {page?.maxWidth ==='false' ? false : page?.maxWidth}>
+      <Page 
+        page={page}
+        onPageAction = {hanlePageAction}
+        pageParams = {pageParams}
+      />
+    </Container>
   )
 })

@@ -13,5 +13,6 @@ export interface IPage{
   id:number,
   slug:string,
   name?:string, 
+  maxWidth?: 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
   schema?:IPageSchema,  
 }

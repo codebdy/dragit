@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ModulePageTable(
   props:{
     pages:IPage[],
-    indexPageId:number,
+    entryPageId:number,
     onChangePage:(newPage:IPage)=>void,
     onRemovePage:(id:number)=>void,
     onAddPage:()=>void,
@@ -35,7 +35,7 @@ export default function ModulePageTable(
     onDesign: (page:IPage)=>void,
   }
 ){
-  const {pages, indexPageId, onChangePage, onRemovePage, onAddPage, onChangeIndexPage, onDesign} = props;
+  const {pages, entryPageId, onChangePage, onRemovePage, onAddPage, onChangeIndexPage, onDesign} = props;
   const classes = useStyles();
   
   const handleRemove = (id:number)=>{
@@ -65,7 +65,7 @@ export default function ModulePageTable(
                 <ModulePageRow 
                   key={page.id} 
                   page={page} 
-                  isIndexPage={indexPageId === page.id} 
+                  isIndexPage={entryPageId === page.id} 
                   onChangePage = {onChangePage}
                   onRemove = {handleRemove}
                   onChangeIndexPage = {(indexed)=>{

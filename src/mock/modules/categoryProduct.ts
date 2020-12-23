@@ -9,7 +9,7 @@ export default [
     id:5,
     name:'产品管理',
     slug:'product',
-    indexPageId:51,
+    entryPageId:51,
     pages:[
       {
         id:51,
@@ -46,7 +46,7 @@ export default [
     id:6,
     slug:'product-category',
     name:'产品分类',
-    indexPageId:61,
+    entryPageId:61,
     pages:[
       {
         id:61,
@@ -60,7 +60,7 @@ export default [
     id:10,
     slug:'product-attribute',
     name:'产品属性',
-    indexPageId:101,
+    entryPageId:101,
     pages:[
       {
         id:101,

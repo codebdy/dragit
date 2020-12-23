@@ -1,4 +1,4 @@
-import {JUMP_TO_PAGE_ACTION} from "base/PageAction"
+import {OPEN_PAGE_ACTION} from "base/PageAction"
 import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
 export default {
   layout:[
@@ -35,7 +35,7 @@ export default {
                   fontSize: '1.1rem',
                 },
                 onClick:{
-                  name: JUMP_TO_PAGE_ACTION,
+                  name: OPEN_PAGE_ACTION,
                   page:{
                     moduleSlug:'user',
                     pageSlug:'edit-user',

@@ -1,30 +1,33 @@
 import article from "mock/views/article";
 import articleAttributeEdit from "mock/views/articleAttributeEdit";
 import articleAttributes from "mock/views/articleAttributes";
-import articleChannel from "mock/views/articleChannel";
 import articles from "mock/views/articles";
 import articleTagEdit from "mock/views/articleTagEdit";
 import articleTags from "mock/views/articleTags";
+import user from "mock/views/user";
+import users from "mock/views/users";
 import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 
 export default[
   {
-    id:1,
+    id:101,
     name:'页面跳转式',
     slug:JUMP_STYLE_MODULE,
     moduleType:JUMP_STYLE_MODULE,
-    entryPageId:1,
+    entryPageId:1011,
     pages:[
       {
-        id:1,
+        id:1011,
         name:'文章列表',
         slug:'articles',
+        maxWidth:'false',
         schema: articles,
       },
       {
-        id:2,
+        id:1012,
         name:'文章编辑',
         slug:'article',
+        maxWidth:'false',
         schema: article,
       },
     ],
@@ -32,17 +35,25 @@ export default[
     ]
   },
   {
-    id:2,
+    id:11,
     slug:POPUP_STYLE_MODULE,
     moduleType:POPUP_STYLE_MODULE,
-    name:'对话框式',
-    entryPageId:21,
+    name:'管理员',
+    entryPageId:111,
     pages:[
       {
-        id:21,
-        name:'频道编辑',
-        slug:'article-channel-tree',
-        schema: articleChannel,
+        id:111,
+        name:'管理员列表',
+        slug:'urser-list',
+        maxWidth:'md',
+        schema: users,
+      },
+      {
+        id:112,
+        name:'管理员编辑',
+        maxWidth:'md',
+        slug:'edit-user',
+        schema: user,
       },
     ],
   },

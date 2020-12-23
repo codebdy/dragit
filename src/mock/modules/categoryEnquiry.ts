@@ -6,7 +6,7 @@ export default[
     id:14,
     name:'询盘管理',
     slug:'enquery',
-    indexPageId:141,
+    entryPageId:141,
     pages:[
       {
         id:141,

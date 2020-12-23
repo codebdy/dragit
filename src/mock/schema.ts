@@ -34,6 +34,8 @@ export const schema = `
     id:ID!
     slug:String!
     name:String 
+    "'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
+    maxWidth:String
     schema:JSON
     auths:[String]  
   }
@@ -43,8 +45,6 @@ export const schema = `
     slug: String
     name: String
     moduleType: String
-    "'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
-    maxWidth:String
     pages: [Page]
     entryPage: Page
   }  

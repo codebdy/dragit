@@ -1,5 +1,5 @@
 import { API_QUERY_AND_OPERATE_MODELS } from "APIs/model"
-import {JUMP_TO_PAGE_ACTION} from "base/PageAction"
+import {OPEN_PAGE_ACTION} from "base/PageAction"
 export default {
   layout:[
     {
@@ -32,7 +32,7 @@ export default {
                 rxText: '新建',
                 size: "large",
                 onClick:{
-                  name: JUMP_TO_PAGE_ACTION,
+                  name: OPEN_PAGE_ACTION,
                   page:{
                     moduleSlug:'supplier',
                     pageSlug:'supplier-edit',

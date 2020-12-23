@@ -1,4 +1,4 @@
-import { JUMP_TO_PAGE_ACTION } from "base/PageAction";
+import { OPEN_PAGE_ACTION } from "base/PageAction";
 
 export default{
   name: 'GridRow',
@@ -31,7 +31,7 @@ export default{
           rxText: '新建',
           size: "large",
           onClick:{
-            name: JUMP_TO_PAGE_ACTION,
+            name: OPEN_PAGE_ACTION,
             page:{
               moduleSlug:'order',
               pageSlug:'order-edit',

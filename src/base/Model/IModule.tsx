@@ -9,6 +9,5 @@ export interface IModule {
   pages?: IPage[];
   entryPage?: IPage;
   auths?: IAuth[];
-  maxWidth?: 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
-  indexPageId?:number; //以后要删除该字段
+  entryPageId?:number; //以后要删除该字段
 }

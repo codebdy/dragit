@@ -1,4 +1,4 @@
-import {JUMP_TO_PAGE_ACTION} from "base/PageAction"
+import {OPEN_PAGE_ACTION} from "base/PageAction"
 import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
 export default {
   layout:[
@@ -31,7 +31,7 @@ export default {
                 color: "primary",
                 rxText: '新建',
                 onClick:{
-                  name: JUMP_TO_PAGE_ACTION,
+                  name: OPEN_PAGE_ACTION,
                   page:{
                     moduleSlug:'role',
                     pageSlug:'edit-role',

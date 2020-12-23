@@ -12,7 +12,7 @@ import { ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ILabelItem } from '../../base/Model/ILabelItem';
 import intl from 'react-intl-universal';
-import { JUMP_TO_PAGE_ACTION, PageActionHandle } from 'base/PageAction';
+import { OPEN_PAGE_ACTION, PageActionHandle } from 'base/PageAction';
 import { AxiosRequestConfig } from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton, Paper } from '@material-ui/core';
@@ -24,6 +24,7 @@ import { ListViewCell } from './ListViewCell';
 import { useAxios } from 'base/Hooks/useAxios';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import { ICommand } from 'base/Model/ICommand';
+import gql from 'graphql-tag';
 
 export const COMMAND_QUERY = "query";
 
@@ -72,6 +73,19 @@ function creatEmpertyRows(length:number){
 
   return rows;
 }
+
+const queryName = 'xxx';
+
+const QUERY_LIST = gql`
+  query ($kewords: String, $filters: [String], $sorts:[String], $searchAbleFields:[String]){
+    ${queryName}(kewords:$kewords, filters:$filters, sorts:$sorts, searchAbleFields:$searchAbleFields){
+      id
+    }
+  }
+`;
+
+//const MUTATION = gql`
+//`
 
 const ListView = React.forwardRef((
     props: {
@@ -175,7 +189,7 @@ const ListView = React.forwardRef((
   };
 
   const jumpToPage = (pageParams:IPageJumper, row:any)=>{
-    onAction({name:JUMP_TO_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
+    onAction({name:OPEN_PAGE_ACTION, page:{...pageParams, dataId:row.id}})
   }
 
   const handleBatchAction = (command:ICommand)=>{

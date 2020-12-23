@@ -1,4 +1,4 @@
-import { JUMP_TO_PAGE_ACTION } from "base/PageAction"
+import { OPEN_PAGE_ACTION } from "base/PageAction"
 import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
 export default {
   layout:[
@@ -43,7 +43,7 @@ export default {
                   rxText: '新建',
                   size: "large",
                   onClick:{
-                    name: JUMP_TO_PAGE_ACTION,
+                    name: OPEN_PAGE_ACTION,
                     page:{
                       moduleSlug:'article-attribute',
                       pageSlug:'article-attribute-edit',

@@ -4,7 +4,7 @@ import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, createStyles, Dialog, makeStyles, Theme } from "@material-ui/core";
 import PageSkeleton from "../../Workspace/common/ModuleSkeleton";
-import { GO_BACK_ACTION, JUMP_TO_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
 
 import { IMeta } from "base//Model/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
@@ -130,7 +130,7 @@ const PageView = ()=>{
   
   const formActionHandle = (action:PageAction)=>{
     switch (action.name){
-      case JUMP_TO_PAGE_ACTION:
+      case OPEN_PAGE_ACTION:
         const url = resolvePageUrl(action.page);
         history.push(url);
         return;

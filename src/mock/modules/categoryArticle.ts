@@ -11,7 +11,7 @@ export default[
     id:1,
     name:'文章管理',
     slug:'article',
-    indexPageId:1,
+    entryPageId:1,
     pages:[
       {
         id:1,
@@ -48,7 +48,7 @@ export default[
     id:2,
     slug:'article-chanel',
     name:'文章频道',
-    indexPageId:21,
+    entryPageId:21,
     pages:[
       {
         id:21,
@@ -62,7 +62,7 @@ export default[
     id:3,
     slug:'article-tag',
     name:'文章标签',
-    indexPageId:31,
+    entryPageId:31,
     pages:[
       {
         id:31,
@@ -82,7 +82,7 @@ export default[
     id:4,
     slug:'article-attribute',
     name:'文章属性',
-    indexPageId:41,
+    entryPageId:41,
     pages:[
       {
         id:41,

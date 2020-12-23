@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { makeStyles, createStyles, Theme, Container } from "@material-ui/core";
 import {observer} from 'mobx-react-lite';
 import gql from 'graphql-tag';
 import { useAppStore } from "store/helpers/useAppStore";
@@ -11,11 +10,12 @@ import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
 import { DrawerStyleModule } from "./DrawerStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
+import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flex: '1',
+      flex:1,
       display:'flex',
       flexFlow:'column',
       background:theme.palette.background.default,
@@ -32,11 +32,11 @@ const QUERY_MODULE = gql`
       slug
       name
       moduleType
-      maxWidth
       pages{
         id
         slug
         name
+        maxWidth
         schema
         auths
       }
@@ -48,8 +48,8 @@ const QUERY_MODULE = gql`
 `;
 
 export const Workspace = observer(()=>{
-  const classes = useStyles();
   const appStore = useAppStore();
+  const classes = useStyles()
   const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
 
   useEffect(()=>{
@@ -59,30 +59,30 @@ export const Workspace = observer(()=>{
 
   const module = data?.moduleBySlug;
   return (
-    <Container className={classes.root} maxWidth = {module?.maxWidth ==='false' ? false : module?.maxWidth}>
-    {
-      loading?
-      <PageSkeleton />
-      :
-      <Fragment>
-        {
-          data?.moduleBySlug?.moduleType === JUMP_STYLE_MODULE &&
-          <JumpStyleModule module={data?.moduleBySlug} />
-        }
-        {
-          data?.moduleBySlug?.moduleType === POPUP_STYLE_MODULE &&
-          <PopupStyleModule module={data?.moduleBySlug} />
-        }
-        {
-          data?.moduleBySlug?.moduleType === DRAWER_STYLE_MODULE &&
-          <DrawerStyleModule module={data?.moduleBySlug} />
-        }
-        {
-          data?.moduleBySlug?.moduleType === TAB_STYLE_MODULE &&
-          <TabStyleModule module={data?.moduleBySlug} />
-        }
-      </Fragment>
-    }
-    </Container>
+    <div className = {classes.root}>
+      {
+        loading?
+        <Container><PageSkeleton /></Container>
+        :
+        <Fragment>
+          {
+            module?.moduleType === JUMP_STYLE_MODULE &&
+            <JumpStyleModule module={module} />
+          }
+          {
+            module?.moduleType === POPUP_STYLE_MODULE &&
+            <PopupStyleModule module={module} />
+          }
+          {
+            module?.moduleType === DRAWER_STYLE_MODULE &&
+            <DrawerStyleModule module={module} />
+          }
+          {
+            module?.moduleType === TAB_STYLE_MODULE &&
+            <TabStyleModule module={module} />
+          }
+        </Fragment>
+      }
+    </div>
   )
 })

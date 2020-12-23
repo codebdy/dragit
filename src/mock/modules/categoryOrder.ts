@@ -10,7 +10,7 @@ export default[
     id:11,
     name:'订单管理',
     slug:'order',
-    indexPageId:111,
+    entryPageId:111,
     pages:[
       {
         id:111,
@@ -52,7 +52,7 @@ export default[
     id:12,
     name:'客户管理',
     slug:'customer',
-    indexPageId:121,
+    entryPageId:121,
     pages:[
       {
         id:121,
@@ -75,7 +75,7 @@ export default[
     id:13,
     name:'供应商管理',
     slug:'supplier',
-    indexPageId:131,
+    entryPageId:131,
     pages:[
       {
         id:131,
