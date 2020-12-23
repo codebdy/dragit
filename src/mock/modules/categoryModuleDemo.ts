@@ -124,7 +124,13 @@ export default[
         slug:'article-attribute-list',
         schema: articleAttributes,
       },
-
+      {
+        id:146,
+        name:'文章编辑',
+        slug:'article',
+        max_width:'false',
+        schema: article,
+      },
     ],
   },
 

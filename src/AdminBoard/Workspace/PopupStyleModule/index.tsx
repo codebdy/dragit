@@ -6,8 +6,7 @@ import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { getModulePageBySlug } from '../common/getModulePageBySlug';
 import { Page } from '../common/Page';
-import PageDialog from './PageDialog';
-import PageDrawer from './PageDrawer';
+import { PopupPage } from './PopupPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,41 +46,19 @@ export const PopupStyleModule = observer((
   }
 
   return (
-    <Container className={classes.root} maxWidth = {page?.max_width ==='false' ? false : page?.max_width}>
+    <Container className={classes.root} maxWidth = {page?.maxWidth ==='false' ? false : page?.maxWidth}>
       <Page 
         page={page}
         onPageAction = {hanlePageAction}
         pageParams = {pageParams}
       />
-      {
-        popupSlug && !module.isDrawerStyle &&
-        <PageDialog
-          maxWidth = {popupPage?.max_width}
-          open={!!popupSlug}
-          onClose={handleClose}
-          title = {popupPage?.name}
-        >
-          <Page 
-            page={popupPage}
-            onPageAction = {hanlePageAction}
-            pageParams = {pageParams}
-          />
-        </PageDialog>      
-      }{
-        module.isDrawerStyle&&
-        <PageDrawer
-          title = {popupPage?.name}
-          onClose = {handleClose}
-          open={!!popupSlug}
-          width = {popupPage?.width}
-        >
-          <Page 
-            page={popupPage}
-            onPageAction = {hanlePageAction}
-            pageParams = {pageParams}
-          />
-        </PageDrawer>
-      }
+      <PopupPage 
+        page = {popupPage}
+        isDrawerStyle = {module.isDrawerStyle} 
+        onPageAction = {hanlePageAction}
+        pageParams = {pageParams}
+        onClose={handleClose}
+      />
     </Container>
   )
 })

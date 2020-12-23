@@ -10,6 +10,7 @@ import { getModulePageBySlug } from '../common/getModulePageBySlug';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { TabStyleModuleBar } from './TabStyleModuleBar';
 import { useEffect } from 'react';
+import { PopupPage } from '../PopupStyleModule/PopupPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,19 +43,25 @@ export const TabStyleModule = observer((
   const [selected, setSelected] = useState(0);
   const appStore = useAppStore();
   const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
+  const [popupSlug, setPopupSlug] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<any>();
 
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
-        //setPageSlug(action.page?.pageSlug);
-        //setPageParams(action.page)
+        setPopupSlug(action.page?.pageSlug);
+        setPageParams(action.page)
         return;        
       case GO_BACK_ACTION:
-        //setPageSlug(module.entryPage?.slug);
+        setPopupSlug(undefined);
         return;
     }
   }
+  const popupPage = getModulePageBySlug(module, popupSlug);
+  const handleClose = ()=>{
+    setPopupSlug(undefined);
+  }
+
   const page = getModulePageBySlug(module, pageSlug);
 
   const indexPages = module?.pages?.filter(page=>page.inTabIndex) || []
@@ -98,7 +105,13 @@ export const TabStyleModule = observer((
         <Page 
           page={page}
           onPageAction = {hanlePageAction}
+        />
+        <PopupPage 
+          page = {popupPage}
+          isDrawerStyle = {module.isDrawerStyle} 
+          onPageAction = {hanlePageAction}
           pageParams = {pageParams}
+          onClose={handleClose}
         />
       </Container>
     </div>
