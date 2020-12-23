@@ -83,7 +83,7 @@ export default[
     id:4,
     slug:TAB_STYLE_MODULE,
     moduleType:TAB_STYLE_MODULE,
-    name:'选项卡式',
+    name:'文章管理',
     entryPageId:41,
     pages:[
       {
