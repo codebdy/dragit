@@ -8,7 +8,6 @@ import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_M
 import { JumpStyleModule } from "./JumpStyleModule";
 import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
-import { DrawerStyleModule } from "./DrawerStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 
@@ -37,6 +36,7 @@ const QUERY_MODULE = gql`
         slug
         name
         maxWidth
+        width
         schema
         auths
       }
@@ -75,7 +75,7 @@ export const Workspace = observer(()=>{
           }
           {
             module?.moduleType === DRAWER_STYLE_MODULE &&
-            <DrawerStyleModule module={module} />
+            <PopupStyleModule module={module} drawerStyle />
           }
           {
             module?.moduleType === TAB_STYLE_MODULE &&

@@ -1,10 +1,8 @@
 import React from 'react';
 import {makeStyles, Theme, createStyles, Drawer, IconButton, Typography, Divider, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
 import Scrollbar from 'AdminBoard/common/Scrollbar';
-import classNames from 'classnames';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { Close } from '@material-ui/icons';
-import intl from "react-intl-universal";
 import useShadows from 'utils/useShadows';
 import { useThemeSettings } from 'store/helpers/useAppStore';
 
@@ -18,12 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight:'-1px',
     },
 
-    openStatus:{
-      width:'400px',
-    },
-    closeStatus:{
-      width:'0',
-    },
     title: {
       margin: 0,
       padding: theme.spacing(2),
@@ -40,13 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ThemeSettings(
+export default function PageDrawer(
   props:{
+    title?:string,
     open:boolean,
-    onClose:()=>void
+    onClose:()=>void,
+    children:any,
+    width?:number,
   }
 ){
-  const {open, onClose} = props;
+  const {title, open, onClose, width = 430, children} = props;
   const classes = useStyles();
   const themeSettings = useThemeSettings();
   
@@ -65,16 +60,14 @@ export default function ThemeSettings(
   return (
     <ThemeProvider theme={theme}>
       <Drawer
-        variant = "permanent"
+        variant = 'temporary'
         anchor="right" 
-        open={true}
+        open={open}
         elevation = {12}
-        classes = {{
-          paper: classNames(classes.root, open ? classes.openStatus : classes.closeStatus)
-        }}
+        onClose = {onClose}
       >
         <MuiDialogTitle disableTypography className = {classes.title}>
-          <Typography variant="h6">{intl.get('theme-settings')}</Typography>
+          <Typography variant="h6">{title}</Typography>
           {onClose ? (
             <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
               <Close />
@@ -82,8 +75,10 @@ export default function ThemeSettings(
           ) : null}
         </MuiDialogTitle>
         <Divider />
-        <Scrollbar className={classes.content}>
-          dddd
+        <Scrollbar className={classes.content} >
+          <div style={{width:width + 'px', display:'flex', flexFlow:"column", flex:1}}>
+            {children}            
+          </div>
         </Scrollbar>
       </Drawer>
     </ThemeProvider>

@@ -36,6 +36,7 @@ export const schema = `
     name:String 
     "'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
     maxWidth:String
+    width:Int
     schema:JSON
     auths:[String]  
   }

@@ -7,6 +7,7 @@ import { useAppStore } from 'store/helpers/useAppStore';
 import { getModulePageBySlug } from './common/getModulePageBySlug';
 import { Page } from './common/Page';
 import PageDialog from './common/PageDialog';
+import PageDrawer from './common/PageDrawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,9 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 export const PopupStyleModule = observer((
-  props:ModuleProps
+  props:ModuleProps&{
+    drawerStyle?:boolean,
+  }
 )=>{
-  const {module} = props;
+  const {module, drawerStyle} = props;
   const classes = useStyles();
   const appStore = useAppStore();
   const [pageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
@@ -53,7 +56,7 @@ export const PopupStyleModule = observer((
         //pageParams = {pageParams}
       />
       {
-        popupSlug&&
+        popupSlug && !drawerStyle &&
         <PageDialog
           maxWidth = {popupPage?.maxWidth}
           open={!!popupSlug}
@@ -65,7 +68,21 @@ export const PopupStyleModule = observer((
             onPageAction = {hanlePageAction}
             //pageParams = {pageParams}
           />
-        </PageDialog>        
+        </PageDialog>      
+      }{
+        drawerStyle&&
+        <PageDrawer
+          title = {popupPage?.name}
+          onClose = {handleClose}
+          open={!!popupSlug}
+          width = {popupPage?.width}
+        >
+          <Page 
+            page={popupPage}
+            onPageAction = {hanlePageAction}
+            //pageParams = {pageParams}
+          />
+        </PageDrawer>
       }
     </Container>
   )

@@ -42,6 +42,7 @@ interface ScrollbarProps{
   children?: any,
   permanent?:boolean,
   onScroll?: (scrollRef: React.RefObject<HTMLDivElement>)=>void,
+  style?:any,
 }
 export default function Scrollbar(props:ScrollbarProps = {}) {
   const {
@@ -50,7 +51,8 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
     permanent = false,
     className,
     children,
-    onScroll = (scrollRef:React.RefObject<HTMLDivElement>)=>{}
+    onScroll = (scrollRef:React.RefObject<HTMLDivElement>)=>{},
+    style
   } = props
   const classes = useStyles();
 
@@ -78,6 +80,8 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
         e.preventDefault();
         onScroll(ref);
       }}
+
+      {...style}
     >
       <div
         className={

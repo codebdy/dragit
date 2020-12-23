@@ -2,8 +2,6 @@ import article from "mock/views/article";
 import articleAttributeEdit from "mock/views/articleAttributeEdit";
 import articleAttributes from "mock/views/articleAttributes";
 import articles from "mock/views/articles";
-import articleTagEdit from "mock/views/articleTagEdit";
-import articleTags from "mock/views/articleTags";
 import user from "mock/views/user";
 import users from "mock/views/users";
 import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
@@ -58,23 +56,26 @@ export default[
     ],
   },
   {
-    id:3,
+    id:13,
     slug:DRAWER_STYLE_MODULE,
     moduleType:DRAWER_STYLE_MODULE,
     name:'右侧滑出式',
-    entryPageId:31,
+    entryPageId:131,
     pages:[
       {
-        id:31,
-        name:'标签列表',
-        slug:'article-tag-list',
-        schema: articleTags,
+        id:131,
+        name:'管理员列表',
+        slug:'urser-list',
+        maxWidth:'lg',
+        schema: users,
       },
       {
-        id:32,
-        name:'标签编辑',
-        slug:'article-tag-edit',
-        schema: articleTagEdit,
+        id:132,
+        name:'管理员编辑',
+        maxWidth:'md',
+        width:450,
+        slug:'edit-user',
+        schema: user,
       },
     ],
   },
