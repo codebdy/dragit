@@ -41,7 +41,7 @@ export const JumpStyleModule = observer((
   const page = getModulePageBySlug(module, pageSlug);
 
   return (
-    <Container className={classes.root} maxWidth = {page?.maxWidth ==='false' ? false : page?.maxWidth}>
+    <Container className={classes.root} maxWidth = {page?.max_width ==='false' ? false : page?.max_width}>
       <Page 
         page={page}
         onPageAction = {hanlePageAction}

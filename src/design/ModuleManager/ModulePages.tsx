@@ -57,7 +57,7 @@ export default function ModulePages(props:{module:IModule}){
       ...API_UPDATE_MODULE_INDEX_PAGE,
       params:{
         moduleId:module.id,
-        entryPageId: indexed ? pageId : -1,
+        entry_page_id: indexed ? pageId : -1,
       }
     })  
   }
@@ -85,7 +85,7 @@ export default function ModulePages(props:{module:IModule}){
             pages = {module.pages || []} 
             onChangePage = {handleChangePage}
             onRemovePage = {handleRemove}
-            entryPageId = {module.entryPageId || -1}
+            entry_page_id = {module.entry_page_id || -1}
             onAddPage = {handleAddPage}
             onChangeIndexPage = {handelChangeIndexPage}
             onDesign = {handelDesign}

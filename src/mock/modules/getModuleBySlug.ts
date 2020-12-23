@@ -9,7 +9,7 @@ export function getModuleBySlug(slug?:string) {
       if (module.slug === slug) {
         for(var j = 0; j < module.pages.length; j++){
           let page =  module.pages[j];
-          if(page.id === module.entryPageId){
+          if(page.id === module.entry_page_id){
             module.entryPage = page;
           }
         }

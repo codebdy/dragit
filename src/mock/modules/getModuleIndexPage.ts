@@ -9,7 +9,7 @@ export function getModuleIndexPage(moduleSlug:string) {
         let pages = module.pages;
         if (pages) {
           for (var j = 0; j < pages.length; j++) {
-            if (pages[j].id === module.entryPageId) {
+            if (pages[j].id === module.entry_page_id) {
               return JSON.parse(JSON.stringify(pages[j]));
             }
           }

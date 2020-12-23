@@ -9,6 +9,7 @@ import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
 import { getModulePageBySlug } from '../common/getModulePageBySlug';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { TabStyleModuleBar } from './TabStyleModuleBar';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,9 +43,7 @@ export const TabStyleModule = observer((
   const appStore = useAppStore();
   const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
   const [pageParams, setPageParams] = useState<any>();
-  const handleSelectChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setSelected(newValue);
-  };
+
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
@@ -58,6 +57,23 @@ export const TabStyleModule = observer((
   }
   const page = getModulePageBySlug(module, pageSlug);
 
+  const indexPages = module?.pages?.filter(page=>page.inTabIndex) || []
+  useEffect(()=>{
+    if(!indexPages){
+      return;
+    }
+    for(var i = 0; i < indexPages?.length; i++){
+      if(indexPages[i].id === module.entryPage?.id){
+        setSelected(i);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  const handleSelectChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setSelected(newValue);
+    setPageSlug(indexPages[newValue].slug);
+  };
   return (
     <div className={classes.root}>
       <TabStyleModuleBar>
@@ -68,10 +84,13 @@ export const TabStyleModule = observer((
             indicatorColor = "primary"
             className = {classes.tabs}
           >
-            <Tab className={classes.tab} label={<Typography variant="subtitle1">文章列表</Typography>} />
-            <Tab className={classes.tab} label={<Typography variant="subtitle1">草稿箱</Typography>} />
-            <Tab className={classes.tab} label={<Typography variant="subtitle1">分类</Typography>} />
-            <Tab className={classes.tab} label={<Typography variant="subtitle1">标签</Typography>} />
+            {
+              indexPages?.map(page=>{
+                return (
+                  <Tab key={page.id} className={classes.tab} label={<Typography variant="subtitle1">{page.name}</Typography>} />
+                )
+              })
+            }
           </Tabs>
       </TabStyleModuleBar>
       <LeftDrawerWidthPlaceholder />

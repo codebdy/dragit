@@ -35,7 +35,8 @@ export const schema = `
     slug:String!
     name:String 
     "'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
-    maxWidth:String
+    max_width:String
+    in_tab_index:Boolean
     width:Int
     schema:JSON
     auths:[String]  
@@ -45,7 +46,8 @@ export const schema = `
     id: ID!
     slug: String
     name: String
-    moduleType: String
+    module_type: String
+    is_drawer_style: Boolean
     pages: [Page]
     entryPage: Page
   }  

@@ -1,31 +1,32 @@
 import article from "mock/views/article";
-import articleAttributeEdit from "mock/views/articleAttributeEdit";
 import articleAttributes from "mock/views/articleAttributes";
+import articleChannel from "mock/views/articleChannel";
 import articles from "mock/views/articles";
+import articleTags from "mock/views/articleTags";
 import user from "mock/views/user";
 import users from "mock/views/users";
-import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
+import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 
 export default[
   {
     id:101,
     name:'页面跳转式',
     slug:JUMP_STYLE_MODULE,
-    moduleType:JUMP_STYLE_MODULE,
-    entryPageId:1011,
+    module_type:JUMP_STYLE_MODULE,
+    entry_page_id:1011,
     pages:[
       {
         id:1011,
         name:'文章列表',
         slug:'articles',
-        maxWidth:'false',
+        max_width:'false',
         schema: articles,
       },
       {
         id:1012,
         name:'文章编辑',
         slug:'article',
-        maxWidth:'false',
+        max_width:'false',
         schema: article,
       },
     ],
@@ -35,21 +36,21 @@ export default[
   {
     id:11,
     slug:POPUP_STYLE_MODULE,
-    moduleType:POPUP_STYLE_MODULE,
+    module_type:POPUP_STYLE_MODULE,
     name:'管理员',
-    entryPageId:111,
+    entry_page_id:111,
     pages:[
       {
         id:111,
         name:'管理员列表',
         slug:'urser-list',
-        maxWidth:'lg',
+        max_width:'lg',
         schema: users,
       },
       {
         id:112,
         name:'管理员编辑',
-        maxWidth:'md',
+        max_width:'md',
         slug:'edit-user',
         schema: user,
       },
@@ -57,22 +58,23 @@ export default[
   },
   {
     id:13,
-    slug:DRAWER_STYLE_MODULE,
-    moduleType:DRAWER_STYLE_MODULE,
+    slug:POPUP_STYLE_MODULE + 2,
+    module_type:POPUP_STYLE_MODULE,
+    is_drawer_style: true,
     name:'右侧滑出式',
-    entryPageId:131,
+    entry_page_id:131,
     pages:[
       {
         id:131,
         name:'管理员列表',
         slug:'urser-list',
-        maxWidth:'lg',
+        max_width:'lg',
         schema: users,
       },
       {
         id:132,
         name:'管理员编辑',
-        maxWidth:'md',
+        max_width:'md',
         width:450,
         slug:'edit-user',
         schema: user,
@@ -80,24 +82,49 @@ export default[
     ],
   },
   {
-    id:4,
+    id:14,
     slug:TAB_STYLE_MODULE,
-    moduleType:TAB_STYLE_MODULE,
+    module_type:TAB_STYLE_MODULE,
     name:'文章管理',
-    entryPageId:41,
+    entry_page_id:141,
     pages:[
       {
-        id:41,
+        id:141,
         name:'文章列表',
-        slug:'article-attribute-list',
+        in_tab_index:true,
+        slug:'article-list-2',
         schema: articles,
       },
       {
-        id:42,
-        name:'文章编辑',
-        slug:'article-attribute-edit',
-        schema: article,
+        id:142,
+        name:'草稿箱',
+        in_tab_index:true,
+        slug:'article-drafts',
+        schema: articles,
       },
+      {
+        id:143,
+        name:'频道',
+        in_tab_index:true,
+        slug:'article-channel-2',
+        schema: articleChannel,
+      },
+
+      {
+        id:144,
+        name:'标签',
+        in_tab_index:true,
+        slug:'article-tag-list',
+        schema: articleTags,
+      },
+      {
+        id:145,
+        name:'附加属性',
+        in_tab_index:true,
+        slug:'article-attribute-list',
+        schema: articleAttributes,
+      },
+
     ],
   },
 

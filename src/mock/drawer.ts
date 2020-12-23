@@ -1,4 +1,5 @@
 import { AUTH_DASHBOARD, AUTH_MEDIAS } from "APIs/authSlugs";
+import { POPUP_STYLE_MODULE } from "utils/consts";
 
 export default [{
         //type:subheader, item, group
@@ -45,7 +46,7 @@ export default [{
                 title: '右侧滑出式',
                 type: 'item',
                 icon: 'mdi-circle-small',
-                moduleSlug: 'drawer-style-module',
+                moduleSlug: POPUP_STYLE_MODULE + 2,
             },
             {
                 title: '选项卡式',

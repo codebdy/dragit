@@ -6,8 +6,9 @@ export interface IModule {
   slug: string;
   name: string;
   moduleType: string;
+  isDrawerStyle?:boolean;
   pages?: IPage[];
   entryPage?: IPage;
   auths?: IAuth[];
-  entryPageId?:number; //以后要删除该字段
+  entry_page_id?:number; //以后要删除该字段
 }

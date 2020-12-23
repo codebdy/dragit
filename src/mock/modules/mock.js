@@ -153,9 +153,9 @@ export default function mockModules(){
   
   Mock.mock(RegExp('/api/update-index-page-of-module?.*'),'post', (request)=>{
     let id = getQueryVariable('moduleId', request.url);
-    let entryPageId = getQueryVariable('entryPageId', request.url);
+    let entry_page_id = getQueryVariable('entry_page_id', request.url);
     let module =getModuleById(id);
-    module.entryPageId = parseInt(entryPageId);
+    module.entry_page_id = parseInt(entry_page_id);
     return JSON.parse(JSON.stringify(module));
   })
   

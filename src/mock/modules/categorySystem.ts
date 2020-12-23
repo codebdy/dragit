@@ -9,7 +9,7 @@ export default[
     id:21,
     slug:'dashboard',
     name:'系统',
-    entryPageId:211,
+    entry_page_id:211,
     pages:[
       {
         id:211,
@@ -45,7 +45,7 @@ export default[
     id:15,
     name:'媒体管理',
     slug:'medias',
-    entryPageId:151,
+    entry_page_id:151,
     pages:[
       {
         id:151,
@@ -63,7 +63,7 @@ export default[
     id:9,
     slug:'notification',
     name:'通知',
-    entryPageId:91,
+    entry_page_id:91,
     pages:[
       {
         id:91,

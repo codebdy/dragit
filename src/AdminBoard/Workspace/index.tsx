@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { useAppStore } from "store/helpers/useAppStore";
 import { useQuery } from "@apollo/react-hooks";
 import PageSkeleton from "AdminBoard/Workspace/common/ModuleSkeleton";
-import { DRAWER_STYLE_MODULE, JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
+import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 import { JumpStyleModule } from "./JumpStyleModule";
 import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
@@ -30,12 +30,14 @@ const QUERY_MODULE = gql`
       id
       slug
       name
-      moduleType
+      moduleType:module_type
+      isDrawerStyle:is_drawer_style
       pages{
         id
         slug
         name
-        maxWidth
+        maxWidth:max_width
+        inTabIndex:in_tab_index
         width
         schema
         auths
@@ -72,10 +74,6 @@ export const Workspace = observer(()=>{
           {
             module?.moduleType === POPUP_STYLE_MODULE &&
             <PopupStyleModule module={module} />
-          }
-          {
-            module?.moduleType === DRAWER_STYLE_MODULE &&
-            <PopupStyleModule module={module} drawerStyle />
           }
           {
             module?.moduleType === TAB_STYLE_MODULE &&

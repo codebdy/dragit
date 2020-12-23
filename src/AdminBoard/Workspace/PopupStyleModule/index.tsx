@@ -20,11 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 export const PopupStyleModule = observer((
-  props:ModuleProps&{
-    drawerStyle?:boolean,
-  }
+  props:ModuleProps
 )=>{
-  const {module, drawerStyle} = props;
+  const {module} = props;
   const classes = useStyles();
   const appStore = useAppStore();
   const [pageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
@@ -49,16 +47,16 @@ export const PopupStyleModule = observer((
   }
 
   return (
-    <Container className={classes.root} maxWidth = {page?.maxWidth ==='false' ? false : page?.maxWidth}>
+    <Container className={classes.root} maxWidth = {page?.max_width ==='false' ? false : page?.max_width}>
       <Page 
         page={page}
         onPageAction = {hanlePageAction}
         pageParams = {pageParams}
       />
       {
-        popupSlug && !drawerStyle &&
+        popupSlug && !module.isDrawerStyle &&
         <PageDialog
-          maxWidth = {popupPage?.maxWidth}
+          maxWidth = {popupPage?.max_width}
           open={!!popupSlug}
           onClose={handleClose}
           title = {popupPage?.name}
@@ -70,7 +68,7 @@ export const PopupStyleModule = observer((
           />
         </PageDialog>      
       }{
-        drawerStyle&&
+        module.isDrawerStyle&&
         <PageDrawer
           title = {popupPage?.name}
           onClose = {handleClose}
