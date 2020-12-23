@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import {observer} from "mobx-react-lite";
-import { ModuleProps } from './common/ModuleProps';
+import { ModuleProps } from '../common/ModuleProps';
 import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
 import { useAppStore } from 'store/helpers/useAppStore';
-import { getModulePageBySlug } from './common/getModulePageBySlug';
-import { Page } from './common/Page';
-import PageDialog from './common/PageDialog';
-import PageDrawer from './common/PageDrawer';
+import { getModulePageBySlug } from '../common/getModulePageBySlug';
+import { Page } from '../common/Page';
+import PageDialog from './PageDialog';
+import PageDrawer from './PageDrawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
