@@ -58,7 +58,7 @@ export default {
               },
               props:{
                 withActions:true,
-                elevation:6,
+                //elevation:6,
                 columns:[
                   {
                     field:'login_name',

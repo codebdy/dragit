@@ -7,6 +7,7 @@ import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidth
 import { AreaSelect } from 'design/AreaSelect';
 import { useLeftDrawer } from 'store/helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
+import { ThemeSettings } from './ThemeSettings';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -45,6 +46,7 @@ export const AdminBoard = observer(()=>{
         <Workspace />
       </div>
       <AreaSelect></AreaSelect>
+      <ThemeSettings />
     </div>
   )
 })

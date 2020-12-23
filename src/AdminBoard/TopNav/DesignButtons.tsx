@@ -1,12 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
-import ThemeSettings from "../ThemeSettings";
 import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_THEME_SETTINGS } from "APIs/authSlugs";
-import { useDesigner, useLeftDrawer } from "store/helpers/useAppStore";
+import { useAppStore, useDesigner, useLeftDrawer } from "store/helpers/useAppStore";
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { observer } from "mobx-react-lite";
 
@@ -36,12 +35,11 @@ export const DesignButtons = observer((
 )=>{
   const {color} = props;
   //const classes = useStyles();
-  const [showSettings, setShowSettings] = useState(false);
   const loggedUser = useLoggedUser();
 
-  const design = useDesigner();
-  
+  const design = useDesigner();  
   const lefDrawer = useLeftDrawer();
+  const appStore = useAppStore();
 
   const handleOpen = () => {
     design.setAreaSelect(true);
@@ -73,7 +71,7 @@ export const DesignButtons = observer((
         {
           loggedUser.authCheck(AUTH_THEME_SETTINGS)&&
           <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"
-            onClick = {()=>setShowSettings(!showSettings)}
+            onClick = {()=>appStore.openShowThemeSettings()}
           >
             <IconButton aria-label={intl.get('theme-settings')} >
               <MdiIcon iconClass="mdi-image-filter-black-white" color={color} />
@@ -91,11 +89,6 @@ export const DesignButtons = observer((
 
       </Fragment >
     }
-
-    <ThemeSettings
-      open = {showSettings}
-      onClose = {()=>setShowSettings(false)}
-    />
     </Hidden>
   )
 })

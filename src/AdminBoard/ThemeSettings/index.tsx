@@ -1,25 +1,22 @@
 import React from 'react';
-import {Divider, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
+import {Divider, createMuiTheme, ThemeProvider} from '@material-ui/core';
 import intl from "react-intl-universal";
 import useShadows from 'utils/useShadows';
-import { useThemeSettings } from 'store/helpers/useAppStore';
+import { useAppStore, useThemeSettings } from 'store/helpers/useAppStore';
 import { ThemeMode } from './ThemeMode';
 import { ThemeColor } from './ThemeColor';
 import { ToolbarSettings } from './ToolbarSettings';
 import { ElevationStrength } from './ElevationStrength';
 import { SidebarSettings } from './SidebarSettings';
 import RightDrawer from 'AdminBoard/ThemeSettings/RightDrawer';
+import {observer} from 'mobx-react-lite';
 
-export default function ThemeSettings(
-  props:{
-    open:boolean,
-    onClose:()=>void
-  }
-){
-  const {open, onClose} = props;
+export const ThemeSettings = observer(()=>{
+
   const themeSettings = useThemeSettings();
+  const appStore = useAppStore();
   
-  const theme = responsiveFontSizes(createMuiTheme({
+  const theme = createMuiTheme({
     palette: {
       type: themeSettings.themeMode as any,
       primary:{
@@ -29,14 +26,14 @@ export default function ThemeSettings(
     },
 
     shadows:[...useShadows()] as any
-  }));
+  });
 
   return (
     <ThemeProvider theme={theme}>
       <RightDrawer
         title = {intl.get('theme-settings')}
-        onClose = {onClose}
-        open={open}
+        onClose = {()=>appStore.closeShowThemeSettings()}
+        open={appStore.showThemeSettings}
       >
         <ThemeMode />
         <Divider />
@@ -50,4 +47,4 @@ export default function ThemeSettings(
       </RightDrawer>
     </ThemeProvider>
   )
-}
+})

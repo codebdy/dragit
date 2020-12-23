@@ -53,7 +53,7 @@ export const PopupStyleModule = observer((
       <Page 
         page={page}
         onPageAction = {hanlePageAction}
-        //pageParams = {pageParams}
+        pageParams = {pageParams}
       />
       {
         popupSlug && !drawerStyle &&
@@ -66,7 +66,7 @@ export const PopupStyleModule = observer((
           <Page 
             page={popupPage}
             onPageAction = {hanlePageAction}
-            //pageParams = {pageParams}
+            pageParams = {pageParams}
           />
         </PageDialog>      
       }{
@@ -80,7 +80,7 @@ export const PopupStyleModule = observer((
           <Page 
             page={popupPage}
             onPageAction = {hanlePageAction}
-            //pageParams = {pageParams}
+            pageParams = {pageParams}
           />
         </PageDrawer>
       }

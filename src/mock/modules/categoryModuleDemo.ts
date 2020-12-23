@@ -88,15 +88,15 @@ export default[
     pages:[
       {
         id:41,
-        name:'属性列表',
+        name:'文章列表',
         slug:'article-attribute-list',
-        schema: articleAttributes,
+        schema: articles,
       },
       {
         id:42,
-        name:'属性编辑',
+        name:'文章编辑',
         slug:'article-attribute-edit',
-        schema: articleAttributeEdit,
+        schema: article,
       },
     ],
   },

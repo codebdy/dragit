@@ -8,7 +8,7 @@ import { DesignButtons } from 'AdminBoard/TopNav/DesignButtons';
 import NavButtons from './NavButtons';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { DARK } from 'store/ThemeSettings';
-import { useThemeSettings } from 'store/helpers/useAppStore';
+import { useAppStore, useThemeSettings } from 'store/helpers/useAppStore';
 import {observer} from "mobx-react-lite";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,6 +23,7 @@ export const TopNav = observer((props:{onSidebarToggle: any}) => {
   const classes = useStyles();
   const [sticky, setSticky] = React.useState(false);
   const toolbarSkin = useThemeSettings().toolbarSkin;
+  const appStore = useAppStore();  
   
   const handleScroll = function(event:any){
     let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0
@@ -36,25 +37,25 @@ export const TopNav = observer((props:{onSidebarToggle: any}) => {
       // 清除
       window.removeEventListener('scroll', handleScroll);
     };
-  });
+  },[]);
 
  
   const backgroundColor = toolbarSkin.colored ? 'primary' :'inherit';
 
   let color:string|undefined = toolbarSkin.mode === DARK ? "#FFF" :"#051a0e";
   color = toolbarSkin.colored ? color : undefined;
-
+  //console.log(appStore.toolbarElevate)
   return (
     <Fragment>
       <TopNavHeightPlaceholder />
       <AppBar position="fixed" 
         className={classNames(classes.root)} 
-        variant ={toolbarSkin.floatStyle || sticky ? "elevation" :"outlined"}
-        elevation = {10}
+        variant ={toolbarSkin.floatStyle || (sticky&&appStore.toolbarElevate) ? "elevation" :"outlined"}
+        elevation = {8}
         color = { backgroundColor}
         style = {{
           transition:'box-shadow 0.3s',
-          border:(toolbarSkin.floatStyle || sticky ? 'transparent solid 1px':undefined)
+          border:(toolbarSkin.floatStyle || (sticky&&appStore.toolbarElevate) ? 'transparent solid 1px':undefined)
         }}
         //style={{borderColor: (toolbarSkin.outlined ? '': 'transparent') }}
         //style={{ border:(toolbarSkin.floatStyle || sticky ? 'transparent solid 1px':undefined)}}

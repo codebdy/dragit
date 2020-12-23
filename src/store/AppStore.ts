@@ -5,6 +5,8 @@ import { Designer } from "./Designer";
 import { IUser } from "base/Model/IUser";
 
 export class AppStore{
+  showThemeSettings = false;
+  toolbarElevate = true;
   token:string = "";
   loggedUser: IUser|undefined = undefined;
   leftDrawer: LeftDrawer = new LeftDrawer();
@@ -18,6 +20,18 @@ export class AppStore{
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setToolbarElevate(show:boolean){
+    this.toolbarElevate = show;
+  }
+
+  openShowThemeSettings(){
+    this.showThemeSettings = true
+  }
+
+  closeShowThemeSettings(){
+    this.showThemeSettings = false
   }
 
   setSuccessAlert(alert:boolean|string){
