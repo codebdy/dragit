@@ -112,6 +112,7 @@ export const SidebarSettings = observer(()=>{
         <Slider
           value={sidebarSkin.maskOpacity}
           max = {1}
+          min = {0.5}
           step={0.01}
           valueLabelDisplay="on"
           onChange = {(e,value)=>{sidebarSkin.setMaskOpacity(value as any)}}
