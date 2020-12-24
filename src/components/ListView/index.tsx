@@ -74,12 +74,17 @@ function creatEmpertyRows(length:number){
   return rows;
 }
 
-const queryName = 'xxx';
+const query = 'posts';
+const fields = `
+title
+name
+`
 
 const QUERY_LIST = gql`
-  query ($kewords: String, $filters: [String], $sorts:[String], $searchAbleFields:[String]){
-    ${queryName}(kewords:$kewords, filters:$filters, sorts:$sorts, searchAbleFields:$searchAbleFields){
+  mutation ($where: JSON, $orderBy: JSON){
+    ${query}(where:$where, orderBy:$orderBy){
       id
+      ${fields}
     }
   }
 `;

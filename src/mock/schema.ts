@@ -50,7 +50,23 @@ export const schema = `
     is_drawer_style: Boolean
     pages: [Page]
     entryPage: Page
-  }  
+  }
+
+  enum PostStatus {
+    PUBLISHED
+    DRAFT 
+  }
+
+  type Post{
+    id: ID!
+    slug: String
+    title: String
+    shortTitle: String
+    content: String
+    status: PostStatus
+    created_at: String!
+    updated_at: String 
+  }
 
   type Query {
     "登录"
@@ -60,6 +76,11 @@ export const schema = `
     modulePage(moduleSlug:String!, pageSlug:String):Page
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
+  }
+
+  type Mutation{
+    "Query and Operation"
+    posts(ids:[ID], commands:[String], where:JSON, orderBy:JSON):[Post]
   }
 `;
 
@@ -109,4 +130,13 @@ export const resolvers = {
     },
 
   },
+
+  Mutation:{
+    posts:async (parent:any, args:any, context:any, info:any)=>{
+      await sleep(1000);
+      //const module = getModuleBySlug(args.slug);
+      return module
+    },
+    
+  }
 };

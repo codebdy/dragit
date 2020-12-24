@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme,  DrawerProps, Drawer, useTheme } from '@material-ui/core';
+import {observer} from 'mobx-react-lite';
+import { useThemeSettings } from 'store/helpers/useAppStore';
 
 const useStyles = (
   theme:Theme, 
@@ -8,6 +10,7 @@ const useStyles = (
   showBorder:boolean|undefined,
   backgroundImage:string|undefined,
   backgroundMask:string|undefined,
+  maskOpacity?:number,
 )=> {
   //const sidebarSkin = useSidebarSkin()
   const useStyles = makeStyles({
@@ -46,7 +49,7 @@ const useStyles = (
         //  maskLinearGradient: "-webkit-" + sidebarSkin.maskLinearGradient,
         //},
         //background: sidebarSkin.maskLinearGradient,
-        opacity: ".9"
+        opacity: maskOpacity
       }
     },
   })
@@ -55,17 +58,16 @@ const useStyles = (
 }
 
 
-export default function StyledDrawer(props:DrawerProps&{
+export const StyledDrawer=observer((props:DrawerProps&{
   children:any,
   width:number,
   elevation?:number,
   showBorder?:boolean,
-  backgroundImage?:string,
-  backgroundMask?:string,
-}){
-  const {children, width, elevation, showBorder, backgroundImage, backgroundMask, ...rest} = props;
+})=>{
+  const {children, width, elevation, showBorder,...rest} = props;
   const theme = useTheme();
-  const classes = useStyles(theme, width, elevation||0, showBorder, backgroundImage, backgroundMask);
+  const leftDrawerSkin = useThemeSettings().leftDrawerSkin;
+  const classes = useStyles(theme, width, elevation||0, showBorder, leftDrawerSkin.image, leftDrawerSkin.mask, leftDrawerSkin.maskOpacity);
   return (
     <Drawer
     classes={{
@@ -79,4 +81,4 @@ export default function StyledDrawer(props:DrawerProps&{
     {children}
   </Drawer>
   )
-}
+})

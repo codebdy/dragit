@@ -277,5 +277,6 @@
     "antv-chart":"AntV Chart",
     "chart-type":"Chart",
     "json-props":"JSON",
-    "edit-json":"Edit JSON"
+    "edit-json":"Edit JSON",
+    "opacity":"Opacity"
 }

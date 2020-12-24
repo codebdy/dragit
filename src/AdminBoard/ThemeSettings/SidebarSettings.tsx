@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { createStyles, Divider, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, Divider, makeStyles, Slider, Theme, Typography } from '@material-ui/core';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
@@ -104,6 +104,18 @@ export const SidebarSettings = observer(()=>{
         <MaskBlock selectedLinerGradient= {sidebarSkin.mask} mask = {linearGradient3}/>
         <MaskBlock selectedLinerGradient= {sidebarSkin.mask} mask = {linearGradient4}/>
         <MaskBlock selectedLinerGradient= {sidebarSkin.mask} mask = {linearGradient5} borderColor="#fff"/>
+      </div>
+      <div className = {classes.content}>
+        <Typography gutterBottom>
+          {intl.get("opacity")}
+        </Typography>
+        <Slider
+          value={sidebarSkin.maskOpacity}
+          max = {1}
+          step={0.01}
+          valueLabelDisplay="on"
+          onChange = {(e,value)=>{sidebarSkin.setMaskOpacity(value as any)}}
+        />
       </div>
       <Divider />
       <Typography 

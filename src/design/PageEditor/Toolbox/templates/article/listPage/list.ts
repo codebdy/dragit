@@ -1,5 +1,3 @@
-import { API_QUERY_AND_OPERATE_MODELS } from "APIs/model";
-
 export default {
   name:'ListView',
   designProps:{
@@ -115,11 +113,10 @@ export default {
         confirmMessage:"删除后将不可恢复，您确定要删除吗？",
       },
     ],
-    dataApi:{
-      ...API_QUERY_AND_OPERATE_MODELS,
-      params:{
-        modelName:'/Model/Article',
-      },      
+    mutation:{
+      name:'posts',
+      where:{},
+      orderBy:[],   
     },
   }
 }

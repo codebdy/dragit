@@ -14,7 +14,6 @@ export default function LeftDrawer(
     <Fragment>
       <Hidden mdUp>
         <MobileDrawer >
-        
           {children}
         </MobileDrawer>
       </Hidden>

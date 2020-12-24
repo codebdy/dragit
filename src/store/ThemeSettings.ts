@@ -22,6 +22,8 @@ export class LeftDrawerSkin{
   image:string = sidebarImg5;
   mask:string = linearGradient2;
   mode: ThemeMode = DARK;
+  maskOpacity: number = 0.8;
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -34,6 +36,10 @@ export class LeftDrawerSkin{
   }
   setMode(mode:ThemeMode){
     this.mode = mode;
+  }
+
+  setMaskOpacity(maskOpacity:number){
+    this.maskOpacity = maskOpacity;
   }
 }
 
