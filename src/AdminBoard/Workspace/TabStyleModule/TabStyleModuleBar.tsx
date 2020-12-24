@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     toolbar:{
       alignItems:'flex-end',
+      transition:'all 0.3s',
     },
     sticky:{
       boxShadow:theme.shadows[8],
@@ -60,7 +61,7 @@ export const TabStyleModuleBar = (
         className = {classNames(classes.appbar, {[classes.sticky]:sticky})}
       >
         <Toolbar></Toolbar>
-        <Toolbar className = {classes.toolbar}>
+        <Toolbar className = {classes.toolbar} variant = {sticky ? 'dense' :'regular'}>
           <LeftDrawerWidthPlaceholder />
           {children}
         </Toolbar>

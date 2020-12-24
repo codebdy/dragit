@@ -106,7 +106,7 @@ export function ListViewHead(props: ListViewHeadProps) {
               <Skeleton animation="wave" height={50} width="50%" />
             </TableCell>
             :
-            <TableCell align="center" style={{width:(50 * rowCommandsCount)+"px"}}>{intl.get('operations')}</TableCell>
+            <TableCell align="center" style={{width:(50 * rowCommandsCount + 20)+"px"}}>{intl.get('operations')}</TableCell>
           )
         }
       </TableRow>
