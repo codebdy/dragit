@@ -4,6 +4,9 @@ import sidebarImg2 from 'assets/img/sidebar-2.jpg';
 import sidebarImg3 from 'assets/img/sidebar-3.jpg';
 import sidebarImg4 from 'assets/img/sidebar-4.jpg';
 import sidebarImg5 from 'assets/img/sidebar-5.jpg';
+import sidebarImg6 from 'assets/img/sidebar-6.jpg';
+import sidebarImg7 from 'assets/img/sidebar-7.jpg';
+import sidebarImg8 from 'assets/img/sidebar-8.jpg';
 
 export const LIGHT = "light";
 export const DARK = "dark";
@@ -79,4 +82,13 @@ export class ThemeSettings {
   }
 };
 
-export {sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5}
+export {
+  sidebarImg1, 
+  sidebarImg2,
+  sidebarImg3, 
+  sidebarImg4, 
+  sidebarImg5,
+  sidebarImg6,
+  sidebarImg7,
+  sidebarImg8,
+}

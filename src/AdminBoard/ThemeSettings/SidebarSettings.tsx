@@ -4,7 +4,7 @@ import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
 import { useThemeSettings } from 'store/helpers/useAppStore';
-import { DARK, LIGHT, linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5 } from 'store/ThemeSettings';
+import { DARK, LIGHT, linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5, sidebarImg6, sidebarImg7, sidebarImg8 } from 'store/ThemeSettings';
 import {observer} from "mobx-react-lite";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -117,6 +117,9 @@ export const SidebarSettings = observer(()=>{
         <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg3}/>
         <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg4}/>
         <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg5}/>
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg6}/>
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg7}/>
+        <ImageBlock selectImage = {sidebarSkin.image} image={sidebarImg8}/>
       </div>
     </Fragment>
   )
