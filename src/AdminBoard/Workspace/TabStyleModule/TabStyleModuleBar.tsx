@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     sticky:{
       boxShadow:theme.shadows[8],
+      //borderBottom:'0',
     }
   }),
 );

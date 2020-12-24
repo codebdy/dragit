@@ -319,7 +319,7 @@ const ListView = React.forwardRef((
                                           command.jumpToPage ? jumpToPage(command.jumpToPage as IPageJumper, row) : handleRowAction(command, row.id);
                                           e.stopPropagation();
                                         }}
-                                        size = "small"
+                                        size = "medium"
                                       >
                                         <MdiIcon iconClass = {command.icon} size="16" />
                                       </IconButton>
