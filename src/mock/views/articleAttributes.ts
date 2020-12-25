@@ -82,7 +82,7 @@ export default {
                   },
                 ],
                 rowsPerPageOptions:'10,25,50',
-                defalutRowsPerPage:'10',
+                defalutRowsPerPage:10,
                 batchCommands:[
                   {
                     slug:"delete",

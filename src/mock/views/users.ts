@@ -89,7 +89,7 @@ export default {
                   }
                 ],
                 rowsPerPageOptions:'10,25,50',
-                defalutRowsPerPage:'10',
+                defalutRowsPerPage:10,
                 filters:[
                   {
                     slug:'status',
