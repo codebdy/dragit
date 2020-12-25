@@ -9,6 +9,13 @@ export default {
     //elevation:6,
     columns:[
       {
+        field: 'feathureImage',
+        label: '图片',
+        render:{
+          name: 'Image',
+        }
+      },
+      {
         field:'title',
         label:'标题',
         sortable:true,

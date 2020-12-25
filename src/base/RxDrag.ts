@@ -37,12 +37,8 @@ function resolveComponent(meta:IMeta, withField = true):any{
   return component;
 }
 
-function resolveCellRender(name:string){
-  return  compoentsMap[name] && compoentsMap[name].component ? compoentsMap[name].component : name;
-}
-
 function resolveRule(name:string):IRule{
   return  compoentsMap[name] ? compoentsMap[name].rule : new Rule();
 }
 
-export {register, resolveComponent, resolveRule, registerHtmlTag, resolveCellRender}
+export {register, resolveComponent, resolveRule, registerHtmlTag}

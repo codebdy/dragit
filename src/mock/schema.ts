@@ -69,6 +69,7 @@ export const schema = `
 
   type Post{
     id: ID!
+    feathureImage: Media
     slug: String
     title: String
     shortTitle: String

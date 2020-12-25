@@ -53,7 +53,6 @@ import { CheckboxGroupRule } from 'components/CheckboxGroup/Rule';
 import RadioGroup from 'components/RadioGroup';
 import { RadioGroupRule } from 'components/RadioGroup/Rule';
 import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
-import { EnumChip } from 'components/EnumChip';
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -85,7 +84,7 @@ register('TreeSelect', TreeSelect, TreeSelectRule);
 register('MediaSelect', MediaSelect);
 register('Medias', Medias);
 register('AntDesignChart', AntDesignChart, AntDesignChartRule);
-register('EnumChip', EnumChip);
+
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);
 registerHtmlTag('h3', HeadRule);
