@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios"
-import { IOperateListParam } from "base/Model/IOperateListParam";
+import { IQueryParam } from "components/ListView/IQueryParam";
 
 //全部列出Model，常用于下拉选择等
 const API_LIST_MODEL : AxiosRequestConfig= {
@@ -23,7 +23,7 @@ const API_SUBMIT_MODEL : AxiosRequestConfig= {
   method:'post',
 }
 
-export function createListOperateRequest(config:AxiosRequestConfig, data:IOperateListParam){
+export function createListOperateRequest(config:AxiosRequestConfig, data:IQueryParam){
   return {...config, data:{...config.data, ...data}};
 }
 

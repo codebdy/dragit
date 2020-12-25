@@ -1,6 +1,6 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { FieldOrder } from "base/Model/IOperateListParam";
+import { FieldOrder } from "components/ListView/IQueryParam";
 import React from "react";
 import { ILabelItem } from "../../base/Model/ILabelItem";
 import intl from "react-intl-universal";

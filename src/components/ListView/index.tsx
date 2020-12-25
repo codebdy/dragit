@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,7 +6,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
-import classNames from 'classnames';
 import { ListViewHead } from './ListViewHead';
 import ListViewToolbar from './ListViewToolbar';
 import { ILabelItem } from '../../base/Model/ILabelItem';
@@ -17,7 +15,7 @@ import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton, Paper } from '@material-ui/core';
 import MdiIcon from '../common/MdiIcon';
 import { IPageJumper } from 'base/Model/IPageJumper';
-import { IOperateListParam } from 'base/Model/IOperateListParam';
+import { IQueryParam } from 'components/ListView/IQueryParam';
 import { IPaginate } from 'base/Model/IPaginate';
 import { ListViewCell } from './ListViewCell';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
@@ -30,15 +28,6 @@ import { resolveFieldGQL } from './CellRenders';
 
 export const COMMAND_QUERY = "query";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-
-    },
-
-  }),
-);
-
 export interface Row{
   id:any,
   [key:string]:any,
@@ -46,7 +35,7 @@ export interface Row{
 
 interface Command{
   command:ICommand,
-  rowId?:number,
+  ids:number[],
 }
 
 function creatEmpertyRows(length:number){
@@ -61,11 +50,15 @@ function creatEmpertyRows(length:number){
 
 //const MUTATION = gql`
 //`
-interface ListQuery{
+interface IListQuery{
   //Query Name
   name:string;
   where:any;
   orderBy:[any];
+}
+
+function transferQueryParams(params:IQueryParam):any{
+  return {first:params.first, page:params.page}
 }
 
 const ListView = React.forwardRef((
@@ -78,7 +71,7 @@ const ListView = React.forwardRef((
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
-      query?:ListQuery,
+      query?:IListQuery,
       mutation?:string,
       variant?:'elevation' | 'outlined',
       elevation:number,
@@ -103,8 +96,7 @@ const ListView = React.forwardRef((
     ...rest
   } = props
   
-  const classes = useStyles();
-  const [operateParam, setOperateParam] = useState<IOperateListParam>({
+  const [queryParam, setQueryParam] = useState<IQueryParam>({
     page : 0,
     first: defalutRowsPerPage,
   });
@@ -149,19 +141,28 @@ const ListView = React.forwardRef((
   }
 
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(createQueryGQL(), {
-    variables: { ...operateParam },
+    variables: { ...queryParam },
+    notifyOnNetworkStatusChange: true
   });
 
-  const [excuteMutation, { loading:mutationLoading, error:mutationsError }] = useMutation(createMutationGQL());
+  const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(createMutationGQL(),
+    {onCompleted:()=>{appStore.setSuccessAlert(true)}}
+  );
 
-  console.log(error, data)
   const loading = queryLoading || mutationLoading;
   useEffect(()=>{
-    if(query){
-      excuteQuery();
+    if(!query){
+      return;
     }
+    if(!called){
+      excuteQuery({variables:{...transferQueryParams(queryParam)}});
+    }
+    else{
+      refetch && refetch({...transferQueryParams(queryParam)});
+    }
+    setSelected([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[query])
+  },[queryParam, mutationResult])
 
   useEffect(()=>{
     let realError = error || mutationsError
@@ -175,16 +176,15 @@ const ListView = React.forwardRef((
   //const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [confirmCommand, setConfirmCommand] = useState<Command>();
 
-  const updateOperateParam = (field:string, value:any, showAlert = false)=>{
+  const updateQueryParam = (field:string, value:any, showAlert = false)=>{
     //setShowSuccessAlert(showAlert);
-    setOperateParam({...operateParam, [field]:value, selected:[...selected]});
-    setSelected([]);
+    setQueryParam({...queryParam, [field]:value});
   }
 
   const [selected, setSelected] = React.useState<number[]>([]);
-  const queryData = (data && query?.name) ? data[query?.name] : {} as any;
-  const rows = loading ? creatEmpertyRows(operateParam.first) : (queryData?.data || []);
-  const paginatorInfo = (queryData?.paginatorInfo ||{}) as IPaginate
+  const queryedData = (data && query?.name) ? data[query?.name] : {} as any;
+  const rows = loading ? creatEmpertyRows(queryParam.first) : (queryedData?.data || []);
+  const paginatorInfo = (queryedData?.paginatorInfo ||{}) as IPaginate
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -219,7 +219,6 @@ const ListView = React.forwardRef((
         selected.slice(selectedIndex + 1),
       );
     }
-
     setSelected(newSelected);
   };
 
@@ -229,32 +228,40 @@ const ListView = React.forwardRef((
 
   const handleBatchAction = (command:ICommand)=>{
     if(command.confirmMessage){
-      setConfirmCommand({command:command})
+      setConfirmCommand({command:command, ids:selected})
     }
     else{
-      updateOperateParam('command', command.slug, true);      
+      excuteMutation({variables:{
+        command:command.slug,
+        ids:selected
+      }})
+      //updateOperateParam('command', command.slug, true);      
     }
   }
   const handleRowAction = (command:ICommand, rowId:number)=>{
     if(command.confirmMessage){
-      setConfirmCommand({command:command, rowId:rowId});
+      setConfirmCommand({command:command, ids:[rowId]});
     }
     else{
-      updateOperateParam('command', command.slug, true);
-      updateOperateParam('selected', [rowId], true);
+      excuteMutation({variables:{
+        command:command.slug,
+        ids:[rowId]
+      }})
     }
   }
 
   const handleConfirm = ()=>{
     if(confirmCommand){
-      updateOperateParam('command', confirmCommand?.command.slug, true);
-      updateOperateParam('selected', [confirmCommand?.rowId], true);      
+      excuteMutation({variables:{
+        command:confirmCommand.command.slug,
+        ids:confirmCommand.ids
+      }})
     }
     setConfirmCommand(undefined);
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateOperateParam('rowsPerPage', parseInt(event.target.value, 10));
+    updateQueryParam('rowsPerPage', parseInt(event.target.value, 10));
   };
 
   const hasRowCommands = rowCommands && rowCommands.length > 0;
@@ -263,16 +270,16 @@ const ListView = React.forwardRef((
   const isSelected = (name: number) => selected.indexOf(name) !== -1;
 
   return (
-    <div className={classNames(classes.root, className)} {...rest} ref={ref}>
+    <div className={className} {...rest} ref={ref}>
       <Paper variant = {variant} elevation = {elevation}>
         <ListViewToolbar
-          keyword = {operateParam.keywords}
+          keyword = {queryParam.keywords}
           numSelected={selected.length}
           filters = {filters}
           batchCommands = {batchCommands}
-          filterValues = {operateParam.filterValues}
-          onFilterChange = {values=>updateOperateParam('filterValues', values)}
-          onKeywordChange = {keywords =>updateOperateParam('keywords', keywords)}
+          filterValues = {queryParam.filterValues}
+          onFilterChange = {values=>updateQueryParam('filterValues', values)}
+          onKeywordChange = {keywords =>updateQueryParam('keywords', keywords)}
           onBatchAction = {handleBatchAction}
         />
         <TableContainer>
@@ -283,9 +290,9 @@ const ListView = React.forwardRef((
           >
             <ListViewHead
               numSelected={selected.length}
-              orders = {operateParam.orders}
+              orders = {queryParam.orders}
               onSelectAllClick={handleSelectAllClick}
-              onRequestSort={orders=>updateOperateParam('orders', orders)}
+              onRequestSort={orders=>updateQueryParam('orders', orders)}
               rowCount={rows?.length || 0}
               columns = {columns}
               rowCommandsCount = {rowCommands?.length}
@@ -374,9 +381,9 @@ const ListView = React.forwardRef((
           component="div"
           labelRowsPerPage = {intl.get('rows-per-page') + ':'}
           count={paginatorInfo.total||0}
-          rowsPerPage={operateParam.first||0}
+          rowsPerPage={queryParam.first||0}
           page={paginatorInfo.currentPage||0}
-          onChangePage={(event, newPage)=>updateOperateParam('page', newPage)}
+          onChangePage={(event, newPage)=>updateQueryParam('page', newPage)}
           onChangeRowsPerPage={handleChangeRowsPerPage}
           SelectProps={{
             inputProps: { 'aria-label': 'rows per page' },

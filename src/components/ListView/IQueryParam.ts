@@ -4,12 +4,10 @@ export interface FieldOrder{
   direction: Order;
 }
 
-export interface IOperateListParam{
-  command?: string | 'query',
+export interface IQueryParam{
   keywords?: string,
   filterValues?: Array<string>,
   orders?: Array<FieldOrder>,
-  selected?: Array<number>,
   first: number,
   page:number,//第几页
 }
