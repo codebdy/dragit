@@ -278,5 +278,8 @@
     "chart-type":"Chart",
     "json-props":"JSON",
     "edit-json":"Edit JSON",
-    "opacity":"Opacity"
+    "opacity":"Opacity",
+
+    "server-error":"Server error",
+    "details":"Details"
 }

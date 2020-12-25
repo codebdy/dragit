@@ -10,6 +10,6 @@ export interface IOperateListParam{
   filterValues?: Array<string>,
   orders?: Array<FieldOrder>,
   selected?: Array<number>,
-  rowsPerPage: number,
+  first: number,
   page:number,//第几页
 }

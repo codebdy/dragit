@@ -13,7 +13,6 @@ import ListViewToolbar from './ListViewToolbar';
 import { ILabelItem } from '../../base/Model/ILabelItem';
 import intl from 'react-intl-universal';
 import { OPEN_PAGE_ACTION, PageActionHandle } from 'base/PageAction';
-import { AxiosRequestConfig } from 'axios';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton, Paper } from '@material-ui/core';
 import MdiIcon from '../common/MdiIcon';
@@ -21,10 +20,12 @@ import { IPageJumper } from 'base/Model/IPageJumper';
 import { IOperateListParam } from 'base/Model/IOperateListParam';
 import { IPaginate } from 'base/Model/IPaginate';
 import { ListViewCell } from './ListViewCell';
-import { useAxios } from 'base/Hooks/useAxios';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import { ICommand } from 'base/Model/ICommand';
 import gql from 'graphql-tag';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { IColumn } from 'components/ListView/IColumn';
+import { useAppStore } from 'store/helpers/useAppStore';
 
 export const COMMAND_QUERY = "query";
 
@@ -42,24 +43,6 @@ export interface Row{
   [key:string]:any,
 }
 
-export interface Paginate{
-  total:number,
-  per_page:number,
-  current_page:number,
-  last_page:number,
-  from:number,
-  to:number,
-  data:Array<unknown>,
-}
-
-export interface ListViewForm{
-  page:number,
-  rowsPerPage:number,
-  keyword:string,
-  filters:Array<string>,
-  sortBy:Array<string>
-}
-
 interface Command{
   command:ICommand,
   rowId?:number,
@@ -74,36 +57,28 @@ function creatEmpertyRows(length:number){
   return rows;
 }
 
-const query = 'posts';
-const fields = `
-title
-name
-`
-
-const QUERY_LIST = gql`
-  mutation ($where: JSON, $orderBy: JSON){
-    ${query}(where:$where, orderBy:$orderBy){
-      id
-      ${fields}
-    }
-  }
-`;
 
 //const MUTATION = gql`
 //`
+interface ListQuery{
+  //Query Name
+  name:string;
+  where:any;
+  orderBy:[any];
+}
 
 const ListView = React.forwardRef((
     props: {
       className:string, 
-      value?:Paginate, 
-      columns:Array<ILabelItem>, 
+      columns:Array<IColumn>, 
       filters:Array<ILabelItem>,
       batchCommands:Array<ICommand>,
       rowCommands:Array<ICommand>,
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
-      dataApi:AxiosRequestConfig,
+      query?:ListQuery,
+      mutation?:string,
       variant?:'elevation' | 'outlined',
       elevation:number,
     }, 
@@ -120,7 +95,8 @@ const ListView = React.forwardRef((
     rowsPerPageOptions = "10,25,50", 
     defalutRowsPerPage = 10,
     onAction,
-    dataApi,
+    query,
+    mutation,
     variant,
     elevation,
     ...rest
@@ -129,32 +105,71 @@ const ListView = React.forwardRef((
   const classes = useStyles();
   const [operateParam, setOperateParam] = useState<IOperateListParam>({
     page : 0,
-    rowsPerPage: defalutRowsPerPage,
+    first: defalutRowsPerPage,
+  });
+  const appStore = useAppStore();
+
+  const createQueryGQL = ()=>{
+    let fields = ''
+    columns?.forEach((colum)=>{
+      fields = fields + ' ' + colum.field
+    })
+    console.log(fields);
+    const QUERY_DATA = gql`
+      query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
+        ${query?.name}(first:$first, page:$page, where:$where, orderBy:$orderBy){
+          data {
+              id
+              ${fields}
+            }
+            paginatorInfo {
+              count
+              currentPage
+              hasMorePages
+              lastPage
+              perPage
+              total
+            }
+        }
+      }
+    `;
+    return QUERY_DATA;
+  }
+
+  const [excuteQuery, { called, loading, error, data, refetch }] = useLazyQuery(createQueryGQL(), {
+    variables: { ...operateParam },
   });
 
-  const [request, setRequest] = useState<AxiosRequestConfig>();
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [confirmCommand, setConfirmCommand] = useState<Command>();
-
-  const [paginate = {
-    total:0,
-    perPage:10,
-    currentPage:0,
-    data:[],
-  }, loading] = useAxios<IPaginate>(request, showSuccessAlert);
+  console.log(error, data)
 
   useEffect(()=>{
-    dataApi && dataApi.url && setRequest({...dataApi, data:{...dataApi.data, operateParam}})
-  }, [dataApi, operateParam])
+    if(query){
+      excuteQuery();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[query])
+
+  useEffect(()=>{
+    if(error){
+      console.log(error, data)
+      appStore.infoError(intl.get('server-error'), error?.message)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[error])
+
+  //const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [confirmCommand, setConfirmCommand] = useState<Command>();
 
   const updateOperateParam = (field:string, value:any, showAlert = false)=>{
-    setShowSuccessAlert(showAlert);
+    //setShowSuccessAlert(showAlert);
     setOperateParam({...operateParam, [field]:value, selected:[...selected]});
     setSelected([]);
   }
 
   const [selected, setSelected] = React.useState<number[]>([]);
-  const rows = loading ? creatEmpertyRows(paginate.perPage) : paginate.data;
+  const queryData = (data && query?.name) ? data[query?.name] : {} as any;
+  const rows = loading ? creatEmpertyRows(operateParam.first) : (queryData?.data || []);
+  const paginatorInfo = (queryData?.paginatorInfo ||{}) as IPaginate
 
   const parseRowsPerPageOptions = ()=>{
     let ret: number[] = [];
@@ -232,7 +247,6 @@ const ListView = React.forwardRef((
 
   const isSelected = (name: number) => selected.indexOf(name) !== -1;
 
-  //const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   return (
     <div className={classNames(classes.root, className)} {...rest} ref={ref}>
       <Paper variant = {variant} elevation = {elevation}>
@@ -350,9 +364,9 @@ const ListView = React.forwardRef((
           rowsPerPageOptions={parseRowsPerPageOptions()}
           component="div"
           labelRowsPerPage = {intl.get('rows-per-page') + ':'}
-          count={paginate.total}
-          rowsPerPage={paginate.perPage}
-          page={paginate.currentPage}
+          count={paginatorInfo.total||0}
+          rowsPerPage={operateParam.first||0}
+          page={paginatorInfo.currentPage||0}
           onChangePage={(event, newPage)=>updateOperateParam('page', newPage)}
           onChangeRowsPerPage={handleChangeRowsPerPage}
           SelectProps={{

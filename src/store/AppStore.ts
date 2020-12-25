@@ -4,6 +4,14 @@ import { ThemeSettings } from "./ThemeSettings";
 import { Designer } from "./Designer";
 import { IUser } from "base/Model/IUser";
 
+export class Error{
+  message?:string;
+  details?:string;
+  constructor() {
+    makeAutoObservable(this)
+  }
+}
+
 export class AppStore{
   showThemeSettings = false;
   toolbarElevate = true;
@@ -13,7 +21,7 @@ export class AppStore{
   themeSettings: ThemeSettings = new ThemeSettings();
   designer:Designer = new Designer();
   successAlert: boolean|string = false;
-  errorMessage: string|undefined = '';
+  error: Error = new Error();
 
   moduleSlug: string|undefined = 'dashboard';
   pageSlug: string|undefined;
@@ -38,8 +46,14 @@ export class AppStore{
     this.successAlert = alert;
   }
 
-  setErrorMessage(message:string|undefined){
-    this.errorMessage = message;
+  infoError(message:string|undefined, details?:string){
+    this.error.message = message;
+    this.error.details = details;
+  }
+
+  clearError(){
+    this.error.message = undefined;
+    this.error.details = undefined;
   }
 
   setLoggedUser(user:IUser|undefined){

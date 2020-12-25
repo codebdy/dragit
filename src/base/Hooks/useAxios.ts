@@ -23,7 +23,7 @@ export function useAxios<T>(config?:AxiosRequestConfig, tipSuccess?:string|boole
         console.log('server error:useAxios', error);
         setLoading(false);
         setError(true);
-        appStore.setErrorMessage(error.message);
+        appStore.infoError(error.message);
       })       
     }
 

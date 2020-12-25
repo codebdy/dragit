@@ -10,6 +10,7 @@ import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
+import intl from "react-intl-universal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,7 +56,11 @@ export const Workspace = observer(()=>{
   const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
 
   useEffect(()=>{
-    appStore.setErrorMessage(error?.message)
+    if(error){
+      appStore.infoError(intl.get('server-error'), error?.message)
+      console.log(error);      
+    }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[error])
 

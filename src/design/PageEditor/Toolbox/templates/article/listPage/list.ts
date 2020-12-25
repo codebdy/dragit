@@ -17,7 +17,7 @@ export default {
         }
       },
       {
-        field:'is_published',
+        field:'status',
         label:'状态',
         sortable:true,
         props:{
@@ -33,7 +33,7 @@ export default {
 
     ],
     rowsPerPageOptions:'10,25,50',
-    defalutRowsPerPage:'10',
+    defalutRowsPerPage:10,
     filters:[
       {
         slug:'gender',
@@ -113,10 +113,11 @@ export default {
         confirmMessage:"删除后将不可恢复，您确定要删除吗？",
       },
     ],
-    mutation:{
+    query:{
       name:'posts',
       where:{},
-      orderBy:[],   
+      orderBy:[], 
     },
+    mutation: 'updatePosts',
   }
 }

@@ -1,10 +1,10 @@
 
 //列表页返回分页数据的接口
 export interface IPaginate{
-  total:number,
-  perPage:number,
-  currentPage:number,
-  from?:number,
-  to?:number,
-  data?:Array<any>,//列表数据
+  count?:number;
+  currentPage?:number;
+  hasMorePages?:boolean;
+  lastPage?:number;
+  perPage?:number;
+  total?:number;
 }

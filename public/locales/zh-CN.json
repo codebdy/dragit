@@ -283,6 +283,9 @@
     "chart-type":"图表类型",
     "json-props":"JSON",
     "edit-json":"编辑JSON",
-    "opacity":"不透明度"
+    "opacity":"不透明度",
+
+    "server-error":"服务器错误",
+    "details":"详细"
 
 }

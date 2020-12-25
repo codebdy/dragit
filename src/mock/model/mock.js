@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 //import createId from 'mock/utils/createId'
 //import {getModuleIndexPage} from './modules'
 import getQueryVariable from 'mock/utils/getQueryVariable'
-import articles from 'mock/data/articlesData';
+import {articlesData} from 'mock/data/articlesData';
 import notifications from 'mock/data/notifications'
 import users from '../data/users';
 import roles from '../data/roles';
@@ -21,7 +21,7 @@ window.modelsList = {
     total:123,
     perPage:10,
     currentPage:0,
-    data:articles,
+    data:articlesData,
   },
 
   '/Model/User':{
@@ -106,7 +106,7 @@ window.modelsList = {
 window.listModels = {
   '/Model/Role':roles,
   '/Model/User':users,
-  '/Model/Article':articles,
+  '/Model/Article':articlesData,
   '/Model/Notification':notifications,
   '/Model/Tag':tags,
   '/Model/ArticleAttribute':articleAttributes,

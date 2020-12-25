@@ -1,4 +1,4 @@
-import articles from 'mock/data/articlesData';
+import {articlesData} from 'mock/data/articlesData';
 import notifications from 'mock/data/notifications'
 import users from '../data/users';
 import roles from '../data/roles';
@@ -16,7 +16,7 @@ export var modelsList = {
     total:123,
     perPage:10,
     currentPage:0,
-    data:articles,
+    data:articlesData,
   },
 
   '/Model/User':{
@@ -101,7 +101,7 @@ export var modelsList = {
 export var models = {
   '/Model/Role':roles,
   '/Model/User':users,
-  '/Model/Article':articles,
+  '/Model/Article':articlesData,
   '/Model/Notification':notifications,
   '/Model/Tag':tags,
   '/Model/ArticleAttribute':articleAttributes,

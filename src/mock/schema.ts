@@ -1,3 +1,4 @@
+import { articlesData } from "./data/articlesData";
 import drawer from "./drawer"
 import { getUser } from "./getUser";
 import { login } from "./login/login";
@@ -52,6 +53,15 @@ export const schema = `
     entryPage: Page
   }
 
+  type PaginatorInfo{
+    count:Int
+    currentPage:Int
+    hasMorePages:Boolean
+    lastPage:Int
+    perPage:Int
+    total:Int
+  }
+
   enum PostStatus {
     PUBLISHED
     DRAFT 
@@ -68,6 +78,11 @@ export const schema = `
     updated_at: String 
   }
 
+  type Posts{
+    paginatorInfo:PaginatorInfo!
+    data:[Post]
+  }
+
   type Query {
     "登录"
     login(login_name:String!, password:String!):LoginData
@@ -76,11 +91,12 @@ export const schema = `
     modulePage(moduleSlug:String!, pageSlug:String):Page
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
+    posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
   }
 
   type Mutation{
     "Query and Operation"
-    posts(ids:[ID], commands:[String], where:JSON, orderBy:JSON):[Post]
+    updatePosts(command:String, ids:[ID] ):Boolean
   }
 `;
 
@@ -128,15 +144,19 @@ export const resolvers = {
       const module = getModuleBySlug(args.slug);
       return module
     },
-
-  },
-
-  Mutation:{
     posts:async (parent:any, args:any, context:any, info:any)=>{
       await sleep(1000);
       //const module = getModuleBySlug(args.slug);
-      return module
+      return {data:articlesData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}}
     },
-    
+  },
+
+  Mutation:{
+    updatePosts:async (parent:any, args:any, context:any, info:any)=>{
+      await sleep(1000);
+      //const module = getModuleBySlug(args.slug);
+      return true
+    },
+   
   }
 };
