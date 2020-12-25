@@ -97,7 +97,7 @@ export const schema = `
 
   type Mutation{
     "Query and Operation"
-    updatePosts(command:String, ids:[ID] ):Boolean
+    updatePosts(command:String, ids:[ID] ):[Post]
   }
 `;
 

@@ -13,7 +13,7 @@ export interface ListViewHeadProps {
   orders?: Array<FieldOrder>;
   rowCount: number;
   columns:Array<ILabelItem>;
-  loading:boolean;
+  loading?:boolean;
   rowCommandsCount:number;
 }
 

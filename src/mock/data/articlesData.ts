@@ -41,6 +41,12 @@ export var articlesData = [
         id:4,
         status:'PUBLISHED',
         title:'只是一片秋叶，随风飘落',
+        feathureImage: {
+          id:5,
+          thumbnail: '/static/images/grid-list/hats.jpg',
+          title: 'Hats',
+          src: '/static/images/grid-list/hats.jpg',
+        },
         created_at:'2020-9-28 8:26'
       },
       {

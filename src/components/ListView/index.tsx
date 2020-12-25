@@ -23,7 +23,7 @@ import { ListViewCell } from './ListViewCell';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import { ICommand } from 'base/Model/ICommand';
 import gql from 'graphql-tag';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IColumn } from 'components/ListView/IColumn';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { resolveFieldGQL } from './CellRenders';
@@ -115,7 +115,7 @@ const ListView = React.forwardRef((
     columns?.forEach((colum)=>{
       fields = fields + ' ' + resolveFieldGQL(colum);
     })
-    const QUERY_DATA = gql`
+    const QUERY_GQL = gql`
       query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
         ${query?.name}(first:$first, page:$page, where:$where, orderBy:$orderBy){
           data {
@@ -133,15 +133,29 @@ const ListView = React.forwardRef((
         }
       }
     `;
-    return QUERY_DATA;
+    return QUERY_GQL;
   }
 
-  const [excuteQuery, { called, loading, error, data, refetch }] = useLazyQuery(createQueryGQL(), {
+  const createMutationGQL = ()=>{
+    const MUTATION_GQL = gql`
+      mutation ($command:String!, $ids:[String!]!){
+        ${mutation}(command:$command, ids:$ids){
+          id
+        }
+      }
+    `;
+
+    return MUTATION_GQL;
+  }
+
+  const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(createQueryGQL(), {
     variables: { ...operateParam },
   });
 
-  console.log(error, data)
+  const [excuteMutation, { loading:mutationLoading, error:mutationsError }] = useMutation(createMutationGQL());
 
+  console.log(error, data)
+  const loading = queryLoading || mutationLoading;
   useEffect(()=>{
     if(query){
       excuteQuery();
@@ -150,12 +164,13 @@ const ListView = React.forwardRef((
   },[query])
 
   useEffect(()=>{
-    if(error){
-      console.log(error, data)
-      appStore.infoError(intl.get('server-error'), error?.message)
+    let realError = error || mutationsError
+    if(realError){
+      console.log(realError, data)
+      appStore.infoError(intl.get('server-error'), realError?.message)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[error])
+  },[error, mutationsError])
 
   //const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [confirmCommand, setConfirmCommand] = useState<Command>();
@@ -273,7 +288,6 @@ const ListView = React.forwardRef((
               onRequestSort={orders=>updateOperateParam('orders', orders)}
               rowCount={rows?.length || 0}
               columns = {columns}
-              loading = {loading}
               rowCommandsCount = {rowCommands?.length}
             />
             <TableBody>
@@ -352,11 +366,6 @@ const ListView = React.forwardRef((
                     </TableRow>
                   );
                 })}
-              {/*emptyRows > 0 && (
-                <TableRow style={{ height: (53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )*/}
             </TableBody>
           </Table>
         </TableContainer>
