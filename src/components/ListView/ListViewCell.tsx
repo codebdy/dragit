@@ -1,7 +1,7 @@
 import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import { IColumn } from './IColumn';
-import { resolveCellRender } from './renders';
+import { resolveCellRender } from './CellRenders';
 
 export const ListViewCell = (props: { row: any; columns: Array<IColumn>; colIndex: number; }) => {
   const { row, columns, colIndex } = props;

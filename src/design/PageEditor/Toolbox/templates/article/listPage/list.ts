@@ -10,9 +10,12 @@ export default {
     columns:[
       {
         field: 'feathureImage',
-        label: '图片',
+        label: '',
         render:{
-          name: 'Image',
+          name: 'MediaRender',
+          props:{
+            width:60,
+          }
         }
       },
       {
@@ -28,7 +31,7 @@ export default {
         label:'状态',
         sortable:true,
         render:{
-          name: 'EnumChip',
+          name: 'EnumChipRender',
           props:{
             metas:[
               {

@@ -5,16 +5,34 @@ export var articlesData = [
         status:'DRAFT',
         created_at:'2020-11-30 14:38',
         content:"<p>轻轻的，我来了</p><p>正如我轻轻的走</p>",
+        feathureImage: {
+          id:2,
+          thumbnail: '/static/images/grid-list/burgers.jpg',
+          title: 'Tasty burger',
+          src: '/static/images/grid-list/burgers.jpg',
+        },
         channel:[1,3,32],
       },
       {
         id:2,
         title:'汇集漫天星星，星星之火可以燎原',
         status:'DRAFT',
+        feathureImage: {
+          id:3,
+          thumbnail: '/static/images/grid-list/camera.jpg',
+          title: 'Camera',
+          src: '/static/images/grid-list/camera.jpg',
+        },
         created_at:'2020-10-30 14:38'
       },
       {
         id:3,
+        feathureImage: {
+          id:4,
+          thumbnail: '/static/images/grid-list/morning.jpg',
+          title: 'Morning',
+          src: '/static/images/grid-list/morning.jpg',
+        },
         title:'人有时像蒲公英，看似自由自在，实则身不由己',
         status:'DRAFT',
         created_at:'2020-9-28 8:26'

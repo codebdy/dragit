@@ -3,17 +3,19 @@ import { IColumn } from '../IColumn';
 import { mediaFieldGQL } from './mediaFieldGQL';
 import {EnumChipRender} from './EnumChipRender'
 import { DefaultRender } from './DefaultRender';
+import {MediaRender} from './MediaRender'
 var rendersMap : { 
   [key: string]: any
 } = {
-  EnumChip: EnumChipRender
+  EnumChipRender,
+  MediaRender
 }
 
 var renderGQLFnsMap:{
   [key: string]: (column:IColumn) => string,
 }
 ={
-  Image:mediaFieldGQL,
+  MediaRender:mediaFieldGQL,
 }
 
 export function resolveCellRender(column: IColumn){

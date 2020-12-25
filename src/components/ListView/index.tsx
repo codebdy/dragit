@@ -26,6 +26,7 @@ import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { IColumn } from 'components/ListView/IColumn';
 import { useAppStore } from 'store/helpers/useAppStore';
+import { resolveFieldGQL } from './CellRenders';
 
 export const COMMAND_QUERY = "query";
 
@@ -112,9 +113,8 @@ const ListView = React.forwardRef((
   const createQueryGQL = ()=>{
     let fields = ''
     columns?.forEach((colum)=>{
-      fields = fields + ' ' + colum.field
+      fields = fields + ' ' + resolveFieldGQL(colum);
     })
-    console.log(fields);
     const QUERY_DATA = gql`
       query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
         ${query?.name}(first:$first, page:$page, where:$where, orderBy:$orderBy){
