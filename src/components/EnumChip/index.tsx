@@ -17,7 +17,7 @@ export const EnumChip = React.forwardRef((
   return(
     value
     ?
-    <Chip label={selectedMeta ? selectedMeta.label : value} color = {selectedMeta && selectedMeta.value} />
+    <Chip label={selectedMeta ? selectedMeta.label : value} color = {selectedMeta && selectedMeta.value} size = "small" />
     :
     <span></span>
   )
