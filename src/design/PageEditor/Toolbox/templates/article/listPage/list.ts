@@ -21,6 +21,24 @@ export default {
         label:'状态',
         sortable:true,
         props:{
+          render:{
+            name: 'EnumChip',
+            props:{
+              metas:[
+                {
+                  name:'PUBLISHED',
+                  value:'default',
+                  label:'已发布'
+                },
+                {
+                  name:'DRAFT',
+                  value:'secondary',
+                  label:'草稿'
+                }
+              ]
+            }            
+          }
+
         }
       },
       {
