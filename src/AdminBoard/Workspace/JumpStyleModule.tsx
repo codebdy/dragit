@@ -3,7 +3,7 @@ import {observer} from "mobx-react-lite";
 import { useAppStore } from 'store/helpers/useAppStore';
 import { getModulePageBySlug } from './common/getModulePageBySlug';
 import { ModuleProps } from './common/ModuleProps';
-import { Page } from './common/Page';
+import { Page } from './Page';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'base/PageAction';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 

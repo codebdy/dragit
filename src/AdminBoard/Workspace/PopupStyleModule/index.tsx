@@ -5,7 +5,7 @@ import { ModuleProps } from '../common/ModuleProps';
 import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { getModulePageBySlug } from '../common/getModulePageBySlug';
-import { Page } from '../common/Page';
+import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
 
 const useStyles = makeStyles((theme: Theme) =>

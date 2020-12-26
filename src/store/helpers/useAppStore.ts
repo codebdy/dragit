@@ -3,7 +3,7 @@ import { AppStore } from 'store/AppStore';
 import { Designer } from 'store/Designer';
 import { LeftDrawer } from 'store/LeftDrawer';
 import { ThemeSettings } from 'store/ThemeSettings';
-import { AppStoreContext } from './AppStoreProdivider';
+import { AppStoreContext } from './AppStoreProvider';
 
 export const useAppStore = (): AppStore => useContext(AppStoreContext);
 export const useLeftDrawer = (): LeftDrawer => useContext(AppStoreContext).leftDrawer;

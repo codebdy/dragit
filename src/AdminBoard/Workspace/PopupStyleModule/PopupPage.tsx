@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
 import { PageAction } from 'base/PageAction';
-import { Page } from '../common/Page';
+import { Page } from '../Page';
 import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
 import { IPage } from 'base/Model/IPage';

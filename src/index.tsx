@@ -7,7 +7,7 @@ import './mock'
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './mock/client-mock';
 
-import { AppStoreProdivider }from 'store/helpers/AppStoreProdivider';
+import { AppStoreProvider }from 'store/helpers/AppStoreProvider';
 import {AppStore} from 'store/AppStore' 
 import { CssBaseline } from '@material-ui/core';
 
@@ -16,12 +16,12 @@ import 'config';
 const appStore = new AppStore();
 
 ReactDOM.render(
-  <AppStoreProdivider value = {appStore}>
+  <AppStoreProvider value = {appStore}>
     <ApolloProvider client={client}>
       <CssBaseline />      
       <App />
     </ApolloProvider>
-  </AppStoreProdivider>  
+  </AppStoreProvider>  
   ,
   document.getElementById('root')
 );

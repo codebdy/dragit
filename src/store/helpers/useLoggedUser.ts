@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AppStoreContext } from './AppStoreProdivider';
+import { AppStoreContext } from './AppStoreProvider';
 import { LoggedUser } from './LoggedUser';
 
 export const useLoggedUser = (): LoggedUser => {
