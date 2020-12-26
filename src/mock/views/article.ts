@@ -1,21 +1,12 @@
-import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
 import ArticleMeta from "design/PageEditor/Toolbox/templates/article/editPage";
 
 export default {
   layout:[ArticleMeta],
 
   isFormPage:true,
-  apiForGet:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/Article',
+  query:{
+    name:'article',
+    variables:{
     },      
   },
-
-  apiForSave:{
-    ...API_SUBMIT_MODEL,
-    params:{
-      modelName:'/Model/Article',
-    },      
-  }
 }

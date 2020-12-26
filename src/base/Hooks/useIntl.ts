@@ -1,6 +1,4 @@
-import { getIntlApi } from "APIs/app";
 import { useEffect, useState } from "react";
-import { useAxios } from "./useAxios";
 import intl from "react-intl-universal";
 
 
@@ -23,8 +21,25 @@ function getDefaultLang(){
 
 export function useIntl():[boolean, boolean]{
   const lang = getDefaultLang()
-  const [request] = useState(getIntlApi(lang));
-  const [intlData, loading, error] = useAxios<any>(request);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [intlData, setIntlData] = useState();
+  useEffect(()=>{
+    setLoading(true);
+    fetch(`/locales/${lang}.json`)
+    .then(response=>response.json())
+    .then(data=>{
+      setIntlData(data)      
+      setLoading(false);
+    })
+    .catch(e=>{
+      setLoading(false);
+      setError(true);
+      console.log("error")
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
   useEffect(()=>{
     if(intlData){
       intl.init({
