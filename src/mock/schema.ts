@@ -3,7 +3,7 @@ import { modulePageResolver } from "./module/modulePageResolver";
 import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
 import { drawerItemsResolver } from "./drawer/drawerItemsResolver";
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
-import { postsResolver, postResolver, updatePostsResolver } from "./post/resolvers";
+import { postsResolver, postResolver, updatePostsResolver } from "./article/post/resolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `

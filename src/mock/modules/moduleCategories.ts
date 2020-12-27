@@ -1,10 +1,10 @@
-import categoryArticle from "./categoryArticle";
-import categoryEnquiry from "./categoryEnquiry";
-import categoryModuleDemo from "./categoryModuleDemo";
-import categoryOrder from "./categoryOrder";
-import categoryProduct from "./categoryProduct";
-import categorySystem from "./categorySystem";
-import categoryUser from "./categoryUser";
+import categoryArticle from "./data/categoryArticle";
+import categoryEnquiry from "./data/categoryEnquiry";
+import categoryModuleDemo from "./data/categoryModuleDemo";
+import categoryOrder from "./data/categoryOrder";
+import categoryProduct from "./data/categoryProduct";
+import categorySystem from "./data/categorySystem";
+import categoryUser from "./data/categoryUser";
 
 var moduleCategories = [
   {

@@ -1,4 +1,4 @@
-import users from "../data/users";
+import users from "./data";
 
 export function getUser(account:string) {
   for (var i = 0; i < users.length; i++) {

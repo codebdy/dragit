@@ -1,5 +1,5 @@
-import { articlesData } from "mock/post/data";
-import { sleep } from "../utils/sleep";
+import { articlesData } from "mock/article/post/data";
+import { sleep } from "../../utils/sleep";
 
 export const postResolver = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);

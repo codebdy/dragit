@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './mock'
 import { ApolloProvider } from '@apollo/react-hooks';
-import client from './mock/client-mock';
+import client from './mock/client';
 
 import { AppStoreProvider }from 'store/helpers/AppStoreProvider';
 import {AppStore} from 'store/AppStore' 

@@ -1,8 +1,8 @@
-import article from "mock/post/views/article";
-import articleAttributes from "mock/views/articleAttributes";
-import articleChannel from "mock/views/articleChannel";
-import articles from "mock/post/views/articles";
-import articleTags from "mock/views/articleTags";
+import article from "mock/article/post/views/article";
+import articleAttributes from "mock/article/articleAttributes";
+import articleChannel from "mock/article/articleChannel";
+import articles from "mock/article/post/views/articles";
+import articleTags from "mock/article/articleTags";
 import user from "mock/views/user";
 import users from "mock/views/users";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";

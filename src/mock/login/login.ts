@@ -1,4 +1,4 @@
-import users from "mock/data/users";
+import users from "mock/user/data";
 import { addAuthsToUser } from "./addAuthsToUser";
 
 export function login(account:string, password:string){
