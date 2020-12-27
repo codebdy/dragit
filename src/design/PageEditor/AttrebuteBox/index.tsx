@@ -7,7 +7,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { IProp } from "base/Model/IProp";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
-import AttributeBoxValidateArea, { ValidateRule } from 'design/PageEditor/AttrebuteBox/ValidateArea';
+import AttributeBoxValidateArea from 'design/PageEditor/AttrebuteBox/ValidateArea';
+import { IValidateRule } from "base/Model/IValidateRule";
 import { API_GET_AUTHS } from 'APIs/modules';
 import MultiSelectBox from 'components/Select/MultiSelectBox';
 import { IMeta } from 'base/Model/IMeta';
@@ -60,7 +61,7 @@ export default function AttributeBox(
   const classes = useStyles();
   const [field, setField] = React.useState(node?.meta.props?.field);
   const [nodeRule, setNodeRule] = React.useState<IRule>();
-  const [validateRule, setValidateRule] = React.useState<ValidateRule>();
+  const [validateRule, setValidateRule] = React.useState<IValidateRule>();
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
 
 
@@ -81,7 +82,7 @@ export default function AttributeBox(
     setField(newField);
   }
 
-  const handleRuleChange = (rule:ValidateRule)=>{
+  const handleRuleChange = (rule:IValidateRule)=>{
     //node?.updateProp('rule', rule);
     setValidateRule(rule);
   }

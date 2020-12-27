@@ -33,7 +33,7 @@ export interface Row{
   [key:string]:any,
 }
 
-interface Command{
+interface ConfirmCommand{
   command:ICommand,
   ids:number[],
 }
@@ -174,7 +174,7 @@ const ListView = React.forwardRef((
   },[error, mutationsError])
 
   //const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [confirmCommand, setConfirmCommand] = useState<Command>();
+  const [confirmCommand, setConfirmCommand] = useState<ConfirmCommand>();
 
   const updateQueryParam = (field:string, value:any, showAlert = false)=>{
     //setShowSuccessAlert(showAlert);

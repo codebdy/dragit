@@ -6,6 +6,7 @@ import { ModuleProps } from './common/ModuleProps';
 import { Page } from './Page';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'base/PageAction';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
+import { IPageJumper } from 'base/Model/IPageJumper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,12 +26,12 @@ export const JumpStyleModule = observer((
   const classes = useStyles();
   const appStore = useAppStore();
   const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
-  const [pageParams, setPageParams] = useState<any>();
+  const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
+        setPageParams(action.page)        
         setPageSlug(action.page?.pageSlug);
-        setPageParams(action.page)
         return;        
       case GO_BACK_ACTION:
         setPageSlug(module.entryPage?.slug);

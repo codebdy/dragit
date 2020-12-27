@@ -1,5 +1,3 @@
-import { AxiosRequestConfig } from "axios";
-
 export type MaxWidth = 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
 
 export interface IPageSchema{
@@ -7,8 +5,7 @@ export interface IPageSchema{
   auths?:string[],
   isFormPage?:boolean,
   refreshAppInfo?:boolean,
-  apiForGet?:AxiosRequestConfig, 
-  apiForSave?:AxiosRequestConfig,
+  query?:string, 
 }
 
 export interface IPage{

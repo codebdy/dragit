@@ -11,6 +11,7 @@ import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDr
 import { TabStyleModuleBar } from './TabStyleModuleBar';
 import { useEffect } from 'react';
 import { PopupPage } from '../PopupStyleModule/PopupPage';
+import { IPageJumper } from 'base/Model/IPageJumper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,13 +45,13 @@ export const TabStyleModule = observer((
   const appStore = useAppStore();
   const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
   const [popupSlug, setPopupSlug] = useState<string|undefined>();
-  const [pageParams, setPageParams] = useState<any>();
+  const [pageParams, setPageParams] = useState<IPageJumper>();
 
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
+        setPageParams(action.page);
         setPopupSlug(action.page?.pageSlug);
-        setPageParams(action.page)
         return;        
       case GO_BACK_ACTION:
         setPopupSlug(undefined);

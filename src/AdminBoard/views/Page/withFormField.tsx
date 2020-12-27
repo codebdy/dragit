@@ -1,4 +1,4 @@
-import { ValidateRule } from 'design/PageEditor/AttrebuteBox/ValidateArea';
+import { IValidateRule } from "base/Model/IValidateRule";
 import React, { useContext, useEffect } from 'react';
 import useFieldValue from './useFieldValue';
 import intl from 'react-intl-universal';
@@ -7,7 +7,7 @@ import { useFormContext } from './Form/useFormContext';
 import useFieldName from './useFieldName';
 import { SubModelContext } from 'components/OneToOnePortlet/SubModelContext';
 
-function metaRuleToRegisterRules(rule:ValidateRule){
+function metaRuleToRegisterRules(rule:IValidateRule){
   let rtRules:any = {};
   if(rule.required){
     rtRules['required'] = intl.get('msg-required');

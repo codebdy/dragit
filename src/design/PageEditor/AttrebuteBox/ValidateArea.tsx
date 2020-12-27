@@ -2,20 +2,9 @@ import React, { Fragment } from 'react';
 import {MenuItem, Select, Switch, FormControl, FormControlLabel, InputLabel, TextField } from '@material-ui/core';
 import { AttributeRow, } from 'design/PageEditor/AttrebuteBox/AttributeRow';
 import intl from 'react-intl-universal';
+import { IValidateRule } from '../../../base/Model/IValidateRule';
 
-export interface ValidateRule{
-  valueType?:string;
-  ruleType?:string;
-  maxLength?:number;
-  minLength?:number;
-  max?:number|string;
-  min?:number|string;
-  pattern?:string;
-  errorMessage?:string;
-  [key:string]:any;
-}
-
-export default function AttributeBoxValidateArea(props:{rule?:ValidateRule, onChange:(rule:ValidateRule)=>void}){
+export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onChange:(rule:IValidateRule)=>void}){
   const {rule, onChange} = props;
   const handleTypeChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let valueType = event.target.value as string;

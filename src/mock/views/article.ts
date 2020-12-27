@@ -3,10 +3,5 @@ import ArticleMeta from "design/PageEditor/Toolbox/templates/article/editPage";
 export default {
   layout:[ArticleMeta],
 
-  isFormPage:true,
-  query:{
-    name:'article',
-    variables:{
-    },      
-  },
+  query:'article',      
 }
