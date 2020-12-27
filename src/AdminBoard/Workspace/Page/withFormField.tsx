@@ -1,10 +1,10 @@
 import { IValidateRule } from "base/Model/IValidateRule";
 import React, { useContext, useEffect } from 'react';
-import useFieldValue from './useFieldValue';
+import useFieldValue from '../../views/Page/useFieldValue';
 import intl from 'react-intl-universal';
-import useFieldError from './useFieldError';
-import { useFormContext } from './Form/useFormContext';
-import useFieldName from './useFieldName';
+import useFieldError from '../../views/Page/useFieldError';
+import { useFormContext } from '../../views/Page/Form/useFormContext';
+import useFieldName from '../../views/Page/useFieldName';
 import { SubModelContext } from 'components/OneToOnePortlet/SubModelContext';
 
 function metaRuleToRegisterRules(rule:IValidateRule){
@@ -57,7 +57,6 @@ function metaRuleToRegisterRules(rule:IValidateRule){
 const withFormField = (Component:any)=>{
   const WithFormField = (props:any)=>{
 
-    const {register, setValue, validate} = useFormContext();
     const {field, forwardedRef, empertyValue, rule, helperText, onDirty, ...rest} = props;
 
     const fieldName = useFieldName(field);
@@ -69,10 +68,10 @@ const withFormField = (Component:any)=>{
     const [error, setError] = React.useState(fieldError && fieldError.message);
     const registerRule = rule && metaRuleToRegisterRules(rule);
 
-    useEffect(()=>{
-      register(fieldName, registerRule)
+    //useEffect(()=>{
+    //  register(fieldName, registerRule)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
+    //},[]);
 
     useEffect(()=>{
       setError(fieldError);
@@ -81,7 +80,7 @@ const withFormField = (Component:any)=>{
     //针对1对1面板
     useEffect(()=>{
       if(subModelContext.parentField && !subModelContext.model){
-        setValue(subModelContext.parentField, {});
+        //setValue(subModelContext.parentField, {});
       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[field, subModelContext.parentField, subModelContext.model]);
@@ -94,13 +93,13 @@ const withFormField = (Component:any)=>{
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
       setInputValue(newValue);
-      setValue(fieldName, newValue);
+      //setValue(fieldName, newValue);
       onDirty && onDirty();
     }
 
     const handleBlur = ()=>{
-      const newError = validate(fieldName);
-      setError(newError)
+      //const newError = validate(fieldName);
+      //setError(newError)
     }
 
     return (

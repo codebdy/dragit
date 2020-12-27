@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import ComponentRender from "./ComponentRender";
+import ComponentRender from "../../Workspace/Page/ComponentRender";
 import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, createStyles, Dialog, makeStyles, Theme } from "@material-ui/core";

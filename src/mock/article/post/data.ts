@@ -11,6 +11,12 @@ export var articlesData = [
           title: 'Tasty burger',
           src: '/static/images/grid-list/burgers.jpg',
         },
+        seoMeta:{
+          id:5,
+          title:'Seo Title',
+          description:'SEO Description',
+          keywords:'爱',
+        },
         channel:[1,3,32],
       },
       {

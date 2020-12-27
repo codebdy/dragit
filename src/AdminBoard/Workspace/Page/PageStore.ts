@@ -30,6 +30,19 @@ export class FieldStore{
     })
     return subGql ? ` ${this.fieldName} { id ${subGql} } ` : ` ${this.fieldName} `;
   }
+
+  setModel(model:any){
+    const fieldValue = model && this.fieldName ? model[this.fieldName] : undefined; 
+    if(!this.subFields){
+      this.defaultValue = fieldValue  
+    }
+    else{
+      this.subFields?.forEach(fieldStore=>{
+        fieldStore.setModel(fieldValue)
+      })
+    }
+
+  }
 }
 
 function parseFieldFromNode(fields:Map<string,FieldStore>, node: RXNode<IMeta>){
@@ -73,7 +86,10 @@ export class PageStore{
   }
 
   setModel(model:any){
-    
+    console.log('setModel', model)
+    this.fields.forEach(fieldStore=>{
+      fieldStore.setModel(model);
+    })
   }
 
   toFieldsGQL(){
