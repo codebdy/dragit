@@ -1,5 +1,11 @@
+import { useContext } from 'react';
 import { createContext } from 'react';
-import { PageStore } from './PageStore';
+import { ModelStore } from './ModelStore';
 
-export const PageContext = createContext<PageStore>({} as PageStore);
-export const PageProvider = PageContext.Provider;
+export const ModelContext = createContext<ModelStore>({} as ModelStore);
+export const PageProvider = ModelContext.Provider;
+export const useModelStore = (): ModelStore => useContext(ModelContext);
+export const useFieldStore = (fieldName:string)=>{
+  const modelStore =  useModelStore();
+  return modelStore.fields.get(fieldName);
+}

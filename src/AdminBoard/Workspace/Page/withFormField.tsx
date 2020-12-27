@@ -1,11 +1,9 @@
 import { IValidateRule } from "base/Model/IValidateRule";
-import React, { useContext, useEffect } from 'react';
-import useFieldValue from '../../views/Page/useFieldValue';
+import React, { useEffect } from 'react';
 import intl from 'react-intl-universal';
-import useFieldError from '../../views/Page/useFieldError';
-import { useFormContext } from '../../views/Page/Form/useFormContext';
 import useFieldName from '../../views/Page/useFieldName';
-import { SubModelContext } from 'components/OneToOnePortlet/SubModelContext';
+import { useFieldStore, useModelStore } from "./PageProvider";
+import {observer} from 'mobx-react-lite';
 
 function metaRuleToRegisterRules(rule:IValidateRule){
   let rtRules:any = {};
@@ -55,67 +53,69 @@ function metaRuleToRegisterRules(rule:IValidateRule){
 }
 
 const withFormField = (Component:any)=>{
-  const WithFormField = (props:any)=>{
+  const WithFormField = observer((props:any)=>{
 
     const {field, forwardedRef, empertyValue, rule, helperText, onDirty, ...rest} = props;
 
     const fieldName = useFieldName(field);
-    const subModelContext = useContext(SubModelContext);
-    
-    const [value, loading] = useFieldValue(field);    
-    const [inputValue, setInputValue] = React.useState(value);
-    const fieldError = useFieldError(fieldName);
-    const [error, setError] = React.useState(fieldError && fieldError.message);
-    const registerRule = rule && metaRuleToRegisterRules(rule);
+    //const subModelContext = useContext(SubModelContext);
+    const fieldStore = useFieldStore(field);
+    const modelStore =  useModelStore();
+    //const [value, loading] = useFieldValue(field);    
+    //const [inputValue, setInputValue] = React.useState(value);
+    //const fieldError = useFieldError(fieldName);
+    //const [error, setError] = React.useState(fieldError && fieldError.message);
+    //const registerRule = rule && metaRuleToRegisterRules(rule);
 
     //useEffect(()=>{
     //  register(fieldName, registerRule)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     //},[]);
 
-    useEffect(()=>{
-      setError(fieldError);
-    },[fieldError]);
+    //useEffect(()=>{
+    //  setError(fieldError);
+    //},[fieldError]);
 
     //针对1对1面板
-    useEffect(()=>{
-      if(subModelContext.parentField && !subModelContext.model){
+    //useEffect(()=>{
+    //  if(subModelContext.parentField && !subModelContext.model){
         //setValue(subModelContext.parentField, {});
-      }
+    //  }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[field, subModelContext.parentField, subModelContext.model]);
+    //},[field, subModelContext.parentField, subModelContext.model]);
 
-    useEffect(()=>{
-      setInputValue(value);
+    //useEffect(()=>{
+    //  setInputValue(value);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value])
+    //}, [value])
 
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
-      setInputValue(newValue);
+      //setInputValue(newValue);
       //setValue(fieldName, newValue);
-      onDirty && onDirty();
+      //onDirty && onDirty();
+      fieldStore?.setValue(newValue);
     }
 
     const handleBlur = ()=>{
       //const newError = validate(fieldName);
       //setError(newError)
     }
-
+    const error = fieldStore?.error;
     return (
       <Component
         ref={forwardedRef}
         name = {fieldName}
-        loading={loading}
-        value={inputValue || empertyValue || ''}
+        loading={fieldStore?.loading || modelStore.loading}
+        value={fieldStore?.value || empertyValue || ''}
         {...rest}
-        error={!!error}
+        error={!! error}
         helperText = {error || helperText}
         onChange={handleChange}
         onBlur={handleBlur}
       />
     )
-  }
+  })
   return React.forwardRef((props, ref) => {
     return <WithFormField {...props} forwardedRef={ref} />;
   });

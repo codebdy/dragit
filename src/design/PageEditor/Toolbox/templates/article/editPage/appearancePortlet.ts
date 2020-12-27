@@ -66,6 +66,7 @@ export default{
                 fullWidth:true,
                 field:'status',
                 color:'primary',
+                onValue:'PUBLISHED'
               },                     
             }
           ]

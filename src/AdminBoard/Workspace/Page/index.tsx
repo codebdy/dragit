@@ -7,7 +7,7 @@ import ComponentRender from 'AdminBoard/Workspace/Page/ComponentRender';
 import { PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from 'base/PageAction';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { IPageJumper } from 'base/Model/IPageJumper';
-import { PageStore } from './PageStore';
+import { ModelStore } from './ModelStore';
 import { PageProvider } from './PageProvider';
 import { useAppStore } from 'store/helpers/useAppStore';
 import intl from 'react-intl-universal';
@@ -20,7 +20,7 @@ export const Page = observer((
   }
 )=>{
   const {page, pageParams, onPageAction} = props;
-  const [pageStore] = useState(new PageStore());
+  const [pageStore] = useState(new ModelStore());
   const appStore = useAppStore();
   const queryName = page?.schema?.query?.name;
 

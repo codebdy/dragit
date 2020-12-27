@@ -17,7 +17,7 @@ export var articlesData = [
           description:'SEO Description',
           keywords:'爱',
         },
-        channel:[1,3,32],
+        //channel:[1,3,32],
       },
       {
         id:2,

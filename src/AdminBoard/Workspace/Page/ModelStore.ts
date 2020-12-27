@@ -34,14 +34,18 @@ export class FieldStore{
   setModel(model:any){
     const fieldValue = model && this.fieldName ? model[this.fieldName] : undefined; 
     if(!this.subFields){
-      this.defaultValue = fieldValue  
+      this.defaultValue = fieldValue
+      this.value = fieldValue;
     }
     else{
       this.subFields?.forEach(fieldStore=>{
         fieldStore.setModel(fieldValue)
       })
     }
+  }
 
+  setValue(value:any){
+    this.value = value;
   }
 }
 
@@ -61,7 +65,7 @@ function parseFieldFromNode(fields:Map<string,FieldStore>, node: RXNode<IMeta>){
   })
 }
 
-export class PageStore{
+export class ModelStore{
   loading?: boolean;
   fields: Map<string,FieldStore>;
   pageLayout?:Array<RXNode<IMeta>>;
