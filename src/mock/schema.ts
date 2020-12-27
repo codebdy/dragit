@@ -1,12 +1,9 @@
-import { postsResolver } from "./resolvers/post/postsResolver";
-import { sleep } from "./resolvers/sleep";
-import { postResolver } from "./resolvers/post/postResolver";
-import { updatePostsResolver } from "./resolvers/post/updatePostsResolver";
-import { drawerItemsResolver } from "./resolvers/drawer/drawerItemsResolver";
-import { userByTokenResolver } from "./resolvers/login/userByTokenResolver";
-import { loginResolver } from "./resolvers/login/loginResolver";
-import { modulePageResolver } from "./resolvers/module/modulePageResolver";
-import { moduleBySlugResolver } from "./resolvers/module/moduleBySlugResolver";
+import { sleep } from "./utils/sleep";
+import { modulePageResolver } from "./module/modulePageResolver";
+import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
+import { drawerItemsResolver } from "./drawer/drawerItemsResolver";
+import { userByTokenResolver, loginResolver } from "./login/resolvers";
+import { postsResolver, postResolver, updatePostsResolver } from "./post/resolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `

@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import drawer from './resolvers/drawer/drawerData'
+import drawer from './drawer/drawerData'
 import dashboard from './views/dashboard'
 import auths from './data/auths'
 import appInfo from './data/appInfo'
@@ -8,8 +8,8 @@ import mockMedias from './medias/mock'
 import mockModules from './modules/mock'
 import mockTrees from './tree/mock'
 import getQueryVariable from './utils/getQueryVariable'
-import { addAuthsToUser } from './resolvers/login/addAuthsToUser'
-import { getUser } from './getUser'
+import { addAuthsToUser } from './login/addAuthsToUser'
+import { getUser } from './user/getUser'
 
 window.drawerData = drawer;
 

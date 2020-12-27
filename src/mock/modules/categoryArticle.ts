@@ -1,8 +1,8 @@
-import article from "mock/views/article";
+import article from "mock/post/views/article";
 import articleAttributeEdit from "mock/views/articleAttributeEdit";
 import articleAttributes from "mock/views/articleAttributes";
 import articleChannel from "mock/views/articleChannel";
-import articles from "mock/views/articles";
+import articles from "mock/post/views/articles";
 import articleTagEdit from "mock/views/articleTagEdit";
 import articleTags from "mock/views/articleTags";
 
