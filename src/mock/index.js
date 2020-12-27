@@ -6,7 +6,6 @@ import appInfo from './data/appInfo'
 import notifications from './data/notifications'
 import mockMedias from './medias/mock'
 import mockModules from './modules/mock'
-import mockModel from './model/mock'
 import mockTrees from './tree/mock'
 import getQueryVariable from './utils/getQueryVariable'
 import { addAuthsToUser } from './login/addAuthsToUser'
@@ -41,7 +40,6 @@ Mock.mock('/api/page/dashboard', 'get', dashboard)
 
 mockMedias();
 mockModules();
-mockModel();
 mockTrees();
 
 Mock.mock('/api/get-auths','get', (request)=>{

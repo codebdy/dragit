@@ -1,10 +1,9 @@
-import { models } from "mock/model";
+import roles from "mock/data/roles";
 
 export function addAuthsToUser(user:any) {
   if (!user) {
     return user;
   }
-  let roles = models['/Model/Role'];
   user.auths = [];
   if (!user.roleIds) {
     return user;

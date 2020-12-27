@@ -60,7 +60,6 @@ export const Workspace = observer(()=>{
       appStore.infoError(intl.get('server-error'), error?.message)
       console.log(error);      
     }
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[error])
 

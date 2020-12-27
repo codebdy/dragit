@@ -9,6 +9,8 @@ import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { IPageJumper } from 'base/Model/IPageJumper';
 import { PageStore } from './PageStore';
 import { PageProvider } from './PageProvider';
+import { useAppStore } from 'store/helpers/useAppStore';
+import intl from 'react-intl-universal';
 
 export const Page = observer((
   props:{
@@ -20,10 +22,12 @@ export const Page = observer((
   const {page, pageParams, onPageAction} = props;
   //const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>([]);
   const [pageStore] = useState(new PageStore());
+  const appStore = useAppStore();
+  const queryName = page?.schema?.query?.name;
   const createQueryGQL = ()=>{
     const QUERY_GQL = gql`
-      query ($id:ID!){
-        ${page?.schema?.query}(id:$id){
+      query ($id:ID){
+        ${queryName}(id:$id){
           id
           ${pageStore.toFieldsGQL()}
         }
@@ -31,15 +35,42 @@ export const Page = observer((
     `;
     return QUERY_GQL;
   }
-  const [excuteQuery, { called, loading:queryLoading, error, data }] = useLazyQuery(createQueryGQL(), {
-    variables: { id: pageParams?.dataId},
+  const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(createQueryGQL(), {
+    variables: { ...page?.schema?.query?.variables, id: pageParams?.dataId},
     notifyOnNetworkStatusChange: true
   });
 
   useEffect(()=>{
     pageStore.parsePage(page);
+    if(queryName){
+      excuteQuery();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page]);
+
+  useEffect(()=>{
+    pageStore.setLoading(queryLoading);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryLoading]);
+
+  useEffect(()=>{
+    if(data && queryName){
+      pageStore.setModel(data[queryName]);      
+    }
+    else{
+      pageStore.setModel(undefined);
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  useEffect(()=>{
+    if(error){
+      appStore.infoError(intl.get('server-error'), error?.message)
+      console.log(error);      
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[error])
 
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){

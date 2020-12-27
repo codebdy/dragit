@@ -1,8 +1,7 @@
+import users from "mock/data/users";
 import { addAuthsToUser } from "./addAuthsToUser";
-import { models } from "../model";
 
 export function login(account:string, password:string){
-  let users = models['/Model/User']
   if(!users){
     return undefined
   }

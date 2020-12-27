@@ -20,10 +20,15 @@ export class FieldStore{
 }
 
 export class PageStore{
+  loading?:boolean;
   fields?:FieldsMap;
   pageLayout?:Array<RXNode<IMeta>>;
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setLoading(loading?:boolean){
+    this.loading = loading;
   }
 
   parsePage(page?:IPage){
@@ -31,6 +36,10 @@ export class PageStore{
     let root = new RXNodeRoot<IMeta>();
     root.parse(cloneObject(layout));
     this.pageLayout = root.children;
+  }
+
+  setModel(model:any){
+    
   }
 
   toFieldsGQL(){

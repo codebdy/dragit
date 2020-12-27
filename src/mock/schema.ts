@@ -1,9 +1,12 @@
-import { articlesData } from "./data/articlesData";
 import drawer from "./drawer"
 import { getUser } from "./getUser";
 import { login } from "./login/login";
 import { getModuleBySlug } from "./modules/getModuleBySlug";
 import { getModulePage } from "./modules/getModulePage";
+import { postsResolver } from "./resolvers/post/postsResolver";
+import { sleep } from "./resolvers/sleep";
+import { postResolver } from "./resolvers/post/postResolver";
+import { updatePostsResolver } from "./resolvers/post/updatePostsResolver";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -93,6 +96,7 @@ export const schema = `
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
     posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
+    post(id:ID):Post
   }
 
   type Mutation{
@@ -100,12 +104,6 @@ export const schema = `
     updatePosts(command:String, ids:[ID] ):[Post]
   }
 `;
-
-function sleep(ms:number) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms)
-  })
-}
 
 // A map of functions which return data for the schema.
 export const resolvers = {
@@ -145,19 +143,11 @@ export const resolvers = {
       const module = getModuleBySlug(args.slug);
       return module
     },
-    posts:async (parent:any, args:any, context:any, info:any)=>{
-      await sleep(500);
-      //const module = getModuleBySlug(args.slug);
-      return {data:articlesData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}}
-    },
+    posts:postsResolver,
+    post:postResolver,
   },
 
   Mutation:{
-    updatePosts:async (parent:any, args:any, context:any, info:any)=>{
-      await sleep(200);
-      //const module = getModuleBySlug(args.slug);
-      return articlesData
-    },
-   
+    updatePosts:updatePostsResolver,   
   }
 };
