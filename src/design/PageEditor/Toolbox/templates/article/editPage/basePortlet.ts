@@ -1,5 +1,3 @@
-import { API_LIST_MODEL } from "APIs/model";
-import { API_GET_MODEL_TREE } from "APIs/tree";
 
 export default{
   name:'Portlet',
@@ -143,12 +141,12 @@ export default{
                 multiSelect:true,
                 //size:"small",
                 xs:6,
-                dataApi:{
-                  ...API_GET_MODEL_TREE,
-                  params:{
-                    modelName:'/Model/ArticleChannel',
-                  },                               
-                },
+                //dataApi:{
+                //  ...API_GET_MODEL_TREE,
+                //  params:{
+                //    modelName:'/Model/ArticleChannel',
+                //  },                               
+                //},
 
                 rule:{
                   //required:true,
@@ -171,12 +169,12 @@ export default{
                 field:'tags',
                 multiple:true,
                 fullWidth:true,
-                dataApi:{
-                  url: API_LIST_MODEL.url,
-                  params:{
-                    modelName:'/Model/Tag',
-                  }
-                },
+                //dataApi:{
+                //  url: API_LIST_MODEL.url,
+                //  params:{
+                //    modelName:'/Model/Tag',
+                //  }
+                //},
                 rule:{
                   //required:true,
                 },

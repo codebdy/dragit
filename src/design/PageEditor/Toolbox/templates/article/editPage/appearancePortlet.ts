@@ -1,5 +1,3 @@
-import { API_LIST_MODEL } from "APIs/model";
-
 export default{
   name:'Portlet',
   props: {
@@ -45,12 +43,12 @@ export default{
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
-                dataApi:{
-                  ...API_LIST_MODEL,
-                  params:{
-                    modelName:'/Model/ArticleAttribute',
-                  }                              
-                }
+                //dataApi:{
+                //  ...API_LIST_MODEL,
+                //  params:{
+               //     modelName:'/Model/ArticleAttribute',
+                //  }                              
+               // }
               },                         
             }
           ]

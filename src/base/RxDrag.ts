@@ -8,13 +8,15 @@ var compoentsMap : {
   [key: string]: {
     component?:any,
     rule:IRule,
+    hasChildField?:boolean,
   }
 } = {}
 
-function register(name:string, component:any, rule:any = Rule): any{
+function register(name:string, component:any, rule:any = Rule, hasChildField:boolean = false): any{
   compoentsMap[name] = {
     component,
-    rule: new rule()
+    rule: new rule(),
+    hasChildField: hasChildField,
   }
 }
 
@@ -41,4 +43,8 @@ function resolveRule(name:string):IRule{
   return  compoentsMap[name] ? compoentsMap[name].rule : new Rule();
 }
 
-export {register, resolveComponent, resolveRule, registerHtmlTag}
+function hasChildField(name:string):boolean|undefined{
+  return  compoentsMap[name] ? compoentsMap[name].hasChildField : false;
+}
+
+export {register, resolveComponent, resolveRule, registerHtmlTag, hasChildField}
