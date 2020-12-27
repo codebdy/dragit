@@ -1,12 +1,12 @@
-import drawer from "./drawer"
-import { getUser } from "./getUser";
-import { login } from "./login/login";
-import { getModuleBySlug } from "./modules/getModuleBySlug";
-import { getModulePage } from "./modules/getModulePage";
 import { postsResolver } from "./resolvers/post/postsResolver";
 import { sleep } from "./resolvers/sleep";
 import { postResolver } from "./resolvers/post/postResolver";
 import { updatePostsResolver } from "./resolvers/post/updatePostsResolver";
+import { drawerItemsResolver } from "./resolvers/drawer/drawerItemsResolver";
+import { userByTokenResolver } from "./resolvers/login/userByTokenResolver";
+import { loginResolver } from "./resolvers/login/loginResolver";
+import { modulePageResolver } from "./resolvers/module/modulePageResolver";
+import { moduleBySlugResolver } from "./resolvers/module/moduleBySlugResolver";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -109,40 +109,18 @@ export const schema = `
 export const resolvers = {
   JSON: GraphQLJSON,
   Query: {
-    userByToken: async(parent:any, args:any, context:any, info:any) => {
-      await sleep(1000);
-      return getUser(args.token);
-    },
-
-    login:async(parent:any, args:any, context:any, info:any)=>{
-      //console.log("Login mock", parent, context, info,  args);
-      await sleep(1000);
-      const user = login(args.login_name, args.password);
-      return {user, token:user.login_name};
-    },
-
+    userByToken: userByTokenResolver,
+    login:loginResolver,
     //不能返回树形结构，用String代替
-    drawerItems:async ()=>{
-      await sleep(1000);
-      return drawer
-    },
-
-    modulePage:async (parent:any, args:any, context:any, info:any)=>{
-      await sleep(1000);
-      const page = getModulePage(args.moduleSlug, args.pageSlug);
-      return page
-    },
+    drawerItems:drawerItemsResolver,
+    modulePage:modulePageResolver,
 
     page:async (parent:any, args:any, context:any, info:any)=>{
       await sleep(1000);
       return null
     },
 
-    moduleBySlug:async (parent:any, args:any, context:any, info:any)=>{
-      await sleep(1000);
-      const module = getModuleBySlug(args.slug);
-      return module
-    },
+    moduleBySlug:moduleBySlugResolver,
     posts:postsResolver,
     post:postResolver,
   },
