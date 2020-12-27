@@ -75,9 +75,9 @@ register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);
 register('MultiSelectBox', MultiSelectBox, SelectRule)
-register('OneToManyTable', OneToManyTable, OneToManyTableRule);
-register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule);
-register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
+register('OneToManyTable', OneToManyTable, OneToManyTableRule, true);
+register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule, true);
+register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule, true);
 register('TinyMCE', TinyMCE, TinyMCERule);
 register('TreeEditor', TreeEditor, TreeEditorRule);
 register('TreeSelect', TreeSelect, TreeSelectRule);

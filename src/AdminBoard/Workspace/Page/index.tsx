@@ -24,7 +24,9 @@ export const Page = observer((
   const [pageStore] = useState(new PageStore());
   const appStore = useAppStore();
   const queryName = page?.schema?.query?.name;
+
   const createQueryGQL = ()=>{
+    //console.log('createQueryGQL',pageStore.toFieldsGQL())
     const QUERY_GQL = gql`
       query ($id:ID){
         ${queryName}(id:$id){
@@ -39,6 +41,8 @@ export const Page = observer((
     variables: { ...page?.schema?.query?.variables, id: pageParams?.dataId},
     notifyOnNetworkStatusChange: true
   });
+
+  console.log('data',queryLoading, error, data)
 
   useEffect(()=>{
     pageStore.parsePage(page);

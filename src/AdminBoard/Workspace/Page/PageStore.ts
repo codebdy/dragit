@@ -1,24 +1,24 @@
 import { IMeta } from "base/Model/IMeta";
 import { IPage } from "base/Model/IPage";
 import { IValidateRule } from "base/Model/IValidateRule";
-import { hasChildField } from "base/RxDrag";
+import { hasSubFields } from "base/RxDrag";
 import { RXNodeRoot } from "base/RXNode/Root";
 import { RXNode } from "base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
 import { cloneObject } from "utils/cloneObject";
 
 export class FieldStore{
-  field?: string;
+  fieldName?: string;
   defaultValue?: any;
   value?: any;
   error?: string;
   rule?: IValidateRule;
   subFields?: Map<string,FieldStore>;
   loading?: boolean;
-  constructor(field:string) {
+  constructor(meta:IMeta) {
     makeAutoObservable(this);    
-    this.field = field;
-    if(hasChildField(field)){
+    this.fieldName = meta.props?.field;
+    if(hasSubFields(meta.name)){
       this.subFields = new Map<string,FieldStore>();
     }
   }
@@ -28,19 +28,19 @@ export class FieldStore{
     this.subFields?.forEach(fieldStore=>{
       subGql = subGql + ` ${fieldStore.toFieldsGQL()} `
     })
-    return subGql ? ` ${this.field} { ${subGql} } ` : ` ${this.field} `;
+    return subGql ? ` ${this.fieldName} { ${subGql} } ` : ` ${this.fieldName} `;
   }
 }
 
 function parseFieldFromNode(fields:Map<string,FieldStore>, node: RXNode<IMeta>){
-  const field = node.meta.field;
+  const fieldName = node.meta.props?.field;
   let subFields = fields;
-  if(field){
-    let fieldStore = new FieldStore(field);
+  if(fieldName){
+    let fieldStore = new FieldStore(node.meta);
     if(fieldStore.subFields){
       subFields = fieldStore.subFields;
     }
-    fields.set(field, fieldStore);
+    fields.set(fieldName, fieldStore);
   }
   
   node.children?.forEach(child=>{
