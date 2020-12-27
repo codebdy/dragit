@@ -64,7 +64,7 @@ export default{
               props:{
                 label:'发布',
                 fullWidth:true,
-                field:'published',
+                field:'status',
                 color:'primary',
               },                     
             }

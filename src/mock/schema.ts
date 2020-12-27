@@ -4,6 +4,7 @@ import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
 import { drawerItemsResolver } from "./drawer/drawerItemsResolver";
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
 import { postsResolver, postResolver, updatePostsResolver } from "./article/post/resolvers";
+import { articleGQLType, articleGQLQuery, articleGQLMutation } from "./article/graphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -14,6 +15,13 @@ export const schema = `
     thumbnail: String!
     title: String
     src: String
+  }
+
+  type SeoMeta{
+    id:ID!
+    title: String
+    keywords: String
+    description: String 
   }
 
   type User {
@@ -67,22 +75,7 @@ export const schema = `
     DRAFT 
   }
 
-  type Post{
-    id: ID!
-    feathureImage: Media
-    slug: String
-    title: String
-    shortTitle: String
-    content: String
-    status: PostStatus
-    created_at: String!
-    updated_at: String 
-  }
-
-  type Posts{
-    paginatorInfo:PaginatorInfo!
-    data:[Post]
-  }
+  ${articleGQLType}
 
   type Query {
     "登录"
@@ -92,13 +85,11 @@ export const schema = `
     modulePage(moduleSlug:String!, pageSlug:String):Page
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
-    posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
-    post(id:ID):Post
+    ${articleGQLQuery}
   }
 
   type Mutation{
-    "Query and Operation"
-    updatePosts(command:String, ids:[ID] ):[Post]
+    ${articleGQLMutation}
   }
 `;
 

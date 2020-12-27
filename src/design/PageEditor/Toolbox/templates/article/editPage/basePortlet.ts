@@ -116,7 +116,7 @@ export default{
                 //size:"small",
                 type:'date',
                 shrinkLabel:true,
-                field:'create_date',
+                field:'created_at',
               },
             }
           ],

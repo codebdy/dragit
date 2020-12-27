@@ -28,7 +28,7 @@ export class FieldStore{
     this.subFields?.forEach(fieldStore=>{
       subGql = subGql + ` ${fieldStore.toFieldsGQL()} `
     })
-    return subGql ? ` ${this.fieldName} { ${subGql} } ` : ` ${this.fieldName} `;
+    return subGql ? ` ${this.fieldName} { id ${subGql} } ` : ` ${this.fieldName} `;
   }
 }
 
