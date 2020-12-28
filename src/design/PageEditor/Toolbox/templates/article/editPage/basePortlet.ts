@@ -114,7 +114,7 @@ export default{
                 variant:"outlined",
                 fullWidth:true,
                 //size:"small",
-                type:'date',
+                type:'datetime-local',
                 shrinkLabel:true,
                 field:'created_at',
               },
@@ -163,12 +163,7 @@ export default{
                 field:'tags',
                 multiple:true,
                 fullWidth:true,
-                //dataApi:{
-                //  url: API_LIST_MODEL.url,
-                //  params:{
-                //    modelName:'/Model/Tag',
-                //  }
-                //},
+                query:'allPostTags',
                 rule:{
                   //required:true,
                 },

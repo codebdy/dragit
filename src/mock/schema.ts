@@ -6,6 +6,7 @@ import { userByTokenResolver, loginResolver } from "./login/resolvers";
 import { postsResolver, postResolver, updatePostsResolver } from "./article/post/resolvers";
 import { articleGQLType, articleGQLQuery, articleGQLMutation } from "./article/graphql";
 import { channelTreeResolver } from "./article/channel/resolvers";
+import { allPostTagsResolver } from "./article/tag/resolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -113,6 +114,7 @@ export const resolvers = {
     posts:postsResolver,
     post:postResolver,
     channelTree:channelTreeResolver,
+    allPostTags:allPostTagsResolver,
   },
 
   Mutation:{

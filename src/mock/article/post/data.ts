@@ -3,7 +3,7 @@ export var articlesData = [
         id:1,
         title:'只要在心里留一块空地，爱就会自然地注入心中',
         status:'DRAFT',
-        created_at:'2020-11-30 14:38',
+        created_at:'2020-11-30T14:38',
         content:"<p>轻轻的，我来了</p><p>正如我轻轻的走</p>",
         feathureImage: {
           id:2,
@@ -18,6 +18,7 @@ export var articlesData = [
           keywords:'关键词',
         },
         channel:[1,3,32],
+        tags:['机器人','价值投资'],
       },
       {
         id:2,

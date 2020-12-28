@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { AxiosRequestConfig } from 'axios';
-import { useBaseItems } from 'base/Hooks/useBaseItems';
+import { gql, useQuery } from '@apollo/react-hooks';
+import { useAppStore } from 'store/helpers/useAppStore';
+import intl from 'react-intl-universal';
 
 const Combobox = React.forwardRef((
   props:{
@@ -12,7 +13,7 @@ const Combobox = React.forwardRef((
     itemKey?:string,
     itemName?:string,
     fullWidth?:boolean,
-    dataApi?:AxiosRequestConfig;
+    query?:string;
     items?:Array<any>;
     label?:string, 
     variant?:any, 
@@ -26,19 +27,36 @@ const Combobox = React.forwardRef((
     onChange, 
     itemName = 'name',
     fullWidth,
-    dataApi,
+    query,
     items,
     ...rest
   } = props;
 
 
-  let name = dataApi ? itemName : 'label';
+  let name = query ? itemName : 'label';
   //const mountedRef = useRef(true);
   const empertyValue = multiple ? []:'';
-  const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi);
-  const [menuItems, loading] = useBaseItems(request);
+  const QUERY_DATA = gql`
+    query {
+      ${query}{
+        id
+        ${itemName}
+      }
+    }
+  `;
+  const { loading, error: queryError, data } = useQuery(QUERY_DATA);
+  const appStore = useAppStore();
+  
+  useEffect(()=>{
+    if(queryError){
+      appStore.infoError(intl.get('server-error'), queryError?.message)
+      console.log( queryError);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[queryError])
+  
 
-  const itemsData = (dataApi? menuItems : items) as any;
+  const itemsData = (query? (data&&data[query])||[] : items) as any;
   
   const [inputValue, setInputValue] = React.useState<any>(value||empertyValue);
 
