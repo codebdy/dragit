@@ -78,7 +78,7 @@ export default function FieldBox(props:{pageSchema?:IPageSchema, onChange:any}){
           variant="outlined" 
           size="small"
           fullWidth
-          dataApi = {API_GET_AUTHS}
+          //dataApi = {API_GET_AUTHS}
           itemKey = "slug"
           groupByField = "module"
           value = {pageSchema?.auths || []}

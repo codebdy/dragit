@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { AxiosRequestConfig } from 'axios';
-import { useBaseItems } from 'base/Hooks/useBaseItems';
+import { gql, useQuery } from '@apollo/react-hooks';
+import { useAppStore } from 'store/helpers/useAppStore';
+import intl from 'react-intl-universal';
 
 const MultiSelectBox = React.forwardRef((
   props:{
-    value?:Array<number|string>,
+    value?:Array<string>,
     onChange?:any,
     itemKey?:string,
     itemName?:string,
     fullWidth?:boolean,
-    dataApi?:AxiosRequestConfig;
+    query?:string;
     items?:Array<any>;
     label?:string, 
     variant?:any, 
@@ -26,7 +27,7 @@ const MultiSelectBox = React.forwardRef((
     onChange, 
     itemName = 'name',
     fullWidth,
-    dataApi,
+    query,
     items,
     itemKey = 'id',
     groupByField,
@@ -35,39 +36,38 @@ const MultiSelectBox = React.forwardRef((
     ...rest
   } = props;
 
-  let key = dataApi ? itemKey : 'slug';
-  let name = dataApi ? itemName : 'label';
+  let key = query ? itemKey : 'slug';
+  let name = query ? itemName : 'label';
   //const mountedRef = useRef(true);
-  const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi)
-  const [menuItems, loading] = useBaseItems(request);
-  const itemsData = (dataApi? menuItems : items) as any;  
-  const [inputValue, setInputValue] = React.useState<Array<any>>([]);
+  const [inputValue, setInputValue] = React.useState<Array<any>>(value||[]);
 
-  useEffect(()=>{
-    setInputValue(keysToItem(value||[]))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemsData, value])
-  const keysToItem = (values:Array<any>)=>{
-    if(!itemsData || !values){
-      return [];
+  const QUERY_DATA = gql`
+  query {
+    ${query}{
+      id
+      ${itemName}
     }
-    return values.map((oneValue:any)=>{
-        for(var i = 0; i < itemsData.length; i++){
-          // eslint-disable-next-line eqeqeq
-          if(itemsData[i][key] == oneValue){
-            return itemsData[i];
-          }
-        }
-        return {};        
-      })
   }
+`;
+const { loading, error: queryError, data } = useQuery(QUERY_DATA);
+const appStore = useAppStore();
 
+useEffect(()=>{
+  if(queryError){
+    appStore.infoError(intl.get('server-error'), queryError?.message)
+    console.log( queryError);
+  }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[queryError])
+
+
+const itemsData = (query? (data&&data[query])||[] : items) as any;
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
 
     onChange && onChange({
       target:{
-        value:newValue?.map((value:any)=>value[key]),
+        value:newValue,
       }
     });
   }

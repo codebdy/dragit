@@ -8,6 +8,10 @@ export var articleGQLType = `
     id:ID!
     name:String
   }
+  type PostChannel{
+    id:ID!
+    name:String
+  }
 
   type Post{
     id: ID!
@@ -15,7 +19,7 @@ export var articleGQLType = `
     slug: String
     title: String
     auther: String
-    channel: [ID]
+    channel: [PostChannel]
     tags:[String]
     email: String
     shortTitle: String
@@ -40,6 +44,7 @@ export var articleGQLQuery = `
   post(id:ID):Post
   channelTree:JSON
   allPostTags:[PostTag]
+  allPostAttributes:[PostAttribute]
 `
 
 export var articleGQLMutation = `

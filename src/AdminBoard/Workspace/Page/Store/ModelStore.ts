@@ -11,6 +11,7 @@ import { TableFieldStore } from "./TableFieldStore";
 import { ModelArrayFieldStore } from "./ModelArrayFieldStore";
 import { ModelFieldStore } from "./ModelFieldStore";
 import { IModelStore } from "./IModelStore";
+import { SelectFieldStore } from "./SelectFieldStore";
 
 function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
   const fieldName = node.meta.props?.field;
@@ -18,6 +19,9 @@ function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
   if(fieldName){
     let fieldType = resolveFieldType(node.meta.name);
     let fieldStore: any = new FieldStore(node.meta);
+    if(fieldType === FieldType.Select){
+      fieldStore = new SelectFieldStore(node.meta);
+    }
     if(fieldType === FieldType.Model){
       fieldStore = new ModelFieldStore(node.meta);
       nextParentStore = fieldStore;

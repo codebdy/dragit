@@ -17,19 +17,19 @@ export default function TreeNode(
   props:{
     node:ITreeNode,
     nameKey:string,
-    selected?:Array<string>,
-    onSelectChange?:(id:string|undefined, isSelected:boolean)=>void,
+    selected?:Array<ITreeNode>,
+    onSelectChange?:(node:ITreeNode, isSelected:boolean)=>void,
   }
 ){
   const {node, nameKey, selected, onSelectChange} = props;
   const classes = useStyles();
-  const isChecked = (id?:string):boolean=>{
+  const isChecked = (node?:{id?:string}):boolean=>{
     if(!selected){
       return false;
     }
 
     for(let i = 0; i < selected.length; i++){
-      if(selected[i] === id){
+      if(selected[i].id === node?.id){
         return true;
       }
     }
@@ -37,18 +37,18 @@ export default function TreeNode(
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
-    onSelectChange && onSelectChange(node.id, event.target.checked);
+    onSelectChange && onSelectChange(node, event.target.checked);
   }
 
   return (
     <TreeItem 
-      nodeId={node.id?.toString() || ''}
+      nodeId={node.id || ''}
       label = {
         <div className = {classes.labelRoot}  onClick = {e=>e.stopPropagation()}>
           <FormControlLabel
             control={
               <Checkbox
-                checked={isChecked(node.id)}
+                checked={isChecked(node)}
                 onChange={handleChange}
                 color="primary"
               />

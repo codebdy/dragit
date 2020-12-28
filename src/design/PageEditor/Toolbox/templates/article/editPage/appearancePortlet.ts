@@ -43,12 +43,7 @@ export default{
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
-                //dataApi:{
-                //  ...API_LIST_MODEL,
-                //  params:{
-               //     modelName:'/Model/ArticleAttribute',
-                //  }                              
-               // }
+                query:'allPostAttributes',
               },                         
             }
           ]

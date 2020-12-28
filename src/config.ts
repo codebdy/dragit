@@ -73,15 +73,15 @@ register('PortletFooter', PortletFooter);
 register('Typography', Typography, TypographyRule);
 register('ListView', ListView, ListViewRule);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
-register('SelectBox', SelectBox, SelectRule);
+register('SelectBox', SelectBox, SelectRule, FieldType.Select);
 register('Combobox', Combobox, SelectRule);
-register('MultiSelectBox', MultiSelectBox, SelectRule)
+register('MultiSelectBox', MultiSelectBox, SelectRule, FieldType.Select )
 register('OneToManyTable', OneToManyTable, OneToManyTableRule, FieldType.ModelArray);
 register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule, FieldType.Model);
 register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule, FieldType.ModelArray);
 register('TinyMCE', TinyMCE, TinyMCERule);
 register('TreeEditor', TreeEditor, TreeEditorRule);
-register('TreeSelect', TreeSelect, TreeSelectRule);
+register('TreeSelect', TreeSelect, TreeSelectRule, FieldType.Select);
 register('MediaSelect', MediaSelect);
 register('Medias', Medias);
 register('AntDesignChart', AntDesignChart, AntDesignChartRule);

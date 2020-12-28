@@ -64,7 +64,7 @@ export default function ChipsInput(
     onFocus?:(event?: any)=>void,
     onBlur?:(event?: any)=>void,
     value?:{
-      values?:Array<string>, 
+      values?:Array<{id:string}>, 
       rootNodes?:Array<ITreeNode>,
       nameKey?:string,
       height?:string,
@@ -139,17 +139,25 @@ export default function ChipsInput(
     );
   };
 
-  const handleSelectChange = (id:string|undefined, isSelected:boolean)=>{
+  const handleSelectChange = (node:ITreeNode, isSelected:boolean)=>{
     let valuesCopy = [...values];
+    const changedValue = node;
     if(isSelected){
-      valuesCopy.push(id);
+      valuesCopy.push(changedValue);
     }
     else{
-      remove(id, valuesCopy)
+      valuesCopy = valuesCopy.filter(chipValue=>{
+        if(chipValue.id === node.id){
+          if(!isSelected){
+            return false;
+          }
+        }
+       return true
+      })
     }
 
     if(!multiSelect){
-      valuesCopy = [id];
+      valuesCopy = [changedValue];
       setFocused(false);
       setAnchorEl(null);    
     }
@@ -193,12 +201,12 @@ export default function ChipsInput(
         style={{minHeight:size==="small" ? theme.spacing(4.6) : theme.spacing(6.6)}}
       >
         <ul className={classes.chips}>
-          {values && values.map((id:string) => {
+          {values && values.map((chipValue:{id:string}) => {
             return (
-              <li key={id}>
+              <li key={chipValue.id}>
                 <Chip
-                  label={getName(id)}
-                  onDelete={handleDelete(id)}
+                  label={getName(chipValue.id)}
+                  onDelete={handleDelete(chipValue.id)}
                   className={classes.chip}
                   size = {size}
                 />
