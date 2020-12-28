@@ -2,8 +2,9 @@ import { IValidateRule } from "base/Model/IValidateRule";
 import React, { useEffect } from 'react';
 import intl from 'react-intl-universal';
 import useFieldName from '../../views/Page/useFieldName';
-import { useFieldStore, useModelStore } from "./PageProvider";
 import {observer} from 'mobx-react-lite';
+import { ModelProvider, useFieldStore, useModelStore } from "./Store/ModelProvider";
+import { ModelFieldStore } from "./Store/ModelFieldStore";
 
 function metaRuleToRegisterRules(rule:IValidateRule){
   let rtRules:any = {};
@@ -55,9 +56,9 @@ function metaRuleToRegisterRules(rule:IValidateRule){
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
 
-    const {field, forwardedRef, empertyValue, rule, helperText, onDirty, ...rest} = props;
+    const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
 
-    const fieldName = useFieldName(field);
+    //const fieldName = useFieldName(field);
     //const subModelContext = useContext(SubModelContext);
     const fieldStore = useFieldStore(field);
     const modelStore =  useModelStore();
@@ -102,18 +103,24 @@ const withFormField = (Component:any)=>{
       //setError(newError)
     }
     const error = fieldStore?.error;
+    const compent = <Component
+      ref={forwardedRef}
+      //name = {field}
+      loading={fieldStore?.loading || modelStore.loading}
+      value={fieldStore?.value || empertyValue || ''}
+      {...rest}
+      error={!! error}
+      helperText = {error || helperText}
+      onChange={handleChange}
+      onBlur={handleBlur}
+    />;
     return (
-      <Component
-        ref={forwardedRef}
-        name = {fieldName}
-        loading={fieldStore?.loading || modelStore.loading}
-        value={fieldStore?.value || empertyValue || ''}
-        {...rest}
-        error={!! error}
-        helperText = {error || helperText}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      fieldStore instanceof ModelFieldStore?
+      <ModelProvider value = {fieldStore as any}>
+        {compent}
+      </ModelProvider>
+      :
+      compent
     )
   })
   return React.forwardRef((props, ref) => {

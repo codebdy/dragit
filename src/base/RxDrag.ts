@@ -1,3 +1,4 @@
+import { FieldType } from "base/FieldType";
 import { IRule } from "base/Rules/IRule";
 import { Rule } from "base/Rules/Rule";
 //import withMargin from "./HOCs/withMargin";
@@ -8,15 +9,15 @@ var compoentsMap : {
   [key: string]: {
     component?:any,
     rule:IRule,
-    hasSubField?:boolean,
+    fieldType?:FieldType,
   }
 } = {}
 
-function register(name:string, component:any, rule:any = Rule, hasSubField:boolean = false): any{
+function register(name:string, component:any, rule:any = Rule, fieldType:FieldType = FieldType.Normal): any{
   compoentsMap[name] = {
     component,
     rule: new rule(),
-    hasSubField: hasSubField,
+    fieldType: fieldType,
   }
 }
 
@@ -43,8 +44,8 @@ function resolveRule(name:string):IRule{
   return  compoentsMap[name] ? compoentsMap[name].rule : new Rule();
 }
 
-function hasSubFields(name:string):boolean|undefined{
-  return  compoentsMap[name] ? compoentsMap[name].hasSubField : false;
+function resolveFieldType(name:string):FieldType|undefined{
+  return  compoentsMap[name] ? compoentsMap[name].fieldType : FieldType.Normal;
 }
 
-export {register, resolveComponent, resolveRule, registerHtmlTag, hasSubFields}
+export {register, resolveComponent, resolveRule, registerHtmlTag, resolveFieldType}

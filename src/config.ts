@@ -53,6 +53,7 @@ import { CheckboxGroupRule } from 'components/CheckboxGroup/Rule';
 import RadioGroup from 'components/RadioGroup';
 import { RadioGroupRule } from 'components/RadioGroup/Rule';
 import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
+import { FieldType } from "base/FieldType";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -75,9 +76,9 @@ register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);
 register('MultiSelectBox', MultiSelectBox, SelectRule)
-register('OneToManyTable', OneToManyTable, OneToManyTableRule, true);
-register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule, true);
-register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule, true);
+register('OneToManyTable', OneToManyTable, OneToManyTableRule, FieldType.ModelArray);
+register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule, FieldType.Model);
+register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule, FieldType.ModelArray);
 register('TinyMCE', TinyMCE, TinyMCERule);
 register('TreeEditor', TreeEditor, TreeEditorRule);
 register('TreeSelect', TreeSelect, TreeSelectRule);

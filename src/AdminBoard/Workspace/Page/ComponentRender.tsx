@@ -11,9 +11,8 @@ export default function ComponentRender(
   props:{
     component:RXNode<IMeta>, 
     onPageAction?: (pageAction:PageAction)=> void,
-    onDirty:()=>void,
   }){
-  const {component, onPageAction, onDirty} = props;
+  const {component, onPageAction} = props;
   const loggedUser = useLoggedUser();
   const onClickAction = component.meta.props?.onClick;
   let Component = resolveComponent(component.meta);
@@ -57,10 +56,6 @@ export default function ComponentRender(
     onClick:handleOnClick
   }
 
-  if(component.meta.props?.field){
-    elementProps.onDirty = onDirty;
-  }
-
   if(withActions){
     elementProps.onAction = onPageAction;
   }
@@ -70,7 +65,7 @@ export default function ComponentRender(
       {rxText}
       {component.children?.map((child: RXNode<IMeta>)=>{
         return (
-          <ComponentRender key={child.id} component={child} onPageAction={onPageAction} onDirty = {onDirty}/>
+          <ComponentRender key={child.id} component={child} onPageAction={onPageAction}/>
         )
       })}
     </Component>)

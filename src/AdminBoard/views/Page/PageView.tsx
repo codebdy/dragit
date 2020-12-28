@@ -58,7 +58,6 @@ const PageView = ()=>{
   const [submit, setSubmit] = useState(false);
   const [openAlert, setOpentAlert] = useState(false);
   const [closeAfterSubmit, setCloseAfterSubmit] = useState(false);
-  const [isDirty] = useState({value:false});
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
   //usePageModel(pageMeta?.schema, id);
@@ -124,7 +123,6 @@ const PageView = ()=>{
 
   const handleBackConfirm = ()=>{
     history.goBack();
-    isDirty.value = false;
     setBackConfirmOpen(false);
   }
   
@@ -136,32 +134,27 @@ const PageView = ()=>{
         return;
         
       case GO_BACK_ACTION:
-        if(isDirty.value){
-          setBackConfirmOpen(true);
-        }
-        else{
+        //if(isDirty.value){
+        //  setBackConfirmOpen(true);
+        //}
+        //else{
           history.goBack();
-        }
+        //}
         return;
       
       case SUBMIT_ACTION:
         setCloseAfterSubmit(true);
         setSubmit(true);
-        isDirty.value = false;
         return;
       
       case SUBMIT_AND_NOT_CLOSE_ACTION:
         setCloseAfterSubmit(false);
         setSubmit(true);
-        isDirty.value = false;
         return;
     }
     
   }
 
-  const handleDirty = ()=>{
-    isDirty.value = true;
-  }
 
   let pageContent:any = loadingPageMeta ?
     <PageSkeleton />
@@ -174,7 +167,6 @@ const PageView = ()=>{
               key={child.id} 
               component={child} 
               onPageAction={formActionHandle}
-              onDirty = {handleDirty}
             />
           )
         })

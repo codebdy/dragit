@@ -7,10 +7,10 @@ import ComponentRender from 'AdminBoard/Workspace/Page/ComponentRender';
 import { PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from 'base/PageAction';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { IPageJumper } from 'base/Model/IPageJumper';
-import { ModelStore } from './ModelStore';
-import { PageProvider } from './PageProvider';
 import { useAppStore } from 'store/helpers/useAppStore';
 import intl from 'react-intl-universal';
+import { ModelProvider } from './Store/ModelProvider';
+import { ModelStore } from './Store/ModelStore';
 
 export const Page = observer((
   props:{
@@ -23,7 +23,7 @@ export const Page = observer((
   const [pageStore] = useState(new ModelStore());
   const appStore = useAppStore();
   const queryName = page?.schema?.query?.name;
-
+  console.log(pageStore.toFieldsGQL())
   const createQueryGQL = ()=>{
     //console.log('createQueryGQL',pageStore.toFieldsGQL())
     const QUERY_GQL = gql`
@@ -41,6 +41,7 @@ export const Page = observer((
     notifyOnNetworkStatusChange: true
   });
 
+  console.log(error, data)
   useEffect(()=>{
     pageStore.parsePage(page);
     if(queryName){
@@ -91,12 +92,8 @@ export const Page = observer((
     onPageAction && onPageAction(action);
   }
 
-
-  const handleDirty = ()=>{
-
-  }
   return (
-    <PageProvider value = {pageStore}>
+    <ModelProvider value = {pageStore}>
       {
         pageStore.pageLayout?.map((child:RXNode<IMeta>)=>{
           return (
@@ -104,11 +101,10 @@ export const Page = observer((
               key={child.id} 
               component={child} 
               onPageAction={hanlePageAction}
-              onDirty = {handleDirty}
             />
           )
         })
       }
-    </PageProvider>
+    </ModelProvider>
   )
 })
