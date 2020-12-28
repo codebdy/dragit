@@ -17,6 +17,7 @@ export var articlesData = [
           description:'SEO Description',
           keywords:'关键词',
         },
+        attributes:[{id:'1'},{id:'3'}],
         channel:[{id:'1'},{id:'3'},{id:'32'}],
         tags:['机器人','价值投资'],
       },

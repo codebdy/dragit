@@ -95,7 +95,11 @@ const itemsData = (query? (data&&data[query])||[] : items) as any;
       }}
 
       getOptionLabel={(option) => {
-        return option[name]
+        for(var i = 0; i < itemsData.length; i++){
+          if(itemsData[i][itemKey] === option[itemKey]){
+            return itemsData[i][name]
+          }
+        }
       }}
 
       groupBy = {(option) => option.module}
