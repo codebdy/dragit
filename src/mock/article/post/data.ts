@@ -15,9 +15,9 @@ export var articlesData = [
           id:5,
           title:'Seo Title',
           description:'SEO Description',
-          keywords:'爱',
+          keywords:'关键词',
         },
-        //channel:[1,3,32],
+        channel:[1,3,32],
       },
       {
         id:2,

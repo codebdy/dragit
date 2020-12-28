@@ -1,9 +1,11 @@
+import { useQuery } from '@apollo/react-hooks';
 import { createStyles, FilledInput, FormControl, FormHelperText, Input, InputLabel, makeStyles, OutlinedInput, Theme } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import { useAxios } from 'base/Hooks/useAxios';
-import { ITreeNode } from 'base/Model/ITreeNode';
-import React from 'react';
+import gql from 'graphql-tag';
+import React, { useEffect } from 'react';
+import { useAppStore } from 'store/helpers/useAppStore';
 import ChipsInput from './ChipsInput';
+import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,12 +33,27 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
     nameKey, 
     multiSelect, 
     height,
-    dataApi,
+    query,
     size, 
     isDeisgning,
     ...rest} = props;
   const classes = useStyles();
-  const [rootNodes, loading] = useAxios<Array<ITreeNode>>(dataApi)
+  const QUERY_TREE = gql`
+    query {
+      ${query}
+    }
+  `;
+  const { loading, error: queryError, data } = useQuery(QUERY_TREE);
+  const appStore = useAppStore();
+  
+  useEffect(()=>{
+    if(queryError){
+      appStore.infoError(intl.get('server-error'), queryError?.message)
+      console.log( queryError);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[queryError])
+  
   let InputControl = Input;
   if(variant === 'outlined'){
     InputControl = OutlinedInput;
@@ -69,7 +86,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
             value={
               {
                 values:values,
-                rootNodes:rootNodes,
+                rootNodes:(data && data[query])||[],
                 nameKey:nameKey,
                 height:height,
                 size:size,

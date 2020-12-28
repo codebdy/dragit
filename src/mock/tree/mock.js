@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import articleChannels from './articleChannels'
+import articleChannels from '../article/channel/articleChannels'
 import productCategories from './productCategories'
 import { getModelName } from '../module/getModelName';
 

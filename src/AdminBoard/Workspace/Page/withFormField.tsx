@@ -1,7 +1,6 @@
 import { IValidateRule } from "base/Model/IValidateRule";
-import React, { useEffect } from 'react';
+import React from 'react';
 import intl from 'react-intl-universal';
-import useFieldName from '../../views/Page/useFieldName';
 import {observer} from 'mobx-react-lite';
 import { ModelProvider, useFieldStore, useModelStore } from "./Store/ModelProvider";
 import { ModelFieldStore } from "./Store/ModelFieldStore";

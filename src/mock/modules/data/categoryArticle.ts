@@ -1,10 +1,10 @@
 import article from "mock/article/post/views/article";
-import articleAttributeEdit from "mock/article/articleAttributeEdit";
-import articleAttributes from "mock/article/articleAttributes";
+import articleAttributeEdit from "mock/article/attribute/articleAttributeEdit";
+import articleAttributes from "mock/article/attribute/articleAttributes";
 import articleChannel from "mock/article/articleChannel";
 import articles from "mock/article/post/views/articles";
-import articleTagEdit from "mock/article/articleTagEdit";
-import articleTags from "mock/article/articleTags";
+import articleTagEdit from "mock/article/tag/articleTagEdit";
+import articleTags from "mock/article/tag/articleTags";
 
 export default[
   {

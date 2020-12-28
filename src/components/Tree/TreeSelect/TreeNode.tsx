@@ -17,13 +17,13 @@ export default function TreeNode(
   props:{
     node:ITreeNode,
     nameKey:string,
-    selected?:Array<number>,
-    onSelectChange?:(id:number|undefined, isSelected:boolean)=>void,
+    selected?:Array<string>,
+    onSelectChange?:(id:string|undefined, isSelected:boolean)=>void,
   }
 ){
   const {node, nameKey, selected, onSelectChange} = props;
   const classes = useStyles();
-  const isChecked = (id?:number):boolean=>{
+  const isChecked = (id?:string):boolean=>{
     if(!selected){
       return false;
     }

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function getNodeById(id:number, rootNodes?:Array<ITreeNode>):ITreeNode|undefined{
+function getNodeById(id:string, rootNodes?:Array<ITreeNode>):ITreeNode|undefined{
   if(!rootNodes){
     return undefined;
   }
@@ -64,7 +64,7 @@ export default function ChipsInput(
     onFocus?:(event?: any)=>void,
     onBlur?:(event?: any)=>void,
     value?:{
-      values?:Array<number>, 
+      values?:Array<string>, 
       rootNodes?:Array<ITreeNode>,
       nameKey?:string,
       height?:string,
@@ -127,7 +127,7 @@ export default function ChipsInput(
     }
   }
 
-  const handleDelete = (id:number) => () => {
+  const handleDelete = (id:string) => () => {
     let valuesCopy = [...values];
     remove(id, valuesCopy);
     onChange(
@@ -139,7 +139,7 @@ export default function ChipsInput(
     );
   };
 
-  const handleSelectChange = (id:number|undefined, isSelected:boolean)=>{
+  const handleSelectChange = (id:string|undefined, isSelected:boolean)=>{
     let valuesCopy = [...values];
     if(isSelected){
       valuesCopy.push(id);
@@ -178,7 +178,7 @@ export default function ChipsInput(
     setAnchorEl(null);
   };
 
-  const getName = (id:number)=>{
+  const getName = (id:string)=>{
     let node = getNodeById(id, rootNodes);
     return node ? node[nameKey] : id;
   }
@@ -193,7 +193,7 @@ export default function ChipsInput(
         style={{minHeight:size==="small" ? theme.spacing(4.6) : theme.spacing(6.6)}}
       >
         <ul className={classes.chips}>
-          {values && values.map((id:number) => {
+          {values && values.map((id:string) => {
             return (
               <li key={id}>
                 <Chip

@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function TreeList(
   props:{
-    selected?:Array<number>,
+    selected?:Array<string>,
     rootNodes?:Array<ITreeNode>,
     nameKey:string,
     multiSelect:true|undefined,
-    onSelectChange?:(id:number|undefined, isSelected:boolean)=>void,
+    onSelectChange?:(id:string|undefined, isSelected:boolean)=>void,
   }
 ){
  

@@ -1,9 +1,4 @@
 export var articleGQLType = `
-  type Channel{
-    id: ID!
-    name: String
-  }
-
   type PostAttribute{
     id: ID!
     name: String
@@ -15,7 +10,7 @@ export var articleGQLType = `
     slug: String
     title: String
     auther: String
-    channel:Channel
+    channel: [ID]
     tags:[String]
     email: String
     shortTitle: String
@@ -38,6 +33,7 @@ export var articleGQLType = `
 export var articleGQLQuery = `
   posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
   post(id:ID):Post
+  channelTree:JSON
 `
 
 export var articleGQLMutation = `

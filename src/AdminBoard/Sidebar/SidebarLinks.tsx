@@ -15,6 +15,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { cloneObject } from "utils/cloneObject";
 import {observer} from "mobx-react-lite";
+import intl from 'react-intl-universal';
+import { useAppStore } from "store/helpers/useAppStore";
 
 // 定义查询语句
 //String代替JSON
@@ -50,8 +52,14 @@ export const SidebarLinks = observer((
     setOpenedId(id)
   }
 
+  const appStore = useAppStore();
+  
   useEffect(()=>{
-    error && console.log( error);
+    if(error){
+      appStore.infoError(intl.get('server-error'), error?.message)
+      console.log( error);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[error])
 
   useEffect(()=>{

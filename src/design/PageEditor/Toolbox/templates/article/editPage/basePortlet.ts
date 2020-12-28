@@ -141,13 +141,7 @@ export default{
                 multiSelect:true,
                 //size:"small",
                 xs:6,
-                //dataApi:{
-                //  ...API_GET_MODEL_TREE,
-                //  params:{
-                //    modelName:'/Model/ArticleChannel',
-                //  },                               
-                //},
-
+                query:'channelTree',
                 rule:{
                   //required:true,
                 },
