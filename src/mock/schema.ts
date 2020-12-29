@@ -8,18 +8,13 @@ import { articleGQLType, articleGQLQuery, articleGQLMutation } from "./article/g
 import { channelTreeResolver } from "./article/channel/resolvers";
 import { allPostTagsResolver } from "./article/tag/resolvers";
 import { allPostAttributesResolver } from "./article/attribute/resolvers";
+import { mediasGQLQuery, mediasGQLType } from "./medias/graphql";
+import { mediaResolvers } from "./medias/resolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
   scalar JSON
   
-  type Media {
-    id:ID!
-    thumbnail: String!
-    title: String
-    src: String
-  }
-
   type SeoMeta{
     id:ID!
     title: String
@@ -77,7 +72,7 @@ export const schema = `
     PUBLISHED
     DRAFT 
   }
-
+  ${mediasGQLType}
   ${articleGQLType}
 
   type Query {
@@ -89,6 +84,7 @@ export const schema = `
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
     ${articleGQLQuery}
+    ${mediasGQLQuery}
   }
 
   type Mutation{
@@ -117,6 +113,8 @@ export const resolvers = {
     channelTree:channelTreeResolver,
     allPostTags:allPostTagsResolver,
     allPostAttributes:allPostAttributesResolver,
+    
+    ...mediaResolvers,
   },
 
   Mutation:{

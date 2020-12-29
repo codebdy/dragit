@@ -17,8 +17,7 @@ import intl from "react-intl-universal";
 import ConfirmDialog from "base/Widgets/ConfirmDialog";
 import { useDesigner } from "store/helpers/useAppStore";
 import { useLoggedUser } from "store/helpers/useLoggedUser";
-import gql from 'graphql-tag';
-import { useQuery } from "@apollo/react-hooks";
+import { gql, useQuery } from "@apollo/react-hooks";
 import { cloneObject } from "utils/cloneObject";
 
 const useStyles = makeStyles((theme: Theme) =>

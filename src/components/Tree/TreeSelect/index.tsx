@@ -1,7 +1,6 @@
-import { useQuery } from '@apollo/react-hooks';
+import { gql, useQuery } from '@apollo/react-hooks';
 import { createStyles, FilledInput, FormControl, FormHelperText, Input, InputLabel, makeStyles, OutlinedInput, Theme } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import gql from 'graphql-tag';
 import React, { useEffect } from 'react';
 import { useAppStore } from 'store/helpers/useAppStore';
 import ChipsInput from './ChipsInput';

@@ -10,6 +10,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import MediaFolder, { FolderActions, FolderLabel, FolderNode } from './MediaFolder';
 import { IMedia } from 'base/Model/IMedia';
+import { gql, useQuery } from '@apollo/react-hooks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
+
+const QUERY_FOLDERS = gql`
+  query {
+    mediaFoldersTree
+  }
+`;
 
 export default function MediaFolders(
     props:{
@@ -56,7 +63,8 @@ export default function MediaFolders(
   } = props;
   const classes = useStyles();
 
-  //const [draggedParent, setDraggedParent] = React.useState<FolderNode|undefined>();
+  const { loading, error, data } = useQuery(QUERY_FOLDERS);
+
 
   const handleAddInRoot = (event: React.MouseEvent<unknown>)=>{
     event.stopPropagation();

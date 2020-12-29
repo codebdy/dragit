@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import {observer} from 'mobx-react-lite';
-import gql from 'graphql-tag';
 import { useAppStore } from "store/helpers/useAppStore";
-import { useQuery } from "@apollo/react-hooks";
+import { gql, useQuery } from "@apollo/react-hooks";
 import PageSkeleton from "AdminBoard/Workspace/common/ModuleSkeleton";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 import { JumpStyleModule } from "./JumpStyleModule";

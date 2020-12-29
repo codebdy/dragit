@@ -8,8 +8,7 @@ import { useHistory } from 'react-router';
 import { ADMIN_INDEX_URL, TOKEN_NAME } from 'utils/consts';
 import { useAppStore, useThemeSettings } from 'store/helpers/useAppStore';
 import { LIGHT } from 'store/ThemeSettings';
-import { useLazyQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { gql, useLazyQuery } from '@apollo/react-hooks';
 import SubmitButton from 'components/common/SubmitButton';
 
 const useStyles = makeStyles((theme: Theme) =>

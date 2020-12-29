@@ -109,23 +109,6 @@ export default function MediasContent(
   const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
 
   useEffect(() => {
-    setFolderLoading(true);
-    axios(
-      {
-        method:"get",
-        url:'/api/medias/folders',
-      }
-    ).then(res => {
-      setFolders(makeupParent(res.data));
-      setFolderLoading(false);
-    })
-    .catch(err => {
-      console.log('server error');
-      setFolderLoading(false);
-    })
-  
-  },[]);
-  useEffect(() => {
     setGridLoading(true);
     setPageNumber(0);
     setMedias([]);

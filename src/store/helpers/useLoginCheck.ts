@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { LOGIN_URL, TOKEN_NAME } from "utils/consts";
 import { useAppStore } from "./useAppStore";
-import gql from 'graphql-tag';
-import { useLazyQuery } from "@apollo/react-hooks";
+import { gql, useLazyQuery } from "@apollo/react-hooks";
 
 // 定义查询语句
 const QUERY_USER = gql`
