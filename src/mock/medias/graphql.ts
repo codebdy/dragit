@@ -2,6 +2,7 @@ export var mediasGQLType = `
   type MediaFolder{
     id: ID!
     name: String
+    parent: MediaFolder
   }
 
   type Media {
@@ -15,6 +16,18 @@ export var mediasGQLType = `
     paginatorInfo:PaginatorInfo!
     data:[Media]
   }
+
+  input MediaFolderInput {
+    id: ID!
+    name: String,
+    parentId: ID,
+  }
+
+  input MediaInput {
+    id:ID!
+    title: String
+    folderId:ID
+  }
 `
 
 export var mediasGQLQuery = `
@@ -23,11 +36,11 @@ export var mediasGQLQuery = `
 `
 
 export var mediasGQLMutation = `
-  addFolder(parentId: ID):MediaFolder
-  removeFolder(id: ID):MediaFolder
-  updateFolder(folder:MediaFolder):MediaFolder
+  addMediaFolder(parentId: ID):MediaFolder
+  removeMediaFolder(id: ID):MediaFolder
+  updateMediaFolder(folder:MediaFolderInput):MediaFolder
   removeMedias(ids:[ID]):[Media]
-  updateMedia(media:Media):Media
+  updateMedia(media:MediaInput):Media
 `
 
 //moveFolder(id:ID!, targetFolderId:ID!):MediaFolder

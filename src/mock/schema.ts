@@ -8,8 +8,9 @@ import { articleGQLType, articleGQLQuery, articleGQLMutation } from "./article/g
 import { channelTreeResolver } from "./article/channel/resolvers";
 import { allPostTagsResolver } from "./article/tag/resolvers";
 import { allPostAttributesResolver } from "./article/attribute/resolvers";
-import { mediasGQLQuery, mediasGQLType } from "./medias/graphql";
-import { mediaResolvers } from "./medias/resolvers";
+import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graphql";
+import { mediaQueryResolvers } from "./medias/queryResolvers";
+import { mediaMutationResolvers } from "./medias/mutationResolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -89,6 +90,7 @@ export const schema = `
 
   type Mutation{
     ${articleGQLMutation}
+    ${mediasGQLMutation}
   }
 `;
 
@@ -114,10 +116,11 @@ export const resolvers = {
     allPostTags:allPostTagsResolver,
     allPostAttributes:allPostAttributesResolver,
     
-    ...mediaResolvers,
+    ...mediaQueryResolvers,
   },
 
   Mutation:{
-    updatePosts:updatePostsResolver,   
+    updatePosts:updatePostsResolver,
+    ...mediaMutationResolvers,   
   }
 };

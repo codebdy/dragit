@@ -18,7 +18,7 @@ export const mediasResolver = async (parent:any, args:any, context:any, info:any
   }
 }
 
-export const mediaResolvers = {
+export const mediaQueryResolvers = {
   mediaFoldersTree:mediaFoldersTreeResolver,
   medias:mediasResolver
 }

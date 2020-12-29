@@ -11,9 +11,10 @@ import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
 import { IMedia } from "base/Model/IMedia";
-import { gql, useLazyQuery, useQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { cloneObject } from "utils/cloneObject";
 import { useAppStore } from "store/helpers/useAppStore";
+import { MUTATION_ADD_FOLDER, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -89,29 +90,6 @@ function getByIdFromTree(id:string, folders?:Array<FolderNode>):FolderNode|undef
   return undefined;
 }
 
-const QUERY_FOLDERS = gql`
-  query {
-    mediaFoldersTree
-  }
-`;
-
-const QUERY_MEDIAS = gql`
-  query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
-    medias(first:$first, page:$page, where:$where, orderBy:$orderBy){
-      data{
-        id
-        thumbnail
-        title
-        src
-      }
-      paginatorInfo{
-        currentPage
-        hasMorePages
-      }      
-    }
-  }
-`
-
 export default function MediasContent(
   props:{
     single?:boolean,
@@ -139,6 +117,27 @@ export default function MediasContent(
     fetchPolicy:'no-cache'
   });
 
+  const [addFolder, {loading:addFolderLoading, error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
+  {
+    onCompleted:(data)=>{
+      let newFolder = data?.addMediaFolder;
+      if(!newFolder){
+        return;
+      }
+      setSelectedFolder(newFolder?.id || 'root');
+      const parent = getByIdFromTree(newFolder?.parent?.id, folders);
+      newFolder.editing = true;
+      newFolder.parent = parent;     
+      if(parent){
+        parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
+        setFolders([...folders])
+      }else{
+        setFolders([...folders, newFolder]);
+      }
+    }
+  }
+);
+
   useEffect(()=>{
     setGridLoading(queryLoading);
   }, [queryLoading])
@@ -146,7 +145,7 @@ export default function MediasContent(
   const appStore = useAppStore();
   const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
   
-  const error = queryFolderError || queryError;
+  const error = queryFolderError || queryError || addFolderError;
 
   useEffect(()=>{
     setFolderLoading(loading);
@@ -192,16 +191,17 @@ export default function MediasContent(
   }
 
   const handleAddFolder = (parent?:FolderNode)=>{
-    setFolderLoading(true)
-    axios(
-      {
-        method: API_MEDIAS_ADD_FOLDER.method as any,
-        url: API_MEDIAS_ADD_FOLDER.url,
-      }
-    ).then(res => {
-      let newFolder = res.data
-      newFolder.editing = true;
-      setFolderLoading(false);
+    addFolder({variables:{parentId:parent?.id}});
+    //setFolderLoading(true)
+    //axios(
+    //  {
+    //    method: API_MEDIAS_ADD_FOLDER.method as any,
+    //    url: API_MEDIAS_ADD_FOLDER.url,
+    //  }
+   // ).then(res => {
+   //   let newFolder = res.data
+   //   newFolder.editing = true;
+   //   setFolderLoading(false);
       //setSelectedFolder(newFolder.id.toString());
       //if(parent){
       //  parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
@@ -209,11 +209,11 @@ export default function MediasContent(
       //}else{
       //  setFolders([...folders, newFolder]);
       //}
-    })
-    .catch(err => {
-      console.log('server error');
-      setFolderLoading(false);
-    });
+    //})
+  //  .catch(err => {
+  //    console.log('server error');
+  //    setFolderLoading(false);
+  //  });
   }
 
   const handleFolderNameChange = (name:string, folder:FolderNode, fromGrid?:boolean)=>{
@@ -435,7 +435,7 @@ export default function MediasContent(
             </div>
             <Divider></Divider>
               {
-                folderLoading === true && <LinearProgress />
+                (folderLoading || addFolderLoading) && <LinearProgress />
               }
             <MediaFolders
               draggedFolder = {draggedFolder} 
