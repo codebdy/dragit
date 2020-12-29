@@ -50,3 +50,19 @@ export const MUTATION_REMOVE_FOLDER = gql`
     }
   }
 `;
+
+export const MUTATION_UPDATE_MEDIA = gql`
+  mutation ($media:MediaInput!){
+    updateMedia(media:$media){
+      id
+    }
+  }
+`;
+
+export const MUTATION_REMOVE_MEDIAS = gql`
+  mutation ($ids:[ID]){
+    removeMedias(ids:$ids){
+      ids
+    }
+  }
+`;

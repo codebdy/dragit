@@ -15,11 +15,11 @@ const updateMediaFolder = async (parent:any, args:any, context:any, info:any)=>{
 }
 const removeMedias = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
-  return []
+  return [...args.ids]
 }
 const updateMedia = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
-  return {}
+  return {...args.media}
 }
 
 export const mediaMutationResolvers = {

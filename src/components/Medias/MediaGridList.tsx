@@ -41,6 +41,7 @@ export default function MediasGridList(props:{
     folderLoading:string|boolean,
     draggedFolder:FolderNode|undefined,
     draggedMedia:IMedia|undefined,
+    folder?:FolderNode,
     folders:Array<FolderNode>|undefined,
     medias:Array<IMedia>, 
     selectedMedias:Array<IMedia>, 
@@ -60,7 +61,8 @@ export default function MediasGridList(props:{
     loading, 
     folderLoading, 
     draggedFolder,
-    draggedMedia, 
+    draggedMedia,
+    folder, 
     folders, 
     medias,
     selectedMedias, 
@@ -125,7 +127,8 @@ export default function MediasGridList(props:{
      
         {medias.map((tile:any, index) => (
           <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
-            <MediaGridListImage 
+            <MediaGridListImage
+              folder = {folder} 
               media = {tile} 
               selectedMedias = {selectedMedias}
               onRemoveMedia = {onRemoveMedia} 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {observer} from 'mobx-react-lite';
 import { useAppStore } from "store/helpers/useAppStore";
 import { gql, useQuery } from "@apollo/react-hooks";
@@ -9,7 +9,7 @@ import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
-import intl from "react-intl-universal";
+import { useShowAppoloError } from "store/helpers/useInfoError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,13 +54,7 @@ export const Workspace = observer(()=>{
   const classes = useStyles()
   const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
 
-  useEffect(()=>{
-    if(error){
-      appStore.infoError(intl.get('server-error'), error?.message)
-      console.log(error);      
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[error])
+  useShowAppoloError(error);
 
   const module = data?.moduleBySlug;
   return (

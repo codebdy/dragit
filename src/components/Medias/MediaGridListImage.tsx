@@ -3,13 +3,15 @@ import { makeStyles, Theme, createStyles, LinearProgress, Dialog, DialogActions,
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import Image from 'components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
-import { API_MEDIAS_CHANGE_MEDIA_NAME, API_MEDIAS_REMOVE_MEDIA } from 'APIs/medias';
-import axios from 'axios';
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
 import { contains } from 'utils/ArrayHelper';
 import { IMedia } from 'base/Model/IMedia';
 import Close from '@material-ui/icons/Close';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediaGQLs';
+import { useShowAppoloError } from 'store/helpers/useInfoError';
+import { FolderNode } from './MediaFolder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,6 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediaGridListImage(
   props:{
+    folder?:FolderNode,
     selectedMedias:Array<IMedia>, 
     media:IMedia, 
     onRemoveMedia:(media:IMedia)=>void,
@@ -78,61 +81,40 @@ export default function MediaGridListImage(
     onToggleSelect:(media:IMedia)=>void,
   }
 ){
-  const {selectedMedias, media, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;
+  const {folder, selectedMedias, media, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
   const [mediaTitle, setMediaTitle] = useState(media.title);
   const [loading, setLoading] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
-
   const selected = contains(media, selectedMedias);
 
+  const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
+    onCompleted:(data)=>{
+      setLoading(false);
+    }});
+
+  const [removeMedias, {error:removeMediasError}] = useMutation(MUTATION_REMOVE_MEDIAS,{
+    onCompleted:(data)=>{
+      setLoading(false);
+      onRemoveMedia(media);
+    }});
+
+  useShowAppoloError(updateMediaError||removeMediasError);
+    
   const changeImageTitleOnServer = ()=>{
     if(mediaTitle === media.title){
       return
     }
     setLoading(true)
-
-    axios(
-      {
-        method: API_MEDIAS_CHANGE_MEDIA_NAME.method as any,
-        url: API_MEDIAS_CHANGE_MEDIA_NAME.url,
-        params:{
-          imageId:media.id,
-          name:mediaTitle,
-        },
-      }
-    ).then(res => {
-      media.title = mediaTitle
-      setLoading(false);
-    })
-    .catch(err => {
-      console.log('server error');
-      setLoading(false);
-    });
-
+    updateMedia({variables:{media:{id:media.id, title:mediaTitle, folderId:folder?.id}}})
+    media.title = mediaTitle
   }
 
   const removeMedia = ()=>{
     setLoading(true)
-
-    axios(
-      {
-        method: API_MEDIAS_REMOVE_MEDIA.method as any,
-        url: API_MEDIAS_REMOVE_MEDIA.url,
-        params:{
-          imageId:media.id,
-        },
-      }
-    ).then(res => {
-      setLoading(false);
-      onRemoveMedia(media);
-    })
-    .catch(err => {
-      console.log('server error');
-      setLoading(false);
-    });
+    removeMedias({variables:{ids:[media.id]}})
   }
 
   const handleEndEditing = ()=>{

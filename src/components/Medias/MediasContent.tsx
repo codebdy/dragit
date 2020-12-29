@@ -3,9 +3,7 @@ import {makeStyles, Theme, createStyles, Divider, Hidden, LinearProgress} from "
 import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
-import axios from 'axios';
 import { batchRemove, remove, toggle } from "utils/ArrayHelper";
-import { API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
@@ -13,8 +11,8 @@ import MediasBatchActions from "./MediasBatchActions";
 import { IMedia } from "base/Model/IMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { cloneObject } from "utils/cloneObject";
-import { useAppStore } from "store/helpers/useAppStore";
-import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_UPDATE_FOLDER, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
+import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
+import { useShowAppoloError } from "store/helpers/useInfoError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -149,24 +147,35 @@ export default function MediasContent(
       setFolderLoading(false);
     }});
 
+  const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
+    onCompleted:(data)=>{
+      setFolderLoading(false);
+    }});
+
+  const [removeMedias, {error:removeMediasError}] = useMutation(MUTATION_REMOVE_MEDIAS,{
+    onCompleted:(data)=>{
+      setBatchActionLoading(false);
+    }});
+    
+
   useEffect(()=>{
     setGridLoading(queryLoading);
   }, [queryLoading])
   
-  const appStore = useAppStore();
   const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
   
-  const error = queryFolderError || queryError || addFolderError || updateFolderError || removeFolderError;
+  const error = queryFolderError || 
+                queryError || 
+                addFolderError || 
+                updateFolderError || 
+                removeFolderError || 
+                updateMediaError || 
+                removeMediasError;
 
+  useShowAppoloError(error);
   useEffect(()=>{
     setFolderLoading(loading);
-    if(error){
-      appStore.infoError(intl.get('server-error'), error?.message)
-      setFolderLoading(false)
-      console.log( error);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[error, loading])
+  },[loading])
   
   useEffect(()=>{
     if(folderData){
@@ -256,27 +265,11 @@ export default function MediasContent(
   const handelMoveMediaTo = (media:IMedia, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
     if(targetFolder?.id === selectedFolder || (!targetFolder && selectedFolder==='root')){
       return
-    }    
-    
+    }
     fromGrid ? setFolderLoading(targetFolder ? targetFolder.id : true) : setFolderLoading(true);
-    axios(
-      {
-        method: API_MEDIAS_MOVE_MEDIA_TO.method as any,
-        url: API_MEDIAS_MOVE_MEDIA_TO.url,
-        params:{
-          media:media.id,
-          folder:targetFolder?.id
-        },
-      }
-    ).then(res => {
-      setFolderLoading(false);
-      remove(media, medias);
-      setMedias([...medias]);
-    })
-    .catch(err => {
-      console.log('server error',err);
-      setFolderLoading(false);
-    });
+    updateMedia({variables:{media:{id:media.id, title:media.title, folderId:targetFolder?.id}}});
+    remove(media, medias);
+    setMedias([...medias]);
   }
 
   const handeRemoveMedia = (media:IMedia)=>{
@@ -301,25 +294,10 @@ export default function MediasContent(
 
   const handleRemoveSelected = ()=>{
     setBatchActionLoading(true)
-    axios(
-      {
-        method: API_MEDIAS_REMOVE_MEDIAS.method as any,
-        url: API_MEDIAS_REMOVE_MEDIAS.url,
-        data:{
-          imageIds:selectedMedias.map((media)=>{return media.id}),
-        },
-      }
-    ).then(res => {
-      setBatchActionLoading(false);
-      batchRemove(selectedMedias, medias)
-      setSelectedMedias([])
-      setMedias([...medias])
-    })
-    .catch(err => {
-      console.log('server error',err);
-      setBatchActionLoading(false);
-    });
-    
+    removeMedias({variables:{ids:selectedMedias.map((media)=>{return media.id})}})
+    batchRemove(selectedMedias, medias)
+    setSelectedMedias([])
+    setMedias([...medias])
   }
  
   return (
@@ -350,6 +328,7 @@ export default function MediasContent(
               folderLoading = {folderLoading}
               draggedFolder = {draggedFolder}
               draggedMedia = {draggedMedia}
+              folder = {selectedFolderNode}
               folders = {selectedFolderNode? selectedFolderNode.children : folders}
               medias = {medias}
               selectedMedias = {selectedMedias}
