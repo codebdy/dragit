@@ -5,7 +5,7 @@ import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { batchRemove, remove, toggle } from "utils/ArrayHelper";
-import { API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
+import { API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
@@ -14,7 +14,7 @@ import { IMedia } from "base/Model/IMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { cloneObject } from "utils/cloneObject";
 import { useAppStore } from "store/helpers/useAppStore";
-import { MUTATION_ADD_FOLDER, MUTATION_UPDATE_FOLDER, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
+import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_UPDATE_FOLDER, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -144,6 +144,11 @@ export default function MediasContent(
       setFolderLoading(false);
     }});
 
+  const [removeFolder, {error:removeFolderError}] = useMutation(MUTATION_REMOVE_FOLDER,{
+    onCompleted:(data)=>{
+      setFolderLoading(false);
+    }});
+
   useEffect(()=>{
     setGridLoading(queryLoading);
   }, [queryLoading])
@@ -151,7 +156,7 @@ export default function MediasContent(
   const appStore = useAppStore();
   const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
   
-  const error = queryFolderError || queryError || addFolderError || updateFolderError;
+  const error = queryFolderError || queryError || addFolderError || updateFolderError || removeFolderError;
 
   useEffect(()=>{
     setFolderLoading(loading);
@@ -211,34 +216,17 @@ export default function MediasContent(
   
   const handleRemoveFolder = (folder:FolderNode, fromGrid?:boolean)=>{
     const parentFolder = folder.parent;
-    fromGrid ? setFolderLoading(folder.id) : setFolderLoading(true)
+    setFolderLoading(true)
     if(selectedFolder === folder.id){
       setSelectedFolder('root');
     }
-    axios(
-      {
-        method:API_MEDIAS_REMOVE_FOLDER.method as any,
-        url: API_MEDIAS_REMOVE_FOLDER.url,
-        params:{
-          id:folder.id
-        },
-      }
-    ).then(res => {
-      setFolderLoading(false);
-      if(!parentFolder){
-        remove(folder, folders)
-        //setFolders([...folders])
-      }
-      else{
-        remove(folder, parentFolder.children)
-        //setFolders([...folders])
-      }
-    })
-    .catch(err => {
-      console.log('server error',err);
-      setFolderLoading(false);
-    });
-
+    removeFolder({variables:{id:folder.id}})
+    if(!parentFolder){
+      remove(folder, folders)
+    }
+    else{
+      remove(folder, parentFolder.children)
+    }
   }
 
   const handleMoveToFolderTo = (folder:FolderNode, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{

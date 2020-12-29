@@ -6,7 +6,7 @@ const addMediaFolder = async (parent:any, args:any, context:any, info:any)=>{
 }
 const removeMediaFolder = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
-  return {}
+  return {id:args.id}
 }
 const updateMediaFolder = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);

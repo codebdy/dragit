@@ -42,3 +42,11 @@ export const MUTATION_UPDATE_FOLDER = gql`
   }
 `;
 
+export const MUTATION_REMOVE_FOLDER = gql`
+  mutation ($id:ID!){
+    removeMediaFolder(id:$id){
+      id
+      name
+    }
+  }
+`;
