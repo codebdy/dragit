@@ -84,8 +84,6 @@ const MediasPortlet = React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[medias]);
 
-  console.log(medias);
-
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
     if (anchorRef && anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
