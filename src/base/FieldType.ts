@@ -4,5 +4,6 @@ export enum FieldType {
   Model,
   ModelArray,
   Table,
-  Select
+  Select,
+  Media
 }

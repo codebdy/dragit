@@ -54,6 +54,7 @@ import RadioGroup from 'components/RadioGroup';
 import { RadioGroupRule } from 'components/RadioGroup/Rule';
 import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
 import { FieldType } from "base/FieldType";
+import { MediaSelectRule } from "components/MediaSelect/Rule";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -72,7 +73,7 @@ register('PortletGridItem', PortletGridItem, PortletGridItemRule);
 register('PortletFooter', PortletFooter);
 register('Typography', Typography, TypographyRule);
 register('ListView', ListView, ListViewRule);
-register('MediasPortlet', MediasPortlet, MediasPortletRule);
+register('MediasPortlet', MediasPortlet, MediasPortletRule, FieldType.Media);
 register('SelectBox', SelectBox, SelectRule, FieldType.Select);
 register('Combobox', Combobox, SelectRule);
 register('MultiSelectBox', MultiSelectBox, SelectRule, FieldType.Select )
@@ -82,7 +83,7 @@ register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule, FieldType.M
 register('TinyMCE', TinyMCE, TinyMCERule);
 register('TreeEditor', TreeEditor, TreeEditorRule);
 register('TreeSelect', TreeSelect, TreeSelectRule, FieldType.Select);
-register('MediaSelect', MediaSelect);
+register('MediaSelect', MediaSelect, MediaSelectRule, FieldType.Media);
 register('Medias', Medias);
 register('AntDesignChart', AntDesignChart, AntDesignChartRule);
 

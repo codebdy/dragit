@@ -12,6 +12,7 @@ import { ModelArrayFieldStore } from "./ModelArrayFieldStore";
 import { ModelFieldStore } from "./ModelFieldStore";
 import { IModelStore } from "./IModelStore";
 import { SelectFieldStore } from "./SelectFieldStore";
+import { MediaFieldStore } from "./MediaFieldStore";
 
 function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
   const fieldName = node.meta.props?.field;
@@ -21,6 +22,9 @@ function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
     let fieldStore: any = new FieldStore(node.meta);
     if(fieldType === FieldType.Select){
       fieldStore = new SelectFieldStore(node.meta);
+    }
+    if(fieldType === FieldType.Media){
+      fieldStore = new MediaFieldStore(node.meta);
     }
     if(fieldType === FieldType.Model){
       fieldStore = new ModelFieldStore(node.meta);

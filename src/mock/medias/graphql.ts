@@ -23,4 +23,12 @@ export var mediasGQLQuery = `
 `
 
 export var mediasGQLMutation = `
+  addFolder(parentId: ID):MediaFolder
+  removeFolder(id: ID):MediaFolder
+  updateFolder(folder:MediaFolder):MediaFolder
+  removeMedias(ids:[ID]):[Media]
+  updateMedia(media:Media):Media
 `
+
+//moveFolder(id:ID!, targetFolderId:ID!):MediaFolder
+//moveMedia(id:ID!, targetFolderId:ID!):Media

@@ -132,9 +132,8 @@ export default function MediasContent(
   const [hasData, setHasData] = React.useState(true);
   const [batchActionLoading, setBatchActionLoading] = React.useState(false);
 
-
   const { loading, error:queryFolderError, data:folderData } = useQuery(QUERY_FOLDERS, {fetchPolicy:'no-cache'});
-  const [excuteQuery, { called, loading:queryLoading, error:queryError, data:mediaData, refetch }] = useLazyQuery(QUERY_MEDIAS, {
+  const [excuteQuery, { loading:queryLoading, error:queryError, data:mediaData, refetch }] = useLazyQuery(QUERY_MEDIAS, {
     variables: { first:20, page:pageNumber + 1},
     notifyOnNetworkStatusChange: true,
     fetchPolicy:'no-cache'
