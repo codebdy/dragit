@@ -5,7 +5,7 @@ import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { batchRemove, remove, toggle } from "utils/ArrayHelper";
-import { API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
+import { API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
@@ -235,40 +235,22 @@ export default function MediasContent(
     if(selectedFolder === folder.id){
       setSelectedFolder('root');
     }
-    axios(
-      {
-        method: API_MEDIAS_MOVE_FOLDER_TO.method as any,
-        url: API_MEDIAS_MOVE_FOLDER_TO.url,
-        params:{
-          id:folder.id,
-          targetId:targetFolder?.id
-        },
-      }
-    ).then(res => {
-      setFolderLoading(false);
-      if(parentFolder){
-          remove(folder, parentFolder.children)
-      }
-      else{
-        remove(folder, folders)
-      }
-      folder.parent = undefined;
-      if(targetFolder){
-        targetFolder.children = targetFolder?.children? [...targetFolder?.children, folder] : [folder]
-        folder.parent = targetFolder;
-      }
-      else{
-        folders.push(folder)
-      }
-  
-      //setFolders([...folders]);
- 
-    })
-    .catch(err => {
-      console.log('server error',err);
-      setFolderLoading(false);
-    });
 
+    updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:targetFolder?.id}}});
+    if(parentFolder){
+        remove(folder, parentFolder.children)
+    }
+    else{
+      remove(folder, folders)
+    }
+    folder.parent = undefined;
+    if(targetFolder){
+      targetFolder.children = targetFolder?.children? [...targetFolder?.children, folder] : [folder]
+      folder.parent = targetFolder;
+    }
+    else{
+      folders.push(folder)
+    }
   }
 
   const handelMoveMediaTo = (media:IMedia, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
