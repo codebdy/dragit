@@ -5,7 +5,7 @@ import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { batchRemove, remove, toggle } from "utils/ArrayHelper";
-import { API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
+import { API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
@@ -14,7 +14,7 @@ import { IMedia } from "base/Model/IMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { cloneObject } from "utils/cloneObject";
 import { useAppStore } from "store/helpers/useAppStore";
-import { MUTATION_ADD_FOLDER, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
+import { MUTATION_ADD_FOLDER, MUTATION_UPDATE_FOLDER, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -117,26 +117,32 @@ export default function MediasContent(
     fetchPolicy:'no-cache'
   });
 
-  const [addFolder, {loading:addFolderLoading, error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
-  {
-    onCompleted:(data)=>{
-      let newFolder = data?.addMediaFolder;
-      if(!newFolder){
-        return;
-      }
-      setSelectedFolder(newFolder?.id || 'root');
-      const parent = getByIdFromTree(newFolder?.parent?.id, folders);
-      newFolder.editing = true;
-      newFolder.parent = parent;     
-      if(parent){
-        parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
-        setFolders([...folders])
-      }else{
-        setFolders([...folders, newFolder]);
+  const [addFolder, {error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
+    {
+      onCompleted:(data)=>{
+        setFolderLoading(false);
+        let newFolder = data?.addMediaFolder;
+        if(!newFolder){
+          return;
+        }
+        setSelectedFolder(newFolder?.id || 'root');
+        const parent = getByIdFromTree(newFolder?.parent?.id, folders);
+        newFolder.editing = true;
+        newFolder.parent = parent;     
+        if(parent){
+          parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
+          setFolders([...folders])
+        }else{
+          setFolders([...folders, newFolder]);
+        }
       }
     }
-  }
-);
+  );
+
+  const [updateFolder, {error:updateFolderError}] = useMutation(MUTATION_UPDATE_FOLDER,{
+    onCompleted:(data)=>{
+      setFolderLoading(false);
+    }});
 
   useEffect(()=>{
     setGridLoading(queryLoading);
@@ -145,12 +151,13 @@ export default function MediasContent(
   const appStore = useAppStore();
   const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
   
-  const error = queryFolderError || queryError || addFolderError;
+  const error = queryFolderError || queryError || addFolderError || updateFolderError;
 
   useEffect(()=>{
     setFolderLoading(loading);
     if(error){
       appStore.infoError(intl.get('server-error'), error?.message)
+      setFolderLoading(false)
       console.log( error);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -191,49 +198,14 @@ export default function MediasContent(
   }
 
   const handleAddFolder = (parent?:FolderNode)=>{
+    setFolderLoading(true)
     addFolder({variables:{parentId:parent?.id}});
-    //setFolderLoading(true)
-    //axios(
-    //  {
-    //    method: API_MEDIAS_ADD_FOLDER.method as any,
-    //    url: API_MEDIAS_ADD_FOLDER.url,
-    //  }
-   // ).then(res => {
-   //   let newFolder = res.data
-   //   newFolder.editing = true;
-   //   setFolderLoading(false);
-      //setSelectedFolder(newFolder.id.toString());
-      //if(parent){
-      //  parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
-      //  setFolders([...folders])
-      //}else{
-      //  setFolders([...folders, newFolder]);
-      //}
-    //})
-  //  .catch(err => {
-  //    console.log('server error');
-  //    setFolderLoading(false);
-  //  });
   }
 
   const handleFolderNameChange = (name:string, folder:FolderNode, fromGrid?:boolean)=>{
     fromGrid ? setFolderLoading(folder.id) : setFolderLoading(true)
-    folder.name = name;    
-    axios(
-      {
-        method: API_MEDIAS_CHANGE_FOLDER_NAME.method as any,
-        url: API_MEDIAS_CHANGE_FOLDER_NAME.url,
-        data:folder,
-      }
-    ).then(res => {
-      setFolderLoading(false);
-      //setFolders([...folders]);
-    })
-    .catch(err => {
-      console.log('server error');
-      setFolderLoading(false);
-    });
-
+    folder.name = name;
+    updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:folder.parent?.id}}});   
   }
 
   
@@ -435,7 +407,7 @@ export default function MediasContent(
             </div>
             <Divider></Divider>
               {
-                (folderLoading || addFolderLoading) && <LinearProgress />
+                (folderLoading === true) && <LinearProgress />
               }
             <MediaFolders
               draggedFolder = {draggedFolder} 

@@ -149,6 +149,7 @@ export default function MediaFolder (props:{
                 }
               }}
 
+              onClick = {e=>e.stopPropagation()}
               onChange = {handleChange}
             />
             :

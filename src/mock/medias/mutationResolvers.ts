@@ -10,7 +10,8 @@ const removeMediaFolder = async (parent:any, args:any, context:any, info:any)=>{
 }
 const updateMediaFolder = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
-  return {}
+  console.log('updateMediaFolder mock', {...args.folder})
+  return {...args.folder}
 }
 const removeMedias = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);

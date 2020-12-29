@@ -32,3 +32,13 @@ export const MUTATION_ADD_FOLDER = gql`
     }
   }
 `;
+
+export const MUTATION_UPDATE_FOLDER = gql`
+  mutation ($folder:MediaFolderInput){
+    updateMediaFolder(folder:$folder){
+      id
+      name
+    }
+  }
+`;
+
