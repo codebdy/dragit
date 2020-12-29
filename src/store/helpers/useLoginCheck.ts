@@ -35,7 +35,7 @@ export function useLoginCheck() {
 
   useEffect(()=>{
     if(!appStore.loggedUser && !localToken){
-      history.push(LOGIN_URL);
+      history?.push(LOGIN_URL);
     }
     if(!appStore.loggedUser && localToken){
       excuteQuery( {variables:{token:localToken}})

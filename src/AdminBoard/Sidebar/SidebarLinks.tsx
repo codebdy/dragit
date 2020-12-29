@@ -25,7 +25,6 @@ const GET_DRAWER_ITEMS = gql`
   }
 `;
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -33,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
 
 export const SidebarLinks = observer((
   props : {

@@ -5,12 +5,15 @@ import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import axios from 'axios';
 import { batchRemove, remove, toggle } from "utils/ArrayHelper";
-import { API_MEDIAS, API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
+import { API_MEDIAS_ADD_FOLDER, API_MEDIAS_CHANGE_FOLDER_NAME, API_MEDIAS_MOVE_FOLDER_TO, API_MEDIAS_MOVE_MEDIA_TO, API_MEDIAS_REMOVE_FOLDER, API_MEDIAS_REMOVE_MEDIAS } from "APIs/medias";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
 import { IMedia } from "base/Model/IMedia";
+import { gql, useLazyQuery, useQuery } from "@apollo/react-hooks";
+import { cloneObject } from "utils/cloneObject";
+import { useAppStore } from "store/helpers/useAppStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,6 +89,29 @@ function getByIdFromTree(id:string, folders?:Array<FolderNode>):FolderNode|undef
   return undefined;
 }
 
+const QUERY_FOLDERS = gql`
+  query {
+    mediaFoldersTree
+  }
+`;
+
+const QUERY_MEDIAS = gql`
+  query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
+    medias(first:$first, page:$page, where:$where, orderBy:$orderBy){
+      data{
+        id
+        thumbnail
+        title
+        src
+      }
+      paginatorInfo{
+        currentPage
+        hasMorePages
+      }      
+    }
+  }
+`
+
 export default function MediasContent(
   props:{
     single?:boolean,
@@ -103,17 +129,54 @@ export default function MediasContent(
   const [medias, setMedias] = React.useState<Array<IMedia>>([]);
   const [selectedMedias, setSelectedMedias] = React.useState<Array<IMedia>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
-  const [haseData] = React.useState(true);
+  const [hasData, setHasData] = React.useState(true);
   const [batchActionLoading, setBatchActionLoading] = React.useState(false);
 
-  const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
 
+  const { loading, error:queryFolderError, data:folderData } = useQuery(QUERY_FOLDERS, {fetchPolicy:'no-cache'});
+  const [excuteQuery, { called, loading:queryLoading, error:queryError, data:mediaData, refetch }] = useLazyQuery(QUERY_MEDIAS, {
+    variables: { first:20, page:pageNumber + 1},
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy:'no-cache'
+  });
+
+  useEffect(()=>{
+    setGridLoading(queryLoading);
+  }, [queryLoading])
+  
+  const appStore = useAppStore();
+  const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
+  
+  const error = queryFolderError || queryError;
+
+  useEffect(()=>{
+    setFolderLoading(loading);
+    if(error){
+      appStore.infoError(intl.get('server-error'), error?.message)
+      console.log( error);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[error, loading])
+  
+  useEffect(()=>{
+    if(folderData){
+      const queriedFolders:Array<FolderNode> = makeupParent(cloneObject((folderData && folderData['mediaFoldersTree'])||[]));
+      setFolders(queriedFolders)
+    }
+  },[folderData])
+
+  useEffect(()=>{
+    setMedias([...medias, ...(mediaData?.medias?.data||[])])
+    setHasData(mediaData?.medias?.paginatorInfo?.hasMorePages);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[mediaData])
+  
   useEffect(() => {
     setGridLoading(true);
     setPageNumber(0);
     setMedias([]);
     setSelectedMedias([]);
-    loadMedias();
+    excuteQuery({variables: { first:20, page:pageNumber + 1}});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[pageNumber, selectedFolder]);
 
@@ -123,30 +186,10 @@ export default function MediasContent(
   },[selectedMedias]);
 
   const handleScrollToEnd = ()=>{
-    if(!gridLoading && haseData){
+    if(!gridLoading && hasData){
       setGridLoading(true);
-      loadMedias(medias);
+      refetch && refetch({ first:20, page:pageNumber + 1});
     }
-  }
-
-  const loadMedias = (oldMedias:Array<IMedia> = []) => {
-    axios(
-      {
-        method: API_MEDIAS.method as any,
-        url: API_MEDIAS.url,
-        params: {
-          folder: selectedFolder === 'root' ? '' : selectedFolder,
-          page: pageNumber,
-        }
-      }
-    ).then(res => {
-      setMedias(oldMedias.concat(res.data));
-      setGridLoading(false);
-    })
-    .catch(err => {
-      console.log('server error');
-      setGridLoading(false);
-    });
   }
 
   const handleAddFolder = (parent?:FolderNode)=>{
@@ -161,12 +204,12 @@ export default function MediasContent(
       newFolder.editing = true;
       setFolderLoading(false);
       //setSelectedFolder(newFolder.id.toString());
-      if(parent){
-        parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
-        setFolders([...folders])
-      }else{
-        setFolders([...folders, newFolder]);
-      }
+      //if(parent){
+      //  parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
+      //  setFolders([...folders])
+      //}else{
+      //  setFolders([...folders, newFolder]);
+      //}
     })
     .catch(err => {
       console.log('server error');
@@ -185,7 +228,7 @@ export default function MediasContent(
       }
     ).then(res => {
       setFolderLoading(false);
-      setFolders([...folders]);
+      //setFolders([...folders]);
     })
     .catch(err => {
       console.log('server error');
@@ -213,11 +256,11 @@ export default function MediasContent(
       setFolderLoading(false);
       if(!parentFolder){
         remove(folder, folders)
-        setFolders([...folders])
+        //setFolders([...folders])
       }
       else{
         remove(folder, parentFolder.children)
-        setFolders([...folders])
+        //setFolders([...folders])
       }
     })
     .catch(err => {
@@ -259,7 +302,7 @@ export default function MediasContent(
         folders.push(folder)
       }
   
-      setFolders([...folders]);
+      //setFolders([...folders]);
  
     })
     .catch(err => {
