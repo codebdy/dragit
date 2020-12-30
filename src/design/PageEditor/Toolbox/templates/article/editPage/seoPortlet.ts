@@ -26,6 +26,10 @@ export default{
                 variant:"outlined",
                 fullWidth:true,
                 field:'title',
+                rule:{
+                  valueType:'string',
+                  required:true,
+                } 
               }
             }
           ]
