@@ -3,11 +3,13 @@ import dashboard from "mock/views/dashboard";
 import meidaPage from "mock/views/meidaPage";
 import notificationPage from "mock/views/notificationPage";
 import notificationViewPage from "mock/views/notificationViewPage";
+import { JUMP_STYLE_MODULE } from "utils/consts";
 
 export default[
   {
     id:21,
     slug:'dashboard',
+    module_type:JUMP_STYLE_MODULE,
     name:'系统',
     entry_page_id:211,
     pages:[
@@ -44,6 +46,7 @@ export default[
   {
     id:15,
     name:'媒体管理',
+    module_type:JUMP_STYLE_MODULE,
     slug:'medias',
     entry_page_id:151,
     pages:[
