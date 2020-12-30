@@ -3,6 +3,7 @@ export var articlesData = [
         id:'1',
         title:'只要在心里留一块空地，爱就会自然地注入心中',
         status:'DRAFT',
+        email:'demo@rxdrag.com',
         created_at:'2020-11-30T14:38',
         content:"<p>轻轻的，我来了</p><p>正如我轻轻的走</p>",
         feathureImage: {

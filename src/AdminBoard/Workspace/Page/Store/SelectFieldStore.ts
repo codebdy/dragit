@@ -1,5 +1,6 @@
 import { IMeta } from "base/Model/IMeta";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
+import { cloneObject } from "utils/cloneObject";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 export class SelectFieldStore implements IFieldStore{
@@ -24,13 +25,14 @@ export class SelectFieldStore implements IFieldStore{
     this.value = value;
   }
 
+  getItemKey(){
+    let itemKey = this.meta.props?.itemKey;
+    itemKey = this.meta.props?.query ? itemKey : 'slug';
+    return itemKey ? itemKey : 'id';
+  }
 
   toFieldsGQL() {
-    let itemKey = this.meta.props?.itemKey;
-    //let itemName = this.meta.props?.itemName;
-    itemKey = this.meta.props?.query ? itemKey : 'slug';
-    //itemName = this.meta.props?.query ? itemName : 'label';
-    return ` ${this.meta?.props?.field} {${itemKey ? itemKey : 'id'}} `;
+    return ` ${this.meta?.props?.field} {${this.getItemKey()}} `;
   }
 
   getModelNode(name:string):IModelNode|undefined{
@@ -38,6 +40,13 @@ export class SelectFieldStore implements IFieldStore{
   }
 
   toInputValue(){
+    const itemKey = this.getItemKey();
+    this.value?.forEach((item:any,key:any)=>{
+      this.value[key] = {[itemKey]:item[itemKey]}
+    })
+    
+    console.log(this.value);
+    return toJS(this.value);
   }
 
   validate(){

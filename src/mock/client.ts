@@ -5,7 +5,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 
 import { schema, resolvers } from './schema';
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache(/*{addTypename: false}*/);
 
 const executableSchema = makeExecutableSchema({
   typeDefs: schema,
