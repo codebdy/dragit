@@ -33,7 +33,11 @@ export const savePost = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
   //const module = getModuleBySlug(args.slug);
   console.log('Server received post data:', args);
-  return {...args.post, id:args.post?.id || idSeed++, created_at:''}
+  let post = {...args.post, id:args.post?.id || idSeed++, created_at:''}
+  if(post?.seoMeta && !post?.seoMeta.id){
+    post.seoMeta.id = ++idSeed;
+  }
+  return post;
 }
 
 export const postQueryResolvers = {
