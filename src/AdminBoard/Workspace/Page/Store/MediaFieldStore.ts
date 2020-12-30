@@ -24,6 +24,9 @@ export class MediaFieldStore implements IFieldStore{
     this.value = value;
   }
 
+  setLoading(loading:boolean){
+    this.loading = loading;
+  }
 
   toFieldsGQL() {
     return ` ${this.meta?.props?.field} {id thumbnail title alt src} `;

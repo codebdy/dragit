@@ -20,6 +20,10 @@ export class SelectFieldStore implements IFieldStore{
     this.value = fieldValue;
   }
 
+  setLoading(loading:boolean){
+    this.loading = loading;
+  }
+  
   setValue(value: any) {
     this.value = value;
   }

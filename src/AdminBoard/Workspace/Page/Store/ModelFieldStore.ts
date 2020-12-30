@@ -26,6 +26,10 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
     return this.subFields.get(fieldName)
   }
 
+  setLoading(loading:boolean){
+    this.loading = loading;
+  }
+  
   setValue(value: any) {
   }
 

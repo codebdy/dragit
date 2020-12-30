@@ -23,6 +23,10 @@ export class TableFieldStore implements IFieldStore, IModelStore {
     return undefined;
   }
   
+  setLoading(loading:boolean){
+    this.loading = loading;
+  }
+  
   setValue(value: any) {
   }
 

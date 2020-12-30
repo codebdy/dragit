@@ -26,6 +26,10 @@ export class FieldStore implements IFieldStore{
     this.meta = meta;
   }
 
+  setLoading(loading:boolean){
+    this.loading = loading;
+  }
+  
   toFieldsGQL() {
     return ` ${this.meta?.props?.field} `;
   }

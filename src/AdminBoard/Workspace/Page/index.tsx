@@ -65,6 +65,11 @@ export const Page = observer((
 
   const [excuteMutation, {error:muetationError}] = useMutation(createMutationGQL(mutation),{
     onCompleted:(data)=>{
+      if(mutation){
+        const submitNode = pageStore.getModelNode(mutation.submitNode); 
+        submitNode?.setLoading(false);
+      }
+      
       appStore.setSuccessAlert(true)
       if(mutation?.goback){
         onPageAction && onPageAction({name:GO_BACK_ACTION})
@@ -75,6 +80,7 @@ export const Page = observer((
     if(mutation){
       const submitNode = pageStore.getModelNode(mutation.submitNode)
       console.log('mutation variables', submitNode?.toInputValue());
+      submitNode?.setLoading(true);
       excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}});      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
