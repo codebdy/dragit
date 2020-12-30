@@ -1,7 +1,7 @@
 import { Divider, Grid, IconButton, ListItem, ListItemText } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
-import { IForm, defultForm, FormContext } from "base/FormContext";
+//import { IForm, defultForm, FormContext } from "base/FormContext";
 import { AxiosRequestConfig } from 'axios';
 import { useAxios } from 'base/Hooks/useAxios';
 import { ITreeNode } from 'base/Model/ITreeNode';
@@ -32,7 +32,7 @@ const TreeEditor = React.forwardRef((
   const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
   const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
   const [root, setRoot] = useState<RXNodeRoot<ITreeNode>>();
-  const [form, setForm] = useState<IForm>(defultForm());
+  //const [form, setForm] = useState<IForm>(defultForm());
   const [selectedNode, setSelectedNode] = useState<RXNode<ITreeNode>|undefined>();
 
   useEffect(()=>{
@@ -129,22 +129,22 @@ const TreeEditor = React.forwardRef((
   const handleSelect = (nodeId:number)=>{
     let node = root?.getNode(nodeId);
     if(node){
-      setForm({
+     /* setForm({
         ...form,
         defaultValues:node.meta,
         values:node.meta,
         valueChanged:valueChanged
-      })
+      })*/
     }
     else{
-      setForm({
+      /*setForm({
         ...form,
         defaultValues:{},
         values:{},
-      })      
+      })  */    
     }
 
-    setSelectedNode(node)
+   // setSelectedNode(node)
   }
 
   const handleSave = ()=>{
@@ -218,9 +218,9 @@ const TreeEditor = React.forwardRef((
 
         </Grid>
         <Grid item xs={7}>
-          <FormContext.Provider value = {form}>
+          {/*<FormContext.Provider value = {form}>
             {selectedNode && children}
-          </FormContext.Provider>
+            </FormContext.Provider>*/}
         </Grid>
       </Grid>
     </Portlet>

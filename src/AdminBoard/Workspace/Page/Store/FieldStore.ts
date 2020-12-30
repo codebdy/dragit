@@ -1,6 +1,7 @@
 import { IMeta } from "base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IModelNode } from "./IModelNode";
+import { validate } from "./validate";
 
 export interface IFieldStore extends IModelNode{
   meta:IMeta;
@@ -11,6 +12,7 @@ export interface IFieldStore extends IModelNode{
 
   setValue: (value:any)=>void;
   setModel:(model: any)=>void;
+  validate:()=>boolean;
 }
 
 export class FieldStore implements IFieldStore{
@@ -45,6 +47,11 @@ export class FieldStore implements IFieldStore{
 
   toInputValue(){
     return toJS(this.value);
+  }
+
+  validate(){
+    this.error = validate(this.value, this.meta?.props?.rule);
+    return !this.error;
   }
 }
 

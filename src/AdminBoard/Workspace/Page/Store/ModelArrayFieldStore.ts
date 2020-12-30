@@ -34,6 +34,11 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
   getModelNode(name:string):IModelNode|undefined{
     return undefined;
   }
+
   toInputValue(){
+  }
+
+  validate(){
+    return true;
   }
 }

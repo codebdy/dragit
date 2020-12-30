@@ -32,7 +32,12 @@ export class MediaFieldStore implements IFieldStore{
   getModelNode(name:string):IModelNode|undefined{
     return undefined;
   }
+
   toInputValue(){
+  }
+
+  validate(){
+    return true;
   }
 }
 

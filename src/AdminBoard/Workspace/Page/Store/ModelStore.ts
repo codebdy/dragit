@@ -48,7 +48,7 @@ function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
 }
 
 export class ModelStore implements IModelStore , IModelNode{
-  id?: String;
+  model?: any;
   loading?: boolean;
   fields: Map<string,IFieldStore>;
   pageLayout?:Array<RXNode<IMeta>>;
@@ -69,10 +69,6 @@ export class ModelStore implements IModelStore , IModelNode{
     this.loading = loading;
   }
 
-  setId(id?:String){
-    this.id = id;
-  }
-
   parsePage(page?:IPage){
     const layout = page?.schema?.layout || [];
     let root = new RXNodeRoot<IMeta>();
@@ -85,6 +81,7 @@ export class ModelStore implements IModelStore , IModelNode{
   }
 
   setModel(model:any){
+    this.model = model
     console.log('setModel', model)
     this.fields.forEach(fieldStore=>{
       fieldStore.setModel(model);
@@ -108,11 +105,21 @@ export class ModelStore implements IModelStore , IModelNode{
   }
 
   toInputValue(){
-    let rtValue = {id:this.id} as any;
+    let rtValue = {id:this.model?.id} as any;
     this.fields?.forEach((fieldStore, key)=>{
       rtValue[key] = fieldStore.toInputValue();
     })
 
     return rtValue
+  }
+
+  validate():boolean{
+    let passed = true;
+    this.fields?.forEach((fieldStore, key)=>{
+      if(!fieldStore.validate()){
+        passed = false;
+      }
+    })
+    return passed;
   }
 }

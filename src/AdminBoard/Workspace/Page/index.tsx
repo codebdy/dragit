@@ -12,6 +12,10 @@ import { ModelStore } from './Store/ModelStore';
 import { IPageMutation } from 'base/Model/IPageMutation';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
 import { useAppStore } from 'store/helpers/useAppStore';
+import { Dialog } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import ConfirmDialog from 'base/Widgets/ConfirmDialog';
+import intl from 'react-intl-universal';
 
 export const Page = observer((
   props:{
@@ -20,6 +24,8 @@ export const Page = observer((
     onPageAction?: (pageAction:PageAction)=> void,
   }
 )=>{
+  const [openAlert, setOpentAlert] = useState(false);
+  const [backConfirmOpen, setBackConfirmOpen] = useState(false);
   const {page, pageParams, onPageAction} = props;
   const [pageStore] = useState(new ModelStore());
   const [mutation, setMutation] = useState<IPageMutation>();
@@ -68,6 +74,7 @@ export const Page = observer((
   useEffect(()=>{
     if(mutation){
       const submitNode = pageStore.getModelNode(mutation.submitNode)
+      console.log('mutation variables', submitNode?.toInputValue());
       excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}});      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +82,6 @@ export const Page = observer((
   
   useEffect(()=>{
     pageStore.parsePage(page);
-    pageStore.setId(pageParams?.dataId)
     if(queryName){
       excuteQuery();
     }
@@ -103,13 +109,27 @@ export const Page = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
-        if(action.mutation){
-          setMutation(action.mutation)
-        }        
+        if(pageStore.validate()){
+          if(action.mutation){
+            setMutation(action.mutation)
+          }           
+        }
+        else{
+          setOpentAlert(true);
+        }
+       
         return;
     }
-
     onPageAction && onPageAction(action);
+  }
+
+  const handleCloseAlert = ()=>{
+    setOpentAlert(false);
+  }
+
+  const handleBackConfirm = ()=>{
+    onPageAction && onPageAction({name:GO_BACK_ACTION})
+    setBackConfirmOpen(false);
   }
 
   return (
@@ -125,6 +145,24 @@ export const Page = observer((
           )
         })
       }
+
+        <Dialog
+          open={openAlert}
+          onClose={handleCloseAlert}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <Alert severity="error"  onClose={handleCloseAlert}>
+            <AlertTitle>{intl.get('error')}</AlertTitle>
+            {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
+          </Alert>      
+        </Dialog>
+        <ConfirmDialog 
+          message = {intl.get('changing-not-save-message')}
+          open = {backConfirmOpen}
+          onCancel ={()=>{setBackConfirmOpen(false)}}
+          onConfirm = {handleBackConfirm}
+        /> 
     </ModelProvider>
   )
 })

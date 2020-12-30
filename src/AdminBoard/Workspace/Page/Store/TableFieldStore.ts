@@ -38,4 +38,8 @@ export class TableFieldStore implements IFieldStore, IModelStore {
 
   toInputValue(){
   }
+
+  validate(){
+    return true;
+  }
 }

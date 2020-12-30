@@ -39,6 +39,10 @@ export class SelectFieldStore implements IFieldStore{
 
   toInputValue(){
   }
+
+  validate(){
+    return true;
+  }
 }
 
 

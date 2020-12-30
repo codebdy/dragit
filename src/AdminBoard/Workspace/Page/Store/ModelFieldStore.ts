@@ -50,6 +50,16 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
   getModelNode(name:string):IModelNode|undefined{
     return undefined
   }
+  
   toInputValue(){
+    let rtValue = {id:this.defaultValue?.id} as any;
+    this.subFields?.forEach((fieldStore, key)=>{
+      rtValue[key] = fieldStore.toInputValue();
+    })
+    return rtValue;
+  }
+
+  validate(){
+    return true;
   }
 }
