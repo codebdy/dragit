@@ -42,15 +42,14 @@ const withFormField = (Component:any)=>{
 
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
-      //setInputValue(newValue);
-      //setValue(fieldName, newValue);
-      //onDirty && onDirty();
       fieldStore?.setValue(newValue);
+      if(fieldStore?.error){
+        fieldStore?.validate();        
+      }
     }
 
     const handleBlur = ()=>{
-      //const newError = validate(fieldName);
-      //setError(newError)
+      fieldStore?.validate();
     }
     const error = fieldStore?.error;
     const compent = <Component
