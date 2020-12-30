@@ -1,6 +1,5 @@
 import { IMeta } from "base/Model/IMeta";
-import { makeAutoObservable, toJS } from "mobx";
-import { cloneObject } from "utils/cloneObject";
+import { makeAutoObservable } from "mobx";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 export class SelectFieldStore implements IFieldStore{
@@ -44,9 +43,7 @@ export class SelectFieldStore implements IFieldStore{
     this.value?.forEach((item:any,key:any)=>{
       this.value[key] = {[itemKey]:item[itemKey]}
     })
-    
-    console.log(this.value);
-    return toJS(this.value);
+    return this.value;
   }
 
   validate(){

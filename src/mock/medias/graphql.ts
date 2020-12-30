@@ -7,9 +7,10 @@ export var mediasGQLType = `
 
   type Media {
     id:ID!
-    thumbnail: String!
+    thumbnail: String
     title: String
     src: String
+    alt: String
   }
 
   type Medias{
@@ -25,6 +26,7 @@ export var mediasGQLType = `
 
   input MediaInput {
     id:ID!
+    thumbnail: String
     title: String
     folderId:ID
     alt: String
