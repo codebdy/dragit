@@ -27,6 +27,7 @@ export var mediasGQLType = `
     id:ID!
     title: String
     folderId:ID
+    alt: String
   }
 `
 

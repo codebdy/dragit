@@ -1,6 +1,7 @@
 import { IMeta } from "base/Model/IMeta";
 import { makeAutoObservable } from "mobx";
 import { IFieldStore } from "./FieldStore";
+import { IModelNode } from "./IModelNode";
 export class SelectFieldStore implements IFieldStore{
   meta:IMeta;
   defaultValue?: any;
@@ -32,6 +33,12 @@ export class SelectFieldStore implements IFieldStore{
     return ` ${this.meta?.props?.field} {${itemKey ? itemKey : 'id'}} `;
   }
 
+  getModelNode(name:string):IModelNode|undefined{
+    return undefined;
+  }
+
+  toInputValue(){
+  }
 }
 
 

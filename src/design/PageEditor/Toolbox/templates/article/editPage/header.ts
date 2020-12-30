@@ -44,6 +44,13 @@ export default{
           marginLeft:2,
           onClick:{
             name:SUBMIT_AND_NOT_CLOSE_ACTION,
+            mutation:{
+              name:'updatePost',
+              variableName:'post',
+              variableType:'PostInput',
+              submitNode:'',
+              refreshNode:'',
+            },
           }
         }
       }]

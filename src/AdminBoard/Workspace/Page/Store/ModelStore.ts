@@ -13,6 +13,7 @@ import { ModelFieldStore } from "./ModelFieldStore";
 import { IModelStore } from "./IModelStore";
 import { SelectFieldStore } from "./SelectFieldStore";
 import { MediaFieldStore } from "./MediaFieldStore";
+import { IModelNode } from "./IModelNode";
 
 function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
   const fieldName = node.meta.props?.field;
@@ -46,7 +47,7 @@ function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
   })
 }
 
-export class ModelStore implements IModelStore{
+export class ModelStore implements IModelStore , IModelNode{
   loading?: boolean;
   fields: Map<string,IFieldStore>;
   pageLayout?:Array<RXNode<IMeta>>;
@@ -86,10 +87,21 @@ export class ModelStore implements IModelStore{
   }
 
   toFieldsGQL(){
-    let gql = ''
+    let gql = ' id '
     this.fields.forEach(fieldStore=>{
       gql = gql + ` ${fieldStore.toFieldsGQL()} `
     })
     return gql;
+  }
+
+  getModelNode(name?:string):IModelNode|undefined{
+    if(!name){
+      return this;
+    }
+
+    return undefined;
+  }
+
+  toInputValue(){
   }
 }

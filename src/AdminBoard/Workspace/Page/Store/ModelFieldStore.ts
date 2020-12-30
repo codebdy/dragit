@@ -2,6 +2,7 @@ import { IMeta } from "base/Model/IMeta";
 import { makeAutoObservable } from "mobx";
 import { IModelStore } from "./IModelStore";
 import { IFieldStore } from "./FieldStore";
+import { IModelNode } from "./IModelNode";
 
 
 export class ModelFieldStore implements IFieldStore, IModelStore {
@@ -46,4 +47,9 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
     return subGql ? ` ${this.meta.props?.field} {id ${subGql}}` :  ` ${this.meta.props?.field} `;
   }
 
+  getModelNode(name:string):IModelNode|undefined{
+    return undefined
+  }
+  toInputValue(){
+  }
 }

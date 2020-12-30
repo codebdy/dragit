@@ -1,7 +1,8 @@
 import { IMeta } from "base/Model/IMeta";
 import { makeAutoObservable } from "mobx";
+import { IModelNode } from "./IModelNode";
 
-export interface IFieldStore{
+export interface IFieldStore extends IModelNode{
   defaultValue?: any;
   value?: any;
   error?: string;
@@ -9,7 +10,6 @@ export interface IFieldStore{
 
   setValue: (value:any)=>void;
   setModel:(model: any)=>void;
-  toFieldsGQL:()=>void;
 }
 
 export class FieldStore implements IFieldStore{
@@ -38,6 +38,12 @@ export class FieldStore implements IFieldStore{
     this.value = value;
   }
 
+  getModelNode(name:string):IModelNode|undefined{
+    return undefined;
+  }
+
+  toInputValue(){
+  }
 }
 
 

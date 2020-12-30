@@ -39,6 +39,35 @@ export var articleGQLType = `
   }
 `
 
+export var articleGQLInput =`
+  input PostChannelInput{
+    id:ID
+    name:String
+  }
+
+  input PostAttributeInput{
+    id: ID
+    name: String
+  }
+
+  input PostInput{
+    id: ID
+    slug: String
+    title: String
+    auther: String
+    channel: [PostChannelInput]
+    tags:[String]
+    email: String
+    shortTitle: String
+    seoMeta:SeoMetaInput
+    content: String
+    order: String
+    attributes:[PostAttributeInput]
+    status: String
+    medias:[MediaInput]
+  }
+`
+
 export var articleGQLQuery = `
   posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
   post(id:ID):Post
@@ -49,4 +78,5 @@ export var articleGQLQuery = `
 
 export var articleGQLMutation = `
   updatePosts(command:String, ids:[ID] ):[Post]
+  updatePost(post:PostInput):Post
 `

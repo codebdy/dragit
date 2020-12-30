@@ -4,7 +4,7 @@ import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
 import { drawerItemsResolver } from "./drawer/drawerItemsResolver";
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
 import { postsResolver, postResolver, updatePostsResolver } from "./article/post/resolvers";
-import { articleGQLType, articleGQLQuery, articleGQLMutation } from "./article/graphql";
+import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./article/graphql";
 import { channelTreeResolver } from "./article/channel/resolvers";
 import { allPostTagsResolver } from "./article/tag/resolvers";
 import { allPostAttributesResolver } from "./article/attribute/resolvers";
@@ -18,6 +18,13 @@ export const schema = `
   
   type SeoMeta{
     id:ID!
+    title: String
+    keywords: String
+    description: String 
+  }
+
+  input SeoMetaInput{
+    id:ID
     title: String
     keywords: String
     description: String 
@@ -75,6 +82,7 @@ export const schema = `
   }
   ${mediasGQLType}
   ${articleGQLType}
+  ${articleGQLInput}
 
   type Query {
     "登录"
