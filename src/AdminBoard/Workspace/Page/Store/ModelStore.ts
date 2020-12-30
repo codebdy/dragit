@@ -65,6 +65,22 @@ export class ModelStore implements IModelStore , IModelNode{
     return this.fields.get(fieldName)
   }
 
+  clearDirty(){
+    this.fields.forEach(fieldStore=>{
+      fieldStore.clearDirty();
+    })
+  }
+
+  isDirty(){
+    let dirty = false;
+    this.fields.forEach(fieldStore=>{
+      if(fieldStore.isDirty()){
+        dirty = true;
+      }
+    })
+    return dirty;
+  }
+
   setLoading(loading?:boolean){
     this.loading = loading;
   }

@@ -26,10 +26,27 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
     return this.subFields.get(fieldName)
   }
 
+  clearDirty(){
+    this.subFields?.forEach((fieldStore, key)=>{
+      fieldStore.clearDirty();
+    })
+  }
+
+  isDirty(){
+    let dirty = false;
+    this.subFields?.forEach((fieldStore, key)=>{
+      if(fieldStore.isDirty()){
+        dirty = true;
+      }
+    })
+
+    return dirty;
+  }
+
   setLoading(loading:boolean){
     this.loading = loading;
   }
-  
+
   setValue(value: any) {
   }
 

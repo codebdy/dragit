@@ -8,6 +8,7 @@ export class MediaFieldStore implements IFieldStore{
   value?: any;
   error?: string;
   loading?: boolean;
+  dirty?: boolean;
   
   constructor(meta:IMeta) {
     makeAutoObservable(this);
@@ -22,6 +23,15 @@ export class MediaFieldStore implements IFieldStore{
 
   setValue(value: any) {
     this.value = value;
+    this.dirty = true;
+  }
+
+  clearDirty(){
+    this.dirty = false;
+  }
+
+  isDirty(){
+    return this.dirty;
   }
 
   setLoading(loading:boolean){

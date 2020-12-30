@@ -11,6 +11,7 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
   error?: string;
   meta: IMeta;
   loading?: boolean;
+  dirty?: boolean;
   constructor(meta: IMeta) {
     this.meta = meta;
     makeAutoObservable(this);
@@ -22,10 +23,18 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
     return undefined;
   }
 
+  clearDirty(){
+    //this.dirty = false;
+  }
+
+  isDirty(){
+    return false;
+  }
+
   setLoading(loading:boolean){
     this.loading = loading;
   }
-  
+
   setValue(value: any) {
   }
 

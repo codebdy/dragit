@@ -68,8 +68,9 @@ export const Page = observer((
       if(mutation){
         const submitNode = pageStore.getModelNode(mutation.submitNode); 
         submitNode?.setLoading(false);
+        submitNode?.clearDirty();
       }
-      
+
       appStore.setSuccessAlert(true)
       if(mutation?.goback){
         onPageAction && onPageAction({name:GO_BACK_ACTION})
@@ -125,6 +126,11 @@ export const Page = observer((
         }
        
         return;
+      case GO_BACK_ACTION:
+        if(pageStore?.isDirty()){
+          setBackConfirmOpen(true);
+          return;
+        }
     }
     onPageAction && onPageAction(action);
   }

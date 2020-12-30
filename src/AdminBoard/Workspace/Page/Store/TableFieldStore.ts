@@ -16,6 +16,13 @@ export class TableFieldStore implements IFieldStore, IModelStore {
     makeAutoObservable(this);
   }
 
+  clearDirty(){
+  }
+
+  isDirty(){
+    return false;
+  }
+
   setFieldStore(fieldName: string, fieldStore: IFieldStore) {
   }
 

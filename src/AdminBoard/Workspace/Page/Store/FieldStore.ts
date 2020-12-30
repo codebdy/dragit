@@ -21,6 +21,7 @@ export class FieldStore implements IFieldStore{
   value?: any;
   error?: string;
   loading?: boolean;
+  dirty?: boolean;
   constructor(meta:IMeta) {
     makeAutoObservable(this);
     this.meta = meta;
@@ -28,6 +29,14 @@ export class FieldStore implements IFieldStore{
 
   setLoading(loading:boolean){
     this.loading = loading;
+  }
+
+  clearDirty(){
+    this.dirty = false;
+  }
+
+  isDirty(){
+    return this.dirty;
   }
   
   toFieldsGQL() {
@@ -43,6 +52,7 @@ export class FieldStore implements IFieldStore{
 
   setValue(value: any) {
     this.value = value;
+    this.dirty = true;
   }
 
   getModelNode(name:string):IModelNode|undefined{

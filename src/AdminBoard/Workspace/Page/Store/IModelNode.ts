@@ -3,4 +3,6 @@ export interface IModelNode{
   getModelNode:(name:string)=>IModelNode|undefined;
   toInputValue:()=>any;
   setLoading:(loading:boolean)=>void;
+  clearDirty:()=>void;
+  isDirty:()=>boolean|undefined;
 }

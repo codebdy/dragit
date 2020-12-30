@@ -105,7 +105,7 @@ export const PageEditor = observer((
   const [draggedNode, setDraggedNode] = useState<RXNode<IMeta>>();
   const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
   const [, saving] = useAxios(saveRequest, true);
-  const [isDirty, setIsDirty] = useState(false);
+  const [dirty, setIsDirty] = useState(false);
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
   const theme = useTheme(); 
@@ -208,7 +208,7 @@ export const PageEditor = observer((
   }, [selectedNode])
 
   const handleCancel = () => {
-    if(isDirty){
+    if(dirty){
       setBackConfirmOpen(true);
     }
     else{
@@ -414,7 +414,7 @@ export const PageEditor = observer((
                 size="large"
                 onClick={handleSave} 
                 submitting={saving}
-                disabled = {!isDirty}
+                disabled = {!dirty}
               >
                 {intl.get('save')}
               </SubmitButton>

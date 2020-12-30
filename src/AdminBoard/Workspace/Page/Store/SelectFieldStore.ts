@@ -8,6 +8,7 @@ export class SelectFieldStore implements IFieldStore{
   value?: any;
   error?: string;
   loading?: boolean;
+  dirty?:boolean;
   
   constructor(meta:IMeta) {
     makeAutoObservable(this);
@@ -20,12 +21,21 @@ export class SelectFieldStore implements IFieldStore{
     this.value = fieldValue;
   }
 
+  clearDirty(){
+    this.dirty = false;
+  }
+
+  isDirty(){
+    return this.dirty;
+  }
+
   setLoading(loading:boolean){
     this.loading = loading;
   }
   
   setValue(value: any) {
     this.value = value;
+    this.dirty = true;
   }
 
   getItemKey(){
