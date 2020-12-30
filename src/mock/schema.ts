@@ -3,7 +3,6 @@ import { modulePageResolver } from "./module/modulePageResolver";
 import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
 import { drawerItemsResolver } from "./drawer/drawerItemsResolver";
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
-import { postsResolver, postResolver, updatePostsResolver } from "./article/post/resolvers";
 import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./article/graphql";
 import { channelTreeResolver } from "./article/channel/resolvers";
 import { allPostTagsResolver } from "./article/tag/resolvers";
@@ -11,6 +10,7 @@ import { allPostAttributesResolver } from "./article/attribute/resolvers";
 import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graphql";
 import { mediaQueryResolvers } from "./medias/queryResolvers";
 import { mediaMutationResolvers } from "./medias/mutationResolvers";
+import { postMutationResolvers, postQueryResolvers } from "./article/post/resolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -118,8 +118,7 @@ export const resolvers = {
     },
 
     moduleBySlug:moduleBySlugResolver,
-    posts:postsResolver,
-    post:postResolver,
+    ...postQueryResolvers,
     channelTree:channelTreeResolver,
     allPostTags:allPostTagsResolver,
     allPostAttributes:allPostAttributesResolver,
@@ -128,7 +127,7 @@ export const resolvers = {
   },
 
   Mutation:{
-    updatePosts:updatePostsResolver,
+    ...postMutationResolvers,
     ...mediaMutationResolvers,   
   }
 };

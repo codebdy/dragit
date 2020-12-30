@@ -108,26 +108,6 @@ export default{
           },
           children:[
             {
-              name:'TextBox',
-              props:{
-                label:'创作日期',
-                variant:"outlined",
-                fullWidth:true,
-                //size:"small",
-                type:'datetime-local',
-                shrinkLabel:true,
-                field:'created_at',
-              },
-            }
-          ],
-        },
-        {
-          name: 'PortletGridItem',
-          props:{
-            xs:6,
-          },
-          children:[
-            {
               name:'TreeSelect',
               designProps:{
                 dataApi:null,

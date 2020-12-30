@@ -78,5 +78,5 @@ export var articleGQLQuery = `
 
 export var articleGQLMutation = `
   updatePosts(command:String, ids:[ID] ):[Post]
-  updatePost(post:PostInput):Post
+  savePost(post:PostInput):Post
 `

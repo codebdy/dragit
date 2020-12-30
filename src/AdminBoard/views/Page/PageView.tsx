@@ -4,7 +4,7 @@ import { RXNode } from "../../../base/RXNode/RXNode";
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, createStyles, Dialog, makeStyles, Theme } from "@material-ui/core";
 import PageSkeleton from "../../Workspace/common/ModuleSkeleton";
-import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from '../../../base/PageAction';
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction, SUBMIT_MUTATION } from '../../../base/PageAction';
 
 import { IMeta } from "base//Model/IMeta";
 import { RXNodeRoot } from "base/RXNode/Root";
@@ -141,12 +141,12 @@ const PageView = ()=>{
         //}
         return;
       
-      case SUBMIT_ACTION:
+      case SUBMIT_MUTATION:
         setCloseAfterSubmit(true);
         setSubmit(true);
         return;
       
-      case SUBMIT_AND_NOT_CLOSE_ACTION:
+      case SUBMIT_MUTATION:
         setCloseAfterSubmit(false);
         setSubmit(true);
         return;

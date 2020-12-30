@@ -4,13 +4,14 @@ import { IPage } from 'base/Model/IPage';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
 import ComponentRender from 'AdminBoard/Workspace/Page/ComponentRender';
-import { GO_BACK_ACTION, PageAction, SUBMIT_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from 'base/PageAction';
+import { GO_BACK_ACTION, PageAction, SUBMIT_MUTATION } from 'base/PageAction';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'base/Model/IPageJumper';
 import { ModelProvider } from './Store/ModelProvider';
 import { ModelStore } from './Store/ModelStore';
 import { IPageMutation } from 'base/Model/IPageMutation';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
+import { useAppStore } from 'store/helpers/useAppStore';
 
 export const Page = observer((
   props:{
@@ -23,6 +24,7 @@ export const Page = observer((
   const [pageStore] = useState(new ModelStore());
   const [mutation, setMutation] = useState<IPageMutation>();
   const queryName = page?.schema?.query?.name;
+  const appStore = useAppStore();
 
   const createQueryGQL = ()=>{
     const QUERY_GQL = gql`
@@ -39,15 +41,15 @@ export const Page = observer((
       return gql`mutation{emperty}`;
     }
     //console.log('createQueryGQL',pageStore.toFieldsGQL())
-    const refshNode = pageStore.getModelNode(mutation?.refreshNode)
-    const QUERY_GQL = gql`
-      mutation ($input:${mutation?.variableType}){
-        ${mutation?.name}(${mutation?.variableName}:$input){
-          ${refshNode?.toFieldsGQL()}
+    const refreshNode = pageStore.getModelNode(mutation?.refreshNode)
+    const MUTATION_GQL = gql`
+      mutation ($${mutation?.variableName}:${mutation?.variableType}){
+        ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName}){
+          ${refreshNode?.toFieldsGQL()}
         }
       }
     `;
-    return QUERY_GQL;
+    return MUTATION_GQL;
   }
 
   const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(createQueryGQL(), {
@@ -57,7 +59,7 @@ export const Page = observer((
 
   const [excuteMutation, {error:muetationError}] = useMutation(createMutationGQL(mutation),{
     onCompleted:(data)=>{
-      //setFolderLoading(false);
+      appStore.setSuccessAlert(true)
       if(mutation?.goback){
         onPageAction && onPageAction({name:GO_BACK_ACTION})
       }
@@ -73,6 +75,7 @@ export const Page = observer((
   
   useEffect(()=>{
     pageStore.parsePage(page);
+    pageStore.setId(pageParams?.dataId)
     if(queryName){
       excuteQuery();
     }
@@ -99,13 +102,7 @@ export const Page = observer((
 
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
-      case SUBMIT_ACTION:
-        //setCloseAfterSubmit(true);
-        //setSubmit(true);
-        //isDirty.value = false;
-        return;
-      
-      case SUBMIT_AND_NOT_CLOSE_ACTION:
+      case SUBMIT_MUTATION:
         if(action.mutation){
           setMutation(action.mutation)
         }        

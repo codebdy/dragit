@@ -31,7 +31,7 @@ export default function NotificationsList(props:{onClose:()=>void}){
 
   const [notifications, loading] = useAxios<Array<INotification>>(request)
 
-  const handleClick = (id:number)=>{
+  const handleClick = (id:string)=>{
     history.push(resolvePageUrl({
       moduleSlug:'notifications',
       pageSlug:'view-notification',

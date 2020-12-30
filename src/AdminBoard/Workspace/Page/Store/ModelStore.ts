@@ -48,6 +48,7 @@ function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
 }
 
 export class ModelStore implements IModelStore , IModelNode{
+  id?: String;
   loading?: boolean;
   fields: Map<string,IFieldStore>;
   pageLayout?:Array<RXNode<IMeta>>;
@@ -66,6 +67,10 @@ export class ModelStore implements IModelStore , IModelNode{
 
   setLoading(loading?:boolean){
     this.loading = loading;
+  }
+
+  setId(id?:String){
+    this.id = id;
   }
 
   parsePage(page?:IPage){
@@ -103,5 +108,11 @@ export class ModelStore implements IModelStore , IModelNode{
   }
 
   toInputValue(){
+    let rtValue = {id:this.id} as any;
+    this.fields?.forEach((fieldStore, key)=>{
+      rtValue[key] = fieldStore.toInputValue();
+    })
+
+    return rtValue
   }
 }

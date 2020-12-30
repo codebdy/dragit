@@ -1,6 +1,6 @@
 import article from "mock/article/post/views/article";
 import articleAttributes from "mock/article/attribute/articleAttributes";
-import articleChannel from "mock/article/articleChannel";
+import articleChannel from "mock/article/channel/articleChannel";
 import articles from "mock/article/post/views/articles";
 import articleTags from "mock/article/tag/articleTags";
 import user from "mock/views/user";

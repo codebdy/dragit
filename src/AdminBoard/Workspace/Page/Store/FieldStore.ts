@@ -1,8 +1,9 @@
 import { IMeta } from "base/Model/IMeta";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 import { IModelNode } from "./IModelNode";
 
 export interface IFieldStore extends IModelNode{
+  meta:IMeta;
   defaultValue?: any;
   value?: any;
   error?: string;
@@ -43,6 +44,7 @@ export class FieldStore implements IFieldStore{
   }
 
   toInputValue(){
+    return toJS(this.value);
   }
 }
 

@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION, SUBMIT_ACTION} from "base/PageAction";
+import {GO_BACK_ACTION, SUBMIT_MUTATION} from "base/PageAction";
 import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
 
 export default {
@@ -73,7 +73,7 @@ export default {
                       size:'large',
                       marginLeft:2,
                       onClick:{
-                        name: SUBMIT_ACTION,
+                        name: SUBMIT_MUTATION,
                       }           
                     }
                   }]

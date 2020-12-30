@@ -3,8 +3,8 @@ import { IPageMutation } from "./Model/IPageMutation";
 export const OPEN_PAGE_ACTION = "OPEN_PAGE_ACTION";
 export const GO_BACK_ACTION = "GO_BACK_ACTION";
 export const GET_DATA_ACTION = "GET_DATA_ACTION";
-export const SUBMIT_ACTION = "SUBMIT_ACTION";
-export const SUBMIT_AND_NOT_CLOSE_ACTION = "SUBMIT_AND_NOT_CLOSE_ACTION";
+//export const SUBMIT_ACTION = "SUBMIT_ACTION";
+export const SUBMIT_MUTATION = "SUBMIT_MUTATION";
 //export const PAGE_ACTION = "PAGE_ACTION";
 
 export interface PageAction{

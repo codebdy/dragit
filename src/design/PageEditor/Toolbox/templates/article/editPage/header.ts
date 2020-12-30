@@ -1,4 +1,4 @@
-import { GO_BACK_ACTION, SUBMIT_AND_NOT_CLOSE_ACTION } from "base/PageAction";
+import { GO_BACK_ACTION, SUBMIT_MUTATION } from "base/PageAction";
 
 export default{
   name: 'GridRow',
@@ -43,13 +43,14 @@ export default{
           size:'large',
           marginLeft:2,
           onClick:{
-            name:SUBMIT_AND_NOT_CLOSE_ACTION,
+            name:SUBMIT_MUTATION,
             mutation:{
-              name:'updatePost',
+              name:'savePost',
               variableName:'post',
               variableType:'PostInput',
               submitNode:'',
               refreshNode:'',
+              goback:true,
             },
           }
         }
