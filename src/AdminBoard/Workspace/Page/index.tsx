@@ -66,8 +66,9 @@ export const Page = observer((
   const [excuteMutation, {error:muetationError}] = useMutation(createMutationGQL(mutation),{
     onCompleted:(data)=>{
       if(mutation){
-        const submitNode = pageStore.getModelNode(mutation.submitNode); 
-        submitNode?.setLoading(false);
+        const submitNode = pageStore.getModelNode(mutation.submitNode);
+        const refreshNode = pageStore.getModelNode(mutation?.refreshNode) 
+        refreshNode?.setLoading(false);
         submitNode?.clearDirty();
       }
 
@@ -80,8 +81,9 @@ export const Page = observer((
   useEffect(()=>{
     if(mutation){
       const submitNode = pageStore.getModelNode(mutation.submitNode)
+      const refreshNode = pageStore.getModelNode(mutation?.refreshNode) 
       console.log('mutation variables', submitNode?.toInputValue());
-      submitNode?.setLoading(true);
+      refreshNode?.setLoading(true);
       excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}});      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

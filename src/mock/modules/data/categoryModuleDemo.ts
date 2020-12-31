@@ -134,4 +134,23 @@ export default[
     ],
   },
 
+  {
+    id:15,
+    name:'独立提交',
+    slug:'split-demo',
+    module_type:JUMP_STYLE_MODULE,
+    entry_page_id:1501,
+    pages:[
+      {
+        id:1501,
+        name:'计算器',
+        slug:'articles',
+        max_width:'false',
+        schema: articles,
+      },
+    ],
+    auths:[
+    ]
+  },
+
 ]
