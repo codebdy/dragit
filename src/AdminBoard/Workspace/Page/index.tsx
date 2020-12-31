@@ -69,9 +69,12 @@ export const Page = observer((
       onCompleted:(data)=>{
         if(mutation){
           const submitNode = pageStore.getModelNode(mutation.submitNode);
+          if(mutation?.refreshNode){
           const refreshNode = pageStore.getModelNode(mutation?.refreshNode)
-          refreshNode?.setModel(data[mutation.name]) 
-          refreshNode?.setLoading(false);
+          refreshNode?.setModel({[mutation?.refreshNode]:data[mutation.name]})             
+          refreshNode?.setLoading(false);          
+        }
+
           submitNode?.clearDirty();
           console.log('mutation result', data, mutation.name)
           setMutation(undefined);
