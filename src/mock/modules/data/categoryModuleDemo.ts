@@ -6,7 +6,7 @@ import articleTags from "mock/article/tag/articleTags";
 import user from "mock/views/user";
 import users from "mock/views/users";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
-import splitSubmit from "mock/demos/splitSubmit";
+import splitSubmit from "mock/demos/splitSubmitView";
 
 export default[
   {

@@ -11,6 +11,8 @@ import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graph
 import { mediaQueryResolvers } from "./medias/queryResolvers";
 import { mediaMutationResolvers } from "./medias/mutationResolvers";
 import { postMutationResolvers, postQueryResolvers } from "./article/post/resolvers";
+import { splitDemoMutationResolvers } from "./demos/resolvers";
+import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/graphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -83,6 +85,8 @@ export const schema = `
   ${mediasGQLType}
   ${articleGQLType}
   ${articleGQLInput}
+  ${splitGQLType}
+  ${splitGQLInput}
 
   type Query {
     "登录"
@@ -99,6 +103,7 @@ export const schema = `
   type Mutation{
     ${articleGQLMutation}
     ${mediasGQLMutation}
+    ${splitGQLMutation}
   }
 `;
 
@@ -128,6 +133,7 @@ export const resolvers = {
 
   Mutation:{
     ...postMutationResolvers,
-    ...mediaMutationResolvers,   
+    ...mediaMutationResolvers,
+    ...splitDemoMutationResolvers, 
   }
 };

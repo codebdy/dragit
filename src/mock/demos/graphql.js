@@ -11,29 +11,24 @@ export var splitGQLType = `
     periods:Int
     result:Int
   }
-
-  type SplitPage{}{
-    subtraction: Subtraction
-    compound: Compound
-  }
 `
 
 export var splitGQLInput =`
-  type SubtractionInput{
+  input SubtractionInput{
     minute:Int
     minus: Int
   }
 
-  type CompoundInput{
+  input CompoundInput{
     cardinal:Int
     rate:Int
     periods:Int
   }
 `
 
-export var splitGQLQuery = `
-  splitPage():SplitPage!
-`
+//export var splitGQLQuery = `
+//  splitPage():SplitPage!
+//`
 
 export var splitGQLMutation = `
   subtract(params:SubtractionInput):Subtraction
