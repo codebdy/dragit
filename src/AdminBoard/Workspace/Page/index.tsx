@@ -35,9 +35,9 @@ export const Page = observer((
   const createQueryGQL = ()=>{
     const QUERY_GQL = gql`
       query ($id:ID){
-        ${queryName}(id:$id){
+        ${queryName}(id:$id)
           ${pageStore.toFieldsGQL()}
-        }
+        
       }
     `;
     return QUERY_GQL;
@@ -51,9 +51,8 @@ export const Page = observer((
     console.log('mueationQueryGQL',refreshNode?.toFieldsGQL())
     const MUTATION_GQL = gql`
       mutation ($${mutation?.variableName}:${mutation?.variableType}){
-        ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName}){
+        ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName})
           ${refreshNode?.toFieldsGQL()}
-        }
       }
     `;
     return MUTATION_GQL;

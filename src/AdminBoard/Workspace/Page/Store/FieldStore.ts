@@ -40,7 +40,7 @@ export class FieldStore implements IFieldStore{
   }
   
   toFieldsGQL() {
-    return ` ${this.meta?.props?.field} `;
+    return '';
   }
 
   setModel(model: any) {

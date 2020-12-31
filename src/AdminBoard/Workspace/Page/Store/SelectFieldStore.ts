@@ -45,7 +45,7 @@ export class SelectFieldStore implements IFieldStore{
   }
 
   toFieldsGQL() {
-    return ` ${this.meta?.props?.field} {${this.getItemKey()}} `;
+    return ` {${this.getItemKey()}} `;
   }
 
   getModelNode(name:string):IModelNode|undefined{

@@ -1,13 +1,11 @@
 export var splitGQLType = `
   type Subtraction{
-    id: ID
     minute:Int
     minus: Int
     result: Int
   }
 
   type Compound{
-    id: ID
     cardinal:Int
     rate:Int
     periods:Int

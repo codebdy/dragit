@@ -107,9 +107,9 @@ export class ModelStore implements IModelStore , IModelNode{
   toFieldsGQL(){
     let gql = ' id '
     this.fields.forEach(fieldStore=>{
-      gql = gql + ` ${fieldStore.toFieldsGQL()} `
+      gql = gql + ` ${fieldStore.meta?.props?.field} ${fieldStore.toFieldsGQL()}`
     })
-    return gql;
+    return `{${gql}}`;
   }
 
   //目前只处理根节点

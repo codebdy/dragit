@@ -39,7 +39,7 @@ export class MediaFieldStore implements IFieldStore{
   }
 
   toFieldsGQL() {
-    return ` ${this.meta?.props?.field} {id thumbnail title alt src} `;
+    return ` {id thumbnail title alt src} `;
   }
 
   getModelNode(name:string):IModelNode|undefined{
