@@ -1,11 +1,13 @@
 export var splitGQLType = `
   type Subtraction{
+    id: ID
     minute:Int
     minus: Int
     result: Int
   }
 
   type Compound{
+    id: ID
     cardinal:Int
     rate:Int
     periods:Int
@@ -15,14 +17,14 @@ export var splitGQLType = `
 
 export var splitGQLInput =`
   input SubtractionInput{
-    minute:Int
-    minus: Int
+    minute:String
+    minus: String
   }
 
   input CompoundInput{
-    cardinal:Int
-    rate:Int
-    periods:Int
+    cardinal:String
+    rate:String
+    periods:String
   }
 `
 

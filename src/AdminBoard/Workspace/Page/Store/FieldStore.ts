@@ -67,6 +67,11 @@ export class FieldStore implements IFieldStore{
     this.error = validate(this.value, this.meta?.props?.rule);
     return !this.error;
   }
+
+  reset(){
+    this.value = this.defaultValue
+    this.error = undefined;
+  }
 }
 
 

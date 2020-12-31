@@ -53,4 +53,9 @@ export class TableFieldStore implements IFieldStore, IModelStore {
   validate(){
     return true;
   }
+
+  reset(){
+    this.value = this.defaultValue
+    this.error = undefined;
+  }
 }

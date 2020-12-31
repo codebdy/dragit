@@ -63,6 +63,11 @@ export class SelectFieldStore implements IFieldStore{
   validate(){
     return true;
   }
+
+  reset(){
+    this.value = this.defaultValue
+    this.error = undefined;
+  }
 }
 
 

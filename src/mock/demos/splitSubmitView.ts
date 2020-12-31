@@ -23,6 +23,7 @@ export default {
                 withHeader:true,
                 title:'减法计算器',
                 collapsible: false,
+                field:'subtraction',
               },
               children:[
                 {
@@ -38,7 +39,7 @@ export default {
                           name:'Typography',
                           props:{
                             variant:'subtitle1',
-                            rxText: '做减法很难',            
+                            rxText: '做减法很难，需要后端大哥帮忙',            
                           }
                         }
                       ]
@@ -55,8 +56,13 @@ export default {
                             label:'被减数',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'variable1',
+                            field:'minute',
                             type:'number',
+                            required:true,
+                            rule:{
+                              valueType:'number',
+                              required:true,
+                            }
                           }
                         }
                       ]
@@ -73,8 +79,13 @@ export default {
                             label:'减数',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'variable2',
+                            field:'minus',
                             type:'number',
+                            required:true,
+                            rule:{
+                              valueType:'number',
+                              required:true,
+                            }
                           }
                         }
                       ]
@@ -111,7 +122,7 @@ export default {
                         size:'large',
                         onClick:{
                           name: RESET_ACTION,
-                          resetNode:'',
+                          resetNode:'subtraction',
                         }
                       }
                     },
@@ -125,6 +136,14 @@ export default {
                       marginLeft:2,
                       onClick:{
                         name: SUBMIT_MUTATION,
+                        mutation:{
+                          name:'subtract',
+                          variableName:'params',
+                          variableType:'SubtractionInput',
+                          submitNode:'subtraction',
+                          refreshNode:'subtraction',
+                          //goback:true,
+                        },
                       }           
                     }
                   }]
@@ -148,6 +167,7 @@ export default {
                 withHeader:true,
                 title:'复利计算器',
                 collapsible: false,
+                field:'Compound',
               },
               children:[
                 {
@@ -180,7 +200,7 @@ export default {
                             label:'基数',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'variable1',
+                            field:'cardinal',
                           }
                         }
                       ]
@@ -197,7 +217,7 @@ export default {
                             label:'利率',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'variable2',
+                            field:'rate',
                           }
                         }
                       ]
@@ -214,7 +234,7 @@ export default {
                             label:'期数',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'variable2',
+                            field:'periods',
                           }
                         }
                       ]
@@ -264,6 +284,14 @@ export default {
                       marginLeft:2,
                       onClick:{
                         name: SUBMIT_MUTATION,
+                        mutation:{
+                          name:'compound',
+                          variableName:'params',
+                          variableType:'CompoundInput',
+                          submitNode:'compound',
+                          refreshNode:'compound',
+                        },
+
                       }           
                     }
                   }]

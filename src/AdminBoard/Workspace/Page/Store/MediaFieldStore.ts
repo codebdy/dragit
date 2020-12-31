@@ -64,6 +64,11 @@ export class MediaFieldStore implements IFieldStore{
   validate(){
     return true;
   }
+
+  reset(){
+    this.value = this.defaultValue
+    this.error = undefined;
+  }
 }
 
 

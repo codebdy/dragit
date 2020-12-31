@@ -48,7 +48,8 @@ const withFormField = (Component:any)=>{
       }
     }
 
-    const handleBlur = ()=>{
+    const handleBlur = (event:any)=>{
+      event.stopPropagation();
       fieldStore?.validate();
     }
     const error = fieldStore?.error;

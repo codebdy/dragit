@@ -3,8 +3,11 @@ import { sleep } from "mock/utils/sleep";
 
 export const subtract = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-
-  return {minute:args.minute, minus:args.minus, result:args.minute - args.minus}
+  const params = args.params;  
+  const minute = parseInt(params?.minute);
+  const minus = parseInt(params?.minus);
+  console.log('算减法', {minute:minute, minus:minus, result:minute - minus});
+  return {minute:minute, minus:minus, result:minute - minus}
 }
 
 export const compound = async (parent:any, args:any, context:any, info:any)=>{

@@ -4,7 +4,7 @@ import { IPage } from 'base/Model/IPage';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
 import ComponentRender from 'AdminBoard/Workspace/Page/ComponentRender';
-import { GO_BACK_ACTION, PageAction, SUBMIT_MUTATION } from 'base/PageAction';
+import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'base/PageAction';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'base/Model/IPageJumper';
 import { ModelProvider } from './Store/ModelProvider';
@@ -46,8 +46,9 @@ export const Page = observer((
     if(!mutation){
       return gql`mutation{emperty}`;
     }
-    //console.log('createQueryGQL',pageStore.toFieldsGQL())
+
     const refreshNode = pageStore.getModelNode(mutation?.refreshNode)
+    console.log('mueationQueryGQL',refreshNode?.toFieldsGQL())
     const MUTATION_GQL = gql`
       mutation ($${mutation?.variableName}:${mutation?.variableType}){
         ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName}){
@@ -63,26 +64,33 @@ export const Page = observer((
     notifyOnNetworkStatusChange: true
   });
 
-  const [excuteMutation, {error:muetationError}] = useMutation(createMutationGQL(mutation),{
-    onCompleted:(data)=>{
-      if(mutation){
-        const submitNode = pageStore.getModelNode(mutation.submitNode);
-        const refreshNode = pageStore.getModelNode(mutation?.refreshNode) 
-        refreshNode?.setLoading(false);
-        submitNode?.clearDirty();
-      }
+  const [excuteMutation, {error:muetationError}] = useMutation(
+    createMutationGQL(mutation),
+    {
+      onCompleted:(data)=>{
+        if(mutation){
+          const submitNode = pageStore.getModelNode(mutation.submitNode);
+          const refreshNode = pageStore.getModelNode(mutation?.refreshNode)
+          refreshNode?.setModel(data[mutation.name]) 
+          refreshNode?.setLoading(false);
+          submitNode?.clearDirty();
+          console.log('mutation result', data, mutation.name)
+          setMutation(undefined);
+        }
 
-      appStore.setSuccessAlert(true)
-      if(mutation?.goback){
-        onPageAction && onPageAction({name:GO_BACK_ACTION})
+        appStore.setSuccessAlert(true)
+        if(mutation?.goback){
+          onPageAction && onPageAction({name:GO_BACK_ACTION})
+        }
       }
-    }});
+    }
+  );
   
   useEffect(()=>{
     if(mutation){
       const submitNode = pageStore.getModelNode(mutation.submitNode)
       const refreshNode = pageStore.getModelNode(mutation?.refreshNode) 
-      console.log('mutation variables', submitNode?.toInputValue());
+      console.log('mutation variables', mutation.submitNode,pageStore, submitNode?.toInputValue());
       refreshNode?.setLoading(true);
       excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}});      
     }
@@ -118,7 +126,8 @@ export const Page = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
-        if(pageStore.validate()){
+        const submitNode = pageStore.getModelNode(action.mutation?.submitNode)
+        if(submitNode?.validate()){
           if(action.mutation){
             setMutation(action.mutation)
           }           
@@ -133,6 +142,11 @@ export const Page = observer((
           setBackConfirmOpen(true);
           return;
         }
+        break;
+      case RESET_ACTION:
+        const resetNode = pageStore.getModelNode(action.resetNode);
+        resetNode?.reset();
+        return;
     }
     onPageAction && onPageAction(action);
   }

@@ -112,18 +112,26 @@ export class ModelStore implements IModelStore , IModelNode{
     return gql;
   }
 
+  //目前只处理根节点
   getModelNode(name?:string):IModelNode|undefined{
     if(!name){
       return this;
     }
-
-    return undefined;
+    let node = undefined;
+    this.fields.forEach((fieldStore,key)=>{
+      if(key === name){
+        node = fieldStore;
+      }
+    })
+    return node;
   }
 
   toInputValue(){
-    let rtValue = {id:this.model?.id} as any;
+    let rtValue = this.model?.id ? {id:this.model?.id} as any : {} as any;
     this.fields?.forEach((fieldStore, key)=>{
-      rtValue[key] = fieldStore.toInputValue();
+      if(!fieldStore.meta.props?.onlyShow){
+        rtValue[key] = fieldStore.toInputValue();        
+      }
     })
 
     return rtValue
@@ -137,5 +145,11 @@ export class ModelStore implements IModelStore , IModelNode{
       }
     })
     return passed;
+  }
+
+  reset(){
+    this.fields?.forEach((fieldStore, key)=>{
+      fieldStore.reset()
+    })
   }
 }

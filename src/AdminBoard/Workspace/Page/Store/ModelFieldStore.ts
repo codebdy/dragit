@@ -73,9 +73,11 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
   }
 
   toInputValue(){
-    let rtValue = {id:this.defaultValue?.id} as any;
+    let rtValue = this.defaultValue?.id ? {id:this.defaultValue?.id} as any : {} as any;
     this.subFields?.forEach((fieldStore, key)=>{
-      rtValue[key] = fieldStore.toInputValue();
+      if(!fieldStore.meta.props?.onlyShow){
+        rtValue[key] = fieldStore.toInputValue();
+      }
     })
     return rtValue;
   }
@@ -88,5 +90,11 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
       }
     })
     return passed;
+  }
+
+  reset(){
+    this.subFields?.forEach((fieldStore, key)=>{
+      fieldStore.reset()
+    })
   }
 }
