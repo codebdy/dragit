@@ -9,7 +9,7 @@ export default [{
   {
     type: 'item',
     title: '分析看板',
-    to: '/admin/module/dashboard',
+    moduleSlug:'dashboard',
     icon: 'mdi-view-dashboard',
     chip: {
         color: 'primary',

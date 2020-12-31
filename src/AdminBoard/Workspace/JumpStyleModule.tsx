@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react-lite";
 import { useAppStore } from 'store/helpers/useAppStore';
 import { getModulePageBySlug } from './common/getModulePageBySlug';
@@ -38,6 +38,11 @@ export const JumpStyleModule = observer((
         return;
     }
   }
+
+  useEffect(()=>{
+    setPageSlug(appStore.pageSlug || module.entryPage?.slug)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[module]);
 
   const page = getModulePageBySlug(module, pageSlug);
 
