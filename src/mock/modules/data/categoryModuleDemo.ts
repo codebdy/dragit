@@ -6,6 +6,7 @@ import articleTags from "mock/article/tag/articleTags";
 import user from "mock/views/user";
 import users from "mock/views/users";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
+import splitSubmit from "mock/demos/splitSubmit";
 
 export default[
   {
@@ -146,7 +147,7 @@ export default[
         name:'计算器',
         slug:'articles',
         max_width:'false',
-        schema: articles,
+        schema: splitSubmit,
       },
     ],
     auths:[

@@ -6,7 +6,7 @@ import { ModelFieldStore } from "./Store/ModelFieldStore";
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
 
-    const {field, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
+    const {field, onlyShow, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
 
     //const fieldName = useFieldName(field);
     //const subModelContext = useContext(SubModelContext);

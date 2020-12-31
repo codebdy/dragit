@@ -20,7 +20,7 @@ type ThemeMode = "light"|"dark";
 
 export class LeftDrawerSkin{
   image:string = sidebarImg5;
-  mask:string = linearGradient2;
+  mask:string = linearGradient5;
   mode: ThemeMode = DARK;
   maskOpacity: number = 0.8;
 
@@ -63,7 +63,7 @@ export class ToolbarSkin{
 }
 
 export class ThemeSettings {
-  themeMode: ThemeMode = LIGHT;
+  themeMode: ThemeMode = DARK;
   elevationStrength: number =  4;
   primary: string = '#5d78ff';
 
