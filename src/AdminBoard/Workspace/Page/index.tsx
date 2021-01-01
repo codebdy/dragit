@@ -48,13 +48,15 @@ export const Page = observer((
     }
 
     const refreshNode = pageStore.getModelNode(mutation?.refreshNode)
-    console.log('mueationQueryGQL',refreshNode?.toFieldsGQL())
-    const MUTATION_GQL = gql`
-      mutation ($${mutation?.variableName}:${mutation?.variableType}){
+    
+    const gqlText = `
+        mutation ($${mutation?.variableName}:${mutation?.variableType}){
         ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName})
           ${refreshNode?.toFieldsGQL()}
       }
-    `;
+    `
+    //console.log('mueationQueryGQL',gqlText)
+    const MUTATION_GQL = gql`${gqlText}`;
     return MUTATION_GQL;
   }
 
@@ -129,6 +131,7 @@ export const Page = observer((
     switch (action.name){
       case SUBMIT_MUTATION:
         const submitNode = pageStore.getModelNode(action.mutation?.submitNode)
+        console.assert(submitNode, 'Page内错误，提交节点不存在：' + action.mutation?.submitNode);
         if(submitNode?.validate()){
           if(action.mutation){
             setMutation(action.mutation)

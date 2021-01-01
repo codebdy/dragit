@@ -1,4 +1,3 @@
-import { articlesData } from "mock/article/post/data";
 import { sleep } from "mock/utils/sleep";
 
 export const subtract = async (parent:any, args:any, context:any, info:any)=>{
@@ -12,8 +11,13 @@ export const subtract = async (parent:any, args:any, context:any, info:any)=>{
 
 export const compound = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  //const module = getModuleBySlug(args.slug);
-  return {data:articlesData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}}
+  const params = args.params;  
+  const cardinal = params.cardinal
+  const rate = params.rate
+  const periods = params.periods
+  console.log('算复利', {cardinal, rate, periods}, args);
+  const result = cardinal * Math.pow((rate + 1), periods)
+  return {cardinal, rate, periods, result}
 }
 
 export const splitDemoMutationResolvers = {

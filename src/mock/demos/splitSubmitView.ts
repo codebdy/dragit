@@ -167,7 +167,7 @@ export default {
                 withHeader:true,
                 title:'复利计算器',
                 collapsible: false,
-                field:'Compound',
+                field:'compound',
               },
               children:[
                 {
@@ -201,6 +201,11 @@ export default {
                             variant:"outlined",
                             fullWidth:true,
                             field:'cardinal',
+                            type:'number',
+                            rule:{
+                              valueType:'number',
+                              required:true,
+                            }
                           }
                         }
                       ]
@@ -218,6 +223,11 @@ export default {
                             variant:"outlined",
                             fullWidth:true,
                             field:'rate',
+                            type:'number',
+                            rule:{
+                              valueType:'number',
+                              required:true,
+                            }
                           }
                         }
                       ]
@@ -235,6 +245,11 @@ export default {
                             variant:"outlined",
                             fullWidth:true,
                             field:'periods',
+                            type:'number',
+                            rule:{
+                              valueType:'number',
+                              required:true,
+                            }
                           }
                         }
                       ]
@@ -270,7 +285,7 @@ export default {
                         size:'large',
                         onClick:{
                           name: RESET_ACTION,
-                          resetNode:'',
+                          resetNode:'compound',
                         }
                       }
                     },
