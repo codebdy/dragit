@@ -80,9 +80,9 @@ export const DesignButtons = observer((
         }
         {
           loggedUser.authCheck(AUTH_DEBUG)&&
-          <Tooltip title={intl.get('debug')} arrow placement="bottom">
-            <IconButton  aria-label={intl.get('debug')}>
-              <MdiIcon iconClass="mdi-android-debug-bridge" color={color} />
+          <Tooltip title={intl.get('debug-graphql')} arrow placement="bottom">
+            <IconButton  aria-label={intl.get('debug-graphql')}>
+              <MdiIcon iconClass="mdi-graphql" color={'color'} />
             </IconButton>
           </Tooltip>          
         }

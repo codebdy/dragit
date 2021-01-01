@@ -14,7 +14,7 @@
     "toolbar":"工具栏",
     "float-style":"浮动式",
     "colored":"上色",
-    "debug": "调试",
+    "debug-graphql": "调试 GraphQL",
     "upload": "上传",
     "filter": "过滤",
     "sort-by": "排序",

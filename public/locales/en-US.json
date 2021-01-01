@@ -14,7 +14,7 @@
     "toolbar":"Toolbar",
     "float-style":"Float style",
     "colored":"Colored",
-    "debug": "Debug",
+    "debug": "Debug graphql",
     "upload": "Upload",
     "filter": "Filter",
     "sort-by": "Sort by",
