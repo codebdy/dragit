@@ -16,7 +16,7 @@ export const compound = async (parent:any, args:any, context:any, info:any)=>{
   const rate = params.rate
   const periods = params.periods
   console.log('算复利', {cardinal, rate, periods}, args);
-  const result = cardinal * Math.pow((rate + 1), periods)
+  const result = (cardinal * Math.pow((rate + 1), periods)).toString();
   return {cardinal, rate, periods, result}
 }
 

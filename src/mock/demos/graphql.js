@@ -9,7 +9,7 @@ export var splitGQLType = `
     cardinal:Float
     rate:Float
     periods:Float
-    result:Float
+    result:String
   }
 `
 
