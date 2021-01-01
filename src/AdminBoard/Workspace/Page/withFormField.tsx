@@ -28,7 +28,7 @@ const withFormField = (Component:any)=>{
     const compent = <Component
       ref={forwardedRef}
       loading={fieldStore?.loading || modelStore.loading}
-      value={fieldStore?.value || empertyValue || ''}
+      value={fieldStore?.value === undefined ? (empertyValue || '') : fieldStore?.value}
       {...rest}
       error={!! error}
       helperText = {error || helperText}
