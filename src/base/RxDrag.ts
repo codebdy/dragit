@@ -5,7 +5,7 @@ import { Rule } from "base/Rules/Rule";
 import withSkeleton from "./HOCs/withSkeleton";
 import { IMeta } from "./Model/IMeta";
 
-var compoentsMap : { 
+var componentsMap : { 
   [key: string]: {
     component?:any,
     rule:IRule,
@@ -14,7 +14,7 @@ var compoentsMap : {
 } = {}
 
 function register(name:string, component:any, rule:any = Rule, fieldType:FieldType = FieldType.Normal): any{
-  compoentsMap[name] = {
+  componentsMap[name] = {
     component,
     rule: new rule(),
     fieldType: fieldType,
@@ -22,7 +22,7 @@ function register(name:string, component:any, rule:any = Rule, fieldType:FieldTy
 }
 
 function registerHtmlTag(name:string, rule:any = Rule){
-  compoentsMap[name] = {
+  componentsMap[name] = {
     rule: new rule()
   }  
 }
@@ -30,22 +30,23 @@ function registerHtmlTag(name:string, rule:any = Rule){
 function resolveComponent(meta:IMeta, withField = true):any{
   //const {marginTop, marginRight, marginBottom, marginLeft} = meta.props || {};
   const name = meta.name;
-  let component = compoentsMap[name] && compoentsMap[name].component ? compoentsMap[name].component : name;
+  const componetNode = componentsMap[name];
+  let component = componetNode && componetNode.component ? componetNode.component : name;
 
   //component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
 
-  if(meta.props?.field && withField){
+  if(meta.props?.field && withField && componetNode.fieldType !== FieldType.Model){
     component = withSkeleton(component);
   }
   return component;
 }
 
 function resolveRule(name:string):IRule{
-  return  compoentsMap[name] ? compoentsMap[name].rule : new Rule();
+  return  componentsMap[name] ? componentsMap[name].rule : new Rule();
 }
 
 function resolveFieldType(name:string):FieldType|undefined{
-  return  compoentsMap[name] ? compoentsMap[name].fieldType : FieldType.Normal;
+  return  componentsMap[name] ? componentsMap[name].fieldType : FieldType.Normal;
 }
 
 export {register, resolveComponent, resolveRule, registerHtmlTag, resolveFieldType}
