@@ -44,8 +44,6 @@ export const JumpStyleModule = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[module]);
 
-  console.log('JumpStyleModule', module, pageId)
-
   const page = getModulePageById(module, pageId);
 
   return (

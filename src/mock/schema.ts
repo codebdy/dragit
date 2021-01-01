@@ -11,8 +11,8 @@ import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graph
 import { mediaQueryResolvers } from "./medias/queryResolvers";
 import { mediaMutationResolvers } from "./medias/mutationResolvers";
 import { postMutationResolvers, postQueryResolvers } from "./article/post/resolvers";
-import { splitDemoMutationResolvers } from "./demos/resolvers";
-import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/graphql";
+import { splitDemoMutationResolvers } from "./demos/splitSubmit/resolvers";
+import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/splitSubmit/graphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `

@@ -6,7 +6,9 @@ import articleTags from "mock/article/tag/articleTags";
 import user from "mock/views/user";
 import users from "mock/views/users";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
-import splitSubmit from "mock/demos/splitSubmitView";
+import splitSubmit from "mock/demos/splitSubmit/view";
+import { OneToManyPortletView } from "mock/demos/oneToManyPortlet/view";
+import { OneToManyTableView } from "mock/demos/oneToManyTable/view";
 
 export default[
   {
@@ -164,7 +166,7 @@ export default[
         id:'1601',
         name:'1对多面板',
         max_width:'false',
-        schema: splitSubmit,
+        schema: OneToManyPortletView,
       },
     ],
     auths:[
@@ -182,7 +184,7 @@ export default[
         id:'1701',
         name:'1对多表格',
         max_width:'false',
-        schema: splitSubmit,
+        schema: OneToManyTableView,
       },
     ],
     auths:[
