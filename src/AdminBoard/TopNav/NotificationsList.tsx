@@ -9,6 +9,7 @@ import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import { INotification } from 'base//Model/INotification';
 import { useHistory } from 'react-router-dom';
 import { resolvePageUrl } from 'utils/resolvePageUrl';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,10 +32,10 @@ export default function NotificationsList(props:{onClose:()=>void}){
 
   const [notifications, loading] = useAxios<Array<INotification>>(request)
 
-  const handleClick = (id:string)=>{
+  const handleClick = (id:ID)=>{
     history.push(resolvePageUrl({
       moduleSlug:'notifications',
-      pageSlug:'view-notification',
+      pageId:'view-notification',
       dataId:id,
     }));
     onClose();

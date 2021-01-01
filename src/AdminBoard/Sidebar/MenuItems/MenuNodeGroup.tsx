@@ -9,6 +9,7 @@ import { MenuNode } from "./MenuNode";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { observer } from "mobx-react-lite"
+import { ID } from "base/Model/graphqlTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,23 +48,23 @@ export function getBadge(children:Array<RXNode<IMenuItem>>): IMenuBadge|undefine
 export const MenuNodeGroup = observer((
   props:{
     node:RXNode<IMenuItem>,
-    openedId?: number,
-    onOpened: (id:number)=>void,
+    openedId?: ID,
+    onOpened: (id:ID)=>void,
     mini:boolean,
     nested?:boolean,
   }
 )=>
 {
   const open = props.openedId === props.node.id
-  const [openedId, setOpenedId] = React.useState(-1);
+  const [openedId, setOpenedId] = React.useState('');
   const loggedUser = useLoggedUser();
 
-  const handleOpened = (id:number)=>{
+  const handleOpened = (id:ID)=>{
     setOpenedId(id)
   }
 
   const handleClick = () => {
-    open ? props.onOpened(-1) : props.onOpened(props.node.id)
+    open ? props.onOpened('') : props.onOpened(props.node.id)
   };
   const classes = useStyles();
   const dotBadge = getBadge(props.node.children)

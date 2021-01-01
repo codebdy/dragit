@@ -2,6 +2,7 @@ import React from 'react';
 import LeftArea from 'design/Layout/LeftArea';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import ModuleList from './ModuleList';
+import { ID } from 'base/Model/graphqlTypes';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function LeftContent(
   props:{
-    onSelect:(moduleId: number)=>void
+    onSelect:(moduleId: ID)=>void
   }
 ){
   const {onSelect} = props;

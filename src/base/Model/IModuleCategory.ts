@@ -1,7 +1,8 @@
+import { ID } from "./graphqlTypes";
 import { IModule } from "./IModule";
 
 export interface IModuleCategory{
-  id:number,
+  id:ID,
   name?:string,
   modules?:Array<IModule>
 }

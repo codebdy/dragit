@@ -6,6 +6,7 @@ import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IMedia } from 'base/Model/IMedia';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export interface FolderNode{
-  id:string;
+  id:ID;
   name:string;
   children?:Array<FolderNode>;
   editing?:boolean;

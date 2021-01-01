@@ -1,6 +1,7 @@
+import { ID } from 'base/Model/graphqlTypes';
 import moduleCategories from './moduleCategories';
 
-export function getPageBySlug(pageSlug:string) {
+export function getPageById(pageId:ID) {
   for (var index = 0; index < moduleCategories.length; index++) {
     let modules = moduleCategories[index].modules;
     for (var i = 0; i < modules.length; i++) {
@@ -8,7 +9,7 @@ export function getPageBySlug(pageSlug:string) {
       let pages = module.pages;
       if (pages) {
         for (var j = 0; j < pages.length; j++) {
-          if (pages[j].slug === pageSlug) {
+          if (pages[j].id === pageId) {
             return JSON.parse(JSON.stringify(pages[j]));
           }
         }

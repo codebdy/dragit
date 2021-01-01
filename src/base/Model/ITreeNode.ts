@@ -1,5 +1,7 @@
+import { ID } from "./graphqlTypes";
+
 export interface ITreeNode{
-  id?:string,
+  id?:ID,
   [key:string]:any,
   children?:Array<ITreeNode>,
 }

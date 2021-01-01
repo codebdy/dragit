@@ -9,6 +9,7 @@ import ModuleAuths from './ModuleAuths';
 import { IModule } from 'base/Model/IModule';
 import intl from "react-intl-universal";
 import { AxiosRequestConfig } from 'axios';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ModuleContent(
   props:{
-    moduleId:number
+    moduleId:ID
   }
 ){
   const {moduleId} = props;

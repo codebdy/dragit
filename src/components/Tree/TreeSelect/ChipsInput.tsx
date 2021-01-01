@@ -8,6 +8,7 @@ import { ITreeNode } from 'base/Model/ITreeNode';
 import TreeList from './TreeList';
 import { isPointInRect } from 'utils/isPointInRect';
 import { remove } from 'utils/ArrayHelper';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function getNodeById(id:string, rootNodes?:Array<ITreeNode>):ITreeNode|undefined{
+function getNodeById(id:ID, rootNodes?:Array<ITreeNode>):ITreeNode|undefined{
   if(!rootNodes){
     return undefined;
   }
@@ -64,7 +65,7 @@ export default function ChipsInput(
     onFocus?:(event?: any)=>void,
     onBlur?:(event?: any)=>void,
     value?:{
-      values?:Array<{id:string}>, 
+      values?:Array<{id:ID}>, 
       rootNodes?:Array<ITreeNode>,
       nameKey?:string,
       height?:string,
@@ -127,7 +128,7 @@ export default function ChipsInput(
     }
   }
 
-  const handleDelete = (id:string) => () => {
+  const handleDelete = (id:ID) => () => {
     let valuesCopy = [...values];
     remove(id, valuesCopy);
     onChange(
@@ -186,7 +187,7 @@ export default function ChipsInput(
     setAnchorEl(null);
   };
 
-  const getName = (id:string)=>{
+  const getName = (id:ID)=>{
     let node = getNodeById(id, rootNodes);
     return node ? node[nameKey] : id;
   }
@@ -201,7 +202,7 @@ export default function ChipsInput(
         style={{minHeight:size==="small" ? theme.spacing(4.6) : theme.spacing(6.6)}}
       >
         <ul className={classes.chips}>
-          {values && values.map((chipValue:{id:string}) => {
+          {values && values.map((chipValue:{id:ID}) => {
             return (
               <li key={chipValue.id}>
                 <Chip

@@ -9,6 +9,7 @@ import { IAuth } from "base/Model/IAuth";
 import { useAxios } from "base/Hooks/useAxios";
 import { API_ADD_MODULE_AUTH, API_REMOVE_MODULE_AUTH, API_UPDATE_MODULE_AUTH } from "APIs/modules";
 import createId from "utils/createId";
+import { ID } from "base/Model/graphqlTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,7 +63,7 @@ export default function ModuleAuths(props:{module:IModule}){
     })
   }
 
-  const handleRemove = (authId:number)=>{
+  const handleRemove = (authId:ID)=>{
     setOperateConfig({
       ...API_REMOVE_MODULE_AUTH,
       params:{

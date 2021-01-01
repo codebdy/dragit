@@ -6,19 +6,19 @@ import products from "mock/views/products";
 
 export default [
   {
-    id:5,
+    id:'5',
     name:'产品管理',
     slug:'product',
-    entry_page_id:51,
+    entry_page_id:'51',
     pages:[
       {
-        id:51,
+        id:'51',
         name:'产品列表',
         slug:'products',
         schema: products,
       },
       {
-        id:52,
+        id:'52',
         name:'产品编辑',
         slug:'product-edit',
         schema: product,
@@ -26,30 +26,30 @@ export default [
     ],
     auths:[
       {
-        id:1,
+        id:'1',
         slug:"product-all",
         name:'产品模块',
       },
       {
-        id:2,
+        id:'2',
         slug:"create-product",
         name:'新建产品',        
       },
       {
-        id:3,
+        id:'3',
         slug:"edit-product",
         name:"产品编辑"
       }
     ]
   },
   {
-    id:6,
+    id:'6',
     slug:'product-category',
     name:'产品分类',
-    entry_page_id:61,
+    entry_page_id:'61',
     pages:[
       {
-        id:61,
+        id:'61',
         name:'产品分类编辑',
         slug:'product-category-tree',
         schema: productCategories,
@@ -57,19 +57,19 @@ export default [
     ],
   },
   {
-    id:10,
+    id:'10',
     slug:'product-attribute',
     name:'产品属性',
-    entry_page_id:101,
+    entry_page_id:'101',
     pages:[
       {
-        id:101,
+        id:'101',
         name:'属性列表',
         slug:'product-attribute-list',
         schema: productAttributes,
       },
       {
-        id:102,
+        id:'102',
         name:'属性编辑',
         slug:'product-attribute-edit',
         schema: productAttributeEdit,

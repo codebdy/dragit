@@ -49,7 +49,6 @@ export const schema = `
 
   type Page{
     id:ID!
-    slug:String!
     name:String 
     "'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
     max_width:String

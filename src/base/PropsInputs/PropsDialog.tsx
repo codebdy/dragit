@@ -6,6 +6,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
 import { useThemeSettings } from 'store/helpers/useAppStore';
+import { ID } from 'base/Model/graphqlTypes';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -26,7 +27,7 @@ const styles = (theme: Theme) =>
   const useStyles = makeStyles(styles);
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string;
+  id:ID;
   children: React.ReactNode;
   onClose: () => void;
 }

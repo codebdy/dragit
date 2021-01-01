@@ -13,6 +13,7 @@ import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { cloneObject } from "utils/cloneObject";
 import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
 import { useShowAppoloError } from "store/helpers/useInfoError";
+import { ID } from "base/Model/graphqlTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -73,7 +74,7 @@ function makeupParent(folders?:Array<FolderNode>, parent?:FolderNode){
   return folders?folders:[];
 }
 
-function getByIdFromTree(id:string, folders?:Array<FolderNode>):FolderNode|undefined{
+function getByIdFromTree(id:ID, folders?:Array<FolderNode>):FolderNode|undefined{
   if(folders){
     for(var i = 0; i < folders.length; i++){
       if(folders[i].id === id){

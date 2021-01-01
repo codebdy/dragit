@@ -5,6 +5,7 @@ import { TreeView } from '@material-ui/lab';
 import TreeNode from './TreeNode';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function TreeList(
   props:{
-    selected?:Array<{id:string}>,
+    selected?:Array<{id:ID}>,
     rootNodes?:Array<ITreeNode>,
     nameKey:string,
     multiSelect:true|undefined,

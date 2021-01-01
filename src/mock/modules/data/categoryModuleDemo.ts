@@ -10,21 +10,21 @@ import splitSubmit from "mock/demos/splitSubmitView";
 
 export default[
   {
-    id:101,
+    id:'101',
     name:'页面跳转式',
     slug:JUMP_STYLE_MODULE,
     module_type:JUMP_STYLE_MODULE,
-    entry_page_id:1011,
+    entry_page_id:'1011',
     pages:[
       {
-        id:1011,
+        id:'1011',
         name:'文章列表',
         slug:'articles',
         max_width:'false',
         schema: articles,
       },
       {
-        id:1012,
+        id:'1012',
         name:'文章编辑',
         slug:'article',
         max_width:'false',
@@ -35,21 +35,21 @@ export default[
     ]
   },
   {
-    id:11,
+    id:'11',
     slug:POPUP_STYLE_MODULE,
     module_type:POPUP_STYLE_MODULE,
     name:'管理员',
-    entry_page_id:111,
+    entry_page_id:'111',
     pages:[
       {
-        id:111,
+        id:'111',
         name:'管理员列表',
         slug:'urser-list',
         max_width:'lg',
         schema: users,
       },
       {
-        id:112,
+        id:'112',
         name:'管理员编辑',
         max_width:'md',
         slug:'edit-user',
@@ -58,22 +58,22 @@ export default[
     ],
   },
   {
-    id:13,
+    id:'13',
     slug:POPUP_STYLE_MODULE + 2,
     module_type:POPUP_STYLE_MODULE,
     is_drawer_style: true,
     name:'右侧滑出式',
-    entry_page_id:131,
+    entry_page_id:'131',
     pages:[
       {
-        id:131,
+        id:'131',
         name:'管理员列表',
         slug:'urser-list',
         max_width:'lg',
         schema: users,
       },
       {
-        id:132,
+        id:'132',
         name:'管理员编辑',
         max_width:'md',
         width:450,
@@ -83,28 +83,28 @@ export default[
     ],
   },
   {
-    id:14,
+    id:'14',
     slug:TAB_STYLE_MODULE,
     module_type:TAB_STYLE_MODULE,
     name:'文章管理',
-    entry_page_id:141,
+    entry_page_id:'141',
     pages:[
       {
-        id:141,
+        id:'141',
         name:'文章列表',
         in_tab_index:true,
         slug:'article-list-2',
         schema: articles,
       },
       {
-        id:142,
+        id:'142',
         name:'草稿箱',
         in_tab_index:true,
         slug:'article-drafts',
         schema: articles,
       },
       {
-        id:143,
+        id:'143',
         name:'频道',
         in_tab_index:true,
         slug:'article-channel-2',
@@ -112,21 +112,21 @@ export default[
       },
 
       {
-        id:144,
+        id:'144',
         name:'标签',
         in_tab_index:true,
         slug:'article-tag-list',
         schema: articleTags,
       },
       {
-        id:145,
+        id:'145',
         name:'附加属性',
         in_tab_index:true,
         slug:'article-attribute-list',
         schema: articleAttributes,
       },
       {
-        id:146,
+        id:'146',
         name:'文章编辑',
         slug:'article',
         max_width:'false',
@@ -136,16 +136,51 @@ export default[
   },
 
   {
-    id:15,
+    id:'15',
     name:'独立提交',
     slug:'split-demo',
     module_type:JUMP_STYLE_MODULE,
-    entry_page_id:1501,
+    entry_page_id:'1501',
     pages:[
       {
-        id:1501,
+        id:'1501',
         name:'计算器',
-        slug:'articles',
+        max_width:'false',
+        schema: splitSubmit,
+      },
+    ],
+    auths:[
+    ]
+  },
+
+  {
+    id:'16',
+    name:'1对多面板',
+    slug:'one-to-many-portlet',
+    module_type:JUMP_STYLE_MODULE,
+    entry_page_id:'1601',
+    pages:[
+      {
+        id:'1601',
+        name:'1对多面板',
+        max_width:'false',
+        schema: splitSubmit,
+      },
+    ],
+    auths:[
+    ]
+  },
+
+  {
+    id:17,
+    name:'1对多表格',
+    slug:'one-to-many-table',
+    module_type:JUMP_STYLE_MODULE,
+    entry_page_id:'1701',
+    pages:[
+      {
+        id:'1701',
+        name:'1对多表格',
         max_width:'false',
         schema: splitSubmit,
       },

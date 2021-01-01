@@ -24,6 +24,7 @@ import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IColumn } from 'components/ListView/IColumn';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { resolveFieldGQL } from './CellRenders';
+import { ID } from 'base/Model/graphqlTypes';
 
 export const COMMAND_QUERY = "query";
 
@@ -34,7 +35,7 @@ export interface Row{
 
 interface ConfirmCommand{
   command:ICommand,
-  ids:number[],
+  ids:ID[],
 }
 
 function creatEmpertyRows(length:number){
@@ -180,7 +181,7 @@ const ListView = React.forwardRef((
     setQueryParam({...queryParam, [field]:value});
   }
 
-  const [selected, setSelected] = React.useState<number[]>([]);
+  const [selected, setSelected] = React.useState<ID[]>([]);
   const queryedData = (data && query?.name) ? data[query?.name] : {} as any;
   const rows = loading ? creatEmpertyRows(queryParam.first) : (queryedData?.data || []);
   const paginatorInfo = (queryedData?.paginatorInfo ||{}) as IPaginate
@@ -202,9 +203,9 @@ const ListView = React.forwardRef((
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+  const handleClick = (event: React.MouseEvent<unknown>, id:ID) => {
     const selectedIndex = selected.indexOf(id);
-    let newSelected: number[] = [];
+    let newSelected: ID[] = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
@@ -237,7 +238,7 @@ const ListView = React.forwardRef((
       //updateOperateParam('command', command.slug, true);      
     }
   }
-  const handleRowAction = (command:ICommand, rowId:number)=>{
+  const handleRowAction = (command:ICommand, rowId:ID)=>{
     if(command.confirmMessage){
       setConfirmCommand({command:command, ids:[rowId]});
     }
@@ -266,7 +267,7 @@ const ListView = React.forwardRef((
   const hasRowCommands = rowCommands && rowCommands.length > 0;
   
 
-  const isSelected = (name: number) => selected.indexOf(name) !== -1;
+  const isSelected = (id: ID) => selected.indexOf(id) !== -1;
 
   return (
     <div className={className} {...rest} ref={ref}>

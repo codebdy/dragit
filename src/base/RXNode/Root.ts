@@ -1,3 +1,4 @@
+import { ID } from "base/Model/graphqlTypes";
 import { cloneObject } from "utils/cloneObject";
 import { RXNode } from "./RXNode";
 
@@ -18,7 +19,7 @@ export class RXNodeRoot<T> extends RXNode<T>{
     })
   }
 
-  getNode(id:number|undefined){
+  getNode(id:ID|undefined){
     if(!id){
       return undefined;
     }

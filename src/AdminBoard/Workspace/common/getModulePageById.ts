@@ -1,14 +1,14 @@
 import { IModule } from "base/Model/IModule";
 import { IPage } from "base/Model/IPage";
 
-export function getModulePageBySlug(module:IModule, pageSlug?:string):IPage|undefined{
-  if(!module.pages || !pageSlug){
+export function getModulePageById(module:IModule, pageId?:string):IPage|undefined{
+  if(!module.pages || !pageId){
     return;
   }
 
   for(var i = 0; i < module.pages.length; i++){
     let page = module.pages[i];
-    if(pageSlug === page.slug){
+    if(pageId === page.id){
       return page;
     }
   }

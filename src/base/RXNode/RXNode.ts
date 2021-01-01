@@ -1,10 +1,11 @@
 import { after, before, first, insertAfter, insertBefore, last, remove } from "utils/ArrayHelper";
 import { IRect } from "base/Model/IRect";
 import { cloneObject } from "utils/cloneObject";
+import { ID } from "base/Model/graphqlTypes";
 
 export class RXNode<T>{
   static idSeed:number = 1;
-  id: number = 0;  
+  id: ID = '';  
   meta!: T;
   children: Array<RXNode<T>>;
   parent?:RXNode<T>;
@@ -33,7 +34,7 @@ export class RXNode<T>{
   }
 
   seedId(){
-    this.id = RXNode.idSeed
+    this.id = RXNode.idSeed.toString();
     RXNode.idSeed ++
   }
 
@@ -64,7 +65,7 @@ export class RXNode<T>{
     return newNode;
   }
 
-  getNode(id:number):RXNode<T>|undefined{
+  getNode(id:ID):RXNode<T>|undefined{
     if(id === this.id){
       return this;
     }
@@ -135,7 +136,7 @@ export class RXNode<T>{
   }
 
   //判断是否是某个节点的祖先
-  isAncestorOf(targetId:number):boolean{
+  isAncestorOf(targetId:ID):boolean{
     if(!this.children){
       return false;
     }
@@ -153,7 +154,7 @@ export class RXNode<T>{
   }
 
   //判断是否是某个节点的后代
-  isPosterityOf(targetId:number):boolean{
+  isPosterityOf(targetId:ID):boolean{
     if(this.parent){
       if(this.parent.id === targetId){
         return true;

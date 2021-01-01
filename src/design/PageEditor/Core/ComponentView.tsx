@@ -14,6 +14,7 @@ import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react-lite';
 import { useDesigner } from 'store/helpers/useAppStore';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -101,7 +102,7 @@ export const ComponentView = observer((
     setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));
   },[node, designer]);
 
-  const handleRefresh=(nodeId:number)=>{
+  const handleRefresh=(nodeId:ID)=>{
     if(node.id === nodeId){
       setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));      
     }

@@ -4,7 +4,7 @@ import getQueryVariable from 'mock/utils/getQueryVariable'
 import moduleCategories from './moduleCategories'
 import { remove } from 'utils/ArrayHelper';
 import { getModuleIndexPage } from './getModuleIndexPage';
-import { getPageBySlug } from './getPageBySlug';
+import { getPageBySlug } from './getPageById';
 import { getModuleById } from './getModuleById';
 
 export function getCagegoryById(id){

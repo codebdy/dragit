@@ -3,13 +3,14 @@ import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import { IPage } from 'base/Model/IPage';
+import { ID } from 'base/Model/graphqlTypes';
 
 export default function ModulePageRow(
   props:{
     page:IPage, 
     isIndexPage:boolean,
     onChangePage:(newPage:IPage)=>void,
-    onRemove:(id:number)=>void,
+    onRemove:(id:ID)=>void,
     onChangeIndexPage:(indexed:boolean)=>void,
     onDesign:()=>void,
   }

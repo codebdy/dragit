@@ -140,7 +140,7 @@ export default function ListViewRowCommandDialog(props:PropsInputProps){
                 variant="outlined" 
                 fullWidth
                 size = "small"
-                value = {command.jumpToPage.pageSlug || ''} 
+                value = {command.jumpToPage.pageId || ''} 
                 onChange = {event=>{
                   hanldeJumpParams('pageSlug', event.target.value.trim())
                 }}

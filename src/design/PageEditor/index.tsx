@@ -33,6 +33,7 @@ import { useAuthCheck } from 'store/helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
 import { observer } from 'mobx-react-lite';
 import { useDesigner } from 'store/helpers/useAppStore';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,7 +72,7 @@ function makeCanvas(){
 interface Snapshot{
   canvasNode:RXNodeRoot<IMeta>;
   pageSchema?:IPageSchema;
-  selectedNodeId?:number;
+  selectedNodeId?:ID;
 }
 
 declare var window:{
@@ -247,7 +248,7 @@ export const PageEditor = observer((
     document.body.classList.add('can-not-be-selected');
   }
 
-  const backupToUndoList = (operateId:number|undefined) => {
+  const backupToUndoList = (operateId:ID|undefined) => {
     setUndoList([...window.undoList,
     {
       canvasNode: window.canvas.copy(),

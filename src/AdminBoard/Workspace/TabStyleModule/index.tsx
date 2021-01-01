@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { Page } from '../Page';
 import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
-import { getModulePageBySlug } from '../common/getModulePageBySlug';
+import { getModulePageById } from '../common/getModulePageById';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { TabStyleModuleBar } from './TabStyleModuleBar';
 import { useEffect } from 'react';
@@ -43,7 +43,7 @@ export const TabStyleModule = observer((
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
   const appStore = useAppStore();
-  const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
+  const [pageSlug, setPageSlug] = useState(appStore.pageId || module.entryPage?.slug);
   const [popupSlug, setPopupSlug] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();
 
@@ -58,12 +58,12 @@ export const TabStyleModule = observer((
         return;
     }
   }
-  const popupPage = getModulePageBySlug(module, popupSlug);
+  const popupPage = getModulePageById(module, popupSlug);
   const handleClose = ()=>{
     setPopupSlug(undefined);
   }
 
-  const page = getModulePageBySlug(module, pageSlug);
+  const page = getModulePageById(module, pageSlug);
 
   const indexPages = module?.pages?.filter(page=>page.inTabIndex) || []
   useEffect(()=>{

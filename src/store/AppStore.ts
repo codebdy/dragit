@@ -24,7 +24,7 @@ export class AppStore{
   error: Error = new Error();
 
   moduleSlug: string|undefined = 'dashboard';
-  pageSlug: string|undefined;
+  pageId: string|undefined;
 
   constructor() {
     makeAutoObservable(this)
@@ -66,7 +66,7 @@ export class AppStore{
 
   showModule(moduleSlug:string, pageSlug?:string){
     this.moduleSlug = moduleSlug;
-    this.pageSlug = pageSlug;
+    this.pageId = pageSlug;
   }
 
 }

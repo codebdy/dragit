@@ -11,6 +11,7 @@ import { Add } from '@material-ui/icons';
 import { IModuleCategory } from 'base/Model/IModuleCategory';
 import { IModule } from 'base/Model/IModule';
 import Scrollbar from 'AdminBoard/common/Scrollbar';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,17 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ModuleList(props:{
-  onSelect:(moduleId: number)=>void
+  onSelect:(moduleId: ID)=>void
 }) {
   const {onSelect} = props;
   const classes = useStyles();
-  const [selectedId, setSelected] = useState(-1);
+  const [selectedId, setSelected] = useState('');
   const [loadingConfig, setLoadingConfig] = React.useState<AxiosRequestConfig>(API_GET_MODULES);
   const [moduleCategories, loading] = useAxios<IModuleCategory[]>(loadingConfig);
   const [categories, setCategories] = useState<IModuleCategory[]>([]);
   //const [, operateLoading] = useAxios<ItemMeta>(operateConfig);
   const [operateLoading, setOperateLoading] = useState(false);
-  const [draggedId, setDraggedId] = useState(0);
+  const [draggedId, setDraggedId] = useState('');
 
   useEffect(()=>{
     if(moduleCategories){
@@ -47,7 +48,7 @@ export default function ModuleList(props:{
     }
   }, [moduleCategories])
 
-  const handleClick = (id:number)=>{
+  const handleClick = (id:ID)=>{
     setSelected(id);
     onSelect(id);
   }
@@ -98,7 +99,7 @@ export default function ModuleList(props:{
     })
   }
 
-  const handleAddModule = (cagegoryId:number)=>{
+  const handleAddModule = (cagegoryId:ID)=>{
     submitOperate(
       {
         ...API_ADD_MODULE,
@@ -110,7 +111,7 @@ export default function ModuleList(props:{
     );   
   }
 
-  const handleRemoveCategory = (id:number)=>{
+  const handleRemoveCategory = (id:ID)=>{
     submitOperate(
       {
         ...API_REMOVE_MODULE_CATEGORY,
@@ -121,7 +122,7 @@ export default function ModuleList(props:{
     );    
   }
 
-  const handleRemoveModule = (id:number)=>{
+  const handleRemoveModule = (id:ID)=>{
     submitOperate(
       {
         ...API_REMOVE_MODULE,
@@ -132,7 +133,7 @@ export default function ModuleList(props:{
     );    
   }
 
-  const handleCloneCategory = (id:number)=>{
+  const handleCloneCategory = (id:ID)=>{
     submitOperate(
       {
         ...API_CLONE_CATEGORY,
@@ -143,7 +144,7 @@ export default function ModuleList(props:{
     );    
   }
 
-  const handleCloneModule = (id:number)=>{
+  const handleCloneModule = (id:ID)=>{
     submitOperate(
       {
         ...API_CLONE_MODULE,
@@ -154,12 +155,12 @@ export default function ModuleList(props:{
     );    
   }
 
-  const handleDragStart = (id:number)=>{
+  const handleDragStart = (id:ID)=>{
     setDraggedId(id)
   }
 
   const handleDragEnd = ()=>{
-    setDraggedId(0);
+    setDraggedId('');
   }
 
   const handleDragOver = (event:React.DragEvent<HTMLElement>, category:IModuleCategory)=>{
@@ -175,7 +176,7 @@ export default function ModuleList(props:{
     }
   }
 
-  const handleDrop = (id:number)=>{
+  const handleDrop = (id:ID)=>{
     if(draggedId){
       submitOperate(
         {

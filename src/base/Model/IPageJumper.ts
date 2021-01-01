@@ -1,5 +1,7 @@
+import { ID } from "./graphqlTypes";
+
 export interface IPageJumper{
-  pageSlug?:string,
+  pageId?:ID,
   dataId?:string,
   [key:string]:string|undefined,
 }

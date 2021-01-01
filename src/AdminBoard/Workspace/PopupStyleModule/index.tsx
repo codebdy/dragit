@@ -4,7 +4,7 @@ import {observer} from "mobx-react-lite";
 import { ModuleProps } from '../common/ModuleProps';
 import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
 import { useAppStore } from 'store/helpers/useAppStore';
-import { getModulePageBySlug } from '../common/getModulePageBySlug';
+import { getModulePageById } from '../common/getModulePageById';
 import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
 import { IPageJumper } from 'base/Model/IPageJumper';
@@ -25,7 +25,7 @@ export const PopupStyleModule = observer((
   const {module} = props;
   const classes = useStyles();
   const appStore = useAppStore();
-  const [pageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
+  const [pageSlug] = useState(appStore.pageId || module.entryPage?.slug);
   const [popupSlug, setPopupSlug] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{
@@ -40,8 +40,8 @@ export const PopupStyleModule = observer((
     }
   }
 
-  const page = getModulePageBySlug(module, pageSlug);
-  const popupPage = getModulePageBySlug(module, popupSlug);
+  const page = getModulePageById(module, pageSlug);
+  const popupPage = getModulePageById(module, popupSlug);
   const handleClose = ()=>{
     setPopupSlug(undefined);
   }

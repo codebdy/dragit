@@ -116,7 +116,7 @@ export default {
         icon:"mdi-pencil",
         jumpToPage:{
           //name: JUMP_TO_PAGE_ACidTION,
-          pageId:'12',
+          pageId:'1012',
           param:'id',
           paramField:'id',
         }

@@ -6,6 +6,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import TreeNode from './TreeNode';
 import { RXNode } from 'base/RXNode/RXNode';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +29,7 @@ export default function TreeList(
     onExchange:(node:RXNode<ITreeNode>)=>void,
     onRemove:(node:RXNode<ITreeNode>)=>void,
     onAddChild:(node:RXNode<ITreeNode>)=>void,
-    onSelect:(nodeId:number)=>void,
+    onSelect:(nodeId:ID)=>void,
   }
 ) {
   const {nodes, nameKey, draggedNode, onNodeDragStart, onDragEnd, onDragIn, onExchange, onRemove, onAddChild, onSelect} = props;
@@ -40,7 +41,7 @@ export default function TreeList(
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
       onNodeSelect = {(e: any, nodeId: string) =>{
-        onSelect(parseInt(nodeId));
+        onSelect(nodeId);
       }} 
     >
       {

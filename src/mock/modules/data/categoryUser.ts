@@ -5,19 +5,19 @@ import users from "mock/views/users";
 
 export default[
   {
-    id:7,
+    id:'7',
     slug:'user',
     name:'管理员',
-    entry_page_id:71,
+    entry_page_id:'71',
     pages:[
       {
-        id:71,
+        id:'71',
         name:'管理员列表',
         slug:'urser-list',
         schema: users,
       },
       {
-        id:72,
+        id:'72',
         name:'管理员编辑',
         slug:'edit-user',
         schema: user,
@@ -25,19 +25,19 @@ export default[
     ],
   },
   {
-    id:8,
+    id:'8',
     slug:'role',
     name:'角色',
-    entry_page_id:81,
+    entry_page_id:'81',
     pages:[
       {
-        id:81,
+        id:'81',
         name:'角色列表',
         slug:'role-list',
         schema: rolesPage,
       },
       {
-        id:82,
+        id:'82',
         name:'角色编辑',
         slug:'edit-role',
         schema: rolePage,

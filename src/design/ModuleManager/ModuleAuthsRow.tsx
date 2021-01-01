@@ -3,12 +3,13 @@ import { IconButton, TableCell, TableRow, TextField, Tooltip } from '@material-u
 import { IAuth } from 'base/Model/IAuth';
 import MdiIcon from 'components/common/MdiIcon';
 import intl from 'react-intl-universal';
+import { ID } from 'base/Model/graphqlTypes';
 
 export default function ModuleAuthsRow(
   props:{
     auth:IAuth,
     onChange:(auth:IAuth)=>void,
-    onRemove:(id:number)=>void,
+    onRemove:(id:ID)=>void,
   }
 ){
   const {auth, onChange, onRemove} = props;

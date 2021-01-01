@@ -1,8 +1,9 @@
 import { IPage } from 'base/Model/IPage';
 import { IAuth } from 'base/Model/IAuth';
+import { ID } from './graphqlTypes';
 
 export interface IModule {
-  id: number;
+  id: ID;
   slug: string;
   name: string;
   moduleType: string;
@@ -10,5 +11,5 @@ export interface IModule {
   pages?: IPage[];
   entryPage?: IPage;
   auths?: IAuth[];
-  entry_page_id?:number; //以后要删除该字段
+  entry_page_id?:ID; //以后要删除该字段
 }

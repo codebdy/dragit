@@ -16,6 +16,7 @@ import { cloneObject } from "utils/cloneObject";
 import {observer} from "mobx-react-lite";
 import intl from 'react-intl-universal';
 import { useAppStore } from "store/helpers/useAppStore";
+import { ID } from "base/Model/graphqlTypes";
 
 // 定义查询语句
 //String代替JSON
@@ -40,12 +41,12 @@ export const SidebarLinks = observer((
   }
 )=>{
   const classes = useStyles();
-  const [openedId, setOpenedId] = React.useState(-1);
+  const [openedId, setOpenedId] = React.useState('');
   const { loading, error, data } = useQuery(GET_DRAWER_ITEMS);
   const [items,setItems] = React.useState<Array<RXNode<IMenuItem>>>([]);
   const loggedUser = useLoggedUser();
 
-  const handleOpened = (id:number)=>{
+  const handleOpened = (id:ID)=>{
     setOpenedId(id)
   }
 

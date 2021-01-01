@@ -34,7 +34,6 @@ const QUERY_MODULE = gql`
       isDrawerStyle:is_drawer_style
       pages{
         id
-        slug
         name
         maxWidth:max_width
         inTabIndex:in_tab_index
@@ -43,7 +42,7 @@ const QUERY_MODULE = gql`
         auths
       }
       entryPage{
-        slug
+        id
       }
     }
   }
@@ -53,7 +52,6 @@ export const Workspace = observer(()=>{
   const appStore = useAppStore();
   const classes = useStyles()
   const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
-
   useShowAppoloError(error);
 
   const module = data?.moduleBySlug;

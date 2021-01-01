@@ -4,6 +4,7 @@ import { Skeleton } from '@material-ui/lab';
 //import { IForm, defultForm, FormContext } from "base/FormContext";
 import { AxiosRequestConfig } from 'axios';
 import { useAxios } from 'base/Hooks/useAxios';
+import { ID } from 'base/Model/graphqlTypes';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { RXNode } from 'base/RXNode/RXNode';
@@ -126,7 +127,7 @@ const TreeEditor = React.forwardRef((
     setRoot(rootCopy); 
   }
 
-  const handleSelect = (nodeId:number)=>{
+  const handleSelect = (nodeId:ID)=>{
     let node = root?.getNode(nodeId);
     if(node){
      /* setForm({

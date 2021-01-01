@@ -21,9 +21,22 @@ export default [{
   {
     type: 'item',
     title: '独立提交',
-    icon: 'mdi-call-split',
+    icon: 'mdi-rhombus-split',
     moduleSlug: 'split-demo'
   },
+  {
+    type: 'item',
+    title: '1对多面板',
+    icon: 'mdi-file-tree',
+    moduleSlug: 'one-to-many-portlet'
+  },
+  {
+    type: 'item',
+    title: '1对多表格',
+    icon: 'mdi-table',
+    moduleSlug: 'one-to-many-table'
+  },
+
   {
     title: '模块样式',
     type: 'group',

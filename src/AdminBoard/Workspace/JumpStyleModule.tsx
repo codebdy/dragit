@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react-lite";
 import { useAppStore } from 'store/helpers/useAppStore';
-import { getModulePageBySlug } from './common/getModulePageBySlug';
+import { getModulePageById } from './common/getModulePageById';
 import { ModuleProps } from './common/ModuleProps';
 import { Page } from './Page';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'base/PageAction';
@@ -25,26 +25,28 @@ export const JumpStyleModule = observer((
   const {module} = props;
   const classes = useStyles();
   const appStore = useAppStore();
-  const [pageSlug, setPageSlug] = useState(appStore.pageSlug || module.entryPage?.slug);
+  const [pageId, setPageId] = useState(appStore.pageId || module.entryPage?.id);
   const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
         setPageParams(action.page)        
-        setPageSlug(action.page?.pageSlug);
+        setPageId(action.page?.pageId);
         return;        
       case GO_BACK_ACTION:
-        setPageSlug(module.entryPage?.slug);
+        setPageId(module.entryPage?.id);
         return;
     }
   }
 
   useEffect(()=>{
-    setPageSlug(appStore.pageSlug || module.entryPage?.slug)
+    setPageId(appStore.pageId || module.entryPage?.id)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[module]);
 
-  const page = getModulePageBySlug(module, pageSlug);
+  console.log('JumpStyleModule', module, pageId)
+
+  const page = getModulePageById(module, pageId);
 
   return (
     <Container className={classes.root} maxWidth = {page?.maxWidth ==='false' ? false : page?.maxWidth}>

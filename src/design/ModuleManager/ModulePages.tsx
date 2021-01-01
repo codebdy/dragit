@@ -9,6 +9,7 @@ import { useAxios } from 'base/Hooks/useAxios';
 import { IPage } from 'base/Model/IPage';
 import { PageEditor } from 'design/PageEditor';
 import createId from 'utils/createId';
+import { ID } from 'base/Model/graphqlTypes';
 
 
 export default function ModulePages(props:{module:IModule}){
@@ -31,7 +32,7 @@ export default function ModulePages(props:{module:IModule}){
     })
   }
 
-  const handleRemove = (pageId:number)=>{
+  const handleRemove = (pageId:ID)=>{
     setOperateConfig({
       ...API_REMOVE_MODULE_PAGE,
       params:{
@@ -52,7 +53,7 @@ export default function ModulePages(props:{module:IModule}){
     })    
   }
 
-  const handelChangeIndexPage = (pageId:number, indexed:boolean)=>{
+  const handelChangeIndexPage = (pageId:ID, indexed:boolean)=>{
     setOperateConfig({
       ...API_UPDATE_MODULE_INDEX_PAGE,
       params:{
@@ -85,7 +86,7 @@ export default function ModulePages(props:{module:IModule}){
             pages = {module.pages || []} 
             onChangePage = {handleChangePage}
             onRemovePage = {handleRemove}
-            entry_page_id = {module.entry_page_id || -1}
+            entry_page_id = {module.entry_page_id || ''}
             onAddPage = {handleAddPage}
             onChangeIndexPage = {handelChangeIndexPage}
             onDesign = {handelDesign}

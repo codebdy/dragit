@@ -5,6 +5,7 @@ import intl from 'react-intl-universal';
 import ModulePageRow from './ModulePageRow';
 import { Add } from '@material-ui/icons';
 import { IPage } from 'base/Model/IPage';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,18 +28,18 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ModulePageTable(
   props:{
     pages:IPage[],
-    entry_page_id:number,
+    entry_page_id:ID,
     onChangePage:(newPage:IPage)=>void,
-    onRemovePage:(id:number)=>void,
+    onRemovePage:(id:ID)=>void,
     onAddPage:()=>void,
-    onChangeIndexPage : (pageId:number, indexed:boolean)=>void,
+    onChangeIndexPage : (pageId:ID, indexed:boolean)=>void,
     onDesign: (page:IPage)=>void,
   }
 ){
   const {pages, entry_page_id, onChangePage, onRemovePage, onAddPage, onChangeIndexPage, onDesign} = props;
   const classes = useStyles();
   
-  const handleRemove = (id:number)=>{
+  const handleRemove = (id:ID)=>{
     onRemovePage(id);
   }
 

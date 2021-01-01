@@ -1,3 +1,5 @@
+import { ID } from "./graphqlTypes";
+
 export type MaxWidth = 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
 
 export interface IQuery{
@@ -16,7 +18,7 @@ export interface IPageSchema{
 }
 
 export interface IPage{
-  id:number,
+  id:ID,
   slug:string,
   name?:string, 
   maxWidth?: MaxWidth;

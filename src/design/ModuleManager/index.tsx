@@ -12,7 +12,7 @@ import { AUTH_CUSTOMIZE } from "APIs/authSlugs";
 const ModuleManager = (props:{children?: any})=>{
   const history = useHistory();
 
-  const [selectedModuleId, setSelectedModuleId] = useState(-1);
+  const [selectedModuleId, setSelectedModuleId] = useState('');
 
   useAuthCheck(AUTH_CUSTOMIZE);
 
@@ -35,7 +35,7 @@ const ModuleManager = (props:{children?: any})=>{
       }      
     >
       {
-        selectedModuleId && selectedModuleId > 0 &&
+        selectedModuleId &&
         <ModuleContent moduleId = {selectedModuleId} />        
       }
 

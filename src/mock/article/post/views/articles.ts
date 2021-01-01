@@ -1,7 +1,7 @@
-import aritcleList from "design/PageEditor/Toolbox/templates/article/listPage"
+import listPage from "./listPage";
 
 export default {
   layout:[
-    aritcleList,
+    listPage,
   ] 
 }

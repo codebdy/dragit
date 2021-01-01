@@ -1,7 +1,7 @@
-import ArticleMeta from "design/PageEditor/Toolbox/templates/article/editPage";
+import editPage from "./editPage";
 
 export default {
-  layout:[ArticleMeta],
+  layout:[editPage],
   query:{
     name:'post',
     variables:{

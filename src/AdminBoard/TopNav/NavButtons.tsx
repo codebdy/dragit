@@ -64,7 +64,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   const handleShowProfile = ()=>{
     history.push(resolvePageUrl({
       moduleSlug:'user',
-      pageSlug:'edit-user',
+      pageId:'edit-user',
       dataId:user.meta?.id
     }));
     setAnchorEl(null);
@@ -73,7 +73,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
   const handleChangePassword = ()=>{
     history.push(resolvePageUrl({
       moduleSlug:'user',
-      pageSlug:'edit-user',
+      pageId:'edit-user',
       dataId:user.meta?.id
     }));
     setAnchorEl(null);

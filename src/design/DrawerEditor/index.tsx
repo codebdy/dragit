@@ -16,6 +16,7 @@ import { AxiosRequestConfig } from 'axios';
 import SubmitButton from 'components/common/SubmitButton';
 import { useAuthCheck } from 'store/helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -105,7 +106,7 @@ export default function DrawerEditor(){
     setDraggedNode(undefined);
   }
 
-  const doDrag = (funciontName :string, targetId:number)=>{
+  const doDrag = (funciontName :string, targetId:ID)=>{
     if(!draggedNode){
       return;
     }
@@ -123,15 +124,15 @@ export default function DrawerEditor(){
     setRootNode(copy);    
   }
 
-  const handleDragToBefore = (targetId:number)=>{
+  const handleDragToBefore = (targetId:ID)=>{
     doDrag('moveBefore', targetId);
   }
 
-  const handleDragToAfter = (targetId:number)=>{
+  const handleDragToAfter = (targetId:ID)=>{
     doDrag('moveAfter', targetId);
   }
 
-  const handleDragIn = (targetId:number)=>{
+  const handleDragIn = (targetId:ID)=>{
     doDrag('moveIn', targetId);
   }
 

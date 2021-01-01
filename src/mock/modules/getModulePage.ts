@@ -1,9 +1,10 @@
+import { ID } from "base/Model/graphqlTypes";
 import { getModuleIndexPage } from "./getModuleIndexPage";
-import { getPageBySlug } from "./getPageBySlug";
+import { getPageById } from "./getPageById";
 
-export function getModulePage(moduleSlug:string, pageSlug:string) {
-  if(pageSlug){
-    return getPageBySlug(pageSlug);
+export function getModulePage(moduleSlug:string, pageId:ID) {
+  if(pageId){
+    return getPageById(pageId);
   }
 
   return getModuleIndexPage(moduleSlug);

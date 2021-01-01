@@ -33,7 +33,7 @@ export default{
           onClick:{
             name: OPEN_PAGE_ACTION,
             page:{
-              pageId:'12',              
+              pageId:'1012',              
             }
 
           }

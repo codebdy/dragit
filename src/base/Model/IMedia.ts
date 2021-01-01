@@ -1,5 +1,7 @@
+import { ID } from "./graphqlTypes";
+
 export interface IMedia{
-  id:number,
+  id:ID,
   title: string,
   thumbnail:string,
   src?:string,

@@ -1,5 +1,7 @@
+import { ID } from "./graphqlTypes";
+
 export interface INotification{
-  id:string,
+  id:ID,
   title?:string,
   content?:string,
   read:boolean,
