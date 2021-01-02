@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Grid, Divider, IconButton } from '@material-ui/core';
 import MultiContentPotlet from 'components/common/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
-import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';
-import { RXInputProps } from 'base/RXInputProps';
-import { creatRowModel, RowModelContext } from 'components/OneToManyPortlet/RowModelContext';
+import { ModelProvider, useModelStore } from 'base/ModelTree/ModelProvider';
+import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,61 +16,54 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight:'bold',
       backgroundColor: fade(theme.palette.secondary.main, 0.04),
       alignItems:"center",
+    },
+    storeBuilder:{
+      display:'none',
     }
   }),
 );
 
 const OneToManyPortlet = React.forwardRef((
-  props: RXInputProps& {
-    value?:Array<any>,   
-    title?:string,
-    isDeisgning?:boolean,
-    children?:any,
-    style?:any,
-    onChange?:(event:any)=>void,
-  },
+  props: any,
   ref:any
 )=>{
-  const {name, loading, value, title, isDeisgning, children, onChange, ...rest} = props;
+  const {field, loading, value, title, isDeisgning, children, ...rest} = props;
   const classes = useStyles();
+  const modelStore =  useModelStore();
+  const fieldStore = modelStore?.getFieldStore(field) as ModelArrayFieldStore;
+  useEffect(()=>{
+    modelStore?.setFieldStore(field,  new ModelArrayFieldStore({name:field, props}));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field])
+
   
-  const emitValueChangded = (newValue:any) => {
-    const event = {
-      persist: () => {return {}},
-      target: {
-        type: "change",
-        name: props.name,
-        value: removeTempIdToTable(newValue),
-      }
-    };
-    onChange && onChange(event);
-  }
-  const valueRows =  value? addTempIdToTable(value) :[];
-  const rows = isDeisgning ? [{id:1}] : valueRows;
+  //const valueRows =  value? addTempIdToTable(value) :[];
+  //const rows = isDeisgning ? [{id:1}] : valueRows;
 
   const handleAddNew = ()=>{
     if(isDeisgning){
       return;
     }
-    const newValue = [...rows, {id:creatId()}]
-    emitValueChangded(newValue)
+
   }
 
   const handelRemove = (index:number)=>{
-    let tempRows = [...rows];
-    tempRows.splice(index, 1);
-    emitValueChangded(tempRows);
   }
 
   return (
     <MultiContentPotlet title={title} ref={ref} {...rest}
       onAddNew = {handleAddNew}
     >
+      <div className = {classes.storeBuilder}>
+        <ModelProvider value = {fieldStore?.schemaRow}>
+          {children}
+        </ModelProvider>
+      </div>
       {
-        rows.map((item, index)=>{
+        fieldStore?.rows.map((rowStore, index)=>{
           return(
-            <RowModelContext.Provider value={creatRowModel(name, index, item)} key = {item.id}>
-              <Grid container key = {item.id}>
+            <ModelProvider value={rowStore} key = {rowStore.id}>
+              <Grid container >
                 <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
                   <Grid item>{title} #{index + 1}</Grid>
                   <Grid item>
@@ -88,7 +80,7 @@ const OneToManyPortlet = React.forwardRef((
                   {children}
                 </Grid>
               </Grid>
-            </RowModelContext.Provider>            
+            </ModelProvider>            
           )
         })
       }

@@ -1,11 +1,11 @@
 import { Rule } from "base/Rules/Rule";
 import { IProp } from "base/Model/IProp";
-import OneToManyTableColumnsDialog from "components/OneToManyTable/PropsInputs/OneToManyTableColumnsDialog";
 import StringInput from "base/PropsInputs/StringInput";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import { IMeta } from "base/Model/IMeta";
 import elevationRules from "base/Rules/elevationRules";
 import marginRules from "base/Rules/marginRules";
+import OneToManyTableColumnsDialog from "./PropsInputs/OneToManyTableColumnsDialog";
 
 export class OneToManyTableRule extends Rule{
   empertyPadding = '';

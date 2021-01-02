@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, TextField, MenuItem, Select, FormControl, InputLabel, FormControlLabel, Switch, Grid} from '@material-ui/core';
-import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
-import MetaListDialog from '../../ListView/PropsInputs/MetaListDialog';
 import { Fragment } from 'react';
 import SelectItemsInputItemDialog from 'components/inputs/Select/PropsInputs/SelectItemsInputItemDialog';
 import { cloneObject } from 'utils/cloneObject';
 import ApiEditor from 'base/PropsInputs/ApiEditor';
 import StringInput from 'base/PropsInputs/StringInput';
+import MetaListDialog from 'components/ListView/PropsInputs/MetaListDialog';
+import { PropsInputProps } from 'base/PropsInputs/PropsEditorProps';
 
 const styles = (theme: Theme) =>
   createStyles({

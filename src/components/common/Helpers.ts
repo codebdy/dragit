@@ -1,9 +1,4 @@
-var seedId = 1;
-const tempPrefix = "TEMP-";
-
-export const creatId = ()=>{
-  return tempPrefix + (seedId++);
-}
+import { creatId } from "../../base/creatId";
 
 export function addTempIdToTable(rows:Array<any>):Array<any>{
   return rows.map((item:any)=>{

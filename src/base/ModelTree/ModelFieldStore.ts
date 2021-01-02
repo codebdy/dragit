@@ -3,9 +3,11 @@ import { makeAutoObservable, toJS } from "mobx";
 import { IModelStore } from "./IModelStore";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
+import { creatId } from "base/creatId";
 
 
 export class ModelFieldStore implements IFieldStore, IModelStore {
+  id:number;
   defaultValue?: any;
   value?: any;
   error?: string;
@@ -13,6 +15,7 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
   loading?: boolean;
   subFields: Map<string,IFieldStore>;
   constructor(meta: IMeta) {
+    this.id = creatId();
     this.meta = meta;
     this.subFields = new Map<string,IFieldStore>();
     makeAutoObservable(this);

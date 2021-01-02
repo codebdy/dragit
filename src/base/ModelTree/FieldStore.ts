@@ -1,9 +1,11 @@
+import { creatId } from "base/creatId";
 import { IMeta } from "base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IModelNode } from "./IModelNode";
 import { validate } from "./validate";
 
 export interface IFieldStore extends IModelNode{
+  id:number;
   meta:IMeta;
   defaultValue?: any;
   value?: any;
@@ -16,6 +18,7 @@ export interface IFieldStore extends IModelNode{
 }
 
 export class FieldStore implements IFieldStore{
+  id:number;
   meta:IMeta;
   defaultValue?: any;
   value?: any;
@@ -23,6 +26,7 @@ export class FieldStore implements IFieldStore{
   loading?: boolean;
   dirty?: boolean;
   constructor(meta:IMeta) {
+    this.id = creatId();
     makeAutoObservable(this);
     this.meta = meta;
   }

@@ -1,8 +1,10 @@
+import { creatId } from "base/creatId";
 import { IMeta } from "base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 export class MediaFieldStore implements IFieldStore{
+  id:number;
   meta:IMeta;
   defaultValue?: any;
   value?: any;
@@ -11,6 +13,7 @@ export class MediaFieldStore implements IFieldStore{
   dirty?: boolean;
   
   constructor(meta:IMeta) {
+    this.id = creatId();
     makeAutoObservable(this);
     this.meta = meta;
   }

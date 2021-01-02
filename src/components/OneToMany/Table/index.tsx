@@ -4,7 +4,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import { resolveComponent } from 'base/RxDrag';
 import { RXInputProps } from 'base/RXInputProps';
 import MultiContentPotlet from 'components/common/MultiContentPotlet';
-import { addTempIdToTable, creatId, removeTempIdToTable } from 'components/common/Helpers';
+import { addTempIdToTable, removeTempIdToTable } from 'components/common/Helpers';
+import { creatId } from "base/creatId";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
