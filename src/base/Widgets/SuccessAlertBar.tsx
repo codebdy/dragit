@@ -25,7 +25,7 @@ export const SuccessAlertBar = observer(()=>{
     <Snackbar 
       anchorOrigin = {{ vertical: 'top', horizontal: 'center' }}
       open={!!appStore.successAlert} 
-      autoHideDuration={1000} 
+      autoHideDuration={700} 
       onClose={handleClose}
     >
       <Alert onClose={handleClose} severity="success">

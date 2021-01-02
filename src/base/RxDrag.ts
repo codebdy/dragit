@@ -1,23 +1,19 @@
-import { FieldType } from "base/FieldType";
 import { IRule } from "base/Rules/IRule";
 import { Rule } from "base/Rules/Rule";
 //import withMargin from "./HOCs/withMargin";
-import withSkeleton from "./HOCs/withSkeleton";
 import { IMeta } from "./Model/IMeta";
 
 var componentsMap : { 
   [key: string]: {
     component?:any,
     rule:IRule,
-    fieldType?:FieldType,
   }
 } = {}
 
-function register(name:string, component:any, rule:any = Rule, fieldType:FieldType = FieldType.Normal): any{
+function register(name:string, component:any, rule:any = Rule): any{
   componentsMap[name] = {
     component,
     rule: new rule(),
-    fieldType: fieldType,
   }
 }
 
@@ -44,9 +40,4 @@ function resolveComponent(meta:IMeta, withField = true):any{
 function resolveRule(name:string):IRule{
   return  componentsMap[name] ? componentsMap[name].rule : new Rule();
 }
-
-function resolveFieldType(name:string):FieldType|undefined{
-  return  componentsMap[name] ? componentsMap[name].fieldType : FieldType.Normal;
-}
-
-export {register, resolveComponent, resolveRule, registerHtmlTag, resolveFieldType}
+export {register, resolveComponent, resolveRule, registerHtmlTag}

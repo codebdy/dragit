@@ -1,18 +1,6 @@
-import { FieldType } from "base/FieldType";
-import { IMeta } from "base/Model/IMeta";
-import { IPage } from "base/Model/IPage";
-import { resolveFieldType } from "base/RxDrag";
-import { RXNodeRoot } from "base/RXNode/Root";
-import { RXNode } from "base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
-//import { cloneObject } from "utils/cloneObject";
-import { FieldStore, IFieldStore } from "./FieldStore";
-import { TableFieldStore } from "./TableFieldStore";
-import { ModelArrayFieldStore } from "./ModelArrayFieldStore";
-import { ModelFieldStore } from "./ModelFieldStore";
+import { IFieldStore } from "./FieldStore";
 import { IModelStore } from "./IModelStore";
-import { SelectFieldStore } from "./SelectFieldStore";
-import { MediaFieldStore } from "./MediaFieldStore";
 import { IModelNode } from "./IModelNode";
 
 /*function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
