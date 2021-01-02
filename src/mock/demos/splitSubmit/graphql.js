@@ -2,7 +2,6 @@ export var splitGQLType = `
   type Subtraction{
     minute:Float
     minus: Float
-    result: Float
   }
 
   type Compound{
@@ -31,6 +30,6 @@ export var splitGQLInput =`
 //`
 
 export var splitGQLMutation = `
-  subtract(params:SubtractionInput):Subtraction
+  subtract(params:SubtractionInput):String
   compound(params:CompoundInput):Compound
 `

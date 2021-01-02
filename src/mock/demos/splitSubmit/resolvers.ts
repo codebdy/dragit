@@ -6,7 +6,7 @@ export const subtract = async (parent:any, args:any, context:any, info:any)=>{
   const minute = params?.minute;
   const minus = params?.minus;
   console.log('算减法', {minute:minute, minus:minus, result:minute - minus});
-  return {minute:minute, minus:minus, result:minute - minus}
+  return (minute - minus).toString();
 }
 
 export const compound = async (parent:any, args:any, context:any, info:any)=>{

@@ -3,6 +3,7 @@ export interface IModelNode{
   toFieldsGQL:()=>void;
   getModelNode:(name:string)=>IModelNode|undefined;
   toInputValue:()=>any;
+  updateDefaultValue:()=>void;
   setLoading:(loading:boolean)=>void;
   clearDirty:()=>void;
   isDirty:()=>boolean|undefined;

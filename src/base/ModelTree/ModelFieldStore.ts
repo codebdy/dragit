@@ -1,5 +1,5 @@
 import { IMeta } from "base/Model/IMeta";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 import { IModelStore } from "./IModelStore";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
@@ -80,6 +80,13 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
       }
     })
     return rtValue;
+  }
+
+  updateDefaultValue(){
+    this.defaultValue = toJS(this.value);
+    this.subFields?.forEach((fieldStore, key)=>{
+      fieldStore.updateDefaultValue();
+    })
   }
 
   validate(){

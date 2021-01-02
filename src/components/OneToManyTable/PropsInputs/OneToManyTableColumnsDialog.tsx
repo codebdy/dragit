@@ -4,7 +4,7 @@ import { PropsInputProps } from '../../../base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from '../../ListView/PropsInputs/MetaListDialog';
 import { Fragment } from 'react';
-import SelectItemsInputItemDialog from 'components/Select/PropsInputs/SelectItemsInputItemDialog';
+import SelectItemsInputItemDialog from 'components/inputs/Select/PropsInputs/SelectItemsInputItemDialog';
 import { cloneObject } from 'utils/cloneObject';
 import ApiEditor from 'base/PropsInputs/ApiEditor';
 import StringInput from 'base/PropsInputs/StringInput';

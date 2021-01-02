@@ -35,9 +35,9 @@ function resolveComponent(meta:IMeta, withField = true):any{
 
   //component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
 
-  if(meta.props?.field && withField && componetNode.fieldType !== FieldType.Model){
-    component = withSkeleton(component);
-  }
+  //if(meta.props?.field && withField && componetNode.fieldType !== FieldType.Model){
+  //  component = withSkeleton(component);
+  //}
   return component;
 }
 

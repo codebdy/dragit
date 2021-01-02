@@ -1,12 +1,12 @@
 import React from 'react';
 import {observer} from 'mobx-react-lite';
-import { ModelProvider, useFieldStore, useModelStore } from "./Store/ModelProvider";
-import { ModelFieldStore } from "./Store/ModelFieldStore";
+import { useModelStore } from "../../base/ModelTree/ModelProvider";
+import { useFieldStore } from "./useFieldStore";
 
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
     const {field, onlyShow, forwardedRef, empertyValue, rule, helperText, ...rest} = props;
-    const fieldStore = useFieldStore(field);
+    const fieldStore = useFieldStore({name:field, props});
     const modelStore =  useModelStore();
 
     const handleChange = (e:any) => {
@@ -27,7 +27,7 @@ const withFormField = (Component:any)=>{
     const error = fieldStore?.error;
     const compent = <Component
       ref={forwardedRef}
-      loading={fieldStore?.loading || modelStore.loading}
+      loading={fieldStore?.loading || modelStore?.loading}
       value={fieldStore?.value === undefined ? (empertyValue || '') : fieldStore?.value}
       {...rest}
       error={!! error}
@@ -36,11 +36,6 @@ const withFormField = (Component:any)=>{
       //onBlur={handleBlur}
     />;
     return (
-      fieldStore instanceof ModelFieldStore?
-      <ModelProvider value = {fieldStore as any}>
-        {compent}
-      </ModelProvider>
-      :
       compent
     )
   })

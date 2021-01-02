@@ -7,8 +7,8 @@ import ComponentRender from 'AdminBoard/Workspace/Page/ComponentRender';
 import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'base/PageAction';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'base/Model/IPageJumper';
-import { ModelProvider } from './Store/ModelProvider';
-import { ModelStore } from './Store/ModelStore';
+import { ModelProvider } from '../../../base/ModelTree/ModelProvider';
+import { ModelStore } from '../../../base/ModelTree/ModelStore';
 import { IPageMutation } from 'base/Model/IPageMutation';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
 import { useAppStore } from 'store/helpers/useAppStore';
@@ -16,6 +16,8 @@ import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import intl from 'react-intl-universal';
+import { RXNodeRoot } from 'base/RXNode/Root';
+import { cloneObject } from 'utils/cloneObject';
 
 export const Page = observer((
   props:{
@@ -27,7 +29,8 @@ export const Page = observer((
   const [openAlert, setOpentAlert] = useState(false);
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
   const {page, pageParams, onPageAction} = props;
-  const [pageStore] = useState(new ModelStore());
+  const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>();
+  const [modelStore] = useState(new ModelStore());
   const [mutation, setMutation] = useState<IPageMutation>();
   const queryName = page?.schema?.query?.name;
   const appStore = useAppStore();
@@ -36,7 +39,7 @@ export const Page = observer((
     const QUERY_GQL = gql`
       query ($id:ID){
         ${queryName}(id:$id)
-          ${pageStore.toFieldsGQL()}
+          ${modelStore.toFieldsGQL()}
         
       }
     `;
@@ -47,7 +50,7 @@ export const Page = observer((
       return gql`mutation{emperty}`;
     }
 
-    const refreshNode = pageStore.getModelNode(mutation?.refreshNode)
+    const refreshNode = modelStore.getModelNode(mutation?.refreshNode)
     
     const gqlText = `
         mutation ($${mutation?.variableName}:${mutation?.variableType}){
@@ -70,9 +73,10 @@ export const Page = observer((
     {
       onCompleted:(data)=>{
         if(mutation){
-          const submitNode = pageStore.getModelNode(mutation.submitNode);
+          const submitNode = modelStore.getModelNode(mutation.submitNode);
+          submitNode?.updateDefaultValue();
           if(mutation?.refreshNode){
-          const refreshNode = pageStore.getModelNode(mutation?.refreshNode)
+          const refreshNode = modelStore.getModelNode(mutation?.refreshNode)
           refreshNode?.setModel({[mutation?.refreshNode]:data[mutation.name]})             
           refreshNode?.setLoading(false);          
         }
@@ -92,17 +96,21 @@ export const Page = observer((
   
   useEffect(()=>{
     if(mutation){
-      const submitNode = pageStore.getModelNode(mutation.submitNode)
-      const refreshNode = pageStore.getModelNode(mutation?.refreshNode) 
-      console.log('mutation variables', mutation.submitNode,pageStore, submitNode?.toInputValue());
+      const submitNode = modelStore.getModelNode(mutation.submitNode)
+      const refreshNode = modelStore.getModelNode(mutation?.refreshNode) 
+      console.log('mutation variables', mutation.submitNode,modelStore, submitNode?.toInputValue());
       refreshNode?.setLoading(true);
-      excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}});      
+      excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}}); 
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mutation])
   
   useEffect(()=>{
-    pageStore.parsePage(page);
+    const layout = page?.schema?.layout || [];
+    let root = new RXNodeRoot<IMeta>();
+    root.parse(cloneObject(layout));
+    setPageLayout(root.children);
+    //pageStore.parsePage(page);
     if(queryName){
       excuteQuery();
     }
@@ -110,16 +118,16 @@ export const Page = observer((
   },[page]);
 
   useEffect(()=>{
-    pageStore.setLoading(queryLoading);
+    modelStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryLoading]);
 
   useEffect(()=>{
     if(data && queryName){
-      pageStore.setModel(data[queryName]);      
+      modelStore.setModel(data[queryName]);      
     }
     else{
-      pageStore.setModel(undefined);
+      modelStore.setModel(undefined);
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -130,7 +138,7 @@ export const Page = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
-        const submitNode = pageStore.getModelNode(action.mutation?.submitNode)
+        const submitNode = modelStore.getModelNode(action.mutation?.submitNode)
         console.assert(submitNode, 'Page内错误，提交节点不存在：' + action.mutation?.submitNode);
         if(submitNode?.validate()){
           if(action.mutation){
@@ -143,14 +151,22 @@ export const Page = observer((
        
         return;
       case GO_BACK_ACTION:
-        if(pageStore?.isDirty()){
+        if(modelStore?.isDirty()){
           setBackConfirmOpen(true);
           return;
         }
         break;
       case RESET_ACTION:
-        const resetNode = pageStore.getModelNode(action.resetNode);
-        resetNode?.reset();
+        if(action.resetNodes){
+          action.resetNodes.forEach(nodeName =>{
+            const resetNode = modelStore.getModelNode(nodeName);
+            resetNode?.reset();          
+          })
+        }
+        else{
+          modelStore.reset();
+        }
+
         return;
     }
     onPageAction && onPageAction(action);
@@ -166,9 +182,9 @@ export const Page = observer((
   }
 
   return (
-    <ModelProvider value = {pageStore}>
+    <ModelProvider value = {modelStore}>
       {
-        pageStore.pageLayout?.map((child:RXNode<IMeta>)=>{
+        pageLayout?.map((child:RXNode<IMeta>)=>{
           return (
             <ComponentRender 
               key={child.id} 

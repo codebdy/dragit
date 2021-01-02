@@ -51,6 +51,9 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
   toInputValue(){
   }
 
+  updateDefaultValue(){
+  }
+
   validate(){
     return true;
   }

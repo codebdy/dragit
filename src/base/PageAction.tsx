@@ -10,6 +10,7 @@ export const SUBMIT_MUTATION = "SUBMIT_MUTATION";
 export interface PageAction{
   name:string;
   mutation?:IPageMutation;
+  resetNodes?:string[];
   [key:string]: any;
 }
 

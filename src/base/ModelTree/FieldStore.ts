@@ -63,6 +63,10 @@ export class FieldStore implements IFieldStore{
     return toJS(this.value);
   }
 
+  updateDefaultValue(){
+    this.defaultValue = toJS(this.value);
+  }
+
   validate(){
     this.error = validate(this.value, this.meta?.props?.rule);
     return !this.error;

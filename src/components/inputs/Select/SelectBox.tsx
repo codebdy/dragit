@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuI
 import { Skeleton } from '@material-ui/lab';
 import { AxiosRequestConfig } from 'axios';
 import { useBaseItems } from 'base/Hooks/useBaseItems';
+import withSkeleton from 'base/HOCs/withSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -129,4 +130,4 @@ const SelectBox = React.forwardRef((
   )
 })
 
-export default SelectBox;
+export default withSkeleton(SelectBox);

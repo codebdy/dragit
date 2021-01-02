@@ -1,14 +1,14 @@
 import { IMeta } from "base/Model/IMeta";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
-export class SelectFieldStore implements IFieldStore{
+export class MediaFieldStore implements IFieldStore{
   meta:IMeta;
   defaultValue?: any;
   value?: any;
   error?: string;
   loading?: boolean;
-  dirty?:boolean;
+  dirty?: boolean;
   
   constructor(meta:IMeta) {
     makeAutoObservable(this);
@@ -19,6 +19,11 @@ export class SelectFieldStore implements IFieldStore{
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.value = fieldValue;
+  }
+
+  setValue(value: any) {
+    this.value = value;
+    this.dirty = true;
   }
 
   clearDirty(){
@@ -32,32 +37,32 @@ export class SelectFieldStore implements IFieldStore{
   setLoading(loading:boolean){
     this.loading = loading;
   }
-  
-  setValue(value: any) {
-    this.value = value;
-    this.dirty = true;
-  }
-
-  getItemKey(){
-    let itemKey = this.meta.props?.itemKey;
-    itemKey = this.meta.props?.query ? itemKey : 'slug';
-    return itemKey ? itemKey : 'id';
-  }
 
   toFieldsGQL() {
-    return ` {${this.getItemKey()}} `;
+    return ` {id thumbnail title alt src} `;
   }
 
   getModelNode(name:string):IModelNode|undefined{
     return undefined;
   }
 
+  valueToInput(value:any){
+    if(value){
+      return {id:value.id, thumbnail:value.thumbnail, alt:value.alt};
+    }
+  }
+
   toInputValue(){
-    const itemKey = this.getItemKey();
-    this.value?.forEach((item:any,key:any)=>{
-      this.value[key] = {[itemKey]:item[itemKey]}
-    })
-    return this.value;
+    if(this.value && this.value instanceof Array){
+      return this.value.map((item,key)=>{
+        return this.valueToInput(item);
+      })
+    }
+    return this.valueToInput(this.value);
+  }
+
+  updateDefaultValue(){
+    this.defaultValue = toJS(this.value);
   }
 
   validate(){

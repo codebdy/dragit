@@ -5,7 +5,7 @@ import { resolveFieldType } from "base/RxDrag";
 import { RXNodeRoot } from "base/RXNode/Root";
 import { RXNode } from "base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
-import { cloneObject } from "utils/cloneObject";
+//import { cloneObject } from "utils/cloneObject";
 import { FieldStore, IFieldStore } from "./FieldStore";
 import { TableFieldStore } from "./TableFieldStore";
 import { ModelArrayFieldStore } from "./ModelArrayFieldStore";
@@ -15,7 +15,7 @@ import { SelectFieldStore } from "./SelectFieldStore";
 import { MediaFieldStore } from "./MediaFieldStore";
 import { IModelNode } from "./IModelNode";
 
-function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
+/*function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
   const fieldName = node.meta.props?.field;
   let nextParentStore:IModelStore = modelStore;
   if(fieldName){
@@ -45,13 +45,13 @@ function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
   node.children?.forEach(child=>{
     parseFieldFromNode(nextParentStore ,child);
   })
-}
+}*/
 
 export class ModelStore implements IModelStore , IModelNode{
   model?: any;
   loading?: boolean;
   fields: Map<string,IFieldStore>;
-  pageLayout?:Array<RXNode<IMeta>>;
+  //pageLayout?:Array<RXNode<IMeta>>;
   constructor() {
     makeAutoObservable(this)
     this.fields = new Map<string,IFieldStore>();
@@ -59,6 +59,7 @@ export class ModelStore implements IModelStore , IModelNode{
 
   setFieldStore(fieldName:string, fieldStore:IFieldStore){
     this.fields.set(fieldName, fieldStore)
+    fieldStore.setModel(this.model);
   }
 
   getFieldStore(fieldName:string){
@@ -85,7 +86,7 @@ export class ModelStore implements IModelStore , IModelNode{
     this.loading = loading;
   }
 
-  parsePage(page?:IPage){
+  /*parsePage(page?:IPage){
     const layout = page?.schema?.layout || [];
     let root = new RXNodeRoot<IMeta>();
     root.parse(cloneObject(layout));
@@ -94,7 +95,7 @@ export class ModelStore implements IModelStore , IModelNode{
     this.pageLayout?.forEach(node=>{
       parseFieldFromNode(this, node);
     })
-  }
+  }*/
 
   setModel(model:any){
     this.model = model
@@ -135,6 +136,12 @@ export class ModelStore implements IModelStore , IModelNode{
     })
 
     return rtValue
+  }
+
+  updateDefaultValue(){
+    this.fields?.forEach((fieldStore, key)=>{
+      fieldStore.updateDefaultValue(); 
+    })
   }
 
   validate():boolean{

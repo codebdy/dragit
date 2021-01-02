@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { RXNode } from '../../../base/RXNode/RXNode';
 import { resolveComponent } from 'base/RxDrag';
-import withFormField from './withFormField';
 import { IMeta } from 'base//Model/IMeta';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import { useLoggedUser } from 'store/helpers/useLoggedUser';
@@ -16,7 +15,7 @@ export default function ComponentRender(
   const loggedUser = useLoggedUser();
   const onClickAction = component.meta.props?.onClick;
   let Component = resolveComponent(component.meta);
-  Component = component.meta.props?.field ? withFormField(Component) : Component;
+  //Component = component.meta.props?.field ? withFormField(Component) : Component;
   const handleOnClick = ()=>{
     if(!onClickAction){
       return

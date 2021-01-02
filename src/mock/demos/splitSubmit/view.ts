@@ -16,18 +16,20 @@ export default {
           },
           children: [
             {
-              name:'OneToOnePortlet',
+              name:'Portlet',
               props: {
                 variant:'outlined',
                 open:true,
                 withHeader:true,
                 title:'减法计算器',
                 collapsible: false,
-                field:'subtraction',
               },
               children:[
                 {
                   name:"FormGridContainer",
+                  props:{
+                    field:'subtraction',
+                  },
                   children:[
                     {
                       name: 'PortletGridItem',
@@ -90,6 +92,12 @@ export default {
                         }
                       ]
                     },
+
+                  ]
+                },
+                {
+                  name:"FormGridContainer",
+                  children:[
                     {
                       name: 'PortletGridItem',
                       props:{
@@ -102,13 +110,12 @@ export default {
                             label:'计算结果',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'result',
+                            field:'subtractResult',
                             onlyShow:true,
                           }
                         }
                       ]
                     },
-
                   ]
                 },
                 {
@@ -122,7 +129,7 @@ export default {
                         size:'large',
                         onClick:{
                           name: RESET_ACTION,
-                          resetNode:'subtraction',
+                          resetNodes:['subtraction','subtractResult'],
                         }
                       }
                     },
@@ -141,7 +148,7 @@ export default {
                           variableName:'params',
                           variableType:'SubtractionInput',
                           submitNode:'subtraction',
-                          refreshNode:'subtraction',
+                          refreshNode:'subtractResult',
                           //goback:true,
                         },
                       }           
@@ -160,21 +167,25 @@ export default {
           },
           children: [
             {
-              name:'OneToOnePortlet',
+              name:'Portlet',
               props: {
                 variant:'outlined',
                 open:true,
                 withHeader:true,
                 title:'复利计算器',
                 collapsible: false,
-                field:'compound',
+                
               },
               children:[
                 {
                   name:"FormGridContainer",
-                  children:[
+                    props: {
+                      field:'compound',
+                    },                  
+                    children:[
                     {
                       name: 'PortletGridItem',
+
                       props:{
                         xs:12,
                       },
@@ -258,6 +269,7 @@ export default {
                       name: 'PortletGridItem',
                       props:{
                         xs:12,
+                        marginTop:2,
                       },
                       children:[
                         {
@@ -285,7 +297,7 @@ export default {
                         size:'large',
                         onClick:{
                           name: RESET_ACTION,
-                          resetNode:'compound',
+                          resetNode:['compound'],
                         }
                       }
                     },

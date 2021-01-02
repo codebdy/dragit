@@ -1,5 +1,5 @@
 import { IProp } from "base/Model/IProp";
-import SelectItemsInputItemDialog from "components/Select/PropsInputs/SelectItemsInputItemDialog";
+import SelectItemsInputItemDialog from "components/inputs/Select/PropsInputs/SelectItemsInputItemDialog";
 
 const itemsRule:IProp = {
   name:'items',

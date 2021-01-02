@@ -6,7 +6,7 @@ import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';
 import BadgeEditor from './BadgeEditor';
 import { API_GET_AUTHS } from 'APIs/modules';
-import MultiSelectBox from 'components/Select/MultiSelectBox';
+import MultiSelectBox from 'components/inputs/Select/MultiSelectBox';
 
 export default function NodeEditor(
   props:{
