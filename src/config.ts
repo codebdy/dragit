@@ -34,8 +34,6 @@ import { OneToManyPortletRule } from 'components/OneToManyPortlet/Rule';
 import MultiSelectBox from 'components/inputs/Select/MultiSelectBox';
 import SwitchBox from 'components/inputs/SwitchBox';
 import { SwitchBoxRule } from 'components/inputs/SwitchBox/Rule';
-import OneToOnePortlet from 'components/OneToOnePortlet';
-import { OneToOnePortletRule } from 'components/OneToOnePortlet/Rule';
 import FieldView from 'components/FieldView';
 import { FieldViewRule } from 'components/FieldView/Rule';
 import TinyMCE from 'components/TinyMCE';
@@ -77,7 +75,6 @@ register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);
 register('MultiSelectBox', MultiSelectBox, SelectRule )
 register('OneToManyTable', OneToManyTable, OneToManyTableRule);
-register('OneToOnePortlet', OneToOnePortlet, OneToOnePortletRule);
 register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
 register('TinyMCE', TinyMCE, TinyMCERule);
 register('TreeEditor', TreeEditor, TreeEditorRule);
