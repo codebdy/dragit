@@ -183,7 +183,7 @@ export default {
                           name:'Typography',
                           props:{
                             variant:'subtitle1',
-                            rxText: '见证人类第八大奇迹',            
+                            rxText: '见证世界第八大奇迹',            
                           }
                         }
                       ]
