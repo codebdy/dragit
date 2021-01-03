@@ -72,12 +72,11 @@ export const ComponentView = observer((
   const [editStyle, setEditStyle] = useState<any>({});
   const designer = useDesigner();
   const refEl = useRef(undefined);
-  let Component = resolveComponent(node.meta, false);
+  let Component = resolveComponent(node.meta);
 
   let metaProps = node.meta.props? node.meta.props :{};
   const {
     rxText, 
-    withActions, 
     onClick, 
     className,     
     marginTop,

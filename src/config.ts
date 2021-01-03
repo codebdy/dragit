@@ -52,6 +52,7 @@ import RadioGroup from 'components/RadioGroup';
 import { RadioGroupRule } from 'components/RadioGroup/Rule';
 import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
 import { MediaSelectRule } from "components/MediaSelect/Rule";
+import TableColumn from "components/OneToMany/Table/TableColumn";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -73,7 +74,8 @@ register('ListView', ListView, ListViewRule);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);
-register('MultiSelectBox', MultiSelectBox, SelectRule )
+register('MultiSelectBox', MultiSelectBox, SelectRule );
+register ('TableColumn', TableColumn);
 register('OneToManyTable', OneToManyTable, OneToManyTableRule);
 register('OneToManyPortlet', OneToManyPortlet, OneToManyPortletRule);
 register('TinyMCE', TinyMCE, TinyMCERule);

@@ -1,10 +1,10 @@
 export default {
   name:'ListView',
   designProps:{
-    dataApi:null,
+    query:null,
   },
+  withActions:true,
   props:{
-    withActions:true,
     elevation:6,
     columns:[
       {

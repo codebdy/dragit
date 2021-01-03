@@ -23,7 +23,7 @@ function registerHtmlTag(name:string, rule:any = Rule){
   }  
 }
 
-function resolveComponent(meta:IMeta, withField = true):any{
+function resolveComponent(meta:IMeta):any{
   //const {marginTop, marginRight, marginBottom, marginLeft} = meta.props || {};
   const name = meta.name;
   const componetNode = componentsMap[name];

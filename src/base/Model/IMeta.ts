@@ -6,6 +6,8 @@ export interface IMeta{
     rule?:IValidateRule,
     [key:string]: any
   },
+  withActions?:boolean,
+  selfRenderChildren?:boolean,
   designProps?:{[key:string]: any},
   auths?:string[],
 }

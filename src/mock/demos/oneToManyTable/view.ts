@@ -51,78 +51,107 @@ export const  OneToManyTableView = {
           children: [
             {
               name:'OneToManyTable',
+              selfRenderChildren:true,              
               props: {
                 elevation: 6,
-                title:'联系人',
+                title:'规格库存',
                 collapsible: true,
                 marginTop:2,
                 open:true,
                 size:"small",
-                field:'contacts',
-                columns:[
-                  {
-                    field:'name',
-                    label:'姓名',
-                    input:{
-                      name:'TextBox',
-                      props:{
-                        variant:'outlined',
-                        size:'small',
-                      }
-                    }
+                field:'specs',
+              },
+              children:[
+                {
+                  name:'TableColumn',
+                  props:{
+                    label:'图片',                  
                   },
-                  {
-                    field:'emial',
-                    label:'邮箱',
-
-                    input:{
-                      name:'TextBox',
-                      props:{
-                        variant:'outlined',
-                        size:'small',
-                      }
+                  children:[{
+                    name:'MediaSelect',
+                    props:{
+                      field:'image',
+                      width:'60px',
                     }
-                  },
-                  {
-                    field:'tel',
-                    label:'电话',
-                    input:{
-                      name:'TextBox',
-                      props:{
-                        variant:'outlined',
-                        size:'small',
-                      }
+                  }]
+                },
+                {
+                  name:'TableColumn',
+                  props:{
+                    label:'名称',
+                    width:'200px',
+                  },          
+                  children:[{
+                    name:'TextBox',
+                    props:{
+                      field:'name',
+                      variant:'outlined',
+                      size:'small',
                     }
+                  }]
+                },
+                {
+                  name:'TableColumn',
+                  props:{
+                    label:'颜色',
                   },
-                  {
-                    field:'linkedin',
-                    label:'领英',
-                    input:{
-                      name:'TextBox',
-                      props:{
-                        variant:'outlined',
-                        size:'small',
-                      }
+                  children:[{
+                    name:'TextBox',
+                    props:{
+                      field:'color',
+                      variant:'outlined',
+                      size:'small',
                     }
+                  }]
+                },
+                {
+                  name:'TableColumn',
+                  props:{
+                    label:'型号',
                   },
-
-                  {
-                    field:'note',
-                    label:'备注',
-
-                    input:{
-                      name:'TextBox',
-                      props:{
-                        variant:'outlined',
-                        size:'small',
-                      }
+                  children:[{
+                    name:'SelectBox',
+                    props:{
+                      field:'category',
+                      variant:"outlined",
+                      size:'small',
+                      withoutEmpertyItem:false,                        
+                      items:[
+                        {
+                          slug:'100',
+                          label:'100'
+                        },
+                        {
+                          slug:'200',
+                          label:'200'
+                        },
+                        {
+                          slug:'300',
+                          label:'300'
+                        }
+                      ]
                     }
+                  }],
+                },
+                {
+                  name:'TableColumn',
+                  props:{
+                    label:'库存',
                   },
-
-                ]         
-              },            
-            },
-
+                  children:[{
+                    name:'TextBox',
+                    props:{
+                      field:'stock',
+                      variant:'outlined',
+                      size:'small',
+                    }
+                  }]
+                },
+          
+          
+              ]             
+            }
+            
           ]
         },
       ]

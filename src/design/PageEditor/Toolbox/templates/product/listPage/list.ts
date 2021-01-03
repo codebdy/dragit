@@ -1,12 +1,12 @@
 export default {
   name:'ListView',
   designProps:{
-    dataApi:null,
+    query:null,
   },
+  withActions:true,
   props:{
     //field:'paginate',
     //noValidation: true,
-    withActions:true,
     elevation:6,
     columns:[
       {

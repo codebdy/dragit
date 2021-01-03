@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { RXNode } from '../../../base/RXNode/RXNode';
+import { RXNode } from './RXNode/RXNode';
 import { resolveComponent } from 'base/RxDrag';
 import { IMeta } from 'base//Model/IMeta';
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
@@ -34,7 +34,6 @@ export default function ComponentRender(
   let metaProps = component.meta.props? component.meta.props :{};
   const {
     rxText, 
-    withActions,
     marginTop,
     marginRight,
     marginBottom,
@@ -55,11 +54,15 @@ export default function ComponentRender(
     onClick:handleOnClick
   }
 
-  if(withActions){
+  if(component.meta.withActions){
     elementProps.onAction = onPageAction;
   }
 
-  let elementView:any = (component.children && component.children.length > 0) || rxText ?
+  if(component.meta.selfRenderChildren){
+    elementProps.childrenNodes = component.children;
+  }
+
+  let elementView:any = ((component.children && component.children.length > 0) || rxText)&& !component.meta.selfRenderChildren ?
     (<Component {...elementProps}>
       {rxText}
       {component.children?.map((child: RXNode<IMeta>)=>{
