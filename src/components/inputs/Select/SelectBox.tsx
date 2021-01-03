@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import withSkeleton from 'base/HOCs/withSkeleton';
+import withFormField from 'components/common/withFormField';
+import { useShowAppoloError } from 'store/helpers/useInfoError';
+import { gql, useQuery } from '@apollo/react-hooks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +41,6 @@ const SelectBox = React.forwardRef((
     value?:string|[],
     label?:string,
     variant?:string,
-    multiple?:boolean,
     helperText?:string,
     onChange:any,
     withoutEmpertyItem?:boolean,
@@ -48,13 +49,13 @@ const SelectBox = React.forwardRef((
     items?:Array<any>;
     groupByField?:string,
     query?:string,
+    loading?:boolean,
   },
   ref
 )=>{
   const{value, 
     label, 
     variant, 
-    multiple, 
     helperText, 
     onChange, 
     withoutEmpertyItem, 
@@ -63,6 +64,7 @@ const SelectBox = React.forwardRef((
     query,
     items = [],
     groupByField,
+    loading,
     ...rest
   } = props;
 
@@ -71,18 +73,23 @@ const SelectBox = React.forwardRef((
   let name = query ? itemName : 'label';
 
   const classes = useStyles();
-  //const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi)
-  //const [menuItems, loading] = useBaseItems(request);
+  const QUERY_DATA = gql`
+  query {
+    ${query}{
+      id
+      ${itemName}
+    }
+  }`;
+  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
+  useShowAppoloError(queryError)
 
-  const empertyValue = multiple?[]:'';
-  const loading = false;
+  const empertyValue = '';
 
-  const itemsData = (query? [] : items) as any;
+  const itemsData = (query? (data&&data[query])||[] : items) as any;
 
   const groups = groupByField ? groupBy(itemsData, groupByField) :[];
 
   const select =  <Select
-      multiple = {multiple}
       value={value || empertyValue}
       onChange={onChange}
       label={label}
@@ -117,7 +124,7 @@ const SelectBox = React.forwardRef((
       <InputLabel 
       >{label}</InputLabel>
       {
-        loading ?
+        loading || queryLoading?
         <Skeleton animation="wave" height={50} width="80%" />
         :
         (itemsData && select)
@@ -129,4 +136,4 @@ const SelectBox = React.forwardRef((
   )
 })
 
-export default withSkeleton(SelectBox);
+export default withFormField(SelectBox);

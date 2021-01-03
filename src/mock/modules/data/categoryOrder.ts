@@ -2,8 +2,8 @@ import customer from "mock/views/customer";
 import customers from "mock/views/customers";
 import order from "mock/views/order";
 import orders from "mock/views/orders";
-import supplier from "mock/views/supplier";
-import suppliers from "mock/views/suppliers";
+import supplier from "mock/supplier/view/supplier";
+import suppliers from "mock/supplier/view/suppliers";
 
 export default[
   {

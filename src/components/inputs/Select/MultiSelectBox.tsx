@@ -4,6 +4,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
 import { useAppStore } from 'store/helpers/useAppStore';
 import intl from 'react-intl-universal';
+import { useShowAppoloError } from 'store/helpers/useInfoError';
 
 const MultiSelectBox = React.forwardRef((
   props:{
@@ -47,21 +48,11 @@ const MultiSelectBox = React.forwardRef((
       id
       ${itemName}
     }
-  }
-`;
-const { loading, error: queryError, data } = useQuery(QUERY_DATA);
-const appStore = useAppStore();
+  }`;
+  const { loading, error: queryError, data } = useQuery(QUERY_DATA);
+  useShowAppoloError(queryError)
 
-useEffect(()=>{
-  if(queryError){
-    appStore.infoError(intl.get('server-error'), queryError?.message)
-    console.log( queryError);
-  }
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[queryError])
-
-
-const itemsData = (query? (data&&data[query])||[] : items) as any;
+  const itemsData = (query? (data&&data[query])||[] : items) as any;
   const handleChange = (newValue:any)=>{
     setInputValue( newValue );
 

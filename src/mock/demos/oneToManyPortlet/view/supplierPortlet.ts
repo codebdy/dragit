@@ -35,7 +35,7 @@ export default               {
                   valueType:'string',
                   required:true,
                 },
-                         
+                query:'allSuppliers'                      
                 
               }
             }

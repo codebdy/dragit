@@ -1,4 +1,4 @@
-export default[
+export var suppliersData=[
       {
         id:1,
         name:'中粮集团有限公司',

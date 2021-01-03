@@ -13,6 +13,8 @@ import { mediaMutationResolvers } from "./medias/mutationResolvers";
 import { postMutationResolvers, postQueryResolvers } from "./article/post/resolvers";
 import { splitDemoMutationResolvers } from "./demos/splitSubmit/resolvers";
 import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/splitSubmit/graphql";
+import { supplierQueryResolvers } from "./supplier/resolvers";
+import { supplierGQLInput, supplierGQLQuery, supplierGQLType } from "./supplier/graphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -86,7 +88,8 @@ export const schema = `
   ${articleGQLInput}
   ${splitGQLType}
   ${splitGQLInput}
-
+  ${supplierGQLType}
+  ${supplierGQLInput}
   type Query {
     "登录"
     login(login_name:String!, password:String!):LoginData
@@ -97,6 +100,7 @@ export const schema = `
     moduleBySlug(slug:String):Module
     ${articleGQLQuery}
     ${mediasGQLQuery}
+    ${supplierGQLQuery}
   }
 
   type Mutation{
@@ -128,6 +132,7 @@ export const resolvers = {
     allPostAttributes:allPostAttributesResolver,
     
     ...mediaQueryResolvers,
+    ...supplierQueryResolvers,
   },
 
   Mutation:{
