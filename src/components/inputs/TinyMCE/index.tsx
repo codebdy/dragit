@@ -39,9 +39,9 @@ const TinyMCE = React.forwardRef((
   }
 
   useEffect(()=>{
-    window.$bus.on('selectImage', openMediaDialog);
+    window.$bus?.on('selectImage', openMediaDialog);
     return ()=>{
-      window.$bus.off('selectImage', openMediaDialog);
+      window.$bus?.off('selectImage', openMediaDialog);
     }
   },[])
 
