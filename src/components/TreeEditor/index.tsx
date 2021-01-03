@@ -2,8 +2,6 @@ import { Divider, Grid, IconButton, ListItem, ListItemText } from '@material-ui/
 import { Add } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
 //import { IForm, defultForm, FormContext } from "base/FormContext";
-import { AxiosRequestConfig } from 'axios';
-import { useAxios } from 'base/Hooks/useAxios';
 import { ID } from 'base/Model/graphqlTypes';
 import { ITreeNode } from 'base/Model/ITreeNode';
 import { RXNodeRoot } from 'base/RXNode/Root';
@@ -19,29 +17,27 @@ const TreeEditor = React.forwardRef((
   props:{
     title:string,
     elevation:number,
-    apiForGet:AxiosRequestConfig,
-    apiForSave:AxiosRequestConfig,
     nameKey:string,
     children:any,
   }, 
   ref:any
 )=>{
-  const {apiForGet, apiForSave, nameKey = 'name', children, ...rest} = props;
+  const {nameKey = 'name', children, ...rest} = props;
 
-  const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
-  const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
-  const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
+  //const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
+  //const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
+  //const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
   const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
   const [root, setRoot] = useState<RXNodeRoot<ITreeNode>>();
   //const [form, setForm] = useState<IForm>(defultForm());
   const [selectedNode, setSelectedNode] = useState<RXNode<ITreeNode>|undefined>();
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     const items = itemsJustSaved ? itemsJustSaved : itemsGot;
     let root = new RXNodeRoot<ITreeNode>(); 
     root.parse(items);
     setRoot(root);
-  },[itemsJustSaved, itemsGot]);
+  },[itemsJustSaved, itemsGot]);*/
 
   const handleNodeDragStart = (node?:RXNode<ITreeNode>)=>{
     setDraggedNode(node);
@@ -149,13 +145,16 @@ const TreeEditor = React.forwardRef((
   }
 
   const handleSave = ()=>{
-    setConfigForSave(
+    /*setConfigForSave(
       {
         ...apiForSave,
         data:root?.getRootMetas()
       }
-    )
+    )*/
   }
+
+  const saving = false;
+  const loading = false;
 
   return (
     <Portlet 

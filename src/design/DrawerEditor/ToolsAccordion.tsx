@@ -6,8 +6,6 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import intl from "react-intl-universal";
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { API_GET_MODULES } from 'APIs/modules';
-import { useAxios } from 'base/Hooks/useAxios';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'base/Model/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
@@ -56,7 +54,7 @@ export default function ToolsAccordion(
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
-  const [moduleCategories] = useAxios<IModuleCategory[]>(API_GET_MODULES);
+  //const [moduleCategories] = useAxios<IModuleCategory[]>(API_GET_MODULES);
   const [assistItems] = useState([
     {
       label:intl.get('fold-group'),
@@ -138,7 +136,7 @@ export default function ToolsAccordion(
               className = {classes.list}
             >
               {
-                moduleCategories?.map(category=>{
+                /*moduleCategories?.map(category=>{
                   return (
                     <TreeItem nodeId = {'' + category.id} key={category.id} 
                       label = {
@@ -166,7 +164,7 @@ export default function ToolsAccordion(
   
                     </TreeItem>                  
                   )
-                })
+                })*/
               }
             </TreeView>
 

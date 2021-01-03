@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
-import { AxiosRequestConfig } from 'axios';
 import ApiEditorParamsDialog from './ApiEditorParamsDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,8 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ApiEditor(
   props:{
     label?:string,
-    value?: AxiosRequestConfig
-    onChange: (api:AxiosRequestConfig)=>void,
+    value?: any
+    onChange: (api:any)=>void,
   }
 ){
   const {label, onChange} = props;

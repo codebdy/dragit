@@ -10,21 +10,14 @@ import Subheader from "./MenuItems/Subheader";
 import { MenuNode } from "./MenuItems/MenuNode";
 import { MenuNodeGroup } from "./MenuItems/MenuNodeGroup";
 import { RXNodeRoot } from "base/RXNode/Root";
-import { gql, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { cloneObject } from "utils/cloneObject";
 import {observer} from "mobx-react-lite";
 import intl from 'react-intl-universal';
 import { useAppStore } from "store/helpers/useAppStore";
 import { ID } from "base/Model/graphqlTypes";
-
-// 定义查询语句
-//String代替JSON
-const GET_DRAWER_ITEMS = gql`
-  query {
-    drawerItems
-  }
-`;
+import { GET_DRAWER_ITEMS } from "../../base/GQLs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

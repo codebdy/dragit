@@ -2,9 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import { API_GET_LASTED_NOTIFICATIONS } from 'APIs/app';
-import { AxiosRequestConfig } from 'axios';
-import { useAxios } from 'base/Hooks/useAxios';
 import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import { INotification } from 'base//Model/INotification';
 import { useHistory } from 'react-router-dom';
@@ -27,10 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function NotificationsList(props:{onClose:()=>void}){
   const {onClose} = props;
   const classes = useStyles();
-  const [request] = useState<AxiosRequestConfig>(API_GET_LASTED_NOTIFICATIONS);
+  //const [request] = useState<AxiosRequestConfig>(API_GET_LASTED_NOTIFICATIONS);
   const history = useHistory();
 
-  const [notifications, loading] = useAxios<Array<INotification>>(request)
+  //const [notifications, loading] = useAxios<Array<INotification>>(request)
 
   const handleClick = (id:ID)=>{
     history.push(resolvePageUrl({
@@ -41,13 +38,15 @@ export default function NotificationsList(props:{onClose:()=>void}){
     onClose();
   }
 
+  const loading = false;
+
   return (
     loading?
     <div className={classes.root}><SiderBarLoadingSkeleton /></div>
     :
     <List className={classes.root}>
       {
-        notifications?.map((note, index)=>{
+        /*notifications?.map((note, index)=>{
           return(
             index < 5 &&
             <Fragment key={note.id}>
@@ -70,7 +69,7 @@ export default function NotificationsList(props:{onClose:()=>void}){
             </Fragment>
 
           )
-        })
+        })*/
       }
     </List>
   )

@@ -1,5 +1,3 @@
-import { API_LIST_MODEL } from "APIs/model";
-import { API_GET_MODEL_TREE } from "APIs/tree";
 
 export default            {
   name:'Portlet',
@@ -46,12 +44,6 @@ export default            {
                 fullWidth:true,
                 multiSelect:true,
                 //size:"small",
-                dataApi:{
-                  ...API_GET_MODEL_TREE,
-                  params:{
-                    modelName:'/Model/ProductCategory',
-                  },                               
-                },
 
                 rule:{
                   //required:true,
@@ -76,12 +68,6 @@ export default            {
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
-                api:{
-                  ...API_LIST_MODEL,
-                  params:{
-                    modelName:'/Model/ProductAttribute',
-                  }                              
-                }
               },                         
             }
           ]

@@ -11,10 +11,7 @@ import { CANVAS_SCROLL, REFRESH_NODE, SELECT_NODE } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'design/Layout';
 import LeftContent from './LeftContent';
-import { API_GET_PAGE, API_UPDATE_PAGE } from 'APIs/modules';
-import { useAxios } from 'base/Hooks/useAxios';
 import { IPage, IPageSchema } from 'base/Model/IPage';
-import { AxiosRequestConfig } from 'axios';
 import PageSkeleton from 'AdminBoard/Workspace/common/ModuleSkeleton';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
@@ -27,10 +24,9 @@ import { CursorPosition, IDragOverParam } from './Core/IDragOverParam';
 import { SelectedLabel } from './Core/SelectedLabel';
 import { cloneObject } from '../../utils/cloneObject';
 import SubmitButton from 'components/common/SubmitButton';
-import { clearPageSchemaCache } from 'base/Hooks/usePageMeta';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import { useAuthCheck } from 'store/helpers/useAuthCheck';
-import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
+import { AUTH_CUSTOMIZE } from 'base/authSlugs';
 import { observer } from 'mobx-react-lite';
 import { useDesigner } from 'store/helpers/useAppStore';
 import { ID } from 'base/Model/graphqlTypes';
@@ -94,9 +90,9 @@ export const PageEditor = observer((
   const classes = useStyles();
   const designer = useDesigner();
   const {showOutline, showPaddingX, showPaddingY} = designer;
-  const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
-  const [pageMeta, loading] = useAxios<IPage>(pageRequest);
-  const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(pageMeta?.schema);
+  //const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
+  //const [pageMeta, loading] = useAxios<IPage>(pageRequest);
+  const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(/*pageMeta?.schema*/);
   const [metas, setMetas] = useState<Array<IMeta>>([])
   const [canvas, setCanvas] = useState<RXNodeRoot<IMeta>>(makeCanvas());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMeta>>();
@@ -104,8 +100,8 @@ export const PageEditor = observer((
   const [redoList, setRedoList] = useState<Array<Snapshot>>([]);
   const [draggedToolboxItem, setDraggedToolboxItem] = useState<IToolboxItem>();
   const [draggedNode, setDraggedNode] = useState<RXNode<IMeta>>();
-  const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
-  const [, saving] = useAxios(saveRequest, true);
+  //const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
+  //const [, saving] = useAxios(saveRequest, true);
   const [dirty, setIsDirty] = useState(false);
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
 
@@ -188,14 +184,14 @@ export const PageEditor = observer((
   },[])
   
   useEffect(() => {
-    setPageRequest({...API_GET_PAGE, params:{pageSlug}})
+    //setPageRequest({...API_GET_PAGE, params:{pageSlug}})
   },[pageSlug]);
 
-  useEffect(() => {
+ /* useEffect(() => {
     setPageSchema(pageMeta?.schema);
     //相当于复制一个Json副本，不保存的话直接扔掉
-    setMetas(cloneObject(pageMeta?.schema?.layout || []));
-  },[pageMeta]);
+    //setMetas(cloneObject(pageMeta?.schema?.layout || []));
+  },[pageMeta]);*/
  
   useEffect(()=>{
     let newCanvas = makeCanvas();
@@ -218,7 +214,7 @@ export const PageEditor = observer((
   };
 
   const handleSave = () => {
-    setSaveRequest({...API_UPDATE_PAGE, 
+    /*setSaveRequest({...API_UPDATE_PAGE, 
       data:{
         page:{
           ...pageMeta,
@@ -229,7 +225,7 @@ export const PageEditor = observer((
         }
       }
     })
-    clearPageSchemaCache();
+    clearPageSchemaCache();*/
     setIsDirty(false);    
   };
 
@@ -354,8 +350,10 @@ export const PageEditor = observer((
 
   let draggedLabel = draggedToolboxItem ?draggedToolboxItem?.title || intl.get(draggedToolboxItem?.titleKey||'') : draggedNode?.meta.name;
 
+  const saving = false;
+
   return (
-    loading? <Container><PageSkeleton /></Container> :
+    /*loading? <Container><PageSkeleton /></Container> :*/
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {

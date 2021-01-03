@@ -1,4 +1,4 @@
-import { AUTH_DASHBOARD } from "APIs/authSlugs";
+import { AUTH_DASHBOARD } from "base/authSlugs";
 
 export default {
   layout:[

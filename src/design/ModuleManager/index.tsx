@@ -7,7 +7,7 @@ import intl from "react-intl-universal";
 import ModuleContent from "./ModuleContent";
 import { useHistory } from "react-router";
 import { useAuthCheck } from "store/helpers/useAuthCheck";
-import { AUTH_CUSTOMIZE } from "APIs/authSlugs";
+import { AUTH_CUSTOMIZE } from "base/authSlugs";
 
 const ModuleManager = (props:{children?: any})=>{
   const history = useHistory();

@@ -1,6 +1,5 @@
 import {GO_BACK_ACTION, SUBMIT_MUTATION} from "base/PageAction";
-import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
-import {API_GET_AUTHS} from "APIs/modules"
+
 
 export default {
   layout:[
@@ -97,7 +96,6 @@ export default {
                             itemName:'name',
                             multiple:true,
                             fullWidth:true,
-                            api:API_GET_AUTHS,
                             itemKey:"slug",
                             groupByField:"module",
                           },                         
@@ -144,19 +142,4 @@ export default {
     }
   ],
 
-
-  isFormPage:true,
-  apiForGet:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/Role',
-    },      
-  },
-
-  apiForSave:{
-    ...API_SUBMIT_MODEL,
-    params:{
-      modelName:'/Model/Role',
-    },      
-  }
 }

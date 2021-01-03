@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { Area, Line, Liquid, Radar } from '@ant-design/charts';
-import { useAxios } from 'base/Hooks/useAxios';
-import { AxiosRequestConfig } from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,18 +24,18 @@ const charts :{
 const AntDesignChart = React.forwardRef((
   props: {
     chart:string,
-    dataApi:AxiosRequestConfig,
+    //dataApi:AxiosRequestConfig,
     jsonProps?:any,
     isDeisgning?:boolean,
   },
   ref:any
 )=>{
-  const {chart, dataApi, isDeisgning, jsonProps, ...rest} = props;
+  const {chart, isDeisgning, jsonProps, ...rest} = props;
   const Chart = charts[chart];
 
-  const [request] = useState<AxiosRequestConfig>(dataApi)
+  //const [request] = useState<AxiosRequestConfig>(dataApi)
   const classes = useStyles();
-  const [data, loading] = useAxios<any>(request);
+  //const [data, loading] = useAxios<any>(request);
   // eslint-disable-next-line no-eval
   //(rest as any).yAxis = eval((rest as any).yAxis)
 
@@ -47,14 +45,15 @@ const AntDesignChart = React.forwardRef((
       {chart} Chart Design
     </div>
     :
-    <Chart 
+    <div></div>
+    /*<Chart 
       className = {classes.root}
       ref={ref}
-      data = {data || []}
+      //data = {data || []}
       {...jsonProps}
       {...rest}
-      loading = {loading}
-    />
+      //loading = {loading}
+    />*/
   )
 })
 

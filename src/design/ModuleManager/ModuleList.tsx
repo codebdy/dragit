@@ -1,9 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { createStyles, Fab, IconButton, LinearProgress, makeStyles, Theme } from '@material-ui/core';
-import { API_ADD_MODULE, API_ADD_MODULE_CATEGORY, API_CHANGE_CATEGORY, API_CHANGE_MODULE, API_CLONE_CATEGORY, API_CLONE_MODULE, API_GET_MODULES, API_MOVE_MODULE_TO_CATEGORY, API_REMOVE_MODULE, API_REMOVE_MODULE_CATEGORY } from 'APIs/modules';
-import { useAxios } from 'base/Hooks/useAxios';
 import { Skeleton, TreeItem, TreeView } from '@material-ui/lab';
-import axios, { AxiosRequestConfig } from 'axios';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItemLabel from './TreeItemLabel';
@@ -35,25 +32,25 @@ export default function ModuleList(props:{
   const {onSelect} = props;
   const classes = useStyles();
   const [selectedId, setSelected] = useState('');
-  const [loadingConfig, setLoadingConfig] = React.useState<AxiosRequestConfig>(API_GET_MODULES);
-  const [moduleCategories, loading] = useAxios<IModuleCategory[]>(loadingConfig);
+  //const [loadingConfig, setLoadingConfig] = React.useState<AxiosRequestConfig>(API_GET_MODULES);
+  //const [moduleCategories, loading] = useAxios<IModuleCategory[]>(loadingConfig);
   const [categories, setCategories] = useState<IModuleCategory[]>([]);
   //const [, operateLoading] = useAxios<ItemMeta>(operateConfig);
-  const [operateLoading, setOperateLoading] = useState(false);
+  //const [operateLoading, setOperateLoading] = useState(false);
   const [draggedId, setDraggedId] = useState('');
 
-  useEffect(()=>{
+ /* useEffect(()=>{
     if(moduleCategories){
       setCategories(moduleCategories);
     }
-  }, [moduleCategories])
+  }, [moduleCategories])*/
 
   const handleClick = (id:ID)=>{
     setSelected(id);
     onSelect(id);
   }
 
-  const submitOperate = (request:AxiosRequestConfig)=>{
+  /*const submitOperate = (request:AxiosRequestConfig)=>{
     setOperateLoading(true);
     axios( request ).then(res => {
       setOperateLoading(false);
@@ -64,10 +61,10 @@ export default function ModuleList(props:{
       console.log('server error:ModuleList', error);
       setOperateLoading(false);
     })  
-  }
+  }*/
 
   const handleChangeCategoryName = (name:string|undefined, category:IModuleCategory)=>{
-    submitOperate(
+    /*submitOperate(
       {
         ...API_CHANGE_CATEGORY,
         params:{
@@ -75,11 +72,11 @@ export default function ModuleList(props:{
           name:name,
         }
       }
-    );
+    );*/
   }
 
   const handleChangeModuleName = (name:string|undefined, module:IModule)=>{
-    submitOperate(
+    /*submitOperate(
       {
         ...API_CHANGE_MODULE,
         params:{
@@ -87,20 +84,20 @@ export default function ModuleList(props:{
           name:name,
         }
       }
-    );
+    );*/
   }
 
   const onHandleAddCategory = ()=>{
-    submitOperate( {
+    /*submitOperate( {
       ...API_ADD_MODULE_CATEGORY,
       params:{
         name:'New Category'
       }
-    })
+    })*/
   }
 
   const handleAddModule = (cagegoryId:ID)=>{
-    submitOperate(
+    /*submitOperate(
       {
         ...API_ADD_MODULE,
         params:{
@@ -108,51 +105,51 @@ export default function ModuleList(props:{
           cagegoryId:cagegoryId,
         }
       }
-    );   
+    );   */
   }
 
   const handleRemoveCategory = (id:ID)=>{
-    submitOperate(
+    /*submitOperate(
       {
         ...API_REMOVE_MODULE_CATEGORY,
         params:{
           id:id,
         }
       }
-    );    
+    ); */   
   }
 
   const handleRemoveModule = (id:ID)=>{
-    submitOperate(
+    /*submitOperate(
       {
         ...API_REMOVE_MODULE,
         params:{
           id:id,
         }
       }
-    );    
+    );  */  
   }
 
   const handleCloneCategory = (id:ID)=>{
-    submitOperate(
+    /*submitOperate(
       {
         ...API_CLONE_CATEGORY,
         params:{
           id:id,
         }
       }
-    );    
+    );    */
   }
 
   const handleCloneModule = (id:ID)=>{
-    submitOperate(
+    /*submitOperate(
       {
         ...API_CLONE_MODULE,
         params:{
           id:id,
         }
       }
-    );    
+    );  */  
   }
 
   const handleDragStart = (id:ID)=>{
@@ -178,7 +175,7 @@ export default function ModuleList(props:{
 
   const handleDrop = (id:ID)=>{
     if(draggedId){
-      submitOperate(
+     /* submitOperate(
         {
           ...API_MOVE_MODULE_TO_CATEGORY,
           params:{
@@ -186,12 +183,12 @@ export default function ModuleList(props:{
             cagegoryId:id,
           }
         }
-      );    
+      ); */   
   
     }
   }  
 
-  const showSkeleton = loadingConfig === API_GET_MODULES && loading;
+  const showSkeleton = false//loadingConfig === API_GET_MODULES && loading;
 
   return (
     <Fragment>
@@ -208,7 +205,7 @@ export default function ModuleList(props:{
         :
         <Fragment>
           {
-            (loading || operateLoading)&&
+            /*(loading || operateLoading)&&*/
             <LinearProgress />
           }
           <div style={{flex:1, display:'flex', flexFlow:'column'}}>

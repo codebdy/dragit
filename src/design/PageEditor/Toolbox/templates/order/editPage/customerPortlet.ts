@@ -1,4 +1,3 @@
-import { API_LIST_MODEL } from "APIs/model";
 
 export default              {
   name:'Portlet',
@@ -32,12 +31,7 @@ export default              {
                   valueType:'string',
                   required:true,
                 },
-                dataApi:{
-                  ...API_LIST_MODEL,
-                  params:{
-                    modelName:'/Model/Customer',
-                  }
-                },                            
+                        
                 
               }
             }

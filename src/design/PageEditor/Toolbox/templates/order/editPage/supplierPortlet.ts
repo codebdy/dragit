@@ -1,4 +1,3 @@
-import { API_LIST_MODEL } from "APIs/model";
 
 export default               {
   name:'OneToManyPortlet',
@@ -36,13 +35,6 @@ export default               {
                   valueType:'string',
                   required:true,
                 },
-                dataApi:{
-                  ...API_LIST_MODEL,
-                  params:{
-                    modelName:'/Model/Supplier',
-                  }
-                },                            
-                
               }
             }
           ]

@@ -5,18 +5,19 @@ import { useHistory } from 'react-router';
 import intl from "react-intl-universal";
 import DrawerItemList from './DrawerItemList';
 import ToolsAccordion from './ToolsAccordion';
-import { API_GET_DRAWER, API_SAVE_DRAWER } from 'APIs/drawer';
-import { useAxios } from 'base/Hooks/useAxios';
 import IMenuItem from 'base/Model/IMenuItem';
 import { RXNode } from 'base/RXNode/RXNode';
 import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
 import { RXNodeRoot } from 'base/RXNode/Root';
-import { AxiosRequestConfig } from 'axios';
 import SubmitButton from 'components/common/SubmitButton';
 import { useAuthCheck } from 'store/helpers/useAuthCheck';
-import { AUTH_CUSTOMIZE } from 'APIs/authSlugs';
+import { AUTH_CUSTOMIZE } from 'base/authSlugs';
 import { ID } from 'base/Model/graphqlTypes';
+import { GET_DRAWER_ITEMS } from 'base/GQLs';
+import { useQuery } from '@apollo/react-hooks';
+import { cloneObject } from 'utils/cloneObject';
+import { useShowAppoloError } from 'store/helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,19 +64,21 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function DrawerEditor(){
   const classes = useStyles();
   const history = useHistory();
-  const [metas, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
+  const { loading, error, data } = useQuery(GET_DRAWER_ITEMS);
+  //const [metas, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
   const [rootNode,setRootNode] = React.useState(new RXNodeRoot<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RXNode<IMenuItem>>();
-  const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
-  const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
+  //const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
+  //const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
 
   useAuthCheck(AUTH_CUSTOMIZE);
+  useShowAppoloError(error);
   
   useEffect(()=>{
-    metas && rootNode.parse(metas);    
+    data && rootNode.parse(cloneObject(data?.drawerItems||[]));    
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[metas]);
+  },[data]);
 
   const handleClose = ()=>{
     history.goBack();
@@ -83,7 +86,7 @@ export default function DrawerEditor(){
 
   const handleSave = ()=>{
     const drawerData = rootNode.getRootMetas();
-    setSaveRequest({...API_SAVE_DRAWER, data:drawerData})
+    //setSaveRequest({...API_SAVE_DRAWER, data:drawerData})
   }
 
   const handleSelectedNode = (node:RXNode<IMenuItem>)=>{
@@ -164,6 +167,8 @@ export default function DrawerEditor(){
     draggedNode?.moveIn(copy);
     setRootNode(copy);     
   }
+
+  const saving = false;
 
   return (
     <div className={classes.root}>

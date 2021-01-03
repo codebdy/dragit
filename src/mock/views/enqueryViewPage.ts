@@ -1,5 +1,4 @@
 import {GO_BACK_ACTION} from "base/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
 
 export default {
   layout:[
@@ -118,10 +117,4 @@ export default {
 
 
   isFormPage:true,
-  apiForGet:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/Enquery',
-    },      
-  },
 }

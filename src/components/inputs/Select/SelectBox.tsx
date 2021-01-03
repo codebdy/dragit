@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import { AxiosRequestConfig } from 'axios';
-import { useBaseItems } from 'base/Hooks/useBaseItems';
 import withSkeleton from 'base/HOCs/withSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,9 +45,9 @@ const SelectBox = React.forwardRef((
     withoutEmpertyItem?:boolean,
     itemKey?:string,
     itemName?:string,
-    dataApi?:AxiosRequestConfig;
     items?:Array<any>;
     groupByField?:string,
+    query?:string,
   },
   ref
 )=>{
@@ -62,23 +60,24 @@ const SelectBox = React.forwardRef((
     withoutEmpertyItem, 
     itemKey = 'id',
     itemName = 'name',
-    dataApi,
+    query,
     items = [],
     groupByField,
     ...rest
   } = props;
 
   //如果不从服务器读取数据，itemKey跟itemName设置无效
-  let key = dataApi ? itemKey : 'slug';
-  let name = dataApi ? itemName : 'label';
+  let key = query ? itemKey : 'slug';
+  let name = query ? itemName : 'label';
 
   const classes = useStyles();
-  const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi)
-  const [menuItems, loading] = useBaseItems(request);
+  //const [request] = React.useState<AxiosRequestConfig|undefined>(dataApi)
+  //const [menuItems, loading] = useBaseItems(request);
 
   const empertyValue = multiple?[]:'';
+  const loading = false;
 
-  const itemsData = (dataApi? menuItems : items) as any;
+  const itemsData = (query? [] : items) as any;
 
   const groups = groupByField ? groupBy(itemsData, groupByField) :[];
 

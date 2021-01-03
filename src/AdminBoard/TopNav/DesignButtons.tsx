@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
-import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_THEME_SETTINGS } from "APIs/authSlugs";
+import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_THEME_SETTINGS } from "base/authSlugs";
 import { useAppStore, useDesigner, useLeftDrawer } from "store/helpers/useAppStore";
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { observer } from "mobx-react-lite";

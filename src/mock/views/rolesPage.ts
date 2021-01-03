@@ -1,5 +1,5 @@
 import {OPEN_PAGE_ACTION} from "base/PageAction"
-import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
+
 export default {
   layout:[
     {
@@ -107,12 +107,6 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                dataApi:{
-                  ...API_QUERY_AND_OPERATE_MODELS,
-                  params:{
-                    modelName:'/Model/Role',
-                  },      
-                },
 
               }
             }],

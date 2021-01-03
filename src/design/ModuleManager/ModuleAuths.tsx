@@ -6,8 +6,6 @@ import intl from "react-intl-universal";
 import { Add } from "@material-ui/icons";
 import ModuleAuthsRow from "./ModuleAuthsRow";
 import { IAuth } from "base/Model/IAuth";
-import { useAxios } from "base/Hooks/useAxios";
-import { API_ADD_MODULE_AUTH, API_REMOVE_MODULE_AUTH, API_UPDATE_MODULE_AUTH } from "APIs/modules";
 import createId from "utils/createId";
 import { ID } from "base/Model/graphqlTypes";
 
@@ -35,24 +33,24 @@ export default function ModuleAuths(props:{module:IModule}){
   const classes = useStyles();
 
   const [operateConfig, setOperateConfig] = React.useState<any>();
-  const [operateModule, operateLoading] = useAxios<IModule>(operateConfig);
+  //const [operateModule, operateLoading] = useAxios<IModule>(operateConfig);
   
-  const module = operateModule || props.module;
+  const module = /*operateModule ||*/ props.module;
 
   const handleAdd = ()=>{
-    setOperateConfig({
+   /* setOperateConfig({
       ...API_ADD_MODULE_AUTH,
       params:{
         moduleId:module.id,
         name:'New Auth',
         slug:'auth-slug' + createId(),
       }
-    })    
+    })    */
 
   }
 
   const handleChange = (auth:IAuth)=>{
-    setOperateConfig({
+    /*setOperateConfig({
       ...API_UPDATE_MODULE_AUTH,
       params:{
         moduleId:module.id
@@ -60,17 +58,17 @@ export default function ModuleAuths(props:{module:IModule}){
       data:{
         auth:auth
       }
-    })
+    })*/
   }
 
   const handleRemove = (authId:ID)=>{
-    setOperateConfig({
+    /*setOperateConfig({
       ...API_REMOVE_MODULE_AUTH,
       params:{
         moduleId:module.id,
         authId:authId
       }
-    })
+    })*/
   }
 
   return (
@@ -84,7 +82,7 @@ export default function ModuleAuths(props:{module:IModule}){
           </h2>
         </Grid>
         <Grid item xs={12}>
-          {operateLoading && <LinearProgress />}
+          {/*operateLoading &&*/ <LinearProgress />}
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="modules table" size="small">
               <TableHead>

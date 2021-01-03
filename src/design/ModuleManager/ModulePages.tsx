@@ -4,8 +4,6 @@ import PrimaryText from 'base/PropsInputs/PrimaryText';
 import intl from 'react-intl-universal';
 import { IModule } from "base/Model/IModule";
 import ModulePageTable from './ModulePageTable';
-import { API_UPDATE_MODULE_PAGE, API_REMOVE_MODULE_PAGE, API_ADD_MODULE_PAGE, API_UPDATE_MODULE_INDEX_PAGE } from 'APIs/modules';
-import { useAxios } from 'base/Hooks/useAxios';
 import { IPage } from 'base/Model/IPage';
 import { PageEditor } from 'design/PageEditor';
 import createId from 'utils/createId';
@@ -16,12 +14,12 @@ export default function ModulePages(props:{module:IModule}){
   //const {module} = props;
   const [designedPage, setDesignedPage] = React.useState<IPage>();
   const [operateConfig, setOperateConfig] = React.useState<any>();
-  const [operateModule, operateLoading] = useAxios<IModule>(operateConfig);
+  //const [operateModule, operateLoading] = useAxios<IModule>(operateConfig);
   
-  const module = operateModule || props.module;
+  //const module = operateModule || props.module;
 
   const handleChangePage = (page:IPage)=>{
-    setOperateConfig({
+    /*setOperateConfig({
       ...API_UPDATE_MODULE_PAGE,
       //params:{
       //  moduleId:module.id
@@ -29,38 +27,38 @@ export default function ModulePages(props:{module:IModule}){
       data:{
         page:page
       }
-    })
+    })*/
   }
 
   const handleRemove = (pageId:ID)=>{
-    setOperateConfig({
+   /* setOperateConfig({
       ...API_REMOVE_MODULE_PAGE,
       params:{
         moduleId:module.id,
         pageId
       }
-    })
+    })*/
   }
 
   const handleAddPage = ()=>{
-    setOperateConfig({
+    /*setOperateConfig({
       ...API_ADD_MODULE_PAGE,
       params:{
         moduleId:module.id,
         name:'New Page',
         slug:'new-slug' + createId(),
       }
-    })    
+    })    */
   }
 
   const handelChangeIndexPage = (pageId:ID, indexed:boolean)=>{
-    setOperateConfig({
+    /*setOperateConfig({
       ...API_UPDATE_MODULE_INDEX_PAGE,
       params:{
         moduleId:module.id,
         entry_page_id: indexed ? pageId : -1,
       }
-    })  
+    })  */
   }
 
   const handelDesign = (page:IPage)=>{
@@ -81,16 +79,16 @@ export default function ModulePages(props:{module:IModule}){
           </h2>
         </Grid>
         <Grid item xs={12}>
-          {operateLoading && <LinearProgress />}
+          {/*operateLoading && <LinearProgress />
           <ModulePageTable 
             pages = {module.pages || []} 
             onChangePage = {handleChangePage}
             onRemovePage = {handleRemove}
-            entry_page_id = {module.entry_page_id || ''}
+            //entry_page_id = {module.entry_page_id || ''}
             onAddPage = {handleAddPage}
             onChangeIndexPage = {handelChangeIndexPage}
             onDesign = {handelDesign}
-          />
+          />*/}
         </Grid>
         {designedPage &&
           <PageEditor 

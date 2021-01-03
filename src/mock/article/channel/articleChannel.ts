@@ -1,5 +1,3 @@
-import { API_GET_MODEL_TREE, API_SAVE_MODEL_TREE } from "APIs/tree";
-
 export default {
   layout:[
     {
@@ -22,18 +20,6 @@ export default {
                 title:'文章频道',
                 elevation:6,
                 marginTop:4,
-                apiForGet:{
-                  ...API_GET_MODEL_TREE,
-                  params:{
-                    modelName:'/Model/ArticleChannel',
-                  },      
-                },
-                apiForSave:{
-                  ...API_SAVE_MODEL_TREE,
-                  params:{
-                    modelName:'/Model/ArticleChannel',
-                  },
-                }
               },
               children:[
                 {

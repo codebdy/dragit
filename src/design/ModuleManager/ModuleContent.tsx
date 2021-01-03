@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, createStyles, makeStyles, Theme, TextField, Button } from '@material-ui/core';
 import { Fragment } from 'react';
-import { useAxios } from 'base/Hooks/useAxios';
-import { API_CHANGE_MODULE, API_GET_MODULE_BY_ID} from 'APIs/modules';
 import { Skeleton } from '@material-ui/lab';
 import ModulePages from './ModulePages';
 import ModuleAuths from './ModuleAuths';
 import { IModule } from 'base/Model/IModule';
 import intl from "react-intl-universal";
-import { AxiosRequestConfig } from 'axios';
 import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,18 +26,18 @@ export default function ModuleContent(
 ){
   const {moduleId} = props;
   const classes = useStyles();
-  const [loadingConfig, setLoadingConfig] = useState<AxiosRequestConfig>({
+  /*const [loadingConfig, setLoadingConfig] = useState<AxiosRequestConfig>({
     ...API_GET_MODULE_BY_ID,
     params:{
       id:moduleId
     }
-  });
+  });*/
 
-  const [module, loading] = useAxios<IModule>(loadingConfig);
+  //const [module, loading] = useAxios<IModule>(loadingConfig);
   const [slug, setSlug] = useState('');
 
   useEffect(()=>{
-    if(loadingConfig.params.id !== moduleId){
+    /*if(loadingConfig.params.id !== moduleId){
       setLoadingConfig(
         {
           ...API_GET_MODULE_BY_ID,
@@ -49,18 +46,18 @@ export default function ModuleContent(
           }
         }        
       )
-    }
+    }*/
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleId])
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     if(module){
       setSlug(module.slug);
     }
-  },[module])
+  },[module])*/
 
   const handleSave = ()=>{
-    setLoadingConfig(
+    /*setLoadingConfig(
       {
         ...API_CHANGE_MODULE,
         params:{
@@ -69,10 +66,10 @@ export default function ModuleContent(
           slug:slug,
         }
       }     
-    )
+    )*/
   }
 
-
+  const loading = false;
   return (
     <Container>
       {
@@ -110,10 +107,10 @@ export default function ModuleContent(
               </Grid>
             </Grid>
             <Grid item md={10}> 
-              <ModulePages module = {module} />          
+              {/*<ModulePages module = {module} />  */}        
             </Grid>
             <Grid item md={10}>
-              <ModuleAuths module = {module} />
+              {/*<ModuleAuths module = {module} />*/}
             </Grid>
           </Grid>
           

@@ -9,7 +9,6 @@ import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
 import AttributeBoxValidateArea from 'design/PageEditor/AttrebuteBox/ValidateArea';
 import { IValidateRule } from "base/Model/IValidateRule";
-import { API_GET_AUTHS } from 'APIs/modules';
 import MultiSelectBox from 'components/inputs/Select/MultiSelectBox';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';

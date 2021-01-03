@@ -1,4 +1,3 @@
-import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
 import editPage from "design/PageEditor/Toolbox/templates/order/editPage";
 
 export default {
@@ -7,19 +6,4 @@ export default {
   ],
 
 
-  isFormPage:true,
-  apiForGet:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/Order',
-    },      
-  },
-
-  apiForSave:{
-    ...API_SUBMIT_MODEL,
-    params:{
-      modelName:'/Model/Order',
-    },      
-  }
-  
 }
