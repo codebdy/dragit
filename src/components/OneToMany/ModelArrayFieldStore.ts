@@ -72,7 +72,6 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
 
   addRow(){
     this.rows.push(new ModelFieldStore(this.meta));
-    console.log('addRow', this.rows)
   }
 
   removeRow(index:number){
