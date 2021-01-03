@@ -5,6 +5,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
+import {Observer} from 'mobx-react-lite';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,56 +37,57 @@ const OneToManyPortlet = React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field])
 
-  
-  //const valueRows =  value? addTempIdToTable(value) :[];
-  //const rows = isDeisgning ? [{id:1}] : valueRows;
-
   const handleAddNew = ()=>{
     if(isDeisgning){
       return;
     }
-
+    fieldStore?.addRow();
   }
 
   const handelRemove = (index:number)=>{
+    fieldStore?.removeRow(index);
   }
 
   return (
-    <MultiContentPotlet title={title} ref={ref} {...rest}
-      onAddNew = {handleAddNew}
-    >
-      <div className = {classes.storeBuilder}>
-        <ModelProvider value = {fieldStore?.schemaRow}>
-          {children}
-        </ModelProvider>
-      </div>
-      {
-        fieldStore?.rows.map((rowStore, index)=>{
-          return(
-            <ModelProvider value={rowStore} key = {rowStore.id}>
-              <Grid container >
-                <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
-                  <Grid item>{title} #{index + 1}</Grid>
-                  <Grid item>
-                    <IconButton aria-label="delete"
-                      onClick = {(event) => {handelRemove(index)}}
-                      size="small"
-                    >
-                      <CloseIcon fontSize="small" />
-                    </IconButton>
+    <Observer>
+      {() =>
+        <MultiContentPotlet title={title} ref={ref} {...rest}
+          onAddNew = {handleAddNew}
+        >
+          <div className = {classes.storeBuilder}>
+            <ModelProvider value = {fieldStore?.schemaRow}>
+              {children}
+            </ModelProvider>
+          </div>
+          {
+            fieldStore?.rows.map((rowStore, index)=>{
+              return(
+                <ModelProvider value={rowStore} key = {rowStore.id}>
+                  <Grid container >
+                    <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
+                      <Grid item>{title} #{index + 1}</Grid>
+                      <Grid item>
+                        <IconButton aria-label="delete"
+                          onClick = {(event) => {handelRemove(index)}}
+                          size="small"
+                        >
+                          <CloseIcon fontSize="small" />
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Divider />
+                      {children}
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                  <Divider />
-                  {children}
-                </Grid>
-              </Grid>
-            </ModelProvider>            
-          )
-        })
-      }
+                </ModelProvider>            
+              )
+            })
+          }
 
-    </MultiContentPotlet>
+        </MultiContentPotlet>
+      }
+    </Observer>
   )
 })
 
