@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx"
 import { ThemeSettings } from "./ThemeSettings";
 import { Designer } from "./Designer";
 import { IUser } from "base/Model/IUser";
+import { IModule } from "base/Model/IModule";
 
 export class Error{
   message?:string;
@@ -26,8 +27,14 @@ export class AppStore{
   moduleSlug: string|undefined = 'dashboard';
   pageId: string|undefined;
 
+  module?:IModule;
+
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setModule(module?:IModule){
+    this.module = module;
   }
 
   setToolbarElevate(show:boolean){

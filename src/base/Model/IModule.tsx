@@ -6,7 +6,7 @@ export interface IModule {
   id: ID;
   slug: string;
   name: string;
-  moduleType: string;
+  moduleType?: string;
   isDrawerStyle?:boolean;
   pages?: IPage[];
   entryPage?: IPage;

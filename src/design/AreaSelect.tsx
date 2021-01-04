@@ -8,8 +8,9 @@ import TopNavHeightPlaceholder from 'AdminBoard/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
-import { useDesigner } from 'store/helpers/useAppStore';
+import { useAppStore, useDesigner } from 'store/helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
+import { ID } from 'base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     designButton:{
       boxShadow: theme.shadows[10],
+      marginTop: theme.spacing(1),
     },
 
     designButtonIcon:{
@@ -47,12 +49,18 @@ const useStyles = makeStyles((theme: Theme) =>
       flex:1,
     },
 
+    pageList:{
+      display:'flex',
+      flexFlow:'column',
+    },
+
   }),
 );
 
 export const AreaSelect = observer(()=>{
   const classes = useStyles();
   const designer = useDesigner();
+  const appStore = useAppStore();
   
   const history = useHistory();
 
@@ -60,10 +68,9 @@ export const AreaSelect = observer(()=>{
     designer.setAreaSelect(false);
   };
 
-  const handleDesignPageContent = (event:any) =>{
+  const handleDesignPage = (pageId:ID) =>{
     designer.setAreaSelect(false);
-    designer.open();
-    event.stopPropagation();
+    designer.designPage(pageId);
   }
 
   const handleDesignDrawer = (event:any)=>{
@@ -87,13 +94,22 @@ export const AreaSelect = observer(()=>{
       >
         <TopNavHeightPlaceholder></TopNavHeightPlaceholder>
         <div className={classNames(classes.pageContentArea, classes.area) }>
-          <Button variant="contained" color="primary" size="large" 
-            className={classNames(classes.designButton) }
-            onClick={handleDesignPageContent}
-          >
-            <MdiIcon iconClass="mdi-pencil-ruler" className={classes.designButtonIcon} />
-            {intl.get('design')}
-          </Button>
+          <div className={classes.pageList}>
+            {
+              appStore.module?.pages?.map(page=>{
+                return (
+                  <Button key={page.id} variant="contained" color="primary" size="large" 
+                    className={classNames(classes.designButton) }
+                    onClick={(e)=>handleDesignPage(page.id)}
+                  >
+                    <MdiIcon iconClass="mdi-pencil-ruler" className={classes.designButtonIcon} />
+                    {page.name}
+                  </Button>
+                )
+              })
+            }
+          </div>
+
         </div>
       </div>
     </Backdrop>

@@ -1,12 +1,12 @@
+import { ID } from "base/Model/graphqlTypes";
 import { makeAutoObservable } from "mobx"
 
 export class Designer{
   areaSelect:boolean = false; 
-  opened:boolean = false;
-  pageSlug:string = '';
   showOutline:boolean = true;
   showPaddingX:boolean = true;
   showPaddingY:boolean = true;
+  pageId?:ID;
   constructor() {
     makeAutoObservable(this)
   }
@@ -15,16 +15,12 @@ export class Designer{
     this.areaSelect = isSelect;
   }
 
-  open(){
-    this.opened = true;
+  designPage(pageId:ID){
+    this.pageId = pageId;
   }
 
   close(){
-    this.opened = false;
-  }
-
-  setPageSlug(slug:string){
-    this.pageSlug = slug;
+    this.pageId = undefined;
   }
 
   setShowOutline(showOutline:boolean){

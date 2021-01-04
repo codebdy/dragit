@@ -19,7 +19,6 @@ export interface IPageSchema{
 
 export interface IPage{
   id:ID,
-  slug:string,
   name?:string, 
   maxWidth?: MaxWidth;
   inTabIndex?:boolean;

@@ -41,12 +41,12 @@ export default {
                           {
                             name:'AntDesignChart',
                             designProps:{
-                              dataApi:null,
+                              query:null,
                               isDeisgning:true,
                             },
                             props:{
                               chart:'Area',
-                              dataApi:{
+                              query:{
                                 url:'https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json',
                                 method:'get',
                               },                             
@@ -98,12 +98,12 @@ export default {
                         {
                           name:'AntDesignChart',
                           designProps:{
-                            dataApi:null,
+                            query:null,
                             isDeisgning:true,
                           },
                           props:{
                             chart:'Line',
-                            dataApi:{
+                            query:{
                               url:'https://gw.alipayobjects.com/os/bmw-prod/e00d52f4-2fa6-47ee-a0d7-105dd95bde20.json',
                               method:'get',
                             },                            
@@ -162,7 +162,7 @@ export default {
                         {
                           name:'AntDesignChart',
                           designProps:{
-                            dataApi:null,
+                            query:null,
                             isDeisgning:true,
                           },
                           props:{

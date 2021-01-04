@@ -19,3 +19,17 @@ export const SAVE_DRAWER = gql`
     }
   }
 `
+
+export const GET_PAGE= gql`
+  query($id:ID){
+    page(id:$id){
+      id
+      name
+      maxWidth:max_width
+      inTabIndex:in_tab_index
+      width
+      schema
+      auths
+    }
+  }
+`

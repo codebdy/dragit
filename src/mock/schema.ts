@@ -15,6 +15,7 @@ import { splitDemoMutationResolvers } from "./demos/splitSubmit/resolvers";
 import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/splitSubmit/graphql";
 import { supplierQueryResolvers } from "./supplier/resolvers";
 import { supplierGQLInput, supplierGQLQuery, supplierGQLType } from "./supplier/graphql";
+import { pageResolver } from "./module/pageResolver";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -124,11 +125,7 @@ export const resolvers = {
     login:loginResolver,
     drawer:drawerResolver,
     modulePage:modulePageResolver,
-
-    page:async (parent:any, args:any, context:any, info:any)=>{
-      await sleep(1000);
-      return null
-    },
+    page:pageResolver,
 
     moduleBySlug:moduleBySlugResolver,
     ...postQueryResolvers,

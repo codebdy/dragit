@@ -19,7 +19,7 @@ export default function ModulePageRow(
   const[titleEditing, setTitleEditing] = useState(false);
   const[slugEditing, setSlugEditing] = useState(false);
   const[title, setTitle] = useState(page.name);
-  const[slug, setSlug] = useState(page.slug);
+  const[slug, setSlug] = useState(page.id);
 
   const handleBeginEdit = ()=>{
     setTitleEditing(true);

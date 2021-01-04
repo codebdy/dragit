@@ -11,7 +11,7 @@ import { CANVAS_SCROLL, REFRESH_NODE, SELECT_NODE } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'design/Layout';
 import LeftContent from './LeftContent';
-import { IPage, IPageSchema } from 'base/Model/IPage';
+import { IPageSchema } from 'base/Model/IPage';
 import PageSkeleton from 'AdminBoard/Workspace/common/ModuleSkeleton';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
@@ -30,6 +30,9 @@ import { AUTH_CUSTOMIZE } from 'base/authSlugs';
 import { observer } from 'mobx-react-lite';
 import { useDesigner } from 'store/helpers/useAppStore';
 import { ID } from 'base/Model/graphqlTypes';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_PAGE } from 'base/GQLs';
+import { useShowAppoloError } from 'store/helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,14 +85,15 @@ declare var window:{
 
 export const PageEditor = observer((
   props:{
-    pageSlug:string,
+    pageId:ID,
     onClose:()=>void
   }
 ) =>{
-  const {pageSlug, onClose} = props;
+  const {pageId, onClose} = props;
   const classes = useStyles();
   const designer = useDesigner();
   const {showOutline, showPaddingX, showPaddingY} = designer;
+  const {data, loading, error} = useQuery(GET_PAGE, {variables:{id:pageId}});
   //const [pageRequest, setPageRequest] = useState<AxiosRequestConfig>();
   //const [pageMeta, loading] = useAxios<IPage>(pageRequest);
   const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(/*pageMeta?.schema*/);
@@ -104,6 +108,9 @@ export const PageEditor = observer((
   //const [, saving] = useAxios(saveRequest, true);
   const [dirty, setIsDirty] = useState(false);
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
+
+  //console.log(data, loading, error, pageId);
+  useShowAppoloError(error);
 
   const theme = useTheme(); 
 
@@ -183,15 +190,15 @@ export const PageEditor = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
-  useEffect(() => {
-    //setPageRequest({...API_GET_PAGE, params:{pageSlug}})
-  },[pageSlug]);
 
- /* useEffect(() => {
-    setPageSchema(pageMeta?.schema);
-    //相当于复制一个Json副本，不保存的话直接扔掉
-    //setMetas(cloneObject(pageMeta?.schema?.layout || []));
-  },[pageMeta]);*/
+  useEffect(() => {
+    if(data){
+      setPageSchema(cloneObject(data?.page?.schema));
+      //相当于复制一个Json副本，不保存的话直接扔掉
+      setMetas(cloneObject(data?.page?.schema?.layout || []));      
+    }
+
+  },[data]);
  
   useEffect(()=>{
     let newCanvas = makeCanvas();
@@ -353,7 +360,6 @@ export const PageEditor = observer((
   const saving = false;
 
   return (
-    /*loading? <Container><PageSkeleton /></Container> :*/
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
@@ -420,29 +426,31 @@ export const PageEditor = observer((
             </Fragment>
           }
         >
-          <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-            <ComponentView 
-              key={canvas.id} 
-              node ={canvas} 
-              selectedNode = {selectedNode} 
-              onSelectNode = {handleSelectedNode}
-              draggedToolboxItem = {draggedToolboxItem}
-              draggedNode = {draggedNode}
-            />
-            {
-              selectedNode &&
-              <Fragment>
-                <SelectedLabel label = {selectedNode.meta.name} />
-                <NodeToolbar 
-                  onBeginDrag = {handleBeginDrag}
-                  onRemove = {handleRemove}
-                  onSelectParent = {handleSelectParent}
-                  onDuplicate = {handleDupliate}
-                />
-              </Fragment>
-            }
+          {loading? <Container><PageSkeleton /></Container> :
+            <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
+              <ComponentView 
+                key={canvas.id} 
+                node ={canvas} 
+                selectedNode = {selectedNode} 
+                onSelectNode = {handleSelectedNode}
+                draggedToolboxItem = {draggedToolboxItem}
+                draggedNode = {draggedNode}
+              />
+              {
+                selectedNode &&
+                <Fragment>
+                  <SelectedLabel label = {selectedNode.meta.name} />
+                  <NodeToolbar 
+                    onBeginDrag = {handleBeginDrag}
+                    onRemove = {handleRemove}
+                    onSelectParent = {handleSelectParent}
+                    onDuplicate = {handleDupliate}
+                  />
+                </Fragment>
+              }
 
-          </Scrollbar>
+            </Scrollbar>
+          }
         </DesignerLayout>
         <Fragment>
           {

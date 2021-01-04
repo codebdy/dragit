@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {observer} from 'mobx-react-lite';
-import { useAppStore } from "store/helpers/useAppStore";
+import { useAppStore, useDesigner } from "store/helpers/useAppStore";
 import { gql, useQuery } from "@apollo/react-hooks";
 import PageSkeleton from "AdminBoard/Workspace/common/ModuleSkeleton";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
@@ -10,6 +10,7 @@ import { PopupStyleModule } from "./PopupStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useShowAppoloError } from "store/helpers/useInfoError";
+import { PageEditor } from "design/PageEditor";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,11 +51,18 @@ const QUERY_MODULE = gql`
 
 export const Workspace = observer(()=>{
   const appStore = useAppStore();
-  const classes = useStyles()
+  const designer = useDesigner();
+  const classes = useStyles();
   const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
   useShowAppoloError(error);
 
-  const module = data?.moduleBySlug;
+  useEffect(()=>{
+    appStore.setModule(data?.moduleBySlug);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[data])
+
+  const module = appStore.module;
+
   return (
     <div className = {classes.root}>
       {
@@ -76,6 +84,11 @@ export const Workspace = observer(()=>{
           }
         </Fragment>
       }
+      {
+        designer.pageId &&
+        <PageEditor pageId = {designer.pageId} onClose={()=>{designer.close()}} />        
+      }
+
     </div>
   )
 })

@@ -43,7 +43,7 @@ export const TabStyleModule = observer((
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
   const appStore = useAppStore();
-  const [pageSlug, setPageSlug] = useState(appStore.pageId || module.entryPage?.slug);
+  const [pageId, setPageId] = useState(appStore.pageId || module.entryPage?.id);
   const [popupSlug, setPopupSlug] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();
 
@@ -63,7 +63,7 @@ export const TabStyleModule = observer((
     setPopupSlug(undefined);
   }
 
-  const page = getModulePageById(module, pageSlug);
+  const page = getModulePageById(module, pageId);
 
   const indexPages = module?.pages?.filter(page=>page.inTabIndex) || []
   useEffect(()=>{
@@ -80,7 +80,7 @@ export const TabStyleModule = observer((
 
   const handleSelectChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setSelected(newValue);
-    setPageSlug(indexPages[newValue].slug);
+    setPageId(indexPages[newValue].id);
   };
   return (
     <div className={classes.root}>
