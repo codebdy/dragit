@@ -1,7 +1,7 @@
 import { sleep } from "./utils/sleep";
 import { modulePageResolver } from "./module/modulePageResolver";
 import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
-import { drawerItemsResolver } from "./drawer/drawerItemsResolver";
+import { drawerResolver, saveDrawerItemsResolver } from "./drawer/drawerItemsResolver";
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
 import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./article/graphql";
 import { channelTreeResolver } from "./article/channel/resolvers";
@@ -20,6 +20,11 @@ const GraphQLJSON = require('graphql-type-json');
 export const schema = `
   scalar JSON
   
+  type Drawer{
+    id:ID
+    items:JSON
+  }
+
   type SeoMeta{
     id:ID!
     title: String
@@ -94,7 +99,7 @@ export const schema = `
     "登录"
     login(login_name:String!, password:String!):LoginData
     userByToken(token: String!): User
-    drawerItems:JSON!
+    drawer:Drawer
     modulePage(moduleSlug:String!, pageSlug:String):Page
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
@@ -104,6 +109,7 @@ export const schema = `
   }
 
   type Mutation{
+    saveDrawerItems(items:JSON):Drawer
     ${articleGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
@@ -116,8 +122,7 @@ export const resolvers = {
   Query: {
     userByToken: userByTokenResolver,
     login:loginResolver,
-    //不能返回树形结构，用String代替
-    drawerItems:drawerItemsResolver,
+    drawer:drawerResolver,
     modulePage:modulePageResolver,
 
     page:async (parent:any, args:any, context:any, info:any)=>{
@@ -136,6 +141,7 @@ export const resolvers = {
   },
 
   Mutation:{
+    saveDrawerItems:saveDrawerItemsResolver,
     ...postMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 

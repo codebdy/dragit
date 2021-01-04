@@ -1,7 +1,7 @@
 import { AUTH_DASHBOARD, AUTH_MEDIAS } from "base/authSlugs";
 import { POPUP_STYLE_MODULE } from "utils/consts";
 
-export default [{
+export var drawerData= [{
     //type:subheader, item, group
     type: 'subheader',
     title: '功能演示',

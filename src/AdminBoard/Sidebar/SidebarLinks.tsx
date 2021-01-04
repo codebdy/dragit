@@ -14,10 +14,9 @@ import { useQuery } from '@apollo/react-hooks';
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { cloneObject } from "utils/cloneObject";
 import {observer} from "mobx-react-lite";
-import intl from 'react-intl-universal';
-import { useAppStore } from "store/helpers/useAppStore";
 import { ID } from "base/Model/graphqlTypes";
-import { GET_DRAWER_ITEMS } from "../../base/GQLs";
+import { GET_DRAWER } from "../../base/GQLs";
+import { useShowAppoloError } from "store/helpers/useInfoError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +34,7 @@ export const SidebarLinks = observer((
 )=>{
   const classes = useStyles();
   const [openedId, setOpenedId] = React.useState('');
-  const { loading, error, data } = useQuery(GET_DRAWER_ITEMS);
+  const { loading, error, data } = useQuery(GET_DRAWER/*, {fetchPolicy:'no-cache'}*/);
   const [items,setItems] = React.useState<Array<RXNode<IMenuItem>>>([]);
   const loggedUser = useLoggedUser();
 
@@ -43,19 +42,11 @@ export const SidebarLinks = observer((
     setOpenedId(id)
   }
 
-  const appStore = useAppStore();
-  
-  useEffect(()=>{
-    if(error){
-      appStore.infoError(intl.get('server-error'), error?.message)
-      console.log( error);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[error])
+  useShowAppoloError(error)
 
   useEffect(()=>{
     let root = new RXNodeRoot<IMenuItem>();
-    root.parse(cloneObject(data?.drawerItems||[]));
+    root.parse(cloneObject(data?.drawer?.items||[]));
     data && setItems(root.children);          
   },[data]);
 

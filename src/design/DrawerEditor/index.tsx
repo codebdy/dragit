@@ -14,10 +14,11 @@ import SubmitButton from 'components/common/SubmitButton';
 import { useAuthCheck } from 'store/helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'base/authSlugs';
 import { ID } from 'base/Model/graphqlTypes';
-import { GET_DRAWER_ITEMS } from 'base/GQLs';
-import { useQuery } from '@apollo/react-hooks';
+import { GET_DRAWER, SAVE_DRAWER } from 'base/GQLs';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { cloneObject } from 'utils/cloneObject';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
+import { useAppStore } from 'store/helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,19 +65,25 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function DrawerEditor(){
   const classes = useStyles();
   const history = useHistory();
-  const { loading, error, data } = useQuery(GET_DRAWER_ITEMS);
-  //const [metas, loading] = useAxios<Array<IMenuItem>>(API_GET_DRAWER);
+  const { loading, error, data } = useQuery(GET_DRAWER);
   const [rootNode,setRootNode] = React.useState(new RXNodeRoot<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RXNode<IMenuItem>>();
+  const appStore = useAppStore();
+
+  const [excuteSave, {error:saveError, loading:saving}] = useMutation(SAVE_DRAWER,{
+    onCompleted:(data)=>{
+      appStore.setSuccessAlert(true)
+    }});
   //const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
   //const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
 
   useAuthCheck(AUTH_CUSTOMIZE);
-  useShowAppoloError(error);
+  useShowAppoloError(error||saveError);
   
   useEffect(()=>{
-    data && rootNode.parse(cloneObject(data?.drawerItems||[]));    
+    rootNode.parse(cloneObject(data?.drawer?.items||[]));
+    setRootNode(rootNode.copy());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data]);
 
@@ -86,7 +93,7 @@ export default function DrawerEditor(){
 
   const handleSave = ()=>{
     const drawerData = rootNode.getRootMetas();
-    //setSaveRequest({...API_SAVE_DRAWER, data:drawerData})
+    excuteSave({variables:{items:drawerData}})
   }
 
   const handleSelectedNode = (node:RXNode<IMenuItem>)=>{
@@ -167,8 +174,6 @@ export default function DrawerEditor(){
     draggedNode?.moveIn(copy);
     setRootNode(copy);     
   }
-
-  const saving = false;
 
   return (
     <div className={classes.root}>
