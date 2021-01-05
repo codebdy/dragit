@@ -225,19 +225,7 @@ export const PageEditor = observer((
         layout:canvas.getRootMetas(),
       },
     }
-  }})
-    /*setSaveRequest({...API_UPDATE_PAGE, 
-      data:{
-        page:{
-          ...pageMeta,
-          schema:{
-            ...pageSchema,
-            layout:canvas.getRootMetas(),
-          },
-        }
-      }
-    })
-    clearPageSchemaCache();*/
+    }})
     setIsDirty(false);    
   };
 
