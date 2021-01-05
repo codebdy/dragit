@@ -11,7 +11,7 @@ import { CANVAS_SCROLL, REFRESH_NODE, SELECT_NODE } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'design/Layout';
 import LeftContent from './LeftContent';
-import { IPage, IPageSchema } from 'base/Model/IPage';
+import { IPageSchema } from 'base/Model/IPage';
 import PageSkeleton from 'AdminBoard/Workspace/common/ModuleSkeleton';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNodeRoot } from 'base/RXNode/Root';
@@ -92,7 +92,6 @@ export const PageEditor = observer((
   const {pageId, onClose} = props;
   const classes = useStyles();
   const designer = useDesigner();
-  const {showOutline, showPaddingX, showPaddingY} = designer;
   const {data, loading, error} = useQuery(GET_PAGE, {variables:{id:pageId}});
   const [savePage, {error:saveError, loading:saving}] = useMutation(SAVE_PAGE);
 
@@ -362,8 +361,7 @@ export const PageEditor = observer((
   }
 
   let draggedLabel = draggedToolboxItem ?draggedToolboxItem?.title || intl.get(draggedToolboxItem?.titleKey||'') : draggedNode?.meta.name;
-
-  return (
+   return (
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
@@ -380,24 +378,24 @@ export const PageEditor = observer((
             <Fragment>
               <IconButton 
                 onClick = {()=>{
-                  designer.setShowOutline(!showOutline)
+                  designer.setShowOutline(!designer.showOutline)
                 }}
               >
-                <MdiIcon iconClass="mdi-border-none-variant" color={showOutline ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-border-none-variant" color={designer.showOutline ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  designer.setShowPaddingX(!showPaddingX)
+                  designer.setShowPaddingX(!designer.showPaddingX)
                 }}
               >
-                <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={showPaddingX ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={designer.showPaddingX ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  designer.setShowPaddingY(!showPaddingY)
+                  designer.setShowPaddingY(!designer.showPaddingY)
                 }}
                 >
-                <MdiIcon iconClass="mdi-arrow-expand-vertical" color={showPaddingY ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-arrow-expand-vertical" color={designer.showPaddingY ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton 
                 disabled = {undoList.length === 0}

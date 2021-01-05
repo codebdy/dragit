@@ -99,7 +99,7 @@ export const ComponentView = observer((
 
   useEffect(()=>{
     setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));
-  },[node, designer]);
+  },[node, designer.showPaddingX, designer.showPaddingY]);
 
   const handleRefresh=(nodeId:ID)=>{
     if(node.id === nodeId){
