@@ -82,11 +82,11 @@ export const ComponentView = observer((
   const dragged = canvasStore.draggedNode?.id === node.id;
   
   let dom : any = refEl.current;
+  node.dom = dom;
   useEffect(()=>{
     if(selected){
       canvasStore.setSelectedNodeDom(dom);      
     }
-    node.dom = dom;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dom, selected])
 
@@ -105,13 +105,11 @@ export const ComponentView = observer((
     event.stopPropagation();
     let dragoverCharger = new DragoverCharger(node, canvasStore.draggedToolboxItem?.meta || canvasStore.draggedNode?.meta);
     if(canvasStore.selectedNode?.id !== node.id && !canvasStore.draggedToolboxItem && !canvasStore.draggedNode){
-        setActived(true);        
+      setActived(true);        
     }
-    else{
+    else if(canvasStore.selectedNode?.id !== node.id){
       if(refEl.current){
         if(canvasStore.draggedNode?.id !== node.id){
-          //console.log('mouse move',dragoverCharger.judgePosition(event))
-          //bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
           canvasStore.setDragOverParam(dragoverCharger.judgePosition(event))
         }
       }

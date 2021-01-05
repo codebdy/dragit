@@ -63,12 +63,13 @@ export const DragCusor = observer(()=>{
   useEffect(()=>{      
     if(canvasStore.dragOverParam){
       const param = canvasStore.dragOverParam;
-
       if(param.position){
         canvasStore.setDragOverParam(param);
         setRect(param?.targetNode?.rect);
+        return;
       }
     }
+    setRect(undefined);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[canvasStore.dragOverParam])
 

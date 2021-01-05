@@ -192,10 +192,10 @@ export class DragoverCharger {
     return false;
   }
 
-  judgePosition(event: React.MouseEvent<HTMLElement>): IDragOverParam{
+  judgePosition(event: React.MouseEvent<HTMLElement>): IDragOverParam|undefined{
     event.stopPropagation();
     if (!this.draggedMeta) {
-      return{};
+      return undefined;
     }
 
     if (this.isDragIn(event)) {
@@ -247,10 +247,12 @@ export class DragoverCharger {
     }
     else{
       if(!this.node.parent){
-        return {};
+        //console.log('undefined1')
+        return undefined;
       }
       if(!this.isNodeAcceptMeta(this.node.parent)){
-        return {};
+        //console.log('undefined2')
+        return undefined;
       }
       return{
         targetNode: this.node,

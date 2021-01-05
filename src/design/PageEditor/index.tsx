@@ -126,13 +126,16 @@ export const PageEditor = observer((
       if(!dragNode && canvasStore.draggedToolboxItem?.meta){
         dragNode = RXNode.make<IMeta>(cloneObject(canvasStore.draggedToolboxItem?.meta));
       }
+      console.log('before operate drop',targetNode, dragNode)
       if(dragNode && targetNode) {
         backupToUndoList(dragNode.id); 
         if(!operateNode(targetNode, dragNode, canvasStore.dragOverParam.position)){
           canvasStore.popUndoList();
-          //canvasStore.setUndoList([...canvasStore.undoList]);
+          console.log('can not drop', targetNode, dragNode, canvasStore.dragOverParam.position);
         }
-        console.log(canvasStore.selectedNode, dragNode)
+        else{
+          canvasStore.setRedoList([]);
+        }
         canvasStore.setRefreshNodeId(dragNode.id);
         canvasStore.setSelectedNode(dragNode);
       }
