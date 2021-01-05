@@ -129,8 +129,8 @@ export const PageEditor = observer((
       if(dragNode && targetNode) {
         backupToUndoList(dragNode.id); 
         if(!operateNode(targetNode, dragNode, canvasStore.dragOverParam.position)){
-          canvasStore.undoList.pop();
-          canvasStore.setUndoList([...canvasStore.undoList]);
+          canvasStore.popUndoList();
+          //canvasStore.setUndoList([...canvasStore.undoList]);
         }
         canvasStore.setSelectedNode(dragNode);
       }
@@ -206,13 +206,11 @@ export const PageEditor = observer((
   }
 
   const backupToUndoList = (operateId:ID|undefined) => {
-    canvasStore.setUndoList([...canvasStore.undoList,
-    {
+    canvasStore.pushUndoList({
       canvasNode: canvasStore.canvas?.copy(),
       pageSchema: cloneObject(pageSchema),
       selectedNodeId: canvasStore.selectedNode?.id || operateId,
-    }
-    ]);
+    });
   }
 
   const handlePropChange = (propName:string, value:any)=>{
@@ -232,16 +230,15 @@ export const PageEditor = observer((
   }
 
   const handleUndo = ()=>{
-    let cmd = canvasStore.undoList.pop();
+    let cmd = canvasStore.popUndoList();
     if(cmd){
       //canvasStore.setUndoList([...canvasStore.undoList]);
-      canvasStore.setRedoList([...canvasStore.redoList, 
-        {
+      canvasStore.pushRedoList({
           canvasNode:canvasStore.canvas?.copy(),
           pageSchema:cloneObject(pageSchema),
           selectedNodeId: cmd.selectedNodeId,
         }
-      ]);
+      );
       canvasStore.setCanvas(cmd.canvasNode);
       setPageSchema(cmd.pageSchema);
       canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));    
@@ -249,15 +246,14 @@ export const PageEditor = observer((
   }
 
   const handleRedo = ()=>{
-    let cmd = canvasStore.redoList.pop();
+    let cmd = canvasStore.popRedoList();
     if(cmd){
-      canvasStore.setUndoList([...canvasStore.undoList, 
-        {
+      canvasStore.pushUndoList({
           canvasNode:canvasStore.canvas?.copy(),
           pageSchema:cloneObject(pageSchema),
           selectedNodeId: cmd.selectedNodeId,
         }
-      ]);
+      );
       //setRedoList([...redoList]);
       canvasStore.setCanvas(cmd.canvasNode); 
       setPageSchema(cmd.pageSchema);

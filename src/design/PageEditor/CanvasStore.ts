@@ -99,6 +99,23 @@ export class CanvasStore {
       this.scrollFlag = 0;
     }
   }
+
+  popUndoList(){
+    return this.undoList.pop();
+  }
+
+  pushUndoList(snapshot:IEditorSnapshot){
+    return this.undoList.push(snapshot);
+  }
+
+  popRedoList(){
+    return this.redoList.pop();
+  }
+
+  pushRedoList(snapshot:IEditorSnapshot){
+    return this.redoList.push(snapshot);
+  }
+
 }
 
 
