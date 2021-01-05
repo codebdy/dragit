@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { makeStyles, Theme, createStyles, Grid, Divider, IconButton } from '@material-ui/core';
 import MultiContentPotlet from 'components/common/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -37,6 +37,16 @@ const OneToManyPortlet = React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field])
 
+  const fieldStoreForDesign = useMemo(()=>{
+    if(isDeisgning){
+      const store = new ModelArrayFieldStore({name:field, props})
+      store.addRow()
+      return store;      
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[isDeisgning]);
+
+
   const handleAddNew = ()=>{
     if(isDeisgning){
       return;
@@ -47,6 +57,8 @@ const OneToManyPortlet = React.forwardRef((
   const handelRemove = (index:number)=>{
     fieldStore?.removeRow(index);
   }
+
+  const store = isDeisgning ? fieldStoreForDesign : fieldStore;
 
   return (
     <Observer>
@@ -60,7 +72,7 @@ const OneToManyPortlet = React.forwardRef((
             </ModelProvider>
           </div>
           {
-            fieldStore?.rows.map((rowStore, index)=>{
+            store?.rows.map((rowStore, index)=>{
               return(
                 <ModelProvider value={rowStore} key = {rowStore.id}>
                   <Grid container >
