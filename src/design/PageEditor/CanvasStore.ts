@@ -23,8 +23,8 @@ export class CanvasStore {
   redoList: Array<IEditorSnapshot> = [];
 
   refreshNodeId?:ID;
-
   scrollFlag:number = 0;
+  selectedNodeDom?:HTMLElement;
 
   constructor() {
     makeAutoObservable(this);
@@ -114,6 +114,10 @@ export class CanvasStore {
 
   pushRedoList(snapshot:IEditorSnapshot){
     return this.redoList.push(snapshot);
+  }
+
+  setSelectedNodeDom(dom:HTMLElement){
+    this.selectedNodeDom = dom;
   }
 
 }

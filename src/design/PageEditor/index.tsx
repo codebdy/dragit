@@ -132,6 +132,8 @@ export const PageEditor = observer((
           canvasStore.popUndoList();
           //canvasStore.setUndoList([...canvasStore.undoList]);
         }
+        console.log(canvasStore.selectedNode, dragNode)
+        canvasStore.setRefreshNodeId(dragNode.id);
         canvasStore.setSelectedNode(dragNode);
       }
     }
@@ -241,7 +243,8 @@ export const PageEditor = observer((
       );
       canvasStore.setCanvas(cmd.canvasNode);
       setPageSchema(cmd.pageSchema);
-      canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));    
+      canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));
+      canvasStore.setRefreshNodeId(cmd.selectedNodeId);
     }
   }
 
@@ -258,6 +261,7 @@ export const PageEditor = observer((
       canvasStore.setCanvas(cmd.canvasNode); 
       setPageSchema(cmd.pageSchema);
       canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));  
+      canvasStore.setRefreshNodeId(cmd.selectedNodeId);
     }    
   }
 

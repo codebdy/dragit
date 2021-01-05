@@ -32,7 +32,7 @@ export const SelectedLabel = observer((
   const canvasStore = useCanvarsStore();
   
   const doFollow = ()=>{
-    let rect = canvasStore.selectedNode?.dom?.getBoundingClientRect();
+    let rect = canvasStore.selectedNodeDom?.getBoundingClientRect();
     if(rect){
       setLeft(rect.x)
       let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
@@ -52,7 +52,7 @@ export const SelectedLabel = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.showPaddingX, canvasStore.showPaddingY, canvasStore.selectedNode, canvasStore.scrollFlag]);
+  },[canvasStore.showPaddingX, canvasStore.showPaddingY, canvasStore.selectedNodeDom, canvasStore.scrollFlag]);
 
   return (
     <Fragment>

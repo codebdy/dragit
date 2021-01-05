@@ -82,7 +82,13 @@ export const ComponentView = observer((
   const dragged = canvasStore.draggedNode?.id === node.id;
   
   let dom : any = refEl.current;
-  node.dom = dom;
+  useEffect(()=>{
+    if(selected){
+      canvasStore.setSelectedNodeDom(dom);      
+    }
+    node.dom = dom;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dom, selected])
 
   useEffect(()=>{
     setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));
