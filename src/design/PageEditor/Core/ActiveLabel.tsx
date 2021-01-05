@@ -1,8 +1,8 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import bus from '../../../base/bus';
-import { CANVAS_SCROLL } from "./busEvents";
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import { observer } from 'mobx-react-lite';
+import { useCanvarsStore } from '../CanvasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,16 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ActiveLabel(
+export const ActiveLabel=observer((
   props:{
     followDom:HTMLElement|null|undefined, 
     label:string,
   }
-){
+)=>{
   const{followDom, label} = props;
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
+  const canvasStore = useCanvarsStore();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect()
@@ -43,10 +44,13 @@ export default function ActiveLabel(
 
   useEffect(()=>{
     doFollow();
-    bus.on(CANVAS_SCROLL, hangdePositionChange);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canvasStore.scrollFlag])
+
+  useEffect(()=>{
+    doFollow();
     window.addEventListener('resize', hangdePositionChange)
     return () => {
-      bus.off(CANVAS_SCROLL, hangdePositionChange);
       window.removeEventListener('resize', hangdePositionChange)
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,4 +77,4 @@ export default function ActiveLabel(
 
     </Fragment>
   )
-}
+})

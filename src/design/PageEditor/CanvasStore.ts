@@ -24,6 +24,8 @@ export class CanvasStore {
 
   refreshNodeId?:ID;
 
+  scrollFlag:number = 0;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -88,6 +90,14 @@ export class CanvasStore {
 
   setRefreshNodeId(refreshNodeId?:ID){
     this.refreshNodeId = refreshNodeId;
+  }
+
+  scroll(){
+    this.scrollFlag ++;
+    //防止溢出
+    if(this.scrollFlag > 1000000){
+      this.scrollFlag = 0;
+    }
   }
 }
 

@@ -1,16 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { IDragOverParam } from "./IDragOverParam";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import bus from '../../../base/bus';
-import { CANVAS_SCROLL, DRAG_OVER_EVENT } from "./busEvents";
 import React from 'react';
 import classNames from 'classnames';
 import { IRect } from 'base/Model/IRect';
 import { useCanvarsStore } from '../CanvasStore';
+import { observer } from 'mobx-react-lite';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,33 +54,28 @@ const useStyles = makeStyles((theme: Theme) =>
 
 //1、基于Bust event来实现，用React组件参数的话，会卡顿
 //2、避免画面卡顿，全局变量存储拖动参数
-export default function DragCusor(){
+export const DragCusor = observer(()=>{
   //const [dragOverParam, setDragOverParam] = useState<IDragOverParam>();
   const [rect, setRect] = useState<IRect>();
   const classes = useStyles();
   const canvasStore = useCanvarsStore();
-  
-  const handleDragOverEvent = (param:IDragOverParam)=>{
-    //只有可拖释放时，才记录拖动信息，避免释放无效的bug
-    if(param.position){
-      canvasStore.setDragOverParam(param);
-      setRect(param?.targetNode?.rect);
-    }
-  }
 
-  const hangdeScroll = ()=>{
-    setRect(canvasStore.dragOverParam?.targetNode?.rect);
-  }
-  
-  useEffect(()=>{
-    bus.on(DRAG_OVER_EVENT, handleDragOverEvent);
-    bus.on(CANVAS_SCROLL, hangdeScroll);
-    return ()=>{
-      bus.off(DRAG_OVER_EVENT, handleDragOverEvent);
-      bus.off(CANVAS_SCROLL, hangdeScroll);
+  useEffect(()=>{      
+    if(canvasStore.dragOverParam){
+      const param = canvasStore.dragOverParam;
+
+      if(param.position){
+        canvasStore.setDragOverParam(param);
+        setRect(param?.targetNode?.rect);
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[canvasStore.dragOverParam])
+
+  useEffect(()=>{
+    setRect(canvasStore.dragOverParam?.targetNode?.rect);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[canvasStore.scrollFlag])
 
   const isvertical = canvasStore.dragOverParam?.position ==='out-left' || canvasStore.dragOverParam?.position ==='out-right'
     ||canvasStore.dragOverParam?.position ==='in-left' || canvasStore.dragOverParam?.position ==='in-right';
@@ -175,4 +168,4 @@ export default function DragCusor(){
       }
     </Fragment>
   )
-}
+})

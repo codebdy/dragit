@@ -1,7 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import bus from '../../../base/bus';
-import { CANVAS_SCROLL, REFRESH_SELECT_STATE } from "./busEvents";
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
 import { useLeftDrawer } from 'store/helpers/useAppStore';
@@ -83,12 +81,14 @@ export const NodeToolbar = observer((
   }
 
   useEffect(() => {
-    bus.on(CANVAS_SCROLL, doFollow);
-    bus.on(REFRESH_SELECT_STATE, doFollow);
+    doFollow();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[canvasStore.showPaddingX, canvasStore.showPaddingY, canvasStore.selectedNode]);
+
+
+  useEffect(() => {
     window.addEventListener('resize', doFollow)
     return () => {
-      bus.off(CANVAS_SCROLL, doFollow);
-      bus.off(REFRESH_SELECT_STATE, doFollow);
       window.removeEventListener('resize', doFollow)
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,7 +97,7 @@ export const NodeToolbar = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.showPaddingX, canvasStore.showPaddingY]);
+  },[canvasStore.showPaddingX, canvasStore.showPaddingY, canvasStore.scrollFlag]);
 
 
   return (

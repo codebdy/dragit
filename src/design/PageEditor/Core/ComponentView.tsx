@@ -4,11 +4,8 @@ import { resolveComponent, resolveRule } from 'base/RxDrag';
 import { IMeta } from 'base//Model/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
-import bus from '../../../base/bus';
-import { DRAG_OVER_EVENT, REFRESH_SELECT_STATE } from "./busEvents";
-
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
-import ActiveLabel from './ActiveLabel';
+import { ActiveLabel } from './ActiveLabel';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react-lite';
@@ -88,10 +85,6 @@ export const ComponentView = observer((
   node.dom = dom;
 
   useEffect(()=>{
-    bus.emit(REFRESH_SELECT_STATE);
-  })
-
-  useEffect(()=>{
     setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));
   },[node, canvasStore.showPaddingX, canvasStore.showPaddingY]);
 
@@ -111,8 +104,9 @@ export const ComponentView = observer((
     else{
       if(refEl.current){
         if(canvasStore.draggedNode?.id !== node.id){
-          bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
-          //canvasStore.setDragOverParam(dragoverCharger.judgePosition(event))
+          //console.log('mouse move',dragoverCharger.judgePosition(event))
+          //bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
+          canvasStore.setDragOverParam(dragoverCharger.judgePosition(event))
         }
       }
     }

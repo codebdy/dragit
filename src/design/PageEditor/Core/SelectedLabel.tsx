@@ -1,7 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import bus from '../../../base/bus';
-import { CANVAS_SCROLL, REFRESH_SELECT_STATE } from "./busEvents";
 import { observer} from 'mobx-react-lite';
 import { useCanvarsStore } from '../CanvasStore';
 
@@ -44,12 +42,8 @@ export const SelectedLabel = observer((
 
   useEffect(()=>{
     doFollow();
-    bus.on(CANVAS_SCROLL, doFollow);
-    bus.on(REFRESH_SELECT_STATE, doFollow);
     window.addEventListener('resize', doFollow)
     return () => {
-      bus.off(CANVAS_SCROLL, doFollow);
-      bus.off(REFRESH_SELECT_STATE, doFollow);
       window.removeEventListener('resize', doFollow)
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,7 +52,7 @@ export const SelectedLabel = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.showPaddingX, canvasStore.showPaddingY]);
+  },[canvasStore.showPaddingX, canvasStore.showPaddingY, canvasStore.selectedNode, canvasStore.scrollFlag]);
 
   return (
     <Fragment>

@@ -6,8 +6,6 @@ import intl from 'react-intl-universal';
 import Scrollbar from 'AdminBoard/common/Scrollbar';
 import Spacer from 'components/common/Spacer';
 import MdiIcon from 'components/common/MdiIcon';
-import bus from '../../base/bus';
-import { CANVAS_SCROLL } from "./Core/busEvents";
 import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'design/Layout';
 import LeftContent from './LeftContent';
@@ -19,7 +17,7 @@ import { ComponentView } from './Core/ComponentView';
 import { RXNode } from 'base/RXNode/RXNode';
 import { NodeToolbar } from './Core/NodeToolbar';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
-import DragCusor from './Core/DragCusor';
+import { DragCusor } from './Core/DragCusor';
 import { CursorPosition } from './Core/IDragOverParam';
 import { SelectedLabel } from './Core/SelectedLabel';
 import { cloneObject } from '../../utils/cloneObject';
@@ -137,7 +135,7 @@ export const PageEditor = observer((
         canvasStore.setSelectedNode(dragNode);
       }
     }
-    canvasStore.dragOverParam = undefined;
+    canvasStore.setDragOverParam(undefined);
     canvasStore.setDraggedNode(undefined);
     canvasStore.setDraggedToolboxItem(undefined);
     document.body.classList.remove('can-not-be-selected');
@@ -198,7 +196,7 @@ export const PageEditor = observer((
   }
 
   const handleScroll = ()=>{
-    bus.emit(CANVAS_SCROLL)
+    canvasStore.scroll();
   }
 
   const handleStartDragMetas = (item:IToolboxItem)=>{
