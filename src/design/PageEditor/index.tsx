@@ -94,7 +94,7 @@ export const PageEditor = observer((
       setIsDirty(true);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.undoList])  
+  },[canvasStore.undoList.length])  
   
   const operateNode = (targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>, position:CursorPosition)=>{
     if(targetNode.id === draggedNode.id){
