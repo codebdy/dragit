@@ -1,7 +1,7 @@
 import { sleep } from "./utils/sleep";
 import { modulePageResolver } from "./module/modulePageResolver";
 import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
-import { drawerResolver, saveDrawerItemsResolver } from "./drawer/drawerItemsResolver";
+import { drawerResolver, saveDrawerResolver } from "./drawer/drawerItemsResolver";
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
 import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./article/graphql";
 import { channelTreeResolver } from "./article/channel/resolvers";
@@ -15,7 +15,7 @@ import { splitDemoMutationResolvers } from "./demos/splitSubmit/resolvers";
 import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/splitSubmit/graphql";
 import { supplierQueryResolvers } from "./supplier/resolvers";
 import { supplierGQLInput, supplierGQLQuery, supplierGQLType } from "./supplier/graphql";
-import { pageResolver } from "./module/pageResolver";
+import { pageResolver, savePageResolver } from "./module/pageResolver";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -66,6 +66,17 @@ export const schema = `
     auths:[String]  
   }
 
+  input PageInput{
+    id:ID
+    name:String 
+    max_width:String
+    in_tab_index:Boolean
+    width:Int
+    schema:JSON
+    auths:[String]  
+  }
+
+
   type Module {
     id: ID!
     slug: String
@@ -110,7 +121,8 @@ export const schema = `
   }
 
   type Mutation{
-    saveDrawerItems(items:JSON):Drawer
+    drawer(items:JSON):Drawer
+    page(page:PageInput):Page
     ${articleGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
@@ -138,7 +150,8 @@ export const resolvers = {
   },
 
   Mutation:{
-    saveDrawerItems:saveDrawerItemsResolver,
+    drawer:saveDrawerResolver,
+    page:savePageResolver,
     ...postMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
