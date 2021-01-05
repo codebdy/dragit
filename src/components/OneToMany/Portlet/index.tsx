@@ -39,7 +39,7 @@ const OneToManyPortlet = React.forwardRef((
 
   const fieldStoreForDesign = useMemo(()=>{
     if(isDeisgning){
-      const store = new ModelArrayFieldStore({name:field, props})
+      const store = new ModelArrayFieldStore({name:field||'temp-for-design', props})
       store.addRow()
       return store;      
     }

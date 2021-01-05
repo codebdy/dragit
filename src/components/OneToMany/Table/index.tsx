@@ -8,6 +8,7 @@ import { RXNode } from 'base/RXNode/RXNode';
 import { ModelProvider, useModelStore } from 'base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
 import { Observer } from 'mobx-react-lite';
+import { Fragment } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +34,7 @@ const OneToManyTable = React.forwardRef((
     size?:any,
     childrenNodes?:Array<RXNode<IMeta>>,
     isDeisgning?:boolean,
+    children:any,
   }, 
   ref:any
 )=>{
@@ -41,6 +43,7 @@ const OneToManyTable = React.forwardRef((
     size,
     childrenNodes = [],
     isDeisgning,
+    children,
      ...rest
   } = props;
   const classes = useStyles();
@@ -72,45 +75,56 @@ const OneToManyTable = React.forwardRef((
         {...rest}
       >
           <Table className={classes.table} size={size}>
-            <TableHead>
-              <TableRow>
-                {
-                  childrenNodes.map((column, index)=>{
-                    const{width = undefined, ...other} = (column.meta.props ? column.meta.props : {})
-                    return(
-                      <TableCell key={`${column}-${index}`} component="th" style={{width:width}} {...other}>
-                        <b>
-                          {column.meta.props?.label}
-                        </b>
-                      </TableCell>
-                    )
-                  })
-                }
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {fieldStore?.rows.map((rowStore, rowIndex) => (
-                <ModelProvider value={rowStore} key = {rowStore.id}>
-                  <TableRow key={`row-${rowStore.id}`} >
+            {
+              isDeisgning?
+              <TableBody>
+                <TableRow>
+                  {children}
+                </TableRow>
+              </TableBody>
+              :
+              <Fragment>
+                <TableHead>
+                  <TableRow>
                     {
                       childrenNodes.map((column, index)=>{
+                        const{width = undefined, ...other} = (column.meta.props ? column.meta.props : {})
                         return(
-                          <ComponentRender key={`${column}-${index}-row-${rowStore.id}`} component = {column} />
+                          <TableCell key={`${column}-${index}`} component="th" style={{width:width}} {...other}>
+                            <b>
+                              {column.meta.props?.label}
+                            </b>
+                          </TableCell>
                         )
                       })
                     }
-                    <TableCell align="right">
-                      <IconButton aria-label="delete"
-                        onClick = {(event) => {handelRemove(rowIndex)}}
-                      >
-                        <CloseIcon fontSize="small" />
-                      </IconButton>
-                    </TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
-                </ModelProvider>
-              ))}
-            </TableBody>
+                </TableHead>
+                <TableBody>
+                  {fieldStore?.rows.map((rowStore, rowIndex) => (
+                    <ModelProvider value={rowStore} key = {rowStore.id}>
+                      <TableRow key={`row-${rowStore.id}`} >
+                        {
+                          childrenNodes.map((column, index)=>{
+                            return(
+                              <ComponentRender key={`${column}-${index}-row-${rowStore.id}`} component = {column} />
+                            )
+                          })
+                        }
+                        <TableCell align="right">
+                          <IconButton aria-label="delete"
+                            onClick = {(event) => {handelRemove(rowIndex)}}
+                          >
+                            <CloseIcon fontSize="small" />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    </ModelProvider>
+                  ))}
+                </TableBody>
+              </Fragment>
+            }
           </Table>    
       </MultiContentPotlet>
     }
