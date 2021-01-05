@@ -1,19 +1,17 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import bus from '../../../base/bus';
-import { CANVAS_SCROLL, REFRESH_SELECT_STATE, SELECT_NODE } from "./busEvents";
+import { CANVAS_SCROLL, REFRESH_SELECT_STATE } from "./busEvents";
 import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
-import { IMeta } from 'base/Model/IMeta';
-import { RXNode } from 'base/RXNode/RXNode';
-import { useDesigner, useLeftDrawer } from 'store/helpers/useAppStore';
+import { useLeftDrawer } from 'store/helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
+import { useCanvarsStore } from '../CanvasStore';
 
 const height = 28;
 const barWidth = height*4;
 
 declare var window:{ 
-  selectedNode?:RXNode<IMeta>,
   addEventListener:any,
   removeEventListener:any,
 };
@@ -68,10 +66,10 @@ export const NodeToolbar = observer((
   
   const sideBarWidth = sidebar.width;
   
-  const designer = useDesigner();
+  const canvasStore = useCanvarsStore();
 
   const doFollow = ()=>{
-    let rect = window.selectedNode?.dom?.getBoundingClientRect();
+    let rect = canvasStore.selectedNode?.dom?.getBoundingClientRect();
     if(!rect){
       return 
     }
@@ -86,12 +84,10 @@ export const NodeToolbar = observer((
 
   useEffect(() => {
     bus.on(CANVAS_SCROLL, doFollow);
-    bus.on(SELECT_NODE, doFollow);
     bus.on(REFRESH_SELECT_STATE, doFollow);
     window.addEventListener('resize', doFollow)
     return () => {
       bus.off(CANVAS_SCROLL, doFollow);
-      bus.off(SELECT_NODE, doFollow);
       bus.off(REFRESH_SELECT_STATE, doFollow);
       window.removeEventListener('resize', doFollow)
     };
@@ -101,12 +97,12 @@ export const NodeToolbar = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[designer.showPaddingX, designer.showPaddingY]);
+  },[canvasStore.showPaddingX, canvasStore.showPaddingY]);
 
 
   return (
     <Fragment>
-      {window.selectedNode?.dom && 
+      {canvasStore.selectedNode?.dom && 
         <div className={classes.toolbar}
           style={{
             left:left + 'px',

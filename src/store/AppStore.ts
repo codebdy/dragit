@@ -1,7 +1,7 @@
 import { LeftDrawer } from "./LeftDrawer";
 import { makeAutoObservable } from "mobx"
 import { ThemeSettings } from "./ThemeSettings";
-import { Designer } from "./Designer";
+import { DesignerStore } from "./DesignerStore";
 import { IUser } from "base/Model/IUser";
 import { IModule } from "base/Model/IModule";
 
@@ -20,7 +20,7 @@ export class AppStore{
   loggedUser: IUser|undefined = undefined;
   leftDrawer: LeftDrawer = new LeftDrawer();
   themeSettings: ThemeSettings = new ThemeSettings();
-  designer:Designer = new Designer();
+  designer:DesignerStore = new DesignerStore();
   successAlert: boolean|string = false;
   error: Error = new Error();
 

@@ -5,16 +5,14 @@ import { IMeta } from 'base//Model/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import bus from '../../../base/bus';
-import { DRAG_OVER_EVENT, REFRESH_NODE, REFRESH_SELECT_STATE } from "./busEvents";
+import { DRAG_OVER_EVENT, REFRESH_SELECT_STATE } from "./busEvents";
 
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import ActiveLabel from './ActiveLabel';
-import { IToolboxItem } from '../Toolbox/IToolboxItem';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react-lite';
-import { useDesigner } from 'store/helpers/useAppStore';
-import { ID } from 'base/Model/graphqlTypes';
+import { useCanvarsStore } from '../CanvasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,17 +58,13 @@ function getEditStyle(
 export const ComponentView = observer((
   props:{
     node:RXNode<IMeta>,
-    selectedNode?:RXNode<IMeta>,
-    onSelectNode:(node?:RXNode<IMeta>)=>void,
-    draggedToolboxItem?:IToolboxItem,
-    draggedNode?:RXNode<IMeta>,
   }
 )=>{
-  const {node, selectedNode, onSelectNode, draggedToolboxItem, draggedNode} = props;
+  const {node} = props;
   const classes = useStyles();
   const [actived, setActived] = useState(false);
   const [editStyle, setEditStyle] = useState<any>({});
-  const designer = useDesigner();
+  const canvasStore = useCanvarsStore();
   const refEl = useRef(undefined);
   let Component = resolveComponent(node.meta);
 
@@ -87,8 +81,8 @@ export const ComponentView = observer((
     ...rest
   } = metaProps as any;
 
-  const selected = selectedNode?.id === node.id;
-  const dragged = draggedNode?.id === node.id;
+  const selected = canvasStore.selectedNode?.id === node.id;
+  const dragged = canvasStore.draggedNode?.id === node.id;
   
   let dom : any = refEl.current;
   node.dom = dom;
@@ -98,33 +92,27 @@ export const ComponentView = observer((
   })
 
   useEffect(()=>{
-    setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));
-  },[node, designer.showPaddingX, designer.showPaddingY]);
-
-  const handleRefresh=(nodeId:ID)=>{
-    if(node.id === nodeId){
-      setEditStyle(getEditStyle(node, designer.showPaddingX, designer.showPaddingY));      
-    }
-  }
+    setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));
+  },[node, canvasStore.showPaddingX, canvasStore.showPaddingY]);
 
   useEffect(()=>{
-    bus.on(REFRESH_NODE, handleRefresh);
-    return ()=>{
-      bus.off(REFRESH_NODE, handleRefresh);
+    if(node.id === canvasStore.refreshNodeId){
+      setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[canvasStore.refreshNodeId])
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    let dragoverCharger = new DragoverCharger(node, draggedToolboxItem?.meta || draggedNode?.meta);
-    if(selectedNode?.id !== node.id && !draggedToolboxItem && !draggedNode){
+    let dragoverCharger = new DragoverCharger(node, canvasStore.draggedToolboxItem?.meta || canvasStore.draggedNode?.meta);
+    if(canvasStore.selectedNode?.id !== node.id && !canvasStore.draggedToolboxItem && !canvasStore.draggedNode){
         setActived(true);        
     }
     else{
       if(refEl.current){
-        if(draggedNode?.id !== node.id){
+        if(canvasStore.draggedNode?.id !== node.id){
           bus.emit(DRAG_OVER_EVENT, dragoverCharger.judgePosition(event))
+          //canvasStore.setDragOverParam(dragoverCharger.judgePosition(event))
         }
       }
     }
@@ -135,7 +123,7 @@ export const ComponentView = observer((
   }
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    onSelectNode(node);
+    canvasStore.setSelectedNode(node);
   }
 
   let elementProps:any = {
@@ -143,7 +131,7 @@ export const ComponentView = observer((
     className:classNames(
       className, 
       {
-        [classes.outline]: designer.showOutline,
+        [classes.outline]: canvasStore.showOutline,
         [classes.active]: actived,
         [classes.selected]: selected,
         [classes.dragged]:dragged,
@@ -169,11 +157,8 @@ export const ComponentView = observer((
       {node.children?.map((child: RXNode<IMeta>)=>{
         return (
           <ComponentView 
-            key={child.id} node={child}
-            selectedNode = {selectedNode}
-            onSelectNode = {onSelectNode}
-            draggedToolboxItem = {draggedToolboxItem}
-            draggedNode = {draggedNode}
+            key={child.id} 
+            node={child}
           />
         )
       })}
