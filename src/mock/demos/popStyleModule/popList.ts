@@ -76,11 +76,11 @@ export default {
                     label:'邮箱',
                   },
                   {
-                    field:'roleNames',
+                    field:'roles',
                     label:'角色',
                   },
                   {
-                    field:'forbid',
+                    field:'status',
                     label:'状态',
                     isHtml:true,
                     props:{
@@ -136,7 +136,9 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-              }
+                query:'users',
+                mutation:'updateUsers',
+              },
             }],
           }
 

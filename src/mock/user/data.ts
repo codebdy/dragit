@@ -1,4 +1,4 @@
-var users = [
+var usersData = [
   {
     id:1,
     login_name:'admin',
@@ -6,7 +6,7 @@ var users = [
     name:'超级管理员',
     email:'super@drag.fit',
     is_supper:true,
-    //roles:'',
+    roles:[],
     //forbid:'<span style="background:#eee; border-radius:12px; padding:6px;">正常</span>',
     created_at:'2019-02-22 10:52:44',
   },
@@ -16,8 +16,7 @@ var users = [
     password:'demo',
     name:'演示账号',
     email:'demo@drag.fit',
-    roleNames:'管理员, 经理',
-    roleIds:[1,2],
+    roles:[],
     is_demo:true,
     avatar:{
       id:'8',
@@ -41,4 +40,4 @@ var users = [
   }
 ]
 
-export default users;
+export default usersData;

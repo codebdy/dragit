@@ -30,10 +30,6 @@ export default {
                 variant: "contained",
                 color: "primary",
                 rxText: '新建',
-                //size: "large",
-                style: {
-                  fontSize: '1.1rem',
-                },
                 onClick:{
                   name: OPEN_PAGE_ACTION,
                   page:{
@@ -137,7 +133,10 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-              }
+
+                query:'users',
+                mutation:'updateUsers',
+              },
             }],
           }
 

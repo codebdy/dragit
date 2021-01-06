@@ -1,4 +1,3 @@
-import { sleep } from "./utils/sleep";
 import { modulePageResolver } from "./module/modulePageResolver";
 import { moduleBySlugResolver } from "./module/moduleBySlugResolver";
 import { drawerResolver, saveDrawerResolver } from "./drawer/drawerItemsResolver";
@@ -16,6 +15,9 @@ import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/splitSubm
 import { supplierQueryResolvers } from "./supplier/resolvers";
 import { supplierGQLInput, supplierGQLQuery, supplierGQLType } from "./supplier/graphql";
 import { pageResolver, savePageResolver } from "./module/pageResolver";
+import { userGQLType, userGQLInput, userGQLQuery, userGQLMutation } from "./user/graphql";
+import { userQueryResolvers, userMutationResolvers } from "./user/resolvers";
+import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./role/graphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -38,16 +40,6 @@ export const schema = `
     title: String
     keywords: String
     description: String 
-  }
-
-  type User {
-    id:ID!
-    login_name:String!
-    name:String
-    avatar:Media
-    is_supper:Boolean
-    is_demo:Boolean
-    auths:[String] 
   }
 
   type LoginData{
@@ -107,6 +99,10 @@ export const schema = `
   ${splitGQLInput}
   ${supplierGQLType}
   ${supplierGQLInput}
+  ${roleGQLType}
+  ${roleGQLInput}
+  ${userGQLType}
+  ${userGQLInput}
   type Query {
     "登录"
     login(login_name:String!, password:String!):LoginData
@@ -118,6 +114,8 @@ export const schema = `
     ${articleGQLQuery}
     ${mediasGQLQuery}
     ${supplierGQLQuery}
+    ${roleGQLQuery}
+    ${userGQLQuery}
   }
 
   type Mutation{
@@ -126,6 +124,8 @@ export const schema = `
     ${articleGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
+    ${roleGQLMutation}
+    ${userGQLMutation}
   }
 `;
 
@@ -147,6 +147,7 @@ export const resolvers = {
     
     ...mediaQueryResolvers,
     ...supplierQueryResolvers,
+    ...userQueryResolvers,
   },
 
   Mutation:{
@@ -155,5 +156,6 @@ export const resolvers = {
     ...postMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
+    ...userMutationResolvers
   }
 };

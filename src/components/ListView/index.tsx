@@ -101,13 +101,13 @@ const ListView = React.forwardRef((
     first: defalutRowsPerPage,
   });
   const appStore = useAppStore();
-
   const createQueryGQL = ()=>{
     let fields = ''
     columns?.forEach((colum)=>{
       fields = fields + ' ' + resolveFieldGQL(colum);
     })
-    const QUERY_GQL = gql`
+
+    const GQL_STRING = `
       query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
         ${query}(first:$first, page:$page, where:$where, orderBy:$orderBy){
           data {
@@ -124,6 +124,10 @@ const ListView = React.forwardRef((
             }
         }
       }
+  `
+    console.log('ListView query GQL', GQL_STRING)
+    const QUERY_GQL = gql`
+      ${GQL_STRING}
     `;
     return QUERY_GQL;
   }
@@ -144,6 +148,8 @@ const ListView = React.forwardRef((
     variables: { ...queryParam },
     notifyOnNetworkStatusChange: true
   });
+
+  console.log('ListView query',error, data);
 
   const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(createMutationGQL(),
     {onCompleted:()=>{appStore.setSuccessAlert(true)}}

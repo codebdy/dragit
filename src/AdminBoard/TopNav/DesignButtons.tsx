@@ -78,15 +78,6 @@ export const DesignButtons = observer((
             </IconButton>
           </Tooltip>          
         }
-        {
-          loggedUser.authCheck(AUTH_DEBUG)&&
-          <Tooltip title={intl.get('debug-graphql')} arrow placement="bottom">
-            <IconButton  aria-label={intl.get('debug-graphql')}>
-              <MdiIcon iconClass="mdi-graphql" color={'color'} />
-            </IconButton>
-          </Tooltip>          
-        }
-
       </Fragment >
     }
     </Hidden>
