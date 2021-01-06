@@ -72,6 +72,9 @@ export const  OneToManyTableView = {
                   },
                   children:[{
                     name:'MediaSelect',
+                    designProps:{
+                      isDeisgning:true,
+                    },
                     props:{
                       field:'image',
                       width:'60px',

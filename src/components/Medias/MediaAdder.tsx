@@ -67,9 +67,10 @@ export default function MediaAdder(
     onSelectMedias:(medias?:Array<IMedia>)=>void, 
     single?:boolean,
     avatar?:boolean,
+    isDeisgning?:boolean,
   }
 ){
-  const {value, onSelectMedias, single, avatar} = props;
+  const {value, onSelectMedias, single, avatar, isDeisgning} = props;
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -78,6 +79,9 @@ export default function MediaAdder(
   const theme = useTheme();
 
   const handleClickOpen = () => {
+    if(isDeisgning){
+      return;
+    }
     setOpen(true);
   };
 

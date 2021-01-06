@@ -12,6 +12,9 @@ export class OneToManyTableRule extends Rule{
   hasField = true;
   
   accept(child:IMeta){
+    if(child.name === 'TableColumn'){
+      return true;
+    }
     return false;
   }
 

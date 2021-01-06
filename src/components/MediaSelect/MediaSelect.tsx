@@ -23,9 +23,10 @@ const MediaSelect = React.forwardRef((props: {
   value?:IMedia,
   width?:string,
   avatar?:boolean,
+  isDeisgning?:boolean,
   onChange?:(event:any)=>void,
 }, ref:any)=>{
-  const {name, label, value, width, avatar, onChange} = props;
+  const {name, label, value, width, avatar, isDeisgning, onChange, ...rest} = props;
   const classes = useStyles();
 
   const [media, setMedia] = React.useState(value);
@@ -48,7 +49,7 @@ const MediaSelect = React.forwardRef((props: {
   }
 
   return (
-    <div className={classes.root} ref = {ref} style={{width:width}}>
+    <div className={classes.root} ref = {ref} style={{width:width}} {...rest}>
       {label && <div className = {classes.label}>{label}</div>}
       {
         <MediaAdder 
@@ -56,6 +57,7 @@ const MediaSelect = React.forwardRef((props: {
           onSelectMedias={handleSelectMedias} 
           single 
           avatar = {avatar}
+          isDeisgning = {isDeisgning}
         />      
       }
 
