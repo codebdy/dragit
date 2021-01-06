@@ -1,5 +1,3 @@
-import { SUBMIT_MUTATION } from "base/PageAction";
-
 export const  OneToManyTableView = {
   layout:[{
     name: 'GridRow',
@@ -20,20 +18,7 @@ export const  OneToManyTableView = {
       },
       {
         name: 'GridColumn',
-        children: [
-          {
-          name: 'Button',
-          props: {
-            rxText: '保存',
-            variant: "contained",
-            color: "primary",
-            size:'large',
-            marginLeft:2,
-            onClick:{
-              name:SUBMIT_MUTATION,
-            }
-          }
-        }]
+        children: []
       },
     ]
   },
