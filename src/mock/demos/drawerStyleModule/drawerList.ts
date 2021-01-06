@@ -16,7 +16,7 @@ export default {
               children: [{
                   name: 'h2',
                   props:{
-                    rxText: '用户列表',
+                    rxText: '侧滑式用户列表',
                   }
                   
               }],

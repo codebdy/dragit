@@ -26,7 +26,7 @@ export const PopupStyleModule = observer((
   const {module} = props;
   const classes = useStyles();
   const appStore = useAppStore();
-  const [pageId] = useState(appStore.pageId || module.entryPage?.id);
+  const pageId = appStore.pageId || module.entryPage?.id;
   const [popupPageId, setPopupPageId] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{
@@ -43,7 +43,6 @@ export const PopupStyleModule = observer((
 
   const page = useMemo(()=>getModulePageById(module, pageId),[module, pageId]);
   const popupPage = useMemo(()=>getModulePageById(module, popupPageId),[module, popupPageId]);
-  console.log(popupPage, popupPageId);
   const handleClose = ()=>{
     setPopupPageId(undefined);
   }
