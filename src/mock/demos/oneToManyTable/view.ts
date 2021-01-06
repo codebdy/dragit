@@ -70,6 +70,9 @@ export const  OneToManyTableView = {
                   props:{
                     label:'图片',                  
                   },
+                  designProps:{
+                    isDeisgning:true,
+                  }, 
                   children:[{
                     name:'MediaSelect',
                     designProps:{
@@ -77,7 +80,7 @@ export const  OneToManyTableView = {
                     },
                     props:{
                       field:'image',
-                      width:'60',
+                      width:'60px',
                     }
                   }]
                 },
@@ -86,7 +89,10 @@ export const  OneToManyTableView = {
                   props:{
                     label:'名称',
                     width:'200px',
-                  },          
+                  },
+                  designProps:{
+                    isDeisgning:true,
+                  }, 
                   children:[{
                     name:'TextBox',
                     props:{
@@ -101,6 +107,9 @@ export const  OneToManyTableView = {
                   props:{
                     label:'颜色',
                   },
+                  designProps:{
+                    isDeisgning:true,
+                  }, 
                   children:[{
                     name:'TextBox',
                     props:{
@@ -115,6 +124,9 @@ export const  OneToManyTableView = {
                   props:{
                     label:'型号',
                   },
+                  designProps:{
+                    isDeisgning:true,
+                  }, 
                   children:[{
                     name:'SelectBox',
                     props:{
@@ -144,6 +156,9 @@ export const  OneToManyTableView = {
                   props:{
                     label:'库存',
                   },
+                  designProps:{
+                    isDeisgning:true,
+                  }, 
                   children:[{
                     name:'TextBox',
                     props:{

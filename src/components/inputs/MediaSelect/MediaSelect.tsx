@@ -23,7 +23,7 @@ const MediaSelect = React.forwardRef((props: {
   name?:string,
   label?:string,
   value?:IMedia,
-  width?:number,
+  width?:string,
   avatar?:boolean,
   isDeisgning?:boolean,
   style?:any,
@@ -54,7 +54,7 @@ const MediaSelect = React.forwardRef((props: {
   }
 
   return (
-    <div className={classes.mediaSelected} ref = {ref} style={{width:width?width+'px':'', ...style}} {...rest}>
+    <div className={classes.mediaSelected} ref = {ref} style={{width:width, ...style}} {...rest}>
       {label && <div className = {classes.label}>{label}</div>}
       {
         <MediaAdder 
