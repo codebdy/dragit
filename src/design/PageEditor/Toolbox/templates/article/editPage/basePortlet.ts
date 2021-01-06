@@ -110,7 +110,7 @@ export default{
             {
               name:'TreeSelect',
               designProps:{
-                dataApi:null,
+                query:null,
                 isDeisgning:true,
               },
               props:{

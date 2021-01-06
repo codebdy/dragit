@@ -1,5 +1,5 @@
 export default{
-  name:'OneToOnePortlet',
+  name:'Portlet',
   props: {
     variant:'outlined',
     open:true,

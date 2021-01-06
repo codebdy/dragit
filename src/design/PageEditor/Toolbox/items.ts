@@ -77,7 +77,7 @@ export default [
       {
         titleKey:"one-to-one-portlet",
         meta: {
-          name:'OneToOnePortlet',
+          name:'Portlet',
           props: {
             elevation: 6,
             open:true,

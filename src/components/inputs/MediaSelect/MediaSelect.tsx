@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const MediaSelect = React.forwardRef((props: {
-  name?:string,
   label?:string,
   value?:IMedia,
   width?:string,
@@ -31,7 +30,7 @@ const MediaSelect = React.forwardRef((props: {
   helperText?:string,
   onChange?:(event:any)=>void,
 }, ref:any)=>{
-  const {name, label, value, helperText, error, width, avatar, isDeisgning, onChange, style, ...rest} = props;
+  const {label, value, helperText, error, width, avatar, isDeisgning, onChange, style, ...rest} = props;
   const classes = useStyles();
 
   const [media, setMedia] = React.useState(value);
@@ -45,7 +44,6 @@ const MediaSelect = React.forwardRef((props: {
     setMedia( currentValue );
     onChange && onChange(
       {
-        name:name,
         target:{
           value:currentValue,
         }
