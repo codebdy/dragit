@@ -14,6 +14,7 @@ import { PageEditor } from "design/PageEditor";
 import MdiIcon from "components/common/MdiIcon";
 import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { AUTH_DEBUG } from "base/authSlugs";
+import GraphQLDebug from "./GraphQLDebug";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,13 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
       background:theme.palette.background.default,
       color:theme.palette.text.primary,
-    },
-    fab: {
-      position: 'fixed',
-      bottom: theme.spacing(2),
-      //left: '280px',
-      zIndex:theme.zIndex.snackbar + 1,
-      transition:'left 0.3s',
     },
   }),
 );
@@ -61,7 +55,7 @@ const QUERY_MODULE = gql`
 export const Workspace = observer(()=>{
   const appStore = useAppStore();
   const designer = useDesigner();
-  const leftDrawer = useLeftDrawer();
+
   const classes = useStyles();
   const loggedUser = useLoggedUser();
   const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
@@ -74,7 +68,6 @@ export const Workspace = observer(()=>{
 
   const module = appStore.module;
 
-  const fabLeft = leftDrawer.isMini ? leftDrawer.compactWidth : leftDrawer.fullWidth;
 
   return (
     <div className = {classes.root}>
@@ -103,11 +96,7 @@ export const Workspace = observer(()=>{
       }
       {
         loggedUser.authCheck(AUTH_DEBUG)&&
-        <Hidden smDown>
-          <Fab className={classes.fab} size="small" aria-label="GraphQL Debug" style={{left:(fabLeft + 8) + 'px'}}>
-            <MdiIcon iconClass="mdi-graphql" color={'#e10098'} />
-          </Fab>
-        </Hidden>      
+        <GraphQLDebug />
       }
 
     </div>
