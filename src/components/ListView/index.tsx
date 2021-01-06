@@ -71,7 +71,7 @@ const ListView = React.forwardRef((
       rowsPerPageOptions:string,
       defalutRowsPerPage:number,
       onAction: PageActionHandle,
-      query?:IListQuery,
+      query?:string,
       mutation?:string,
       variant?:'elevation' | 'outlined',
       elevation:number,
@@ -109,7 +109,7 @@ const ListView = React.forwardRef((
     })
     const QUERY_GQL = gql`
       query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
-        ${query?.name}(first:$first, page:$page, where:$where, orderBy:$orderBy){
+        ${query}(first:$first, page:$page, where:$where, orderBy:$orderBy){
           data {
               id
               ${fields}
@@ -182,7 +182,7 @@ const ListView = React.forwardRef((
   }
 
   const [selected, setSelected] = React.useState<ID[]>([]);
-  const queryedData = (data && query?.name) ? data[query?.name] : {} as any;
+  const queryedData = (data && query) ? data[query] : {} as any;
   const rows = loading ? creatEmpertyRows(queryParam.first) : (queryedData?.data || []);
   const paginatorInfo = (queryedData?.paginatorInfo ||{}) as IPaginate
 

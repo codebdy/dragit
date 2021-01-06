@@ -138,11 +138,7 @@ export default {
         confirmMessage:"删除后将不可恢复，您确定要删除吗？",
       },
     ],
-    query:{
-      name:'posts',
-      where:{},
-      orderBy:[], 
-    },
+    query:'posts',
     mutation: 'updatePosts',
   }
 }
