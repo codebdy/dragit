@@ -14,6 +14,7 @@ export class CanvasStore {
   showPaddingX:boolean = true;
   showPaddingY:boolean = true;
 
+  activeNode?: RXNode<IMeta>;
   dragOverParam?: IDragOverParam;
   draggedNode?: RXNode<IMeta>;
   canvas?: RXNodeRoot<IMeta>;
@@ -40,6 +41,10 @@ export class CanvasStore {
 
   setShowPaddingY(showPaddingY:boolean){
     this.showPaddingY = showPaddingY;
+  }
+
+  setActiveNode(activeNode?:RXNode<IMeta>){
+    this.activeNode = activeNode;
   }
 
   setDragOverParam(dragOverParam?:IDragOverParam){

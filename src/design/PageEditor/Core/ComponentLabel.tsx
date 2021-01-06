@@ -1,14 +1,15 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { observer } from 'mobx-react-lite';
+import { observer} from 'mobx-react-lite';
 import { useCanvarsStore } from '../CanvasStore';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     label: {
       position:'fixed',
-      background:fade(theme.palette.primary.main, 0.8),
+      background:theme.palette.primary.main,
       color:'#fff',
       padding:' 0 5px',
       fontSize:'0.8rem',
@@ -16,25 +17,25 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight:'20px',
       userSelect:'none',
       cursor: 'default',
+      pointerEvents: 'none',
     },
 
   }),
 );
-
-export const ActiveLabel=observer((
+export const ComponentLabel = observer((
   props:{
-    followDom:HTMLElement|null|undefined, 
-    label:string,
+    node?:RXNode<IMeta>,
+    followDom?:HTMLElement,
   }
 )=>{
-  const{followDom, label} = props;
+  const{node, followDom} = props;
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
   const canvasStore = useCanvarsStore();
   
   const doFollow = ()=>{
-    let rect = followDom?.getBoundingClientRect()
+    let rect = followDom?.getBoundingClientRect();
     if(rect){
       setLeft(rect.x)
       let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
@@ -44,23 +45,17 @@ export const ActiveLabel=observer((
 
   useEffect(()=>{
     doFollow();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvasStore.scrollFlag])
-
-  useEffect(()=>{
-    doFollow();
-    window.addEventListener('resize', hangdePositionChange)
+    window.addEventListener('resize', doFollow)
     return () => {
-      window.removeEventListener('resize', hangdePositionChange)
+      window.removeEventListener('resize', doFollow)
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[followDom])
+  },[])
 
-  
-  const hangdePositionChange = ()=>{
+  useEffect(() => {
     doFollow();
-  }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[canvasStore.showPaddingX, canvasStore.showPaddingY, followDom, canvasStore.scrollFlag]);
 
   return (
     <Fragment>
@@ -71,7 +66,7 @@ export const ActiveLabel=observer((
             top: top + 'px',
           }}
         >
-          {label}
+          {node?.meta.name}
         </div>
       }
 

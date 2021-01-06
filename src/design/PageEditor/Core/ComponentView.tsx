@@ -5,7 +5,6 @@ import { IMeta } from 'base//Model/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import { makeSpaceStyle } from 'base/HOCs/withMargin';
-import { ActiveLabel } from './ActiveLabel';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react-lite';
@@ -59,7 +58,6 @@ export const ComponentView = observer((
 )=>{
   const {node} = props;
   const classes = useStyles();
-  const [actived, setActived] = useState(false);
   const [editStyle, setEditStyle] = useState<any>({});
   const canvasStore = useCanvarsStore();
   const refEl = useRef(undefined);
@@ -105,7 +103,7 @@ export const ComponentView = observer((
     event.stopPropagation();
     let dragoverCharger = new DragoverCharger(node, canvasStore.draggedToolboxItem?.meta || canvasStore.draggedNode?.meta);
     if(canvasStore.selectedNode?.id !== node.id && !canvasStore.draggedToolboxItem && !canvasStore.draggedNode){
-      setActived(true);        
+      canvasStore.setActiveNode(node);     
     }
     else if(canvasStore.selectedNode?.id !== node.id){
       if(refEl.current){
@@ -117,12 +115,14 @@ export const ComponentView = observer((
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{
     //event.stopPropagation();
-    setActived(false);
+    canvasStore.setActiveNode(undefined);
   }
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     canvasStore.setSelectedNode(node);
   }
+
+  const actived = canvasStore.activeNode?.id === node.id;
 
   let elementProps:any = {
     ...rest, 
@@ -167,10 +167,6 @@ export const ComponentView = observer((
   return(
     <Fragment>
     { elementView }
-    {
-      (actived) &&
-      <ActiveLabel followDom = {refEl?.current} label = {node.meta.name} />
-    }
     </Fragment>
   )
 })

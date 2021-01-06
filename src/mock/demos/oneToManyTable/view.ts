@@ -77,7 +77,7 @@ export const  OneToManyTableView = {
                     },
                     props:{
                       field:'image',
-                      width:'60px',
+                      width:'60',
                     }
                   }]
                 },

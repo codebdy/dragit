@@ -19,7 +19,7 @@ import { NodeToolbar } from './Core/NodeToolbar';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
 import { DragCusor } from './Core/DragCusor';
 import { CursorPosition } from './Core/IDragOverParam';
-import { SelectedLabel } from './Core/SelectedLabel';
+import { ComponentLabel } from './Core/ComponentLabel';
 import { cloneObject } from '../../utils/cloneObject';
 import SubmitButton from 'components/common/SubmitButton';
 import ConfirmDialog from 'base/Widgets/ConfirmDialog';
@@ -384,9 +384,13 @@ export const PageEditor = observer((
                 />
               }
               {
+                canvasStore.activeNode &&
+                <ComponentLabel node={canvasStore.activeNode} followDom={canvasStore.activeNode?.dom}/>
+              }
+              {
                 canvasStore.selectedNode &&
                 <Fragment>
-                  <SelectedLabel label = {canvasStore.selectedNode?.meta.name} />
+                  <ComponentLabel node={canvasStore.selectedNode} followDom={canvasStore.selectedNodeDom}/>
                   <NodeToolbar 
                     onBeginDrag = {handleBeginDrag}
                     onRemove = {handleRemove}

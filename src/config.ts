@@ -3,7 +3,7 @@ import {register, registerHtmlTag} from "./base/RxDrag";
 import { Button, Divider, Typography } from '@material-ui/core';
 import PortletGridItem from 'components/Portlet/GridItem';
 import ListView from 'components/ListView';
-import MediaSelect from 'components/MediaSelect/MediaSelect';
+import MediaSelect from 'components/inputs/MediaSelect/MediaSelect';
 import OneToManyTable from 'components/OneToMany/Table';
 import Portlet from 'components/Portlet';
 import PortletFooter from 'components/Portlet/Footer';
@@ -51,7 +51,7 @@ import { CheckboxGroupRule } from 'components/CheckboxGroup/Rule';
 import RadioGroup from 'components/RadioGroup';
 import { RadioGroupRule } from 'components/RadioGroup/Rule';
 import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
-import { MediaSelectRule } from "components/MediaSelect/Rule";
+import { MediaSelectRule } from "components/inputs/MediaSelect/Rule";
 import TableColumn from "components/OneToMany/Table/TableColumn";
 import { TableColumnRule } from "components/OneToMany/Table/TableColumn/Rule";
 
