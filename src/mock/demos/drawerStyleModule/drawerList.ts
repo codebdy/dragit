@@ -37,8 +37,7 @@ export default {
                 onClick:{
                   name: OPEN_PAGE_ACTION,
                   page:{
-                    moduleSlug:'user',
-                    pageSlug:'edit-user',
+                    id:'132',
                     //dataId:'1',
                   }
                 }
@@ -125,9 +124,7 @@ export default {
                     label:"编辑",
                     icon:"mdi-pencil",
                     jumpToPage:{
-                      //name: JUMP_TO_PAGE_ACidTION,
-                      moduleSlug:'user',
-                      pageSlug:'edit-user',
+                      pageId:'132',
                       param:'id',
                       paramField:'id',
                     }

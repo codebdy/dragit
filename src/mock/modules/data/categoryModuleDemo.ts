@@ -3,12 +3,16 @@ import articleAttributes from "mock/article/attribute/articleAttributes";
 import articleChannel from "mock/article/channel/articleChannel";
 import articles from "mock/article/post/views/articles";
 import articleTags from "mock/article/tag/articleTags";
-import user from "mock/views/user";
-import users from "mock/views/users";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 import splitSubmit from "mock/demos/splitSubmit/view";
 import { OneToManyPortletView } from "mock/demos/oneToManyPortlet/view";
 import { OneToManyTableView } from "mock/demos/oneToManyTable/view";
+import jumpList from "mock/demos/jumpStyleModule/jumpList";
+import jumpEdit from "mock/demos/jumpStyleModule/jumpEdit";
+import popList from "mock/demos/popStyleModule/popList";
+import popEdit from "mock/demos/popStyleModule/popEdit";
+import drawerEdit from "mock/demos/drawerStyleModule/drawerEdit";
+import drawerList from "mock/demos/drawerStyleModule/drawerList";
 
 export default[
   {
@@ -23,14 +27,14 @@ export default[
         name:'文章列表',
         slug:'articles',
         max_width:'false',
-        schema: articles,
+        schema: jumpList,
       },
       {
         id:'1012',
         name:'文章编辑',
         slug:'article',
         max_width:'false',
-        schema: article,
+        schema: jumpEdit,
       },
     ],
     auths:[
@@ -48,14 +52,14 @@ export default[
         name:'管理员列表',
         slug:'urser-list',
         max_width:'lg',
-        schema: users,
+        schema: popList,
       },
       {
         id:'112',
         name:'管理员编辑',
         max_width:'md',
         slug:'edit-user',
-        schema: user,
+        schema: popEdit,
       },
     ],
   },
@@ -72,7 +76,7 @@ export default[
         name:'管理员列表',
         slug:'urser-list',
         max_width:'lg',
-        schema: users,
+        schema: drawerList,
       },
       {
         id:'132',
@@ -80,7 +84,7 @@ export default[
         max_width:'md',
         width:450,
         slug:'edit-user',
-        schema: user,
+        schema: drawerEdit,
       },
     ],
   },

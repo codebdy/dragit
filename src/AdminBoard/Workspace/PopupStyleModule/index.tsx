@@ -8,6 +8,7 @@ import { getModulePageById } from '../common/getModulePageById';
 import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
 import { IPageJumper } from 'base/Model/IPageJumper';
+import { useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,24 +27,25 @@ export const PopupStyleModule = observer((
   const classes = useStyles();
   const appStore = useAppStore();
   const [pageId] = useState(appStore.pageId || module.entryPage?.id);
-  const [popupSlug, setPopupSlug] = useState<string|undefined>();
+  const [popupPageId, setPopupPageId] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
         setPageParams(action.page)
-        setPopupSlug(action.page?.pageSlug);        
+        setPopupPageId(action.page?.id);        
         return;        
       case GO_BACK_ACTION:
-        setPopupSlug(undefined);
+        setPopupPageId(undefined);
         return;
     }
   }
 
-  const page = getModulePageById(module, pageId);
-  const popupPage = getModulePageById(module, popupSlug);
+  const page = useMemo(()=>getModulePageById(module, pageId),[module, pageId]);
+  const popupPage = useMemo(()=>getModulePageById(module, popupPageId),[module, popupPageId]);
+  console.log(popupPage, popupPageId);
   const handleClose = ()=>{
-    setPopupSlug(undefined);
+    setPopupPageId(undefined);
   }
 
   return (

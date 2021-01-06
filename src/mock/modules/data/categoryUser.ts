@@ -1,7 +1,7 @@
 import rolePage from "mock/views/rolePage";
 import rolesPage from "mock/views/rolesPage";
-import user from "mock/views/user";
-import users from "mock/views/users";
+import user from "mock/user/views/user";
+import users from "mock/user/views/users";
 
 export default[
   {
