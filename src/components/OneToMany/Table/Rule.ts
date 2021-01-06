@@ -5,7 +5,6 @@ import OptionSelect from "base/PropsInputs/OptionSelect";
 import { IMeta } from "base/Model/IMeta";
 import elevationRules from "base/Rules/elevationRules";
 import marginRules from "base/Rules/marginRules";
-import OneToManyTableColumnsDialog from "./PropsInputs/OneToManyTableColumnsDialog";
 
 export class OneToManyTableRule extends Rule{
   empertyPadding = '';
@@ -22,11 +21,6 @@ export class OneToManyTableRule extends Rule{
     return [
       ...marginRules,
       ...elevationRules,   
-      {
-        name:'columns',
-        label:'columns',
-        input:OneToManyTableColumnsDialog,
-      },
       {
         name:'size',
         label:'size',
