@@ -14,7 +14,7 @@
     "toolbar":"工具栏",
     "float-style":"浮动式",
     "colored":"上色",
-    "debug-graphql": "调试 GraphQL",
+    "debug": "调试",
     "upload": "上传",
     "filter": "过滤",
     "sort-by": "排序",
@@ -288,6 +288,9 @@
     "opacity":"不透明度",
 
     "server-error":"服务器错误",
-    "details":"详细"
+    "details":"详细",
+
+    "query":"查询",
+    "mutation":"更改"
 
 }

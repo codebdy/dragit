@@ -14,7 +14,7 @@
     "toolbar":"Toolbar",
     "float-style":"Float style",
     "colored":"Colored",
-    "debug": "Debug graphql",
+    "debug": "Debug",
     "upload": "Upload",
     "filter": "Filter",
     "sort-by": "Sort by",
@@ -283,5 +283,8 @@
     "opacity":"Opacity",
 
     "server-error":"Server error",
-    "details":"Details"
+    "details":"Details",
+
+    "query":"Query",
+    "mutation":"Mutation"
 }
