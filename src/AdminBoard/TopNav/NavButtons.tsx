@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import MdiIcon from "components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
-import { Hidden, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon, Avatar } from "@material-ui/core";
+import { Hidden, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon, Avatar, Tooltip } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from "react-router";
 import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
@@ -142,6 +142,14 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
         <MdiIcon iconClass = "mdi-github"/>
       </a>
       <EvenNotification color={color} />
+
+      <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"
+        onClick = {()=>appStore.openShowThemeSettings()}
+      >
+        <IconButton aria-label={intl.get('theme-settings')} >
+          <MdiIcon iconClass="mdi-application-cog" color={color} />
+        </IconButton>
+      </Tooltip>          
 
       <Avatar className={classes.avatar} onClick={handleProfileMenuOpen} src={user?.meta?.avatar?.thumbnail}>
         {

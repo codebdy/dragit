@@ -9,7 +9,6 @@ import client from './mock/client';
 import { AppStoreProvider }from 'store/helpers/AppStoreProvider';
 import {AppStore} from 'store/AppStore' 
 import { CssBaseline } from '@material-ui/core';
-
 import 'config';
 
 const appStore = new AppStore();

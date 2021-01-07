@@ -67,17 +67,6 @@ export const DesignButtons = observer((
             </Tooltip>          
           </Fragment>
         }
-
-        {
-          loggedUser.authCheck(AUTH_THEME_SETTINGS)&&
-          <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"
-            onClick = {()=>appStore.openShowThemeSettings()}
-          >
-            <IconButton aria-label={intl.get('theme-settings')} >
-              <MdiIcon iconClass="mdi-image-filter-black-white" color={color} />
-            </IconButton>
-          </Tooltip>          
-        }
       </Fragment >
     }
     </Hidden>
