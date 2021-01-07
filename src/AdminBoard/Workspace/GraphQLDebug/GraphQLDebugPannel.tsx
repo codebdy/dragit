@@ -74,7 +74,7 @@ export const GraphQLDebugPannel = observer((props:{
 
   useEffect(()=>{
     try{
-      setVariablesStr(JSON.stringify(selected?.variables||{}));
+      setVariablesStr(JSON.stringify(selected?.variables||{}, null, 2));
       setGraphiQL(selected?.gql ? print(parse(selected?.gql)) : '');
     }
     catch(e){
@@ -106,7 +106,7 @@ export const GraphQLDebugPannel = observer((props:{
         <GQLList gqls = {queries} selected = {selected} onSelect={(gql)=>{setSelected(gql)}} />
       }
       <div className={classes.container}>      
-        <Grid container spacing={1} alignItems="stretch" >
+        <Grid container spacing={0} alignItems="stretch" >
           <Grid item md={4} className={classes.editorSchell}>
             <Typography className={classes.titleText} variant="h6">GraphiQL</Typography>
             <CodeMirrorEditor value = {graphiQL} mode="graphql" onChange = {value=>setGraphiQL(value?.trim())}/>
@@ -130,7 +130,7 @@ export const GraphQLDebugPannel = observer((props:{
                 </div>
               </div>
               :
-              <CodeMirrorEditor value = {queryResult ? JSON.stringify(queryResult) :''} mode="application/json" lint = {false}/>
+              <CodeMirrorEditor value = {queryResult ? JSON.stringify(queryResult, null, 2) :''} mode="application/json" lint = {false}/>
             }
             <Fab 
               className={classes.fab} 
