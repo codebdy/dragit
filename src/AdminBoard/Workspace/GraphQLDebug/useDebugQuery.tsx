@@ -14,6 +14,7 @@ export function useDebugQuery(graphiQL?:string){
     graphiQLStr = 'query{empty}'
   }
   return useLazyQuery(gql`${graphiQLStr}`,{
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy:'no-cache'
   });
 }
