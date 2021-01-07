@@ -12,4 +12,12 @@ export class GraphQLStore{
     this.gql = gql;
     makeAutoObservable(this)
   }
+
+  setGql(gql?:string){
+    this.gql = gql;
+  }
+
+  setVariables(variables?:any){
+    this.variables = variables;
+  }
 }

@@ -63,7 +63,7 @@ export default function JSONEditDialog(
             json: true,
             //括号匹配
             matchBrackets:true,
-          }
+          } as any
         }
         onBeforeChange={(editor, data, value) => {
           setInputValue(value);
