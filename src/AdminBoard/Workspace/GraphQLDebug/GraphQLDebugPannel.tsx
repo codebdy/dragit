@@ -8,6 +8,7 @@ import {CodeMirrorEditor} from './CodeMirrorEditor';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
 import { useAppStore } from 'store/helpers/useAppStore';
+import { useDebugQuery } from './useDebugQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,8 +67,10 @@ export const GraphQLDebugPannel = observer((props:{
   const [selected, setSelected] = useState<GraphQLStore|undefined>(/*queries&&queries.length > 0 ? queries[0] : undefined*/);
   const [graphiQL, setGraphiQL] = useState('');
   const [variablesStr, setVariablesStr] = useState('');
-  const [error, setError] = useState<any>();
+  //const [error, setError] = useState<any>();
   const appStore = useAppStore();
+
+  const [excuteQuery, { error, data:queryResult }] = useDebugQuery(graphiQL);
 
   useEffect(()=>{
     try{
@@ -82,18 +85,19 @@ export const GraphQLDebugPannel = observer((props:{
 
   const handleRun = ()=>{
     let variables;
-    let graphiqlStr;
-    setError(undefined);
     try{
       variables = variablesStr ? JSON.parse(variablesStr) : variablesStr;
-      graphiqlStr = print(parse(graphiQL));
+      print(parse(graphiQL));
     }
     catch(e){
-      console.error(e);
+      //console.error(e);
       appStore.infoError(intl.get('input-graphql-error'));
       return;
     }
+
+    excuteQuery({variables:variables});
   }
+  
 
   return (
     <div className={classes.root}>
@@ -126,7 +130,7 @@ export const GraphQLDebugPannel = observer((props:{
                 </div>
               </div>
               :
-              <CodeMirrorEditor value = {''} mode="application/json" lint = {false}/>
+              <CodeMirrorEditor value = {queryResult ? JSON.stringify(queryResult) :''} mode="application/json" lint = {false}/>
             }
             <Fab 
               className={classes.fab} 
