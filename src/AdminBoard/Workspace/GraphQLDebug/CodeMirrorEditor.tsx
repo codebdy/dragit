@@ -10,6 +10,8 @@ import 'codemirror/addon/hint/show-hint';
 import 'codemirror-graphql/hint';
 import 'codemirror-graphql/lint';
 import 'codemirror-graphql/mode';
+import "codemirror/addon/lint/json-lint";
+
 const jsonlint = require("jsonlint-mod");
 
 declare var window:any;

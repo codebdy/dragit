@@ -287,5 +287,6 @@
 
     "query":"Query",
     "list-query":"Query list",
-    "mutation":"Mutation"
+    "mutation":"Mutation",
+    "result":"Result"
 }
