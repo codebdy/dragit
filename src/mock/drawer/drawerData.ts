@@ -60,12 +60,12 @@ export var drawerData= [{
           icon: 'mdi-circle-small',
           moduleSlug: POPUP_STYLE_MODULE + 2,
       },
-      {
-          title: '选项卡式',
-          type: 'item',
-          icon: 'mdi-circle-small',
-          moduleSlug: 'tab-style-module',
-      },
+      //{
+      //    title: '选项卡式',
+      //    type: 'item',
+      //    icon: 'mdi-circle-small',
+      //    moduleSlug: 'tab-style-module',
+      //},
     ],
   },
   {

@@ -21,19 +21,23 @@ import { cloneObject } from 'utils/cloneObject';
 import { AUTH_DEBUG } from 'base/authSlugs';
 import { useLoggedUser } from 'store/helpers/useLoggedUser';
 import GraphQLDebug from '../GraphQLDebug';
+import { PageGQLProvider } from 'base/GraphQL/PageGQLProvider';
+import { PageGQLStore } from 'base/GraphQL/PageGQLStore';
 
 export const Page = observer((
   props:{
     page?:IPage,
     pageParams?:IPageJumper,
+    hideGQLDebug?:boolean,
     onPageAction?: (pageAction:PageAction)=> void,
   }
 )=>{
   const [openAlert, setOpentAlert] = useState(false);
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
-  const {page, pageParams, onPageAction} = props;
+  const {page, pageParams, hideGQLDebug, onPageAction} = props;
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>();
-  const [modelStore] = useState(new ModelStore());
+  const [modelStore] = useState(new ModelStore());  
+  const [gqlStore] = useState(new PageGQLStore());
   const [mutation, setMutation] = useState<IPageMutation>();
   const queryName = page?.schema?.query?.name;
   const appStore = useAppStore();
@@ -187,17 +191,18 @@ export const Page = observer((
 
   return (
     <ModelProvider value = {modelStore}>
-      {
-        pageLayout?.map((child:RXNode<IMeta>)=>{
-          return (
-            <ComponentRender 
-              key={child.id} 
-              component={child} 
-              onPageAction={hanlePageAction}
-            />
-          )
-        })
-      }
+      <PageGQLProvider value = {gqlStore}>
+        {
+          pageLayout?.map((child:RXNode<IMeta>)=>{
+            return (
+              <ComponentRender 
+                key={child.id} 
+                component={child} 
+                onPageAction={hanlePageAction}
+              />
+            )
+          })
+        }
 
         <Dialog
           open={openAlert}
@@ -216,10 +221,11 @@ export const Page = observer((
           onCancel ={()=>{setBackConfirmOpen(false)}}
           onConfirm = {handleBackConfirm}
         /> 
-      {
-        loggedUser.authCheck(AUTH_DEBUG)&&
-        <GraphQLDebug />
-      }
+        {
+          loggedUser.authCheck(AUTH_DEBUG) && !hideGQLDebug &&
+          <GraphQLDebug/>
+        }
+      </PageGQLProvider>
     </ModelProvider>
   )
 })

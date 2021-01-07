@@ -1,9 +1,5 @@
-import article from "mock/article/post/views/article";
-import articleAttributes from "mock/article/attribute/articleAttributes";
-import articleChannel from "mock/article/channel/articleChannel";
-import articles from "mock/article/post/views/articles";
-import articleTags from "mock/article/tag/articleTags";
-import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
+
+import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE } from "utils/consts";
 import splitSubmit from "mock/demos/splitSubmit/view";
 import { OneToManyPortletView } from "mock/demos/oneToManyPortlet/view";
 import { OneToManyTableView } from "mock/demos/oneToManyTable/view";
@@ -88,7 +84,7 @@ export default[
       },
     ],
   },
-  {
+  /*{
     id:'14',
     slug:TAB_STYLE_MODULE,
     module_type:TAB_STYLE_MODULE,
@@ -139,7 +135,7 @@ export default[
         schema: article,
       },
     ],
-  },
+  },*/
 
   {
     id:'15',

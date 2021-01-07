@@ -28,7 +28,7 @@ import { AUTH_CUSTOMIZE } from 'base/authSlugs';
 import { observer } from 'mobx-react-lite';
 import { ID } from 'base/Model/graphqlTypes';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_PAGE, SAVE_PAGE } from 'base/GQLs';
+import { GET_PAGE, SAVE_PAGE } from 'base/GraphQL/GQLs';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
 import { CanvarsStoreProvider, CanvasStore } from './CanvasStore';
 

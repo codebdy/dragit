@@ -4,6 +4,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import { useLeftDrawer } from 'store/helpers/useAppStore';
 import { Close } from '@material-ui/icons';
 import intl from 'react-intl-universal';
+import { usePageGQLStore } from 'base/GraphQL/PageGQLProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,7 +12,6 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'fixed',
       bottom: theme.spacing(1),
       zIndex:theme.zIndex.snackbar + 1,
-      transition:'left 0.3s',
     },
     title: {
       margin: 0,
@@ -76,6 +76,7 @@ export default function GraphQLDebug(){
     setOpen(false)
   }
 
+  const pageGqlStore = usePageGQLStore();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -115,7 +116,11 @@ export default function GraphQLDebug(){
         <Divider />
         <div className={classes.content}> 
           <TabPanel value={value} index={0}>
-            {intl.get('query')}
+            {pageGqlStore?.queries.map((query)=>{
+              return(
+                query.name + '-' + query.source
+              )
+            })}
           </TabPanel>
           <TabPanel value={value} index={1}>
             {intl.get('mutation')}

@@ -25,6 +25,8 @@ import { IColumn } from 'components/ListView/IColumn';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { resolveFieldGQL } from './CellRenders';
 import { ID } from 'base/Model/graphqlTypes';
+import { GraphQLStore } from 'base/GraphQL/GraphQLStore';
+import { usePageGQLStore } from 'base/GraphQL/PageGQLProvider';
 
 export const COMMAND_QUERY = "query";
 
@@ -100,7 +102,10 @@ const ListView = React.forwardRef((
     page : 0,
     first: defalutRowsPerPage,
   });
+
   const appStore = useAppStore();
+  const pageGQLStore = usePageGQLStore();
+
   const createQueryGQL = ()=>{
     let fields = ''
     columns?.forEach((colum)=>{
@@ -126,12 +131,19 @@ const ListView = React.forwardRef((
       }
   `
     console.log('ListView query GQL', GQL_STRING)
-    const QUERY_GQL = gql`
-      ${GQL_STRING}
-    `;
-    return QUERY_GQL;
+    return GQL_STRING;
   }
 
+  const [queryGQL] = useState(new GraphQLStore(intl.get('query'), 'ListView', createQueryGQL()));
+
+  useEffect(()=>{
+    pageGQLStore?.addQuery(queryGQL);
+    return ()=>{
+      pageGQLStore?.removeQuery(queryGQL);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  
   const createMutationGQL = ()=>{
     const MUTATION_GQL = gql`
       mutation ($command:String!, $ids:[String!]!){
@@ -144,7 +156,7 @@ const ListView = React.forwardRef((
     return MUTATION_GQL;
   }
 
-  const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(createQueryGQL(), {
+  const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryParam },
     notifyOnNetworkStatusChange: true
   });

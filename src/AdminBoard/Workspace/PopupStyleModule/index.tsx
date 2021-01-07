@@ -53,6 +53,7 @@ export const PopupStyleModule = observer((
         page={page}
         onPageAction = {hanlePageAction}
         pageParams = {pageParams}
+        hideGQLDebug = {!!popupPage}
       />
       <PopupPage 
         page = {popupPage}

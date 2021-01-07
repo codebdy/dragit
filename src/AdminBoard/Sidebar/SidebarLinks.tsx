@@ -15,7 +15,7 @@ import { useLoggedUser } from "store/helpers/useLoggedUser";
 import { cloneObject } from "utils/cloneObject";
 import {observer} from "mobx-react-lite";
 import { ID } from "base/Model/graphqlTypes";
-import { GET_DRAWER } from "../../base/GQLs";
+import { GET_DRAWER } from "../../base/GraphQL/GQLs";
 import { useShowAppoloError } from "store/helpers/useInfoError";
 
 const useStyles = makeStyles((theme: Theme) =>

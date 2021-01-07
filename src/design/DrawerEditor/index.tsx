@@ -14,7 +14,7 @@ import SubmitButton from 'components/common/SubmitButton';
 import { useAuthCheck } from 'store/helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'base/authSlugs';
 import { ID } from 'base/Model/graphqlTypes';
-import { GET_DRAWER, SAVE_DRAWER } from 'base/GQLs';
+import { GET_DRAWER, SAVE_DRAWER } from 'base/GraphQL/GQLs';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { cloneObject } from 'utils/cloneObject';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
