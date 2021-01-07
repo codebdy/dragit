@@ -285,6 +285,7 @@
     "server-error":"Server error",
     "details":"Details",
 
+    "query":"Query",
     "list-query":"Query list",
     "mutation":"Mutation"
 }
