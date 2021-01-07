@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, Grid, Typography, Fab } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Grid, Typography, Fab, CircularProgress } from '@material-ui/core';
 import { GraphQLStore } from 'base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react-lite';
 import {GQLList} from './GQLList';
@@ -70,7 +70,7 @@ export const GraphQLDebugPannel = observer((props:{
   //const [error, setError] = useState<any>();
   const appStore = useAppStore();
 
-  const [excuteQuery, { error, data:queryResult }] = useDebugQuery(graphiQL);
+  const [excuteQuery, { loading, error, data:queryResult }] = useDebugQuery(graphiQL);
 
   useEffect(()=>{
     try{
@@ -87,7 +87,7 @@ export const GraphQLDebugPannel = observer((props:{
     let variables;
     try{
       variables = variablesStr ? JSON.parse(variablesStr) : variablesStr;
-      print(parse(graphiQL));
+      parse(graphiQL);
     }
     catch(e){
       //console.error(e);
@@ -132,15 +132,22 @@ export const GraphQLDebugPannel = observer((props:{
               :
               <CodeMirrorEditor value = {queryResult ? JSON.stringify(queryResult, null, 2) :''} mode="application/json" lint = {false}/>
             }
-            <Fab 
-              className={classes.fab} 
-              size="medium" 
-              color = "primary"
-              aria-label="GraphQL Run" 
-              onClick={handleRun} 
-            >        
-              <MdiIcon iconClass="mdi-play" size={30}/>
-            </Fab>
+            <div className={classes.fab}>
+              {
+                loading?
+                  <CircularProgress />
+                :
+                <Fab 
+                  size="medium" 
+                  color = "primary"
+                  aria-label="GraphQL Run" 
+                  onClick={handleRun} 
+                >        
+                  <MdiIcon iconClass="mdi-play" size={30}/>
+                </Fab>  
+              }            
+            </div>
+
           </Grid>
         </Grid>
         </div>

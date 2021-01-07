@@ -1,5 +1,5 @@
 import { useLazyQuery, gql } from "@apollo/react-hooks";
-import { print, parse } from 'graphql';
+import { parse } from 'graphql';
 
 export function useDebugQuery(graphiQL?:string){
   let graphiQLStr = graphiQL;
@@ -8,7 +8,7 @@ export function useDebugQuery(graphiQL?:string){
   }
 
   try{
-    print(parse(graphiQL||''));
+    parse(graphiQL||'');
   }
   catch(e){
     graphiQLStr = 'query{empty}'
