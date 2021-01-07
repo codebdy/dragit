@@ -85,7 +85,7 @@ export const GraphQLDebugPannel = observer((props:{
     let graphiqlStr;
     setError(undefined);
     try{
-      variables = JSON.parse(variablesStr);
+      variables = variablesStr ? JSON.parse(variablesStr) : variablesStr;
       graphiqlStr = print(parse(graphiQL));
     }
     catch(e){
@@ -105,11 +105,17 @@ export const GraphQLDebugPannel = observer((props:{
         <Grid container spacing={1} alignItems="stretch" >
           <Grid item md={4} className={classes.editorSchell}>
             <Typography className={classes.titleText} variant="h6">GraphiQL</Typography>
-            <CodeMirrorEditor value = {graphiQL} mode="graphql" onChange = {value=>setGraphiQL(value)}/>
+            <CodeMirrorEditor value = {graphiQL} mode="graphql" onChange = {value=>setGraphiQL(value?.trim())}/>
           </Grid>
           <Grid item md={4} className={classes.editorSchell}>
             <Typography variant="h6" className={classes.titleText}>Variables</Typography>
-            <CodeMirrorEditor value = {variablesStr} mode="application/json" onChange = {value=>setVariablesStr(value)}/>
+            <CodeMirrorEditor value = {variablesStr} mode="application/json" 
+              onChange = {
+                value=>setVariablesStr(value?.trim())
+              }
+
+              lint = {!!variablesStr}
+            />
           </Grid>
           <Grid item md={4} className={classes.editorSchell}>
             <Typography variant="h6" className={classes.titleText}>{intl.get('result')}</Typography>
