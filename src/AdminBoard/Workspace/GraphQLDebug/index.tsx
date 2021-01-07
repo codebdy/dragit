@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     closeButton: {
       position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
+      right: theme.spacing(0.2),
+      top: theme.spacing(0.2),
       color: theme.palette.grey[500],
     },
     content:{
@@ -95,7 +95,7 @@ export default function GraphQLDebug(){
         </Fab>
       }
 
-      <Drawer variant = "persistent" anchor="bottom" open={open} onClose={handleClose}>
+      <Drawer anchor="bottom" open={open} onClose={handleClose}>
         <div className = {classes.title}>
           <MdiIcon iconClass="mdi-graphql" />        
           <Typography className={classes.titleText} variant="h6">GraphQL </Typography>
@@ -114,7 +114,6 @@ export default function GraphQLDebug(){
         </div>
         <Divider />
         <div className={classes.content}> 
-
           <TabPanel value={value} index={0}>
             {intl.get('query')}
           </TabPanel>

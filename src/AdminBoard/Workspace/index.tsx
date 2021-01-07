@@ -11,9 +11,6 @@ import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useShowAppoloError } from "store/helpers/useInfoError";
 import { PageEditor } from "design/PageEditor";
-import { useLoggedUser } from "store/helpers/useLoggedUser";
-import { AUTH_DEBUG } from "base/authSlugs";
-import GraphQLDebug from "./GraphQLDebug";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,7 +53,7 @@ export const Workspace = observer(()=>{
   const designer = useDesigner();
 
   const classes = useStyles();
-  const loggedUser = useLoggedUser();
+  
   const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
   useShowAppoloError(error);
 
@@ -93,11 +90,6 @@ export const Workspace = observer(()=>{
         designer.pageId &&
         <PageEditor pageId = {designer.pageId} onClose={()=>{designer.close()}} />        
       }
-      {
-        loggedUser.authCheck(AUTH_DEBUG)&&
-        <GraphQLDebug />
-      }
-
     </div>
   )
 })

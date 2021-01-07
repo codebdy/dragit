@@ -18,6 +18,9 @@ import ConfirmDialog from 'base/Widgets/ConfirmDialog';
 import intl from 'react-intl-universal';
 import { RXNodeRoot } from 'base/RXNode/Root';
 import { cloneObject } from 'utils/cloneObject';
+import { AUTH_DEBUG } from 'base/authSlugs';
+import { useLoggedUser } from 'store/helpers/useLoggedUser';
+import GraphQLDebug from '../GraphQLDebug';
 
 export const Page = observer((
   props:{
@@ -34,7 +37,8 @@ export const Page = observer((
   const [mutation, setMutation] = useState<IPageMutation>();
   const queryName = page?.schema?.query?.name;
   const appStore = useAppStore();
-
+  const loggedUser = useLoggedUser();
+  
   const createQueryGQL = ()=>{
     const QUERY_GQL = gql`
       query ($id:ID){
@@ -212,6 +216,10 @@ export const Page = observer((
           onCancel ={()=>{setBackConfirmOpen(false)}}
           onConfirm = {handleBackConfirm}
         /> 
+      {
+        loggedUser.authCheck(AUTH_DEBUG)&&
+        <GraphQLDebug />
+      }
     </ModelProvider>
   )
 })
