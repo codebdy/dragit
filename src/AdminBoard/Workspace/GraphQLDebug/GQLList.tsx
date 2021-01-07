@@ -15,17 +15,22 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const GQLList = observer((props:{
-  gqls?:Array<GraphQLStore>
+  gqls?:Array<GraphQLStore>,
+  selected?:GraphQLStore,
+  onSelect?:(gql:GraphQLStore)=>void,
 })=>{
-  const{gqls} = props;
+  const{gqls,selected, onSelect} = props;
   const classes = useStyles();
+  const handleClick = (gql:GraphQLStore)=>{
+    onSelect&&onSelect(gql)
+  }
   return (
     <div className={classes.root}>
       <List>
         {
           gqls?.map((gql, index)=>{
             return(
-              <ListItem key={index} button>
+              <ListItem key={index} button selected = {selected === gql} onClick={()=>handleClick(gql)}>
                 <ListItemText primary={gql.name} secondary={`from ${gql.source}`} />
               </ListItem>
             )

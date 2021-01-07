@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { GraphQLStore } from 'base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react-lite';
@@ -19,9 +19,11 @@ export const QueriesDebug = observer((props:{
 })=>{
   const {queries} = props;
   const classes = useStyles();
+  const [selected, setSelected] = useState<GraphQLStore|undefined>(/*queries&&queries.length > 0 ? queries[0] : undefined*/);
+
   return (
     <div className={classes.root}>
-      <GQLList gqls = {queries} />
+      <GQLList gqls = {queries} selected = {selected} onSelect={(gql)=>{setSelected(gql)}} />
       <Grid container>
         <Grid item md={4}>
           1
