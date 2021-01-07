@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, createStyles, Fab, Hidden, Drawer, Divider, IconButton, Typography, Box, Tab, Tabs} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Fab, Hidden, Drawer, Divider, IconButton, Typography, Tab, Tabs} from '@material-ui/core';
 import MdiIcon from 'components/common/MdiIcon';
 import { useLeftDrawer } from 'store/helpers/useAppStore';
 import { Close } from '@material-ui/icons';
 import intl from 'react-intl-universal';
 import { usePageGQLStore } from 'base/GraphQL/PageGQLProvider';
+import { QueriesDebug } from './QueriesDebug';
+import { TabPanel } from './TabPanel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,41 +31,21 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.grey[500],
     },
     content:{
-      height:'400px',
+      height:'100%',
       display:'flex',
       flexFlow:'row',
     },
     tabs: {
       marginLeft:theme.spacing(2),
     },
+
+    tabPanel:{
+      flex:1,
+      height:'400px',
+      display:'flex',
+    }
   }),
 );
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: any;
-  value: any;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={1}>
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-}
 
 export default function GraphQLDebug(){
   const classes = useStyles();
@@ -115,14 +97,10 @@ export default function GraphQLDebug(){
         </div>
         <Divider />
         <div className={classes.content}> 
-          <TabPanel value={value} index={0}>
-            {pageGqlStore?.queries.map((query)=>{
-              return(
-                query.name + '-' + query.source
-              )
-            })}
+          <TabPanel className = {classes.tabPanel} value={value} index={0}>
+            <QueriesDebug queries = {pageGqlStore?.queries} />
           </TabPanel>
-          <TabPanel value={value} index={1}>
+          <TabPanel className = {classes.tabPanel} value={value} index={1}>
             {intl.get('mutation')}
           </TabPanel>
         </div>

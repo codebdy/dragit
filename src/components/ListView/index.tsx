@@ -134,7 +134,7 @@ const ListView = React.forwardRef((
     return GQL_STRING;
   }
 
-  const [queryGQL] = useState(new GraphQLStore(intl.get('query'), 'ListView', createQueryGQL()));
+  const [queryGQL] = useState(new GraphQLStore(intl.get('list-query'), 'ListView', createQueryGQL()));
 
   useEffect(()=>{
     pageGQLStore?.addQuery(queryGQL);

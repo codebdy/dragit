@@ -290,7 +290,7 @@
     "server-error":"服务器错误",
     "details":"详细",
 
-    "query":"查询",
+    "list-query":"列表查询",
     "mutation":"更改"
 
 }
