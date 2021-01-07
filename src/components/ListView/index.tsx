@@ -23,10 +23,8 @@ import { ICommand } from 'base/Model/ICommand';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IColumn } from 'components/ListView/IColumn';
 import { useAppStore } from 'store/helpers/useAppStore';
-import { resolveFieldGQL } from './CellRenders';
 import { ID } from 'base/Model/graphqlTypes';
-import { GraphQLStore } from 'base/GraphQL/GraphQLStore';
-import { usePageGQLStore } from 'base/GraphQL/PageGQLProvider';
+import { useQueryGQL } from './useQueryGQL';
 
 export const COMMAND_QUERY = "query";
 
@@ -104,45 +102,7 @@ const ListView = React.forwardRef((
   });
 
   const appStore = useAppStore();
-  const pageGQLStore = usePageGQLStore();
-
-  const createQueryGQL = ()=>{
-    let fields = ''
-    columns?.forEach((colum)=>{
-      fields = fields + ' ' + resolveFieldGQL(colum);
-    })
-
-    const GQL_STRING = `
-      query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
-        ${query}(first:$first, page:$page, where:$where, orderBy:$orderBy){
-          data {
-              id
-              ${fields}
-            }
-            paginatorInfo {
-              count
-              currentPage
-              hasMorePages
-              lastPage
-              perPage
-              total
-            }
-        }
-      }
-  `
-    console.log('ListView query GQL', GQL_STRING)
-    return GQL_STRING;
-  }
-
-  const [queryGQL] = useState(new GraphQLStore(intl.get('list-query'), 'ListView', createQueryGQL()));
-
-  useEffect(()=>{
-    pageGQLStore?.addQuery(queryGQL);
-    return ()=>{
-      pageGQLStore?.removeQuery(queryGQL);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  const queryGQL = useQueryGQL( columns, query, queryParam );
   
   const createMutationGQL = ()=>{
     const MUTATION_GQL = gql`
@@ -160,8 +120,6 @@ const ListView = React.forwardRef((
     variables: { ...queryParam },
     notifyOnNetworkStatusChange: true
   });
-
-  console.log('ListView query',error, data);
 
   const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(createMutationGQL(),
     {onCompleted:()=>{appStore.setSuccessAlert(true)}}
