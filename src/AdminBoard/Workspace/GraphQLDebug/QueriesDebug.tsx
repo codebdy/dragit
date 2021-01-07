@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, Grid, Typography } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Grid, Typography, Fab } from '@material-ui/core';
 import { GraphQLStore } from 'base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react-lite';
 import {GQLList} from './GQLList';
 import { print, parse } from 'graphql';
 import {CodeMirrorEditor} from './CodeMirrorEditor';
 import intl from 'react-intl-universal';
+import MdiIcon from 'components/common/MdiIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:theme.spacing(1, 1),
     },
     editorSchell:{
+      position:'relative',
       display:'flex',
       flexFlow:'column',
     },
@@ -45,6 +47,11 @@ const useStyles = makeStyles((theme: Theme) =>
     pre:{
       whiteSpace:'pre-wrap',
       wordWrap:'break-word',
+    },
+    fab:{
+      position:'absolute',
+      top:'calc(50% - 20px)',
+      left:'-16px',
     }
   }),
 );
@@ -96,6 +103,15 @@ export const QueriesDebug = observer((props:{
                 </pre>
               </div>
             </div>
+            <Fab 
+              className={classes.fab} 
+              size="medium" 
+              color = "primary"
+              aria-label="GraphQL Run" 
+              onClick={()=>{}} 
+            >        
+              <MdiIcon iconClass="mdi-play" size={30}/>
+            </Fab>
           </Grid>
         </Grid>
         </div>
