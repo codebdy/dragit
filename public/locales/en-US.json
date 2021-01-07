@@ -288,5 +288,6 @@
     "query":"Query",
     "list-query":"Query list",
     "mutation":"Mutation",
-    "result":"Result"
+    "result":"Result",
+    "input-graphql-error":"Input error"
 }

@@ -32,9 +32,10 @@ export const CodeMirrorEditor = (
     value:string,
     mode:string,
     onChange?:(value:string)=>void,
+    lint?:boolean,
   }
 )=>{
-  const {value, mode, onChange} = props;
+  const {value, mode, lint = true, onChange} = props;
   const classes = useStyles();
   return (
     <CodeMirror
@@ -55,7 +56,7 @@ export const CodeMirrorEditor = (
         foldGutter: true,
         gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter","CodeMirror-lint-markers"],
         //CodeMirror-lint-markers是实现语法报错功能
-        lint: true,
+        lint: lint,
         //json: true,
         //括号匹配
         //matchBrackets:true,

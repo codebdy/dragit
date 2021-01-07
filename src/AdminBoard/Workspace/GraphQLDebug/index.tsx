@@ -4,7 +4,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import { useLeftDrawer, useThemeSettings } from 'store/helpers/useAppStore';
 import { Close } from '@material-ui/icons';
 import { usePageGQLStore } from 'base/GraphQL/PageGQLProvider';
-import { QueriesDebug } from './QueriesDebug';
+import { GraphQLDebugPannel } from './GraphQLDebugPannel';
 import intl from 'react-intl-universal';
 import { DARK } from 'store/ThemeSettings';
 import "./style.css";
@@ -97,7 +97,7 @@ export default function GraphQLDebug(){
           </div>
           <Divider />
           <div className={classes.content}> 
-          <QueriesDebug queries = {pageGqlStore?.queries} />
+          <GraphQLDebugPannel queries = {pageGqlStore?.queries} />
           </div>
         </Drawer>
       </Hidden>

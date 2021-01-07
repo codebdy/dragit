@@ -293,6 +293,7 @@
     "query":"查询",
     "list-query":"列表查询",
     "mutation":"更改",
-    "result":"结果"
+    "result":"结果",
+    "input-graphql-error":"输入错误"
 
 }

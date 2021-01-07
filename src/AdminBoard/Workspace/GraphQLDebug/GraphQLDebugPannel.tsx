@@ -7,6 +7,7 @@ import { print, parse } from 'graphql';
 import {CodeMirrorEditor} from './CodeMirrorEditor';
 import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
+import { useAppStore } from 'store/helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,11 +53,12 @@ const useStyles = makeStyles((theme: Theme) =>
       position:'absolute',
       top:'calc(50% - 20px)',
       left:'-16px',
+      zIndex:10,
     }
   }),
 );
 
-export const QueriesDebug = observer((props:{
+export const GraphQLDebugPannel = observer((props:{
   queries?:Array<GraphQLStore>
 })=>{
   const {queries} = props;
@@ -64,6 +66,8 @@ export const QueriesDebug = observer((props:{
   const [selected, setSelected] = useState<GraphQLStore|undefined>(/*queries&&queries.length > 0 ? queries[0] : undefined*/);
   const [graphiQL, setGraphiQL] = useState('');
   const [variablesStr, setVariablesStr] = useState('');
+  const [error, setError] = useState<any>();
+  const appStore = useAppStore();
 
   useEffect(()=>{
     try{
@@ -75,6 +79,21 @@ export const QueriesDebug = observer((props:{
       setGraphiQL(selected?.gql||'');
     }
   },[selected])
+
+  const handleRun = ()=>{
+    let variables;
+    let graphiqlStr;
+    setError(undefined);
+    try{
+      variables = JSON.parse(variablesStr);
+      graphiqlStr = print(parse(graphiQL));
+    }
+    catch(e){
+      console.error(e);
+      appStore.infoError(intl.get('input-graphql-error'));
+      return;
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -94,21 +113,21 @@ export const QueriesDebug = observer((props:{
           </Grid>
           <Grid item md={4} className={classes.editorSchell}>
             <Typography variant="h6" className={classes.titleText}>{intl.get('result')}</Typography>
-            <div className={classes.error}>
-              <div className={classes.errorInner}> 
-                <pre className= {classes.pre}>error error error error error error error1 
-                error error error error error 2
-                error error error error 3
-                error error error error error error error error error error error error error error error error 
-                </pre>
+            {error?
+              <div className={classes.error}>
+                <div className={classes.errorInner}> 
+                  <pre className= {classes.pre}>{error.toString()}</pre>
+                </div>
               </div>
-            </div>
+              :
+              <CodeMirrorEditor value = {''} mode="application/json" lint = {false}/>
+            }
             <Fab 
               className={classes.fab} 
               size="medium" 
               color = "primary"
               aria-label="GraphQL Run" 
-              onClick={()=>{}} 
+              onClick={handleRun} 
             >        
               <MdiIcon iconClass="mdi-play" size={30}/>
             </Fab>
