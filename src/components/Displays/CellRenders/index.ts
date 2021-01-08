@@ -1,5 +1,5 @@
 
-import { IColumn } from '../IColumn';
+import { IColumn } from '../../ListView/IColumn';
 import { mediaFieldGQL } from './mediaFieldGQL';
 import {EnumChipRender} from './EnumChipRender'
 import { DefaultRender } from './DefaultRender';

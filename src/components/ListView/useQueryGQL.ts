@@ -1,6 +1,6 @@
 import { GraphQLStore } from "base/GraphQL/GraphQLStore";
 import { useState, useEffect } from "react";
-import { resolveFieldGQL } from "./CellRenders";
+import { resolveFieldGQL } from "../Displays/CellRenders";
 import { IColumn } from "./IColumn";
 import intl from "react-intl-universal";
 import { usePageGQLStore } from "base/GraphQL/PageGQLProvider";
