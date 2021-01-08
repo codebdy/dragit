@@ -8,7 +8,7 @@ export interface ChipMeta{
   value: 'default' | 'primary' | 'secondary' | undefined
 }
 
-export const EnumChipRender = React.forwardRef((
+export const EnumView = React.forwardRef((
   props:{value:string, metas:[ChipMeta]},
   ref:any
 ) =>{

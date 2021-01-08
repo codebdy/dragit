@@ -1,16 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { RXInputProps } from 'base/RXInputProps';
+import withSkeleton from 'base/HOCs/withSkeleton';
+import withFormField from 'components/common/withFormField';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    fullWidth: {
-      width:'100%',
-    },
-  }),
-);
-
-const FieldView = React.forwardRef((
+const TextView = React.forwardRef((
   props: RXInputProps& {
     fullWidth?:boolean,
     value?:Array<any>,   
@@ -23,17 +16,15 @@ const FieldView = React.forwardRef((
   ref:any
 )=>{
   const {fullWidth, name, loading, value, error, helperText, children, onChange, ...rest} = props;
-  const classes = useStyles();
 
   return (
-    <div 
+    <span 
       ref={ref}
-      className = {fullWidth ? classes.fullWidth : ''}
       {...rest}
     >
       {value}
-    </div>
+    </span>
   )
 })
 
-export default FieldView
+export default withFormField(withSkeleton(TextView))

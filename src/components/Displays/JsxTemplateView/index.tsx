@@ -13,11 +13,11 @@ const JsxTemplateView = React.forwardRef((
   props:{
     isDesigning?:boolean,
     model?:boolean,
-    graphQLFields?:string,
+    graphiQL?:string,
   },
   ref:any
 )=>{
-  const {isDesigning, model, graphQLFields, ...rest} = props;
+  const {isDesigning, model, graphiQL, ...rest} = props;
   const classes = useStyles();
 
   return (

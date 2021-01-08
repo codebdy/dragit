@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -80,6 +80,7 @@ const ListView = React.forwardRef((
       elevation:number,
       childrenNodes?:Array<RXNode<IMeta>>,
       isDeisgning?:boolean,
+      children?:any,
     }, 
     ref:any
   )=>{
@@ -100,6 +101,7 @@ const ListView = React.forwardRef((
     elevation,
     childrenNodes = [],
     isDeisgning,
+    children,
     ...rest
   } = props
   
@@ -237,9 +239,9 @@ const ListView = React.forwardRef((
   };
 
   const hasRowCommands = rowCommands && rowCommands.length > 0;
-  
-
   const isSelected = (id: ID) => selected.indexOf(id) !== -1;
+
+  console.log(children);
 
   return (
     <div className={className} {...rest} ref={ref}>
@@ -259,93 +261,105 @@ const ListView = React.forwardRef((
             aria-labelledby="tableTitle"
             size={'medium'}
             aria-label="enhanced table"
+            style={{marginTop:'1px'}}
           >
-            <ListViewHead
-              numSelected={selected.length}
-              orders = {queryParam.orders}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={orders=>updateQueryParam('orders', orders)}
-              rowCount={rows?.length || 0}
-              columns = {columns}
-              rowCommandsCount = {rowCommands?.length}
-            />
-            <TableBody>
-              {rows?.map((row:Row, index: any) => {
-                  const isItemSelected = isSelected(row.id);
-                  const labelId = `listview-${index}`;
-                  return (
-                    <TableRow
-                      hover
-                      id={row.id}
-                      onClick={(event) => handleClick(event, row.id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        {
-                          loading ? 
-                          <Skeleton animation="wave" height={50} width="60%" />
-                          :
-                          <Checkbox
-                            id = {row.id.toString()}
-                            checked={isItemSelected}
-                            inputProps={{ 'aria-labelledby': labelId }}
-                          />
-                        }
-                      </TableCell>
-                      {
-                        columns.map((column, colIndex) => {
-                          return(
-                            loading ? 
-                            <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props} >
-                              <Skeleton animation="wave" height={50} width="50%" />
-                            </TableCell>
-                            :
-                            <ListViewCell
-                              key = {row.id + '-' + colIndex + '-' + column.field} 
-                              row={row} 
-                              columns = {columns} 
-                              colIndex = {colIndex} 
-                            />
-                          )
-                        })
-                      }
-                      {
-                        hasRowCommands&&
-                        (
-                          loading ? 
-                            <TableCell key={row.id + '-command'} align="right">
-                              <Skeleton animation="wave" height={50} width="50%" />
-                            </TableCell>
-                          :
-                            <TableCell key={row.id + '-command'} align="right">
-                              {
-                                rowCommands?.map((command, index)=>{
-                                  return(
-                                    <Tooltip title={command.label} key={command.slug}>
-                                      <IconButton aria-label={command.label} name={'row-action-' + command.slug}
-                                        onClick = {(e)=>{
-                                          command.jumpToPage ? jumpToPage(command.jumpToPage as IPageJumper, row) : handleRowAction(command, row.id);
-                                          e.stopPropagation();
-                                        }}
-                                        size = "medium"
-                                      >
-                                        <MdiIcon iconClass = {command.icon} size="16" />
-                                      </IconButton>
-                                    </Tooltip>
-                                  )
-                                })
-                              }                              
-                            </TableCell>
-                        )
-                      }
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
+            {
+              isDeisgning?
+              <TableBody>
+                <TableRow>
+                  {children}
+                </TableRow>
+              </TableBody>
+              :
+              <Fragment>
+                <ListViewHead
+                  numSelected={selected.length}
+                  orders = {queryParam.orders}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={orders=>updateQueryParam('orders', orders)}
+                  rowCount={rows?.length || 0}
+                  columns = {columns}
+                  rowCommandsCount = {rowCommands?.length}
+                />
+                <TableBody>
+                  {rows?.map((row:Row, index: any) => {
+                      const isItemSelected = isSelected(row.id);
+                      const labelId = `listview-${index}`;
+                      return (
+                        <TableRow
+                          hover
+                          id={row.id}
+                          onClick={(event) => handleClick(event, row.id)}
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={row.id}
+                          selected={isItemSelected}
+                        >
+                          <TableCell padding="checkbox">
+                            {
+                              loading ? 
+                              <Skeleton animation="wave" height={50} width="60%" />
+                              :
+                              <Checkbox
+                                id = {row.id.toString()}
+                                checked={isItemSelected}
+                                inputProps={{ 'aria-labelledby': labelId }}
+                              />
+                            }
+                          </TableCell>
+                          {
+                            columns.map((column, colIndex) => {
+                              return(
+                                loading ? 
+                                <TableCell key={row.id + '-' + colIndex + '-' + column.field} {... column.props} >
+                                  <Skeleton animation="wave" height={50} width="50%" />
+                                </TableCell>
+                                :
+                                <ListViewCell
+                                  key = {row.id + '-' + colIndex + '-' + column.field} 
+                                  row={row} 
+                                  columns = {columns} 
+                                  colIndex = {colIndex} 
+                                />
+                              )
+                            })
+                          }
+                          {
+                            hasRowCommands&&
+                            (
+                              loading ? 
+                                <TableCell key={row.id + '-command'} align="right">
+                                  <Skeleton animation="wave" height={50} width="50%" />
+                                </TableCell>
+                              :
+                                <TableCell key={row.id + '-command'} align="right">
+                                  {
+                                    rowCommands?.map((command, index)=>{
+                                      return(
+                                        <Tooltip title={command.label} key={command.slug}>
+                                          <IconButton aria-label={command.label} name={'row-action-' + command.slug}
+                                            onClick = {(e)=>{
+                                              command.jumpToPage ? jumpToPage(command.jumpToPage as IPageJumper, row) : handleRowAction(command, row.id);
+                                              e.stopPropagation();
+                                            }}
+                                            size = "medium"
+                                          >
+                                            <MdiIcon iconClass = {command.icon} size="16" />
+                                          </IconButton>
+                                        </Tooltip>
+                                      )
+                                    })
+                                  }                              
+                                </TableCell>
+                            )
+                          }
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Fragment>
+            }
           </Table>
         </TableContainer>
         <TablePagination

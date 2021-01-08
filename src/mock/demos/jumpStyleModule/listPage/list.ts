@@ -1,62 +1,14 @@
 export default {
   name:'ListView',
+  withActions:true,
+  selfRenderChildren:true,
   designProps:{
+    isDeisgning:true,
     query:null,
   },
-  withActions:true,
   props:{
     variant:'outlined',
     //elevation:6,
-    columns:[
-      {
-        field: 'feathureImage',
-        label: '',
-        render:{
-          name: 'MediaRender',
-          props:{
-            width:60,
-          }
-        }
-      },
-      {
-        field:'title',
-        label:'标题',
-        sortable:true,
-        //template:'<span style="color:red;">{$title}</span>',
-        props:{
-        }
-      },
-      {
-        field:'status',
-        label:'状态',
-        sortable:true,
-        render:{
-          name: 'EnumChipRender',
-          props:{
-            metas:[
-              {
-                name:'PUBLISHED',
-                value:'default',
-                label:'已发布'
-              },
-              {
-                name:'DRAFT',
-                value:'secondary',
-                label:'草稿'
-              }
-            ]
-          }            
-        }
-      },
-      {
-        field:'created_at',
-        label:'时间',
-        sortable:true,
-        props:{
-        }
-      },
-
-    ],
     rowsPerPageOptions:'10,25,50',
     defalutRowsPerPage:10,
     filters:[
@@ -140,5 +92,111 @@ export default {
     ],
     query:'posts',
     mutation: 'updatePosts',
-  }
+  },
+  children:[
+    {
+      name:'TableColumn',
+      props:{
+        label:'图片',                  
+      },
+      designProps:{
+        isDeisgning:true,
+      }, 
+      children:[{
+        name:'MediaSelect',
+        designProps:{
+          isDeisgning:true,
+        },
+        props:{
+          field:'image',
+          width:'60px',
+        }
+      }]
+    },
+    {
+      name:'TableColumn',
+      props:{
+        label:'名称',
+        width:'200px',
+      },
+      designProps:{
+        isDeisgning:true,
+      }, 
+      children:[{
+        name:'TextBox',
+        props:{
+          field:'name',
+          variant:'outlined',
+          size:'small',
+        }
+      }]
+    },
+    {
+      name:'TableColumn',
+      props:{
+        label:'颜色',
+      },
+      designProps:{
+        isDeisgning:true,
+      }, 
+      children:[{
+        name:'TextBox',
+        props:{
+          field:'color',
+          variant:'outlined',
+          size:'small',
+        }
+      }]
+    },
+    {
+      name:'TableColumn',
+      props:{
+        label:'型号',
+      },
+      designProps:{
+        isDeisgning:true,
+      }, 
+      children:[{
+        name:'SelectBox',
+        props:{
+          field:'category',
+          variant:"outlined",
+          size:'small',
+          withoutEmpertyItem:false,                        
+          items:[
+            {
+              slug:'100',
+              label:'100'
+            },
+            {
+              slug:'200',
+              label:'200'
+            },
+            {
+              slug:'300',
+              label:'300'
+            }
+          ]
+        }
+      }],
+    },
+    {
+      name:'TableColumn',
+      props:{
+        label:'库存',
+      },
+      designProps:{
+        isDeisgning:true,
+      }, 
+      children:[{
+        name:'TextBox',
+        props:{
+          field:'stock',
+          variant:'outlined',
+          size:'small',
+        }
+      }]
+    },
+  ],             
+
 }
