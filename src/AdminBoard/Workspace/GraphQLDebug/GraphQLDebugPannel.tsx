@@ -108,11 +108,11 @@ export const GraphQLDebugPannel = observer((props:{
       <div className={classes.container}>      
         <Grid container spacing={0} alignItems="stretch" >
           <Grid item md={4} className={classes.editorSchell}>
-            <Typography className={classes.titleText} variant="h6">GraphiQL</Typography>
+            <Typography className={classes.titleText} variant="h6">{intl.get('graphiqL')}</Typography>
             <CodeMirrorEditor value = {graphiQL} mode="graphql" onChange = {value=>setGraphiQL(value?.trim())}/>
           </Grid>
           <Grid item md={4} className={classes.editorSchell}>
-            <Typography variant="h6" className={classes.titleText}>Variables</Typography>
+            <Typography variant="h6" className={classes.titleText}>{intl.get('variables')}</Typography>
             <CodeMirrorEditor value = {variablesStr} mode="application/json" 
               onChange = {
                 value=>setVariablesStr(value?.trim())

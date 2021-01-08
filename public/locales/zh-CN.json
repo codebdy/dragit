@@ -294,6 +294,8 @@
     "list-query":"列表查询",
     "mutation":"更改",
     "result":"结果",
-    "input-graphql-error":"输入错误"
+    "input-graphql-error":"输入错误",
+    "graphiqL":"GraphQL语句",
+    "variables":"变量"
 
 }
