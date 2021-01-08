@@ -105,7 +105,7 @@ const ListView = React.forwardRef((
 
   const appStore = useAppStore();
   const queryGQL = useQueryGQL( columns, query, queryParam );
-  const mutationGQL = useMutationGQL(mutation, selected, queryParam);
+  const mutationGQL = useMutationGQL(mutation, selected);
   
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryParam },

@@ -2,11 +2,10 @@ import intl from 'react-intl-universal';
 import { GraphQLStore } from "base/GraphQL/GraphQLStore";
 import { useEffect, useState } from "react";
 import { usePageGQLStore } from 'base/GraphQL/PageGQLProvider';
-import { IQueryParam } from './IQueryParam';
 import { ID } from 'base/Model/graphqlTypes';
 
 
-export function useMutationGQL( mutation:String|undefined, selected:ID[], queryParam: IQueryParam ){
+export function useMutationGQL( mutation:String|undefined, selected:ID[] ){
   const pageGQLStore = usePageGQLStore();
 
   const createMutationGQL = ()=>{
@@ -24,9 +23,9 @@ export function useMutationGQL( mutation:String|undefined, selected:ID[], queryP
   const [mutationGQL] = useState(new GraphQLStore(intl.get('list-update'), 'ListView', createMutationGQL()));
 
   useEffect(()=>{
-    mutationGQL.setVariables({...mutationGQL.variables, ...queryParam, ids:selected, command:''})
+    mutationGQL.setVariables({...mutationGQL.variables, ids:selected, command:''})
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[queryParam, selected])
+  },[selected])
 
   useEffect(()=>{
     pageGQLStore?.addQuery(mutationGQL);
