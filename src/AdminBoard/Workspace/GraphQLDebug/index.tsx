@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
     fab: {
       position: 'fixed',
       bottom: theme.spacing(1),
-      zIndex:theme.zIndex.snackbar + 1,
     },
     title: {
       margin: 0,
