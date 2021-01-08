@@ -87,7 +87,7 @@ export default function GraphQLDebug(){
           </Fab>
         }
 
-        <Drawer anchor="bottom" open={open} onClose={handleClose}>
+        <Drawer anchor="bottom" variant="persistent" open={open} onClose={handleClose}>
           <div className = {classes.title}>
             <MdiIcon iconClass="mdi-graphql" />        
             <Typography className={classes.titleText} variant="h6">GraphQL {intl.get('debug')}</Typography>
