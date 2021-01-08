@@ -26,6 +26,8 @@ import { useAppStore } from 'store/helpers/useAppStore';
 import { ID } from 'base/Model/graphqlTypes';
 import { useQueryGQL } from './useQueryGQL';
 import { useMutationGQL } from './useMutationGQL';
+import { IMeta } from 'base/Model/IMeta';
+import { RXNode } from 'base/RXNode/RXNode';
 
 export const COMMAND_QUERY = "query";
 
@@ -76,6 +78,8 @@ const ListView = React.forwardRef((
       mutation?:string,
       variant?:'elevation' | 'outlined',
       elevation:number,
+      childrenNodes?:Array<RXNode<IMeta>>,
+      isDeisgning?:boolean,
     }, 
     ref:any
   )=>{
@@ -94,6 +98,8 @@ const ListView = React.forwardRef((
     mutation,
     variant,
     elevation,
+    childrenNodes = [],
+    isDeisgning,
     ...rest
   } = props
   
