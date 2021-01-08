@@ -5,7 +5,7 @@ import { RXNode } from 'base/RXNode/RXNode';
 import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';
 import BadgeEditor from './BadgeEditor';
-import MultiSelectBox from 'components/inputs/Select/MultiSelectBox';
+import MultiSelectBox from 'components/Input/Select/MultiSelectBox';
 
 export default function NodeEditor(
   props:{
