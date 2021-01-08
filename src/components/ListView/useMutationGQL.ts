@@ -11,7 +11,7 @@ export function useMutationGQL( mutation:String|undefined, selected:ID[] ){
   const createMutationGQL = ()=>{
     const MUTATION_GQL = `
       mutation ($command:String!, $ids:[String!]!){
-        ${mutation||'empty'}(command:$command, ids:$ids){
+        ${mutation}(command:$command, ids:$ids){
           id
         }
       }
