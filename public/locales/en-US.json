@@ -291,5 +291,6 @@
     "result":"Result",
     "input-graphql-error":"Input error",
     "graphiqL":"GraphiQL",
-    "variables":"Variables"
+    "variables":"Variables",
+    "list-update":"List update"
 }

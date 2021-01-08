@@ -296,6 +296,7 @@
     "result":"结果",
     "input-graphql-error":"输入错误",
     "graphiqL":"GraphQL语句",
-    "variables":"变量"
+    "variables":"变量",
+    "list-update":"列表更新"
 
 }

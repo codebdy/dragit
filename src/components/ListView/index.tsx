@@ -25,6 +25,7 @@ import { IColumn } from 'components/ListView/IColumn';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { ID } from 'base/Model/graphqlTypes';
 import { useQueryGQL } from './useQueryGQL';
+import { useMutationGQL } from './useMutationGQL';
 
 export const COMMAND_QUERY = "query";
 
@@ -100,28 +101,18 @@ const ListView = React.forwardRef((
     page : 0,
     first: defalutRowsPerPage,
   });
+  const [selected, setSelected] = React.useState<ID[]>([]);
 
   const appStore = useAppStore();
   const queryGQL = useQueryGQL( columns, query, queryParam );
+  const mutationGQL = useMutationGQL(mutation, selected, queryParam);
   
-  const createMutationGQL = ()=>{
-    const MUTATION_GQL = gql`
-      mutation ($command:String!, $ids:[String!]!){
-        ${mutation}(command:$command, ids:$ids){
-          id
-        }
-      }
-    `;
-
-    return MUTATION_GQL;
-  }
-
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryParam },
     notifyOnNetworkStatusChange: true
   });
 
-  const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(createMutationGQL(),
+  const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(gql`${mutationGQL.gql}`,
     {onCompleted:()=>{appStore.setSuccessAlert(true)}}
   );
 
@@ -157,7 +148,6 @@ const ListView = React.forwardRef((
     setQueryParam({...queryParam, [field]:value});
   }
 
-  const [selected, setSelected] = React.useState<ID[]>([]);
   const queryedData = (data && query) ? data[query] : {} as any;
   const rows = loading ? creatEmpertyRows(queryParam.first) : (queryedData?.data || []);
   const paginatorInfo = (queryedData?.paginatorInfo ||{}) as IPaginate
