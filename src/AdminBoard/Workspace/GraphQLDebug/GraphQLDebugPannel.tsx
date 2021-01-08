@@ -9,6 +9,7 @@ import intl from 'react-intl-universal';
 import MdiIcon from 'components/common/MdiIcon';
 import { useAppStore } from 'store/helpers/useAppStore';
 import { useDebugQuery } from './useDebugQuery';
+import { useDebugMutation } from './useDebugMutation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,7 +71,8 @@ export const GraphQLDebugPannel = observer((props:{
   //const [error, setError] = useState<any>();
   const appStore = useAppStore();
 
-  const [excuteQuery, { loading, error, data:queryResult }] = useDebugQuery(graphiQL);
+  const [excuteQuery, { loading, error:queryError, data:queryResult }] = useDebugQuery(graphiQL);
+  const [excuteMutation, {loading:mutating, error:mutationError, data:mutationResult}] = useDebugMutation(graphiQL);
 
   useEffect(()=>{
     try{
@@ -81,7 +83,24 @@ export const GraphQLDebugPannel = observer((props:{
       console.error(e);
       setGraphiQL(selected?.gql||'');
     }
-  },[selected])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[selected?.variables])
+
+  const isQuery = graphiQL?.startsWith('query');
+  const isMutation = graphiQL?.startsWith('mutation');
+  let result:any;
+  let error:any
+
+  if(isQuery){
+    result = queryResult;
+    error = queryError;
+  }
+
+  if(isMutation){
+    result = mutationResult;
+    error = mutationError;
+  }
+  
 
   const handleRun = ()=>{
     let variables;
@@ -95,8 +114,22 @@ export const GraphQLDebugPannel = observer((props:{
       return;
     }
 
-    excuteQuery({variables:variables});
+    try{
+      if(isQuery){
+        excuteQuery({variables:variables});
+      }
+      if(isMutation){
+        excuteMutation({variables:variables});
+      }
+    }
+    catch(e){
+      //console.error(e);
+      error = e;
+      return;
+    }
+
   }
+
   
 
   return (
@@ -123,18 +156,18 @@ export const GraphQLDebugPannel = observer((props:{
           </Grid>
           <Grid item md={4} className={classes.editorSchell}>
             <Typography variant="h6" className={classes.titleText}>{intl.get('result')}</Typography>
-            {error?
+            {error ?
               <div className={classes.error}>
                 <div className={classes.errorInner}> 
                   <pre className= {classes.pre}>{error.toString()}</pre>
                 </div>
               </div>
               :
-              <CodeMirrorEditor value = {queryResult ? JSON.stringify(queryResult, null, 2) :''} mode="application/json" lint = {false}/>
+              <CodeMirrorEditor value = {result ? JSON.stringify(result, null, 2) :''} mode="application/json" lint = {false}/>
             }
             <div className={classes.fab}>
               {
-                loading?
+                loading || mutating ?
                   <CircularProgress />
                 :
                 <Fab 
