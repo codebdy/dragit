@@ -52,6 +52,12 @@ import { AntDesignChartRule } from 'components/AntDesignChart/Rule';
 import { MediaSelectRule } from "components/Inputs/MediaSelect/Rule";
 import TableColumn from "components/OneToMany/Table/TableColumn";
 import { TableColumnRule } from "components/OneToMany/Table/TableColumn/Rule";
+import TextView from "components/Displays/TextView";
+import { TextViewRule } from "components/Displays/TextView/Rule";
+import { EnumViewRule } from "components/Displays/EnumView/Rule";
+import  EnumView  from "components/Displays/EnumView";
+import { MediaViewRule } from "components/Displays/MediaView/Rule";
+import MediaView from "components/Displays/MediaView";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -82,6 +88,10 @@ register('TreeSelect', TreeSelect, TreeSelectRule);
 register('MediaSelect', MediaSelect, MediaSelectRule);
 register('Medias', Medias);
 register('AntDesignChart', AntDesignChart, AntDesignChartRule);
+
+register('TextView', TextView, TextViewRule);
+register('MediaView', MediaView, MediaViewRule);
+register('EnumView', EnumView, EnumViewRule);
 
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);

@@ -1,4 +1,6 @@
 import Chip from '@material-ui/core/Chip';
+import withSkeleton from 'base/HOCs/withSkeleton';
+import withFormField from 'components/common/withFormField';
 import React from 'react';
 import { first } from 'utils/ArrayHelper';
 
@@ -8,7 +10,7 @@ export interface ChipMeta{
   value: 'default' | 'primary' | 'secondary' | undefined
 }
 
-export const EnumView = React.forwardRef((
+const EnumView = React.forwardRef((
   props:{value:string, metas:[ChipMeta]},
   ref:any
 ) =>{
@@ -22,3 +24,5 @@ export const EnumView = React.forwardRef((
     <span></span>
   )
 })
+
+export default withFormField(withSkeleton(EnumView));

@@ -103,7 +103,7 @@ export default {
         isDeisgning:true,
       }, 
       children:[{
-        name:'MediaSelect',
+        name:'MediaView',
         designProps:{
           isDeisgning:true,
         },
@@ -116,14 +116,14 @@ export default {
     {
       name:'TableColumn',
       props:{
-        label:'名称',
+        label:'标题',
         width:'200px',
       },
       designProps:{
         isDeisgning:true,
       }, 
       children:[{
-        name:'TextBox',
+        name:'TextView',
         props:{
           field:'name',
           variant:'outlined',

@@ -34,6 +34,7 @@ const withFormField = (Component:any)=>{
       helperText = {error || helperText}
       onChange={handleChange}
       //onBlur={handleBlur}
+      name = {field}
     />;
     return (
       compent

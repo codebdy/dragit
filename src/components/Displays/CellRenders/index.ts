@@ -1,14 +1,14 @@
 
 import { IColumn } from '../../ListView/IColumn';
 import { mediaFieldGQL } from './mediaFieldGQL';
-import {EnumView} from '../EnumView'
+import EnumView from '../EnumView'
 import { DefaultRender } from './DefaultRender';
-import {MediaRender} from '../MediaView'
+import {MediaView} from '../MediaView'
 var rendersMap : { 
   [key: string]: any
 } = {
   EnumChipRender: EnumView,
-  MediaRender
+  MediaView
 }
 
 var renderGQLFnsMap:{

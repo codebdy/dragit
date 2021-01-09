@@ -12,18 +12,19 @@ const TextView = React.forwardRef((
     withHeader:boolean,
     error?:any,
     helperText?:string,
+    isDeisgning?:boolean,
   },
   ref:any
 )=>{
-  const {fullWidth, name, loading, value, error, helperText, children, onChange, ...rest} = props;
+  const {fullWidth, name, loading, value, error, helperText, children, onChange, isDeisgning, ...rest} = props;
 
   return (
-    <span 
+    <div 
       ref={ref}
       {...rest}
     >
-      {value}
-    </span>
+      {isDeisgning ? `field:${name}` : value}
+    </div>
   )
 })
 
