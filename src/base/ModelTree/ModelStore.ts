@@ -3,46 +3,15 @@ import { IFieldStore } from "./FieldStore";
 import { IModelStore } from "./IModelStore";
 import { IModelNode } from "./IModelNode";
 
-/*function parseFieldFromNode(modelStore:IModelStore, node: RXNode<IMeta>){
-  const fieldName = node.meta.props?.field;
-  let nextParentStore:IModelStore = modelStore;
-  if(fieldName){
-    let fieldType = resolveFieldType(node.meta.name);
-    let fieldStore: any = new FieldStore(node.meta);
-    if(fieldType === FieldType.Select){
-      fieldStore = new SelectFieldStore(node.meta);
-    }
-    if(fieldType === FieldType.Media){
-      fieldStore = new MediaFieldStore(node.meta);
-    }
-    if(fieldType === FieldType.Model){
-      fieldStore = new ModelFieldStore(node.meta);
-      nextParentStore = fieldStore;
-    }
-    if(fieldType === FieldType.ModelArray){
-      fieldStore = new ModelArrayFieldStore(node.meta);
-      nextParentStore = fieldStore;
-    }
-    if(fieldType === FieldType.Table){
-      fieldStore = new TableFieldStore(node.meta);
-      nextParentStore = fieldStore;
-    }
-    modelStore.setFieldStore(fieldName, fieldStore);
-  }
-  
-  node.children?.forEach(child=>{
-    parseFieldFromNode(nextParentStore ,child);
-  })
-}*/
-
 export class ModelStore implements IModelStore , IModelNode{
   model?: any;
   loading?: boolean;
   fields: Map<string,IFieldStore>;
-  //pageLayout?:Array<RXNode<IMeta>>;
-  constructor() {
+
+  constructor(model?:any) {
+    this.model = model;
+    this.fields = new Map<string,IFieldStore>();    
     makeAutoObservable(this)
-    this.fields = new Map<string,IFieldStore>();
   }
 
   setFieldStore(fieldName:string, fieldStore:IFieldStore){
@@ -74,17 +43,6 @@ export class ModelStore implements IModelStore , IModelNode{
     this.loading = loading;
   }
 
-  /*parsePage(page?:IPage){
-    const layout = page?.schema?.layout || [];
-    let root = new RXNodeRoot<IMeta>();
-    root.parse(cloneObject(layout));
-    this.pageLayout = root.children;
-
-    this.pageLayout?.forEach(node=>{
-      parseFieldFromNode(this, node);
-    })
-  }*/
-
   setModel(model:any){
     this.model = model
     console.log('setModel', model)
@@ -96,7 +54,7 @@ export class ModelStore implements IModelStore , IModelNode{
   toFieldsGQL(){
     let gql = ' id '
     this.fields.forEach(fieldStore=>{
-      gql = gql + ` ${fieldStore.meta?.props?.field} ${fieldStore.toFieldsGQL()}`
+      gql = gql + ` ${fieldStore.toFieldsGQL()} `
     })
     return `{${gql}}`;
   }
@@ -118,7 +76,7 @@ export class ModelStore implements IModelStore , IModelNode{
   toInputValue(){
     let rtValue = this.model?.id ? {id:this.model?.id} as any : {} as any;
     this.fields?.forEach((fieldStore, key)=>{
-      if(!fieldStore.meta.props?.onlyShow){
+      if(!fieldStore.meta?.props?.onlyShow){
         rtValue[key] = fieldStore.toInputValue();        
       }
     })

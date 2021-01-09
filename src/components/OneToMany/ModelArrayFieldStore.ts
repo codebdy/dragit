@@ -12,12 +12,12 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
   defaultValue?: any;
   value?: any;
   error?: string;
-  meta: IMeta;
+  meta?: IMeta;
   loading?: boolean;
   dirty?: boolean;
   rows:Array<ModelFieldStore> = [];
   schemaRow?:ModelFieldStore;
-  constructor(meta: IMeta) {
+  constructor(meta?: IMeta) {
     this.id = creatId();
     this.meta = meta;
     this.schemaRow = new ModelFieldStore(this.meta);
@@ -46,6 +46,12 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
   }
 
   setModel(model: any) {
+    this.rows = [];
+    model?.map((row:any)=>{
+      const rowStore = new ModelFieldStore();
+      rowStore.setValue(row);
+      this.rows.push(rowStore);
+    })
   }
 
   toFieldsGQL() {

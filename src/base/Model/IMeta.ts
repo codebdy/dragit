@@ -10,4 +10,5 @@ export interface IMeta{
   selfRenderChildren?:boolean,
   designProps?:{[key:string]: any},
   auths?:string[],
+  graphiQL?:string,
 }

@@ -4,20 +4,8 @@ import { makeAutoObservable, toJS } from "mobx";
 import { IModelNode } from "./IModelNode";
 import { validate } from "./validate";
 
-export interface IFieldStore extends IModelNode{
-  id:number;
-  meta?:IMeta;
-  defaultValue?: any;
-  value?: any;
-  error?: string;
-  loading?: boolean;
-
-  setValue: (value:any)=>void;
-  setModel:(model: any)=>void;
-  validate:()=>boolean;
-}
-
-export class FieldStore implements IFieldStore{
+//解析JXS的控件使用，可以内部使用多个字段名
+export class MultiFieldsStore implements IModelNode{
   id:number;
   meta:IMeta;
   defaultValue?: any;
@@ -44,9 +32,7 @@ export class FieldStore implements IFieldStore{
   }
   
   toFieldsGQL() {
-
-    const gqlStr = this.meta.props?.graphiQL ? this.meta.props.graphiQL.replace('$field', this.meta?.props?.field) : this.meta?.props?.field;
-    return ` ${gqlStr} `;
+    return ` ${this.meta.graphiQL} `;
   }
 
   setModel(model: any) {

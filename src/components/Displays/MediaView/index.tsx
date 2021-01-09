@@ -11,12 +11,13 @@ export const MediaView = React.forwardRef((
     value:IMedia,
     width:number,
     isDeisgning?:boolean,
+    style?:any,
   },
   ref:any
 ) =>{
-  const {value, width = 60,  error, helperText, name, isDeisgning, ...rest} = props;
+  const {value, width = 60,  error, helperText, name, isDeisgning, style, ...rest} = props;
   return(
-    <div style={{width:width ? width + 'px' :''}} {...rest}>
+    <div style={{...style, width:width}} {...rest} ref={ref}>
       {isDeisgning && `field:${name}`}
       <Image src={value?.thumbnail || noImage} />      
     </div>

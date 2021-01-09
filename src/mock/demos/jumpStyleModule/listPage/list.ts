@@ -107,83 +107,90 @@ export default {
         designProps:{
           isDeisgning:true,
         },
+
         props:{
-          field:'image',
+          field:'feathureImage',
+          graphiQL:`$field{
+            id 
+            thumbnail
+          } `,          
           width:'60px',
         }
       }]
     },
     {
       name:'TableColumn',
+      designProps:{
+        isDeisgning:true,
+      }, 
       props:{
         label:'标题',
+        field:'title',
+        sortable:true,
         width:'200px',
+      },
+
+      children:[{
+        name:'TextView',
+        designProps:{
+          isDeisgning:true,
+        }, 
+        props:{
+          field:'title',
+          variant:'outlined',
+          size:'small',
+        }
+      }]
+    },
+    {
+      name:'TableColumn',
+      props:{
+        label:'状态',
+      },
+      designProps:{
+        isDeisgning:true,
+      }, 
+      children:[{
+        name:'EnumView',
+        props:{
+          field:'status',
+          metas:[
+            {
+              name:'PUBLISHED',
+              value:'default',
+              label:'已发布'
+            },
+            {
+              name:'DRAFT',
+              value:'secondary',
+              label:'草稿'
+            }
+          ]
+        }
+      }]
+    },
+    {
+      name:'TableColumn',
+      props:{
+        label:'时间',
       },
       designProps:{
         isDeisgning:true,
       }, 
       children:[{
         name:'TextView',
+        designProps:{
+          isDeisgning:true,
+        }, 
         props:{
-          field:'name',
-          variant:'outlined',
-          size:'small',
-        }
-      }]
-    },
-    {
-      name:'TableColumn',
-      props:{
-        label:'颜色',
-      },
-      designProps:{
-        isDeisgning:true,
-      }, 
-      children:[{
-        name:'TextBox',
-        props:{
-          field:'color',
-          variant:'outlined',
-          size:'small',
-        }
-      }]
-    },
-    {
-      name:'TableColumn',
-      props:{
-        label:'型号',
-      },
-      designProps:{
-        isDeisgning:true,
-      }, 
-      children:[{
-        name:'SelectBox',
-        props:{
-          field:'category',
-          variant:"outlined",
-          size:'small',
-          withoutEmpertyItem:false,                        
-          items:[
-            {
-              slug:'100',
-              label:'100'
-            },
-            {
-              slug:'200',
-              label:'200'
-            },
-            {
-              slug:'300',
-              label:'300'
-            }
-          ]
+          field:'created_at',
         }
       }],
     },
     {
       name:'TableColumn',
       props:{
-        label:'库存',
+        label:'操作',
       },
       designProps:{
         isDeisgning:true,
@@ -191,7 +198,6 @@ export default {
       children:[{
         name:'TextBox',
         props:{
-          field:'stock',
           variant:'outlined',
           size:'small',
         }

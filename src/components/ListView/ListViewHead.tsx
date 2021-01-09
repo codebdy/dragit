@@ -2,8 +2,8 @@ import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@materi
 import { Skeleton } from "@material-ui/lab";
 import { FieldOrder } from "components/ListView/IQueryParam";
 import React from "react";
-import { ILabelItem } from "../../base/Model/ILabelItem";
-import intl from "react-intl-universal";
+import { RXNode } from "base/RXNode/RXNode";
+import { IMeta } from "base/Model/IMeta";
 
 
 export interface ListViewHeadProps {
@@ -12,13 +12,12 @@ export interface ListViewHeadProps {
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   orders?: Array<FieldOrder>;
   rowCount: number;
-  columns:Array<ILabelItem>;
+  columns:Array<RXNode<IMeta>>;
   loading?:boolean;
-  rowCommandsCount:number;
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, orders = [], numSelected, rowCount, onRequestSort, columns, loading, rowCommandsCount} = props;
+  const { onSelectAllClick, orders = [], numSelected, rowCount, onRequestSort, columns, loading} = props;
 
   const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
     let order = getOrder(field);
@@ -73,41 +72,34 @@ export function ListViewHead(props: ListViewHeadProps) {
             />
           }
         </TableCell>
-        {columns.map((column,index) => (
-          loading ? 
-          <TableCell key={column.field + '-' + index} {... column.props} >
-            <Skeleton animation="wave" height={50} width="50%" />
-          </TableCell>
-          :
-          <TableCell
-            key={column.field + '-' + index}
-            sortDirection={getOrderDirection(column.field)}
-            {...column.props}
-          >
-            {column.sortable ?
-              <TableSortLabel
-                id = {column.field}
-                active={!!getOrderDirection(column.field)}
-                direction={getOrderDirection(column.field)}
-                onClick={createSortHandler(column.field)}
-              >
-                {column.label}
-              </TableSortLabel>
-              :
-              column.label
-            }
-          </TableCell>
-        ))}
-        {
-          rowCommandsCount > 0 &&
-          (
+        {columns.map((column,index) => {
+          const{sortable, ...restProps} = column.meta.props as any;
+          return(
             loading ? 
-            <TableCell  align="right">
+            <TableCell key={column.id + '-' + index} {... restProps} >
               <Skeleton animation="wave" height={50} width="50%" />
             </TableCell>
             :
-            <TableCell align="center" style={{width:(50 * rowCommandsCount + 20)+"px"}}>{intl.get('operations')}</TableCell>
+            <TableCell
+              key={column.id + '-' + index}
+              sortDirection={getOrderDirection(column.meta.props?.field)}
+              {...restProps}
+            >
+              {column.meta.props?.sortable ?
+                <TableSortLabel
+                  id = {column.id + 'label'}
+                  active={!!getOrderDirection(column.meta.props?.field)}
+                  direction={getOrderDirection(column.meta.props?.field)}
+                  onClick={createSortHandler(column.meta.props?.field)}
+                >
+                  {column.meta.props?.label}
+                </TableSortLabel>
+                :
+                column.meta.props?.label
+              }
+            </TableCell>
           )
+        })
         }
       </TableRow>
     </TableHead>

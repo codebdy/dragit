@@ -11,10 +11,10 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
   defaultValue?: any;
   value?: any;
   error?: string;
-  meta: IMeta;
+  meta?: IMeta;
   loading?: boolean;
   subFields: Map<string,IFieldStore>;
-  constructor(meta: IMeta) {
+  constructor(meta?: IMeta) {
     this.id = creatId();
     this.meta = meta;
     this.subFields = new Map<string,IFieldStore>();
@@ -51,10 +51,13 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
   }
 
   setValue(value: any) {
+    this.subFields.forEach(fieldStore=>{
+      fieldStore.setModel(value);
+    })
   }
 
   setModel(model: any) {
-    const fieldName = this.meta.props?.field;
+    const fieldName = this.meta?.props?.field;
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.subFields.forEach(fieldStore=>{
@@ -78,7 +81,7 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
   toInputValue(){
     let rtValue = this.defaultValue?.id ? {id:this.defaultValue?.id} as any : {} as any;
     this.subFields?.forEach((fieldStore, key)=>{
-      if(!fieldStore.meta.props?.onlyShow){
+      if(!fieldStore.meta?.props?.onlyShow){
         rtValue[key] = fieldStore.toInputValue();
       }
     })

@@ -18,15 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface ColumnMeta{
-  field?:string;
-  label?:string;
-  props?:any;
-  input?:{
-    name:string,
-    props:any,
-  };
-}
 
 const OneToManyTable = React.forwardRef((
   props: {
@@ -108,7 +99,7 @@ const OneToManyTable = React.forwardRef((
                         {
                           childrenNodes.map((column, index)=>{
                             return(
-                              <ComponentRender key={`${column}-${index}-row-${rowStore.id}`} component = {column} />
+                              <ComponentRender key={`${index}-row-${rowStore.id}`} component = {column} />
                             )
                           })
                         }
