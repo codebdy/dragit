@@ -152,6 +152,9 @@ export default {
       }, 
       children:[{
         name:'EnumView',
+        designProps:{
+          isDeisgning:true,
+        }, 
         props:{
           field:'status',
           metas:[
