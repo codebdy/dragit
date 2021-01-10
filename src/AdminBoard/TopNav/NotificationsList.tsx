@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
-import { INotification } from 'base1/Model/INotification';
+import { INotification } from 'Base/Model/INotification';
 import { useHistory } from 'react-router-dom';
 import { resolvePageUrl } from 'utils/resolvePageUrl';
-import { ID } from 'base1/Model/graphqlTypes';
+import { ID } from 'Base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

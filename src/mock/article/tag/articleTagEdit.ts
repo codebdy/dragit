@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION, SUBMIT_MUTATION} from "base1/PageAction";
+import {GO_BACK_ACTION, SUBMIT_MUTATION} from "Base/PageAction";
 
 
 export default {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, List, ListItem, ListItemText } from '@material-ui/core';
-import { GraphQLStore } from 'base1/GraphQL/GraphQLStore';
+import { GraphQLStore } from 'Base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react-lite';
 
 const useStyles = makeStyles((theme: Theme) =>

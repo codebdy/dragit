@@ -4,9 +4,9 @@ import { useAppStore } from 'store1/helpers1/useAppStore';
 import { getModulePageById } from './common/getModulePageById';
 import { ModuleProps } from './common/ModuleProps';
 import { Page } from './Page';
-import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'base1/PageAction';
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'Base/PageAction';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
-import { IPageJumper } from 'base1/Model/IPageJumper';
+import { IPageJumper } from 'Base/Model/IPageJumper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

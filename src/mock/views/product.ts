@@ -1,4 +1,4 @@
-import productPage from "design1/PageEditor/Toolbox/templates/product/editPage"
+import productPage from "Design/PageEditor/Toolbox/templates/product/editPage"
 
 export default {
   layout:[

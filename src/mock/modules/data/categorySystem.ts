@@ -1,4 +1,4 @@
-import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_DASHBOARD, AUTH_THEME_SETTINGS, AUTH_MEDIAS } from "base1/authSlugs";
+import { AUTH_CUSTOMIZE, AUTH_DEBUG, AUTH_DASHBOARD, AUTH_THEME_SETTINGS, AUTH_MEDIAS } from "Base/authSlugs";
 import dashboard from "mock/views/dashboard";
 import meidaPage from "mock/views/meidaPage";
 import notificationPage from "mock/views/notificationPage";

@@ -1,9 +1,9 @@
 import { Badge, ListItem, ListItemIcon, ListItemText, Chip, createStyles, makeStyles, Theme } from "@material-ui/core";
-import { useAppValue } from "base1/Hooks/useAppValue";
-import IMenuItem from "base1/Model/IMenuItem";
-import { RXNode } from "base1/RXNode/RXNode";
+import { useAppValue } from "Base/Hooks/useAppValue";
+import IMenuItem from "Base/Model/IMenuItem";
+import { RXNode } from "Base/RXNode/RXNode";
 import classNames from "classnames";
-import MdiIcon from "components1/common/MdiIcon";
+import MdiIcon from "Components/common/MdiIcon";
 import React from "react";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { useAppStore, useLeftDrawer } from "store1/helpers1/useAppStore";

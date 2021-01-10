@@ -1,4 +1,4 @@
-import { ID } from "base1/Model/graphqlTypes";
+import { ID } from "Base/Model/graphqlTypes";
 import { getModuleIndexPage } from "./getModuleIndexPage";
 import { getPageById } from "./getPageById";
 

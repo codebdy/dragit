@@ -10,7 +10,7 @@ import { PopupStyleModule } from "./PopupStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useShowAppoloError } from "store1/helpers1/useInfoError";
-import { PageEditor } from "design1/PageEditor";
+import { PageEditor } from "Design/PageEditor";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

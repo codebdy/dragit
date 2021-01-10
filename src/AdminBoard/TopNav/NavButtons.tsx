@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import MdiIcon from "components1/common/MdiIcon"
+import MdiIcon from "Components/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Hidden, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon, Avatar, Tooltip } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';

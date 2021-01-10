@@ -1,6 +1,6 @@
 import React from "react";
 import { createStyles, Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import MdiIcon from "components1/common/MdiIcon";
+import MdiIcon from "Components/common/MdiIcon";
 
 interface BrandProps{
   fullWidth?: number,

@@ -1,4 +1,4 @@
-import { IModule } from "base1/Model/IModule";
+import { IModule } from "Base/Model/IModule";
 
 export interface ModuleProps{
   module:IModule

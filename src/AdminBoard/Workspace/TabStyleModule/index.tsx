@@ -5,13 +5,13 @@ import { ModuleProps } from '../common/ModuleProps';
 import { useState } from 'react';
 import { useAppStore } from 'store1/helpers1/useAppStore';
 import { Page } from '../Page';
-import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base1/PageAction';
+import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'Base/PageAction';
 import { getModulePageById } from '../common/getModulePageById';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { TabStyleModuleBar } from './TabStyleModuleBar';
 import { useEffect } from 'react';
 import { PopupPage } from '../PopupStyleModule/PopupPage';
-import { IPageJumper } from 'base1/Model/IPageJumper';
+import { IPageJumper } from 'Base/Model/IPageJumper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

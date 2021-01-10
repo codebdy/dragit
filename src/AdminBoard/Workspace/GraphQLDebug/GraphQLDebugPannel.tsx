@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles, Grid, Typography, Fab, CircularProgress } from '@material-ui/core';
-import { GraphQLStore } from 'base1/GraphQL/GraphQLStore';
+import { GraphQLStore } from 'Base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react-lite';
 import {GQLList} from './GQLList';
 import { print, parse } from 'graphql';
 import {CodeMirrorEditor} from './CodeMirrorEditor';
 import intl from 'react-intl-universal';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import { useAppStore } from 'store1/helpers1/useAppStore';
 import { useDebugQuery } from './useDebugQuery';
 import { useDebugMutation } from './useDebugMutation';

@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react-lite";
-import { IPage } from 'base1/Model/IPage';
-import { IMeta } from 'base1/Model/IMeta';
-import { RXNode } from 'base1/RXNode/RXNode';
-import ComponentRender from 'base1/ComponentRender';
-import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'base1/PageAction';
+import { IPage } from 'Base/Model/IPage';
+import { IMeta } from 'Base/Model/IMeta';
+import { RXNode } from 'Base/RXNode/RXNode';
+import ComponentRender from 'Base/ComponentRender';
+import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'Base/PageAction';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
-import { IPageJumper } from 'base1/Model/IPageJumper';
-import { ModelProvider } from '../../../base1/ModelTree/ModelProvider';
-import { ModelStore } from '../../../base1/ModelTree/ModelStore';
-import { IPageMutation } from 'base1/Model/IPageMutation';
+import { IPageJumper } from 'Base/Model/IPageJumper';
+import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
+import { ModelStore } from '../../../Base/ModelTree/ModelStore';
+import { IPageMutation } from 'Base/Model/IPageMutation';
 import { useShowAppoloError } from 'store1/helpers1/useInfoError';
 import { useAppStore } from 'store1/helpers1/useAppStore';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import ConfirmDialog from 'base1/Widgets/ConfirmDialog';
+import ConfirmDialog from 'Base/Widgets/ConfirmDialog';
 import intl from 'react-intl-universal';
-import { RXNodeRoot } from 'base1/RXNode/Root';
+import { RXNodeRoot } from 'Base/RXNode/Root';
 import { cloneObject } from 'utils/cloneObject';
-import { AUTH_DEBUG } from 'base1/authSlugs';
+import { AUTH_DEBUG } from 'Base/authSlugs';
 import { useLoggedUser } from 'store1/helpers1/useLoggedUser';
 import GraphQLDebug from '../GraphQLDebug';
-import { PageGQLProvider } from 'base1/GraphQL/PageGQLProvider';
-import { PageGQLStore } from 'base1/GraphQL/PageGQLStore';
+import { PageGQLProvider } from 'Base/GraphQL/PageGQLProvider';
+import { PageGQLStore } from 'Base/GraphQL/PageGQLStore';
 
 export const Page = observer((
   props:{
