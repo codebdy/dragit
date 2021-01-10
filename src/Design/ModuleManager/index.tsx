@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import Spacer from "Components/common/Spacer";
+import Spacer from "Components/common1/Spacer";
 import DesignerLayout from "Design/Layout";
 import React, { Fragment, useState } from "react";
 import LeftContent from "./LeftContent";
