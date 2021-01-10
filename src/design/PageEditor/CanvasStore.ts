@@ -104,8 +104,8 @@ export class CanvasStore {
     return !!this.waitingRefreshNodeIds.find((id)=>id === nodeId)
   }
 
-  removeFrefrehNodeId(id:ID){
-    this.waitingRefreshNodeIds.splice(this.waitingRefreshNodeIds.indexOf(id), 1);
+  finishFrefrehNode(nodeId:ID){
+    this.waitingRefreshNodeIds.splice(this.waitingRefreshNodeIds.indexOf(nodeId), 1);
   }
 
   scroll(){

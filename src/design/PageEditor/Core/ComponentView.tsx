@@ -95,7 +95,7 @@ export const ComponentView = observer((
   useEffect(()=>{
     if(canvasStore.needRefresh(node.id)){
       setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));
-      canvasStore.removeFrefrehNodeId(node.id);
+      canvasStore.finishFrefrehNode(node.id);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[canvasStore.waitingRefreshNodeIds.length])
