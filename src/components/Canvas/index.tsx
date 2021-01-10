@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     editPadding:{
-      //padding: theme.spacing(1),
+      paddingTop: '2px',
       paddingBottom: theme.spacing(5),
     },
   }),
