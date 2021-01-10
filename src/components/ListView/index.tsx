@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ListViewInner from './ListViewInner';
+import ListViewInner from './ListViewBody/ListViewInner';
 
 const ListView = React.forwardRef((
     props:any, 

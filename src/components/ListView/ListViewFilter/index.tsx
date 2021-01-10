@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Tooltip, IconButton, FormLabel, RadioGroup, FormControlLabel, Radio, Button, makeStyles, Theme, createStyles, Popover } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { ILabelItem } from '../../base/Model/ILabelItem';
+import { ILabelItem } from '../../../base/Model/ILabelItem';
 import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
