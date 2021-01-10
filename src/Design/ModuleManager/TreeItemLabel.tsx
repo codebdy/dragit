@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, IconButton, TextField } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

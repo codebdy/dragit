@@ -3,12 +3,12 @@ import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button, fade } from '@material-ui/core';
 import intl from 'react-intl-universal';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 import TopNavHeightPlaceholder from 'AdminBoard/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
-import { useAppStore, useDesigner } from 'store1/helpers1/useAppStore';
+import { useAppStore, useDesigner } from 'Store/Helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
 import { ID } from 'Base/Model/graphqlTypes';
 

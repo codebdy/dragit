@@ -1,16 +1,16 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import {Controlled as CodeMirror} from 'react-codemirror2'
-import "Components/AntDesignChart/PropsInputs/node_modules/codemirror/mode/javascript/javascript";
-import "Components/AntDesignChart/PropsInputs/node_modules/codemirror/lib/codemirror.css";
-import "Components/AntDesignChart/PropsInputs/node_modules/codemirror/addon/lint/lint";
-import "Components/AntDesignChart/PropsInputs/node_modules/codemirror/addon/lint/lint.css";
-import "Components/AntDesignChart/PropsInputs/node_modules/codemirror/theme/material-darker.css";
+import "codemirror/mode/javascript/javascript";
+import "codemirror/lib/codemirror.css";
+import "codemirror/addon/lint/lint";
+import "codemirror/addon/lint/lint.css";
+import "codemirror/theme/material-darker.css";
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror-graphql/hint';
 import 'codemirror-graphql/lint';
 import 'codemirror-graphql/mode';
-import "Components/AntDesignChart/PropsInputs/node_modules/codemirror/addon/lint/json-lint";
+import "codemirror/addon/lint/json-lint";
 
 const jsonlint = require("jsonlint-mod");
 

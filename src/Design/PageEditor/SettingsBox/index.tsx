@@ -4,7 +4,7 @@ import intl from 'react-intl-universal';
 import { AttributeRow } from '../AttrebuteBox/AttributeRow';
 import { IPageSchema } from 'Base/Model/IPage';
 import ApiEditor from '../../../Base/PropsInputs/ApiEditor';
-import MultiSelectBox from 'components1/Inputs/Select/MultiSelectBox';
+import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

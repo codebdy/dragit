@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
-import { useAppStore } from 'store1/helpers1/useAppStore';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 import intl from 'react-intl-universal';
-import { useShowAppoloError } from 'store1/helpers1/useInfoError';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const MultiSelectBox = React.forwardRef((
   props:{
