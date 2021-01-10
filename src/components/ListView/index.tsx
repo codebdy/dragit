@@ -1,6 +1,5 @@
+import { Paper } from '@material-ui/core';
 import React from 'react';
-
-import ListViewInner from './ListViewBody/ListViewInner';
 
 const ListView = React.forwardRef((
     props:any, 
@@ -8,16 +7,14 @@ const ListView = React.forwardRef((
   )=>{
 
   const {
-    className, 
-    style,
+    children,
     ...rest
   } = props
   
- 
   return (
-    <div className={className} style={{...style}}  ref={ref}>
-      <ListViewInner {...rest} />
-    </div>
+    <Paper {...rest}  ref={ref}>
+      {children}
+    </Paper>
   );
 })
 

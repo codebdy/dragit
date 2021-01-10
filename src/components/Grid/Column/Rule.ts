@@ -6,8 +6,8 @@ import marginRules from "base/Rules/marginRules";
 
 
 export class GridColumnRule extends Rule{
-  editPaddingY = '16px';
-  editPaddingX = '16px';
+  editPaddingY = '8px';
+  editPaddingX = '8px';
   labelKey ="column";
 
   accept(child:IMeta){

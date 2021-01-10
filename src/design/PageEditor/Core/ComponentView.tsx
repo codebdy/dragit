@@ -93,11 +93,12 @@ export const ComponentView = observer((
   },[node, canvasStore.showPaddingX, canvasStore.showPaddingY]);
 
   useEffect(()=>{
-    if(node.id === canvasStore.refreshNodeId){
-      setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));      
+    if(canvasStore.needRefresh(node.id)){
+      setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));
+      canvasStore.removeFrefrehNodeId(node.id);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.refreshNodeId])
+  },[canvasStore.waitingRefreshNodeIds.length])
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();

@@ -11,9 +11,16 @@ import elevationRules from "base/Rules/elevationRules";
 import apiRule from "base/Rules/apiRule";
 
 export class ListViewRule extends Rule{
-  empertyPadding = '';
-  
+  editPaddingY = '8px';
+  editPaddingX = '8px';
+
   accept(child:IMeta){
+    if(child.name === 'ListViewBody'){
+      return true;
+    }
+    if(child.name === 'ListViewToolbar'){
+      return true;
+    }
     return false;
   }
 

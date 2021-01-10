@@ -23,7 +23,8 @@ export class CanvasStore {
   undoList: Array<IEditorSnapshot> = [];
   redoList: Array<IEditorSnapshot> = [];
 
-  refreshNodeId?:ID;
+  //refreshNodeId?:ID;
+  waitingRefreshNodeIds:ID[]= [];
   scrollFlag:number = 0;
   selectedNodeDom?:HTMLElement;
 
@@ -93,8 +94,18 @@ export class CanvasStore {
     }
   }
 
-  setRefreshNodeId(refreshNodeId?:ID){
-    this.refreshNodeId = refreshNodeId;
+  refreshNode(nodeId?:ID){
+    if(nodeId){
+      this.waitingRefreshNodeIds.push(nodeId);      
+    }
+  }
+
+  needRefresh(nodeId:ID){
+    return !!this.waitingRefreshNodeIds.find((id)=>id === nodeId)
+  }
+
+  removeFrefrehNodeId(id:ID){
+    this.waitingRefreshNodeIds.splice(this.waitingRefreshNodeIds.indexOf(id), 1);
   }
 
   scroll(){

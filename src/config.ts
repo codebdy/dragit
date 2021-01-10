@@ -60,6 +60,8 @@ import { MediaViewRule } from "components/Displays/MediaView/Rule";
 import MediaView from "components/Displays/MediaView";
 import DayView from "components/Displays/DayView";
 import { DayViewRule } from "components/Displays/DayView/Rule";
+import ListViewBody from "components/ListView/ListViewBody";
+import { ListViewBodyRule } from "components/ListView/ListViewBody/Rule";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -77,6 +79,7 @@ register('PortletGridItem', PortletGridItem, PortletGridItemRule);
 register('PortletFooter', PortletFooter);
 register('Typography', Typography, TypographyRule);
 register('ListView', ListView, ListViewRule);
+register('ListViewBody', ListViewBody, ListViewBodyRule);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);

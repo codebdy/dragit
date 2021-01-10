@@ -6,8 +6,8 @@ import { IMeta } from "base/Model/IMeta";
 import marginRules from "base/Rules/marginRules";
 
 export class GridRowRule extends Rule{
-  editPaddingY = '16px';
-  editPaddingX = '16px';
+  editPaddingY = '8px';
+  editPaddingX = '8px';
   labelKey ="row";
 
   accept(child:IMeta){

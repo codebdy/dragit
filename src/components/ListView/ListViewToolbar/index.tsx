@@ -43,7 +43,7 @@ interface ListViewToolbarProps {
   onBatchAction:(action:ICommand)=>void,
 }
 
-const ListViewToolbar = (props: ListViewToolbarProps) => {
+const ListViewToolbar = React.forwardRef((props: ListViewToolbarProps, ref:any) => {
   const classes = useToolbarStyles();
   const { numSelected, filters, batchCommands, filterValues, onKeywordChange, onFilterChange, onBatchAction } = props;
   const [keyword, setKeyword] = useState(props.keyword)
@@ -54,6 +54,7 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
       className={clsx(classes.root, {
         [classes.highlight]: numSelected > 0,
       })}
+      ref= {ref}
     >
       {numSelected > 0 ? (
         <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
@@ -115,6 +116,6 @@ const ListViewToolbar = (props: ListViewToolbarProps) => {
       )}
     </Toolbar>
   );
-};
+});
 
 export default ListViewToolbar

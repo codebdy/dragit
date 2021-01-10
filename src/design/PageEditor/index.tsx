@@ -127,6 +127,7 @@ export const PageEditor = observer((
         dragNode = RXNode.make<IMeta>(cloneObject(canvasStore.draggedToolboxItem?.meta));
       }
       if(dragNode && targetNode) {
+        const drageNodeParentId = dragNode.parent?.id;
         backupToUndoList(dragNode.id); 
         if(!operateNode(targetNode, dragNode, canvasStore.dragOverParam.position)){
           canvasStore.popUndoList();
@@ -134,8 +135,10 @@ export const PageEditor = observer((
         else{
           canvasStore.setRedoList([]);
         }
-        canvasStore.setRefreshNodeId(dragNode.id);
-        canvasStore.setRefreshNodeId(targetNode.id);
+        //console.log('oldrefreshID, drageNodeParentId', canvasStore.refreshNodeId, drageNodeParentId);
+        canvasStore.refreshNode(drageNodeParentId);
+        canvasStore.refreshNode(dragNode.id);
+        canvasStore.refreshNode(targetNode.id);
         canvasStore.setSelectedNode(dragNode);
       }
     }
@@ -224,7 +227,7 @@ export const PageEditor = observer((
       canvasStore.selectedNode.meta.props[propName] = value;
       canvasStore.setSelectedNode(canvasStore.selectedNode);
       canvasStore.setRedoList([]);
-      canvasStore.setRefreshNodeId(canvasStore.selectedNode?.id);
+      canvasStore.refreshNode(canvasStore.selectedNode?.id);
     }
   }
 
@@ -246,7 +249,7 @@ export const PageEditor = observer((
       canvasStore.setCanvas(cmd.canvasNode);
       setPageSchema(cmd.pageSchema);
       canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));
-      canvasStore.setRefreshNodeId(cmd.selectedNodeId);
+      canvasStore.refreshNode(cmd.selectedNodeId);
     }
   }
 
@@ -263,14 +266,14 @@ export const PageEditor = observer((
       canvasStore.setCanvas(cmd.canvasNode); 
       setPageSchema(cmd.pageSchema);
       canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));  
-      canvasStore.setRefreshNodeId(cmd.selectedNodeId);
+      canvasStore.refreshNode(cmd.selectedNodeId);
     }    
   }
 
   const handleClear = ()=>{
     backupToUndoList(undefined);    
     canvasStore.clear();
-    canvasStore.setRefreshNodeId(canvasStore.canvas?.id)      
+    canvasStore.refreshNode(canvasStore.canvas?.id)      
     canvasStore.setSelectedNode(undefined);
     canvasStore.setRedoList([]);
   }
@@ -289,7 +292,7 @@ export const PageEditor = observer((
       canvasStore.selectedNode.remove();
       canvasStore.setSelectedNode(undefined);
       canvasStore.setRedoList([]);
-      canvasStore.setRefreshNodeId(parentId)
+      canvasStore.refreshNode(parentId)
     }
   }
 
@@ -299,7 +302,7 @@ export const PageEditor = observer((
       let newNode = canvasStore.selectedNode?.duplicate();
       canvasStore.setSelectedNode(newNode);
       canvasStore.setRedoList([]);
-      canvasStore.setRefreshNodeId(canvasStore.selectedNode?.parent?.id);
+      canvasStore.refreshNode(canvasStore.selectedNode?.parent?.id);
     }
   }
 
