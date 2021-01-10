@@ -97,9 +97,6 @@ export default [
         titleKey:"one-to-many-portlet",
         meta: {
           name:'OneToManyPortlet',
-          designProps:{
-            isDeisgning:true,
-          },
           props: {
             elevation: 6,
             open:true,
@@ -300,9 +297,6 @@ export default [
         titleKey:'antv-chart',
         meta:{
           name:'AntDesignChart',
-          designProps:{
-            isDeisgning:true,
-          },
           props:{
             chart:'Line',
             jsonProps:{},

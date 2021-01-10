@@ -30,7 +30,7 @@ import { ID } from 'base/Model/graphqlTypes';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_PAGE, SAVE_PAGE } from 'base/GraphQL/GQLs';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
-import { CanvarsStoreProvider, CanvasStore } from './CanvasStore';
+import { CanvasStoreProvider, CanvasStore } from './CanvasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -312,7 +312,7 @@ export const PageEditor = observer((
 
   let draggedLabel = canvasStore.draggedToolboxItem ?canvasStore.draggedToolboxItem?.title || intl.get(canvasStore.draggedToolboxItem?.titleKey||'') : canvasStore.draggedNode?.meta.name;
    return (
-    <CanvarsStoreProvider value = {canvasStore}>
+    <CanvasStoreProvider value = {canvasStore}>
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
@@ -387,10 +387,6 @@ export const PageEditor = observer((
                 />
               }
               {
-                canvasStore.activeNode &&
-                <ComponentLabel node={canvasStore.activeNode} followDom={canvasStore.activeNode?.dom}/>
-              }
-              {
                 canvasStore.selectedNode &&
                 <Fragment>
                   <ComponentLabel node={canvasStore.selectedNode} followDom={canvasStore.selectedNodeDom}/>
@@ -402,7 +398,10 @@ export const PageEditor = observer((
                   />
                 </Fragment>
               }
-
+              {
+                canvasStore.activeNode &&
+                <ComponentLabel node={canvasStore.activeNode} followDom={canvasStore.activeNode?.dom}/>
+              }
             </Scrollbar>
           }
         </DesignerLayout>
@@ -423,6 +422,6 @@ export const PageEditor = observer((
           />
         </Fragment>      
       </Backdrop>
-    </CanvarsStoreProvider>
+    </CanvasStoreProvider>
   );
 })

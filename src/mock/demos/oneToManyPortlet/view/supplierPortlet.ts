@@ -2,9 +2,6 @@
 export default               {
   name:'OneToManyPortlet',
 
-  designProps:{
-    isDeisgning:true,
-  },
   props:{
     field:'factoryOrders',                
     title:'工厂合同',

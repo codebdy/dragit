@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { useAppStore } from 'store/helpers/useAppStore';
 import ChipsInput from './ChipsInput';
 import intl from 'react-intl-universal';
+import { useDesign } from 'design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,7 +35,6 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
     height,
     query,
     size, 
-    isDeisgning,
     ...rest} = props;
   const classes = useStyles();
   const QUERY_TREE = gql`
@@ -44,6 +44,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
   `;
   const { loading, error: queryError, data } = useQuery(QUERY_TREE);
   const appStore = useAppStore();
+  const {isDesigning} = useDesign();
   
   useEffect(()=>{
     if(queryError){
@@ -90,7 +91,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
                 height:height,
                 size:size,
                 multiSelect:multiSelect,
-                isDeisgning:isDeisgning,
+                isDesigning:isDesigning,
               }
             }
             onChange={handleChange}

@@ -7,7 +7,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import { ListViewHead } from './ListViewHead';
-import ListViewToolbar from '../ListViewToolbar';
+import ListViewToolbar from '../ListViewToolbar/index-back';
 import { ILabelItem } from '../../../base/Model/ILabelItem';
 import intl from 'react-intl-universal';
 import { OPEN_PAGE_ACTION, PageActionHandle } from 'base/PageAction';
@@ -30,6 +30,7 @@ import ComponentRender from 'base/ComponentRender';
 import { ModelStore } from 'base/ModelTree/ModelStore';
 import { ModelProvider } from 'base/ModelTree/ModelProvider';
 import {observer} from "mobx-react-lite";
+import { useDesign } from 'design/PageEditor/useDesign';
 
 export const COMMAND_QUERY = "query";
 
@@ -80,7 +81,6 @@ const ListViewInner = observer((
       variant?:'elevation' | 'outlined',
       elevation:number,
       childrenNodes?:Array<RXNode<IMeta>>,
-      isDeisgning?:boolean,
       children?:any,
     } 
   )=>{
@@ -96,11 +96,10 @@ const ListViewInner = observer((
     variant,
     elevation,
     childrenNodes = [],
-    isDeisgning,
     children,
     ...rest
-  } = props
-  
+  } = props;
+  const {isDesigning} = useDesign();
   const [queryParam, setQueryParam] = useState<IQueryParam>({
     page : 0,
     first: defalutRowsPerPage,
@@ -270,7 +269,7 @@ const ListViewInner = observer((
             style={{marginTop:'1px'}}
           >
             {
-              isDeisgning?
+              isDesigning?
               <TableBody {...rest}>
                 <TableRow>
                   {children}

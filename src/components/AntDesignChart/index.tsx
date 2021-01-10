@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { Area, Line, Liquid, Radar } from '@ant-design/charts';
+import { useDesign } from 'design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,13 +27,12 @@ const AntDesignChart = React.forwardRef((
     chart:string,
     //dataApi:AxiosRequestConfig,
     jsonProps?:any,
-    isDeisgning?:boolean,
   },
   ref:any
 )=>{
-  const {chart, isDeisgning, jsonProps, ...rest} = props;
+  const {chart, jsonProps, ...rest} = props;
   const Chart = charts[chart];
-
+  const {isDesigning} = useDesign();
   //const [request] = useState<AxiosRequestConfig>(dataApi)
   const classes = useStyles();
   //const [data, loading] = useAxios<any>(request);
@@ -40,7 +40,7 @@ const AntDesignChart = React.forwardRef((
   //(rest as any).yAxis = eval((rest as any).yAxis)
 
   return (
-    isDeisgning?
+    isDesigning?
     <div ref={ref} {...rest}>
       {chart} Chart Design
     </div>

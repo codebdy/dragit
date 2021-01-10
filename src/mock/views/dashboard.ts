@@ -42,7 +42,6 @@ export default {
                             name:'AntDesignChart',
                             designProps:{
                               query:null,
-                              isDeisgning:true,
                             },
                             props:{
                               chart:'Area',
@@ -99,7 +98,6 @@ export default {
                           name:'AntDesignChart',
                           designProps:{
                             query:null,
-                            isDeisgning:true,
                           },
                           props:{
                             chart:'Line',
@@ -163,7 +161,6 @@ export default {
                           name:'AntDesignChart',
                           designProps:{
                             query:null,
-                            isDeisgning:true,
                           },
                           props:{
                             chart:'Radar',                            

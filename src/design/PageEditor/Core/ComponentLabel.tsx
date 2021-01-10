@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { observer} from 'mobx-react-lite';
-import { useCanvarsStore } from '../CanvasStore';
+import { useCanvasStore } from '../CanvasStore';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
 
@@ -32,7 +32,7 @@ export const ComponentLabel = observer((
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const canvasStore = useCanvarsStore();
+  const canvasStore = useCanvasStore();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();

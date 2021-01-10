@@ -9,6 +9,7 @@ import { ModelProvider, useModelStore } from 'base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
 import { Observer } from 'mobx-react-lite';
 import { Fragment } from 'react';
+import { useDesign } from 'design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +25,6 @@ const OneToManyTable = React.forwardRef((
     field?:string,
     size?:any,
     childrenNodes?:Array<RXNode<IMeta>>,
-    isDeisgning?:boolean,
     children:any,
   }, 
   ref:any
@@ -33,10 +33,10 @@ const OneToManyTable = React.forwardRef((
     field,
     size,
     childrenNodes = [],
-    isDeisgning,
     children,
      ...rest
   } = props;
+  const {isDesigning} = useDesign();
   const classes = useStyles();
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getFieldStore(field||'') as ModelArrayFieldStore;
@@ -48,7 +48,7 @@ const OneToManyTable = React.forwardRef((
   }, [field])
 
   const handleAddNew = ()=>{
-    if(isDeisgning){
+    if(isDesigning){
       return;
     }
     fieldStore?.addRow();
@@ -67,7 +67,7 @@ const OneToManyTable = React.forwardRef((
       >
           <Table className={classes.table} size={size}>
             {
-              isDeisgning?
+              isDesigning?
               <TableBody>
                 <TableRow>
                   {children}

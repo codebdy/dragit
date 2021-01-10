@@ -139,6 +139,6 @@ export class CanvasStore {
 }
 
 
-export const CanvarsStoreContext = createContext<CanvasStore>({} as CanvasStore);
-export const CanvarsStoreProvider = CanvarsStoreContext.Provider;
-export const useCanvarsStore = (): CanvasStore => useContext(CanvarsStoreContext);
+export const CanvasStoreContext = createContext<CanvasStore>({} as CanvasStore);
+export const CanvasStoreProvider = CanvasStoreContext.Provider;
+export const useCanvasStore = (): CanvasStore => useContext(CanvasStoreContext);

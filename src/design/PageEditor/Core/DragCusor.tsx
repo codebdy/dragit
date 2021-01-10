@@ -7,7 +7,7 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import React from 'react';
 import classNames from 'classnames';
 import { IRect } from 'base/Model/IRect';
-import { useCanvarsStore } from '../CanvasStore';
+import { useCanvasStore } from '../CanvasStore';
 import { observer } from 'mobx-react-lite';
 
 
@@ -58,7 +58,7 @@ export const DragCusor = observer(()=>{
   //const [dragOverParam, setDragOverParam] = useState<IDragOverParam>();
   const [rect, setRect] = useState<IRect>();
   const classes = useStyles();
-  const canvasStore = useCanvarsStore();
+  const canvasStore = useCanvasStore();
 
   useEffect(()=>{      
     if(canvasStore.dragOverParam){

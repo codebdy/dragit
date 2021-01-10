@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import JsxParser from 'react-jsx-parser'
+import { useDesign } from 'design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,13 +12,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const JsxTemplateView = React.forwardRef((
   props:{
-    isDesigning?:boolean,
     model?:boolean,
     graphiQL?:string,
   },
   ref:any
 )=>{
-  const {isDesigning, model, graphiQL, ...rest} = props;
+  const {model, graphiQL, ...rest} = props;
+  const {isDesigning} = useDesign();
   const classes = useStyles();
 
   return (

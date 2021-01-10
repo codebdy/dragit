@@ -8,7 +8,7 @@ import { makeSpaceStyle } from 'base/HOCs/withMargin';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react-lite';
-import { useCanvarsStore } from '../CanvasStore';
+import { useCanvasStore } from '../CanvasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,7 +59,7 @@ export const ComponentView = observer((
   const {node} = props;
   const classes = useStyles();
   const [editStyle, setEditStyle] = useState<any>({});
-  const canvasStore = useCanvarsStore();
+  const canvasStore = useCanvasStore();
   const refEl = useRef(undefined);
   let Component = resolveComponent(node.meta);
 

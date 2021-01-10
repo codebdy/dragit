@@ -1,7 +1,7 @@
 export default {
   name:'ListView',
   designProps:{
-    //isDeisgning:true,
+    //isDesigning:true,
     //query:null,
   },
   props:{
@@ -10,6 +10,9 @@ export default {
        
   },
   children:[
+    {
+      name:'ListViewToolbar'
+    },
     {
       name:'ListViewBody',
     }

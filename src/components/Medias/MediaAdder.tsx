@@ -6,6 +6,7 @@ import MediaGridListIconButton from './MediaGridListIconButton';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import MediasSelectDialog from './MediasSelectDialog';
 import { IMedia } from 'base/Model/IMedia';
+import { useDesign } from 'design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,10 +68,10 @@ export default function MediaAdder(
     onSelectMedias:(medias?:Array<IMedia>)=>void, 
     single?:boolean,
     avatar?:boolean,
-    isDeisgning?:boolean,
   }
 ){
-  const {value, onSelectMedias, single, avatar, isDeisgning} = props;
+  const {value, onSelectMedias, single, avatar} = props;
+  const {isDesigning} = useDesign();
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -79,7 +80,7 @@ export default function MediaAdder(
   const theme = useTheme();
 
   const handleClickOpen = () => {
-    if(isDeisgning){
+    if(isDesigning){
       return;
     }
     setOpen(true);

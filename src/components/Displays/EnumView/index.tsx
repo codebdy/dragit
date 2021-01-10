@@ -2,6 +2,7 @@ import Chip from '@material-ui/core/Chip';
 import withSkeleton from 'base/HOCs/withSkeleton';
 import { RXInputProps } from 'base/RXInputProps';
 import withFormField from 'components/common/withFormField';
+import { useDesign } from 'design/PageEditor/useDesign';
 import React from 'react';
 import { first } from 'utils/ArrayHelper';
 
@@ -14,18 +15,18 @@ export interface ChipMeta{
 const EnumView = React.forwardRef((
   props:RXInputProps&{
     metas:[ChipMeta], 
-    isDeisgning?:boolean
   },
   ref:any
 ) =>{
-  const {name, value, metas, error, helperText, isDeisgning, ...rest} = props;
+  const {name, value, metas, error, helperText, ...rest} = props;
+  const {isDesigning} = useDesign();
   const selectedMeta:ChipMeta|undefined = first(metas?.filter(meta=>meta.name === value))
   const render = value ?
     <Chip label={selectedMeta ? selectedMeta.label : value} color = {selectedMeta && selectedMeta.value} size = "small" />
     :
     <span></span>
   return(
-    isDeisgning?
+    isDesigning?
       <div 
         ref={ref}
         {...rest}

@@ -9,6 +9,7 @@ import TreeList from './TreeList';
 import { isPointInRect } from 'utils/isPointInRect';
 import { remove } from 'utils/ArrayHelper';
 import { ID } from 'base/Model/graphqlTypes';
+import { useDesign } from 'design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,7 +72,6 @@ export default function ChipsInput(
       height?:string,
       size?:any,
       multiSelect?:true,
-      isDeisgning?:boolean,
     },
     name?:string,
     itemKey?:string,
@@ -80,7 +80,8 @@ export default function ChipsInput(
 ) {
 
   const {value, name, onFocus, onBlur, onChange} = props;
-  const {values, rootNodes, nameKey = 'name', height, size, multiSelect, isDeisgning} = value || {} as any;
+  const {values, rootNodes, nameKey = 'name', height, size, multiSelect} = value || {} as any;
+  const {isDesigning} = useDesign();
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [focused,setFocused] = useState(false);
@@ -122,7 +123,7 @@ export default function ChipsInput(
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     setAnchorEl(event.currentTarget);
     setFocused(true);
-    if(!isDeisgning){
+    if(!isDesigning){
       event.preventDefault();
       event.stopPropagation();      
     }
@@ -228,7 +229,7 @@ export default function ChipsInput(
         </div>
       </div>
       {
-        open && !isDeisgning &&
+        open && !isDesigning &&
         <Popover
           id={id}
           open={open}

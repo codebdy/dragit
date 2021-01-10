@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TableColumn = React.forwardRef((props:any, ref:any)=>{
-  const {label, className, isDeisgning, sortable, children, ...rest} = props;
+  const {label, className, isDesigning, sortable, children, ...rest} = props;
   const classes = useStyles();
 
   return (
-    <TableCell className = {classNames({[classes.root]:isDeisgning}, className)} {...rest} ref={ref}>
-      {isDeisgning&&<div className={classes.label}>{label} </div>}
+    <TableCell className = {classNames({[classes.root]:isDesigning}, className)} {...rest} ref={ref}>
+      {isDesigning&&<div className={classes.label}>{label} </div>}
       {children}
     </TableCell> 
   )

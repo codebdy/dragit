@@ -37,9 +37,6 @@ export const  OneToManyTableView = {
             {
               name:'OneToManyTable',
               selfRenderChildren:true,
-              designProps:{
-                isDeisgning:true,
-              },              
               props: {
                 elevation: 6,
                 title:'规格库存',
@@ -55,14 +52,8 @@ export const  OneToManyTableView = {
                   props:{
                     label:'图片',                  
                   },
-                  designProps:{
-                    isDeisgning:true,
-                  }, 
                   children:[{
                     name:'MediaSelect',
-                    designProps:{
-                      isDeisgning:true,
-                    },
                     props:{
                       field:'image',
                       width:'60px',
@@ -75,9 +66,6 @@ export const  OneToManyTableView = {
                     label:'名称',
                     width:'200px',
                   },
-                  designProps:{
-                    isDeisgning:true,
-                  }, 
                   children:[{
                     name:'TextBox',
                     props:{
@@ -92,9 +80,6 @@ export const  OneToManyTableView = {
                   props:{
                     label:'颜色',
                   },
-                  designProps:{
-                    isDeisgning:true,
-                  }, 
                   children:[{
                     name:'TextBox',
                     props:{
@@ -109,9 +94,6 @@ export const  OneToManyTableView = {
                   props:{
                     label:'型号',
                   },
-                  designProps:{
-                    isDeisgning:true,
-                  }, 
                   children:[{
                     name:'SelectBox',
                     props:{
@@ -141,9 +123,6 @@ export const  OneToManyTableView = {
                   props:{
                     label:'库存',
                   },
-                  designProps:{
-                    isDeisgning:true,
-                  }, 
                   children:[{
                     name:'TextBox',
                     props:{

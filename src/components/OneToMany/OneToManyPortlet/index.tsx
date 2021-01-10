@@ -6,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
 import {Observer} from 'mobx-react-lite';
+import { useDesign } from 'design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +29,8 @@ const OneToManyPortlet = React.forwardRef((
   props: any,
   ref:any
 )=>{
-  const {field, loading, value, title, isDeisgning, children, ...rest} = props;
+  const {field, loading, value, title, children, ...rest} = props;
+  const {isDesigning} = useDesign();
   const classes = useStyles();
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getFieldStore(field) as ModelArrayFieldStore;
@@ -38,17 +40,17 @@ const OneToManyPortlet = React.forwardRef((
   }, [field])
 
   const fieldStoreForDesign = useMemo(()=>{
-    if(isDeisgning){
+    if(isDesigning){
       const store = new ModelArrayFieldStore({name:field||'temp-for-design', props})
       store.addRow()
       return store;      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isDeisgning]);
+  },[isDesigning]);
 
 
   const handleAddNew = ()=>{
-    if(isDeisgning){
+    if(isDesigning){
       return;
     }
     fieldStore?.addRow();
@@ -58,7 +60,7 @@ const OneToManyPortlet = React.forwardRef((
     fieldStore?.removeRow(index);
   }
 
-  const store = isDeisgning ? fieldStoreForDesign : fieldStore;
+  const store = isDesigning ? fieldStoreForDesign : fieldStore;
 
   return (
     <Observer>

@@ -3,7 +3,6 @@ export default {
   withActions:true,
   selfRenderChildren:true,
   designProps:{
-    isDeisgning:true,
     query:null,
   },
   props:{
@@ -99,15 +98,8 @@ export default {
       props:{
         label:'图片',                  
       },
-      designProps:{
-        isDeisgning:true,
-      }, 
       children:[{
         name:'MediaView',
-        designProps:{
-          isDeisgning:true,
-        },
-
         props:{
           field:'feathureImage',
           graphiQL:`$field{
@@ -120,9 +112,6 @@ export default {
     },
     {
       name:'TableColumn',
-      designProps:{
-        isDeisgning:true,
-      }, 
       props:{
         label:'标题',
         field:'title',
@@ -132,9 +121,6 @@ export default {
 
       children:[{
         name:'TextView',
-        designProps:{
-          isDeisgning:true,
-        }, 
         props:{
           field:'title',
           variant:'outlined',
@@ -147,14 +133,8 @@ export default {
       props:{
         label:'状态',
       },
-      designProps:{
-        isDeisgning:true,
-      }, 
       children:[{
         name:'EnumView',
-        designProps:{
-          isDeisgning:true,
-        }, 
         props:{
           field:'status',
           metas:[
@@ -177,14 +157,8 @@ export default {
       props:{
         label:'时间',
       },
-      designProps:{
-        isDeisgning:true,
-      }, 
       children:[{
         name:'DayView',
-        designProps:{
-          isDeisgning:true,
-        }, 
         props:{
           field:'created_at',
         }
@@ -195,9 +169,6 @@ export default {
       props:{
         label:'操作',
       },
-      designProps:{
-        isDeisgning:true,
-      }, 
       children:[{
         name:'TextBox',
         props:{
