@@ -4,8 +4,8 @@ import {observer} from "mobx-react-lite";
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
-import { useThemeSettings } from 'store/helpers/useAppStore';
-import { LIGHT, DARK } from 'store/ThemeSettings';
+import { useThemeSettings } from 'store1/helpers1/useAppStore';
+import { LIGHT, DARK } from 'store1/ThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

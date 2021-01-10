@@ -3,8 +3,8 @@ import { createStyles, Divider, makeStyles, Slider, Theme, Typography } from '@m
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
-import { useThemeSettings } from 'store/helpers/useAppStore';
-import { DARK, LIGHT, linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5, sidebarImg6, sidebarImg7, sidebarImg8 } from 'store/ThemeSettings';
+import { useThemeSettings } from 'store1/helpers1/useAppStore';
+import { DARK, LIGHT, linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5, sidebarImg6, sidebarImg7, sidebarImg8 } from 'store1/ThemeSettings';
 import {observer} from "mobx-react-lite";
 
 const useStyles = makeStyles((theme: Theme) =>

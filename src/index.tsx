@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './mock/client';
 
-import { AppStoreProvider }from 'store/helpers/AppStoreProvider';
-import {AppStore} from 'store/AppStore' 
+import { AppStoreProvider }from 'store1/helpers1/AppStoreProvider';
+import {AppStore} from 'store1/AppStore' 
 import { CssBaseline } from '@material-ui/core';
 import 'config';
 

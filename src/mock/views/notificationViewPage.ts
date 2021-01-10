@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "base/PageAction";
+import {GO_BACK_ACTION} from "base1/PageAction";
 
 
 export default {

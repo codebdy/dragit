@@ -1,4 +1,4 @@
-import editPage from "design/PageEditor/Toolbox/templates/order/editPage";
+import editPage from "design1/PageEditor/Toolbox/templates/order/editPage";
 
 export default {
   layout:[

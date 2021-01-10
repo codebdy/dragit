@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import { FormControlLabel, Radio, Typography } from '@material-ui/core';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
-import { useThemeSettings } from 'store/helpers/useAppStore';
+import { useThemeSettings } from 'store1/helpers1/useAppStore';
 import {observer} from "mobx-react-lite";
-import { DARK, LIGHT, linearGradient1, linearGradient5 } from 'store/ThemeSettings';
+import { DARK, LIGHT, linearGradient1, linearGradient5 } from 'store1/ThemeSettings';
 
 export const ThemeMode = observer(()=>{
   const classes = useRowStyles();

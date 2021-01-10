@@ -1,10 +1,10 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
-import { PageAction } from 'base/PageAction';
+import { PageAction } from 'base1/PageAction';
 import { Page } from '../Page';
 import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
-import { IPage } from 'base/Model/IPage';
+import { IPage } from 'base1/Model/IPage';
 import { Fragment } from 'react';
 
 export const PopupPage = observer((

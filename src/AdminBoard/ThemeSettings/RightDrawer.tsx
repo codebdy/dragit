@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { Close } from '@material-ui/icons';
 import useShadows from 'utils/useShadows';
-import { useThemeSettings } from 'store/helpers/useAppStore';
+import { useThemeSettings } from 'store1/helpers1/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -7,8 +7,8 @@ import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
 import { DesignButtons } from 'AdminBoard/TopNav/DesignButtons';
 import NavButtons from './NavButtons';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
-import { DARK } from 'store/ThemeSettings';
-import { useAppStore, useThemeSettings } from 'store/helpers/useAppStore';
+import { DARK } from 'store1/ThemeSettings';
+import { useAppStore, useThemeSettings } from 'store1/helpers1/useAppStore';
 import {observer} from "mobx-react-lite";
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -3,15 +3,15 @@ import { makeStyles, Theme, createStyles, Typography, Container, Tabs, Tab } fro
 import {observer} from "mobx-react-lite";
 import { ModuleProps } from '../common/ModuleProps';
 import { useState } from 'react';
-import { useAppStore } from 'store/helpers/useAppStore';
+import { useAppStore } from 'store1/helpers1/useAppStore';
 import { Page } from '../Page';
-import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base/PageAction';
+import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'base1/PageAction';
 import { getModulePageById } from '../common/getModulePageById';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { TabStyleModuleBar } from './TabStyleModuleBar';
 import { useEffect } from 'react';
 import { PopupPage } from '../PopupStyleModule/PopupPage';
-import { IPageJumper } from 'base/Model/IPageJumper';
+import { IPageJumper } from 'base1/Model/IPageJumper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

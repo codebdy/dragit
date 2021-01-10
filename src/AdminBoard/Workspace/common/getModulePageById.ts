@@ -1,5 +1,5 @@
-import { IModule } from "base/Model/IModule";
-import { IPage } from "base/Model/IPage";
+import { IModule } from "base1/Model/IModule";
+import { IPage } from "base1/Model/IPage";
 
 export function getModulePageById(module:IModule, pageId?:string):IPage|undefined{
   if(!module.pages || !pageId){

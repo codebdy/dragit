@@ -3,20 +3,20 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Scrollbar from "../common/Scrollbar";
 import SiderBarLoadingSkeleton from "./LoadingSkeleton";
-import IMenuItem from "base/Model/IMenuItem";
+import IMenuItem from "base1/Model/IMenuItem";
 import { Divider } from "@material-ui/core";
-import { RXNode } from "base/RXNode/RXNode";
+import { RXNode } from "base1/RXNode/RXNode";
 import Subheader from "./MenuItems/Subheader";
 import { MenuNode } from "./MenuItems/MenuNode";
 import { MenuNodeGroup } from "./MenuItems/MenuNodeGroup";
-import { RXNodeRoot } from "base/RXNode/Root";
+import { RXNodeRoot } from "base1/RXNode/Root";
 import { useQuery } from '@apollo/react-hooks';
-import { useLoggedUser } from "store/helpers/useLoggedUser";
+import { useLoggedUser } from "store1/helpers1/useLoggedUser";
 import { cloneObject } from "utils/cloneObject";
 import {observer} from "mobx-react-lite";
-import { ID } from "base/Model/graphqlTypes";
-import { GET_DRAWER } from "../../base/GraphQL/GQLs";
-import { useShowAppoloError } from "store/helpers/useInfoError";
+import { ID } from "base1/Model/graphqlTypes";
+import { GET_DRAWER } from "../../base1/GraphQL/GQLs";
+import { useShowAppoloError } from "store1/helpers1/useInfoError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

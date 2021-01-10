@@ -1,4 +1,4 @@
-import { AUTH_MEDIAS } from "base/authSlugs";
+import { AUTH_MEDIAS } from "base1/authSlugs";
 
 export default {
   layout:[

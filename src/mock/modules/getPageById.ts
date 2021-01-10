@@ -1,4 +1,4 @@
-import { ID } from 'base/Model/graphqlTypes';
+import { ID } from 'base1/Model/graphqlTypes';
 import moduleCategories from './moduleCategories';
 
 export function getPageById(pageId:ID) {

@@ -1,4 +1,4 @@
-import {RESET_ACTION, SUBMIT_MUTATION} from "base/PageAction";
+import {RESET_ACTION, SUBMIT_MUTATION} from "base1/PageAction";
 
 export default {
   layout:[

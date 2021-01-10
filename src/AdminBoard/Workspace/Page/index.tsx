@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react-lite";
-import { IPage } from 'base/Model/IPage';
-import { IMeta } from 'base/Model/IMeta';
-import { RXNode } from 'base/RXNode/RXNode';
-import ComponentRender from 'base/ComponentRender';
-import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'base/PageAction';
+import { IPage } from 'base1/Model/IPage';
+import { IMeta } from 'base1/Model/IMeta';
+import { RXNode } from 'base1/RXNode/RXNode';
+import ComponentRender from 'base1/ComponentRender';
+import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'base1/PageAction';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
-import { IPageJumper } from 'base/Model/IPageJumper';
-import { ModelProvider } from '../../../base/ModelTree/ModelProvider';
-import { ModelStore } from '../../../base/ModelTree/ModelStore';
-import { IPageMutation } from 'base/Model/IPageMutation';
-import { useShowAppoloError } from 'store/helpers/useInfoError';
-import { useAppStore } from 'store/helpers/useAppStore';
+import { IPageJumper } from 'base1/Model/IPageJumper';
+import { ModelProvider } from '../../../base1/ModelTree/ModelProvider';
+import { ModelStore } from '../../../base1/ModelTree/ModelStore';
+import { IPageMutation } from 'base1/Model/IPageMutation';
+import { useShowAppoloError } from 'store1/helpers1/useInfoError';
+import { useAppStore } from 'store1/helpers1/useAppStore';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import ConfirmDialog from 'base/Widgets/ConfirmDialog';
+import ConfirmDialog from 'base1/Widgets/ConfirmDialog';
 import intl from 'react-intl-universal';
-import { RXNodeRoot } from 'base/RXNode/Root';
+import { RXNodeRoot } from 'base1/RXNode/Root';
 import { cloneObject } from 'utils/cloneObject';
-import { AUTH_DEBUG } from 'base/authSlugs';
-import { useLoggedUser } from 'store/helpers/useLoggedUser';
+import { AUTH_DEBUG } from 'base1/authSlugs';
+import { useLoggedUser } from 'store1/helpers1/useLoggedUser';
 import GraphQLDebug from '../GraphQLDebug';
-import { PageGQLProvider } from 'base/GraphQL/PageGQLProvider';
-import { PageGQLStore } from 'base/GraphQL/PageGQLStore';
+import { PageGQLProvider } from 'base1/GraphQL/PageGQLProvider';
+import { PageGQLStore } from 'base1/GraphQL/PageGQLStore';
 
 export const Page = observer((
   props:{

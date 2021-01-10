@@ -2,7 +2,7 @@ import React from 'react';
 import {Divider, createMuiTheme, ThemeProvider} from '@material-ui/core';
 import intl from "react-intl-universal";
 import useShadows from 'utils/useShadows';
-import { useAppStore, useThemeSettings } from 'store/helpers/useAppStore';
+import { useAppStore, useThemeSettings } from 'store1/helpers1/useAppStore';
 import { ThemeMode } from './ThemeMode';
 import { ThemeColor } from './ThemeColor';
 import { ToolbarSettings } from './ToolbarSettings';

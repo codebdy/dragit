@@ -1,4 +1,4 @@
-import { AUTH_DASHBOARD, AUTH_MEDIAS } from "base/authSlugs";
+import { AUTH_DASHBOARD, AUTH_MEDIAS } from "base1/authSlugs";
 
 var roles = [
   {

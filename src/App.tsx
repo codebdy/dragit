@@ -6,17 +6,17 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Loading from 'AdminBoard/common/Loading'
 
 import {AdminBoard} from 'AdminBoard';
-import ModuleManager from 'design/ModuleManager';
+import ModuleManager from 'design1/ModuleManager';
 import useShadows from 'utils/useShadows';
-import DrawerEditor from 'design/DrawerEditor';
-import {SuccessAlertBar} from 'base/Widgets/SuccessAlertBar';
+import DrawerEditor from 'design1/DrawerEditor';
+import {SuccessAlertBar} from 'base1/Widgets/SuccessAlertBar';
 import Login from 'AdminBoard/views/Login';
-import { useIntl } from 'base/Hooks/useIntl';
+import { useIntl } from 'base1/Hooks/useIntl';
 import { LOGIN_URL } from 'utils/consts';
-import { useThemeSettings } from 'store/helpers/useAppStore';
+import { useThemeSettings } from 'store1/helpers1/useAppStore';
 import {observer} from 'mobx-react-lite';
-import { ErrorDialog } from 'base/Widgets/ErrorDialog';
-import { useLoginCheck } from 'store/helpers/useLoginCheck';
+import { ErrorDialog } from 'base1/Widgets/ErrorDialog';
+import { useLoginCheck } from 'store1/helpers1/useLoginCheck';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();

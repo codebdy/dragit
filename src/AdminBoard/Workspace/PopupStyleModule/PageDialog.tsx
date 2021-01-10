@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Dialog, DialogTitle, IconButton, Grow } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
-import { MaxWidth } from 'base/Model/IPage';
+import { MaxWidth } from 'base1/Model/IPage';
 import { TransitionProps } from '@material-ui/core/transitions';
 
 const useStyles = makeStyles((theme: Theme) =>

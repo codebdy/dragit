@@ -11,7 +11,15 @@ export default {
   },
   children:[
     {
-      name:'ListViewToolbar'
+      name:'ListViewToolbar',
+      children:[
+        {
+          name:'ListViewFilter',
+        },
+        {
+          name:'ListViewBatchCommads',
+        }
+      ]
     },
     {
       name:'ListViewBody',

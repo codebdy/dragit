@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import MdiIcon from "components/common/MdiIcon"
+import MdiIcon from "components1/common/MdiIcon"
 import IconButton from '@material-ui/core/IconButton';
 import { Hidden, Typography, Menu, MenuItem, createStyles, makeStyles, Theme, ListItemIcon, Avatar, Tooltip } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -8,8 +8,8 @@ import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
 import intl from "react-intl-universal";
 import EvenNotification from "./Notifications"
 import { resolvePageUrl } from "utils/resolvePageUrl";
-import { useLoggedUser } from "store/helpers/useLoggedUser";
-import { useAppStore } from "store/helpers/useAppStore";
+import { useLoggedUser } from "store1/helpers1/useLoggedUser";
+import { useAppStore } from "store1/helpers1/useAppStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

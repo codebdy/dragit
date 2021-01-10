@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Fab, Hidden, Drawer, Divider, IconButton, Typography, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
-import MdiIcon from 'components/common/MdiIcon';
-import { useLeftDrawer, useThemeSettings } from 'store/helpers/useAppStore';
+import MdiIcon from 'components1/common/MdiIcon';
+import { useLeftDrawer, useThemeSettings } from 'store1/helpers1/useAppStore';
 import { Close } from '@material-ui/icons';
-import { usePageGQLStore } from 'base/GraphQL/PageGQLProvider';
+import { usePageGQLStore } from 'base1/GraphQL/PageGQLProvider';
 import { GraphQLDebugPannel } from './GraphQLDebugPannel';
 import intl from 'react-intl-universal';
-import { DARK } from 'store/ThemeSettings';
+import { DARK } from 'store1/ThemeSettings';
 import "./style.css";
 
 const useStyles = makeStyles((theme: Theme) =>

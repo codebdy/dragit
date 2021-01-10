@@ -4,8 +4,8 @@ import Sidebar from 'AdminBoard/Sidebar';
 import {TopNav} from 'AdminBoard/TopNav';
 import { Workspace } from 'AdminBoard/Workspace';
 import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
-import { AreaSelect } from 'design/AreaSelect';
-import { useLeftDrawer } from 'store/helpers/useAppStore';
+import { AreaSelect } from 'design1/AreaSelect';
+import { useLeftDrawer } from 'store1/helpers1/useAppStore';
 import {observer} from 'mobx-react-lite';
 import { ThemeSettings } from './ThemeSettings';
 

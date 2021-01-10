@@ -6,10 +6,10 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
 import { ADMIN_INDEX_URL, TOKEN_NAME } from 'utils/consts';
-import { useAppStore, useThemeSettings } from 'store/helpers/useAppStore';
-import { LIGHT } from 'store/ThemeSettings';
+import { useAppStore, useThemeSettings } from 'store1/helpers1/useAppStore';
+import { LIGHT } from 'store1/ThemeSettings';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
-import SubmitButton from 'components/common/SubmitButton';
+import SubmitButton from 'components1/common/SubmitButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

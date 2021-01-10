@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {observer} from 'mobx-react-lite';
-import { useAppStore, useDesigner } from "store/helpers/useAppStore";
+import { useAppStore, useDesigner } from "store1/helpers1/useAppStore";
 import { gql, useQuery } from "@apollo/react-hooks";
 import PageSkeleton from "AdminBoard/Workspace/common/ModuleSkeleton";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
@@ -9,8 +9,8 @@ import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
-import { useShowAppoloError } from "store/helpers/useInfoError";
-import { PageEditor } from "design/PageEditor";
+import { useShowAppoloError } from "store1/helpers1/useInfoError";
+import { PageEditor } from "design1/PageEditor";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
