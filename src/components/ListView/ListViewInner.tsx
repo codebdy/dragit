@@ -98,6 +98,7 @@ const ListViewInner = observer((
     childrenNodes = [],
     isDeisgning,
     children,
+    ...rest
   } = props
   
   const [queryParam, setQueryParam] = useState<IQueryParam>({
@@ -270,7 +271,7 @@ const ListViewInner = observer((
           >
             {
               isDeisgning?
-              <TableBody>
+              <TableBody {...rest}>
                 <TableRow>
                   {children}
                 </TableRow>

@@ -61,7 +61,7 @@ export default {
         confirmMessage:"删除后将不可恢复，您确定要删除吗？",
       },
     ],
-    rowCommands:[
+    /*rowCommands:[
       {
         slug:"edit",
         label:"编辑",
@@ -89,7 +89,7 @@ export default {
         icon:"mdi-delete",
         confirmMessage:"删除后将不可恢复，您确定要删除吗？",
       },
-    ],
+    ],*/
     query:'posts',
     mutation: 'updatePosts',
   },
