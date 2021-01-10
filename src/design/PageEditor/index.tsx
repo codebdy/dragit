@@ -30,7 +30,8 @@ import { ID } from 'base/Model/graphqlTypes';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_PAGE, SAVE_PAGE } from 'base/GraphQL/GQLs';
 import { useShowAppoloError } from 'store/helpers/useInfoError';
-import { CanvasStoreProvider, CanvasStore } from './CanvasStore';
+import { CanvasStore } from './CanvasStore';
+import { CanvasStoreProvider } from './useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,4 +1,10 @@
-import { useCanvasStore } from "./CanvasStore"
+import { createContext, useContext } from "react";
+import { CanvasStore } from "./CanvasStore"
+
+export const CanvasStoreContext = createContext<CanvasStore>({} as CanvasStore);
+export const CanvasStoreProvider = CanvasStoreContext.Provider;
+
+const useCanvasStore = (): CanvasStore => useContext(CanvasStoreContext);
 
 export function useDesign(){
   const canvasStore = useCanvasStore();

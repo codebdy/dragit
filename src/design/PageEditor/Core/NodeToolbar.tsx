@@ -4,7 +4,7 @@ import MdiIcon from 'components/common/MdiIcon';
 import classNames from 'classnames';
 import { useLeftDrawer } from 'store/helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
-import { useCanvasStore } from '../CanvasStore';
+import { useDesign } from '../useDesign';
 
 const height = 28;
 const barWidth = height*4;
@@ -64,7 +64,7 @@ export const NodeToolbar = observer((
   
   const sideBarWidth = sidebar.width;
   
-  const canvasStore = useCanvasStore();
+  const {canvasStore} = useDesign();
 
   const doFollow = ()=>{
     let rect = canvasStore.selectedNodeDom?.getBoundingClientRect();

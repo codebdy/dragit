@@ -6,8 +6,6 @@ import { RXNode } from "base/RXNode/RXNode";
 import { IDragOverParam } from "design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable } from "mobx";
-import { createContext, useContext } from "react";
-
 
 export class CanvasStore {
   showOutline:boolean = true;
@@ -137,8 +135,3 @@ export class CanvasStore {
   }
 
 }
-
-
-export const CanvasStoreContext = createContext<CanvasStore>({} as CanvasStore);
-export const CanvasStoreProvider = CanvasStoreContext.Provider;
-export const useCanvasStore = (): CanvasStore => useContext(CanvasStoreContext);

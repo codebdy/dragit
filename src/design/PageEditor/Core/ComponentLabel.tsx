@@ -1,9 +1,9 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { observer} from 'mobx-react-lite';
-import { useCanvasStore } from '../CanvasStore';
 import { IMeta } from 'base/Model/IMeta';
 import { RXNode } from 'base/RXNode/RXNode';
+import { useDesign } from '../useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +32,7 @@ export const ComponentLabel = observer((
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const canvasStore = useCanvasStore();
+  const {canvasStore} = useDesign();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();
