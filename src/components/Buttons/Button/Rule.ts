@@ -1,6 +1,6 @@
-import { Rule } from "../../base/Rules/Rule";
-import { IMeta } from "../../base/Model/IMeta";
-import { IProp } from "../../base/Model/IProp";
+import { Rule } from "../../../base/Rules/Rule";
+import { IMeta } from "../../../base/Model/IMeta";
+import { IProp } from "../../../base/Model/IProp";
 import OptionSelect from "base/PropsInputs/OptionSelect";
 import StringInput from "base/PropsInputs/StringInput";
 import marginRules from "base/Rules/marginRules";
@@ -94,27 +94,6 @@ export class ButtonRule extends Rule{
           ]
         },
       },
-      /*{
-        name:'type',
-        label:'type',
-        input:OptionSelect,
-        props:{
-          items:[
-            {
-              value:'submit',
-              label:'Submit'
-            },
-            {
-              value:'reset',
-              label:'Reset'
-            },
-            {
-              value:'button',
-              label:'Button'
-            },
-          ]
-        },
-      },*/
       {
         name:'disabled',
         label:'disabled',

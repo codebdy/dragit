@@ -13,7 +13,7 @@ import SelectBox from 'components/Inputs/Select/SelectBox';
 import Canvas from 'components/Canvas';
 import MediasPortlet from 'components/MediasPortlet';
 import { HeadRule } from 'components/Head/Rule';
-import { ButtonRule } from 'components/Button/Rule';
+import { ButtonRule } from 'components/Buttons/Button/Rule';
 import { DividerRule } from 'components/Divider/Rule';
 import { CanvasRule } from 'components/Canvas/Rule';
 import GridRow from 'components/Grid/Row';
@@ -58,6 +58,8 @@ import { EnumViewRule } from "components/Displays/EnumView/Rule";
 import  EnumView  from "components/Displays/EnumView";
 import { MediaViewRule } from "components/Displays/MediaView/Rule";
 import MediaView from "components/Displays/MediaView";
+import DayView from "components/Displays/DayView";
+import { DayViewRule } from "components/Displays/DayView/Rule";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -92,6 +94,7 @@ register('AntDesignChart', AntDesignChart, AntDesignChartRule);
 register('TextView', TextView, TextViewRule);
 register('MediaView', MediaView, MediaViewRule);
 register('EnumView', EnumView, EnumViewRule);
+register('DayView', DayView, DayViewRule);
 
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);

@@ -178,7 +178,7 @@ export default {
         isDeisgning:true,
       }, 
       children:[{
-        name:'TextView',
+        name:'DayView',
         designProps:{
           isDeisgning:true,
         }, 
