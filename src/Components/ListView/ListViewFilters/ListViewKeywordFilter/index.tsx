@@ -1,10 +1,9 @@
 import { makeStyles, Theme, createStyles, InputAdornment, TextField } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
-import { InputSize } from 'Components/Inputs/InputPropTypes';
 import { useListViewStore } from 'Components/ListView/ListViewStore';
 import React from 'react';
-import { useState } from 'react';
 import intl from 'react-intl-universal';
+import { IFilterProps } from '../IFilterProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,19 +14,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ListViewKeywordFilter = React.forwardRef((
-    props:{
-      size:InputSize
-    }, 
+    props: IFilterProps, 
     ref:any
   )=>{
 
   const {
+    variant = "outlined",
     size,
+    width = '260px',
+    style,
     ...rest
   } = props
   const classes = useStyles();
  
-  const [keywordFocused, setKeywordFocused] = useState(false);
   const listViewStore = useListViewStore();
   
   return (
@@ -42,7 +41,7 @@ const ListViewKeywordFilter = React.forwardRef((
         ),
       }}
       className={classes.keyword}
-      variant = "outlined"
+      variant = {variant}
       size = {size}
       value = {listViewStore.keywords || ''}
       onChange = {e=>{listViewStore.setKeywords(e.target.value as string)}}
@@ -52,13 +51,9 @@ const ListViewKeywordFilter = React.forwardRef((
           }
         }
       }
-
-      onFocus = {()=>setKeywordFocused(true)}
-      onBlur = {()=>setKeywordFocused(false)}
-
-      style={{width:keywordFocused ? '300px' : '200px'}}
-
       placeholder = {intl.get('please-input-and-press-enter')}
+      {...rest}
+      style={{...style, width}}
     />
   );
 })

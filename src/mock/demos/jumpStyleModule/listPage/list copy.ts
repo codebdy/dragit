@@ -139,14 +139,14 @@ export default {
           field:'status',
           metas:[
             {
-              name:'PUBLISHED',
-              value:'default',
-              label:'已发布'
+              value:'PUBLISHED',
+              color:'default',
+              name:'已发布'
             },
             {
-              name:'DRAFT',
-              value:'secondary',
-              label:'草稿'
+              value:'DRAFT',
+              color:'secondary',
+              name:'草稿'
             }
           ]
         }

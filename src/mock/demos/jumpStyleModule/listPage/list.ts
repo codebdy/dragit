@@ -26,6 +26,20 @@ export default {
               name:'ListViewEnumFilter',
               props:{
                 marginLeft:2,
+                size:'small',
+                //helperText:'提示消息',
+                label:'状态',
+                width:'120px',
+                metas:[
+                  {
+                    value:'DRAFT',
+                    name:'草稿',
+                  },
+                  {
+                    value:'PUBLISHED',
+                    name:'已发布',
+                  },
+                ]
               }
             }
           ]

@@ -3,9 +3,8 @@ import { IProp } from "Base/Model/IProp";
 import { IMeta } from "Base/Model/IMeta";
 
 export class ListViewEnumFilterRUle extends Rule{
-  editPaddingY = '8px';
-  editPaddingX = '8px';
-  
+  empertyPadding = '';
+
   accept(child:IMeta){
     return false;
   }
