@@ -30,6 +30,7 @@ export default {
                 //helperText:'提示消息',
                 label:'状态',
                 width:'120px',
+                field:'status',
                 metas:[
                   {
                     value:'DRAFT',

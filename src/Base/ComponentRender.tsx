@@ -43,6 +43,7 @@ export default function ComponentRender(
   } = metaProps as any;
 
   let elementProps:any = {
+    id:`rx-${component.id}`,
     ...rest,
     style:{
       ...style,

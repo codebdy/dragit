@@ -2,6 +2,9 @@ import { makeStyles, Theme, createStyles, Select, FormControl, FormHelperText, I
 import React from 'react';
 import { IFilterProps } from '../IFilterProps';
 import { IEnumItem } from '../../../../Base/Model/IEnumItem';
+import { useState } from 'react';
+import intl from "react-intl-universal";
+import { useListViewStore } from 'Components/ListView/ListViewStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,11 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
 const ListViewEnumFilter = React.forwardRef((
   props:IFilterProps&{
     metas?:IEnumItem[],
+    field?:string,
   }, 
   ref:any
 )=>{
 
   const {
+    id,
     variant = "outlined",
     label,
     width,
@@ -30,23 +35,28 @@ const ListViewEnumFilter = React.forwardRef((
     helperText,
     metas,
     style,
+    field,
     ...rest
   } = props
   const classes = useStyles();
- 
-  const handleChange = ()=>{
-    
+  const [value, setValue] = useState('');
+  const listViewStore = useListViewStore();
+  
+  const handleChange = (event:React.ChangeEvent<{ value: unknown }>)=>{
+    setValue(event.target.value as string);
+    listViewStore.setWhereGraphiQL(id, value ? `{column:${field}, operator:EQ, value:"${value}"}` : value);
+    listViewStore.excuteQuery();
   }
 
   return (
     <FormControl variant={variant} size={size} ref={ref} {...rest} style={{...style, width}}>
       <InputLabel className={classes.label}>{label}</InputLabel>
       <Select
-        value={''}
+        value={value}
         onChange={handleChange}
       >
         <MenuItem value="">
-          <em>全部</em>
+          {intl.get('all')}
         </MenuItem>
         {
           metas?.map(meta=><MenuItem key={meta.value} value={meta.value}>{meta.name}</MenuItem>)

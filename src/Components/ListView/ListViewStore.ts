@@ -4,9 +4,12 @@ import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 
 export class ListViewStore{
+  refreshQueryFlag:number = 1;
   rowSchemaStore:ModelStore = new ModelStore();
+  searchableFields:Array<string> = [];
   selects:ID[] = [];
-  keywords?:string;
+  whereGraphiQLs: Map<string,string> = new Map<string,string>();
+  orderByGraphiQLs:Map<string,string> = new Map<string,string>();
   
   constructor() {
     makeAutoObservable(this)
@@ -26,9 +29,18 @@ export class ListViewStore{
     return this.selects.indexOf(id) > -1
   }
 
-  setKeywords(keywords?:string){
-    this.keywords = keywords;
+  setWhereGraphiQL(rxId:string, grahpiQL: string){
+    this.whereGraphiQLs.set(rxId, grahpiQL);
   }
+
+  setOrderByGraphiQL(rxId:string, grahpiQL: string){
+    this.orderByGraphiQLs.set(rxId, grahpiQL);
+  }
+
+  excuteQuery(){
+    this.refreshQueryFlag ++;
+  }
+
 }
 
 export const ListViewStoreContext = createContext<ListViewStore>({} as ListViewStore);

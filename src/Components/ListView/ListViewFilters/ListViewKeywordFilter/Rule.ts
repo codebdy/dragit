@@ -3,6 +3,7 @@ import { IProp } from "Base/Model/IProp";
 import { IMeta } from "Base/Model/IMeta";
 
 export class ListViewKeywordFilterRule extends Rule{
+  empertyPadding = '';
   
   accept(child:IMeta){
     return false;
