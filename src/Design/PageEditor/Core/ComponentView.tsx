@@ -76,61 +76,62 @@ export const ComponentView = observer((
     ...rest
   } = metaProps as any;
 
-  const selected = canvasStore.selectedNode?.id === node.id;
-  const dragged = canvasStore.draggedNode?.id === node.id;
+  const selected = canvasStore?.selectedNode?.id === node.id;
+  const dragged = canvasStore?.draggedNode?.id === node.id;
   
   let dom : any = refEl.current;
   node.dom = dom;
   useEffect(()=>{
     if(selected){
-      canvasStore.setSelectedNodeDom(dom);      
+      canvasStore?.setSelectedNodeDom(dom);      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dom, selected])
 
   useEffect(()=>{
-    setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));
-  },[node, canvasStore.showPaddingX, canvasStore.showPaddingY]);
+    setEditStyle(getEditStyle(node, canvasStore?.showPaddingX, canvasStore?.showPaddingY));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[node, canvasStore?.showPaddingX, canvasStore?.showPaddingY]);
 
   useEffect(()=>{
-    if(canvasStore.needRefresh(node.id)){
-      setEditStyle(getEditStyle(node, canvasStore.showPaddingX, canvasStore.showPaddingY));
-      canvasStore.finishFrefrehNode(node.id);
+    if(canvasStore?.needRefresh(node.id)){
+      setEditStyle(getEditStyle(node, canvasStore?.showPaddingX, canvasStore?.showPaddingY));
+      canvasStore?.finishFrefrehNode(node.id);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.waitingRefreshNodeIds.length])
+  },[canvasStore?.waitingRefreshNodeIds.length])
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    let dragoverCharger = new DragoverCharger(node, canvasStore.draggedToolboxItem?.meta || canvasStore.draggedNode?.meta);
-    if(canvasStore.selectedNode?.id !== node.id && !canvasStore.draggedToolboxItem && !canvasStore.draggedNode){
-      canvasStore.setActiveNode(node);     
+    let dragoverCharger = new DragoverCharger(node, canvasStore?.draggedToolboxItem?.meta || canvasStore?.draggedNode?.meta);
+    if(canvasStore?.selectedNode?.id !== node.id && !canvasStore?.draggedToolboxItem && !canvasStore?.draggedNode){
+      canvasStore?.setActiveNode(node);     
     }
-    else if(canvasStore.selectedNode?.id !== node.id){
+    else if(canvasStore?.selectedNode?.id !== node.id){
       if(refEl.current){
-        if(canvasStore.draggedNode?.id !== node.id){
-          canvasStore.setDragOverParam(dragoverCharger.judgePosition(event))
+        if(canvasStore?.draggedNode?.id !== node.id){
+          canvasStore?.setDragOverParam(dragoverCharger.judgePosition(event))
         }
       }
     }
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{
     //event.stopPropagation();
-    canvasStore.setActiveNode(undefined);
+    canvasStore?.setActiveNode(undefined);
   }
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    canvasStore.setSelectedNode(node);
+    canvasStore?.setSelectedNode(node);
   }
 
-  const actived = canvasStore.activeNode?.id === node.id;
+  const actived = canvasStore?.activeNode?.id === node.id;
 
   let elementProps:any = {
     ...rest, 
     className:classNames(
       className, 
       {
-        [classes.outline]: canvasStore.showOutline,
+        [classes.outline]: canvasStore?.showOutline,
         [classes.active]: actived,
         [classes.selected]: selected,
         [classes.dragged]:dragged,

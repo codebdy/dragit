@@ -61,25 +61,25 @@ export const DragCusor = observer(()=>{
   const {canvasStore} = useDesign();
 
   useEffect(()=>{      
-    if(canvasStore.dragOverParam){
-      const param = canvasStore.dragOverParam;
+    if(canvasStore?.dragOverParam){
+      const param = canvasStore?.dragOverParam;
       if(param.position){
-        canvasStore.setDragOverParam(param);
+        canvasStore?.setDragOverParam(param);
         setRect(param?.targetNode?.rect);
         return;
       }
     }
     setRect(undefined);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.dragOverParam])
+  },[canvasStore?.dragOverParam])
 
   useEffect(()=>{
-    setRect(canvasStore.dragOverParam?.targetNode?.rect);
+    setRect(canvasStore?.dragOverParam?.targetNode?.rect);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.scrollFlag])
+  },[canvasStore?.scrollFlag])
 
-  const isvertical = canvasStore.dragOverParam?.position ==='out-left' || canvasStore.dragOverParam?.position ==='out-right'
-    ||canvasStore.dragOverParam?.position ==='in-left' || canvasStore.dragOverParam?.position ==='in-right';
+  const isvertical = canvasStore?.dragOverParam?.position ==='out-left' || canvasStore?.dragOverParam?.position ==='out-right'
+    ||canvasStore?.dragOverParam?.position ==='in-left' || canvasStore?.dragOverParam?.position ==='in-right';
 
   const cursorWidth = isvertical ? (rect?.height) : (rect?.width)
   let cursorLeft = rect?.x;
@@ -87,42 +87,42 @@ export const DragCusor = observer(()=>{
   let marginTop = '-1px';
   let cursorTop = rect?.y;  
   
-  if(canvasStore.dragOverParam?.position ==='out-top'){
+  if(canvasStore?.dragOverParam?.position ==='out-top'){
     marginTop = "-3px";
   }
 
-  if(canvasStore.dragOverParam?.position ==='out-bottom'){
+  if(canvasStore?.dragOverParam?.position ==='out-bottom'){
     cursorTop = (rect?.y||0) + (rect?.height||0);
     marginTop = "-1px";
   }
 
-  if(canvasStore.dragOverParam?.position ==='in-top'){
+  if(canvasStore?.dragOverParam?.position ==='in-top'){
     marginTop = "1px";
   }
-  if(canvasStore.dragOverParam?.position ==='in-bottom'){
+  if(canvasStore?.dragOverParam?.position ==='in-bottom'){
     cursorTop = (rect?.y||0) + (rect?.height||0);
     marginTop = "-4px";
   }
 
-  if(canvasStore.dragOverParam?.position ==='in-left'){
+  if(canvasStore?.dragOverParam?.position ==='in-left'){
     marginTop = "1px";
     marginLeft = '4px';
   }
-  if(canvasStore.dragOverParam?.position === 'in-right'){
+  if(canvasStore?.dragOverParam?.position === 'in-right'){
     cursorLeft = (rect?.x || 0) + (rect?.width||0);
     marginTop = "1px";
   }
 
-  if(canvasStore.dragOverParam?.position ==='out-right'){
+  if(canvasStore?.dragOverParam?.position ==='out-right'){
     cursorLeft = (rect?.x || 0) + (rect?.width||0)
     marginLeft = '2px'
   }
 
-  if(canvasStore.dragOverParam?.position ==='out-left'){
+  if(canvasStore?.dragOverParam?.position ==='out-left'){
     marginLeft = '2px'
   }
 
-  if(canvasStore.dragOverParam?.position ==='in-center'){
+  if(canvasStore?.dragOverParam?.position ==='in-center'){
     cursorTop =  (rect?.y||0) + (rect?.height||0)/2;
   }
 
@@ -149,17 +149,17 @@ export const DragCusor = observer(()=>{
           }}
         >
           {
-            canvasStore.dragOverParam?.position !=='in-top' && canvasStore.dragOverParam?.position !=='in-right' &&
-            canvasStore.dragOverParam?.position !=='in-center'&&
+            canvasStore?.dragOverParam?.position !=='in-top' && canvasStore?.dragOverParam?.position !=='in-right' &&
+            canvasStore?.dragOverParam?.position !=='in-center'&&
             <ArrowDropUpIcon className={classes.upArrow}/>            
           }
           {
-             canvasStore.dragOverParam?.position !=='in-bottom' && canvasStore.dragOverParam?.position !=='in-left' &&
-             canvasStore.dragOverParam?.position !=='in-center'&&
+             canvasStore?.dragOverParam?.position !=='in-bottom' && canvasStore?.dragOverParam?.position !=='in-left' &&
+             canvasStore?.dragOverParam?.position !=='in-center'&&
             <ArrowDropDownIcon className = {classes.downArrow} />
           }
           {
-            canvasStore.dragOverParam?.position ==='in-center'&&
+            canvasStore?.dragOverParam?.position ==='in-center'&&
             <Fragment>
               <ArrowLeftIcon className = {classes.leftArrow} fontSize="large"/>
               <ArrowRightIcon className = {classes.rightArrow} fontSize="large"/>
