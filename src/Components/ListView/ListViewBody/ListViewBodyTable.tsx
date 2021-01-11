@@ -1,9 +1,18 @@
-import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
+import { TableRow, TableCell, Checkbox, TableBody} from "@material-ui/core";
 import React from "react";
 import { RXNode } from "Base/RXNode/RXNode";
 import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {Observer} from 'mobx-react-lite';
+import { Skeleton } from "@material-ui/lab";
+import ComponentRender from "Base/ComponentRender";
+import { ModelProvider } from "Base/ModelTree/ModelProvider";
+import { ModelStore } from "Base/ModelTree/ModelStore";
+
+export interface Row{
+  id:any,
+  [key:string]:any,
+}
 
 export function ListViewBodyTable(
   props: {
@@ -13,57 +22,52 @@ export function ListViewBodyTable(
   const {columns} = props;
   const listViewStore = useListViewStore();
 
-  const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>)=>{
-    if (event.target.checked) {
-      const newSelecteds = listViewStore.rows.map((n) => n.id);
-      listViewStore.setSelects(newSelecteds);
-    }
-    else{
-      listViewStore.setSelects([]);
-    }
-  }
-  
   return (
     <Observer>
       {()=>
-        <TableHead>
-          <TableRow>
-            <TableCell padding="checkbox">
-              <Checkbox
-                id = 'all'
-                indeterminate={listViewStore.selects.length > 0 && listViewStore.selects.length < listViewStore.rows.length}
-                checked={listViewStore.rows.length > 0 && listViewStore.selects.length === listViewStore.rows.length}
-                onChange={handleSelectAll}
-                inputProps={{ 'aria-label': 'select all desserts' }}
-              />
-            </TableCell>
-            {columns.map((column,index) => {
-              const{sortable, ...restProps} = column.meta.props as any;
-              return(
-                <TableCell
-                  key={column.id + '-' + index}
-                  sortDirection={listViewStore.getFieldDirection(column.meta.props?.field)}
-                  {...restProps}
+        <TableBody>
+          {listViewStore.rows?.map((row:Row, index: any) => {
+              const isItemSelected = listViewStore.isRowSelected(row.id);
+              const labelId = `listview-${index}`;
+              return (
+                <TableRow
+                  hover
+                  id={row.id}
+                  role="checkbox"
+                  aria-checked={isItemSelected}
+                  tabIndex={-1}
+                  key={row.id}
+                  selected={isItemSelected}
                 >
-                  {column.meta.props?.sortable ?
-                    <TableSortLabel
-                      id = {column.id + 'label'}
-                      active={!!listViewStore.getFieldDirection(column.meta.props?.field)}
-                      direction={listViewStore.getFieldDirection(column.meta.props?.field)}
-                      onClick={()=>listViewStore.sortField(column.meta.props?.field)}
-                    >
-                      {column.meta.props?.label}
-                    </TableSortLabel>
-                    :
-                    column.meta.props?.label
-                  }
-                </TableCell>
-              )
-            })
-            }
-          </TableRow>
-        </TableHead>
-      }
+                  <TableCell padding="checkbox">
+                    {
+                      <Checkbox
+                        id = {row.id.toString()}
+                        checked={isItemSelected}
+                        inputProps={{ 'aria-labelledby': labelId }}
+                        onClick={event=>listViewStore.toggleSelect(row.id)}
+                      />
+                    }
+                  </TableCell>
+                  <ModelProvider value={new ModelStore(row)}>
+                    {
+                      columns?.map((column, colIndex) => {
+                        return(
+                          listViewStore.loading ? 
+                          <TableCell key={row.id + '-' + colIndex} >
+                            <Skeleton animation="wave" height={50} width="50%" />
+                          </TableCell>
+                          :
+                          <ComponentRender key={colIndex} component = {column} />
+                        )
+                      })
+                    }
+                  </ModelProvider>
+                </TableRow>
+              );
+            })}
+        </TableBody>
+    }
     </Observer>
   );
 }

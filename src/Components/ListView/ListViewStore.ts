@@ -37,6 +37,7 @@ export class ListViewStore{
   orderByGraphiQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
   rows: Array<any> = [];
+  loading?:boolean;
   
   constructor() {
     makeAutoObservable(this)
@@ -103,6 +104,10 @@ export class ListViewStore{
     }
 
     return this.getOrderBy(field)?.direction;
+  }
+
+  isRowSelected(rowId:ID){
+    return !!this.selects.find(id=>id === rowId);
   }
 
 }

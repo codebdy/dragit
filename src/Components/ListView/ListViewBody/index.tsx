@@ -4,9 +4,10 @@ import { IMeta } from 'Base/Model/IMeta';
 import { ModelProvider } from 'Base/ModelTree/ModelProvider';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { useDesign } from 'Design/PageEditor/useDesign';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useListViewStore } from '../ListViewStore';
 import { ListViewBodyHead } from './ListViewBodyHead';
+import { ListViewBodyTable } from './ListViewBodyTable';
 
 const ListViewBody = React.forwardRef((
     props:{
@@ -54,7 +55,10 @@ const ListViewBody = React.forwardRef((
                 {children} 
               </TableRow>
             </TableBody>
-          : <ListViewBodyHead columns = {childrenNodes||[]}/>
+          : <Fragment>
+              <ListViewBodyHead columns = {childrenNodes||[]}/>
+              <ListViewBodyTable columns = {childrenNodes||[]}/>
+            </Fragment>           
         }
       </Table>
     </TableContainer>
