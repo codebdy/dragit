@@ -14,7 +14,7 @@ export default {
       name:'ListViewToolbar',
       children:[
         {
-          name:'ListViewFilter',
+          name:'ListViewQueryParams',
         },
         {
           name:'ListViewBatchCommads',

@@ -7,7 +7,16 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex:1,
+      display:'flex',
+      flexFlow:'column',
     },
+    selectedTip:{
+      marginTop:theme.spacing(1),
+      padding:theme.spacing(1, 0),
+    },
+    commands:{
+      padding:theme.spacing(1, 0),
+    }
   })
 );
 
@@ -31,8 +40,8 @@ const ListViewBatchCommads = React.forwardRef((
           {...rest}
           ref= {ref}
         >
-          ddddd
-          {children}
+          <div className={classes.selectedTip}>选中记录数量：<b>3</b></div>
+          <div className={classes.commands}>dd{children}</div>          
         </div>
       }
     </Observer>

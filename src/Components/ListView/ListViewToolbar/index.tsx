@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing(2),
-      paddingRight: theme.spacing(1),
       display:'flex',
       flexFlow:'column',
       justifyContent:'center',

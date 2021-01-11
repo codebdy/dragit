@@ -1,7 +1,7 @@
 import { makeStyles, Theme, createStyles, lighten, Toolbar, Typography, TextField, InputAdornment, Tooltip, IconButton } from "@material-ui/core";
 import React, { Fragment, useState } from "react";
 import MdiIcon from "../../Common/MdiIcon";
-import ListViewFilter from "../ListViewFilter/index-back";
+import ListViewFilter from "../ListViewQueryParams/index-back";
 import clsx from 'clsx';
 import { ILabelItem } from "../../../Base/Model/ILabelItem";
 import intl from 'react-intl-universal';
