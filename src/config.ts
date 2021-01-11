@@ -73,6 +73,8 @@ import { ListViewFiltersRule } from "Components/ListView/ListViewFilters/Rule";
 import { ListViewKeywordFilterRule } from "Components/ListView/ListViewFilters/ListViewKeywordFilter/Rule";
 import ListViewKeywordFilter from "Components/ListView/ListViewFilters/ListViewKeywordFilter";
 import Button from "Components/Buttons/Button";
+import ListViewPagination from "Components/ListView/ListViewPagination";
+import { ListViewPaginationRule } from "Components/ListView/ListViewPagination/Rule";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -96,6 +98,7 @@ register('ListViewFilters', ListViewFilters, ListViewFiltersRule);
 register('ListViewKeywordFilter', ListViewKeywordFilter, ListViewKeywordFilterRule);
 register('ListViewEnumFilter', ListViewEnumFilter, ListViewEnumFilterRUle);
 register('ListViewBatchCommads', ListViewBatchCommads, ListViewBatchCommadsRule);
+register('ListViewPagination', ListViewPagination, ListViewPaginationRule);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);

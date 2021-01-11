@@ -56,9 +56,11 @@ const ListViewEnumFilter = React.forwardRef((
         value={value}
         onChange={handleChange}
       >
-        <MenuItem value="">
-          {intl.get('all')}
-        </MenuItem>
+        {!withoutAll&&
+          <MenuItem value="">
+            <em>{intl.get('all')}</em>
+          </MenuItem>
+        }
         {
           metas?.map(meta=><MenuItem key={meta.value} value={meta.value}>{meta.name}</MenuItem>)
         }

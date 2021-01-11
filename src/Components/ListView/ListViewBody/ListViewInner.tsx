@@ -298,19 +298,6 @@ const ListViewInner = observer((
             }
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={parseRowsPerPageOptions()}
-          component="div"
-          labelRowsPerPage = {intl.get('rows-per-page') + ':'}
-          count={paginatorInfo.total||0}
-          rowsPerPage={queryParam.first||0}
-          page={paginatorInfo.currentPage||0}
-          onChangePage={(event, newPage)=>updateQueryParam('page', newPage)}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-          SelectProps={{
-            inputProps: { 'aria-label': 'rows per page' },
-          }}
-        />
       </Paper>
       <ConfirmDialog 
         message = {confirmCommand?.command.confirmMessage||'Confirm message'}

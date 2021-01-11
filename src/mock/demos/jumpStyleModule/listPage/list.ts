@@ -165,6 +165,9 @@ export default {
           }]
         },
       ],             
+    },
+    {
+      name:'ListViewPagination',
     }
   ],      
 }

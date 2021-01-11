@@ -38,6 +38,7 @@ export function ListViewBodyTable(
                   tabIndex={-1}
                   key={row.id}
                   selected={isItemSelected}
+                  onClick = {event=>listViewStore.toggleSelect(row.id)}
                 >
                   <TableCell padding="checkbox">
                     {
