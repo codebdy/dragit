@@ -1,13 +1,9 @@
-type Order = 'asc' | 'desc';
-export interface FieldOrder{
-  field:string;
-  direction: Order;
-}
+import { IFieldOrder } from "./IFieldOrder";
 
 export interface IQueryParam{
   keywords?: string,
   filterValues?: Array<string>,
-  orders?: Array<FieldOrder>,
+  orders?: Array<IFieldOrder>,
   first: number,
   page:number,//第几页
 }

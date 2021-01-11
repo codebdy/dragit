@@ -4,7 +4,6 @@ import MediaAdder from 'Components/Medias/MediaAdder';
 import { IMedia } from 'Base/Model/IMedia';
 import withSkeleton from 'Base/HOCs/withSkeleton';
 import withFormField from 'Components/Common/withFormField';
-import { useDesign } from 'Design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +30,6 @@ const MediaSelect = React.forwardRef((props: {
   onChange?:(event:any)=>void,
 }, ref:any)=>{
   const {label, value, helperText, error, width, avatar, onChange, style, ...rest} = props;
-  const {isDesigning} = useDesign();
   const classes = useStyles();
 
   const [media, setMedia] = React.useState(value);

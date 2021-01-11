@@ -276,14 +276,6 @@ const ListViewInner = observer((
               </TableBody>
               :
               <Fragment>
-                <ListViewHead
-                  numSelected={selected.length}
-                  orders = {queryParam.orders}
-                  onSelectAllClick={handleSelectAllClick}
-                  onRequestSort={orders=>updateQueryParam('orders', orders)}
-                  rowCount={rows?.length || 0}
-                  columns = {childrenNodes}
-                />
                 <TableBody>
                   {rows?.map((row:Row, index: any) => {
                       const isItemSelected = isSelected(row.id);

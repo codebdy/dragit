@@ -2,13 +2,16 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { Observer } from 'mobx-react-lite';
 import React from 'react';
 import { useListViewStore } from '../ListViewStore';
+import intl from 'react-intl-universal';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex:1,
       display:'flex',
-      flexFlow:'column',
+      justifyContent:'space-between',
+      alignItems:'center',
     },
     selectedTip:{
       marginTop:theme.spacing(1),
@@ -26,6 +29,7 @@ const ListViewBatchCommads = React.forwardRef((
   )=>{
 
   const {
+    className,
     children,
     ...rest
   } = props
@@ -36,11 +40,11 @@ const ListViewBatchCommads = React.forwardRef((
     <Observer>
       {()=>
         <div
-          className={classes.root}
+          className={classNames(className, classes.root)}
           {...rest}
           ref= {ref}
         >
-          <div className={classes.selectedTip}>选中记录数量：<b>3</b></div>
+          <div className={classes.selectedTip}>{intl.get('records-selected')} <b>{listViewStore.selects.length}</b></div>
           <div className={classes.commands}>{children}</div>          
         </div>
       }

@@ -173,7 +173,7 @@
     "medias":"媒体库",
     "root-dir":"根目录",
 
-    "records-selected":"个被选中",
+    "records-selected":"选中数量：",
     "replace":"替换",
     "edit":"编辑",
     "finish-edit":"完成编辑",

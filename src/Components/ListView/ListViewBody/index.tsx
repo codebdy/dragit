@@ -1,4 +1,7 @@
+import { TableContainer, Table } from '@material-ui/core';
+import { useDesign } from 'Design/PageEditor/useDesign';
 import React from 'react';
+import { ListViewHead } from './ListViewHead';
 
 const ListViewBody = React.forwardRef((
     props:any, 
@@ -6,15 +9,27 @@ const ListViewBody = React.forwardRef((
   )=>{
 
   const {
+    childrenNodes,
     children,
     ...rest
   } = props
-  
+  const {isDesigning} = useDesign(); 
  
   return (
-    <div {...rest}  ref={ref}>
-      ListView body
-    </div>
+    <TableContainer {...rest}  ref={ref}>
+      <Table
+        aria-labelledby="tableTitle"
+        size={'medium'}
+        aria-label="List View"
+        style={{marginTop:'1px'}}
+      >
+        {
+          isDesigning
+          ? children
+          : <ListViewHead columns = {childrenNodes}/>
+        }
+      </Table>
+    </TableContainer>
   );
 })
 

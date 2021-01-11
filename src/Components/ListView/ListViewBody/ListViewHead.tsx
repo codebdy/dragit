@@ -1,107 +1,69 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import { FieldOrder } from "Components/ListView/IQueryParam";
 import React from "react";
 import { RXNode } from "Base/RXNode/RXNode";
 import { IMeta } from "Base/Model/IMeta";
-
+import { useListViewStore } from "../ListViewStore";
+import {Observer} from 'mobx-react-lite';
 
 export interface ListViewHeadProps {
-  numSelected: number;
-  onRequestSort: (orders:Array<FieldOrder>) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  orders?: Array<FieldOrder>;
-  rowCount: number;
   columns:Array<RXNode<IMeta>>;
-  loading?:boolean;
 }
 
 export function ListViewHead(props: ListViewHeadProps) {
-  const { onSelectAllClick, orders = [], numSelected, rowCount, onRequestSort, columns, loading} = props;
+  const {columns} = props;
+  const listViewStore = useListViewStore();
 
-  const createSortHandler = (field: string) => (event: React.MouseEvent<unknown>) => {
-    let order = getOrder(field);
-    if(order){
-      if(order.direction === 'asc'){
-        order.direction = 'desc';
-        onRequestSort([...orders])
-      }else if(order.direction === 'desc'){
-        removeOrder(order.field)
-      }
-    }else{
-      onRequestSort([...orders, {field:field, direction:'asc'}]);
+  const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>)=>{
+    if (event.target.checked) {
+      const newSelecteds = listViewStore.rows.map((n) => n.id);
+      listViewStore.setSelects(newSelecteds);
     }
-  };
-
-  const removeOrder = (field:string)=>{
-    for(var i = 0; i < orders.length; i++){
-      if(field === orders[i].field){
-        orders.splice(i,1);
-        onRequestSort([...orders])
-        return
-      }
-    }    
-  }
-
-  const getOrderDirection = (field:string)=>{
-    return getOrder(field)?.direction;
-  }
-
-  const getOrder = (field:string)=>{
-    for(var i = 0; i < orders.length; i++){
-      if(field === orders[i].field){
-        return orders[i]
-      }
+    else{
+      listViewStore.setSelects([]);
     }
   }
-
+  
   return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          {
-             loading ? 
-              <Skeleton animation="wave" height={50} width="60%" />
-             :
-            <Checkbox
-              id = 'all'
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{ 'aria-label': 'select all desserts' }}
-            />
-          }
-        </TableCell>
-        {columns.map((column,index) => {
-          const{sortable, ...restProps} = column.meta.props as any;
-          return(
-            loading ? 
-            <TableCell key={column.id + '-' + index} {... restProps} >
-              <Skeleton animation="wave" height={50} width="50%" />
+    <Observer>
+      {()=>
+        <TableHead>
+          <TableRow>
+            <TableCell padding="checkbox">
+              <Checkbox
+                id = 'all'
+                indeterminate={listViewStore.selects.length > 0 && listViewStore.selects.length < listViewStore.rows.length}
+                checked={listViewStore.rows.length > 0 && listViewStore.selects.length === listViewStore.rows.length}
+                onChange={handleSelectAll}
+                inputProps={{ 'aria-label': 'select all desserts' }}
+              />
             </TableCell>
-            :
-            <TableCell
-              key={column.id + '-' + index}
-              sortDirection={getOrderDirection(column.meta.props?.field)}
-              {...restProps}
-            >
-              {column.meta.props?.sortable ?
-                <TableSortLabel
-                  id = {column.id + 'label'}
-                  active={!!getOrderDirection(column.meta.props?.field)}
-                  direction={getOrderDirection(column.meta.props?.field)}
-                  onClick={createSortHandler(column.meta.props?.field)}
+            {columns.map((column,index) => {
+              const{sortable, ...restProps} = column.meta.props as any;
+              return(
+                <TableCell
+                  key={column.id + '-' + index}
+                  sortDirection={listViewStore.getFieldDirection(column.meta.props?.field)}
+                  {...restProps}
                 >
-                  {column.meta.props?.label}
-                </TableSortLabel>
-                :
-                column.meta.props?.label
-              }
-            </TableCell>
-          )
-        })
-        }
-      </TableRow>
-    </TableHead>
+                  {column.meta.props?.sortable ?
+                    <TableSortLabel
+                      id = {column.id + 'label'}
+                      active={!!listViewStore.getFieldDirection(column.meta.props?.field)}
+                      direction={listViewStore.getFieldDirection(column.meta.props?.field)}
+                      onClick={()=>listViewStore.sortField(column.meta.props?.field)}
+                    >
+                      {column.meta.props?.label}
+                    </TableSortLabel>
+                    :
+                    column.meta.props?.label
+                  }
+                </TableCell>
+              )
+            })
+            }
+          </TableRow>
+        </TableHead>
+      }
+    </Observer>
   );
 }

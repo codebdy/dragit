@@ -76,6 +76,93 @@ export default {
     },
     {
       name:'ListViewBody',
+      selfRenderChildren:true,
+      children:[
+        {
+          name:'TableColumn',
+          props:{
+            label:'图片',                  
+          },
+          children:[{
+            name:'MediaView',
+            props:{
+              field:'feathureImage',
+              graphiQL:`$field{
+                id 
+                thumbnail
+              } `,          
+              width:'60px',
+            }
+          }]
+        },
+        {
+          name:'TableColumn',
+          props:{
+            label:'标题',
+            field:'title',
+            sortable:true,
+            width:'200px',
+          },
+    
+          children:[{
+            name:'TextView',
+            props:{
+              field:'title',
+              variant:'outlined',
+              size:'small',
+            }
+          }]
+        },
+        {
+          name:'TableColumn',
+          props:{
+            label:'状态',
+          },
+          children:[{
+            name:'EnumView',
+            props:{
+              field:'status',
+              metas:[
+                {
+                  value:'PUBLISHED',
+                  color:'default',
+                  name:'已发布'
+                },
+                {
+                  value:'DRAFT',
+                  color:'secondary',
+                  name:'草稿'
+                }
+              ]
+            }
+          }]
+        },
+        {
+          name:'TableColumn',
+          props:{
+            label:'时间',
+          },
+          children:[{
+            name:'DayView',
+            props:{
+              field:'created_at',
+            }
+          }],
+        },
+        {
+          name:'TableColumn',
+          props:{
+            label:'操作',
+          },
+          children:[{
+            name:'TextBox',
+            props:{
+              variant:'outlined',
+              size:'small',
+            }
+          }]
+        },
+      ],             
     }
   ],      
 }

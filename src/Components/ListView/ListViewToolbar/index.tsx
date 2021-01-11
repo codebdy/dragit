@@ -31,6 +31,7 @@ const ListViewToolbar = React.forwardRef((
   )=>{
 
   const {
+    className,
     children,
     ...rest
   } = props
@@ -41,7 +42,7 @@ const ListViewToolbar = React.forwardRef((
     <Observer>
       {()=>
         <div
-          className={classNames(classes.root, {
+          className={classNames(classes.root, className, {
             [classes.highlight]: listViewStore.selects.length > 0,
           })}
           {...rest}

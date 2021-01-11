@@ -1,4 +1,5 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import classNames from 'classnames';
 import { Observer } from 'mobx-react-lite';
 import React from 'react';
 
@@ -18,6 +19,7 @@ const ListViewFilters = React.forwardRef((
   )=>{
 
   const {
+    className,
     children,
     ...rest
   } = props
@@ -27,7 +29,7 @@ const ListViewFilters = React.forwardRef((
     <Observer>
       {()=>
         <div
-          className={classes.root}
+          className={classNames(className, classes.root)}
           {...rest}
           ref= {ref}
         >
