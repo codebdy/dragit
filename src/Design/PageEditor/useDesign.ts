@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { CanvasStore } from "./CanvasStore"
 
-export const CanvasStoreContext = createContext<CanvasStore>({} as CanvasStore);
+export const CanvasStoreContext = createContext<CanvasStore>(undefined as unknown as CanvasStore);
 export const CanvasStoreProvider = CanvasStoreContext.Provider;
 
 const useCanvasStore = (): CanvasStore => useContext(CanvasStoreContext);
