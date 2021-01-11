@@ -7,7 +7,7 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import React from 'react';
 import classNames from 'classnames';
 import { IRect } from 'Base/Model/IRect';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { useDesign } from '../useDesign';
 
 

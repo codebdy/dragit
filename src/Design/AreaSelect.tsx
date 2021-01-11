@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { useAppStore, useDesigner } from 'Store/Helpers/useAppStore';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { ID } from 'Base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { Page } from './Page';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'Base/PageAction';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';

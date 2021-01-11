@@ -3,7 +3,7 @@ import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { SidebarLinks } from "./SidebarLinks"
 import LeftDrawer from "./LeftDrawer";
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { useLeftDrawer, useThemeSettings } from "Store/Helpers/useAppStore";
 
 export enum SidebarSize{

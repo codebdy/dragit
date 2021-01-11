@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { gql, useQuery } from "@apollo/react-hooks";
 import { JumpStyleModule } from "./JumpStyleModule";
 import { Fragment } from "react";

@@ -5,7 +5,7 @@ import {TopNav} from 'AdminBoard/TopNav';
 import { Workspace } from 'AdminBoard/Workspace';
 import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { AreaSelect } from 'Design/AreaSelect';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { ThemeSettings } from './ThemeSettings';
 import { useLeftDrawer } from 'Store/Helpers/useAppStore';
 

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { FormControlLabel, Switch, Typography } from '@material-ui/core';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { useThemeSettings } from 'Store/Helpers/useAppStore';
 
 export const ToolbarSettings = observer(()=>{

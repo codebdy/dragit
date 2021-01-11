@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles, Grid, Typography, Fab, CircularProgress } from '@material-ui/core';
 import { GraphQLStore } from 'Base/GraphQL/GraphQLStore';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import {GQLList} from './GQLList';
 import { print, parse } from 'graphql';
 import {CodeMirrorEditor} from './CodeMirrorEditor';

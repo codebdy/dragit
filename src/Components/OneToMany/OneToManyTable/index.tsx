@@ -7,7 +7,7 @@ import ComponentRender from 'Base/ComponentRender';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
-import { Observer } from 'mobx-react-lite';
+import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 

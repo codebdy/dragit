@@ -7,7 +7,7 @@ import { ToolbarSettings } from './ToolbarSettings';
 import { ElevationStrength } from './ElevationStrength';
 import { SidebarSettings } from './SidebarSettings';
 import RightDrawer from 'AdminBoard/ThemeSettings/RightDrawer';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { useThemeSettings, useAppStore } from 'Store/Helpers/useAppStore';
 import useShadows from 'Utils/useShadows';
 

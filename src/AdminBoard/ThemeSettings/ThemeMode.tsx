@@ -3,7 +3,7 @@ import { FormControlLabel, Radio, Typography } from '@material-ui/core';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 
 import { useThemeSettings } from 'Store/Helpers/useAppStore';
 import { LIGHT, linearGradient1, DARK, linearGradient5 } from 'Store/ThemeSettings';

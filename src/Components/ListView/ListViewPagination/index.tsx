@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import intl from 'react-intl-universal';
 import { useListViewStore } from '../ListViewStore';
-import {Observer} from 'mobx-react-lite';
+import {Observer} from 'mobx-react';
 
 const ListViewPagination = React.forwardRef((
     props:{

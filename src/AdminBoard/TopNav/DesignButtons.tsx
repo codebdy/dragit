@@ -5,7 +5,7 @@ import { Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
 import { AUTH_CUSTOMIZE } from "Base/authSlugs";
-import { observer } from "mobx-react-lite";
+import { observer } from "mobx-react";
 import MdiIcon from "Components/Common/MdiIcon";
 import { useDesigner, useLeftDrawer } from "Store/Helpers/useAppStore";
 import { useLoggedUser } from "Store/Helpers/useLoggedUser";

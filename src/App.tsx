@@ -12,7 +12,7 @@ import DrawerEditor from 'Design/DrawerEditor';
 import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';
 import Login from 'AdminBoard/Views/Login';
 import { useIntl } from 'Base/Hooks/useIntl';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { ErrorDialog } from 'Base/Widgets/ErrorDialog';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
 import { useThemeSettings } from 'Store/Helpers/useAppStore';

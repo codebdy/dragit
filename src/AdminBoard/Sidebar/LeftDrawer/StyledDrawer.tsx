@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme,  DrawerProps, Drawer, useTheme } from '@material-ui/core';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { useThemeSettings } from 'Store/Helpers/useAppStore';
 
 const useStyles = (

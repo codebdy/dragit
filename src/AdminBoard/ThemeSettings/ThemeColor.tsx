@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';

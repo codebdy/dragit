@@ -5,7 +5,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
-import {Observer} from 'mobx-react-lite';
+import {Observer} from 'mobx-react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>

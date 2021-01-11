@@ -8,7 +8,7 @@ import { DesignButtons } from 'AdminBoard/TopNav/DesignButtons';
 import NavButtons from './NavButtons';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { useThemeSettings, useAppStore } from 'Store/Helpers/useAppStore';
 import { DARK } from 'Store/ThemeSettings';
 

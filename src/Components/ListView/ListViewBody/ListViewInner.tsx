@@ -25,7 +25,7 @@ import { RXNode } from 'Base/RXNode/RXNode';
 import ComponentRender from 'Base/ComponentRender';
 import { ModelStore } from 'Base/ModelTree/ModelStore';
 import { ModelProvider } from 'Base/ModelTree/ModelProvider';
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 

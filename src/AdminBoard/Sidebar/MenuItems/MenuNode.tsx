@@ -5,7 +5,7 @@ import { RXNode } from "Base/RXNode/RXNode";
 import classNames from "classnames";
 import React from "react";
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import MdiIcon from "Components/Common/MdiIcon";
 import { useLeftDrawer, useAppStore } from "Store/Helpers/useAppStore";
 

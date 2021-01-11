@@ -25,7 +25,7 @@ import SubmitButton from 'Components/Common/SubmitButton';
 import ConfirmDialog from 'Base/Widgets/ConfirmDialog';
 import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'Base/authSlugs';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_PAGE, SAVE_PAGE } from 'Base/GraphQL/GQLs';

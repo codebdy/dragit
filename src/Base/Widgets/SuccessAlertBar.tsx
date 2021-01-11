@@ -2,7 +2,7 @@ import React from 'react';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import intl from 'react-intl-universal';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 
 function Alert(props: AlertProps) {

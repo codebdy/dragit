@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import classNames from 'classnames';
 import { useLeftDrawer } from 'Store/Helpers/useAppStore';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
 
 const height = 28;

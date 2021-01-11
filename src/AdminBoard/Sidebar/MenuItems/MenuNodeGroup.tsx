@@ -8,7 +8,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { MenuNode } from "./MenuNode";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { useLoggedUser } from "Store/Helpers/useLoggedUser";
-import { observer } from "mobx-react-lite"
+import { observer } from "mobx-react"
 import { ID } from "Base/Model/graphqlTypes";
 
 const useStyles = makeStyles((theme: Theme) =>

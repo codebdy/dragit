@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { Observer } from 'mobx-react-lite';
+import { Observer } from 'mobx-react';
 import React from 'react';
 import { useListViewStore } from '../ListViewStore';
 import intl from 'react-intl-universal';

@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>

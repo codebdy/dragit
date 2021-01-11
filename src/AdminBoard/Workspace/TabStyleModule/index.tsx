@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Typography, Container, Tabs, Tab } from '@material-ui/core';
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { useState } from 'react';
 import { Page } from '../Page';
 import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'Base/PageAction';

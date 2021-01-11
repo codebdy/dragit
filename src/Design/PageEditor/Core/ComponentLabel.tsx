@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { observer} from 'mobx-react-lite';
+import { observer} from 'mobx-react';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { useDesign } from '../useDesign';

@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles, lighten } from '@material-ui/core';
 import classNames from 'classnames';
-import { Observer } from 'mobx-react-lite';
+import { Observer } from 'mobx-react';
 import React from 'react';
 import { useListViewStore } from '../ListViewStore';
 

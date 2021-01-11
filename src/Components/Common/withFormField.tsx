@@ -1,5 +1,5 @@
 import React from 'react';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 import { useModelStore } from "../../Base/ModelTree/ModelProvider";
 import { useFieldStore } from "./useFieldStore";
 

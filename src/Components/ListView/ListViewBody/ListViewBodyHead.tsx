@@ -3,7 +3,7 @@ import React from "react";
 import { RXNode } from "Base/RXNode/RXNode";
 import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
-import {Observer} from 'mobx-react-lite';
+import {Observer} from 'mobx-react';
 
 export function ListViewBodyHead(
   props: {

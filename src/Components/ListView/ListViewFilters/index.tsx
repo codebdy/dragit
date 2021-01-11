@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from 'classnames';
-import { Observer } from 'mobx-react-lite';
+import { Observer } from 'mobx-react';
 import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>

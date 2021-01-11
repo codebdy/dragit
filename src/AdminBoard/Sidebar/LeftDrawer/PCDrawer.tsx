@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from '@material-ui/core';
 import Brand from '../SidebarBrand';
 import {StyledDrawer} from './StyledDrawer';
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { useLeftDrawer } from 'Store/Helpers/useAppStore';
 
 export const PCDrawer = observer((

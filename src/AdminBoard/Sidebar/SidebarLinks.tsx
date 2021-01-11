@@ -10,7 +10,7 @@ import { MenuNode } from "./MenuItems/MenuNode";
 import { MenuNodeGroup } from "./MenuItems/MenuNodeGroup";
 import { RXNodeRoot } from "Base/RXNode/Root";
 import { useQuery } from '@apollo/react-hooks';
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
 import { ID } from "Base/Model/graphqlTypes";
 import { GET_DRAWER } from "../../Base/GraphQL/GQLs";
 import Scrollbar from "AdminBoard/Common/Scrollbar";
