@@ -7,7 +7,7 @@ import Subheader from "./Subheader";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { MenuNode } from "./MenuNode";
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import { useLoggedUser } from "store1/helpers1/useLoggedUser";
+import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 import { observer } from "mobx-react-lite"
 import { ID } from "Base/Model/graphqlTypes";
 

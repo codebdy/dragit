@@ -9,7 +9,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'Base/Model/IMenuItem';
 import { RXNode } from 'Base/RXNode/RXNode';
-import Scrollbar from 'AdminBoard/common/Scrollbar';
+import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { IModuleCategory } from 'Base/Model/IModuleCategory';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';

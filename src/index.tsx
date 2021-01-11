@@ -5,11 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './mock/client';
-
-import { AppStoreProvider }from 'store1/helpers1/AppStoreProvider';
-import {AppStore} from 'store1/AppStore' 
 import { CssBaseline } from '@material-ui/core';
 import 'config';
+import { AppStore } from 'Store/AppStore';
+import { AppStoreProvider } from 'Store/Helpers/AppStoreProvider';
 
 const appStore = new AppStore();
 

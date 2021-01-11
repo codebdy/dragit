@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import withFormField from 'Components/common/withFormField';
-import { useShowAppoloError } from 'store1/helpers1/useInfoError';
 import { gql, useQuery } from '@apollo/react-hooks';
+import withFormField from 'Components/Common/withFormField';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

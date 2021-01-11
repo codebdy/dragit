@@ -1,17 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles, LinearProgress, Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@material-ui/core';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
-import Image from 'Components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
-import MdiIcon from 'Components/common/MdiIcon';
 import classNames from 'classnames';
-import { contains } from 'utils/ArrayHelper';
 import { IMedia } from 'Base/Model/IMedia';
 import Close from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediaGQLs';
-import { useShowAppoloError } from 'store1/helpers1/useInfoError';
 import { FolderNode } from './MediaFolder';
+import MdiIcon from 'Components/Common/MdiIcon';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { contains } from 'Utils/ArrayHelper';
+import Image from 'Components/Common/Image';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

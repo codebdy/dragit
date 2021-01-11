@@ -6,10 +6,10 @@ import {GQLList} from './GQLList';
 import { print, parse } from 'graphql';
 import {CodeMirrorEditor} from './CodeMirrorEditor';
 import intl from 'react-intl-universal';
-import MdiIcon from 'Components/common/MdiIcon';
-import { useAppStore } from 'store1/helpers1/useAppStore';
 import { useDebugQuery } from './useDebugQuery';
 import { useDebugMutation } from './useDebugMutation';
+import MdiIcon from 'Components/Common/MdiIcon';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

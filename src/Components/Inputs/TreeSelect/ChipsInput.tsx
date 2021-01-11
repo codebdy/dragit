@@ -6,8 +6,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import { IconButton, Popover, useTheme } from '@material-ui/core';
 import { ITreeNode } from 'Base/Model/ITreeNode';
 import TreeList from './TreeList';
-import { isPointInRect } from 'utils/isPointInRect';
-import { remove } from 'utils/ArrayHelper';
+import { isPointInRect } from 'Utils/isPointInRect';
+import { remove } from 'Utils/ArrayHelper';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useDesign } from 'Design/PageEditor/useDesign';
 

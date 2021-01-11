@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx";
 import { IModelStore } from "./IModelStore";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
-import createId from "utils/createId";
+import createId from "Utils/createId";
 
 
 export class TableFieldStore implements IFieldStore, IModelStore {

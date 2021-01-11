@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@material-ui/core';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
 import { IPage } from 'Base/Model/IPage';
 import { ID } from 'Base/Model/graphqlTypes';

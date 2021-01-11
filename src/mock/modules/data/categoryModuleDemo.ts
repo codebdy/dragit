@@ -1,5 +1,4 @@
 
-import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE } from "utils/consts";
 import splitSubmit from "mock/demos/splitSubmit/view";
 import { OneToManyPortletView } from "mock/demos/oneToManyPortlet/view";
 import { OneToManyTableView } from "mock/demos/oneToManyTable/view";
@@ -9,6 +8,7 @@ import popList from "mock/demos/popStyleModule/popList";
 import popEdit from "mock/demos/popStyleModule/popEdit";
 import drawerEdit from "mock/demos/drawerStyleModule/drawerEdit";
 import drawerList from "mock/demos/drawerStyleModule/drawerList";
+import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE } from "Utils/consts";
 
 export default[
   {

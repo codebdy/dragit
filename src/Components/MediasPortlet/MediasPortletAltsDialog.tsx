@@ -1,14 +1,14 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grow, AppBar, Button, Dialog, DialogActions, DialogContent, IconButton, Toolbar, Typography, FormControl, InputAdornment, InputLabel, OutlinedInput, Tooltip } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
-import Spacer from '../common/Spacer';
+import Spacer from '../Common/Spacer';
 import CloseIcon from '@material-ui/icons/Close';
 import Intl from "react-intl-universal";
-import Image from 'Components/common/Image';
+import Image from 'Components/Common/Image';
 import classNames from 'classnames';
-import MdiIcon from '../common/MdiIcon';
+import MdiIcon from '../Common/MdiIcon';
 import { IMedia } from 'Base/Model/IMedia';
-import { cloneObject } from 'utils/cloneObject';
+import { cloneObject } from 'Utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

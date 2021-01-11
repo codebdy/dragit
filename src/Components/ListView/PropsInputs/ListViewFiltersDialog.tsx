@@ -5,7 +5,7 @@ import intl from 'react-intl-universal';
 import MetaListDialog from 'Components/ListView/PropsInputs/MetaListDialog';
 import MetaListInput from 'Base/PropsInputs/MetaListInput';
 import { MetaItem } from "Base/Model/MetaItem";
-import { cloneObject } from 'utils/cloneObject';
+import { cloneObject } from 'Utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({

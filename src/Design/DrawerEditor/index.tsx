@@ -10,15 +10,15 @@ import { RXNode } from 'Base/RXNode/RXNode';
 import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
 import { RXNodeRoot } from 'Base/RXNode/Root';
-import SubmitButton from 'components1/common/SubmitButton';
-import { useAuthCheck } from 'store1/helpers1/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'Base/authSlugs';
 import { ID } from 'Base/Model/graphqlTypes';
 import { GET_DRAWER, SAVE_DRAWER } from 'Base/GraphQL/GQLs';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { cloneObject } from 'utils/cloneObject';
-import { useShowAppoloError } from 'store1/helpers1/useInfoError';
-import { useAppStore } from 'store1/helpers1/useAppStore';
+import SubmitButton from 'Components/Common/SubmitButton';
+import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { cloneObject } from 'Utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

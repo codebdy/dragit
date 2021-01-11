@@ -1,6 +1,6 @@
-import { after, before, first, insertAfter, insertBefore, last, remove } from "utils/ArrayHelper";
+import { after, before, first, insertAfter, insertBefore, last, remove } from "Utils/ArrayHelper";
 import { IRect } from "Base/Model/IRect";
-import { cloneObject } from "utils/cloneObject";
+import { cloneObject } from "Utils/cloneObject";
 import { ID } from "Base/Model/graphqlTypes";
 
 export class RXNode<T>{

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IconButton, TableCell, TableRow, TextField, Tooltip } from '@material-ui/core';
 import { IAuth } from 'Base/Model/IAuth';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
 import { ID } from 'Base/Model/graphqlTypes';
 

@@ -5,11 +5,12 @@ import leftImage from "assets/img/design-team.png";
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
-import { ADMIN_INDEX_URL, TOKEN_NAME } from 'utils/consts';
-import { useAppStore, useThemeSettings } from 'store1/helpers1/useAppStore';
-import { LIGHT } from 'store1/ThemeSettings';
+import { ADMIN_INDEX_URL, TOKEN_NAME } from 'Utils/consts';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
-import SubmitButton from 'Components/common/SubmitButton';
+import SubmitButton from 'Components/Common/SubmitButton';
+import { useAppStore, useThemeSettings } from 'Store/Helpers/useAppStore';
+import { LIGHT } from 'Store/ThemeSettings';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

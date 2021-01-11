@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { AppStore } from 'store1/AppStore';
-import { DesignerStore } from 'store1/DesignerStore';
-import { LeftDrawer } from 'store1/LeftDrawer';
-import { ThemeSettings } from 'store1/ThemeSettings';
+import { AppStore } from 'Store/AppStore';
+import { DesignerStore } from 'Store/DesignerStore';
+import { LeftDrawer } from 'Store/LeftDrawer';
+import { ThemeSettings } from 'Store/ThemeSettings';
 import { AppStoreContext } from './AppStoreProvider';
 
 export const useAppStore = (): AppStore => useContext(AppStoreContext);

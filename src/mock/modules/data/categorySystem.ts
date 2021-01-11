@@ -3,7 +3,8 @@ import dashboard from "mock/views/dashboard";
 import meidaPage from "mock/views/meidaPage";
 import notificationPage from "mock/views/notificationPage";
 import notificationViewPage from "mock/views/notificationViewPage";
-import { JUMP_STYLE_MODULE } from "utils/consts";
+import { JUMP_STYLE_MODULE } from "Utils/consts";
+
 
 export default[
   {

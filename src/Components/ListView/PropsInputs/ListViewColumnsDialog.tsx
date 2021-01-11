@@ -4,7 +4,7 @@ import { PropsInputProps } from '../../../Base/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import MetaListDialog from 'Components/ListView/PropsInputs/MetaListDialog';
-import { cloneObject } from 'utils/cloneObject';
+import { cloneObject } from 'Utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({

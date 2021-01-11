@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MediaAdder from 'Components/Medias/MediaAdder';
 import { IMedia } from 'Base/Model/IMedia';
 import withSkeleton from 'Base/HOCs/withSkeleton';
-import withFormField from 'Components/common/withFormField';
+import withFormField from 'Components/Common/withFormField';
 import { useDesign } from 'Design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>

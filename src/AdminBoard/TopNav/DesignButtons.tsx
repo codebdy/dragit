@@ -1,13 +1,14 @@
 import React, { Fragment } from "react";
-import MdiIcon from "Components/common/MdiIcon"
+
 import IconButton from '@material-ui/core/IconButton';
 import { Tooltip, Hidden } from "@material-ui/core";
 import intl from 'react-intl-universal';
 import { NavLink } from "react-router-dom";
 import { AUTH_CUSTOMIZE } from "Base/authSlugs";
-import { useDesigner, useLeftDrawer } from "store1/helpers1/useAppStore";
-import { useLoggedUser } from "store1/helpers1/useLoggedUser";
 import { observer } from "mobx-react-lite";
+import MdiIcon from "Components/Common/MdiIcon";
+import { useDesigner, useLeftDrawer } from "Store/Helpers/useAppStore";
+import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 
 export const DesignButtons = observer((
   props:{

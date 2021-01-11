@@ -2,7 +2,7 @@ import React from 'react';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { createStyles, Dialog, makeStyles, Theme } from '@material-ui/core';
 import {observer} from 'mobx-react-lite';
-import { useAppStore } from 'store1/helpers1/useAppStore';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

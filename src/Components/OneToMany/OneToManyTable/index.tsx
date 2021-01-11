@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import MultiContentPotlet from 'Components/common/MultiContentPotlet';
+import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { IMeta } from 'Base/Model/IMeta';
 import ComponentRender from 'Base/ComponentRender';
 import { RXNode } from 'Base/RXNode/RXNode';

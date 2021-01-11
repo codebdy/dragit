@@ -1,5 +1,5 @@
 import { AUTH_DASHBOARD, AUTH_MEDIAS } from "Base/authSlugs";
-import { POPUP_STYLE_MODULE } from "utils/consts";
+import { POPUP_STYLE_MODULE } from "Utils/consts";
 
 export var drawerData= [{
     //type:subheader, item, group

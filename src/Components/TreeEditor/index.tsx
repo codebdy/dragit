@@ -6,7 +6,7 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { ITreeNode } from 'Base/Model/ITreeNode';
 import { RXNodeRoot } from 'Base/RXNode/Root';
 import { RXNode } from 'Base/RXNode/RXNode';
-import SubmitButton from 'Components/common/SubmitButton';
+import SubmitButton from 'Components/Common/SubmitButton';
 import Portlet from 'Components/Portlet';
 import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";

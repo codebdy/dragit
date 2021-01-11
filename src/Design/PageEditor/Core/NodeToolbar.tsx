@@ -1,8 +1,8 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 import classNames from 'classnames';
-import { useLeftDrawer } from 'store1/helpers1/useAppStore';
+import { useLeftDrawer } from 'Store/Helpers/useAppStore';
 import {observer} from 'mobx-react-lite';
 import { useDesign } from '../useDesign';
 

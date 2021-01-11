@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { sideBarSettings } from 'utils/sideBarSettings';
+import { sideBarSettings } from 'Utils/sideBarSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -3,17 +3,17 @@ import {makeStyles, Theme, createStyles, Divider, Hidden, LinearProgress} from "
 import MediaGridList from "./MediaGridList";
 import MediaFolders from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
-import { batchRemove, remove, toggle } from "utils/ArrayHelper";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
 import { IMedia } from "Base/Model/IMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
-import { cloneObject } from "utils/cloneObject";
 import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
-import { useShowAppoloError } from "store1/helpers1/useInfoError";
 import { ID } from "Base/Model/graphqlTypes";
+import { useShowAppoloError } from "Store/Helpers/useInfoError";
+import { toggle, batchRemove, remove } from "Utils/ArrayHelper";
+import { cloneObject } from "Utils/cloneObject";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -7,7 +7,7 @@ import TreeItemLabel from './TreeItemLabel';
 import { Add } from '@material-ui/icons';
 import { IModuleCategory } from 'Base/Model/IModuleCategory';
 import { IModule } from 'Base/Model/IModule';
-import Scrollbar from 'AdminBoard/common/Scrollbar';
+import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { ID } from 'Base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>

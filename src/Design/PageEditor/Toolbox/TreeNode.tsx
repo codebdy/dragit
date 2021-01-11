@@ -5,7 +5,7 @@ import { IToolboxItem } from "./IToolboxItem";
 import TreeNodeLabel from "./TreeNodeLabel";
 import intl from "react-intl-universal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 import classNames from "classnames";
 
 const useStyles = makeStyles((theme: Theme) =>

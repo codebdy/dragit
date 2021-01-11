@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { SidebarLinks } from "./SidebarLinks"
 import LeftDrawer from "./LeftDrawer";
 import {observer} from "mobx-react-lite";
-import { useLeftDrawer, useThemeSettings } from "store1/helpers1/useAppStore";
+import { useLeftDrawer, useThemeSettings } from "Store/Helpers/useAppStore";
 
 export enum SidebarSize{
   small = "small",

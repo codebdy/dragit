@@ -1,6 +1,6 @@
 import { TextField } from '@material-ui/core';
 import withSkeleton from 'Base/HOCs/withSkeleton';
-import withFormField from 'Components/common/withFormField';
+import withFormField from 'Components/Common/withFormField';
 import React from 'react';
 
 const TexBox = React.forwardRef((props:any, ref:any)=>{

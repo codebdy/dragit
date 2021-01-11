@@ -3,7 +3,7 @@ import { RXNode } from './RXNode/RXNode';
 import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
-import { useLoggedUser } from 'store1/helpers1/useLoggedUser';
+import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { PageAction } from 'Base/PageAction';
 
 export default function ComponentRender(

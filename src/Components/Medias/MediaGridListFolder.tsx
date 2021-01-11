@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, LinearProgress } from '@material-ui/core';
-import MdiIcon from 'Components/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import { FolderNode } from './MediaFolder';
 import MediaGridListIconButton from './MediaGridListIconButton';

@@ -1,10 +1,10 @@
 import Chip from '@material-ui/core/Chip';
 import withSkeleton from 'Base/HOCs/withSkeleton';
 import { RXInputProps } from 'Base/RXInputProps';
-import withFormField from 'Components/common/withFormField';
+import withFormField from 'Components/Common/withFormField';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import React from 'react';
-import { first } from 'utils/ArrayHelper';
+import { first } from 'Utils/ArrayHelper';
 
 export interface ChipMeta{
   name:string,

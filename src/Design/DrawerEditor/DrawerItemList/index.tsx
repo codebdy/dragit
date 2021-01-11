@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import IMenuItem from 'Base/Model/IMenuItem';
 import { MenuNode } from './MenuNode';
 import { RXNode } from 'Base/RXNode/RXNode';
-import Scrollbar from 'AdminBoard/common/Scrollbar';
+import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { List, Theme } from '@material-ui/core';
 import MenuNodeOperateProps from './MenuNodeOperateProps';
 

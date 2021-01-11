@@ -6,7 +6,7 @@ import { IModule } from "Base/Model/IModule";
 import ModulePageTable from './ModulePageTable';
 import { IPage } from 'Base/Model/IPage';
 import { PageEditor } from 'Design/PageEditor';
-import createId from 'utils/createId';
+import createId from 'Utils/createId';
 import { ID } from 'Base/Model/graphqlTypes';
 
 

@@ -1,8 +1,8 @@
 import Mock from 'mockjs'
-import createId from 'utils/createId'
+import createId from 'Utils/createId'
 import getQueryVariable from 'mock/utils/getQueryVariable'
 import moduleCategories from './moduleCategories'
-import { remove } from 'utils/ArrayHelper';
+import { remove } from 'Utils/ArrayHelper';
 import { getModuleIndexPage } from './getModuleIndexPage';
 import { getPageBySlug } from './getPageById';
 import { getModuleById } from './getModuleById';

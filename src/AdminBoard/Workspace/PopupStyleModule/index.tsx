@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import {observer} from "mobx-react-lite";
-import { ModuleProps } from '../common/ModuleProps';
 import { PageAction, OPEN_PAGE_ACTION, GO_BACK_ACTION } from 'Base/PageAction';
-import { useAppStore } from 'store1/helpers1/useAppStore';
-import { getModulePageById } from '../common/getModulePageById';
 import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { useMemo } from 'react';
+import { useAppStore } from 'Store/Helpers/useAppStore';
+import { getModulePageById } from '../Common/getModulePageById';
+import { ModuleProps } from '../Common/ModuleProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

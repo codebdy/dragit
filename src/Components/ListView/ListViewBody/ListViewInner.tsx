@@ -13,14 +13,12 @@ import intl from 'react-intl-universal';
 import { OPEN_PAGE_ACTION, PageActionHandle } from 'Base/PageAction';
 import { Skeleton } from '@material-ui/lab';
 import { Tooltip, IconButton, Paper } from '@material-ui/core';
-import MdiIcon from '../../common/MdiIcon';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { IQueryParam } from 'Components/ListView/IQueryParam';
 import { IPaginate } from 'Base/Model/IPaginate';
 import ConfirmDialog from 'Base/Widgets/ConfirmDialog';
 import { ICommand } from 'Base/Model/ICommand';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
-import { useAppStore } from 'store1/helpers1/useAppStore';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useQueryGQL } from '../useQueryGQL';
 import { useMutationGQL } from '../useMutationGQL';
@@ -31,6 +29,7 @@ import { ModelStore } from 'Base/ModelTree/ModelStore';
 import { ModelProvider } from 'Base/ModelTree/ModelProvider';
 import {observer} from "mobx-react-lite";
 import { useDesign } from 'Design/PageEditor/useDesign';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 export const COMMAND_QUERY = "query";
 

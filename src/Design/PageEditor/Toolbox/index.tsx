@@ -8,7 +8,7 @@ import { RXNode } from 'Base/RXNode/RXNode';
 import { IToolboxItem } from './IToolboxItem';
 import { RXNodeRoot } from 'Base/RXNode/Root';
 import TreeNode from './TreeNode';
-import { cloneObject } from 'utils/cloneObject';
+import { cloneObject } from 'Utils/cloneObject';
 
 
 const useStyles = makeStyles((theme: Theme) =>

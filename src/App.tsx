@@ -3,20 +3,20 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import Loading from 'AdminBoard/common/Loading'
+import Loading from 'AdminBoard/Common/Loading'
 
 import {AdminBoard} from 'AdminBoard';
 import ModuleManager from 'Design/ModuleManager';
-import useShadows from 'utils/useShadows';
+import useShadows from 'Utils/useShadows';
 import DrawerEditor from 'Design/DrawerEditor';
 import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';
-import Login from 'AdminBoard/views/Login';
+import Login from 'AdminBoard/Views/Login';
 import { useIntl } from 'Base/Hooks/useIntl';
-import { LOGIN_URL } from 'utils/consts';
-import { useThemeSettings } from 'store1/helpers1/useAppStore';
 import {observer} from 'mobx-react-lite';
 import { ErrorDialog } from 'Base/Widgets/ErrorDialog';
-import { useLoginCheck } from 'store1/helpers1/useLoginCheck';
+import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
+import { useThemeSettings } from 'Store/Helpers/useAppStore';
+import { LOGIN_URL } from 'Utils/consts';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();

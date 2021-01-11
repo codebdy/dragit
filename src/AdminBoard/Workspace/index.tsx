@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import {observer} from 'mobx-react-lite';
-import { useAppStore, useDesigner } from "store1/helpers1/useAppStore";
 import { gql, useQuery } from "@apollo/react-hooks";
-import PageSkeleton from "AdminBoard/Workspace/common/ModuleSkeleton";
-import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "utils/consts";
 import { JumpStyleModule } from "./JumpStyleModule";
 import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
 import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
-import { useShowAppoloError } from "store1/helpers1/useInfoError";
 import { PageEditor } from "Design/PageEditor";
+import { useAppStore, useDesigner } from "Store/Helpers/useAppStore";
+import { useShowAppoloError } from "Store/Helpers/useInfoError";
+import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "Utils/consts";
+import ModuleSkeleton from "./Common/ModuleSkeleton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,7 +69,7 @@ export const Workspace = observer(()=>{
     <div className = {classes.root}>
       {
         loading?
-        <Container><PageSkeleton /></Container>
+        <Container><ModuleSkeleton /></Container>
         :
         <Fragment>
           {

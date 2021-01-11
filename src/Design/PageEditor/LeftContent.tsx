@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs, Tab } from '@material-ui/core';
-import MdiIcon from 'components1/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 import Toolbox from './Toolbox';
 import Box from '@material-ui/core/Box';
 import AttributeBox from './AttrebuteBox';
@@ -9,7 +9,7 @@ import LeftArea from 'Design/Layout/LeftArea';
 import { IPageSchema } from 'Base/Model/IPage';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
-import Scrollbar from 'AdminBoard/common/Scrollbar';
+import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
 
 interface TabPanelProps {

@@ -29,7 +29,7 @@ import { observer } from 'mobx-react-lite';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_PAGE, SAVE_PAGE } from 'Base/GraphQL/GQLs';
-import { useShowAppoloError } from 'Store1/Helpers/useInfoError';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { CanvasStore } from './CanvasStore';
 import { CanvasStoreProvider } from './useDesign';
 

@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, Toolbar} from '@material-ui/core';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { Fragment } from 'react';
 import classNames from 'classnames';
-import { useAppStore } from 'store1/helpers1/useAppStore';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

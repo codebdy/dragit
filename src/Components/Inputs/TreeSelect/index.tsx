@@ -2,10 +2,10 @@ import { gql, useQuery } from '@apollo/react-hooks';
 import { createStyles, FilledInput, FormControl, FormHelperText, Input, InputLabel, makeStyles, OutlinedInput, Theme } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import React, { useEffect } from 'react';
-import { useAppStore } from 'store1/helpers1/useAppStore';
 import ChipsInput from './ChipsInput';
 import intl from 'react-intl-universal';
 import { useDesign } from 'Design/PageEditor/useDesign';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -3,7 +3,7 @@ import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react-lite';
-import { useAppStore } from 'store1/helpers1/useAppStore';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

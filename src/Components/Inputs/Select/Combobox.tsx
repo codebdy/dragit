@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
-import { useAppStore } from 'store1/helpers1/useAppStore';
 import intl from 'react-intl-universal';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 const Combobox = React.forwardRef((
   props:{

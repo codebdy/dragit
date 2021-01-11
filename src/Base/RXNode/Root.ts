@@ -1,5 +1,5 @@
 import { ID } from "Base/Model/graphqlTypes";
-import { cloneObject } from "utils/cloneObject";
+import { cloneObject } from "Utils/cloneObject";
 import { RXNode } from "./RXNode";
 
 export class RXNodeRoot<T> extends RXNode<T>{

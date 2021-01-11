@@ -1,7 +1,7 @@
 import { useHistory } from "react-router";
-import { useLoggedUser } from "store1/helpers1/useLoggedUser";
-import { TOKEN_NAME, LOGIN_URL } from "utils/consts";
+import { LOGIN_URL, TOKEN_NAME } from "Utils/consts";
 import { useAppStore } from "./useAppStore";
+import { useLoggedUser } from "./useLoggedUser";
 
 export function useAuthCheck(...auths:string[]){
   const loggedUser = useLoggedUser();

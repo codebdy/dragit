@@ -10,19 +10,19 @@ import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
 import { ModelStore } from '../../../Base/ModelTree/ModelStore';
 import { IPageMutation } from 'Base/Model/IPageMutation';
-import { useShowAppoloError } from 'store1/helpers1/useInfoError';
-import { useAppStore } from 'store1/helpers1/useAppStore';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ConfirmDialog from 'Base/Widgets/ConfirmDialog';
 import intl from 'react-intl-universal';
 import { RXNodeRoot } from 'Base/RXNode/Root';
-import { cloneObject } from 'utils/cloneObject';
 import { AUTH_DEBUG } from 'Base/authSlugs';
-import { useLoggedUser } from 'store1/helpers1/useLoggedUser';
 import GraphQLDebug from '../GraphQLDebug';
 import { PageGQLProvider } from 'Base/GraphQL/PageGQLProvider';
 import { PageGQLStore } from 'Base/GraphQL/PageGQLStore';
+import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
+import { cloneObject } from 'Utils/cloneObject';
 
 export const Page = observer((
   props:{

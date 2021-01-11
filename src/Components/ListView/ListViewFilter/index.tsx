@@ -3,7 +3,7 @@ import { Observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
 import { useListViewStore } from '../ListViewStore';
 import intl from 'react-intl-universal';
-import MdiIcon from 'Components/common/MdiIcon';
+import MdiIcon from 'Components/Common/MdiIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
