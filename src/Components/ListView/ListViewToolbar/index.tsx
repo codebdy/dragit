@@ -1,4 +1,4 @@
-import { makeStyles, Theme, createStyles, lighten, Toolbar } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, lighten } from '@material-ui/core';
 import classNames from 'classnames';
 import { Observer } from 'mobx-react-lite';
 import React from 'react';
