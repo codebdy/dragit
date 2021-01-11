@@ -141,6 +141,8 @@ export default {
           name:'TableColumn',
           props:{
             label:'时间',
+            field:'created_at',
+            sortable:true,
           },
           children:[{
             name:'DayView',

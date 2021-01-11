@@ -5,11 +5,11 @@ import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {Observer} from 'mobx-react-lite';
 
-export interface ListViewHeadProps {
-  columns:Array<RXNode<IMeta>>;
-}
-
-export function ListViewHead(props: ListViewHeadProps) {
+export function ListViewBodyHead(
+  props: {
+    columns:Array<RXNode<IMeta>>
+  }
+) {
   const {columns} = props;
   const listViewStore = useListViewStore();
 

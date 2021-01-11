@@ -6,8 +6,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
-import { ListViewHead } from './ListViewHead';
-import ListViewToolbar from '../ListViewToolbar/index-back';
 import { ILabelItem } from '../../../Base/Model/ILabelItem';
 import intl from 'react-intl-universal';
 import { OPEN_PAGE_ACTION, PageActionHandle } from 'Base/PageAction';
@@ -31,7 +29,7 @@ import {observer} from "mobx-react-lite";
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 
-export const COMMAND_QUERY = "query";
+//export const COMMAND_QUERY = "query";
 
 export interface Row{
   id:any,
@@ -234,32 +232,7 @@ const ListViewInner = observer((
 
   return (
     <Fragment>
-      <Table style={{display:'none'}}>
-        <TableBody>
-          <TableRow>
-            <ModelProvider value={rowSchemaStore}>
-              {
-                childrenNodes?.map((column, colIndex) => {
-                  return(
-                    <ComponentRender key={colIndex} component = {column} />
-                  )
-                })
-              }
-              </ModelProvider>
-            </TableRow>
-        </TableBody>
-      </Table>
       <Paper variant = {variant} elevation = {elevation}>
-        <ListViewToolbar
-          keyword = {queryParam.keywords}
-          numSelected={selected.length}
-          filters = {filters}
-          batchCommands = {batchCommands}
-          filterValues = {queryParam.filterValues}
-          onFilterChange = {values=>updateQueryParam('filterValues', values)}
-          onKeywordChange = {keywords =>updateQueryParam('keywords', keywords)}
-          onBatchAction = {handleBatchAction}
-        />
         <TableContainer>
           <Table
             aria-labelledby="tableTitle"
