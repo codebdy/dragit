@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     label:{
       background:theme.palette.background.paper,
+      padding:theme.spacing(0, 1),
     },
 
   })

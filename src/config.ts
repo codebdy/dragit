@@ -1,6 +1,6 @@
 
 import {register, registerHtmlTag} from "./Base/RxDrag";
-import { Button, Divider, Typography } from '@material-ui/core';
+import { Divider, Typography } from '@material-ui/core';
 import PortletGridItem from 'Components/Portlet/GridItem';
 import ListView from 'Components/ListView';
 import MediaSelect from 'Components/Inputs/MediaSelect/MediaSelect';
@@ -72,6 +72,7 @@ import { ListViewEnumFilterRUle } from "Components/ListView/ListViewFilters/List
 import { ListViewFiltersRule } from "Components/ListView/ListViewFilters/Rule";
 import { ListViewKeywordFilterRule } from "Components/ListView/ListViewFilters/ListViewKeywordFilter/Rule";
 import ListViewKeywordFilter from "Components/ListView/ListViewFilters/ListViewKeywordFilter";
+import Button from "Components/Buttons/Button";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);

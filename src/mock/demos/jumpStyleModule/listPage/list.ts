@@ -47,6 +47,30 @@ export default {
         },
         {
           name:'ListViewBatchCommads',
+          children:[
+            {
+              name:'Button',              
+              props:{
+                rxText:'删除',
+                //size:'small',
+                variant:"contained",
+                startIcon:'mdi-delete',
+                color:'secondary',
+              }
+            },
+            {
+              name:'Button',              
+              props:{
+                rxText:'发布',
+                marginLeft:2,
+                //size:'small',
+                variant:"contained",
+                startIcon:'mdi-publish',
+                //color:'primary',
+              }
+            }
+
+          ]
         }
       ]
     },

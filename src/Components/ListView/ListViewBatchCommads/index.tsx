@@ -41,7 +41,7 @@ const ListViewBatchCommads = React.forwardRef((
           ref= {ref}
         >
           <div className={classes.selectedTip}>选中记录数量：<b>3</b></div>
-          <div className={classes.commands}>dd{children}</div>          
+          <div className={classes.commands}>{children}</div>          
         </div>
       }
     </Observer>
