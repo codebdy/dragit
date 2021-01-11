@@ -9,7 +9,7 @@ import { useMutationGQL } from './useMutationGQL';
 import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
 
-const ListView =React.forwardRef((
+const ListView = observer(React.forwardRef((
     props:{
       query?:string,
       children?:any,
@@ -45,7 +45,7 @@ const ListView =React.forwardRef((
       </Paper>
     </ListViewStoreProvider>
   );
-})
+}))
 
-export default observer(ListView);
+export default ListView;
 
