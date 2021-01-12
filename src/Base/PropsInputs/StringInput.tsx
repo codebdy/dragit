@@ -31,7 +31,7 @@ export default function StringInput(props:PropsInputProps){
       variant = "outlined"
       onBlur = {handleEndInput}
       onKeyUp = {e=>{
-        if(e.keyCode === 13) {
+        if(e.key === 'Enter') {
           handleEndInput()
         }
       }

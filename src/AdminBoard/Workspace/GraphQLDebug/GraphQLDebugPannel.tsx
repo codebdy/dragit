@@ -61,11 +61,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const GraphQLDebugPannel = observer((props:{
-  queries?:Array<GraphQLStore>
+  gqls?:Array<GraphQLStore>
 })=>{
-  const {queries} = props;
+  const {gqls} = props;
   const classes = useStyles();
-  const [selected, setSelected] = useState<GraphQLStore|undefined>(/*queries&&queries.length > 0 ? queries[0] : undefined*/);
+  const [selected, setSelected] = useState<GraphQLStore|undefined>(/*gqls&&gqls.length > 0 ? gqls[0] : undefined*/);
   const [graphiQL, setGraphiQL] = useState('');
   const [variablesStr, setVariablesStr] = useState('');
   //const [error, setError] = useState<any>();
@@ -84,7 +84,7 @@ export const GraphQLDebugPannel = observer((props:{
       setGraphiQL(selected?.gql||'');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selected?.variables])
+  },[selected?.variables, selected?.gql])
 
   const isQuery = graphiQL?.startsWith('query');
   const isMutation = graphiQL?.startsWith('mutation');
@@ -129,14 +129,12 @@ export const GraphQLDebugPannel = observer((props:{
     }
 
   }
-
-  
-
+ 
   return (
     <div className={classes.root}>
       {
-        queries && queries.length > 0 &&
-        <GQLList gqls = {queries} selected = {selected} onSelect={(gql)=>{setSelected(gql)}} />
+        gqls && gqls.length > 0 &&
+        <GQLList gqls = {gqls} selected = {selected} onSelect={(gql)=>{setSelected(gql)}} />
       }
       <div className={classes.container}>      
         <Grid container spacing={0} alignItems="stretch" >

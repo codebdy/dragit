@@ -25,7 +25,7 @@ const ListView = observer(React.forwardRef((
   
   const [listViewStore] = useState(new ListViewStore())
   const appStore = useAppStore();
-  //const queryGQL = useQueryGQL( listViewStore.rowSchemaStore.toFieldsGQL(), query, queryParam );
+  const queryGQL = useQueryGQL( listViewStore, query );
   //const mutationGQL = useMutationGQL(mutation, selected);
   //const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
   //  notifyOnNetworkStatusChange: true,

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     codemirror:{
       width:'100%',
-      height:'350px',
+      height:'260px',
     },
 
   }),

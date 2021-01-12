@@ -110,7 +110,24 @@ export class ListViewStore{
   }
 
   setOrderByGraphiQL(rxId:string, grahpiQL: string){
+    console.log(rxId, grahpiQL)
     this.orderByGraphiQLs.set(rxId, grahpiQL);
+  }
+
+  toWhereGaphiQL(){
+    let gqls = ''
+    this.whereGraphiQLs.forEach(gql=>{
+      gqls = gqls + ' ' + gql
+    })
+    return gqls
+    ? `
+        {
+          AND:[
+            ${ gqls }
+          ]
+        }
+      `
+    : '{}'
   }
 
   excuteQuery(){

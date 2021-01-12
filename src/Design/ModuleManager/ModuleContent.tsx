@@ -92,7 +92,7 @@ export default function ModuleContent(
                   variant = "outlined"
                   label = {intl.get('slug')}
                   onKeyUp = {e=>{
-                      if(e.keyCode === 13) {
+                      if(e.key === 'Enter') {
                         //handleFinishEdit()
                       }
                     }

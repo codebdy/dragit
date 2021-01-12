@@ -5,26 +5,18 @@ import { GraphQLStore } from "./GraphQLStore";
 
 export class PageGQLStore{
   
-  queries: Array<GraphQLStore> = [];
-  mutations: Array<GraphQLStore> = [];
+  gqls: Array<GraphQLStore> = [];
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  addQuery(query:GraphQLStore){
-    this.queries.push(query)
+  addGql(gql:GraphQLStore){
+    this.gqls.push(gql)
   }
 
-  removeQuery(query:GraphQLStore){
-    this.queries.splice(this.queries.indexOf(query), 1);
+  removeGql(gql:GraphQLStore){
+    this.gqls.splice(this.gqls.indexOf(gql), 1);
   }
 
-  addMutation(mutation:GraphQLStore){
-    this.mutations.push(mutation);
-  }
-
-  removeMutation(mutation:GraphQLStore){
-    this.mutations.splice(this.mutations.indexOf(mutation), 1);
-  }
 }

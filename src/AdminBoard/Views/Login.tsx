@@ -187,7 +187,7 @@ export default function Login(){
               className = {classes.loginBox} 
               alignContent = "stretch"
               onKeyUp = {e=>{
-                if(e.keyCode === 13) {
+                if(e.key === 'Enter') {
                   handleLogin()
                 }
               }}

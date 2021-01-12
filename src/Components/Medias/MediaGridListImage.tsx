@@ -177,7 +177,7 @@ export default function MediaGridListImage(
           className={classes.titleInput}
           onBlur = {handleEndEditing}
           onKeyUp = {e=>{
-            if(e.keyCode === 13) {
+            if(e.key === 'Enter') {
               handleEndEditing()
             }
           }}

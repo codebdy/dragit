@@ -1,5 +1,5 @@
 import { TableRow, TableCell, Checkbox, TableBody} from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { RXNode } from "Base/RXNode/RXNode";
 import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
@@ -21,6 +21,10 @@ export function ListViewBodyTable(
 ) {
   const {columns} = props;
   const listViewStore = useListViewStore();
+  useEffect(()=>{
+    listViewStore.setColumns(columns);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <Observer>

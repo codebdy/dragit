@@ -2,17 +2,17 @@ import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { usePageGQLStore } from "Base/GraphQL/PageGQLProvider";
-import { IQueryParam } from "./IQueryParam";
+import { ListViewStore } from "./ListViewStore";
 
-export function useQueryGQL( fieldGql:string, query:string|undefined, queryParam: IQueryParam ){
+export function useQueryGQL( listViewStore:ListViewStore, query?:string ){
   const pageGQLStore = usePageGQLStore();
 
   const createQueryGQL = ()=>{
     const GQL_STRING = `
-      query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
-        ${query}(first:$first, page:$page, where:$where, orderBy:$orderBy){
+      query ($first:Int, $page:Int){
+        ${query}(first:$first, page:$page, where:${listViewStore.toWhereGaphiQL()}, orderBy:$orderBy){
           data 
-            ${fieldGql}
+            ${listViewStore.rowSchemaStore.toFieldsGQL()}
             paginatorInfo {
               count
               currentPage
@@ -31,22 +31,22 @@ export function useQueryGQL( fieldGql:string, query:string|undefined, queryParam
   const [queryGQL] = useState(new GraphQLStore(intl.get('list-query'), 'ListView', createQueryGQL()));
 
   useEffect(()=>{
-    pageGQLStore?.addQuery(queryGQL);
+    pageGQLStore?.addGql(queryGQL);
     return ()=>{
-      pageGQLStore?.removeQuery(queryGQL);
+      pageGQLStore?.removeGql(queryGQL);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   useEffect(()=>{
-    queryGQL.setVariables({...queryParam})
+    queryGQL.setVariables({first:listViewStore.paginatorInfo.perPage, page:listViewStore.paginatorInfo.currentPage})
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[queryParam])
+  },[listViewStore.paginatorInfo.perPage, listViewStore.paginatorInfo.currentPage])
 
   useEffect(()=>{
     queryGQL.setGql(createQueryGQL());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[fieldGql, query])
+  },[listViewStore.rowSchemaStore.fields.size, query, listViewStore.refreshQueryFlag])
 
   return queryGQL;
 }

@@ -104,7 +104,7 @@ const ListViewInner = observer((
   const [selected, setSelected] = useState<ID[]>([]);
   const [rowSchemaStore]  = useState(new ModelStore());
   const appStore = useAppStore();
-  const queryGQL = useQueryGQL( rowSchemaStore.toFieldsGQL(), query, queryParam );
+  const queryGQL = useQueryGQL( rowSchemaStore as any, query/*, queryParam*/ );
   const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryParam },

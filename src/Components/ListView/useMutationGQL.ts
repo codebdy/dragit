@@ -28,9 +28,9 @@ export function useMutationGQL( mutation:String|undefined, selected:ID[] ){
   },[selected])
 
   useEffect(()=>{
-    pageGQLStore?.addQuery(mutationGQL);
+    pageGQLStore?.addGql(mutationGQL);
     return ()=>{
-      pageGQLStore?.removeQuery(mutationGQL);
+      pageGQLStore?.removeGql(mutationGQL);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])

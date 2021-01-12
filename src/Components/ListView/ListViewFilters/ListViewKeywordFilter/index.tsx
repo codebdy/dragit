@@ -34,7 +34,8 @@ const ListViewKeywordFilter = React.forwardRef((
   const handleSearch = ()=>{
     let gql = '';
     listViewStore.columns.forEach(column=>{
-      if(column.meta.props?.searachable && column.meta.props?.field){
+      if(column.meta.props?.searchable && column.meta.props?.field){
+        console.log(column)
         keywords.split(' ').forEach(keyword=>{
           if(keyword.trim()){
             gql = ` ${gql} {column:${column.meta.props?.field}, operator:LIKE, value:"%${keyword.trim()}%"} `            
@@ -43,7 +44,7 @@ const ListViewKeywordFilter = React.forwardRef((
       }
 
     })
-    listViewStore.setWhereGraphiQL(id, gql);
+    listViewStore.setWhereGraphiQL(id, gql ? `{OR:[${gql}]}` : '');
     listViewStore.excuteQuery();
   }
 
@@ -64,7 +65,7 @@ const ListViewKeywordFilter = React.forwardRef((
       value = {keywords}
       onChange = {e=>{setKeywords(e.target.value as string || '')}}
       onKeyUp = {e=>{
-          if(e.keyCode === 13) {
+          if(e.key === 'Enter') {
             handleSearch()
           }
         }

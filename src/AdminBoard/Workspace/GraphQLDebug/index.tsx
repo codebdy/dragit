@@ -96,7 +96,7 @@ export default function GraphQLDebug(){
           </div>
           <Divider />
           <div className={classes.content}> 
-          <GraphQLDebugPannel queries = {pageGqlStore?.queries} />
+            <GraphQLDebugPannel gqls = {pageGqlStore?.gqls} />
           </div>
         </Drawer>
       </Hidden>

@@ -2,11 +2,11 @@ export default {
   name:'ListView',
   designProps:{
     //isDesigning:true,
-    //query:null,
+    query:null,
   },
   props:{
     variant:'outlined',
-    //elevation:6,
+    query:'posts',
        
   },
   children:[
@@ -100,6 +100,7 @@ export default {
           props:{
             label:'标题',
             field:'title',
+            searchable:true,
             sortable:true,
             width:'200px',
           },

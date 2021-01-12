@@ -40,7 +40,7 @@ export default function ModuleAuthsRow(
           size = "small" 
           variant = "outlined"
           onKeyUp = {e=>{
-              if(e.keyCode === 13) {
+              if(e.key === 'Enter') {
                 handleFinishEdit()
               }
             }
@@ -60,7 +60,7 @@ export default function ModuleAuthsRow(
           size = "small" 
           variant = "outlined"
           onKeyUp = {e=>{
-              if(e.keyCode === 13) {
+              if(e.key === 'Enter') {
                 handleFinishEdit()
               }
             }
