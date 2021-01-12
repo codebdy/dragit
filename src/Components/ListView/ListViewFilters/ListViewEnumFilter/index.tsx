@@ -27,7 +27,7 @@ const ListViewEnumFilter = React.forwardRef((
 )=>{
 
   const {
-    id,
+    'data-rxid':rxid,
     variant = "outlined",
     label,
     width,
@@ -47,7 +47,7 @@ const ListViewEnumFilter = React.forwardRef((
     let newValue = event.target.value as string;
     setValue(newValue);
     const gql = newValue ? `{column:${field}, operator:EQ, value:"${newValue}"}` : newValue;
-    listViewStore.setWhereGraphiQL(id, gql);
+    listViewStore.setWhereGraphiQL(rxid, gql);
     listViewStore.excuteQuery();
   }
 

@@ -19,7 +19,7 @@ const ListViewKeywordFilter = React.forwardRef((
   )=>{
 
   const {
-    id,
+    'data-rxid':rxid,
     variant = "outlined",
     size,
     width = '260px',
@@ -47,7 +47,7 @@ const ListViewKeywordFilter = React.forwardRef((
         }
       }
     })
-    listViewStore.setWhereGraphiQL(id, gql);
+    listViewStore.setWhereGraphiQL(rxid, gql);
     listViewStore.excuteQuery();
   }
 

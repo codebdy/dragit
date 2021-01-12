@@ -2,7 +2,7 @@ import { InputSize, InputVariant } from 'Components/Inputs/InputPropTypes';
 
 
 export interface IFilterProps {
-  id:string;
+  ['data-rxid']:string;
   variant?: InputVariant;
   label?: string;
   width?: string;
