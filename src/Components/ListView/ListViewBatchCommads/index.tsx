@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import { Observer } from 'mobx-react';
-import React from 'react';
+import { observer } from 'mobx-react';
+import React, { Fragment } from 'react';
 import { useListViewStore } from '../ListViewStore';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
@@ -14,16 +14,15 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems:'center',
     },
     selectedTip:{
-      marginTop:theme.spacing(1),
-      padding:theme.spacing(1, 0),
+
     },
     commands:{
-      padding:theme.spacing(1, 0),
+
     }
   })
 );
 
-const ListViewBatchCommads = React.forwardRef((
+const ListViewBatchCommads = observer(React.forwardRef((
     props:any, 
     ref:any
   )=>{
@@ -37,20 +36,18 @@ const ListViewBatchCommads = React.forwardRef((
   const listViewStore = useListViewStore();
  
   return (
-    <Observer>
-      {()=>
-        <div
-          className={classNames(className, classes.root)}
-          {...rest}
-          ref= {ref}
-        >
-          <div className={classes.selectedTip}>{intl.get('records-selected')} <b>{listViewStore.selects.length}</b></div>
-          <div className={classes.commands}>{children}</div>          
-        </div>
-      }
-    </Observer>
+    listViewStore.selects.length > 0
+    ? <div
+        className={classNames(className, classes.root)}
+        {...rest}
+        ref= {ref}
+      >
+        <div className={classes.selectedTip}>{intl.get('records-selected')} <b>{listViewStore.selects.length}</b></div>
+        <div className={classes.commands}>{children}</div>          
+      </div>
+    : <Fragment></Fragment>
   );
-})
+}))
 
 export default ListViewBatchCommads;
 

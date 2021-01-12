@@ -1,4 +1,4 @@
-import { makeStyles, Theme, createStyles, lighten } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, lighten, fade } from '@material-ui/core';
 import classNames from 'classnames';
 import { Observer } from 'mobx-react';
 import React from 'react';
@@ -7,10 +7,11 @@ import { useListViewStore } from '../ListViewStore';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
       display:'flex',
       flexFlow:'column',
       justifyContent:'center',
+      minHeight:theme.spacing(10),
     },
     highlight:
       theme.palette.type === 'light'
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
           }
         : {
             color: theme.palette.text.primary,
-            backgroundColor: theme.palette.secondary.dark,
+            backgroundColor: fade(theme.palette.secondary.dark, 0.5),
           },
   }),
 );

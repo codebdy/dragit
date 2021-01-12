@@ -1,19 +1,20 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from 'classnames';
-import { Observer } from 'mobx-react';
-import React from 'react';
+import { observer } from 'mobx-react';
+import React, { Fragment } from 'react';
+import { useListViewStore } from '../ListViewStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex:1,
       display:'flex',
-      paddingTop:theme.spacing(1),
+      alignItems:'center',
     },
   })
 );
 
-const ListViewFilters = React.forwardRef((
+const ListViewFilters = observer(React.forwardRef((
     props:any, 
     ref:any
   )=>{
@@ -24,21 +25,20 @@ const ListViewFilters = React.forwardRef((
     ...rest
   } = props
   const classes = useStyles();
+  const listViewStore = useListViewStore();
 
   return (
-    <Observer>
-      {()=>
-        <div
-          className={classNames(className, classes.root)}
-          {...rest}
-          ref= {ref}
-        >
-          {children}
-        </div>
-      }
-    </Observer>
+    listViewStore.selects.length === 0
+    ?<div
+      className={classNames(className, classes.root)}
+      {...rest}
+      ref= {ref}
+    >
+      {children}
+    </div>
+    :<Fragment></Fragment>
   );
-})
+}))
 
 export default ListViewFilters;
 
