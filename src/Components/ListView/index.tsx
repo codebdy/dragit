@@ -67,7 +67,7 @@ const ListView = observer(React.forwardRef((
 
 
   useEffect(()=>{
-    listViewStore.setRows(data && query ? data[query]?.data:[]);
+    !queryLoading && listViewStore.setRows(data && query ? data[query]?.data:[]);
     listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data])
