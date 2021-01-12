@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react";
 import { Page } from './Page';
-import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'Base/PageAction';
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, PageAction } from 'Base/Action/PageAction';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { getModulePageById } from './Common/getModulePageById';

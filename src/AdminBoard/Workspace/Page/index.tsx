@@ -4,7 +4,7 @@ import { IPage } from 'Base/Model/IPage';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 import ComponentRender from 'Base/ComponentRender';
-import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'Base/PageAction';
+import { GO_BACK_ACTION, PageAction, RESET_ACTION, SUBMIT_MUTATION } from 'Base/Action/PageAction';
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
@@ -23,6 +23,7 @@ import { useAppStore } from 'Store/Helpers/useAppStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { cloneObject } from 'Utils/cloneObject';
+import { ActionStore, ActionStoreProvider } from 'Base/Action/ActionStore';
 
 export const Page = observer((
   props:{
@@ -36,6 +37,7 @@ export const Page = observer((
   const [backConfirmOpen, setBackConfirmOpen] = useState(false);
   const {page, pageParams, hideGQLDebug, onPageAction} = props;
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>();
+  const [actionStore] = useState(new ActionStore());
   const [modelStore] = useState(new ModelStore());  
   const [gqlStore] = useState(new PageGQLStore());
   const [mutation, setMutation] = useState<IPageMutation>();
@@ -190,42 +192,44 @@ export const Page = observer((
   }
 
   return (
-    <ModelProvider value = {modelStore}>
-      <PageGQLProvider value = {gqlStore}>
-        {
-          pageLayout?.map((child:RXNode<IMeta>)=>{
-            return (
-              <ComponentRender 
-                key={child.id} 
-                component={child} 
-                onPageAction={hanlePageAction}
-              />
-            )
-          })
-        }
+    <ActionStoreProvider value = {actionStore}>
+      <ModelProvider value = {modelStore}>
+        <PageGQLProvider value = {gqlStore}>
+          {
+            pageLayout?.map((child:RXNode<IMeta>)=>{
+              return (
+                <ComponentRender 
+                  key={child.id} 
+                  component={child} 
+                  onPageAction={hanlePageAction}
+                />
+              )
+            })
+          }
 
-        <Dialog
-          open={openAlert}
-          onClose={handleCloseAlert}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <Alert severity="error"  onClose={handleCloseAlert}>
-            <AlertTitle>{intl.get('error')}</AlertTitle>
-            {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
-          </Alert>      
-        </Dialog>
-        <ConfirmDialog 
-          message = {intl.get('changing-not-save-message')}
-          open = {backConfirmOpen}
-          onCancel ={()=>{setBackConfirmOpen(false)}}
-          onConfirm = {handleBackConfirm}
-        /> 
-        {
-          loggedUser.authCheck(AUTH_DEBUG) && !hideGQLDebug &&
-          <GraphQLDebug/>
-        }
-      </PageGQLProvider>
-    </ModelProvider>
+          <Dialog
+            open={openAlert}
+            onClose={handleCloseAlert}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <Alert severity="error"  onClose={handleCloseAlert}>
+              <AlertTitle>{intl.get('error')}</AlertTitle>
+              {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
+            </Alert>      
+          </Dialog>
+          <ConfirmDialog 
+            message = {intl.get('changing-not-save-message')}
+            open = {backConfirmOpen}
+            onCancel ={()=>{setBackConfirmOpen(false)}}
+            onConfirm = {handleBackConfirm}
+          /> 
+          {
+            loggedUser.authCheck(AUTH_DEBUG) && !hideGQLDebug &&
+            <GraphQLDebug/>
+          }
+        </PageGQLProvider>
+      </ModelProvider>
+    </ActionStoreProvider>
   )
 })

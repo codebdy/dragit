@@ -4,7 +4,7 @@ import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
-import { PageAction } from 'Base/PageAction';
+import { PageAction } from 'Base/Action/PageAction';
 
 export default function ComponentRender(
   props:{
@@ -55,9 +55,9 @@ export default function ComponentRender(
     onClick:handleOnClick
   }
 
-  if(component.meta.withActions){
-    elementProps.onAction = onPageAction;
-  }
+  //if(component.meta.withActions){
+  //  elementProps.onAction = onPageAction;
+  //}
 
   if(component.meta.selfRenderChildren){
     elementProps.childrenNodes = component.children;

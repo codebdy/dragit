@@ -1,4 +1,4 @@
-import { OPEN_PAGE_ACTION } from "Base/PageAction"
+import { OPEN_PAGE_ACTION } from "Base/Action/PageAction"
 
 export default {
   layout:[

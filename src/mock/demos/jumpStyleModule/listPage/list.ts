@@ -1,13 +1,12 @@
+import { BATCH_DELETE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS } from "Base/Action/PageAction";
+
 export default {
   name:'ListView',
-  designProps:{
-    //isDesigning:true,
-    query:null,
-  },
   props:{
     variant:'outlined',
     query:'posts',
-       
+    delete:'deletePost',
+    update:'updatePost',
   },
   children:[
     {
@@ -56,6 +55,9 @@ export default {
                 variant:"contained",
                 startIcon:'mdi-delete',
                 color:'secondary',
+                onClick:{
+                  name: BATCH_DELETE_LIST_VIEW_RECORDS,
+                }
               }
             },
             {
@@ -66,7 +68,12 @@ export default {
                 //size:'small',
                 variant:"contained",
                 startIcon:'mdi-publish',
-                //color:'primary',
+                onClick:{
+                  name: BATCH_UPDATE_LIST_VIEW_RECORDS,
+                  field:'status',
+                  value:'PUBLISHED',
+                  confirmMessage:'删除后将不可恢复，您确定要删除吗？',
+                }
               }
             }
 
@@ -156,7 +163,8 @@ export default {
         {
           name:'TableColumn',
           props:{
-            label:'操作',
+            label:'',
+            align:'right',
           },
           children:[{
             name:'TextBox',

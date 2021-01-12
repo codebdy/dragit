@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import { PageAction } from 'Base/PageAction';
+import { PageAction } from 'Base/Action/PageAction';
 import { Page } from '../Page';
 import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
