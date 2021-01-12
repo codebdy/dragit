@@ -5,10 +5,12 @@ import { IEnumItem } from '../../../../Base/Model/IEnumItem';
 import { useState } from 'react';
 import intl from "react-intl-universal";
 import { useListViewStore } from 'Components/ListView/ListViewStore';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      
     },
     label:{
       background:theme.palette.background.paper,
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ListViewEnumFilter = React.forwardRef((
   props:IFilterProps&{
+    className?:any,
     metas?:IEnumItem[],
     field?:string,
   }, 
@@ -27,6 +30,7 @@ const ListViewEnumFilter = React.forwardRef((
 )=>{
 
   const {
+    className,
     'data-rxid':rxid,
     variant = "outlined",
     label,
@@ -52,7 +56,7 @@ const ListViewEnumFilter = React.forwardRef((
   }
 
   return (
-    <FormControl variant={variant} size={size} ref={ref} {...rest} style={{...style, width}}>
+    <FormControl className={classNames(classes.root, className)} variant={variant} size={size} ref={ref} {...rest} style={{...style, width}}>
       <InputLabel className={classes.label}>{label}</InputLabel>
       <Select
         value={value}

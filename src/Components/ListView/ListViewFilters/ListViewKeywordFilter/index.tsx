@@ -1,4 +1,5 @@
 import { makeStyles, Theme, createStyles, InputAdornment, TextField } from '@material-ui/core';
+import classNames from 'classnames';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useListViewStore } from 'Components/ListView/ListViewStore';
 import React, { useState } from 'react';
@@ -7,18 +8,21 @@ import { IFilterProps } from '../IFilterProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    keyword:{
-      transition:'width 0.1s',
+    root:{
+      paddingBottom:'5px',
     },
   })
 );
 
 const ListViewKeywordFilter = React.forwardRef((
-    props: IFilterProps, 
+    props: IFilterProps&{
+      className:any,
+    }, 
     ref:any
   )=>{
 
   const {
+    className,
     'data-rxid':rxid,
     variant = "outlined",
     size,
@@ -52,31 +56,34 @@ const ListViewKeywordFilter = React.forwardRef((
   }
 
   return (
-    <TextField
-      name="table-search"
-      type="search"
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <MdiIcon iconClass="mdi-magnify "/>
-          </InputAdornment>
-        ),
-      }}
-      className={classes.keyword}
-      variant = {variant}
-      size = {size}
-      value = {keywords}
-      onChange = {e=>{setKeywords(e.target.value as string || '')}}
-      onKeyUp = {e=>{
-          if(e.key === 'Enter') {
-            handleSearch()
+    <div className={classNames(className, classes.root)} style={{...style, width}}>
+      <TextField
+        name="table-search"
+        type="search"
+        fullWidth
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <MdiIcon iconClass="mdi-magnify "/>
+            </InputAdornment>
+          ),
+        }}
+       
+        variant = {variant}
+        size = {size}
+        value = {keywords}
+        onChange = {e=>{setKeywords(e.target.value as string || '')}}
+        onKeyUp = {e=>{
+            if(e.key === 'Enter') {
+              handleSearch()
+            }
           }
         }
-      }
-      placeholder = {intl.get('please-input-and-press-enter')}
-      {...rest}
-      style={{...style, width}}
-    />
+        placeholder = {intl.get('please-input-and-press-enter')}
+        {...rest}
+        
+      />
+    </div>
   );
 })
 
