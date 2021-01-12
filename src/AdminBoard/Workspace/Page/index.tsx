@@ -182,6 +182,16 @@ export const Page = observer((
     onPageAction && onPageAction(action);
   }
 
+  useEffect(()=>{
+    if(actionStore.waitingActions.length>0){
+      const action = actionStore.popAction();
+      if(action){
+        hanlePageAction(action);        
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[actionStore.waitingActions.length])
+
   const handleCloseAlert = ()=>{
     setOpentAlert(false);
   }
@@ -201,7 +211,6 @@ export const Page = observer((
                 <ComponentRender 
                   key={child.id} 
                   component={child} 
-                  onPageAction={hanlePageAction}
                 />
               )
             })

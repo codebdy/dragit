@@ -8,6 +8,14 @@ export class ActionStore{
   constructor() {
     makeAutoObservable(this)
   }
+
+  emit(action:PageAction){
+    this.waitingActions.push(action);
+  }
+  
+  popAction(){
+    return this.waitingActions.pop();
+  }
 }
 
 export const ActionStoreContext = createContext<ActionStore|undefined>(undefined);

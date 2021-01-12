@@ -4,23 +4,22 @@ import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
-import { PageAction } from 'Base/Action/PageAction';
+import { useActionStore } from './Action/ActionStore';
 
 export default function ComponentRender(
   props:{
-    component:RXNode<IMeta>, 
-    onPageAction?: (pageAction:PageAction)=> void,
+    component:RXNode<IMeta>
   }){
-  const {component, onPageAction} = props;
+  const {component} = props;
   const loggedUser = useLoggedUser();
   const onClickAction = component.meta.props?.onClick;
   let Component = resolveComponent(component.meta);
-  //Component = component.meta.props?.field ? withFormField(Component) : Component;
+
+  const actionStore = useActionStore();
   const handleOnClick = ()=>{
-    if(!onClickAction){
-      return
+    if(onClickAction){
+      actionStore?.emit(onClickAction);
     }
-    onPageAction && onPageAction(onClickAction);
   };
 
   const authChecked = ()=>{
@@ -68,7 +67,7 @@ export default function ComponentRender(
       {rxText}
       {component.children?.map((child: RXNode<IMeta>)=>{
         return (
-          <ComponentRender key={child.id} component={child} onPageAction={onPageAction}/>
+          <ComponentRender key={child.id} component={child} />
         )
       })}
     </Component>)
