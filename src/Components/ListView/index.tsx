@@ -39,7 +39,7 @@ const ListView = observer(React.forwardRef((
   //const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     notifyOnNetworkStatusChange: true,
-    fetchPolicy:'no-cache'
+    //fetchPolicy:'no-cache'
   });
 
   //const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(gql`${mutationGQL.gql}`,

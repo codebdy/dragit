@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { useListViewStore } from '../ListViewStore';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
+import { useDesign } from 'Design/PageEditor/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,9 +35,10 @@ const ListViewBatchCommads = observer(React.forwardRef((
   } = props
   const classes = useStyles();
   const listViewStore = useListViewStore();
+  const {isDesigning} = useDesign();
  
   return (
-    listViewStore.selects.length > 0
+    listViewStore.selects.length > 0 || isDesigning
     ? <div
         className={classNames(className, classes.root)}
         {...rest}
