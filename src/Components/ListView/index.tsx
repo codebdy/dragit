@@ -10,6 +10,15 @@ import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
 import { useEffect } from 'react';
 
+function creatEmpertyRows(length:number){
+  let rows = []
+  for(var i = 0; i < length; i++){
+    rows.push({id:i+1});
+  }
+
+  return rows;
+}
+
 const ListView = observer(React.forwardRef((
     props:{
       query?:string,
@@ -52,8 +61,10 @@ const ListView = observer(React.forwardRef((
 
   useEffect(()=>{
     listViewStore.setLoading(queryLoading);
+    queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[queryLoading])
+
 
   useEffect(()=>{
     listViewStore.setRows(data && query ? data[query]?.data:[]);
