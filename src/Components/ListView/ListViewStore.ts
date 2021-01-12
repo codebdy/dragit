@@ -5,6 +5,7 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { remove } from "Utils/ArrayHelper";
+import { PaginatorInfo } from "./PaginatorInfo";
 
 type Order = 'asc' | 'desc';
 export class FieldOrder {
@@ -25,46 +26,6 @@ export class FieldOrder {
     this.direction = direction;
   }
 }
-
-export class PaginatorInfo{
-  count:number = 0;
-  currentPage:number = 0;
-  hasMorePages:boolean = false;
-  lastPage:number = 0;
-  perPage:number = 0;
-  total:number = 0;
-
-  constructor() {
-    makeAutoObservable(this)
-  }
-
-  setQueryResult(data:any = {}){
-    const {
-      count = 0, 
-      currentPage = 0,
-      hasMorePages = false,
-      lastPage = 0,
-      perPage = this.perPage,
-      total = 0
-    } = data
-
-    this.count = count;
-    this.currentPage = currentPage;
-    this.hasMorePages = hasMorePages;
-    this.lastPage  = lastPage;
-    this.perPage = perPage;
-    this.total = total;
-  }
-
-  setPerPage(perPage:number){
-    this.perPage = perPage;
-  }
-
-  setCurrentPage(currentPage:number){
-    this.currentPage = currentPage;
-  }
-}
-
 
 export class ListViewStore{
   refreshQueryFlag:number = 1;
@@ -170,6 +131,18 @@ export class ListViewStore{
 
   isRowSelected(rowId:ID){
     return !!this.selects.find(id=>id === rowId);
+  }
+
+  getQueryVariables(){
+    return {first:this.paginatorInfo.perPage, page:this.paginatorInfo.currentPage}
+  }
+
+  setRows(rows?:Array<any>){
+    this.rows = rows ? rows :[];
+  }
+
+  setLoading(loading?:boolean){
+    this.loading = loading;
   }
 
 }

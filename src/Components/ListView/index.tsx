@@ -8,6 +8,7 @@ import { ListViewStore, ListViewStoreProvider } from './ListViewStore';
 import { useMutationGQL } from './useMutationGQL';
 import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
+import { useEffect } from 'react';
 
 const ListView = observer(React.forwardRef((
     props:{
@@ -27,16 +28,39 @@ const ListView = observer(React.forwardRef((
   const appStore = useAppStore();
   const queryGQL = useQueryGQL( listViewStore, query );
   //const mutationGQL = useMutationGQL(mutation, selected);
-  //const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
-  //  notifyOnNetworkStatusChange: true,
-  //  fetchPolicy:'no-cache'
-  //});
+  const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy:'no-cache'
+  });
 
   //const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(gql`${mutationGQL.gql}`,
   //  {onCompleted:()=>{appStore.setSuccessAlert(true)}}
   //);
+  useEffect(()=>{
+    if(!query){
+      return;
+    }
+    if(!called){
+      excuteQuery({variables:listViewStore.getQueryVariables()});
+    }
+    else{
+      refetch && refetch(listViewStore.getQueryVariables());
+    }
+    listViewStore.setSelects([]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[listViewStore.refreshQueryFlag])
 
-  //useShowAppoloError(error||mutationsError);
+  useEffect(()=>{
+    listViewStore.setLoading(queryLoading);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[queryLoading])
+
+  useEffect(()=>{
+    listViewStore.setRows(data && query ? data[query]?.data:[]);
+    listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[data])
+  useShowAppoloError(error);
 
   return (
     <ListViewStoreProvider value = {listViewStore}>
