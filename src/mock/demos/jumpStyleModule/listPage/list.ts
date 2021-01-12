@@ -1,11 +1,11 @@
-import { BATCH_DELETE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS } from "Base/Action/PageAction";
+import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS } from "Base/Action/PageAction";
 
 export default {
   name:'ListView',
   props:{
     variant:'outlined',
     query:'posts',
-    delete:'deletePost',
+    remove:'deletePost',
     update:'updatePost',
   },
   children:[
@@ -56,7 +56,7 @@ export default {
                 startIcon:'mdi-delete',
                 color:'secondary',
                 onClick:{
-                  name: BATCH_DELETE_LIST_VIEW_RECORDS,
+                  name: BATCH_REMOVE_LIST_VIEW_RECORDS,
                 }
               }
             },

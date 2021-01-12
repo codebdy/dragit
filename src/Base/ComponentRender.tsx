@@ -5,6 +5,8 @@ import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { useActionStore } from './Action/ActionStore';
+import { useEffect } from 'react';
+import { REGISTER_ACTION_TO_GQL_STORE, REMOVE_ACTION_FROM_GQL_STORE } from './Action/PageAction';
 
 export default function ComponentRender(
   props:{
@@ -16,6 +18,18 @@ export default function ComponentRender(
   let Component = resolveComponent(component.meta);
 
   const actionStore = useActionStore();
+  useEffect(()=>{
+    if(onClickAction){
+      actionStore?.emit({name:REGISTER_ACTION_TO_GQL_STORE, node:component})      
+    }
+    return ()=>{
+      if(onClickAction){
+        actionStore?.emit({name:REMOVE_ACTION_FROM_GQL_STORE, node:component})
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  
   const handleOnClick = ()=>{
     if(onClickAction){
       actionStore?.emit(onClickAction);
@@ -54,10 +68,6 @@ export default function ComponentRender(
     onClick:handleOnClick
   }
 
-  //if(component.meta.withActions){
-  //  elementProps.onAction = onPageAction;
-  //}
-
   if(component.meta.selfRenderChildren){
     elementProps.childrenNodes = component.children;
   }
@@ -77,7 +87,7 @@ export default function ComponentRender(
   elementView = authChecked() ? elementView : undefined; 
   return(
     <Fragment>
-    { elementView }
+      { elementView }
     </Fragment>
   )
 }

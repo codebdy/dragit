@@ -9,6 +9,10 @@ import { useMutationGQL } from './useMutationGQL';
 import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
 import { useEffect } from 'react';
+import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
+import { REGISTER_ACTION_TO_GQL_STORE, REMOVE_ACTION_FROM_GQL_STORE } from 'Base/Action/PageAction';
+import { useRemoveGQL } from './useRemoveGQL';
+import { useUpdateGQL } from './useUpdateGQL';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -22,6 +26,8 @@ function creatEmpertyRows(length:number){
 const ListView = observer(React.forwardRef((
     props:{
       query?:string,
+      update?:string,
+      remove?:string,
       children?:any,
     }, 
     ref:any
@@ -29,13 +35,19 @@ const ListView = observer(React.forwardRef((
 
   const {
     query,
+    update,
+    remove,
     children,
     ...rest
   } = props
   
   const [listViewStore] = useState(new ListViewStore())
+  const [actionStore] = useState(new ActionStore());
   const appStore = useAppStore();
+  const parentActionStore = useActionStore();
   const queryGQL = useQueryGQL( listViewStore, query );
+  const updateGQL = useUpdateGQL( listViewStore, query );
+  const removeGQL = useRemoveGQL( listViewStore, query );
   //const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     notifyOnNetworkStatusChange: true,
@@ -73,12 +85,28 @@ const ListView = observer(React.forwardRef((
   },[data])
   useShowAppoloError(error);
 
+  useEffect(()=>{
+    if(parentActionStore && parentActionStore.waitingActions.length > 0){
+      const action = parentActionStore.popAction();
+      if(action?.name === REGISTER_ACTION_TO_GQL_STORE){
+
+      }
+
+      if(action?.name === REMOVE_ACTION_FROM_GQL_STORE){
+        
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[parentActionStore?.waitingActions.length])
+
   return (
-    <ListViewStoreProvider value = {listViewStore}>
-      <Paper {...rest}  ref={ref}>
-        {children}
-      </Paper>
-    </ListViewStoreProvider>
+    <ActionStoreProvider value = {actionStore}>
+      <ListViewStoreProvider value = {listViewStore}>
+        <Paper {...rest}  ref={ref}>
+          {children}
+        </Paper>
+      </ListViewStoreProvider>
+    </ActionStoreProvider>
   );
 }))
 
