@@ -291,12 +291,13 @@
     "details":"详细",
 
     "query":"查询",
-    "list-query":"列表查询",
     "mutation":"更改",
     "result":"结果",
     "input-graphql-error":"输入错误",
     "graphiqL":"GraphQL语句",
     "variables":"变量",
-    "list-update":"列表更新"
+    "data-query":"数据查询",
+    "data-update":"数据更新",
+    "data-remove":"数据删除"
 
 }

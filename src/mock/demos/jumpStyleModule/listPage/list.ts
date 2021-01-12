@@ -5,8 +5,12 @@ export default {
   props:{
     variant:'outlined',
     query:'posts',
-    remove:'deletePost',
-    update:'updatePost',
+    remove:'removePosts',
+    update:{
+      name:'updatePosts',
+      variableType:'PostInput',
+      variableName:'postFragment',
+    }
   },
   children:[
     {

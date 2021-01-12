@@ -286,11 +286,13 @@
     "details":"Details",
 
     "query":"Query",
-    "list-query":"Query list",
     "mutation":"Mutation",
     "result":"Result",
     "input-graphql-error":"Input error",
     "graphiqL":"GraphiQL",
     "variables":"Variables",
-    "list-update":"List update"
+    "list-update":"List update",
+    "data-query":"Query data",
+    "data-update":"Update data",
+    "data-remove":"Delete data"
 }

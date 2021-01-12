@@ -9,26 +9,16 @@ export function useRemoveGQL( listViewStore:ListViewStore, remove?:string ){
 
   const createQueryGQL = ()=>{
     const GQL_STRING = `
-      query ($first:Int, $page:Int){
-        ${remove}(first:$first, page:$page, where:${listViewStore.toWhereGaphiQL()}, orderBy:${listViewStore.toOrderByGraphiQL()}){
-          data 
-            ${listViewStore.rowSchemaStore.toFieldsGQL()}
-            paginatorInfo {
-              count
-              currentPage
-              hasMorePages
-              lastPage
-              perPage
-              total
-            }
-        }
+      mutation ($ids:[ID]){
+        ${remove}(ids:$ids)
+        ${listViewStore.rowSchemaStore.toFieldsGQL()}
       }
   `
     //console.log('ListView query GQL', GQL_STRING)
     return GQL_STRING;
   }
 
-  const [queryGQL] = useState(new GraphQLStore(intl.get('list-query'), 'ListView', createQueryGQL()));
+  const [queryGQL] = useState(new GraphQLStore(intl.get('data-remove'), 'ListView', createQueryGQL()));
 
   useEffect(()=>{
     pageGQLStore?.addGql(queryGQL);
@@ -39,14 +29,10 @@ export function useRemoveGQL( listViewStore:ListViewStore, remove?:string ){
   },[])
 
   useEffect(()=>{
-    queryGQL.setVariables({first:listViewStore.paginatorInfo.perPage, page:listViewStore.paginatorInfo.currentPage})
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[listViewStore.paginatorInfo.perPage, listViewStore.paginatorInfo.currentPage])
-
-  useEffect(()=>{
+    queryGQL.setVariables({ids:[]});
     queryGQL.setGql(createQueryGQL());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[listViewStore.rowSchemaStore.fields.size, remove, listViewStore.refreshQueryFlag])
+  },[remove])
 
   return queryGQL;
 }

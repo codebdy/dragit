@@ -28,7 +28,7 @@ export function useQueryGQL( listViewStore:ListViewStore, query?:string ){
     return GQL_STRING;
   }
 
-  const [queryGQL] = useState(new GraphQLStore(intl.get('list-query'), 'ListView', createQueryGQL()));
+  const [queryGQL] = useState(new GraphQLStore(intl.get('data-query'), 'ListView', createQueryGQL()));
 
   useEffect(()=>{
     pageGQLStore?.addGql(queryGQL);

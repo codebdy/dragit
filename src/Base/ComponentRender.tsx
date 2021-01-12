@@ -6,7 +6,6 @@ import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { useActionStore } from './Action/ActionStore';
 import { useEffect } from 'react';
-import { REGISTER_ACTION_TO_GQL_STORE, REMOVE_ACTION_FROM_GQL_STORE } from './Action/PageAction';
 
 export default function ComponentRender(
   props:{
@@ -20,11 +19,12 @@ export default function ComponentRender(
   const actionStore = useActionStore();
   useEffect(()=>{
     if(onClickAction){
-      actionStore?.emit({name:REGISTER_ACTION_TO_GQL_STORE, node:component})      
+      //添加按钮的GQL调试信息
+      //actionStore?.emit({name:REGISTER_ACTION_TO_GQL_STORE, node:component})      
     }
     return ()=>{
       if(onClickAction){
-        actionStore?.emit({name:REMOVE_ACTION_FROM_GQL_STORE, node:component})
+        //actionStore?.emit({name:REMOVE_ACTION_FROM_GQL_STORE, node:component})
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

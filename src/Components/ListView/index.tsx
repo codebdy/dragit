@@ -5,14 +5,13 @@ import { useState } from 'react';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { ListViewStore, ListViewStoreProvider } from './ListViewStore';
-import { useMutationGQL } from './useMutationGQL';
 import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
 import { useEffect } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
-import { REGISTER_ACTION_TO_GQL_STORE, REMOVE_ACTION_FROM_GQL_STORE } from 'Base/Action/PageAction';
 import { useRemoveGQL } from './useRemoveGQL';
 import { useUpdateGQL } from './useUpdateGQL';
+import { IPageMutation } from 'Base/Model/IPageMutation';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -26,7 +25,7 @@ function creatEmpertyRows(length:number){
 const ListView = observer(React.forwardRef((
     props:{
       query?:string,
-      update?:string,
+      update?:IPageMutation,
       remove?:string,
       children?:any,
     }, 
@@ -46,17 +45,24 @@ const ListView = observer(React.forwardRef((
   const appStore = useAppStore();
   const parentActionStore = useActionStore();
   const queryGQL = useQueryGQL( listViewStore, query );
-  const updateGQL = useUpdateGQL( listViewStore, query );
-  const removeGQL = useRemoveGQL( listViewStore, query );
+  const updateGQL = useUpdateGQL( listViewStore, update );
+  const removeGQL = useRemoveGQL( listViewStore, remove );
   //const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     notifyOnNetworkStatusChange: true,
     //fetchPolicy:'no-cache'
   });
 
-  //const [excuteMutation, { loading:mutationLoading, error:mutationsError, data:mutationResult }] = useMutation(gql`${mutationGQL.gql}`,
-  //  {onCompleted:()=>{appStore.setSuccessAlert(true)}}
-  //);
+  const [excuteUpdate, { loading:updateLoading, error:updateError, data:updateResult }] = useMutation(gql`${updateGQL.gql}`,
+    {onCompleted:()=>{appStore.setSuccessAlert(true)}}
+  );
+
+  const [excuteRemove, { loading:removeLoading, error:removeError, data:removeResult }] = useMutation(gql`${removeGQL.gql}`,
+    {onCompleted:()=>{appStore.setSuccessAlert(true)}}
+  );
+
+  useShowAppoloError(error||updateError||removeError);
+
   useEffect(()=>{
     if(!query){
       return;
@@ -83,18 +89,11 @@ const ListView = observer(React.forwardRef((
     listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data])
-  useShowAppoloError(error);
 
   useEffect(()=>{
     if(parentActionStore && parentActionStore.waitingActions.length > 0){
       const action = parentActionStore.popAction();
-      if(action?.name === REGISTER_ACTION_TO_GQL_STORE){
 
-      }
-
-      if(action?.name === REMOVE_ACTION_FROM_GQL_STORE){
-        
-      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[parentActionStore?.waitingActions.length])
