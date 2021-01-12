@@ -143,6 +143,7 @@ export default {
           props:{
             label:'时间',
             field:'created_at',
+            searchable:true,
             sortable:true,
           },
           children:[{

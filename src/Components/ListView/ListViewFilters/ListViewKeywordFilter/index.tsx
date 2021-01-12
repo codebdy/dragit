@@ -33,17 +33,21 @@ const ListViewKeywordFilter = React.forwardRef((
   
   const handleSearch = ()=>{
     let gql = '';
-    listViewStore.columns.forEach(column=>{
-      if(column.meta.props?.searchable && column.meta.props?.field){
-        keywords.split(' ').forEach(keyword=>{
-          if(keyword.trim()){
-            gql = ` ${gql} {column:${column.meta.props?.field}, operator:LIKE, value:"%${keyword.trim()}%"} `            
+    keywords.split(' ').forEach(keyword=>{    
+      if(keyword.trim()){
+        let oneKeywordSql = '';
+        listViewStore.columns.forEach(column=>{
+          if(column.meta.props?.searchable && column.meta.props?.field){
+            oneKeywordSql = ` ${oneKeywordSql} {column:${column.meta.props?.field}, operator:LIKE, value:"%${keyword.trim()}%"} `            
           }
-        })        
+        }) 
+        
+        if(oneKeywordSql){
+          gql = `${gql} {OR:[${oneKeywordSql}]}`;
+        }
       }
-
     })
-    listViewStore.setWhereGraphiQL(id, gql ? `{OR:[${gql}]}` : '');
+    listViewStore.setWhereGraphiQL(id, gql);
     listViewStore.excuteQuery();
   }
 
