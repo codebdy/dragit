@@ -10,7 +10,7 @@ export function useQueryGQL( listViewStore:ListViewStore, query?:string ){
   const createQueryGQL = ()=>{
     const GQL_STRING = `
       query ($first:Int, $page:Int){
-        ${query}(first:$first, page:$page, where:${listViewStore.toWhereGaphiQL()}, orderBy:$orderBy){
+        ${query}(first:$first, page:$page, where:${listViewStore.toWhereGaphiQL()}, orderBy:${listViewStore.toOrderByGraphiQL()}){
           data 
             ${listViewStore.rowSchemaStore.toFieldsGQL()}
             paginatorInfo {

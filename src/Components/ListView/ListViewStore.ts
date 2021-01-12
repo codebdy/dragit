@@ -73,7 +73,7 @@ export class ListViewStore{
   //searchableFields:Array<string> = [];
   selects:ID[] = [];
   whereGraphiQLs: Map<string,string> = new Map<string,string>();
-  orderByGraphiQLs: Map<string,string> = new Map<string,string>();
+  //orderByGraphiQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
   rows: Array<any> = [];
   loading?:boolean;
@@ -107,11 +107,6 @@ export class ListViewStore{
 
   setWhereGraphiQL(rxId:string, grahpiQL: string){
     this.whereGraphiQLs.set(rxId, grahpiQL);
-  }
-
-  setOrderByGraphiQL(rxId:string, grahpiQL: string){
-    console.log(rxId, grahpiQL)
-    this.orderByGraphiQLs.set(rxId, grahpiQL);
   }
 
   toWhereGaphiQL(){
@@ -153,6 +148,7 @@ export class ListViewStore{
     }else{
       this.orderByArray.push(new FieldOrder(field, 'asc'));
     }
+
   };
 
   getFieldDirection(field?:string){
@@ -161,6 +157,15 @@ export class ListViewStore{
     }
 
     return this.getOrderBy(field)?.direction;
+  }
+
+  toOrderByGraphiQL(){
+    let gqls = '';
+    this.orderByArray.forEach(gql=>{
+      gqls = gqls + `{column:${gql.field}, order:${gql.direction.toUpperCase()}}`
+    })
+
+    return `[${gqls}]`
   }
 
   isRowSelected(rowId:ID){

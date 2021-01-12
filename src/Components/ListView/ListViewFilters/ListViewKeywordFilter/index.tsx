@@ -35,7 +35,6 @@ const ListViewKeywordFilter = React.forwardRef((
     let gql = '';
     listViewStore.columns.forEach(column=>{
       if(column.meta.props?.searchable && column.meta.props?.field){
-        console.log(column)
         keywords.split(' ').forEach(keyword=>{
           if(keyword.trim()){
             gql = ` ${gql} {column:${column.meta.props?.field}, operator:LIKE, value:"%${keyword.trim()}%"} `            
