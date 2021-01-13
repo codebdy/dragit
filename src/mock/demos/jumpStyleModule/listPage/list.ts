@@ -186,7 +186,6 @@ export default {
             },
             {
               name:'JsxTemplateParser',
-
               props:{
               actions:{
                 publish:{
@@ -196,7 +195,10 @@ export default {
                 }
               },                
               template:`
-                  <IconButton icon='mdi-publish' tooltip='发布' onClick={publish} />
+                  {
+                    model.status === 'DRAFT' &&
+                    <IconButton icon='mdi-publish' tooltip='发布' onClick={publish} />
+                  }
                 `
               }
             },

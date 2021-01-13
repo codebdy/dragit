@@ -5,4 +5,5 @@ export interface IModelStore{
   setFieldStore:(fieldName:string, fieldStore:IFieldStore)=>void;
   getFieldStore:(fieldName:string)=>IFieldStore|undefined;
   toFieldsGQL:()=>void;
+  toInputValue:()=>any;
 }
