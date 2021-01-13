@@ -8,12 +8,11 @@ import { ListViewStore, ListViewStoreProvider } from './ListViewStore';
 import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
 import { useEffect } from 'react';
-import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
 import { useRemoveGQL } from './useRemoveGQL';
 import { useUpdateGQL } from './useUpdateGQL';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import ListViewActionHunter from './ListViewActionHunter';
-import { PageAction } from 'Base/Action/PageAction';
+import { ID } from 'Base/Model/graphqlTypes';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -43,9 +42,8 @@ const ListView = observer(React.forwardRef((
   } = props
   
   const [listViewStore] = useState(new ListViewStore())
-  const [actionStore] = useState(new ActionStore());
+  
   const appStore = useAppStore();
-  const parentActionStore = useActionStore();
   const queryGQL = useQueryGQL( listViewStore, query );
   const updateGQL = useUpdateGQL( listViewStore, update );
   const removeGQL = useRemoveGQL( listViewStore, remove );
@@ -112,31 +110,48 @@ const ListView = observer(React.forwardRef((
     }})
   }
 
-  const handleBatchUpadate = (action:PageAction)=>{
+  const handleBatchUpadate = (field:string, value:any)=>{
     if(!update){
       return;
     }
-    listViewStore.setUpdatingSelects(action.field);
-    //listViewStore.setSelects([]);
+    listViewStore.setUpdatingSelects(field);
     excuteUpdate({variables:{
       ids:listViewStore.selects,
-      [update.variableName]:{[action.field]:action.value},
+      [update.variableName]:{[field]:value},
+    }})
+  }
+
+  const handleUpdate = (id:ID, field:string, value:any)=>{
+    if(!update){
+      return;
+    }
+    listViewStore.setUpdating(id, field);
+    excuteUpdate({variables:{
+      ids:[id],
+      [update.variableName]:{[field]:value},
+    }})
+  }
+
+  const handelReomve = (id:ID)=>{
+    listViewStore.setRemoving(id);
+    excuteRemove({variables:{
+      ids:[id]
     }})
   }
 
   return (
-    <ActionStoreProvider value = {actionStore}>
+    <ListViewActionHunter
+      onExcuteBatchRemove = {handelBatchRemove}
+      onExcuteBatchUpdate = {handleBatchUpadate}
+      onExcuteUpdate = {handleUpdate}
+      onExcuteRemove = {handelReomve}
+    >
       <ListViewStoreProvider value = {listViewStore}>
-        <ListViewActionHunter
-          onExcuteBatchRemove = {handelBatchRemove}
-          onExcuteBatchUpdate = {handleBatchUpadate} 
-          onPageAction= {(action)=>{parentActionStore&&parentActionStore.emit(action)}} 
-        />
         <Paper {...rest}  ref={ref}>
           {children}
         </Paper>
       </ListViewStoreProvider>
-    </ActionStoreProvider>
+    </ListViewActionHunter>
   );
 }))
 

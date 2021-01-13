@@ -1,4 +1,4 @@
-import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS } from "Base/Action/PageAction";
+import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from "Base/Action/PageAction";
 
 export default {
   name:'ListView',
@@ -181,8 +181,23 @@ export default {
             {
               name:'IconButton',
               props:{
+                icon:'mdi-publish',
+                tooltip:'发布',
+                onClick:{
+                  name: UPDATE_LIST_VIEW_RECORD,
+                  field:'status',
+                  value:'PUBLISHED',
+                }
+              }
+            },
+            {
+              name:'IconButton',
+              props:{
                 icon:'mdi-delete',
                 tooltip:'删除',
+                onClick:{
+                  name: REMOVE_LIST_VIEW_RECORD,
+                }
               }
             },
           ]

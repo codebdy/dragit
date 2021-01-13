@@ -157,9 +157,25 @@ export class ListViewStore{
     })
   }
 
+  setUpdating(id:ID, field:string){
+    this.rows.forEach(rowStore=>{
+      if(rowStore.model.id === id){
+        rowStore.setFieldLoading(field, true);        
+      }
+    })
+  }
+
   setRemovingSelects(){
     this.rows.forEach(rowStore=>{
       if(this.isSelected(rowStore.model.id)){
+        rowStore.setLoading(true);        
+      }
+    })
+  }
+
+  setRemoving(id:ID){
+    this.rows.forEach(rowStore=>{
+      if(rowStore.model.id === id){
         rowStore.setLoading(true);        
       }
     })
