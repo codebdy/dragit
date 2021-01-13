@@ -9,6 +9,7 @@ import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
+import RefreshHunter from './RefreshHunter';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -93,13 +94,9 @@ export const ComponentView = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[node, canvasStore?.showPaddingX, canvasStore?.showPaddingY]);
 
-  useEffect(()=>{
-    if(canvasStore?.needRefresh(node.id)){
-      setEditStyle(getEditStyle(node, canvasStore?.showPaddingX, canvasStore?.showPaddingY));
-      canvasStore?.finishFrefrehNode(node.id);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore?.waitingRefreshNodeIds.length])
+  const handleRefresh = ()=>{
+    setEditStyle(getEditStyle(node, canvasStore?.showPaddingX, canvasStore?.showPaddingY));
+  }
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
@@ -168,7 +165,8 @@ export const ComponentView = observer((
 
   return(
     <Fragment>
-    { elementView }
+      <RefreshHunter nodeId={node.id} onRefresh = {handleRefresh} />
+      { elementView }
     </Fragment>
   )
 })

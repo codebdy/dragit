@@ -42,7 +42,6 @@ export const ListViewBodyTableRow = (
       role="checkbox"
       tabIndex={-1}
       key={row.id}
-   
     >
       <TableCell padding="checkbox">
         {

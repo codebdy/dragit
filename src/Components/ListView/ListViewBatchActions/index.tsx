@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ListViewBatchCommads = observer(React.forwardRef((
+const ListViewBatchActions = observer(React.forwardRef((
     props:any, 
     ref:any
   )=>{
@@ -51,5 +51,5 @@ const ListViewBatchCommads = observer(React.forwardRef((
   );
 }))
 
-export default ListViewBatchCommads;
+export default ListViewBatchActions;
 

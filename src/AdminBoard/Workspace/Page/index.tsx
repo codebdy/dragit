@@ -24,6 +24,7 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { cloneObject } from 'Utils/cloneObject';
 import { ActionStore, ActionStoreProvider } from 'Base/Action/ActionStore';
+import PageActionHunter from './PageActionHunter';
 
 export const Page = observer((
   props:{
@@ -182,16 +183,6 @@ export const Page = observer((
     onPageAction && onPageAction(action);
   }
 
-  useEffect(()=>{
-    if(actionStore.waitingActions.length>0){
-      const action = actionStore.popAction();
-      if(action){
-        hanlePageAction(action);        
-      }
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[actionStore.waitingActions.length])
-
   const handleCloseAlert = ()=>{
     setOpentAlert(false);
   }
@@ -205,6 +196,7 @@ export const Page = observer((
     <ActionStoreProvider value = {actionStore}>
       <ModelProvider value = {modelStore}>
         <PageGQLProvider value = {gqlStore}>
+          <PageActionHunter onPageAction = {hanlePageAction} />
           {
             pageLayout?.map((child:RXNode<IMeta>)=>{
               return (

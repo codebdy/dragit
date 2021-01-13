@@ -9,6 +9,10 @@ export class ActionStore{
     makeAutoObservable(this)
   }
 
+  hasAction() {
+    return this.waitingActions.length > 0;
+  }
+
   emit(action:PageAction){
     this.waitingActions.push(action);
   }

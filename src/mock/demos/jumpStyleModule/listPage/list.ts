@@ -49,7 +49,7 @@ export default {
           ]
         },
         {
-          name:'ListViewBatchCommads',
+          name:'ListViewBatchActions',
           children:[
             {
               name:'Button',              

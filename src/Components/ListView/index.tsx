@@ -12,6 +12,7 @@ import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/Ac
 import { useRemoveGQL } from './useRemoveGQL';
 import { useUpdateGQL } from './useUpdateGQL';
 import { IPageMutation } from 'Base/Model/IPageMutation';
+import ListViewActionHunter from './ListViewActionHunter';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -90,17 +91,22 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data])
 
-  useEffect(()=>{
-    if(parentActionStore && parentActionStore.waitingActions.length > 0){
-      const action = parentActionStore.popAction();
+  const handelBatchRemove = ()=>{
 
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[parentActionStore?.waitingActions.length])
+  }
+
+  const handleBatchUpadate = ()=>{
+    
+  }
 
   return (
     <ActionStoreProvider value = {actionStore}>
       <ListViewStoreProvider value = {listViewStore}>
+        <ListViewActionHunter
+          onExcuteBatchRemove = {handelBatchRemove}
+          onExcuteBatchUpdate = {handleBatchUpadate} 
+          onPageAction= {(action)=>{parentActionStore&&parentActionStore.emit(action)}} 
+        />
         <Paper {...rest}  ref={ref}>
           {children}
         </Paper>
