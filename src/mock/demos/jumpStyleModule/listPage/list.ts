@@ -170,13 +170,22 @@ export default {
             label:'',
             align:'right',
           },
-          children:[{
-            name:'TextBox',
-            props:{
-              variant:'outlined',
-              size:'small',
-            }
-          }]
+          children:[
+            {
+              name:'IconButton',
+              props:{
+                icon:'mdi-pencil',
+                tooltip:'编辑',
+              }
+            },
+            {
+              name:'IconButton',
+              props:{
+                icon:'mdi-delete',
+                tooltip:'删除',
+              }
+            },
+          ]
         },
       ],             
     },

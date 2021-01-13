@@ -106,6 +106,7 @@ const ListView = observer(React.forwardRef((
 
   const handelBatchRemove = ()=>{
     listViewStore.setRemovingSelects();
+    //listViewStore.setSelects([]);
     excuteRemove({variables:{
       ids:listViewStore.selects
     }})
@@ -116,6 +117,7 @@ const ListView = observer(React.forwardRef((
       return;
     }
     listViewStore.setUpdatingSelects(action.field);
+    //listViewStore.setSelects([]);
     excuteUpdate({variables:{
       ids:listViewStore.selects,
       [update.variableName]:{[action.field]:action.value},

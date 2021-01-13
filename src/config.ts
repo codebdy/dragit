@@ -75,12 +75,15 @@ import ListViewKeywordFilter from "Components/ListView/ListViewFilters/ListViewK
 import Button from "Components/Buttons/Button";
 import ListViewPagination from "Components/ListView/ListViewPagination";
 import { ListViewPaginationRule } from "Components/ListView/ListViewPagination/Rule";
+import { IconButtonRule } from "Components/Buttons/IconButton/Rule";
+import IconButton from "Components/Buttons/IconButton";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
 register('GridRow', GridRow, GridRowRule);
 register('GridColumn', GridColumn, GridColumnRule);
 register('Button',Button, ButtonRule);
+register('IconButton', IconButton, IconButtonRule);
 register('TextBox', TextBox, TextBoxRule);
 register('SwitchBox', SwitchBox, SwitchBoxRule);
 register('Checkbox', Checkbox, CheckboxRule);
