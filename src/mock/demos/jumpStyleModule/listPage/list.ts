@@ -186,9 +186,17 @@ export default {
             },
             {
               name:'JsxTemplateParser',
+
               props:{
-                template:`
-                  <IconButton icon='mdi-publish' tooltip='发布' />
+              actions:{
+                publish:{
+                  name: UPDATE_LIST_VIEW_RECORD,
+                  field:'status',
+                  value:'PUBLISHED',
+                }
+              },                
+              template:`
+                  <IconButton icon='mdi-publish' tooltip='发布' onClick={publish} />
                 `
               }
             },
