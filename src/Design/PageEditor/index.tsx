@@ -22,7 +22,6 @@ import { CursorPosition } from './Core/IDragOverParam';
 import { ComponentLabel } from './Core/ComponentLabel';
 import { cloneObject } from '../../Utils/cloneObject';
 import SubmitButton from 'Components/Common/SubmitButton';
-import ConfirmDialog from 'Base/Widgets/ConfirmDialog';
 import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'Base/authSlugs';
 import { observer } from 'mobx-react';
@@ -32,6 +31,7 @@ import { GET_PAGE, SAVE_PAGE } from 'Base/GraphQL/GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { CanvasStore } from './CanvasStore';
 import { CanvasStoreProvider } from './useDesign';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,7 +82,7 @@ export const PageEditor = observer((
   const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(/*pageMeta?.schema*/);
   const [metas, setMetas] = useState<Array<IMeta>>([])
   const [dirty, setIsDirty] = useState(false);
-  const [backConfirmOpen, setBackConfirmOpen] = useState(false);
+  const appStore = useAppStore();
 
   useShowAppoloError(error||saveError);
 
@@ -177,7 +177,10 @@ export const PageEditor = observer((
 
   const handleCancel = () => {
     if(dirty){
-      setBackConfirmOpen(true);
+      appStore.confirmAction(intl.get('changing-not-save-message'), ()=>{
+        canvasStore.reset();
+        onClose();
+      })
     }
     else{
       canvasStore.reset();
@@ -196,12 +199,6 @@ export const PageEditor = observer((
     }})
     setIsDirty(false);    
   };
-
-  const handleBackConfirm = ()=>{
-    setBackConfirmOpen(false);
-    canvasStore.reset();
-    onClose();
-  }
 
   const handleScroll = ()=>{
     canvasStore.scroll();
@@ -415,12 +412,6 @@ export const PageEditor = observer((
             (canvasStore.draggedToolboxItem || canvasStore.draggedNode) &&
             <DragCusor/>
           }
-          <ConfirmDialog 
-            message = {intl.get('changing-not-save-message')}
-            open = {backConfirmOpen}
-            onCancel ={()=>{setBackConfirmOpen(false)}}
-            onConfirm = {handleBackConfirm}
-          />
         </Fragment>      
       </Backdrop>
     </CanvasStoreProvider>

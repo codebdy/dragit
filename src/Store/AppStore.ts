@@ -13,6 +13,24 @@ export class Error{
   }
 }
 
+export class Confirm{
+  message?:string;
+  callbackFn?:()=>void;
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  open(message:string, callbackFn:()=>void){
+    this.message = message;
+    this.callbackFn = callbackFn;
+  }
+
+  close(){
+    this.message = undefined;
+    this.callbackFn = undefined;
+  }
+}
+
 export class AppStore{
   showThemeSettings = false;
   toolbarElevate = true;
@@ -23,6 +41,7 @@ export class AppStore{
   designer:DesignerStore = new DesignerStore();
   successAlert: boolean|string = false;
   error: Error = new Error();
+  confirm: Confirm = new Confirm();
 
   moduleSlug: string|undefined = 'dashboard';
   pageId: string|undefined;
@@ -74,6 +93,10 @@ export class AppStore{
   showModule(moduleSlug:string, pageSlug?:string){
     this.moduleSlug = moduleSlug;
     this.pageId = pageSlug;
+  }
+
+  confirmAction(message:string, actionCallback:()=>void){
+    this.confirm.open(message, actionCallback);
   }
 
 }

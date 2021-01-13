@@ -14,6 +14,7 @@ export const BATCH_UPDATE_LIST_VIEW_RECORDS = "BATCH_UPDATE_LIST_VIEW_RECORDS";
 
 export interface PageAction{
   name:string;
+  confirmMessage?:string;
   mutation?:IPageMutation;
   resetNodes?:string[];
   [key:string]: any;

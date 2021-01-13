@@ -17,6 +17,7 @@ import { ErrorDialog } from 'Base/Widgets/ErrorDialog';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
 import { useThemeSettings } from 'Store/Helpers/useAppStore';
 import { LOGIN_URL } from 'Utils/consts';
+import { ConfirmDialog } from 'Base/Widgets/ConfirmDialog';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();
@@ -53,6 +54,7 @@ const App = observer(()=>{
         </BrowserRouter>
         <SuccessAlertBar />
         <ErrorDialog />
+        <ConfirmDialog />
       </ThemeProvider>)
   );
 })

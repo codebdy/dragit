@@ -6,38 +6,42 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import intl from 'react-intl-universal';
+import { useAppStore } from 'Store/Helpers/useAppStore';
+import {observer} from 'mobx-react';
 
-export default function ConfirmDialog(
-  props:{
-    message:string,
-    onConfirm:()=>void,
-    onCancel:()=>void,
-    open:boolean,
+export const ConfirmDialog = observer(() => {
+  const confirmStore = useAppStore().confirm;
+  
+  const handelCancel = ()=>{
+    confirmStore.close();
   }
-) {
-  const {message, open, onConfirm, onCancel} = props;
+
+  const handleConfirm = ()=>{
+    confirmStore.callbackFn && confirmStore.callbackFn();
+    confirmStore.close();
+  }
 
   return (
     <Dialog
-      open={open}
-      onClose={onCancel}
+      open={!!confirmStore.message}
+      onClose={handelCancel}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">{intl.get('operation-confirm')}</DialogTitle>
       <DialogContent style={{minWidth:"400px"}}>
         <DialogContentText id="alert-dialog-description">
-          {message}
+          {confirmStore.message}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancel}>
+        <Button onClick={handelCancel}>
         {intl.get('cancel')}
         </Button>
-        <Button onClick={onConfirm} color="primary" autoFocus>
+        <Button onClick={handleConfirm} color="primary" autoFocus>
           {intl.get('confirm')}
         </Button>
       </DialogActions>
     </Dialog>
   );
-}
+})

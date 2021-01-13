@@ -12,7 +12,6 @@ import { ModelStore } from '../../../Base/ModelTree/ModelStore';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import ConfirmDialog from 'Base/Widgets/ConfirmDialog';
 import intl from 'react-intl-universal';
 import { RXNodeRoot } from 'Base/RXNode/Root';
 import { AUTH_DEBUG } from 'Base/authSlugs';
@@ -35,7 +34,6 @@ export const Page = observer((
   }
 )=>{
   const [openAlert, setOpentAlert] = useState(false);
-  const [backConfirmOpen, setBackConfirmOpen] = useState(false);
   const {page, pageParams, hideGQLDebug, onPageAction} = props;
   const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>();
   const [actionStore] = useState(new ActionStore());
@@ -163,7 +161,9 @@ export const Page = observer((
         return;
       case GO_BACK_ACTION:
         if(modelStore?.isDirty()){
-          setBackConfirmOpen(true);
+          appStore.confirmAction(intl.get('changing-not-save-message'), ()=>{
+            onPageAction && onPageAction({name:GO_BACK_ACTION})
+          })
           return;
         }
         break;
@@ -185,11 +185,6 @@ export const Page = observer((
 
   const handleCloseAlert = ()=>{
     setOpentAlert(false);
-  }
-
-  const handleBackConfirm = ()=>{
-    onPageAction && onPageAction({name:GO_BACK_ACTION})
-    setBackConfirmOpen(false);
   }
 
   return (
@@ -219,12 +214,6 @@ export const Page = observer((
               {intl.get('input-error')} — <strong>{intl.get('please-confirm')}</strong>
             </Alert>      
           </Dialog>
-          <ConfirmDialog 
-            message = {intl.get('changing-not-save-message')}
-            open = {backConfirmOpen}
-            onCancel ={()=>{setBackConfirmOpen(false)}}
-            onConfirm = {handleBackConfirm}
-          /> 
           {
             loggedUser.authCheck(AUTH_DEBUG) && !hideGQLDebug &&
             <GraphQLDebug/>

@@ -5,7 +5,7 @@ import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { useActionStore } from './Action/ActionStore';
-import { useEffect } from 'react';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 export default function ComponentRender(
   props:{
@@ -16,23 +16,16 @@ export default function ComponentRender(
   const onClickAction = component.meta.props?.onClick;
   let Component = resolveComponent(component.meta);
 
+  const appStore = useAppStore();
   const actionStore = useActionStore();
-  useEffect(()=>{
-    if(onClickAction){
-      //添加按钮的GQL调试信息
-      //actionStore?.emit({name:REGISTER_ACTION_TO_GQL_STORE, node:component})      
-    }
-    return ()=>{
-      if(onClickAction){
-        //actionStore?.emit({name:REMOVE_ACTION_FROM_GQL_STORE, node:component})
-      }
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
   
   const handleOnClick = ()=>{
     if(onClickAction){
-      actionStore?.emit(onClickAction);
+      if(onClickAction.confirmMessage){
+        appStore.confirmAction(onClickAction.confirmMessage, ()=>{
+          actionStore?.emit(onClickAction);
+        })
+      }    
     }
   };
 

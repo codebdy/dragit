@@ -61,6 +61,7 @@ export default {
                 color:'secondary',
                 onClick:{
                   name: BATCH_REMOVE_LIST_VIEW_RECORDS,
+                  confirmMessage:'删除后将不可恢复，您确定要删除吗？',
                 }
               }
             },
@@ -76,7 +77,6 @@ export default {
                   name: BATCH_UPDATE_LIST_VIEW_RECORDS,
                   field:'status',
                   value:'PUBLISHED',
-                  confirmMessage:'删除后将不可恢复，您确定要删除吗？',
                 }
               }
             }
