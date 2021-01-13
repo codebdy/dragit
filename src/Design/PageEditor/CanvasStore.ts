@@ -77,18 +77,17 @@ export class CanvasStore {
   reset() {
     this.dragOverParam = undefined;
     this.draggedNode = undefined;
-    //this.canvas?: RXNodeRoot<IMeta>;
     this.draggedToolboxItem = undefined;
     this.selectedNode = undefined;
+    this.activeNode = undefined;
     this.undoList = [];
     this.redoList = [];
   }
 
   clear(){
-    this.reset();
+    this.selectedNode = undefined;
     if(this.canvas){
       this.canvas.children = [];
-      this.canvas = {...this.canvas} as any;
     }
   }
 
