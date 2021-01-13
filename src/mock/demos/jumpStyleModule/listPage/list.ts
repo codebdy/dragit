@@ -185,6 +185,14 @@ export default {
               }
             },
             {
+              name:'JsxTemplateParser',
+              props:{
+                template:`
+                  <IconButton icon='mdi-publish' tooltip='发布' />
+                `
+              }
+            },
+            /*{
               name:'IconButton',
               props:{
                 icon:'mdi-publish',
@@ -195,7 +203,7 @@ export default {
                   value:'PUBLISHED',
                 }
               }
-            },
+            },*/
             {
               name:'IconButton',
               props:{

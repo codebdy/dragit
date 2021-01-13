@@ -77,6 +77,8 @@ import ListViewPagination from "Components/ListView/ListViewPagination";
 import { ListViewPaginationRule } from "Components/ListView/ListViewPagination/Rule";
 import { IconButtonRule } from "Components/Buttons/IconButton/Rule";
 import IconButton from "Components/Buttons/IconButton";
+import JsxTemplateParser from "Components/JsxTemplateParser";
+import { JsxTemplateParserRule } from "Components/JsxTemplateParser/Rule";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -120,6 +122,8 @@ register('TextView', TextView, TextViewRule);
 register('MediaView', MediaView, MediaViewRule);
 register('EnumView', EnumView, EnumViewRule);
 register('DayView', DayView, DayViewRule);
+
+register('JsxTemplateParser', JsxTemplateParser, JsxTemplateParserRule);
 
 registerHtmlTag('h1', HeadRule);
 registerHtmlTag('h2', HeadRule);
