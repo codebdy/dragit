@@ -46,7 +46,7 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
     return dirty;
   }
 
-  setLoading(loading:boolean){
+  setLoading(loading?:boolean){
     this.loading = loading;
   }
 

@@ -31,7 +31,7 @@ export class FieldStore implements IFieldStore{
     this.meta = meta;
   }
 
-  setLoading(loading:boolean){
+  setLoading(loading?:boolean){
     this.loading = loading;
   }
 

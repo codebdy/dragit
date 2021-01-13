@@ -37,16 +37,12 @@ export class ListViewStore{
   refreshQueryFlag:number = 1;
   rowSchemaStore:ModelStore = new ModelStore();
   columns:Array<RXNode<IMeta>> = [];
-  //searchableFields:Array<string> = [];
   selects:ID[] = [];
   whereGraphiQLs: Map<string,string> = new Map<string,string>();
-  //orderByGraphiQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
-  rows: Array<any> = [];
+  rows: Array<ModelStore> = [];
   loading?:boolean;
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
-  updating?:Updating;
-  removingIds?:Array<ID>;
   
   constructor() {
     makeAutoObservable(this)
@@ -146,7 +142,7 @@ export class ListViewStore{
   }
 
   setRows(rows?:Array<any>){
-    this.rows = rows ? rows :[];
+    this.rows = rows?.map((row)=>new ModelStore(row)) || [];
   }
 
   setLoading(loading?:boolean){
@@ -154,33 +150,27 @@ export class ListViewStore{
   }
 
   setUpdatingSelects(field:string){
-    this.updating = {field, ids:this.selects};
+    this.rows.forEach(rowStore=>{
+      if(this.isSelected(rowStore.model.id)){
+        rowStore.setFieldLoading(field, true);        
+      }
+    })
   }
 
   setRemovingSelects(){
-    this.removingIds = this.selects;
+    this.rows.forEach(rowStore=>{
+      if(this.isSelected(rowStore.model.id)){
+        rowStore.setLoading(true);        
+      }
+    })
   }
 
   finishMutation(){
-    this.updating = undefined;
-    this.removingIds = undefined;
+    this.rows.forEach(rowStore=>{
+      rowStore.setLoading(false);
+    })
   }
 
-  isLoading(id:ID, field?:string){
-    if(this.loading){
-      return true;
-    }
-
-    if(this.removingIds && this.removingIds.indexOf(id) >= 0){
-      return true;
-    }
-
-    if(this.updating && this.updating.field === field){
-      return this.updating.ids.indexOf(id) >= 0;
-    }
-
-    return false;
-  }
 
 }
 

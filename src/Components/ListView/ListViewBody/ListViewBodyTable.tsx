@@ -4,8 +4,9 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {observer} from 'mobx-react';
-import { ListViewBodyTableRow, DataRow } from "./ListViewBodyTableRow";
+import { ListViewBodyTableRow } from "./ListViewBodyTableRow";
 import { ListViewBodyTableCell } from "./ListViewBodyTableCell";
+import { ModelStore } from "Base/ModelTree/ModelStore";
 
 export const ListViewBodyTable = observer((
   props: {
@@ -21,13 +22,13 @@ export const ListViewBodyTable = observer((
 
   return (
     <TableBody>
-      {listViewStore.rows?.map((row:DataRow, index: any) => {
+      {listViewStore.rows?.map((row:ModelStore, index: any) => {
           return (
-            <ListViewBodyTableRow key={row.id} row={row}>
+            <ListViewBodyTableRow key={row.model.id} row={row}>
               {
                 columns?.map((column, colIndex) => {
                   return(
-                    <ListViewBodyTableCell key={row.id + '-' + column.id} column = {column} row={row} />
+                    <ListViewBodyTableCell key={row.model.id + '-' + column.id} column = {column} />
                   )
                 })
               }

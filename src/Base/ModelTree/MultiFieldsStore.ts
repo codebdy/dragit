@@ -19,7 +19,7 @@ export class MultiFieldsStore implements IModelNode{
     this.meta = meta;
   }
 
-  setLoading(loading:boolean){
+  setLoading(loading?:boolean){
     this.loading = loading;
   }
 

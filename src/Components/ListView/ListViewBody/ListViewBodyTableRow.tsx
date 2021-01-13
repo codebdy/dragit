@@ -29,7 +29,7 @@ const RowCheckBox = observer((props:{rowId:string}) => {
 
 export const ListViewBodyTableRow = (
   props: {
-    row:DataRow,
+    row:ModelStore,
     children?:any,
   }
 )=>{
@@ -38,19 +38,18 @@ export const ListViewBodyTableRow = (
   return (
     <TableRow
       hover
-      id={row.id}
       role="checkbox"
       tabIndex={-1}
-      key={row.id}
+      key={row.model.id}
     >
       <TableCell padding="checkbox">
         {
           <RowCheckBox
-            rowId={row.id}
+            rowId={row.model.id}
           />
         }
       </TableCell>
-      <ModelProvider value={new ModelStore(row)}>
+      <ModelProvider value={row}>
         {
           children
         }

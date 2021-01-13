@@ -23,12 +23,13 @@ export const posts = async (parent:any, args:any, context:any, info:any)=>{
 
 export const removePosts = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  console.log('updatePosts', args.ids)
+  console.log('removePosts', args)
   return articlesData
 }
 
 export const updatePosts = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
+  console.log('updatePosts', args)
   return articlesData
 }
 

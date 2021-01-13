@@ -38,7 +38,7 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
     return false;
   }
 
-  setLoading(loading:boolean){
+  setLoading(loading?:boolean){
     this.loading = loading;
   }
 

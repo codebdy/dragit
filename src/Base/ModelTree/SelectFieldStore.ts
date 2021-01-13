@@ -32,7 +32,7 @@ export class SelectFieldStore implements IFieldStore{
     return this.dirty;
   }
 
-  setLoading(loading:boolean){
+  setLoading(loading?:boolean){
     this.loading = loading;
   }
   

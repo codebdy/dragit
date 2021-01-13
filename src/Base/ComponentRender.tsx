@@ -25,6 +25,9 @@ export default function ComponentRender(
         appStore.confirmAction(onClickAction.confirmMessage, ()=>{
           actionStore?.emit(onClickAction);
         })
+      }
+      else{
+        actionStore?.emit(onClickAction);
       }    
     }
   };

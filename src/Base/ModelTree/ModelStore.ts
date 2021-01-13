@@ -41,6 +41,13 @@ export class ModelStore implements IModelStore , IModelNode{
 
   setLoading(loading?:boolean){
     this.loading = loading;
+    this.fields.forEach(field=>{
+      field.setLoading(loading);
+    })
+  }
+
+  setFieldLoading(feildName:string, loading?:boolean){
+    this.fields.get(feildName)?.setLoading(loading);
   }
 
   setModel(model:any){

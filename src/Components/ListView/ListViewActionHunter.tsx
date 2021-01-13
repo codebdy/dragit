@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 const ListViewActionHunter = observer((
     props:{
-      onExcuteBatchUpdate:()=>void,
+      onExcuteBatchUpdate:(action:PageAction)=>void,
       onExcuteBatchRemove:()=>void,
       //处理不了的Action转发给父组件
       onPageAction:(action:PageAction)=>void,
@@ -27,6 +27,7 @@ const ListViewActionHunter = observer((
         onExcuteBatchRemove();
         break;
       case BATCH_UPDATE_LIST_VIEW_RECORDS:
+        onExcuteBatchUpdate(action)
         break;
       
       default:

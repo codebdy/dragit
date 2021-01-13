@@ -13,6 +13,7 @@ import { useRemoveGQL } from './useRemoveGQL';
 import { useUpdateGQL } from './useUpdateGQL';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import ListViewActionHunter from './ListViewActionHunter';
+import { PageAction } from 'Base/Action/PageAction';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -110,9 +111,14 @@ const ListView = observer(React.forwardRef((
     }})
   }
 
-  const handleBatchUpadate = ()=>{
+  const handleBatchUpadate = (action:PageAction)=>{
+    if(!update){
+      return;
+    }
+    listViewStore.setUpdatingSelects(action.field);
     excuteUpdate({variables:{
-      ids:listViewStore.selects
+      ids:listViewStore.selects,
+      [update.variableName]:{[action.field]:action.value},
     }})
   }
 
