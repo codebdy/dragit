@@ -18,20 +18,23 @@ export const post = async (parent:any, args:any, context:any, info:any)=>{
 
 export const posts = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  //const module = getModuleBySlug(args.slug);
   return {data:articlesData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}}
 }
 
+export const removePosts = async (parent:any, args:any, context:any, info:any)=>{
+  await sleep(500);
+  console.log('updatePosts', args.ids)
+  return articlesData
+}
 
 export const updatePosts = async (parent:any, args:any, context:any, info:any)=>{
-  await sleep(200);
-  //const module = getModuleBySlug(args.slug);
+  await sleep(500);
   return articlesData
 }
 
 export const savePost = async (parent:any, args:any, context:any, info:any)=>{
-  await sleep(200);
-  //const module = getModuleBySlug(args.slug);
+  await sleep(500);
+
   console.log('Server received post data:', args);
   let post = {...args.post, id:args.post?.id || idSeed++, created_at:''}
   if(post?.seoMeta && !post?.seoMeta.id){
@@ -47,6 +50,7 @@ export const postQueryResolvers = {
 
 
 export const postMutationResolvers = {
+  removePosts,
   updatePosts,
   savePost
 }

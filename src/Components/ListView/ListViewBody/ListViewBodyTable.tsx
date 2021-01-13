@@ -1,12 +1,11 @@
-import { TableCell, TableBody} from "@material-ui/core";
+import { TableBody} from "@material-ui/core";
 import React, { useEffect } from "react";
 import { RXNode } from "Base/RXNode/RXNode";
 import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {observer} from 'mobx-react';
-import { Skeleton } from "@material-ui/lab";
-import ComponentRender from "Base/ComponentRender";
 import { ListViewBodyTableRow, DataRow } from "./ListViewBodyTableRow";
+import { ListViewBodyTableCell } from "./ListViewBodyTableCell";
 
 export const ListViewBodyTable = observer((
   props: {
@@ -25,18 +24,13 @@ export const ListViewBodyTable = observer((
       {listViewStore.rows?.map((row:DataRow, index: any) => {
           return (
             <ListViewBodyTableRow key={row.id} row={row}>
-                {
-                  columns?.map((column, colIndex) => {
-                    return(
-                      listViewStore.loading ? 
-                      <TableCell key={row.id + '-' + colIndex} >
-                        <Skeleton animation="wave" height={50} width="50%" />
-                      </TableCell>
-                      :
-                      <ComponentRender key={colIndex} component = {column} />
-                    )
-                  })
-                }
+              {
+                columns?.map((column, colIndex) => {
+                  return(
+                    <ListViewBodyTableCell key={row.id + '-' + column.id} column = {column} row={row} />
+                  )
+                })
+              }
             </ListViewBodyTableRow>
           );
         })}

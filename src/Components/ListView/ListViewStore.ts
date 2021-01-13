@@ -27,6 +27,12 @@ export class FieldOrder {
   }
 }
 
+interface Updating{
+  field:string;
+  ids:Array<ID>;
+}
+
+
 export class ListViewStore{
   refreshQueryFlag:number = 1;
   rowSchemaStore:ModelStore = new ModelStore();
@@ -39,6 +45,8 @@ export class ListViewStore{
   rows: Array<any> = [];
   loading?:boolean;
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
+  updating?:Updating;
+  removingIds?:Array<ID>;
   
   constructor() {
     makeAutoObservable(this)
@@ -143,6 +151,35 @@ export class ListViewStore{
 
   setLoading(loading?:boolean){
     this.loading = loading;
+  }
+
+  setUpdatingSelects(field:string){
+    this.updating = {field, ids:this.selects};
+  }
+
+  setRemovingSelects(){
+    this.removingIds = this.selects;
+  }
+
+  finishMutation(){
+    this.updating = undefined;
+    this.removingIds = undefined;
+  }
+
+  isLoading(id:ID, field?:string){
+    if(this.loading){
+      return true;
+    }
+
+    if(this.removingIds && this.removingIds.indexOf(id) >= 0){
+      return true;
+    }
+
+    if(this.updating && this.updating.field === field){
+      return this.updating.ids.indexOf(id) >= 0;
+    }
+
+    return false;
   }
 
 }

@@ -77,6 +77,7 @@ export var articleGQLQuery = `
 `
 
 export var articleGQLMutation = `
-  updatePosts(command:String, ids:[ID] ):[Post]
+  removePosts(ids:[ID]):[Post]
+  updatePosts(postFragment:PostInput, ids:[ID] ):[Post]
   savePost(post:PostInput):Post
 `

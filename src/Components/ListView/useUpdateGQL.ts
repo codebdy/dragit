@@ -10,8 +10,8 @@ export function useUpdateGQL( listViewStore:ListViewStore, update?:IPageMutation
 
   const createQueryGQL = ()=>{
     const GQL_STRING = `
-      mutation ($ids:[ID], $${update?.variableName}:${update?.variableType}){
-        ${update?.name}(ids:$ids, ${update?.variableName}:$${update?.variableName})
+      mutation ($${update?.variableName}:${update?.variableType}, $ids:[ID]){
+        ${update?.name}(${update?.variableName}:$${update?.variableName}, ids:$ids)
         ${listViewStore.rowSchemaStore.toFieldsGQL()}
       }
   `

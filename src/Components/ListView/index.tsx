@@ -54,12 +54,24 @@ const ListView = observer(React.forwardRef((
     //fetchPolicy:'no-cache'
   });
 
-  const [excuteUpdate, { loading:updateLoading, error:updateError, data:updateResult }] = useMutation(gql`${updateGQL.gql}`,
-    {onCompleted:()=>{appStore.setSuccessAlert(true)}}
+  const [excuteUpdate, { error:updateError }] = useMutation(gql`${updateGQL.gql}`,
+    {
+      onCompleted:()=>{
+        appStore.setSuccessAlert(true);
+        listViewStore.setSelects([]);
+        listViewStore.finishMutation();
+      }
+    }
   );
 
-  const [excuteRemove, { loading:removeLoading, error:removeError, data:removeResult }] = useMutation(gql`${removeGQL.gql}`,
-    {onCompleted:()=>{appStore.setSuccessAlert(true)}}
+  const [excuteRemove, { error:removeError }] = useMutation(gql`${removeGQL.gql}`,
+    {
+      onCompleted:()=>{
+        appStore.setSuccessAlert(true);
+        listViewStore.setSelects([]);
+        listViewStore.finishMutation();
+      }
+    }
   );
 
   useShowAppoloError(error||updateError||removeError);
@@ -92,11 +104,16 @@ const ListView = observer(React.forwardRef((
   },[data])
 
   const handelBatchRemove = ()=>{
-
+    listViewStore.setRemovingSelects();
+    excuteRemove({variables:{
+      ids:listViewStore.selects
+    }})
   }
 
   const handleBatchUpadate = ()=>{
-    
+    excuteUpdate({variables:{
+      ids:listViewStore.selects
+    }})
   }
 
   return (
