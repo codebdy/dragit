@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
-import { REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
+import { OPEN_PAGE_ACTION, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
 import { useEffect } from 'react';
 import { ModelStore } from 'Base/ModelTree/ModelStore';
 
@@ -31,7 +31,10 @@ const ListViewTableRowActionHunter = observer((
         }
 
         break;
-      
+      case OPEN_PAGE_ACTION:
+        console.assert(action.page, 'Page not set on OPEN_PAGE_ACTION');
+        parentActionStore?.emit({...action, page:{...action.page, dataId:row.model.id}});
+        break;
       default:
         //处理不了的Action转发给父组件
         if(action){

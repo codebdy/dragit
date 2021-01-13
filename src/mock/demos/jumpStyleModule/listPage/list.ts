@@ -1,4 +1,4 @@
-import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from "Base/Action/PageAction";
+import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, OPEN_PAGE_ACTION, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from "Base/Action/PageAction";
 
 export default {
   name:'ListView',
@@ -176,6 +176,12 @@ export default {
               props:{
                 icon:'mdi-pencil',
                 tooltip:'编辑',
+                onClick:{
+                  name: OPEN_PAGE_ACTION,
+                  page:{
+                    pageId:'1012',              
+                  }
+                }
               }
             },
             {
