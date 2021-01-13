@@ -54,7 +54,7 @@ const JsxTemplateParser = observer(React.forwardRef((
                 />
   return (
     isDesigning
-    ? <div className={classNames(classes.root, className)} {...rest} ref={ref}>{parser}</div>
+    ? <div className={classNames(classes.root, className)} {...rest} ref={ref}>JSX</div>
     : parser
   )
 }))

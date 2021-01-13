@@ -230,6 +230,9 @@ export default {
     },
     {
       name:'ListViewPagination',
+      props:{
+        rowsPerPageOptions: '5, 10, 25'
+      }
     }
   ],      
 }
