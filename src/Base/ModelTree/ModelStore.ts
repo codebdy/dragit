@@ -1,9 +1,8 @@
 import { makeAutoObservable } from "mobx";
 import { IFieldStore } from "./FieldStore";
-import { IModelStore } from "./IModelStore";
 import { IModelNode } from "./IModelNode";
 
-export class ModelStore implements IModelStore , IModelNode{
+export class ModelStore implements IModelNode{
   model?: any;
   loading?: boolean;
   fields: Map<string,IFieldStore>;
@@ -111,5 +110,14 @@ export class ModelStore implements IModelStore , IModelNode{
     this.fields?.forEach((fieldStore, key)=>{
       fieldStore.reset()
     })
+  }
+
+  getChildren(){
+    let children:Array<IModelNode> = [];
+    this.fields.forEach(fieldStore=>{
+      children.push(fieldStore);
+    })
+
+    return children;
   }
 }

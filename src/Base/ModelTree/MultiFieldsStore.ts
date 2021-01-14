@@ -1,6 +1,7 @@
 import { creatId } from "Base/creatId";
 import { IMeta } from "Base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
+import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 import { validate } from "./validate";
 
@@ -67,6 +68,18 @@ export class MultiFieldsStore implements IModelNode{
   reset(){
     this.value = this.defaultValue
     this.error = undefined;
+  }
+
+  getChildren(){
+    return [];
+  }
+
+  setFieldStore(fieldName:string, fieldStore:IFieldStore){
+
+  }
+
+  getFieldStore(fieldName:string){
+    return undefined;
   }
 }
 

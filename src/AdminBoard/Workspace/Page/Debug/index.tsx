@@ -1,13 +1,16 @@
-import React, { Fragment } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles, createStyles, Theme, createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
 import { SpeedDialIcon } from '@material-ui/lab';
 import GraphQLDebug from './DebugGraphQL';
-import { useLeftDrawer } from 'Store/Helpers/useAppStore';
+import { useLeftDrawer, useThemeSettings } from 'Store/Helpers/useAppStore';
 import {observer} from 'mobx-react';
+import { DARK } from 'Store/ThemeSettings';
+import { DebugModelTree } from './DebugModelTree';
+import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,15 +26,34 @@ export const Debug = observer(()=>{
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [gqlOpen, setGqlOpen] = React.useState(false);
+  const [treeOpen, setTreeOpen] = React.useState(false);
   const leftDrawer = useLeftDrawer();
   const fabLeft = leftDrawer.isMini ? leftDrawer.compactWidth : leftDrawer.fullWidth;
-  
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const themeSettings = useThemeSettings();
+  const theme = responsiveFontSizes(createMuiTheme({
+    palette: {
+      type: DARK,
+      primary:{
+        main:themeSettings.primary,
+      },
+      background:{
+        paper:'#212121',
+      }
+    },
+    
+  }));
 
   const handleOpen = () => {
     setOpen(true);
+  };
+
+  const handleClose = ()=>{
+    setOpen(false);
+  }
+
+  const handleOpentree = () => {
+    setOpen(false);
+    setTreeOpen(true);
   };
 
   const handleOpenGql = ()=>{
@@ -40,7 +62,7 @@ export const Debug = observer(()=>{
   }
   
   return (
-    <Fragment>
+    <Hidden smDown>
       <SpeedDial
         ariaLabel="Debug SpeedDial"
         className={classes.speedDial}
@@ -50,6 +72,7 @@ export const Debug = observer(()=>{
             openIcon={<MdiIcon iconClass = "mdi-close"/>}
           />
         }
+        hidden = {treeOpen || gqlOpen}
         onClose={handleClose}
         onOpen={handleOpen}
         open={open}
@@ -59,17 +82,20 @@ export const Debug = observer(()=>{
         <SpeedDialAction
           icon={<MdiIcon iconClass = "mdi-graphql" />}
           tooltipTitle={'GraphiQL ' + intl.get('debug')}
-          tooltipPlacement = "top"
+          tooltipPlacement = "right"
           onClick={(handleOpenGql)}
         />
         <SpeedDialAction
           icon={<MdiIcon iconClass = "mdi-file-tree" />}
           tooltipTitle={'Model Tree ' + intl.get('debug')}
-          tooltipPlacement = "top"
-          onClick={handleClose}
+          tooltipPlacement = "right"
+          onClick={handleOpentree}
         />
       </SpeedDial>
-      <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
-    </Fragment>
+      <ThemeProvider theme={theme}>
+        <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
+        <DebugModelTree open={treeOpen} onClose = {()=>setTreeOpen(false)} />
+      </ThemeProvider>
+    </Hidden>
   );
 })

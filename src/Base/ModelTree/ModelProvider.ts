@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { createContext } from 'react';
-import { IModelStore } from './IModelStore';
+import { IModelNode } from './IModelNode';
 
-export const ModelContext = createContext<IModelStore|undefined>(undefined as unknown as IModelStore);
+export const ModelContext = createContext<IModelNode|undefined>(undefined);
 export const ModelProvider = ModelContext.Provider;
-export const useModelStore = (): IModelStore|undefined => useContext(ModelContext);
+export const useModelStore = (): IModelNode|undefined => useContext(ModelContext);
 

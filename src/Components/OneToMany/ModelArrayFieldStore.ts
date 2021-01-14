@@ -1,13 +1,12 @@
 import { IMeta } from "Base/Model/IMeta";
 import { makeAutoObservable } from "mobx";
-import { IModelStore } from "../../Base/ModelTree/IModelStore";
 import { IFieldStore } from "../../Base/ModelTree/FieldStore";
 import { IModelNode } from "../../Base/ModelTree/IModelNode";
 import { ModelFieldStore } from "Base/ModelTree/ModelFieldStore";
 import { creatId } from "Base/creatId";
 
 
-export class ModelArrayFieldStore implements IFieldStore, IModelStore {
+export class ModelArrayFieldStore implements IFieldStore {
   id:number;
   defaultValue?: any;
   value?: any;
@@ -82,5 +81,9 @@ export class ModelArrayFieldStore implements IFieldStore, IModelStore {
 
   removeRow(index:number){
     this.rows.splice(index, 1);
+  }
+
+  getChildren(){
+    return [];
   }
 }

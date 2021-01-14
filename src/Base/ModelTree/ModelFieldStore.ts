@@ -1,12 +1,11 @@
 import { IMeta } from "Base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
-import { IModelStore } from "./IModelStore";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 import { creatId } from "Base/creatId";
 
 
-export class ModelFieldStore implements IFieldStore, IModelStore {
+export class ModelFieldStore implements IFieldStore{
   id:number;
   defaultValue?: any;
   value?: any;
@@ -109,5 +108,14 @@ export class ModelFieldStore implements IFieldStore, IModelStore {
     this.subFields?.forEach((fieldStore, key)=>{
       fieldStore.reset()
     })
+  }
+
+  getChildren(){
+    let children:Array<IModelNode> = [];
+    this.subFields.forEach(fieldStore=>{
+      children.push(fieldStore);
+    })
+
+    return children;
   }
 }

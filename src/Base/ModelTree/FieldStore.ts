@@ -82,6 +82,18 @@ export class FieldStore implements IFieldStore{
     this.value = this.defaultValue
     this.error = undefined;
   }
+
+  getChildren(){
+    return undefined;
+  }
+
+  setFieldStore(fieldName:string, fieldStore:IFieldStore){
+
+  }
+
+  getFieldStore(fieldName:string){
+    return undefined;
+  }
 }
 
 

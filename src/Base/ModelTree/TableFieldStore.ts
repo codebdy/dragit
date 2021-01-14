@@ -1,12 +1,11 @@
 import { IMeta } from "Base/Model/IMeta";
 import { makeAutoObservable } from "mobx";
-import { IModelStore } from "./IModelStore";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 import createId from "Utils/createId";
 
 
-export class TableFieldStore implements IFieldStore, IModelStore {
+export class TableFieldStore implements IFieldStore {
   id:number;
   defaultValue?: any;
   value?: any;
@@ -62,5 +61,9 @@ export class TableFieldStore implements IFieldStore, IModelStore {
   reset(){
     this.value = this.defaultValue
     this.error = undefined;
+  }
+
+  getChildren(){
+    return [];
   }
 }
