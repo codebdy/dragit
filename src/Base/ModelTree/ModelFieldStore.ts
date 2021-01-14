@@ -72,10 +72,9 @@ export class ModelFieldStore implements IFieldStore{
   toFieldsGQL() {
     let subGql = '';
     this.subFields.forEach(fieldStore=>{
-      subGql = subGql + ` ${fieldStore.metaProps?.field} ${fieldStore.toFieldsGQL()} `
+      subGql = subGql + ` ${fieldStore.toFieldsGQL()} `
     })
-
-    return subGql ? ` {id ${subGql}}` :  `  `;
+    return subGql ? ` ${this.metaProps?.field}{id ${subGql}}` :  ` ${this.metaProps?.field} `;
   }
 
   getModelNode(name:string):IModelNode|undefined{
