@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { useActionStore } from 'Base/Action/ActionStore';
 import { PageAction } from 'Base/Action/PageAction';
 import { useEffect } from 'react';
-const PageActionHunter = observer((
+const ActionHunter = observer((
     props:{
       onPageAction:(action:PageAction)=>void,
     }
@@ -29,5 +29,5 @@ const PageActionHunter = observer((
   );
 })
 
-export default PageActionHunter;
+export default ActionHunter;
 

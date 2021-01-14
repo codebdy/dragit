@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
-import { OPEN_PAGE_ACTION, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
-import { useEffect } from 'react';
+import { OPEN_PAGE_ACTION, PageAction, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
 import { ModelStore } from 'Base/ModelTree/ModelStore';
+import ActionHunter from 'Base/Action/ActionHunter';
 
-const ListViewTableRowActionHunter = observer((
+const ListViewTableRowActionFilter = observer((
     props:{
       row:ModelStore,
       children?:any,
@@ -18,8 +18,8 @@ const ListViewTableRowActionHunter = observer((
   } = props
   const parentActionStore = useActionStore();
   const [actionStore] = useState(new ActionStore());
-  useEffect(()=>{
-    const action = actionStore?.popAction();
+
+  const hanlePageAction = (action:PageAction)=>{
     switch(action?.name){
       case REMOVE_LIST_VIEW_RECORD:
         parentActionStore?.emit({...action, id:row.model?.id})
@@ -41,15 +41,15 @@ const ListViewTableRowActionHunter = observer((
           parentActionStore?.emit(action);          
         }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[actionStore?.waitingActions.length])
+  }
 
   return (
     <ActionStoreProvider value = {actionStore}>
-     {children}
+      <ActionHunter onPageAction = {hanlePageAction}/>
+      {children}
    </ActionStoreProvider>
   );
 })
 
-export default ListViewTableRowActionHunter;
+export default ListViewTableRowActionFilter;
 

@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { useRemoveGQL } from './useRemoveGQL';
 import { useUpdateGQL } from './useUpdateGQL';
 import { IPageMutation } from 'Base/Model/IPageMutation';
-import ListViewActionHunter from './ListViewActionHunter';
+import ListViewActionFilter from './ListViewActionFilter';
 import { ID } from 'Base/Model/graphqlTypes';
 
 function creatEmpertyRows(length:number){
@@ -140,7 +140,7 @@ const ListView = observer(React.forwardRef((
   }
 
   return (
-    <ListViewActionHunter
+    <ListViewActionFilter
       onExcuteBatchRemove = {handelBatchRemove}
       onExcuteBatchUpdate = {handleBatchUpadate}
       onExcuteUpdate = {handleUpdate}
@@ -151,7 +151,7 @@ const ListView = observer(React.forwardRef((
           {children}
         </Paper>
       </ListViewStoreProvider>
-    </ListViewActionHunter>
+    </ListViewActionFilter>
   );
 }))
 

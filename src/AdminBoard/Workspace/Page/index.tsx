@@ -23,7 +23,7 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { cloneObject } from 'Utils/cloneObject';
 import { ActionStore, ActionStoreProvider } from 'Base/Action/ActionStore';
-import PageActionHunter from './PageActionHunter';
+import ActionHunter from 'Base/Action/ActionHunter';
 
 export const Page = observer((
   props:{
@@ -191,7 +191,7 @@ export const Page = observer((
     <ActionStoreProvider value = {actionStore}>
       <ModelProvider value = {modelStore}>
         <PageGQLProvider value = {gqlStore}>
-          <PageActionHunter onPageAction = {hanlePageAction} />
+          <ActionHunter onPageAction = {hanlePageAction} />
           {
             pageLayout?.map((child:RXNode<IMeta>)=>{
               return (

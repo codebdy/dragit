@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
-import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
-import { useEffect } from 'react';
+import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, PageAction, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
 import { ID } from 'Base/Model/graphqlTypes';
+import ActionHunter from 'Base/Action/ActionHunter';
 
-const ListViewActionHunter = observer((
+const ListViewActionFilter = observer((
     props:{
       onExcuteBatchUpdate:(field:string, value:any)=>void,
       onExcuteBatchRemove:()=>void,
@@ -24,8 +24,8 @@ const ListViewActionHunter = observer((
   } = props
   const parentActionStore = useActionStore();
   const [actionStore] = useState(new ActionStore());
-  useEffect(()=>{
-    const action = actionStore?.popAction();
+
+  const hanlePageAction = (action:PageAction)=>{
     switch(action?.name){
       case BATCH_REMOVE_LIST_VIEW_RECORDS:
         onBatchRemove();
@@ -60,15 +60,15 @@ const ListViewActionHunter = observer((
           parentActionStore?.emit(action);          
         }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[actionStore?.waitingActions.length])
+  }
 
   return (
     <ActionStoreProvider value = {actionStore}>
-     {children}
+      <ActionHunter onPageAction = {hanlePageAction}/>
+      {children}
    </ActionStoreProvider>
   );
 })
 
-export default ListViewActionHunter;
+export default ListViewActionFilter;
 

@@ -4,7 +4,7 @@ import { useListViewStore } from "../ListViewStore";
 import { ModelProvider } from "Base/ModelTree/ModelProvider";
 import { ModelStore } from "Base/ModelTree/ModelStore";
 import {observer} from "mobx-react";
-import ListViewTableRowActionHunter from "./ListViewTableRowActionHunter";
+import ListViewTableRowActionFilter from "./ListViewTableRowActionFilter";
 
 export interface DataRow{
   id:any,
@@ -37,7 +37,7 @@ export const ListViewBodyTableRow = (
   const {row, children} = props;
 
   return (
-    <ListViewTableRowActionHunter row={row}>
+    <ListViewTableRowActionFilter row={row}>
       <TableRow
         hover
         role="checkbox"
@@ -57,6 +57,6 @@ export const ListViewBodyTableRow = (
           }
         </ModelProvider>
       </TableRow>
-    </ListViewTableRowActionHunter>
+    </ListViewTableRowActionFilter>
   );
 }
