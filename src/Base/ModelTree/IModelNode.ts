@@ -1,6 +1,8 @@
+import { ID } from "Base/Model/graphqlTypes";
 import { IFieldStore } from "./FieldStore";
 
 export interface IModelNode{
+  id:ID;
   loading?:boolean;
   setModel:(model:any)=>void;
   getModelNode:(name:string)=>IModelNode|undefined;

@@ -1,13 +1,17 @@
+import { ID } from "Base/Model/graphqlTypes";
 import { makeAutoObservable } from "mobx";
+import createId from "Utils/createId";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 
 export class ModelStore implements IModelNode{
+  id:ID;
   model?: any;
   loading?: boolean;
   fields: Map<string,IFieldStore>;
 
   constructor(model?:any) {
+    this.id = createId();
     this.model = model;
     this.fields = new Map<string,IFieldStore>();    
     makeAutoObservable(this)

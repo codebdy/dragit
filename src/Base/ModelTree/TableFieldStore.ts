@@ -3,10 +3,11 @@ import { makeAutoObservable } from "mobx";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 import createId from "Utils/createId";
+import { ID } from "Base/Model/graphqlTypes";
 
 
 export class TableFieldStore implements IFieldStore {
-  id:number;
+  id:ID;
   defaultValue?: any;
   value?: any;
   error?: string;

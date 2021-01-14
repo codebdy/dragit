@@ -64,9 +64,9 @@ export const DebugModelTree = observer((
             defaultExpandIcon={<ChevronRightIcon />}
           >
             {
-              modelStore?.getChildren()?.map(childStore=>{
+              modelStore?.getChildren()?.map((childStore, index)=>{
                 return (
-                  <ModelTreeNode modelNode = {childStore} />
+                  <ModelTreeNode key = {childStore.id} modelNode = {childStore} />
                 )
               })
             }

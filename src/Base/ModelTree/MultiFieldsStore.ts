@@ -1,4 +1,5 @@
 import { creatId } from "Base/creatId";
+import { ID } from "Base/Model/graphqlTypes";
 import { IMeta } from "Base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IFieldStore } from "./FieldStore";
@@ -7,7 +8,7 @@ import { validate } from "./validate";
 
 //解析JXS的控件使用，可以内部使用多个字段名
 export class MultiFieldsStore implements IModelNode{
-  id:number;
+  id:ID;
   meta:IMeta;
   defaultValue?: any;
   value?: any;

@@ -4,10 +4,11 @@ import { IFieldStore } from "../../Base/ModelTree/FieldStore";
 import { IModelNode } from "../../Base/ModelTree/IModelNode";
 import { ModelFieldStore } from "Base/ModelTree/ModelFieldStore";
 import { creatId } from "Base/creatId";
+import { ID } from "Base/Model/graphqlTypes";
 
 
 export class ModelArrayFieldStore implements IFieldStore {
-  id:number;
+  id:ID;
   defaultValue?: any;
   value?: any;
   error?: string;

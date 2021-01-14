@@ -1,10 +1,11 @@
 import { creatId } from "Base/creatId";
+import { ID } from "Base/Model/graphqlTypes";
 import { IMeta } from "Base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 export class SelectFieldStore implements IFieldStore{
-  id:number;
+  id:ID;
   meta:IMeta;
   defaultValue?: any;
   value?: any;
