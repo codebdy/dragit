@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import { makeStyles, Theme, createStyles, Fab, Hidden, Drawer, Divider, IconButton, Typography, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, createStyles, Hidden, Drawer, Divider, IconButton, Typography, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { Close } from '@material-ui/icons';
 import { usePageGQLStore } from 'Base/GraphQL/PageGQLProvider';
 import { GraphQLDebugPannel } from './GraphQLDebugPannel';
 import intl from 'react-intl-universal';
 import "./style.css";
-import { useLeftDrawer, useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useThemeSettings } from 'Store/Helpers/useAppStore';
 import { DARK } from 'Store/ThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    fab: {
-      position: 'fixed',
-      bottom: theme.spacing(1),
-    },
     title: {
       margin: 0,
       display:'flex',
@@ -46,14 +42,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function GraphQLDebug(){
-  const classes = useStyles();
-  const leftDrawer = useLeftDrawer();
-  const [open, setOpen] = useState(false);
-  const fabLeft = leftDrawer.isMini ? leftDrawer.compactWidth : leftDrawer.fullWidth;
-  const handleClose = ()=>{
-    setOpen(false)
+export default function GraphQLDebug(
+  props:{
+    open?:boolean,
+    onClose?:()=>void,
   }
+){
+  const {open, onClose} = props;
+  const classes = useStyles();
   const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
@@ -73,24 +69,11 @@ export default function GraphQLDebug(){
   return (
     <ThemeProvider theme={theme}>
       <Hidden smDown>
-        {
-          !open &&
-          <Fab 
-            className={classes.fab} 
-            size="small" 
-            aria-label="GraphQL Debug" 
-            style={{left:(fabLeft + 8) + 'px'}}
-            onClick={()=>setOpen(true)} 
-          >        
-            <MdiIcon iconClass="mdi-graphql"  color={'#e10098'} />
-          </Fab>
-        }
-
-        <Drawer anchor="bottom" variant="persistent" open={open} onClose={handleClose}>
+        <Drawer anchor="bottom" variant="persistent" open={open} onClose={onClose}>
           <div className = {classes.title}>
             <MdiIcon iconClass="mdi-graphql" />        
             <Typography className={classes.titleText} variant="h6">GraphQL {intl.get('debug')}</Typography>
-            <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
+            <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
               <Close />
             </IconButton>
           </div>

@@ -16,7 +16,6 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import intl from 'react-intl-universal';
 import { RXNodeRoot } from 'Base/RXNode/Root';
 import { AUTH_DEBUG } from 'Base/authSlugs';
-import GraphQLDebug from '../GraphQLDebug';
 import { PageGQLProvider } from 'Base/GraphQL/PageGQLProvider';
 import { PageGQLStore } from 'Base/GraphQL/PageGQLStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
@@ -26,6 +25,7 @@ import { cloneObject } from 'Utils/cloneObject';
 import { ActionStore, ActionStoreProvider } from 'Base/Action/ActionStore';
 import ActionHunter from 'Base/Action/ActionHunter';
 import { usePageQueryGQL } from './usePageQueryGQL';
+import { Debug } from './Debug';
 
 export const Page = observer((
   props:{
@@ -209,7 +209,7 @@ export const Page = observer((
           </Dialog>
           {
             loggedUser.authCheck(AUTH_DEBUG) && !hideGQLDebug &&
-            <GraphQLDebug/>
+            <Debug/>
           }
         </PageGQLProvider>
       </ModelProvider>

@@ -7,11 +7,13 @@ export default{
     title:'SEO Meta',
     collapsible: true,
     marginTop:2,
-    field:'seoMeta',
   },
   children:[
     {
       name:'FormGridContainer',
+      props:{
+        field:'seoMeta',
+      },
       children:[
         {
           name: 'PortletGridItem',
@@ -74,8 +76,6 @@ export default{
             }
           ]
         },
-
-
       ],
     }
   ],
