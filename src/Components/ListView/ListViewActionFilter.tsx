@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
-import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, PageAction, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
+import { PageAction } from 'Base/Action/PageAction';
+import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from "Base/Action/ACTIONs";
 import { ID } from 'Base/Model/graphqlTypes';
 import ActionHunter from 'Base/Action/ActionHunter';
 

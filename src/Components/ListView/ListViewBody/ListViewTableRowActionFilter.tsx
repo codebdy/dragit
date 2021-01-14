@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/Action/ActionStore';
-import { OPEN_PAGE_ACTION, PageAction, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from 'Base/Action/PageAction';
+import { PageAction } from 'Base/Action/PageAction';
+import { OPEN_PAGE_ACTION, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from "Base/Action/ACTIONs";
 import { ModelStore } from 'Base/ModelTree/ModelStore';
 import ActionHunter from 'Base/Action/ActionHunter';
 

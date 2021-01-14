@@ -1,4 +1,4 @@
-import { OPEN_PAGE_ACTION } from "Base/Action/PageAction";
+import { OPEN_PAGE_ACTION } from "Base/Action/ACTIONs";
 
 export default{
   name: 'GridRow',

@@ -1,4 +1,4 @@
-import {GO_BACK_ACTION} from "Base/Action/PageAction";
+import { GO_BACK_ACTION } from "Base/Action/ACTIONs";
 
 export default {
   layout:[
