@@ -82,6 +82,13 @@ export class MultiFieldsStore implements IModelNode{
   getFieldStore(fieldName:string){
     return undefined;
   }
+
+  removeFieldStore(fieldName:string){  
+  }
+
+  getLabel(){
+    return `Multi Field`
+  }
 }
 
 

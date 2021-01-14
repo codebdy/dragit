@@ -1,9 +1,9 @@
-import { IMeta } from "Base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 import { creatId } from "Base/creatId";
 import { ID } from "Base/Model/graphqlTypes";
+import { IMetaProps } from "Base/Model/IMeta";
 
 
 export class ModelFieldStore implements IFieldStore{
@@ -11,12 +11,12 @@ export class ModelFieldStore implements IFieldStore{
   defaultValue?: any;
   value?: any;
   error?: string;
-  meta?: IMeta;
+  metaProps?: IMetaProps;
   loading?: boolean;
   subFields: Map<string,IFieldStore>;
-  constructor(meta?: IMeta) {
+  constructor(metaProps?: IMetaProps) {
     this.id = creatId();
-    this.meta = meta;
+    this.metaProps = metaProps;
     this.subFields = new Map<string,IFieldStore>();
     makeAutoObservable(this);
   }
@@ -27,6 +27,10 @@ export class ModelFieldStore implements IFieldStore{
 
   getFieldStore(fieldName:string){
     return this.subFields.get(fieldName)
+  }
+
+  removeFieldStore(fieldName:string){
+    this.subFields.delete(fieldName);
   }
 
   clearDirty(){
@@ -57,7 +61,7 @@ export class ModelFieldStore implements IFieldStore{
   }
 
   setModel(model: any) {
-    const fieldName = this.meta?.props?.field;
+    const fieldName = this.metaProps?.props?.field;
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.subFields.forEach(fieldStore=>{
@@ -68,7 +72,7 @@ export class ModelFieldStore implements IFieldStore{
   toFieldsGQL() {
     let subGql = '';
     this.subFields.forEach(fieldStore=>{
-      subGql = subGql + ` ${fieldStore.meta?.props?.field} ${fieldStore.toFieldsGQL()} `
+      subGql = subGql + ` ${fieldStore.metaProps?.props?.field} ${fieldStore.toFieldsGQL()} `
     })
 
     return subGql ? ` {id ${subGql}}` :  `  `;
@@ -81,7 +85,7 @@ export class ModelFieldStore implements IFieldStore{
   toInputValue(){
     let rtValue = this.defaultValue?.id ? {id:this.defaultValue?.id} as any : {} as any;
     this.subFields?.forEach((fieldStore, key)=>{
-      if(!fieldStore.meta?.props?.onlyShow){
+      if(!fieldStore.metaProps?.props?.onlyShow){
         rtValue[key] = fieldStore.toInputValue();
       }
     })
@@ -118,5 +122,9 @@ export class ModelFieldStore implements IFieldStore{
     })
 
     return children;
+  }
+
+  getLabel(){
+    return `Submodel : ${this.metaProps?.field}`
   }
 }

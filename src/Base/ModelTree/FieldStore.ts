@@ -1,12 +1,12 @@
 import { creatId } from "Base/creatId";
 import { ID } from "Base/Model/graphqlTypes";
-import { IMeta } from "Base/Model/IMeta";
+import { IMetaProps } from "Base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IModelNode } from "./IModelNode";
 import { validate } from "./validate";
 
 export interface IFieldStore extends IModelNode{
-  meta?:IMeta;
+  metaProps?:IMetaProps;
   defaultValue?: any;
   value?: any;
   error?: string;
@@ -19,16 +19,16 @@ export interface IFieldStore extends IModelNode{
 
 export class FieldStore implements IFieldStore{
   id:ID;
-  meta:IMeta;
+  metaProps:IMetaProps;
   defaultValue?: any;
   value?: any;
   error?: string;
   loading?: boolean;
   dirty?: boolean;
-  constructor(meta:IMeta) {
+  constructor(metaProps:IMetaProps) {
     this.id = creatId();
     makeAutoObservable(this);
-    this.meta = meta;
+    this.metaProps = metaProps;
   }
 
   setLoading(loading?:boolean){
@@ -45,12 +45,12 @@ export class FieldStore implements IFieldStore{
   
   toFieldsGQL() {
 
-    const gqlStr = this.meta.props?.graphiQL ? this.meta.props.graphiQL.replace('$field', this.meta?.props?.field) : this.meta?.props?.field;
+    const gqlStr = this.metaProps.props?.graphiQL ? this.metaProps.props.graphiQL.replace('$field', this.metaProps?.props?.field) : this.metaProps?.props?.field;
     return ` ${gqlStr} `;
   }
 
   setModel(model: any) {
-    const fieldName = this.meta.props?.field;
+    const fieldName = this.metaProps.props?.field;
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.value = fieldValue;
@@ -74,7 +74,7 @@ export class FieldStore implements IFieldStore{
   }
 
   validate(){
-    this.error = validate(this.value, this.meta?.props?.rule);
+    this.error = validate(this.value, this.metaProps?.props?.rule);
     return !this.error;
   }
 
@@ -93,6 +93,13 @@ export class FieldStore implements IFieldStore{
 
   getFieldStore(fieldName:string){
     return undefined;
+  }
+
+  removeFieldStore(fieldName:string){  
+  }
+
+  getLabel(){
+    return `Field : ${this.metaProps?.field}`;
   }
 }
 

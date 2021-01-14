@@ -12,17 +12,21 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ModelTreeNode(
   props:{
-    modelNode?: IModelNode,
+    modelNode: IModelNode,
   }
 ){
   const {modelNode} = props;
   const classes = useStyles();
 
   return (
-    <TreeItem nodeId="1" label="Applications">
-      <TreeItem nodeId="2" label="Calendar" />
-      <TreeItem nodeId="3" label="Chrome" />
-      <TreeItem nodeId="4" label="Webstorm" />
+    <TreeItem nodeId = {modelNode.id} label={modelNode.getLabel()}>
+      {
+        modelNode.getChildren()?.map(childStore=>{
+          return(
+            <ModelTreeNode key = {childStore.id} modelNode = {childStore} />
+          )
+        })
+      }
     </TreeItem>
   )
 }

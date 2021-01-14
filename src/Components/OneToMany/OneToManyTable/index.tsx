@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead
 import CloseIcon from '@material-ui/icons/Close';
 import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { IMeta } from 'Base/Model/IMeta';
-import ComponentRender from 'Base/ComponentRender';
+import { ComponentRender } from 'Base/ComponentRender';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';

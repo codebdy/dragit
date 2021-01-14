@@ -7,7 +7,7 @@ import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { useActionStore } from './Action/ActionStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 
-export default function ComponentRender(
+export function ComponentRender(
   props:{
     component:RXNode<IMeta>
   }){

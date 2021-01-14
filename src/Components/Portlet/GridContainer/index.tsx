@@ -20,7 +20,7 @@ const FormGridContainer = React.forwardRef((props:any, ref:any) => {
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getFieldStore(field);
   useEffect(()=>{
-    modelStore?.setFieldStore(field,  new ModelFieldStore({name:field, props}));
+    modelStore?.setFieldStore(field,  new ModelFieldStore(props));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field])
   

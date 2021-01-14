@@ -87,4 +87,11 @@ export class ModelArrayFieldStore implements IFieldStore {
   getChildren(){
     return [];
   }
+
+  getLabel(){
+    return 'Table:' + this.meta?.props?.field
+  }
+
+  removeFieldStore(fieldName:string){  
+  }
 }

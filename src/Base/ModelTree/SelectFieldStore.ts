@@ -88,6 +88,13 @@ export class SelectFieldStore implements IFieldStore{
   getFieldStore(fieldName:string){
     return undefined;
   }
+
+  removeFieldStore(fieldName:string){  
+  }
+
+  getLabel(){
+    return `Field:${this.meta?.props?.field}-${this.meta?.name}`;
+  }
 }
 
 

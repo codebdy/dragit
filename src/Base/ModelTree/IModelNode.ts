@@ -17,4 +17,6 @@ export interface IModelNode{
   toInputValue:()=>any;
   setFieldStore:(fieldName:string, fieldStore:IFieldStore)=>void;
   getFieldStore:(fieldName:string)=>IFieldStore|undefined;
+  removeFieldStore:(fieldName:string)=>void;
+  getLabel:()=>string;
 }

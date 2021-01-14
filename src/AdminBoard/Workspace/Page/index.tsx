@@ -3,7 +3,7 @@ import {observer} from "mobx-react";
 import { IPage } from 'Base/Model/IPage';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
-import ComponentRender from 'Base/ComponentRender';
+import { ComponentRender } from 'Base/ComponentRender';
 import { PageAction } from 'Base/Action/PageAction';
 import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/Action/ACTIONs";
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';

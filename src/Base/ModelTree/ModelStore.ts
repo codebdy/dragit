@@ -53,6 +53,10 @@ export class ModelStore implements IModelNode{
     this.fields.get(feildName)?.setLoading(loading);
   }
 
+  removeFieldStore(fieldName:string){  
+    this.fields.delete(fieldName);
+  }
+
   setModel(model:any){
     this.model = model
     console.log('setModel', model)
@@ -86,7 +90,7 @@ export class ModelStore implements IModelNode{
   toInputValue(){
     let rtValue = this.model?.id ? {id:this.model?.id} as any : {} as any;
     this.fields?.forEach((fieldStore, key)=>{
-      if(!fieldStore.meta?.props?.onlyShow){
+      if(!fieldStore.metaProps?.onlyShow){
         rtValue[key] = fieldStore.toInputValue();        
       }
     })
@@ -123,5 +127,9 @@ export class ModelStore implements IModelNode{
     })
 
     return children;
+  }
+
+  getLabel(){
+    return `Model:${this.model?.id}`
   }
 }

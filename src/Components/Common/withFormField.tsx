@@ -6,9 +6,8 @@ import { useFieldStore } from "./useFieldStore";
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
     const {field, onlyShow, forwardedRef, empertyValue, rule, helperText, graphiQL, ...rest} = props;
-    const fieldStore = useFieldStore({name:field, props});
+    const fieldStore = useFieldStore(props);
     const modelStore =  useModelStore();
-
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
       fieldStore?.setValue(newValue);
