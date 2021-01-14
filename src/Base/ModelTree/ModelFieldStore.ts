@@ -61,7 +61,7 @@ export class ModelFieldStore implements IFieldStore{
   }
 
   setModel(model: any) {
-    const fieldName = this.metaProps?.props?.field;
+    const fieldName = this.metaProps?.field;
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.subFields.forEach(fieldStore=>{
@@ -72,7 +72,7 @@ export class ModelFieldStore implements IFieldStore{
   toFieldsGQL() {
     let subGql = '';
     this.subFields.forEach(fieldStore=>{
-      subGql = subGql + ` ${fieldStore.metaProps?.props?.field} ${fieldStore.toFieldsGQL()} `
+      subGql = subGql + ` ${fieldStore.metaProps?.field} ${fieldStore.toFieldsGQL()} `
     })
 
     return subGql ? ` {id ${subGql}}` :  `  `;
@@ -85,7 +85,7 @@ export class ModelFieldStore implements IFieldStore{
   toInputValue(){
     let rtValue = this.defaultValue?.id ? {id:this.defaultValue?.id} as any : {} as any;
     this.subFields?.forEach((fieldStore, key)=>{
-      if(!fieldStore.metaProps?.props?.onlyShow){
+      if(!fieldStore.metaProps?.onlyShow){
         rtValue[key] = fieldStore.toInputValue();
       }
     })

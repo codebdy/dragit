@@ -1,25 +1,25 @@
 import { creatId } from "Base/creatId";
 import { ID } from "Base/Model/graphqlTypes";
-import { IMeta } from "Base/Model/IMeta";
+import { IMetaProps } from "Base/Model/IMeta";
 import { makeAutoObservable, toJS } from "mobx";
 import { IFieldStore } from "./FieldStore";
 import { IModelNode } from "./IModelNode";
 export class SelectFieldStore implements IFieldStore{
   id:ID;
-  meta:IMeta;
+  metaProps:IMetaProps;
   defaultValue?: any;
   value?: any;
   error?: string;
   loading?: boolean;
   dirty?:boolean;
   
-  constructor(meta:IMeta) {
+  constructor(metaProps:IMetaProps) {
     this.id = creatId();
     makeAutoObservable(this);
-    this.meta = meta;
+    this.metaProps = metaProps;
   }
   setModel(model: any) {
-    const fieldName = this.meta.props?.field;
+    const fieldName = this.metaProps?.field;
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.value = fieldValue;
@@ -43,8 +43,8 @@ export class SelectFieldStore implements IFieldStore{
   }
 
   getItemKey(){
-    let itemKey = this.meta.props?.itemKey;
-    itemKey = this.meta.props?.query ? itemKey : 'slug';
+    let itemKey = this.metaProps?.itemKey;
+    itemKey = this.metaProps?.query ? itemKey : 'slug';
     return itemKey ? itemKey : 'id';
   }
 
@@ -93,7 +93,7 @@ export class SelectFieldStore implements IFieldStore{
   }
 
   getLabel(){
-    return `Field:${this.meta?.props?.field}-${this.meta?.name}`;
+    return `Field:${this.metaProps?.field}-${this.metaProps?.name}`;
   }
 }
 

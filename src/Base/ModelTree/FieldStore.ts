@@ -45,12 +45,12 @@ export class FieldStore implements IFieldStore{
   
   toFieldsGQL() {
 
-    const gqlStr = this.metaProps.props?.graphiQL ? this.metaProps.props.graphiQL.replace('$field', this.metaProps?.props?.field) : this.metaProps?.props?.field;
+    const gqlStr = this.metaProps?.graphiQL ? this.metaProps.graphiQL.replace('$field', this.metaProps?.field) : this.metaProps?.field;
     return ` ${gqlStr} `;
   }
 
   setModel(model: any) {
-    const fieldName = this.metaProps.props?.field;
+    const fieldName = this.metaProps?.field;
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.value = fieldValue;
@@ -74,7 +74,7 @@ export class FieldStore implements IFieldStore{
   }
 
   validate(){
-    this.error = validate(this.value, this.metaProps?.props?.rule);
+    this.error = validate(this.value, this.metaProps?.rule);
     return !this.error;
   }
 
