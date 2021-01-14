@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:theme.spacing(1),
       display:'flex',
       flexFlow:'row',
-      minWidth:'290px',
+      minWidth:'280px',
     },
   }),
 );

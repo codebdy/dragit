@@ -46,6 +46,11 @@ export const Page = observer((
   const appStore = useAppStore();
   const loggedUser = useLoggedUser();
 
+  useEffect(()=>{
+    modelStore.fields.clear();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[page, pageParams])
+
   const queryGQL = usePageQueryGQL(modelStore, gqlStore, queryName, pageParams);
   
   const createMutationGQL = (mutation?: IPageMutation)=>{
