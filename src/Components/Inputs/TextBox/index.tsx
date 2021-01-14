@@ -4,7 +4,7 @@ import withFormField from 'Components/Common/withFormField';
 import React from 'react';
 
 const TexBox = React.forwardRef((props:any, ref:any)=>{
-  const {shrinkLabel, type, onChange, ...rest} = props;
+  const {value, shrinkLabel, type, onChange, ...rest} = props;
 
   const handleOnchange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     let newValue = event.target.value as string;
@@ -21,6 +21,7 @@ const TexBox = React.forwardRef((props:any, ref:any)=>{
       ref={ref}
       type = {type}
       onChange = {handleOnchange}
+      value = {value||''}
       {...rest} 
       InputLabelProps = {
         shrinkLabel ? 

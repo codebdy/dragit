@@ -25,6 +25,7 @@ import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { cloneObject } from 'Utils/cloneObject';
 import { ActionStore, ActionStoreProvider } from 'Base/Action/ActionStore';
 import ActionHunter from 'Base/Action/ActionHunter';
+import { usePageQueryGQL } from './usePageQueryGQL';
 
 export const Page = observer((
   props:{
@@ -41,27 +42,18 @@ export const Page = observer((
   const [modelStore] = useState(new ModelStore());  
   const [gqlStore] = useState(new PageGQLStore());
   const [mutation, setMutation] = useState<IPageMutation>();
-  const queryName = page?.schema?.query?.name;
+  const queryName = page?.schema?.query;
   const appStore = useAppStore();
   const loggedUser = useLoggedUser();
+
+  const queryGQL = usePageQueryGQL(modelStore, gqlStore, queryName, pageParams);
   
-  const createQueryGQL = ()=>{
-    const QUERY_GQL = gql`
-      query ($id:ID){
-        ${queryName}(id:$id)
-          ${modelStore.toFieldsGQL()}
-        
-      }
-    `;
-    return QUERY_GQL;
-  }
   const createMutationGQL = (mutation?: IPageMutation)=>{
     if(!mutation){
       return gql`mutation{emperty}`;
     }
 
-    const refreshNode = modelStore.getModelNode(mutation?.refreshNode)
-    
+    const refreshNode = modelStore.getModelNode(mutation?.refreshNode)    
     const gqlText = `
         mutation ($${mutation?.variableName}:${mutation?.variableType}){
         ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName})
@@ -73,9 +65,10 @@ export const Page = observer((
     return MUTATION_GQL;
   }
 
-  const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(createQueryGQL(), {
-    variables: { ...page?.schema?.query?.variables, id: pageParams?.dataId},
-    notifyOnNetworkStatusChange: true
+  const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(gql`${queryGQL.gql}`, {
+    variables: { ...queryGQL.variables },
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy:'no-cache'
   });
 
   const [excuteMutation, {error:muetationError}] = useMutation(
@@ -139,7 +132,6 @@ export const Page = observer((
     else{
       modelStore.setModel(undefined);
     }
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 

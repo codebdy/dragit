@@ -14,7 +14,7 @@ export interface IPageSchema{
   auths?:string[],
   isFormPage?:boolean,
   refreshAppInfo?:boolean,
-  query?:IQuery, 
+  query?:string, 
 }
 
 export interface IPage{

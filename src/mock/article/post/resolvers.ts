@@ -5,7 +5,7 @@ var idSeed = 1000;
 
 export const post = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-
+  console.log('mock post', args);
   for(var i = 0; i < articlesData.length; i++){
     //ID会被转成String
     // eslint-disable-next-line eqeqeq
