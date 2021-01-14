@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { TreeItem } from '@material-ui/lab';
 import { IModelNode } from 'Base/ModelTree/IModelNode';
+import { ID } from 'Base/Model/graphqlTypes';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,10 +17,27 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ModelTreeNode(
   props:{
     modelNode: IModelNode,
+    selected:ID,
+    onSelect:(selected:ID)=>void,
   }
 ){
-  const {modelNode} = props;
+  const {selected, onSelect, modelNode} = props;
   const classes = useStyles();
+  useEffect(()=>{
+    modelNode.setSelected(selected === modelNode.id)
+    return ()=>{
+      modelNode.setSelected(false);
+    }
+  },[selected, modelNode])
+
+  const handleClick = ()=>{
+    if(modelNode.id === selected){
+      onSelect('');
+    }
+    else{
+      onSelect(modelNode.id);      
+    }
+  }
 
   return (
     <TreeItem 
@@ -26,11 +45,17 @@ export default function ModelTreeNode(
       label={
         <div className = {classes.label}>{modelNode.getLabel()}</div>
       }
+      onClick = {handleClick}
     >
       {
         modelNode.getChildren()?.map(childStore=>{
           return(
-            <ModelTreeNode key = {childStore.id} modelNode = {childStore} />
+            <ModelTreeNode 
+              key = {childStore.id} 
+              selected = {selected}
+              modelNode = {childStore} 
+              onSelect = {onSelect} 
+            />
           )
         })
       }

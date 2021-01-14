@@ -14,6 +14,7 @@ export class MultiFieldsStore implements IModelNode{
   value?: any;
   error?: string;
   loading?: boolean;
+  isSelected?: boolean;
   dirty?: boolean;
   constructor(meta:IMeta) {
     this.id = creatId();
@@ -88,6 +89,10 @@ export class MultiFieldsStore implements IModelNode{
 
   getLabel(){
     return `Multi Field`
+  }
+
+  setSelected(selected:boolean){
+    this.isSelected = selected;
   }
 }
 

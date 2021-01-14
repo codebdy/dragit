@@ -11,6 +11,7 @@ export class SelectFieldStore implements IFieldStore{
   value?: any;
   error?: string;
   loading?: boolean;
+  isSelected?: boolean;
   dirty?:boolean;
   
   constructor(metaProps:IMetaProps) {
@@ -94,6 +95,10 @@ export class SelectFieldStore implements IFieldStore{
 
   getLabel(){
     return `Field:${this.metaProps?.field}-${this.metaProps?.name}`;
+  }
+
+  setSelected(selected:boolean){
+    this.isSelected = selected;
   }
 }
 

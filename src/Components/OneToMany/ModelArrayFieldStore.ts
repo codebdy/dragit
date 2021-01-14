@@ -14,6 +14,7 @@ export class ModelArrayFieldStore implements IFieldStore {
   error?: string;
   metaProps?: IMetaProps;
   loading?: boolean;
+  isSelected?: boolean;
   dirty?: boolean;
   rows:Array<ModelFieldStore> = [];
   schemaRow?:ModelFieldStore;
@@ -93,5 +94,9 @@ export class ModelArrayFieldStore implements IFieldStore {
   }
 
   removeFieldStore(fieldName:string){  
+  }
+
+  setSelected(selected:boolean){
+    this.isSelected = selected;
   }
 }

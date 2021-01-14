@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Drawer, Divider, IconButton, Typography } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { Close } from '@material-ui/icons';
@@ -44,6 +44,7 @@ export const DebugModelTree = observer((
   }
 )=>{
   const {open, onClose} = props;
+  const [selected, setSelected] = useState('');
   const classes = useStyles();
   const modelStore = useModelStore();
 
@@ -62,11 +63,17 @@ export const DebugModelTree = observer((
           <TreeView
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
+            selected = {selected}
           >
             {
               modelStore?.getChildren()?.map((childStore, index)=>{
                 return (
-                  <ModelTreeNode key = {childStore.id} modelNode = {childStore} />
+                  <ModelTreeNode 
+                    key = {childStore.id} 
+                    modelNode = {childStore} 
+                    selected = {selected}
+                    onSelect = {(selected)=>setSelected(selected)}
+                  />
                 )
               })
             }

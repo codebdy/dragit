@@ -19,6 +19,7 @@ export interface IFieldStore extends IModelNode{
 
 export class FieldStore implements IFieldStore{
   id:ID;
+  isSelected?:boolean;
   metaProps:IMetaProps;
   defaultValue?: any;
   value?: any;
@@ -100,6 +101,10 @@ export class FieldStore implements IFieldStore{
 
   getLabel(){
     return `Field : ${this.metaProps?.field}`;
+  }
+
+  setSelected(selected:boolean){
+    this.isSelected = selected;
   }
 }
 

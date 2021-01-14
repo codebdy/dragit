@@ -13,6 +13,7 @@ export class ModelFieldStore implements IFieldStore{
   error?: string;
   metaProps?: IMetaProps;
   loading?: boolean;
+  isSelected?: boolean;
   subFields: Map<string,IFieldStore>;
   constructor(metaProps?: IMetaProps) {
     this.id = creatId();
@@ -125,5 +126,9 @@ export class ModelFieldStore implements IFieldStore{
 
   getLabel(){
     return `Submodel : ${this.metaProps?.field}`
+  }
+
+  setSelected(selected:boolean){
+    this.isSelected = selected;
   }
 }

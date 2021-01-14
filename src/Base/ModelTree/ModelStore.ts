@@ -8,6 +8,7 @@ export class ModelStore implements IModelNode{
   id:ID;
   model?: any;
   loading?: boolean;
+  isSelected?: boolean;
   fields: Map<string,IFieldStore>;
 
   constructor(model?:any) {
@@ -133,4 +134,7 @@ export class ModelStore implements IModelNode{
     return `Model:${this.model?.id}`
   }
 
+  setSelected(selected:boolean){
+    this.isSelected = selected;
+  }
 }

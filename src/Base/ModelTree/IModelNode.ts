@@ -4,6 +4,7 @@ import { IFieldStore } from "./FieldStore";
 export interface IModelNode{
   id:ID;
   loading?:boolean;
+  isSelected?:boolean;
   setModel:(model:any)=>void;
   getModelNode:(name:string)=>IModelNode|undefined;
   updateDefaultValue:()=>void;
@@ -19,4 +20,6 @@ export interface IModelNode{
   getFieldStore:(fieldName:string)=>IFieldStore|undefined;
   removeFieldStore:(fieldName:string)=>void;
   getLabel:()=>string;
+
+  setSelected:(selected:boolean)=>void;
 }
