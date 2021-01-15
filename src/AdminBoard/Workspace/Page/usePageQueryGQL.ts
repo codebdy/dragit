@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { ModelStore } from "Base/ModelTree/ModelStore";
 import { IPageJumper } from "Base/Model/IPageJumper";
-import { PageGQLStore } from "Base/GraphQL/PageGQLStore";
+import { PageStore } from "Base/PageUtlis/PageStore";
 
-export function usePageQueryGQL( modelStore:ModelStore, pageGQLStore:PageGQLStore, queryName?:string, pageParams?:IPageJumper ){
+export function usePageQueryGQL( modelStore:ModelStore, pageStore:PageStore, queryName?:string, pageParams?:IPageJumper ){
    const createQueryGQL = ()=>{
     const GQL_STRING = `
       query ($id:ID){
@@ -21,9 +21,9 @@ export function usePageQueryGQL( modelStore:ModelStore, pageGQLStore:PageGQLStor
 
   useEffect(()=>{
     if(queryName){
-      pageGQLStore?.addGql(queryGQL);
+      pageStore?.addGql(queryGQL);
       return ()=>{
-        pageGQLStore?.removeGql(queryGQL);
+        pageStore?.removeGql(queryGQL);
       }      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

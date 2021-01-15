@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import {observer} from "mobx-react";
-import { PageAction } from 'Base/Action/PageAction';
-import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/Action/ACTIONs";
+import { PageAction } from 'Base/PageUtlis/PageAction';
+import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/PageUtlis/ACTIONs";
 import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
 import { IPageJumper } from 'Base/Model/IPageJumper';
@@ -54,7 +54,7 @@ export const PopupStyleModule = observer((
         page={page}
         onPageAction = {hanlePageAction}
         pageParams = {pageParams}
-        hideGQLDebug = {!!popupPage}
+        hideDebug = {!!popupPage}
       />
       <PopupPage 
         page = {popupPage}

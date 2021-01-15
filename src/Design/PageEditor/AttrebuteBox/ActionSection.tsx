@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
 import { FormControl,  InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { AttributeRow } from './AttributeRow';
-import { PageAction } from 'Base/Action/PageAction';
-import { GO_BACK_ACTION, OPEN_PAGE_ACTION, SUBMIT_MUTATION } from "Base/Action/ACTIONs";
+import { PageAction } from 'Base/PageUtlis/PageAction';
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, SUBMIT_MUTATION } from "Base/PageUtlis/ACTIONs";
 import intl from 'react-intl-universal';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';

@@ -4,7 +4,7 @@ import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
-import { useActionStore } from './Action/ActionStore';
+import { useActionStore } from './PageUtlis/ActionStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 
 export function ComponentRender(

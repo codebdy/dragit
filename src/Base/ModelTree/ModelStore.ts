@@ -18,6 +18,10 @@ export class ModelStore implements IModelNode{
     makeAutoObservable(this)
   }
 
+  clearFields(){
+    this.fields.clear();
+  }
+
   setFieldStore(fieldName:string, fieldStore:IFieldStore){
     this.fields.set(fieldName, fieldStore)
     fieldStore.setModel(this.model);

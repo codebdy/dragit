@@ -1,11 +1,11 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
+import { usePageStore } from "Base/PageUtlis/PageStore";
 import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import { usePageGQLStore } from "Base/GraphQL/PageGQLProvider";
 import { ListViewStore } from "./ListViewStore";
 
 export function useQueryGQL( listViewStore:ListViewStore, query?:string ){
-  const pageGQLStore = usePageGQLStore();
+  const pageStore = usePageStore();
 
   const createQueryGQL = ()=>{
     const GQL_STRING = `
@@ -31,9 +31,9 @@ export function useQueryGQL( listViewStore:ListViewStore, query?:string ){
   const [queryGQL] = useState(new GraphQLStore(intl.get('data-query'), 'ListView', createQueryGQL()));
 
   useEffect(()=>{
-    pageGQLStore?.addGql(queryGQL);
+    pageStore?.addGql(queryGQL);
     return ()=>{
-      pageGQLStore?.removeGql(queryGQL);
+      pageStore?.removeGql(queryGQL);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])

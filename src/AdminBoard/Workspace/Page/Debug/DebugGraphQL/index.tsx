@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, Drawer, Divider, IconButton, Typography } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { Close } from '@material-ui/icons';
-import { usePageGQLStore } from 'Base/GraphQL/PageGQLProvider';
 import { GraphQLDebugPannel } from './GraphQLDebugPannel';
 import intl from 'react-intl-universal';
 import "./style.css";
+import { usePageStore } from 'Base/PageUtlis/PageStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +41,7 @@ export default function GraphQLDebug(
   const {open, onClose} = props;
   const classes = useStyles();
 
-  const pageGqlStore = usePageGQLStore();
+  const pageStore = usePageStore();
 
   return (
     <Drawer anchor="bottom" variant="persistent" open={open} onClose={onClose}>
@@ -54,7 +54,7 @@ export default function GraphQLDebug(
       </div>
       <Divider />
       <div className={classes.content}> 
-        <GraphQLDebugPannel gqls = {pageGqlStore?.gqls} />
+        <GraphQLDebugPannel gqls = {pageStore?.gqls} />
       </div>
     </Drawer>
   )

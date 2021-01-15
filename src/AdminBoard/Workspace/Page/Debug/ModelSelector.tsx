@@ -33,7 +33,6 @@ export const ModelSelector = observer(() => {
   }  
   
   const handleScroll = ()=>{
-    console.log('Scroll')
     reComputeRect();
   }
 

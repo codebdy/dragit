@@ -1,12 +1,12 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import { usePageGQLStore } from "Base/GraphQL/PageGQLProvider";
 import { ListViewStore } from "./ListViewStore";
 import { IPageMutation } from "Base/Model/IPageMutation";
+import { usePageStore } from "Base/PageUtlis/PageStore";
 
 export function useUpdateGQL( listViewStore:ListViewStore, update?:IPageMutation ){
-  const pageGQLStore = usePageGQLStore();
+  const pageStore = usePageStore();
 
   const createQueryGQL = ()=>{
     const GQL_STRING = `
@@ -22,9 +22,9 @@ export function useUpdateGQL( listViewStore:ListViewStore, update?:IPageMutation
   const [queryGQL] = useState(new GraphQLStore(intl.get('data-update'), 'ListView', createQueryGQL()));
 
   useEffect(()=>{
-    pageGQLStore?.addGql(queryGQL);
+    pageStore?.addGql(queryGQL);
     return ()=>{
-      pageGQLStore?.removeGql(queryGQL);
+      pageStore?.removeGql(queryGQL);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
