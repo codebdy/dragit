@@ -47,6 +47,7 @@ export const Page = observer((
   const loggedUser = useLoggedUser();
 
   useEffect(()=>{
+    appStore.setSelectModelComponentRxid('');
     modelStore.fields.clear();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageParams])
