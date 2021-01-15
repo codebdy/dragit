@@ -51,6 +51,7 @@ export const Page = observer((
   useEffect(()=>{
     appStore.setSelectModelComponentRxid('');
     modelStore.clearFields();
+    pageStore.clear();
     pageStore.addComponentObserver(gqlGather);
     return()=>{
       pageStore.removeComponentObserver(gqlGather);

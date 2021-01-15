@@ -40,6 +40,11 @@ export class PageStore{
       comObserver.onDestory(node)
     })
   }
+
+  clear(){
+    this.gqls = [];
+    this.componentObservers = [];
+  }
 }
 
 export const PageStoreContext = createContext<PageStore|undefined>(undefined);
