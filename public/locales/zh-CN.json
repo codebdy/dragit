@@ -292,6 +292,7 @@
 
     "query":"查询",
     "mutation":"更改",
+    "page-mutaion":"数据提交",
     "result":"结果",
     "input-graphql-error":"输入错误",
     "graphiqL":"GraphQL语句",

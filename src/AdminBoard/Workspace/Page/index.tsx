@@ -3,7 +3,7 @@ import {observer} from "mobx-react";
 import { IPage } from 'Base/Model/IPage';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
-import { ComponentRender } from 'Base/ComponentRender';
+import { ComponentRender } from 'Base/PageUtlis/ComponentRender';
 import { PageAction } from 'Base/PageUtlis/PageAction';
 import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtlis/ACTIONs";
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
@@ -25,6 +25,8 @@ import ActionHunter from 'Base/PageUtlis/ActionHunter';
 import { usePageQueryGQL } from './usePageQueryGQL';
 import { Debug } from './Debug';
 import { PageStore, PageStoreProvider } from 'Base/PageUtlis/PageStore';
+import { PageMutationGraphiQLGather } from './PageMutationGraphiQLGather';
+import { createMutationGQL } from './createMutationGQL';
 
 export const Page = observer((
   props:{
@@ -41,6 +43,7 @@ export const Page = observer((
   const [modelStore] = useState(new ModelStore());  
   const [pageStore] = useState(new PageStore());
   const [mutation, setMutation] = useState<IPageMutation>();
+  const [gqlGather] = useState(new PageMutationGraphiQLGather());
   const queryName = page?.schema?.query;
   const appStore = useAppStore();
   const loggedUser = useLoggedUser();
@@ -48,26 +51,15 @@ export const Page = observer((
   useEffect(()=>{
     appStore.setSelectModelComponentRxid('');
     modelStore.clearFields();
+    pageStore.addComponentObserver(gqlGather);
+    return()=>{
+      pageStore.removeComponentObserver(gqlGather);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageParams])
 
   const queryGQL = usePageQueryGQL(modelStore, pageStore, queryName, pageParams);
   
-  const createMutationGQL = (mutation?: IPageMutation)=>{
-    if(!mutation){
-      return gql`mutation{emperty}`;
-    }
-
-    const refreshNode = modelStore.getModelNode(mutation?.refreshNode)    
-    const gqlText = `
-        mutation ($${mutation?.variableName}:${mutation?.variableType}){
-        ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName})
-          ${refreshNode?.toFieldsGQL()}
-      }
-    `
-    return gqlText;
-  }
-
   const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryGQL.variables },
     notifyOnNetworkStatusChange: true,
@@ -75,7 +67,7 @@ export const Page = observer((
   });
 
   const [excuteMutation, {error:muetationError}] = useMutation(
-    gql`${createMutationGQL(mutation)}`,
+    gql`${createMutationGQL(mutation, modelStore)}`,
     {
       onCompleted:(data)=>{
         if(mutation){
@@ -88,7 +80,6 @@ export const Page = observer((
           }
 
           submitNode?.clearDirty();
-          console.log('mutation result', data, mutation.name)
           setMutation(undefined);
         }
 
@@ -104,7 +95,6 @@ export const Page = observer((
     if(mutation){
       const submitNode = modelStore.getModelNode(mutation.submitNode)
       const refreshNode = modelStore.getModelNode(mutation?.refreshNode) 
-      console.log('mutation variables', mutation.submitNode,modelStore, submitNode?.toInputValue());
       refreshNode?.setLoading(true);
       excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}}); 
     }
@@ -127,6 +117,13 @@ export const Page = observer((
     modelStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryLoading]);
+
+  useEffect(()=>{
+    gqlGather.registerGqls(pageStore, modelStore);
+    return()=>{
+      gqlGather.unRegisterGqls(pageStore);
+    }
+  })
 
   useEffect(()=>{
     if(data && queryName){

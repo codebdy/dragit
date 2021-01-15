@@ -1,5 +1,5 @@
 import { TableContainer, Table, TableBody, TableRow } from '@material-ui/core';
-import { ComponentRender } from 'Base/ComponentRender';
+import { ComponentRender } from 'Base/PageUtlis/ComponentRender';
 import { IMeta } from 'Base/Model/IMeta';
 import { ModelProvider } from 'Base/ModelTree/ModelProvider';
 import { RXNode } from 'Base/RXNode/RXNode';
