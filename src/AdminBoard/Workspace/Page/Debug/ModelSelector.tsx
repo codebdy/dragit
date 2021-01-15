@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       position: 'fixed',
       outline:'dashed green 2px',
+      pointerEvents:'none',
     },
 
   }),
