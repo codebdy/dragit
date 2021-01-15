@@ -39,4 +39,9 @@ export class PageMutationGraphiQLGather implements IComponentObserver{
       pageStore.removeGql(child.gqlStore)
     })
   }
+
+  refreshVariables(pageStore:PageStore, modelStore:ModelStore){
+    this.unRegisterGqls(pageStore);
+    this.registerGqls(pageStore, modelStore);
+  }
 }

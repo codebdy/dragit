@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, Grid, Typography, Fab, CircularProgress } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Grid, Typography, Fab, CircularProgress, IconButton } from '@material-ui/core';
 import { GraphQLStore } from 'Base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react';
 import {GQLList} from './GQLList';
@@ -61,9 +61,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const GraphQLDebugPannel = observer((props:{
-  gqls?:Array<GraphQLStore>
+  gqls?:Array<GraphQLStore>,
+  onRefreshVariables?:()=>void
 })=>{
-  const {gqls} = props;
+  const {gqls, onRefreshVariables} = props;
   const classes = useStyles();
   const [selected, setSelected] = useState<GraphQLStore|undefined>(/*gqls&&gqls.length > 0 ? gqls[0] : undefined*/);
   const [graphiQL, setGraphiQL] = useState('');
@@ -143,7 +144,15 @@ export const GraphQLDebugPannel = observer((props:{
             <CodeMirrorEditor value = {graphiQL} mode="graphql" onChange = {value=>setGraphiQL(value?.trim())}/>
           </Grid>
           <Grid item md={4} className={classes.editorSchell}>
-            <Typography variant="h6" className={classes.titleText}>{intl.get('variables')}</Typography>
+            <Typography variant="h6" className={classes.titleText}>
+              {intl.get('variables')} 
+              <IconButton 
+                size = "small" 
+                disabled = {!selected}
+                onClick = {onRefreshVariables}
+              ><MdiIcon iconClass = "mdi-refresh" size={20}/></IconButton>
+            </Typography> 
+            
             <CodeMirrorEditor value = {variablesStr} mode="application/json" 
               onChange = {
                 value=>setVariablesStr(value?.trim())

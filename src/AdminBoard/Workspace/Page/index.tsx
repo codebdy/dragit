@@ -210,7 +210,7 @@ export const Page = observer((
           </Dialog>
           {
             loggedUser.authCheck(AUTH_DEBUG) && !hideDebug &&
-            <Debug/>
+            <Debug onRefreshVariables={()=>{gqlGather.refreshVariables(pageStore, modelStore)}}/>
           }
         </ModelProvider>
       </ActionStoreProvider>
