@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelFieldStore } from 'Base/ModelTree/ModelFieldStore';
+import useSelectModel from 'Components/Common/useSelectModel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,10 +16,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const FormGridContainer = React.forwardRef((props:any, ref:any) => {
-  const {className, children, error, helperText, field, ...rest} = props
+  const {'data-rxid':rxid, className, children, error, helperText, field, ...rest} = props
   const classes = useStyles();
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getFieldStore(field);
+  console.log('GridContainer', rxid)
+  useSelectModel(fieldStore, rxid);
   useEffect(()=>{
     if(field){
       modelStore?.setFieldStore(field,  new ModelFieldStore(props));

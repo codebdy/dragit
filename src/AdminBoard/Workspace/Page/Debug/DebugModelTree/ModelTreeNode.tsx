@@ -30,7 +30,8 @@ export default function ModelTreeNode(
     }
   },[selected, modelNode])
 
-  const handleClick = ()=>{
+  const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
     if(modelNode.id === selected){
       onSelect('');
     }
@@ -43,9 +44,11 @@ export default function ModelTreeNode(
     <TreeItem 
       nodeId = {modelNode.id} 
       label={
-        <div className = {classes.label}>{modelNode.getLabel()}</div>
+        <div 
+          className = {classes.label}
+          onClick = {handleClick}
+        >{modelNode.getLabel()}</div>
       }
-      onClick = {handleClick}
     >
       {
         modelNode.getChildren()?.map(childStore=>{

@@ -2,12 +2,16 @@ import React from 'react';
 import {observer} from 'mobx-react';
 import { useModelStore } from "../../Base/ModelTree/ModelProvider";
 import { useFieldStore } from "./useFieldStore";
+import useSelectModel from './useSelectModel';
 
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
-    const {field, onlyShow, forwardedRef, empertyValue, rule, helperText, graphiQL, ...rest} = props;
+    const {'data-rxid':rxid, field, onlyShow, forwardedRef, empertyValue, rule, helperText, graphiQL, ...rest} = props;
     const fieldStore = useFieldStore(props);
     const modelStore =  useModelStore();
+
+    useSelectModel(fieldStore, rxid);
+
     const handleChange = (e:any) => {
       let newValue = e?.target?.value;
       fieldStore?.setValue(newValue);

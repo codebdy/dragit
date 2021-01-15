@@ -4,32 +4,8 @@ import { ThemeSettings } from "./ThemeSettings";
 import { DesignerStore } from "./DesignerStore";
 import { IUser } from "Base/Model/IUser";
 import { IModule } from "Base/Model/IModule";
-
-export class Error{
-  message?:string;
-  details?:string;
-  constructor() {
-    makeAutoObservable(this)
-  }
-}
-
-export class Confirm{
-  message?:string;
-  callbackFn?:()=>void;
-  constructor() {
-    makeAutoObservable(this)
-  }
-
-  open(message:string, callbackFn:()=>void){
-    this.message = message;
-    this.callbackFn = callbackFn;
-  }
-
-  close(){
-    this.message = undefined;
-    this.callbackFn = undefined;
-  }
-}
+import { Confirm } from "./Confirm";
+import { Error } from "./Error";
 
 export class AppStore{
   showThemeSettings = false;
@@ -47,6 +23,7 @@ export class AppStore{
   pageId: string|undefined;
 
   module?:IModule;
+  selectModelComponentRxid?:string;
 
   constructor() {
     makeAutoObservable(this)
@@ -97,6 +74,10 @@ export class AppStore{
 
   confirmAction(message:string, actionCallback:()=>void){
     this.confirm.open(message, actionCallback);
+  }
+
+  setSelectModelComponentRxid(rxid?:string){
+    this.selectModelComponentRxid = rxid;
   }
 
 }

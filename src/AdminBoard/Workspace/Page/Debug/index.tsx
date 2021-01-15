@@ -11,6 +11,7 @@ import {observer} from 'mobx-react';
 import { DARK } from 'Store/ThemeSettings';
 import { DebugModelTree } from './DebugModelTree';
 import { Hidden } from '@material-ui/core';
+import { ModelSelector } from './ModelSelector';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -96,6 +97,7 @@ export const Debug = observer(()=>{
         <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
         <DebugModelTree open={treeOpen} onClose = {()=>setTreeOpen(false)} />
       </ThemeProvider>
+      <ModelSelector />
     </Hidden>
   );
 })
