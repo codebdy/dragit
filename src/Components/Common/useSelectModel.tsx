@@ -6,13 +6,11 @@ export default function useSelectModel(modelNode:IModelNode|undefined, rxid:stri
   const appStore = useAppStore();
   
   useEffect(()=>{
-    if(modelNode){
-      if(modelNode.isSelected){
-        appStore.setSelectModelComponentRxid(rxid);
-      }
-      return()=>{
-        appStore.setSelectModelComponentRxid(undefined);
-      }
+    if(modelNode?.isSelected){
+      appStore.setSelectModelComponentRxid(rxid);
+    }
+    else if(appStore.selectModelComponentRxid === rxid){
+      appStore.setSelectModelComponentRxid(undefined);
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
     label: {
       fontSize:'0.8rem',
       padding:theme.spacing(0.5,0),
+      userSelect:'none',
     },
   }),
 );

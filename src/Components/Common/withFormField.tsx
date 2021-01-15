@@ -29,6 +29,7 @@ const withFormField = (Component:any)=>{
 
     const error = fieldStore?.error;
     const compent = <Component
+      data-rxid = {rxid}
       ref={forwardedRef}
       loading={fieldStore?.loading || modelStore?.loading}
       value={fieldStore?.value === undefined ? (empertyValue || '') : fieldStore?.value}
