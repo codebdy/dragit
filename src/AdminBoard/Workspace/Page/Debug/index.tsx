@@ -6,7 +6,7 @@ import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
 import { SpeedDialIcon } from '@material-ui/lab';
 import GraphQLDebug from './DebugGraphQL';
-import { useLeftDrawer, useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useAppStore, useLeftDrawer, useThemeSettings } from 'Store/Helpers/useAppStore';
 import {observer} from 'mobx-react';
 import { DARK } from 'Store/ThemeSettings';
 import { DebugModelTree } from './DebugModelTree';
@@ -28,6 +28,7 @@ export const Debug = observer(()=>{
   const [open, setOpen] = React.useState(false);
   const [gqlOpen, setGqlOpen] = React.useState(false);
   const [treeOpen, setTreeOpen] = React.useState(false);
+  const appStore = useAppStore();
   const leftDrawer = useLeftDrawer();
   const fabLeft = leftDrawer.isMini ? leftDrawer.compactWidth : leftDrawer.fullWidth;
   const themeSettings = useThemeSettings();
@@ -56,6 +57,11 @@ export const Debug = observer(()=>{
     setOpen(false);
     setTreeOpen(true);
   };
+
+  const handleCloseTree = ()=>{
+    appStore.setSelectModelComponentRxid('');
+    setTreeOpen(false);
+  }
 
   const handleOpenGql = ()=>{
     setOpen(false);
@@ -95,7 +101,7 @@ export const Debug = observer(()=>{
       </SpeedDial>
       <ThemeProvider theme={theme}>
         <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
-        <DebugModelTree open={treeOpen} onClose = {()=>setTreeOpen(false)} />
+        <DebugModelTree open={treeOpen} onClose = {handleCloseTree} />
       </ThemeProvider>
       <ModelSelector />
     </Hidden>
