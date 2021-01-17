@@ -3,9 +3,9 @@ import {observer} from "mobx-react";
 import { IPage } from 'Base/Model/IPage';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
-import { ComponentRender } from 'Base/ComponentRender';
-import { PageAction } from 'Base/Action/PageAction';
-import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/Action/ACTIONs";
+import { ComponentRender } from 'Base/PageUtils/ComponentRender';
+import { PageAction } from 'Base/PageUtils/PageAction';
+import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
@@ -18,47 +18,42 @@ import { AUTH_DEBUG } from 'Base/authSlugs';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
-import { cloneObject } from 'Utils/cloneObject';
-import { ActionStore, ActionStoreProvider } from 'Base/Action/ActionStore';
-import ActionHunter from 'Base/Action/ActionHunter';
+import { ActionStore, ActionStoreProvider } from 'Base/PageUtils/ActionStore';
+import ActionHunter from 'Base/PageUtils/ActionHunter';
 import { usePageQueryGQL } from './usePageQueryGQL';
 import { Debug } from './Debug';
-import { PageStore, PageStoreProvider } from 'Base/Action/PageStore';
-import { PageMutationGraphiQLGather } from './PageMutationGraphiQLGather';
+import { PageStore, PageStoreProvider } from 'Base/PageUtils/PageStore';
 import { createMutationGQL } from './createMutationGQL';
 
 export const Page = observer((
   props:{
-    page?:IPage,
-    pageParams?:IPageJumper,
+    page:IPage,
+    pageJumper?:IPageJumper,
     hideDebug?:boolean,
     onPageAction?: (pageAction:PageAction)=> void,
   }
 )=>{
   const [openAlert, setOpentAlert] = useState(false);
-  const {page, pageParams, hideDebug, onPageAction} = props;
-  const [pageLayout, setPageLayout] = useState<Array<RXNode<IMeta>>>();
+  const {page, pageJumper, hideDebug, onPageAction} = props;
   const [actionStore] = useState(new ActionStore());
   const [modelStore] = useState(new ModelStore());  
-  const [pageStore] = useState(new PageStore());
+  const [pageStore, setPage] = useState<PageStore>();
   const [mutation, setMutation] = useState<IPageMutation>();
-  const [gqlGather] = useState(new PageMutationGraphiQLGather());
   const queryName = page?.schema?.query;
   const appStore = useAppStore();
   const loggedUser = useLoggedUser();
 
   useEffect(()=>{
-    appStore.setSelectModelComponentRxid('');
-    modelStore.clearFields();
-    pageStore.clear();
-    pageStore.addComponentObserver(gqlGather);
-    return()=>{
-      pageStore.removeComponentObserver(gqlGather);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[page, pageParams])
+    setPage(new PageStore(page));
+  },[page]);
 
-  const queryGQL = usePageQueryGQL(modelStore, pageStore, queryName, pageParams);
+  useEffect(()=>{
+    pageStore?.setSelectModelComponentRxid('');
+    modelStore.clearFields();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[page, pageJumper])
+
+  const queryGQL = usePageQueryGQL(modelStore, pageStore, queryName, pageJumper);
   
   const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryGQL.variables },
@@ -102,11 +97,6 @@ export const Page = observer((
   },[mutation])
   
   useEffect(()=>{
-    const layout = page?.schema?.layout || [];
-    let root = new RXNode<IMeta>();
-    root.parse(cloneObject(layout));
-    setPageLayout(root.children);
-
     if(queryName){
       excuteQuery();
     }
@@ -117,13 +107,6 @@ export const Page = observer((
     modelStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryLoading]);
-
-  useEffect(()=>{
-    gqlGather.registerGqls(pageStore, modelStore);
-    return()=>{
-      gqlGather.unRegisterGqls(pageStore);
-    }
-  })
 
   useEffect(()=>{
     if(data && queryName){
@@ -140,7 +123,6 @@ export const Page = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
-        console.log('Page', modelStore);
         const submitNode = modelStore.getModelNode(action.mutation?.submitNode)
         console.assert(submitNode, 'Page内错误，提交节点不存在：' + action.mutation?.submitNode);
         if(submitNode?.validate()){
@@ -187,7 +169,7 @@ export const Page = observer((
         <ModelProvider value = {modelStore}>
           <ActionHunter onPageAction = {hanlePageAction} />
           {
-            pageLayout?.map((child:RXNode<IMeta>)=>{
+            pageStore?.pageLayout?.map((child:RXNode<IMeta>)=>{
               return (
                 <ComponentRender 
                   key={child.id} 
@@ -210,7 +192,7 @@ export const Page = observer((
           </Dialog>
           {
             loggedUser.authCheck(AUTH_DEBUG) && !hideDebug &&
-            <Debug onRefreshVariables={()=>{gqlGather.refreshVariables(pageStore, modelStore)}}/>
+            <Debug onRefreshVariables={()=>{}}/>
           }
         </ModelProvider>
       </ActionStoreProvider>

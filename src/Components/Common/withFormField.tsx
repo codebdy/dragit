@@ -7,9 +7,9 @@ import useSelectModel from './useSelectModel';
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
     const {'data-rxid':rxid, onlyShow, forwardedRef, empertyValue, rule, helperText, graphiQL, ...rest} = props;
-    const fieldStore = useFieldStore();
     const modelStore =  useModelStore();
-
+    const fieldStore = useFieldStore();
+    
     useSelectModel(fieldStore, rxid);
 
     const handleChange = (e:any) => {

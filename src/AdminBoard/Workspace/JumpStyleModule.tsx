@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react";
 import { Page } from './Page';
-import { PageAction } from 'Base/Action/PageAction';
-import { GO_BACK_ACTION, OPEN_PAGE_ACTION } from "Base/Action/ACTIONs";
+import { PageAction } from 'Base/PageUtils/PageAction';
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION } from "Base/PageUtils/ACTIONs";
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { getModulePageById } from './Common/getModulePageById';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { ModuleProps } from './Common/ModuleProps';
+import { Fragment } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,11 +50,16 @@ export const JumpStyleModule = observer((
 
   return (
     <Container className={classes.root} maxWidth = {page?.maxWidth ==='false' ? false : page?.maxWidth}>
-      <Page 
-        page={page}
-        onPageAction = {hanlePageAction}
-        pageParams = {pageParams}
-      />
+      {
+        page 
+        ? <Page 
+            page={page}
+            onPageAction = {hanlePageAction}
+            pageJumper = {pageParams}
+          />
+        :<Fragment></Fragment>      
+      }
+
     </Container>
   )
 })

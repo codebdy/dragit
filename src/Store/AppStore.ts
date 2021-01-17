@@ -23,7 +23,7 @@ export class AppStore{
   pageId: string|undefined;
 
   module?:IModule;
-  selectModelComponentRxid?:string;
+
 
   constructor() {
     makeAutoObservable(this)
@@ -74,10 +74,6 @@ export class AppStore{
 
   confirmAction(message:string, actionCallback:()=>void){
     this.confirm.open(message, actionCallback);
-  }
-
-  setSelectModelComponentRxid(rxid?:string){
-    this.selectModelComponentRxid = rxid;
   }
 
 }

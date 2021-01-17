@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { ModelStore } from "Base/ModelTree/ModelStore";
 import { IPageJumper } from "Base/Model/IPageJumper";
-import { PageStore } from "Base/Action/PageStore";
+import { PageStore } from "Base/PageUtils/PageStore";
 
-export function usePageQueryGQL( modelStore:ModelStore, pageStore:PageStore, queryName?:string, pageParams?:IPageJumper ){
+export function usePageQueryGQL( modelStore:ModelStore, pageStore?:PageStore, queryName?:string, pageParams?:IPageJumper ){
    const createQueryGQL = ()=>{
     const GQL_STRING = `
       query ($id:ID){
@@ -19,14 +19,14 @@ export function usePageQueryGQL( modelStore:ModelStore, pageStore:PageStore, que
 
   const [queryGQL] = useState(new GraphQLStore(intl.get('data-query'), 'Page', createQueryGQL()));
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     if(queryName){
       pageStore?.addGql(queryGQL);
       return ()=>{
         pageStore?.removeGql(queryGQL);
       }      
     }
-  })
+  })*/
 
   useEffect(()=>{
     queryGQL.setVariables({id:pageParams?.dataId})

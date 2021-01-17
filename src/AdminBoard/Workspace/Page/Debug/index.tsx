@@ -6,12 +6,13 @@ import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
 import { SpeedDialIcon } from '@material-ui/lab';
 import GraphQLDebug from './DebugGraphQL';
-import { useAppStore, useLeftDrawer, useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useLeftDrawer, useThemeSettings } from 'Store/Helpers/useAppStore';
 import {observer} from 'mobx-react';
 import { DARK } from 'Store/ThemeSettings';
 import { DebugModelTree } from './DebugModelTree';
 import { Hidden } from '@material-ui/core';
 import { ModelSelector } from './ModelSelector';
+import { usePageStore } from '../../../../Base/PageUtils/PageStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,7 @@ export const Debug = observer((
   const [open, setOpen] = React.useState(false);
   const [gqlOpen, setGqlOpen] = React.useState(false);
   const [treeOpen, setTreeOpen] = React.useState(false);
-  const appStore = useAppStore();
+  const pageStore = usePageStore();
   const leftDrawer = useLeftDrawer();
   const fabLeft = leftDrawer.isMini ? leftDrawer.compactWidth : leftDrawer.fullWidth;
   const themeSettings = useThemeSettings();
@@ -64,7 +65,7 @@ export const Debug = observer((
   };
 
   const handleCloseTree = ()=>{
-    appStore.setSelectModelComponentRxid('');
+    pageStore?.setSelectModelComponentRxid('');
     setTreeOpen(false);
   }
 

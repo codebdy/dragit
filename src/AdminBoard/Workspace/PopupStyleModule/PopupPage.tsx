@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import { PageAction } from 'Base/Action/PageAction';
+import { PageAction } from 'Base/PageUtils/PageAction';
 import { Page } from '../Page';
 import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
@@ -31,11 +31,11 @@ export const PopupPage = observer((
           <Page 
             page={page}
             onPageAction = {onPageAction}
-            pageParams = {pageParams}
+            pageJumper = {pageParams}
           />
         </PageDialog>      
       }{
-        isDrawerStyle&&
+        isDrawerStyle && page &&
         <PageDrawer
           title = {page?.name}
           onClose = {onClose}
@@ -45,7 +45,7 @@ export const PopupPage = observer((
           <Page 
             page={page}
             onPageAction = {onPageAction}
-            pageParams = {pageParams}
+            pageJumper = {pageParams}
           />
         </PageDrawer>
       }

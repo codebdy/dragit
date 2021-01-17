@@ -3,8 +3,8 @@ import { makeStyles, Theme, createStyles, Typography, Container, Tabs, Tab } fro
 import {observer} from "mobx-react";
 import { useState } from 'react';
 import { Page } from '../Page';
-import { PageAction } from 'Base/Action/PageAction';
-import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/Action/ACTIONs";
+import { PageAction } from 'Base/PageUtils/PageAction';
+import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/PageUtils/ACTIONs";
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { TabStyleModuleBar } from './TabStyleModuleBar';
 import { useEffect } from 'react';
@@ -104,10 +104,14 @@ export const TabStyleModule = observer((
       </TabStyleModuleBar>
       <LeftDrawerWidthPlaceholder />
       <Container>
-        <Page 
-          page={page}
-          onPageAction = {hanlePageAction}
-        />
+        {
+          page &&
+          <Page 
+            page={page}
+            onPageAction = {hanlePageAction}
+          />        
+        }
+
         <PopupPage 
           page = {popupPage}
           isDrawerStyle = {module.isDrawerStyle} 

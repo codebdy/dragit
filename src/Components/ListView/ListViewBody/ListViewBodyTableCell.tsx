@@ -5,7 +5,7 @@ import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {observer} from 'mobx-react';
 import { Skeleton } from "@material-ui/lab";
-import { ComponentRender } from "Base/ComponentRender";
+import { ComponentRender } from "Base/PageUtils/ComponentRender";
 
 export const ListViewBodyTableCell = observer((
   props: {

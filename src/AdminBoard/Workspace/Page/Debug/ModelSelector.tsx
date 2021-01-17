@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import { useAppStore } from 'Store/Helpers/useAppStore';
 import {observer} from 'mobx-react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useEffect } from 'react';
+import { usePageStore } from '../../../../Base/PageUtils/PageStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export const ModelSelector = observer(() => {
   const classes = useStyles();
-  const appStore = useAppStore();
+  const pageStore = usePageStore();
   const [rect, setRect] = useState<DOMRect>();
 
   const getDom = ()=>{
-    return document.querySelector(`[data-rxid="${appStore.selectModelComponentRxid}"]`);
+    return document.querySelector(`[data-rxid="${pageStore?.selectModelComponentRxid}"]`);
   }
 
   const getDomRect = ()=>{
@@ -59,10 +59,10 @@ export const ModelSelector = observer(() => {
 
     reComputeRect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appStore.selectModelComponentRxid])
+  }, [pageStore?.selectModelComponentRxid])
 
   return (
-    appStore.selectModelComponentRxid && rect
+    pageStore?.selectModelComponentRxid && rect
     ? <div 
         className={classes.root}
         style = {{

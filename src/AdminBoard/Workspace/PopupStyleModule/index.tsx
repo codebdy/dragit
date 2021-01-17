@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import {observer} from "mobx-react";
-import { PageAction } from 'Base/Action/PageAction';
-import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/Action/ACTIONs";
+import { PageAction } from 'Base/PageUtils/PageAction';
+import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/PageUtils/ACTIONs";
 import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
 import { IPageJumper } from 'Base/Model/IPageJumper';
@@ -50,12 +50,15 @@ export const PopupStyleModule = observer((
 
   return (
     <Container className={classes.root} maxWidth = {page?.maxWidth ==='false' ? false : page?.maxWidth}>
-      <Page 
-        page={page}
-        onPageAction = {hanlePageAction}
-        pageParams = {pageParams}
-        hideDebug = {!!popupPage}
-      />
+      {
+        page &&
+        <Page 
+          page={page}
+          onPageAction = {hanlePageAction}
+          pageJumper = {pageParams}
+          hideDebug = {!!popupPage}
+        />
+      }
       <PopupPage 
         page = {popupPage}
         isDrawerStyle = {module.isDrawerStyle} 

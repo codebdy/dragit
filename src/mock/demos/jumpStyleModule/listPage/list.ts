@@ -3,7 +3,7 @@ import { BATCH_REMOVE_LIST_VIEW_RECORDS,
   OPEN_PAGE_ACTION, 
   REMOVE_LIST_VIEW_RECORD, 
   UPDATE_LIST_VIEW_RECORD 
-} from "Base/Action/ACTIONs";
+} from "Base/PageUtils/ACTIONs";
 
 export default {
   name:'ListView',

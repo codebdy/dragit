@@ -1,16 +1,16 @@
+import { usePageStore } from "Base/PageUtils/PageStore";
 import { IModelNode } from "Base/ModelTree/IModelNode";
 import { useEffect } from "react";
-import { useAppStore } from "Store/Helpers/useAppStore";
 
 export default function useSelectModel(modelNode:IModelNode|undefined, rxid:string|undefined){
-  const appStore = useAppStore();
+  const pageStore = usePageStore();
   
   useEffect(()=>{
     if(modelNode?.isSelected){
-      appStore.setSelectModelComponentRxid(rxid);
+      pageStore?.setSelectModelComponentRxid(rxid);
     }
-    else if(appStore.selectModelComponentRxid === rxid){
-      appStore.setSelectModelComponentRxid(undefined);
+    else if(pageStore?.selectModelComponentRxid === rxid){
+      pageStore?.setSelectModelComponentRxid(undefined);
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

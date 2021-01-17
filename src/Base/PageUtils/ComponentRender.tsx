@@ -1,14 +1,12 @@
 import React, { Fragment } from 'react';
-import { RXNode } from './RXNode/RXNode';
+import { RXNode } from '../RXNode/RXNode';
 import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
-import { useActionStore } from './Action/ActionStore';
+import { useActionStore } from './ActionStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
-import { useEffect } from 'react';
-import { usePageStore } from './Action/PageStore';
-import { RXNodeProvider } from './RXNode/RXNodeProvider';
+import { RXNodeProvider } from '../RXNode/RXNodeProvider';
 
 export function ComponentRender(
   props:{
@@ -21,16 +19,7 @@ export function ComponentRender(
 
   const appStore = useAppStore();
   const actionStore = useActionStore();
-  const pageStore = usePageStore();
 
-  useEffect(()=>{
-    pageStore?.onRender(node);
-    return ()=>{
-      pageStore?.onDestory(node);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
-  
   const handleOnClick = ()=>{
     if(onClickAction){
       if(onClickAction.confirmMessage){

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { Fragment } from 'react';
-import { useActionStore } from 'Base/Action/ActionStore';
-import { PageAction } from 'Base/Action/PageAction';
+import { useActionStore } from 'Base/PageUtils/ActionStore';
+import { PageAction } from 'Base/PageUtils/PageAction';
 import { useEffect } from 'react';
 const ActionHunter = observer((
     props:{

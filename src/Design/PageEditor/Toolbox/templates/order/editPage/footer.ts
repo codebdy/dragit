@@ -1,4 +1,4 @@
-import { GO_BACK_ACTION, SUBMIT_MUTATION } from "Base/Action/ACTIONs";
+import { GO_BACK_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 
 export default {
   name: 'GridRow',

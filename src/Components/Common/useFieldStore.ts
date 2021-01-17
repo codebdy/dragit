@@ -9,7 +9,7 @@ export const useFieldStore = () => {
   const fieldName = node?.meta.field;
   useEffect(()=>{
     if(node && fieldName){
-      modelStore?.setFieldStore(fieldName, new FieldStore(node))      
+      modelStore?.setFieldStore(fieldName, new FieldStore(node))    
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[fieldName, modelStore])
