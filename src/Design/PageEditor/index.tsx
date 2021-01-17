@@ -386,7 +386,7 @@ export const PageEditor = observer((
               {
                 canvasStore.selectedNode &&
                 <Fragment>
-                  <ComponentLabel node={canvasStore.selectedNode} followDom={canvasStore.selectedNodeDom}/>
+                  <ComponentLabel node={canvasStore.selectedNode} followDom={canvasStore.selectedNode?.dom}/>
                   <NodeToolbar 
                     onBeginDrag = {handleBeginDrag}
                     onRemove = {handleRemove}

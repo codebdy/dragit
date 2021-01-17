@@ -6,6 +6,7 @@ import { useState } from 'react';
 import intl from "react-intl-universal";
 import { useListViewStore } from 'Components/ListView/ListViewStore';
 import classNames from 'classnames';
+import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +32,7 @@ const ListViewEnumFilter = React.forwardRef((
 
   const {
     className,
-    'data-rxid':rxid,
+    [DADA_RXID_CONST]:rxid,
     variant = "outlined",
     label,
     width,

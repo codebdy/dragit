@@ -6,6 +6,7 @@ import { ModelFieldStore } from 'Base/ModelTree/ModelFieldStore';
 import useSelectModel from 'Components/Common/useSelectModel';
 import {observer} from 'mobx-react';
 import { useRXNode } from 'Base/RXNode/RXNodeProvider';
+import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const FormGridContainer = observer(React.forwardRef((props:any, ref:any) => {
-  const {'data-rxid':rxid, className, children, error, helperText, ...rest} = props
+  const {[DADA_RXID_CONST]:rxid, className, children, error, helperText, ...rest} = props
   const classes = useStyles();
   const modelStore =  useModelStore();
   const rxNode = useRXNode();
@@ -38,7 +39,7 @@ const FormGridContainer = observer(React.forwardRef((props:any, ref:any) => {
   }, [fieldName])
   
   return (
-    <Grid data-rxid = {rxid} container spacing={2} className={ classNames(classes.portletBody, className) } {...rest} ref={ref}>
+    <Grid {...{[DADA_RXID_CONST]:rxid}} container spacing={2} className={ classNames(classes.portletBody, className) } {...rest} ref={ref}>
       {
         rxNode?.meta.field?
         <ModelProvider value = {fieldStore as any}>

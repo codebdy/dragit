@@ -19,8 +19,6 @@ const ListViewBody = React.forwardRef((
   const {isDesigning} = useDesign();
   const rxNode = useRXNode();
   
-  console.log('ListViewBody', rxNode)
-
   return (
     <TableContainer {...rest}  ref={ref}>
       <Table

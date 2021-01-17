@@ -4,13 +4,14 @@ import { cloneObject } from "Utils/cloneObject";
 import { ID } from "Base/Model/graphqlTypes";
 import { makeAutoObservable } from "mobx";
 
+export const DADA_RXID_CONST = "data-rxid"
+
 export class RXNode<T>{
   static idSeed:number = 1;
   id: ID = '';  
   meta!: T;
   children: Array<RXNode<T>>;
   parent?:RXNode<T>;
-  dom?:HTMLElement;
 
   static make<T>(meta:T){
     let node = new RXNode<T>();
@@ -38,6 +39,10 @@ export class RXNode<T>{
   seedId(){
     this.id = RXNode.idSeed.toString();
     RXNode.idSeed ++
+  }
+
+  get rxid(){
+    return 'rx-' + this.id;
   }
 
   get rect():IRect|undefined{
@@ -80,6 +85,10 @@ export class RXNode<T>{
     }
 
     return undefined;
+  }
+
+  get dom(){
+    return document.querySelector(`[data-rxid="${this.rxid}"]`);
   }
 
   remove(){

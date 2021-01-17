@@ -3,6 +3,7 @@ import {observer} from 'mobx-react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useEffect } from 'react';
 import { usePageStore } from '../../../../Base/PageUtils/PageStore';
+import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +21,7 @@ export const ModelSelector = observer(() => {
   const [rect, setRect] = useState<DOMRect>();
 
   const getDom = ()=>{
-    return document.querySelector(`[data-rxid="${pageStore?.selectModelComponentRxid}"]`);
+    return document.querySelector(`[${DADA_RXID_CONST}="${pageStore?.selectModelComponentRxid}"]`);
   }
 
   const getDomRect = ()=>{

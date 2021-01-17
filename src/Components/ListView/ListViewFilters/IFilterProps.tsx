@@ -1,8 +1,9 @@
+import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 import { InputSize, InputVariant } from 'Components/Inputs/InputPropTypes';
 
 
 export interface IFilterProps {
-  ['data-rxid']:string;
+  [DADA_RXID_CONST]:string;
   variant?: InputVariant;
   label?: string;
   width?: string;

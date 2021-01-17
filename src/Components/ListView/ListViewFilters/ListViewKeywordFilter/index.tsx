@@ -1,4 +1,5 @@
 import { makeStyles, Theme, createStyles, InputAdornment, TextField } from '@material-ui/core';
+import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 import classNames from 'classnames';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useListViewStore } from 'Components/ListView/ListViewStore';
@@ -23,7 +24,7 @@ const ListViewKeywordFilter = React.forwardRef((
 
   const {
     className,
-    'data-rxid':rxid,
+    [DADA_RXID_CONST]:rxid,
     variant = "outlined",
     size,
     width = '260px',

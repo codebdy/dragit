@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { RXNode } from '../../../Base/RXNode/RXNode';
+import { DADA_RXID_CONST, RXNode } from '../../../Base/RXNode/RXNode';
 import { resolveComponent, resolveRule } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
@@ -80,15 +80,6 @@ export const ComponentView = observer((
   const selected = canvasStore?.selectedNode?.id === node.id;
   const dragged = canvasStore?.draggedNode?.id === node.id;
   
-  let dom : any = refEl.current;
-  node.dom = dom;
-  useEffect(()=>{
-    if(selected){
-      canvasStore?.setSelectedNodeDom(dom);      
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dom, selected])
-
   useEffect(()=>{
     setEditStyle(getEditStyle(node, canvasStore?.showPaddingX, canvasStore?.showPaddingY));
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -125,6 +116,7 @@ export const ComponentView = observer((
 
   let elementProps:any = {
     ...rest, 
+    [DADA_RXID_CONST]:node.rxid,
     className:classNames(
       className, 
       {

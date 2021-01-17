@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ComponentLabel = observer((
   props:{
     node?:RXNode<IMeta>,
-    followDom?:HTMLElement,
+    followDom?:Element|null,
   }
 )=>{
   const{node, followDom} = props;

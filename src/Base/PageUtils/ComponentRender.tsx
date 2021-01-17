@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { RXNode } from '../RXNode/RXNode';
+import { DADA_RXID_CONST, RXNode } from '../RXNode/RXNode';
 import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
@@ -53,7 +53,7 @@ export function ComponentRender(
   } = metaProps as any;
 
   let elementProps:any = {
-    'data-rxid':`rx-${node.id}`,
+    [DADA_RXID_CONST]: node.rxid,
     ...rest,
     style:{
       ...style,

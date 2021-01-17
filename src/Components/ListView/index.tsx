@@ -13,6 +13,7 @@ import { useUpdateGQL } from './useUpdateGQL';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import ListViewActionFilter from './ListViewActionFilter';
 import { ID } from 'Base/Model/graphqlTypes';
+import { useDesign } from 'Design/PageEditor/useDesign';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -47,6 +48,7 @@ const ListView = observer(React.forwardRef((
   const queryGQL = useQueryGQL( listViewStore, query );
   const updateGQL = useUpdateGQL( listViewStore, update );
   const removeGQL = useRemoveGQL( listViewStore, remove );
+  const {isDesigning} = useDesign();
 
   //const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
@@ -77,7 +79,7 @@ const ListView = observer(React.forwardRef((
   useShowAppoloError(error||updateError||removeError);
 
   useEffect(()=>{
-    if(!query){
+    if(!query || isDesigning){
       return;
     }
     if(!called){
