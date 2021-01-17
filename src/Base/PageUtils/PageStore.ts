@@ -1,10 +1,12 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { IMeta } from "Base/Model/IMeta";
 import { IPage } from "Base/Model/IPage";
+import { IPageJumper } from "Base/Model/IPageJumper";
 import { RXNode } from "Base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { cloneObject } from "Utils/cloneObject";
+import intl from "react-intl-universal";
 
 function getGQL(node:RXNode<IMeta>){
   let gql = '';
@@ -19,16 +21,30 @@ function getGQL(node:RXNode<IMeta>){
 
 export class PageStore{
   gqls: Array<GraphQLStore> = [];
-  page:IPage;
-  pageLayout:Array<RXNode<IMeta>> = [];
-  selectModelComponentRxid?:string;
-
+  page: IPage;
+  pageLayout: Array<RXNode<IMeta>> = [];
+  selectModelComponentRxid?: string;
+  queryGQL?: GraphQLStore;
   //ActionStore
-  constructor(page:IPage) {
+  constructor(page:IPage, pageJumper?:IPageJumper) {
     this.page = page;
     makeAutoObservable(this)
-
     this.parsePage(page);
+    const query = page?.schema?.query;
+    if(query){
+      this.queryGQL = new GraphQLStore(intl.get('data-query'), 'Page', `
+        query ($id:ID){
+          ${query}(id:$id)
+          ${this.getFieldsGQL()} 
+        }
+      `);
+
+      if(pageJumper?.dataId){
+        this.queryGQL.setVariables({id:pageJumper?.dataId})        
+      }
+      //Debug用
+      this.gqls.push(this.queryGQL);      
+    }
   }
 
   private parsePage(page: IPage) {

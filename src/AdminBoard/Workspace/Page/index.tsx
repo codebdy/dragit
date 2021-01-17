@@ -6,7 +6,7 @@ import { RXNode } from 'Base/RXNode/RXNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { PageAction } from 'Base/PageUtils/PageAction';
 import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
-import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { gql, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
 import { ModelStore } from '../../../Base/ModelTree/ModelStore';
@@ -20,10 +20,10 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { ActionStore, ActionStoreProvider } from 'Base/PageUtils/ActionStore';
 import ActionHunter from 'Base/PageUtils/ActionHunter';
-import { usePageQueryGQL } from './usePageQueryGQL';
 import { Debug } from './Debug';
 import { PageStore, PageStoreProvider } from 'Base/PageUtils/PageStore';
 import { createMutationGQL } from './createMutationGQL';
+import { PageQuery } from './PageQuery';
 
 export const Page = observer((
   props:{
@@ -39,25 +39,17 @@ export const Page = observer((
   const [modelStore, setModelStore] = useState<ModelStore>();  
   const [pageStore, setPageStore] = useState<PageStore>();
   const [mutation, setMutation] = useState<IPageMutation>();
-  const queryName = page?.schema?.query;
   const appStore = useAppStore();
   const loggedUser = useLoggedUser();
 
   useEffect(()=>{
-    setPageStore(new PageStore(page));
+    setPageStore(new PageStore(page, pageJumper));
     setActionStore(new ActionStore());
     setModelStore(new ModelStore());    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageJumper])
 
-  const queryGQL = usePageQueryGQL(pageStore, queryName, pageJumper);
   
-  const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(gql`${queryGQL.gql}`, {
-    variables: { ...queryGQL.variables },
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy:'no-cache'
-  });
-
   const [excuteMutation, {error:muetationError}] = useMutation(
     gql`${createMutationGQL(mutation, modelStore)}`,
     {
@@ -83,6 +75,8 @@ export const Page = observer((
     }
   );
   
+  useShowAppoloError(muetationError);
+
   useEffect(()=>{
     if(mutation){
       const submitNode = modelStore?.getModelNode(mutation.submitNode)
@@ -93,30 +87,6 @@ export const Page = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mutation])
   
-  useEffect(()=>{
-    if(queryName){
-      excuteQuery();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[page]);
-
-  useEffect(()=>{
-    modelStore?.setLoading(queryLoading);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryLoading]);
-
-  useEffect(()=>{
-    if(data && queryName){
-      modelStore?.setModel(data[queryName]);      
-    }
-    else{
-      modelStore?.setModel(undefined);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
-  useShowAppoloError(error||muetationError);
-
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
@@ -164,6 +134,11 @@ export const Page = observer((
     <PageStoreProvider value = {pageStore}>
       <ActionStoreProvider value = {actionStore}>
         <ModelProvider value = {modelStore}>
+          {
+            pageStore?.queryGQL &&
+            <PageQuery queryGQL = {pageStore?.queryGQL}/>
+          }
+          
           <ActionHunter onPageAction = {hanlePageAction} />
           {
             pageStore?.pageLayout?.map((child:RXNode<IMeta>)=>{
