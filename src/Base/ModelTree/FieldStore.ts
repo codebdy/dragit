@@ -1,12 +1,12 @@
 import { creatId } from "Base/creatId";
 import { ID } from "Base/Model/graphqlTypes";
-import { IMetaProps } from "Base/Model/IMeta";
+import { IMeta } from "Base/Model/IMeta";
+import { RXNode } from "Base/RXNode/RXNode";
 import { makeAutoObservable, toJS } from "mobx";
 import { IModelNode } from "./IModelNode";
 import { validate } from "./validate";
 
 export interface IFieldStore extends IModelNode{
-  metaProps?:IMetaProps;
   defaultValue?: any;
   value?: any;
   error?: string;
@@ -20,16 +20,16 @@ export interface IFieldStore extends IModelNode{
 export class FieldStore implements IFieldStore{
   id:ID;
   isSelected?:boolean;
-  metaProps:IMetaProps;
+  node:RXNode<IMeta>;
   defaultValue?: any;
   value?: any;
   error?: string;
   loading?: boolean;
   dirty?: boolean;
-  constructor(metaProps:IMetaProps) {
+  constructor(node:RXNode<IMeta>) {
     this.id = creatId();
     makeAutoObservable(this);
-    this.metaProps = metaProps;
+    this.node = node;
   }
 
   setLoading(loading?:boolean){
@@ -46,12 +46,12 @@ export class FieldStore implements IFieldStore{
   
   toFieldsGQL() {
 
-    const gqlStr = this.metaProps?.graphiQL ? this.metaProps.graphiQL.replace('$field', this.metaProps?.field) : this.metaProps?.field;
+    const gqlStr = this.node?.meta.graphiQL ? this.node.meta.graphiQL.replace('$field', this.node?.meta.field||'') : this.node?.meta.field;
     return ` ${gqlStr} `;
   }
 
   setModel(model: any) {
-    const fieldName = this.metaProps?.field;
+    const fieldName = this.node?.meta.field;
     const fieldValue = model && fieldName ? model[fieldName] : undefined;
     this.defaultValue = fieldValue;
     this.value = fieldValue;
@@ -75,7 +75,7 @@ export class FieldStore implements IFieldStore{
   }
 
   validate(){
-    this.error = validate(this.value, this.metaProps?.rule);
+    this.error = validate(this.value, this.node?.meta.rule);
     return !this.error;
   }
 
@@ -92,7 +92,7 @@ export class FieldStore implements IFieldStore{
 
   }
 
-  getFieldStore(fieldName:string){
+  getFieldStore(fieldName?:string){
     return undefined;
   }
 
@@ -100,7 +100,7 @@ export class FieldStore implements IFieldStore{
   }
 
   getLabel(){
-    return `Field : ${this.metaProps?.field}`;
+    return `Field : ${this.node?.meta.field}`;
   }
 
   setSelected(selected:boolean){

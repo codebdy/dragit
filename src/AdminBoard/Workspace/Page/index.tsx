@@ -3,9 +3,9 @@ import {observer} from "mobx-react";
 import { IPage } from 'Base/Model/IPage';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
-import { ComponentRender } from 'Base/PageUtlis/ComponentRender';
-import { PageAction } from 'Base/PageUtlis/PageAction';
-import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtlis/ACTIONs";
+import { ComponentRender } from 'Base/ComponentRender';
+import { PageAction } from 'Base/Action/PageAction';
+import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/Action/ACTIONs";
 import { gql, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
@@ -19,11 +19,11 @@ import { useAppStore } from 'Store/Helpers/useAppStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { cloneObject } from 'Utils/cloneObject';
-import { ActionStore, ActionStoreProvider } from 'Base/PageUtlis/ActionStore';
-import ActionHunter from 'Base/PageUtlis/ActionHunter';
+import { ActionStore, ActionStoreProvider } from 'Base/Action/ActionStore';
+import ActionHunter from 'Base/Action/ActionHunter';
 import { usePageQueryGQL } from './usePageQueryGQL';
 import { Debug } from './Debug';
-import { PageStore, PageStoreProvider } from 'Base/PageUtlis/PageStore';
+import { PageStore, PageStoreProvider } from 'Base/Action/PageStore';
 import { PageMutationGraphiQLGather } from './PageMutationGraphiQLGather';
 import { createMutationGQL } from './createMutationGQL';
 
@@ -140,6 +140,7 @@ export const Page = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
+        console.log('Page', modelStore);
         const submitNode = modelStore.getModelNode(action.mutation?.submitNode)
         console.assert(submitNode, 'Page内错误，提交节点不存在：' + action.mutation?.submitNode);
         if(submitNode?.validate()){
@@ -190,7 +191,7 @@ export const Page = observer((
               return (
                 <ComponentRender 
                   key={child.id} 
-                  component={child} 
+                  node={child} 
                 />
               )
             })

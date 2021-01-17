@@ -1,8 +1,8 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { IMeta } from "Base/Model/IMeta";
 import { ModelStore } from "Base/ModelTree/ModelStore";
-import { IComponentObserver } from "Base/PageUtlis/IComponentObserver";
-import { PageStore } from "Base/PageUtlis/PageStore";
+import { IComponentObserver } from "Base/Action/IComponentObserver";
+import { PageStore } from "Base/Action/PageStore";
 import { RXNode } from "Base/RXNode/RXNode";
 import { createMutationGQL } from "./createMutationGQL";
 import intl from 'react-intl-universal';

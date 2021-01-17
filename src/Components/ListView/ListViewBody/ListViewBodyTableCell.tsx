@@ -5,7 +5,7 @@ import { IMeta } from "Base/Model/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {observer} from 'mobx-react';
 import { Skeleton } from "@material-ui/lab";
-import { ComponentRender } from "Base/PageUtlis/ComponentRender";
+import { ComponentRender } from "Base/ComponentRender";
 
 export const ListViewBodyTableCell = observer((
   props: {
@@ -21,7 +21,7 @@ export const ListViewBodyTableCell = observer((
         ? <TableCell>
             <Skeleton animation="wave" height={50} width="50%" />
           </TableCell>
-        : <ComponentRender component = {column} />
+        : <ComponentRender node = {column} />
       }
     </Fragment>
   );

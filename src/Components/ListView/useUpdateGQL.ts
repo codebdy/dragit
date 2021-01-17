@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { ListViewStore } from "./ListViewStore";
 import { IPageMutation } from "Base/Model/IPageMutation";
-import { usePageStore } from "Base/PageUtlis/PageStore";
+import { usePageStore } from "Base/Action/PageStore";
 
 export function useUpdateGQL( listViewStore:ListViewStore, update?:IPageMutation ){
   const pageStore = usePageStore();

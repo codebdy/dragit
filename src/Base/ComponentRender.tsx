@@ -1,31 +1,32 @@
 import React, { Fragment } from 'react';
-import { RXNode } from '../RXNode/RXNode';
+import { RXNode } from './RXNode/RXNode';
 import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
-import { useActionStore } from './ActionStore';
+import { useActionStore } from './Action/ActionStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { useEffect } from 'react';
-import { usePageStore } from './PageStore';
+import { usePageStore } from './Action/PageStore';
+import { RXNodeProvider } from './RXNode/RXNodeProvider';
 
 export function ComponentRender(
   props:{
-    component:RXNode<IMeta>
+    node:RXNode<IMeta>
   }){
-  const {component} = props;
+  const {node} = props;
   const loggedUser = useLoggedUser();
-  const onClickAction = component.meta.props?.onClick;
-  let Component = resolveComponent(component.meta);
+  const onClickAction = node.meta.props?.onClick;
+  let Component = resolveComponent(node.meta);
 
   const appStore = useAppStore();
   const actionStore = useActionStore();
   const pageStore = usePageStore();
 
   useEffect(()=>{
-    pageStore?.onRender(component);
+    pageStore?.onRender(node);
     return ()=>{
-      pageStore?.onDestory(component);
+      pageStore?.onDestory(node);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
@@ -45,13 +46,13 @@ export function ComponentRender(
 
   const authChecked = ()=>{
     //如果不设置权限，则所有用户可见
-    if(!component.meta.auths || component.meta.auths.length === 0){
+    if(!node.meta.auths || node.meta.auths.length === 0){
       return true;
     }
-    return loggedUser?.authCheck(...component.meta.auths||[]);
+    return loggedUser?.authCheck(...node.meta.auths||[]);
   }
 
-  let metaProps = component.meta.props? component.meta.props :{};
+  let metaProps = node.meta.props? node.meta.props :{};
   const {
     rxText, 
     marginTop,
@@ -63,7 +64,7 @@ export function ComponentRender(
   } = metaProps as any;
 
   let elementProps:any = {
-    'data-rxid':`rx-${component.id}`,
+    'data-rxid':`rx-${node.id}`,
     ...rest,
     style:{
       ...style,
@@ -75,16 +76,16 @@ export function ComponentRender(
     onClick:handleOnClick
   }
 
-  if(component.meta.selfRenderChildren){
-    elementProps.childrenNodes = component.children;
+  if(node.meta.selfRender){
+    elementProps.childrenNodes = node.children;
   }
 
-  let elementView:any = ((component.children && component.children.length > 0) || rxText)&& !component.meta.selfRenderChildren ?
+  let elementView:any = ((node.children && node.children.length > 0) || rxText)&& !node.meta.selfRender ?
     (<Component {...elementProps}>
       {rxText}
-      {component.children?.map((child: RXNode<IMeta>)=>{
+      {node.children?.map((child: RXNode<IMeta>)=>{
         return (
-          <ComponentRender key={child.id} component={child} />
+          <ComponentRender key={child.id} node={child} />
         )
       })}
     </Component>)
@@ -94,7 +95,13 @@ export function ComponentRender(
   elementView = authChecked() ? elementView : undefined; 
   return(
     <Fragment>
-      { elementView }
+      { 
+        node.meta.field || node.meta.selfRender 
+        ? <RXNodeProvider value = {node}>
+            {elementView}
+          </RXNodeProvider>
+        : elementView 
+      }
     </Fragment>
   )
 }

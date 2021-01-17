@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { ModelStore } from "Base/ModelTree/ModelStore";
 import { IPageJumper } from "Base/Model/IPageJumper";
-import { PageStore } from "Base/PageUtlis/PageStore";
+import { PageStore } from "Base/Action/PageStore";
 
 export function usePageQueryGQL( modelStore:ModelStore, pageStore:PageStore, queryName?:string, pageParams?:IPageJumper ){
    const createQueryGQL = ()=>{

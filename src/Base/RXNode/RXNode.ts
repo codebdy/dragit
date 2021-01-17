@@ -2,6 +2,7 @@ import { after, before, first, insertAfter, insertBefore, last, remove } from "U
 import { IRect } from "Base/Model/IRect";
 import { cloneObject } from "Utils/cloneObject";
 import { ID } from "Base/Model/graphqlTypes";
+import { makeAutoObservable } from "mobx";
 
 export class RXNode<T>{
   static idSeed:number = 1;
@@ -31,6 +32,7 @@ export class RXNode<T>{
 
   constructor(){
     this.children = [];
+    makeAutoObservable(this);
   }
 
   seedId(){

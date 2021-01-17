@@ -5,8 +5,8 @@ import { useDesign } from 'Design/PageEditor/useDesign';
 import classNames from 'classnames';
 import IconButton from 'Components/Buttons/IconButton';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
-import { PageAction } from 'Base/PageUtlis/PageAction';
-import { useActionStore } from 'Base/PageUtlis/ActionStore';
+import { PageAction } from 'Base/Action/PageAction';
+import { useActionStore } from 'Base/Action/ActionStore';
 import {observer} from "mobx-react";
 
 const useStyles = makeStyles((theme: Theme) =>

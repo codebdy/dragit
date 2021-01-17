@@ -27,7 +27,10 @@ export class ModelStore implements IModelNode{
     fieldStore.setModel(this.model);
   }
 
-  getFieldStore(fieldName:string){
+  getFieldStore(fieldName?:string){
+    if(!fieldName){
+      return undefined;
+    }
     return this.fields.get(fieldName)
   }
 
@@ -95,7 +98,7 @@ export class ModelStore implements IModelNode{
   toInputValue(){
     let rtValue = this.model?.id ? {id:this.model?.id} as any : {} as any;
     this.fields?.forEach((fieldStore, key)=>{
-      if(!fieldStore.metaProps?.onlyShow){
+      if(!fieldStore.node?.meta?.onlyShow){
         rtValue[key] = fieldStore.toInputValue();        
       }
     })

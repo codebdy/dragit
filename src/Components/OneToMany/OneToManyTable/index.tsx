@@ -3,13 +3,14 @@ import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead
 import CloseIcon from '@material-ui/icons/Close';
 import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { IMeta } from 'Base/Model/IMeta';
-import { ComponentRender } from 'Base/PageUtlis/ComponentRender';
+import { ComponentRender } from 'Base/ComponentRender';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
 import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';
+import { useRXNode } from 'Base/RXNode/RXNodeProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,10 +40,11 @@ const OneToManyTable = React.forwardRef((
   const {isDesigning} = useDesign();
   const classes = useStyles();
   const modelStore =  useModelStore();
-  const fieldStore = modelStore?.getFieldStore(field||'') as ModelArrayFieldStore;
+  const rxNode = useRXNode();
+  const fieldStore = modelStore?.getFieldStore(field) as ModelArrayFieldStore;
   useEffect(()=>{
     if(field){
-      modelStore?.setFieldStore(field,  new ModelArrayFieldStore({name:field, props}));      
+      modelStore?.setFieldStore(field,  new ModelArrayFieldStore(rxNode));      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field])
@@ -99,7 +101,7 @@ const OneToManyTable = React.forwardRef((
                         {
                           childrenNodes.map((column, index)=>{
                             return(
-                              <ComponentRender key={`${index}-row-${rowStore.id}`} component = {column} />
+                              <ComponentRender key={`${index}-row-${rowStore.id}`} node = {column} />
                             )
                           })
                         }

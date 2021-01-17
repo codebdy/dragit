@@ -36,7 +36,7 @@ export const  OneToManyTableView = {
           children: [
             {
               name:'OneToManyTable',
-              selfRenderChildren:true,
+              selfRender:true,
               props: {
                 elevation: 6,
                 title:'规格库存',

@@ -5,7 +5,7 @@ import { Close } from '@material-ui/icons';
 import { GraphQLDebugPannel } from './GraphQLDebugPannel';
 import intl from 'react-intl-universal';
 import "./style.css";
-import { usePageStore } from 'Base/PageUtlis/PageStore';
+import { usePageStore } from 'Base/Action/PageStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

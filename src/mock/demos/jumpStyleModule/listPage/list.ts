@@ -3,7 +3,7 @@ import { BATCH_REMOVE_LIST_VIEW_RECORDS,
   OPEN_PAGE_ACTION, 
   REMOVE_LIST_VIEW_RECORD, 
   UPDATE_LIST_VIEW_RECORD 
-} from "Base/PageUtlis/ACTIONs";
+} from "Base/Action/ACTIONs";
 
 export default {
   name:'ListView',
@@ -92,7 +92,7 @@ export default {
     },
     {
       name:'ListViewBody',
-      selfRenderChildren:true,
+      selfRender:true,
       children:[
         {
           name:'TableColumn',

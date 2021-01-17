@@ -1,5 +1,5 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
-import { usePageStore } from "Base/PageUtlis/PageStore";
+import { usePageStore } from "Base/Action/PageStore";
 import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { ListViewStore } from "./ListViewStore";

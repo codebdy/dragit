@@ -1,4 +1,4 @@
-import { RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtlis/ACTIONs";
+import { RESET_ACTION, SUBMIT_MUTATION } from "Base/Action/ACTIONs";
 
 export default {
   layout:[
@@ -27,9 +27,7 @@ export default {
               children:[
                 {
                   name:"FormGridContainer",
-                  props:{
-                    field:'subtraction',
-                  },
+                  field:'subtraction',
                   children:[
                     {
                       name: 'PortletGridItem',
@@ -54,17 +52,18 @@ export default {
                       children:[
                         {
                           name:'TextBox',
+                          field:'minute',
+                          rule:{
+                            valueType:'number',
+                            required:true,
+                          },                          
                           props:{
                             label:'被减数',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'minute',
                             type:'number',
                             required:true,
-                            rule:{
-                              valueType:'number',
-                              required:true,
-                            }
+
                           }
                         }
                       ]
@@ -77,17 +76,18 @@ export default {
                       children:[
                         {
                           name:'TextBox',
+                          field:'minus',
+                          rule:{
+                            valueType:'number',
+                            required:true,
+                          },
                           props:{
                             label:'减数',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'minus',
                             type:'number',
                             required:true,
-                            rule:{
-                              valueType:'number',
-                              required:true,
-                            }
+
                           }
                         }
                       ]
@@ -106,12 +106,12 @@ export default {
                       children:[
                         {
                           name:'TextBox',
+                          field:'subtractResult',
+                          onlyShow:true,
                           props:{
                             label:'计算结果',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'subtractResult',
-                            onlyShow:true,
                           }
                         }
                       ]
@@ -179,9 +179,8 @@ export default {
               children:[
                 {
                   name:"FormGridContainer",
-                    props: {
-                      field:'compound',
-                    },                  
+                    field:'compound',                    
+             
                     children:[
                     {
                       name: 'PortletGridItem',
@@ -207,16 +206,17 @@ export default {
                       children:[
                         {
                           name:'TextBox',
+                          field:'cardinal',                          
+                          rule:{
+                            valueType:'number',
+                            required:true,
+                          },
                           props:{
                             label:'基数',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'cardinal',
                             type:'number',
-                            rule:{
-                              valueType:'number',
-                              required:true,
-                            }
+
                           }
                         }
                       ]
@@ -229,16 +229,17 @@ export default {
                       children:[
                         {
                           name:'TextBox',
+                          field:'rate',
+                          rule:{
+                            valueType:'number',
+                            required:true,
+                          },
                           props:{
                             label:'利率',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'rate',
                             type:'number',
-                            rule:{
-                              valueType:'number',
-                              required:true,
-                            }
+
                           }
                         }
                       ]
@@ -251,16 +252,17 @@ export default {
                       children:[
                         {
                           name:'TextBox',
+                          field:'periods',
+                          rule:{
+                            valueType:'number',
+                            required:true,
+                          },
                           props:{
                             label:'期数',
                             variant:"outlined",
-                            fullWidth:true,
-                            field:'periods',
+                            fullWidth:true,                            
                             type:'number',
-                            rule:{
-                              valueType:'number',
-                              required:true,
-                            }
+
                           }
                         }
                       ]
@@ -274,12 +276,12 @@ export default {
                       children:[
                         {
                           name:'TextBox',
+                          field:'result',
+                          onlyShow:true,//不是输入字段
                           props:{
                             label:'计算结果',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'result',
-                            onlyShow:true,//不是输入字段
                           }
                         }
                       ]

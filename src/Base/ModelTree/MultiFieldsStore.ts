@@ -80,7 +80,7 @@ export class MultiFieldsStore implements IModelNode{
 
   }
 
-  getFieldStore(fieldName:string){
+  getFieldStore(fieldName?:string){
     return undefined;
   }
 

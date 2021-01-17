@@ -7,6 +7,7 @@ import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
 import {Observer} from 'mobx-react';
 import { useDesign } from 'Design/PageEditor/useDesign';
+import { useRXNode } from 'Base/RXNode/RXNodeProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,15 +34,16 @@ const OneToManyPortlet = React.forwardRef((
   const {isDesigning} = useDesign();
   const classes = useStyles();
   const modelStore =  useModelStore();
+  const node = useRXNode();
   const fieldStore = modelStore?.getFieldStore(field) as ModelArrayFieldStore;
   useEffect(()=>{
-    modelStore?.setFieldStore(field,  new ModelArrayFieldStore({name:field, props}));
+    modelStore?.setFieldStore(field,  new ModelArrayFieldStore(node));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field])
 
   const fieldStoreForDesign = useMemo(()=>{
     if(isDesigning){
-      const store = new ModelArrayFieldStore({name:field||'temp-for-design', props})
+      const store = new ModelArrayFieldStore()
       store.addRow()
       return store;      
     }

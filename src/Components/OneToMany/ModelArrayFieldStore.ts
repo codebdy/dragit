@@ -4,7 +4,8 @@ import { IModelNode } from "../../Base/ModelTree/IModelNode";
 import { ModelFieldStore } from "Base/ModelTree/ModelFieldStore";
 import { creatId } from "Base/creatId";
 import { ID } from "Base/Model/graphqlTypes";
-import { IMetaProps } from "Base/Model/IMeta";
+import { IMeta } from "Base/Model/IMeta";
+import { RXNode } from "Base/RXNode/RXNode";
 
 
 export class ModelArrayFieldStore implements IFieldStore {
@@ -12,22 +13,22 @@ export class ModelArrayFieldStore implements IFieldStore {
   defaultValue?: any;
   value?: any;
   error?: string;
-  metaProps?: IMetaProps;
+  node?: RXNode<IMeta>;
   loading?: boolean;
   isSelected?: boolean;
   dirty?: boolean;
   rows:Array<ModelFieldStore> = [];
   schemaRow?:ModelFieldStore;
-  constructor(metaProps?: IMetaProps) {
+  constructor(node?: RXNode<IMeta>) {
     this.id = creatId();
-    this.metaProps = metaProps;
-    this.schemaRow = new ModelFieldStore(this.metaProps);
+    this.node = node;
+    this.schemaRow = new ModelFieldStore(this.node);
     makeAutoObservable(this);
   }
   setFieldStore(fieldName: string, fieldStore: IFieldStore) {
   }
 
-  getFieldStore(fieldName:string){
+  getFieldStore(fieldName?:string){
     return undefined;
   }
 
@@ -78,7 +79,7 @@ export class ModelArrayFieldStore implements IFieldStore {
   }
 
   addRow(){
-    this.rows.push(new ModelFieldStore(this.metaProps));
+    this.rows.push(new ModelFieldStore(this.node));
   }
 
   removeRow(index:number){
@@ -90,7 +91,7 @@ export class ModelArrayFieldStore implements IFieldStore {
   }
 
   getLabel(){
-    return 'Table:' + this.metaProps?.field
+    return 'Table:' + this.node?.meta.field
   }
 
   removeFieldStore(fieldName:string){  

@@ -1,8 +1,11 @@
 import { ID } from "Base/Model/graphqlTypes";
+import { IMeta } from "Base/Model/IMeta";
+import { RXNode } from "Base/RXNode/RXNode";
 import { IFieldStore } from "./FieldStore";
 
 export interface IModelNode{
   id:ID;
+  node?:RXNode<IMeta>;
   loading?:boolean;
   isSelected?:boolean;
   setModel:(model:any)=>void;
@@ -17,7 +20,7 @@ export interface IModelNode{
   toFieldsGQL:()=>void;
   toInputValue:()=>any;
   setFieldStore:(fieldName:string, fieldStore:IFieldStore)=>void;
-  getFieldStore:(fieldName:string)=>IFieldStore|undefined;
+  getFieldStore:(fieldName?:string)=>IFieldStore|undefined;
   removeFieldStore:(fieldName:string)=>void;
   getLabel:()=>string;
 
