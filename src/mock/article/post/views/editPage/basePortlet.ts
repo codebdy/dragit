@@ -20,15 +20,15 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'title',
+              rule:{
+                valueType:'string',
+                required:true,
+              },  
               props:{
                 label:'标题',
                 variant:"outlined",
                 fullWidth:true,
-                field:'title',
-                rule:{
-                  valueType:'string',
-                  required:true,
-                }                      
               }
             }
           ]
@@ -41,16 +41,12 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'slug',
               props:{
                 label:'Slug',
                 variant:"outlined",
                 fullWidth:true,
-                field:'slug',
                 //required:true,
-                rule:{
-                  //valueType:'string',
-                  //required:true,
-                }                      
               },
             }
           ]
@@ -63,17 +59,13 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'auther',
               props:{
                 label:'作者',
                 variant:"outlined",
                 fullWidth:true,
-                field:'auther',
                 //required:true,
                 helperText:'作者提示',
-                rule:{
-                  //valueType:'string',
-                  //required:true,
-                }                      
               },
             }
           ]
@@ -86,16 +78,16 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'email',
+              rule:{
+                valueType:'string',
+                ruleType:'email',
+                required:true,
+              },
               props:{
                 label:'Email',
                 variant:"outlined",
                 fullWidth:true,
-                field:'email',
-                rule:{
-                  valueType:'string',
-                  ruleType:'email',
-                  required:true,
-                },
               },
             }
           ]
@@ -109,21 +101,18 @@ export default{
           children:[
             {
               name:'TreeSelect',
+              field:'channel',
               designProps:{
                 query:null,
               },
               props:{
                 label:"频道",
                 variant:"outlined",
-                field:'channel',
                 fullWidth:true,
                 multiSelect:true,
                 //size:"small",
                 xs:6,
                 query:'channelTree',
-                rule:{
-                  //required:true,
-                },
               },        
             }
           ],
@@ -136,16 +125,13 @@ export default{
           children:[
             {
               name:'Combobox',
+              field:'tags',
               props:{
                 label:"标签",
                 variant:"outlined",
-                field:'tags',
                 multiple:true,
                 fullWidth:true,
                 query:'allPostTags',
-                rule:{
-                  //required:true,
-                },
               },                         
             }
           ]

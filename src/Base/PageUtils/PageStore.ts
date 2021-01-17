@@ -6,6 +6,17 @@ import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { cloneObject } from "Utils/cloneObject";
 
+function getGQL(node:RXNode<IMeta>){
+  let gql = '';
+  if(node.meta.field){
+    gql = gql + ` ${node.meta.field} `;
+  }
+  node.children.forEach(child=>{
+    gql = gql + getGQL(child);
+  })
+  return gql;
+}
+
 export class PageStore{
   gqls: Array<GraphQLStore> = [];
   page:IPage;
@@ -40,8 +51,11 @@ export class PageStore{
   }
 
   getFieldsGQL(){
-    let gql = '{ id }';
-    return gql;
+    let gql = '';
+    this.pageLayout.forEach(child=>{
+      gql = gql + getGQL(child);
+    })
+    return `{ id ${gql}}`;
   }
 }
 

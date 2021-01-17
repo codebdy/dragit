@@ -11,9 +11,7 @@ export default{
   children:[
     {
       name:'FormGridContainer',
-      props:{
-        field:'seoMeta',
-      },
+      field:'seoMeta',
       children:[
         {
           name: 'PortletGridItem',
@@ -23,11 +21,11 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'title',
               props:{
                 label:'标题',
                 variant:"outlined",
                 fullWidth:true,
-                field:'title',
                 rule:{
                   valueType:'string',
                   required:true,
@@ -45,13 +43,13 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'keywords',
               props:{
                 label:'关键词',
                 variant:"outlined",
                 fullWidth:true,
                 multiline:true,
                 rows:2,
-                field:'keywords',
               }
             }
           ]
@@ -65,13 +63,13 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'description',
               props:{
                 label:'描述',
                 variant:"outlined",
                 fullWidth:true,
                 multiline:true,
                 rows:3,
-                field:'description',
               }
             }
           ]

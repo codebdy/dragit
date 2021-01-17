@@ -1,9 +1,9 @@
 export default{
   name:'MediasPortlet',
+  field:'medias',
   props: {
     variant:'outlined',
     cols:3,
-    field:'medias',
     marginTop:2,  
    },
 }

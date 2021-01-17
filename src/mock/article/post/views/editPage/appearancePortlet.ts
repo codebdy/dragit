@@ -19,11 +19,11 @@ export default{
           children:[
             {
               name:'TextBox',
+              field:'order',
               props:{
                 label:'顺序',
                 variant:"outlined",
                 fullWidth:true,
-                field:'order',
               }
             }
           ]
@@ -36,10 +36,10 @@ export default{
           children:[
             {
               name:'MultiSelectBox',
+              field:'attributes',
               props:{
                 label:"附加属性",
                 variant:"outlined",
-                field:'attributes',
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
@@ -56,10 +56,10 @@ export default{
           children:[
             {
               name:'SwitchBox',
+              field:'status',
               props:{
                 label:'发布',
                 fullWidth:true,
-                field:'status',
                 color:'primary',
                 onValue:'PUBLISHED',
                 offValue:'DRAFT',

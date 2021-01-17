@@ -11,9 +11,9 @@ export default{
   children:[
     {
       name:"TinyMCE",
+      field:'content',
       props:{
         height:500,
-        field:'content'
       }
 
     }
