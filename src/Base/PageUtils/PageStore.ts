@@ -7,15 +7,18 @@ import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { cloneObject } from "Utils/cloneObject";
 import intl from "react-intl-universal";
+import { CHILDREN_GQL, getMetaFieldGql } from "./getMetaFieldGql";
 
 function getGQL(node:RXNode<IMeta>){
-  let gql = '';
-  if(node.meta.field){
-    gql = gql + ` ${node.meta.field} `;
-  }
+  let gql = ` ${getMetaFieldGql(node.meta)} `;
+  
+  let childrenGql = '';
   node.children.forEach(child=>{
-    gql = gql + getGQL(child);
-  })
+    childrenGql = childrenGql + getGQL(child);
+  })  
+
+  gql = gql.trim() ? gql.replace(CHILDREN_GQL, childrenGql) : childrenGql;
+
   return gql;
 }
 

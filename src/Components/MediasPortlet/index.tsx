@@ -9,6 +9,7 @@ import { Skeleton } from '@material-ui/lab';
 import { IMedia } from 'Base/Model/IMedia';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { add, exchange, remove } from 'Utils/ArrayHelper';
+import withFormField from 'Components/Common/withFormField';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -196,9 +197,9 @@ const MediasPortlet = React.forwardRef((
         <Grid container spacing={3}>
           {
             loading?
-            [1,2,3,4,5,6].map(i=>{
+            [1,2,3].map(i=>{
               return (
-                <Grid key={i} item xs={2}>
+                <Grid key={i} item xs={12/(cols||4) as any}>
                   <Skeleton animation="wave" variant="rect" style={{paddingBottom:'100%'}} />
                 </Grid>
               )
@@ -221,4 +222,4 @@ const MediasPortlet = React.forwardRef((
   )
 })
 
-export default MediasPortlet;
+export default withFormField(MediasPortlet);

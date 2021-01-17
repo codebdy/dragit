@@ -7,7 +7,7 @@ import MediaSelect from 'Components/Inputs/MediaSelect/MediaSelect';
 import OneToManyTable from 'Components/OneToMany/OneToManyTable';
 import Portlet from 'Components/Portlet';
 import PortletFooter from 'Components/Portlet/Footer';
-import FormGridContainer from 'Components/Portlet/GridContainer';
+import FormGridContainer from 'Components/Portlet/FormGridContainer';
 import Combobox from 'Components/Inputs/Select/Combobox';
 import SelectBox from 'Components/Inputs/Select/SelectBox';
 import Canvas from 'Components/Canvas';
