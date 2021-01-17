@@ -42,8 +42,6 @@ export default function GraphQLDebug(
   const {open, onClose, onRefreshVariables} = props;
   const classes = useStyles();
 
-  const pageStore = usePageStore();
-
   return (
     <Drawer anchor="bottom" variant="persistent" open={open} onClose={onClose}>
       <div className = {classes.title}>
@@ -55,7 +53,7 @@ export default function GraphQLDebug(
       </div>
       <Divider />
       <div className={classes.content}> 
-        <GraphQLDebugPannel gqls = {pageStore?.gqls} onRefreshVariables = {onRefreshVariables}/>
+        <GraphQLDebugPannel onRefreshVariables = {onRefreshVariables}/>
       </div>
     </Drawer>
   )

@@ -30,6 +30,19 @@ export class PageStore{
   setSelectModelComponentRxid(rxid?:string){
     this.selectModelComponentRxid = rxid;
   }
+
+  addGql(gql:GraphQLStore){
+    this.gqls.push(gql);
+  }
+
+  removeGql(gql:GraphQLStore){
+    this.gqls.splice(this.gqls.indexOf(gql), 1);
+  }
+
+  getFieldsGQL(){
+    let gql = '{ id }';
+    return gql;
+  }
 }
 
 export const PageStoreContext = createContext<PageStore|undefined>(undefined);

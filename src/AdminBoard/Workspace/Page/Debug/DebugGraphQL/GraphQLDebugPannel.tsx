@@ -10,6 +10,7 @@ import { useDebugQuery } from './useDebugQuery';
 import { useDebugMutation } from './useDebugMutation';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useAppStore } from 'Store/Helpers/useAppStore';
+import { usePageStore } from 'Base/PageUtils/PageStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,14 +62,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const GraphQLDebugPannel = observer((props:{
-  gqls?:Array<GraphQLStore>,
   onRefreshVariables?:()=>void
 })=>{
-  const {gqls, onRefreshVariables} = props;
+  const {onRefreshVariables} = props;
   const classes = useStyles();
   const [selected, setSelected] = useState<GraphQLStore|undefined>(/*gqls&&gqls.length > 0 ? gqls[0] : undefined*/);
   const [graphiQL, setGraphiQL] = useState('');
   const [variablesStr, setVariablesStr] = useState('');
+  const gqls = usePageStore()?.gqls;
   //const [error, setError] = useState<any>();
   const appStore = useAppStore();
 

@@ -35,25 +35,22 @@ export const Page = observer((
 )=>{
   const [openAlert, setOpentAlert] = useState(false);
   const {page, pageJumper, hideDebug, onPageAction} = props;
-  const [actionStore] = useState(new ActionStore());
-  const [modelStore] = useState(new ModelStore());  
-  const [pageStore, setPage] = useState<PageStore>();
+  const [actionStore, setActionStore] = useState<ActionStore>();
+  const [modelStore, setModelStore] = useState<ModelStore>();  
+  const [pageStore, setPageStore] = useState<PageStore>();
   const [mutation, setMutation] = useState<IPageMutation>();
   const queryName = page?.schema?.query;
   const appStore = useAppStore();
   const loggedUser = useLoggedUser();
 
   useEffect(()=>{
-    setPage(new PageStore(page));
-  },[page]);
-
-  useEffect(()=>{
-    pageStore?.setSelectModelComponentRxid('');
-    modelStore.clearFields();
+    setPageStore(new PageStore(page));
+    setActionStore(new ActionStore());
+    setModelStore(new ModelStore());    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageJumper])
 
-  const queryGQL = usePageQueryGQL(modelStore, pageStore, queryName, pageJumper);
+  const queryGQL = usePageQueryGQL(pageStore, queryName, pageJumper);
   
   const [excuteQuery, { loading:queryLoading, error, data }] = useLazyQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryGQL.variables },
@@ -66,10 +63,10 @@ export const Page = observer((
     {
       onCompleted:(data)=>{
         if(mutation){
-          const submitNode = modelStore.getModelNode(mutation.submitNode);
+          const submitNode = modelStore?.getModelNode(mutation.submitNode);
           submitNode?.updateDefaultValue();
           if(mutation?.refreshNode){
-            const refreshNode = modelStore.getModelNode(mutation?.refreshNode)
+            const refreshNode = modelStore?.getModelNode(mutation?.refreshNode)
             refreshNode?.setModel({[mutation?.refreshNode]:data[mutation.name]})             
             refreshNode?.setLoading(false);          
           }
@@ -88,8 +85,8 @@ export const Page = observer((
   
   useEffect(()=>{
     if(mutation){
-      const submitNode = modelStore.getModelNode(mutation.submitNode)
-      const refreshNode = modelStore.getModelNode(mutation?.refreshNode) 
+      const submitNode = modelStore?.getModelNode(mutation.submitNode)
+      const refreshNode = modelStore?.getModelNode(mutation?.refreshNode) 
       refreshNode?.setLoading(true);
       excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}}); 
     }
@@ -104,16 +101,16 @@ export const Page = observer((
   },[page]);
 
   useEffect(()=>{
-    modelStore.setLoading(queryLoading);
+    modelStore?.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryLoading]);
 
   useEffect(()=>{
     if(data && queryName){
-      modelStore.setModel(data[queryName]);      
+      modelStore?.setModel(data[queryName]);      
     }
     else{
-      modelStore.setModel(undefined);
+      modelStore?.setModel(undefined);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -123,7 +120,7 @@ export const Page = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
-        const submitNode = modelStore.getModelNode(action.mutation?.submitNode)
+        const submitNode = modelStore?.getModelNode(action.mutation?.submitNode)
         console.assert(submitNode, 'Page内错误，提交节点不存在：' + action.mutation?.submitNode);
         if(submitNode?.validate()){
           if(action.mutation){
@@ -146,12 +143,12 @@ export const Page = observer((
       case RESET_ACTION:
         if(action.resetNodes){
           action.resetNodes.forEach(nodeName =>{
-            const resetNode = modelStore.getModelNode(nodeName);
+            const resetNode = modelStore?.getModelNode(nodeName);
             resetNode?.reset();          
           })
         }
         else{
-          modelStore.reset();
+          modelStore?.reset();
         }
 
         return;
