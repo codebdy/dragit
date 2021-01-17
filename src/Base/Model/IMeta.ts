@@ -9,7 +9,7 @@ export interface IMeta{
   field?:string,
   onlyShow?:boolean,
   rule?:IValidateRule,
-  selfRender?:boolean,
+  withNodeContext?:boolean,
   designProps?:{[key:string]: any},
   auths?:string[],
   graphiQL?:string,

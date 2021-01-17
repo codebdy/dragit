@@ -35,7 +35,6 @@ interface Updating{
 
 export class ListViewStore{
   refreshQueryFlag:number = 1;
-  rowSchemaStore:ModelStore = new ModelStore();
   columns:Array<RXNode<IMeta>> = [];
   selects:ID[] = [];
   whereGraphiQLs: Map<string,string> = new Map<string,string>();

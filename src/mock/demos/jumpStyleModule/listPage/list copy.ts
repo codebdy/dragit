@@ -1,7 +1,7 @@
 export default {
   name:'ListView',
   withActions:true,
-  selfRender:true,
+  withNodeContext:true,
   designProps:{
     query:null,
   },

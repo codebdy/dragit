@@ -25,7 +25,6 @@ const OneToManyTable = React.forwardRef((
   props: {
     field?:string,
     size?:any,
-    childrenNodes?:Array<RXNode<IMeta>>,
     children:any,
   }, 
   ref:any
@@ -33,7 +32,6 @@ const OneToManyTable = React.forwardRef((
   const{
     field,
     size,
-    childrenNodes = [],
     children,
      ...rest
   } = props;
@@ -80,7 +78,7 @@ const OneToManyTable = React.forwardRef((
                 <TableHead>
                   <TableRow>
                     {
-                      childrenNodes.map((column, index)=>{
+                      rxNode?.children.map((column, index)=>{
                         const{width = undefined, ...other} = (column.meta.props ? column.meta.props : {})
                         return(
                           <TableCell key={`${column}-${index}`} component="th" style={{width:width}} {...other}>
@@ -99,7 +97,7 @@ const OneToManyTable = React.forwardRef((
                     <ModelProvider value={rowStore} key = {rowStore.id}>
                       <TableRow key={`row-${rowStore.id}`} >
                         {
-                          childrenNodes.map((column, index)=>{
+                          rxNode?.children.map((column, index)=>{
                             return(
                               <ComponentRender key={`${index}-row-${rowStore.id}`} node = {column} />
                             )

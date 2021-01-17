@@ -7,6 +7,7 @@ import { BATCH_REMOVE_LIST_VIEW_RECORDS,
 
 export default {
   name:'ListView',
+  withNodeContext:true,
   props:{
     variant:'outlined',
     query:'posts',
@@ -92,7 +93,7 @@ export default {
     },
     {
       name:'ListViewBody',
-      selfRender:true,
+      withNodeContext:true,
       children:[
         {
           name:'TableColumn',
@@ -101,12 +102,12 @@ export default {
           },
           children:[{
             name:'MediaView',
+            field:'feathureImage',
+            graphiQL:`feathureImage{
+              id 
+              thumbnail
+            } `,  
             props:{
-              field:'feathureImage',
-              graphiQL:`$field{
-                id 
-                thumbnail
-              } `,          
               width:'60px',
             }
           }]
@@ -123,8 +124,8 @@ export default {
     
           children:[{
             name:'TextView',
+            field:'title',
             props:{
-              field:'title',
               variant:'outlined',
               size:'small',
             }
@@ -137,8 +138,8 @@ export default {
           },
           children:[{
             name:'EnumView',
+            field:'status',
             props:{
-              field:'status',
               metas:[
                 {
                   value:'PUBLISHED',
@@ -164,9 +165,7 @@ export default {
           },
           children:[{
             name:'DayView',
-            props:{
-              field:'created_at',
-            }
+            field:'created_at',
           }],
         },
         {

@@ -65,11 +65,7 @@ export function ComponentRender(
     onClick:handleOnClick
   }
 
-  if(node.meta.selfRender){
-    elementProps.childrenNodes = node.children;
-  }
-
-  let elementView:any = ((node.children && node.children.length > 0) || rxText)&& !node.meta.selfRender ?
+  let elementView:any = ((node.children && node.children.length > 0) || rxText) ?
     (<Component {...elementProps}>
       {rxText}
       {node.children?.map((child: RXNode<IMeta>)=>{
@@ -85,7 +81,7 @@ export function ComponentRender(
   return(
     <Fragment>
       { 
-        node.meta.field || node.meta.selfRender 
+        node.meta.field || node.meta.withNodeContext 
         ? <RXNodeProvider value = {node}>
             {elementView}
           </RXNodeProvider>

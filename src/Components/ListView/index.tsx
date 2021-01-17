@@ -47,6 +47,7 @@ const ListView = observer(React.forwardRef((
   const queryGQL = useQueryGQL( listViewStore, query );
   const updateGQL = useUpdateGQL( listViewStore, update );
   const removeGQL = useRemoveGQL( listViewStore, remove );
+
   //const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     notifyOnNetworkStatusChange: true,
