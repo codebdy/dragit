@@ -68,9 +68,9 @@ const SelectBox = React.forwardRef((
     ...rest
   } = props;
 
-  //如果不从服务器读取数据，itemKey跟itemName设置无效
-  let key = query ? itemKey : 'slug';
-  let name = query ? itemName : 'label';
+
+  let key =  itemKey;
+  let name = itemName;
 
   const classes = useStyles();
   const QUERY_DATA = gql`

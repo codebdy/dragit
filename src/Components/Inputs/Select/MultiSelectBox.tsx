@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
-import { useAppStore } from 'Store/Helpers/useAppStore';
-import intl from 'react-intl-universal';
+
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import withFormField from 'Components/Common/withFormField';
 
 const MultiSelectBox = React.forwardRef((
   props:{
-    value?:Array<string>,
+    value?:Array<any>,
     onChange?:any,
     itemKey?:string,
     itemName?:string,
@@ -20,27 +20,27 @@ const MultiSelectBox = React.forwardRef((
     size?:any,
     groupByField?:string,
     method?:any,
-    params?:any
+    params?:any,
+    loading?:boolean,
   },
   ref:any
 )=>{
   const{value, 
     onChange, 
+    itemKey = 'id',    
     itemName = 'name',
     fullWidth,
     query,
     items,
-    itemKey = 'id',
+    loading,
     groupByField,
     method,
     params,
     ...rest
   } = props;
 
-  let key = query ? itemKey : 'slug';
-  let name = query ? itemName : 'label';
-  //const mountedRef = useRef(true);
-  const [inputValue, setInputValue] = React.useState<Array<any>>(value||[]);
+  let key =itemKey;
+  let name =itemName;
 
   const QUERY_DATA = gql`
   query {
@@ -49,16 +49,14 @@ const MultiSelectBox = React.forwardRef((
       ${itemName}
     }
   }`;
-  const { loading, error: queryError, data } = useQuery(QUERY_DATA);
+  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
   useShowAppoloError(queryError)
 
   const itemsData = (query? (data&&data[query])||[] : items) as any;
-  const handleChange = (newValue:any)=>{
-    setInputValue( newValue );
-
+  const handleChange = (event:any, newValue:any)=>{
     onChange && onChange({
       target:{
-        value:newValue,
+        value:newValue||[],
       }
     });
   }
@@ -67,9 +65,9 @@ const MultiSelectBox = React.forwardRef((
     <Autocomplete
       multiple = {true}
       options = {itemsData||[]}
-      loading = {!!loading }
+      loading = {loading || queryLoading }
       ref = {ref}
-      value = {inputValue}
+      value = {value||[]}
 
       fullWidth = {fullWidth}
       //defaultValue = {value||empertyValue}
@@ -94,13 +92,13 @@ const MultiSelectBox = React.forwardRef((
       }}
 
       groupBy = {(option) => option.module}
-      onChange={(event, newValue) => {
-        handleChange(newValue);
-      }}
+      onChange={handleChange}
 
     />
 
   )
 })
 
-export default MultiSelectBox;
+const MultiSelectBoxAny = withFormField(MultiSelectBox) as any;
+
+export default MultiSelectBoxAny;

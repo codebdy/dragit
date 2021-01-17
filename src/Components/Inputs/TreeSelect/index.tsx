@@ -6,6 +6,7 @@ import ChipsInput from './ChipsInput';
 import intl from 'react-intl-universal';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useAppStore } from 'Store/Helpers/useAppStore';
+import withFormField from 'Components/Common/withFormField';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,10 +31,11 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
     fullWidth, 
     error, 
     helperText, 
-    nameKey, 
+    nameKey = 'name', 
     multiSelect, 
     height,
     query,
+    loading,
     size, 
     ...rest} = props;
   const classes = useStyles();
@@ -42,7 +44,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
       ${query}
     }
   `;
-  const { loading, error: queryError, data } = useQuery(QUERY_TREE);
+  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_TREE);
   const appStore = useAppStore();
   const {isDesigning} = useDesign();
   
@@ -78,7 +80,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
     <FormControl variant="outlined" error = {error} fullWidth = {fullWidth} ref={ref}>
       <InputLabel htmlFor={name} shrink={values.length > 0} className = {classes.label}>{label}</InputLabel>
       {
-        loading?
+        loading || queryLoading?
           <Skeleton animation="wave" height={60} /> 
         :
           <InputControl
@@ -110,4 +112,4 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
   )
 })
 
-export default TreeSelect;
+export default withFormField(TreeSelect);

@@ -13,6 +13,14 @@ export function getMetaFieldGql(meta: IMeta){
       return `  ${meta.field}{ id title  thumbnail  src  alt }`;
     }
 
+    if(meta.name === 'TreeSelect'){
+      return `  ${meta.field}{ id ${meta.props?.nameKey || 'name'} }`;
+    }
+
+    if(meta.name === 'MultiSelectBox' || meta.name === 'SelectBox'){
+      return `  ${meta.field}{ ${meta.props?.itemKey || 'id'} ${meta.props?.itemName || 'name'} }`;
+    }
+
     return ` ${meta.field} `;
   }
 

@@ -3,6 +3,7 @@ import {observer} from 'mobx-react';
 import { useModelStore } from "../../Base/ModelTree/ModelProvider";
 import { useFieldStore } from "./useFieldStore";
 import useSelectModel from './useSelectModel';
+import { toJS } from 'mobx';
 
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
@@ -13,7 +14,7 @@ const withFormField = (Component:any)=>{
     useSelectModel(fieldStore, rxid);
 
     const handleChange = (e:any) => {
-      let newValue = e?.target?.value;
+      let newValue = toJS(e?.target?.value);
       fieldStore?.setValue(newValue);
       if(fieldStore?.error){
         fieldStore?.validate();        
@@ -32,7 +33,7 @@ const withFormField = (Component:any)=>{
       data-rxid = {rxid}
       ref={forwardedRef}
       loading={fieldStore?.loading || modelStore?.loading}
-      value={fieldStore?.value === undefined ? (empertyValue || '') : fieldStore?.value}
+      value={fieldStore?.value === undefined ? (empertyValue || '') : toJS(fieldStore?.value)}
       {...rest}
       error={!! error}
       helperText = {error || helperText}
