@@ -12,7 +12,6 @@ import LeftContent from './LeftContent';
 import { IPageSchema } from 'Base/Model/IPage';
 import PageSkeleton from 'AdminBoard/Workspace/Common/ModuleSkeleton';
 import { IMeta } from 'Base/Model/IMeta';
-import { RXNodeRoot } from 'Base/RXNode/Root';
 import { ComponentView } from './Core/ComponentView';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { NodeToolbar } from './Core/NodeToolbar';
@@ -60,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function makeCanvas(){
-  return new RXNodeRoot<IMeta>(
+  return RXNode.make<IMeta>(
     {
       name:'Canvas'
     }
@@ -193,7 +192,7 @@ export const PageEditor = observer((
       id:pageId,
       schema:{
         ...pageSchema,
-        layout:canvasStore.canvas?.getRootMetas(),
+        layout:canvasStore.canvas?.getChildrenMetas(),
       },
     }
     }})

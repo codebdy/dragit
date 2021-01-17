@@ -8,7 +8,6 @@ import { RXNode } from "Base/RXNode/RXNode";
 import Subheader from "./MenuItems/Subheader";
 import { MenuNode } from "./MenuItems/MenuNode";
 import { MenuNodeGroup } from "./MenuItems/MenuNodeGroup";
-import { RXNodeRoot } from "Base/RXNode/Root";
 import { useQuery } from '@apollo/react-hooks';
 import {observer} from "mobx-react";
 import { ID } from "Base/Model/graphqlTypes";
@@ -45,7 +44,7 @@ export const SidebarLinks = observer((
   useShowAppoloError(error)
 
   useEffect(()=>{
-    let root = new RXNodeRoot<IMenuItem>();
+    let root = new RXNode<IMenuItem>();
     root.parse(cloneObject(data?.drawer?.items||[]));
     data && setItems(root.children);          
   },[data]);

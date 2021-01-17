@@ -9,7 +9,6 @@ import IMenuItem from 'Base/Model/IMenuItem';
 import { RXNode } from 'Base/RXNode/RXNode';
 import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
-import { RXNodeRoot } from 'Base/RXNode/Root';
 import { AUTH_CUSTOMIZE } from 'Base/authSlugs';
 import { ID } from 'Base/Model/graphqlTypes';
 import { GET_DRAWER, SAVE_DRAWER } from 'Base/GraphQL/GQLs';
@@ -66,7 +65,7 @@ export default function DrawerEditor(){
   const classes = useStyles();
   const history = useHistory();
   const { loading, error, data } = useQuery(GET_DRAWER);
-  const [rootNode,setRootNode] = React.useState(new RXNodeRoot<IMenuItem>());
+  const [rootNode,setRootNode] = React.useState(new RXNode<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RXNode<IMenuItem>>();
   const appStore = useAppStore();
@@ -92,7 +91,7 @@ export default function DrawerEditor(){
   }
 
   const handleSave = ()=>{
-    const drawerData = rootNode.getRootMetas();
+    const drawerData = rootNode.getChildrenMetas();
     excuteSave({variables:{items:drawerData}})
   }
 

@@ -1,10 +1,10 @@
 import { IPageSchema } from 'Base/Model/IPage';
 import { IMeta } from 'Base/Model/IMeta';
-import { RXNodeRoot } from 'Base/RXNode/Root';
 import { ID } from 'Base/Model/graphqlTypes';
+import { RXNode } from 'Base/RXNode/RXNode';
 
 export interface IEditorSnapshot {
-  canvasNode?: RXNodeRoot<IMeta>;
+  canvasNode?: RXNode<IMeta>;
   pageSchema?: IPageSchema;
   selectedNodeId?: ID;
 }

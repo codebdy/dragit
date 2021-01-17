@@ -26,8 +26,7 @@ export function usePageQueryGQL( modelStore:ModelStore, pageStore:PageStore, que
         pageStore?.removeGql(queryGQL);
       }      
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[queryName])
+  })
 
   useEffect(()=>{
     queryGQL.setVariables({id:pageParams?.dataId})

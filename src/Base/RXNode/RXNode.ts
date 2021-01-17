@@ -65,7 +65,7 @@ export class RXNode<T>{
     return newNode;
   }
 
-  getNode(id:ID):RXNode<T>|undefined{
+  getNode(id?:ID):RXNode<T>|undefined{
     if(id === this.id){
       return this;
     }
@@ -125,7 +125,7 @@ export class RXNode<T>{
     return after(this, this.parent?.children)
   }
 
-  getMeta(){
+   getMeta(){
     let metaAny = cloneObject(this.meta);
     metaAny.children = [];
     this.children.forEach(child=>{
@@ -176,4 +176,21 @@ export class RXNode<T>{
     this.id = targetId;
   }
 
+  getChildrenMetas(){
+    let metas:Array<T> = [];
+    this.children.forEach(child=>{
+      metas.push(child.getMeta());
+    })
+
+    return metas;
+  }
+
+  parse(metas?:Array<T>){
+    this.children = [];
+    metas && metas.forEach((meta: any)=>{
+      let node = RXNode.make<T>(meta);
+      node.parent = this;
+      this.children.push(node);
+    })
+  }
 } 

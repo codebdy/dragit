@@ -14,7 +14,6 @@ import { IPageMutation } from 'Base/Model/IPageMutation';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import intl from 'react-intl-universal';
-import { RXNodeRoot } from 'Base/RXNode/Root';
 import { AUTH_DEBUG } from 'Base/authSlugs';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
@@ -104,7 +103,7 @@ export const Page = observer((
   
   useEffect(()=>{
     const layout = page?.schema?.layout || [];
-    let root = new RXNodeRoot<IMeta>();
+    let root = new RXNode<IMeta>();
     root.parse(cloneObject(layout));
     setPageLayout(root.children);
 

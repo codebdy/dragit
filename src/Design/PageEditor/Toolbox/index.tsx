@@ -6,7 +6,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { IToolboxItem } from './IToolboxItem';
-import { RXNodeRoot } from 'Base/RXNode/Root';
 import TreeNode from './TreeNode';
 import { cloneObject } from 'Utils/cloneObject';
 
@@ -36,10 +35,10 @@ export default function Toolbox(
 ) {
   const {onStartDragToolboxItem} = props;
   const classes = useStyles();
-  const [root, setRoot] = useState<RXNodeRoot<IToolboxItem>>();
+  const [root, setRoot] = useState<RXNode<IToolboxItem>>();
   
   useEffect(()=>{
-    let aRoot = new RXNodeRoot<IToolboxItem>();
+    let aRoot = new RXNode<IToolboxItem>();
     aRoot.parse(cloneObject(items));
     setRoot(aRoot);
   // eslint-disable-next-line react-hooks/exhaustive-deps

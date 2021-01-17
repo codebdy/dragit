@@ -4,7 +4,6 @@ import { Skeleton } from '@material-ui/lab';
 //import { IForm, defultForm, FormContext } from "base/FormContext";
 import { ID } from 'Base/Model/graphqlTypes';
 import { ITreeNode } from 'Base/Model/ITreeNode';
-import { RXNodeRoot } from 'Base/RXNode/Root';
 import { RXNode } from 'Base/RXNode/RXNode';
 import SubmitButton from 'Components/Common/SubmitButton';
 import Portlet from 'Components/Portlet';
@@ -28,13 +27,13 @@ const TreeEditor = React.forwardRef((
   //const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
   //const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
   const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
-  const [root, setRoot] = useState<RXNodeRoot<ITreeNode>>();
+  const [root, setRoot] = useState<RXNode<ITreeNode>>();
   //const [form, setForm] = useState<IForm>(defultForm());
   const [selectedNode, setSelectedNode] = useState<RXNode<ITreeNode>|undefined>();
 
   /*useEffect(()=>{
     const items = itemsJustSaved ? itemsJustSaved : itemsGot;
-    let root = new RXNodeRoot<ITreeNode>(); 
+    let root = new RXNode<ITreeNode>(); 
     root.parse(items);
     setRoot(root);
   },[itemsJustSaved, itemsGot]);*/
@@ -45,7 +44,7 @@ const TreeEditor = React.forwardRef((
 
   //form值改变刷新树列表
   const valueChanged = ()=>{
-    let newRoot = new RXNodeRoot<ITreeNode>();
+    let newRoot = new RXNode<ITreeNode>();
     newRoot.children = [...(root?.children||[])];
     setRoot(newRoot);
   }

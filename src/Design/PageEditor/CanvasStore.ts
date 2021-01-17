@@ -1,7 +1,6 @@
 import { ID } from "Base/Model/graphqlTypes";
 import { IEditorSnapshot } from "Base/Model/IEditorSnapshot";
 import { IMeta } from "Base/Model/IMeta";
-import { RXNodeRoot } from "Base/RXNode/Root";
 import { RXNode } from "Base/RXNode/RXNode";
 import { IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
@@ -15,7 +14,7 @@ export class CanvasStore {
   activeNode?: RXNode<IMeta>;
   dragOverParam?: IDragOverParam;
   draggedNode?: RXNode<IMeta>;
-  canvas?: RXNodeRoot<IMeta>;
+  canvas?: RXNode<IMeta>;
   draggedToolboxItem?: IToolboxItem;
   selectedNode?: RXNode<IMeta>;
   undoList: Array<IEditorSnapshot> = [];
@@ -54,7 +53,7 @@ export class CanvasStore {
     this.draggedNode = draggedNode;
   }
 
-  setCanvas(canvas?:RXNodeRoot<IMeta>){
+  setCanvas(canvas?:RXNode<IMeta>){
     this.canvas = canvas;
   }
 

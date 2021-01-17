@@ -28,8 +28,8 @@ export class PageMutationGraphiQLGather implements IComponentObserver{
     this.mutationActions.forEach(child=>{
       const mutation = child.node.meta.props?.onClick?.mutation;
       const submitNode = modelStore.getModelNode(mutation.submitNode)
-      child.gqlStore.gql = createMutationGQL(mutation, modelStore);
-      child.gqlStore.variables = {[mutation.variableName]:submitNode?.toInputValue()}
+      child.gqlStore.setGql(createMutationGQL(mutation, modelStore));
+      child.gqlStore.setVariables({[mutation.variableName]:submitNode?.toInputValue()});
       pageStore.addGql(child.gqlStore)
     })
   }
