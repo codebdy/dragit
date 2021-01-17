@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { DADA_RXID_CONST, RXNode } from '../../../Base/RXNode/RXNode';
 import { resolveComponent, resolveRule } from 'Base/RxDrag';
 import { IMeta } from 'Base/Model/IMeta';
@@ -61,7 +61,6 @@ export const ComponentView = observer((
   const classes = useStyles();
   const [editStyle, setEditStyle] = useState<any>({});
   const {canvasStore} = useDesign();
-  const refEl = useRef(undefined);
   let Component = resolveComponent(node.meta);
 
   let metaProps = node.meta.props? node.meta.props :{};
@@ -96,11 +95,11 @@ export const ComponentView = observer((
       canvasStore?.setActiveNode(node);     
     }
     else if(canvasStore?.selectedNode?.id !== node.id){
-      if(refEl.current){
+      //if(refEl.current){
         if(canvasStore?.draggedNode?.id !== node.id){
           canvasStore?.setDragOverParam(dragoverCharger.judgePosition(event))
         }
-      }
+      //}
     }
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{
@@ -141,7 +140,7 @@ export const ComponentView = observer((
   }
 
   const elementView = (node.children && node.children.length > 0) || rxText ?
-    (<Component {...elementProps} ref={refEl}>
+    (<Component {...elementProps}>
       {rxText}
       {node.children?.map((child: RXNode<IMeta>)=>{
         return (
@@ -153,7 +152,7 @@ export const ComponentView = observer((
       })}
     </Component>)
     :
-    <Component {...elementProps} ref={refEl}/>
+    <Component {...elementProps}/>
 
   return(
     <Fragment>
