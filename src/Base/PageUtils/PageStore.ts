@@ -8,6 +8,7 @@ import { createContext, useContext } from "react";
 import { cloneObject } from "Utils/cloneObject";
 import intl from "react-intl-universal";
 import { getNodeGraphQL } from "./getNodeGraphQL";
+import { getMutationNode } from "./getMutationNode";
 
 export class PageStore{
   gqls: Array<GraphQLStore> = [];
@@ -22,6 +23,7 @@ export class PageStore{
     const layout = page?.schema?.layout || [];
     this.rootNode = new RXNode<IMeta>();
     this.rootNode.parse(cloneObject(layout));
+    this.makePageMutationGqls();
     const query = page?.schema?.query;
     if(query){
       this.queryGQL = new GraphQLStore(intl.get('data-query'), 'Page', `
@@ -62,6 +64,19 @@ export class PageStore{
       gql = gql + getNodeGraphQL(child);
     })
     return `{ id ${gql}}`;
+  }
+
+  makePageMutationGqls(){
+    let mutationNodes = new Array<RXNode<IMeta>>()
+    this.pageLayout.forEach(child=>{
+      getMutationNode(mutationNodes, child);
+    })
+
+    mutationNodes.forEach(node=>{
+      const gql = new GraphQLStore(intl.get('mutation'), node.meta.name + ' : ' +node.meta.props?.rxText);
+      gql.setMutation(node.meta.props?.onClick?.mutation);
+      this.gqls.push(gql);
+    })
   }
 }
 

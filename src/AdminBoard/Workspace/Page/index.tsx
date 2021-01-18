@@ -21,7 +21,7 @@ import { ActionStore, ActionStoreProvider } from 'Base/PageUtils/ActionStore';
 import ActionHunter from 'Base/PageUtils/ActionHunter';
 import { Debug } from './Debug';
 import { PageStore, PageStoreProvider } from 'Base/PageUtils/PageStore';
-import { createMutationGQL } from './createMutationGQL';
+import { createMutationGQL } from '../../../Base/PageUtils/createMutationGQL';
 import { PageQuery } from './PageQuery';
 import { RXModel } from 'Base/ModelTree/RXModel';
 
@@ -168,7 +168,7 @@ export const Page = observer((
           </Dialog>
           {
             loggedUser.authCheck(AUTH_DEBUG) && !hideDebug &&
-            <Debug onRefreshVariables={()=>{}}/>
+            <Debug />
           }
         </ModelProvider>
       </ActionStoreProvider>

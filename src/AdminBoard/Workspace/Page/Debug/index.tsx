@@ -24,12 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const Debug = observer((
-  props:{
-    onRefreshVariables?:()=>void
-  }
-)=>{
-  const {onRefreshVariables} = props;
+export const Debug = observer(()=>{
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [gqlOpen, setGqlOpen] = React.useState(false);
@@ -106,7 +101,7 @@ export const Debug = observer((
         />
       </SpeedDial>
       <ThemeProvider theme={theme}>
-        <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} onRefreshVariables = {onRefreshVariables} />
+        <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
         <DebugModelTree open={treeOpen} onClose = {handleCloseTree} />
       </ThemeProvider>
       <ModelSelector />

@@ -1,3 +1,4 @@
+import { IPageMutation } from "Base/Model/IPageMutation";
 import { makeAutoObservable } from "mobx";
 
 export class GraphQLStore{
@@ -5,6 +6,7 @@ export class GraphQLStore{
   source:string;
   gql?:string;
   variables?:any;
+  mutation?:IPageMutation;
 
   constructor(name:string, source:string, gql?:string) {
     this.name = name;
@@ -19,5 +21,9 @@ export class GraphQLStore{
 
   setVariables(variables?:any){
     this.variables = variables;
+  }
+
+  setMutation(mutation?:IPageMutation){
+    this.mutation = mutation;
   }
 }

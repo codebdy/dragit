@@ -35,10 +35,9 @@ export default function GraphQLDebug(
   props:{
     open?:boolean,
     onClose?:()=>void,
-    onRefreshVariables?:()=>void
   }
 ){
-  const {open, onClose, onRefreshVariables} = props;
+  const {open, onClose} = props;
   const classes = useStyles();
 
   return (
@@ -52,7 +51,7 @@ export default function GraphQLDebug(
       </div>
       <Divider />
       <div className={classes.content}> 
-        <GraphQLDebugPannel onRefreshVariables = {onRefreshVariables}/>
+        <GraphQLDebugPannel />
       </div>
     </Drawer>
   )

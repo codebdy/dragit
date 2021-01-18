@@ -11,6 +11,8 @@ import { useDebugMutation } from './useDebugMutation';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { usePageStore } from 'Base/PageUtils/PageStore';
+import { useModelStore } from 'Base/ModelTree/ModelProvider';
+import { createMutationGQL } from 'Base/PageUtils/createMutationGQL';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,10 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const GraphQLDebugPannel = observer((props:{
-  onRefreshVariables?:()=>void
-})=>{
-  const {onRefreshVariables} = props;
+export const GraphQLDebugPannel = observer(()=>{
   const classes = useStyles();
   const [selected, setSelected] = useState<GraphQLStore|undefined>(/*gqls&&gqls.length > 0 ? gqls[0] : undefined*/);
   const [graphiQL, setGraphQL] = useState('');
@@ -72,21 +71,35 @@ export const GraphQLDebugPannel = observer((props:{
   const gqls = usePageStore()?.gqls;
   //const [error, setError] = useState<any>();
   const appStore = useAppStore();
+  const modelStore = useModelStore();
 
   const [excuteQuery, { loading, error:queryError, data:queryResult }] = useDebugQuery(graphiQL);
   const [excuteMutation, {loading:mutating, error:mutationError, data:mutationResult}] = useDebugMutation(graphiQL);
 
+  const refreshVariables = ()=>{
+    let variables = selected?.variables||{};
+    if(selected?.mutation){
+      const submitNode = modelStore?.getModelNode(selected?.mutation.submitNode)
+      variables = {[selected?.mutation.variableName]:submitNode?.toInputValue()}
+    }
+    setVariablesStr(JSON.stringify(variables, null, 2)); 
+  }
+
   useEffect(()=>{
     try{
-      setVariablesStr(JSON.stringify(selected?.variables||{}, null, 2));
-      setGraphQL(selected?.gql ? print(parse(selected?.gql)) : '');
+      let gql = selected?.gql;
+      if(selected?.mutation){
+        gql = createMutationGQL(selected?.mutation, modelStore);
+      }
+      setGraphQL(gql ? print(parse(gql)) : '');
+      refreshVariables();
     }
     catch(e){
       console.error(e);
       setGraphQL(selected?.gql||'');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selected?.variables, selected?.gql])
+  },[selected?.variables, selected?.gql, selected?.mutation])
 
   const isQuery = graphiQL?.startsWith('query');
   const isMutation = graphiQL?.startsWith('mutation');
@@ -101,6 +114,10 @@ export const GraphQLDebugPannel = observer((props:{
   if(isMutation){
     result = mutationResult;
     error = mutationError;
+  }
+
+  const handleRefreshVariables = ()=>{
+    refreshVariables();
   }
   
 
@@ -150,7 +167,7 @@ export const GraphQLDebugPannel = observer((props:{
               <IconButton 
                 size = "small" 
                 disabled = {!selected}
-                onClick = {onRefreshVariables}
+                onClick = {handleRefreshVariables}
               ><MdiIcon iconClass = "mdi-refresh" size={20}/></IconButton>
             </Typography> 
             
