@@ -4,7 +4,7 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { validate } from "./validate";
 
 export class RXModel{
-  key:string;
+  key:string|number;
   node: RXNode<IMeta>;
   modelLabel: string = '';
   defaultValue?: any;
@@ -13,7 +13,7 @@ export class RXModel{
   loading?: boolean;
   isSelected?: boolean;
   private childrenMap: Map<string,RXModel>;
-  constructor(node: RXNode<IMeta>, key:string) {
+  constructor(node: RXNode<IMeta>, key:string|number) {
     this.node = node;
     this.key = key;
     this.childrenMap = new Map<string,RXModel>();
@@ -67,7 +67,6 @@ export class RXModel{
   }
 
   setModel(model: any) {
-    //const fieldName = this.node?.meta.field;
     const fieldValue = model ? model[this.key] : undefined;
     this.defaultValue = fieldValue;
     this.value = fieldValue;

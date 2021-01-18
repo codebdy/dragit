@@ -150,11 +150,11 @@ export class ListViewStore{
 
   setRows(rows?:Array<any>){
     this.rxModel?.clearChildren();
-    rows?.map((row)=> {
+    rows?.forEach((row, index)=> {
       const rowRxNode = RXNode.make({name:'ListViewBodyTableRow'})
       const columns = this.tableRxNode?.clone()?.children;
       rowRxNode.setChildren(columns);
-      const rowModel = new RXModel(rowRxNode, row.id);
+      const rowModel = new RXModel(rowRxNode, index);
       rowModel.setModel(rows);
       this.rxModel?.setChild(row.id, rowModel); 
     });
