@@ -14,6 +14,7 @@ import { IPageMutation } from 'Base/Model/IPageMutation';
 import ListViewActionFilter from './ListViewActionFilter';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useDesign } from 'Design/PageEditor/useDesign';
+import { useModelStore } from 'Base/ModelTree/ModelProvider';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -49,6 +50,16 @@ const ListView = observer(React.forwardRef((
   const updateGQL = useUpdateGQL( listViewStore, update );
   const removeGQL = useRemoveGQL( listViewStore, remove );
   const {isDesigning} = useDesign();
+  const modelStore = useModelStore();
+
+  useEffect(()=>{
+    if(listViewStore.rxModel){
+      const label = 'ListView' + listViewStore.rxModel?.node.id;
+      listViewStore.rxModel.setLabel(label);
+      modelStore?.setChild(label, listViewStore.rxModel)
+    }    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[listViewStore.rxModel]);
 
   //const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
