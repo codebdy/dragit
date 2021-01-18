@@ -1,6 +1,7 @@
 import { makeAutoObservable, toJS } from "mobx";
 import { IMeta } from "Base/Model/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
+import { validate } from "./validate";
 
 export class RXModel{
   key:string;
@@ -85,12 +86,17 @@ export class RXModel{
 
 
   toInputValue(){
+    if(this.childrenMap.size === 0){
+      return this.value;
+    }
+
     let rtValue = this.defaultValue?.id ? {id:this.defaultValue?.id} as any : {} as any;
     this.childrenMap?.forEach((fieldStore, key)=>{
       if(!fieldStore.node?.meta.onlyShow){
         rtValue[key] = fieldStore.toInputValue();
       }
     })
+
     return rtValue;
   }
 
@@ -102,6 +108,10 @@ export class RXModel{
   }
 
   validate(){
+    if(this.childrenMap.size === 0){
+      this.error = validate(this.value, this.node?.meta.rule);
+      return !this.error;
+    }
     let passed = true;
     this.childrenMap?.forEach((fieldStore, key)=>{
       if(!fieldStore.validate()){

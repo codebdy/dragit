@@ -30,7 +30,9 @@ const FormGridContainer = observer(React.forwardRef((props:any, ref:any) => {
   
   useEffect(()=>{
     if(fieldName && rxNode){
-      modelStore?.setChild(fieldName, new RXModel(rxNode, fieldName));
+      const rxModel = new RXModel(rxNode, fieldName);
+      rxModel.setLabel(`Submodel : ${fieldName}`);
+      modelStore?.setChild(fieldName, rxModel);
       return ()=>{
         modelStore?.removeFieldStore(fieldName);
       }      
