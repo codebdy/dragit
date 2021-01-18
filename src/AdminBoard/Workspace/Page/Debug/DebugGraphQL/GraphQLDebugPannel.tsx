@@ -67,7 +67,7 @@ export const GraphQLDebugPannel = observer((props:{
   const {onRefreshVariables} = props;
   const classes = useStyles();
   const [selected, setSelected] = useState<GraphQLStore|undefined>(/*gqls&&gqls.length > 0 ? gqls[0] : undefined*/);
-  const [graphiQL, setGraphiQL] = useState('');
+  const [graphiQL, setGraphQL] = useState('');
   const [variablesStr, setVariablesStr] = useState('');
   const gqls = usePageStore()?.gqls;
   //const [error, setError] = useState<any>();
@@ -79,11 +79,11 @@ export const GraphQLDebugPannel = observer((props:{
   useEffect(()=>{
     try{
       setVariablesStr(JSON.stringify(selected?.variables||{}, null, 2));
-      setGraphiQL(selected?.gql ? print(parse(selected?.gql)) : '');
+      setGraphQL(selected?.gql ? print(parse(selected?.gql)) : '');
     }
     catch(e){
       console.error(e);
-      setGraphiQL(selected?.gql||'');
+      setGraphQL(selected?.gql||'');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selected?.variables, selected?.gql])
@@ -142,7 +142,7 @@ export const GraphQLDebugPannel = observer((props:{
         <Grid container spacing={0} alignItems="stretch" >
           <Grid item md={4} className={classes.editorSchell}>
             <Typography className={classes.titleText} variant="h6">{intl.get('graphiqL')}</Typography>
-            <CodeMirrorEditor value = {graphiQL} mode="graphql" onChange = {value=>setGraphiQL(value?.trim())}/>
+            <CodeMirrorEditor value = {graphiQL} mode="graphql" onChange = {value=>setGraphQL(value?.trim())}/>
           </Grid>
           <Grid item md={4} className={classes.editorSchell}>
             <Typography variant="h6" className={classes.titleText}>

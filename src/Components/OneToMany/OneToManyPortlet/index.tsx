@@ -3,12 +3,12 @@ import { makeStyles, Theme, createStyles, Grid, Divider, IconButton } from '@mat
 import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
-import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
-import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
+import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import {Observer} from 'mobx-react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useRXNode } from 'Base/RXNode/RXNodeProvider';
 import { RXModel } from 'Base/ModelTree/RXModel';
+import { RXNode } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,8 +46,8 @@ const OneToManyPortlet = React.forwardRef((
 
   const fieldStoreForDesign = useMemo(()=>{
     if(isDesigning){
-      const store = new ModelArrayFieldStore()
-      store.addRow()
+      const store = new RXNode()
+      //store.addRow()
       return store;      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

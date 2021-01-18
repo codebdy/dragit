@@ -94,7 +94,7 @@ export const Debug = observer((
       >
         <SpeedDialAction
           icon={<MdiIcon iconClass = "mdi-graphql" />}
-          tooltipTitle={'GraphiQL ' + intl.get('debug')}
+          tooltipTitle={'GraphQL ' + intl.get('debug')}
           tooltipPlacement = "right"
           onClick={(handleOpenGql)}
         />

@@ -1,5 +1,5 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
-import { getNodeGQL } from "Base/PageUtils/getNodeGQL";
+import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { usePageStore } from "Base/PageUtils/PageStore";
 import { useRXNode } from "Base/RXNode/RXNodeProvider";
 import { useState, useEffect } from "react";
@@ -14,9 +14,9 @@ export function useQueryGQL( listViewStore:ListViewStore, query?:string ){
   const createQueryGQL = ()=>{
     const GQL_STRING = `
       query ($first:Int, $page:Int){
-        ${query}(first:$first, page:$page, where:${listViewStore.toWhereGaphiQL()}, orderBy:${listViewStore.toOrderByGraphiQL()}){
+        ${query}(first:$first, page:$page, where:${listViewStore.toWhereGaphiQL()}, orderBy:${listViewStore.toOrderByGraphQL()}){
           data 
-            ${getNodeGQL(rxNode)}
+            ${getNodeGraphQL(rxNode)}
             paginatorInfo {
               count
               currentPage

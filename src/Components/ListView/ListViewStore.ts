@@ -37,7 +37,7 @@ export class ListViewStore{
   refreshQueryFlag:number = 1;
   tableRxNode?: RXNode<IMeta>;
   selects:ID[] = [];
-  whereGraphiQLs: Map<string,string> = new Map<string,string>();
+  whereGraphQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
   //rows: Array<TableRowStore> = [];
   rxModel?:RXModel; 
@@ -77,13 +77,13 @@ export class ListViewStore{
     return this.selects.indexOf(id) > -1
   }
 
-  setWhereGraphiQL(rxId:string, grahpiQL: string){
-    this.whereGraphiQLs.set(rxId, grahpiQL);
+  setWhereGraphQL(rxId:string, grahpiQL: string){
+    this.whereGraphQLs.set(rxId, grahpiQL);
   }
 
   toWhereGaphiQL(){
     let gqls = ''
-    this.whereGraphiQLs.forEach(gql=>{
+    this.whereGraphQLs.forEach(gql=>{
       gqls = gqls + ' ' + gql
     })
     return gqls
@@ -131,7 +131,7 @@ export class ListViewStore{
     return this.getOrderBy(field)?.direction;
   }
 
-  toOrderByGraphiQL(){
+  toOrderByGraphQL(){
     let gqls = '';
     this.orderByArray.forEach(gql=>{
       gqls = gqls + `{column:${gql.field}, order:${gql.direction.toUpperCase()}}`

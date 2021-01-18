@@ -52,7 +52,7 @@ const ListViewKeywordFilter = React.forwardRef((
         }
       }
     })
-    listViewStore.setWhereGraphiQL(rxid, gql);
+    listViewStore.setWhereGraphQL(rxid, gql);
     listViewStore.excuteQuery();
   }
 

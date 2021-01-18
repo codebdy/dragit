@@ -38,7 +38,7 @@ function getMetaFieldGql(meta?: IMeta){
   return '';
 }
 
-export function getNodeGQL(node?: RXNode<IMeta>) {
+export function getNodeGraphQL(node?: RXNode<IMeta>) {
   if(!node){
     return '';
   }
@@ -47,7 +47,7 @@ export function getNodeGQL(node?: RXNode<IMeta>) {
 
   let childrenGql = '';
   node.children.forEach(child => {
-    childrenGql = childrenGql + getNodeGQL(child);
+    childrenGql = childrenGql + getNodeGraphQL(child);
   });
 
   gql = gql.trim() ? gql.replace(CHILDREN_GQL, childrenGql) : childrenGql;

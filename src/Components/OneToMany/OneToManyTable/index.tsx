@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
-import { IMeta } from 'Base/Model/IMeta';
-import { ComponentRender } from 'Base/PageUtils/ComponentRender';
-import { RXNode } from 'Base/RXNode/RXNode';
-import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
-import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
+import { useModelStore } from 'Base/ModelTree/ModelProvider';
+
 import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';

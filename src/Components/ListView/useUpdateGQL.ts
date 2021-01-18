@@ -4,7 +4,7 @@ import intl from "react-intl-universal";
 import { ListViewStore } from "./ListViewStore";
 import { IPageMutation } from "Base/Model/IPageMutation";
 import { usePageStore } from "Base/PageUtils/PageStore";
-import { getNodeGQL } from "Base/PageUtils/getNodeGQL";
+import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { useRXNode } from "Base/RXNode/RXNodeProvider";
 
 export function useUpdateGQL( listViewStore:ListViewStore, update?:IPageMutation ){
@@ -15,7 +15,7 @@ export function useUpdateGQL( listViewStore:ListViewStore, update?:IPageMutation
     const GQL_STRING = `
       mutation ($${update?.variableName}:${update?.variableType}, $ids:[ID]){
         ${update?.name}(${update?.variableName}:$${update?.variableName}, ids:$ids)
-        ${getNodeGQL(rxNode)}
+        ${getNodeGraphQL(rxNode)}
       }
   `
     //console.log('ListView query GQL', GQL_STRING)

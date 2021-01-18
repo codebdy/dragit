@@ -1,5 +1,5 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
-import { getNodeGQL } from "Base/PageUtils/getNodeGQL";
+import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { usePageStore } from "Base/PageUtils/PageStore";
 import { useRXNode } from "Base/RXNode/RXNodeProvider";
 import { useState, useEffect } from "react";
@@ -14,7 +14,7 @@ export function useRemoveGQL( listViewStore:ListViewStore, remove?:string ){
     const GQL_STRING = `
       mutation ($ids:[ID]){
         ${remove}(ids:$ids)
-        ${getNodeGQL(rxNode)}
+        ${getNodeGraphQL(rxNode)}
       }
   `
     //console.log('ListView query GQL', GQL_STRING)

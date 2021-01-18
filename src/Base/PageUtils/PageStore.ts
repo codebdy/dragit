@@ -7,7 +7,7 @@ import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { cloneObject } from "Utils/cloneObject";
 import intl from "react-intl-universal";
-import { getNodeGQL } from "./getNodeGQL";
+import { getNodeGraphQL } from "./getNodeGraphQL";
 
 export class PageStore{
   gqls: Array<GraphQLStore> = [];
@@ -27,7 +27,7 @@ export class PageStore{
       this.queryGQL = new GraphQLStore(intl.get('data-query'), 'Page', `
         query ($id:ID){
           ${query}(id:$id)
-          ${this.getFieldsGQL()} 
+          ${this.getFieldsGraphQL()} 
         }
       `);
 
@@ -56,10 +56,10 @@ export class PageStore{
     this.gqls.splice(this.gqls.indexOf(gql), 1);
   }
 
-  getFieldsGQL(){
+  getFieldsGraphQL(){
     let gql = '';
     this.pageLayout.forEach(child=>{
-      gql = gql + getNodeGQL(child);
+      gql = gql + getNodeGraphQL(child);
     })
     return `{ id ${gql}}`;
   }
