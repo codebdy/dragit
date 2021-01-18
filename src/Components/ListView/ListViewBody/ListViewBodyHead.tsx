@@ -15,7 +15,7 @@ export function ListViewBodyHead(
 
   const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>)=>{
     if (event.target.checked) {
-      const newSelecteds = listViewStore.rows.map((n) => n.model.id);
+      const newSelecteds = listViewStore.rows.map((n) => n.modelStore.model.id);
       listViewStore.setSelects(newSelecteds);
     }
     else{

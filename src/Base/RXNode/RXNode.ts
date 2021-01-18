@@ -64,9 +64,15 @@ export class RXNode<T>{
     return copy;
   }
 
-  duplicate(){
+  //复制一个副本，创建新ID，不插入父节点
+  clone(){
     let metaCopy = cloneObject(this.getMeta());
     let newNode = RXNode.make<T>(metaCopy);
+    return newNode;
+  }
+
+  duplicate(){
+    const newNode = this.clone();
     newNode.parent = this.parent;
     newNode.moveAfter(this);
     return newNode;
@@ -88,7 +94,7 @@ export class RXNode<T>{
   }
 
   get dom(){
-    return document.querySelector(`[data-rxid="${this.rxid}"]`);
+    return document.querySelector(`[${DADA_RXID_CONST}="${this.rxid}"]`);
   }
 
   remove(){

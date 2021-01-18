@@ -1,34 +1,25 @@
 import { TableBody} from "@material-ui/core";
-import React, { useEffect } from "react";
-import { RXNode } from "Base/RXNode/RXNode";
-import { IMeta } from "Base/Model/IMeta";
+import React from "react";
 import { useListViewStore } from "../ListViewStore";
 import {observer} from 'mobx-react';
 import { ListViewBodyTableRow } from "./ListViewBodyTableRow";
 import { ListViewBodyTableCell } from "./ListViewBodyTableCell";
-import { ModelStore } from "Base/ModelTree/ModelStore";
+import { ListViewRowStore } from "../ListViewRowStore";
 
 export const ListViewBodyTable = observer((
-  props: {
-    columns:Array<RXNode<IMeta>>
-  }
+
 ) =>{
-  const {columns} = props;
   const listViewStore = useListViewStore();
-  useEffect(()=>{
-    listViewStore.setColumns(columns);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
 
   return (
     <TableBody>
-      {listViewStore.rows?.map((row:ModelStore, index: any) => {
+      {listViewStore.rows?.map((row:ListViewRowStore) => {
           return (
-            <ListViewBodyTableRow key={row.model.id} row={row}>
+            <ListViewBodyTableRow key={row.modelStore.model.id} modelStore={row.modelStore}>
               {
-                columns?.map((column, colIndex) => {
+                row.columns.map((column) => {
                   return(
-                    <ListViewBodyTableCell key={row.model.id + '-' + column.id} column = {column} />
+                    <ListViewBodyTableCell key={column.id} column = {column} />
                   )
                 })
               }

@@ -5,6 +5,7 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { remove } from "Utils/ArrayHelper";
+import { ListViewRowStore } from "./ListViewRowStore";
 import { PaginatorInfo } from "./PaginatorInfo";
 
 type Order = 'asc' | 'desc';
@@ -35,21 +36,30 @@ interface Updating{
 
 export class ListViewStore{
   refreshQueryFlag:number = 1;
-  columns:Array<RXNode<IMeta>> = [];
+  tableRxNode?: RXNode<IMeta>;
+  //columns:Array<RXNode<IMeta>> = [];
   selects:ID[] = [];
   whereGraphiQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
-  rows: Array<ModelStore> = [];
+  rows: Array<ListViewRowStore> = [];
   loading?:boolean;
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
   
   constructor() {
     makeAutoObservable(this)
   }
-
-  setColumns(columns:Array<RXNode<IMeta>>){
-    this.columns = columns;
+  
+  get columns(){
+    return this.tableRxNode?.children || []
   }
+
+  setTableRxNode(node?:RXNode<IMeta>){
+    this.tableRxNode = node;
+  }
+
+  //setColumns(columns:Array<RXNode<IMeta>>){
+  //  this.columns = columns;
+  //}
 
   setSelects(selects:ID[]){
     this.selects = selects;
@@ -141,7 +151,11 @@ export class ListViewStore{
   }
 
   setRows(rows?:Array<any>){
-    this.rows = rows?.map((row)=>new ModelStore(row)) || [];
+    this.rows = rows?.map((row)=> {
+      const columns = this.tableRxNode?.clone()?.children;
+      const rowModelStroe = new ModelStore(row);
+      return new ListViewRowStore(rowModelStroe, columns);      
+    }) || [];
   }
 
   setLoading(loading?:boolean){
@@ -150,39 +164,39 @@ export class ListViewStore{
 
   setUpdatingSelects(field:string){
     this.rows.forEach(rowStore=>{
-      if(this.isSelected(rowStore.model.id)){
-        rowStore.setFieldLoading(field, true);        
+      if(this.isSelected(rowStore.modelStore.model.id)){
+        rowStore.modelStore.setFieldLoading(field, true);        
       }
     })
   }
 
   setUpdating(id:ID, field:string){
     this.rows.forEach(rowStore=>{
-      if(rowStore.model.id === id){
-        rowStore.setFieldLoading(field, true);        
+      if(rowStore.modelStore.model.id === id){
+        rowStore.modelStore.setFieldLoading(field, true);        
       }
     })
   }
 
   setRemovingSelects(){
     this.rows.forEach(rowStore=>{
-      if(this.isSelected(rowStore.model.id)){
-        rowStore.setLoading(true);        
+      if(this.isSelected(rowStore.modelStore.model.id)){
+        rowStore.modelStore.setLoading(true);        
       }
     })
   }
 
   setRemoving(id:ID){
     this.rows.forEach(rowStore=>{
-      if(rowStore.model.id === id){
-        rowStore.setLoading(true);        
+      if(rowStore.modelStore.model.id === id){
+        rowStore.modelStore.setLoading(true);        
       }
     })
   }
 
   finishMutation(){
     this.rows.forEach(rowStore=>{
-      rowStore.setLoading(false);
+      rowStore.modelStore.setLoading(false);
     })
   }
 

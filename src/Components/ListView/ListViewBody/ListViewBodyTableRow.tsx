@@ -6,11 +6,6 @@ import { ModelStore } from "Base/ModelTree/ModelStore";
 import {observer} from "mobx-react";
 import ListViewTableRowActionFilter from "./ListViewTableRowActionFilter";
 
-export interface DataRow{
-  id:any,
-  [key:string]:any,
-}
-
 const RowCheckBox = observer((props:{rowId:string}) => {
   const {rowId} = props;
   const listViewStore = useListViewStore();
@@ -30,11 +25,11 @@ const RowCheckBox = observer((props:{rowId:string}) => {
 
 export const ListViewBodyTableRow = (
   props: {
-    row:ModelStore,
+    modelStore:ModelStore,
     children?:any,
   }
 )=>{
-  const {row, children} = props;
+  const {modelStore: row, children} = props;
 
   return (
     <ListViewTableRowActionFilter row={row}>

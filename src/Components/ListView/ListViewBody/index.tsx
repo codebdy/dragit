@@ -2,6 +2,8 @@ import { TableContainer, Table, TableBody, TableRow } from '@material-ui/core';
 import { useRXNode } from 'Base/RXNode/RXNodeProvider';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import React, { Fragment } from 'react';
+import { useEffect } from 'react';
+import { useListViewStore } from '../ListViewStore';
 import { ListViewBodyHead } from './ListViewBodyHead';
 import { ListViewBodyTable } from './ListViewBodyTable';
 
@@ -18,7 +20,12 @@ const ListViewBody = React.forwardRef((
   } = props
   const {isDesigning} = useDesign();
   const rxNode = useRXNode();
+  const listViewStore = useListViewStore();
   
+  useEffect(()=>{
+    listViewStore?.setTableRxNode(rxNode);
+  },[listViewStore, rxNode])
+
   return (
     <TableContainer {...rest}  ref={ref}>
       <Table
@@ -36,7 +43,7 @@ const ListViewBody = React.forwardRef((
             </TableBody>
           : <Fragment>
               <ListViewBodyHead columns = {rxNode?.children||[]}/>
-              <ListViewBodyTable columns = {rxNode?.children||[]}/>
+              <ListViewBodyTable />
             </Fragment>           
         }
       </Table>
