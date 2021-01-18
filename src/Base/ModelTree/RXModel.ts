@@ -4,7 +4,8 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { validate } from "./validate";
 
 export class RXModel{
-  key:string|number;
+  //从model中的取值索引
+  modelKey:string|number;
   node: RXNode<IMeta>;
   modelLabel: string = '';
   defaultValue?: any;
@@ -12,19 +13,19 @@ export class RXModel{
   error?: string;  
   loading?: boolean;
   isSelected?: boolean;
-  childrenMap: Map<string|number,RXModel>;
-  constructor(node: RXNode<IMeta>, key:string|number) {
+  childrenMap: Map<string,RXModel>;
+  constructor(node: RXNode<IMeta>, modelKey:string|number) {
     this.node = node;
-    this.key = key;
-    this.childrenMap = new Map<string|number,RXModel>();
+    this.modelKey = modelKey;
+    this.childrenMap = new Map<string,RXModel>();
     makeAutoObservable(this);
   }
 
-  setChild(key: string|number, rxModel: RXModel) {
+  setChild(key: string, rxModel: RXModel) {
     this.childrenMap.set(key, rxModel);
   }
 
-  getChild(key?:string|number){
+  getChild(key?:string){
     if(!key){
       return undefined;
     }
@@ -59,7 +60,7 @@ export class RXModel{
     })
   }
 
-  setChildLoading(childKey:string|number,loading?:boolean){
+  setChildLoading(childKey:string,loading?:boolean){
     this.childrenMap.forEach((child,key)=>{
       if(childKey === key){
         child.setLoading(loading);        
@@ -75,7 +76,7 @@ export class RXModel{
   }
 
   setModel(model: any) {
-    const fieldValue = model ? model[this.key] : undefined;
+    const fieldValue = model ? model[this.modelKey] : undefined;
     this.defaultValue = fieldValue;
     this.value = fieldValue;
     this.childrenMap.forEach(fieldStore=>{

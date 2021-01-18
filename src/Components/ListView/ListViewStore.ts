@@ -154,6 +154,7 @@ export class ListViewStore{
       const rowRxNode = RXNode.make({name:'ListViewBodyTableRow'})
       const columns = this.tableRxNode?.clone()?.children;
       rowRxNode.setChildren(columns);
+      //index作为key，在setModel中使用索引取值，model为数组跟普通对象的区别，
       const rowModel = new RXModel(rowRxNode, index);
       rowModel.setModel(rows);
       this.rxModel?.setChild(row.id, rowModel); 
@@ -199,8 +200,6 @@ export class ListViewStore{
   finishMutation(){
     this.rxModel?.setLoading(false);
   }
-
-
 }
 
 export const ListViewStoreContext = createContext<ListViewStore>({} as ListViewStore);
