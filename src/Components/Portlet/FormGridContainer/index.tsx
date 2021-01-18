@@ -25,7 +25,7 @@ const FormGridContainer = observer(React.forwardRef((props:any, ref:any) => {
   const fieldStore = modelStore?.getChild(rxNode?.meta.field);
 
   //Debug时跟踪页面
-  useSelectModel(fieldStore, rxid);
+  useSelectModel(fieldStore);
   const fieldName = rxNode?.meta.field;  
   
   useEffect(()=>{

@@ -12,7 +12,7 @@ const withFormField = (Component:any)=>{
     const modelStore =  useModelStore();
     const fieldStore = useFieldStore();
     
-    useSelectModel(fieldStore, rxid);
+    useSelectModel(fieldStore);
 
     const handleChange = (e:any) => {
       let newValue = toJS(e?.target?.value);

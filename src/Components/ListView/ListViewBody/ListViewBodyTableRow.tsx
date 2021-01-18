@@ -4,6 +4,7 @@ import { useListViewStore } from "../ListViewStore";
 import {observer} from "mobx-react";
 import ListViewTableRowActionFilter from "./ListViewTableRowActionFilter";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
+import useSelectModel from "Components/Common/useSelectModel";
 
 const RowCheckBox = observer((props:{rowId:string}) => {
   const {rowId} = props;
@@ -22,19 +23,22 @@ const RowCheckBox = observer((props:{rowId:string}) => {
   )
 })
 
-export const ListViewBodyTableRow = (
+export const ListViewBodyTableRow = observer((
   props: {
     children?:any,
   }
 )=>{
-  const {children} = props;
+  const {children, ...rest} = props;
   const rowModel = useModelStore();
 
+  useSelectModel(rowModel);
+  
   return (
     <TableRow
       hover
       role="checkbox"
       tabIndex={-1}
+      {...rest}
     >
       {rowModel&&
       <ListViewTableRowActionFilter row={rowModel}>
@@ -52,4 +56,4 @@ export const ListViewBodyTableRow = (
       }
     </TableRow>
   );
-}
+})
