@@ -12,19 +12,19 @@ export class RXModel{
   error?: string;  
   loading?: boolean;
   isSelected?: boolean;
-  private childrenMap: Map<string,RXModel>;
+  childrenMap: Map<string|number,RXModel>;
   constructor(node: RXNode<IMeta>, key:string|number) {
     this.node = node;
     this.key = key;
-    this.childrenMap = new Map<string,RXModel>();
+    this.childrenMap = new Map<string|number,RXModel>();
     makeAutoObservable(this);
   }
 
-  setChild(key: string, rxModel: RXModel) {
+  setChild(key: string|number, rxModel: RXModel) {
     this.childrenMap.set(key, rxModel);
   }
 
-  getChild(key?:string){
+  getChild(key?:string|number){
     if(!key){
       return undefined;
     }
@@ -56,6 +56,14 @@ export class RXModel{
     this.loading = loading;
     this.childrenMap.forEach(child=>{
       child.setLoading(loading);
+    })
+  }
+
+  setChildLoading(childKey:string|number,loading?:boolean){
+    this.childrenMap.forEach((child,key)=>{
+      if(childKey === key){
+        child.setLoading(loading);        
+      }
     })
   }
 
@@ -139,10 +147,6 @@ export class RXModel{
   clearChildren(){
     this.childrenMap.clear();
   }
-
-  //getLabel(){
-  //  return `Submodel : ${this.node?.meta.field}`
-  //}
 
   setSelected(selected:boolean){
     this.isSelected = selected;

@@ -165,41 +165,39 @@ export class ListViewStore{
   }
 
   setUpdatingSelects(field:string){
-    //this.rows.forEach(rowStore=>{
-    //  if(this.isSelected(rowStore.modelStore.model.id)){
-   //     rowStore.modelStore.setFieldLoading(field, true);        
-    //  }
-    //})
+    this.rxModel?.childrenMap.forEach(rowStore=>{
+      if(this.isSelected(rowStore.value?.id)){
+        rowStore.setChildLoading(field, true);        
+      }
+    })
   }
 
   setUpdating(id:ID, field:string){
-   // this.rows.forEach(rowStore=>{
-   //   if(rowStore.modelStore.model.id === id){
-   //     rowStore.modelStore.setFieldLoading(field, true);        
-   //   }
-   // })
+    this.rxModel?.childrenMap.forEach(rowStore=>{
+      if(rowStore.value?.id === id){
+        rowStore.setChildLoading(field, true);        
+      }
+    })
   }
 
   setRemovingSelects(){
-   // this.rows.forEach(rowStore=>{
-   //   if(this.isSelected(rowStore.modelStore.model.id)){
-   //     rowStore.modelStore.setLoading(true);        
-   //   }
-   // })
+    this.rxModel?.childrenMap.forEach(rowStore=>{
+      if(this.isSelected(rowStore.value?.id)){
+        rowStore.setLoading(true);        
+      }
+    })
   }
 
   setRemoving(id:ID){
-   // this.rows.forEach(rowStore=>{
-  //    if(rowStore.modelStore.model.id === id){
-  //      rowStore.modelStore.setLoading(true);        
-   //   }
-  //  })
+    this.rxModel?.childrenMap.forEach(rowStore=>{
+      if(rowStore.value?.id === id){
+        rowStore.setLoading(true);        
+      }
+    })
   }
 
   finishMutation(){
-  //  this.rows.forEach(rowStore=>{
-  //    rowStore.modelStore.setLoading(false);
-  //  })
+    this.rxModel?.setLoading(false);
   }
 
 
