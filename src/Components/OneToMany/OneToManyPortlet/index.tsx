@@ -8,6 +8,7 @@ import { ModelArrayFieldStore } from '../ModelArrayFieldStore';
 import {Observer} from 'mobx-react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useRXNode } from 'Base/RXNode/RXNodeProvider';
+import { RXModel } from 'Base/ModelTree/RXModel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,9 +36,11 @@ const OneToManyPortlet = React.forwardRef((
   const classes = useStyles();
   const modelStore =  useModelStore();
   const node = useRXNode();
-  const fieldStore = modelStore?.getFieldStore(field) as ModelArrayFieldStore;
+  const fieldStore = modelStore?.getChild(field);
   useEffect(()=>{
-    modelStore?.setFieldStore(field,  new ModelArrayFieldStore(node));
+    if(node){
+        //modelStore?.setChild(field,  new RXModel(node));
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field])
 
@@ -55,11 +58,11 @@ const OneToManyPortlet = React.forwardRef((
     if(isDesigning){
       return;
     }
-    fieldStore?.addRow();
+    //fieldStore?.addRow();
   }
 
   const handelRemove = (index:number)=>{
-    fieldStore?.removeRow(index);
+    //fieldStore?.removeRow(index);
   }
 
   const store = isDesigning ? fieldStoreForDesign : fieldStore;
@@ -70,13 +73,13 @@ const OneToManyPortlet = React.forwardRef((
         <MultiContentPotlet title={title} ref={ref} {...rest}
           onAddNew = {handleAddNew}
         >
-          <div className = {classes.storeBuilder}>
+          <div className = {classes.storeBuilder}>{/*
             <ModelProvider value = {fieldStore?.schemaRow}>
               {children}
-            </ModelProvider>
+          </ModelProvider>*/}
           </div>
-          {
-            store?.rows.map((rowStore, index)=>{
+          {/*
+            store?.children.map((rowStore, index)=>{
               return(
                 <ModelProvider value={rowStore} key = {rowStore.id}>
                   <Grid container >
@@ -99,7 +102,7 @@ const OneToManyPortlet = React.forwardRef((
                 </ModelProvider>            
               )
             })
-          }
+          */}
 
         </MultiContentPotlet>
       }

@@ -36,6 +36,10 @@ export class RXNode<T>{
     makeAutoObservable(this);
   }
 
+  setChildren(children:Array<RXNode<T>>|undefined){
+    this.children = children || [];
+  }
+
   seedId(){
     this.id = RXNode.idSeed.toString();
     RXNode.idSeed ++

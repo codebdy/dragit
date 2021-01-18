@@ -69,7 +69,7 @@ export const DebugModelTree = observer((
               modelStore?.getChildren()?.map((childStore, index)=>{
                 return (
                   <ModelTreeNode 
-                    key = {childStore.id} 
+                    key = {childStore.node.id} 
                     modelNode = {childStore} 
                     selected = {selected}
                     onSelect = {(selected)=>setSelected(selected)}

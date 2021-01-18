@@ -1,8 +1,8 @@
 import { usePageStore } from "Base/PageUtils/PageStore";
-import { IModelNode } from "Base/ModelTree/IModelNode";
 import { useEffect } from "react";
+import { RXModel } from "Base/ModelTree/RXModel";
 
-export default function useSelectModel(modelNode:IModelNode|undefined, rxid:string|undefined){
+export default function useSelectModel(modelNode:RXModel|undefined, rxid:string|undefined){
   const pageStore = usePageStore();
   
   useEffect(()=>{

@@ -93,15 +93,17 @@ const ListView = observer(React.forwardRef((
   },[listViewStore.refreshQueryFlag])
 
   useEffect(()=>{
-    listViewStore.setLoading(queryLoading);
     queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
+    listViewStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[queryLoading])
 
 
   useEffect(()=>{
-    !queryLoading && listViewStore.setRows(data && query ? data[query]?.data:[]);
-    listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});
+    if(data){
+      !queryLoading && listViewStore.setRows(data && query ? data[query]?.data:[]);
+      listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});      
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data])
 

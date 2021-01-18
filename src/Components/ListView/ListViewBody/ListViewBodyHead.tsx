@@ -15,14 +15,16 @@ export function ListViewBodyHead(
 
   const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>)=>{
     if (event.target.checked) {
-      const newSelecteds = listViewStore.rows.map((n) => n.modelStore.model.id);
-      listViewStore.setSelects(newSelecteds);
+      const newSelecteds = listViewStore.rxModel?.getChildren()?.map((n) => n.value?.id);
+      listViewStore.setSelects(newSelecteds||[]);
     }
     else{
       listViewStore.setSelects([]);
     }
   }
   
+  const rows = listViewStore?.rxModel?.getChildren() || [];
+
   return (
     <Observer>
       {()=>
@@ -31,8 +33,8 @@ export function ListViewBodyHead(
             <TableCell padding="checkbox">
               <Checkbox
                 id = 'all'
-                indeterminate={listViewStore.selects.length > 0 && listViewStore.selects.length < listViewStore.rows.length}
-                checked={listViewStore.rows.length > 0 && listViewStore.selects.length === listViewStore.rows.length}
+                indeterminate={listViewStore.selects.length > 0 && listViewStore.selects.length < rows.length}
+                checked={rows.length > 0 && listViewStore.selects.length === rows.length}
                 onChange={handleSelectAll}
                 inputProps={{ 'aria-label': 'select all desserts' }}
               />

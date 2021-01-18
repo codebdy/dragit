@@ -1,4 +1,6 @@
 import { ID } from "Base/Model/graphqlTypes";
+import { IMeta } from "Base/Model/IMeta";
+import { RXNode } from "Base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
 import createId from "Utils/createId";
 import { IFieldStore } from "./FieldStore";
@@ -6,6 +8,7 @@ import { IModelNode } from "./IModelNode";
 
 export class ModelStore implements IModelNode{
   id:ID;
+  node?:RXNode<IMeta>;
   model?: any;
   loading?: boolean;
   isSelected?: boolean;

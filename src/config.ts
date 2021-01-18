@@ -79,6 +79,7 @@ import { IconButtonRule } from "Components/Buttons/IconButton/Rule";
 import IconButton from "Components/Buttons/IconButton";
 import JsxTemplateParser from "Components/JsxTemplateParser";
 import { JsxTemplateParserRule } from "Components/JsxTemplateParser/Rule";
+import { ListViewBodyTableRow } from "Components/ListView/ListViewBody/ListViewBodyTableRow";
 
 register('Canvas', Canvas, CanvasRule);
 register('Divider', Divider, DividerRule);
@@ -104,6 +105,7 @@ register('ListViewKeywordFilter', ListViewKeywordFilter, ListViewKeywordFilterRu
 register('ListViewEnumFilter', ListViewEnumFilter, ListViewEnumFilterRUle);
 register('ListViewBatchActions', ListViewBatchActions, ListViewBatchActionsRule);
 register('ListViewPagination', ListViewPagination, ListViewPaginationRule);
+register('ListViewBodyTableRow', ListViewBodyTableRow);
 register('MediasPortlet', MediasPortlet, MediasPortletRule);
 register('SelectBox', SelectBox, SelectRule);
 register('Combobox', Combobox, SelectRule);

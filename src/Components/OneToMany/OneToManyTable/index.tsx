@@ -39,10 +39,10 @@ const OneToManyTable = React.forwardRef((
   const classes = useStyles();
   const modelStore =  useModelStore();
   const rxNode = useRXNode();
-  const fieldStore = modelStore?.getFieldStore(field) as ModelArrayFieldStore;
+  const fieldStore = modelStore?.getChild(field);
   useEffect(()=>{
     if(field){
-      modelStore?.setFieldStore(field,  new ModelArrayFieldStore(rxNode));      
+      //modelStore?.setChild(field,  new RXNode(rxNode));      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field])
@@ -51,11 +51,11 @@ const OneToManyTable = React.forwardRef((
     if(isDesigning){
       return;
     }
-    fieldStore?.addRow();
+    //fieldStore?.addRow();
   }
 
   const handelRemove = (index:number)=>{
-    fieldStore?.removeRow(index);
+    //fieldStore?.removeRow(index);
   }
 
   return (
@@ -93,7 +93,7 @@ const OneToManyTable = React.forwardRef((
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {fieldStore?.rows.map((rowStore, rowIndex) => (
+                  {/*fieldStore?.rows.map((rowStore, rowIndex) => (
                     <ModelProvider value={rowStore} key = {rowStore.id}>
                       <TableRow key={`row-${rowStore.id}`} >
                         {
@@ -112,7 +112,7 @@ const OneToManyTable = React.forwardRef((
                         </TableCell>
                       </TableRow>
                     </ModelProvider>
-                  ))}
+                      ))*/}
                 </TableBody>
               </Fragment>
             }

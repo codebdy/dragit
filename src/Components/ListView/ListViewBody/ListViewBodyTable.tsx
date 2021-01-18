@@ -2,28 +2,23 @@ import { TableBody} from "@material-ui/core";
 import React from "react";
 import { useListViewStore } from "../ListViewStore";
 import {observer} from 'mobx-react';
-import { ListViewBodyTableRow } from "./ListViewBodyTableRow";
-import { ListViewBodyTableCell } from "./ListViewBodyTableCell";
-import { ListViewRowStore } from "../ListViewRowStore";
+import { RXModel } from "Base/ModelTree/RXModel";
+import { ModelProvider } from "Base/ModelTree/ModelProvider";
+import { ComponentRender } from "Base/PageUtils/ComponentRender";
 
 export const ListViewBodyTable = observer((
 
 ) =>{
   const listViewStore = useListViewStore();
 
+  const rows = listViewStore?.rxModel?.getChildren() || [];
   return (
     <TableBody>
-      {listViewStore.rows?.map((row:ListViewRowStore) => {
+      {rows?.map((row:RXModel) => {
           return (
-            <ListViewBodyTableRow key={row.modelStore.model.id} modelStore={row.modelStore}>
-              {
-                row.columns.map((column) => {
-                  return(
-                    <ListViewBodyTableCell key={column.id} column = {column} />
-                  )
-                })
-              }
-            </ListViewBodyTableRow>
+            <ModelProvider value={row} key={row.node.id}>
+              <ComponentRender node={row.node} />
+            </ModelProvider>
           );
         })}
     </TableBody>

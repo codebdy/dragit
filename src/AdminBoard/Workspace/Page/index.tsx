@@ -24,6 +24,7 @@ import { Debug } from './Debug';
 import { PageStore, PageStoreProvider } from 'Base/PageUtils/PageStore';
 import { createMutationGQL } from './createMutationGQL';
 import { PageQuery } from './PageQuery';
+import { RXModel } from 'Base/ModelTree/RXModel';
 
 export const Page = observer((
   props:{
@@ -36,7 +37,7 @@ export const Page = observer((
   const [openAlert, setOpentAlert] = useState(false);
   const {page, pageJumper, hideDebug, onPageAction} = props;
   const [actionStore, setActionStore] = useState<ActionStore>();
-  const [modelStore, setModelStore] = useState<ModelStore>();  
+  const [modelStore, setModelStore] = useState<RXModel>();  
   const [pageStore, setPageStore] = useState<PageStore>();
   const [mutation, setMutation] = useState<IPageMutation>();
   const appStore = useAppStore();
@@ -45,7 +46,10 @@ export const Page = observer((
   useEffect(()=>{
     setPageStore(new PageStore(page, pageJumper));
     setActionStore(new ActionStore());
-    setModelStore(new ModelStore());    
+    if(pageStore?.rootNode){
+      setModelStore(new RXModel(pageStore.rootNode, 'root'));        
+    }
+  
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageJumper])
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { TreeItem } from '@material-ui/lab';
-import { IModelNode } from 'Base/ModelTree/IModelNode';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useEffect } from 'react';
+import { RXModel } from 'Base/ModelTree/RXModel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ModelTreeNode(
   props:{
-    modelNode: IModelNode,
+    modelNode: RXModel,
     selected:ID,
     onSelect:(selected:ID)=>void,
   }
@@ -25,7 +25,7 @@ export default function ModelTreeNode(
   const {selected, onSelect, modelNode} = props;
   const classes = useStyles();
   useEffect(()=>{
-    modelNode.setSelected(selected === modelNode.id)
+    modelNode.setSelected(selected === modelNode.node.id)
     return ()=>{
       modelNode.setSelected(false);
     }
@@ -33,29 +33,29 @@ export default function ModelTreeNode(
 
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    if(modelNode.id === selected){
+    if(modelNode.node.id === selected){
       onSelect('');
     }
     else{
-      onSelect(modelNode.id);      
+      onSelect(modelNode.node.id);      
     }
   }
 
   return (
     <TreeItem 
-      nodeId = {modelNode.id} 
+      nodeId = {modelNode.node.id} 
       label={
         <div 
           className = {classes.label}
           onClick = {handleClick}
-        >{modelNode.getLabel()}</div>
+        >{modelNode.label}</div>
       }
     >
       {
         modelNode.getChildren()?.map(childStore=>{
           return(
             <ModelTreeNode 
-              key = {childStore.id} 
+              key = {childStore.node.id} 
               selected = {selected}
               modelNode = {childStore} 
               onSelect = {onSelect} 

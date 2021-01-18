@@ -1,4 +1,4 @@
-import { FieldStore } from 'Base/ModelTree/FieldStore';
+import { RXModel } from 'Base/ModelTree/RXModel';
 import { useRXNode } from 'Base/RXNode/RXNodeProvider';
 import { useEffect } from 'react';
 import { useModelStore } from '../../Base/ModelTree/ModelProvider';
@@ -9,10 +9,12 @@ export const useFieldStore = () => {
   const fieldName = node?.meta.field;
   useEffect(()=>{
     if(node && fieldName){
-      modelStore?.setFieldStore(fieldName, new FieldStore(node))    
+      const rxModel = new RXModel(node, fieldName);
+      rxModel.setModel(modelStore?.value)
+      modelStore?.setChild(fieldName, rxModel);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[fieldName, modelStore])
 
-  return modelStore?.getFieldStore(fieldName);
+  return modelStore?.getChild(fieldName);
 };

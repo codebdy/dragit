@@ -11,15 +11,17 @@ import { getNodeGQL } from "./getNodeGQL";
 
 export class PageStore{
   gqls: Array<GraphQLStore> = [];
+  rootNode: RXNode<IMeta>;
   page: IPage;
-  pageLayout: Array<RXNode<IMeta>> = [];
   selectModelComponentRxid?: string;
   queryGQL?: GraphQLStore;
   //ActionStore
   constructor(page:IPage, pageJumper?:IPageJumper) {
     this.page = page;
     makeAutoObservable(this)
-    this.parsePage(page);
+    const layout = page?.schema?.layout || [];
+    this.rootNode = new RXNode<IMeta>();
+    this.rootNode.parse(cloneObject(layout));
     const query = page?.schema?.query;
     if(query){
       this.queryGQL = new GraphQLStore(intl.get('data-query'), 'Page', `
@@ -37,11 +39,9 @@ export class PageStore{
     }
   }
 
-  private parsePage(page: IPage) {
-    const layout = page?.schema?.layout || [];
-    let root = new RXNode<IMeta>();
-    root.parse(cloneObject(layout));
-    this.pageLayout = root.children;
+
+  get pageLayout(){
+    return this.rootNode.children;
   }
 
   setSelectModelComponentRxid(rxid?:string){

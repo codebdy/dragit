@@ -1,7 +1,8 @@
 import { IPageMutation } from "Base/Model/IPageMutation";
-import { ModelStore } from "Base/ModelTree/ModelStore";
+import { RXModel } from "Base/ModelTree/RXModel";
+import { getNodeGQL } from "Base/PageUtils/getNodeGQL";
 
-export const createMutationGQL = (mutation?: IPageMutation, modelStore?:ModelStore)=>{
+export const createMutationGQL = (mutation?: IPageMutation, modelStore?:RXModel)=>{
   if(!mutation){
     return `mutation{emperty}`;
   }
@@ -10,7 +11,7 @@ export const createMutationGQL = (mutation?: IPageMutation, modelStore?:ModelSto
   const gqlText = `
       mutation ($${mutation?.variableName}:${mutation?.variableType}){
       ${mutation?.name}(${mutation?.variableName}:$${mutation?.variableName})
-        ${refreshNode?.toFieldsGQL()}
+        ${getNodeGQL(refreshNode?.node)}
     }
   `
   return gqlText;
