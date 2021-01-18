@@ -10,7 +10,8 @@ export const useFieldStore = () => {
   useEffect(()=>{
     if(node && fieldName){
       const rxModel = new RXModel(node, fieldName);
-      rxModel.setModel(modelStore?.value)
+      rxModel.setModel(modelStore?.value);
+      rxModel.setLabel(`Field : ${fieldName}`);
       modelStore?.setChild(fieldName, rxModel);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

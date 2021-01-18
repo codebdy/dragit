@@ -9,7 +9,6 @@ import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/AC
 import { gql, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
-import { ModelStore } from '../../../Base/ModelTree/ModelStore';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -44,10 +43,11 @@ export const Page = observer((
   const loggedUser = useLoggedUser();
 
   useEffect(()=>{
-    setPageStore(new PageStore(page, pageJumper));
+    const pgStore = new PageStore(page, pageJumper);
+    setPageStore(pgStore);
     setActionStore(new ActionStore());
-    if(pageStore?.rootNode){
-      setModelStore(new RXModel(pageStore.rootNode, 'root'));        
+    if(pgStore?.rootNode){
+      setModelStore(new RXModel(pgStore.rootNode, 'root'));        
     }
   
   // eslint-disable-next-line react-hooks/exhaustive-deps

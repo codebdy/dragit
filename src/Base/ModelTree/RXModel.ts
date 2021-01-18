@@ -5,7 +5,7 @@ import { RXNode } from "Base/RXNode/RXNode";
 export class RXModel{
   key:string;
   node: RXNode<IMeta>;
-  label: string = '';
+  modelLabel: string = '';
   defaultValue?: any;
   value?: any;
   error?: string;  
@@ -73,6 +73,14 @@ export class RXModel{
     this.childrenMap.forEach(fieldStore=>{
       fieldStore.setModel(fieldValue);
     })
+  }
+
+  get label(){
+    return this.modelLabel || this.node.meta?.field || this.value?.id
+  }
+
+  setLabel(label?:string){
+    this.modelLabel = label || '';
   }
 
 
