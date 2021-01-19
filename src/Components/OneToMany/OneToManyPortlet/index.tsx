@@ -62,47 +62,47 @@ const OneToManyPortlet = observer(React.forwardRef((
     fieldStore?.removeChildStore(id);
   }
 
-  //const store = isDesigning ? fieldStoreForDesign : fieldStore;
-
   return (
     <MultiContentPotlet title={title} ref={ref} {...rest} {...{[DADA_RXID_CONST]:fieldStore?.node?.rxid}}
       onAddNew = {handleAddNew}
     >
-      <div className = {classes.storeBuilder}>{/*
-        <ModelProvider value = {fieldStore?.schemaRow}>
-          {children}
-      </ModelProvider>*/}
-      </div>
       {
-        fieldStore?.getChildren()?.map((rowStore, index)=>{
-          return(
-            <ModelProvider value={rowStore} key = {rowStore.id}>
-              <Grid container >
-                <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
-                  <Grid item>{title} #{index + 1}</Grid>
-                  <Grid item>
-                    <IconButton aria-label="delete"
-                      onClick = {(event) => {handelRemove(rowStore.id)}}
-                      size="small"
-                    >
-                      <CloseIcon fontSize="small" />
-                    </IconButton>
+        isDesigning
+        ? <Grid container >
+            <Grid item xs={12}>
+              {children}
+            </Grid>
+          </Grid>
+        
+        : fieldStore?.getChildren()?.map((rowStore, index)=>{
+            return(
+              <ModelProvider value={rowStore} key = {rowStore.id}>
+                <Grid container >
+                  <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
+                    <Grid item>{title} #{index + 1}</Grid>
+                    <Grid item>
+                      <IconButton aria-label="delete"
+                        onClick = {(event) => {handelRemove(rowStore.id)}}
+                        size="small"
+                      >
+                        <CloseIcon fontSize="small" />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} {...{[DADA_RXID_CONST]:rowStore?.node?.rxid}}>
+                    <Divider />
+                    {
+                      rowStore?.node?.children.map((column)=>{
+                        return(
+                          <ComponentRender key={`${column?.id}-${rowStore.id}`} node = {column} />
+                        )
+                      })
+                    }
                   </Grid>
                 </Grid>
-                <Grid item xs={12} {...{[DADA_RXID_CONST]:rowStore?.node?.rxid}}>
-                  <Divider />
-                  {
-                    rowStore?.node?.children.map((column)=>{
-                      return(
-                        <ComponentRender key={`${column?.id}-${rowStore.id}`} node = {column} />
-                      )
-                    })
-                  }
-                </Grid>
-              </Grid>
-            </ModelProvider>            
-          )
-        })
+              </ModelProvider>            
+            )
+          })
       }
 
     </MultiContentPotlet>
