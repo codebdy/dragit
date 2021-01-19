@@ -99,16 +99,16 @@ export default               {
                 withoutEmpertyItem:true,
                 items:[
                   {
-                    slug:'100-0',
-                    label:'T/T 100%/0%'
+                    id:'100-0',
+                    name:'T/T 100%/0%'
                   },
                   {
-                    slug:'50-50',
-                    label:'T/T 50%/50%'
+                    id:'50-50',
+                    name:'T/T 50%/50%'
                   },                              
                   {
-                    slug:'30-70',
-                    label:'T/T 30%/70%'
+                    id:'30-70',
+                    name:'T/T 30%/70%'
                   },
 
                   {
@@ -138,16 +138,16 @@ export default               {
                 withoutEmpertyItem:true,
                 items:[
                   {
-                    slug:'dollor',
-                    label:'美元'
+                    id:'dollor',
+                    name:'美元'
                   },
                   {
-                    slug:'euro',
-                    label:'欧元'
+                    id:'euro',
+                    name:'欧元'
                   },                              
                   {
-                    slug:'rmb',
-                    label:'人民币'
+                    id:'rmb',
+                    name:'人民币'
                   },
 
                 ]
