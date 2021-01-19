@@ -11,7 +11,7 @@ import {observer} from "mobx-react";
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelTreeNode } from './ModelTreeNode';
 import { ModelSelector } from './ModelSelector';
-import { RXModel } from 'Base/ModelTree/RXModel';
+import { useDebugStore } from '../DebugStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,9 +46,9 @@ export const DebugModelTree = observer((
   }
 )=>{
   const {open, onClose} = props;
-  const [selected, setSelected] = useState<RXModel>();
   const classes = useStyles();
   const modelStore = useModelStore();
+  const debugStore = useDebugStore();
 
   return (
     <Drawer anchor="left" variant="persistent" open={open} onClose={onClose}>
@@ -65,7 +65,7 @@ export const DebugModelTree = observer((
           <TreeView
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
-            selected = {selected?.id || ''}
+            selected = {debugStore?.selectedModel?.id || ''}
           >
             {
               modelStore?.getChildren()?.map((childStore, index)=>{
@@ -73,15 +73,13 @@ export const DebugModelTree = observer((
                   <ModelTreeNode 
                     key = {childStore.id} 
                     modelNode = {childStore} 
-                    selected = {selected}
-                    onSelect = {(selected)=>setSelected(selected)}
                   />
                 )
               })
             }
           </TreeView>
         </div>
-        <ModelSelector selectedRxid = {selected?.node.rxid}/>
+        <ModelSelector/>
       </Scrollbar>
     </Drawer>
   )

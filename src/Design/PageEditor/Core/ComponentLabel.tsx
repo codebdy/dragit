@@ -43,14 +43,14 @@ export const ComponentLabel = observer((
     }
   }
 
-  useEffect(()=>{
-    doFollow();
+  useEffect(() => {
     window.addEventListener('resize', doFollow)
+    window.addEventListener('scroll', doFollow)
     return () => {
       window.removeEventListener('resize', doFollow)
+      window.removeEventListener('scroll', doFollow)
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  });
 
   useEffect(() => {
     doFollow();

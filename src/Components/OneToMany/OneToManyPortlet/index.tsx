@@ -10,6 +10,7 @@ import { makeTableModel, makeTableRowModel } from 'Base/ModelTree/makeTableModel
 import { ID } from 'Base/Model/graphqlTypes';
 import { observer } from 'mobx-react';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
+import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -104,9 +105,15 @@ const OneToManyPortlet = observer(React.forwardRef((
                     </IconButton>
                   </Grid>
                 </Grid>
-                <Grid item xs={12} {...{[DADA_RXID_CONST]:rxNode?.rxid}}>
+                <Grid item xs={12} {...{[DADA_RXID_CONST]:rowStore?.node?.rxid}}>
                   <Divider />
-                  {children}
+                  {
+                    rowStore?.node?.children.map((column)=>{
+                      return(
+                        <ComponentRender key={`${column?.id}-${rowStore.id}`} node = {column} />
+                      )
+                    })
+                  }
                 </Grid>
               </Grid>
             </ModelProvider>            

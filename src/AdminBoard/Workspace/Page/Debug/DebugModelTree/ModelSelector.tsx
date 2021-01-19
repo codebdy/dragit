@@ -3,6 +3,7 @@ import {observer} from 'mobx-react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useEffect } from 'react';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
+import { useDebugStore } from '../DebugStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,13 +15,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
-export const ModelSelector = observer((props:{selectedRxid?:string}) => {
-  const {selectedRxid: selected} = props;
+export const ModelSelector = observer(() => {
   const classes = useStyles();
   const [rect, setRect] = useState<DOMRect>();
+  const debugStore = useDebugStore();
+  const selectedRxid = debugStore?.selectedModel?.node.rxid;
 
   const getDom = ()=>{
-    return document.querySelector(`[${DADA_RXID_CONST}="${selected}"]`);
+    return document.querySelector(`[${DADA_RXID_CONST}="${selectedRxid}"]`);
   }
 
   const getDomRect = ()=>{
@@ -32,17 +34,21 @@ export const ModelSelector = observer((props:{selectedRxid?:string}) => {
     setRect(getDomRect());
   }  
   
-  const handleScroll = ()=>{
-    reComputeRect();
+  const doFollow = ()=>{
+    if(debugStore?.selectedModel){
+      reComputeRect();
+    }
+
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', doFollow)
+    window.addEventListener('scroll', doFollow)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', doFollow)
+      window.removeEventListener('scroll', doFollow)
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  });
 
 
   useEffect(()=>{
@@ -59,10 +65,10 @@ export const ModelSelector = observer((props:{selectedRxid?:string}) => {
 
     reComputeRect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected])
+  }, [selectedRxid])
 
   return (
-    selected && rect
+    selectedRxid && rect
     ? <div 
         className={classes.root}
         style = {{

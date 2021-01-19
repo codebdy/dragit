@@ -11,6 +11,7 @@ import {observer} from 'mobx-react';
 import { DARK } from 'Store/ThemeSettings';
 import { DebugModelTree } from './DebugModelTree';
 import { Hidden } from '@material-ui/core';
+import { DebugStore, DebugStoreProvider } from './DebugStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,39 +68,41 @@ export const Debug = observer(()=>{
   
   return (
     <Hidden smDown>
-      <SpeedDial
-        ariaLabel="Debug SpeedDial"
-        className={classes.speedDial}
-        icon={
-          <SpeedDialIcon 
-            icon={<MdiIcon iconClass = "mdi-android-debug-bridge"/>}
-            openIcon={<MdiIcon iconClass = "mdi-close"/>}
+      <DebugStoreProvider value = {new DebugStore()}>
+        <SpeedDial
+          ariaLabel="Debug SpeedDial"
+          className={classes.speedDial}
+          icon={
+            <SpeedDialIcon 
+              icon={<MdiIcon iconClass = "mdi-android-debug-bridge"/>}
+              openIcon={<MdiIcon iconClass = "mdi-close"/>}
+            />
+          }
+          hidden = {treeOpen || gqlOpen}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction='up'
+          style={{left:(fabLeft) + 'px'}}
+        >
+          <SpeedDialAction
+            icon={<MdiIcon iconClass = "mdi-graphql" />}
+            tooltipTitle={'GraphQL ' + intl.get('debug')}
+            tooltipPlacement = "right"
+            onClick={(handleOpenGql)}
           />
-        }
-        hidden = {treeOpen || gqlOpen}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        open={open}
-        direction='up'
-        style={{left:(fabLeft) + 'px'}}
-      >
-        <SpeedDialAction
-          icon={<MdiIcon iconClass = "mdi-graphql" />}
-          tooltipTitle={'GraphQL ' + intl.get('debug')}
-          tooltipPlacement = "right"
-          onClick={(handleOpenGql)}
-        />
-        <SpeedDialAction
-          icon={<MdiIcon iconClass = "mdi-file-tree" />}
-          tooltipTitle={'Model Tree ' + intl.get('debug')}
-          tooltipPlacement = "right"
-          onClick={handleOpentree}
-        />
-      </SpeedDial>
-      <ThemeProvider theme={theme}>
-        <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
-        <DebugModelTree open={treeOpen} onClose = {handleCloseTree} />
-      </ThemeProvider>
+          <SpeedDialAction
+            icon={<MdiIcon iconClass = "mdi-file-tree" />}
+            tooltipTitle={'Model Tree ' + intl.get('debug')}
+            tooltipPlacement = "right"
+            onClick={handleOpentree}
+          />
+        </SpeedDial>
+        <ThemeProvider theme={theme}>
+          <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
+          <DebugModelTree open={treeOpen} onClose = {handleCloseTree} />
+        </ThemeProvider>
+        </DebugStoreProvider>
     </Hidden>
   );
 })

@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { TreeItem } from '@material-ui/lab';
-import { useEffect } from 'react';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import {observer} from 'mobx-react';
+import { useDebugStore } from '../DebugStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,26 +18,20 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ModelTreeNode = observer((
   props:{
     modelNode: RXModel,
-    selected?:RXModel,
-    onSelect:(selected?:RXModel)=>void,
   }
 )=>{
-  const {selected, onSelect, modelNode} = props;
+  const {modelNode} = props;
   const classes = useStyles();
-  useEffect(()=>{
-    modelNode.setSelected(selected?.id === modelNode.node.id)
-    return ()=>{
-      modelNode.setSelected(false);
-    }
-  },[selected, modelNode])
+
+  const debugStore = useDebugStore();
 
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    if(modelNode.id === selected?.id){
-      onSelect(undefined);
+    if(modelNode.id === debugStore?.selectedModel?.id){
+      debugStore?.setSelectedModel(modelNode)
     }
     else{
-      onSelect(modelNode);      
+      debugStore?.setSelectedModel(modelNode)   
     }
   }
 
@@ -57,9 +51,7 @@ export const ModelTreeNode = observer((
           return(
             <ModelTreeNode 
               key = {childStore.id} 
-              selected = {selected}
               modelNode = {childStore} 
-              onSelect = {onSelect} 
             />
           )
         })

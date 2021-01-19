@@ -15,7 +15,6 @@ export class RXModel{
   value?: any;
   error?: string;  
   loading?: boolean;
-  isSelected?: boolean;
   childrenMap: Map<string,RXModel>;
   constructor(node: RXNode<IMeta>, modelKey:string|number) {
     this.id = createId();
@@ -156,9 +155,6 @@ export class RXModel{
     this.childrenMap.clear();
   }
 
-  setSelected(selected:boolean){
-    this.isSelected = selected;
-  }
 
   //目前只处理根节点
   getModelNode(name?:string):RXModel|undefined{
