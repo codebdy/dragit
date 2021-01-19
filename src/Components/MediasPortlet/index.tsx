@@ -10,6 +10,8 @@ import { IMedia } from 'Base/Model/IMedia';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { add, exchange, remove } from 'Utils/ArrayHelper';
 import withFormField from 'Components/Common/withFormField';
+import { IMeta } from 'Base/Model/IMeta';
+import { RXNode } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,12 +53,13 @@ export function mergeArray(oldArray:any, newArray:any){
 
 const MediasPortlet = React.forwardRef((
   props: {
+    rxNode: RXNode<IMeta>,
     value?:any
     cols?:number,
   } & RXInputProps, 
   ref:any
 )=>{
-  const{value, cols, onChange, error, helperText, loading, ...rest
+  const{rxNode, value, cols, onChange, error, helperText, loading, ...rest
   } = props;
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);

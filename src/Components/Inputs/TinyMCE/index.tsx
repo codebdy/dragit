@@ -5,6 +5,8 @@ import { Editor } from '@tinymce/tinymce-react';
 import MediasSelectDialog from 'Components/Medias/MediasSelectDialog';
 import { IMedia } from 'Base/Model/IMedia';
 import { EventEmitter } from 'events';
+import withFormField from 'Components/Common/withFormField';
+import withSkeleton from 'Base/HOCs/withSkeleton';
 
 declare var window: {$bus:EventEmitter};
 
@@ -103,4 +105,4 @@ const TinyMCE = React.forwardRef((
   )
 })
 
-export default TinyMCE
+export default withFormField(withSkeleton(TinyMCE));

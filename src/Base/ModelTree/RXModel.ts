@@ -2,8 +2,11 @@ import { makeAutoObservable, toJS } from "mobx";
 import { IMeta } from "Base/Model/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
 import { validate } from "./validate";
+import { createId } from "Base/creatId";
+import { ID } from "Base/Model/graphqlTypes";
 
 export class RXModel{
+  id:ID;
   //从model中的取值索引
   modelKey:string|number;
   node: RXNode<IMeta>;
@@ -15,6 +18,7 @@ export class RXModel{
   isSelected?: boolean;
   childrenMap: Map<string,RXModel>;
   constructor(node: RXNode<IMeta>, modelKey:string|number) {
+    this.id = createId();
     this.node = node;
     this.modelKey = modelKey;
     this.childrenMap = new Map<string,RXModel>();
@@ -32,8 +36,8 @@ export class RXModel{
     return this.childrenMap.get(key)
   }
 
-  removeFieldStore(fieldName:string){
-    this.childrenMap.delete(fieldName);
+  removeChildStore(key:string){
+    this.childrenMap.delete(key);
   }
 
   clearDirty(){

@@ -5,6 +5,7 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { remove } from "Utils/ArrayHelper";
+import { makeTableModel } from "../../Base/ModelTree/makeTableModel";
 import { PaginatorInfo } from "./PaginatorInfo";
 
 type Order = 'asc' | 'desc';
@@ -149,16 +150,7 @@ export class ListViewStore{
   }
 
   setRows(rows?:Array<any>){
-    this.rxModel?.clearChildren();
-    rows?.forEach((row, index)=> {
-      const rowRxNode = RXNode.make({name:'ListViewBodyTableRow'})
-      const columns = this.tableRxNode?.clone()?.children;
-      rowRxNode.setChildren(columns);
-      //index作为key，在setModel中使用索引取值，model为数组跟普通对象的区别，
-      const rowModel = new RXModel(rowRxNode, index);
-      rowModel.setModel(rows);
-      this.rxModel?.setChild(row.id, rowModel); 
-    });
+    makeTableModel(rows, this.rxModel, this.tableRxNode, 'ListViewBodyTableRow')
   }
 
   setLoading(loading?:boolean){

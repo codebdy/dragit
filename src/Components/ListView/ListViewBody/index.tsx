@@ -1,5 +1,6 @@
 import { TableContainer, Table, TableBody, TableRow } from '@material-ui/core';
-import { useRXNode } from 'Base/RXNode/RXNodeProvider';
+import { IMeta } from 'Base/Model/IMeta';
+import { RXNode } from 'Base/RXNode/RXNode';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import React, { Fragment } from 'react';
 import { useEffect } from 'react';
@@ -9,17 +10,18 @@ import { ListViewBodyTable } from './ListViewBodyTable';
 
 const ListViewBody = React.forwardRef((
     props:{
+      rxNode:RXNode<IMeta>,
       children?:any,
     }, 
     ref:any
   )=>{
 
   const {
+    rxNode,
     children,
     ...rest
   } = props
   const {isDesigning} = useDesign();
-  const rxNode = useRXNode();
   const listViewStore = useListViewStore();
   
   useEffect(()=>{

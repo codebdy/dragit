@@ -6,7 +6,6 @@ import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { useActionStore } from './ActionStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
-import { RXNodeProvider } from '../RXNode/RXNodeProvider';
 
 export function ComponentRender(
   props:{
@@ -65,6 +64,10 @@ export function ComponentRender(
     onClick:handleOnClick
   }
 
+  if(node.meta.field || node.meta.withNodeContext ){
+    elementProps.rxNode = node;
+  }
+
   let elementView:any = ((node.children && node.children.length > 0) || rxText) ?
     (<Component {...elementProps}>
       {rxText}
@@ -81,11 +84,7 @@ export function ComponentRender(
   return(
     <Fragment>
       { 
-        node.meta.field || node.meta.withNodeContext 
-        ? <RXNodeProvider value = {node}>
-            {elementView}
-          </RXNodeProvider>
-        : elementView 
+        elementView 
       }
     </Fragment>
   )

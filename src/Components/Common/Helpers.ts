@@ -1,8 +1,8 @@
-import { creatId } from "../../Base/creatId";
+import { createId } from "../../Base/creatId";
 
 export function addTempIdToTable(rows:Array<any>):Array<any>{
   return rows.map((item:any)=>{
-    return {...item, id:item.id? item.id: creatId()}
+    return {...item, id:item.id? item.id: createId()}
   })
 }
 

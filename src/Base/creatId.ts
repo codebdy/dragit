@@ -1,5 +1,5 @@
 
 var seedId = 1;
-export const creatId = () => {
+export const createId = () => {
   return (seedId++).toString();
 };

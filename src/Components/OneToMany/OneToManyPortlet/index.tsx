@@ -1,14 +1,15 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect} from 'react';
 import { makeStyles, Theme, createStyles, Grid, Divider, IconButton } from '@material-ui/core';
 import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
-import { useModelStore } from 'Base/ModelTree/ModelProvider';
+import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import {Observer} from 'mobx-react';
 import { useDesign } from 'Design/PageEditor/useDesign';
-import { useRXNode } from 'Base/RXNode/RXNodeProvider';
 import { RXModel } from 'Base/ModelTree/RXModel';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { makeTableModel, makeTableRowModel } from 'Base/ModelTree/makeTableModel';
+import { ID } from 'Base/Model/graphqlTypes';
+import { observer } from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,45 +28,58 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const OneToManyPortlet = React.forwardRef((
+const OneToManyPortlet = observer(React.forwardRef((
   props: any,
   ref:any
 )=>{
-  const {field, loading, value, title, children, ...rest} = props;
+  const {loading, rxNode, value, title, children, ...rest} = props;
   const {isDesigning} = useDesign();
   const classes = useStyles();
   const modelStore =  useModelStore();
-  const node = useRXNode();
-  const fieldStore = modelStore?.getChild(field);
+  const fieldStore = modelStore?.getChild(rxNode?.meta.field);
   useEffect(()=>{
-    if(node){
-        //modelStore?.setChild(field,  new RXModel(node));
+    const field = rxNode?.meta.field;
+    if(rxNode && field){
+      const model = new RXModel(rxNode, field);
+      modelStore?.setChild(field, model);
+      return ()=>{
+        modelStore?.removeChildStore(field);
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [field])
+  }, [rxNode])
 
-  const fieldStoreForDesign = useMemo(()=>{
-    if(isDesigning){
-      const store = new RXNode()
-      //store.addRow()
-      return store;      
-    }
+  useEffect(()=>{
+    makeTableModel(fieldStore?.value, fieldStore, rxNode, 'OneToManyPortletRow');
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isDesigning]);
+  },[fieldStore?.value])
+
+  //const fieldStoreForDesign = useMemo(()=>{
+  //  if(isDesigning){
+      //const store = new RXNode()
+      //store.addRow()
+  //    return store;      
+  //  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  //},[isDesigning]);
 
 
   const handleAddNew = ()=>{
     if(isDesigning){
       return;
     }
+    makeTableRowModel(fieldStore?.value,  fieldStore, rxNode, 'OneToManyPortletRow')
+    //const rowRxNode = RXNode.make({ name: 'OneToManyPortletRow' });
+    //fieldStore?.setChild(rowRxNode.id, )
     //fieldStore?.addRow();
   }
 
-  const handelRemove = (index:number)=>{
+  const handelRemove = (id:ID)=>{
+    fieldStore?.removeChildStore(id);
     //fieldStore?.removeRow(index);
   }
 
-  const store = isDesigning ? fieldStoreForDesign : fieldStore;
+  //const store = isDesigning ? fieldStoreForDesign : fieldStore;
 
   return (
     <Observer>
@@ -78,8 +92,8 @@ const OneToManyPortlet = React.forwardRef((
               {children}
           </ModelProvider>*/}
           </div>
-          {/*
-            store?.children.map((rowStore, index)=>{
+          {
+            fieldStore?.getChildren()?.map((rowStore, index)=>{
               return(
                 <ModelProvider value={rowStore} key = {rowStore.id}>
                   <Grid container >
@@ -87,7 +101,7 @@ const OneToManyPortlet = React.forwardRef((
                       <Grid item>{title} #{index + 1}</Grid>
                       <Grid item>
                         <IconButton aria-label="delete"
-                          onClick = {(event) => {handelRemove(index)}}
+                          onClick = {(event) => {handelRemove(rowStore.id)}}
                           size="small"
                         >
                           <CloseIcon fontSize="small" />
@@ -102,12 +116,12 @@ const OneToManyPortlet = React.forwardRef((
                 </ModelProvider>            
               )
             })
-          */}
+          }
 
         </MultiContentPotlet>
       }
     </Observer>
   )
-})
+}))
 
 export default OneToManyPortlet

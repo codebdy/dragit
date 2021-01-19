@@ -1,15 +1,15 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
+import { IMeta } from "Base/Model/IMeta";
 import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { usePageStore } from "Base/PageUtils/PageStore";
-import { useRXNode } from "Base/RXNode/RXNodeProvider";
+import { RXNode } from "Base/RXNode/RXNode";
 import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { ListViewStore } from "./ListViewStore";
 
-export function useRemoveGQL( listViewStore:ListViewStore, remove?:string ){
+export function useRemoveGQL( rxNode:RXNode<IMeta>, listViewStore:ListViewStore, remove?:string ){
   const pageStore = usePageStore();
-  const rxNode = useRXNode();
-  
+
   const createQueryGQL = ()=>{
     const GQL_STRING = `
       mutation ($ids:[ID]){

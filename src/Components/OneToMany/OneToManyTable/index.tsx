@@ -6,7 +6,8 @@ import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';
-import { useRXNode } from 'Base/RXNode/RXNodeProvider';
+import { IMeta } from 'Base/Model/IMeta';
+import { RXNode } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const OneToManyTable = React.forwardRef((
   props: {
+    rxNode:RXNode<IMeta>,
     field?:string,
     size?:any,
     children:any,
@@ -26,6 +28,7 @@ const OneToManyTable = React.forwardRef((
   ref:any
 )=>{
   const{
+    rxNode,
     field,
     size,
     children,
@@ -34,7 +37,6 @@ const OneToManyTable = React.forwardRef((
   const {isDesigning} = useDesign();
   const classes = useStyles();
   const modelStore =  useModelStore();
-  const rxNode = useRXNode();
   const fieldStore = modelStore?.getChild(field);
   useEffect(()=>{
     if(field){

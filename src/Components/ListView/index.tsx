@@ -16,6 +16,8 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import useSelectModel from 'Components/Common/useSelectModel';
+import { IMeta } from 'Base/Model/IMeta';
+import { RXNode } from 'Base/RXNode/RXNode';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -28,6 +30,7 @@ function creatEmpertyRows(length:number){
 
 const ListView = observer(React.forwardRef((
     props:{
+      rxNode:RXNode<IMeta>,
       query?:string,
       update?:IPageMutation,
       remove?:string,
@@ -37,6 +40,7 @@ const ListView = observer(React.forwardRef((
   )=>{
 
   const {
+    rxNode,
     query,
     update,
     remove,
@@ -47,9 +51,9 @@ const ListView = observer(React.forwardRef((
   const [listViewStore] = useState(new ListViewStore())
   
   const appStore = useAppStore();
-  const queryGQL = useQueryGQL( listViewStore, query );
-  const updateGQL = useUpdateGQL( listViewStore, update );
-  const removeGQL = useRemoveGQL( listViewStore, remove );
+  const queryGQL = useQueryGQL( rxNode, listViewStore, query );
+  const updateGQL = useUpdateGQL( rxNode, listViewStore, update );
+  const removeGQL = useRemoveGQL( rxNode, listViewStore, remove );
   const {isDesigning} = useDesign();
   const modelStore = useModelStore();
 

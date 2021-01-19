@@ -4,6 +4,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
 import intl from 'react-intl-universal';
 import { useAppStore } from 'Store/Helpers/useAppStore';
+import withFormField from 'Components/Common/withFormField';
 
 const Combobox = React.forwardRef((
   props:{
@@ -19,6 +20,7 @@ const Combobox = React.forwardRef((
     variant?:any, 
     size?:any,
     groupBy?:string,
+    loading?:boolean,
   },
   ref:any
 )=>{
@@ -29,6 +31,7 @@ const Combobox = React.forwardRef((
     fullWidth,
     query,
     items,
+    loading,
     ...rest
   } = props;
 
@@ -44,7 +47,7 @@ const Combobox = React.forwardRef((
       }
     }
   `;
-  const { loading, error: queryError, data } = useQuery(QUERY_DATA);
+  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
   const appStore = useAppStore();
   
   useEffect(()=>{
@@ -77,7 +80,7 @@ const Combobox = React.forwardRef((
     <Autocomplete
       multiple = {multiple}
       options = {options||[]}
-      loading = {!!loading }
+      loading = {loading ||queryLoading }
       ref = {ref}
       value = {inputValue}
       freeSolo
@@ -99,4 +102,4 @@ const Combobox = React.forwardRef((
   )
 })
 
-export default Combobox;
+export default withFormField(Combobox);

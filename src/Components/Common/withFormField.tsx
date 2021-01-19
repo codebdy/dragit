@@ -8,9 +8,9 @@ import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{
-    const {[DADA_RXID_CONST]:rxid, onlyShow, forwardedRef, empertyValue, rule, helperText, graphiQL, ...rest} = props;
+    const {[DADA_RXID_CONST]:rxid, rxNode, onlyShow, forwardedRef, empertyValue, rule, helperText, graphiQL, ...rest} = props;
     const modelStore =  useModelStore();
-    const fieldStore = useFieldStore();
+    const fieldStore = useFieldStore(rxNode);
     
     useSelectModel(fieldStore);
 
