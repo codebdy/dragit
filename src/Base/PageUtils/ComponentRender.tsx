@@ -64,7 +64,7 @@ export function ComponentRender(
     onClick:handleOnClick
   }
 
-  if(node.meta.field || node.meta.withNodeContext ){
+  if(node.meta.field || node.meta.withNode ){
     elementProps.rxNode = node;
   }
 

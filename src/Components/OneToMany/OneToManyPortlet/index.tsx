@@ -1,16 +1,16 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, Divider, IconButton } from '@material-ui/core';
 import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { useDesign } from 'Design/PageEditor/useDesign';
-import { RXModel } from 'Base/ModelTree/RXModel';
-import { makeTableModel, makeTableRowModel } from 'Base/ModelTree/makeTableModel';
+import { makeTableRowModel } from 'Base/ModelTree/makeTableModel';
 import { ID } from 'Base/Model/graphqlTypes';
 import { observer } from 'mobx-react';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
+import { useSetChildStore } from '../useSetChildStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,23 +38,9 @@ const OneToManyPortlet = observer(React.forwardRef((
   const classes = useStyles();
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(rxNode?.meta.field);
-  useEffect(()=>{
-    const field = rxNode?.meta.field;
-    if(rxNode && field){
-      const model = new RXModel(rxNode, field);
-      modelStore?.setChild(field, model);
-      return ()=>{
-        modelStore?.removeChildStore(field);
-      }
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rxNode])
 
-  useEffect(()=>{
-    makeTableModel(fieldStore?.value, fieldStore, rxNode, 'OneToManyPortletRow');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[fieldStore?.value])
-
+  useSetChildStore(rxNode, 'OneToManyPortletRow');
+  
   //const fieldStoreForDesign = useMemo(()=>{
   //  if(isDesigning){
       //const store = new RXNode()
@@ -73,9 +59,7 @@ const OneToManyPortlet = observer(React.forwardRef((
   }
 
   const handelRemove = (id:ID)=>{
-    console.log('handelRemove', id);
     fieldStore?.removeChildStore(id);
-    //fieldStore?.removeRow(index);
   }
 
   //const store = isDesigning ? fieldStoreForDesign : fieldStore;

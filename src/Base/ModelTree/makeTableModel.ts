@@ -19,7 +19,6 @@ export function makeTableRowModel(rows: any[], parentRxModel: RXModel | undefine
   
   rowModel.setModel(rows);
   parentRxModel?.setChild(rowModel.id, rowModel);
-
   parentRxModel?.getChildren().forEach((child, index)=>{
     child.setLabel((index + 1).toString());
   })

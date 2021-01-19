@@ -7,7 +7,7 @@ import { BATCH_REMOVE_LIST_VIEW_RECORDS,
 
 export default {
   name:'ListView',
-  withNodeContext:true,
+  withNode:true,
   props:{
     variant:'outlined',
     query:'posts',
@@ -93,7 +93,7 @@ export default {
     },
     {
       name:'ListViewBody',
-      withNodeContext:true,
+      withNode:true,
       children:[
         {
           name:'TableColumn',

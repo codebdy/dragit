@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
 import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
-import { useModelStore } from 'Base/ModelTree/ModelProvider';
+import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 
 import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
+import { useSetChildStore } from '../useSetChildStore';
+import { ComponentRender } from 'Base/PageUtils/ComponentRender';
+import { Close } from '@material-ui/icons';
+import { ID } from 'Base/Model/graphqlTypes';
+import { makeTableRowModel } from 'Base/ModelTree/makeTableModel';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const OneToManyTable = React.forwardRef((
+const OneToManyTable = observer(React.forwardRef((
   props: {
     rxNode:RXNode<IMeta>,
     field?:string,
@@ -38,22 +44,19 @@ const OneToManyTable = React.forwardRef((
   const classes = useStyles();
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(field);
-  useEffect(()=>{
-    if(field){
-      //modelStore?.setChild(field,  new RXNode(rxNode));      
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [field])
+  
+  useSetChildStore(rxNode, 'OneToManyTableRow');
 
   const handleAddNew = ()=>{
+    console.log('handleAddNew');
     if(isDesigning){
       return;
     }
-    //fieldStore?.addRow();
+    makeTableRowModel(fieldStore?.value,  fieldStore, rxNode, 'OneToManyTableRow')
   }
 
-  const handelRemove = (index:number)=>{
-    //fieldStore?.removeRow(index);
+  const handelRemove = (id:ID)=>{
+    fieldStore?.removeChildStore(id);
   }
 
   return (
@@ -91,26 +94,26 @@ const OneToManyTable = React.forwardRef((
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {/*fieldStore?.rows.map((rowStore, rowIndex) => (
+                  {fieldStore?.getChildren()?.map((rowStore) => (
                     <ModelProvider value={rowStore} key = {rowStore.id}>
                       <TableRow key={`row-${rowStore.id}`} >
                         {
-                          rxNode?.children.map((column, index)=>{
+                          rxNode?.children.map((column)=>{
                             return(
-                              <ComponentRender key={`${index}-row-${rowStore.id}`} node = {column} />
+                              <ComponentRender key={`${column?.id}-${rowStore.id}`} node = {column} />
                             )
                           })
                         }
                         <TableCell align="right">
                           <IconButton aria-label="delete"
-                            onClick = {(event) => {handelRemove(rowIndex)}}
+                            onClick = {(event) => {handelRemove(rowStore.id)}}
                           >
-                            <CloseIcon fontSize="small" />
+                            <Close fontSize="small" />
                           </IconButton>
                         </TableCell>
                       </TableRow>
                     </ModelProvider>
-                      ))*/}
+                      ))}
                 </TableBody>
               </Fragment>
             }
@@ -119,6 +122,6 @@ const OneToManyTable = React.forwardRef((
     }
     </Observer>
   )
-})
+}))
 
 export default OneToManyTable;
