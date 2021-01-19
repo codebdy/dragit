@@ -7,7 +7,7 @@ import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { IMeta } from 'Base/Model/IMeta';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { DADA_RXID_CONST, RXNode } from 'Base/RXNode/RXNode';
 import { useSetTableStore } from '../useSetTableStore';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { Close } from '@material-ui/icons';
@@ -63,7 +63,7 @@ const OneToManyTable = observer(React.forwardRef((
         onAddNew = {handleAddNew}
         {...rest}
       >
-          <Table className={classes.table} size={size}>
+          <Table className={classes.table} size={size} {...{[DADA_RXID_CONST]:fieldStore?.node?.rxid}}>
             {
               isDesigning?
               <TableBody>
@@ -93,7 +93,7 @@ const OneToManyTable = observer(React.forwardRef((
                 <TableBody>
                   {fieldStore?.getChildren()?.map((rowStore) => (
                     <ModelProvider value={rowStore} key = {rowStore.id}>
-                      <TableRow key={`row-${rowStore.id}`} >
+                      <TableRow key={`row-${rowStore.id}`} {...{[DADA_RXID_CONST]:rowStore?.node?.rxid}}>
                         {
                           rxNode?.children.map((column)=>{
                             return(

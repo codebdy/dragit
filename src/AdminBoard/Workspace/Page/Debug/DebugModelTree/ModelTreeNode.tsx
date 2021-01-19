@@ -28,7 +28,7 @@ export const ModelTreeNode = observer((
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     if(modelNode.id === debugStore?.selectedModel?.id){
-      debugStore?.setSelectedModel(modelNode)
+      debugStore?.setSelectedModel(undefined)
     }
     else{
       debugStore?.setSelectedModel(modelNode)   

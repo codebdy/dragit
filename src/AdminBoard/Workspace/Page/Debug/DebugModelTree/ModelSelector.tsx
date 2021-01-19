@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'fixed',
       outline:'dashed green 2px',
       pointerEvents:'none',
+      zIndex:theme.zIndex.appBar - 10,
     },
 
   }),

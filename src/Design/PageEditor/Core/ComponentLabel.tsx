@@ -50,7 +50,8 @@ export const ComponentLabel = observer((
       window.removeEventListener('resize', doFollow)
       window.removeEventListener('scroll', doFollow)
     };
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   useEffect(() => {
     doFollow();

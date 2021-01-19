@@ -45,7 +45,6 @@ export const  OneToManyTableView = {
                 marginTop:2,
                 open:true,
                 size:"small",
-                field:'specs',
               },
               children:[
                 {
@@ -55,8 +54,8 @@ export const  OneToManyTableView = {
                   },
                   children:[{
                     name:'MediaSelect',
+                    field:'image',
                     props:{
-                      field:'image',
                       width:'60px',
                     }
                   }]
@@ -69,8 +68,8 @@ export const  OneToManyTableView = {
                   },
                   children:[{
                     name:'TextBox',
+                    field:'name',
                     props:{
-                      field:'name',
                       variant:'outlined',
                       size:'small',
                     }
@@ -83,8 +82,8 @@ export const  OneToManyTableView = {
                   },
                   children:[{
                     name:'TextBox',
+                    field:'color',
                     props:{
-                      field:'color',
                       variant:'outlined',
                       size:'small',
                     }
@@ -97,23 +96,23 @@ export const  OneToManyTableView = {
                   },
                   children:[{
                     name:'SelectBox',
+                    field:'specs',
                     props:{
-                      field:'category',
                       variant:"outlined",
                       size:'small',
                       withoutEmpertyItem:false,                        
                       items:[
                         {
-                          slug:'100',
-                          label:'100'
+                          id:'100',
+                          name:'100'
                         },
                         {
-                          slug:'200',
-                          label:'200'
+                          id:'200',
+                          name:'200'
                         },
                         {
-                          slug:'300',
-                          label:'300'
+                          id:'300',
+                          name:'300'
                         }
                       ]
                     }
@@ -126,8 +125,8 @@ export const  OneToManyTableView = {
                   },
                   children:[{
                     name:'TextBox',
+                    field:'stock',
                     props:{
-                      field:'stock',
                       variant:'outlined',
                       size:'small',
                     }
