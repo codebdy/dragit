@@ -49,7 +49,7 @@ export const ModelTreeNode = observer((
         <div 
           className = {classes.label}
           onClick = {handleClick}
-          title = {`value : ${modelNode.value}`}
+          title = {`value : ${JSON.stringify(modelNode.value)}`}
         >{modelNode.label}</div>
       }
     >
