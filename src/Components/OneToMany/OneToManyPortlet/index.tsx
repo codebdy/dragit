@@ -4,12 +4,12 @@ import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
-import {Observer} from 'mobx-react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import { makeTableModel, makeTableRowModel } from 'Base/ModelTree/makeTableModel';
 import { ID } from 'Base/Model/graphqlTypes';
 import { observer } from 'mobx-react';
+import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,12 +69,10 @@ const OneToManyPortlet = observer(React.forwardRef((
       return;
     }
     makeTableRowModel(fieldStore?.value,  fieldStore, rxNode, 'OneToManyPortletRow')
-    //const rowRxNode = RXNode.make({ name: 'OneToManyPortletRow' });
-    //fieldStore?.setChild(rowRxNode.id, )
-    //fieldStore?.addRow();
   }
 
   const handelRemove = (id:ID)=>{
+    console.log('handelRemove', id);
     fieldStore?.removeChildStore(id);
     //fieldStore?.removeRow(index);
   }
@@ -82,45 +80,41 @@ const OneToManyPortlet = observer(React.forwardRef((
   //const store = isDesigning ? fieldStoreForDesign : fieldStore;
 
   return (
-    <Observer>
-      {() =>
-        <MultiContentPotlet title={title} ref={ref} {...rest}
-          onAddNew = {handleAddNew}
-        >
-          <div className = {classes.storeBuilder}>{/*
-            <ModelProvider value = {fieldStore?.schemaRow}>
-              {children}
-          </ModelProvider>*/}
-          </div>
-          {
-            fieldStore?.getChildren()?.map((rowStore, index)=>{
-              return(
-                <ModelProvider value={rowStore} key = {rowStore.id}>
-                  <Grid container >
-                    <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
-                      <Grid item>{title} #{index + 1}</Grid>
-                      <Grid item>
-                        <IconButton aria-label="delete"
-                          onClick = {(event) => {handelRemove(rowStore.id)}}
-                          size="small"
-                        >
-                          <CloseIcon fontSize="small" />
-                        </IconButton>
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Divider />
-                      {children}
-                    </Grid>
+    <MultiContentPotlet title={title} ref={ref} {...rest} {...{[DADA_RXID_CONST]:fieldStore?.node?.rxid}}
+      onAddNew = {handleAddNew}
+    >
+      <div className = {classes.storeBuilder}>{/*
+        <ModelProvider value = {fieldStore?.schemaRow}>
+          {children}
+      </ModelProvider>*/}
+      </div>
+      {
+        fieldStore?.getChildren()?.map((rowStore, index)=>{
+          return(
+            <ModelProvider value={rowStore} key = {rowStore.id}>
+              <Grid container >
+                <Grid container item xs={12} justify = "space-between" className={classes.itemToolbar}>
+                  <Grid item>{title} #{index + 1}</Grid>
+                  <Grid item>
+                    <IconButton aria-label="delete"
+                      onClick = {(event) => {handelRemove(rowStore.id)}}
+                      size="small"
+                    >
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
                   </Grid>
-                </ModelProvider>            
-              )
-            })
-          }
-
-        </MultiContentPotlet>
+                </Grid>
+                <Grid item xs={12} {...{[DADA_RXID_CONST]:rxNode?.rxid}}>
+                  <Divider />
+                  {children}
+                </Grid>
+              </Grid>
+            </ModelProvider>            
+          )
+        })
       }
-    </Observer>
+
+    </MultiContentPotlet>
   )
 }))
 

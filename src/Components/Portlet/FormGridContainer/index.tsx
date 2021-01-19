@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
-import useSelectModel from 'Components/Common/useSelectModel';
 import {observer} from 'mobx-react';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 import { RXModel } from 'Base/ModelTree/RXModel';
@@ -22,13 +21,10 @@ const FormGridContainer = observer(React.forwardRef((props:any, ref:any) => {
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(rxNode?.meta.field);
 
-  //Debug时跟踪页面
-  useSelectModel(fieldStore);
   const fieldName = rxNode?.meta.field;  
   
   useEffect(()=>{
     if(fieldName && rxNode){
-      console.log(fieldName, rxNode)
       const rxModel = new RXModel(rxNode, fieldName);
       rxModel.setLabel(`Submodel : ${fieldName}`);
       modelStore?.setChild(fieldName, rxModel);

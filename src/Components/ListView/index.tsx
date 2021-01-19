@@ -15,7 +15,6 @@ import ListViewActionFilter from './ListViewActionFilter';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
-import useSelectModel from 'Components/Common/useSelectModel';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 
@@ -66,9 +65,6 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[listViewStore.rxModel]);
 
-  useSelectModel(listViewStore.rxModel);
-
-  //const mutationGQL = useMutationGQL(mutation, selected);
   const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
     notifyOnNetworkStatusChange: true,
     //fetchPolicy:'no-cache'
@@ -127,7 +123,6 @@ const ListView = observer(React.forwardRef((
 
   const handelBatchRemove = ()=>{
     listViewStore.setRemovingSelects();
-    //listViewStore.setSelects([]);
     excuteRemove({variables:{
       ids:listViewStore.selects
     }})

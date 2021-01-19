@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { TreeItem } from '@material-ui/lab';
-import { ID } from 'Base/Model/graphqlTypes';
 import { useEffect } from 'react';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import {observer} from 'mobx-react';
@@ -19,14 +18,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ModelTreeNode = observer((
   props:{
     modelNode: RXModel,
-    selected:ID,
-    onSelect:(selected:ID)=>void,
+    selected?:RXModel,
+    onSelect:(selected?:RXModel)=>void,
   }
 )=>{
   const {selected, onSelect, modelNode} = props;
   const classes = useStyles();
   useEffect(()=>{
-    modelNode.setSelected(selected === modelNode.node.id)
+    modelNode.setSelected(selected?.id === modelNode.node.id)
     return ()=>{
       modelNode.setSelected(false);
     }
@@ -34,22 +33,22 @@ export const ModelTreeNode = observer((
 
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    if(modelNode.node.id === selected){
-      onSelect('');
+    if(modelNode.id === selected?.id){
+      onSelect(undefined);
     }
     else{
-      onSelect(modelNode.node.id);      
+      onSelect(modelNode);      
     }
   }
 
   return (
     <TreeItem 
-      nodeId = {modelNode.node.id} 
+      nodeId = {modelNode.id} 
       label={
         <div 
           className = {classes.label}
           onClick = {handleClick}
-          title = {`value : ${JSON.stringify(modelNode.toInputValue())}`}
+          title = {`${modelNode.node.rxid}, value : ${JSON.stringify(modelNode.toInputValue())}`}
         >{modelNode.label}</div>
       }
     >
@@ -57,7 +56,7 @@ export const ModelTreeNode = observer((
         modelNode.getChildren()?.map(childStore=>{
           return(
             <ModelTreeNode 
-              key = {childStore.node.id} 
+              key = {childStore.id} 
               selected = {selected}
               modelNode = {childStore} 
               onSelect = {onSelect} 

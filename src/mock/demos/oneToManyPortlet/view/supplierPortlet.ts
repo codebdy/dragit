@@ -21,11 +21,11 @@ export default               {
           children:[
             {
               name:'SelectBox',
+              field:'factory',
               props:{
                 label:'工厂',
                 variant:"outlined",
                 fullWidth:true,
-                field:'title',
                 size:'small',
                 rule:{
                   valueType:'string',
@@ -46,6 +46,7 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'contract_date',
               props:{
                 label:'合同日期',
                 variant:"outlined",
@@ -53,7 +54,6 @@ export default               {
                 size:"small",
                 type:'date',
                 shrinkLabel:true,
-                field:'contract_date',
               },
             }
           ],
@@ -67,12 +67,12 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'contract_no',
               props:{
                 label:'合同号',
                 variant:"outlined",
                 fullWidth:true,
                 size:'small',
-                field:'contract_no',
                 rule:{
                   valueType:'string',
                   required:true,
@@ -90,12 +90,12 @@ export default               {
           children:[
             {
               name:'SelectBox',
+              field:'payment_term',
               props:{
                 label:'付款方式',
                 variant:"outlined",
                 fullWidth:true,
                 size:'small',
-                field:'payment_term',
                 withoutEmpertyItem:true,
                 items:[
                   {
@@ -129,12 +129,12 @@ export default               {
           children:[
             {
               name:'SelectBox',
+              field:'currency',
               props:{
                 label:'币种',
                 variant:"outlined",
                 fullWidth:true,
                 size:'small',
-                field:'currency',
                 withoutEmpertyItem:true,
                 items:[
                   {
@@ -163,13 +163,13 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'amount',
               props:{
                 label:'合同金额',
                 variant:"outlined",
                 type:'number',
                 fullWidth:true,
                 size:'small',
-                field:'amount',
               }
             }
           ]
@@ -183,6 +183,7 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'cargo_description',
               props:{
                 label:'货物描述',
                 variant:"outlined",
@@ -190,7 +191,6 @@ export default               {
                 multiline:true,
                 size:'small',
                 rows:5,
-                field:'cargo_description',
               },
             }
           ],
@@ -204,6 +204,7 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'date1',
               props:{
                 label:'预计发货日期',
                 variant:"outlined",
@@ -211,7 +212,6 @@ export default               {
                 size:"small",
                 type:'date',
                 shrinkLabel:true,
-                field:'date1',
               },
             }
           ],
@@ -224,6 +224,7 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'date2',
               props:{
                 label:'实际发货日期',
                 variant:"outlined",
@@ -231,7 +232,6 @@ export default               {
                 size:"small",
                 type:'date',
                 shrinkLabel:true,
-                field:'date2',
               },
             }
           ],
@@ -244,6 +244,7 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'pay_date1',
               props:{
                 label:'第一次付款日期',
                 variant:"outlined",
@@ -251,7 +252,6 @@ export default               {
                 size:"small",
                 type:'date',
                 shrinkLabel:true,
-                field:'pay_date1',
               },
             }
           ],
@@ -264,13 +264,13 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'payment1',
               props:{
                 label:'第一次付款金额',
                 variant:"outlined",
                 type:'number',
                 fullWidth:true,
                 size:'small',
-                field:'payment1',
               }
             }
           ]
@@ -283,13 +283,13 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'exchange1',
               props:{
                 label:'汇率',
                 variant:"outlined",
                 type:'number',
                 fullWidth:true,
                 size:'small',
-                field:'exchange1',
               }
             }
           ]
@@ -303,6 +303,7 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'pay_date2',
               props:{
                 label:'第二次付款日期',
                 variant:"outlined",
@@ -310,7 +311,6 @@ export default               {
                 size:"small",
                 type:'date',
                 shrinkLabel:true,
-                field:'pay_date2',
               },
             }
           ],
@@ -323,13 +323,13 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'payment2',
               props:{
                 label:'第二次付款金额',
                 variant:"outlined",
                 type:'number',
                 fullWidth:true,
                 size:'small',
-                field:'payment2',
               }
             }
           ]
@@ -342,13 +342,13 @@ export default               {
           children:[
             {
               name:'TextBox',
+              field:'exchange2',
               props:{
                 label:'汇率',
                 variant:"outlined",
                 type:'number',
                 fullWidth:true,
                 size:'small',
-                field:'exchange2',
               }
             }
           ]

@@ -11,8 +11,6 @@ import {observer} from 'mobx-react';
 import { DARK } from 'Store/ThemeSettings';
 import { DebugModelTree } from './DebugModelTree';
 import { Hidden } from '@material-ui/core';
-import { ModelSelector } from './ModelSelector';
-import { usePageStore } from '../../../../Base/PageUtils/PageStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +27,6 @@ export const Debug = observer(()=>{
   const [open, setOpen] = React.useState(false);
   const [gqlOpen, setGqlOpen] = React.useState(false);
   const [treeOpen, setTreeOpen] = React.useState(false);
-  const pageStore = usePageStore();
   const leftDrawer = useLeftDrawer();
   const fabLeft = leftDrawer.isMini ? leftDrawer.compactWidth : leftDrawer.fullWidth;
   const themeSettings = useThemeSettings();
@@ -60,7 +57,6 @@ export const Debug = observer(()=>{
   };
 
   const handleCloseTree = ()=>{
-    pageStore?.setSelectModelComponentRxid('');
     setTreeOpen(false);
   }
 
@@ -104,7 +100,6 @@ export const Debug = observer(()=>{
         <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
         <DebugModelTree open={treeOpen} onClose = {handleCloseTree} />
       </ThemeProvider>
-      <ModelSelector />
     </Hidden>
   );
 })

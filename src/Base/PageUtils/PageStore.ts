@@ -14,7 +14,6 @@ export class PageStore{
   gqls: Array<GraphQLStore> = [];
   rootNode: RXNode<IMeta>;
   page: IPage;
-  selectModelComponentRxid?: string;
   queryGQL?: GraphQLStore;
   //ActionStore
   constructor(page:IPage, pageJumper?:IPageJumper) {
@@ -44,10 +43,6 @@ export class PageStore{
 
   get pageLayout(){
     return this.rootNode.children;
-  }
-
-  setSelectModelComponentRxid(rxid?:string){
-    this.selectModelComponentRxid = rxid;
   }
 
   addGql(gql:GraphQLStore){

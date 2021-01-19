@@ -10,6 +10,8 @@ import { TreeView } from '@material-ui/lab';
 import {observer} from "mobx-react";
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { ModelTreeNode } from './ModelTreeNode';
+import { ModelSelector } from './ModelSelector';
+import { RXModel } from 'Base/ModelTree/RXModel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +46,7 @@ export const DebugModelTree = observer((
   }
 )=>{
   const {open, onClose} = props;
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState<RXModel>();
   const classes = useStyles();
   const modelStore = useModelStore();
 
@@ -63,13 +65,13 @@ export const DebugModelTree = observer((
           <TreeView
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
-            selected = {selected}
+            selected = {selected?.id || ''}
           >
             {
               modelStore?.getChildren()?.map((childStore, index)=>{
                 return (
                   <ModelTreeNode 
-                    key = {childStore.node.id} 
+                    key = {childStore.id} 
                     modelNode = {childStore} 
                     selected = {selected}
                     onSelect = {(selected)=>setSelected(selected)}
@@ -79,6 +81,7 @@ export const DebugModelTree = observer((
             }
           </TreeView>
         </div>
+        <ModelSelector selectedRxid = {selected?.node.rxid}/>
       </Scrollbar>
     </Drawer>
   )

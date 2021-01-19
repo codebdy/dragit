@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import {observer} from 'mobx-react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useEffect } from 'react';
-import { usePageStore } from '../../../../Base/PageUtils/PageStore';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,13 +14,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
   }),
 );
-export const ModelSelector = observer(() => {
+export const ModelSelector = observer((props:{selectedRxid?:string}) => {
+  const {selectedRxid: selected} = props;
   const classes = useStyles();
-  const pageStore = usePageStore();
   const [rect, setRect] = useState<DOMRect>();
 
   const getDom = ()=>{
-    return document.querySelector(`[${DADA_RXID_CONST}="${pageStore?.selectModelComponentRxid}"]`);
+    return document.querySelector(`[${DADA_RXID_CONST}="${selected}"]`);
   }
 
   const getDomRect = ()=>{
@@ -60,10 +59,10 @@ export const ModelSelector = observer(() => {
 
     reComputeRect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageStore?.selectModelComponentRxid])
+  }, [selected])
 
   return (
-    pageStore?.selectModelComponentRxid && rect
+    selected && rect
     ? <div 
         className={classes.root}
         style = {{

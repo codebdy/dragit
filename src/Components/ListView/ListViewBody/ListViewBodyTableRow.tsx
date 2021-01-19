@@ -4,7 +4,6 @@ import { useListViewStore } from "../ListViewStore";
 import {observer} from "mobx-react";
 import ListViewTableRowActionFilter from "./ListViewTableRowActionFilter";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
-import useSelectModel from "Components/Common/useSelectModel";
 
 const RowCheckBox = observer((props:{rowId:string}) => {
   const {rowId} = props;
@@ -30,8 +29,6 @@ export const ListViewBodyTableRow = observer((
 )=>{
   const {children, ...rest} = props;
   const rowModel = useModelStore();
-
-  useSelectModel(rowModel);
   
   return (
     <TableRow

@@ -14,8 +14,14 @@ export function makeTableRowModel(rows: any[], parentRxModel: RXModel | undefine
   const columns = rxNode?.clone()?.children;
   rowRxNode.setChildren(columns);
   //index作为key，在setModel中使用索引取值，model为数组跟普通对象的区别，
-  const rowModel = new RXModel(rowRxNode, parentRxModel?.childrenMap.size || 0);
+  const key = parentRxModel?.childrenMap.size || 0;
+  const rowModel = new RXModel(rowRxNode, key);
+  
   rowModel.setModel(rows);
-  parentRxModel?.setChild(rowRxNode.id, rowModel);
+  parentRxModel?.setChild(rowModel.id, rowModel);
+
+  parentRxModel?.getChildren().forEach((child, index)=>{
+    child.setLabel((index + 1).toString());
+  })
 }
 

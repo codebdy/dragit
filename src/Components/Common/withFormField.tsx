@@ -2,7 +2,6 @@ import React from 'react';
 import {observer} from 'mobx-react';
 import { useModelStore } from "../../Base/ModelTree/ModelProvider";
 import { useFieldStore } from "./useFieldStore";
-import useSelectModel from './useSelectModel';
 import { toJS } from 'mobx';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 
@@ -12,8 +11,6 @@ const withFormField = (Component:any)=>{
     const modelStore =  useModelStore();
     const fieldStore = useFieldStore(rxNode);
     
-    useSelectModel(fieldStore);
-
     const handleChange = (e:any) => {
       let newValue = toJS(e?.target?.value);
       fieldStore?.setValue(newValue);
