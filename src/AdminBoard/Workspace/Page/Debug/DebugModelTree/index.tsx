@@ -9,7 +9,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { TreeView } from '@material-ui/lab';
 import {observer} from "mobx-react";
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
-import ModelTreeNode from './ModelTreeNode';
+import { ModelTreeNode } from './ModelTreeNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -4,6 +4,7 @@ import { TreeItem } from '@material-ui/lab';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useEffect } from 'react';
 import { RXModel } from 'Base/ModelTree/RXModel';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,13 +16,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ModelTreeNode(
+export const ModelTreeNode = observer((
   props:{
     modelNode: RXModel,
     selected:ID,
     onSelect:(selected:ID)=>void,
   }
-){
+)=>{
   const {selected, onSelect, modelNode} = props;
   const classes = useStyles();
   useEffect(()=>{
@@ -48,6 +49,7 @@ export default function ModelTreeNode(
         <div 
           className = {classes.label}
           onClick = {handleClick}
+          title = {`value : ${modelNode.value}`}
         >{modelNode.label}</div>
       }
     >
@@ -65,4 +67,4 @@ export default function ModelTreeNode(
       }
     </TreeItem>
   )
-}
+})
