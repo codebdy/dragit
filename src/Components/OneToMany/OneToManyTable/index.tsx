@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const OneToManyTable = observer(React.forwardRef((
   props: {
     rxNode:RXNode<IMeta>,
-    field?:string,
     size?:any,
     children:any,
   }, 
@@ -35,7 +34,6 @@ const OneToManyTable = observer(React.forwardRef((
 )=>{
   const{
     rxNode,
-    field,
     size,
     children,
      ...rest
@@ -43,12 +41,11 @@ const OneToManyTable = observer(React.forwardRef((
   const {isDesigning} = useDesign();
   const classes = useStyles();
   const modelStore =  useModelStore();
-  const fieldStore = modelStore?.getChild(field);
+  const fieldStore = modelStore?.getChild(rxNode?.meta.field);
   
   useSetTableStore(rxNode, 'OneToManyTableRow');
 
   const handleAddNew = ()=>{
-    console.log('handleAddNew');
     if(isDesigning){
       return;
     }
