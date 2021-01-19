@@ -5,7 +5,7 @@ import { RXModel } from "Base/ModelTree/RXModel";
 import { RXNode } from "Base/RXNode/RXNode";
 import { useEffect } from "react";
 
-export function useSetChildStore(rxNode:RXNode<IMeta>, rowComponentName:string){
+export function useSetTableStore(rxNode:RXNode<IMeta>, rowComponentName:string){
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(rxNode?.meta.field);
 

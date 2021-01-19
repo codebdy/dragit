@@ -8,7 +8,7 @@ import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { IMeta } from 'Base/Model/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
-import { useSetChildStore } from '../useSetChildStore';
+import { useSetTableStore } from '../useSetTableStore';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { Close } from '@material-ui/icons';
 import { ID } from 'Base/Model/graphqlTypes';
@@ -45,7 +45,7 @@ const OneToManyTable = observer(React.forwardRef((
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(field);
   
-  useSetChildStore(rxNode, 'OneToManyTableRow');
+  useSetTableStore(rxNode, 'OneToManyTableRow');
 
   const handleAddNew = ()=>{
     console.log('handleAddNew');

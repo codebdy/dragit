@@ -10,7 +10,7 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { observer } from 'mobx-react';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
-import { useSetChildStore } from '../useSetChildStore';
+import { useSetTableStore } from '../useSetTableStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +39,7 @@ const OneToManyPortlet = observer(React.forwardRef((
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(rxNode?.meta.field);
 
-  useSetChildStore(rxNode, 'OneToManyPortletRow');
+  useSetTableStore(rxNode, 'OneToManyPortletRow');
   
   //const fieldStoreForDesign = useMemo(()=>{
   //  if(isDesigning){
