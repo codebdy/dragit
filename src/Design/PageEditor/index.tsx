@@ -202,10 +202,7 @@ export const PageEditor = observer((
   }
 
   const handleClear = ()=>{
-    //backupToUndoList(undefined);    
     eidtorStore.clear();
-    eidtorStore.refreshNode(eidtorStore.canvas?.id)      
-    eidtorStore.setSelectedNode(undefined);
   }
 
   

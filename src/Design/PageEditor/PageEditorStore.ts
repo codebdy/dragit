@@ -4,6 +4,7 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { CursorPosition, IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable } from "mobx";
+import { ClearCommand } from "./Commands/ClearCommand";
 import { ICommand } from "./Commands/ICommand";
 import { MoveAfterCommand } from "./Commands/MoveAfterCommand";
 import { MoveBeforeCommand } from "./Commands/MoveBeforeCommand";
@@ -84,10 +85,10 @@ export class PageEditorStore {
   }
 
   clear(){
-    this.selectedNode = undefined;
     if(this.canvas){
-      this.canvas.children = [];
+        this.excuteCommand(new ClearCommand(this.canvas, this.selectedNode));
     }
+
   }
 
   refreshNode(nodeId?:ID){
