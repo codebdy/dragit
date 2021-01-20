@@ -78,6 +78,12 @@ export const ComponentView = observer((
 
   const selected = eidtorStore?.selectedNode?.id === node.id;
   const dragged = eidtorStore?.draggedNode?.id === node.id;
+
+  useEffect(()=>{
+    if(eidtorStore?.selectedNode?.id === node.id){
+      eidtorStore?.setSelectedDom(document.querySelector(`[${DADA_RXID_CONST}="${node.rxid}"]`));
+    }
+  })
   
   useEffect(()=>{
     setEditStyle(getEditStyle(node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY));

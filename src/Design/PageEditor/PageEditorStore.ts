@@ -17,6 +17,7 @@ export class PageEditorStore {
   canvas?: RXNode<IMeta>;
   draggedToolboxItem?: IToolboxItem;
   selectedNode?: RXNode<IMeta>;
+  selectedDom: Element|null = null;
   undoList: Array<ICommand> = [];
   redoList: Array<ICommand> = [];
 
@@ -62,6 +63,10 @@ export class PageEditorStore {
 
   setSelectedNode(selectedNode?:RXNode<IMeta>){
     this.selectedNode = selectedNode
+  }
+
+  setSelectedDom(selectedDom:Element|null){
+    this.selectedDom = selectedDom;
   }
 
   //setUndoList(undoList:Array<IEditorSnapshot>){

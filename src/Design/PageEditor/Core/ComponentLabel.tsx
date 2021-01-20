@@ -25,16 +25,15 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ComponentLabel = observer((
   props:{
     node?:RXNode<IMeta>,
+    followDom:Element|null,
   }
 )=>{
-  const{node} = props;
+  const{node, followDom} = props;
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
   const {eidtorStore} = useDesign();
   
-  const followDom = node?.dom;
-
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();
     if(rect){

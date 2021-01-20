@@ -348,13 +348,16 @@ export const PageEditor = observer((
             <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
               {eidtorStore.canvas&&
                 <ComponentView 
-                  node ={eidtorStore.canvas} 
+                  node ={eidtorStore.canvas}
                 />
               }
               {
                 eidtorStore.selectedNode &&
                 <Fragment>
-                  <ComponentLabel node={eidtorStore.selectedNode}/>
+                  <ComponentLabel 
+                    node={eidtorStore.selectedNode}
+                    followDom = {eidtorStore.selectedDom}
+                  />
                   <NodeToolbar 
                     onBeginDrag = {handleBeginDrag}
                     onRemove = {handleRemove}
@@ -365,7 +368,10 @@ export const PageEditor = observer((
               }
               {
                 eidtorStore.activeNode &&
-                <ComponentLabel node={eidtorStore.activeNode}/>
+                <ComponentLabel 
+                  node={eidtorStore.activeNode}
+                  followDom = {eidtorStore.activeNode.dom}
+                />
               }
             </Scrollbar>
           }

@@ -67,7 +67,7 @@ export const NodeToolbar = observer((
   const {eidtorStore} = useDesign();
 
   const doFollow = ()=>{
-    let rect = eidtorStore?.selectedNode?.dom?.getBoundingClientRect();
+    let rect =  eidtorStore?.selectedDom?.getBoundingClientRect();
     if(!rect){
       return 
     }
@@ -83,7 +83,7 @@ export const NodeToolbar = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[eidtorStore?.showPaddingX, eidtorStore?.showPaddingY, eidtorStore?.selectedNode, eidtorStore?.scrollFlag]);
+  },[eidtorStore?.showPaddingX, eidtorStore?.showPaddingY, eidtorStore?.selectedDom, eidtorStore?.scrollFlag]);
 
 
   useEffect(() => {
