@@ -89,7 +89,7 @@ export const ComponentView = observer((
   useEffect(()=>{
     setEditStyle(getEditStyle(node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY]);
+  },[node, node.children.length, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY]);
 
   const handleRefresh = ()=>{
     setEditStyle(getEditStyle(node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY));
