@@ -25,9 +25,8 @@ export class PageEditorStore {
   undoList: Array<ICommand> = [];
   redoList: Array<ICommand> = [];
 
-  //refreshNodeId?:ID;
-  //waitingRefreshNodeIds:ID[]= [];
   scrollFlag:number = 0;
+  isDirty: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -90,20 +89,6 @@ export class PageEditorStore {
 
   }
 
-  //refreshNode(nodeId?:ID){
-  //  if(nodeId){
-  //    this.waitingRefreshNodeIds.push(nodeId);      
-  //  }
-  //}
-
-  //needRefresh(nodeId:ID){
-  //  return !!this.waitingRefreshNodeIds.find((id)=>id === nodeId)
-  //}
-
-  //finishFrefrehNode(nodeId:ID){
-  //  this.waitingRefreshNodeIds.splice(this.waitingRefreshNodeIds.indexOf(nodeId), 1);
-  //}
-
   scroll(){
     this.scrollFlag ++;
     //防止溢出
@@ -113,6 +98,7 @@ export class PageEditorStore {
   }
 
   excuteCommand(command:ICommand){
+    this.isDirty = true;
     const selectedNode = command.excute();
     this.setSelectedNode(selectedNode);
     this.undoList.push(command);
@@ -158,6 +144,10 @@ export class PageEditorStore {
       return true;  
     }
     return false;  
+  }
+
+  setIsDirty(isDirty:boolean){
+    this.isDirty = isDirty;
   }
 
 }
