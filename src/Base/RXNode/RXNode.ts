@@ -140,13 +140,17 @@ export class RXNode<T>{
   }
 
   previousSibling() : RXNode<T>|undefined{
-    //避免[mobx] Out of bounds read， map转换一下
-    return before(this, this.parent?.children.map(child=>child))
+    if(this.parent?.children){
+      //避免[mobx] Out of bounds read， map转换一下
+      return before(this, this.parent?.children.map(child=>child))
+    }
   }
 
   nextSibling() : RXNode<T>|undefined{
-    //避免[mobx] Out of bounds read， map转换一下
-    return after(this, this.parent?.children.map(child=>child));
+    if(this.parent?.children){
+      //避免[mobx] Out of bounds read， map转换一下
+      return after(this, this.parent?.children.map(child=>child));      
+    }
   }
 
    getMeta(){

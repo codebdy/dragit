@@ -32,6 +32,7 @@ export abstract class RelationCommand implements ICommand{
     else{
       this.sourceNode.remove();
     }
-    return this.sourceNode;
+
+    return this.sourceNode.parent ? this.sourceNode : undefined;
   }
 }
