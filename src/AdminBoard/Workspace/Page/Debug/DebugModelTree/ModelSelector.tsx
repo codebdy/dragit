@@ -9,9 +9,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'fixed',
-      outline:'dashed green 2px',
+      outline:'solid green 1px',
       pointerEvents:'none',
       zIndex:theme.zIndex.appBar - 10,
+      background:'rgba(0,128,0, 0.2)',
     },
 
   }),
