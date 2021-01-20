@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import {observer} from 'mobx-react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useEffect } from 'react';
-import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 import { useDebugStore } from '../DebugStore';
 import { getDomByRxid } from 'Utils/getDomByRxid';
 

@@ -9,7 +9,6 @@ import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
-import RefreshHunter from './RefreshHunter';
 import { getDomByRxid } from '../../../Utils/getDomByRxid';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -91,10 +90,6 @@ export const ComponentView = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[node, node.children.length, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY]);
 
-  const handleRefresh = ()=>{
-    setEditStyle(getEditStyle(node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY));
-  }
-
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     let dragoverCharger = new DragoverCharger(node, eidtorStore?.draggedToolboxItem?.meta || eidtorStore?.draggedNode?.meta);
@@ -161,7 +156,6 @@ export const ComponentView = observer((
 
   return(
     <Fragment>
-      <RefreshHunter nodeId={node.id} onRefresh = {handleRefresh} />
       { elementView }
     </Fragment>
   )

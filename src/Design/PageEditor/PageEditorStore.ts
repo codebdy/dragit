@@ -1,4 +1,3 @@
-import { ID } from "Base/Model/graphqlTypes";
 import { IMeta } from "Base/Model/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
 import { CursorPosition, IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
@@ -27,7 +26,7 @@ export class PageEditorStore {
   redoList: Array<ICommand> = [];
 
   //refreshNodeId?:ID;
-  waitingRefreshNodeIds:ID[]= [];
+  //waitingRefreshNodeIds:ID[]= [];
   scrollFlag:number = 0;
 
   constructor() {
@@ -91,19 +90,19 @@ export class PageEditorStore {
 
   }
 
-  refreshNode(nodeId?:ID){
-    if(nodeId){
-      this.waitingRefreshNodeIds.push(nodeId);      
-    }
-  }
+  //refreshNode(nodeId?:ID){
+  //  if(nodeId){
+  //    this.waitingRefreshNodeIds.push(nodeId);      
+  //  }
+  //}
 
-  needRefresh(nodeId:ID){
-    return !!this.waitingRefreshNodeIds.find((id)=>id === nodeId)
-  }
+  //needRefresh(nodeId:ID){
+  //  return !!this.waitingRefreshNodeIds.find((id)=>id === nodeId)
+  //}
 
-  finishFrefrehNode(nodeId:ID){
-    this.waitingRefreshNodeIds.splice(this.waitingRefreshNodeIds.indexOf(nodeId), 1);
-  }
+  //finishFrefrehNode(nodeId:ID){
+  //  this.waitingRefreshNodeIds.splice(this.waitingRefreshNodeIds.indexOf(nodeId), 1);
+  //}
 
   scroll(){
     this.scrollFlag ++;
