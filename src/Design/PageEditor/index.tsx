@@ -28,9 +28,9 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_PAGE, SAVE_PAGE } from 'Base/GraphQL/GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { CanvasStore } from './CanvasStore';
-import { CanvasStoreProvider } from './useDesign';
+import { PageEditorStore } from './PageEditorStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
+import { PageEditorStoreProvider } from './useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,7 +74,7 @@ export const PageEditor = observer((
 ) =>{
   const {pageId, onClose} = props;
   const classes = useStyles();
-  const [canvasStore] = useState(new CanvasStore());
+  const [eidtorStore] = useState(new PageEditorStore());
   const {data, loading, error} = useQuery(GET_PAGE, {variables:{id:pageId}});
   const [savePage, {error:saveError, loading:saving}] = useMutation(SAVE_PAGE);
 
@@ -90,11 +90,11 @@ export const PageEditor = observer((
   useAuthCheck(AUTH_CUSTOMIZE);
 
   useEffect(()=>{
-    if(canvasStore.undoList.length > 0 && (canvasStore.redoList.length !== 0 || canvasStore.undoList.length !== 0)){
+    if(eidtorStore.undoList.length > 0 && (eidtorStore.redoList.length !== 0 || eidtorStore.undoList.length !== 0)){
       setIsDirty(true);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore.undoList.length])  
+  },[eidtorStore.undoList.length])  
   
   const operateNode = (targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>, position:CursorPosition)=>{
     if(targetNode.id === draggedNode.id){
@@ -120,31 +120,31 @@ export const PageEditor = observer((
   }
 
   const handleMouseUp = ()=>{
-    if(canvasStore.dragOverParam && (canvasStore.draggedToolboxItem || canvasStore.draggedNode)){
-      let targetNode = canvasStore.dragOverParam?.targetNode;
-      let dragNode = canvasStore.draggedNode;
-      if(!dragNode && canvasStore.draggedToolboxItem?.meta){
-        dragNode = RXNode.make<IMeta>(cloneObject(canvasStore.draggedToolboxItem?.meta));
+    if(eidtorStore.dragOverParam && (eidtorStore.draggedToolboxItem || eidtorStore.draggedNode)){
+      let targetNode = eidtorStore.dragOverParam?.targetNode;
+      let dragNode = eidtorStore.draggedNode;
+      if(!dragNode && eidtorStore.draggedToolboxItem?.meta){
+        dragNode = RXNode.make<IMeta>(cloneObject(eidtorStore.draggedToolboxItem?.meta));
       }
       if(dragNode && targetNode) {
         const drageNodeParentId = dragNode.parent?.id;
         backupToUndoList(dragNode.id); 
-        if(!operateNode(targetNode, dragNode, canvasStore.dragOverParam.position)){
-          canvasStore.popUndoList();
+        if(!operateNode(targetNode, dragNode, eidtorStore.dragOverParam.position)){
+          //canvasStore.popUndoList();
         }
         else{
-          canvasStore.setRedoList([]);
+          //canvasStore.setRedoList([]);
         }
         //console.log('oldrefreshID, drageNodeParentId', canvasStore.refreshNodeId, drageNodeParentId);
-        canvasStore.refreshNode(drageNodeParentId);
-        canvasStore.refreshNode(dragNode.id);
-        canvasStore.refreshNode(targetNode.id);
-        canvasStore.setSelectedNode(dragNode);
+        eidtorStore.refreshNode(drageNodeParentId);
+        eidtorStore.refreshNode(dragNode.id);
+        eidtorStore.refreshNode(targetNode.id);
+        eidtorStore.setSelectedNode(dragNode);
       }
     }
-    canvasStore.setDragOverParam(undefined);
-    canvasStore.setDraggedNode(undefined);
-    canvasStore.setDraggedToolboxItem(undefined);
+    eidtorStore.setDragOverParam(undefined);
+    eidtorStore.setDraggedNode(undefined);
+    eidtorStore.setDraggedToolboxItem(undefined);
     document.body.classList.remove('can-not-be-selected');
   }
 
@@ -170,19 +170,19 @@ export const PageEditor = observer((
   useEffect(()=>{
     let newCanvas = makeCanvas();
     newCanvas.parse(metas);
-    canvasStore.setCanvas(newCanvas);
+    eidtorStore.setCanvas(newCanvas);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[metas])
 
   const handleCancel = () => {
     if(dirty){
       appStore.confirmAction(intl.get('changing-not-save-message'), ()=>{
-        canvasStore.reset();
+        eidtorStore.reset();
         onClose();
       })
     }
     else{
-      canvasStore.reset();
+      eidtorStore.reset();
       onClose();
     }
   };
@@ -192,7 +192,7 @@ export const PageEditor = observer((
       id:pageId,
       schema:{
         ...pageSchema,
-        layout:canvasStore.canvas?.getChildrenMetas(),
+        layout:eidtorStore.canvas?.getChildrenMetas(),
       },
     }
     }})
@@ -200,41 +200,41 @@ export const PageEditor = observer((
   };
 
   const handleScroll = ()=>{
-    canvasStore.scroll();
+    eidtorStore.scroll();
   }
 
   const handleStartDragMetas = (item:IToolboxItem)=>{
-    canvasStore.setDraggedToolboxItem(item);
-    canvasStore.setSelectedNode(undefined);
+    eidtorStore.setDraggedToolboxItem(item);
+    eidtorStore.setSelectedNode(undefined);
     document.body.classList.add('can-not-be-selected');
   }
 
   const backupToUndoList = (operateId:ID|undefined) => {
-    canvasStore.pushUndoList({
-      canvasNode: canvasStore.canvas?.copy(),
-      pageSchema: cloneObject(pageSchema),
-      selectedNodeId: canvasStore.selectedNode?.id || operateId,
-    });
+    //canvasStore.pushUndoList({
+    //  canvasNode: canvasStore.canvas?.copy(),
+    //  pageSchema: cloneObject(pageSchema),
+    //  selectedNodeId: canvasStore.selectedNode?.id || operateId,
+    //});
   }
 
   const handlePropChange = (propName:string, value:any)=>{
-    if(canvasStore.selectedNode){
-      backupToUndoList(canvasStore.selectedNode?.id);        
-      canvasStore.selectedNode.meta.props = canvasStore.selectedNode.meta.props || {};
-      canvasStore.selectedNode.meta.props[propName] = value;
-      canvasStore.setSelectedNode(canvasStore.selectedNode);
-      canvasStore.setRedoList([]);
-      canvasStore.refreshNode(canvasStore.selectedNode?.id);
-    }
+    //if(canvasStore.selectedNode){
+    //  backupToUndoList(canvasStore.selectedNode?.id);        
+    //  canvasStore.selectedNode.meta.props = canvasStore.selectedNode.meta.props || {};
+    //  canvasStore.selectedNode.meta.props[propName] = value;
+    //  canvasStore.setSelectedNode(canvasStore.selectedNode);
+    //  canvasStore.setRedoList([]);
+    //  canvasStore.refreshNode(canvasStore.selectedNode?.id);
+    //}
   }
 
   const handlPageChange = (page:IPageSchema)=>{
-    backupToUndoList(undefined);
-    setPageSchema(page);
+    //backupToUndoList(undefined);
+    //setPageSchema(page);
   }
 
   const handleUndo = ()=>{
-    let cmd = canvasStore.popUndoList();
+   /* let cmd = canvasStore.popUndoList();
     if(cmd){
       //canvasStore.setUndoList([...canvasStore.undoList]);
       canvasStore.pushRedoList({
@@ -247,11 +247,11 @@ export const PageEditor = observer((
       setPageSchema(cmd.pageSchema);
       canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));
       canvasStore.refreshNode(cmd.selectedNodeId);
-    }
+    }*/
   }
 
   const handleRedo = ()=>{
-    let cmd = canvasStore.popRedoList();
+   /* let cmd = canvasStore.popRedoList();
     if(cmd){
       canvasStore.pushUndoList({
           canvasNode:canvasStore.canvas?.copy(),
@@ -264,58 +264,58 @@ export const PageEditor = observer((
       setPageSchema(cmd.pageSchema);
       canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));  
       canvasStore.refreshNode(cmd.selectedNodeId);
-    }    
+    }   */ 
   }
 
   const handleClear = ()=>{
     backupToUndoList(undefined);    
-    canvasStore.clear();
-    canvasStore.refreshNode(canvasStore.canvas?.id)      
-    canvasStore.setSelectedNode(undefined);
-    canvasStore.setRedoList([]);
+    eidtorStore.clear();
+    eidtorStore.refreshNode(eidtorStore.canvas?.id)      
+    eidtorStore.setSelectedNode(undefined);
+    //canvasStore.setRedoList([]);
   }
 
   
   const handleBeginDrag = ()=>{
-    canvasStore.setDraggedNode(canvasStore.selectedNode);
-    canvasStore.setSelectedNode(undefined);
+    eidtorStore.setDraggedNode(eidtorStore.selectedNode);
+    eidtorStore.setSelectedNode(undefined);
     document.body.classList.add('can-not-be-selected')
   }
 
   const handleRemove = ()=>{
-    if(canvasStore.selectedNode){
+    if(eidtorStore.selectedNode){
       backupToUndoList(undefined);
-      let parentId = canvasStore.selectedNode.parent?.id;
-      canvasStore.selectedNode.remove();
-      canvasStore.setSelectedNode(undefined);
-      canvasStore.setRedoList([]);
-      canvasStore.refreshNode(parentId)
+      let parentId = eidtorStore.selectedNode.parent?.id;
+      eidtorStore.selectedNode.remove();
+      eidtorStore.setSelectedNode(undefined);
+      ///canvasStore.setRedoList([]);
+      eidtorStore.refreshNode(parentId)
     }
   }
 
   const handleDupliate = ()=>{
-    if(canvasStore.selectedNode){
+    if(eidtorStore.selectedNode){
       backupToUndoList(undefined);      
-      let newNode = canvasStore.selectedNode?.duplicate();
-      canvasStore.setSelectedNode(newNode);
-      canvasStore.setRedoList([]);
-      canvasStore.refreshNode(canvasStore.selectedNode?.parent?.id);
+      let newNode = eidtorStore.selectedNode?.duplicate();
+      eidtorStore.setSelectedNode(newNode);
+      //canvasStore.setRedoList([]);
+      eidtorStore.refreshNode(eidtorStore.selectedNode?.parent?.id);
     }
   }
 
   const handleSelectParent = ()=>{
-    canvasStore.setSelectedNode(canvasStore.selectedNode?.parent);
+    eidtorStore.setSelectedNode(eidtorStore.selectedNode?.parent);
   }
 
-  let draggedLabel = canvasStore.draggedToolboxItem ?canvasStore.draggedToolboxItem?.title || intl.get(canvasStore.draggedToolboxItem?.titleKey||'') : canvasStore.draggedNode?.meta.name;
+  let draggedLabel = eidtorStore.draggedToolboxItem ?eidtorStore.draggedToolboxItem?.title || intl.get(eidtorStore.draggedToolboxItem?.titleKey||'') : eidtorStore.draggedNode?.meta.name;
    return (
-    <CanvasStoreProvider value = {canvasStore}>
+    <PageEditorStoreProvider value = {eidtorStore}>
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
             <LeftContent 
               pageSchema={pageSchema} 
-              selectedNode = {canvasStore.selectedNode}
+              selectedNode = {eidtorStore.selectedNode}
               onPropChange = {handlePropChange}
               onSettingsChange={handlPageChange}
               onStartDragToolboxItem = {handleStartDragMetas}
@@ -326,32 +326,32 @@ export const PageEditor = observer((
             <Fragment>
               <IconButton 
                 onClick = {()=>{
-                  canvasStore.setShowOutline(!canvasStore.showOutline)
+                  eidtorStore.setShowOutline(!eidtorStore.showOutline)
                 }}
               >
-                <MdiIcon iconClass="mdi-border-none-variant" color={canvasStore.showOutline ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-border-none-variant" color={eidtorStore.showOutline ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  canvasStore.setShowPaddingX(!canvasStore.showPaddingX)
+                  eidtorStore.setShowPaddingX(!eidtorStore.showPaddingX)
                 }}
               >
-                <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={canvasStore.showPaddingX ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={eidtorStore.showPaddingX ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  canvasStore.setShowPaddingY(!canvasStore.showPaddingY)
+                  eidtorStore.setShowPaddingY(!eidtorStore.showPaddingY)
                 }}
                 >
-                <MdiIcon iconClass="mdi-arrow-expand-vertical" color={canvasStore.showPaddingY ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-arrow-expand-vertical" color={eidtorStore.showPaddingY ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton 
-                disabled = {canvasStore.undoList.length === 0}
+                disabled = {eidtorStore.undoList.length === 0}
                 onClick = {handleUndo}
               >
                 <MdiIcon iconClass="mdi-undo"/>
               </IconButton>
-              <IconButton disabled = {canvasStore.redoList.length === 0}
+              <IconButton disabled = {eidtorStore.redoList.length === 0}
                 onClick = {handleRedo}
               >
                 <MdiIcon iconClass="mdi-redo"/>
@@ -378,15 +378,15 @@ export const PageEditor = observer((
         >
           {loading? <Container><PageSkeleton /></Container> :
             <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-              {canvasStore.canvas&&
+              {eidtorStore.canvas&&
                 <ComponentView 
-                  node ={canvasStore.canvas} 
+                  node ={eidtorStore.canvas} 
                 />
               }
               {
-                canvasStore.selectedNode &&
+                eidtorStore.selectedNode &&
                 <Fragment>
-                  <ComponentLabel node={canvasStore.selectedNode} followDom={canvasStore.selectedNode?.dom}/>
+                  <ComponentLabel node={eidtorStore.selectedNode}/>
                   <NodeToolbar 
                     onBeginDrag = {handleBeginDrag}
                     onRemove = {handleRemove}
@@ -396,23 +396,23 @@ export const PageEditor = observer((
                 </Fragment>
               }
               {
-                canvasStore.activeNode &&
-                <ComponentLabel node={canvasStore.activeNode} followDom={canvasStore.activeNode?.dom}/>
+                eidtorStore.activeNode &&
+                <ComponentLabel node={eidtorStore.activeNode}/>
               }
             </Scrollbar>
           }
         </DesignerLayout>
         <Fragment>
           {
-            (canvasStore.draggedToolboxItem || canvasStore.draggedNode) &&
+            (eidtorStore.draggedToolboxItem || eidtorStore.draggedNode) &&
             <MouseFollower label={ draggedLabel || 'unknow'} />
           }
           {
-            (canvasStore.draggedToolboxItem || canvasStore.draggedNode) &&
+            (eidtorStore.draggedToolboxItem || eidtorStore.draggedNode) &&
             <DragCusor/>
           }
         </Fragment>      
       </Backdrop>
-    </CanvasStoreProvider>
+    </PageEditorStoreProvider>
   );
 })

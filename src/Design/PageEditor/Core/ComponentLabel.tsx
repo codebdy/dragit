@@ -25,15 +25,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ComponentLabel = observer((
   props:{
     node?:RXNode<IMeta>,
-    followDom?:Element|null,
   }
 )=>{
-  const{node, followDom} = props;
+  const{node} = props;
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const {canvasStore} = useDesign();
+  const {eidtorStore} = useDesign();
   
+  const followDom = node?.dom;
+
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();
     if(rect){
@@ -56,7 +57,7 @@ export const ComponentLabel = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore?.showPaddingX, canvasStore?.showPaddingY, followDom, canvasStore?.scrollFlag]);
+  },[eidtorStore?.showPaddingX, eidtorStore?.showPaddingY, followDom, eidtorStore?.scrollFlag]);
 
   return (
     <Fragment>

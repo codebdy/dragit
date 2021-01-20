@@ -15,15 +15,15 @@ const RefreshHunter = observer(React.forwardRef((
     nodeId,
     onRefresh,
   } = props
-  const {canvasStore} = useDesign();
+  const {eidtorStore} = useDesign();
 
   useEffect(()=>{
-    if(canvasStore?.needRefresh(nodeId)){
+    if(eidtorStore?.needRefresh(nodeId)){
       onRefresh();
-      canvasStore?.finishFrefrehNode(nodeId);
+      eidtorStore?.finishFrefrehNode(nodeId);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore?.waitingRefreshNodeIds.length])
+  },[eidtorStore?.waitingRefreshNodeIds.length])
 
   return (
    <Fragment></Fragment>

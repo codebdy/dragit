@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
-import { CanvasStore } from "./CanvasStore"
+import { PageEditorStore } from "./PageEditorStore"
 
-export const CanvasStoreContext = createContext<CanvasStore|undefined>(undefined);
-export const CanvasStoreProvider = CanvasStoreContext.Provider;
+export const PageEditorStoreContext = createContext<PageEditorStore|undefined>(undefined);
+export const PageEditorStoreProvider = PageEditorStoreContext.Provider;
 
-const useCanvasStore = (): CanvasStore|undefined => useContext(CanvasStoreContext);
+const usePageEditorStore = (): PageEditorStore|undefined => useContext(PageEditorStoreContext);
 
 export function useDesign(){
-  const canvasStore = useCanvasStore();
-  return {isDesigning:!!canvasStore, canvasStore}
+  const eidtorStore = usePageEditorStore();
+  return {isDesigning:!!eidtorStore, eidtorStore}
 }

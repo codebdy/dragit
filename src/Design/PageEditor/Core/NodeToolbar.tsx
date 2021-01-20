@@ -64,10 +64,10 @@ export const NodeToolbar = observer((
   
   const sideBarWidth = sidebar.width;
   
-  const {canvasStore} = useDesign();
+  const {eidtorStore} = useDesign();
 
   const doFollow = ()=>{
-    let rect = canvasStore?.selectedNode?.dom?.getBoundingClientRect();
+    let rect = eidtorStore?.selectedNode?.dom?.getBoundingClientRect();
     if(!rect){
       return 
     }
@@ -83,7 +83,7 @@ export const NodeToolbar = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[canvasStore?.showPaddingX, canvasStore?.showPaddingY, canvasStore?.selectedNode?.dom, canvasStore?.scrollFlag]);
+  },[eidtorStore?.showPaddingX, eidtorStore?.showPaddingY, eidtorStore?.selectedNode, eidtorStore?.scrollFlag]);
 
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export const NodeToolbar = observer((
 
   return (
     <Fragment>
-      {canvasStore?.selectedNode?.dom && 
+      {eidtorStore?.selectedNode?.dom && 
         <div className={classes.toolbar}
           style={{
             left:left + 'px',

@@ -60,7 +60,7 @@ export const ComponentView = observer((
   const {node} = props;
   const classes = useStyles();
   const [editStyle, setEditStyle] = useState<any>({});
-  const {canvasStore} = useDesign();
+  const {eidtorStore} = useDesign();
   let Component = resolveComponent(node.meta);
 
   let metaProps = node.meta.props? node.meta.props :{};
@@ -76,42 +76,42 @@ export const ComponentView = observer((
     ...rest
   } = metaProps as any;
 
-  const selected = canvasStore?.selectedNode?.id === node.id;
-  const dragged = canvasStore?.draggedNode?.id === node.id;
+  const selected = eidtorStore?.selectedNode?.id === node.id;
+  const dragged = eidtorStore?.draggedNode?.id === node.id;
   
   useEffect(()=>{
-    setEditStyle(getEditStyle(node, canvasStore?.showPaddingX, canvasStore?.showPaddingY));
+    setEditStyle(getEditStyle(node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[node, canvasStore?.showPaddingX, canvasStore?.showPaddingY]);
+  },[node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY]);
 
   const handleRefresh = ()=>{
-    setEditStyle(getEditStyle(node, canvasStore?.showPaddingX, canvasStore?.showPaddingY));
+    setEditStyle(getEditStyle(node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY));
   }
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    let dragoverCharger = new DragoverCharger(node, canvasStore?.draggedToolboxItem?.meta || canvasStore?.draggedNode?.meta);
-    if(canvasStore?.selectedNode?.id !== node.id && !canvasStore?.draggedToolboxItem && !canvasStore?.draggedNode){
-      canvasStore?.setActiveNode(node);     
+    let dragoverCharger = new DragoverCharger(node, eidtorStore?.draggedToolboxItem?.meta || eidtorStore?.draggedNode?.meta);
+    if(eidtorStore?.selectedNode?.id !== node.id && !eidtorStore?.draggedToolboxItem && !eidtorStore?.draggedNode){
+      eidtorStore?.setActiveNode(node);     
     }
-    else if(canvasStore?.selectedNode?.id !== node.id){
+    else if(eidtorStore?.selectedNode?.id !== node.id){
       //if(refEl.current){
-        if(canvasStore?.draggedNode?.id !== node.id){
-          canvasStore?.setDragOverParam(dragoverCharger.judgePosition(event))
+        if(eidtorStore?.draggedNode?.id !== node.id){
+          eidtorStore?.setDragOverParam(dragoverCharger.judgePosition(event))
         }
       //}
     }
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{
     //event.stopPropagation();
-    canvasStore?.setActiveNode(undefined);
+    eidtorStore?.setActiveNode(undefined);
   }
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    canvasStore?.setSelectedNode(node);
+    eidtorStore?.setSelectedNode(node);
   }
 
-  const actived = canvasStore?.activeNode?.id === node.id;
+  const actived = eidtorStore?.activeNode?.id === node.id;
 
   let elementProps:any = {
     ...rest, 
@@ -119,7 +119,7 @@ export const ComponentView = observer((
     className:classNames(
       className, 
       {
-        [classes.outline]: canvasStore?.showOutline,
+        [classes.outline]: eidtorStore?.showOutline,
         [classes.active]: actived,
         [classes.selected]: selected,
         [classes.dragged]:dragged,

@@ -6,7 +6,7 @@ import { IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable } from "mobx";
 
-export class CanvasStore {
+export class PageEditorStore {
   showOutline:boolean = true;
   showPaddingX:boolean = true;
   showPaddingY:boolean = true;
@@ -64,13 +64,13 @@ export class CanvasStore {
     this.selectedNode = selectedNode
   }
 
-  setUndoList(undoList:Array<IEditorSnapshot>){
-    this.undoList = undoList;
-  }
+  //setUndoList(undoList:Array<IEditorSnapshot>){
+  //  this.undoList = undoList;
+  //}
 
-  setRedoList(redoList:Array<IEditorSnapshot>){
-    this.redoList = redoList;
-  }
+  //setRedoList(redoList:Array<IEditorSnapshot>){
+  //  this.redoList = redoList;
+  //}
 
   reset() {
     this.dragOverParam = undefined;
@@ -111,20 +111,20 @@ export class CanvasStore {
     }
   }
 
-  popUndoList(){
-    return this.undoList.pop();
-  }
+  //popUndoList(){
+  //  return this.undoList.pop();
+  //}
 
-  pushUndoList(snapshot:IEditorSnapshot){
-    return this.undoList.push(snapshot);
-  }
+  //pushUndoList(snapshot:IEditorSnapshot){
+  //  return this.undoList.push(snapshot);
+  //}
 
-  popRedoList(){
-    return this.redoList.pop();
-  }
+  //popRedoList(){
+  //  return this.redoList.pop();
+  //}
 
-  pushRedoList(snapshot:IEditorSnapshot){
-    return this.redoList.push(snapshot);
-  }
+  //pushRedoList(snapshot:IEditorSnapshot){
+  //  return this.redoList.push(snapshot);
+  //}
 
 }
