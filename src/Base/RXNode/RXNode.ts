@@ -3,6 +3,7 @@ import { IRect } from "Base/Model/IRect";
 import { cloneObject } from "Utils/cloneObject";
 import { ID } from "Base/Model/graphqlTypes";
 import { makeAutoObservable, toJS } from "mobx";
+import { getDomByRxid } from "Utils/getDomByRxid";
 
 export const DADA_RXID_CONST = "data-rxid"
 
@@ -98,7 +99,7 @@ export class RXNode<T>{
   }
 
   get dom(){
-    return document.querySelector(`[${DADA_RXID_CONST}="${this.rxid}"]`);
+    return getDomByRxid(this.rxid);
   }
 
   remove(){

@@ -4,6 +4,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useEffect } from 'react';
 import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
 import { useDebugStore } from '../DebugStore';
+import { getDomByRxid } from 'Utils/getDomByRxid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ export const ModelSelector = observer(() => {
   const selectedRxid = debugStore?.selectedModel?.node.rxid;
 
   const getDom = ()=>{
-    return document.querySelector(`[${DADA_RXID_CONST}="${selectedRxid}"]`);
+    return getDomByRxid(selectedRxid);
   }
 
   const getDomRect = ()=>{

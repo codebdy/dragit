@@ -10,6 +10,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
 import RefreshHunter from './RefreshHunter';
+import { getDomByRxid } from '../../../Utils/getDomByRxid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +82,7 @@ export const ComponentView = observer((
 
   useEffect(()=>{
     if(eidtorStore?.selectedNode?.id === node.id){
-      eidtorStore?.setSelectedDom(document.querySelector(`[${DADA_RXID_CONST}="${node.rxid}"]`));
+      eidtorStore?.setSelectedDom(getDomByRxid(node.rxid));
     }
   })
   
@@ -167,3 +168,4 @@ export const ComponentView = observer((
     </Fragment>
   )
 })
+
