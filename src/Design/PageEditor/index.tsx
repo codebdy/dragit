@@ -31,6 +31,10 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { PageEditorStore } from './PageEditorStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { PageEditorStoreProvider } from './useDesign';
+import { MoveInCommand } from './Commands/MoveInCommand';
+import { MoveAfterCommand } from './Commands/MoveAfterCommand';
+import { MoveBeforeCommand } from './Commands/MoveBeforeCommand';
+import { MoveInTopCommand } from './Commands/RemoveCommand';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -101,19 +105,23 @@ export const PageEditor = observer((
       return false;
     }
     if(position === 'in-bottom' || position === 'in-right' || position === 'in-center'){
-      draggedNode.moveIn(targetNode);
+      eidtorStore.excuteCommand(new MoveInCommand(targetNode, draggedNode));
+      //draggedNode.moveIn(targetNode);
       return true;        
     }
     if(position === 'in-top' || position === 'in-left'){
-      draggedNode.moveInTop(targetNode);
+      eidtorStore.excuteCommand(new MoveInTopCommand(targetNode, draggedNode));
+      //draggedNode.moveInTop(targetNode);
       return true;  
     }
     if(position === 'out-bottom' || position === 'out-right'){
-      draggedNode.moveAfter(targetNode);
+      eidtorStore.excuteCommand(new MoveAfterCommand(targetNode, draggedNode));
+      //draggedNode.moveAfter(targetNode);
       return true;  
     }
     if(position === 'out-top' || position === 'out-left'){
-      draggedNode.moveBefore(targetNode);
+      eidtorStore.excuteCommand(new MoveBeforeCommand(targetNode, draggedNode));
+      //draggedNode.moveBefore(targetNode);
       return true;  
     }
     return false;  
@@ -127,19 +135,13 @@ export const PageEditor = observer((
         dragNode = RXNode.make<IMeta>(cloneObject(eidtorStore.draggedToolboxItem?.meta));
       }
       if(dragNode && targetNode) {
-        const drageNodeParentId = dragNode.parent?.id;
-        backupToUndoList(dragNode.id); 
-        if(!operateNode(targetNode, dragNode, eidtorStore.dragOverParam.position)){
-          //canvasStore.popUndoList();
-        }
-        else{
-          //canvasStore.setRedoList([]);
-        }
+        //const drageNodeParentId = dragNode.parent?.id;
+        operateNode(targetNode, dragNode, eidtorStore.dragOverParam.position);
         //console.log('oldrefreshID, drageNodeParentId', canvasStore.refreshNodeId, drageNodeParentId);
-        eidtorStore.refreshNode(drageNodeParentId);
-        eidtorStore.refreshNode(dragNode.id);
-        eidtorStore.refreshNode(targetNode.id);
-        eidtorStore.setSelectedNode(dragNode);
+        //eidtorStore.refreshNode(drageNodeParentId);
+        //eidtorStore.refreshNode(dragNode.id);
+        //eidtorStore.refreshNode(targetNode.id);
+        //eidtorStore.setSelectedNode(dragNode);
       }
     }
     eidtorStore.setDragOverParam(undefined);
@@ -209,14 +211,6 @@ export const PageEditor = observer((
     document.body.classList.add('can-not-be-selected');
   }
 
-  const backupToUndoList = (operateId:ID|undefined) => {
-    //canvasStore.pushUndoList({
-    //  canvasNode: canvasStore.canvas?.copy(),
-    //  pageSchema: cloneObject(pageSchema),
-    //  selectedNodeId: canvasStore.selectedNode?.id || operateId,
-    //});
-  }
-
   const handlePropChange = (propName:string, value:any)=>{
     //if(canvasStore.selectedNode){
     //  backupToUndoList(canvasStore.selectedNode?.id);        
@@ -234,41 +228,15 @@ export const PageEditor = observer((
   }
 
   const handleUndo = ()=>{
-   /* let cmd = canvasStore.popUndoList();
-    if(cmd){
-      //canvasStore.setUndoList([...canvasStore.undoList]);
-      canvasStore.pushRedoList({
-          canvasNode:canvasStore.canvas?.copy(),
-          pageSchema:cloneObject(pageSchema),
-          selectedNodeId: cmd.selectedNodeId,
-        }
-      );
-      canvasStore.setCanvas(cmd.canvasNode);
-      setPageSchema(cmd.pageSchema);
-      canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));
-      canvasStore.refreshNode(cmd.selectedNodeId);
-    }*/
+    eidtorStore.undo();
   }
 
   const handleRedo = ()=>{
-   /* let cmd = canvasStore.popRedoList();
-    if(cmd){
-      canvasStore.pushUndoList({
-          canvasNode:canvasStore.canvas?.copy(),
-          pageSchema:cloneObject(pageSchema),
-          selectedNodeId: cmd.selectedNodeId,
-        }
-      );
-      //setRedoList([...redoList]);
-      canvasStore.setCanvas(cmd.canvasNode); 
-      setPageSchema(cmd.pageSchema);
-      canvasStore.setSelectedNode(cmd.canvasNode?.getNode(cmd.selectedNodeId));  
-      canvasStore.refreshNode(cmd.selectedNodeId);
-    }   */ 
+    eidtorStore.redo();
   }
 
   const handleClear = ()=>{
-    backupToUndoList(undefined);    
+    //backupToUndoList(undefined);    
     eidtorStore.clear();
     eidtorStore.refreshNode(eidtorStore.canvas?.id)      
     eidtorStore.setSelectedNode(undefined);
@@ -284,7 +252,7 @@ export const PageEditor = observer((
 
   const handleRemove = ()=>{
     if(eidtorStore.selectedNode){
-      backupToUndoList(undefined);
+      //backupToUndoList(undefined);
       let parentId = eidtorStore.selectedNode.parent?.id;
       eidtorStore.selectedNode.remove();
       eidtorStore.setSelectedNode(undefined);
@@ -295,7 +263,7 @@ export const PageEditor = observer((
 
   const handleDupliate = ()=>{
     if(eidtorStore.selectedNode){
-      backupToUndoList(undefined);      
+      //backupToUndoList(undefined);      
       let newNode = eidtorStore.selectedNode?.duplicate();
       eidtorStore.setSelectedNode(newNode);
       //canvasStore.setRedoList([]);

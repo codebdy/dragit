@@ -1,7 +1,7 @@
 import { IPageJumper } from "./IPageJumper";
 import { ILabelItem } from "./ILabelItem";
 
-export interface ICommand extends ILabelItem{
+export interface IPageCommand extends ILabelItem{
   slug:string,
   label:string,  
   icon?:string,

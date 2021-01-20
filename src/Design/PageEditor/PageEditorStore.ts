@@ -1,10 +1,10 @@
 import { ID } from "Base/Model/graphqlTypes";
-import { IEditorSnapshot } from "Base/Model/IEditorSnapshot";
 import { IMeta } from "Base/Model/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
 import { IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable } from "mobx";
+import { ICommand } from "./Commands/ICommand";
 
 export class PageEditorStore {
   showOutline:boolean = true;
@@ -17,8 +17,8 @@ export class PageEditorStore {
   canvas?: RXNode<IMeta>;
   draggedToolboxItem?: IToolboxItem;
   selectedNode?: RXNode<IMeta>;
-  undoList: Array<IEditorSnapshot> = [];
-  redoList: Array<IEditorSnapshot> = [];
+  undoList: Array<ICommand> = [];
+  redoList: Array<ICommand> = [];
 
   //refreshNodeId?:ID;
   waitingRefreshNodeIds:ID[]= [];
@@ -111,20 +111,29 @@ export class PageEditorStore {
     }
   }
 
-  //popUndoList(){
-  //  return this.undoList.pop();
-  //}
+  excuteCommand(command:ICommand){
+    const selectedNode = command.excute();
+    this.setSelectedNode(selectedNode);
+    this.undoList.push(command);
+    this.redoList = [];
+  }
 
-  //pushUndoList(snapshot:IEditorSnapshot){
-  //  return this.undoList.push(snapshot);
-  //}
+  undo(){
+    const cmd = this.undoList.pop();
+    const selectedNode = cmd?.undo();
+    if(cmd){
+      this.redoList.push(cmd);
+    }
+    this.setSelectedNode(selectedNode);
+  }
 
-  //popRedoList(){
-  //  return this.redoList.pop();
-  //}
-
-  //pushRedoList(snapshot:IEditorSnapshot){
-  //  return this.redoList.push(snapshot);
-  //}
+  redo(){
+    const cmd = this.redoList.pop();
+    const selectedNode = cmd?.excute();
+    if(cmd){
+      this.undoList.push(cmd);
+    }
+    this.setSelectedNode(selectedNode);
+  }
 
 }

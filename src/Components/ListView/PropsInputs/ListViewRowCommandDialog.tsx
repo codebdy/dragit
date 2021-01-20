@@ -5,7 +5,7 @@ import intl from 'react-intl-universal';
 import MetaListDialog from 'Components/ListView/PropsInputs/MetaListDialog';
 import { useEffect } from 'react';
 import { cloneObject } from 'Utils/cloneObject';
-import { ICommand } from 'Base/Model/ICommand';
+import { IPageCommand } from 'Base/Model/IPageCommand';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 
 const styles = (theme: Theme) =>
@@ -25,7 +25,7 @@ const useStyles = makeStyles(styles);
 export default function ListViewRowCommandDialog(props:PropsInputProps){
   const classes = useStyles();
   const {label, value, onChange} = props;
-  const [commands, setCommands] = React.useState<Array<ICommand>>(value ? cloneObject(value) : []);
+  const [commands, setCommands] = React.useState<Array<IPageCommand>>(value ? cloneObject(value) : []);
   const [selectedIndex, setSelectedIndex] = React.useState(commands.length > 0 ? 0 : -1);
   const command = commands[selectedIndex];
 
