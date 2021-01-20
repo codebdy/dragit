@@ -68,6 +68,7 @@ export const NodeToolbar = observer((
 
   const doFollow = ()=>{
     let rect =  eidtorStore?.selectedDom?.getBoundingClientRect();
+
     if(!rect){
       return 
     }
@@ -98,7 +99,7 @@ export const NodeToolbar = observer((
 
   return (
     <Fragment>
-      {eidtorStore?.selectedNode?.dom && 
+      {eidtorStore?.selectedDom && 
         <div className={classes.toolbar}
           style={{
             left:left + 'px',

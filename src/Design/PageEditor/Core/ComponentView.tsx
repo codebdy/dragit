@@ -102,11 +102,9 @@ export const ComponentView = observer((
       eidtorStore?.setActiveNode(node);     
     }
     else if(eidtorStore?.selectedNode?.id !== node.id){
-      //if(refEl.current){
-        if(eidtorStore?.draggedNode?.id !== node.id){
-          eidtorStore?.setDragOverParam(dragoverCharger.judgePosition(event))
-        }
-      //}
+      if(eidtorStore?.draggedNode?.id !== node.id){
+        eidtorStore?.setDragOverParam(dragoverCharger.judgePosition(event))
+      }
     }
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{

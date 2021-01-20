@@ -1,10 +1,14 @@
 import { ID } from "Base/Model/graphqlTypes";
 import { IMeta } from "Base/Model/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
-import { IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
+import { CursorPosition, IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable } from "mobx";
 import { ICommand } from "./Commands/ICommand";
+import { MoveAfterCommand } from "./Commands/MoveAfterCommand";
+import { MoveBeforeCommand } from "./Commands/MoveBeforeCommand";
+import { MoveInCommand } from "./Commands/MoveInCommand";
+import { MoveInTopCommand } from "./Commands/MoveInTopCommand";
 
 export class PageEditorStore {
   showOutline:boolean = true;
@@ -69,14 +73,6 @@ export class PageEditorStore {
     this.selectedDom = selectedDom;
   }
 
-  //setUndoList(undoList:Array<IEditorSnapshot>){
-  //  this.undoList = undoList;
-  //}
-
-  //setRedoList(redoList:Array<IEditorSnapshot>){
-  //  this.redoList = redoList;
-  //}
-
   reset() {
     this.dragOverParam = undefined;
     this.draggedNode = undefined;
@@ -139,6 +135,29 @@ export class PageEditorStore {
       this.undoList.push(cmd);
     }
     this.setSelectedNode(selectedNode);
+  }
+
+  operateNode (draggedNode:RXNode<IMeta>, targetNode:RXNode<IMeta>, position:CursorPosition){
+    if(targetNode.id === draggedNode.id){
+      return false;
+    }
+    if(position === 'in-bottom' || position === 'in-right' || position === 'in-center'){
+      this.excuteCommand(new MoveInCommand(draggedNode, targetNode));
+      return true;        
+    }
+    if(position === 'in-top' || position === 'in-left'){
+      this.excuteCommand(new MoveInTopCommand(draggedNode, targetNode));
+      return true;  
+    }
+    if(position === 'out-bottom' || position === 'out-right'){
+      this.excuteCommand(new MoveAfterCommand(draggedNode, targetNode));
+      return true;  
+    }
+    if(position === 'out-top' || position === 'out-left'){
+      this.excuteCommand(new MoveBeforeCommand(draggedNode, targetNode));
+      return true;  
+    }
+    return false;  
   }
 
 }

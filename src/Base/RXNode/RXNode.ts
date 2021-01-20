@@ -2,7 +2,7 @@ import { after, before, first, insertAfter, insertBefore, last, remove } from "U
 import { IRect } from "Base/Model/IRect";
 import { cloneObject } from "Utils/cloneObject";
 import { ID } from "Base/Model/graphqlTypes";
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { getDomByRxid } from "Utils/getDomByRxid";
 
 export const DADA_RXID_CONST = "data-rxid"
@@ -19,9 +19,9 @@ export class RXNode<T>{
     node.seedId();      
     node.meta = meta;
     let metaAny = meta as any    
-    const meteChildren = metaAny.children as Array<T>|undefined;
+    const metaChildren = metaAny.children as Array<T>|undefined;
     node.children = [];
-    meteChildren?.forEach(child=>{
+    metaChildren?.forEach(child=>{
       let childNode = RXNode.make<T>(child);
       childNode.parent = node;
       node.children.push(childNode);
@@ -139,12 +139,14 @@ export class RXNode<T>{
     return last(this.children);
   }
 
-  beforeBrother(){
-    return before(this, toJS(this.parent?.children))
+  previousSibling() : RXNode<T>|undefined{
+    //避免[mobx] Out of bounds read， map转换一下
+    return before(this, this.parent?.children.map(child=>child))
   }
 
-  afterBrother(){
-    return after(this, toJS(this.parent?.children))
+  nextSibling() : RXNode<T>|undefined{
+    //避免[mobx] Out of bounds read， map转换一下
+    return after(this, this.parent?.children.map(child=>child));
   }
 
    getMeta(){

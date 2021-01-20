@@ -200,7 +200,7 @@ export class DragoverCharger {
 
     if (this.isDragIn(event)) {
       const afterChild = this.firstChildAfterMouse(event);
-      let bother = afterChild?.beforeBrother() || afterChild;
+      let bother = afterChild?.previousSibling() || afterChild;
       
       if(bother && bother.id !== this.node.id){
         if(bother.rect){

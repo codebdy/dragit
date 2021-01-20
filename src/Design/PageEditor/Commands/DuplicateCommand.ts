@@ -3,20 +3,20 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { ICommand } from "./ICommand";
 
 export class DuplicateCommand implements ICommand{
-  targetNode: RXNode<IMeta>;
+  sourceNode: RXNode<IMeta>;
   newNode?: RXNode<IMeta>;
 
-  constructor(targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>){
-    this.targetNode = targetNode;
+  constructor(sourceNode:RXNode<IMeta>){
+    this.sourceNode = sourceNode;
   }
 
   excute(){
-    this.newNode = this.targetNode.duplicate();
+    this.newNode = this.sourceNode.duplicate();
     return this.newNode;
   }
 
   undo(){
     this.newNode?.remove();
-    return this.targetNode;
+    return this.sourceNode;
   }
 }

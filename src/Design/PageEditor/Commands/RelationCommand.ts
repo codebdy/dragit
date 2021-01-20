@@ -3,30 +3,35 @@ import { RXNode } from "Base/RXNode/RXNode";
 import { ICommand } from "./ICommand";
 
 export abstract class RelationCommand implements ICommand{
-  targetNode:RXNode<IMeta>;
-  draggedNode:RXNode<IMeta>;
+  targetNode?:RXNode<IMeta>;
+  sourceNode:RXNode<IMeta>;
   oldParent?:RXNode<IMeta>;
-  oldAfterBrather?:RXNode<IMeta>;
+  oldNextSibling?:RXNode<IMeta>;
+  oldPreviousSibling?:RXNode<IMeta>;
   
-  constructor(targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>){
+  constructor(sourceNode:RXNode<IMeta>, targetNode?:RXNode<IMeta>){
     this.targetNode = targetNode;
-    this.draggedNode = draggedNode;
-    this.oldParent = draggedNode.parent;
-    this.oldAfterBrather = draggedNode.afterBrother();
+    this.sourceNode = sourceNode;
+    this.oldParent = sourceNode.parent;
+    this.oldNextSibling = sourceNode.nextSibling();
+    this.oldPreviousSibling = sourceNode.previousSibling();
   }
 
   abstract excute():RXNode<IMeta>|undefined;
 
   undo(){
-    if(this.oldAfterBrather){
-      this.draggedNode.moveBefore(this.oldAfterBrather);
+    if(this.oldNextSibling){
+      this.sourceNode.moveBefore(this.oldNextSibling);
+    }
+    else if(this.oldPreviousSibling){
+      this.sourceNode.moveAfter(this.oldPreviousSibling);
     }
     else if(this.oldParent){
-      this.draggedNode.moveIn(this.oldParent);
+      this.sourceNode.moveInTop(this.oldParent);
     }
     else{
-      this.draggedNode.remove();
+      this.sourceNode.remove();
     }
-    return this.draggedNode;
+    return this.sourceNode;
   }
 }

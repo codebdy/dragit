@@ -17,7 +17,6 @@ import { RXNode } from 'Base/RXNode/RXNode';
 import { NodeToolbar } from './Core/NodeToolbar';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
 import { DragCusor } from './Core/DragCusor';
-import { CursorPosition } from './Core/IDragOverParam';
 import { ComponentLabel } from './Core/ComponentLabel';
 import { cloneObject } from '../../Utils/cloneObject';
 import SubmitButton from 'Components/Common/SubmitButton';
@@ -31,10 +30,8 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { PageEditorStore } from './PageEditorStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { PageEditorStoreProvider } from './useDesign';
-import { MoveInCommand } from './Commands/MoveInCommand';
-import { MoveAfterCommand } from './Commands/MoveAfterCommand';
-import { MoveBeforeCommand } from './Commands/MoveBeforeCommand';
-import { MoveInTopCommand } from './Commands/RemoveCommand';
+import { RemoveCommand } from './Commands/RemoveCommand';
+import { DuplicateCommand } from './Commands/DuplicateCommand';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -100,32 +97,7 @@ export const PageEditor = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[eidtorStore.undoList.length])  
   
-  const operateNode = (targetNode:RXNode<IMeta>, draggedNode:RXNode<IMeta>, position:CursorPosition)=>{
-    if(targetNode.id === draggedNode.id){
-      return false;
-    }
-    if(position === 'in-bottom' || position === 'in-right' || position === 'in-center'){
-      eidtorStore.excuteCommand(new MoveInCommand(targetNode, draggedNode));
-      //draggedNode.moveIn(targetNode);
-      return true;        
-    }
-    if(position === 'in-top' || position === 'in-left'){
-      eidtorStore.excuteCommand(new MoveInTopCommand(targetNode, draggedNode));
-      //draggedNode.moveInTop(targetNode);
-      return true;  
-    }
-    if(position === 'out-bottom' || position === 'out-right'){
-      eidtorStore.excuteCommand(new MoveAfterCommand(targetNode, draggedNode));
-      //draggedNode.moveAfter(targetNode);
-      return true;  
-    }
-    if(position === 'out-top' || position === 'out-left'){
-      eidtorStore.excuteCommand(new MoveBeforeCommand(targetNode, draggedNode));
-      //draggedNode.moveBefore(targetNode);
-      return true;  
-    }
-    return false;  
-  }
+
 
   const handleMouseUp = ()=>{
     if(eidtorStore.dragOverParam && (eidtorStore.draggedToolboxItem || eidtorStore.draggedNode)){
@@ -135,13 +107,7 @@ export const PageEditor = observer((
         dragNode = RXNode.make<IMeta>(cloneObject(eidtorStore.draggedToolboxItem?.meta));
       }
       if(dragNode && targetNode) {
-        //const drageNodeParentId = dragNode.parent?.id;
-        operateNode(targetNode, dragNode, eidtorStore.dragOverParam.position);
-        //console.log('oldrefreshID, drageNodeParentId', canvasStore.refreshNodeId, drageNodeParentId);
-        //eidtorStore.refreshNode(drageNodeParentId);
-        //eidtorStore.refreshNode(dragNode.id);
-        //eidtorStore.refreshNode(targetNode.id);
-        //eidtorStore.setSelectedNode(dragNode);
+        eidtorStore?.operateNode(dragNode, targetNode, eidtorStore.dragOverParam.position);
       }
     }
     eidtorStore.setDragOverParam(undefined);
@@ -240,7 +206,6 @@ export const PageEditor = observer((
     eidtorStore.clear();
     eidtorStore.refreshNode(eidtorStore.canvas?.id)      
     eidtorStore.setSelectedNode(undefined);
-    //canvasStore.setRedoList([]);
   }
 
   
@@ -252,22 +217,13 @@ export const PageEditor = observer((
 
   const handleRemove = ()=>{
     if(eidtorStore.selectedNode){
-      //backupToUndoList(undefined);
-      let parentId = eidtorStore.selectedNode.parent?.id;
-      eidtorStore.selectedNode.remove();
-      eidtorStore.setSelectedNode(undefined);
-      ///canvasStore.setRedoList([]);
-      eidtorStore.refreshNode(parentId)
+      eidtorStore.excuteCommand(new RemoveCommand(eidtorStore.selectedNode))
     }
   }
 
   const handleDupliate = ()=>{
     if(eidtorStore.selectedNode){
-      //backupToUndoList(undefined);      
-      let newNode = eidtorStore.selectedNode?.duplicate();
-      eidtorStore.setSelectedNode(newNode);
-      //canvasStore.setRedoList([]);
-      eidtorStore.refreshNode(eidtorStore.selectedNode?.parent?.id);
+      eidtorStore.excuteCommand(new DuplicateCommand(eidtorStore.selectedNode))
     }
   }
 

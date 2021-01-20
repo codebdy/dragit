@@ -2,7 +2,9 @@ import { RelationCommand } from "./RelationCommand";
 
 export class MoveInTopCommand extends RelationCommand{
   excute(){
-    this.draggedNode.moveInTop(this.targetNode);
-    return this.draggedNode;
+    if(this.targetNode){
+      this.sourceNode.moveInTop(this.targetNode);
+    }
+    return this.sourceNode;
   }
 }

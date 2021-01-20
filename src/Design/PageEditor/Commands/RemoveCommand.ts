@@ -1,8 +1,8 @@
 import { RelationCommand } from "./RelationCommand";
 
-export class MoveInTopCommand extends RelationCommand{
+export class RemoveCommand extends RelationCommand{
   excute(){
-    this.draggedNode.remove();
+    this.sourceNode.remove();
     return undefined;
   }
 }
