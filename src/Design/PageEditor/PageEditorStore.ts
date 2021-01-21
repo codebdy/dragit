@@ -84,7 +84,7 @@ export class PageEditorStore {
 
   clear(){
     if(this.canvas){
-        this.excuteCommand(new ClearCommand(this.canvas, this.selectedNode));
+      this.excuteCommand(new ClearCommand(this.canvas, this.selectedNode));
     }
 
   }

@@ -14,8 +14,10 @@ import { resolveMetaConfig } from 'Base/RxDrag';
 import { IMetaConfig } from 'Base/RXNode/IMetaConfig';
 import { observer } from 'mobx-react';
 import { useDesign } from '../useDesign';
-import { propsInputs } from './PropsInputs';
 import { toJS } from 'mobx';
+import { propsInputs } from './PropsInputs';
+import { cloneObject } from 'Utils/cloneObject';
+import { ChangeMetaCommand } from '../Commands/ChangeMetaCommand';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,11 +68,14 @@ export const AttributeBox = observer(()=>{
   },[node]);
 
   const handlePropChange = (key:string, value:any) => {
-    const meta = toJS(node?.meta);
+    const meta = cloneObject(toJS(node?.meta));
     if(meta){
       meta.props = {...meta.props};
       meta.props[key] = value;
-      node?.setMeta({...meta});      
+      if(node){
+        editorStore?.excuteCommand(new ChangeMetaCommand(node, meta));
+      }
+
     }
   };
 
