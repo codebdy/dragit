@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
 export default function StringInput(props:PropsInputProps){
-  const {label, value, onChange} = props;
+  const {label, value, onChange, ...rest} = props;
   const [inputValue, setInputValue] = React.useState(value);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -36,7 +36,7 @@ export default function StringInput(props:PropsInputProps){
         }
       }
     }
-      {...props.props}
+      {...rest}
     />
   )
 }

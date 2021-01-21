@@ -1,11 +1,11 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import StringInput from "Base/PropsInputs/StringInput";
-import { IMeta } from "Base/Model/IMeta";
-import apiRule from "Base/Rules/apiRule";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import { IMeta } from "Base/RXNode/IMeta";
+import apiRule from "Base/RXNode/Configs/apiRule";
 import JSONEditDialog from "./PropsInputs/JSONEditDialog";
 
-export class AntDesignChartRule extends Rule{
+export class AntDesignChartRule extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -14,7 +14,7 @@ export class AntDesignChartRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
       {
         name:'chart',

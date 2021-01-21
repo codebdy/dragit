@@ -1,9 +1,9 @@
-import { IRule } from "./IRule";
-import { IProp } from "../Model/IProp";
-import { IMeta } from "../Model/IMeta";
+import { IMetaConfig } from "./IMetaConfig";
+import { IPropConfig } from "./IPropConfig";
+import { IMeta } from "./IMeta";
 import intl from 'react-intl-universal';
 
-export class Rule implements IRule{
+export class MetaConfig implements IMetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '16px';
@@ -25,7 +25,7 @@ export class Rule implements IRule{
     return true;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return []
   }
 }

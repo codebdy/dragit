@@ -1,7 +1,7 @@
-import { IMeta } from "Base/Model/IMeta";
-import { Rule } from "../../../Base/Rules/Rule";
+import { IMeta } from "Base/RXNode/IMeta";
+import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 
-export class FormGridContainerRule extends Rule{
+export class FormGridContainerRule extends MetaConfig{
 
   accept(child:IMeta){
     if(child.name === "FormGridItem"){

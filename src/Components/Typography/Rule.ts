@@ -1,11 +1,11 @@
-import { Rule } from "Base/Rules/Rule";
-import { IMeta } from "Base/Model/IMeta";
-import { IProp } from "Base/Model/IProp";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
-import SwitchInput from "Base/PropsInputs/BooleanInput";
-import StringInput from "Base/PropsInputs/StringInput";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IMeta } from "Base/RXNode/IMeta";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import SwitchInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 
-export class TypographyRule extends Rule{
+export class TypographyRule extends MetaConfig{
 
   match(meta:IMeta){
     return meta.name === 'Typography';
@@ -15,7 +15,7 @@ export class TypographyRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
       {
         name:'align',

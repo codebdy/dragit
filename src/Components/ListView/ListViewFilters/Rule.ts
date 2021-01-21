@@ -1,14 +1,14 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import { IMeta } from "Base/Model/IMeta";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IMeta } from "Base/RXNode/IMeta";
 
-export class ListViewFiltersRule extends Rule{
+export class ListViewFiltersRule extends MetaConfig{
   
   accept(child:IMeta){
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
     ]
   }

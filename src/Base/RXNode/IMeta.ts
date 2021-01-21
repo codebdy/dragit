@@ -1,4 +1,4 @@
-import { IValidateRule } from "./IValidateRule";
+import { IValidateRule } from "../Model/IValidateRule";
 
 export interface IMeta{
   name:string,

@@ -1,12 +1,12 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import StringInput from "Base/PropsInputs/StringInput";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
-import { IMeta } from "Base/Model/IMeta";
-import elevationRules from "Base/Rules/elevationRules";
-import marginRules from "Base/Rules/marginRules";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import { IMeta } from "Base/RXNode/IMeta";
+import elevationRules from "Base/RXNode/Configs/elevationRules";
+import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 
-export class OneToManyTableRule extends Rule{
+export class OneToManyTableRule extends MetaConfig{
   empertyPadding = '';
   hasField = true;
   
@@ -17,9 +17,9 @@ export class OneToManyTableRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginRules,
+      ...marginConfigs,
       ...elevationRules,   
       {
         name:'size',

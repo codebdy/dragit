@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { DADA_RXID_CONST, RXNode } from '../../../Base/RXNode/RXNode';
-import { resolveComponent, resolveRule } from 'Base/RxDrag';
-import { IMeta } from 'Base/Model/IMeta';
+import { resolveComponent, resolveMetaConfig } from 'Base/RxDrag';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
@@ -35,7 +35,7 @@ function getEditStyle(
   showPaddingX?:boolean,
   showPaddingY?:boolean,
 ){
-  const rule = resolveRule(node.meta.name);
+  const rule = resolveMetaConfig(node.meta.name);
   const hasNodChildren = node.children.length === 0 && !node.meta?.props?.rxText
   const paddingX={
     paddingLeft : hasNodChildren ? rule.empertyPadding : showPaddingX && rule.editPaddingX,
@@ -60,7 +60,7 @@ export const ComponentView = observer((
   const {node} = props;
   const classes = useStyles();
   const [editStyle, setEditStyle] = useState<any>({});
-  const {eidtorStore} = useDesign();
+  const {editorStore} = useDesign();
   let Component = resolveComponent(node.meta);
 
   let metaProps = node.meta.props? node.meta.props :{};
@@ -76,42 +76,42 @@ export const ComponentView = observer((
     ...rest
   } = metaProps as any;
 
-  const selected = eidtorStore?.selectedNode?.id === node.id;
-  const dragged = eidtorStore?.draggedNode?.id === node.id;
+  const selected = editorStore?.selectedNode?.id === node.id;
+  const dragged = editorStore?.draggedNode?.id === node.id;
 
   useEffect(()=>{
-    if(eidtorStore?.selectedNode?.id === node.id){
-      eidtorStore?.setSelectedDom(getDomByRxid(node.rxid));
+    if(editorStore?.selectedNode?.id === node.id){
+      editorStore?.setSelectedDom(getDomByRxid(node.rxid));
     }
   })
   
   useEffect(()=>{
-    setEditStyle(getEditStyle(node, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY));
+    setEditStyle(getEditStyle(node, editorStore?.showPaddingX, editorStore?.showPaddingY));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[node, node.children.length, eidtorStore?.showPaddingX, eidtorStore?.showPaddingY]);
+  },[node, node.children.length, editorStore?.showPaddingX, editorStore?.showPaddingY]);
 
   const handleMouseMove = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    let dragoverCharger = new DragoverCharger(node, eidtorStore?.draggedToolboxItem?.meta || eidtorStore?.draggedNode?.meta);
-    if(eidtorStore?.selectedNode?.id !== node.id && !eidtorStore?.draggedToolboxItem && !eidtorStore?.draggedNode){
-      eidtorStore?.setActiveNode(node);     
+    let dragoverCharger = new DragoverCharger(node, editorStore?.draggedToolboxItem?.meta || editorStore?.draggedNode?.meta);
+    if(editorStore?.selectedNode?.id !== node.id && !editorStore?.draggedToolboxItem && !editorStore?.draggedNode){
+      editorStore?.setActiveNode(node);     
     }
-    else if(eidtorStore?.selectedNode?.id !== node.id){
-      if(eidtorStore?.draggedNode?.id !== node.id){
-        eidtorStore?.setDragOverParam(dragoverCharger.judgePosition(event))
+    else if(editorStore?.selectedNode?.id !== node.id){
+      if(editorStore?.draggedNode?.id !== node.id){
+        editorStore?.setDragOverParam(dragoverCharger.judgePosition(event))
       }
     }
   }
   const handleMouseOut = (event:React.MouseEvent<HTMLElement>)=>{
     //event.stopPropagation();
-    eidtorStore?.setActiveNode(undefined);
+    editorStore?.setActiveNode(undefined);
   }
   const handleClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
-    eidtorStore?.setSelectedNode(node);
+    editorStore?.setSelectedNode(node);
   }
 
-  const actived = eidtorStore?.activeNode?.id === node.id;
+  const actived = editorStore?.activeNode?.id === node.id;
 
   let elementProps:any = {
     ...rest, 
@@ -119,7 +119,7 @@ export const ComponentView = observer((
     className:classNames(
       className, 
       {
-        [classes.outline]: eidtorStore?.showOutline,
+        [classes.outline]: editorStore?.showOutline,
         [classes.active]: actived,
         [classes.selected]: selected,
         [classes.dragged]:dragged,

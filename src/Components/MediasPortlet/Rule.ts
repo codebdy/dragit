@@ -1,11 +1,11 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
-import marginRules from "Base/Rules/marginRules";
-import elevationRules from "Base/Rules/elevationRules";
-import { IMeta } from "Base/Model/IMeta";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import elevationRules from "Base/RXNode/Configs/elevationRules";
+import { IMeta } from "Base/RXNode/IMeta";
 
-export class MediasPortletRule extends Rule{
+export class MediasPortletRule extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -14,9 +14,9 @@ export class MediasPortletRule extends Rule{
   accept(child:IMeta){
     return false;
   }
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginRules,
+      ...marginConfigs,
       ...elevationRules,
       {
         name:'cols',

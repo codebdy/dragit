@@ -3,11 +3,11 @@ import { Tabs, Tab } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import Toolbox from './Toolbox';
 import Box from '@material-ui/core/Box';
-import AttributeBox from './AttrebuteBox';
+import { AttributeBox } from './AttrebuteBox';
 import SettingsBox from './SettingsBox';
 import LeftArea from 'Design/Layout/LeftArea';
 import { IPageSchema } from 'Base/Model/IPage';
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
@@ -72,10 +72,7 @@ export default function LeftContent(
           <Toolbox onStartDragToolboxItem = {onStartDragToolboxItem}></Toolbox>
         </TabPanel>
         <TabPanel value={value} index={1}>
-        <AttributeBox 
-          node = {selectedNode}
-          onPropChange = {onPropChange}
-        ></AttributeBox>
+          <AttributeBox></AttributeBox>
         </TabPanel>
         <TabPanel value={value} index={2}>
           {

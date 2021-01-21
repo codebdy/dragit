@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PropsDialog from 'Base/PropsInputs/PropsDialog';
+import PropsDialog from 'Design/PageEditor/AttrebuteBox/PropsInputs/PropsDialog';
 import intl from "react-intl-universal";
 import {Controlled as CodeMirror} from 'react-codemirror2'
 import "codemirror/mode/javascript/javascript";

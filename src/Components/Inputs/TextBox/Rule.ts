@@ -1,13 +1,13 @@
-import { IMeta } from "Base/Model/IMeta";
-import { IProp } from "Base/Model/IProp";
-import BooleanInput from "Base/PropsInputs/BooleanInput";
-import NumberInput from "Base/PropsInputs/NumberInput";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
-import StringInput from "Base/PropsInputs/StringInput";
-import inputRules from "Base/Rules/inputRules";
-import { Rule } from "Base/Rules/Rule";
+import { IMeta } from "Base/RXNode/IMeta";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import NumberInput from "Design/PageEditor/AttrebuteBox/PropsInputs/NumberInput";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import inputRules from "Base/RXNode/Configs/inputRules";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
 
-export class TextBoxRule extends Rule{
+export class TextBoxRule extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -18,7 +18,7 @@ export class TextBoxRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
       ...inputRules,
       {

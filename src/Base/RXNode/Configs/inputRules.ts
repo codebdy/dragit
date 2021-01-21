@@ -1,9 +1,9 @@
-import { IProp } from "Base/Model/IProp";
-import BooleanInput from "Base/PropsInputs/BooleanInput";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
-import StringInput from "Base/PropsInputs/StringInput";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 
-const inputRules:Array<IProp> =[
+const inputRules:Array<IPropConfig> =[
   {
     name:'variant',
     label:'variant',

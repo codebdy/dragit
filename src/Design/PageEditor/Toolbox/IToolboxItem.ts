@@ -1,4 +1,4 @@
-import { IMeta } from "Base/Model/IMeta";
+import { IMeta } from "Base/RXNode/IMeta";
 
 export interface IToolboxItem{
   title?:string,

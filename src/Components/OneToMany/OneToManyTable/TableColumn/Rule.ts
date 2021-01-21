@@ -1,10 +1,10 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import { IMeta } from "Base/Model/IMeta";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
-import StringInput from "Base/PropsInputs/StringInput";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IMeta } from "Base/RXNode/IMeta";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 
-export class TableColumnRule extends Rule{
+export class TableColumnRule extends MetaConfig{
  
   accept(child:IMeta){
     if(child.name === 'TableColumn'){
@@ -13,7 +13,7 @@ export class TableColumnRule extends Rule{
     return true;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
       {
         name:'label',

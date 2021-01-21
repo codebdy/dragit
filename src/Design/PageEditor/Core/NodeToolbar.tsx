@@ -86,10 +86,10 @@ export const NodeToolbar = observer((
   
   const sideBarWidth = sidebar.width;
   
-  const {eidtorStore} = useDesign();
+  const {editorStore} = useDesign();
 
   const doFollow = ()=>{
-    let rect =  eidtorStore?.selectedDom?.getBoundingClientRect();
+    let rect =  editorStore?.selectedDom?.getBoundingClientRect();
 
     if(!rect){
       return 
@@ -106,7 +106,7 @@ export const NodeToolbar = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[eidtorStore?.showPaddingX, eidtorStore?.showPaddingY, eidtorStore?.selectedDom, eidtorStore?.scrollFlag]);
+  },[editorStore?.showPaddingX, editorStore?.showPaddingY, editorStore?.selectedDom, editorStore?.scrollFlag]);
 
 
   useEffect(() => {
@@ -121,7 +121,7 @@ export const NodeToolbar = observer((
 
   return (
     <Fragment>
-      {eidtorStore?.selectedDom && 
+      {editorStore?.selectedDom && 
         <div className={classes.toolbar}
           style={{
             left:left + 'px',

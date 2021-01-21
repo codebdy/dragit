@@ -1,4 +1,4 @@
-import { IMeta } from "Base/Model/IMeta";
+import { IMeta } from "Base/RXNode/IMeta";
 import { makeTableModel } from "Base/ModelTree/makeTableModel";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
 import { RXModel } from "Base/ModelTree/RXModel";

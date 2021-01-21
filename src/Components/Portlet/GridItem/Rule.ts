@@ -1,9 +1,9 @@
-import { Rule } from "Base/Rules/Rule";
-import { IMeta } from "Base/Model/IMeta";
-import { IProp } from "Base/Model/IProp";
-import colWidthRules from "Base/Rules/colWidthRules";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IMeta } from "Base/RXNode/IMeta";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import colWidthRules from "Base/RXNode/Configs/colWidthRules";
 
-export class PortletGridItemRule extends Rule{
+export class PortletGridItemRule extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
 
@@ -15,7 +15,7 @@ export class PortletGridItemRule extends Rule{
     return 'Grid Item';
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
       ...colWidthRules
     ]

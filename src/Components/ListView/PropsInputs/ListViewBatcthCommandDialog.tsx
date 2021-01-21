@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
-import { PropsInputProps } from '../../../Base/PropsInputs/PropsEditorProps';
+import { PropsInputProps } from '../../../Design/PageEditor/AttrebuteBox/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
 import { cloneObject } from 'Utils/cloneObject';

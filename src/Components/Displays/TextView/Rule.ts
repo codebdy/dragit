@@ -1,8 +1,8 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import { IMeta } from "Base/Model/IMeta";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IMeta } from "Base/RXNode/IMeta";
 
-export class TextViewRule extends Rule{
+export class TextViewRule extends MetaConfig{
   //empertyPadding = '';
   hasField = true;
   
@@ -10,7 +10,7 @@ export class TextViewRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
     ]
   }

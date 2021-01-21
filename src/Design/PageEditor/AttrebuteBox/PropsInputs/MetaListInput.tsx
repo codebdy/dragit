@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { IconButton, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { cloneObject } from 'Utils/cloneObject';
-import { MetaItem } from '../Model/MetaItem';
+import { MetaItem } from '../../../../Base/Model/MetaItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,12 +1,12 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import StringInput from "Base/PropsInputs/StringInput";
-import { IMeta } from "Base/Model/IMeta";
-import elevationRules from "Base/Rules/elevationRules";
-import marginRules from "Base/Rules/marginRules";
-import ApiEditor from "Base/PropsInputs/ApiEditor";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import { IMeta } from "Base/RXNode/IMeta";
+import elevationRules from "Base/RXNode/Configs/elevationRules";
+import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import ApiEditor from "Design/PageEditor/AttrebuteBox/PropsInputs/ApiEditor";
 
-export class TreeEditorRule extends Rule{
+export class TreeEditorRule extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -18,9 +18,9 @@ export class TreeEditorRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginRules,
+      ...marginConfigs,
       ...elevationRules,   
       {
         name:'title',

@@ -58,28 +58,28 @@ export const DragCusor = observer(()=>{
   //const [dragOverParam, setDragOverParam] = useState<IDragOverParam>();
   const [rect, setRect] = useState<IRect>();
   const classes = useStyles();
-  const {eidtorStore} = useDesign();
+  const {editorStore} = useDesign();
 
   useEffect(()=>{      
-    if(eidtorStore?.dragOverParam){
-      const param = eidtorStore?.dragOverParam;
+    if(editorStore?.dragOverParam){
+      const param = editorStore?.dragOverParam;
       if(param.position){
-        eidtorStore?.setDragOverParam(param);
+        editorStore?.setDragOverParam(param);
         setRect(param?.targetNode?.rect);
         return;
       }
     }
     setRect(undefined);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[eidtorStore?.dragOverParam])
+  },[editorStore?.dragOverParam])
 
   useEffect(()=>{
-    setRect(eidtorStore?.dragOverParam?.targetNode?.rect);
+    setRect(editorStore?.dragOverParam?.targetNode?.rect);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[eidtorStore?.scrollFlag])
+  },[editorStore?.scrollFlag])
 
-  const isvertical = eidtorStore?.dragOverParam?.position ==='out-left' || eidtorStore?.dragOverParam?.position ==='out-right'
-    ||eidtorStore?.dragOverParam?.position ==='in-left' || eidtorStore?.dragOverParam?.position ==='in-right';
+  const isvertical = editorStore?.dragOverParam?.position ==='out-left' || editorStore?.dragOverParam?.position ==='out-right'
+    ||editorStore?.dragOverParam?.position ==='in-left' || editorStore?.dragOverParam?.position ==='in-right';
 
   const cursorWidth = isvertical ? (rect?.height) : (rect?.width)
   let cursorLeft = rect?.x;
@@ -87,42 +87,42 @@ export const DragCusor = observer(()=>{
   let marginTop = '-1px';
   let cursorTop = rect?.y;  
   
-  if(eidtorStore?.dragOverParam?.position ==='out-top'){
+  if(editorStore?.dragOverParam?.position ==='out-top'){
     marginTop = "-3px";
   }
 
-  if(eidtorStore?.dragOverParam?.position ==='out-bottom'){
+  if(editorStore?.dragOverParam?.position ==='out-bottom'){
     cursorTop = (rect?.y||0) + (rect?.height||0);
     marginTop = "-1px";
   }
 
-  if(eidtorStore?.dragOverParam?.position ==='in-top'){
+  if(editorStore?.dragOverParam?.position ==='in-top'){
     marginTop = "1px";
   }
-  if(eidtorStore?.dragOverParam?.position ==='in-bottom'){
+  if(editorStore?.dragOverParam?.position ==='in-bottom'){
     cursorTop = (rect?.y||0) + (rect?.height||0);
     marginTop = "-4px";
   }
 
-  if(eidtorStore?.dragOverParam?.position ==='in-left'){
+  if(editorStore?.dragOverParam?.position ==='in-left'){
     marginTop = "1px";
     marginLeft = '4px';
   }
-  if(eidtorStore?.dragOverParam?.position === 'in-right'){
+  if(editorStore?.dragOverParam?.position === 'in-right'){
     cursorLeft = (rect?.x || 0) + (rect?.width||0);
     marginTop = "1px";
   }
 
-  if(eidtorStore?.dragOverParam?.position ==='out-right'){
+  if(editorStore?.dragOverParam?.position ==='out-right'){
     cursorLeft = (rect?.x || 0) + (rect?.width||0)
     marginLeft = '2px'
   }
 
-  if(eidtorStore?.dragOverParam?.position ==='out-left'){
+  if(editorStore?.dragOverParam?.position ==='out-left'){
     marginLeft = '2px'
   }
 
-  if(eidtorStore?.dragOverParam?.position ==='in-center'){
+  if(editorStore?.dragOverParam?.position ==='in-center'){
     cursorTop =  (rect?.y||0) + (rect?.height||0)/2;
   }
 
@@ -149,17 +149,17 @@ export const DragCusor = observer(()=>{
           }}
         >
           {
-            eidtorStore?.dragOverParam?.position !=='in-top' && eidtorStore?.dragOverParam?.position !=='in-right' &&
-            eidtorStore?.dragOverParam?.position !=='in-center'&&
+            editorStore?.dragOverParam?.position !=='in-top' && editorStore?.dragOverParam?.position !=='in-right' &&
+            editorStore?.dragOverParam?.position !=='in-center'&&
             <ArrowDropUpIcon className={classes.upArrow}/>            
           }
           {
-             eidtorStore?.dragOverParam?.position !=='in-bottom' && eidtorStore?.dragOverParam?.position !=='in-left' &&
-             eidtorStore?.dragOverParam?.position !=='in-center'&&
+             editorStore?.dragOverParam?.position !=='in-bottom' && editorStore?.dragOverParam?.position !=='in-left' &&
+             editorStore?.dragOverParam?.position !=='in-center'&&
             <ArrowDropDownIcon className = {classes.downArrow} />
           }
           {
-            eidtorStore?.dragOverParam?.position ==='in-center'&&
+            editorStore?.dragOverParam?.position ==='in-center'&&
             <Fragment>
               <ArrowLeftIcon className = {classes.leftArrow} fontSize="large"/>
               <ArrowRightIcon className = {classes.rightArrow} fontSize="large"/>

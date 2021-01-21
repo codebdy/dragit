@@ -15,7 +15,7 @@ import ListViewActionFilter from './ListViewActionFilter';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 
 function creatEmpertyRows(length:number){

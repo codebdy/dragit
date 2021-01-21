@@ -1,8 +1,8 @@
 import React from 'react';
 import { CursorPosition, IDragOverParam } from "./IDragOverParam";
 import { IRect } from "../../../Base/Model/IRect";
-import { resolveRule } from 'Base/RxDrag';
-import { IMeta } from 'Base/Model/IMeta';
+import { resolveMetaConfig } from 'Base/RxDrag';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 
 class Rect {
@@ -110,7 +110,7 @@ export class DragoverCharger {
     if (!nodeName) {
       return 0;
     }
-    const rule = resolveRule(nodeName);
+    const rule = resolveMetaConfig(nodeName);
     let margin = rule.dropInMargin;
     margin = margin ? margin : 0;
     return margin;
@@ -146,7 +146,7 @@ export class DragoverCharger {
     if (!targetNodeName || !childMeta) {
       return false;
     }
-    const rule = resolveRule(targetNodeName);
+    const rule = resolveMetaConfig(targetNodeName);
     return rule.accept(childMeta);
   }
 

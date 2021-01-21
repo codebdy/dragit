@@ -9,10 +9,11 @@ export interface SelectItem{
   localLabelKey?:string;
 }
 
-export default function OptionSelect(props:PropsInputProps){
+export default function OptionSelect(props:PropsInputProps&{
+  items?:Array<{value:string, label:string}>,
+}){
   //const classes = useStyles();
-  const {label, value, onChange} = props;
-  const items = props.props?.items;
+  const {label, value, onChange, items} = props;
   const [inputValue, setInputValue] = React.useState(value);
 
   useEffect(()=>{

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { createStyles, Fab, Grid, LinearProgress, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Theme } from "@material-ui/core";
-import PrimaryText from "Base/PropsInputs/PrimaryText";
+import PrimaryText from "Design/PageEditor/AttrebuteBox/PropsInputs/PrimaryText";
 import { IModule } from "Base/Model/IModule";
 import intl from "react-intl-universal";
 import { Add } from "@material-ui/icons";

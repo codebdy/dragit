@@ -5,7 +5,7 @@ import { ListViewStore } from "./ListViewStore";
 import { IPageMutation } from "Base/Model/IPageMutation";
 import { usePageStore } from "Base/PageUtils/PageStore";
 import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
-import { IMeta } from "Base/Model/IMeta";
+import { IMeta } from "Base/RXNode/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
 
 export function useUpdateGQL( rxNode:RXNode<IMeta>, listViewStore:ListViewStore, update?:IPageMutation ){

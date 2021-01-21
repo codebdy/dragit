@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react";
 import { IPage } from 'Base/Model/IPage';
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { PageAction } from 'Base/PageUtils/PageAction';

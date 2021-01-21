@@ -1,7 +1,7 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
 import React from "react";
 import { RXNode } from "Base/RXNode/RXNode";
-import { IMeta } from "Base/Model/IMeta";
+import { IMeta } from "Base/RXNode/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {Observer} from 'mobx-react';
 

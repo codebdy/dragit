@@ -1,7 +1,7 @@
-import { Rule } from "../../Base/Rules/Rule";
-import { IMeta } from "../../Base/Model/IMeta";
+import { MetaConfig } from "../../Base/RXNode/MetaConfig";
+import { IMeta } from "../../Base/RXNode/IMeta";
 
-export class DividerRule extends Rule{
+export class DividerRule extends MetaConfig{
   editPaddingY = '0';
   editPaddingX = '0';
   empertyPadding = '2px';

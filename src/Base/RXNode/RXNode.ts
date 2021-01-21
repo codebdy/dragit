@@ -36,6 +36,10 @@ export class RXNode<T>{
     this.children = [];
     makeAutoObservable(this);
   }
+  
+  setMeta(meta:T){
+    this.meta = meta;
+  }
 
   setChildren(children:Array<RXNode<T>>|undefined){
     this.children = children || [];

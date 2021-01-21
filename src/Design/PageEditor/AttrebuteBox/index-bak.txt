@@ -10,12 +10,12 @@ import AttributeBoxActionSection from './ActionSection';
 import AttributeBoxValidateArea from 'Design/PageEditor/AttrebuteBox/ValidateArea';
 import { IValidateRule } from "Base/Model/IValidateRule";
 import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
-import { resolveMetaConfig } from 'Base/RxDrag';
+import { IMeta } from 'Base/RXNode/IMeta';
+import { RXNode } from 'Base/RXNode/RXNode';
+import { resolveRule } from 'Base/RxDrag';
 import { IMetaConfig } from 'Base/RXNode/IMetaConfig';
 import { observer } from 'mobx-react';
-import { useDesign } from '../useDesign';
-import { propsInputs } from './PropsInputs';
-import { toJS } from 'mobx';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,34 +51,34 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const AttributeBox = observer(()=>{
+export const AttributeBox = observer((
+  props:{
+    node?:RXNode<IMeta>,
+    onPropChange:(propName:string, value:any)=>void
+  }
+)=>{
+  const {node, onPropChange} = props;  
   const classes = useStyles();
-  const {editorStore} = useDesign();
-  const node = editorStore?.selectedNode;  
   const [field, setField] = React.useState(node?.meta.props?.field);
-  const [metaConfig, setMetaConfig] = React.useState<IMetaConfig>();
+  const [nodeRule, setNodeRule] = React.useState<IMetaConfig>();
   const [validateRule, setValidateRule] = React.useState<IValidateRule>();
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
 
+
   useEffect(() => {
-    //setField(node?.meta.props?.field);
-    node?.meta.name && setMetaConfig(resolveMetaConfig(node?.meta.name))
+    setField(node?.meta.props?.field);
+    node?.meta.name && setNodeRule(resolveRule(node?.meta.name))
   },[node]);
 
-  const handlePropChange = (key:string, value:any) => {
-    const meta = toJS(node?.meta);
-    if(meta){
-      meta.props = {...meta.props};
-      meta.props[key] = value;
-      console.log(meta);
-      node?.setMeta({...meta});      
-    }
+  const handlePropChange = (field:string, value:any) => {
+    onPropChange(field, value);
+    //node?.updateProp(field, value);
   };
 
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let newField = event.target.value as string;
     //node?.updateProp('field', newField);
-    //onPropChange('field', newField);
+    onPropChange('field', newField);
     setField(newField);
   }
 
@@ -110,16 +110,16 @@ export const AttributeBox = observer(()=>{
             <AccordionDetails className={classes.pannelDetail}>
               <Grid container spacing={2}>
                 {
-                  metaConfig?.getPropConfigs().map((config:IPropConfig, index)=>{
-                    const PropInput = config.propType ? propsInputs[config.propType] : undefined;
-                    console.assert(PropInput, '属性编辑器不存在,属性propType：' + config.propType);
+                  nodeRule?.getPropConfigs().map((field:IPropConfig)=>{
                     return(
-                      PropInput && 
-                      <PropInput 
-                        key={index + '-' + config.name} 
-                        onChange={(value: any) => handlePropChange(config.name, value)} 
-                        {...config.props} 
-                      />
+                      <Grid item key={node.id + '-' + field.name} xs={field.xs || 6}>
+                        <field.input
+                          label={field.label && (intl.get(field.label)||field.label)}
+                          value={node.meta.props && node.meta.props[field.name]}
+                          onChange= {(value:any)=>handlePropChange(field.name, value)}
+                          props={field.props}
+                        />
+                      </Grid>                  
                     )
                   })
                 }
@@ -127,7 +127,7 @@ export const AttributeBox = observer(()=>{
               </Grid>
             </AccordionDetails>
           </Accordion>
-          {metaConfig?.hasField &&
+          {nodeRule?.hasField &&
             <Accordion  className={classes.panelPaper}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -147,7 +147,7 @@ export const AttributeBox = observer(()=>{
             </Accordion>
           }
           {
-            metaConfig?.hasValidation && 
+            nodeRule?.hasValidation && 
               <Accordion  className={classes.panelPaper}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -159,7 +159,7 @@ export const AttributeBox = observer(()=>{
                 </AccordionDetails>            
               </Accordion>            
           }
-          {metaConfig?.hasAction && 
+          {nodeRule?.hasAction && 
             <Accordion  className={classes.panelPaper}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

@@ -1,11 +1,11 @@
-import { Rule } from "../../../Base/Rules/Rule";
-import { IProp } from "../../../Base/Model/IProp";
-import colWidthRules from "Base/Rules/colWidthRules";
-import { IMeta } from "Base/Model/IMeta";
-import marginRules from "Base/Rules/marginRules";
+import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
+import { IPropConfig } from "../../../Base/RXNode/IPropConfig";
+import colWidthRules from "Base/RXNode/Configs/colWidthRules";
+import { IMeta } from "Base/RXNode/IMeta";
+import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 
 
-export class GridColumnRule extends Rule{
+export class GridColumnRule extends MetaConfig{
   editPaddingY = '8px';
   editPaddingX = '8px';
   labelKey ="column";
@@ -17,9 +17,9 @@ export class GridColumnRule extends Rule{
     return true;
   }
   
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginRules,
+      ...marginConfigs,
       ...colWidthRules
     ]
   }

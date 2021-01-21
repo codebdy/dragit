@@ -1,7 +1,7 @@
-import { IProp } from "Base/Model/IProp";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
-const colorRule:IProp =   {
+const colorRule:IPropConfig =   {
   name:'color',
   label:'color',
   input:OptionSelect,

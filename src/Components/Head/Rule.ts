@@ -1,9 +1,9 @@
-import { Rule } from "Base/Rules/Rule";
-import { IMeta } from "Base/Model/IMeta";
-import { IProp } from "Base/Model/IProp";
-import StringInput from "Base/PropsInputs/StringInput";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IMeta } from "Base/RXNode/IMeta";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 
-export class HeadRule extends Rule{
+export class HeadRule extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   
@@ -15,7 +15,7 @@ export class HeadRule extends Rule{
     return meta.name
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
        {
         name:'rxText',

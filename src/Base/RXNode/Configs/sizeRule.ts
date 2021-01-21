@@ -1,4 +1,4 @@
-import OptionSelect from "Base/PropsInputs/OptionSelect";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
 const sizeRule = {
   name:'size',

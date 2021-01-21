@@ -1,43 +1,37 @@
-import { IRule } from "Base/Rules/IRule";
-import { Rule } from "Base/Rules/Rule";
+import { IMetaConfig } from "Base/RXNode/IMetaConfig";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
 //import withMargin from "./HOCs/withMargin";
-import { IMeta } from "./Model/IMeta";
+import { IMeta } from "./RXNode/IMeta";
 
 var componentsMap : { 
   [key: string]: {
     component?:any,
-    rule:IRule,
+    rule:IMetaConfig,
   }
 } = {}
 
-function register(name:string, component:any, rule:any = Rule): any{
+function register(name:string, component:any, rule:any = MetaConfig): any{
   componentsMap[name] = {
     component,
     rule: new rule(),
   }
 }
 
-function registerHtmlTag(name:string, rule:any = Rule){
+function registerHtmlTag(name:string, rule:any = MetaConfig){
   componentsMap[name] = {
     rule: new rule()
   }  
 }
 
 function resolveComponent(meta:IMeta):any{
-  //const {marginTop, marginRight, marginBottom, marginLeft} = meta.props || {};
   const name = meta.name;
   const componetNode = componentsMap[name];
   let component = componetNode && componetNode.component ? componetNode.component : name;
 
-  //component = marginTop || marginRight || marginBottom || marginLeft ? withMargin(component) : component;
-
-  //if(meta.props?.field && withField && componetNode.fieldType !== FieldType.Model){
-  //  component = withSkeleton(component);
-  //}
   return component;
 }
 
-function resolveRule(name:string):IRule{
-  return  componentsMap[name] ? componentsMap[name].rule : new Rule();
+function resolveMetaConfig(name:string):IMetaConfig{
+  return  componentsMap[name] ? componentsMap[name].rule : new MetaConfig();
 }
-export {register, resolveComponent, resolveRule, registerHtmlTag}
+export {register, resolveComponent, resolveMetaConfig, registerHtmlTag}

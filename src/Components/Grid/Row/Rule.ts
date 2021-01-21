@@ -1,11 +1,11 @@
-import { Rule } from "../../../Base/Rules/Rule";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
-import { IProp } from "../../../Base/Model/IProp";
-import NumberInput from "Base/PropsInputs/NumberInput";
-import { IMeta } from "Base/Model/IMeta";
-import marginRules from "Base/Rules/marginRules";
+import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import { IPropConfig } from "../../../Base/RXNode/IPropConfig";
+import NumberInput from "Design/PageEditor/AttrebuteBox/PropsInputs/NumberInput";
+import { IMeta } from "Base/RXNode/IMeta";
+import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 
-export class GridRowRule extends Rule{
+export class GridRowRule extends MetaConfig{
   editPaddingY = '8px';
   editPaddingX = '8px';
   labelKey ="row";
@@ -17,9 +17,9 @@ export class GridRowRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginRules,
+      ...marginConfigs,
       {
         name:'direction',
         label:'direction',

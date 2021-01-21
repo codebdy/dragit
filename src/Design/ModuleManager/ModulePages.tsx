@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Grid, LinearProgress } from '@material-ui/core';
-import PrimaryText from 'Base/PropsInputs/PrimaryText';
+import PrimaryText from 'Design/PageEditor/AttrebuteBox/PropsInputs/PrimaryText';
 import intl from 'react-intl-universal';
 import { IModule } from "Base/Model/IModule";
 import ModulePageTable from './ModulePageTable';

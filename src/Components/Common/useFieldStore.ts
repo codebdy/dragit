@@ -1,4 +1,4 @@
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { useEffect } from 'react';

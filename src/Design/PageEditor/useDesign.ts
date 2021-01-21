@@ -7,6 +7,6 @@ export const PageEditorStoreProvider = PageEditorStoreContext.Provider;
 const usePageEditorStore = (): PageEditorStore|undefined => useContext(PageEditorStoreContext);
 
 export function useDesign(){
-  const eidtorStore = usePageEditorStore();
-  return {isDesigning:!!eidtorStore, eidtorStore}
+  const editorStore = usePageEditorStore();
+  return {isDesigning:!!editorStore, editorStore}
 }

@@ -1,5 +1,5 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
-import { IMeta } from "Base/Model/IMeta";
+import { IMeta } from "Base/RXNode/IMeta";
 import { IPage } from "Base/Model/IPage";
 import { IPageJumper } from "Base/Model/IPageJumper";
 import { RXNode } from "Base/RXNode/RXNode";

@@ -11,7 +11,7 @@ import DesignerLayout from 'Design/Layout';
 import LeftContent from './LeftContent';
 import { IPageSchema } from 'Base/Model/IPage';
 import PageSkeleton from 'AdminBoard/Workspace/Common/ModuleSkeleton';
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { ComponentView } from './Core/ComponentView';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { NodeToolbar } from './Core/NodeToolbar';

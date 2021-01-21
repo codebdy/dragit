@@ -1,5 +1,5 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
-import { IMeta } from "Base/Model/IMeta";
+import { IMeta } from "Base/RXNode/IMeta";
 import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { usePageStore } from "Base/PageUtils/PageStore";
 import { RXNode } from "Base/RXNode/RXNode";

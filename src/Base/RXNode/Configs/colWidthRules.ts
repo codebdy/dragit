@@ -1,5 +1,5 @@
-import { IProp } from "Base/Model/IProp";
-import OptionSelect from "Base/PropsInputs/OptionSelect";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
 const sizeSchema = [
   {
@@ -65,7 +65,7 @@ const sizeSchema = [
 ]
 
 
-const colWidthRules:Array<IProp> = [
+const colWidthRules:Array<IPropConfig> = [
   {
     name:'xl',
     label:'xl',

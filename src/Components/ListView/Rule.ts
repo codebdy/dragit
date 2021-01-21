@@ -1,16 +1,16 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import StringInput from "Base/PropsInputs/StringInput";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import ListViewBatcthCommandDialog from "Components/ListView/PropsInputs/ListViewBatcthCommandDialog";
 import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "./PropsInputs/ListViewFiltersDialog";
 import ListViewRowCommandDialog from "./PropsInputs/ListViewRowCommandDialog";
-import { IMeta } from "Base/Model/IMeta";
-import marginRules from "Base/Rules/marginRules";
-import elevationRules from "Base/Rules/elevationRules";
-import apiRule from "Base/Rules/apiRule";
+import { IMeta } from "Base/RXNode/IMeta";
+import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import elevationRules from "Base/RXNode/Configs/elevationRules";
+import apiRule from "Base/RXNode/Configs/apiRule";
 
-export class ListViewRule extends Rule{
+export class ListViewRule extends MetaConfig{
   editPaddingY = '8px';
   editPaddingX = '8px';
 
@@ -24,9 +24,9 @@ export class ListViewRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginRules,
+      ...marginConfigs,
       ...elevationRules,
       {
         name:'columns',

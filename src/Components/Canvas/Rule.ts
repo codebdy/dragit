@@ -1,7 +1,7 @@
-import { IMeta } from "Base/Model/IMeta";
-import { Rule } from "../../Base/Rules/Rule";
+import { IMeta } from "Base/RXNode/IMeta";
+import { MetaConfig } from "../../Base/RXNode/MetaConfig";
 
-export class CanvasRule extends Rule{
+export class CanvasRule extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   dropInMargin = 0;

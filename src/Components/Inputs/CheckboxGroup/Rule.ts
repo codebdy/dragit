@@ -1,13 +1,13 @@
-import { IMeta } from "Base/Model/IMeta";
-import { IProp } from "Base/Model/IProp";
-import BooleanInput from "Base/PropsInputs/BooleanInput";
-import StringInput from "Base/PropsInputs/StringInput";
-import colorRule from "Base/Rules/colorRule";
-import itemsRule from "Base/Rules/itemsRule";
-import { Rule } from "Base/Rules/Rule";
-import sizeRule from "Base/Rules/sizeRule";
+import { IMeta } from "Base/RXNode/IMeta";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import colorRule from "Base/RXNode/Configs/colorRule";
+import itemsRule from "Base/RXNode/Configs/itemsRule";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import sizeRule from "Base/RXNode/Configs/sizeRule";
 
-export class CheckboxGroupRule extends Rule{
+export class CheckboxGroupRule extends MetaConfig{
   //editPaddingY = '';
   //editPaddingX = '';
   //empertyPadding = '';
@@ -18,7 +18,7 @@ export class CheckboxGroupRule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
       {
         name:'label',

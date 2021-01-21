@@ -4,7 +4,7 @@ import { AttributeRow } from './AttributeRow';
 import { PageAction } from 'Base/PageUtils/PageAction';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import intl from 'react-intl-universal';
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 
 export default function AttributeBoxActionSection(

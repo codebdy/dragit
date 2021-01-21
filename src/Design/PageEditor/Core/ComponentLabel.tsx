@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { observer} from 'mobx-react';
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { useDesign } from '../useDesign';
 
@@ -32,7 +32,7 @@ export const ComponentLabel = observer((
   const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const {eidtorStore} = useDesign();
+  const {editorStore} = useDesign();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();
@@ -56,7 +56,7 @@ export const ComponentLabel = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[eidtorStore?.showPaddingX, eidtorStore?.showPaddingY, followDom, eidtorStore?.scrollFlag]);
+  },[editorStore?.showPaddingX, editorStore?.showPaddingY, followDom, editorStore?.scrollFlag]);
 
   return (
     <Fragment>

@@ -1,12 +1,12 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import SwitchInput from "Base/PropsInputs/BooleanInput";
-import StringInput from "Base/PropsInputs/StringInput";
-import elevationRules from "Base/Rules/elevationRules";
-import marginRules from "Base/Rules/marginRules";
-import { IMeta } from "Base/Model/IMeta";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import SwitchInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import elevationRules from "Base/RXNode/Configs/elevationRules";
+import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import { IMeta } from "Base/RXNode/IMeta";
 
-export class PortletRule extends Rule{
+export class PortletRule extends MetaConfig{
 
   accept(child:IMeta){
     if(child.name === "PortletFormGridBody"){
@@ -18,9 +18,9 @@ export class PortletRule extends Rule{
     return true;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginRules,
+      ...marginConfigs,
       ...elevationRules,      
       {
         name:'collapsible',

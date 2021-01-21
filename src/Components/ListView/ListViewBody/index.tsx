@@ -1,5 +1,5 @@
 import { TableContainer, Table, TableBody, TableRow } from '@material-ui/core';
-import { IMeta } from 'Base/Model/IMeta';
+import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import React, { Fragment } from 'react';

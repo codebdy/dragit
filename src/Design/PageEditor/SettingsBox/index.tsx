@@ -3,7 +3,7 @@ import {makeStyles, Theme, createStyles, Switch, FormControlLabel} from '@materi
 import intl from 'react-intl-universal';
 import { AttributeRow } from '../AttrebuteBox/AttributeRow';
 import { IPageSchema } from 'Base/Model/IPage';
-import ApiEditor from '../../../Base/PropsInputs/ApiEditor';
+import ApiEditor from '../AttrebuteBox/PropsInputs/ApiEditor';
 import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
 
 const useStyles = makeStyles((theme: Theme) =>

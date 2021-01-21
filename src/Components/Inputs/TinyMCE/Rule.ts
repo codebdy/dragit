@@ -1,9 +1,9 @@
-import { Rule } from "Base/Rules/Rule";
-import { IProp } from "Base/Model/IProp";
-import { IMeta } from "Base/Model/IMeta";
-import NumberInput from "Base/PropsInputs/NumberInput";
+import { MetaConfig } from "Base/RXNode/MetaConfig";
+import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IMeta } from "Base/RXNode/IMeta";
+import NumberInput from "Design/PageEditor/AttrebuteBox/PropsInputs/NumberInput";
 
-export class TinyMCERule extends Rule{
+export class TinyMCERule extends MetaConfig{
   empertyPadding = '';
   hasField = true;
   
@@ -11,7 +11,7 @@ export class TinyMCERule extends Rule{
     return false;
   }
 
-  getFields(): Array<IProp>{
+  getPropConfigs(): Array<IPropConfig>{
     return [
       {
         name:'height',
