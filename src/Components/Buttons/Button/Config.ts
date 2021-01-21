@@ -24,66 +24,68 @@ export class ButtonConfig extends MetaConfig{
         name:'color',
         labelKey:'color',
         propType:'select',
-        items:[
-          {
-            value:'default',
-            label:'Default'
-          },
-          {
-            value:'inherit',
-            label:'Inherit'
-          },
-          {
-            value:'primary',
-            label:'Primary'
-          },
-          {
-            value:'secondary',
-            label:'Secondary'
-          },
-        ]
+        props:{
+          items:[
+            {
+              value:'default',
+              label:'Default'
+            },
+            {
+              value:'inherit',
+              label:'Inherit'
+            },
+            {
+              value:'primary',
+              label:'Primary'
+            },
+            {
+              value:'secondary',
+              label:'Secondary'
+            },
+          ]
+        }
       },
       {
         name:'size',
         labelKey:'size',
         propType:'select',
-        items:[
-          {
-            value:'large',
-            label:'Large'
-          },
-          {
-            value:'medium',
-            label:'Medium'
-          },
-          {
-            value:'primary',
-            label:'Primary'
-          },
-          {
-            value:'small',
-            label:'Small'
-          },
-        ]
+        props:{
+          items:[
+            {
+              value:'large',
+              label:'Large'
+            },
+            {
+              value:'medium',
+              label:'Medium'
+            },
+            {
+              value:'small',
+              label:'Small'
+            },
+          ]
+        }
       },
       {
         name:'variant',
         labelKey:'variant',
         propType:'select',
-        items:[
-          {
-            value:'contained',
-            label:'Contained'
-          },
-          {
-            value:'outlined',
-            label:'Outlined'
-          },
-          {
-            value:'text',
-            label:'Text'
-          },
-        ]
+        props:{
+          items:[
+            {
+              value:'contained',
+              label:'Contained'
+            },
+            {
+              value:'outlined',
+              label:'Outlined'
+            },
+            {
+              value:'text',
+              label:'Text'
+            },
+          ]
+        }
       },
       {
         name:'disabled',

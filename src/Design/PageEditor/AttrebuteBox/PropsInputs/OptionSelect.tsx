@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Select, MenuItem, FormControl, InputLabel, Grid} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 import intl from "react-intl-universal";
@@ -13,22 +13,17 @@ export default function OptionSelect(props:PropsInputProps&{
   items?:Array<{value:string, label:string}>,
 }){
   const {label, value, onChange, items, xs=6, ...rest} = props;
-  const [inputValue, setInputValue] = React.useState(value);
 
-  useEffect(()=>{
-    setInputValue(value);
-  },[value])
-  
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setInputValue(event.target.value);
     onChange(event.target.value || undefined);
   };  
+
   return (
     <Grid item xs = {xs}>
       <FormControl variant="outlined" size="small" fullWidth {...rest}>
         <InputLabel>{label}</InputLabel>
         <Select
-          value={inputValue || ''}
+          value={value === undefined ? '' : value }
           onChange={handleChange}
           label = {label}
         >
