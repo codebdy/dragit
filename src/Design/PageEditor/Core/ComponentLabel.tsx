@@ -56,7 +56,7 @@ export const ComponentLabel = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[editorStore?.showPaddingX, editorStore?.showPaddingY, followDom, editorStore?.scrollFlag]);
+  },[editorStore?.showPaddingX, editorStore?.showPaddingY, followDom, editorStore?.refreshToolbarAndLabelFlag]);
 
   return (
     <Fragment>

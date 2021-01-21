@@ -63,7 +63,6 @@ export const AttributeBox = observer(()=>{
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
 
   useEffect(() => {
-    //setField(node?.meta.props?.field);
     node?.meta.name && setMetaConfig(resolveMetaConfig(node?.meta.name))
   },[node]);
 

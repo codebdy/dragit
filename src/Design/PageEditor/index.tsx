@@ -157,7 +157,7 @@ export const PageEditor = observer((
   };
 
   const handleScroll = ()=>{
-    editorStore.scroll();
+    editorStore.refreshToolbarAndLabel();
   }
 
   const handleStartDragMetas = (item:IToolboxItem)=>{

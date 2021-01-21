@@ -25,7 +25,7 @@ export class PageEditorStore {
   undoList: Array<ICommand> = [];
   redoList: Array<ICommand> = [];
 
-  scrollFlag:number = 0;
+  refreshToolbarAndLabelFlag:number = 0;
   isDirty: boolean = false;
 
   constructor() {
@@ -89,11 +89,11 @@ export class PageEditorStore {
 
   }
 
-  scroll(){
-    this.scrollFlag ++;
+  refreshToolbarAndLabel(){
+    this.refreshToolbarAndLabelFlag ++;
     //防止溢出
-    if(this.scrollFlag > 1000000){
-      this.scrollFlag = 0;
+    if(this.refreshToolbarAndLabelFlag > 1000000){
+      this.refreshToolbarAndLabelFlag = 0;
     }
   }
 
@@ -103,6 +103,7 @@ export class PageEditorStore {
     this.setSelectedNode(selectedNode);
     this.undoList.push(command);
     this.redoList = [];
+    this.refreshToolbarAndLabel();
   }
 
   undo(){
@@ -112,6 +113,7 @@ export class PageEditorStore {
       this.redoList.push(cmd);
     }
     this.setSelectedNode(selectedNode);
+    this.refreshToolbarAndLabel();
   }
 
   redo(){
@@ -121,6 +123,7 @@ export class PageEditorStore {
       this.undoList.push(cmd);
     }
     this.setSelectedNode(selectedNode);
+    this.refreshToolbarAndLabel();
   }
 
   operateNode (draggedNode:RXNode<IMeta>, targetNode:RXNode<IMeta>, position:CursorPosition){

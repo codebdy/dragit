@@ -106,7 +106,7 @@ export const NodeToolbar = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[editorStore?.showPaddingX, editorStore?.showPaddingY, editorStore?.selectedDom, editorStore?.scrollFlag]);
+  },[editorStore?.showPaddingX, editorStore?.showPaddingY, editorStore?.selectedDom, editorStore?.refreshToolbarAndLabelFlag]);
 
 
   useEffect(() => {

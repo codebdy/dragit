@@ -76,7 +76,7 @@ export const DragCusor = observer(()=>{
   useEffect(()=>{
     setRect(editorStore?.dragOverParam?.targetNode?.rect);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[editorStore?.scrollFlag])
+  },[editorStore?.refreshToolbarAndLabelFlag])
 
   const isvertical = editorStore?.dragOverParam?.position ==='out-left' || editorStore?.dragOverParam?.position ==='out-right'
     ||editorStore?.dragOverParam?.position ==='in-left' || editorStore?.dragOverParam?.position ==='in-right';
