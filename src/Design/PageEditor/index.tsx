@@ -294,6 +294,13 @@ export const PageEditor = observer((
                 />
               }
               {
+                editorStore.activeNode &&
+                <ComponentLabel 
+                  node={editorStore.activeNode}
+                  followDom = {editorStore.activeNode.dom}
+                />
+              }              
+              {
                 editorStore.selectedNode &&
                 <Fragment>
                   <ComponentLabel 
@@ -308,13 +315,7 @@ export const PageEditor = observer((
                   />
                 </Fragment>
               }
-              {
-                editorStore.activeNode &&
-                <ComponentLabel 
-                  node={editorStore.activeNode}
-                  followDom = {editorStore.activeNode.dom}
-                />
-              }
+
             </Scrollbar>
           }
         </DesignerLayout>
