@@ -29,10 +29,10 @@ export const PageQuery = observer((
 
   useEffect(()=>{
     if(data){
-      modelStore?.setModel(data[queryName||'']);      
+      modelStore?.initWithModel(data[queryName||'']);      
     }
     else{
-      modelStore?.setModel(undefined);
+      modelStore?.initWithModel(undefined);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

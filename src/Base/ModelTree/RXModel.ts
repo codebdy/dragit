@@ -74,11 +74,11 @@ export class RXModel{
   setValue(value: any) {
     this.value = value;
     this.childrenMap.forEach(child=>{
-      child.setModel(value);
+      child.initWithModel(value);
     })
   }
 
-  setModel(model: any) {
+  initWithModel(model: any) {
     let childValue = model ? model[this.modelKey] : undefined;
     if(this.modelKey==='root'){//如果是根节点
       childValue = model;
@@ -86,7 +86,7 @@ export class RXModel{
     this.defaultValue = childValue;
     this.value = childValue;
     this.childrenMap.forEach(childStore=>{
-      childStore.setModel(childValue);
+      childStore.initWithModel(childValue);
     })
   }
 

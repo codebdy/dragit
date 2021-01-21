@@ -10,7 +10,7 @@ export const useFieldStore = (node:RXNode<IMeta>) => {
   useEffect(()=>{
     if(node && fieldName){
       const rxModel = new RXModel(node, fieldName);
-      rxModel.setModel(modelStore?.value);
+      rxModel.initWithModel(modelStore?.value);
       rxModel.setLabel(`Field : ${fieldName}`);
       modelStore?.setChild(fieldName, rxModel);
     }

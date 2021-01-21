@@ -63,7 +63,7 @@ export const Page = observer((
           submitNode?.updateDefaultValue();
           if(mutation?.refreshNode){
             const refreshNode = modelStore?.getModelNode(mutation?.refreshNode)
-            refreshNode?.setModel({[mutation?.refreshNode]:data[mutation.name]})             
+            refreshNode?.initWithModel({[mutation?.refreshNode]:data[mutation.name]})             
             refreshNode?.setLoading(false);          
           }
 
