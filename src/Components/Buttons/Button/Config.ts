@@ -22,8 +22,8 @@ export class ButtonConfig extends MetaConfig{
       ...marginConfigs,
       {
         name:'color',
-        label:'color',
-        input:'select',
+        labelKey:'color',
+        propType:'select',
         items:[
           {
             value:'default',
@@ -45,8 +45,8 @@ export class ButtonConfig extends MetaConfig{
       },
       {
         name:'size',
-        label:'size',
-        input:'select',
+        labelKey:'size',
+        propType:'select',
         items:[
           {
             value:'large',
@@ -68,8 +68,8 @@ export class ButtonConfig extends MetaConfig{
       },
       {
         name:'variant',
-        label:'variant',
-        input:'select',
+        labelKey:'variant',
+        propType:'select',
         items:[
           {
             value:'contained',
@@ -87,28 +87,31 @@ export class ButtonConfig extends MetaConfig{
       },
       {
         name:'disabled',
-        label:'disabled',
-        input:'boolean',
+        labelKey:'disabled',
+        propType:'boolean',
       },
       {
         name:'disableElevation',
-        label:'disableElevation',
-        input:'boolean',
+        labelKey:'disableElevation',
+        propType:'boolean',
       },
       {
         name:'disableRipple',
-        label:'disableRipple',
-        input:'boolean',
+        labelKey:'disableRipple',
+        propType:'boolean',
       },
       {
         name:'fullWidth',
-        label:'fullWidth',
-        input:'boolean',
+        labelKey:'fullWidth',
+        propType:'boolean',
       },
       {
         name:'rxText',
-        label:'text',
-        input:'string',
+        labelKey:'text',
+        propType:'string',
+        props:{
+          xs:12,
+        }
       },
 
     ]

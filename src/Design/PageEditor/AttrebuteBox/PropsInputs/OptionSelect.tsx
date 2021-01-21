@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Select, MenuItem, FormControl, InputLabel} from '@material-ui/core';
+import { Select, MenuItem, FormControl, InputLabel, Grid} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 import intl from "react-intl-universal";
 
@@ -12,8 +12,7 @@ export interface SelectItem{
 export default function OptionSelect(props:PropsInputProps&{
   items?:Array<{value:string, label:string}>,
 }){
-  //const classes = useStyles();
-  const {label, value, onChange, items} = props;
+  const {label, value, onChange, items, xs=6, ...rest} = props;
   const [inputValue, setInputValue] = React.useState(value);
 
   useEffect(()=>{
@@ -25,26 +24,28 @@ export default function OptionSelect(props:PropsInputProps&{
     onChange(event.target.value || undefined);
   };  
   return (
-    <FormControl variant="outlined" size="small" fullWidth>
-      <InputLabel>{label}</InputLabel>
-      <Select
-        value={inputValue || ''}
-        onChange={handleChange}
-        label = {label}
-      >
-      <MenuItem value="">
-        <em>None</em>
-      </MenuItem>
-      {
-        items?.map((item:SelectItem)=>{
-          return (
-            <MenuItem key={item.value} value={item.value}>
-              {item.localLabelKey ? intl.get(item.localLabelKey) : item.label}
-            </MenuItem>
-          )
-        })
-      }
-    </Select>
-    </FormControl>
+    <Grid item xs = {xs}>
+      <FormControl variant="outlined" size="small" fullWidth {...rest}>
+        <InputLabel>{label}</InputLabel>
+        <Select
+          value={inputValue || ''}
+          onChange={handleChange}
+          label = {label}
+        >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        {
+          items?.map((item:SelectItem)=>{
+            return (
+              <MenuItem key={item.value} value={item.value}>
+                {item.localLabelKey ? intl.get(item.localLabelKey) : item.label}
+              </MenuItem>
+            )
+          })
+        }
+      </Select>
+      </FormControl>
+    </Grid>
   )
 }

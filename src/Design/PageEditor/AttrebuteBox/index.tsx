@@ -70,7 +70,6 @@ export const AttributeBox = observer(()=>{
     if(meta){
       meta.props = {...meta.props};
       meta.props[key] = value;
-      console.log(meta);
       node?.setMeta({...meta});      
     }
   };
@@ -92,6 +91,8 @@ export const AttributeBox = observer(()=>{
     setAuths(auths);
   }
 
+  const props = node?.meta.props || {};
+
   return (
     <div className={classes.root}>
       {node&&
@@ -112,11 +113,14 @@ export const AttributeBox = observer(()=>{
                 {
                   metaConfig?.getPropConfigs().map((config:IPropConfig, index)=>{
                     const PropInput = config.propType ? propsInputs[config.propType] : undefined;
+                    const label = config.label || intl.get(config.labelKey||'');
                     console.assert(PropInput, '属性编辑器不存在,属性propType：' + config.propType);
                     return(
                       PropInput && 
                       <PropInput 
                         key={index + '-' + config.name} 
+                        label = {label}
+                        value = {props[config.name]}
                         onChange={(value: any) => handlePropChange(config.name, value)} 
                         {...config.props} 
                       />
