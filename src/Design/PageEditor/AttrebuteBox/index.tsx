@@ -118,7 +118,7 @@ export const AttributeBox = observer(()=>{
                   metaConfig?.getPropConfigs().map((config:IPropConfig, index)=>{
                     const PropInput = config.propType ? propsInputs[config.propType] : undefined;
                     const label = config.label || intl.get(config.labelKey||'');
-                    console.assert(PropInput, '属性编辑器不存在,属性propType：' + config.propType);
+                    console.assert(PropInput, `Config editor not exist,Meta:${node?.meta.name}, prop:${config.name}, propType：${config.propType}`);
                     return(
                       PropInput && 
                       <PropInput 
