@@ -21,7 +21,7 @@ const TexBox = React.forwardRef((props:any, ref:any)=>{
       ref={ref}
       type = {type}
       onChange = {handleOnchange}
-      value = {value||''}
+      value = {value === undefined ? '' : value}
       {...rest} 
       InputLabelProps = {
         shrinkLabel ? 
