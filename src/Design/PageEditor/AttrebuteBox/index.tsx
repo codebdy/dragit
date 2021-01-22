@@ -17,7 +17,6 @@ import { useDesign } from '../useDesign';
 import { toJS } from 'mobx';
 import { propsInputs } from './PropsInputs';
 import { cloneObject } from 'Utils/cloneObject';
-import { ChangeMetaCommand } from '../Commands/ChangeMetaCommand';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,7 +56,6 @@ export const AttributeBox = observer(()=>{
   const classes = useStyles();
   const {editorStore} = useDesign();
   const node = editorStore?.selectedNode;  
-  const [field, setField] = React.useState(node?.meta.props?.field);
   const [metaConfig, setMetaConfig] = React.useState<IMetaConfig>();
   const [validateRule, setValidateRule] = React.useState<IValidateRule>();
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
@@ -67,22 +65,14 @@ export const AttributeBox = observer(()=>{
   },[node]);
 
   const handlePropChange = (key:string, value:any) => {
-    const meta = cloneObject(toJS(node?.meta));
-    if(meta){
-      meta.props = {...meta.props};
-      meta.props[key] = value;
-      if(node){
-        editorStore?.excuteCommand(new ChangeMetaCommand(node, meta));
-      }
-
-    }
+    const props = cloneObject(toJS(node?.meta.props)||{});
+    props[key] = value;  
+    editorStore?.updateSelecteMeta('props', props);
   };
 
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let newField = event.target.value as string;
-    //node?.updateProp('field', newField);
-    //onPropChange('field', newField);
-    setField(newField);
+    editorStore?.updateSelecteMeta('field', newField);
   }
 
   const handleRuleChange = (rule:IValidateRule)=>{
@@ -131,7 +121,6 @@ export const AttributeBox = observer(()=>{
                     )
                   })
                 }
-
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -147,7 +136,7 @@ export const AttributeBox = observer(()=>{
                   <TextField
                     size="small" 
                     variant = "outlined" 
-                    label={intl.get("field")} value={field || ''}
+                    label={intl.get("field")} value={node?.meta.field === undefined ? '' : node?.meta.field }
                     onChange={handleFieldChange}>
                   </TextField>
                 
@@ -175,7 +164,9 @@ export const AttributeBox = observer(()=>{
                 <Typography className={classes.heading}>{intl.get('action')}</Typography>
               </AccordionSummary>
               <AccordionDetails key={node.id + '-action'} className={classes.pannelDetail}>
-                <AttributeBoxActionSection node={node} />
+                <Grid container spacing={2}>
+                  <AttributeBoxActionSection />
+                </Grid>
               </AccordionDetails>            
             </Accordion>
           }
@@ -186,7 +177,7 @@ export const AttributeBox = observer(()=>{
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
             </AccordionSummary>
             <AccordionDetails className={classes.pannelDetail}>
-              <MultiSelectBox label={'权限'} 
+              <MultiSelectBox label={intl.get('authority')} 
                 variant="outlined" 
                 size="small"
                 //dataApi = {API_GET_AUTHS}

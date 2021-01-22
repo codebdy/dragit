@@ -2,7 +2,9 @@ import { IMeta } from "Base/RXNode/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
 import { CursorPosition, IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
+import { cloneObject } from "Utils/cloneObject";
+import { ChangeMetaCommand } from "./Commands/ChangeMetaCommand";
 import { ClearCommand } from "./Commands/ClearCommand";
 import { ICommand } from "./Commands/ICommand";
 import { MoveAfterCommand } from "./Commands/MoveAfterCommand";
@@ -151,6 +153,14 @@ export class PageEditorStore {
 
   setIsDirty(isDirty:boolean){
     this.isDirty = isDirty;
+  }
+
+  updateSelecteMeta(field:string, value:any){
+    const meta = cloneObject(toJS(this.selectedNode?.meta));
+    if(meta && this.selectedNode){
+      meta[field] =value;
+        this.excuteCommand(new ChangeMetaCommand(this.selectedNode, meta));
+    }
   }
 
 }
