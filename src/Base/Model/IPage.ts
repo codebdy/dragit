@@ -12,8 +12,6 @@ export interface IQuery{
 export interface IPageSchema{
   layout?:Array<any>,
   auths?:string[],
-  isFormPage?:boolean,
-  refreshAppInfo?:boolean,
   query?:string, 
 }
 
@@ -23,5 +21,5 @@ export interface IPage{
   maxWidth?: MaxWidth;
   inTabIndex?:boolean;
   width?:number;
-  schema?:IPageSchema,  
+  schema?:IPageSchema,
 }

@@ -8,10 +8,12 @@ import { cloneObject } from "Utils/cloneObject";
 import { ChangeMetaCommand } from "./Commands/ChangeMetaCommand";
 import { ClearCommand } from "./Commands/ClearCommand";
 import { ICommand } from "./Commands/ICommand";
+import { IPageUpdate } from "./Commands/IPageUpdate";
 import { MoveAfterCommand } from "./Commands/MoveAfterCommand";
 import { MoveBeforeCommand } from "./Commands/MoveBeforeCommand";
 import { MoveInCommand } from "./Commands/MoveInCommand";
 import { MoveInTopCommand } from "./Commands/MoveInTopCommand";
+import { UpdatePageSchemaCommand } from "./Commands/UpdatePageSchemaCommand";
 
 function makeCanvas(){
   return RXNode.make<IMeta>(
@@ -21,7 +23,7 @@ function makeCanvas(){
   )
 }
 
-export class PageEditorStore {
+export class PageEditorStore implements IPageUpdate{
   page?:IPage;
   showOutline:boolean = true;
   showPaddingX:boolean = true;
@@ -174,6 +176,18 @@ export class PageEditorStore {
       meta[field] =value;
         this.excuteCommand(new ChangeMetaCommand(this.selectedNode, meta));
     }
+  }
+
+  setPage(page:IPage){
+    this.page = page;
+  }
+
+  updatePageQuery(query?:string){
+    this.excuteCommand(new UpdatePageSchemaCommand(this, 'query', query));
+  }
+
+  updatePageAuths(auths?:Array<string>){
+    this.excuteCommand(new UpdatePageSchemaCommand(this, 'auths', auths));
   }
 
 }

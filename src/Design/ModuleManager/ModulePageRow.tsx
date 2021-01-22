@@ -38,8 +38,8 @@ export default function ModulePageRow(
   }
 
   const handleChangeIsFormPage = (event: React.ChangeEvent<HTMLInputElement>)=>{
-    let isFormPage = page.schema?.isFormPage;
-    onChangePage({...page, schema:{...page.schema, isFormPage:!isFormPage}});
+    //let isFormPage = page.schema?.isFormPage;
+    //onChangePage({...page, schema:{...page.schema, isFormPage:!isFormPage}});
   }
 
   return (
@@ -90,7 +90,7 @@ export default function ModulePageRow(
     </TableCell>
     <TableCell>
       <Checkbox
-        checked = {page.schema?.isFormPage || false}
+        //checked = {page.schema?.isFormPage || false}
         color="primary"
         inputProps={{ 'aria-label': 'Is form page' }}
         onChange = {handleChangeIsFormPage}
