@@ -132,14 +132,12 @@ export const AttributeBox = observer(()=>{
                 <Typography className={classes.heading}>{intl.get('data')}</Typography>
               </AccordionSummary>
               <AccordionDetails  key={node.id + '-data'} className={classes.pannelDetail}>
-               
-                  <TextField
-                    size="small" 
-                    variant = "outlined" 
-                    label={intl.get("field")} value={node?.meta.field === undefined ? '' : node?.meta.field }
-                    onChange={handleFieldChange}>
-                  </TextField>
-                
+                <TextField
+                  size="small" 
+                  variant = "outlined" 
+                  label={intl.get("field")} value={node?.meta.field === undefined ? '' : node?.meta.field }
+                  onChange={handleFieldChange}>
+                </TextField>
               </AccordionDetails>            
             </Accordion>
           }

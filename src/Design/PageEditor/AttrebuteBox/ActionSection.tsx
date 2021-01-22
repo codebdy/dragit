@@ -7,13 +7,14 @@ import { useDesign } from '../useDesign';
 import { cloneObject } from 'Utils/cloneObject';
 import { toJS } from 'mobx';
 import { IPageMutation } from 'Base/Model/IPageMutation';
+import { PageAction } from 'Base/PageUtils/PageAction';
 
 const AttributeBoxActionSection = observer(()=>{
   const {editorStore} = useDesign();
   const node = editorStore?.selectedNode;  
-  const action = node?.meta.props?.onClick||{};
+  const action:PageAction = node?.meta.props?.onClick||{};
 
-  const updatAction = (field:string, value:string|IPageMutation|boolean)=>{
+  const updatAction = (field:string, value:string|IPageMutation|boolean|Array<string>)=>{
     const newAction = cloneObject(action);
     const props = cloneObject(toJS(node?.meta.props)||{})
     newAction[field] = value;
@@ -30,6 +31,11 @@ const AttributeBoxActionSection = observer(()=>{
     const goback = event.target.checked;
     updatAction('goback', goback);
   }
+
+  const handleResetNodesChange =  (event: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = (event.target.value as string) || '';
+    updatAction('resetNodes', newValue.replace('，',',').split(','));
+  }; 
 
   const handleModuleSlugChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //let newValue = (event.target.value as string);
@@ -110,14 +116,30 @@ const AttributeBoxActionSection = observer(()=>{
             <TextField fullWidth
               variant="outlined" 
               size = "small"
-              label = {intl.get("action-slug")}
-              value={action.slug||''} 
+              //label = {intl.get("action-slug")}
+              //value={action.slug||''} 
               //onChange={handleSlugChange}
+            ></TextField>
+          </Grid>
+        </Fragment>
+      }
+      {
+        RESET_ACTION === action.name &&
+        <Fragment>
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("reset-nodes")}
+              value={action.resetNodes?.join(',')||''} 
+              onChange={handleResetNodesChange}
+              helperText = {intl.get("split-by-comma")}
             ></TextField>
           </Grid>
         </Fragment>
 
       }
+
    </Fragment>
   )
 })

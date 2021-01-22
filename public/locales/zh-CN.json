@@ -77,7 +77,8 @@
     "go-back":"返回",
     "sumbit":"提交",
     "sumbit-and-close":"提交并关闭",
-    "action-slug":"动作标识",
+    "reset-nodes":"重置节点",
+    "split-by-comma":"逗号分隔",
 
     "column-editor":"表格列编辑器",
     "field":"字段",

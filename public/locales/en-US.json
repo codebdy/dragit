@@ -77,7 +77,8 @@
     "go-back":"Go Back",
     "sumbit":"Submit",
     "sumbit-and-close":"Submit and close",
-    "action-slug":"Action Slug",
+    "reset-nodes":"Reset nodes",
+    "split-by-comma":"Split by comma",
 
     "column-editor":"Table Cell Editor",
     "field":"Field",
