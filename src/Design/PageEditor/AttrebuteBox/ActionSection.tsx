@@ -1,41 +1,47 @@
 import React, { Fragment } from 'react';
-import { FormControl,  Grid,  InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
-import { AttributeRow } from './AttributeRow';
+import { FormControl,  FormControlLabel,  Grid,  InputLabel, MenuItem, Select, Switch, TextField } from '@material-ui/core';
 import { PageAction } from 'Base/PageUtils/PageAction';
-import { GO_BACK_ACTION, OPEN_PAGE_ACTION, SUBMIT_MUTATION, SUBMIT_MUTATION_AND_CLOSE } from "Base/PageUtils/ACTIONs";
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
 import { cloneObject } from 'Utils/cloneObject';
 import { toJS } from 'mobx';
+import { IPageMutation } from 'Base/Model/IPageMutation';
 
 const AttributeBoxActionSection = observer(()=>{
   const {editorStore} = useDesign();
   const node = editorStore?.selectedNode;  
   const action = node?.meta.props?.onClick||{};
 
-  const updatAction = (action:PageAction)=>{
+  const updatAction = (field:string, value:string|IPageMutation|boolean)=>{
+    const newAction = cloneObject(action);
     const props = cloneObject(toJS(node?.meta.props)||{})
-    props.onClick = action;
+    newAction[field] = value;
+    props.onClick = newAction;
     editorStore?.updateSelecteMeta('props', props);
   }
 
   const handleActionChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const actionName = event.target.value as string;
-    const newAction =  {...action, name: actionName};
-    updatAction(newAction);
+    updatAction('name', actionName);
   }
 
-  const handleModuleSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    let newValue = (event.target.value as string);
-    let newAction:PageAction =  {...action, page:{...action.page, moduleSlug:newValue}};
+  const handleGoBack = (event: React.ChangeEvent<HTMLInputElement>)=>{
+    const goback = event.target.checked;
+    updatAction('goback', goback);
+  }
+
+  const handleModuleSlugChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //let newValue = (event.target.value as string);
+    //let newAction:PageAction =  {...action, page:{...action.page, moduleSlug:newValue}};
     //setAction(newAction);
     //node.updateProp('onClick', newAction)
   }; 
 
-  const handlePageSlugChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    let newValue = (event.target.value as string);
-    let newAction:PageAction =  {...action, page:{...action.page, pageSlug:newValue}};
+  const handlePageSlugChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //let newValue = (event.target.value as string);
+    //let newAction:PageAction =  {...action, page:{...action.page, pageSlug:newValue}};
     //setAction(newAction);
     //node.updateProp('onClick', newAction)
   }; 
@@ -55,7 +61,7 @@ const AttributeBoxActionSection = observer(()=>{
               <em>None</em>
             </MenuItem>
             <MenuItem value={SUBMIT_MUTATION}>{intl.get("sumbit")}</MenuItem>
-            <MenuItem value={SUBMIT_MUTATION_AND_CLOSE}>{intl.get("sumbit-and-close")}</MenuItem>
+            <MenuItem value={RESET_ACTION}>{intl.get("reset")}</MenuItem>
             <MenuItem value={GO_BACK_ACTION}>{intl.get("go-back")}</MenuItem>
             <MenuItem value={OPEN_PAGE_ACTION}>{intl.get("jump-to")}</MenuItem>
           </Select>
@@ -64,7 +70,7 @@ const AttributeBoxActionSection = observer(()=>{
       {
         OPEN_PAGE_ACTION === action.name &&
         <Fragment>
-          <AttributeRow>
+          <Grid item xs={12}>
             <TextField fullWidth
               variant="outlined" 
               size = "small"
@@ -72,8 +78,8 @@ const AttributeBoxActionSection = observer(()=>{
               value={action.page?.moduleSlug} 
               onChange={handleModuleSlugChange}
             ></TextField>
-          </AttributeRow>
-          <AttributeRow>
+          </Grid>
+          <Grid item xs={12}>
             <TextField fullWidth
               variant="outlined" 
               size = "small"
@@ -81,36 +87,36 @@ const AttributeBoxActionSection = observer(()=>{
               value = {action.page?.pageSlug} 
               onChange = {handlePageSlugChange}
             ></TextField>
-          </AttributeRow>
+          </Grid>
         </Fragment>
       }
       {
-        /*POST_DATA_ACTION === action.name &&
+        SUBMIT_MUTATION === action.name &&
         <Fragment>
-        <AttributeRow>
-          <TextField fullWidth
-            variant="outlined" 
-            size = "small"
-            label = {intl.get("action-slug")}
-            value={action.slug||''} 
-            onChange={handleSlugChange}
-          ></TextField>
-        </AttributeRow>
-        <AttributeRow>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={action.needGoBack||false}
-                onChange={handleNeedGoBack}
-                color="primary"
-                //size="small" 
-              />
-            }
-            style={{margin:'2px'}}
-            label={intl.get("finished-go-back")}
-          />     
-        </AttributeRow>
-        </Fragment>*/
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={action.goback||false}
+                  onChange={handleGoBack}
+                  color="primary"
+                  //size="small" 
+                />
+              }
+              style={{margin:'2px'}}
+              label={intl.get("finished-go-back")}
+            />     
+          </Grid>
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("action-slug")}
+              value={action.slug||''} 
+              //onChange={handleSlugChange}
+            ></TextField>
+          </Grid>
+        </Fragment>
 
       }
    </Fragment>
