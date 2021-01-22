@@ -64,7 +64,6 @@ export const Workspace = observer(()=>{
 
   const module = appStore.module;
 
-
   return (
     <div className = {classes.root}>
       {
