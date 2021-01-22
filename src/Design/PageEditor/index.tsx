@@ -8,11 +8,7 @@ import Spacer from 'Components/Common/Spacer';
 import MdiIcon from 'Components/Common/MdiIcon';
 import DesignerLayout from 'Design/Layout';
 import LeftContent from './LeftContent';
-import { IPageSchema } from 'Base/Model/IPage';
 import PageSkeleton from 'AdminBoard/Workspace/Common/ModuleSkeleton';
-import { IMeta } from 'Base/RXNode/IMeta';
-import { RXNode } from 'Base/RXNode/RXNode';
-import { IToolboxItem } from './Toolbox/IToolboxItem';
 import { cloneObject } from '../../Utils/cloneObject';
 import SubmitButton from 'Components/Common/SubmitButton';
 import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
@@ -53,14 +49,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function makeCanvas(){
-  return RXNode.make<IMeta>(
-    {
-      name:'Canvas'
-    }
-  )
-}
-
 export const PageEditor = observer((
   props:{
     pageId:ID,
@@ -69,12 +57,10 @@ export const PageEditor = observer((
 ) =>{
   const {pageId, onClose} = props;
   const classes = useStyles();
-  const [editorStore] = useState(new PageEditorStore());
+  const [editorStore, setEditorStore] = useState<PageEditorStore>();
   const {data, loading, error} = useQuery(GET_PAGE, {variables:{id:pageId}});
   const [savePage, {error:saveError, loading:saving}] = useMutation(SAVE_PAGE);
 
-  const [pageSchema, setPageSchema] = useState<IPageSchema|undefined>(/*pageMeta?.schema*/);
-  const [metas, setMetas] = useState<Array<IMeta>>([])
   const appStore = useAppStore();
 
   useShowAppoloError(error||saveError);
@@ -83,31 +69,20 @@ export const PageEditor = observer((
   useAuthCheck(AUTH_CUSTOMIZE);
 
   useEffect(() => {
-    if(data){
-      //setPage(data?.page);
-      setPageSchema(cloneObject(data?.page?.schema));
-      //相当于复制一个Json副本，不保存的话直接扔掉
-      setMetas(cloneObject(data?.page?.schema?.layout || []));      
-    }
+    //复制一个副本
+    setEditorStore(new PageEditorStore( cloneObject(data?.page)))
 
   },[data]);
  
-  useEffect(()=>{
-    let newCanvas = makeCanvas();
-    newCanvas.parse(metas);
-    editorStore.setCanvas(newCanvas);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[metas])
-
   const handleCancel = () => {
-    if(editorStore.isDirty){
+    if(editorStore?.isDirty){
       appStore.confirmAction(intl.get('changing-not-save-message'), ()=>{
-        editorStore.reset();
+        editorStore?.reset();
         onClose();
       })
     }
     else{
-      editorStore.reset();
+      editorStore?.reset();
       onClose();
     }
   };
@@ -116,50 +91,28 @@ export const PageEditor = observer((
     savePage({variables:{page:{
       id:pageId,
       schema:{
-        ...pageSchema,
-        layout:editorStore.canvas?.getChildrenMetas(),
+        ...editorStore?.page?.schema,
+        layout:editorStore?.canvas?.getChildrenMetas(),
       },
     }
     }})
-    editorStore.setIsDirty(false);    
+    editorStore?.setIsDirty(false);    
   };
 
   const handleScroll = ()=>{
-    editorStore.refreshToolbarAndLabel();
-  }
-
-  const handleStartDragMetas = (item:IToolboxItem)=>{
-    editorStore.setDraggedToolboxItem(item);
-    editorStore.setSelectedNode(undefined);
-    document.body.classList.add('can-not-be-selected');
-  }
-
-  const handlePropChange = (propName:string, value:any)=>{
-    //if(canvasStore.selectedNode){
-    //  backupToUndoList(canvasStore.selectedNode?.id);        
-    //  canvasStore.selectedNode.meta.props = canvasStore.selectedNode.meta.props || {};
-    //  canvasStore.selectedNode.meta.props[propName] = value;
-    //  canvasStore.setSelectedNode(canvasStore.selectedNode);
-    //  canvasStore.setRedoList([]);
-    //  canvasStore.refreshNode(canvasStore.selectedNode?.id);
-    //}
-  }
-
-  const handlPageChange = (page:IPageSchema)=>{
-    //backupToUndoList(undefined);
-    //setPageSchema(page);
+    editorStore?.refreshToolbarAndLabel();
   }
 
   const handleUndo = ()=>{
-    editorStore.undo();
+    editorStore?.undo();
   }
 
   const handleRedo = ()=>{
-    editorStore.redo();
+    editorStore?.redo();
   }
 
   const handleClear = ()=>{
-    editorStore.clear();
+    editorStore?.clear();
   }
 
    return (
@@ -167,45 +120,39 @@ export const PageEditor = observer((
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
-            <LeftContent 
-              pageSchema={pageSchema} 
-              selectedNode = {editorStore.selectedNode}
-              onPropChange = {handlePropChange}
-              onSettingsChange={handlPageChange}
-              onStartDragToolboxItem = {handleStartDragMetas}
-            />
+            <LeftContent />
           }
 
           toolbar = {
             <Fragment>
               <IconButton 
                 onClick = {()=>{
-                  editorStore.setShowOutline(!editorStore.showOutline)
+                  editorStore?.setShowOutline(!editorStore?.showOutline)
                 }}
               >
-                <MdiIcon iconClass="mdi-border-none-variant" color={editorStore.showOutline ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-border-none-variant" color={editorStore?.showOutline ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  editorStore.setShowPaddingX(!editorStore.showPaddingX)
+                  editorStore?.setShowPaddingX(!editorStore?.showPaddingX)
                 }}
               >
-                <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={editorStore.showPaddingX ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-arrow-expand-horizontal" color={editorStore?.showPaddingX ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton
                 onClick = {()=>{
-                  editorStore.setShowPaddingY(!editorStore.showPaddingY)
+                  editorStore?.setShowPaddingY(!editorStore?.showPaddingY)
                 }}
                 >
-                <MdiIcon iconClass="mdi-arrow-expand-vertical" color={editorStore.showPaddingY ? theme.palette.primary.main : ''}/>
+                <MdiIcon iconClass="mdi-arrow-expand-vertical" color={editorStore?.showPaddingY ? theme.palette.primary.main : ''}/>
               </IconButton>
               <IconButton 
-                disabled = {editorStore.undoList.length === 0}
+                disabled = {editorStore?.undoList.length === 0}
                 onClick = {handleUndo}
               >
                 <MdiIcon iconClass="mdi-undo"/>
               </IconButton>
-              <IconButton disabled = {editorStore.redoList.length === 0}
+              <IconButton disabled = {editorStore?.redoList.length === 0}
                 onClick = {handleRedo}
               >
                 <MdiIcon iconClass="mdi-redo"/>
@@ -223,7 +170,7 @@ export const PageEditor = observer((
                 size="large"
                 onClick={handleSave} 
                 submitting={saving}
-                disabled = {!editorStore.isDirty}
+                disabled = {!editorStore?.isDirty}
               >
                 {intl.get('save')}
               </SubmitButton>

@@ -13,7 +13,16 @@ import { MoveBeforeCommand } from "./Commands/MoveBeforeCommand";
 import { MoveInCommand } from "./Commands/MoveInCommand";
 import { MoveInTopCommand } from "./Commands/MoveInTopCommand";
 
+function makeCanvas(){
+  return RXNode.make<IMeta>(
+    {
+      name:'Canvas'
+    }
+  )
+}
+
 export class PageEditorStore {
+  page?:IPage;
   showOutline:boolean = true;
   showPaddingX:boolean = true;
   showPaddingY:boolean = true;
@@ -32,7 +41,14 @@ export class PageEditorStore {
   isDirty: boolean = false;
 
   constructor(page?:IPage) {
+    this.page = page;
     makeAutoObservable(this);
+    this.parsePage();
+  }
+
+  private parsePage(){
+    this.canvas = makeCanvas();
+    this.canvas.parse(this.page?.schema?.layout);
   }
 
   setShowOutline(showOutline:boolean){
@@ -57,10 +73,6 @@ export class PageEditorStore {
 
   setDraggedNode(draggedNode?:RXNode<IMeta>){
     this.draggedNode = draggedNode;
-  }
-
-  setCanvas(canvas?:RXNode<IMeta>){
-    this.canvas = canvas;
   }
 
   setDraggedToolboxItem(draggedToolboxItem?:IToolboxItem){

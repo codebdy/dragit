@@ -28,12 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function Toolbox(
-  props:{
-    onStartDragToolboxItem: (metas:IToolboxItem)=>void,
-  }
-) {
-  const {onStartDragToolboxItem} = props;
+export default function Toolbox() {
   const classes = useStyles();
   const [root, setRoot] = useState<RXNode<IToolboxItem>>();
   
@@ -61,7 +56,6 @@ export default function Toolbox(
               <TreeNode 
                 key={node.id + ''} 
                 node={node}
-                onStartDragToolboxItem = {onStartDragToolboxItem}
               />
             )
           })

@@ -7,6 +7,7 @@ import intl from "react-intl-universal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import MdiIcon from 'Components/Common/MdiIcon';
 import classNames from "classnames";
+import { useDesign } from "../useDesign";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,18 +27,20 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function TreeNode(
   props:{
     node: RXNode<IToolboxItem>,
-    onStartDragToolboxItem: (item:IToolboxItem)=>void,
   }
 ) {
-  const {node, onStartDragToolboxItem} = props;
+  const {node} = props;
   const classes = useStyles();
+  const {editorStore} = useDesign();
 
   const isLeaf =  node.children.length === 0 && node.meta.meta;
   const labelText = node?.meta?.title || (node?.meta?.titleKey && intl.get(node?.meta?.titleKey));
 
   const handleMouseDown = ()=>{
     if(node?.meta.meta){
-      onStartDragToolboxItem(node?.meta);      
+      editorStore?.setDraggedToolboxItem(node?.meta);
+      editorStore?.setSelectedNode(undefined);
+      document.body.classList.add('can-not-be-selected');
     }
   }
 
@@ -69,7 +72,6 @@ export default function TreeNode(
             <TreeNode 
               key={child.id} 
               node = {child}
-              onStartDragToolboxItem = {onStartDragToolboxItem}
             />
           )
         }))
