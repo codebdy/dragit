@@ -1,3 +1,4 @@
+import { IPage } from "Base/Model/IPage";
 import { IMeta } from "Base/RXNode/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
 import { CursorPosition, IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
@@ -30,7 +31,7 @@ export class PageEditorStore {
   refreshToolbarAndLabelFlag:number = 0;
   isDirty: boolean = false;
 
-  constructor() {
+  constructor(page?:IPage) {
     makeAutoObservable(this);
   }
 

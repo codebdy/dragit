@@ -6,18 +6,13 @@ import intl from 'react-intl-universal';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import Spacer from 'Components/Common/Spacer';
 import MdiIcon from 'Components/Common/MdiIcon';
-import MouseFollower from './Core/MouseFollower';
 import DesignerLayout from 'Design/Layout';
 import LeftContent from './LeftContent';
 import { IPageSchema } from 'Base/Model/IPage';
 import PageSkeleton from 'AdminBoard/Workspace/Common/ModuleSkeleton';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { ComponentView } from './Core/ComponentView';
 import { RXNode } from 'Base/RXNode/RXNode';
-import { NodeToolbar } from './Core/NodeToolbar';
 import { IToolboxItem } from './Toolbox/IToolboxItem';
-import { DragCusor } from './Core/DragCusor';
-import { ComponentLabel } from './Core/ComponentLabel';
 import { cloneObject } from '../../Utils/cloneObject';
 import SubmitButton from 'Components/Common/SubmitButton';
 import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
@@ -30,8 +25,7 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { PageEditorStore } from './PageEditorStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { PageEditorStoreProvider } from './useDesign';
-import { RemoveCommand } from './Commands/RemoveCommand';
-import { DuplicateCommand } from './Commands/DuplicateCommand';
+import { PageEditorCore } from './PageEditorCore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -87,32 +81,6 @@ export const PageEditor = observer((
 
   const theme = useTheme(); 
   useAuthCheck(AUTH_CUSTOMIZE);
-
-  const handleMouseUp = ()=>{
-    if(editorStore.dragOverParam && (editorStore.draggedToolboxItem || editorStore.draggedNode)){
-      let targetNode = editorStore.dragOverParam?.targetNode;
-      let dragNode = editorStore.draggedNode;
-      if(!dragNode && editorStore.draggedToolboxItem?.meta){
-        dragNode = RXNode.make<IMeta>(cloneObject(editorStore.draggedToolboxItem?.meta));
-      }
-      if(dragNode && targetNode) {
-        editorStore?.operateNode(dragNode, targetNode, editorStore.dragOverParam.position);
-      }
-    }
-    editorStore.setDragOverParam(undefined);
-    editorStore.setDraggedNode(undefined);
-    editorStore.setDraggedToolboxItem(undefined);
-    document.body.classList.remove('can-not-be-selected');
-  }
-
-  useEffect(()=>{
-    document.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      document.removeEventListener('mouseup', handleMouseUp)
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
-  
 
   useEffect(() => {
     if(data){
@@ -194,30 +162,6 @@ export const PageEditor = observer((
     editorStore.clear();
   }
 
-  
-  const handleBeginDrag = ()=>{
-    editorStore.setDraggedNode(editorStore.selectedNode);
-    editorStore.setSelectedNode(undefined);
-    document.body.classList.add('can-not-be-selected')
-  }
-
-  const handleRemove = ()=>{
-    if(editorStore.selectedNode){
-      editorStore.excuteCommand(new RemoveCommand(editorStore.selectedNode))
-    }
-  }
-
-  const handleDupliate = ()=>{
-    if(editorStore.selectedNode){
-      editorStore.excuteCommand(new DuplicateCommand(editorStore.selectedNode))
-    }
-  }
-
-  const handleSelectParent = ()=>{
-    editorStore.setSelectedNode(editorStore.selectedNode?.parent);
-  }
-
-  let draggedLabel = editorStore.draggedToolboxItem ?editorStore.draggedToolboxItem?.title || intl.get(editorStore.draggedToolboxItem?.titleKey||'') : editorStore.draggedNode?.meta.name;
    return (
     <PageEditorStoreProvider value = {editorStore}>
       <Backdrop className={classes.backdrop} open={true}>        
@@ -288,47 +232,12 @@ export const PageEditor = observer((
         >
           {loading? <Container><PageSkeleton /></Container> :
             <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
-              {editorStore.canvas&&
-                <ComponentView 
-                  node ={editorStore.canvas}
-                />
+              {editorStore&&
+                <PageEditorCore editorStore = {editorStore} />
               }
-              {
-                editorStore.activeNode &&
-                <ComponentLabel 
-                  node={editorStore.activeNode}
-                  followDom = {editorStore.activeNode.dom}
-                />
-              }              
-              {
-                editorStore.selectedNode &&
-                <Fragment>
-                  <ComponentLabel 
-                    node={editorStore.selectedNode}
-                    followDom = {editorStore.selectedDom}
-                  />
-                  <NodeToolbar 
-                    onBeginDrag = {handleBeginDrag}
-                    onRemove = {handleRemove}
-                    onSelectParent = {handleSelectParent}
-                    onDuplicate = {handleDupliate}
-                  />
-                </Fragment>
-              }
-
             </Scrollbar>
           }
         </DesignerLayout>
-        <Fragment>
-          {
-            (editorStore.draggedToolboxItem || editorStore.draggedNode) &&
-            <MouseFollower label={ draggedLabel || 'unknow'} />
-          }
-          {
-            (editorStore.draggedToolboxItem || editorStore.draggedNode) &&
-            <DragCusor/>
-          }
-        </Fragment>      
       </Backdrop>
     </PageEditorStoreProvider>
   );
