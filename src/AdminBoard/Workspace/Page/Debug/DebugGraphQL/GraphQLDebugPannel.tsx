@@ -80,7 +80,9 @@ export const GraphQLDebugPannel = observer(()=>{
     let variables = selected?.variables||{};
     if(selected?.mutation){
       const submitNode = modelStore?.getModelNode(selected?.mutation.submitNode)
-      variables = {[selected?.mutation.variableName]:submitNode?.toInputValue()}
+      if(selected?.mutation.variableName){
+        variables = {[selected?.mutation.variableName]:submitNode?.toInputValue()}
+      }
     }
     setVariablesStr(JSON.stringify(variables, null, 2)); 
   }

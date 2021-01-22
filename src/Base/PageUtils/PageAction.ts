@@ -11,7 +11,6 @@ export interface PageAction{
   id?:ID;
   //表格行命令使用
   value?:any;
-  goback?:boolean;
   page?:IPageJumper;
 }
 

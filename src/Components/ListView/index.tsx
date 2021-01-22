@@ -133,9 +133,10 @@ const ListView = observer(React.forwardRef((
       return;
     }
     listViewStore.setUpdatingSelects(field);
+    const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
     excuteUpdate({variables:{
       ids:listViewStore.selects,
-      [update.variableName]:{[field]:value},
+      ...varilabes,
     }})
   }
 
@@ -144,9 +145,10 @@ const ListView = observer(React.forwardRef((
       return;
     }
     listViewStore.setUpdating(id, field);
+    const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
     excuteUpdate({variables:{
       ids:[id],
-      [update.variableName]:{[field]:value},
+      ...varilabes,
     }})
   }
 

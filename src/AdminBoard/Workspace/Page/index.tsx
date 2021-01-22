@@ -58,7 +58,7 @@ export const Page = observer((
     gql`${createMutationGQL(mutation, modelStore)}`,
     {
       onCompleted:(data)=>{
-        if(mutation){
+        if(mutation && mutation.name){
           const submitNode = modelStore?.getModelNode(mutation.submitNode);
           submitNode?.updateDefaultValue();
           if(mutation?.refreshNode){
@@ -86,7 +86,8 @@ export const Page = observer((
       const submitNode = modelStore?.getModelNode(mutation.submitNode)
       const refreshNode = modelStore?.getModelNode(mutation?.refreshNode) 
       refreshNode?.setLoading(true);
-      excuteMutation({variables:{[mutation.variableName]:submitNode?.toInputValue()}}); 
+      const varialbles = mutation.variableName? {[mutation.variableName]:submitNode?.toInputValue()} : undefined;
+      excuteMutation({variables:varialbles}); 
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mutation])

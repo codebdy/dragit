@@ -29,13 +29,24 @@ const AttributeBoxActionSection = observer(()=>{
 
   const handleGoBack = (event: React.ChangeEvent<HTMLInputElement>)=>{
     const goback = event.target.checked;
-    updatAction('goback', goback);
+    const mutation:IPageMutation = cloneObject(action.mutation) ||{};
+    mutation.goback = goback;
+    updatAction('mutation', mutation);
   }
 
   const handleResetNodesChange =  (event: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue = (event.target.value as string) || '';
+    const newValue = (event.target.value as string) || '';
     updatAction('resetNodes', newValue.replace('，',',').split(','));
   }; 
+
+  const handleChangeMutation =  (event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>, 
+    key:'name'|'variableName'|'variableType'|'submitNode'|'refreshNode') => {
+    const newValue = (event.target.value as string) || '';
+    const mutation:IPageMutation = cloneObject(action.mutation) ||{};
+    mutation[key] = newValue;
+    updatAction('mutation', mutation);
+  }; 
+
 
   const handleModuleSlugChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //let newValue = (event.target.value as string);
@@ -102,13 +113,11 @@ const AttributeBoxActionSection = observer(()=>{
             <FormControlLabel
               control={
                 <Switch
-                  checked={action.goback||false}
+                  checked={action.mutation?.goback||false}
                   onChange={handleGoBack}
                   color="primary"
-                  //size="small" 
                 />
               }
-              style={{margin:'2px'}}
               label={intl.get("finished-go-back")}
             />     
           </Grid>
@@ -116,11 +125,50 @@ const AttributeBoxActionSection = observer(()=>{
             <TextField fullWidth
               variant="outlined" 
               size = "small"
-              //label = {intl.get("action-slug")}
-              //value={action.slug||''} 
-              //onChange={handleSlugChange}
+              label = {intl.get("mutaion-name")}
+              value={action.mutation?.name === undefined ? '' :action.mutation?.name} 
+              onChange={(event)=>handleChangeMutation(event, 'name')}
             ></TextField>
           </Grid>
+
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("variable-name")}
+              value={action.mutation?.variableName === undefined ? '': action.mutation?.variableName} 
+              onChange={(event)=>handleChangeMutation(event, 'variableName')}
+            ></TextField>
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("variable-type")}
+              value={action.mutation?.variableType === undefined ? '': action.mutation?.variableType} 
+              onChange={(event)=>handleChangeMutation(event, 'variableType')}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("submit-node")}
+              value={action.mutation?.submitNode === undefined ? '': action.mutation?.submitNode} 
+              onChange={(event)=>handleChangeMutation(event, 'submitNode')}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("refresh-node")}
+              value={action.mutation?.refreshNode === undefined ? '': action.mutation?.refreshNode} 
+              onChange={(event)=>handleChangeMutation(event, 'refreshNode')}
+            ></TextField>
+          </Grid>
+
         </Fragment>
       }
       {
