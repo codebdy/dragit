@@ -5,7 +5,7 @@ import leftImage from "assets/img/design-team.png";
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
-import { ADMIN_INDEX_URL, TOKEN_NAME } from 'Utils/consts';
+import { INDEX_URL, TOKEN_NAME } from 'Utils/consts';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
 import SubmitButton from 'Components/Common/SubmitButton';
 import { useAppStore, useThemeSettings } from 'Store/Helpers/useAppStore';
@@ -124,7 +124,7 @@ export default function Login(){
 
         appStore.setLoggedUser(data.login.user);
         appStore.setToken(data.login.token);
-        history.push(ADMIN_INDEX_URL)
+        history.push(INDEX_URL)
       }
 
     }

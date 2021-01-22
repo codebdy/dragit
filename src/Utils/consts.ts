@@ -1,6 +1,6 @@
 export const TOKEN_NAME="RxDragAuthToken";
 export const LOGIN_URL = "/login";
-export const ADMIN_INDEX_URL = "/admin";
+export const INDEX_URL = "/apps-index";
 export const JUMP_STYLE_MODULE = "jump-style-module";
 export const POPUP_STYLE_MODULE = "popup-style-module";
 export const TAB_STYLE_MODULE = "tab-style-module";
