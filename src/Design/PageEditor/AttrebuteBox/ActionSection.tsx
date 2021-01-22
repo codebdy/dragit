@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { FormControl,  FormControlLabel,  Grid,  InputLabel, MenuItem, Select, Switch, TextField } from '@material-ui/core';
-import { PageAction } from 'Base/PageUtils/PageAction';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
