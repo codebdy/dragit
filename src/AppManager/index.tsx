@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize:'20px',
     },
     titleArea:{
-      padding:theme.spacing(2,0),
+      padding:theme.spacing(4,0),
     },
     title:{
       fontSize:'1.6rem',
