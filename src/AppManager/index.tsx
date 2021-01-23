@@ -13,8 +13,8 @@ import intl from 'react-intl-universal';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_RX_APP_LIST } from 'Base/GraphQL/GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { Skeleton } from '@material-ui/lab';
 import AppsSkeleton from './AppsSkeleton';
+import { IRxApp } from 'Base/Model/IRxApp';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +49,7 @@ export const AppManager = observer(() => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_RX_APP_LIST);
   useShowAppoloError(error);
+  const apps = data ? data.rxApps :[];
 
   return (
     <div className={classes.root}>
@@ -101,12 +102,15 @@ export const AppManager = observer(() => {
           loading
           ? <AppsSkeleton />
           : <Grid container spacing = {2}>
-              <Grid item>
-                <AppCard />
-              </Grid>
-              <Grid item>
-                <AppCard />
-              </Grid>
+              {
+                apps.map((rxApp:IRxApp)=>{
+                  return(
+                    <Grid item key={rxApp.id} lg={2} md={3} sm={4} xs={6}>
+                      <AppCard rxApp = {rxApp} />
+                    </Grid>
+                  )
+                })
+              }
             </Grid>
         }
       </Container>

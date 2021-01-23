@@ -6,12 +6,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Avatar, Badge, IconButton } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
-import green from '@material-ui/core/colors/green';
+import { IRxApp } from 'Base/Model/IRxApp';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      minWidth: 200,
       paddingTop: theme.spacing(2),
     },
     
@@ -40,24 +39,29 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function AppCard() {
+export default function AppCard(
+  props:{
+    rxApp:IRxApp
+  }
+) {
+  const {rxApp} = props;
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
         <Badge color="secondary" badgeContent={5}>
-          <Avatar className = {classes.appAvata} style={{ backgroundColor: green[500]}} variant = "rounded">
-            <MdiIcon iconClass = "mdi-account-supervisor" size={40}  />
+          <Avatar className = {classes.appAvata} style={{ backgroundColor: rxApp.color}} variant = "rounded">
+            <MdiIcon iconClass = {rxApp.icon} size={40}  />
           </Avatar>
         </Badge>
         <Typography variant="h5" component="div" className={classes.appName}>
-          用户管理
+          {rxApp.name}
         </Typography>
       </CardContent>
       <CardActions className={classes.actions}>
         <Typography className={classes.pos} color="textSecondary">
-          免费
+          {rxApp.appType}
         </Typography>
         <IconButton>
           <MdiIcon iconClass = "mdi-dots-horizontal" size={20} />
