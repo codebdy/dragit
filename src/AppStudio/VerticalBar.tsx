@@ -85,7 +85,7 @@ export const VerticalBar = observer(() => {
               <IconButton
                 onClick = {()=>{setPagesOpen(!pagesOpen)}}
               >
-                <MdiIcon iconClass = "mdi-file-outline" color={iconColor}/>
+                <MdiIcon iconClass = "mdi-file-outline" color={"#5a8dee"}/>
               </IconButton>
             </Tooltip>
             <Tooltip title={intl.get('navigation')} placement="right">

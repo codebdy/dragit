@@ -5,7 +5,9 @@ import { DARK, ThemeMode } from "Store/ThemeSettings";
 
 export class AppStudioStore{
   verticalBarWidth:string = '60px';
+  isDirty:boolean = false;
   themeMode:ThemeMode = DARK;
+  editingPageId?:string;
 
   constructor() {
     makeAutoObservable(this)
