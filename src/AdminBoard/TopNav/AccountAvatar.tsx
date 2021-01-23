@@ -30,7 +30,6 @@ export const AccountAvatar = observer(()=>{
   const user = useLoggedUser();
 
   const isMenuOpen = Boolean(anchorEl);
-  const menuId = 'primary-search-account-menu';
   const history = useHistory();
 
   const handleMenuClose = () => {
@@ -54,7 +53,6 @@ export const AccountAvatar = observer(()=>{
       pageId:'edit-user',
       dataId:user.meta?.id
     }));
-    setAnchorEl(null);
   }
 
   const handleChangePassword = ()=>{
@@ -63,7 +61,6 @@ export const AccountAvatar = observer(()=>{
       pageId:'edit-user',
       dataId:user.meta?.id
     }));
-    setAnchorEl(null);
   }
 
   return (
@@ -78,8 +75,6 @@ export const AccountAvatar = observer(()=>{
 
       <Menu
         anchorEl={anchorEl}
-        id={menuId}
-        keepMounted
         getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',

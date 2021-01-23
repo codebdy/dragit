@@ -304,5 +304,6 @@
     "data-remove":"Delete data",
     "applications":"Applications",
     "download":"Download",
-    "create":"Create"
+    "create":"Create",
+    "uninstall":"Uninstall"
 }

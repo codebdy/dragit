@@ -308,6 +308,7 @@
     "data-remove":"数据删除",
     "applications":"应用程序",
     "download":"下载",
-    "create":"创建"
+    "create":"创建",
+    "uninstall":"卸载"
 
 }
