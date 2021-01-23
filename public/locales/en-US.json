@@ -305,5 +305,7 @@
     "applications":"Applications",
     "download":"Download",
     "create":"Create",
-    "uninstall":"Uninstall"
+    "uninstall":"Uninstall",
+    "pages":"Pages",
+    "navigation":"Navigation"
 }

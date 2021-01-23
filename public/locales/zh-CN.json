@@ -309,6 +309,8 @@
     "applications":"应用程序",
     "download":"下载",
     "create":"创建",
-    "uninstall":"卸载"
+    "uninstall":"卸载",
+    "pages":"页面",
+    "navigation":"导航"
 
 }
