@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       flexFlow:'column',
       alignItems:'center',
+      paddingBottom: theme.spacing(2),
     },
     logoIcon: {
       backgroundColor: theme.palette.primary.main,
@@ -43,9 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
 export const VerticalBar = observer(() => {
   const classes = useStyles();
   const [pagesOpen, setPagesOpen] = React.useState(false);
+  const iconColor = "#8494a7";
   const theme = createMuiTheme({
     palette: {
       type: DARK,
@@ -71,19 +74,32 @@ export const VerticalBar = observer(() => {
               <IconButton
                 onClick = {()=>{setPagesOpen(!pagesOpen)}}
               >
-                <MdiIcon iconClass = "mdi-file-outline" color="#8494a7"/>
+                <MdiIcon iconClass = "mdi-file-outline" color={iconColor}/>
               </IconButton>
             </Tooltip>
             <Tooltip title={intl.get('navigation')} placement="right">
               <IconButton
                 onClick = {()=>{}}
               >
-                <MdiIcon iconClass = "mdi-file-tree-outline" color="#8494a7"/>
+                <MdiIcon iconClass = "mdi-file-tree-outline" color={iconColor}/>
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={intl.get('authority')} placement="right">
+              <IconButton
+                onClick = {()=>{}}
+              >
+                <MdiIcon iconClass = "mdi-script-text-key-outline" color={iconColor}/>
               </IconButton>
             </Tooltip>
           </div>
           <Spacer />
-          dd
+          <Tooltip title={intl.get('settings')} placement="right">
+            <IconButton
+              onClick = {()=>{}}
+            >
+              <MdiIcon iconClass = "mdi-cog-outline" color={iconColor}/>
+            </IconButton>
+          </Tooltip>
         </Paper>
       </ThemeProvider>
       <Drawer
