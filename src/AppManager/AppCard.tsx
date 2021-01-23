@@ -8,6 +8,7 @@ import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from
 import MdiIcon from 'Components/Common/MdiIcon';
 import { IRxApp } from 'Base/Model/IRxApp';
 import intl from 'react-intl-universal';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,6 +54,7 @@ export default function AppCard(
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();
   const isMenuOpen = Boolean(anchorEl);
+  const history = useHistory();
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -62,6 +64,7 @@ export default function AppCard(
   };
 
   const hadleEdit = ()=>{
+    history.push(`/app-studio/${rxApp.id}`)
     setAnchorEl(null);
   }
 
