@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core';
+import { makeStyles, createStyles, Theme } from '@material-ui/core';
 import Sidebar from 'AdminBoard/Sidebar';
 import {TopNav} from 'AdminBoard/TopNav';
 import { Workspace } from 'AdminBoard/Workspace';
@@ -9,7 +9,7 @@ import {observer} from 'mobx-react';
 import { ThemeSettings } from './ThemeSettings';
 import { useLeftDrawer } from 'Store/Helpers/useAppStore';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       minHeight:'100%',
@@ -24,9 +24,9 @@ const useStyles = makeStyles(() =>
       height:'100%',
       width:'100%',
     },
-
   }),
 );
+
 
 export const AdminBoard = observer(()=>{
   const leftDrawer = useLeftDrawer();
