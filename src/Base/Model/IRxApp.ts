@@ -5,7 +5,7 @@ import { IRxPage } from "./IRxPage";
 
 export interface IRxApp{
   id?:ID;
-  rxSlug?: string;
+  guid?: string;
   name?: string;
   icon?: string; 
   color?: string;

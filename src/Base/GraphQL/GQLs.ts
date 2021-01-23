@@ -2,12 +2,11 @@ import { gql } from '@apollo/react-hooks';
 
 const appFieldsGQL = `
   id
-  rxSlug: rx_slug
+  guid
   name
   icon 
   color
   appType: app_type
-  pages
   navigationItems: navigation_items
   auths{
     id
@@ -30,6 +29,14 @@ export const GET_RX_APP = gql`
   query ($id:ID){
     rxApp(id:$id){
       ${appFieldsGQL}
+      pages{
+        id
+        guid
+        name 
+        maxWidth:max_width
+        width
+        schema
+      }
     }
   }
 `

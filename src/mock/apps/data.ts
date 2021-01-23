@@ -1,7 +1,7 @@
 var appsData = [
   {
     id:'1',
-    rx_slug:'users',
+    guid:'users',
     name:'用户管理',
     icon:'mdi-account-supervisor',
     color:'#a1887f',
@@ -19,7 +19,7 @@ var appsData = [
   },
   {
     id:'2',
-    rx_slug:'demos',
+    guid:'demos',
     name:'功能演示',
     icon:'mdi-leaf',
     color:'#8bc34a',
@@ -38,7 +38,7 @@ var appsData = [
   },
   {
     id:'3',
-    rx_slug:'web-cms',
+    guid:'web-cms',
     name:'外贸网站CMS',
     icon:'mdi-web',
     color:'#ff9100',
@@ -56,7 +56,7 @@ var appsData = [
   },
   {
     id:'4',
-    rx_slug:'foreign-trade-crm',
+    guid:'foreign-trade-crm',
     name:'外贸CRM',
     icon:'mdi-card-account-mail',
     color:'#5d78ff',
@@ -75,7 +75,7 @@ var appsData = [
   },
   {
     id:'5',
-    rx_slug:'shop',
+    guid:'shop',
     name:'商城',
     icon:'mdi-basket',
     color:'#ba68c8',

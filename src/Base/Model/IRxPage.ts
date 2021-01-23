@@ -17,7 +17,7 @@ export interface IPageSchema{
 
 export interface IRxPage{
   id:ID,
-  rxSlug?:string,
+  guid?:string,
   name?:string, 
   maxWidth?: MaxWidth;
   inTabIndex?:boolean;
