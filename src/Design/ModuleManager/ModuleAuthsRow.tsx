@@ -16,7 +16,7 @@ export default function ModuleAuthsRow(
   const[nameEditing, setNameEditing] = useState(false);
   const[slugEditing, setSlugEditing] = useState(false);
   const[name, setName] = useState(auth.name);
-  const[slug, setSlug] = useState(auth.slug);
+  const[slug, setSlug] = useState(auth.rxSlug);
 
   const handleBeginEdit = ()=>{
     setNameEditing(true);
@@ -26,7 +26,7 @@ export default function ModuleAuthsRow(
   const handleFinishEdit = ()=>{
     setNameEditing(false);
     setSlugEditing(false);
-    onChange({...auth, name:name, slug:slug});
+    onChange({...auth, name:name, rxSlug:slug});
   }
 
   return (

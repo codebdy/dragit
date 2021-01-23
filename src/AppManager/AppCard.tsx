@@ -46,8 +46,8 @@ export default function AppCard() {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <Badge color="secondary" variant="dot">
-          <Avatar className = {classes.appAvata} style={{ backgroundColor: green[500]}}>
+        <Badge color="secondary" badgeContent={5}>
+          <Avatar className = {classes.appAvata} style={{ backgroundColor: green[500]}} variant = "rounded">
             <MdiIcon iconClass = "mdi-account-supervisor" size={40}  />
           </Avatar>
         </Badge>

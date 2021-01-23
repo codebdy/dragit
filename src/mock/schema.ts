@@ -18,11 +18,13 @@ import { pageResolver, savePageResolver } from "./module/pageResolver";
 import { userGQLType, userGQLInput, userGQLQuery, userGQLMutation } from "./user/graphql";
 import { userQueryResolvers, userMutationResolvers } from "./user/resolvers";
 import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./role/graphql";
+import { appGQLInput, appGQLMutation, appGQLQuery, appGQLType } from "./apps/graphql";
+import { appMutationResolvers, appQueryResolvers } from "./apps/resolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
   scalar JSON
-  
+
   type Drawer{
     id:ID
     items:JSON
@@ -92,6 +94,10 @@ export const schema = `
     PUBLISHED
     DRAFT 
   }
+
+  ${appGQLType}
+  ${appGQLInput}
+
   ${mediasGQLType}
   ${articleGQLType}
   ${articleGQLInput}
@@ -111,6 +117,7 @@ export const schema = `
     modulePage(moduleSlug:String!, pageSlug:String):Page
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
+    ${appGQLQuery}
     ${articleGQLQuery}
     ${mediasGQLQuery}
     ${supplierGQLQuery}
@@ -121,6 +128,7 @@ export const schema = `
   type Mutation{
     drawer(items:JSON):Drawer
     page(page:PageInput):Page
+    ${appGQLMutation}
     ${articleGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
@@ -135,6 +143,9 @@ export const resolvers = {
   Query: {
     userByToken: userByTokenResolver,
     login:loginResolver,
+
+    ...appQueryResolvers,
+    
     drawer:drawerResolver,
     modulePage:modulePageResolver,
     page:pageResolver,
@@ -151,6 +162,7 @@ export const resolvers = {
   },
 
   Mutation:{
+    ...appMutationResolvers,
     drawer:saveDrawerResolver,
     page:savePageResolver,
     ...postMutationResolvers,
