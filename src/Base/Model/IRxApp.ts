@@ -13,4 +13,5 @@ export interface IRxApp{
   pages?: Array<IRxPage>;
   navigationItems?: Array<IMenuItem>;
   auths?: Array<IAuth>;
+  notifications?: number;
 }

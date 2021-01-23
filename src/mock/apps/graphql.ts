@@ -28,6 +28,7 @@ export var appGQLType = `
     pages: [RxPage]
     navigation_items: JSON
     auths: [RxAuth]
+    notifications:Int
   }
 `
 

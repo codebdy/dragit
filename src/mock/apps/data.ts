@@ -33,7 +33,8 @@ var appsData = [
         name:'App访问',
         predefined:true,
       }
-    ]
+    ],
+    notifications:8,
   },
   {
     id:'3',
@@ -69,7 +70,8 @@ var appsData = [
         name:'App访问',
         predefined:true,
       }
-    ]
+    ],
+    notifications:7,
   },
   {
     id:'5',

@@ -15,6 +15,7 @@ const appFieldsGQL = `
     name
     predefined
   }
+  notifications
 `
 
 export const GET_RX_APP_LIST = gql`

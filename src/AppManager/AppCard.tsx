@@ -72,7 +72,7 @@ export default function AppCard(
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <Badge color="secondary" badgeContent={5}>
+        <Badge color="secondary" badgeContent={rxApp.notifications}>
           <Avatar className = {classes.appAvata} style={{ backgroundColor: rxApp.color}} variant = "rounded">
             <MdiIcon iconClass = {rxApp.icon} size={40}  />
           </Avatar>
