@@ -16,11 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
 
-    githubLink:{
-      color: theme.palette.text.secondary,
-      marginRight:theme.spacing(1),
-    },
-
   }),
 );
 
@@ -49,9 +44,6 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
       <div className={classes.grow} />
 
       
-      <a href="https://github.com/rxwater/dragit" className={classes.githubLink} style={{color:color}} target="_blank" rel="noopener noreferrer">
-        <MdiIcon iconClass = "mdi-github"/>
-      </a>
       <EvenNotification color={color} />
 
       <Tooltip title={intl.get('theme-settings')} arrow placement="bottom"

@@ -301,5 +301,8 @@
     "list-update":"List update",
     "data-query":"Query data",
     "data-update":"Update data",
-    "data-remove":"Delete data"
+    "data-remove":"Delete data",
+    "applications":"Applications",
+    "download":"Download",
+    "create":"Create"
 }

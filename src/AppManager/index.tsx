@@ -10,6 +10,8 @@ import { Add } from '@material-ui/icons';
 import { useState } from 'react';
 import { AppMangerStore } from './AppMangerStore';
 import { AccountAvatar } from 'AdminBoard/TopNav/AccountAvatar';
+import { observer } from 'mobx-react';
+import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,12 +34,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
     addButton:{
       marginLeft:theme.spacing(2),
-    }
+    },
+    githubLink:{
+      color: theme.palette.text.secondary,
+      marginRight:theme.spacing(1),
+    },
   }),
 );
 
-export default function AppManager() {
+export const AppManager = observer(() => {
   const classes = useStyles();
+  const appMangerStore = useState(new AppMangerStore());
 
   return (
     <div className={classes.root}>
@@ -54,6 +61,9 @@ export default function AppManager() {
             <MdiIcon iconClass = "mdi-feather" />
           </Avatar>
           <Spacer />
+          <a href="https://github.com/rxwater/rxdrag" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
+            <MdiIcon iconClass = "mdi-github" />
+          </a>
           <AccountAvatar />
         </Toolbar>
       </AppBar>
@@ -61,7 +71,7 @@ export default function AppManager() {
         <Grid container justify = "space-between" className={classes.titleArea} alignItems="center">
           <Grid item>
             <Typography className={classes.title} variant = "h5">
-              应用程序
+              {intl.get('applications')}
             </Typography>
           </Grid>
           <Grid>
@@ -71,7 +81,7 @@ export default function AppManager() {
               startIcon = {
                 <MdiIcon iconClass = "mdi-cloud-download-outline" />
               }
-            >下载</Button>
+            >{intl.get('download')}</Button>
             <Button 
               className = {classes.addButton}
               variant = "contained" 
@@ -80,7 +90,7 @@ export default function AppManager() {
               startIcon = {
                 <Add />
               }
-            >新建</Button>
+            >{intl.get('create')}</Button>
           </Grid>
         </Grid>
         <Grid container spacing = {2}>
@@ -95,4 +105,4 @@ export default function AppManager() {
       </Container>
     </div>
   );
-}
+})

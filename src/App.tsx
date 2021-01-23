@@ -18,7 +18,7 @@ import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
 import { useThemeSettings } from 'Store/Helpers/useAppStore';
 import { LOGIN_URL } from 'Utils/consts';
 import { ConfirmDialog } from 'Base/Widgets/ConfirmDialog';
-import AppManager from 'AppManager';
+import { AppManager } from 'AppManager';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();
