@@ -19,6 +19,7 @@ import { useThemeSettings } from 'Store/Helpers/useAppStore';
 import { LOGIN_URL } from 'Utils/consts';
 import { ConfirmDialog } from 'Base/Widgets/ConfirmDialog';
 import { AppManager } from 'AppManager';
+import { AppStudio } from 'AppStudio';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();
@@ -51,6 +52,7 @@ const App = observer(()=>{
             <Route path="/design" component={ModuleManager}></Route>
             <Route path="/drawer-edit" component={DrawerEditor}></Route>
             <Route path="/apps-index" component={AppManager}></Route>
+            <Route path="/app-studio/:id" component={AppStudio}></Route>
             <Redirect to={ LOGIN_URL } from='/' /> 
           </Switch>
         </BrowserRouter>

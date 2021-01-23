@@ -1,7 +1,6 @@
 var appsData = [
   {
-    id:'1',
-    guid:'users',
+    id:'guid-1',
     name:'用户管理',
     icon:'mdi-account-supervisor',
     color:'#a1887f',
@@ -10,7 +9,7 @@ var appsData = [
     navigation_items:[],
     auths:[
       {
-        id:'11',
+        id:'guid-11',
         rx_slug:'app',
         name:'App访问',
         predefined:true,
@@ -18,8 +17,7 @@ var appsData = [
     ]
   },
   {
-    id:'2',
-    guid:'demos',
+    id:'guid-2',
     name:'功能演示',
     icon:'mdi-leaf',
     color:'#8bc34a',
@@ -28,7 +26,7 @@ var appsData = [
     navigation_items:[],
     auths:[
       {
-        id:'21',
+        id:'guid-21',
         rx_slug:'app',
         name:'App访问',
         predefined:true,
@@ -37,8 +35,7 @@ var appsData = [
     notifications:8,
   },
   {
-    id:'3',
-    guid:'web-cms',
+    id:'guid-3',
     name:'外贸网站CMS',
     icon:'mdi-web',
     color:'#ff9100',
@@ -47,7 +44,7 @@ var appsData = [
     navigation_items:[],
     auths:[
       {
-        id:'31',
+        id:'guid-31',
         rx_slug:'app',
         name:'App访问',
         predefined:true,
@@ -55,8 +52,7 @@ var appsData = [
     ]
   },
   {
-    id:'4',
-    guid:'foreign-trade-crm',
+    id:'guid-4',
     name:'外贸CRM',
     icon:'mdi-card-account-mail',
     color:'#5d78ff',
@@ -65,7 +61,7 @@ var appsData = [
     navigation_items:[],
     auths:[
       {
-        id:'41',
+        id:'guid-41',
         rx_slug:'app',
         name:'App访问',
         predefined:true,
@@ -74,8 +70,7 @@ var appsData = [
     notifications:7,
   },
   {
-    id:'5',
-    guid:'shop',
+    id:'guid-5',
     name:'商城',
     icon:'mdi-basket',
     color:'#ba68c8',
@@ -84,7 +79,7 @@ var appsData = [
     navigation_items:[],
     auths:[
       {
-        id:'51',
+        id:'guid-51',
         rx_slug:'app',
         name:'App访问',
         predefined:true,

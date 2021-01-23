@@ -8,7 +8,6 @@ export var appGQLType = `
 
   type RxPage{
     id:ID!
-    guid: String!
     name:String
     query:String
     "弹出式页面使用，可选：'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
@@ -20,7 +19,6 @@ export var appGQLType = `
 
   type RxApp{
     id: ID!
-    guid: String!
     name: String
     icon: String 
     color: String
@@ -35,7 +33,6 @@ export var appGQLType = `
 export var appGQLInput =`
   input RxAppInput{
     id: ID
-    guid: String
     name: String
     icon: String 
     color: String

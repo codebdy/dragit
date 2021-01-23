@@ -4,8 +4,8 @@ import IMenuItem from "./IMenuItem";
 import { IRxPage } from "./IRxPage";
 
 export interface IRxApp{
+  //使用GUID当ID用
   id?:ID;
-  guid?: string;
   name?: string;
   icon?: string; 
   color?: string;

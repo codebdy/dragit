@@ -2,7 +2,6 @@ import { gql } from '@apollo/react-hooks';
 
 const appFieldsGQL = `
   id
-  guid
   name
   icon 
   color
@@ -31,7 +30,6 @@ export const GET_RX_APP = gql`
       ${appFieldsGQL}
       pages{
         id
-        guid
         name 
         maxWidth:max_width
         width

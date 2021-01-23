@@ -16,8 +16,8 @@ export interface IPageSchema{
 }
 
 export interface IRxPage{
+  //使用GUID当ID用
   id:ID,
-  guid?:string,
   name?:string, 
   maxWidth?: MaxWidth;
   inTabIndex?:boolean;
