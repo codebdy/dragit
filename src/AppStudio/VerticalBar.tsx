@@ -8,6 +8,7 @@ import Spacer from 'Components/Common/Spacer';
 import { Fragment } from 'react';
 import { DARK } from 'Store/ThemeSettings';
 import intl from 'react-intl-universal';
+import { useAppStudioStore } from './AppStudioStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
       left:'0',
       top:'0',
       height:'100%',
-      width:'60px',
       background:'#1a233a',
       color:'#8494a7',
       zIndex:theme.zIndex.modal + 1,
@@ -38,9 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexFlow:'column',
       alignItems:'center',
     },
-    drawerPaper:{
-      marginLeft:'60px',
-    },
   }),
 );
 
@@ -48,12 +45,25 @@ const useStyles = makeStyles((theme: Theme) =>
 export const VerticalBar = observer(() => {
   const classes = useStyles();
   const [pagesOpen, setPagesOpen] = React.useState(false);
+  const studioStore = useAppStudioStore();
   const iconColor = "#8494a7";
   const theme = createMuiTheme({
     palette: {
       type: DARK,
+      primary:{
+        main:'#5a8dee',
+      },
+      background:{
+        default:'#1a233a',
+        paper:'#272e48',
+      }
     },
   });
+
+  const drawerClasses = makeStyles({
+    drawer:{
+      marginLeft:studioStore?.verticalBarWidth,
+    }})();
 
   return (
     <Fragment>
@@ -62,6 +72,7 @@ export const VerticalBar = observer(() => {
           className = {classes.root} 
           square
           elevation = {pagesOpen ? 1 : 6}
+          style={{width:studioStore?.verticalBarWidth}}
         >
           <Avatar
             className = {classes.logoIcon}
@@ -106,7 +117,7 @@ export const VerticalBar = observer(() => {
         anchor={'left'}
         open={pagesOpen}
         onClose={()=>setPagesOpen(false)}
-        classes = {{paper:classes.drawerPaper}}
+        classes = {{paper:drawerClasses.drawer}}
       >
         sweeweweeeeeeeeeeeeee
       </Drawer>

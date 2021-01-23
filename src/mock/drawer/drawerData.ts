@@ -21,7 +21,7 @@ export var drawerData= [{
   {
     type: 'item',
     title: '独立提交',
-    icon: 'mdi-rhombus-split',
+    icon: 'mdi-arrange-send-to-back',
     moduleSlug: 'split-demo'
   },
   {
