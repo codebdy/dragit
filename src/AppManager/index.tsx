@@ -2,13 +2,14 @@ import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { Avatar, Button, Container, Grid, Typography } from '@material-ui/core';
 import Spacer from 'Components/Common/Spacer';
 import AppCard from './AppCard';
 import { Add } from '@material-ui/icons';
+import { useState } from 'react';
+import { AppMangerStore } from './AppMangerStore';
+import { AccountAvatar } from 'AdminBoard/TopNav/AccountAvatar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,9 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
       letterSpacing:'1px',
       fontWeight:'bold',
       fontSize:'20px',
-    },
-    avatar: {
-      cursor:'pointer',
     },
     titleArea:{
       padding:theme.spacing(2,0),
@@ -40,15 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AppManager() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <div className={classes.root}>
@@ -65,29 +54,7 @@ export default function AppManager() {
             <MdiIcon iconClass = "mdi-feather" />
           </Avatar>
           <Spacer />
-          <div>
-            <Avatar className={classes.avatar} onClick={handleMenu}>
-              <MdiIcon iconClass = 'mdi-account' />
-            </Avatar>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-            </Menu>
-          </div>
+          <AccountAvatar />
         </Toolbar>
       </AppBar>
       <Container maxWidth = 'lg'>
