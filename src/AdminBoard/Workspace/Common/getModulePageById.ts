@@ -1,7 +1,7 @@
 import { IModule } from "Base/Model/IModule";
-import { IPage } from "Base/Model/IPage";
+import { IRxPage } from "Base/Model/IRxPage";
 
-export function getModulePageById(module:IModule, pageId?:string):IPage|undefined{
+export function getModulePageById(module:IModule, pageId?:string):IRxPage|undefined{
   if(!module.pages || !pageId){
     return;
   }

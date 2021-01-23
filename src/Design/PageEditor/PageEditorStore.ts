@@ -1,4 +1,4 @@
-import { IPage } from "Base/Model/IPage";
+import { IRxPage } from "Base/Model/IRxPage";
 import { IMeta } from "Base/RXNode/IMeta";
 import { RXNode } from "Base/RXNode/RXNode";
 import { CursorPosition, IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
@@ -24,7 +24,7 @@ function makeCanvas(){
 }
 
 export class PageEditorStore implements IPageUpdate{
-  page?:IPage;
+  page?:IRxPage;
   showOutline:boolean = true;
   showPaddingX:boolean = true;
   showPaddingY:boolean = true;
@@ -42,7 +42,7 @@ export class PageEditorStore implements IPageUpdate{
   refreshToolbarAndLabelFlag:number = 0;
   isDirty: boolean = false;
 
-  constructor(page?:IPage) {
+  constructor(page?:IRxPage) {
     this.page = page;
     makeAutoObservable(this);
     this.parsePage();
@@ -178,7 +178,7 @@ export class PageEditorStore implements IPageUpdate{
     }
   }
 
-  setPage(page:IPage){
+  setPage(page:IRxPage){
     this.page = page;
   }
 

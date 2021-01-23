@@ -15,7 +15,7 @@ export interface IPageSchema{
   query?:string, 
 }
 
-export interface IPage{
+export interface IRxPage{
   id:ID,
   name?:string, 
   maxWidth?: MaxWidth;

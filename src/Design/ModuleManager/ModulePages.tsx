@@ -4,7 +4,7 @@ import PrimaryText from 'Design/PageEditor/AttrebuteBox/PropsInputs/PrimaryText'
 import intl from 'react-intl-universal';
 import { IModule } from "Base/Model/IModule";
 import ModulePageTable from './ModulePageTable';
-import { IPage } from 'Base/Model/IPage';
+import { IRxPage } from 'Base/Model/IRxPage';
 import { PageEditor } from 'Design/PageEditor';
 import createId from 'Utils/createId';
 import { ID } from 'Base/Model/graphqlTypes';
@@ -12,13 +12,13 @@ import { ID } from 'Base/Model/graphqlTypes';
 
 export default function ModulePages(props:{module:IModule}){
   //const {module} = props;
-  const [designedPage, setDesignedPage] = React.useState<IPage>();
+  const [designedPage, setDesignedPage] = React.useState<IRxPage>();
   const [operateConfig, setOperateConfig] = React.useState<any>();
   //const [operateModule, operateLoading] = useAxios<IModule>(operateConfig);
   
   //const module = operateModule || props.module;
 
-  const handleChangePage = (page:IPage)=>{
+  const handleChangePage = (page:IRxPage)=>{
     /*setOperateConfig({
       ...API_UPDATE_MODULE_PAGE,
       //params:{
@@ -61,7 +61,7 @@ export default function ModulePages(props:{module:IModule}){
     })  */
   }
 
-  const handelDesign = (page:IPage)=>{
+  const handelDesign = (page:IRxPage)=>{
     setDesignedPage(page);
   }
 

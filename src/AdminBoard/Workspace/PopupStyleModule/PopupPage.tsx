@@ -4,12 +4,12 @@ import { PageAction } from 'Base/PageUtils/PageAction';
 import { Page } from '../Page';
 import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
-import { IPage } from 'Base/Model/IPage';
+import { IRxPage } from 'Base/Model/IRxPage';
 import { Fragment } from 'react';
 
 export const PopupPage = observer((
   props:{
-    page?:IPage, 
+    page?:IRxPage, 
     pageParams?:any,
     onPageAction?: (pageAction:PageAction)=> void,
     onClose:()=>void,

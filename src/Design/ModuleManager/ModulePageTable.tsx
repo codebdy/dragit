@@ -4,7 +4,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 import intl from 'react-intl-universal';
 import ModulePageRow from './ModulePageRow';
 import { Add } from '@material-ui/icons';
-import { IPage } from 'Base/Model/IPage';
+import { IRxPage } from 'Base/Model/IRxPage';
 import { ID } from 'Base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ModulePageTable(
   props:{
-    pages:IPage[],
+    pages:IRxPage[],
     entry_page_id:ID,
-    onChangePage:(newPage:IPage)=>void,
+    onChangePage:(newPage:IRxPage)=>void,
     onRemovePage:(id:ID)=>void,
     onAddPage:()=>void,
     onChangeIndexPage : (pageId:ID, indexed:boolean)=>void,
-    onDesign: (page:IPage)=>void,
+    onDesign: (page:IRxPage)=>void,
   }
 ){
   const {pages, entry_page_id, onChangePage, onRemovePage, onAddPage, onChangeIndexPage, onDesign} = props;

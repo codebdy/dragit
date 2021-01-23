@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
-import { IPage } from 'Base/Model/IPage';
+import { IRxPage } from 'Base/Model/IRxPage';
 import { ID } from 'Base/Model/graphqlTypes';
 
 export default function ModulePageRow(
   props:{
-    page:IPage, 
+    page:IRxPage, 
     isIndexPage:boolean,
-    onChangePage:(newPage:IPage)=>void,
+    onChangePage:(newPage:IRxPage)=>void,
     onRemove:(id:ID)=>void,
     onChangeIndexPage:(indexed:boolean)=>void,
     onDesign:()=>void,

@@ -1,6 +1,6 @@
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { IMeta } from "Base/RXNode/IMeta";
-import { IPage } from "Base/Model/IPage";
+import { IRxPage } from "Base/Model/IRxPage";
 import { IPageJumper } from "Base/Model/IPageJumper";
 import { RXNode } from "Base/RXNode/RXNode";
 import { makeAutoObservable } from "mobx";
@@ -13,10 +13,10 @@ import { getMutationNode } from "./getMutationNode";
 export class PageStore{
   gqls: Array<GraphQLStore> = [];
   rootNode: RXNode<IMeta>;
-  page: IPage;
+  page: IRxPage;
   queryGQL?: GraphQLStore;
   //ActionStore
-  constructor(page:IPage, pageJumper?:IPageJumper) {
+  constructor(page:IRxPage, pageJumper?:IPageJumper) {
     this.page = page;
     makeAutoObservable(this)
     const layout = page?.schema?.layout || [];

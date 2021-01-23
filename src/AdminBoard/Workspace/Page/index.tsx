@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react";
-import { IPage } from 'Base/Model/IPage';
+import { IRxPage } from 'Base/Model/IRxPage';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RXNode } from 'Base/RXNode/RXNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
@@ -27,7 +27,7 @@ import { RXModel } from 'Base/ModelTree/RXModel';
 
 export const Page = observer((
   props:{
-    page:IPage,
+    page:IRxPage,
     pageJumper?:IPageJumper,
     hideDebug?:boolean,
     onPageAction?: (pageAction:PageAction)=> void,

@@ -1,4 +1,4 @@
-import { IPage } from 'Base/Model/IPage';
+import { IRxPage } from 'Base/Model/IRxPage';
 import { IAuth } from 'Base/Model/IAuth';
 import { ID } from './graphqlTypes';
 
@@ -8,8 +8,8 @@ export interface IModule {
   name: string;
   moduleType?: string;
   isDrawerStyle?:boolean;
-  pages?: IPage[];
-  entryPage?: IPage;
+  pages?: IRxPage[];
+  entryPage?: IRxPage;
   auths?: IAuth[];
   entry_page_id?:ID; //以后要删除该字段
 }
