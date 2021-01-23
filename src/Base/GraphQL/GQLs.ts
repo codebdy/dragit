@@ -1,5 +1,45 @@
 import { gql } from '@apollo/react-hooks';
 
+const appFieldsGQL = `
+  id
+  rxSlug: rx_slug
+  name
+  icon 
+  color
+  appType: app_type
+  pages
+  navigationItems: navigation_items
+  auths{
+    id
+    rxSlug:rx_slug
+    name
+    predefined
+  }
+`
+
+export const GET_RX_APP_LIST = gql`
+  query {
+    rxApps{
+      ${appFieldsGQL}
+    }
+  }
+`
+
+export const GET_RX_APP = gql`
+  query ($id:ID){
+    rxApp(id:$id){
+      ${appFieldsGQL}
+    }
+  }
+`
+export const SAVE_RX_APP = gql`
+  mutation($rxApp:RxAppInput){
+    rxApp(rxApp:$rxApp){
+      ${appFieldsGQL}
+    }
+  }
+`
+
 // 定义查询语句
 //String代替JSON
 export const GET_DRAWER = gql`

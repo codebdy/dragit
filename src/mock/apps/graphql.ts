@@ -1,13 +1,14 @@
 export var appGQLType = `
   type RxAuth{
     id: ID!
-    rxSlug: String
+    rx_slug: String!
     name: String
     predefined: Boolean
   }
 
   type RxPage{
     id:ID!
+    rx_slug: String!
     name:String
     query:String
     "弹出式页面使用，可选：'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
@@ -19,7 +20,7 @@ export var appGQLType = `
 
   type RxApp{
     id: ID!
-    rx_slug: String
+    rx_slug: String!
     name: String
     icon: String 
     color: String
@@ -38,10 +39,8 @@ export var appGQLInput =`
     icon: String 
     color: String
     app_type: String
-    pages: [RxPage]
     navigation_items: JSON
-    auths: [RxAuth]
-  }
+}
 `
 
 export var appGQLQuery = `

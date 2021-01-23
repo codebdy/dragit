@@ -7,11 +7,14 @@ import { Avatar, Button, Container, Grid, Typography } from '@material-ui/core';
 import Spacer from 'Components/Common/Spacer';
 import AppCard from './AppCard';
 import { Add } from '@material-ui/icons';
-import { useState } from 'react';
-import { AppMangerStore } from './AppMangerStore';
 import { AccountAvatar } from 'AdminBoard/TopNav/AccountAvatar';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_RX_APP_LIST } from 'Base/GraphQL/GQLs';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { Skeleton } from '@material-ui/lab';
+import AppsSkeleton from './AppsSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +47,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const appMangerStore = useState(new AppMangerStore());
+  const { loading, error, data } = useQuery(GET_RX_APP_LIST);
+  useShowAppoloError(error);
 
   return (
     <div className={classes.root}>
@@ -93,15 +97,18 @@ export const AppManager = observer(() => {
             >{intl.get('create')}</Button>
           </Grid>
         </Grid>
-        <Grid container spacing = {2}>
-          <Grid item>
-            <AppCard />
-          </Grid>
-          <Grid item>
-            <AppCard />
-          </Grid>
-        </Grid>
-        
+        {
+          loading
+          ? <AppsSkeleton />
+          : <Grid container spacing = {2}>
+              <Grid item>
+                <AppCard />
+              </Grid>
+              <Grid item>
+                <AppCard />
+              </Grid>
+            </Grid>
+        }
       </Container>
     </div>
   );
