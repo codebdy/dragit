@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { useState } from 'react';
 import PageAction from './PageAction';
 import { IRxPage } from 'Base/Model/IRxPage';
+import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
       cursor:'pointer',
       minHeight: theme.spacing(6),
     },
+    rightArea:{
+      display:'flex',
+    }
   }),
 );
 
@@ -29,6 +33,7 @@ export const PageListItem = observer((
   const {page, onClick} = props;
   const [hover, setHover] = useState(false);
   const classes = useStyles();
+  const loading = false;
 
   return (
     <div 
@@ -38,14 +43,21 @@ export const PageListItem = observer((
       onMouseLeave = {()=>{setHover(false)}}
     >
       {page.name}
-      {
-        hover&&
-        <div onClick={e=>{
-          e.stopPropagation();
-        }}>
-          <PageAction onCloseMenu={()=>setHover(false)} />
-        </div>
-      }
+      <div className={classes.rightArea}>
+        {
+          loading &&
+          <CircularProgress size = {24}/>
+        }
+        {
+          hover&&
+          <div onClick={e=>{
+            e.stopPropagation();
+          }}>
+            <PageAction onCloseMenu={()=>setHover(false)} />
+          </div>
+        }      
+      </div>
+
     </div>
   );
 })
