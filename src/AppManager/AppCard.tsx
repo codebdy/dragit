@@ -98,11 +98,11 @@ export default function AppCard(
           getContentAnchorEl={null}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'center',
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'center',
+            horizontal: 'left',
           }}
           open={isMenuOpen}
           onClose={handleMenuClose}

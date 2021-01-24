@@ -23,9 +23,10 @@ export const PageList = observer(() => {
       {
         storeStudio?.rxApp?.pages?.map(page=>{
           return (
-            <PageListItem key={page.id}>
-              {page.name}
-            </PageListItem>
+            <PageListItem 
+              key={page.id}
+              page = {page}
+            />
           )
         })
       }

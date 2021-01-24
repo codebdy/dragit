@@ -308,5 +308,6 @@
     "uninstall":"Uninstall",
     "pages":"Pages",
     "navigation":"Navigation",
-    "settings":"Settings"
+    "settings":"Settings",
+    "duplicate":"Duplicate"
 }
