@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import Drawer from '@material-ui/core/Drawer';
-import { Avatar, createMuiTheme, IconButton, Paper, ThemeProvider, Tooltip } from '@material-ui/core';
+import { Avatar, Button, createMuiTheme, IconButton, Paper, ThemeProvider, Tooltip } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import Spacer from 'Components/Common/Spacer';
 import { Fragment } from 'react';
 import { DARK } from 'Store/ThemeSettings';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from './AppStudioStore';
+import { PopuDrawer } from './PopuDrawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,11 +60,6 @@ export const VerticalBar = observer(() => {
     },
   });
 
-  const drawerClasses = makeStyles({
-    drawer:{
-      marginLeft:studioStore?.verticalBarWidth,
-    }})();
-
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
@@ -113,14 +108,16 @@ export const VerticalBar = observer(() => {
           </Tooltip>
         </Paper>
       </ThemeProvider>
-      <Drawer
-        anchor={'left'}
+      <PopuDrawer
         open={pagesOpen}
         onClose={()=>setPagesOpen(false)}
-        classes = {{paper:drawerClasses.drawer}}
+        title = {intl.get('pages')}
+        titleAction = {
+          <Button variant="outlined" color = "primary">{intl.get('add-new')}</Button>
+        }
       >
         sweeweweeeeeeeeeeeeee
-      </Drawer>
+      </PopuDrawer>
 
     </Fragment>
   );

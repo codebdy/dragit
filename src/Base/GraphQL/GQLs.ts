@@ -34,6 +34,7 @@ export const GET_RX_APP = gql`
         maxWidth:max_width
         width
         schema
+        auths
       }
     }
   }

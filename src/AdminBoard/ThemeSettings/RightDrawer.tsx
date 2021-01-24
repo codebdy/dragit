@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles, Theme, createStyles, Drawer, IconButton, Typography, Divider, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
 import classNames from 'classnames';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { Close } from '@material-ui/icons';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { useThemeSettings } from 'Store/Helpers/useAppStore';
@@ -75,14 +75,14 @@ export default function RightDrawer(
         }}
         onClose = {onClose}
       >
-        <MuiDialogTitle disableTypography className = {classes.title}>
+        <DialogTitle disableTypography className = {classes.title}>
           <Typography variant="h6">{title}</Typography>
           {onClose ? (
             <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
               <Close />
             </IconButton>
           ) : null}
-        </MuiDialogTitle>
+        </DialogTitle>
         <Divider />
         <Scrollbar className={classes.content}>
           {children}
