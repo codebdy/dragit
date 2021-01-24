@@ -12,19 +12,19 @@ export class UpdatePageSchemaCommand implements ICommand{
     this.pageUpdate = pageUpdate;
     this.key = key;
     this.value = cloneObject(value);
-    this.oldValue = pageUpdate.page?.schema ? pageUpdate.page.schema[key] : undefined;
+    this.oldValue = pageUpdate.page ? pageUpdate.page[key] : undefined;
   }
 
   excute(){
     if(this.pageUpdate.page){
-      this.pageUpdate.setPage({...this.pageUpdate.page, schema:{...this.pageUpdate.page.schema, [this.key]:this.value}})
+      this.pageUpdate.setPage({...this.pageUpdate.page, [this.key]:this.value})
     }
     return this.pageUpdate.selectedNode;
   }
 
   undo(){
     if(this.pageUpdate.page){
-      this.pageUpdate.setPage({...this.pageUpdate.page, schema:{...this.pageUpdate.page.schema, [this.key]:this.oldValue}})
+      this.pageUpdate.setPage({...this.pageUpdate.page, [this.key]:this.oldValue})
     }
     return this.pageUpdate.selectedNode;
   }

@@ -4,12 +4,11 @@ import { gql, useQuery } from "@apollo/react-hooks";
 import { JumpStyleModule } from "./JumpStyleModule";
 import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
-import { TabStyleModule } from "./TabStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { PageEditor } from "Design/PageEditor";
 import { useAppStore, useDesigner } from "Store/Helpers/useAppStore";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
-import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE, TAB_STYLE_MODULE } from "Utils/consts";
+import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE } from "Utils/consts";
 import ModuleSkeleton from "./Common/ModuleSkeleton";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -78,10 +77,6 @@ export const Workspace = observer(()=>{
           {
             module?.moduleType === POPUP_STYLE_MODULE &&
             <PopupStyleModule module={module} />
-          }
-          {
-            module?.moduleType === TAB_STYLE_MODULE &&
-            <TabStyleModule module={module} />
           }
         </Fragment>
       }

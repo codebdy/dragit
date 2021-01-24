@@ -90,10 +90,7 @@ export const PageEditor = observer((
   const handleSave = () => {
     savePage({variables:{page:{
       id:pageId,
-      schema:{
-        ...editorStore?.page?.schema,
-        layout:editorStore?.canvas?.getChildrenMetas(),
-      },
+      layout:editorStore?.canvas?.getChildrenMetas(),
     }
     }})
     editorStore?.setIsDirty(false);    

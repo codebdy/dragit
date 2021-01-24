@@ -50,7 +50,7 @@ export class PageEditorStore implements IPageUpdate{
 
   private parsePage(){
     this.canvas = makeCanvas();
-    this.canvas.parse(this.page?.schema?.layout);
+    this.canvas.parse(this.page?.layout);
   }
 
   setShowOutline(showOutline:boolean){

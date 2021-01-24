@@ -15,7 +15,7 @@ export const PageQuery = observer((
   const {queryGQL} = props;
   const modelStore = useModelStore();
   const pageStore = usePageStore();
-  const queryName = pageStore?.page.schema?.query;
+  const queryName = pageStore?.page.query;
   const { loading, error, data } = useQuery(gql`${queryGQL.gql}`, {
     variables: { ...queryGQL.variables },
     notifyOnNetworkStatusChange: true,

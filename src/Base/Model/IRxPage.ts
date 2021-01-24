@@ -9,18 +9,13 @@ export interface IQuery{
   }
 }
 
-export interface IPageSchema{
-  layout?:Array<any>,
-  auths?:string[],
-  query?:string, 
-}
-
 export interface IRxPage{
   //使用GUID当ID用
   id:ID,
   name?:string, 
   maxWidth?: MaxWidth;
-  inTabIndex?:boolean;
   width?:number;
-  schema?:IPageSchema,
+  layout?:Array<any>,
+  auths?:string[],
+  query?:string, 
 }

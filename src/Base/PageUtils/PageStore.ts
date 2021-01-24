@@ -19,11 +19,11 @@ export class PageStore{
   constructor(page:IRxPage, pageJumper?:IPageJumper) {
     this.page = page;
     makeAutoObservable(this)
-    const layout = page?.schema?.layout || [];
+    const layout = page?.layout || [];
     this.rootNode = new RXNode<IMeta>();
     this.rootNode.parse(cloneObject(layout));
     this.makePageMutationGqls();
-    const query = page?.schema?.query;
+    const query = page?.query;
     if(query){
       this.queryGQL = new GraphQLStore(intl.get('data-query'), 'Page', `
         query ($id:ID){

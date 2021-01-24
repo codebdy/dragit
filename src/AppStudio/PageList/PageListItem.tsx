@@ -5,6 +5,7 @@ import { useState } from 'react';
 import PageAction from './PageAction';
 import { IRxPage } from 'Base/Model/IRxPage';
 import { CircularProgress } from '@material-ui/core';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,8 +33,13 @@ export const PageListItem = observer((
 ) => {
   const {page, onClick} = props;
   const [hover, setHover] = useState(false);
+  const [name, setName] = useState(page.name);
   const classes = useStyles();
   const loading = false;
+
+  useEffect(()=>{
+    setName(page.name)
+  },[page.name])
 
   return (
     <div 
@@ -42,7 +48,7 @@ export const PageListItem = observer((
       onMouseOver = {()=>{setHover(true)}}
       onMouseLeave = {()=>{setHover(false)}}
     >
-      {page.name}
+      {name}
       <div className={classes.rightArea}>
         {
           loading &&

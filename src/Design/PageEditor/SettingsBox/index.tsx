@@ -23,7 +23,7 @@ const SettingsBox = observer(()=>{
     editorStore?.updatePageQuery(newValue);
   }
 
-  const query = editorStore?.page?.schema?.query;
+  const query = editorStore?.page?.query;
 
   return (
     <div className = {classes.root}>
