@@ -9,6 +9,11 @@ import { AppStudioStore, AppStudioStoreProvider } from './AppStudioStore';
 import Spacer from 'Components/Common/Spacer';
 import intl from 'react-intl-universal';
 import { useHistory, useRouteMatch } from 'react-router';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { GET_RX_APP } from 'Base/GraphQL/GQLs';
+import { useEffect } from 'react';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import AppSkeleton from './AppSkeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,6 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flex:1,
       display:'flex',
       flexFlow:'column',
+    },
+    content:{
+      display:'flex',
+      flex:1,
     },
     workspace:{
       display:'flex',
@@ -39,6 +48,23 @@ export const AppStudio = observer(() => {
   const history = useHistory();
   const match = useRouteMatch();
   const{id} = match.params as any;
+
+  const [excuteQuery, { loading, error, data }] = useLazyQuery(GET_RX_APP,{
+    notifyOnNetworkStatusChange: true
+  });
+
+  useEffect(()=>{
+    if(id){
+      excuteQuery({variables:{id}});
+    }
+  },[id, excuteQuery]);
+
+  useEffect(()=>{
+    studioStore.setRxApp(data?.rxApp);
+  },[data, studioStore])
+
+  useShowAppoloError(error)
+
   const handleBack = ()=>{
     history.goBack();
   }
@@ -60,9 +86,15 @@ export const AppStudio = observer(() => {
               </Button>
             </Toolbar>
           </AppBar>
-          <div className={classes.workspace}>
+          <div className={classes.content}>
             <div style={{width:studioStore.verticalBarWidth}}></div>
-            <div>ddd</div>
+            <div className={classes.workspace}>
+              {
+                loading 
+                ? <AppSkeleton />
+                : 'ddd'
+              }
+            </div>
           </div>
         </div>
       </AppStudioStoreProvider>

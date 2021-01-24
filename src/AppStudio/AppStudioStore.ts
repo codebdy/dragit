@@ -1,3 +1,4 @@
+import { IRxApp } from "Base/Model/IRxApp";
 import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
 import { useContext } from "react";
@@ -8,9 +9,14 @@ export class AppStudioStore{
   isDirty:boolean = false;
   themeMode:ThemeMode = DARK;
   editingPageId?:string;
+  rxApp?: IRxApp;
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setRxApp(rxApp: IRxApp){
+    this.rxApp = rxApp;
   }
 }
 

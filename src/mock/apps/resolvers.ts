@@ -11,7 +11,7 @@ function getRxApp(id:string){
 
 export const rxApp = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  console.log('mock post', args);
+  console.log('mock rxApp', args);
   return getRxApp(args.id)
 }
 
