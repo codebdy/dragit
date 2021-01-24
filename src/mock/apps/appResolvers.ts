@@ -1,7 +1,7 @@
 import { sleep } from "mock/utils/sleep";
 import appsData from "./data";
 
-function getRxApp(id:string){
+export function getRxApp(id:string){
   for(var i = 0; i < appsData.length; i++){
     if(appsData[i].id === id){
       return appsData[i];

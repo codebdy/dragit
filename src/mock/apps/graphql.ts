@@ -62,4 +62,5 @@ export var appGQLMutation = `
   saveRxApp(rxApp:RxAppInput):RxApp
   saveRxPage(rxPage:RxPageInput):RxPage
   removeRxPage(id:ID):RxApp
+  createPage(appId:ID, templateId:ID, pageId:ID, name:String):RxPage
 `

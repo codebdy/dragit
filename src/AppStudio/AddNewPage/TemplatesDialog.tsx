@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { Fragment, useState } from 'react';
-import { Button, DialogActions, DialogContent, Divider, TextField } from '@material-ui/core';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_RX_TEMPLATES } from 'Base/GraphQL/GQLs';
 import intl from 'react-intl-universal';
-import RxDialog from './RxDialog';
+import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
+import RxDialog from 'AppStudio/RxDialog';
+import { IRXTemplate } from 'Base/Model/IRXTemplate';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import TemplatesSkeleton from './TemplatesSkeleton';
+import { useState } from 'react';
 
-//通过代码复制，快构建一个响应式组件
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content:{
@@ -19,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:theme.spacing(2),
     },
     pageName:{
-      minWidth:'300px',
+      minWidth:'260px',
     },
     buttons:{
 
@@ -31,17 +35,25 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const AddNewPage = observer(() => {
+export const TemplatesDialog = observer((
+  props:{
+    open:boolean,
+    onClose:()=>void,
+  }
+) => {
+  const {open, onClose} = props;
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(''); 
-  const handleNew = ()=>{
-    setOpen(true);
-  }
+  const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
+  useShowAppoloError(error);
+  console.log(loading, data, error);
+  const templates = data?.rxTemplates;
 
   const handleClose = ()=>{
-    setOpen(false);
+    onClose();
+    setName('');
+    setNameError('');
   }
 
   const handelNameChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -60,27 +72,35 @@ export const AddNewPage = observer(() => {
     }
   }
 
+  
   return (
-    <Fragment>
-      <Button 
-        variant="outlined" 
-        color = "primary"
-        onClick = {handleNew}
-      >{intl.get('add-new')}</Button>
-      <RxDialog 
-        open = {open}
-        title = {intl.get('add-new-page')}
-        onClose = {handleClose}
-        maxWidth = "sm"
-      >
-        <Divider />
-        <DialogContent className={classes.content}>
+    <RxDialog 
+      open = {open}
+      title = {intl.get('add-new-page')}
+      onClose = {handleClose}
+      maxWidth = "sm"
+    >
+      <Divider />
+      <DialogContent className={classes.content}>
+        {
+          loading
+          ? <TemplatesSkeleton />
+          : <Grid container spacing = {2}>
+              {
+                templates?.map((template:IRXTemplate)=>{
+                  return(
+                    <Grid key={template.id} item  md={4}>
+                      {template.name}
+                    </Grid>
+                  )
+                })
+              }
 
-        
-        
-        </DialogContent>
-        <Divider />
-        <DialogActions className = {classes.actions}>
+            </Grid>
+        }
+      </DialogContent>
+      <Divider />
+      <DialogActions className = {classes.actions}>
           <TextField 
             className={classes.pageName} 
             variant = "outlined" 
@@ -91,7 +111,10 @@ export const AddNewPage = observer(() => {
             onChange = {handelNameChange}
           />    
           <div className = {classes.buttons}>
-            <Button variant = "outlined">
+            <Button 
+              variant = "outlined"
+              onClick = {handleClose}
+            >
               {intl.get('cancel')}
             </Button>
             <Button 
@@ -104,7 +127,6 @@ export const AddNewPage = observer(() => {
             </Button>
           </div>
         </DialogActions>   
-      </RxDialog>
-    </Fragment>
+    </RxDialog>
   );
 })

@@ -94,6 +94,17 @@ export const SAVE_RX_PAGE = gql`
   }
 `
 
+export const GET_RX_TEMPLATES = gql`
+  query {
+    rxTemplates{
+      id
+      name
+      schema
+      thumbnail
+    }
+  }
+`
+
 //后面要删除此变量
 export const SAVE_PAGE = gql`
   mutation($page:PageInput){

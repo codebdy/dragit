@@ -21,6 +21,8 @@ import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./role
 import { appGQLInput, appGQLMutation, appGQLQuery, appGQLType } from "./apps/graphql";
 import { appMutationResolvers, appQueryResolvers } from "./apps/appResolvers";
 import { pageMutationResolvers, pageQueryResolvers } from "./apps/pageResolvers";
+import { templateQueryResolvers } from "./templates/resolvers";
+import { templateGQLQuery, templateGQLType } from "./templates/graphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -98,6 +100,7 @@ export const schema = `
 
   ${appGQLType}
   ${appGQLInput}
+  ${templateGQLType}
 
   ${mediasGQLType}
   ${articleGQLType}
@@ -119,6 +122,7 @@ export const schema = `
     page(id:ID!):Page
     moduleBySlug(slug:String):Module
     ${appGQLQuery}
+    ${templateGQLQuery}
     ${articleGQLQuery}
     ${mediasGQLQuery}
     ${supplierGQLQuery}
@@ -147,6 +151,7 @@ export const resolvers = {
 
     ...appQueryResolvers,
     ...pageQueryResolvers,
+    ...templateQueryResolvers,
     
     drawer:drawerResolver,
     modulePage:modulePageResolver,

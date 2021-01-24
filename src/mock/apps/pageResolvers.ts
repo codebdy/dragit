@@ -1,4 +1,6 @@
+import { getTemplate } from "mock/templates/data";
 import { sleep } from "mock/utils/sleep";
+import { getRxApp } from "./appResolvers";
 import appsData from "./data";
 
 function getRxPage(id:string){
@@ -47,11 +49,25 @@ export const saveRxPage = async (parent:any, args:any, context:any, info:any)=>{
   return rxPage;
 }
 
+export const createPage = async (parent:any, args:any, context:any, info:any)=>{
+  await sleep(500);
+  const app = getRxApp(args.appId)
+  const template = getTemplate(args.templateId);
+  let page = {id:args.pageId, name:args.name, schema:template?.schema} as any;
+  console.log('Server createPage:', args);
+  if(app){
+    app.pages = [...app.pages, page];
+  }
+
+  return page;
+}
+
 export const pageQueryResolvers = {
   rxPage,
 }
 
 export const pageMutationResolvers = {
   removeRxPage,
-  saveRxPage
+  saveRxPage,
+  createPage
 }
