@@ -19,10 +19,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function PageAction(
   props:{
-    onCloseMenu?:()=>void
+    onCloseMenu?:()=>void,
+    onEditName?:()=>void,
   }
 ){
-  const {onCloseMenu} = props;
+  const {onCloseMenu, onEditName} = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -35,6 +36,12 @@ export default function PageAction(
     setAnchorEl(null);
     onCloseMenu && onCloseMenu();
   };
+
+  const handleEditName = () =>{
+    handleMenuClose();
+    onEditName&&onEditName();
+  }
+
   return (
     <Fragment>
       <IconButton size="small" className = {classes.root} onClick={handleMenuOpen}>
@@ -53,9 +60,14 @@ export default function PageAction(
           }}
           open={isMenuOpen}
           onClose={handleMenuClose}
-          
         >
           <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
+            <ListItemIcon>
+              <MdiIcon iconClass = "mdi-pencil-ruler"  size={18}/>
+            </ListItemIcon>
+            {intl.get('design-page')} 
+          </MenuItem>
+          <MenuItem onClick={handleEditName} className = {classes.menuItem}>
             <ListItemIcon>
               <MdiIcon iconClass = "mdi-pencil"  size={18}/>
             </ListItemIcon>
