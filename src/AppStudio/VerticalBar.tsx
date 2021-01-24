@@ -9,6 +9,7 @@ import { DARK } from 'Store/ThemeSettings';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from './AppStudioStore';
 import { PopuDrawer } from './PopuDrawer';
+import { PageList } from './PageList';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -116,7 +117,7 @@ export const VerticalBar = observer(() => {
           <Button variant="outlined" color = "primary">{intl.get('add-new')}</Button>
         }
       >
-        sweeweweeeeeeeeeeeeee
+        <PageList />
       </PopuDrawer>
 
     </Fragment>
