@@ -1,3 +1,5 @@
+import demoPages from "mock/demo/pages";
+
 var appsData = [
   {
     id:'guid-1',
@@ -22,7 +24,7 @@ var appsData = [
     icon:'mdi-leaf',
     color:'#8bc34a',
     app_type:'免费',
-    pages:[],
+    pages: demoPages,
     navigation_items:[],
     auths:[
       {
