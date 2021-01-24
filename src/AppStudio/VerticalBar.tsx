@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { Avatar, Button, createMuiTheme, IconButton, Paper, ThemeProvider, Tooltip } from '@material-ui/core';
+import { Avatar, createMuiTheme, IconButton, Paper, ThemeProvider, Tooltip } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import Spacer from 'Components/Common/Spacer';
 import { Fragment } from 'react';
@@ -10,6 +10,7 @@ import intl from 'react-intl-universal';
 import { useAppStudioStore } from './AppStudioStore';
 import { PopuDrawer } from './PopuDrawer';
 import { PageList } from './PageList';
+import { AddNewPage } from './AddNewPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -114,7 +115,7 @@ export const VerticalBar = observer(() => {
         onClose={()=>setPagesOpen(false)}
         title = {intl.get('pages')}
         titleAction = {
-          <Button variant="outlined" color = "primary">{intl.get('add-new')}</Button>
+          <AddNewPage />
         }
       >
         <PageList />

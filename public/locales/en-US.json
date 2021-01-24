@@ -310,5 +310,7 @@
     "navigation":"Navigation",
     "settings":"Settings",
     "duplicate":"Duplicate",
-    "design-page":"Design page"
+    "design-page":"Design page",
+    "add-new-page":"Add new page",
+    "page-name":"Page name"
 }
