@@ -31,6 +31,15 @@ export var appGQLType = `
 `
 
 export var appGQLInput =`
+  input RxPageInput{
+    id:ID
+    name:String
+    query:String
+    max_width:String
+    width:Int
+    schema:JSON
+    auths:[String]
+  }
   input RxAppInput{
     id: ID
     name: String
@@ -38,15 +47,19 @@ export var appGQLInput =`
     color: String
     app_type: String
     navigation_items: JSON
-}
+  }
+
 `
 
 export var appGQLQuery = `
   rxApps:[RxApp]!
   rxApp(id:ID):RxApp
+  rxPage(id:ID):RxPage
 `
 
 export var appGQLMutation = `
   removeRxApp(id:ID):RxApp
   saveRxApp(rxApp:RxAppInput):RxApp
+  saveRxPage(rxPage:RxPageInput):RxPage
+  removeRxPage(id:ID):RxApp
 `

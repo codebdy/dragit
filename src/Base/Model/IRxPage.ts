@@ -15,7 +15,7 @@ export interface IRxPage{
   name?:string, 
   maxWidth?: MaxWidth;
   width?:number;
-  layout?:Array<any>,
+  schema?:Array<any>,
   auths?:string[],
   query?:string, 
 }

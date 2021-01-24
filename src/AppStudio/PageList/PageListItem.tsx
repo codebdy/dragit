@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import PageAction from './PageAction';
 import { IRxPage } from 'Base/Model/IRxPage';
-import { Button, CircularProgress, TextField } from '@material-ui/core';
+import { CircularProgress, TextField } from '@material-ui/core';
 import { useEffect } from 'react';
-import intl from 'react-intl-universal';
+import { useMutation } from '@apollo/react-hooks';
+import { SAVE_RX_PAGE } from 'Base/GraphQL/GQLs';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,11 +42,14 @@ export const PageListItem = observer((
   const [name, setName] = useState(page.name);
   const [editing, setEditing] = useState(false);
   const classes = useStyles();
-  const loading = false;
 
   useEffect(()=>{
     setName(page.name)
   },[page.name])
+
+  const [excuteMutation, {loading:saving, error}] = useMutation( SAVE_RX_PAGE );
+
+  useShowAppoloError(error);
 
   const handleEditName = ()=>{
     setEditing(true);
@@ -52,12 +57,16 @@ export const PageListItem = observer((
 
   const handleFinishedEdit = ()=>{
     setEditing(false);
+    if(name !== page.name){
+      excuteMutation({variables:{rxPage:{id:page.id, name}}})
+    }
   }
 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     const newValue = event.target.value as string;
     setName(newValue);
   }
+  const loading = saving;
 
   return (
     <div 
@@ -68,29 +77,21 @@ export const PageListItem = observer((
     >
       {
         editing 
-        ? <Fragment>
-            <TextField 
-              autoFocus
-              size = "small" 
-              variant = "outlined" 
-              value = {name === undefined ? '' : name} 
-              onBlur = {handleFinishedEdit}
-              onChange = {handleChange}
-              onKeyUp = {e=>{
+        ? <TextField 
+            autoFocus
+            size = "small" 
+            variant = "outlined" 
+            value = {name === undefined ? '' : name} 
+            onBlur = {handleFinishedEdit}
+            onChange = {handleChange}
+            onKeyUp = {
+              e=>{
                 if(e.key === 'Enter') {
                   handleFinishedEdit()
                 }
               }
             }
-            />
-            <Button 
-              aria-label="save" 
-              className = {classes.save}
-              variant = "outlined"
-            >
-              {intl.get('save')}
-            </Button>
-          </Fragment>
+          />
         : name
       }
       <div className={classes.rightArea}>
@@ -99,7 +100,7 @@ export const PageListItem = observer((
           <CircularProgress size = {24}/>
         }
         {
-          hover&& !editing &&
+          hover&& !editing && !loading &&
           <div onClick={e=>{
             e.stopPropagation();
           }}>

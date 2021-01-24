@@ -19,7 +19,7 @@ export class PageStore{
   constructor(page:IRxPage, pageJumper?:IPageJumper) {
     this.page = page;
     makeAutoObservable(this)
-    const layout = page?.layout || [];
+    const layout = page?.schema || [];
     this.rootNode = new RXNode<IMeta>();
     this.rootNode.parse(cloneObject(layout));
     this.makePageMutationGqls();

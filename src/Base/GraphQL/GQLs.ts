@@ -41,7 +41,7 @@ export const GET_RX_APP = gql`
 `
 export const SAVE_RX_APP = gql`
   mutation($rxApp:RxAppInput){
-    rxApp(rxApp:$rxApp){
+    saveRxApp(rxApp:$rxApp){
       ${appFieldsGQL}
     }
   }
@@ -80,7 +80,21 @@ export const GET_PAGE = gql`
     }
   }
 `
+export const SAVE_RX_PAGE = gql`
+  mutation($rxPage:RxPageInput){
+    saveRxPage(rxPage:$rxPage){
+      id
+      name
+      maxWidth:max_width
+      width
+      schema
+      auths
+      query
+    }
+  }
+`
 
+//后面要删除此变量
 export const SAVE_PAGE = gql`
   mutation($page:PageInput){
     page(page:$page){
