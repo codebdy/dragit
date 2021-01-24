@@ -12,6 +12,7 @@ import TemplatesSkeleton from './TemplatesSkeleton';
 import { useState } from 'react';
 import Image from 'Components/Common/Image';
 import classNames from 'classnames';
+import SubmitButton from 'Components/Common/SubmitButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,10 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth:'260px',
     },
     buttons:{
-
+      display:'flex',
+      alignItems:'center',
     },
     confirmButton:{
-      marginLeft:theme.spacing(2),
+      marginLeft:theme.spacing(1),
     },
     image:{
       border:theme.palette.divider + ' solid 1px',
@@ -70,8 +72,7 @@ export const TemplatesDialog = observer((
 ) => {
   const {open, onClose} = props;
   const classes = useStyles();
-  const [name, setName] = useState('');
-  const [nameError, setNameError] = useState(''); 
+  const [name, setName] = useState(intl.get('new-page'));
   const [selectedId, setSelectedId] = useState('');
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
   useShowAppoloError(error);
@@ -80,24 +81,16 @@ export const TemplatesDialog = observer((
 
   const handleClose = ()=>{
     onClose();
-    setName('');
-    setNameError('');
+    setName(intl.get('new-page'));
   }
 
   const handelNameChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     const newValue = event.target.value as string;
-    if(newValue){
-      setNameError('');
-    }
-
     setName(newValue);
   }
 
   const handleConfirm = ()=>{
-    if(!name){
-      setNameError(intl.get('required'));
-      return;
-    }
+
   }
 
   
@@ -143,8 +136,7 @@ export const TemplatesDialog = observer((
             variant = "outlined" 
             size="small" 
             label = {intl.get('page-name')}
-            error = {!!nameError}
-            helperText = {nameError}
+            value = {name}
             onChange = {handelNameChange}
           />    
           <div className = {classes.buttons}>
@@ -154,14 +146,15 @@ export const TemplatesDialog = observer((
             >
               {intl.get('cancel')}
             </Button>
-            <Button 
+            <SubmitButton 
               className = {classes.confirmButton} 
               variant = "contained" 
               color = "primary"
               onClick = {handleConfirm}
+              disabled = {!name || !selectedId}
             >
               {intl.get('confirm')}
-            </Button>
+            </SubmitButton>
           </div>
         </DialogActions>   
     </RxDialog>
