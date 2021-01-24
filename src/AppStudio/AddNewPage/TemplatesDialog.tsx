@@ -47,7 +47,7 @@ export const TemplatesDialog = observer((
   const [nameError, setNameError] = useState(''); 
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
   useShowAppoloError(error);
-  console.log(loading, data, error);
+
   const templates = data?.rxTemplates;
 
   const handleClose = ()=>{
