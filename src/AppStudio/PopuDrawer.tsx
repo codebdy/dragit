@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       justifyContent:'space-between',
     },
-    content:{
-      padding:theme.spacing(1),
-    },
   }),
 );
 
@@ -52,7 +49,7 @@ export const PopuDrawer = observer((
         {titleAction}
       </DialogTitle>
       <Divider />
-      <Scrollbar className={classes.content}>
+      <Scrollbar>
         {children}
       </Scrollbar>
     </Drawer>
