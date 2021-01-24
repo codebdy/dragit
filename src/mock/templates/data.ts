@@ -11,14 +11,14 @@ var pageTemplates = [
     id:'guid-t-2',
     name:'产品页',
     schema:[],
-    thumbnail:'',
+    thumbnail:'/static/images/templates/product.jpg',
   },
 
   {
     id:'guid-t-3',
     name:'文章页',
     schema:[],
-    thumbnail:''
+    thumbnail:'/static/images/templates/article.jpg',
   },
 ]
 

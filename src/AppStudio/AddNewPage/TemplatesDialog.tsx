@@ -10,6 +10,8 @@ import { IRXTemplate } from 'Base/Model/IRXTemplate';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import TemplatesSkeleton from './TemplatesSkeleton';
 import { useState } from 'react';
+import Image from 'Components/Common/Image';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +32,31 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     confirmButton:{
       marginLeft:theme.spacing(2),
+    },
+    image:{
+      border:theme.palette.divider + ' solid 1px',
+      '&:hover':{
+        outline: theme.palette.primary.main + ' solid 1px',
+      }
+    },
+    selected:{
+      outline: theme.palette.primary.main + ' solid 2px',
+      '&:hover':{
+        outline: theme.palette.primary.main + ' solid 2px',
+      }
+    },
+    templateGrid:{
+      display:'flex',
+      flexFlow:'column',
+      cursor: 'pointer',
+    },
+    templateName:{
+      flex:1,
+      display:'flex',
+      justifyContent: 'center',
+      alignItems : 'center',
+      padding:theme.spacing(1),
+      fontSize:'1.1rem',
     }
   }),
 );
@@ -45,6 +72,7 @@ export const TemplatesDialog = observer((
   const classes = useStyles();
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(''); 
+  const [selectedId, setSelectedId] = useState('');
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
   useShowAppoloError(error);
 
@@ -89,13 +117,22 @@ export const TemplatesDialog = observer((
               {
                 templates?.map((template:IRXTemplate)=>{
                   return(
-                    <Grid key={template.id} item  md={4}>
-                      {template.name}
+                    <Grid 
+                      key={template.id} item  md={4} 
+                      className = {classes.templateGrid}
+                      onClick={()=>{setSelectedId(template.id)}}
+                    >
+                      <Image 
+                        src = {template.thumbnail} 
+                        className={
+                          classNames(classes.image,{[classes.selected]:selectedId === template.id})
+                        }
+                      />
+                      <div className = {classes.templateName}>{template.name}</div>
                     </Grid>
                   )
                 })
               }
-
             </Grid>
         }
       </DialogContent>
