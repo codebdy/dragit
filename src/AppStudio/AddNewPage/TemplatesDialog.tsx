@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_RX_TEMPLATES } from 'Base/GraphQL/GQLs';
+import { GET_RX_TEMPLATES, pageFieldsGQL } from 'Base/GraphQL/GQLs';
 import { CREATE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
@@ -81,18 +81,16 @@ export const TemplatesDialog = observer((
   const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
     //更新缓存
-    update: (cache, { data: { createRxPage } })=>{
+    update(cache, { data: { createRxPage } }){
       cache.modify({
         id: cache.identify(studioStore?.rxApp as any),
         fields: {
-          pages:(existingPageRefs = [], { readField })=>{
+          pages(existingPageRefs = []){
             const newPageRef = cache.writeFragment({
               data: createRxPage,
               fragment: gql`
                 fragment NewPage on RxPage {
-                  id
-                  name
-                  schema
+                  ${pageFieldsGQL}
                 }
               `
             });

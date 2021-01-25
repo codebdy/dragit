@@ -6,11 +6,12 @@ import PageAction from './PageAction';
 import { IRxPage } from 'Base/Model/IRxPage';
 import { CircularProgress, TextField } from '@material-ui/core';
 import { useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import { REMOVE_RX_PAGE, SAVE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
+import { gql, useMutation } from '@apollo/react-hooks';
+import { DUPLICATE_RX_PAGE, REMOVE_RX_PAGE, SAVE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import classNames from 'classnames';
+import { pageFieldsGQL } from 'Base/GraphQL/GQLs';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,7 +77,29 @@ export const PageListItem = observer((
     }
   );
 
-  useShowAppoloError(error||removeError);
+  const [excuteDuplicate, {loading:duplicating, error:duplicateError}] = useMutation(DUPLICATE_RX_PAGE, {
+    //更新缓存
+    update:(cache, { data: { duplicateRxPage } })=>{
+      cache.modify({
+        id: cache.identify(studioStore?.rxApp as any),
+        fields: {
+          pages(existingPageRefs = []){
+            const newPageRef = cache.writeFragment({
+              data: duplicateRxPage,
+              fragment: gql`
+                fragment NewPage on RxPage {
+                  ${pageFieldsGQL}
+                }
+              `
+            });
+            return [...existingPageRefs, newPageRef];
+          }
+        }
+      });
+    },
+  });
+
+  useShowAppoloError(error || removeError || duplicateError);
 
   const handleEditName = ()=>{
     setEditing(true);
@@ -99,14 +122,14 @@ export const PageListItem = observer((
   }
 
   const handleDuplicate = ()=>{
-
+    excuteDuplicate({variables:{id:page.id}});
   }
 
   const handleRemove = ()=>{
     excuteRemoveRxPage({variables:{id:page.id}});
   }
 
-  const loading = saving || removing;
+  const loading = saving || removing || duplicating;
 
   return (
     <div 

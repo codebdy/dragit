@@ -1,7 +1,9 @@
 import { getTemplate } from "mock/templates/data";
 import { sleep } from "mock/utils/sleep";
+import { cloneObject } from "Utils/cloneObject";
 import { getRxApp } from "./appResolvers";
 import appsData from "./data";
+import { v4 as uuidv4 } from 'uuid';
 
 function getRxPage(id:string){
   for(var i = 0; i < appsData.length; i++){
@@ -9,6 +11,17 @@ function getRxPage(id:string){
     for(var j = 0; j < app.pages.length; j++){
       if(id === app.pages[j].id){
         return app.pages[j];
+      }
+    }
+  }
+}
+
+function getPageApp(id:string){
+  for(var i = 0; i < appsData.length; i++){
+    const app = appsData[i];
+    for(var j = 0; j < app.pages.length; j++){
+      if(id === app.pages[j].id){
+        return app
       }
     }
   }
@@ -62,6 +75,21 @@ export const createRxPage = async (parent:any, args:any, context:any, info:any)=
   return page;
 }
 
+export const duplicateRxPage = async (parent:any, args:any, context:any, info:any)=>{
+  await sleep(500);
+
+  const rxPage = getRxPage(args.id);
+  console.log('Server duplicateRxPage:', rxPage);
+  const copy = cloneObject(rxPage);
+  copy.id = uuidv4();
+  copy.name = copy.name + ' copy';
+  const rxApp = getPageApp(args.id)
+  if(rxApp){
+    rxApp.pages =[...rxApp.pages, copy];
+  }
+  return copy;
+}
+
 export const pageQueryResolvers = {
   rxPage,
 }
@@ -69,5 +97,6 @@ export const pageQueryResolvers = {
 export const pageMutationResolvers = {
   removeRxPage,
   saveRxPage,
-  createRxPage
+  createRxPage,
+  duplicateRxPage
 }
