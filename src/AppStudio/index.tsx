@@ -79,7 +79,7 @@ export const AppStudio = observer(() => {
           <VerticalBar />
           <AppBar position="static" color="transparent" variant="outlined">
             <Toolbar variant="dense">
-              <div style={{width:studioStore.verticalBarWidth}}></div>
+              <div style={{width:'50px'}}></div>
               <IconButton edge="start" onClick={handleBack}>
                 <MdiIcon iconClass = "mdi-arrow-left" color="#475f7b"/>
               </IconButton>

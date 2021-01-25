@@ -16,6 +16,7 @@
   border: solid 1px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .rx-drag .rx-left .rx-canvas-wapper{
@@ -32,7 +33,7 @@
 
 .rx-drag .rx-right{
   width: 280px;
-  border: solid 1px;
+  border-left: solid 1px;
 }
 
 .rx-drag ::-webkit-scrollbar {

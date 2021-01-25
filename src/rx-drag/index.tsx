@@ -3,6 +3,8 @@ import { observer } from 'mobx-react';
 import { IRxMeta } from './IRxMeta';
 import { IRxThemeOptions } from './IRxThemeOptions';
 import './style.css';
+import { Toolbox } from './Toolbox';
+import { NodeNavigation } from './NodeNavigation';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
@@ -17,9 +19,7 @@ export const RxDrag = observer((
   return (
     <div className = 'rx-drag'>
       <div className = 'rx-left'>
-        <div className = 'rx-toolbar'>
-          rx-toolbar
-        </div>
+        <Toolbox />
         <div className = 'rx-canvas-wapper'>
         rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
         rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
@@ -37,9 +37,7 @@ export const RxDrag = observer((
         rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
         rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
         </div>
-        <div className = 'rx-node-navigation'>
-          node-navigation
-        </div>
+        <NodeNavigation />
       </div>
       <div className = 'rx-right'>
         rx-right
