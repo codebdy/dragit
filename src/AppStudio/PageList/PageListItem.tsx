@@ -54,7 +54,27 @@ export const PageListItem = observer((
   },[page.name])
 
   const [excuteSaveRxPage, {loading:saving, error}] = useMutation( SAVE_RX_PAGE );
-  const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_PAGE );
+  const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_PAGE,
+    {
+      update: (cache, { data: { removeRxPage } })=>{
+        cache.modify({
+          id: cache.identify(studioStore?.rxApp as any),
+          fields: {
+            pages:(existingPageRefs = [], { readField })=>{
+              return existingPageRefs.filter(
+                (pageRef:any) => page.id !== readField('id', pageRef)
+              );
+            }
+          }
+        });
+      },
+      onCompleted: (data)=>{
+        if(page.id === studioStore?.editingPageId){
+          studioStore.setEditingPageId('');
+        }
+      }
+    }
+  );
 
   useShowAppoloError(error||removeError);
 

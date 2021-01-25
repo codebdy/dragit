@@ -78,14 +78,14 @@ export const TemplatesDialog = observer((
   const [name, setName] = useState(intl.get('new-page'));
   const [selectedId, setSelectedId] = useState('');
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
-  const sutdioStore = useAppStudioStore();
+  const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
     //更新缓存
     update: (cache, { data: { createRxPage } })=>{
       cache.modify({
-        id: cache.identify(sutdioStore?.rxApp as any),
+        id: cache.identify(studioStore?.rxApp as any),
         fields: {
-          pages(existingPageRefs = [], { readField }) {
+          pages:(existingPageRefs = [], { readField })=>{
             const newPageRef = cache.writeFragment({
               data: createRxPage,
               fragment: gql`
@@ -123,7 +123,7 @@ export const TemplatesDialog = observer((
 
   const handleConfirm = ()=>{
     excuteCreate({variables:{
-      appId:sutdioStore?.rxApp?.id,
+      appId:studioStore?.rxApp?.id,
       templateId:selectedId,
       pageId:uuidv4(),
       name
