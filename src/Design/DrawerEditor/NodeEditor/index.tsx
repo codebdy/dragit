@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import IMenuItem, { IMenuChip } from 'Base/Model/IMenuItem';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';
 import BadgeEditor from './BadgeEditor';
@@ -9,8 +9,8 @@ import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
 
 export default function NodeEditor(
   props:{
-    node:RXNode<IMenuItem>,
-    onChange:(node:RXNode<IMenuItem>, field:string, value:any)=>void,
+    node:RxNode<IMenuItem>,
+    onChange:(node:RxNode<IMenuItem>, field:string, value:any)=>void,
   }
 ){
   const {node, onChange} = props;

@@ -4,7 +4,7 @@ import { PropsInputProps } from '../../../Design/PageEditor/AttrebuteBox/PropsIn
 import intl from 'react-intl-universal';
 import { Fragment } from 'react';
 import MetaListDialog from 'Components/ListView/PropsInputs/MetaListDialog';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 
 const styles = (theme: Theme) =>
   createStyles({

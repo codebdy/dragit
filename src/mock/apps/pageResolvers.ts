@@ -1,6 +1,6 @@
 import { getTemplate } from "mock/templates/data";
 import { sleep } from "mock/utils/sleep";
-import { cloneObject } from "Utils/cloneObject";
+import { cloneObject } from "rx-drag/utils/cloneObject";
 import { getRxApp } from "./appResolvers";
 import appsData from "./data";
 import { v4 as uuidv4 } from 'uuid';

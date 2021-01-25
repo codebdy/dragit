@@ -1,6 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx";
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { validate } from "./validate";
 import { createId } from "Base/creatId";
 import { ID } from "Base/Model/graphqlTypes";
@@ -9,14 +9,14 @@ export class RXModel{
   id:ID;
   //从model中的取值索引
   modelKey:string|number;
-  node: RXNode<IMeta>;
+  node: RxNode<IMeta>;
   modelLabel: string = '';
   defaultValue?: any;
   value?: any;
   error?: string;  
   loading?: boolean;
   childrenMap: Map<string,RXModel>;
-  constructor(node: RXNode<IMeta>, modelKey:string|number) {
+  constructor(node: RxNode<IMeta>, modelKey:string|number) {
     this.id = createId();
     this.node = node;
     this.modelKey = modelKey;

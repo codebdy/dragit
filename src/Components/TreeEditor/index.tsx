@@ -4,7 +4,7 @@ import { Skeleton } from '@material-ui/lab';
 //import { IForm, defultForm, FormContext } from "base/FormContext";
 import { ID } from 'Base/Model/graphqlTypes';
 import { ITreeNode } from 'Base/Model/ITreeNode';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import SubmitButton from 'Components/Common/SubmitButton';
 import Portlet from 'Components/Portlet';
 import React, { useEffect, useState } from 'react';
@@ -26,10 +26,10 @@ const TreeEditor = React.forwardRef((
   //const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
   //const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
   //const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
-  const [draggedNode, setDraggedNode] = useState<RXNode<ITreeNode>|undefined>();
-  const [root, setRoot] = useState<RXNode<ITreeNode>>();
+  const [draggedNode, setDraggedNode] = useState<RxNode<ITreeNode>|undefined>();
+  const [root, setRoot] = useState<RxNode<ITreeNode>>();
   //const [form, setForm] = useState<IForm>(defultForm());
-  const [selectedNode, setSelectedNode] = useState<RXNode<ITreeNode>|undefined>();
+  const [selectedNode, setSelectedNode] = useState<RxNode<ITreeNode>|undefined>();
 
   /*useEffect(()=>{
     const items = itemsJustSaved ? itemsJustSaved : itemsGot;
@@ -38,18 +38,18 @@ const TreeEditor = React.forwardRef((
     setRoot(root);
   },[itemsJustSaved, itemsGot]);*/
 
-  const handleNodeDragStart = (node?:RXNode<ITreeNode>)=>{
+  const handleNodeDragStart = (node?:RxNode<ITreeNode>)=>{
     setDraggedNode(node);
   }
 
   //form值改变刷新树列表
   const valueChanged = ()=>{
-    let newRoot = new RXNode<ITreeNode>();
+    let newRoot = new RxNode<ITreeNode>();
     newRoot.children = [...(root?.children||[])];
     setRoot(newRoot);
   }
 
-  const handleDragIn = (node:RXNode<ITreeNode>)=>{
+  const handleDragIn = (node:RxNode<ITreeNode>)=>{
     let rootCopy = root?.copy();
     let draggedNodeCopy = rootCopy?.getNode(draggedNode?.id);
     let nodeCopy = rootCopy?.getNode(node.id);
@@ -59,7 +59,7 @@ const TreeEditor = React.forwardRef((
     setRoot(rootCopy);
   }
 
-  const handleExchange = (node:RXNode<ITreeNode>)=>{
+  const handleExchange = (node:RxNode<ITreeNode>)=>{
     let rootCopy = root?.copy();
     let draggedNodeCopy = rootCopy?.getNode(draggedNode?.id);
     let nodeCopy = rootCopy?.getNode(node.id);
@@ -87,21 +87,21 @@ const TreeEditor = React.forwardRef((
     }
   }
 
-  const handelRemove = (node:RXNode<ITreeNode>)=>{
+  const handelRemove = (node:RxNode<ITreeNode>)=>{
     let rootCopy = root?.copy();
     let nodeCopy = rootCopy?.getNode(node.id);
     nodeCopy?.remove();
     setRoot(rootCopy); 
   }
 
-  const handleAddChild = (node:RXNode<ITreeNode>)=>{
+  const handleAddChild = (node:RxNode<ITreeNode>)=>{
     let rootCopy = root?.copy();
     let nodeCopy = rootCopy?.getNode(node.id);
     if(!nodeCopy){
       return;
     }
     
-    let newNode = RXNode.make<ITreeNode>({
+    let newNode = RxNode.make<ITreeNode>({
       [nameKey]:'New Node',
     })
     newNode.moveIn(nodeCopy);    
@@ -115,7 +115,7 @@ const TreeEditor = React.forwardRef((
       return;
     }
 
-    let newNode = RXNode.make<ITreeNode>({
+    let newNode = RxNode.make<ITreeNode>({
       [nameKey]:'New Node',
     })
     newNode.moveIn(rootCopy);    

@@ -1,15 +1,15 @@
 import { ID } from "Base/Model/graphqlTypes";
 import IMenuItem from "Base/Model/IMenuItem";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 
 export default interface MenuNodeOperateProps {
   onClick?:()=>void,
-  selectedNode?:RXNode<IMenuItem>,
-  draggedNode?: RXNode<IMenuItem>;
-  onSelected?: (node: RXNode<IMenuItem>) => void;
+  selectedNode?:RxNode<IMenuItem>,
+  draggedNode?: RxNode<IMenuItem>;
+  onSelected?: (node: RxNode<IMenuItem>) => void;
   onDragToBefore: (targetId: ID) => void;
   onDragToAfter: (targetId: ID) => void;
-  onDragStart: (node: RXNode<IMenuItem>) => void;
+  onDragStart: (node: RxNode<IMenuItem>) => void;
   onDragEnd: () => void;
   onDragIn?: (targetId: ID)=>void;
 }

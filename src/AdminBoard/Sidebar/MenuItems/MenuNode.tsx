@@ -1,7 +1,7 @@
 import { Badge, ListItem, ListItemIcon, ListItemText, Chip, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useAppValue } from "Base/Hooks/useAppValue";
 import IMenuItem from "Base/Model/IMenuItem";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import classNames from "classnames";
 import React from "react";
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MenuNode = observer((
   props:{
     nested?:boolean,
-    node:RXNode<IMenuItem>,
+    node:RxNode<IMenuItem>,
     mini:boolean,
     onClick?: ()=>void,
     children?: any,

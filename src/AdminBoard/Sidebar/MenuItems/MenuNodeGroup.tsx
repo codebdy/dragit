@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles, Divider, Collapse, List } from "@material-ui/core";
 import IMenuItem, { IMenuBadge } from "Base/Model/IMenuItem"
-import { RXNode } from "Base/RXNode/RXNode"
+import { RxNode } from "rx-drag/RxNode"
 import classNames from "classnames"
 import React, { Fragment } from "react"
 import Subheader from "./Subheader";
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-export function getBadge(children:Array<RXNode<IMenuItem>>): IMenuBadge|undefined{
+export function getBadge(children:Array<RxNode<IMenuItem>>): IMenuBadge|undefined{
   for(let node of children){
     if(node.meta.badge){
       return node.meta.badge
@@ -47,7 +47,7 @@ export function getBadge(children:Array<RXNode<IMenuItem>>): IMenuBadge|undefine
 
 export const MenuNodeGroup = observer((
   props:{
-    node:RXNode<IMenuItem>,
+    node:RxNode<IMenuItem>,
     openedId?: ID,
     onOpened: (id:ID)=>void,
     mini:boolean,
@@ -68,7 +68,7 @@ export const MenuNodeGroup = observer((
   };
   const classes = useStyles();
   const dotBadge = getBadge(props.node.children)
-  const listItems = props.node.children?.map((node:RXNode<IMenuItem>)=>{
+  const listItems = props.node.children?.map((node:RxNode<IMenuItem>)=>{
     let item = node.meta;
     const authed = loggedUser.authCheck(...node.meta?.auths||[]);
     return (

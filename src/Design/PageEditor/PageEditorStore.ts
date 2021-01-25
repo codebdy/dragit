@@ -1,10 +1,10 @@
 import { IRxPage } from "Base/Model/IRxPage";
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { CursorPosition, IDragOverParam } from "Design/PageEditor/Core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable, toJS } from "mobx";
-import { cloneObject } from "Utils/cloneObject";
+import { cloneObject } from "rx-drag/utils/cloneObject";
 import { ChangeMetaCommand } from "./Commands/ChangeMetaCommand";
 import { ClearCommand } from "./Commands/ClearCommand";
 import { ICommand } from "./Commands/ICommand";
@@ -16,7 +16,7 @@ import { MoveInTopCommand } from "./Commands/MoveInTopCommand";
 import { UpdatePageSchemaCommand } from "./Commands/UpdatePageSchemaCommand";
 
 function makeCanvas(){
-  return RXNode.make<IMeta>(
+  return RxNode.make<IMeta>(
     {
       name:'Canvas'
     }
@@ -29,12 +29,12 @@ export class PageEditorStore implements IPageUpdate{
   showPaddingX:boolean = true;
   showPaddingY:boolean = true;
 
-  activeNode?: RXNode<IMeta>;
+  activeNode?: RxNode<IMeta>;
   dragOverParam?: IDragOverParam;
-  draggedNode?: RXNode<IMeta>;
-  canvas?: RXNode<IMeta>;
+  draggedNode?: RxNode<IMeta>;
+  canvas?: RxNode<IMeta>;
   draggedToolboxItem?: IToolboxItem;
-  selectedNode?: RXNode<IMeta>;
+  selectedNode?: RxNode<IMeta>;
   selectedDom: Element|null = null;
   undoList: Array<ICommand> = [];
   redoList: Array<ICommand> = [];
@@ -65,7 +65,7 @@ export class PageEditorStore implements IPageUpdate{
     this.showPaddingY = showPaddingY;
   }
 
-  setActiveNode(activeNode?:RXNode<IMeta>){
+  setActiveNode(activeNode?:RxNode<IMeta>){
     this.activeNode = activeNode;
   }
 
@@ -73,7 +73,7 @@ export class PageEditorStore implements IPageUpdate{
     this.dragOverParam = dragOverParam;
   }
 
-  setDraggedNode(draggedNode?:RXNode<IMeta>){
+  setDraggedNode(draggedNode?:RxNode<IMeta>){
     this.draggedNode = draggedNode;
   }
 
@@ -81,7 +81,7 @@ export class PageEditorStore implements IPageUpdate{
     this.draggedToolboxItem = draggedToolboxItem;
   }
 
-  setSelectedNode(selectedNode?:RXNode<IMeta>){
+  setSelectedNode(selectedNode?:RxNode<IMeta>){
     this.selectedNode = selectedNode
   }
 
@@ -143,7 +143,7 @@ export class PageEditorStore implements IPageUpdate{
     this.refreshToolbarAndLabel();
   }
 
-  operateNode (draggedNode:RXNode<IMeta>, targetNode:RXNode<IMeta>, position:CursorPosition){
+  operateNode (draggedNode:RxNode<IMeta>, targetNode:RxNode<IMeta>, position:CursorPosition){
     if(targetNode.id === draggedNode.id){
       return false;
     }

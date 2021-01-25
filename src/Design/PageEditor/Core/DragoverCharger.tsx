@@ -3,7 +3,7 @@ import { CursorPosition, IDragOverParam } from "./IDragOverParam";
 import { IRect } from "../../../Base/Model/IRect";
 import { resolveMetaConfig } from 'Base/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 
 class Rect {
   rect: IRect;
@@ -98,9 +98,9 @@ class Rect {
 }
 
 export class DragoverCharger {
-  node: RXNode<IMeta>;
+  node: RxNode<IMeta>;
   draggedMeta?: IMeta;
-  constructor(node: RXNode<IMeta>, draggedMeta?: IMeta) {
+  constructor(node: RxNode<IMeta>, draggedMeta?: IMeta) {
     this.node = node;
     this.draggedMeta = draggedMeta;
   }
@@ -140,7 +140,7 @@ export class DragoverCharger {
   }
 
   //判断一个节点是否接受被拖动的数据，不输入参数代表判断本节点
-  isNodeAcceptMeta(node?: RXNode<IMeta>, meta?:IMeta) {
+  isNodeAcceptMeta(node?: RxNode<IMeta>, meta?:IMeta) {
     const childMeta = meta || this.draggedMeta;
     let targetNodeName = node?.meta.name || this.node.meta.name;
     if (!targetNodeName || !childMeta) {
@@ -154,7 +154,7 @@ export class DragoverCharger {
     return this.dragInRect?.isIn(event) && this.isNodeAcceptMeta();
   }
 
-  firstChildAfterMouse(event: React.MouseEvent<HTMLElement>, node?: RXNode<IMeta>) {
+  firstChildAfterMouse(event: React.MouseEvent<HTMLElement>, node?: RxNode<IMeta>) {
     let theNode = node || this.node;
     if (!theNode) {
       return;
@@ -168,7 +168,7 @@ export class DragoverCharger {
     return undefined;
   }
 
-  isAfterMouse(event: React.MouseEvent<HTMLElement>, node?: RXNode<IMeta>): boolean {
+  isAfterMouse(event: React.MouseEvent<HTMLElement>, node?: RxNode<IMeta>): boolean {
     let theNode = node || this.node;
     if (!theNode) {
       return false;

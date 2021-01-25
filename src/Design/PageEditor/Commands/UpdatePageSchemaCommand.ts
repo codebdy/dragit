@@ -1,4 +1,4 @@
-import { cloneObject } from "Utils/cloneObject";
+import { cloneObject } from "rx-drag/utils/cloneObject";
 import { ICommand } from "./ICommand";
 import { IPageUpdate } from "./IPageUpdate";
 

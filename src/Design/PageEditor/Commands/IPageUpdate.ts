@@ -1,9 +1,9 @@
 import { IRxPage } from "Base/Model/IRxPage";
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 
 export interface IPageUpdate{
   page?:IRxPage;
-  selectedNode?: RXNode<IMeta>;
+  selectedNode?: RxNode<IMeta>;
   setPage:(page:IRxPage)=>void;
 }

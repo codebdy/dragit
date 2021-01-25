@@ -6,7 +6,7 @@ import intl from 'react-intl-universal';
 import classNames from 'classnames';
 import { grey } from '@material-ui/core/colors';
 import { Add, Delete } from '@material-ui/icons';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,15 +48,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function TreeNode(
   props:{
-    node:RXNode<ITreeNode>,
+    node:RxNode<ITreeNode>,
     nameKey:string,
-    draggedNode?:RXNode<ITreeNode>,
-    onNodeDragStart:(node?:RXNode<ITreeNode>)=>void,
+    draggedNode?:RxNode<ITreeNode>,
+    onNodeDragStart:(node?:RxNode<ITreeNode>)=>void,
     onDragEnd:()=>void,
-    onDragIn:(node:RXNode<ITreeNode>)=>void,
-    onExchange:(node:RXNode<ITreeNode>)=>void,
-    onRemove:(node:RXNode<ITreeNode>)=>void,
-    onAddChild:(node:RXNode<ITreeNode>)=>void,
+    onDragIn:(node:RxNode<ITreeNode>)=>void,
+    onExchange:(node:RxNode<ITreeNode>)=>void,
+    onRemove:(node:RxNode<ITreeNode>)=>void,
+    onAddChild:(node:RxNode<ITreeNode>)=>void,
   }
 ){
   const {node, nameKey, draggedNode, onNodeDragStart, onDragEnd, onDragIn, onExchange, onRemove, onAddChild} = props;

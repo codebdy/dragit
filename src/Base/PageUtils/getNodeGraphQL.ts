@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 
 const CHILDREN_GQL = "#{children}";
 function getMetaFieldGql(meta?: IMeta){
@@ -38,7 +38,7 @@ function getMetaFieldGql(meta?: IMeta){
   return '';
 }
 
-export function getNodeGraphQL(node?: RXNode<IMeta>) {
+export function getNodeGraphQL(node?: RxNode<IMeta>) {
   if(!node){
     return '';
   }

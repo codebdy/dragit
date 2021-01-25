@@ -1,11 +1,7 @@
+import { IRxMeta } from "rx-drag/IRxMeta";
 import { IValidateRule } from "../Model/IValidateRule";
 
-export interface IMeta{
-  name:string,
-  props?:{
-    //rule?:IValidateRule;
-    [key:string]: any
-  },
+export interface IMeta extends IRxMeta{
   field?:string,
   onlyShow?:boolean,
   rule?:IValidateRule,

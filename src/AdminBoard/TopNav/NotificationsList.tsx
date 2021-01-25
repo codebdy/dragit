@@ -5,7 +5,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import { INotification } from 'Base/Model/INotification';
 import { useHistory } from 'react-router-dom';
-import { resolvePageUrl } from 'Utils/resolvePageUrl';
+//import { resolvePageUrl } from 'Utils/resolvePageUrl';
 import { ID } from 'Base/Model/graphqlTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,12 +30,12 @@ export default function NotificationsList(props:{onClose:()=>void}){
   //const [notifications, loading] = useAxios<Array<INotification>>(request)
 
   const handleClick = (id:ID)=>{
-    history.push(resolvePageUrl({
-      moduleSlug:'notifications',
-      pageId:'view-notification',
-      dataId:id,
-    }));
-    onClose();
+    //history.push(resolvePageUrl({
+    //  moduleSlug:'notifications',
+    //  pageId:'view-notification',
+    //  dataId:id,
+    //}));
+    //onClose();
   }
 
   const loading = false;

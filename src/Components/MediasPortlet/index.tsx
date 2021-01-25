@@ -8,10 +8,10 @@ import { RXInputProps } from 'Base/RXInputProps';
 import { Skeleton } from '@material-ui/lab';
 import { IMedia } from 'Base/Model/IMedia';
 import MdiIcon from 'Components/Common/MdiIcon';
-import { add, exchange, remove } from 'Utils/ArrayHelper';
+import { add, exchange, remove } from 'rx-drag/utils/ArrayHelper';
 import withFormField from 'Components/Common/withFormField';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,7 +53,7 @@ export function mergeArray(oldArray:any, newArray:any){
 
 const MediasPortlet = React.forwardRef((
   props: {
-    rxNode: RXNode<IMeta>,
+    rxNode: RxNode<IMeta>,
     value?:any
     cols?:number,
   } & RXInputProps, 

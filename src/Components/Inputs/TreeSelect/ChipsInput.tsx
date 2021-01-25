@@ -7,7 +7,7 @@ import { IconButton, Popover, useTheme } from '@material-ui/core';
 import { ITreeNode } from 'Base/Model/ITreeNode';
 import TreeList from './TreeList';
 import { isPointInRect } from 'Utils/isPointInRect';
-import { remove } from 'Utils/ArrayHelper';
+import { remove } from 'rx-drag/utils/ArrayHelper';
 import { ID } from 'Base/Model/graphqlTypes';
 import { useDesign } from 'Design/PageEditor/useDesign';
 

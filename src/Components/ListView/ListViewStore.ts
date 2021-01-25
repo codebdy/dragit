@@ -1,10 +1,10 @@
 import { ID } from "Base/Model/graphqlTypes";
 import { IMeta } from "Base/RXNode/IMeta";
 import { RXModel } from "Base/ModelTree/RXModel";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
-import { remove } from "Utils/ArrayHelper";
+import { remove } from "rx-drag/utils/ArrayHelper";
 import { makeTableModel } from "../../Base/ModelTree/makeTableModel";
 import { PaginatorInfo } from "./PaginatorInfo";
 
@@ -36,7 +36,7 @@ interface Updating{
 
 export class ListViewStore{
   refreshQueryFlag:number = 1;
-  tableRxNode?: RXNode<IMeta>;
+  tableRxNode?: RxNode<IMeta>;
   selects:ID[] = [];
   whereGraphQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
@@ -52,7 +52,7 @@ export class ListViewStore{
     return this.tableRxNode?.children || []
   }
 
-  setTableRxNode(node?:RXNode<IMeta>){
+  setTableRxNode(node?:RxNode<IMeta>){
     this.tableRxNode = node;
     if(node){
       this.rxModel = new RXModel(node, 'ListView' + node.id);      

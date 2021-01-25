@@ -4,7 +4,7 @@ import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from 
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { toJS } from 'mobx';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import { PageAction } from 'Base/PageUtils/PageAction';

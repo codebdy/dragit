@@ -16,7 +16,7 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -29,7 +29,7 @@ function creatEmpertyRows(length:number){
 
 const ListView = observer(React.forwardRef((
     props:{
-      rxNode:RXNode<IMeta>,
+      rxNode:RxNode<IMeta>,
       query?:string,
       update?:IPageMutation,
       remove?:string,

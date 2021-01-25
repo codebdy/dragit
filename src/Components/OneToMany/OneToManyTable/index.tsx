@@ -7,7 +7,7 @@ import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { DADA_RXID_CONST, RXNode } from 'Base/RXNode/RXNode';
+import { DADA_RXID_CONST, RxNode } from 'rx-drag/RxNode';
 import { useSetTableStore } from '../useSetTableStore';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { Close } from '@material-ui/icons';
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const OneToManyTable = observer(React.forwardRef((
   props: {
-    rxNode:RXNode<IMeta>,
+    rxNode:RxNode<IMeta>,
     size?:any,
     children:any,
   }, 

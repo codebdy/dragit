@@ -2,10 +2,10 @@ import { IMeta } from "Base/RXNode/IMeta";
 import { makeTableModel } from "Base/ModelTree/makeTableModel";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
 import { RXModel } from "Base/ModelTree/RXModel";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { useEffect } from "react";
 
-export function useSetTableStore(rxNode:RXNode<IMeta>, rowComponentName:string){
+export function useSetTableStore(rxNode:RxNode<IMeta>, rowComponentName:string){
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(rxNode?.meta.field);
 

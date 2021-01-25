@@ -8,7 +8,7 @@ import intl from "react-intl-universal";
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'Base/Model/IMenuItem';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { IModuleCategory } from 'Base/Model/IModuleCategory';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ToolsAccordion(
   props:{
-    onStartDragNode:(node:RXNode<IMenuItem>)=>void,
+    onStartDragNode:(node:RxNode<IMenuItem>)=>void,
     onEndDragNode:()=>void,
   }
 ) {
@@ -85,7 +85,7 @@ export default function ToolsAccordion(
   };
 
   const handleDragStart = (itemMeta:IMenuItem) => {
-    let draggedNode = RXNode.make<IMenuItem>(itemMeta);
+    let draggedNode = RxNode.make<IMenuItem>(itemMeta);
     onStartDragNode(draggedNode);
   }
 

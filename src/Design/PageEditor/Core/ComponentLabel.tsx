@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { observer} from 'mobx-react';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import { useDesign } from '../useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export const ComponentLabel = observer((
   props:{
-    node?:RXNode<IMeta>,
+    node?:RxNode<IMeta>,
     followDom:Element|null,
   }
 )=>{

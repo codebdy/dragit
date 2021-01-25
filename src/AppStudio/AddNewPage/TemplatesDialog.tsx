@@ -7,7 +7,7 @@ import { CREATE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
 import RxDialog from 'AppStudio/RxDialog';
-import { IRXTemplate } from 'Base/Model/IRXTemplate';
+import { IRxTemplate } from 'Base/Model/IRxTemplate2';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import TemplatesSkeleton from './TemplatesSkeleton';
 import { useState } from 'react';
@@ -143,7 +143,7 @@ export const TemplatesDialog = observer((
           ? <TemplatesSkeleton />
           : <Grid container spacing = {2}>
               {
-                templates?.map((template:IRXTemplate)=>{
+                templates?.map((template:IRxTemplate)=>{
                   return(
                     <Grid 
                       key={template.id} item  md={4} 

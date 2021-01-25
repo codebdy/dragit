@@ -8,7 +8,7 @@ import Image from 'Components/Common/Image';
 import classNames from 'classnames';
 import MdiIcon from '../Common/MdiIcon';
 import { IMedia } from 'Base/Model/IMedia';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

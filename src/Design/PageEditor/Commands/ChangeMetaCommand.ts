@@ -1,13 +1,13 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { ICommand } from "./ICommand";
 
 export class ChangeMetaCommand implements ICommand{
-  sourceNode: RXNode<IMeta>;
+  sourceNode: RxNode<IMeta>;
   newMeta?:IMeta;
   oldMeta?:IMeta;
   
-  constructor(sourceNode:RXNode<IMeta>, newMeta:IMeta){
+  constructor(sourceNode:RxNode<IMeta>, newMeta:IMeta){
     this.sourceNode = sourceNode;
     this.newMeta = newMeta;
   }

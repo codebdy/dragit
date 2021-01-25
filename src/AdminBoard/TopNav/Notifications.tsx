@@ -4,7 +4,7 @@ import MdiIcon from "Components/Common/MdiIcon"
 import NotificationsList from './NotificationsList';
 //import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
-import { resolvePageUrl } from 'Utils/resolvePageUrl';
+//import { resolvePageUrl } from 'Utils/resolvePageUrl';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,10 +44,10 @@ export default function Notifications(
   const history = useHistory();
 
   const handleViewAll = ()=>{
-    history.push(resolvePageUrl({
-      moduleSlug:'notification',
-    }));
-    handleClose();
+    //history.push(resolvePageUrl({
+    //  moduleSlug:'notification',
+    //}));
+    //handleClose();
   }
 
   const open = Boolean(anchorEl);

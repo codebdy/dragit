@@ -8,7 +8,7 @@ import { useDesign } from 'Design/PageEditor/useDesign';
 import { makeTableRowModel } from 'Base/ModelTree/makeTableModel';
 import { ID } from 'Base/Model/graphqlTypes';
 import { observer } from 'mobx-react';
-import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
+import { DADA_RXID_CONST } from 'rx-drag/RxNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { useSetTableStore } from '../useSetTableStore';
 

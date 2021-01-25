@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { DADA_RXID_CONST, RXNode } from '../../../Base/RXNode/RXNode';
+import { DADA_RXID_CONST, RxNode } from '../../../rx-drag/RxNode';
 import { resolveComponent, resolveMetaConfig } from 'Base/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
@@ -9,7 +9,7 @@ import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react';
 import { useDesign } from '../useDesign';
-import { getDomByRxid } from '../../../Utils/getDomByRxid';
+import { getDomByRxid } from '../../../rx-drag/utils/getDomByRxid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getEditStyle(
-  node:RXNode<IMeta>,
+  node:RxNode<IMeta>,
   showPaddingX?:boolean,
   showPaddingY?:boolean,
 ){
@@ -54,7 +54,7 @@ function getEditStyle(
 
 export const ComponentView = observer((
   props:{
-    node:RXNode<IMeta>,
+    node:RxNode<IMeta>,
   }
 )=>{
   const {node} = props;
@@ -142,7 +142,7 @@ export const ComponentView = observer((
   const elementView = (node.children && node.children.length > 0) || rxText ?
     (<Component {...elementProps}>
       {rxText}
-      {node.children?.map((child: RXNode<IMeta>)=>{
+      {node.children?.map((child: RxNode<IMeta>)=>{
         return (
           <ComponentView 
             key={child.id} 

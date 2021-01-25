@@ -10,7 +10,7 @@ import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediaGQLs';
 import { FolderNode } from './MediaFolder';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { contains } from 'Utils/ArrayHelper';
+import { contains } from 'rx-drag/utils/ArrayHelper';
 import Image from 'Components/Common/Image';
 
 const useStyles = makeStyles((theme: Theme) =>

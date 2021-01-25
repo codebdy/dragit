@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import IMenuItem from 'Base/Model/IMenuItem';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import MenuItem from './MenuItem';
 import { Collapse, List } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export function MenuNode(
   props: {
-    node:RXNode<IMenuItem>,
+    node:RxNode<IMenuItem>,
   }&MenuNodeOperateProps
 ) 
 {

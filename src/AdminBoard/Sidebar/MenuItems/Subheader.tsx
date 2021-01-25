@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles, ListSubheader } from "@material-ui/core";
 import IMenuItem from "Base/Model/IMenuItem";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import React, { Fragment } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Subheader(
   props:{
     nested?:boolean,
-    node:RXNode<IMenuItem>,
+    node:RxNode<IMenuItem>,
     mini:boolean
   }
 ){

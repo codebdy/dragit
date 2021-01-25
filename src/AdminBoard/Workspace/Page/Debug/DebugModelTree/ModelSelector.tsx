@@ -3,7 +3,7 @@ import {observer} from 'mobx-react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDebugStore } from '../DebugStore';
-import { getDomByRxid } from 'Utils/getDomByRxid';
+import { getDomByRxid } from 'rx-drag/utils/getDomByRxid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

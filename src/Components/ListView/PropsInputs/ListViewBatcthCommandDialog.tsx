@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
 import { PropsInputProps } from '../../../Design/PageEditor/AttrebuteBox/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from './MetaListDialog';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { IPageCommand } from 'Base/Model/IPageCommand';
 
 const styles = (theme: Theme) =>

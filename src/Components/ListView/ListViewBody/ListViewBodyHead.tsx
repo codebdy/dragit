@@ -1,13 +1,13 @@
 import { TableHead, TableRow, TableCell, Checkbox, TableSortLabel} from "@material-ui/core";
 import React from "react";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { IMeta } from "Base/RXNode/IMeta";
 import { useListViewStore } from "../ListViewStore";
 import {Observer} from 'mobx-react';
 
 export function ListViewBodyHead(
   props: {
-    columns:Array<RXNode<IMeta>>
+    columns:Array<RxNode<IMeta>>
   }
 ) {
   const {columns} = props;

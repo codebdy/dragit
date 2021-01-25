@@ -2,17 +2,17 @@ import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IRxPage } from "Base/Model/IRxPage";
 import { IPageJumper } from "Base/Model/IPageJumper";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
-import { cloneObject } from "Utils/cloneObject";
+import { cloneObject } from "rx-drag/utils/cloneObject";
 import intl from "react-intl-universal";
 import { getNodeGraphQL } from "./getNodeGraphQL";
 import { getMutationNode } from "./getMutationNode";
 
 export class PageStore{
   gqls: Array<GraphQLStore> = [];
-  rootNode: RXNode<IMeta>;
+  rootNode: RxNode<IMeta>;
   page: IRxPage;
   queryGQL?: GraphQLStore;
   //ActionStore
@@ -20,7 +20,7 @@ export class PageStore{
     this.page = page;
     makeAutoObservable(this)
     const layout = page?.schema || [];
-    this.rootNode = new RXNode<IMeta>();
+    this.rootNode = new RxNode<IMeta>();
     this.rootNode.parse(cloneObject(layout));
     this.makePageMutationGqls();
     const query = page?.query;
@@ -62,7 +62,7 @@ export class PageStore{
   }
 
   makePageMutationGqls(){
-    let mutationNodes = new Array<RXNode<IMeta>>()
+    let mutationNodes = new Array<RxNode<IMeta>>()
     this.pageLayout.forEach(child=>{
       getMutationNode(mutationNodes, child);
     })

@@ -3,11 +3,11 @@ import intl from 'react-intl-universal';
 import MouseFollower from './Core/MouseFollower';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { ComponentView } from './Core/ComponentView';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import { NodeToolbar } from './Core/NodeToolbar';
 import { DragCusor } from './Core/DragCusor';
 import { ComponentLabel } from './Core/ComponentLabel';
-import { cloneObject } from '../../Utils/cloneObject';
+import { cloneObject } from '../../rx-drag/utils/cloneObject';
 import { observer } from 'mobx-react';
 import { PageEditorStore } from './PageEditorStore';
 import { RemoveCommand } from './Commands/RemoveCommand';
@@ -25,7 +25,7 @@ export const PageEditorCore = observer((
       let targetNode = editorStore.dragOverParam?.targetNode;
       let dragNode = editorStore.draggedNode;
       if(!dragNode && editorStore.draggedToolboxItem?.meta){
-        dragNode = RXNode.make<IMeta>(cloneObject(editorStore.draggedToolboxItem?.meta));
+        dragNode = RxNode.make<IMeta>(cloneObject(editorStore.draggedToolboxItem?.meta));
       }
       if(dragNode && targetNode) {
         editorStore?.operateNode(dragNode, targetNode, editorStore.dragOverParam.position);

@@ -1,12 +1,12 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { ICommand } from "./ICommand";
 
 export class DuplicateCommand implements ICommand{
-  sourceNode: RXNode<IMeta>;
-  newNode?: RXNode<IMeta>;
+  sourceNode: RxNode<IMeta>;
+  newNode?: RxNode<IMeta>;
 
-  constructor(sourceNode:RXNode<IMeta>){
+  constructor(sourceNode:RxNode<IMeta>){
     this.sourceNode = sourceNode;
   }
 

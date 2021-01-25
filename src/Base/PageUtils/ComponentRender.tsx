@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { DADA_RXID_CONST, RXNode } from '../RXNode/RXNode';
+import { DADA_RXID_CONST, RxNode } from '../../rx-drag/RxNode';
 import { resolveComponent } from 'Base/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
@@ -9,7 +9,7 @@ import { useAppStore } from 'Store/Helpers/useAppStore';
 
 export function ComponentRender(
   props:{
-    node:RXNode<IMeta>
+    node:RxNode<IMeta>
   }){
   const {node} = props;
   const loggedUser = useLoggedUser();
@@ -71,7 +71,7 @@ export function ComponentRender(
   let elementView:any = ((node.children && node.children.length > 0) || rxText) ?
     (<Component {...elementProps}>
       {rxText}
-      {node.children?.map((child: RXNode<IMeta>)=>{
+      {node.children?.map((child: RxNode<IMeta>)=>{
         return (
           <ComponentRender key={child.id} node={child} />
         )

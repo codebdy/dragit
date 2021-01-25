@@ -4,7 +4,7 @@ import { PropsInputProps } from '../../../Design/PageEditor/AttrebuteBox/PropsIn
 import intl from 'react-intl-universal';
 import MetaListDialog from 'Components/ListView/PropsInputs/MetaListDialog';
 import { useEffect } from 'react';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { IPageCommand } from 'Base/Model/IPageCommand';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 

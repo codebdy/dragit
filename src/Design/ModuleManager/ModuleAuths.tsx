@@ -6,7 +6,7 @@ import intl from "react-intl-universal";
 import { Add } from "@material-ui/icons";
 import ModuleAuthsRow from "./ModuleAuthsRow";
 import { IAuth } from "Base/Model/IAuth";
-import createId from "Utils/createId";
+import createId from "rx-drag/utils/createId";
 import { ID } from "Base/Model/graphqlTypes";
 
 const useStyles = makeStyles((theme: Theme) =>

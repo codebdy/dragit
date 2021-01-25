@@ -5,7 +5,7 @@ import MdiIcon from 'Components/Common/MdiIcon';
 import { useHistory } from 'react-router';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { TOKEN_NAME, LOGIN_URL } from 'Utils/consts';
-import { resolvePageUrl } from 'Utils/resolvePageUrl';
+//import { resolvePageUrl } from 'Utils/resolvePageUrl';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import intl from "react-intl-universal";
 
@@ -48,19 +48,19 @@ export const AccountAvatar = observer(()=>{
   }
 
   const handleShowProfile = ()=>{
-    history.push(resolvePageUrl({
-      moduleSlug:'user',
-      pageId:'edit-user',
-      dataId:user.meta?.id
-    }));
+    //history.push(resolvePageUrl({
+    //  moduleSlug:'user',
+    //  pageId:'edit-user',
+    //  dataId:user.meta?.id
+    //}));
   }
 
   const handleChangePassword = ()=>{
-    history.push(resolvePageUrl({
-      moduleSlug:'user',
-      pageId:'edit-user',
-      dataId:user.meta?.id
-    }));
+    //history.push(resolvePageUrl({
+    //  moduleSlug:'user',
+    //  pageId:'edit-user',
+    //  dataId:user.meta?.id
+    //}));
   }
 
   return (

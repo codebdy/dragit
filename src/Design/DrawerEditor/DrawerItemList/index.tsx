@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import IMenuItem from 'Base/Model/IMenuItem';
 import { MenuNode } from './MenuNode';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { List, Theme } from '@material-ui/core';
 import MenuNodeOperateProps from './MenuNodeOperateProps';
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 export default function DrawerItemList(
-  props : {nodes?: Array<RXNode<IMenuItem>>}
+  props : {nodes?: Array<RxNode<IMenuItem>>}
     &MenuNodeOperateProps
 ) {
   const {nodes, 
@@ -30,9 +30,9 @@ export default function DrawerItemList(
     onDragIn
   } = props;
   const classes = useStyles();
-  const [selectedNode, setSelectedNode] = useState<RXNode<IMenuItem>>();
+  const [selectedNode, setSelectedNode] = useState<RxNode<IMenuItem>>();
 
-  const handleSelected = (node:RXNode<IMenuItem>)=>{
+  const handleSelected = (node:RxNode<IMenuItem>)=>{
     setSelectedNode(node);
     onSelected && onSelected(node);
   }

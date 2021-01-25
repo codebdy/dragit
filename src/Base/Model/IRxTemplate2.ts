@@ -1,6 +1,6 @@
 import { ID } from "./graphqlTypes";
 
-export interface IRXTemplate{
+export interface IRxTemplate{
   id:ID;
   name:string;
   schema:any;

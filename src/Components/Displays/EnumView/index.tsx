@@ -5,7 +5,7 @@ import { RXInputProps } from 'Base/RXInputProps';
 import withFormField from 'Components/Common/withFormField';
 import { useDesign } from 'Design/PageEditor/useDesign';
 import React from 'react';
-import { first } from 'Utils/ArrayHelper';
+import { first } from 'rx-drag/utils/ArrayHelper';
 
 export interface ChipMeta extends IEnumItem{
   color: 'default' | 'primary' | 'secondary' | undefined

@@ -6,9 +6,9 @@ import { IPageMutation } from "Base/Model/IPageMutation";
 import { usePageStore } from "Base/PageUtils/PageStore";
 import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 
-export function useUpdateGQL( rxNode:RXNode<IMeta>, listViewStore:ListViewStore, update?:IPageMutation ){
+export function useUpdateGQL( rxNode:RxNode<IMeta>, listViewStore:ListViewStore, update?:IPageMutation ){
   const pageStore = usePageStore();
 
   const createQueryGQL = ()=>{

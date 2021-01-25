@@ -1,5 +1,5 @@
 import { TreeItem } from "@material-ui/lab";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import React, { Fragment } from "react";
 import { IToolboxItem } from "./IToolboxItem";
 import TreeNodeLabel from "./TreeNodeLabel";
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function TreeNode(
   props:{
-    node: RXNode<IToolboxItem>,
+    node: RxNode<IToolboxItem>,
   }
 ) {
   const {node} = props;

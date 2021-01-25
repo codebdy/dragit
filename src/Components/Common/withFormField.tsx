@@ -3,7 +3,7 @@ import {observer} from 'mobx-react';
 import { useModelStore } from "../../Base/ModelTree/ModelProvider";
 import { useFieldStore } from "./useFieldStore";
 import { toJS } from 'mobx';
-import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
+import { DADA_RXID_CONST } from 'rx-drag/RxNode';
 
 const withFormField = (Component:any)=>{
   const WithFormField = observer((props:any)=>{

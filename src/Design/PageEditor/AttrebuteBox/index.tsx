@@ -16,7 +16,7 @@ import { observer } from 'mobx-react';
 import { useDesign } from '../useDesign';
 import { toJS } from 'mobx';
 import { propsInputs } from './PropsInputs';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

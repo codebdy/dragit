@@ -1,15 +1,15 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { ICommand } from "./ICommand";
 
 export abstract class RelationCommand implements ICommand{
-  targetNode?:RXNode<IMeta>;
-  sourceNode:RXNode<IMeta>;
-  oldParent?:RXNode<IMeta>;
-  oldNextSibling?:RXNode<IMeta>;
-  oldPreviousSibling?:RXNode<IMeta>;
+  targetNode?:RxNode<IMeta>;
+  sourceNode:RxNode<IMeta>;
+  oldParent?:RxNode<IMeta>;
+  oldNextSibling?:RxNode<IMeta>;
+  oldPreviousSibling?:RxNode<IMeta>;
   
-  constructor(sourceNode:RXNode<IMeta>, targetNode?:RXNode<IMeta>){
+  constructor(sourceNode:RxNode<IMeta>, targetNode?:RxNode<IMeta>){
     this.targetNode = targetNode;
     this.sourceNode = sourceNode;
     this.oldParent = sourceNode.parent;
@@ -17,7 +17,7 @@ export abstract class RelationCommand implements ICommand{
     this.oldPreviousSibling = sourceNode.previousSibling();
   }
 
-  abstract excute():RXNode<IMeta>|undefined;
+  abstract excute():RxNode<IMeta>|undefined;
 
   undo(){
     if(this.oldNextSibling){

@@ -6,7 +6,7 @@ import { IModule } from "Base/Model/IModule";
 import ModulePageTable from './ModulePageTable';
 import { IRxPage } from 'Base/Model/IRxPage';
 import { PageEditor } from 'Design/PageEditor';
-import createId from 'Utils/createId';
+import createId from 'rx-drag/utils/createId';
 import { ID } from 'Base/Model/graphqlTypes';
 
 

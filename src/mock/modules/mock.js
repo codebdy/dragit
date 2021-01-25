@@ -1,8 +1,8 @@
 import Mock from 'mockjs'
-import createId from 'Utils/createId'
+import createId from 'rx-drag/utils/createId'
 import getQueryVariable from 'mock/utils/getQueryVariable'
 import moduleCategories from './moduleCategories'
-import { remove } from 'Utils/ArrayHelper';
+import { remove } from 'rx-drag/utils/ArrayHelper';
 import { getModuleIndexPage } from './getModuleIndexPage';
 import { getPageBySlug } from './getPageById';
 import { getModuleById } from './getModuleById';

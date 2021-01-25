@@ -9,7 +9,7 @@ import MdiIcon from 'Components/Common/MdiIcon';
 import DesignerLayout from 'Design/Layout';
 import LeftContent from './LeftContent';
 import PageSkeleton from 'AdminBoard/Workspace/Common/ModuleSkeleton';
-import { cloneObject } from '../../Utils/cloneObject';
+import { cloneObject } from '../../rx-drag/utils/cloneObject';
 import SubmitButton from 'Components/Common/SubmitButton';
 import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'Base/authSlugs';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react";
 import { IRxPage } from 'Base/Model/IRxPage';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { PageAction } from 'Base/PageUtils/PageAction';
 import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
@@ -146,7 +146,7 @@ export const Page = observer((
           
           <ActionHunter onPageAction = {hanlePageAction} />
           {
-            pageStore?.pageLayout?.map((child:RXNode<IMeta>)=>{
+            pageStore?.pageLayout?.map((child:RxNode<IMeta>)=>{
               return (
                 <ComponentRender 
                   key={child.id} 

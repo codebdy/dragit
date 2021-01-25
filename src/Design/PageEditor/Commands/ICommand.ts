@@ -1,9 +1,9 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 
 export interface ICommand{
   //返回selectedNode
-  excute: () => RXNode<IMeta>|undefined;
+  excute: () => RxNode<IMeta>|undefined;
   //返回selectedNode
-  undo: () => RXNode<IMeta>|undefined;
+  undo: () => RxNode<IMeta>|undefined;
 }

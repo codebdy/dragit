@@ -1,13 +1,13 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RXNode } from "Base/RXNode/RXNode";
+import { RxNode } from "rx-drag/RxNode";
 import { ICommand } from "./ICommand";
 
 export class ClearCommand implements ICommand{
-  canvasNode: RXNode<IMeta>;
-  nodes?: Array<RXNode<IMeta>>;
-  selectedNode?: RXNode<IMeta>;
+  canvasNode: RxNode<IMeta>;
+  nodes?: Array<RxNode<IMeta>>;
+  selectedNode?: RxNode<IMeta>;
 
-  constructor(canvasNode:RXNode<IMeta>, selectedNode?:RXNode<IMeta>){
+  constructor(canvasNode:RxNode<IMeta>, selectedNode?:RxNode<IMeta>){
     this.canvasNode = canvasNode;
     this.selectedNode = selectedNode;
   }

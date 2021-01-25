@@ -1,10 +1,10 @@
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RXModel } from 'Base/ModelTree/RXModel';
-import { RXNode } from 'Base/RXNode/RXNode';
+import { RxNode } from 'rx-drag/RxNode';
 import { useEffect } from 'react';
 import { useModelStore } from '../../Base/ModelTree/ModelProvider';
 
-export const useFieldStore = (node:RXNode<IMeta>) => {
+export const useFieldStore = (node:RxNode<IMeta>) => {
   const modelStore = useModelStore();
   const fieldName = node?.meta.field;
   useEffect(()=>{

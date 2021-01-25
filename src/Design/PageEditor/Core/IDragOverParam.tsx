@@ -1,4 +1,4 @@
-import { RXNode } from '../../../Base/RXNode/RXNode';
+import { RxNode } from '../../../rx-drag/RxNode';
 import { IMeta } from 'Base/RXNode/IMeta';
 
 
@@ -7,5 +7,5 @@ export type CursorPosition = "in-left" | "in-top" | "in-right" | "in-bottom" | "
 
 export interface IDragOverParam {
   position?: CursorPosition;
-  targetNode?: RXNode<IMeta>;
+  targetNode?: RxNode<IMeta>;
 }

@@ -4,7 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { MetaItem } from 'Base/Model/MetaItem';
 
 const useStyles = makeStyles((theme: Theme) =>

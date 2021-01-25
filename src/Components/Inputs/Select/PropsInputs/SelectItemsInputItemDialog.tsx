@@ -6,7 +6,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
 import MetaListInput from '../../../../Design/PageEditor/AttrebuteBox/PropsInputs/MetaListInput';
-import { cloneObject } from 'Utils/cloneObject';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { ID } from 'Base/Model/graphqlTypes';
 
 const styles = (theme: Theme) =>

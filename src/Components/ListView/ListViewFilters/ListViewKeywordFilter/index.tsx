@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles, InputAdornment, TextField } from '@material-ui/core';
-import { DADA_RXID_CONST } from 'Base/RXNode/RXNode';
+import { DADA_RXID_CONST } from 'rx-drag/RxNode';
 import classNames from 'classnames';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useListViewStore } from 'Components/ListView/ListViewStore';
