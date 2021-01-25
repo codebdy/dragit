@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_RX_TEMPLATES } from 'Base/GraphQL/GQLs';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { CREATE_RX_PAGE, GET_RX_TEMPLATES } from 'Base/GraphQL/GQLs';
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
 import RxDialog from 'AppStudio/RxDialog';
@@ -13,6 +13,8 @@ import { useState } from 'react';
 import Image from 'Components/Common/Image';
 import classNames from 'classnames';
 import SubmitButton from 'Components/Common/SubmitButton';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,7 +77,14 @@ export const TemplatesDialog = observer((
   const [name, setName] = useState(intl.get('new-page'));
   const [selectedId, setSelectedId] = useState('');
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
-  useShowAppoloError(error);
+  const sutdioStore = useAppStudioStore();
+  const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
+    onCompleted:(data)=>{
+      onClose();
+      console.log(data);
+    }})
+
+  useShowAppoloError(error||createError);
 
   const templates = data?.rxTemplates;
 
@@ -90,7 +99,12 @@ export const TemplatesDialog = observer((
   }
 
   const handleConfirm = ()=>{
-
+    excuteCreate({variables:{
+      appId:sutdioStore?.rxApp?.id,
+      templateId:selectedId,
+      pageId:uuidv4(),
+      name
+    }})
   }
 
   
@@ -150,6 +164,7 @@ export const TemplatesDialog = observer((
               className = {classes.confirmButton} 
               variant = "contained" 
               color = "primary"
+              submitting = {creating}
               onClick = {handleConfirm}
               disabled = {!name || !selectedId}
             >

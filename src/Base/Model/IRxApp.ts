@@ -7,6 +7,7 @@ export interface IRxApp{
   //使用GUID当ID用
   id?:ID;
   name?: string;
+  isSystem?: boolean;
   icon?: string; 
   color?: string;
   appType?: string;

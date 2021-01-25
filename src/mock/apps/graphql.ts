@@ -20,6 +20,7 @@ export var appGQLType = `
   type RxApp{
     id: ID!
     name: String
+    is_system: Boolean
     icon: String 
     color: String
     app_type: String
@@ -62,5 +63,5 @@ export var appGQLMutation = `
   saveRxApp(rxApp:RxAppInput):RxApp
   saveRxPage(rxPage:RxPageInput):RxPage
   removeRxPage(id:ID):RxApp
-  createPage(appId:ID, templateId:ID, pageId:ID, name:String):RxPage
+  createRxPage(appId:ID, templateId:ID, pageId:ID, name:String):RxPage
 `

@@ -3,6 +3,7 @@ import { gql } from '@apollo/react-hooks';
 const appFieldsGQL = `
   id
   name
+  isSystem:is_system
   icon 
   color
   appType: app_type
@@ -101,6 +102,20 @@ export const GET_RX_TEMPLATES = gql`
       name
       schema
       thumbnail
+    }
+  }
+`
+
+export const CREATE_RX_PAGE = gql`
+  mutation($appId:ID, $templateId:ID, $pageId:ID, $name:String){
+    createRxPage(appId:$appId, templateId:$templateId, pageId:$pageId, name:$name){
+      id
+      name
+      maxWidth:max_width
+      width
+      schema
+      auths
+      query
     }
   }
 `

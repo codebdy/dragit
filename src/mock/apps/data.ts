@@ -6,7 +6,8 @@ var appsData = [
     name:'用户管理',
     icon:'mdi-account-supervisor',
     color:'#a1887f',
-    app_type:'免费',
+    app_type:'系统',
+    is_system:true,
     pages:[],
     navigation_items:[],
     auths:[

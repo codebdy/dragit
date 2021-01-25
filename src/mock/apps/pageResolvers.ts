@@ -49,7 +49,7 @@ export const saveRxPage = async (parent:any, args:any, context:any, info:any)=>{
   return rxPage;
 }
 
-export const createPage = async (parent:any, args:any, context:any, info:any)=>{
+export const createRxPage = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
   const app = getRxApp(args.appId)
   const template = getTemplate(args.templateId);
@@ -69,5 +69,5 @@ export const pageQueryResolvers = {
 export const pageMutationResolvers = {
   removeRxPage,
   saveRxPage,
-  createPage
+  createRxPage
 }

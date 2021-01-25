@@ -114,20 +114,28 @@ export default function AppCard(
             </ListItemIcon>
             {intl.get('edit')} 
           </MenuItem>
-          <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
-            <ListItemIcon>
-              <MdiIcon iconClass = "mdi-toy-brick-remove"  size={18}/>
-            </ListItemIcon>
-            {intl.get('uninstall')} 
-          </MenuItem>
-          <Divider/>
-          <MenuItem className = {classes.menuItem} onClick={handleRemove}>
-            <ListItemIcon>
-              <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>
-            </ListItemIcon>
-            {intl.get('delete')} 
-          </MenuItem>
+          {
+            !rxApp.isSystem && 
+            <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
+              <ListItemIcon>
+                <MdiIcon iconClass = "mdi-toy-brick-remove"  size={18}/>
+              </ListItemIcon>
+              {intl.get('uninstall')} 
+            </MenuItem>
+          }
+          { !rxApp.isSystem && 
+            <Divider/>
+          }
+          { !rxApp.isSystem && 
+            <MenuItem className = {classes.menuItem} onClick={handleRemove}>
+              <ListItemIcon>
+                <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>
+              </ListItemIcon>
+              {intl.get('delete')} 
+            </MenuItem>
+          }
         </Menu>
+
 
       </CardActions>
     </Card>
