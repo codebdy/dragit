@@ -14,6 +14,7 @@ import { GET_RX_APP } from 'Base/GraphQL/GQLs';
 import { useEffect } from 'react';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppSkeleton from './AppSkeleton';
+import { RxDrag } from 'rx-drag';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     content:{
       display:'flex',
       flex:1,
+      height:'0',
     },
     workspace:{
       display:'flex',
@@ -69,6 +71,7 @@ export const AppStudio = observer(() => {
     history.goBack();
   }
 
+
   return (
     <ThemeProvider theme={theme}>
       <AppStudioStoreProvider value = {studioStore}>
@@ -92,7 +95,7 @@ export const AppStudio = observer(() => {
               {
                 loading 
                 ? <AppSkeleton />
-                : 'ddd'
+                : ( studioStore?.editingPage && <RxDrag />)
               }
             </div>
           </div>

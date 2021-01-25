@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { PageListItem } from './PageListItem';
+import { IRxPage } from 'Base/Model/IRxPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,8 +23,8 @@ export const PageList = observer((
   const {onClose} = props;
   const classes = useStyles();
   const studioStore = useAppStudioStore();
-  const handleClick = (pageId:string)=>{
-    studioStore?.setEditingPageId(pageId);
+  const handleClick = (page:IRxPage)=>{
+    studioStore?.setEditingPage(page);
     onClose();
   }
 
@@ -35,7 +36,7 @@ export const PageList = observer((
             <PageListItem 
               key={page.id}
               page = {page}
-              onClick = {()=>handleClick(page.id)}
+              onClick = {()=>handleClick(page)}
             />
           )
         })

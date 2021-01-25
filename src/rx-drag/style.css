@@ -1,0 +1,58 @@
+.rx-drag{
+  flex:1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.rx-drag .rx-left{
+  flex:1;
+  display: flex;
+  flex-flow: column;
+}
+
+.rx-drag .rx-left .rx-toolbar{
+  height: 40px;
+  border: solid 1px;
+  display: flex;
+  align-items: center;
+}
+
+.rx-drag .rx-left .rx-canvas-wapper{
+  flex:1;
+  display: flex;
+  flex-flow: column;
+  overflow: auto;
+}
+
+.rx-drag .rx-left .rx-node-navigation{
+  height: 30px;
+  border: solid 1px;
+}
+
+.rx-drag .rx-right{
+  width: 280px;
+  border: solid 1px;
+}
+
+.rx-drag ::-webkit-scrollbar {
+  display: block;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+
+.rx-drag ::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+.rx-drag.dark ::-webkit-scrollbar-thumb {
+  border-radius: 0.2rem;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all .2s;
+}
+
+.rx-drag ::-webkit-scrollbar-thumb {
+  border-radius: 0.2rem;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all .2s;
+}

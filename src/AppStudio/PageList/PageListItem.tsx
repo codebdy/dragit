@@ -70,8 +70,8 @@ export const PageListItem = observer((
         });
       },
       onCompleted: (data)=>{
-        if(page.id === studioStore?.editingPageId){
-          studioStore.setEditingPageId('');
+        if(page.id === studioStore?.editingPage?.id){
+          studioStore.setEditingPage(undefined);
         }
       }
     }
@@ -136,7 +136,7 @@ export const PageListItem = observer((
       className = {
         classNames(
           classes.root,
-          {[classes.selected]:studioStore?.editingPageId === page.id}
+          {[classes.selected]:studioStore?.editingPage?.id === page.id}
         )
       } 
       onClick={onClick}
