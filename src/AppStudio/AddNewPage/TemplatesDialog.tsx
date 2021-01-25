@@ -79,7 +79,8 @@ export const TemplatesDialog = observer((
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
   const sutdioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
-    update(cache, { data: { createRxPage } }) {
+    //更新缓存
+    update: (cache, { data: { createRxPage } })=>{
       cache.modify({
         id: cache.identify(sutdioStore?.rxApp as any),
         fields: {
@@ -98,7 +99,8 @@ export const TemplatesDialog = observer((
         }
       });
     },
-    onCompleted:(data)=>{
+    //结束后返回
+    onCompleted: (data)=>{
       onClose();
     }
   })
