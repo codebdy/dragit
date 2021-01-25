@@ -91,6 +91,7 @@ export const TemplatesDialog = observer((
                 fragment NewPage on RxPage {
                   id
                   name
+                  schema
                 }
               `
             });
