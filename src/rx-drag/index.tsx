@@ -1,26 +1,20 @@
 import * as React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { IRxMeta } from './IRxMeta';
-
-//通过代码复制，快构建一个响应式组件
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root:{
-    },
-  }),
-);
+import { IRxTheme } from './IRxTheme';
 
 export interface IRxDragProps{
+  theme: IRxTheme,
   json: Array<IRxMeta>,
-  onChange: ()=>void,
+  onChange: (json : Array<IRxMeta>)=>void,
 }
 
-export const RxDrag = observer(() => {
-  const classes = useStyles();
+export const RxDrag = observer((
+  props: IRxDragProps
+) => {
 
   return (
-    <div className = {classes.root}>
+    <div>
       RxDrag
     </div>
   );

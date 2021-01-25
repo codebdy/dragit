@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from 'react';
 import intl from 'react-intl-universal';
 import MouseFollower from './Core/MouseFollower';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { ComponentView } from './Core/ComponentView';
 import { RxNode } from 'rx-drag/RxNode';
 import { NodeToolbar } from './Core/NodeToolbar';
 import { DragCusor } from './Core/DragCusor';
@@ -12,6 +11,7 @@ import { observer } from 'mobx-react';
 import { PageEditorStore } from './PageEditorStore';
 import { RemoveCommand } from './Commands/RemoveCommand';
 import { DuplicateCommand } from './Commands/DuplicateCommand';
+import { ComponentView } from './Core/ComponentView';
 
 export const PageEditorCore = observer((
   props:{
