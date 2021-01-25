@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 import { CREATE_RX_PAGE, GET_RX_TEMPLATES } from 'Base/GraphQL/GQLs';
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
@@ -79,10 +79,29 @@ export const TemplatesDialog = observer((
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
   const sutdioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
+    update(cache, { data: { createRxPage } }) {
+      cache.modify({
+        id: cache.identify(sutdioStore?.rxApp as any),
+        fields: {
+          pages(existingPageRefs = [], { readField }) {
+            const newPageRef = cache.writeFragment({
+              data: createRxPage,
+              fragment: gql`
+                fragment NewPage on RxPage {
+                  id
+                  name
+                }
+              `
+            });
+            return [...existingPageRefs, newPageRef];
+          }
+        }
+      });
+    },
     onCompleted:(data)=>{
       onClose();
-      console.log(data);
-    }})
+    }
+  })
 
   useShowAppoloError(error||createError);
 
