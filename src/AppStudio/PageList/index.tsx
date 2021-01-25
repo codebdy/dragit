@@ -14,18 +14,28 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const PageList = observer(() => {
+export const PageList = observer((
+  props:{
+    onClose:()=>void,
+  }
+) => {
+  const {onClose} = props;
   const classes = useStyles();
-  const storeStudio = useAppStudioStore();
+  const studioStore = useAppStudioStore();
+  const handleClick = (pageId:string)=>{
+    studioStore?.setEditingPageId(pageId);
+    onClose();
+  }
 
   return (
     <div className = {classes.root}>
       {
-        storeStudio?.rxApp?.pages?.map(page=>{
+        studioStore?.rxApp?.pages?.map(page=>{
           return (
             <PageListItem 
               key={page.id}
               page = {page}
+              onClick = {()=>handleClick(page.id)}
             />
           )
         })

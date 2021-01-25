@@ -20,10 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PageAction(
   props:{
     onCloseMenu?:()=>void,
+    onDesign?:()=>void,
     onEditName?:()=>void,
+    onDuplicate?:()=>void,
+    onRemove?:()=>void,
   }
 ){
-  const {onCloseMenu, onEditName} = props;
+  const {onCloseMenu, onDesign, onEditName, onDuplicate, onRemove} = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -40,6 +43,21 @@ export default function PageAction(
   const handleEditName = () =>{
     handleMenuClose();
     onEditName&&onEditName();
+  }
+
+  const handleDesign = ()=>{
+    handleMenuClose();
+    onDesign&&onDesign();
+  }
+
+  const handleDuplicate = ()=>{
+    handleMenuClose();
+    onDuplicate&&onDuplicate();
+  }
+
+  const handleRemove = ()=>{
+    handleMenuClose();
+    onRemove&&onRemove();
   }
 
   return (
@@ -61,7 +79,7 @@ export default function PageAction(
           open={isMenuOpen}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
+          <MenuItem onClick={handleDesign} className = {classes.menuItem}>
             <ListItemIcon>
               <MdiIcon iconClass = "mdi-pencil-ruler"  size={18}/>
             </ListItemIcon>
@@ -73,14 +91,14 @@ export default function PageAction(
             </ListItemIcon>
             {intl.get('edit')+intl.get('name')} 
           </MenuItem>
-          <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
+          <MenuItem onClick={handleDuplicate} className = {classes.menuItem}>
             <ListItemIcon>
               <MdiIcon iconClass = "mdi-content-copy"  size={18}/>
             </ListItemIcon>
             {intl.get('duplicate')} 
           </MenuItem>
           <Divider/>
-          <MenuItem className = {classes.menuItem} onClick={handleMenuClose}>
+          <MenuItem className = {classes.menuItem} onClick={handleRemove}>
             <ListItemIcon>
               <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>
             </ListItemIcon>

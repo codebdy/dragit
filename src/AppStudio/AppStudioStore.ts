@@ -1,3 +1,4 @@
+import { ID } from "Base/Model/graphqlTypes";
 import { IRxApp } from "Base/Model/IRxApp";
 import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
@@ -17,6 +18,13 @@ export class AppStudioStore{
 
   setRxApp(rxApp: IRxApp){
     this.rxApp = rxApp;
+    if(rxApp?.pages?.length){
+      this.editingPageId = rxApp.pages[0].id;
+    }
+  }
+
+  setEditingPageId(pageId:ID){
+    this.editingPageId = pageId;
   }
 }
 

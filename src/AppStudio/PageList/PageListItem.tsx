@@ -7,8 +7,10 @@ import { IRxPage } from 'Base/Model/IRxPage';
 import { CircularProgress, TextField } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { SAVE_RX_PAGE } from 'Base/GraphQL/GQLs';
+import { REMOVE_RX_PAGE, SAVE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems:'center',
       cursor:'pointer',
       minHeight: theme.spacing(6),
+    },
+    selected:{
+      color:theme.palette.primary.main,
     },
     rightArea:{
       display:'flex',
@@ -34,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const PageListItem = observer((
   props:{
     page:IRxPage,
-    onClick?:(event:React.MouseEvent<HTMLElement>)=>void,
+    onClick?:()=>void,
   }
 ) => {
   const {page, onClick} = props;
@@ -42,14 +47,16 @@ export const PageListItem = observer((
   const [name, setName] = useState(page.name);
   const [editing, setEditing] = useState(false);
   const classes = useStyles();
+  const studioStore = useAppStudioStore();
 
   useEffect(()=>{
     setName(page.name)
   },[page.name])
 
-  const [excuteMutation, {loading:saving, error}] = useMutation( SAVE_RX_PAGE );
+  const [excuteSaveRxPage, {loading:saving, error}] = useMutation( SAVE_RX_PAGE );
+  const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_PAGE );
 
-  useShowAppoloError(error);
+  useShowAppoloError(error||removeError);
 
   const handleEditName = ()=>{
     setEditing(true);
@@ -58,7 +65,7 @@ export const PageListItem = observer((
   const handleFinishedEdit = ()=>{
     setEditing(false);
     if(name !== page.name){
-      excuteMutation({variables:{rxPage:{id:page.id, name}}})
+      excuteSaveRxPage({variables:{rxPage:{id:page.id, name}}})
     }
   }
 
@@ -66,11 +73,29 @@ export const PageListItem = observer((
     const newValue = event.target.value as string;
     setName(newValue);
   }
-  const loading = saving;
+
+  const handleDesign = ()=>{
+    onClick && onClick();
+  }
+
+  const handleDuplicate = ()=>{
+
+  }
+
+  const handleRemove = ()=>{
+    excuteRemoveRxPage({variables:{id:page.id}});
+  }
+
+  const loading = saving || removing;
 
   return (
     <div 
-      className = {classes.root} 
+      className = {
+        classNames(
+          classes.root,
+          {[classes.selected]:studioStore?.editingPageId === page.id}
+        )
+      } 
       onClick={onClick}
       onMouseOver = {()=>{setHover(true)}}
       onMouseLeave = {()=>{setHover(false)}}
@@ -107,6 +132,9 @@ export const PageListItem = observer((
             <PageAction 
               onCloseMenu={()=>setHover(false)} 
               onEditName = {handleEditName}
+              onDesign = {handleDesign}
+              onDuplicate = {handleDuplicate}
+              onRemove = {handleRemove}
             />
           </div>
         }      

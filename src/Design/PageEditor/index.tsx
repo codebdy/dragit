@@ -15,13 +15,42 @@ import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'Base/authSlugs';
 import { observer } from 'mobx-react';
 import { ID } from 'Base/Model/graphqlTypes';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_PAGE, SAVE_PAGE } from 'Base/GraphQL/GQLs';
+import { gql, useMutation, useQuery } from '@apollo/react-hooks';
+
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { PageEditorStore } from './PageEditorStore';
 import { useAppStore } from 'Store/Helpers/useAppStore';
 import { PageEditorStoreProvider } from './useDesign';
 import { PageEditorCore } from './PageEditorCore';
+
+//后面要删除此变量
+export const SAVE_PAGE = gql`
+  mutation($page:PageInput){
+    page(page:$page){
+      id
+      name
+      maxWidth:max_width
+      inTabIndex:in_tab_index
+      width
+      schema
+      auths
+    }
+  }
+`
+
+export const GET_PAGE = gql`
+  query($id:ID){
+    page(id:$id){
+      id
+      name
+      maxWidth:max_width
+      inTabIndex:in_tab_index
+      width
+      schema
+      auths
+    }
+  }
+`
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

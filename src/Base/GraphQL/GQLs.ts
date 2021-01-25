@@ -17,6 +17,16 @@ const appFieldsGQL = `
   notifications
 `
 
+export const pageFieldsGQL = `
+  id
+  name
+  maxWidth:max_width
+  width
+  schema
+  auths
+  query
+`
+
 export const GET_RX_APP_LIST = gql`
   query {
     rxApps{
@@ -68,33 +78,6 @@ export const SAVE_DRAWER = gql`
   }
 `
 
-export const GET_PAGE = gql`
-  query($id:ID){
-    page(id:$id){
-      id
-      name
-      maxWidth:max_width
-      inTabIndex:in_tab_index
-      width
-      schema
-      auths
-    }
-  }
-`
-export const SAVE_RX_PAGE = gql`
-  mutation($rxPage:RxPageInput){
-    saveRxPage(rxPage:$rxPage){
-      id
-      name
-      maxWidth:max_width
-      width
-      schema
-      auths
-      query
-    }
-  }
-`
-
 export const GET_RX_TEMPLATES = gql`
   query {
     rxTemplates{
@@ -106,31 +89,4 @@ export const GET_RX_TEMPLATES = gql`
   }
 `
 
-export const CREATE_RX_PAGE = gql`
-  mutation($appId:ID, $templateId:ID, $pageId:ID, $name:String){
-    createRxPage(appId:$appId, templateId:$templateId, pageId:$pageId, name:$name){
-      id
-      name
-      maxWidth:max_width
-      width
-      schema
-      auths
-      query
-    }
-  }
-`
 
-//后面要删除此变量
-export const SAVE_PAGE = gql`
-  mutation($page:PageInput){
-    page(page:$page){
-      id
-      name
-      maxWidth:max_width
-      inTabIndex:in_tab_index
-      width
-      schema
-      auths
-    }
-  }
-`

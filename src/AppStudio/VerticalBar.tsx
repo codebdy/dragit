@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight:'bold',
       fontSize:'20px',
       marginTop:theme.spacing(1),
+      color:"#FFF",
     },
     buttons:{
       marginTop:theme.spacing(2),
@@ -62,6 +63,8 @@ export const VerticalBar = observer(() => {
     },
   });
 
+  const activeIconColor = "#5a8dee";
+
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
@@ -75,14 +78,14 @@ export const VerticalBar = observer(() => {
             className = {classes.logoIcon}
             variant="rounded"
           >
-            <MdiIcon iconClass = "mdi-feather" color="#fff"/>
+            RX
           </Avatar>
           <div className = {classes.buttons}>
             <Tooltip title={intl.get('pages')} placement="right">
               <IconButton
                 onClick = {()=>{setPagesOpen(!pagesOpen)}}
               >
-                <MdiIcon iconClass = "mdi-file-outline" color={"#5a8dee"}/>
+                <MdiIcon iconClass = "mdi-file-outline" color={studioStore?.editingPageId ? activeIconColor : iconColor}/>
               </IconButton>
             </Tooltip>
             <Tooltip title={intl.get('navigation')} placement="right">
@@ -118,7 +121,7 @@ export const VerticalBar = observer(() => {
           <AddNewPage />
         }
       >
-        <PageList />
+        <PageList onClose={()=>setPagesOpen(false)}/>
       </PopuDrawer>
 
     </Fragment>
