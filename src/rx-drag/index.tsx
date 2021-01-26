@@ -31,7 +31,8 @@ export const RxDrag = observer((
 
   useEffect(()=>{
     onThemeModeChange && onThemeModeChange(store.themeOptions?.mode)
-  },[onThemeModeChange, store.themeOptions])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[onThemeModeChange, store.themeOptions?.mode])
 
   return (
     <RxDragStoreProvider value = {store}>
