@@ -35,6 +35,10 @@ class RxThemeOptions implements IRxThemeOptions{
   get canvasColor(){
     return this.mode === LIGHT ? this.lightCanvasColor : this.darkCanvasColor;
   }
+
+  setOptions(options?:IRxThemeOptions){
+    //this.setThemeMode(options?.mode ? options?.mode : this.mode);
+  }
 }
 
 export type TabType = 'toolbox'|'attributes'|'settings';
@@ -60,6 +64,10 @@ export class RxDragStore{
 
   toggleThemeMode(){
     this.themeOptions.setThemeMode(this.themeOptions.mode === DARK ? LIGHT : DARK);
+  }
+
+  setThemeOptions(options?:IRxThemeOptions){
+    this.themeOptions.setOptions(options);
   }
 
 }

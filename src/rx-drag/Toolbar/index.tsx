@@ -4,7 +4,7 @@ import './style.css';
 import classNames from 'classnames';
 import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
 import { ToolbarButton } from './ToolbarButton';
-import { DARK } from 'rx-drag/context/IRxThemeOptions';
+import { DARK, LIGHT, RxThemeMode } from 'rx-drag/context/IRxThemeOptions';
 
 const svgOutLine = `
   <svg viewBox="0 0 24 24">
@@ -62,7 +62,16 @@ const svgRight = `
     <path fill="currentColor" d="M21,15.61L19.59,17L14.58,12L19.59,7L21,8.39L17.44,12L21,15.61M3,6H16V8H3V6M3,13V11H13V13H3M3,18V16H16V18H3Z" />
   </svg>
 `
-export const Toolbar = observer(() => {
+export const Toolbar = observer((
+  props:{
+    onThemeModeChange?:(mode :RxThemeMode)=>void,
+  }
+) => {
+  const {onThemeModeChange} = props;
+  const handleModeChange = ()=>{
+    dragStore?.toggleThemeMode();
+    onThemeModeChange && onThemeModeChange(dragStore?.themeOptions.mode || LIGHT)
+  }
   const dragStore = useRxDragStore();
   return (
     <div 
@@ -86,7 +95,7 @@ export const Toolbar = observer(() => {
           dragStore?.themeOptions.canSwitchThemeMode && 
           <ToolbarButton 
             svgIcon = {dragStore?.themeOptions.mode === DARK ? svgLight : svgDark} 
-            onClick = {()=>dragStore?.toggleThemeMode()}
+            onClick = {handleModeChange}
           />        
         }
 

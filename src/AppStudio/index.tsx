@@ -50,6 +50,9 @@ export const AppStudio = observer(() => {
       primary:{
         main:'#5a8dee',
       },
+      text:{
+        //primary:studioStore?.themeMode === DARK ? '#909eaf' :'#8494a7',
+      },
       background:{
         default: studioStore?.themeMode === DARK ? '#1a233a' : '#f2f4f4',
         paper: studioStore?.themeMode === DARK ? '#272e48' : '#FFF',

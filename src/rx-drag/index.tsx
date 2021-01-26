@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { IRxMeta } from './IRxMeta';
-import { IRxThemeOptions, RxThemeMode } from './context/IRxThemeOptions';
+import { IRxThemeOptions, LIGHT, RxThemeMode } from './context/IRxThemeOptions';
 import './style.css';
 import { Toolbar } from './Toolbar';
 import { NodeNavigation } from './NodeNavigation';
@@ -26,14 +26,10 @@ export interface IRxDragProps{
 export const RxDrag = observer((
   props: IRxDragProps
 ) => {
-  const {toolbox, attributeBox, pageSettings, locales, onThemeModeChange} = props;
+  const {theme, toolbox, attributeBox, pageSettings, locales, onThemeModeChange} = props;
   const [store] = React.useState(new RxDragStore(locales))
 
-  useEffect(()=>{
-    onThemeModeChange && onThemeModeChange(store.themeOptions?.mode)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[onThemeModeChange, store.themeOptions?.mode])
-
+  store?.setThemeOptions(theme);
   return (
     <RxDragStoreProvider value = {store}>
       <div 
@@ -46,7 +42,7 @@ export const RxDrag = observer((
         }
       >
         <div className = 'rx-left'>
-          <Toolbar />
+          <Toolbar onThemeModeChange = {onThemeModeChange}/>
           <div className = 'rx-canvas-background'
 
           >

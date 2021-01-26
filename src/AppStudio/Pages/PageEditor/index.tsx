@@ -22,6 +22,11 @@ export const PageEditor = observer(() => {
   }
   return (
     <RxDrag
+      theme = {
+        {
+          mode:studioStore?.themeMode,
+        }
+      }
       toolbox = {<div>tool box</div>}
       attributeBox = {<div>Attributes box</div>}
       pageSettings = {<div>Settings box</div>}
