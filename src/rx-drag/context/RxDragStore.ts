@@ -4,7 +4,7 @@ import { IRxThemeOptions, LIGHT, RxThemeMode } from "./IRxThemeOptions";
 class RxThemeOptions implements IRxThemeOptions{
   mode : RxThemeMode = LIGHT;
   classes = {
-    toolbar : 'rx-toobar-2',
+    toolbar : 'rx-toolbar-color',
   };
 
   constructor() {

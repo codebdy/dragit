@@ -2,6 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
 import classNames from 'classnames';
+import { useThemeOptions } from 'rx-drag/context/useRxDragStore';
 
 const svgOutLine = `
   <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -49,8 +50,9 @@ const svgRight = `
   </svg>
 `
 export const Toolbox = observer(() => {
+  const themeOptions = useThemeOptions();
   return (
-    <div className = {classNames('rx-toolbar','rx-toolbar-2')}>
+    <div className = {classNames('rx-toolbar', themeOptions?.classes.toolbar)}>
       <div className = 'rx-toolbar-button-group'>
         <div 
           dangerouslySetInnerHTML = {{__html:svgOutLine}}

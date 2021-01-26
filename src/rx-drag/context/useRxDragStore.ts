@@ -6,4 +6,6 @@ export const RxDragStoreProvider = RxDragStoreContext.Provider;
 
 const useRxDragStore = (): RxDragStore|undefined => useContext(RxDragStoreContext);
 
-export {useRxDragStore};
+const useThemeOptions = () => useRxDragStore()?.themeOptions;
+
+export {useRxDragStore, useThemeOptions};
