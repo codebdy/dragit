@@ -8,6 +8,7 @@ import { NodeNavigation } from './NodeNavigation';
 import { RxDragStore } from './context/RxDragStore';
 import { RxDragStoreProvider } from './context/useRxDragStore';
 import classNames from 'classnames';
+import { Sidebar } from './Sidebar';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
@@ -62,7 +63,7 @@ export const RxDrag = observer((
         )}
         style = {{borderColor:store?.themeOptions.borderColor}}
         >
-          rx-right
+          <Sidebar />
         </div>
       </div>
     </RxDragStoreProvider>

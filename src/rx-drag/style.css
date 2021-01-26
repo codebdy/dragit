@@ -35,6 +35,8 @@
   overflow: hidden;
   transition: all 0.5s;
   border-left: solid 1px;
+  display: flex;
+  flex-flow: column;
 }
 
 .rx-right.collapse{

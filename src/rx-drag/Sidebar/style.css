@@ -1,0 +1,25 @@
+.rx-sidebar{
+  display: flex;
+  width: 280px;
+  flex-flow: column;
+  justify-content: center;
+
+}
+
+.rx-sidebar-tabs{
+  display: flex;
+  flex-flow: row;
+  align-items: stretch;
+  height: 40px;
+  border-bottom: solid 1px;
+}
+
+.rx-sidebar-tab-title{
+  flex:1;
+  border-right:solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
