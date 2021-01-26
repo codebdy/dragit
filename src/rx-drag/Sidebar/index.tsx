@@ -3,7 +3,6 @@ import { observer } from 'mobx-react';
 import './style.css';
 import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
 import classNames from 'classnames';
-import intl from 'react-intl-universal';
 
 export const Sidebar = observer((
   props:{
@@ -38,7 +37,7 @@ export const Sidebar = observer((
           }
           onClick = {()=>dragStore?.setActiveTab('toolbox')}
         >
-          {intl.get('component')}
+          {dragStore?.locales?.components || 'Components'}
         </div>
         <div className = {
             classNames(
@@ -53,7 +52,7 @@ export const Sidebar = observer((
           }
           onClick = {()=>dragStore?.setActiveTab('attributes')}
         >
-          {intl.get('attributes')}
+          {dragStore?.locales?.attributes || 'Attributes'}
         </div>
         <div className = {
             classNames(
@@ -68,7 +67,7 @@ export const Sidebar = observer((
           }
           onClick = {()=>dragStore?.setActiveTab('settings')}
         >
-          {intl.get('page-settings')}
+          {dragStore?.locales?.pageSettings || 'Page settings'}
         </div>
       </div>
       <div className = 'rx-sidebar-tabpanel'>

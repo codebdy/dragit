@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { IRxLocales } from "rx-drag/IRxLocales";
 import { IRxThemeOptions, LIGHT, DARK, RxThemeMode } from "./IRxThemeOptions";
 
 class RxThemeOptions implements IRxThemeOptions{
@@ -42,8 +43,10 @@ export class RxDragStore{
   rightFolded : boolean = false;
   themeOptions : RxThemeOptions = new RxThemeOptions(); 
   activedTab : TabType = 'toolbox';
+  locales?:IRxLocales;
 
-  constructor() {
+  constructor(locales?:IRxLocales) {
+    this.locales = locales;
     makeAutoObservable(this)
   }
 
