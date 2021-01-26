@@ -73,6 +73,7 @@ export const VerticalBar = observer(() => {
           square
           elevation = {pagesOpen ? 1 : 6}
           style={{width:studioStore?.verticalBarWidth}}
+          onClick = {()=>setPagesOpen(false)}
         >
           <Avatar
             className = {classes.logoIcon}
@@ -83,14 +84,19 @@ export const VerticalBar = observer(() => {
           <div className = {classes.buttons}>
             <Tooltip title={intl.get('pages')} placement="right">
               <IconButton
-                onClick = {()=>{setPagesOpen(!pagesOpen)}}
+                onClick = {(e)=>{
+                  e.stopPropagation();
+                  setPagesOpen(!pagesOpen)
+                }}
               >
                 <MdiIcon iconClass = "mdi-file-outline" color={studioStore?.editingPage ? activeIconColor : iconColor}/>
               </IconButton>
             </Tooltip>
             <Tooltip title={intl.get('navigation')} placement="right">
               <IconButton
-                onClick = {()=>{studioStore?.editNavigation()}}
+                onClick = {()=>{
+                  studioStore?.editNavigation();
+                }}
               >
                 <MdiIcon iconClass = "mdi-file-tree-outline" color={studioStore?.editingNavigation ? activeIconColor : iconColor} />
               </IconButton>
