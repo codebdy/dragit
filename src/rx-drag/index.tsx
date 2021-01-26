@@ -40,7 +40,7 @@ export const RxDrag = observer((
             <div 
               className = 'rx-canvas'
               style={{
-                backgroundColor:store?.themeOptions.canvasColor,
+                backgroundColor: store?.themeOptions.canvasColor,
               }}
             >
               rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>

@@ -8,7 +8,8 @@ export interface IRxThemeOptions{
   darkBackgroundColor: string;
   lightBorderColor: string;
   darkBorderColor: string;
-  canvasColor: string;
+  lightCanvasColor: string;
+  canSwitchThemeMode?: boolean;
 
   canvas?:{
     selectedLabelColor?:string,
