@@ -1,27 +1,9 @@
 import React, { useEffect, Fragment } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { observer} from 'mobx-react';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/RxNode';
-import { useDesign } from '../useDesign';
+import { useDesign } from '../../Design/PageEditor/useDesign';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    label: {
-      position:'fixed',
-      background:theme.palette.primary.main,
-      color:'#fff',
-      padding:' 0 5px',
-      fontSize:'0.8rem',
-      height:'20px',
-      lineHeight:'20px',
-      userSelect:'none',
-      cursor: 'default',
-      pointerEvents: 'none',
-    },
-
-  }),
-);
 export const ComponentLabel = observer((
   props:{
     node?:RxNode<IMeta>,
@@ -29,7 +11,6 @@ export const ComponentLabel = observer((
   }
 )=>{
   const{node, followDom} = props;
-  const classes = useStyles();
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
   const {editorStore} = useDesign();
@@ -61,7 +42,7 @@ export const ComponentLabel = observer((
   return (
     <Fragment>
       {followDom &&
-        <div className={classes.label}
+        <div className={'rx-label'}
           style={{
             left:left + 'px',
             top: top + 'px',

@@ -1,17 +1,17 @@
 import React, { Fragment, useEffect } from 'react';
 import intl from 'react-intl-universal';
-import MouseFollower from './Core/MouseFollower';
+import MouseFollower from '../../rx-drag/core/MouseFollower';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/RxNode';
-import { NodeToolbar } from './Core/NodeToolbar';
-import { DragCusor } from './Core/DragCusor';
-import { ComponentLabel } from './Core/ComponentLabel';
+import { NodeToolbar } from '../../rx-drag/core/NodeToolbar';
+import { DragCusor } from '../../rx-drag/core/DragCusor';
+import { ComponentLabel } from '../../rx-drag/core/ComponentLabel';
 import { cloneObject } from '../../rx-drag/utils/cloneObject';
 import { observer } from 'mobx-react';
 import { PageEditorStore } from './PageEditorStore';
 import { RemoveCommand } from './Commands/RemoveCommand';
 import { DuplicateCommand } from './Commands/DuplicateCommand';
-import { ComponentView } from './Core/ComponentView';
+import { ComponentView } from '../../rx-drag/core/ComponentView';
 
 export const PageEditorCore = observer((
   props:{

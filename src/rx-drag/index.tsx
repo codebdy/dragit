@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { IRxMeta } from './IRxMeta';
-import { IRxThemeOptions, LIGHT, RxThemeMode } from './context/IRxThemeOptions';
-import './style.css';
+import { IRxThemeOptions, RxThemeMode } from './context/IRxThemeOptions';
 import { Toolbar } from './Toolbar';
 import { NodeNavigation } from './NodeNavigation';
 import { RxDragStore } from './context/RxDragStore';
 import { RxDragStoreProvider } from './context/useRxDragStore';
 import classNames from 'classnames';
 import { Sidebar } from './Sidebar';
-import { useEffect } from 'react';
 import { IRxLocales } from './IRxLocales';
+import './style.css';
+import './core.css';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,

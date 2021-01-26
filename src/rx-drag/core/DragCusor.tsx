@@ -8,7 +8,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { IRect } from 'Base/Model/IRect';
 import { observer } from 'mobx-react';
-import { useDesign } from '../useDesign';
+import { useDesign } from '../../Design/PageEditor/useDesign';
 
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,4 +1,4 @@
-import { RxNode } from '../../../rx-drag/RxNode';
+import { RxNode } from '../RxNode';
 import { IMeta } from 'Base/RXNode/IMeta';
 
 

@@ -1,0 +1,12 @@
+.rx-label{
+  position:fixed;
+  background:#5a8dee;
+  color:#fff;
+  padding: 0 5px;
+  font-size:0.8rem;
+  height:20px;
+  line-height:20px;
+  user-select:none;
+  cursor: default;
+  pointer-events: none;
+}

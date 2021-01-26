@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { DADA_RXID_CONST, RxNode } from '../../../rx-drag/RxNode';
+import { DADA_RXID_CONST, RxNode } from '../RxNode';
 import { resolveComponent, resolveMetaConfig } from 'Base/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
@@ -8,8 +8,8 @@ import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react';
-import { useDesign } from '../useDesign';
-import { getDomByRxid } from '../../../rx-drag/utils/getDomByRxid';
+import { useDesign } from '../../Design/PageEditor/useDesign';
+import { getDomByRxid } from '../utils/getDomByRxid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
