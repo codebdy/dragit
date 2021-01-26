@@ -14,7 +14,7 @@ import { GET_RX_APP } from 'Base/GraphQL/GQLs';
 import { useEffect } from 'react';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppSkeleton from './AppSkeleton';
-import { RxDrag } from 'rx-drag';
+import { WorkSpace } from './WorkSpace';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,7 +95,7 @@ export const AppStudio = observer(() => {
               {
                 loading 
                 ? <AppSkeleton />
-                : ( studioStore?.editingPage && <RxDrag />)
+                : <WorkSpace />
               }
             </div>
           </div>

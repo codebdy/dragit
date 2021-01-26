@@ -5,11 +5,18 @@ import { createContext } from "react";
 import { useContext } from "react";
 import { DARK, ThemeMode } from "Store/ThemeSettings";
 
+export class WorkSpaceState{
+  constructor() {
+    makeAutoObservable(this)
+  }
+}
+
 export class AppStudioStore{
   verticalBarWidth:string = '60px';
   isDirty:boolean = false;
   themeMode:ThemeMode = DARK;
   editingPage?:IRxPage;
+  editingNavigation?:boolean;
   rxApp?: IRxApp;
 
   constructor() {
@@ -23,8 +30,14 @@ export class AppStudioStore{
     }
   }
 
-  setEditingPage(page?:IRxPage){
+  editPage(page?:IRxPage){
     this.editingPage = page;
+    this.editingNavigation = false;
+  }
+
+  editNavigation(){
+    this.editingPage = undefined;
+    this.editingNavigation = true;
   }
 }
 

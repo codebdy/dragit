@@ -24,7 +24,7 @@ export const PageList = observer((
   const classes = useStyles();
   const studioStore = useAppStudioStore();
   const handleClick = (page:IRxPage)=>{
-    studioStore?.setEditingPage(page);
+    studioStore?.editPage(page);
     onClose();
   }
 

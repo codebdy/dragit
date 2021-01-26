@@ -90,9 +90,9 @@ export const VerticalBar = observer(() => {
             </Tooltip>
             <Tooltip title={intl.get('navigation')} placement="right">
               <IconButton
-                onClick = {()=>{}}
+                onClick = {()=>{studioStore?.editNavigation()}}
               >
-                <MdiIcon iconClass = "mdi-file-tree-outline" color={iconColor}/>
+                <MdiIcon iconClass = "mdi-file-tree-outline" color={studioStore?.editingNavigation ? activeIconColor : iconColor} />
               </IconButton>
             </Tooltip>
             <Tooltip title={intl.get('authority')} placement="right">

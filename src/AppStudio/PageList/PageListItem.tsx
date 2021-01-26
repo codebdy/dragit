@@ -71,7 +71,7 @@ export const PageListItem = observer((
       },
       onCompleted: (data)=>{
         if(page.id === studioStore?.editingPage?.id){
-          studioStore.setEditingPage(undefined);
+          studioStore.editPage(undefined);
         }
       }
     }

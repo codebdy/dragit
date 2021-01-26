@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { IRxMeta } from './IRxMeta';
-import { IRxThemeOptions, LIGHT } from './context/IRxThemeOptions';
+import { IRxThemeOptions, RxThemeMode } from './context/IRxThemeOptions';
 import './style.css';
 import { Toolbar } from './Toolbar';
 import { NodeNavigation } from './NodeNavigation';
@@ -9,17 +9,27 @@ import { RxDragStore } from './context/RxDragStore';
 import { RxDragStoreProvider } from './context/useRxDragStore';
 import classNames from 'classnames';
 import { Sidebar } from './Sidebar';
+import { useEffect } from 'react';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
-  json?: Array<IRxMeta>,
+  initJson?: Array<IRxMeta>,
+  toolbox?: JSX.Element,
+  attributeBox?: JSX.Element,
+  pageSettings?: JSX.Element,
   onChange?: (json : Array<IRxMeta>)=>void,
+  onThemeModeChange?:(mode :RxThemeMode)=>void,
 }
 
 export const RxDrag = observer((
   props: IRxDragProps
 ) => {
+  const {onThemeModeChange, toolbox, attributeBox, pageSettings} = props;
   const [store] = React.useState(new RxDragStore())
+
+  useEffect(()=>{
+    onThemeModeChange && onThemeModeChange(store.themeOptions?.mode)
+  },[onThemeModeChange, store.themeOptions])
 
   return (
     <RxDragStoreProvider value = {store}>
@@ -68,7 +78,11 @@ export const RxDrag = observer((
         )}
         style = {{borderColor:store?.themeOptions.borderColor}}
         >
-          <Sidebar />
+          <Sidebar
+            toolbox = {toolbox}
+            attributeBox = {attributeBox}
+            pageSettings = {pageSettings}
+          />
         </div>
       </div>
     </RxDragStoreProvider>

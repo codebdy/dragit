@@ -5,7 +5,14 @@ import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
 import classNames from 'classnames';
 import intl from 'react-intl-universal';
 
-export const Sidebar = observer(() => {
+export const Sidebar = observer((
+  props:{
+    toolbox?: JSX.Element,
+    attributeBox?: JSX.Element,
+    pageSettings?: JSX.Element,
+  }
+) => {
+  const {toolbox, attributeBox, pageSettings} = props;
   const dragStore = useRxDragStore();
 
   return (
@@ -65,21 +72,16 @@ export const Sidebar = observer(() => {
         </div>
       </div>
       <div className = 'rx-sidebar-tabpanel'>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
-      rx-sidebar-tabpanel <br/><br/><br/><br/><br/><br/><br/>
+        {
+          dragStore?.activedTab === 'toolbox' && toolbox
+        }
+        {
+          dragStore?.activedTab === 'attributes' && attributeBox
+        }
+        {
+          dragStore?.activedTab === 'settings' && pageSettings
+        }
+
       </div>
     </div>
   );
