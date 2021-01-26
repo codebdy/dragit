@@ -48,6 +48,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const VerticalBar = observer(() => {
   const classes = useStyles();
   const [pagesOpen, setPagesOpen] = React.useState(false);
+  const [authsOpen, setAuthsOpen] = React.useState(false);
+  const [settingsOpen, setSettingsOpen] = React.useState(false);
   const studioStore = useAppStudioStore();
   const iconColor = "#8494a7";
   const theme = createMuiTheme({
@@ -67,15 +69,48 @@ export const VerticalBar = observer(() => {
 
   const handleBarClick = ()=>{
     setPagesOpen(false);
+    setSettingsOpen(false);
+    setAuthsOpen(false);
   }
 
   const handlePagesClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     setPagesOpen(!pagesOpen)
+    setSettingsOpen(false);
+    setAuthsOpen(false);
+  }
+
+  const handleNavigationClick = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
+    setSettingsOpen(false);
+    setPagesOpen(false)
+    setAuthsOpen(false);
+    studioStore?.editNavigation();
   }
 
   const handleClosePages = ()=>{
     setPagesOpen(false);
+  }
+  const handleAuthsClick = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
+    setSettingsOpen(false);
+    setPagesOpen(false)
+    setAuthsOpen(!authsOpen);
+  }
+
+  const handleCloseAuths = ()=>{
+    setAuthsOpen(false);
+  }
+
+  const handleSettingsClick = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
+    setSettingsOpen(!settingsOpen);
+    setPagesOpen(false)
+    setAuthsOpen(false);
+  }
+
+  const handleCloseSettings = ()=>{
+    setSettingsOpen(false);
   }
 
   return (
@@ -104,16 +139,14 @@ export const VerticalBar = observer(() => {
             </Tooltip>
             <Tooltip title={intl.get('navigation')} placement="right">
               <IconButton
-                onClick = {()=>{
-                  studioStore?.editNavigation();
-                }}
+                onClick = {handleNavigationClick}
               >
                 <MdiIcon iconClass = "mdi-file-tree-outline" color={studioStore?.editingNavigation ? activeIconColor : iconColor} />
               </IconButton>
             </Tooltip>
             <Tooltip title={intl.get('authority')} placement="right">
               <IconButton
-                onClick = {()=>{}}
+                onClick = {handleAuthsClick}
               >
                 <MdiIcon iconClass = "mdi-script-text-key-outline" color={iconColor}/>
               </IconButton>
@@ -122,7 +155,7 @@ export const VerticalBar = observer(() => {
           <Spacer />
           <Tooltip title={intl.get('settings')} placement="right">
             <IconButton
-              onClick = {()=>{}}
+              onClick = {handleSettingsClick}
             >
               <MdiIcon iconClass = "mdi-cog-outline" color={iconColor}/>
             </IconButton>
@@ -140,6 +173,21 @@ export const VerticalBar = observer(() => {
         <Pages onClose={()=>setPagesOpen(false)}/>
       </PopuDrawer>
 
+      <PopuDrawer
+        open={authsOpen}
+        onClose={handleCloseAuths}
+        title = {intl.get('authority')}
+      >
+        Auths
+      </PopuDrawer>
+
+      <PopuDrawer
+        open={settingsOpen}
+        onClose={handleCloseSettings}
+        title = {intl.get('settings')}
+      >
+        settings
+      </PopuDrawer>
     </Fragment>
   );
 })
