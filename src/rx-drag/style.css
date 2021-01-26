@@ -18,11 +18,17 @@
   justify-content: space-between;
 }
 
-.rx-canvas-wapper{
+.rx-canvas-background{
   flex:1;
   display: flex;
   flex-flow: column;
   overflow: auto;
+}
+
+.rx-canvas{
+  flex:1;
+  display: flex;
+  flex-flow: column;
 }
 
 .rx-node-navigation{

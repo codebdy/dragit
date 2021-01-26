@@ -34,26 +34,31 @@ export const RxDrag = observer((
       >
         <div className = 'rx-left'>
           <Toolbar />
-          <div className = 'rx-canvas-wapper'
-            style={{
-              backgroundColor:store?.themeOptions.canvasColor,
-            }}
+          <div className = 'rx-canvas-background'
+
           >
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
-          rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
+            <div 
+              className = 'rx-canvas'
+              style={{
+                backgroundColor:store?.themeOptions.canvasColor,
+              }}
+            >
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+            </div>
           </div>
           <NodeNavigation />
         </div>
