@@ -34,6 +34,7 @@
 .rx-node-navigation{
   height: 30px;
   border-top: solid 1px;
+  user-select: none;
 }
 
 .rx-right{
