@@ -3,6 +3,14 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { Button, Grid, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import { stringValue } from 'rx-drag/utils/stringValue';
+import SubmitButton from 'Components/Common/SubmitButton';
+import { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { SAVE_RX_APP } from 'Base/GraphQL/GQLs';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useAppStore } from 'Store/Helpers/useAppStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,10 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     actions:{
       display:'flex',
-      justifyContent: 'flex-end',
+      justifyContent: 'center',
       alignItems:'center',
     },
-    confirmButton:{
+    saveButton:{
       marginLeft:theme.spacing(1),
     }
   }),
@@ -29,6 +37,42 @@ export const Settings = observer((
 ) => {
   const {onClose} = props;
   const classes = useStyles();
+  const studioStore = useAppStudioStore();
+  const rxApp = studioStore?.rxApp;
+  const appStore = useAppStore();
+
+  const [name, setName] = useState(rxApp?.name);
+  const [appType, setAppType] = useState(rxApp?.appType);
+  const [icon, setIcon] = useState(rxApp?.icon);
+  const [color, setColor] = useState(rxApp?.color);
+  const [excuteSave, {loading, error}] = useMutation(SAVE_RX_APP,{
+    onCompleted(){
+      onClose && onClose();
+      appStore.setSuccessAlert(true)
+    }
+  });
+
+  useShowAppoloError(error);
+
+  const handleCancel = ()=>{
+    onClose && onClose();
+    setName(rxApp?.name);
+    setAppType(rxApp?.appType);
+    setIcon(rxApp?.icon);
+    setColor(rxApp?.color);
+  }
+
+  const handleSave = ()=>{
+    excuteSave({variables:{
+      rxApp:{
+        id:rxApp?.id,
+        name,
+        app_type:appType,
+        icon,
+        color
+      }
+    }})
+  }
 
   return (
     <div className = {classes.root}>
@@ -39,6 +83,8 @@ export const Settings = observer((
             variant = "outlined" 
             label = {intl.get('name')} 
             size = "small"
+            value = {stringValue(name)}
+            onChange = {(e)=>setName(e.target.value as string)}
           />
         </Grid>
         <Grid item xs = {12}>
@@ -47,6 +93,8 @@ export const Settings = observer((
             variant = "outlined" 
             label = {intl.get('type')} 
             size = "small"
+            value = {stringValue(appType)}
+            onChange = {(e)=>setAppType(e.target.value as string)}
           />
         </Grid>
         <Grid item xs = {12}>
@@ -55,6 +103,8 @@ export const Settings = observer((
             variant = "outlined" 
             label = {intl.get('icon')} 
             size = "small"
+            value = {stringValue(icon)}
+            onChange = {(e)=>setIcon(e.target.value as string)}
           />
         </Grid>
         <Grid item xs = {12}>
@@ -63,15 +113,25 @@ export const Settings = observer((
             variant = "outlined" 
             label = {intl.get('color')} 
             size = "small"
+            value = {stringValue(color)}
+            onChange = {(e)=>setColor(e.target.value as string)}
           />
         </Grid>
 
         <Grid item className = {classes.actions} xs = {12}>
           <Button 
             variant = 'outlined'
-            onClick = {onClose}
+            onClick = {handleCancel}
           >{intl.get('cancel')}</Button>
-          <Button className = {classes.confirmButton} variant = 'contained' color = 'primary'>{intl.get('confirm')}</Button>
+          <SubmitButton 
+            className = {classes.saveButton} 
+            variant = 'contained' 
+            color = 'primary'
+            submitting = {loading}
+            onClick = {handleSave}
+          >
+            {intl.get('save')}
+          </SubmitButton>
         </Grid>
       </Grid>
     </div>
