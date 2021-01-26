@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const PageList = observer((
+export const Pages = observer((
   props:{
     onClose:()=>void,
   }

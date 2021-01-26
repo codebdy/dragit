@@ -9,7 +9,7 @@ import { DARK } from 'Store/ThemeSettings';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from './AppStudioStore';
 import { PopuDrawer } from './PopuDrawer';
-import { PageList } from './Pages/PageList';
+import { Pages } from './Pages/Pages';
 import { AddNewPage } from './Pages/AddNewPage';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -137,7 +137,7 @@ export const VerticalBar = observer(() => {
           <AddNewPage />
         }
       >
-        <PageList onClose={()=>setPagesOpen(false)}/>
+        <Pages onClose={()=>setPagesOpen(false)}/>
       </PopuDrawer>
 
     </Fragment>
