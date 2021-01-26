@@ -9,8 +9,10 @@ import { DARK } from 'Store/ThemeSettings';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from './AppStudioStore';
 import { PopuDrawer } from './PopuDrawer';
-import { Pages } from './Pages/Pages';
+import { Pages } from './Pages';
 import { AddNewPage } from './Pages/AddNewPage';
+import { Auths } from './Auths';
+import { Settings } from './Settings';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -169,7 +171,7 @@ export const VerticalBar = observer(() => {
         titleAction = {
           <AddNewPage />
         }
-      >
+      >       
         <Pages onClose={()=>setPagesOpen(false)}/>
       </PopuDrawer>
 
@@ -178,7 +180,7 @@ export const VerticalBar = observer(() => {
         onClose={handleCloseAuths}
         title = {intl.get('authority')}
       >
-        Auths
+        <Auths/>
       </PopuDrawer>
 
       <PopuDrawer
@@ -186,7 +188,7 @@ export const VerticalBar = observer(() => {
         onClose={handleCloseSettings}
         title = {intl.get('settings')}
       >
-        settings
+        <Settings onClose = {handleCloseSettings}/>
       </PopuDrawer>
     </Fragment>
   );

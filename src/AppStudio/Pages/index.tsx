@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { PageListItem } from './PageListItem';
 import { IRxPage } from 'Base/Model/IRxPage';
+import Scrollbar from 'AdminBoard/Common/Scrollbar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +30,7 @@ export const Pages = observer((
   }
 
   return (
-    <div className = {classes.root}>
+    <Scrollbar className = {classes.root}>
       {
         studioStore?.rxApp?.pages?.map(page=>{
           return (
@@ -41,6 +42,6 @@ export const Pages = observer((
           )
         })
       }
-    </div>
+    </Scrollbar>
   );
 })

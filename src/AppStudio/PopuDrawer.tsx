@@ -1,7 +1,6 @@
 import React from 'react';
 import {makeStyles, Theme, createStyles, Drawer, Typography, Divider} from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import {observer} from 'mobx-react';
 import { useAppStudioStore } from './AppStudioStore';
 
@@ -49,9 +48,7 @@ export const PopuDrawer = observer((
         {titleAction}
       </DialogTitle>
       <Divider />
-      <Scrollbar>
-        {children}
-      </Scrollbar>
+      {children}
     </Drawer>
   )
 })
