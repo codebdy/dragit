@@ -11,3 +11,7 @@
   /*IE*/
   filter:FlipH;
 }
+
+.rx-light .rx-toolbar-2{
+  background: #f2f4f4;
+}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
+import classNames from 'classnames';
 
 const svgOutLine = `
   <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -49,7 +50,7 @@ const svgRight = `
 `
 export const Toolbox = observer(() => {
   return (
-    <div className = 'rx-toolbar'>
+    <div className = {classNames('rx-toolbar','rx-toolbar-2')}>
       <div className = 'rx-toolbar-button-group'>
         <div 
           dangerouslySetInnerHTML = {{__html:svgOutLine}}

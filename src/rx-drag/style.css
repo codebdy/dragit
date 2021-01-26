@@ -5,13 +5,13 @@
   display: flex;
 }
 
-.rx-drag .rx-left{
+.rx-left{
   flex:1;
   display: flex;
   flex-flow: column;
 }
 
-.rx-drag .rx-left .rx-toolbar{
+.rx-toolbar{
   height: 40px;
   border: solid 1px;
   display: flex;
@@ -19,19 +19,19 @@
   justify-content: space-between;
 }
 
-.rx-drag .rx-left .rx-canvas-wapper{
+.rx-canvas-wapper{
   flex:1;
   display: flex;
   flex-flow: column;
   overflow: auto;
 }
 
-.rx-drag .rx-left .rx-node-navigation{
+.rx-node-navigation{
   height: 30px;
   border: solid 1px;
 }
 
-.rx-drag .rx-right{
+.rx-right{
   width: 280px;
   border-left: solid 1px;
 }
@@ -46,13 +46,13 @@
   border-radius: 0;
 }
 
-.rx-drag.dark ::-webkit-scrollbar-thumb {
+.rx-dark.rx-drag ::-webkit-scrollbar-thumb {
   border-radius: 0.2rem;
   background: rgba(255, 255, 255, 0.3);
   transition: all .2s;
 }
 
-.rx-drag ::-webkit-scrollbar-thumb {
+.rx-light.rx-drag ::-webkit-scrollbar-thumb {
   border-radius: 0.2rem;
   background: rgba(0, 0, 0, 0.3);
   transition: all .2s;
