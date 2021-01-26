@@ -1,0 +1,40 @@
+.rx-toolbar-button-group{
+  display: flex;
+  align-items: center;
+}
+
+.flip {
+  -moz-transform:scaleX(-1);
+  -webkit-transform:scaleX(-1);
+  -o-transform:scaleX(-1);
+  transform:scaleX(-1);
+  /*IE*/
+  filter:FlipH;
+}
+.rx-toolbar-color{
+  padding-left:10px;
+}
+
+.rx-light .rx-toolbar-color{
+  background: #f2f4f4;
+  color:#475f7b;
+  border-bottom: #dfe3e7 solid 1px;
+}
+
+.rx-toolbar-button{
+  margin-top: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.rx-light .rx-toolbar-button:hover, .rx-toolbar-button.checked{
+  color:#5a8dee;
+}
+
+.rx-light .rx-toolbar-button.disabled{
+  color:#c9ccce;
+  cursor: default;
+}

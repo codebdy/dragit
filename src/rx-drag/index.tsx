@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { IRxMeta } from './IRxMeta';
 import { IRxThemeOptions, LIGHT } from './context/IRxThemeOptions';
 import './style.css';
-import { Toolbox } from './Toolbox';
+import { Toolbar } from './Toolbar';
 import { NodeNavigation } from './NodeNavigation';
 import { RxDragStore } from './context/RxDragStore';
 import { RxDragStoreProvider } from './context/useRxDragStore';
@@ -24,7 +24,7 @@ export const RxDrag = observer((
     <RxDragStoreProvider value = {store}>
       <div className = {classNames('rx-drag', store.themeOptions.mode === LIGHT ? 'rx-light' : 'rx-dark')}>
         <div className = 'rx-left'>
-          <Toolbox />
+          <Toolbar />
           <div className = 'rx-canvas-wapper'>
           rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
           rx-canvas-wapper<br/><br/><br/><br/><br/><br/><br/>
