@@ -9,8 +9,8 @@ import { DARK } from 'Store/ThemeSettings';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from './AppStudioStore';
 import { PopuDrawer } from './PopuDrawer';
-import { PageList } from './PageList';
-import { AddNewPage } from './AddNewPage';
+import { PageList } from './Pages/PageList';
+import { AddNewPage } from './Pages/AddNewPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,6 +65,19 @@ export const VerticalBar = observer(() => {
 
   const activeIconColor = "#5a8dee";
 
+  const handleBarClick = ()=>{
+    setPagesOpen(false);
+  }
+
+  const handlePagesClick = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
+    setPagesOpen(!pagesOpen)
+  }
+
+  const handleClosePages = ()=>{
+    setPagesOpen(false);
+  }
+
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
@@ -73,7 +86,7 @@ export const VerticalBar = observer(() => {
           square
           elevation = {pagesOpen ? 1 : 6}
           style={{width:studioStore?.verticalBarWidth}}
-          onClick = {()=>setPagesOpen(false)}
+          onClick = {handleBarClick}
         >
           <Avatar
             className = {classes.logoIcon}
@@ -84,10 +97,7 @@ export const VerticalBar = observer(() => {
           <div className = {classes.buttons}>
             <Tooltip title={intl.get('pages')} placement="right">
               <IconButton
-                onClick = {(e)=>{
-                  e.stopPropagation();
-                  setPagesOpen(!pagesOpen)
-                }}
+                onClick = {handlePagesClick}
               >
                 <MdiIcon iconClass = "mdi-file-outline" color={studioStore?.editingPage ? activeIconColor : iconColor}/>
               </IconButton>
@@ -121,7 +131,7 @@ export const VerticalBar = observer(() => {
       </ThemeProvider>
       <PopuDrawer
         open={pagesOpen}
-        onClose={()=>setPagesOpen(false)}
+        onClose={handleClosePages}
         title = {intl.get('pages')}
         titleAction = {
           <AddNewPage />
