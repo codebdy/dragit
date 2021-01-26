@@ -1,9 +1,10 @@
 .rx-sidebar{
   display: flex;
-  width: 280px;
+  min-width: 280px;
   flex-flow: column;
   justify-content: center;
-
+  flex:1;
+  height: 0;
 }
 
 .rx-sidebar-tabs{
@@ -44,4 +45,10 @@
 .rx-light .rx-sidebar-tab-title.actived{
   background-color: #fff;
   color:#5a8dee;
+}
+
+.rx-sidebar-tabpanel{
+  flex:1;
+  display:flex;
+  overflow: auto;
 }

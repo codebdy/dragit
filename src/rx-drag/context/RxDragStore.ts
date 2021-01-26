@@ -26,9 +26,12 @@ class RxThemeOptions implements IRxThemeOptions{
   }
 }
 
+export type TabType = 'toolbox'|'attributes'|'settings';
+
 export class RxDragStore{
   rightFolded : boolean = false;
   themeOptions : RxThemeOptions = new RxThemeOptions(); 
+  activedTab : TabType = 'toolbox';
 
   constructor() {
     makeAutoObservable(this)
@@ -36,6 +39,10 @@ export class RxDragStore{
 
   setRightFolded(rightFolded:boolean){
     this.rightFolded = rightFolded;
+  }
+
+  setActiveTab(activeTab:TabType){
+    this.activedTab = activeTab;
   }
 
 }
