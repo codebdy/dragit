@@ -7,6 +7,12 @@ export interface IRxThemeClasses{
 
 export interface IRxThemeOptions{
   mode?: RxThemeMode;
+  lightBackgroundColor: string;
+  darkBackgroundColor: string;
+  lightBorderColor: string;
+  darkBorderColor: string;
+  canvasColor: string;
+  
   classes :IRxThemeClasses;
 
   canvas?:{

@@ -13,12 +13,16 @@
 }
 .rx-toolbar-color{
   padding-left:10px;
+  border-bottom: solid 1px;
 }
 
 .rx-light .rx-toolbar-color{
   background: #f2f4f4;
   color:#475f7b;
-  border-bottom: #dfe3e7 solid 1px;
+}
+
+.rx-dark .rx-toolbar-color{
+  color:#8a99b5;
 }
 
 .rx-toolbar-button{
@@ -31,11 +35,16 @@
   user-select: none;
 }
 
-.rx-light .rx-toolbar-button:hover, .rx-toolbar-button.checked{
+.rx-toolbar-button:hover, .rx-toolbar-button.checked{
   color:#5a8dee;
 }
 
 .rx-light .rx-toolbar-button.disabled{
   color:#c9ccce;
+  cursor: default;
+}
+
+.rx-dark .rx-toolbar-button.disabled{
+  color:#485163;
   cursor: default;
 }

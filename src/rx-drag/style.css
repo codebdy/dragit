@@ -27,12 +27,19 @@
 
 .rx-node-navigation{
   height: 30px;
-  border: solid 1px;
+  border-top: solid 1px;
 }
 
 .rx-right{
   width: 280px;
+  overflow: hidden;
+  transition: all 0.5s;
   border-left: solid 1px;
+}
+
+.rx-right.collapse{
+  width: 0px;
+  border: 0;
 }
 
 .rx-drag ::-webkit-scrollbar {

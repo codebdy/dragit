@@ -54,7 +54,14 @@ export const Toolbar = observer(() => {
   const dragStore = useRxDragStore();
   const themeOptions = useThemeOptions();
   return (
-    <div className = {classNames('rx-toolbar', themeOptions?.classes.toolbar)}>
+    <div 
+      className = {classNames('rx-toolbar', themeOptions?.classes.toolbar)}
+      style = {
+        {
+          borderColor:dragStore?.themeOptions.borderColor,
+        }
+      }
+    >
       <div className = 'rx-toolbar-button-group'>
         <ToolbarButton svgIcon = {svgOutLine} />
         <ToolbarButton svgIcon = {svgPaddingX} checked />
