@@ -11,6 +11,7 @@ import { Sidebar } from './Sidebar';
 import { IRxLocales } from './IRxLocales';
 import './style.css';
 import './core.css';
+import { useEffect } from 'react';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
@@ -29,7 +30,10 @@ export const RxDrag = observer((
   const {theme, toolbox, attributeBox, pageSettings, locales, onThemeModeChange} = props;
   const [store] = React.useState(new RxDragStore(locales))
 
-  store?.setThemeOptions(theme);
+  useEffect(()=>{
+    store?.setThemeOptions(theme);
+  }, [store, theme]);
+
   return (
     <RxDragStoreProvider value = {store}>
       <div 

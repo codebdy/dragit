@@ -37,7 +37,7 @@ class RxThemeOptions implements IRxThemeOptions{
   }
 
   setOptions(options?:IRxThemeOptions){
-    //this.setThemeMode(options?.mode ? options?.mode : this.mode);
+    this.setThemeMode(options?.mode ? options?.mode : this.mode);
   }
 }
 
