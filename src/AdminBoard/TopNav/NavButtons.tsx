@@ -5,7 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import intl from "react-intl-universal";
 import EvenNotification from "./Notifications"
 import MdiIcon from "Components/Common/MdiIcon";
-import { useAppStore } from "Store/Helpers/useAppStore";
+import { useDragItStore } from "Store/Helpers/useDragItStore";
 import { AccountAvatar } from "./AccountAvatar";
 
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function NavButtons(props:{color?:string, onSidebarToggle: any}) {
   const {color} = props;
   const classes = useStyles();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
  
   return(
     <Fragment>

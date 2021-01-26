@@ -9,7 +9,7 @@ import NavButtons from './NavButtons';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 
 import {observer} from "mobx-react";
-import { useThemeSettings, useAppStore } from 'Store/Helpers/useAppStore';
+import { useThemeSettings, useDragItStore } from 'Store/Helpers/useDragItStore';
 import { DARK } from 'Store/ThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,7 +24,7 @@ export const TopNav = observer((props:{onSidebarToggle: any}) => {
   const classes = useStyles();
   const [sticky, setSticky] = React.useState(false);
   const toolbarSkin = useThemeSettings().toolbarSkin;
-  const appStore = useAppStore();  
+  const appStore = useDragItStore();  
   
   const handleScroll = function(event:any){
     let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0

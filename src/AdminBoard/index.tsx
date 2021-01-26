@@ -7,7 +7,7 @@ import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidth
 import { AreaSelect } from 'Design/AreaSelect';
 import {observer} from 'mobx-react';
 import { ThemeSettings } from './ThemeSettings';
-import { useLeftDrawer } from 'Store/Helpers/useAppStore';
+import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

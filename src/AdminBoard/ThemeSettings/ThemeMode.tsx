@@ -5,7 +5,7 @@ import useRowStyles from './useRowStyles';
 
 import {observer} from "mobx-react";
 
-import { useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useThemeSettings } from 'Store/Helpers/useDragItStore';
 import { LIGHT, linearGradient1, DARK, linearGradient5 } from 'Store/ThemeSettings';
 
 export const ThemeMode = observer(()=>{

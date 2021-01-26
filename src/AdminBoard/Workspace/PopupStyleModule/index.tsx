@@ -7,7 +7,7 @@ import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { useMemo } from 'react';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { getModulePageById } from '../Common/getModulePageById';
 import { ModuleProps } from '../Common/ModuleProps';
 
@@ -26,7 +26,7 @@ export const PopupStyleModule = observer((
 )=>{
   const {module} = props;
   const classes = useStyles();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const pageId = appStore.pageId || module.entryPage?.id;
   const [popupPageId, setPopupPageId] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();

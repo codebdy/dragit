@@ -3,7 +3,7 @@ import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -11,7 +11,7 @@ function Alert(props: AlertProps) {
 
 export const SuccessAlertBar = observer(()=>{
 
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
 
    
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {

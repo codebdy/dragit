@@ -8,13 +8,13 @@ import { ElevationStrength } from './ElevationStrength';
 import { SidebarSettings } from './SidebarSettings';
 import RightDrawer from 'AdminBoard/ThemeSettings/RightDrawer';
 import {observer} from 'mobx-react';
-import { useThemeSettings, useAppStore } from 'Store/Helpers/useAppStore';
+import { useThemeSettings, useDragItStore } from 'Store/Helpers/useDragItStore';
 import useShadows from 'Utils/useShadows';
 
 export const ThemeSettings = observer(()=>{
 
   const themeSettings = useThemeSettings();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   
   const theme = createMuiTheme({
     palette: {

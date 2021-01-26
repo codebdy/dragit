@@ -3,7 +3,7 @@ import { FormControlLabel, Switch, Typography } from '@material-ui/core';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import {observer} from "mobx-react";
-import { useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useThemeSettings } from 'Store/Helpers/useDragItStore';
 
 export const ToolbarSettings = observer(()=>{
   const classes = useRowStyles();

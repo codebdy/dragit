@@ -6,11 +6,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import intl from 'react-intl-universal';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import {observer} from 'mobx-react';
 
 export const ConfirmDialog = observer(() => {
-  const confirmStore = useAppStore().confirm;
+  const confirmStore = useDragItStore().confirm;
   
   const handelCancel = ()=>{
     confirmStore.close();

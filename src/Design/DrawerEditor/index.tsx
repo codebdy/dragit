@@ -14,7 +14,7 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { GET_DRAWER, SAVE_DRAWER } from 'Base/GraphQL/GQLs';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import SubmitButton from 'Components/Common/SubmitButton';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
@@ -68,7 +68,7 @@ export default function DrawerEditor(){
   const [rootNode,setRootNode] = React.useState(new RxNode<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RxNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RxNode<IMenuItem>>();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
 
   const [excuteSave, {error:saveError, loading:saving}] = useMutation(SAVE_DRAWER,{
     onCompleted:(data)=>{

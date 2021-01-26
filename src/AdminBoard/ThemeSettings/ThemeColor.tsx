@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
-import { useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useThemeSettings } from 'Store/Helpers/useDragItStore';
 import { LIGHT, DARK } from 'Store/ThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>

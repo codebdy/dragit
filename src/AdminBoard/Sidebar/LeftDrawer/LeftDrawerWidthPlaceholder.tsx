@@ -1,7 +1,7 @@
 import React from "react";
 import { Hidden } from "@material-ui/core";
 import {observer} from "mobx-react";
-import { useLeftDrawer } from "Store/Helpers/useAppStore";
+import { useLeftDrawer } from "Store/Helpers/useDragItStore";
 
 export const LeftDrawerWidthPlaceholder = observer((
   props:{children?:any, className?:string, style?:any}

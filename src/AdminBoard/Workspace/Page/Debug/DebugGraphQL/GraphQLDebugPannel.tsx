@@ -9,7 +9,7 @@ import intl from 'react-intl-universal';
 import { useDebugQuery } from './useDebugQuery';
 import { useDebugMutation } from './useDebugMutation';
 import MdiIcon from 'Components/Common/MdiIcon';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { usePageStore } from 'Base/PageUtils/PageStore';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { createMutationGQL } from 'Base/PageUtils/createMutationGQL';
@@ -70,7 +70,7 @@ export const GraphQLDebugPannel = observer(()=>{
   const [variablesStr, setVariablesStr] = useState('');
   const gqls = usePageStore()?.gqls;
   //const [error, setError] = useState<any>();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const modelStore = useModelStore();
 
   const [excuteQuery, { loading, error:queryError, data:queryResult }] = useDebugQuery(graphiQL);

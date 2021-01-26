@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { SAVE_RX_APP } from 'Base/GraphQL/GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +39,7 @@ export const Settings = observer((
   const classes = useStyles();
   const studioStore = useAppStudioStore();
   const rxApp = studioStore?.rxApp;
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
 
   const [name, setName] = useState(rxApp?.name);
   const [appType, setAppType] = useState(rxApp?.appType);

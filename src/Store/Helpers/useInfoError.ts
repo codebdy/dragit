@@ -1,10 +1,10 @@
 import { ApolloError } from "@apollo/react-hooks";
 import { useEffect } from "react";
 import intl from 'react-intl-universal';
-import { useAppStore } from "./useAppStore";
+import { useDragItStore } from "./useDragItStore";
 
 export function useShowAppoloError(error?:ApolloError){
-  const appStore = useAppStore() 
+  const appStore = useDragItStore() 
   useEffect(()=>{
     if(error){
       appStore.infoError(intl.get('server-error'), error?.message)

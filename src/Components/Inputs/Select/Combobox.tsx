@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
 import intl from 'react-intl-universal';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import withFormField from 'Components/Common/withFormField';
 
 const Combobox = React.forwardRef((
@@ -48,7 +48,7 @@ const Combobox = React.forwardRef((
     }
   `;
   const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   
   useEffect(()=>{
     if(queryError){

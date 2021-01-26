@@ -2,7 +2,7 @@ import { useLazyQuery, gql, useMutation } from '@apollo/react-hooks';
 import { Paper } from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { ListViewStore, ListViewStoreProvider } from './ListViewStore';
 import { useQueryGQL } from './useQueryGQL';
@@ -49,7 +49,7 @@ const ListView = observer(React.forwardRef((
   
   const [listViewStore] = useState(new ListViewStore())
   
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const queryGQL = useQueryGQL( rxNode, listViewStore, query );
   const updateGQL = useUpdateGQL( rxNode, listViewStore, update );
   const removeGQL = useRemoveGQL( rxNode, listViewStore, remove );

@@ -6,7 +6,7 @@ import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
 import { SpeedDialIcon } from '@material-ui/lab';
 import GraphQLDebug from './DebugGraphQL';
-import { useLeftDrawer, useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useLeftDrawer, useThemeSettings } from 'Store/Helpers/useDragItStore';
 import {observer} from 'mobx-react';
 import { DARK } from 'Store/ThemeSettings';
 import { DebugModelTree } from './DebugModelTree';

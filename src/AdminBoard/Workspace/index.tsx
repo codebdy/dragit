@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { PageEditor } from "Design/PageEditor";
-import { useAppStore, useDesigner } from "Store/Helpers/useAppStore";
+import { useDragItStore, useDesigner } from "Store/Helpers/useDragItStore";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE } from "Utils/consts";
 import ModuleSkeleton from "./Common/ModuleSkeleton";
@@ -48,7 +48,7 @@ const QUERY_MODULE = gql`
 `;
 
 export const Workspace = observer(()=>{
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const designer = useDesigner();
 
   const classes = useStyles();

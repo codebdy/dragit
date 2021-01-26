@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router";
-import { useAppStore } from "./useAppStore";
+import { useDragItStore } from "./useDragItStore";
 import { gql, useLazyQuery } from "@apollo/react-hooks";
 import { TOKEN_NAME, LOGIN_URL } from "Utils/consts";
 
@@ -31,7 +31,7 @@ export function useLoginCheck() {
     notifyOnNetworkStatusChange: true
   });
   //const { loading, error, data } = useQuery(LOGIN,);
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
 
   useEffect(()=>{
     if(!appStore.loggedUser && !localToken){

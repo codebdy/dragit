@@ -5,7 +5,7 @@ import { IMeta } from 'Base/RXNode/IMeta';
 import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { useActionStore } from './ActionStore';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 export function ComponentRender(
   props:{
@@ -16,7 +16,7 @@ export function ComponentRender(
   const onClickAction = node.meta.props?.onClick;
   let Component = resolveComponent(node.meta);
 
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const actionStore = useActionStore();
 
   const handleOnClick = ()=>{

@@ -7,18 +7,18 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import client from './mock/client';
 import { CssBaseline } from '@material-ui/core';
 import 'config';
-import { AppStore } from 'Store/AppStore';
-import { AppStoreProvider } from 'Store/Helpers/AppStoreProvider';
+import { DragItStore } from 'Store/DragItStore';
+import { DragItStoreProvider } from 'Store/Helpers/DragItStoreProvider';
 
-const appStore = new AppStore();
+const appStore = new DragItStore();
 
 ReactDOM.render(
-  <AppStoreProvider value = {appStore}>
+  <DragItStoreProvider value = {appStore}>
     <ApolloProvider client={client}>
       <CssBaseline />      
       <App />
     </ApolloProvider>
-  </AppStoreProvider>  
+  </DragItStoreProvider>  
   ,
   document.getElementById('root')
 );

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { TOKEN_NAME, LOGIN_URL } from 'Utils/consts';
 //import { resolvePageUrl } from 'Utils/resolvePageUrl';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import intl from "react-intl-universal";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const AccountAvatar = observer(()=>{
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const user = useLoggedUser();
 
   const isMenuOpen = Boolean(anchorEl);

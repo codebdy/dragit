@@ -1,5 +1,5 @@
 import { createMuiTheme, Theme } from "@material-ui/core";
-import { useThemeSettings } from "Store/Helpers/useAppStore";
+import { useThemeSettings } from "Store/Helpers/useDragItStore";
 
 const weakenShadow = (shadow:string, strength:number)=>{
   return shadow.replace('rgba(0,0,0,0.14)',`rgba(0,0,0,${0.14*strength/10})`)

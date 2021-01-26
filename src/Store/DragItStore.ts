@@ -7,7 +7,7 @@ import { IModule } from "Base/Model/IModule";
 import { Confirm } from "./Confirm";
 import { Error } from "./Error";
 
-export class AppStore{
+export class DragItStore{
   showThemeSettings = false;
   toolbarElevate = true;
   token:string = "";

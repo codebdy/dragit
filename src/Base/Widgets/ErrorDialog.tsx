@@ -2,7 +2,7 @@ import React from 'react';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { createStyles, Dialog, makeStyles, Theme } from '@material-ui/core';
 import {observer} from 'mobx-react';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +25,7 @@ function Alert(props: AlertProps) {
 
 export const ErrorDialog = observer(()=>{
   const classes = useStyles();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const error = appStore.error;
   const handleClose = () => {
     appStore.clearError();

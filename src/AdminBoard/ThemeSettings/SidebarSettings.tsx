@@ -4,7 +4,7 @@ import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import classNames from 'classnames';
 import {observer} from "mobx-react";
-import { useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useThemeSettings } from 'Store/Helpers/useDragItStore';
 import { LIGHT, DARK, linearGradient1, linearGradient2, linearGradient3, linearGradient4, linearGradient5, sidebarImg1, sidebarImg2, sidebarImg3, sidebarImg4, sidebarImg5, sidebarImg6, sidebarImg7, sidebarImg8 } from 'Store/ThemeSettings';
 
 const useStyles = makeStyles((theme: Theme) =>

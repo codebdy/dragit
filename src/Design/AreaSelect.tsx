@@ -8,7 +8,7 @@ import TopNavHeightPlaceholder from 'AdminBoard/TopNav/TopNavHeightPlaceholder';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
-import { useAppStore, useDesigner } from 'Store/Helpers/useAppStore';
+import { useDragItStore, useDesigner } from 'Store/Helpers/useDragItStore';
 import {observer} from 'mobx-react';
 import { ID } from 'Base/Model/graphqlTypes';
 
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const AreaSelect = observer(()=>{
   const classes = useStyles();
   const designer = useDesigner();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   
   const history = useHistory();
 

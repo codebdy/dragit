@@ -7,7 +7,7 @@ import React from "react";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { observer } from 'mobx-react';
 import MdiIcon from "Components/Common/MdiIcon";
-import { useLeftDrawer, useAppStore } from "Store/Helpers/useAppStore";
+import { useLeftDrawer, useDragItStore } from "Store/Helpers/useDragItStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,7 +64,7 @@ export const MenuNode = observer((
   const {badge, chip, title, icon} = item;
   const baggeLabel = useAppValue(badge?.field);
   const leftDrawer = useLeftDrawer();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
 
   const handleClick = ()=>{
     if(item.moduleSlug){

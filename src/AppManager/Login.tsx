@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 import { INDEX_URL, TOKEN_NAME } from 'Utils/consts';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
 import SubmitButton from 'Components/Common/SubmitButton';
-import { useAppStore, useThemeSettings } from 'Store/Helpers/useAppStore';
+import { useDragItStore, useThemeSettings } from 'Store/Helpers/useDragItStore';
 import { LIGHT } from 'Store/ThemeSettings';
 
 
@@ -102,7 +102,7 @@ export default function Login(){
     notifyOnNetworkStatusChange: true
   });
   
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
 
   const history = useHistory();
   

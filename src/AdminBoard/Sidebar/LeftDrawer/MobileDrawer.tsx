@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledDrawer } from './StyledDrawer';
 import {observer} from 'mobx-react';
-import { useLeftDrawer } from 'Store/Helpers/useAppStore';
+import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
 
 export const MobileDrawer = observer((
   props:{

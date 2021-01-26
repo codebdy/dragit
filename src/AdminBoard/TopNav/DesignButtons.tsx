@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { AUTH_CUSTOMIZE } from "Base/authSlugs";
 import { observer } from "mobx-react";
 import MdiIcon from "Components/Common/MdiIcon";
-import { useDesigner, useLeftDrawer } from "Store/Helpers/useAppStore";
+import { useDesigner, useLeftDrawer } from "Store/Helpers/useDragItStore";
 import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 
 export const DesignButtons = observer((

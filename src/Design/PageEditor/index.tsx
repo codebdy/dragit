@@ -19,7 +19,7 @@ import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { PageEditorStore } from './PageEditorStore';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { PageEditorStoreProvider } from './useDesign';
 import { PageEditorCore } from './PageEditorCore';
 
@@ -90,7 +90,7 @@ export const PageEditor = observer((
   const {data, loading, error} = useQuery(GET_PAGE, {variables:{id:pageId}});
   const [savePage, {error:saveError, loading:saving}] = useMutation(SAVE_PAGE);
 
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
 
   useShowAppoloError(error||saveError);
 

@@ -14,7 +14,7 @@ import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import intl from 'react-intl-universal';
 import { AUTH_DEBUG } from 'Base/authSlugs';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { ActionStore, ActionStoreProvider } from 'Base/PageUtils/ActionStore';
@@ -39,7 +39,7 @@ export const Page = observer((
   const [modelStore, setModelStore] = useState<RXModel>();  
   const [pageStore, setPageStore] = useState<PageStore>();
   const [mutation, setMutation] = useState<IPageMutation>();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const loggedUser = useLoggedUser();
 
   useEffect(()=>{

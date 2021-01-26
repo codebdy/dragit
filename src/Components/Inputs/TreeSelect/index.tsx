@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import ChipsInput from './ChipsInput';
 import intl from 'react-intl-universal';
 import { useDesign } from 'Design/PageEditor/useDesign';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import withFormField from 'Components/Common/withFormField';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,7 +45,7 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
     }
   `;
   const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_TREE);
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const {isDesigning} = useDesign();
   
   useEffect(()=>{

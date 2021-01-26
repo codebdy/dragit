@@ -6,7 +6,7 @@ import { GO_BACK_ACTION, OPEN_PAGE_ACTION } from "Base/PageUtils/ACTIONs";
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { getModulePageById } from './Common/getModulePageById';
-import { useAppStore } from 'Store/Helpers/useAppStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { ModuleProps } from './Common/ModuleProps';
 import { Fragment } from 'react';
 
@@ -26,7 +26,7 @@ export const JumpStyleModule = observer((
 )=>{
   const {module} = props;
   const classes = useStyles();
-  const appStore = useAppStore();
+  const appStore = useDragItStore();
   const [pageId, setPageId] = useState(appStore.pageId || module.entryPage?.id);
   const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{
