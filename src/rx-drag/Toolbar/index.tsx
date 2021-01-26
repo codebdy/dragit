@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
 import classNames from 'classnames';
-import { useRxDragStore, useThemeOptions } from 'rx-drag/context/useRxDragStore';
+import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
 import { ToolbarButton } from './ToolbarButton';
 
 const svgOutLine = `
@@ -52,10 +52,9 @@ const svgRight = `
 `
 export const Toolbar = observer(() => {
   const dragStore = useRxDragStore();
-  const themeOptions = useThemeOptions();
   return (
     <div 
-      className = {classNames('rx-toolbar', themeOptions?.classes.toolbar)}
+      className = {classNames('rx-toolbar', 'rx-toolbar-color')}
       style = {
         {
           borderColor:dragStore?.themeOptions.borderColor,

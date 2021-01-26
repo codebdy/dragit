@@ -2,6 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
 import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
+import classNames from 'classnames';
 
 export const Sidebar = observer(() => {
   const dragStore = useRxDragStore();
@@ -16,7 +17,7 @@ export const Sidebar = observer(() => {
           }
         }
       >
-        <div className = 'rx-sidebar-tab-title'
+        <div className = {classNames('rx-sidebar-tab-title', 'actived')}
           style = {
             {
               borderColor:dragStore?.themeOptions.borderColor,

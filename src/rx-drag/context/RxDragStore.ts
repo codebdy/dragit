@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { IRxThemeOptions, LIGHT, RxThemeMode } from "./IRxThemeOptions";
+import { IRxThemeOptions, LIGHT, DARK, RxThemeMode } from "./IRxThemeOptions";
 
 class RxThemeOptions implements IRxThemeOptions{
   mode : RxThemeMode = LIGHT;
@@ -8,9 +8,6 @@ class RxThemeOptions implements IRxThemeOptions{
   lightBorderColor: string = "#dfe3e7";
   darkBorderColor: string = "#464d5c";
   canvasColor: string = "#FFF";
-  classes = {
-    toolbar : 'rx-toolbar-color',
-  };
 
   constructor() {
     makeAutoObservable(this)
