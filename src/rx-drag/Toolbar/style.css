@@ -28,6 +28,7 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
+  user-select: none;
 }
 
 .rx-light .rx-toolbar-button:hover, .rx-toolbar-button.checked{

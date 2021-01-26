@@ -3,13 +3,14 @@ import React from "react"
 
 export const ToolbarButton = (
   props:{
+    className?:string,
     svgIcon:string,
     checked?:boolean,
     disabled?:boolean,
     onClick?:()=>void,
   }
 )=>{
-  const {svgIcon, checked, disabled, onClick} = props;
+  const {className, svgIcon, checked, disabled, onClick} = props;
   return (
     <div 
       className = {
@@ -18,7 +19,8 @@ export const ToolbarButton = (
           {
             'checked':checked,
             'disabled':disabled,
-          }
+          },
+          className
         )
       }
       dangerouslySetInnerHTML = {{__html:svgIcon}}

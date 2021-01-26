@@ -20,11 +20,8 @@ export class RxDragStore{
     makeAutoObservable(this)
   }
 
-  foldRight(){
-    this.rightFolded = true;
+  setRightFolded(rightFolded:boolean){
+    this.rightFolded = rightFolded;
   }
 
-  expandRight(){
-    this.rightFolded = false;
-  }
 }

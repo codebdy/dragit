@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
 import classNames from 'classnames';
-import { useThemeOptions } from 'rx-drag/context/useRxDragStore';
+import { useRxDragStore, useThemeOptions } from 'rx-drag/context/useRxDragStore';
 import { ToolbarButton } from './ToolbarButton';
 
 const svgOutLine = `
@@ -51,6 +51,7 @@ const svgRight = `
   </svg>
 `
 export const Toolbar = observer(() => {
+  const dragStore = useRxDragStore();
   const themeOptions = useThemeOptions();
   return (
     <div className = {classNames('rx-toolbar', themeOptions?.classes.toolbar)}>
@@ -63,8 +64,11 @@ export const Toolbar = observer(() => {
         <ToolbarButton svgIcon = {svgClear} />
       </div>
       <div>
-        <ToolbarButton svgIcon = {svgLeft} />
-        <ToolbarButton svgIcon = {svgRight} />
+        <ToolbarButton 
+          svgIcon = { dragStore?.rightFolded ? svgLeft : svgRight} 
+          className = { dragStore?.rightFolded ? '' : 'flip'} 
+          onClick = {()=>{dragStore?.setRightFolded(!dragStore?.rightFolded)}}
+        />
       </div>
     </div>
   );
