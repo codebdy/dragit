@@ -24,7 +24,7 @@ export const RxPageEditor = observer((
 ) => {
   const {rxPage} = props; 
   const classes = useStyles();
-  const [rxDragStore] = React.useState<RxDragStore>();
+  const [rxDragStore] = React.useState<RxDragStore>(new RxDragStore());
   const studioStore = useAppStudioStore();
   const handleThemeModeChange = (mode :RxThemeMode)=>{
     studioStore?.setThemeMode(mode);

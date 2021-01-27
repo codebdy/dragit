@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { useRxDragStore } from './store/useDesign';
 import { cloneObject } from './utils/cloneObject';
 import { RxDragCore } from './core';
+import { toJS } from 'mobx';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
@@ -35,18 +36,16 @@ export const RxDrag = observer((
   const rxDragStore = useRxDragStore();
 
   useEffect(()=>{
-    rxDragStore?.setMetas(cloneObject(initMetas));
+    rxDragStore?.setMetas(cloneObject(toJS(initMetas)));
   },[rxDragStore, initMetas])
 
   useEffect(()=>{
     shellStore?.setThemeOptions(theme);
   }, [shellStore, theme]);
 
-  useEffect(() => {
-    //复制一个副本
-    //setEditorStore(new RxDragStore( cloneObject(data?.page)))
-
-  },[]);
+  const handleScroll = ()=>{
+    rxDragStore?.refreshToolbarAndLabel();
+  }
 
   return (
     <RxDragShellStoreProvider value = {shellStore}>
@@ -61,7 +60,10 @@ export const RxDrag = observer((
       >
         <div className = 'rx-left'>
           <Toolbar onThemeModeChange = {onThemeModeChange}/>
-          <div className = 'rx-canvas-background'>
+          <div 
+            className = 'rx-canvas-background'
+            onScroll = {handleScroll}
+          >
             <div 
               className = 'rx-canvas'
               style={{

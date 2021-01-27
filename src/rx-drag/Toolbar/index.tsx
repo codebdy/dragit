@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { useRxDragShellStore } from 'rx-drag/store/useRxDragShellStore';
 import { ToolbarButton } from './ToolbarButton';
 import { DARK, LIGHT, RxThemeMode } from 'rx-drag/store/IRxThemeOptions';
+import { useRxDragStore } from 'rx-drag/store/useDesign';
 
 const svgOutLine = `
   <svg viewBox="0 0 24 24">
@@ -68,41 +69,91 @@ export const Toolbar = observer((
   }
 ) => {
   const {onThemeModeChange} = props;
+  const shellStore = useRxDragShellStore();
+  const rxDragStore = useRxDragStore();
+  
   const handleModeChange = ()=>{
-    dragStore?.toggleThemeMode();
-    onThemeModeChange && onThemeModeChange(dragStore?.themeOptions.mode || LIGHT)
+    shellStore?.toggleThemeMode();
+    onThemeModeChange && onThemeModeChange(shellStore?.themeOptions.mode || LIGHT)
   }
-  const dragStore = useRxDragShellStore();
+
+  const handleOutline = ()=>{
+    rxDragStore?.setShowOutline(!rxDragStore?.showOutline)
+  }
+
+  const handlePaddingX = ()=>{
+    rxDragStore?.setShowPaddingX(!rxDragStore?.showPaddingX)
+  }
+
+  const handlePaddingY = ()=>{
+    rxDragStore?.setShowPaddingY(!rxDragStore?.showPaddingY)
+  }
+
+  const handleUndo = ()=>{
+    rxDragStore?.undo();
+  }
+
+  const handleRedo = ()=>{
+    rxDragStore?.redo();
+  }
+
+  const handleClear = ()=>{
+    rxDragStore?.clear();
+  }
   return (
     <div 
       className = {classNames('rx-toolbar', 'rx-toolbar-color')}
       style = {
         {
-          borderColor:dragStore?.themeOptions.borderColor,
+          borderColor:shellStore?.themeOptions.borderColor,
         }
       }
     >
       <div className = 'rx-toolbar-button-group'>
-        <ToolbarButton svgIcon = {svgOutLine} />
-        <ToolbarButton svgIcon = {svgPaddingX} checked />
-        <ToolbarButton svgIcon = {svgPaddingY} />
-        <ToolbarButton svgIcon = {svgUndo} />
-        <ToolbarButton svgIcon = {svgRedo} disabled />
-        <ToolbarButton svgIcon = {svgClear} />
+        <ToolbarButton 
+          svgIcon = {svgOutLine} 
+          checked = {rxDragStore?.showOutline}
+          onClick = {handleOutline}
+        />
+        <ToolbarButton 
+          svgIcon = {svgPaddingX} 
+          checked = {rxDragStore?.showPaddingX} 
+          onClick = {handlePaddingX}
+        />
+        <ToolbarButton 
+          svgIcon = {svgPaddingY} 
+          checked = {rxDragStore?.showPaddingY}
+          onClick = {handlePaddingY}
+        />
+        <ToolbarButton 
+          svgIcon = {svgUndo} 
+          disabled = {!rxDragStore?.undoList?.length}
+          onClick = {handleUndo}
+        />
+        <ToolbarButton 
+          svgIcon = {svgRedo} 
+          disabled = {!rxDragStore?.redoList?.length}
+          onClick = {handleRedo} 
+        />
+        <ToolbarButton 
+          svgIcon = {svgClear} 
+          disabled = {!rxDragStore?.canvas?.children?.length}
+          onClick = {handleClear}
+        />
       </div>
       <div className = 'rx-toolbar-button-group'>
         {
-          dragStore?.themeOptions.canSwitchThemeMode && 
+          shellStore?.themeOptions.canSwitchThemeMode && 
           <ToolbarButton 
-            svgIcon = {dragStore?.themeOptions.mode === DARK ? svgLight : svgDark} 
+            svgIcon = {shellStore?.themeOptions.mode === DARK ? svgLight : svgDark} 
             onClick = {handleModeChange}
           />        
         }
 
         <ToolbarButton 
-          svgIcon = { dragStore?.rightFolded ? svgLeft : svgRight} 
-          className = { dragStore?.rightFolded ? '' : 'flip'} 
-          onClick = {()=>{dragStore?.setRightFolded(!dragStore?.rightFolded)}}
+          svgIcon = { shellStore?.rightFolded ? svgLeft : svgRight} 
+          className = { shellStore?.rightFolded ? '' : 'flip'} 
+          onClick = {()=>{shellStore?.setRightFolded(!shellStore?.rightFolded)}}
         />
       </div>
     </div>
