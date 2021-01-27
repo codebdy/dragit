@@ -18,10 +18,10 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { PageEditorStore } from './PageEditorStore';
+import { RxDragCoreStore } from '../../rx-drag/context/RxDragCoreStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { PageEditorStoreProvider } from './useDesign';
-import { PageEditorCore } from './PageEditorCore';
+import { RxDragCoreStoreProvider } from '../../rx-drag/context/useDesign';
+import { RxDragCore } from '../../rx-drag/core';
 
 //后面要删除此变量
 export const SAVE_PAGE = gql`
@@ -86,7 +86,7 @@ export const PageEditor = observer((
 ) =>{
   const {pageId, onClose} = props;
   const classes = useStyles();
-  const [editorStore, setEditorStore] = useState<PageEditorStore>();
+  const [editorStore, setEditorStore] = useState<RxDragCoreStore>();
   const {data, loading, error} = useQuery(GET_PAGE, {variables:{id:pageId}});
   const [savePage, {error:saveError, loading:saving}] = useMutation(SAVE_PAGE);
 
@@ -99,7 +99,7 @@ export const PageEditor = observer((
 
   useEffect(() => {
     //复制一个副本
-    setEditorStore(new PageEditorStore( cloneObject(data?.page)))
+    setEditorStore(new RxDragCoreStore( cloneObject(data?.page)))
 
   },[data]);
  
@@ -142,7 +142,7 @@ export const PageEditor = observer((
   }
 
    return (
-    <PageEditorStoreProvider value = {editorStore}>
+    <RxDragCoreStoreProvider value = {editorStore}>
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
@@ -206,12 +206,12 @@ export const PageEditor = observer((
           {loading? <Container><PageSkeleton /></Container> :
             <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
               {editorStore&&
-                <PageEditorCore editorStore = {editorStore} />
+                <RxDragCore editorStore = {editorStore} />
               }
             </Scrollbar>
           }
         </DesignerLayout>
       </Backdrop>
-    </PageEditorStoreProvider>
+    </RxDragCoreStoreProvider>
   );
 })

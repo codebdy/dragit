@@ -5,15 +5,15 @@ import { CursorPosition, IDragOverParam } from "rx-drag/core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable, toJS } from "mobx";
 import { cloneObject } from "rx-drag/utils/cloneObject";
-import { ChangeMetaCommand } from "./Commands/ChangeMetaCommand";
-import { ClearCommand } from "./Commands/ClearCommand";
-import { ICommand } from "./Commands/ICommand";
-import { IPageUpdate } from "./Commands/IPageUpdate";
-import { MoveAfterCommand } from "./Commands/MoveAfterCommand";
-import { MoveBeforeCommand } from "./Commands/MoveBeforeCommand";
-import { MoveInCommand } from "./Commands/MoveInCommand";
-import { MoveInTopCommand } from "./Commands/MoveInTopCommand";
-import { UpdatePageSchemaCommand } from "./Commands/UpdatePageSchemaCommand";
+import { ChangeMetaCommand } from "../commands/ChangeMetaCommand";
+import { ClearCommand } from "../commands/ClearCommand";
+import { IPageUpdate } from "../commands/IPageUpdate";
+import { MoveAfterCommand } from "../commands/MoveAfterCommand";
+import { MoveBeforeCommand } from "../commands/MoveBeforeCommand";
+import { MoveInCommand } from "../commands/MoveInCommand";
+import { MoveInTopCommand } from "../commands/MoveInTopCommand";
+import { UpdatePageSchemaCommand } from "../commands/UpdatePageSchemaCommand";
+import { ICommand } from "rx-drag/commands/ICommand";
 
 function makeCanvas(){
   return RxNode.make<IMeta>(
@@ -23,7 +23,7 @@ function makeCanvas(){
   )
 }
 
-export class PageEditorStore implements IPageUpdate{
+export class RxDragCoreStore implements IPageUpdate{
   page?:IRxPage;
   showOutline:boolean = true;
   showPaddingX:boolean = true;

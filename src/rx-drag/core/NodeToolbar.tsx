@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
 import {observer} from 'mobx-react';
-import { useDesign } from '../../Design/PageEditor/useDesign';
+import { useDesign } from '../context/useDesign';
 
 const height = 28;
 const barWidth = height*4;
@@ -86,7 +86,7 @@ export const NodeToolbar = observer((
   
   const sideBarWidth = sidebar.width;
   
-  const {editorStore} = useDesign();
+  const {rxDragCoreStore: editorStore} = useDesign();
 
   const doFollow = ()=>{
     let rect =  editorStore?.selectedDom?.getBoundingClientRect();

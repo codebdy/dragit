@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import JsxParser from 'react-jsx-parser'
-import { useDesign } from 'Design/PageEditor/useDesign';
+import { useDesign } from 'rx-drag/context/useDesign';
 import classNames from 'classnames';
 import IconButton from 'Components/Buttons/IconButton';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';

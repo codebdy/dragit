@@ -1,21 +1,21 @@
 import React, { Fragment, useEffect } from 'react';
 import intl from 'react-intl-universal';
-import MouseFollower from '../../rx-drag/core/MouseFollower';
+import MouseFollower from './MouseFollower';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/RxNode';
-import { NodeToolbar } from '../../rx-drag/core/NodeToolbar';
-import { DragCusor } from '../../rx-drag/core/DragCusor';
-import { ComponentLabel } from '../../rx-drag/core/ComponentLabel';
-import { cloneObject } from '../../rx-drag/utils/cloneObject';
+import { NodeToolbar } from './NodeToolbar';
+import { DragCusor } from './DragCusor';
+import { ComponentLabel } from './ComponentLabel';
+import { cloneObject } from '../utils/cloneObject';
 import { observer } from 'mobx-react';
-import { PageEditorStore } from './PageEditorStore';
-import { RemoveCommand } from './Commands/RemoveCommand';
-import { DuplicateCommand } from './Commands/DuplicateCommand';
-import { ComponentView } from '../../rx-drag/core/ComponentView';
+import { RxDragCoreStore } from '../context/RxDragCoreStore';
+import { RemoveCommand } from '../commands/RemoveCommand';
+import { DuplicateCommand } from '../commands/DuplicateCommand';
+import { ComponentView } from './ComponentView';
 
-export const PageEditorCore = observer((
+export const RxDragCore = observer((
   props:{
-    editorStore:PageEditorStore,
+    editorStore:RxDragCoreStore,
   }
 ) =>{
   const {editorStore} = props;

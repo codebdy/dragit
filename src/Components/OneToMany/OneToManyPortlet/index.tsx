@@ -4,7 +4,7 @@ import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
-import { useDesign } from 'Design/PageEditor/useDesign';
+import { useDesign } from 'rx-drag/context/useDesign';
 import { makeTableRowModel } from 'Base/ModelTree/makeTableModel';
 import { ID } from 'Base/Model/graphqlTypes';
 import { observer } from 'mobx-react';

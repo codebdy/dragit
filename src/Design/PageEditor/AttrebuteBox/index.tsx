@@ -13,7 +13,7 @@ import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
 import { resolveMetaConfig } from 'Base/RxDrag';
 import { IMetaConfig } from 'Base/RXNode/IMetaConfig';
 import { observer } from 'mobx-react';
-import { useDesign } from '../useDesign';
+import { useDesign } from '../../../rx-drag/context/useDesign';
 import { toJS } from 'mobx';
 import { propsInputs } from './PropsInputs';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AttributeBox = observer(()=>{
   const classes = useStyles();
-  const {editorStore} = useDesign();
+  const {rxDragCoreStore: editorStore} = useDesign();
   const node = editorStore?.selectedNode;  
   const [metaConfig, setMetaConfig] = React.useState<IMetaConfig>();
   const [validateRule, setValidateRule] = React.useState<IValidateRule>();

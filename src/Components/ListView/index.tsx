@@ -13,7 +13,7 @@ import { useUpdateGQL } from './useUpdateGQL';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import ListViewActionFilter from './ListViewActionFilter';
 import { ID } from 'Base/Model/graphqlTypes';
-import { useDesign } from 'Design/PageEditor/useDesign';
+import { useDesign } from 'rx-drag/context/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/RxNode';

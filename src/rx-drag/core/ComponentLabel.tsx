@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { observer} from 'mobx-react';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/RxNode';
-import { useDesign } from '../../Design/PageEditor/useDesign';
+import { useDesign } from '../context/useDesign';
 
 export const ComponentLabel = observer((
   props:{
@@ -13,7 +13,7 @@ export const ComponentLabel = observer((
   const{node, followDom} = props;
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const {editorStore} = useDesign();
+  const {rxDragCoreStore: editorStore} = useDesign();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();

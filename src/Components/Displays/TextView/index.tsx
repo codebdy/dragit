@@ -2,7 +2,7 @@ import React from 'react';
 import { RXInputProps } from 'Base/RXInputProps';
 import withSkeleton from 'Base/HOCs/withSkeleton';
 import withFormField from 'Components/Common/withFormField';
-import { useDesign } from 'Design/PageEditor/useDesign';
+import { useDesign } from 'rx-drag/context/useDesign';
 
 const TextView = React.forwardRef((
   props: RXInputProps& {

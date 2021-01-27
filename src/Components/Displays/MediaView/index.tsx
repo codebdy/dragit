@@ -5,7 +5,7 @@ import noImage from 'assets/img/no-image.png';
 import withFormField from 'Components/Common/withFormField';
 import withSkeleton from 'Base/HOCs/withSkeleton';
 import { RXInputProps } from 'Base/RXInputProps';
-import { useDesign } from 'Design/PageEditor/useDesign';
+import { useDesign } from 'rx-drag/context/useDesign';
 
 export const MediaView = React.forwardRef((
   props:RXInputProps& {

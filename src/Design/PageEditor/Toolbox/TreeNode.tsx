@@ -7,7 +7,7 @@ import intl from "react-intl-universal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import MdiIcon from 'Components/Common/MdiIcon';
 import classNames from "classnames";
-import { useDesign } from "../useDesign";
+import { useDesign } from "../../../rx-drag/context/useDesign";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +31,7 @@ export default function TreeNode(
 ) {
   const {node} = props;
   const classes = useStyles();
-  const {editorStore} = useDesign();
+  const {rxDragCoreStore: editorStore} = useDesign();
 
   const isLeaf =  node.children.length === 0 && node.meta.meta;
   const labelText = node?.meta?.title || (node?.meta?.titleKey && intl.get(node?.meta?.titleKey));

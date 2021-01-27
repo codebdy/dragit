@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
-import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
+import { useRxDragShellStore } from 'rx-drag/context/useRxDragShellStore';
 import classNames from 'classnames';
 
 export const Sidebar = observer((
@@ -12,7 +12,7 @@ export const Sidebar = observer((
   }
 ) => {
   const {toolbox, attributeBox, pageSettings} = props;
-  const dragStore = useRxDragStore();
+  const dragStore = useRxDragShellStore();
 
   return (
     <div className = 'rx-sidebar'>

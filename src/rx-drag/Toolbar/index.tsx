@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
 import classNames from 'classnames';
-import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
+import { useRxDragShellStore } from 'rx-drag/context/useRxDragShellStore';
 import { ToolbarButton } from './ToolbarButton';
 import { DARK, LIGHT, RxThemeMode } from 'rx-drag/context/IRxThemeOptions';
 
@@ -72,7 +72,7 @@ export const Toolbar = observer((
     dragStore?.toggleThemeMode();
     onThemeModeChange && onThemeModeChange(dragStore?.themeOptions.mode || LIGHT)
   }
-  const dragStore = useRxDragStore();
+  const dragStore = useRxDragShellStore();
   return (
     <div 
       className = {classNames('rx-toolbar', 'rx-toolbar-color')}

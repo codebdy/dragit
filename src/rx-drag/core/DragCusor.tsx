@@ -8,7 +8,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { IRect } from 'Base/Model/IRect';
 import { observer } from 'mobx-react';
-import { useDesign } from '../../Design/PageEditor/useDesign';
+import { useDesign } from '../context/useDesign';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,7 +58,7 @@ export const DragCusor = observer(()=>{
   //const [dragOverParam, setDragOverParam] = useState<IDragOverParam>();
   const [rect, setRect] = useState<IRect>();
   const classes = useStyles();
-  const {editorStore} = useDesign();
+  const {rxDragCoreStore: editorStore} = useDesign();
 
   useEffect(()=>{      
     if(editorStore?.dragOverParam){

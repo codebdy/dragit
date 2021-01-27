@@ -8,7 +8,7 @@ import { makeSpaceStyle } from 'Base/HOCs/withMargin';
 import { DragoverCharger } from './DragoverCharger';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react';
-import { useDesign } from '../../Design/PageEditor/useDesign';
+import { useDesign } from '../context/useDesign';
 import { getDomByRxid } from '../utils/getDomByRxid';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,7 +60,7 @@ export const ComponentView = observer((
   const {node} = props;
   const classes = useStyles();
   const [editStyle, setEditStyle] = useState<any>({});
-  const {editorStore} = useDesign();
+  const {rxDragCoreStore: editorStore} = useDesign();
   let Component = resolveComponent(node.meta);
 
   let metaProps = node.meta.props? node.meta.props :{};

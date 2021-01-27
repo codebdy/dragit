@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { useRxDragStore } from 'rx-drag/context/useRxDragStore';
+import { useRxDragShellStore } from 'rx-drag/context/useRxDragShellStore';
 
 
 export const NodeNavigation = observer(() => {
-  const store = useRxDragStore();
+  const store = useRxDragShellStore();
   return (
     <div className = 'rx-node-navigation'
       style = {
