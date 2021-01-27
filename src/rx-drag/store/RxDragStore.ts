@@ -17,7 +17,10 @@ import { IRxMeta } from "rx-drag/IRxMeta";
 function makeCanvas(){
   return RxNode.make<IMeta>(
     {
-      name:'Canvas'
+      name:'Canvas',
+      props:{
+        
+      }
     }
   )
 }

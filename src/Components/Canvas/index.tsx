@@ -24,6 +24,7 @@ const Canvas = React.forwardRef((props: {className?:string, children?:any, style
   return (
     <Container
       ref={ref}
+      maxWidth = {false}
       {...props}
       className={ classNames(classes.canvas, props.className, classes.editPadding) }
     >
