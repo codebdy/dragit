@@ -77,7 +77,7 @@ export const RxDragCore = observer((
         />
       }
       {
-        rxDragStore.activeNode &&
+        rxDragStore.activeNode && (rxDragStore.activeNode.id !== rxDragStore.canvas?.id) &&
         <ComponentLabel 
           node={rxDragStore.activeNode}
           followDom = {rxDragStore.activeNode.dom}
