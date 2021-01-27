@@ -35,6 +35,8 @@
   height: 30px;
   border-top: solid 1px;
   user-select: none;
+  display: flex;
+  align-items: stretch;
 }
 
 .rx-right{
@@ -72,3 +74,4 @@
   background: rgba(0, 0, 0, 0.3);
   transition: all .2s;
 }
+
