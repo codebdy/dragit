@@ -23,7 +23,7 @@ function makeCanvas(){
   )
 }
 
-export class RxDragCoreStore implements IPageUpdate{
+export class RxDragStore implements IPageUpdate{
   page?:IRxPage;
   showOutline:boolean = true;
   showPaddingX:boolean = true;

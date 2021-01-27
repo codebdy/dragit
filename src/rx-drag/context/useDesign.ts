@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
-import { RxDragCoreStore } from "./RxDragCoreStore"
+import { RxDragStore } from "./RxDragStore"
 
-export const RxDragCoreStoreContext = createContext<RxDragCoreStore|undefined>(undefined);
-export const RxDragCoreStoreProvider = RxDragCoreStoreContext.Provider;
+export const RxDragStoreContext = createContext<RxDragStore|undefined>(undefined);
+export const RxDragStoreProvider = RxDragStoreContext.Provider;
 
-const useRxDragCoreStore = (): RxDragCoreStore|undefined => useContext(RxDragCoreStoreContext);
+const useRxDragStore = (): RxDragStore|undefined => useContext(RxDragStoreContext);
 
 export function useDesign(){
-  const rxDragCoreStore = useRxDragCoreStore();
+  const rxDragCoreStore = useRxDragStore();
   return {isDesigning:!!rxDragCoreStore, rxDragCoreStore}
 }

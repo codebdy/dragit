@@ -8,14 +8,14 @@ import { DragCusor } from './DragCusor';
 import { ComponentLabel } from './ComponentLabel';
 import { cloneObject } from '../utils/cloneObject';
 import { observer } from 'mobx-react';
-import { RxDragCoreStore } from '../context/RxDragCoreStore';
+import { RxDragStore } from '../context/RxDragStore';
 import { RemoveCommand } from '../commands/RemoveCommand';
 import { DuplicateCommand } from '../commands/DuplicateCommand';
 import { ComponentView } from './ComponentView';
 
 export const RxDragCore = observer((
   props:{
-    editorStore:RxDragCoreStore,
+    editorStore:RxDragStore,
   }
 ) =>{
   const {editorStore} = props;

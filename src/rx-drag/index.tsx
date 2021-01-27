@@ -12,8 +12,6 @@ import { IRxLocales } from './IRxLocales';
 import './style.css';
 import './core.css';
 import { useEffect } from 'react';
-import { RxDragCoreStore } from './context/RxDragCoreStore';
-import { RxDragCoreStoreProvider } from './context/useDesign';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
@@ -31,7 +29,7 @@ export const RxDrag = observer((
 ) => {
   const {theme, toolbox, attributeBox, pageSettings, locales, onThemeModeChange} = props;
   const [shellStore] = React.useState(new RxDragShellStore(locales))
-  const [coreStore, setCoreStore] = React.useState<RxDragCoreStore>();
+
 
   useEffect(()=>{
     shellStore?.setThemeOptions(theme);
@@ -39,65 +37,63 @@ export const RxDrag = observer((
 
   useEffect(() => {
     //复制一个副本
-    //setEditorStore(new RxDragCoreStore( cloneObject(data?.page)))
+    //setEditorStore(new RxDragStore( cloneObject(data?.page)))
 
   },[]);
 
   return (
     <RxDragShellStoreProvider value = {shellStore}>
-      <RxDragCoreStoreProvider value = {coreStore}>
-        <div 
-          className = {classNames('rx-drag', shellStore.themeOptions.themeModeClass)}
-          style = {
-            {
-              borderColor:shellStore?.themeOptions.borderColor,
-              backgroundColor:shellStore?.themeOptions.backgroundColor,
-            }
+      <div 
+        className = {classNames('rx-drag', shellStore.themeOptions.themeModeClass)}
+        style = {
+          {
+            borderColor:shellStore?.themeOptions.borderColor,
+            backgroundColor:shellStore?.themeOptions.backgroundColor,
           }
-        >
-          <div className = 'rx-left'>
-            <Toolbar onThemeModeChange = {onThemeModeChange}/>
-            <div className = 'rx-canvas-background'>
-              <div 
-                className = 'rx-canvas'
-                style={{
-                  backgroundColor: shellStore?.themeOptions.canvasColor,
-                }}
-              >
+        }
+      >
+        <div className = 'rx-left'>
+          <Toolbar onThemeModeChange = {onThemeModeChange}/>
+          <div className = 'rx-canvas-background'>
+            <div 
+              className = 'rx-canvas'
+              style={{
+                backgroundColor: shellStore?.themeOptions.canvasColor,
+              }}
+            >
 
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-                rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              </div>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
             </div>
-            <NodeNavigation />
           </div>
-          <div className = {classNames(
-            'rx-right', 
-            { 'collapse':shellStore.rightFolded }
-          )}
-          style = {{borderColor:shellStore?.themeOptions.borderColor}}
-          >
-            <Sidebar
-              toolbox = {toolbox}
-              attributeBox = {attributeBox}
-              pageSettings = {pageSettings}
-            />
-          </div>
+          <NodeNavigation />
         </div>
-      </RxDragCoreStoreProvider>
+        <div className = {classNames(
+          'rx-right', 
+          { 'collapse':shellStore.rightFolded }
+        )}
+        style = {{borderColor:shellStore?.themeOptions.borderColor}}
+        >
+          <Sidebar
+            toolbox = {toolbox}
+            attributeBox = {attributeBox}
+            pageSettings = {pageSettings}
+          />
+        </div>
+      </div>
     </RxDragShellStoreProvider>
   );
 })

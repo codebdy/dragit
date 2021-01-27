@@ -5,6 +5,8 @@ import { RxDrag } from 'rx-drag';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { RxThemeMode } from 'rx-drag/context/IRxThemeOptions';
+import { RxDragStoreProvider } from 'rx-drag/context/useDesign';
+import { RxDragStore } from 'rx-drag/context/RxDragStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,27 +18,30 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const PageEditor = observer(() => {
   const classes = useStyles();
+  const [rxDragStore, setCoreStore] = React.useState<RxDragStore>();
   const studioStore = useAppStudioStore();
   const handleThemeModeChange = (mode :RxThemeMode)=>{
     studioStore?.setThemeMode(mode);
   }
   return (
-    <RxDrag
-      theme = {
-        {
-          mode:studioStore?.themeMode,
+    <RxDragStoreProvider value = {rxDragStore}>
+      <RxDrag
+        theme = {
+          {
+            mode:studioStore?.themeMode,
+          }
         }
-      }
-      toolbox = {<div>tool box</div>}
-      attributeBox = {<div>Attributes box</div>}
-      pageSettings = {<div>Settings box</div>}
-      locales = {{
-        components:intl.get('component'),
-        attributes:intl.get('attributes'),
-        pageSettings:intl.get('page-settings')
-      }}
+        toolbox = {<div>tool box</div>}
+        attributeBox = {<div>Attributes box</div>}
+        pageSettings = {<div>Settings box</div>}
+        locales = {{
+          components:intl.get('component'),
+          attributes:intl.get('attributes'),
+          pageSettings:intl.get('page-settings')
+        }}
 
-      onThemeModeChange = {handleThemeModeChange}
-    />
+        onThemeModeChange = {handleThemeModeChange}
+      />
+    </RxDragStoreProvider>
   );
 })

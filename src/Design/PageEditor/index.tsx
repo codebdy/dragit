@@ -18,9 +18,9 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { RxDragCoreStore } from '../../rx-drag/context/RxDragCoreStore';
+import { RxDragStore } from '../../rx-drag/context/RxDragStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { RxDragCoreStoreProvider } from '../../rx-drag/context/useDesign';
+import { RxDragStoreProvider } from '../../rx-drag/context/useDesign';
 import { RxDragCore } from '../../rx-drag/core';
 
 //后面要删除此变量
@@ -86,7 +86,7 @@ export const PageEditor = observer((
 ) =>{
   const {pageId, onClose} = props;
   const classes = useStyles();
-  const [editorStore, setEditorStore] = useState<RxDragCoreStore>();
+  const [editorStore, setEditorStore] = useState<RxDragStore>();
   const {data, loading, error} = useQuery(GET_PAGE, {variables:{id:pageId}});
   const [savePage, {error:saveError, loading:saving}] = useMutation(SAVE_PAGE);
 
@@ -99,7 +99,7 @@ export const PageEditor = observer((
 
   useEffect(() => {
     //复制一个副本
-    setEditorStore(new RxDragCoreStore( cloneObject(data?.page)))
+    setEditorStore(new RxDragStore( cloneObject(data?.page)))
 
   },[data]);
  
@@ -142,7 +142,7 @@ export const PageEditor = observer((
   }
 
    return (
-    <RxDragCoreStoreProvider value = {editorStore}>
+    <RxDragStoreProvider value = {editorStore}>
       <Backdrop className={classes.backdrop} open={true}>        
         <DesignerLayout
           leftArea = {
@@ -212,6 +212,6 @@ export const PageEditor = observer((
           }
         </DesignerLayout>
       </Backdrop>
-    </RxDragCoreStoreProvider>
+    </RxDragStoreProvider>
   );
 })
