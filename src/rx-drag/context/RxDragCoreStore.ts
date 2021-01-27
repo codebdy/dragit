@@ -7,12 +7,12 @@ import { makeAutoObservable, toJS } from "mobx";
 import { cloneObject } from "rx-drag/utils/cloneObject";
 import { ChangeMetaCommand } from "../commands/ChangeMetaCommand";
 import { ClearCommand } from "../commands/ClearCommand";
-import { IPageUpdate } from "../commands/IPageUpdate";
+import { IPageUpdate } from "../../AppStudio/Pages/PageEditor/IPageUpdate";
 import { MoveAfterCommand } from "../commands/MoveAfterCommand";
 import { MoveBeforeCommand } from "../commands/MoveBeforeCommand";
 import { MoveInCommand } from "../commands/MoveInCommand";
 import { MoveInTopCommand } from "../commands/MoveInTopCommand";
-import { UpdatePageSchemaCommand } from "../commands/UpdatePageSchemaCommand";
+import { UpdatePageSchemaCommand } from "../../AppStudio/Pages/PageEditor/UpdatePageSchemaCommand";
 import { ICommand } from "rx-drag/commands/ICommand";
 
 function makeCanvas(){

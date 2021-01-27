@@ -1,5 +1,5 @@
 import { cloneObject } from "rx-drag/utils/cloneObject";
-import { ICommand } from "./ICommand";
+import { ICommand } from "../../../rx-drag/commands/ICommand";
 import { IPageUpdate } from "./IPageUpdate";
 
 export class UpdatePageSchemaCommand implements ICommand{

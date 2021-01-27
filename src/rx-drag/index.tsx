@@ -57,9 +57,7 @@ export const RxDrag = observer((
         >
           <div className = 'rx-left'>
             <Toolbar onThemeModeChange = {onThemeModeChange}/>
-            <div className = 'rx-canvas-background'
-
-            >
+            <div className = 'rx-canvas-background'>
               <div 
                 className = 'rx-canvas'
                 style={{
