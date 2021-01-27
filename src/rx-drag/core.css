@@ -10,3 +10,74 @@
   cursor: default;
   pointer-events: none;
 }
+
+.rx-cusor{
+  position:fixed;
+  height:2px;
+  color:#5a8dee;
+  background:#5a8dee;
+  border:transparent solid 1px;
+  transition:width 0.3s, left 0.3s, top 0.3s;
+}
+
+.rx-vertical{
+  transform:rotate(90deg);
+  transform-origin:left 0;
+}
+
+.rx-up-arrow{
+  position:absolute;
+  left:calc(50% - 10px);
+  top:-14px;
+}
+.rx-down-arrow{
+  position:absolute;
+  left:calc(50% - 10px);
+  top:-7px;
+}
+.left-arrow{
+  position:absolute;
+  right:-13px;
+  top:-14px;
+}
+.right-arrow{
+  position:absolute;
+  left:-13px;
+  top:-14px;
+}
+
+.rx-mouse-follower{
+  position:fixed;
+  background:#5d78ff;
+  color:#fff;
+  padding: 5px 10px;
+  font-size:0.8rem;
+  user-select:none;
+  cursor: default;
+  pointer-events:none;
+  border-radius:3px;
+}
+
+.rx-node-toolbar{
+  position:fixed;
+  background:#5d78ff;
+  color:#fff;
+  font-size:0.8rem;
+  height:28px;
+  line-height:28px;
+  width: 112px;
+  display: flex;
+  flex-flow: row;
+  align-items:strech;
+}
+
+.rx-node-button{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:28px;
+}
+
+.rx-node-button:hover{
+  background:rgba(255, 255, 255, 0.1);
+}

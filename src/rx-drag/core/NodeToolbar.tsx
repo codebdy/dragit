@@ -1,7 +1,4 @@
 import React, { useEffect, Fragment } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import classNames from 'classnames';
-import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
 import {observer} from 'mobx-react';
 import { useDesign } from '../store/useDesign';
 
@@ -13,38 +10,6 @@ declare var window:{
   removeEventListener:any,
 };
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    toolbar: {
-      position:'fixed',
-      background:theme.palette.primary.main,
-      color:'#fff',
-      fontSize:'0.8rem',
-      height:height + 'px',
-      lineHeight:height + 'px',
-      width: barWidth + 'px',
-      display: 'flex',
-      flexFlow: 'row',
-      alignItems:'strech',
-      //zIndex:theme.zIndex.drawer + 2,
-    },
-
-    button:{
-      display:'flex',
-      justifyContent:'center',
-      alignItems:'center',
-      width:height + 'px',
-      "&:hover ":{
-        background:'rgba(255, 255, 255, 0.1)',
-      }
-    },
-
-    move:{
-      //cursor:'move',
-    },
-
-  }),
-);
 var svgArrowUp = `
   <svg style="width:20px;height:20px" viewBox="0 0 24 24">
     <path fill="currentColor" d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" />
@@ -78,25 +43,23 @@ export const NodeToolbar = observer((
   }
 )=>{
   const {onBeginDrag, onRemove, onSelectParent, onDuplicate} = props;
-  const classes = useStyles();
+
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const sidebar = useLeftDrawer() 
-  
-  const sideBarWidth = sidebar.width;
-  
-  const {rxDragCoreStore: editorStore} = useDesign();
+  const {rxDragCoreStore} = useDesign();
 
   const doFollow = ()=>{
-    let rect =  editorStore?.selectedDom?.getBoundingClientRect();
+    const canvasRect = rxDragCoreStore?.canvas?.dom?.getBoundingClientRect();
+    const rect =  rxDragCoreStore?.selectedDom?.getBoundingClientRect();
+    const canvasLeft = canvasRect?.left || 0
 
     if(!rect){
       return 
     }
     //let rect = followDom.getBoundingClientRect();
     let left = rect.x + rect.width - barWidth;
-    left = left < sideBarWidth ? sideBarWidth : left;
+    left = left < canvasLeft ? canvasLeft : left;
     left = left + barWidth > document.body.clientWidth ? document.body.clientWidth - barWidth : left;
     setLeft(left)
     let top = rect.y < 90 ? rect.y + rect.height : rect.y - 28;
@@ -106,7 +69,7 @@ export const NodeToolbar = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[editorStore?.showPaddingX, editorStore?.showPaddingY, editorStore?.selectedDom, editorStore?.refreshToolbarAndLabelFlag]);
+  },[rxDragCoreStore?.showPaddingX, rxDragCoreStore?.showPaddingY, rxDragCoreStore?.selectedDom, rxDragCoreStore?.refreshToolbarAndLabelFlag]);
 
 
   useEffect(() => {
@@ -121,32 +84,32 @@ export const NodeToolbar = observer((
 
   return (
     <Fragment>
-      {editorStore?.selectedDom && 
-        <div className={classes.toolbar}
+      {rxDragCoreStore?.selectedDom && 
+        <div className= 'rx-node-toolbar'
           style={{
             left:left + 'px',
             top: top + 'px',
           }}
         >
           <div 
-            className={classes.button}
+            className='rx-node-button'
             onClick = {onSelectParent}
             dangerouslySetInnerHTML = {{__html:svgArrowUp}}
             style = {{width: '24px'}}
           >
           </div>
           <div 
-            className={ classNames(classes.button, classes.move) }
+            className='rx-node-button'
             onMouseDown = {onBeginDrag}
             dangerouslySetInnerHTML = {{__html:svgMove}}
           >
           </div>
-          <div className={classes.button}
+          <div className='rx-node-button'
             dangerouslySetInnerHTML = {{__html:svgDuplicate}}
             onClick = {onDuplicate}
           >
           </div>
-          <div className={classes.button}
+          <div className='rx-node-button'
           dangerouslySetInnerHTML = {{__html:svgRemove}}
             onClick={ onRemove }
           >

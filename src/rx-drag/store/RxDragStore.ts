@@ -1,4 +1,3 @@
-import { IRxPage } from "Base/Model/IRxPage";
 import { IMeta } from "Base/RXNode/IMeta";
 import { RxNode } from "rx-drag/RxNode";
 import { CursorPosition, IDragOverParam } from "rx-drag/core/IDragOverParam";
