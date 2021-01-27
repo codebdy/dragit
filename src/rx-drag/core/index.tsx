@@ -8,7 +8,7 @@ import { DragCusor } from './DragCusor';
 import { ComponentLabel } from './ComponentLabel';
 import { cloneObject } from '../utils/cloneObject';
 import { observer } from 'mobx-react';
-import { RxDragStore } from '../context/RxDragStore';
+import { RxDragStore } from '../store/RxDragStore';
 import { RemoveCommand } from '../commands/RemoveCommand';
 import { DuplicateCommand } from '../commands/DuplicateCommand';
 import { ComponentView } from './ComponentView';

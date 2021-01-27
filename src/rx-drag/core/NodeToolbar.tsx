@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
 import {observer} from 'mobx-react';
-import { useDesign } from '../context/useDesign';
+import { useDesign } from '../store/useDesign';
 
 const height = 28;
 const barWidth = height*4;

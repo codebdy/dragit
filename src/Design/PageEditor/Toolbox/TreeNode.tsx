@@ -7,7 +7,7 @@ import intl from "react-intl-universal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import MdiIcon from 'Components/Common/MdiIcon';
 import classNames from "classnames";
-import { useDesign } from "../../../rx-drag/context/useDesign";
+import { useDesign } from "../../../rx-drag/store/useDesign";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

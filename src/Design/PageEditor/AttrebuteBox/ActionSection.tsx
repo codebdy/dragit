@@ -3,7 +3,7 @@ import { FormControl,  FormControlLabel,  Grid,  InputLabel, MenuItem, Select, S
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
-import { useDesign } from '../../../rx-drag/context/useDesign';
+import { useDesign } from '../../../rx-drag/store/useDesign';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { toJS } from 'mobx';
 import { IPageMutation } from 'Base/Model/IPageMutation';

@@ -18,9 +18,9 @@ import { ID } from 'Base/Model/graphqlTypes';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { RxDragStore } from '../../rx-drag/context/RxDragStore';
+import { RxDragStore } from '../../rx-drag/store/RxDragStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { RxDragStoreProvider } from '../../rx-drag/context/useDesign';
+import { RxDragStoreProvider } from '../../rx-drag/store/useDesign';
 import { RxDragCore } from '../../rx-drag/core';
 
 //后面要删除此变量

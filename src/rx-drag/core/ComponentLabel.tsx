@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { observer} from 'mobx-react';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/RxNode';
-import { useDesign } from '../context/useDesign';
+import { useDesign } from '../store/useDesign';
 
 export const ComponentLabel = observer((
   props:{

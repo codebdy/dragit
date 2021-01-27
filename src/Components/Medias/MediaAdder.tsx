@@ -6,7 +6,7 @@ import MediaGridListIconButton from './MediaGridListIconButton';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import MediasSelectDialog from './MediasSelectDialog';
 import { IMedia } from 'Base/Model/IMedia';
-import { useDesign } from 'rx-drag/context/useDesign';
+import { useDesign } from 'rx-drag/store/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

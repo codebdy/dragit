@@ -13,7 +13,7 @@ import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
 import { resolveMetaConfig } from 'Base/RxDrag';
 import { IMetaConfig } from 'Base/RXNode/IMetaConfig';
 import { observer } from 'mobx-react';
-import { useDesign } from '../../../rx-drag/context/useDesign';
+import { useDesign } from '../../../rx-drag/store/useDesign';
 import { toJS } from 'mobx';
 import { propsInputs } from './PropsInputs';
 import { cloneObject } from 'rx-drag/utils/cloneObject';

@@ -2,9 +2,9 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
 import classNames from 'classnames';
-import { useRxDragShellStore } from 'rx-drag/context/useRxDragShellStore';
+import { useRxDragShellStore } from 'rx-drag/store/useRxDragShellStore';
 import { ToolbarButton } from './ToolbarButton';
-import { DARK, LIGHT, RxThemeMode } from 'rx-drag/context/IRxThemeOptions';
+import { DARK, LIGHT, RxThemeMode } from 'rx-drag/store/IRxThemeOptions';
 
 const svgOutLine = `
   <svg viewBox="0 0 24 24">

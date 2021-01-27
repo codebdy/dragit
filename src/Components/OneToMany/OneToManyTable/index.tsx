@@ -5,7 +5,7 @@ import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 
 import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
-import { useDesign } from 'rx-drag/context/useDesign';
+import { useDesign } from 'rx-drag/store/useDesign';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { DADA_RXID_CONST, RxNode } from 'rx-drag/RxNode';
 import { useSetTableStore } from '../useSetTableStore';

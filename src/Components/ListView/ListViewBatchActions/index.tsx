@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { useListViewStore } from '../ListViewStore';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
-import { useDesign } from 'rx-drag/context/useDesign';
+import { useDesign } from 'rx-drag/store/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

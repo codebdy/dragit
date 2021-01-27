@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { IRxMeta } from './IRxMeta';
-import { IRxThemeOptions, RxThemeMode } from './context/IRxThemeOptions';
+import { IRxThemeOptions, RxThemeMode } from './store/IRxThemeOptions';
 import { Toolbar } from './Toolbar';
 import { NodeNavigation } from './NodeNavigation';
-import { RxDragShellStore } from './context/RxDragShellStore';
-import { RxDragShellStoreProvider } from './context/useRxDragShellStore';
+import { RxDragShellStore } from './store/RxDragShellStore';
+import { RxDragShellStoreProvider } from './store/useRxDragShellStore';
 import classNames from 'classnames';
 import { Sidebar } from './Sidebar';
 import { IRxLocales } from './IRxLocales';

@@ -4,7 +4,7 @@ import { Skeleton } from '@material-ui/lab';
 import React, { useEffect } from 'react';
 import ChipsInput from './ChipsInput';
 import intl from 'react-intl-universal';
-import { useDesign } from 'rx-drag/context/useDesign';
+import { useDesign } from 'rx-drag/store/useDesign';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import withFormField from 'Components/Common/withFormField';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { Area, Line, Liquid, Radar } from '@ant-design/charts';
-import { useDesign } from 'rx-drag/context/useDesign';
+import { useDesign } from 'rx-drag/store/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

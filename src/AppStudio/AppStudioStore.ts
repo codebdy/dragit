@@ -3,7 +3,7 @@ import { IRxPage } from "Base/Model/IRxPage";
 import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
 import { useContext } from "react";
-import { LIGHT, RxThemeMode } from "rx-drag/context/IRxThemeOptions";
+import { LIGHT, RxThemeMode } from "rx-drag/store/IRxThemeOptions";
 
 export class WorkSpaceState{
   constructor() {

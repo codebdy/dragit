@@ -3,7 +3,7 @@ import { RXInputProps } from 'Base/RXInputProps';
 import withSkeleton from 'Base/HOCs/withSkeleton';
 import withFormField from 'Components/Common/withFormField';
 import dayjs from 'dayjs';
-import { useDesign } from 'rx-drag/context/useDesign';
+import { useDesign } from 'rx-drag/store/useDesign';
 
 const DayView = React.forwardRef((
   props: RXInputProps& {

@@ -4,9 +4,9 @@ import { observer } from 'mobx-react';
 import { RxDrag } from 'rx-drag';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
-import { RxThemeMode } from 'rx-drag/context/IRxThemeOptions';
-import { RxDragStoreProvider } from 'rx-drag/context/useDesign';
-import { RxDragStore } from 'rx-drag/context/RxDragStore';
+import { RxThemeMode } from 'rx-drag/store/IRxThemeOptions';
+import { RxDragStoreProvider } from 'rx-drag/store/useDesign';
+import { RxDragStore } from 'rx-drag/store/RxDragStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

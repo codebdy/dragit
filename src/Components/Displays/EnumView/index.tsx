@@ -3,7 +3,7 @@ import withSkeleton from 'Base/HOCs/withSkeleton';
 import { IEnumItem } from 'Base/Model/IEnumItem';
 import { RXInputProps } from 'Base/RXInputProps';
 import withFormField from 'Components/Common/withFormField';
-import { useDesign } from 'rx-drag/context/useDesign';
+import { useDesign } from 'rx-drag/store/useDesign';
 import React from 'react';
 import { first } from 'rx-drag/utils/ArrayHelper';
 

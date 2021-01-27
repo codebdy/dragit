@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import './style.css';
-import { useRxDragShellStore } from 'rx-drag/context/useRxDragShellStore';
+import { useRxDragShellStore } from 'rx-drag/store/useRxDragShellStore';
 import classNames from 'classnames';
 
 export const Sidebar = observer((
