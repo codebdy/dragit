@@ -87,7 +87,13 @@ export class RxDragStore{
   }
 
   setSelectedNode(selectedNode?:RxNode<IMeta>){
-    this.selectedNode = selectedNode
+    if(selectedNode?.id === this.canvas?.id){
+      this.selectedNode = undefined
+    }
+    else{
+      this.selectedNode = selectedNode
+    }
+
   }
 
   setSelectedDom(selectedDom:Element|null){

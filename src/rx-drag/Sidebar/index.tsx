@@ -12,7 +12,7 @@ export const Sidebar = observer((
   }
 ) => {
   const {toolbox, attributeBox, pageSettings} = props;
-  const dragStore = useRxDragShellStore();
+  const dragShellStore = useRxDragShellStore();
 
   return (
     <div className = 'rx-sidebar'>
@@ -20,65 +20,65 @@ export const Sidebar = observer((
         className = 'rx-sidebar-tabs'
         style = {
           {
-            borderColor:dragStore?.themeOptions.borderColor,
+            borderColor:dragShellStore?.themeOptions.borderColor,
           }
         }
       >
         <div className = {
             classNames(
               'rx-sidebar-tab-title', 
-              {'actived':dragStore?.activedTab === 'toolbox'}
+              {'actived':dragShellStore?.activedTab === 'toolbox'}
             )
           }
           style = {
             {
-              borderColor:dragStore?.themeOptions.borderColor,
+              borderColor:dragShellStore?.themeOptions.borderColor,
             }
           }
-          onClick = {()=>dragStore?.setActiveTab('toolbox')}
+          onClick = {()=>dragShellStore?.setActiveTab('toolbox')}
         >
-          {dragStore?.locales?.components || 'Components'}
+          {dragShellStore?.locales?.components || 'Components'}
         </div>
         <div className = {
             classNames(
               'rx-sidebar-tab-title', 
-              {'actived':dragStore?.activedTab === 'attributes'}
+              {'actived':dragShellStore?.activedTab === 'attributes'}
             )
           }        
           style = {
             {
-              borderColor:dragStore?.themeOptions.borderColor,
+              borderColor:dragShellStore?.themeOptions.borderColor,
             }
           }
-          onClick = {()=>dragStore?.setActiveTab('attributes')}
+          onClick = {()=>dragShellStore?.setActiveTab('attributes')}
         >
-          {dragStore?.locales?.attributes || 'Attributes'}
+          {dragShellStore?.locales?.attributes || 'Attributes'}
         </div>
         <div className = {
             classNames(
               'rx-sidebar-tab-title', 
-              {'actived':dragStore?.activedTab === 'settings'}
+              {'actived':dragShellStore?.activedTab === 'settings'}
             )
           }  
           style = {
             {
-              borderColor:dragStore?.themeOptions.borderColor,
+              borderColor:dragShellStore?.themeOptions.borderColor,
             }
           }
-          onClick = {()=>dragStore?.setActiveTab('settings')}
+          onClick = {()=>dragShellStore?.setActiveTab('settings')}
         >
-          {dragStore?.locales?.pageSettings || 'Page settings'}
+          {dragShellStore?.locales?.pageSettings || 'Page settings'}
         </div>
       </div>
       <div className = 'rx-sidebar-tabpanel'>
         {
-          dragStore?.activedTab === 'toolbox' && toolbox
+          dragShellStore?.activedTab === 'toolbox' && toolbox
         }
         {
-          dragStore?.activedTab === 'attributes' && attributeBox
+          dragShellStore?.activedTab === 'attributes' && attributeBox
         }
         {
-          dragStore?.activedTab === 'settings' && pageSettings
+          dragShellStore?.activedTab === 'settings' && pageSettings
         }
 
       </div>

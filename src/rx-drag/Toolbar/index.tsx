@@ -100,6 +100,12 @@ export const Toolbar = observer((
   const handleClear = ()=>{
     rxDragStore?.clear();
   }
+
+  const handleFoldSidebar = ()=>{
+    shellStore?.setRightFolded(!shellStore?.rightFolded);
+    rxDragStore?.setSelectedNode(undefined);
+  }
+
   return (
     <div 
       className = {classNames('rx-toolbar', 'rx-toolbar-color')}
@@ -153,7 +159,7 @@ export const Toolbar = observer((
         <ToolbarButton 
           svgIcon = { shellStore?.rightFolded ? svgLeft : svgRight} 
           className = { shellStore?.rightFolded ? '' : 'flip'} 
-          onClick = {()=>{shellStore?.setRightFolded(!shellStore?.rightFolded)}}
+          onClick = { handleFoldSidebar }
         />
       </div>
     </div>
