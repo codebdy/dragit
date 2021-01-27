@@ -1,7 +1,6 @@
 import { RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 
-export default {
-  layout:[
+export var splitSubmitSchema = [
     {
       name: 'GridRow',
       props: {
@@ -332,7 +331,5 @@ export default {
         },
 
       ]
-    },
-    
-],
-}
+    },   
+]

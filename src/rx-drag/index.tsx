@@ -12,24 +12,31 @@ import { IRxLocales } from './IRxLocales';
 import './style.css';
 import './core.css';
 import { useEffect } from 'react';
+import { useRxDragStore } from './store/useDesign';
+import { cloneObject } from './utils/cloneObject';
+import { RxDragCore } from './core';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
-  initJson?: Array<IRxMeta>,
+  initMetas?: Array<IRxMeta>,
   toolbox?: JSX.Element,
   attributeBox?: JSX.Element,
   pageSettings?: JSX.Element,
   locales?:IRxLocales,
-  onChange?: (json : Array<IRxMeta>)=>void,
+  onChange?: (metas : Array<IRxMeta>)=>void,
   onThemeModeChange?:(mode :RxThemeMode)=>void,
 }
 
 export const RxDrag = observer((
   props: IRxDragProps
 ) => {
-  const {theme, toolbox, attributeBox, pageSettings, locales, onThemeModeChange} = props;
+  const {theme, initMetas, toolbox, attributeBox, pageSettings, locales, onThemeModeChange} = props;
   const [shellStore] = React.useState(new RxDragShellStore(locales))
+  const rxDragStore = useRxDragStore();
 
+  useEffect(()=>{
+    rxDragStore?.setMetas(cloneObject(initMetas));
+  },[rxDragStore, initMetas])
 
   useEffect(()=>{
     shellStore?.setThemeOptions(theme);
@@ -62,21 +69,10 @@ export const RxDrag = observer((
               }}
             >
 
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
-              rx-canvas-background<br/><br/><br/><br/><br/><br/><br/>
+              {rxDragStore&&
+                <RxDragCore rxDragStore = {rxDragStore} />
+              }
+              
             </div>
           </div>
           <NodeNavigation />

@@ -20,10 +20,10 @@ const SettingsBox = observer(()=>{
 
   const handleQueryChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const newValue = event.target.value as string;
-    editorStore?.updatePageQuery(newValue);
+    //editorStore?.updatePageQuery(newValue);
   }
 
-  const query = editorStore?.page?.query;
+  const query = undefined;//editorStore?.page?.query;
 
   return (
     <div className = {classes.root}>

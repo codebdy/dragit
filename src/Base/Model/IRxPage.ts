@@ -1,3 +1,4 @@
+import { IMeta } from "Base/RXNode/IMeta";
 import { ID } from "./graphqlTypes";
 
 export type MaxWidth = 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
@@ -10,12 +11,12 @@ export interface IQuery{
 }
 
 export interface IRxPage{
-  //使用GUID当ID用
+  //使用UUID当ID用
   id:ID,
   name?:string, 
   maxWidth?: MaxWidth;
   width?:number;
-  schema?:Array<any>,
+  schema?:Array<IMeta>,
   auths?:string[],
   query?:string, 
 }

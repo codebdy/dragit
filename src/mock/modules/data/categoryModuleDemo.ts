@@ -1,5 +1,5 @@
 
-import splitSubmit from "mock/demos/splitSubmit/view";
+//import splitSubmit from "mock/demo/splitSubmit/splitSubmitSchema";
 import { OneToManyPortletView } from "mock/demos/oneToManyPortlet/view";
 import { OneToManyTableView } from "mock/demos/oneToManyTable/view";
 import jumpList from "mock/demos/jumpStyleModule/jumpList";
@@ -148,7 +148,7 @@ export default[
         id:'1501',
         name:'计算器',
         max_width:'false',
-        schema: splitSubmit,
+        //schema: splitSubmit,
       },
     ],
     auths:[

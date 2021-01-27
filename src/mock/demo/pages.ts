@@ -1,7 +1,10 @@
+import { splitSubmitSchema } from "./splitSubmit/splitSubmitSchema";
+
 var demoPages = [
   {
     id:'guid-p-1',
     name:'独立提交',
+    schema:splitSubmitSchema,
   },
   {
     id:'guid-p-2',

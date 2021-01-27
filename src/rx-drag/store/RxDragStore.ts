@@ -7,13 +7,12 @@ import { makeAutoObservable, toJS } from "mobx";
 import { cloneObject } from "rx-drag/utils/cloneObject";
 import { ChangeMetaCommand } from "../commands/ChangeMetaCommand";
 import { ClearCommand } from "../commands/ClearCommand";
-import { IPageUpdate } from "../../AppStudio/Pages/PageEditor/IPageUpdate";
 import { MoveAfterCommand } from "../commands/MoveAfterCommand";
 import { MoveBeforeCommand } from "../commands/MoveBeforeCommand";
 import { MoveInCommand } from "../commands/MoveInCommand";
 import { MoveInTopCommand } from "../commands/MoveInTopCommand";
-import { UpdatePageSchemaCommand } from "../../AppStudio/Pages/PageEditor/UpdatePageSchemaCommand";
 import { ICommand } from "rx-drag/commands/ICommand";
+import { IRxMeta } from "rx-drag/IRxMeta";
 
 function makeCanvas(){
   return RxNode.make<IMeta>(
@@ -23,8 +22,8 @@ function makeCanvas(){
   )
 }
 
-export class RxDragStore implements IPageUpdate{
-  page?:IRxPage;
+export class RxDragStore{
+  metas?:Array<IRxMeta>;
   showOutline:boolean = true;
   showPaddingX:boolean = true;
   showPaddingY:boolean = true;
@@ -42,15 +41,18 @@ export class RxDragStore implements IPageUpdate{
   refreshToolbarAndLabelFlag:number = 0;
   isDirty: boolean = false;
 
-  constructor(page?:IRxPage) {
-    this.page = page;
+  constructor() {    
     makeAutoObservable(this);
-    this.parsePage();
   }
 
   private parsePage(){
     this.canvas = makeCanvas();
-    this.canvas.parse(this.page?.schema);
+    this.canvas.parse(this.metas);
+  }
+
+  setMetas(metas?:Array<IRxMeta>){
+    this.metas = metas;
+    this.parsePage();
   }
 
   setShowOutline(showOutline:boolean){
@@ -178,16 +180,12 @@ export class RxDragStore implements IPageUpdate{
     }
   }
 
-  setPage(page:IRxPage){
-    this.page = page;
-  }
+  //updatePageQuery(query?:string){
+ //   this.excuteCommand(new UpdatePageSchemaCommand(this, 'query', query));
+  //}
 
-  updatePageQuery(query?:string){
-    this.excuteCommand(new UpdatePageSchemaCommand(this, 'query', query));
-  }
-
-  updatePageAuths(auths?:Array<string>){
-    this.excuteCommand(new UpdatePageSchemaCommand(this, 'auths', auths));
-  }
+  //updatePageAuths(auths?:Array<string>){
+  //  this.excuteCommand(new UpdatePageSchemaCommand(this, 'auths', auths));
+  //}
 
 }

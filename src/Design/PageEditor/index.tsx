@@ -99,7 +99,7 @@ export const PageEditor = observer((
 
   useEffect(() => {
     //复制一个副本
-    setEditorStore(new RxDragStore( cloneObject(data?.page)))
+    setEditorStore(new RxDragStore( /*cloneObject(data?.page)*/))
 
   },[data]);
  
@@ -206,7 +206,7 @@ export const PageEditor = observer((
           {loading? <Container><PageSkeleton /></Container> :
             <Scrollbar permanent className={classes.scrollBar} onScroll ={handleScroll}>
               {editorStore&&
-                <RxDragCore editorStore = {editorStore} />
+                <RxDragCore rxDragStore = {editorStore} />
               }
             </Scrollbar>
           }

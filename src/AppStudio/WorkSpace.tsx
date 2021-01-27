@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { useAppStudioStore } from './AppStudioStore';
-import { PageEditor } from './Pages/PageEditor';
+import { RxPageEditor } from './Pages/RxPageEditor';
 import { NavigationEditor } from './Navigation/NavigationEditor';
 
 export const WorkSpace = observer(() => {
@@ -10,7 +10,7 @@ export const WorkSpace = observer(() => {
     <>
       {
         studioStore?.editingPage &&
-        <PageEditor />
+        <RxPageEditor rxPage = {studioStore?.editingPage}/>
       }
       {
         studioStore?.editingNavigation && 

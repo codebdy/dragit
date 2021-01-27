@@ -10,8 +10,8 @@ import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graph
 import { mediaQueryResolvers } from "./medias/queryResolvers";
 import { mediaMutationResolvers } from "./medias/mutationResolvers";
 import { postMutationResolvers, postQueryResolvers } from "./article/post/resolvers";
-import { splitDemoMutationResolvers } from "./demos/splitSubmit/resolvers";
-import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demos/splitSubmit/graphql";
+import { splitDemoMutationResolvers } from "./demo/splitSubmit/resolvers";
+import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demo/splitSubmit/graphql";
 import { supplierQueryResolvers } from "./supplier/resolvers";
 import { supplierGQLInput, supplierGQLQuery, supplierGQLType } from "./supplier/graphql";
 import { pageResolver, savePageResolver } from "./module/pageResolver";

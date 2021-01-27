@@ -7,6 +7,7 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { RxThemeMode } from 'rx-drag/store/IRxThemeOptions';
 import { RxDragStoreProvider } from 'rx-drag/store/useDesign';
 import { RxDragStore } from 'rx-drag/store/RxDragStore';
+import { IRxPage } from 'Base/Model/IRxPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,9 +17,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const PageEditor = observer(() => {
+export const RxPageEditor = observer((
+  props:{
+    rxPage:IRxPage
+  }
+) => {
+  const {rxPage} = props; 
   const classes = useStyles();
-  const [rxDragStore, setCoreStore] = React.useState<RxDragStore>();
+  const [rxDragStore] = React.useState<RxDragStore>();
   const studioStore = useAppStudioStore();
   const handleThemeModeChange = (mode :RxThemeMode)=>{
     studioStore?.setThemeMode(mode);
@@ -31,6 +37,7 @@ export const PageEditor = observer(() => {
             mode:studioStore?.themeMode,
           }
         }
+        initMetas = {rxPage.schema}
         toolbox = {<div>tool box</div>}
         attributeBox = {<div>Attributes box</div>}
         pageSettings = {<div>Settings box</div>}

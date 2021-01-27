@@ -15,25 +15,25 @@ import { ComponentView } from './ComponentView';
 
 export const RxDragCore = observer((
   props:{
-    editorStore:RxDragStore,
+    rxDragStore:RxDragStore,
   }
 ) =>{
-  const {editorStore} = props;
+  const {rxDragStore} = props;
 
   const handleMouseUp = ()=>{
-    if(editorStore.dragOverParam && (editorStore.draggedToolboxItem || editorStore.draggedNode)){
-      let targetNode = editorStore.dragOverParam?.targetNode;
-      let dragNode = editorStore.draggedNode;
-      if(!dragNode && editorStore.draggedToolboxItem?.meta){
-        dragNode = RxNode.make<IMeta>(cloneObject(editorStore.draggedToolboxItem?.meta));
+    if(rxDragStore.dragOverParam && (rxDragStore.draggedToolboxItem || rxDragStore.draggedNode)){
+      let targetNode = rxDragStore.dragOverParam?.targetNode;
+      let dragNode = rxDragStore.draggedNode;
+      if(!dragNode && rxDragStore.draggedToolboxItem?.meta){
+        dragNode = RxNode.make<IMeta>(cloneObject(rxDragStore.draggedToolboxItem?.meta));
       }
       if(dragNode && targetNode) {
-        editorStore?.operateNode(dragNode, targetNode, editorStore.dragOverParam.position);
+        rxDragStore?.operateNode(dragNode, targetNode, rxDragStore.dragOverParam.position);
       }
     }
-    editorStore.setDragOverParam(undefined);
-    editorStore.setDraggedNode(undefined);
-    editorStore.setDraggedToolboxItem(undefined);
+    rxDragStore.setDragOverParam(undefined);
+    rxDragStore.setDraggedNode(undefined);
+    rxDragStore.setDraggedToolboxItem(undefined);
     document.body.classList.remove('can-not-be-selected');
   }
 
@@ -47,48 +47,48 @@ export const RxDragCore = observer((
   
   
   const handleBeginDrag = ()=>{
-    editorStore.setDraggedNode(editorStore.selectedNode);
-    editorStore.setSelectedNode(undefined);
+    rxDragStore.setDraggedNode(rxDragStore.selectedNode);
+    rxDragStore.setSelectedNode(undefined);
     document.body.classList.add('can-not-be-selected')
   }
 
   const handleRemove = ()=>{
-    if(editorStore.selectedNode){
-      editorStore.excuteCommand(new RemoveCommand(editorStore.selectedNode))
+    if(rxDragStore.selectedNode){
+      rxDragStore.excuteCommand(new RemoveCommand(rxDragStore.selectedNode))
     }
   }
 
   const handleDupliate = ()=>{
-    if(editorStore.selectedNode){
-      editorStore.excuteCommand(new DuplicateCommand(editorStore.selectedNode))
+    if(rxDragStore.selectedNode){
+      rxDragStore.excuteCommand(new DuplicateCommand(rxDragStore.selectedNode))
     }
   }
 
   const handleSelectParent = ()=>{
-    editorStore.setSelectedNode(editorStore.selectedNode?.parent);
+    rxDragStore.setSelectedNode(rxDragStore.selectedNode?.parent);
   }
 
-  let draggedLabel = editorStore.draggedToolboxItem ?editorStore.draggedToolboxItem?.title || intl.get(editorStore.draggedToolboxItem?.titleKey||'') : editorStore.draggedNode?.meta.name;
+  let draggedLabel = rxDragStore.draggedToolboxItem ?rxDragStore.draggedToolboxItem?.title || intl.get(rxDragStore.draggedToolboxItem?.titleKey||'') : rxDragStore.draggedNode?.meta.name;
    return (
     <Fragment>
-      {editorStore.canvas&&
+      {rxDragStore.canvas&&
         <ComponentView 
-          node ={editorStore.canvas}
+          node ={rxDragStore.canvas}
         />
       }
       {
-        editorStore.activeNode &&
+        rxDragStore.activeNode &&
         <ComponentLabel 
-          node={editorStore.activeNode}
-          followDom = {editorStore.activeNode.dom}
+          node={rxDragStore.activeNode}
+          followDom = {rxDragStore.activeNode.dom}
         />
       }              
       {
-        editorStore.selectedNode &&
+        rxDragStore.selectedNode &&
         <Fragment>
           <ComponentLabel 
-            node={editorStore.selectedNode}
-            followDom = {editorStore.selectedDom}
+            node={rxDragStore.selectedNode}
+            followDom = {rxDragStore.selectedDom}
           />
           <NodeToolbar 
             onBeginDrag = {handleBeginDrag}
@@ -100,11 +100,11 @@ export const RxDragCore = observer((
       }
       <Fragment>
         {
-          (editorStore.draggedToolboxItem || editorStore.draggedNode) &&
+          (rxDragStore.draggedToolboxItem || rxDragStore.draggedNode) &&
           <MouseFollower label={ draggedLabel || 'unknow'} />
         }
         {
-          (editorStore.draggedToolboxItem || editorStore.draggedNode) &&
+          (rxDragStore.draggedToolboxItem || rxDragStore.draggedNode) &&
           <DragCusor/>
         }
       </Fragment>  
