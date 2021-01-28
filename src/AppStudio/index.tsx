@@ -99,7 +99,11 @@ export const AppStudio = observer(() => {
         <div className={classes.root} style={{background:theme.palette.background.default}}>
           <VerticalBar />
           <ThemeProvider theme={appbarTheme}>
-            <AppBar position="static" color="inherit" variant="outlined">
+            <AppBar position="static" color="inherit" elevation = {0}
+              style={{
+                borderBottom: theme.palette.divider + ' solid 1px',
+              }}
+            >
               <Toolbar variant="dense">
                 <div style={{width:'50px'}}></div>
                 <IconButton edge="start" onClick={handleBack}>
