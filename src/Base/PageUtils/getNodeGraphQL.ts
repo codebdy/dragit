@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 
 const CHILDREN_GQL = "#{children}";
 function getMetaFieldGql(meta?: IMeta){

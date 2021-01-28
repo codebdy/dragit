@@ -1,5 +1,5 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import ListViewBatcthCommandDialog from "Components/ListView/PropsInputs/ListViewBatcthCommandDialog";
 import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";
@@ -8,7 +8,6 @@ import ListViewRowCommandDialog from "./PropsInputs/ListViewRowCommandDialog";
 import { IMeta } from "Base/RXNode/IMeta";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 import elevationRules from "Base/RXNode/Configs/elevationRules";
-import apiRule from "Base/RXNode/Configs/apiRule";
 
 export class ListViewRule extends MetaConfig{
   editPaddingY = '8px';
@@ -58,7 +57,6 @@ export class ListViewRule extends MetaConfig{
         label:'rows-per-page',
         input:StringInput,
       },
-      apiRule,
     ]
   }
 

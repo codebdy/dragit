@@ -1,5 +1,5 @@
 import { TreeItem } from "@material-ui/lab";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import React, { Fragment } from "react";
 import { IToolboxItem } from "./IToolboxItem";
 import TreeNodeLabel from "./TreeNodeLabel";

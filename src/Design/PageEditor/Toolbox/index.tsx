@@ -4,7 +4,7 @@ import items from './items'
 import TreeView from '@material-ui/lab/TreeView';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import { IToolboxItem } from './IToolboxItem';
 import TreeNode from './TreeNode';
 import { cloneObject } from 'rx-drag/utils/cloneObject';

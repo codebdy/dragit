@@ -4,19 +4,20 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
 import AttributeBoxValidateArea from 'Design/PageEditor/AttrebuteBox/ValidateArea';
 import { IValidateRule } from "Base/Model/IValidateRule";
 import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
-import { resolveMetaConfig } from 'Base/RxDrag';
-import { IMetaConfig } from 'Base/RXNode/IMetaConfig';
+import { resolveMetaConfig } from 'rx-drag/RxDrag';
+import { IRxMetaConfig } from 'rx-drag/models/IRxMetaConfig';
 import { observer } from 'mobx-react';
 import { useDesign } from '../../../rx-drag/store/useDesign';
 import { toJS } from 'mobx';
 import { propsInputs } from './PropsInputs';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
+import { MetaConfig } from 'Base/RXNode/MetaConfig';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,12 +57,12 @@ export const AttributeBox = observer(()=>{
   const classes = useStyles();
   const {rxDragCoreStore: editorStore} = useDesign();
   const node = editorStore?.selectedNode;  
-  const [metaConfig, setMetaConfig] = React.useState<IMetaConfig>();
+  const [metaConfig, setMetaConfig] = React.useState<MetaConfig>();
   const [validateRule, setValidateRule] = React.useState<IValidateRule>();
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
 
   useEffect(() => {
-    node?.meta.name && setMetaConfig(resolveMetaConfig(node?.meta.name))
+    node?.meta.name && setMetaConfig(resolveMetaConfig(node?.meta.name) as MetaConfig)
   },[node]);
 
   const handlePropChange = (key:string, value:any) => {

@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import { useDragItStore, useDesigner } from 'Store/Helpers/useDragItStore';
 import {observer} from 'mobx-react';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

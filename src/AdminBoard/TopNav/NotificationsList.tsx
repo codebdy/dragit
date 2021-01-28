@@ -6,7 +6,7 @@ import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import { INotification } from 'Base/Model/INotification';
 import { useHistory } from 'react-router-dom';
 //import { resolvePageUrl } from 'Utils/resolvePageUrl';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

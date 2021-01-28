@@ -12,11 +12,11 @@ import { useRemoveGQL } from './useRemoveGQL';
 import { useUpdateGQL } from './useUpdateGQL';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import ListViewActionFilter from './ListViewActionFilter';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 
 function creatEmpertyRows(length:number){
   let rows = []

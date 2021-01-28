@@ -5,7 +5,7 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import React from 'react';
 import classNames from 'classnames';
-import { IRect } from 'Base/Model/IRect';
+import { IRect } from 'rx-drag/models/IRect';
 import { observer } from 'mobx-react';
 import { useDesign } from '../store/useDesign';
 

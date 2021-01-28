@@ -2,7 +2,7 @@ import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { IMeta } from "Base/RXNode/IMeta";
 import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { usePageStore } from "Base/PageUtils/PageStore";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { ListViewStore } from "./ListViewStore";

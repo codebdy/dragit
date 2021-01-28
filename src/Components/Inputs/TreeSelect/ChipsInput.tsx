@@ -8,7 +8,7 @@ import { ITreeNode } from 'Base/Model/ITreeNode';
 import TreeList from './TreeList';
 import { isPointInRect } from 'Utils/isPointInRect';
 import { remove } from 'rx-drag/utils/ArrayHelper';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 import { useDesign } from 'rx-drag/store/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>

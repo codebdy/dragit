@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import {observer} from 'mobx-react';
-import { DADA_RXID_CONST } from 'rx-drag/RxNode';
+import { DADA_RXID_CONST } from 'rx-drag/models/RxNode';
 import { RXModel } from 'Base/ModelTree/RXModel';
 
 const useStyles = makeStyles((theme: Theme) =>

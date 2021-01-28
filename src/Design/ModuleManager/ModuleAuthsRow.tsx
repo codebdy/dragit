@@ -3,7 +3,7 @@ import { IconButton, TableCell, TableRow, TextField, Tooltip } from '@material-u
 import { IAuth } from 'Base/Model/IAuth';
 import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 export default function ModuleAuthsRow(
   props:{

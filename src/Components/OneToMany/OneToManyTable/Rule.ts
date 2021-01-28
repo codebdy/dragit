@@ -1,5 +1,5 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import { IMeta } from "Base/RXNode/IMeta";
@@ -41,7 +41,6 @@ export class OneToManyTableRule extends MetaConfig{
       {
         name:'helperText',
         label:'helper-text',
-        xs:12,
         input:StringInput,
       },
     ]

@@ -7,7 +7,7 @@ import { Add } from "@material-ui/icons";
 import ModuleAuthsRow from "./ModuleAuthsRow";
 import { IAuth } from "Base/Model/IAuth";
 import createId from "rx-drag/utils/createId";
-import { ID } from "Base/Model/graphqlTypes";
+import { ID } from "rx-drag/models/baseTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,6 +1,6 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { RXModel } from "Base/ModelTree/RXModel";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 
 export function makeTableModel(rows: Array<any> | undefined, parentRxModel: RXModel | undefined, rxNode: RxNode<IMeta> | undefined, rowComponentName: string) {
   parentRxModel?.clearChildren();

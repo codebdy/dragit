@@ -8,5 +8,4 @@ export interface IPropConfig {
   items?: Array<{value:string, label:string}>;
   props?: any;
   defaultValue?:any;
-  xs?: boolean | 12 | 2 | 1 | "auto" | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | undefined;
 }

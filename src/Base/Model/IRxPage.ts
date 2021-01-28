@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { ID } from "./graphqlTypes";
+import { ID } from "../../rx-drag/models/baseTypes";
 
 export type MaxWidth = 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
 

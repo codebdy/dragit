@@ -7,7 +7,7 @@ import ModulePageTable from './ModulePageTable';
 import { IRxPage } from 'Base/Model/IRxPage';
 import { PageEditor } from 'Design/PageEditor';
 import createId from 'rx-drag/utils/createId';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 
 export default function ModulePages(props:{module:IModule}){

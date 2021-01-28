@@ -2,7 +2,7 @@ import React from 'react';
 import LeftArea from 'Design/Layout/LeftArea';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import ModuleList from './ModuleList';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { ICommand } from "./ICommand";
 
 export class DuplicateCommand implements ICommand{

@@ -2,7 +2,7 @@ import { IMeta } from "Base/RXNode/IMeta";
 import { makeTableModel } from "Base/ModelTree/makeTableModel";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
 import { RXModel } from "Base/ModelTree/RXModel";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { useEffect } from "react";
 
 export function useSetTableStore(rxNode:RxNode<IMeta>, rowComponentName:string){

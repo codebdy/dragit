@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { CursorPosition, IDragOverParam } from "rx-drag/core/IDragOverParam";
 import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable, toJS } from "mobx";
@@ -11,7 +11,7 @@ import { MoveBeforeCommand } from "../commands/MoveBeforeCommand";
 import { MoveInCommand } from "../commands/MoveInCommand";
 import { MoveInTopCommand } from "../commands/MoveInTopCommand";
 import { ICommand } from "rx-drag/commands/ICommand";
-import { IRxMeta } from "rx-drag/IRxMeta";
+import { IRxMeta } from "rx-drag/models/IRxMeta";
 
 function makeCanvas(){
   return RxNode.make<IMeta>(

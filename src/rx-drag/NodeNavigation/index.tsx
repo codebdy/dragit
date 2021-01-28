@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { useRxDragShellStore } from 'rx-drag/store/useRxDragShellStore';
-import './style.css';
 import { NodeNavigationLabel } from './NodeNavigationLabel';
 import { useEffect, useRef, useState } from 'react';
 import { useRxDragStore } from 'rx-drag/store/useDesign';
-import { IRxMeta } from 'rx-drag/IRxMeta';
-import { RxNode } from 'rx-drag/RxNode';
-
+import { IRxMeta } from 'rx-drag/models/IRxMeta';
+import { RxNode } from 'rx-drag/models/RxNode';
+import './style.css';
 
 export const NodeNavigation = observer(() => {
   const shellStore = useRxDragShellStore();

@@ -5,7 +5,7 @@ import intl from 'react-intl-universal';
 import ModulePageRow from './ModulePageRow';
 import { Add } from '@material-ui/icons';
 import { IRxPage } from 'Base/Model/IRxPage';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

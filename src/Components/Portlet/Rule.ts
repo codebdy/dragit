@@ -1,5 +1,5 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import SwitchInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import elevationRules from "Base/RXNode/Configs/elevationRules";
@@ -40,7 +40,6 @@ export class PortletRule extends MetaConfig{
       {
         name:'title',
         label:'title',
-        xs:12,
         input:StringInput,
       },
     ]

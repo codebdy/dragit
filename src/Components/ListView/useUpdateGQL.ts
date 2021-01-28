@@ -6,7 +6,7 @@ import { IPageMutation } from "Base/Model/IPageMutation";
 import { usePageStore } from "Base/PageUtils/PageStore";
 import { getNodeGraphQL } from "Base/PageUtils/getNodeGraphQL";
 import { IMeta } from "Base/RXNode/IMeta";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 
 export function useUpdateGQL( rxNode:RxNode<IMeta>, listViewStore:ListViewStore, update?:IPageMutation ){
   const pageStore = usePageStore();

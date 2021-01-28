@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import IMenuItem, { IMenuChip } from 'Base/Model/IMenuItem';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';
 import BadgeEditor from './BadgeEditor';

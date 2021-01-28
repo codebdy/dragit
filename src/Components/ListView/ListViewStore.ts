@@ -1,7 +1,7 @@
-import { ID } from "Base/Model/graphqlTypes";
+import { ID } from "rx-drag/models/baseTypes";
 import { IMeta } from "Base/RXNode/IMeta";
 import { RXModel } from "Base/ModelTree/RXModel";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { remove } from "rx-drag/utils/ArrayHelper";

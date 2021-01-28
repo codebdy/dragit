@@ -1,6 +1,6 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 import { IMeta } from "../../../Base/RXNode/IMeta";
-import { IPropConfig } from "../../../Base/RXNode/IPropConfig";
+import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
 import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { DADA_RXID_CONST, RxNode } from '../RxNode';
-import { resolveComponent, resolveMetaConfig } from 'Base/RxDrag';
+import { DADA_RXID_CONST, RxNode } from '../models/RxNode';
+import { resolveComponent, resolveMetaConfig } from 'rx-drag/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";

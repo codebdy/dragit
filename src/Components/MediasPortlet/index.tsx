@@ -11,7 +11,7 @@ import MdiIcon from 'Components/Common/MdiIcon';
 import { add, exchange, remove } from 'rx-drag/utils/ArrayHelper';
 import withFormField from 'Components/Common/withFormField';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

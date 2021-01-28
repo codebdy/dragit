@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import intl from 'react-intl-universal';
 import MouseFollower from './MouseFollower';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import { NodeToolbar } from './NodeToolbar';
 import { DragCusor } from './DragCusor';
 import { ComponentLabel } from './ComponentLabel';
@@ -12,6 +12,7 @@ import { RxDragStore } from '../store/RxDragStore';
 import { RemoveCommand } from '../commands/RemoveCommand';
 import { DuplicateCommand } from '../commands/DuplicateCommand';
 import { ComponentView } from './ComponentView';
+import './style.css'
 
 export const RxDragCore = observer((
   props:{

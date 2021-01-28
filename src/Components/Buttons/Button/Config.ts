@@ -1,6 +1,6 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 import { IMeta } from "../../../Base/RXNode/IMeta";
-import { IPropConfig } from "../../../Base/RXNode/IPropConfig";
+import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 
 export class ButtonConfig extends MetaConfig{

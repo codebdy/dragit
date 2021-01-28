@@ -1,6 +1,6 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 
 export class HeadRule extends MetaConfig{
@@ -20,7 +20,6 @@ export class HeadRule extends MetaConfig{
        {
         name:'rxText',
         label:'text',
-        xs:12,        
         input:StringInput,
         props:{
           //multiline:true,

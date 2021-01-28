@@ -1,4 +1,4 @@
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 
 const marginConfigs:Array<IPropConfig> = [
   {

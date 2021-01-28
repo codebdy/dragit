@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { SUBMIT_MUTATION } from "./ACTIONs";
 
 export function getMutationNode(mutationNodes: Array<RxNode<IMeta>>, node?: RxNode<IMeta>) {

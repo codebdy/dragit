@@ -7,7 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
 import MetaListInput from '../../../../Design/PageEditor/AttrebuteBox/PropsInputs/MetaListInput';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const styles = (theme: Theme) =>
   createStyles({

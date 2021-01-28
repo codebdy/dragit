@@ -1,4 +1,4 @@
-import { DADA_RXID_CONST } from 'rx-drag/RxNode';
+import { DADA_RXID_CONST } from 'rx-drag/models/RxNode';
 import { InputSize, InputVariant } from 'Components/Inputs/InputPropTypes';
 
 

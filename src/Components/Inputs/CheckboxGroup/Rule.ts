@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import colorRule from "Base/RXNode/Configs/colorRule";
@@ -35,7 +35,6 @@ export class CheckboxGroupRule extends MetaConfig{
       {
         name:'helperText',
         label:'helper-text',
-        xs:12,
         input:StringInput,
       },
       itemsRule

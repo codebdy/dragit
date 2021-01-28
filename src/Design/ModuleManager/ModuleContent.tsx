@@ -6,7 +6,7 @@ import ModulePages from './ModulePages';
 import ModuleAuths from './ModuleAuths';
 import { IModule } from 'Base/Model/IModule';
 import intl from "react-intl-universal";
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

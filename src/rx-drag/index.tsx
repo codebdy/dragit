@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { IRxMeta } from './IRxMeta';
+import { IRxMeta } from './models/IRxMeta';
 import { IRxThemeOptions, RxThemeMode } from './store/IRxThemeOptions';
 import { Toolbar } from './Toolbar';
 import { NodeNavigation } from './NodeNavigation';
@@ -8,9 +8,8 @@ import { RxDragShellStore } from './store/RxDragShellStore';
 import { RxDragShellStoreProvider } from './store/useRxDragShellStore';
 import classNames from 'classnames';
 import { Sidebar } from './Sidebar';
-import { IRxLocales } from './IRxLocales';
+import { IRxLocales } from './models/IRxLocales';
 import './style.css';
-import './core.css';
 import { useEffect } from 'react';
 import { useRxDragStore } from './store/useDesign';
 import { cloneObject } from './utils/cloneObject';

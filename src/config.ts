@@ -1,5 +1,5 @@
 
-import {register, registerHtmlTag} from "./Base/RxDrag";
+import {register, registerHtmlTag} from "./rx-drag/RxDrag";
 import { Divider, Typography } from '@material-ui/core';
 import PortletGridItem from 'Components/Portlet/GridItem';
 import ListView from 'Components/ListView';

@@ -1,7 +1,7 @@
 import { Badge, ListItem, ListItemIcon, ListItemText, Chip, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useAppValue } from "Base/Hooks/useAppValue";
 import IMenuItem from "Base/Model/IMenuItem";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import classNames from "classnames";
 import React from "react";
 import { fade } from '@material-ui/core/styles/colorManipulator';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {observer} from "mobx-react";
 import { IRxPage } from 'Base/Model/IRxPage';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { PageAction } from 'Base/PageUtils/PageAction';
 import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";

@@ -1,12 +1,12 @@
-import { IMetaConfig } from "Base/RXNode/IMetaConfig";
+import { IRxMetaConfig } from "rx-drag/models/IRxMetaConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 //import withMargin from "./HOCs/withMargin";
-import { IMeta } from "./RXNode/IMeta";
+import { IMeta } from "../Base/RXNode/IMeta";
 
 var componentsMap : { 
   [key: string]: {
     component?:any,
-    rule:IMetaConfig,
+    rule:IRxMetaConfig,
   }
 } = {}
 
@@ -31,7 +31,7 @@ function resolveComponent(meta:IMeta):any{
   return component;
 }
 
-function resolveMetaConfig(name:string):IMetaConfig{
+function resolveMetaConfig(name:string):IRxMetaConfig{
   return  componentsMap[name] ? componentsMap[name].rule : new MetaConfig();
 }
 export {register, resolveComponent, resolveMetaConfig, registerHtmlTag}

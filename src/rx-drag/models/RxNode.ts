@@ -1,7 +1,7 @@
 import { after, before, first, insertAfter, insertBefore, last, remove } from "rx-drag/utils/ArrayHelper";
-import { IRect } from "Base/Model/IRect";
+import { IRect } from "rx-drag/models/IRect";
 import { cloneObject } from "rx-drag/utils/cloneObject";
-import { ID } from "Base/Model/graphqlTypes";
+import { ID } from "rx-drag/models/baseTypes";
 import { makeAutoObservable } from "mobx";
 import { getDomByRxid } from "rx-drag/utils/getDomByRxid";
 

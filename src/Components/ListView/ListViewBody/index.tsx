@@ -1,6 +1,6 @@
 import { TableContainer, Table, TableBody, TableRow } from '@material-ui/core';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import { useDesign } from 'rx-drag/store/useDesign';
 import React, { Fragment } from 'react';
 import { useEffect } from 'react';

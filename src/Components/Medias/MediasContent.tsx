@@ -10,7 +10,7 @@ import MediasBatchActions from "./MediasBatchActions";
 import { IMedia } from "Base/Model/IMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediaGQLs";
-import { ID } from "Base/Model/graphqlTypes";
+import { ID } from "rx-drag/models/baseTypes";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { toggle, batchRemove, remove } from "rx-drag/utils/ArrayHelper";
 import { cloneObject } from "rx-drag/utils/cloneObject";

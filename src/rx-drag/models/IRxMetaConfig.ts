@@ -1,7 +1,7 @@
-import { IMeta } from "./IMeta";
 import { IPropConfig } from "./IPropConfig";
+import { IRxMeta } from "./IRxMeta";
 
-export interface IMetaConfig{
+export interface IRxMetaConfig{
   editPaddingY?: string;
   editPaddingX?: string;
   empertyPadding?: string;
@@ -10,18 +10,10 @@ export interface IMetaConfig{
   label?:string;
   dropInMargin: number;
 
-  accept: (child:IMeta)=>boolean;
-  resolveLabel: (meta:IMeta)=>string|undefined;
+  accept: (child:IRxMeta)=>boolean;
+  resolveLabel: (meta:IRxMeta)=>string|undefined;
 
   //属性字段
   getPropConfigs: ()=>Array<IPropConfig>;
 
-  //动作
-  hasAction?:boolean;
-
-  //数据
-  hasField?:boolean;
-
-  //验证
-  hasValidation?:boolean;
 }

@@ -8,7 +8,7 @@ import intl from "react-intl-universal";
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'Base/Model/IMenuItem';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import { IModuleCategory } from 'Base/Model/IModuleCategory';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';

@@ -6,7 +6,7 @@ import intl from 'react-intl-universal';
 import classNames from 'classnames';
 import { grey } from '@material-ui/core/colors';
 import { Add, Delete } from '@material-ui/icons';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

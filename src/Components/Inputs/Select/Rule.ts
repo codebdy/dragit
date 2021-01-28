@@ -1,8 +1,7 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
-import apiRule from "Base/RXNode/Configs/apiRule";
 import inputRules from "Base/RXNode/Configs/inputRules";
 import itemsRule from "Base/RXNode/Configs/itemsRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
@@ -58,11 +57,10 @@ export class SelectRule extends MetaConfig{
       {
         name:'helperText',
         label:'helper-text',
-        xs:12,
+
         input:StringInput,
       },
       itemsRule,
-      apiRule,
     ]
   }
 

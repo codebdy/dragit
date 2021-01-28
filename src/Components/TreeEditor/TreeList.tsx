@@ -5,8 +5,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { ITreeNode } from 'Base/Model/ITreeNode';
 import TreeNode from './TreeNode';
-import { RxNode } from 'rx-drag/RxNode';
-import { ID } from 'Base/Model/graphqlTypes';
+import { RxNode } from 'rx-drag/models/RxNode';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

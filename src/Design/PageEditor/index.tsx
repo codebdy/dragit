@@ -14,7 +14,7 @@ import SubmitButton from 'Components/Common/SubmitButton';
 import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
 import { AUTH_CUSTOMIZE } from 'Base/authSlugs';
 import { observer } from 'mobx-react';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';

@@ -1,4 +1,4 @@
-import { IRxMeta } from "rx-drag/IRxMeta";
+import { IRxMeta } from "rx-drag/models/IRxMeta";
 import { IValidateRule } from "../Model/IValidateRule";
 
 export interface IMeta extends IRxMeta{

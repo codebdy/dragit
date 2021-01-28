@@ -1,8 +1,7 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
-import apiRule from "Base/RXNode/Configs/apiRule";
 import JSONEditDialog from "./PropsInputs/JSONEditDialog";
 
 export class AntDesignChartRule extends MetaConfig{
@@ -27,7 +26,6 @@ export class AntDesignChartRule extends MetaConfig{
         input:JSONEditDialog,
       },
 
-      apiRule,
     ]
   }
 

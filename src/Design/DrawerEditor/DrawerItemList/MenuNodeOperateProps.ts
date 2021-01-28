@@ -1,6 +1,6 @@
-import { ID } from "Base/Model/graphqlTypes";
+import { ID } from "rx-drag/models/baseTypes";
 import IMenuItem from "Base/Model/IMenuItem";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 
 export default interface MenuNodeOperateProps {
   onClick?:()=>void,

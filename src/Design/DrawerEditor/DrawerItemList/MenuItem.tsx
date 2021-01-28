@@ -3,7 +3,7 @@ import { Chip, ListItemIcon, ListItemText, ListItem, createStyles, makeStyles, T
 import IMenuItem from 'Base/Model/IMenuItem';
 import MdiIcon from 'Components/Common/MdiIcon';
 import classNames from 'classnames';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import MenuNodeOperateProps from './MenuNodeOperateProps';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

@@ -1,4 +1,4 @@
-import { ID } from "./graphqlTypes";
+import { ID } from "../../rx-drag/models/baseTypes";
 import { IAuth } from "./IAuth";
 import IMenuItem from "./IMenuItem";
 import { IRxPage } from "./IRxPage";

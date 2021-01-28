@@ -1,4 +1,4 @@
-import { ID } from "./graphqlTypes";
+import { ID } from "../../rx-drag/models/baseTypes";
 
 export interface IMedia{
   id:ID,

@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 import NumberInput from "Design/PageEditor/AttrebuteBox/PropsInputs/NumberInput";
 import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
@@ -120,7 +120,6 @@ export class TextBoxRule extends MetaConfig{
       {
         name:'helperText',
         label:'helper-text',
-        xs:12,
         input:StringInput,
       }
     ]

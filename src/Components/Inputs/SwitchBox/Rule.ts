@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import colorRule from "Base/RXNode/Configs/colorRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
@@ -28,7 +28,6 @@ export class SwitchBoxRule extends MetaConfig{
       {
         name:'helperText',
         label:'helper-text',
-        xs:12,
         input:StringInput,
       }
     ]

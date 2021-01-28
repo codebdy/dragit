@@ -1,5 +1,5 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
 import elevationRules from "Base/RXNode/Configs/elevationRules";
@@ -25,19 +25,16 @@ export class TreeEditorRule extends MetaConfig{
       {
         name:'title',
         label:'title',
-        xs:12,
         input:StringInput,      
       },
       {
         name:'apiForGet',
         label:'get-api',
-        xs:12,
         input:ApiEditor,
       },
       {
         name:'apiForSave',
         label:'submit-api',
-        xs:12,
         input:ApiEditor,
       }
     ]

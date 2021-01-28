@@ -1,5 +1,5 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
-import { IPropConfig } from "../../../Base/RXNode/IPropConfig";
+import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
 import colWidthRules from "Base/RXNode/Configs/colWidthRules";
 import { IMeta } from "Base/RXNode/IMeta";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";

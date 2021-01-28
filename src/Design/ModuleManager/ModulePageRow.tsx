@@ -3,7 +3,7 @@ import { TableRow, TableCell, Checkbox, Tooltip, IconButton, TextField } from '@
 import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
 import { IRxPage } from 'Base/Model/IRxPage';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 
 export default function ModulePageRow(
   props:{

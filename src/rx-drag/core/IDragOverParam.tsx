@@ -1,4 +1,4 @@
-import { RxNode } from '../RxNode';
+import { RxNode } from '../models/RxNode';
 import { IMeta } from 'Base/RXNode/IMeta';
 
 

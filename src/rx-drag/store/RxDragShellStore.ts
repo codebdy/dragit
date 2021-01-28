@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { IRxLocales } from "rx-drag/IRxLocales";
+import { IRxLocales } from "rx-drag/models/IRxLocales";
 import { IRxThemeOptions, LIGHT, DARK } from "./IRxThemeOptions";
 import { RxThemeOptions } from "./RxThemeOptions";
 

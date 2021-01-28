@@ -7,11 +7,11 @@ import { Observer } from 'mobx-react';
 import { Fragment } from 'react';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { DADA_RXID_CONST, RxNode } from 'rx-drag/RxNode';
+import { DADA_RXID_CONST, RxNode } from 'rx-drag/models/RxNode';
 import { useSetTableStore } from '../useSetTableStore';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { Close } from '@material-ui/icons';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 import { makeTableRowModel } from 'Base/ModelTree/makeTableModel';
 import {observer} from 'mobx-react';
 

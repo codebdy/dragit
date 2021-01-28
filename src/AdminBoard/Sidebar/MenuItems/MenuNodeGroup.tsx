@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles, Divider, Collapse, List } from "@material-ui/core";
 import IMenuItem, { IMenuBadge } from "Base/Model/IMenuItem"
-import { RxNode } from "rx-drag/RxNode"
+import { RxNode } from "rx-drag/models/RxNode"
 import classNames from "classnames"
 import React, { Fragment } from "react"
 import Subheader from "./Subheader";
@@ -9,7 +9,7 @@ import { MenuNode } from "./MenuNode";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 import { observer } from "mobx-react"
-import { ID } from "Base/Model/graphqlTypes";
+import { ID } from "rx-drag/models/baseTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import intl from "react-intl-universal";
 import { useListViewStore } from 'Components/ListView/ListViewStore';
 import classNames from 'classnames';
-import { DADA_RXID_CONST } from 'rx-drag/RxNode';
+import { DADA_RXID_CONST } from 'rx-drag/models/RxNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

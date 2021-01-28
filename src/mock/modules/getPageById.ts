@@ -1,4 +1,4 @@
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 import moduleCategories from './moduleCategories';
 
 export function getPageById(pageId:ID) {

@@ -1,6 +1,6 @@
 import { IRxPage } from 'Base/Model/IRxPage';
 import { IAuth } from 'Base/Model/IAuth';
-import { ID } from './graphqlTypes';
+import { ID } from '../../rx-drag/models/baseTypes';
 
 export interface IModule {
   id: ID;

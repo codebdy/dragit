@@ -1,9 +1,9 @@
 import React from 'react';
 import { CursorPosition, IDragOverParam } from "./IDragOverParam";
-import { IRect } from "../../Base/Model/IRect";
-import { resolveMetaConfig } from 'Base/RxDrag';
+import { IRect } from "../models/IRect";
+import { resolveMetaConfig } from 'rx-drag/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 
 class Rect {
   rect: IRect;

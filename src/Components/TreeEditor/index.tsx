@@ -2,9 +2,9 @@ import { Divider, Grid, IconButton, ListItem, ListItemText } from '@material-ui/
 import { Add } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
 //import { IForm, defultForm, FormContext } from "base/FormContext";
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 import { ITreeNode } from 'Base/Model/ITreeNode';
-import { RxNode } from 'rx-drag/RxNode';
+import { RxNode } from 'rx-drag/models/RxNode';
 import SubmitButton from 'Components/Common/SubmitButton';
 import Portlet from 'Components/Portlet';
 import React, { useEffect, useState } from 'react';

@@ -1,6 +1,6 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import SwitchInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
@@ -157,7 +157,6 @@ export class TypographyRule extends MetaConfig{
       {
         name:'rxText',
         label:'text',
-        xs:12,
         input:StringInput,
       },
     ]

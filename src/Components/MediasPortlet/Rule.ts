@@ -1,5 +1,5 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import { IPropConfig } from "Base/RXNode/IPropConfig";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 import elevationRules from "Base/RXNode/Configs/elevationRules";

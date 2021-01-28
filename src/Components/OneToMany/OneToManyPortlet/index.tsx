@@ -6,9 +6,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { makeTableRowModel } from 'Base/ModelTree/makeTableModel';
-import { ID } from 'Base/Model/graphqlTypes';
+import { ID } from 'rx-drag/models/baseTypes';
 import { observer } from 'mobx-react';
-import { DADA_RXID_CONST } from 'rx-drag/RxNode';
+import { DADA_RXID_CONST } from 'rx-drag/models/RxNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { useSetTableStore } from '../useSetTableStore';
 

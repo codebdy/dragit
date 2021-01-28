@@ -1,9 +1,9 @@
 import { makeAutoObservable, toJS } from "mobx";
 import { IMeta } from "Base/RXNode/IMeta";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { validate } from "./validate";
 import { createId } from "Base/creatId";
-import { ID } from "Base/Model/graphqlTypes";
+import { ID } from "rx-drag/models/baseTypes";
 
 export class RXModel{
   id:ID;

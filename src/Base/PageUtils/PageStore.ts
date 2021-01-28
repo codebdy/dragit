@@ -2,7 +2,7 @@ import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IRxPage } from "Base/Model/IRxPage";
 import { IPageJumper } from "Base/Model/IPageJumper";
-import { RxNode } from "rx-drag/RxNode";
+import { RxNode } from "rx-drag/models/RxNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { cloneObject } from "rx-drag/utils/cloneObject";
