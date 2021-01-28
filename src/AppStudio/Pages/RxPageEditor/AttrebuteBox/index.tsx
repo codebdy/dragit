@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Accordion, Grid, TextField } from '@material-ui/core';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import { makeStyles, Theme, createStyles, Accordion as MuiAccordion, Grid, TextField, withStyles } from '@material-ui/core';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { IPropConfig } from "rx-drag/models/IPropConfig";
@@ -23,38 +23,66 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width:'100%',
     },
-    panelPaper:{
-      background:'rgba(255,255,255, 0.02)',
-    },
-    pannelSummary:{
-      boder:'0',
-    },
-    pannelDetail:{
-      display:'flex',
-      flexFlow:'column',
-    },
+
     heading: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightRegular,
     },
 
-    input:{
-      background:'#41474c', 
-      outline:'0', 
-      border:'1px', 
-      color:'#cdcfd0', 
-      borderRadius:'3px', 
-      padding:'4px',
-      '&:focus':{
-        border:'#0a6fb7 solid 1px'
-      }
-    },
     nodeLabel:{
       padding:'16px',
       color: theme.palette.text.secondary,
+    },
+
+    moreIcon:{
+      color:theme.palette.text.secondary,
     }
   }),
 );
+
+const Accordion = withStyles((theme) => ({
+  root: {
+    border: '1px solid ' + theme.palette.divider,
+    borderLeft: '0',
+    borderRight: '0',
+    boxShadow: 'none',
+    '&:not(:last-child)': {
+      borderBottom: 0,
+    },
+    '&:before': {
+      display: 'none',
+    },
+    '&$expanded': {
+      margin: 'auto',
+    },
+  },
+  expanded: {},
+}))(MuiAccordion);
+
+const AccordionSummary = withStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+    borderBottom: '1px solid ' + theme.palette.divider,
+    marginBottom: -1,
+    minHeight: 46,
+    '&$expanded': {
+      minHeight: 46,
+    },
+  },
+  content: {
+    '&$expanded': {
+      margin: '12px 0',
+    },
+  },
+  expanded: {},
+}))(MuiAccordionSummary);
+
+const AccordionDetails = withStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3, 2, 2, 2),
+  },
+}))(MuiAccordionDetails);
 
 export const AttributeBox = observer(()=>{
   const classes = useStyles();
@@ -100,14 +128,13 @@ export const AttributeBox = observer(()=>{
             <span style={{color:'#5d78ff'}}>{node.meta.name}</span>
           </div>
           
-          <Accordion className={classes.panelPaper}>
+          <Accordion>
             <AccordionSummary
-              className = {classes.pannelSummary}
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
             >
               <Typography className={classes.heading}>{intl.get('attributes')}</Typography>
             </AccordionSummary>
-            <AccordionDetails className={classes.pannelDetail}>
+            <AccordionDetails>
               <Grid container spacing={2}>
                 {
                   metaConfig?.getPropConfigs().map((config:IPropConfig, index)=>{
@@ -130,13 +157,13 @@ export const AttributeBox = observer(()=>{
             </AccordionDetails>
           </Accordion>
           {metaConfig?.hasField &&
-            <Accordion  className={classes.panelPaper}>
+            <Accordion>
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
               >
                 <Typography className={classes.heading}>{intl.get('data')}</Typography>
               </AccordionSummary>
-              <AccordionDetails  key={node.id + '-data'} className={classes.pannelDetail}>
+              <AccordionDetails  key={node.id + '-data'}>
                 <TextField
                   size="small" 
                   variant = "outlined" 
@@ -148,38 +175,38 @@ export const AttributeBox = observer(()=>{
           }
           {
             metaConfig?.hasValidation && 
-              <Accordion  className={classes.panelPaper}>
+              <Accordion >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
+                  expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
                 >
                   <Typography className={classes.heading}>{intl.get('validate')}</Typography>
                 </AccordionSummary>
-                <AccordionDetails  key={node.id + '-rule'} className={classes.pannelDetail}>
+                <AccordionDetails  key={node.id + '-rule'}>
                   <AttributeBoxValidateArea rule={validateRule} onChange={handleRuleChange} /> 
                 </AccordionDetails>            
               </Accordion>            
           }
           {metaConfig?.hasAction && 
-            <Accordion  className={classes.panelPaper}>
+            <Accordion>
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
               >
                 <Typography className={classes.heading}>{intl.get('action')}</Typography>
               </AccordionSummary>
-              <AccordionDetails key={node.id + '-action'} className={classes.pannelDetail}>
+              <AccordionDetails key={node.id + '-action'}>
                 <Grid container spacing={2}>
                   <AttributeBoxActionSection />
                 </Grid>
               </AccordionDetails>            
             </Accordion>
           }
-          <Accordion  className={classes.panelPaper}>
+          <Accordion>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
             >
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
             </AccordionSummary>
-            <AccordionDetails className={classes.pannelDetail}>
+            <AccordionDetails>
               <MultiSelectBox label={intl.get('authority')} 
                 variant="outlined" 
                 size="small"
