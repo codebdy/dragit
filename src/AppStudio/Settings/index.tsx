@@ -117,6 +117,9 @@ export const Settings = observer((
             onChange = {(e)=>setColor(e.target.value as string)}
           />
         </Grid>
+        <Grid item className = {classes.actions} xs = {12}>
+          应用权限： 此处添加预制权限选择
+        </Grid>
 
         <Grid item className = {classes.actions} xs = {12}>
           <Button 
@@ -133,6 +136,7 @@ export const Settings = observer((
             {intl.get('save')}
           </SubmitButton>
         </Grid>
+
       </Grid>
     </div>
   );

@@ -6,6 +6,7 @@
 }
 
 .rx-left{
+  width: 0;
   flex:1;
   display: flex;
   flex-flow: column;
