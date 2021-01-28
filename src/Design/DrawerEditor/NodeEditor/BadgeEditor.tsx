@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Grid, TextField, FormControl, InputLabel, MenuItem, Select, FormControlLabel, Switch } from '@material-ui/core';
 import { IMenuBadge } from 'Base/Model/IMenuItem';
 import intl from "react-intl-universal";
-import PrimaryText from 'Design/PageEditor/AttrebuteBox/PropsInputs/PrimaryText';
+import PrimaryText from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/PrimaryText';
 
 export default function BadgeEditor(
   props:{

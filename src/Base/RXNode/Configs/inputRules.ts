@@ -1,7 +1,7 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
-import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import BooleanInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import OptionSelect from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 
 const inputRules:Array<IPropConfig> =[
   {

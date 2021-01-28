@@ -5,7 +5,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
-import MetaListInput from '../../../../Design/PageEditor/AttrebuteBox/PropsInputs/MetaListInput';
+import MetaListInput from '../../../../AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/MetaListInput';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { ID } from 'rx-drag/models/baseTypes';
 

@@ -1,4 +1,4 @@
-import productListPage from "Design/PageEditor/Toolbox/templates/product/listPage";
+import productListPage from "AppStudio/Pages/RxPageEditor/Toolbox/templates/product/listPage";
 
 export default {
   layout:[

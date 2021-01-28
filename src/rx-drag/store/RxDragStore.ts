@@ -1,7 +1,7 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { RxNode } from "rx-drag/models/RxNode";
 import { CursorPosition, IDragOverParam } from "rx-drag/core/IDragOverParam";
-import { IToolboxItem } from "Design/PageEditor/Toolbox/IToolboxItem";
+import { IToolboxItem } from "AppStudio/Pages/RxPageEditor/Toolbox/IToolboxItem";
 import { makeAutoObservable, toJS } from "mobx";
 import { cloneObject } from "rx-drag/utils/cloneObject";
 import { ChangeMetaCommand } from "../commands/ChangeMetaCommand";

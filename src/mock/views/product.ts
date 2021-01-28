@@ -1,4 +1,4 @@
-import productPage from "Design/PageEditor/Toolbox/templates/product/editPage"
+import productPage from "AppStudio/Pages/RxPageEditor/Toolbox/templates/product/editPage"
 
 export default {
   layout:[

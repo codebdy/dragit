@@ -3,7 +3,7 @@ import {makeStyles, Theme, createStyles, Grid, TextField} from '@material-ui/cor
 import intl from 'react-intl-universal';
 import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
 import {observer} from "mobx-react";
-import { useDesign } from '../../../rx-drag/store/useDesign';
+import { useDesign } from '../../../../rx-drag/store/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

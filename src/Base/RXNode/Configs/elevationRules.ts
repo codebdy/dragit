@@ -1,5 +1,5 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import NumberInput from "Design/PageEditor/AttrebuteBox/PropsInputs/NumberInput";
+import NumberInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 
 const elevationRules:Array<IPropConfig> = [
   {

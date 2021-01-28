@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Loading from 'AdminBoard/Common/Loading'
 
 import {AdminBoard} from 'AdminBoard';
-import ModuleManager from 'Design/ModuleManager';
 import useShadows from 'Utils/useShadows';
 import DrawerEditor from 'Design/DrawerEditor';
 import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';
@@ -49,7 +48,6 @@ const App = observer(()=>{
           <Switch> 
             <Route path={ LOGIN_URL } component={Login}></Route>
             <Route path="/admin" component={AdminBoard}></Route>
-            <Route path="/design" component={ModuleManager}></Route>
             <Route path="/drawer-edit" component={DrawerEditor}></Route>
             <Route path="/apps-index" component={AppManager}></Route>
             <Route path="/app-studio/:id" component={AppStudio}></Route>

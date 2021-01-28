@@ -1,7 +1,7 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
-import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import OptionSelect from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
-import NumberInput from "Design/PageEditor/AttrebuteBox/PropsInputs/NumberInput";
+import NumberInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 import { IMeta } from "Base/RXNode/IMeta";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
 

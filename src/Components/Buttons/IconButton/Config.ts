@@ -1,9 +1,9 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 import { IMeta } from "../../../Base/RXNode/IMeta";
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
-import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import OptionSelect from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
-import BooleanInput from "Design/PageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import BooleanInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 
 export class IconButtonConfig extends MetaConfig{
   editPaddingY = '';

@@ -1,8 +1,8 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
-import OptionSelect from "Design/PageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import OptionSelect from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 
 export class TableColumnRule extends MetaConfig{
  

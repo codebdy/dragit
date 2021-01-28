@@ -1,10 +1,10 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "Design/PageEditor/AttrebuteBox/PropsInputs/StringInput";
+import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
 import elevationRules from "Base/RXNode/Configs/elevationRules";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
-import ApiEditor from "Design/PageEditor/AttrebuteBox/PropsInputs/ApiEditor";
+import ApiEditor from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/ApiEditor";
 
 export class TreeEditorRule extends MetaConfig{
   editPaddingY = '';

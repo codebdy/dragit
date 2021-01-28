@@ -5,7 +5,6 @@ import { JumpStyleModule } from "./JumpStyleModule";
 import { Fragment } from "react";
 import { PopupStyleModule } from "./PopupStyleModule";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
-import { PageEditor } from "Design/PageEditor";
 import { useDragItStore, useDesigner } from "Store/Helpers/useDragItStore";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE } from "Utils/consts";
@@ -79,10 +78,6 @@ export const Workspace = observer(()=>{
             <PopupStyleModule module={module} />
           }
         </Fragment>
-      }
-      {
-        designer.pageId &&
-        <PageEditor pageId = {designer.pageId} onClose={()=>{designer.close()}} />        
       }
     </div>
   )

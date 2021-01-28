@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, TextField} from '@material-ui/core';
-import { PropsInputProps } from '../../../Design/PageEditor/AttrebuteBox/PropsInputs/PropsEditorProps';
+import { PropsInputProps } from '../../../AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from 'Components/ListView/PropsInputs/MetaListDialog';
-import MetaListInput from 'Design/PageEditor/AttrebuteBox/PropsInputs/MetaListInput';
+import MetaListInput from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/MetaListInput';
 import { MetaItem } from "Base/Model/MetaItem";
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 
