@@ -11,7 +11,7 @@ import { useAppStudioStore } from './AppStudioStore';
 import { PopuDrawer } from './PopuDrawer';
 import { Pages } from './Pages';
 import { AddNewPage } from './Pages/AddNewPage';
-import { Auths } from './Auths';
+import { AuthsDrawer } from './AuthsDrawer';
 import { Settings } from './Settings';
 import classNames from 'classnames';
 
@@ -183,13 +183,10 @@ export const VerticalBar = observer(() => {
         <Pages onClose={()=>setPagesOpen(false)}/>
       </PopuDrawer>
 
-      <PopuDrawer
+      <AuthsDrawer
         open={authsOpen}
         onClose={handleCloseAuths}
-        title = {intl.get('authority')}
-      >
-        <Auths/>
-      </PopuDrawer>
+      />
 
       <PopuDrawer
         open={settingsOpen}
