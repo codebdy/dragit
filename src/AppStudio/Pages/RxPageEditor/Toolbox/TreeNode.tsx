@@ -1,7 +1,7 @@
 import { TreeItem } from "@material-ui/lab";
 import { RxNode } from "rx-drag/models/RxNode";
 import React, { Fragment } from "react";
-import { IToolboxItem } from "./IToolboxItem";
+import { IToolboxItem } from "../../../../rx-drag/models/IToolboxItem";
 import TreeNodeLabel from "./TreeNodeLabel";
 import intl from "react-intl-universal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
