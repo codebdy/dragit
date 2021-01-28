@@ -3,6 +3,8 @@ import { observer } from 'mobx-react';
 import { useRxDragShellStore } from 'rx-drag/store/useRxDragShellStore';
 import classNames from 'classnames';
 import './style.css';
+import { useRxDragStore } from 'rx-drag/store/useDesign';
+import { useEffect } from 'react';
 
 export const Sidebar = observer((
   props:{
@@ -13,6 +15,14 @@ export const Sidebar = observer((
 ) => {
   const {toolbox, attributeBox, pageSettings} = props;
   const dragShellStore = useRxDragShellStore();
+  const rxDragStore = useRxDragStore();
+
+  useEffect(()=>{
+    if(rxDragStore?.selectedNode){
+      dragShellStore?.setActiveTab('attributes');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[rxDragStore?.selectedNode])
 
   return (
     <div className = 'rx-sidebar'>
