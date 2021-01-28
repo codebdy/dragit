@@ -13,6 +13,7 @@ import { Pages } from './Pages';
 import { AddNewPage } from './Pages/AddNewPage';
 import { Auths } from './Auths';
 import { Settings } from './Settings';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +30,11 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems:'center',
       paddingBottom: theme.spacing(2),
     },
+
+    outlined:{
+      outline:theme.palette.divider + ' solid 1px',
+    },
+    
     logoIcon: {
       backgroundColor: theme.palette.primary.main,
       letterSpacing:'1px',
@@ -115,13 +121,15 @@ export const VerticalBar = observer(() => {
     setSettingsOpen(false);
   }
 
+  const popDrawerOpen = pagesOpen||authsOpen||authsOpen||settingsOpen
+
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
         <Paper 
-          className = {classes.root} 
+          className = {classNames(classes.root, popDrawerOpen ? classes.outlined : '')} 
           square
-          elevation = {pagesOpen ? 1 : 6}
+          elevation = { popDrawerOpen ? 0 : 6}
           style={{width:studioStore?.verticalBarWidth}}
           onClick = {handleBarClick}
         >
