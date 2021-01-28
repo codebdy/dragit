@@ -5,6 +5,7 @@ import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import intl from 'react-intl-universal';
 import { PopuDrawer } from 'AppStudio/PopuDrawer';
 import { Button } from '@material-ui/core';
+import { AuthListItem } from './AuthListItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,9 @@ export const AuthsDrawer = observer((
   const {open, onClose} = props;
   const classes = useStyles();
 
+  const handleNew = ()=>{
+
+  }
   return (
     <PopuDrawer
       open={open}
@@ -34,12 +38,14 @@ export const AuthsDrawer = observer((
         <Button 
           variant="outlined" 
           color = "primary"
-          //onClick = {handleNew}
+          onClick = {handleNew}
         >{intl.get('add-new')}</Button>
       }
     >
       <Scrollbar className = {classes.root}>
-        Auths
+        <AuthListItem />
+        <AuthListItem />
+        <AuthListItem />
       </Scrollbar>
     </PopuDrawer>
 

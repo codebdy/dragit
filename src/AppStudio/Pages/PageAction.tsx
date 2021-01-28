@@ -100,7 +100,7 @@ export default function PageAction(
           <Divider/>
           <MenuItem className = {classes.menuItem} onClick={handleRemove}>
             <ListItemIcon>
-              <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>
+              <MdiIcon iconClass = "mdi-trash-can-outline" color={'red'} size={18}/>
             </ListItemIcon>
             {intl.get('delete')} 
           </MenuItem>
