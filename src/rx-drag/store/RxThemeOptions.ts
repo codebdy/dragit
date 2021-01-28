@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
-import { IRxThemeOptions, LIGHT, RxThemeMode } from "./IRxThemeOptions";
+import { IRxThemeOptions, DARK, LIGHT, RxThemeMode } from "./IRxThemeOptions";
 
 export class RxThemeOptions implements IRxThemeOptions {
-  mode: RxThemeMode = LIGHT;
+  mode: RxThemeMode = DARK;
   lightBackgroundColor: string = "#fff";
   darkBackgroundColor: string = "#1a233a";
   lightBorderColor: string = "#dfe3e7";

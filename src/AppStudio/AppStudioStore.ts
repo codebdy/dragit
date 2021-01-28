@@ -3,7 +3,7 @@ import { IRxPage } from "Base/Model/IRxPage";
 import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
 import { useContext } from "react";
-import { LIGHT, RxThemeMode } from "rx-drag/store/IRxThemeOptions";
+import { DARK, RxThemeMode } from "rx-drag/store/IRxThemeOptions";
 
 export class WorkSpaceState{
   constructor() {
@@ -14,7 +14,7 @@ export class WorkSpaceState{
 export class AppStudioStore{
   verticalBarWidth:string = '60px';
   isDirty:boolean = false;
-  themeMode:RxThemeMode = LIGHT;
+  themeMode:RxThemeMode = DARK;
   editingPage?:IRxPage;
   editingNavigation?:boolean;
   rxApp?: IRxApp;
