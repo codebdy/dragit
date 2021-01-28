@@ -68,11 +68,21 @@ export const AuthListItem = observer((
   }
 
   const handleCancel = ()=>{
+    setSlug(auth?.rxSlug||'');
+    setName(auth?.name||'');
     setEditing(false);
   }
 
   const handleSave = ()=>{
     setEditing(false);
+  }
+
+  const handleSlugChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
+    setSlug(event.target.value as string);
+  }
+
+  const handleNameChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
+    setName(event.target.value as string);
   }
 
   return (
@@ -87,7 +97,8 @@ export const AuthListItem = observer((
           ? <TextField 
               variant = "outlined" 
               size = "small" 
-              value = {slug} 
+              value = {slug}
+              onChange = {handleSlugChange} 
             />
           : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{slug}</Typography> 
         }        
@@ -99,13 +110,14 @@ export const AuthListItem = observer((
               variant = "outlined" 
               size = "small" 
               value = {name}
+              onChange = {handleNameChange} 
             />
           : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{name}</Typography> 
         }   
         
       </div>
       <div  className = {classes.action}>
-        { hover && !editing && auth && auth.predefined &&
+        { hover && !editing && auth && !auth.predefined &&
           <>
             <IconButton 
               size = "small" 
