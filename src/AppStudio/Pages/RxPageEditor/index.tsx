@@ -11,6 +11,7 @@ import { IRxPage } from 'Base/Model/IRxPage';
 import { Toolbox } from './Toolbox';
 import { AttributeBox } from './AttrebuteBox';
 import SettingsBox from './SettingsBox';
+import { useEffect } from 'react';
 
 export const RxPageEditor = observer((
   props:{
@@ -30,6 +31,10 @@ export const RxPageEditor = observer((
       },
     },
   });
+  useEffect(()=>{
+    rxDragStore?.setSelectedNode(undefined);
+  },[rxDragStore, rxPage]);
+
   const handleThemeModeChange = (mode :RxThemeMode)=>{
     studioStore?.setThemeMode(mode);
   }
