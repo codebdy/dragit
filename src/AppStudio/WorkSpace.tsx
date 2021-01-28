@@ -2,8 +2,8 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { useAppStudioStore } from './AppStudioStore';
 import { RxPageEditor } from './Pages/RxPageEditor';
-import { NavigationEditor } from './Navigation/NavigationEditor';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import NavigationEditor from './Navigation/NavigationEditor';
 
 export const WorkSpace = observer(() => {
   const studioStore = useAppStudioStore();

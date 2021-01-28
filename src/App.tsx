@@ -7,7 +7,7 @@ import Loading from 'AdminBoard/Common/Loading'
 
 import {AdminBoard} from 'AdminBoard';
 import useShadows from 'Utils/useShadows';
-import DrawerEditor from 'Design/DrawerEditor';
+import NavigationEditor from 'AppStudio/Navigation/NavigationEditor';
 import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';
 import Login from 'AppManager/Login';
 import { useIntl } from 'Base/Hooks/useIntl';
@@ -48,7 +48,7 @@ const App = observer(()=>{
           <Switch> 
             <Route path={ LOGIN_URL } component={Login}></Route>
             <Route path="/admin" component={AdminBoard}></Route>
-            <Route path="/drawer-edit" component={DrawerEditor}></Route>
+            <Route path="/drawer-edit" component={NavigationEditor}></Route>
             <Route path="/apps-index" component={AppManager}></Route>
             <Route path="/app-studio/:id" component={AppStudio}></Route>
             <Redirect to={ LOGIN_URL } from='/' /> 

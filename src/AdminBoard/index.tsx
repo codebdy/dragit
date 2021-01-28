@@ -4,7 +4,6 @@ import Sidebar from 'AdminBoard/Sidebar';
 import {TopNav} from 'AdminBoard/TopNav';
 import { Workspace } from 'AdminBoard/Workspace';
 import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
-import { AreaSelect } from 'Design/AreaSelect';
 import {observer} from 'mobx-react';
 import { ThemeSettings } from './ThemeSettings';
 import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
@@ -45,7 +44,6 @@ export const AdminBoard = observer(()=>{
         <LeftDrawerWidthPlaceholder />
         <Workspace />
       </div>
-      <AreaSelect></AreaSelect>
       <ThemeSettings />
     </div>
   )
