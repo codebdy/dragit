@@ -11,7 +11,6 @@ import AttributeBoxValidateArea from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/
 import { IValidateRule } from "Base/Model/IValidateRule";
 import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
 import { resolveMetaConfig } from 'rx-drag/RxDrag';
-import { IRxMetaConfig } from 'rx-drag/models/IRxMetaConfig';
 import { observer } from 'mobx-react';
 import { useDesign } from '../../../../rx-drag/store/useDesign';
 import { toJS } from 'mobx';
@@ -22,7 +21,7 @@ import { MetaConfig } from 'Base/RXNode/MetaConfig';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-
+      width:'100%',
     },
     panelPaper:{
       background:'rgba(255,255,255, 0.02)',

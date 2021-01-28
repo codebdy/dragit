@@ -8,6 +8,9 @@ import { RxThemeMode } from 'rx-drag/store/IRxThemeOptions';
 import { RxDragStoreProvider } from 'rx-drag/store/useDesign';
 import { RxDragStore } from 'rx-drag/store/RxDragStore';
 import { IRxPage } from 'Base/Model/IRxPage';
+import { Toolbox } from './Toolbox';
+import { AttributeBox } from './AttrebuteBox';
+import SettingsBox from './SettingsBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,9 +41,9 @@ export const RxPageEditor = observer((
           }
         }
         initMetas = {rxPage.schema}
-        toolbox = {<div>tool box</div>}
-        attributeBox = {<div>Attributes box</div>}
-        pageSettings = {<div>Settings box</div>}
+        toolbox = {<Toolbox/>}
+        attributeBox = {<AttributeBox/>}
+        pageSettings = {<SettingsBox />}
         locales = {{
           components:intl.get('component'),
           attributes:intl.get('attributes'),

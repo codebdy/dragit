@@ -8,6 +8,7 @@ import { RxNode } from 'rx-drag/models/RxNode';
 import { IToolboxItem } from './IToolboxItem';
 import TreeNode from './TreeNode';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
+import {observer} from 'mobx-react';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       padding: theme.spacing(2),
+      color:theme.palette.text.secondary,
     },
     treeItemLabel: {
       fontSize:'0.9rem',
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function Toolbox() {
+export const Toolbox = observer(()=>{
   const classes = useStyles();
   const [root, setRoot] = useState<RxNode<IToolboxItem>>();
   
@@ -62,4 +64,4 @@ export default function Toolbox() {
         }
       </TreeView>      
    );
-}
+})
