@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeStyles, Theme, createStyles, Drawer, Typography, Divider} from '@material-ui/core';
+import {makeStyles, Theme, createStyles, Drawer, Typography, Divider, useTheme} from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {observer} from 'mobx-react';
 import { useAppStudioStore } from './AppStudioStore';
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 0,
       padding: theme.spacing(1, 2),
       minWidth:'260px',
-      background: theme.palette.background.default,
+      background: theme.palette.background.paper,
       display:'flex',
       justifyContent:'space-between',
     },
@@ -29,10 +29,12 @@ export const PopuDrawer = observer((
   const {title,titleAction,  open, onClose, children} = props;
   const classes = useStyles();
   const studioStore = useAppStudioStore();
+  const theme = useTheme();
   
   const drawerClasses = makeStyles({
     drawer:{
       marginLeft:studioStore?.verticalBarWidth,
+      backgroundColor:theme.palette.background.default,
     }})();
 
   return (
