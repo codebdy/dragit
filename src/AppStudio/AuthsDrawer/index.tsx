@@ -4,9 +4,9 @@ import { observer } from 'mobx-react';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import intl from 'react-intl-universal';
 import { PopuDrawer } from 'AppStudio/PopuDrawer';
-import { Button } from '@material-ui/core';
 import { AuthListItem } from './AuthListItem';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import SubmitButton from 'Components/Common/SubmitButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,11 +37,11 @@ export const AuthsDrawer = observer((
       onClose={onClose}
       title = {intl.get('authority')}
       titleAction = {
-        <Button 
+        <SubmitButton 
           variant="outlined" 
           color = "primary"
           onClick = {handleNew}
-        >{intl.get('add-new')}</Button>
+        >{intl.get('add-new')}</SubmitButton>
       }
     >
       <Scrollbar className = {classes.root}>

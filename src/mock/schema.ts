@@ -23,6 +23,7 @@ import { appMutationResolvers, appQueryResolvers } from "./apps/appResolvers";
 import { pageMutationResolvers, pageQueryResolvers } from "./apps/pageResolvers";
 import { templateQueryResolvers } from "./templates/resolvers";
 import { templateGQLQuery, templateGQLType } from "./templates/graphql";
+import { authMutationResolvers } from "./apps/authResolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -171,6 +172,7 @@ export const resolvers = {
   Mutation:{
     ...appMutationResolvers,
     ...pageMutationResolvers,
+    ...authMutationResolvers,
     drawer:saveDrawerResolver,
     page:savePageResolver,
     ...postMutationResolvers,

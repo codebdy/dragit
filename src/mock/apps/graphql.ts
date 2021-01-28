@@ -32,6 +32,13 @@ export var appGQLType = `
 `
 
 export var appGQLInput =`
+  input RxAuthInput{
+    id: ID
+    rx_slug: String
+    name: String
+    predefined: Boolean
+  }
+
   input RxPageInput{
     id:ID
     name:String
@@ -65,4 +72,7 @@ export var appGQLMutation = `
   createRxPage(appId:ID, templateId:ID, pageId:ID, name:String):RxPage
   removeRxPage(id:ID):RxPage
   duplicateRxPage(id:ID):RxPage
+  createRxAuth(appId:ID, rxSlug:String, name:String):RxAuth
+  saveRxAuth(rxAuth:RxAuthInput):RxAuth
+  removeRxAuth(id:ID):RxAuth
 `
