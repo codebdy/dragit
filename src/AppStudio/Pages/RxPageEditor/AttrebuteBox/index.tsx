@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
     panelPaper:{
       background:'rgba(255,255,255, 0.02)',
     },
+    pannelSummary:{
+      boder:'0',
+    },
     pannelDetail:{
       display:'flex',
       flexFlow:'column',
@@ -48,6 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     nodeLabel:{
       padding:'16px',
+      color: theme.palette.text.secondary,
     }
   }),
 );
@@ -98,6 +102,7 @@ export const AttributeBox = observer(()=>{
           
           <Accordion className={classes.panelPaper}>
             <AccordionSummary
+              className = {classes.pannelSummary}
               expandIcon={<ExpandMoreIcon />}
             >
               <Typography className={classes.heading}>{intl.get('attributes')}</Typography>

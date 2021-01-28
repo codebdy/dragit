@@ -55,8 +55,8 @@ export const AppStudio = observer(() => {
         primary:studioStore?.themeMode === DARK ? '#909eaf' :'#8494a7',
       },
       background:{
-        default: studioStore?.themeMode === DARK ? '#1a233a' : '#f2f4f4',
-        paper: studioStore?.themeMode === DARK ? '#272e48' : '#FFF',
+        default: studioStore?.themeMode === DARK ? '#272e48' : '#FFF',
+        paper: studioStore?.themeMode === DARK ? '#1a233a' : '#f2f4f4',
       }
     },
   });
@@ -68,7 +68,7 @@ export const AppStudio = observer(() => {
       },
       background:{
         default: studioStore?.themeMode === DARK ? '#1a233a' : '#FFF',
-        paper: studioStore?.themeMode === DARK ? '#1a233a' : '#FFF',
+        paper: studioStore?.themeMode === DARK ? '#272e48' : '#FFF',
       }
     },
   });

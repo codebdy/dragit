@@ -5,7 +5,9 @@
   justify-content: center;
   flex:1;
   height: 0;
+  background-color: #272e48;
 }
+
 
 .rx-sidebar-tabs{
   display: flex;
@@ -25,6 +27,14 @@
   user-select: none;
   cursor: pointer;
 
+}
+
+.rx-light .rx-sidebar{
+  background-color: #fff;
+}
+
+.rx-dark .rx-sidebar{
+  background-color: #272e48;
 }
 
 .rx-light .rx-sidebar-tabs{
