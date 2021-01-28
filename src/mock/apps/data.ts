@@ -33,6 +33,11 @@ var appsData = [
         rx_slug:'app',
         name:'App访问',
         predefined:true,
+      },
+      {
+        id:'guid-22',
+        rx_slug:'compute',
+        name:'计算',
       }
     ],
     notifications:8,

@@ -5,6 +5,8 @@ import { IconButton, TextField, Typography, useTheme } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useState } from 'react';
 import intl from 'react-intl-universal';
+import { IAuth } from 'Base/Model/IAuth';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:theme.spacing(0, 2),
       minHeight: theme.spacing(7),
       borderBottom: theme.palette.divider + ' solid 1px',
+    },
+    header:{
+      fontWeight:'bold',
     },
     slug:{
       flex:1,
@@ -39,11 +44,24 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const AuthListItem = observer(() => {
+export const AuthListItem = observer((
+  props:{
+    auth?: IAuth
+  }
+) => {
+  const {auth} = props;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [slug, setSlug] = useState(auth?.rxSlug ||'');
+  const [name, setName] = useState(auth?.name || '');
   const theme = useTheme();
+  useEffect(()=>{
+    if(!auth){
+      setSlug(intl.get('slug'));
+      setName(intl.get('name'));
+    }
+  },[auth])
 
   const handleEditing = ()=>{
     setEditing(true);
@@ -59,7 +77,7 @@ export const AuthListItem = observer(() => {
 
   return (
     <div 
-      className = {classes.root}
+      className = { classes.root }
       onMouseOver = {()=>{setHover(true)}}
       onMouseLeave = {()=>{setHover(false)}}
     >
@@ -69,9 +87,9 @@ export const AuthListItem = observer(() => {
           ? <TextField 
               variant = "outlined" 
               size = "small" 
-              label = {intl.get('slug')} 
+              value = {slug} 
             />
-          : <Typography variant = "subtitle1">slug</Typography> 
+          : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{slug}</Typography> 
         }        
       </div>
       <div className = {classes.name}>
@@ -80,14 +98,14 @@ export const AuthListItem = observer(() => {
           ? <TextField 
               variant = "outlined" 
               size = "small" 
-              label = {intl.get('name')} 
+              value = {name}
             />
-          : <Typography variant = "subtitle1">name</Typography> 
+          : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{name}</Typography> 
         }   
         
       </div>
       <div  className = {classes.action}>
-        { hover && !editing &&
+        { hover && !editing && auth && auth.predefined &&
           <>
             <IconButton 
               size = "small" 

@@ -6,6 +6,7 @@ import intl from 'react-intl-universal';
 import { PopuDrawer } from 'AppStudio/PopuDrawer';
 import { Button } from '@material-ui/core';
 import { AuthListItem } from './AuthListItem';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,7 @@ export const AuthsDrawer = observer((
 ) => {
   const {open, onClose} = props;
   const classes = useStyles();
+  const studioStore = useAppStudioStore();
 
   const handleNew = ()=>{
 
@@ -44,8 +46,13 @@ export const AuthsDrawer = observer((
     >
       <Scrollbar className = {classes.root}>
         <AuthListItem />
-        <AuthListItem />
-        <AuthListItem />
+        {
+          studioStore?.rxApp?.auths?.map(auth=>{
+            return (
+              <AuthListItem key = {auth.id} auth = {auth}/>
+            )
+          })
+        }
       </Scrollbar>
     </PopuDrawer>
 
