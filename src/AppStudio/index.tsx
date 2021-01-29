@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       flex:1,
       height:'0',
-      backgroundColor: theme.palette.background.default,
+      //backgroundColor: theme.palette.background.default,
     },
     workspace:{
       display:'flex',
