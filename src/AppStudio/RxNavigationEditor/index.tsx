@@ -4,15 +4,8 @@ import DrawerItemList from './DrawerItemList';
 import ToolsAccordion from './ToolsAccordion';
 import IMenuItem from 'Base/Model/IMenuItem';
 import { RxNode } from 'rx-drag/models/RxNode';
-import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
 import NodeEditor from './NodeEditor';
-import { AUTH_CUSTOMIZE } from 'Base/authSlugs';
 import { ID } from 'rx-drag/models/baseTypes';
-import { GET_DRAWER, SAVE_DRAWER } from 'Base/GraphQL/GQLs';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { useAuthCheck } from 'Store/Helpers/useAuthCheck';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,29 +50,25 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function RxNavigationEditor(){
+export default function RxNavigationEditor(
+  props:{
+    items?:Array<IMenuItem>,
+    onChange?:(items:Array<IMenuItem>)=>void,
+  }
+){
+  const {items, onChange} = props;
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_DRAWER);
+ // const { loading, error, data } = useQuery(GET_DRAWER);
   const [rootNode,setRootNode] = React.useState(new RxNode<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RxNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RxNode<IMenuItem>>();
-  const appStore = useDragItStore();
 
-  const [excuteSave, {error:saveError, loading:saving}] = useMutation(SAVE_DRAWER,{
-    onCompleted:(data)=>{
-      appStore.setSuccessAlert(true)
-    }});
-  //const [saveRequest, setSaveRequest] = useState<AxiosRequestConfig>();
-  //const [, saving] = useAxios<Array<IMenuItem>>(saveRequest, true);
-
-  useAuthCheck(AUTH_CUSTOMIZE);
-  useShowAppoloError(error||saveError);
-  
+ 
   useEffect(()=>{
-    rootNode.parse(cloneObject(data?.drawer?.items||[]));
+    rootNode.parse(cloneObject(items||[]));
     setRootNode(rootNode.copy());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[data]);
+  },[items]);
 
 
   const handleSelectedNode = (node:RxNode<IMenuItem>)=>{
@@ -171,21 +160,16 @@ export default function RxNavigationEditor(){
           onDrop = {(event: React.DragEvent<unknown>)=>{event.stopPropagation()}}
           onDragOver = {handleDragOver}
         >
-          {
-            loading?
-            <SiderBarLoadingSkeleton />
-            :
-            <DrawerItemList 
-              nodes={rootNode.children} 
-              draggedNode = {draggedNode}
-              onSelected = {handleSelectedNode}
-              onDragToBefore = {handleDragToBefore}
-              onDragToAfter = {handleDragToAfter}
-              onDragStart = {handleStartDragNode}
-              onDragEnd = {handleDragEnd}
-              onDragIn = {handleDragIn}
-            />
-          }
+          <DrawerItemList 
+            nodes={rootNode.children} 
+            draggedNode = {draggedNode}
+            onSelected = {handleSelectedNode}
+            onDragToBefore = {handleDragToBefore}
+            onDragToAfter = {handleDragToAfter}
+            onDragStart = {handleStartDragNode}
+            onDragEnd = {handleDragEnd}
+            onDragIn = {handleDragIn}
+          />
         </div>
         <div className = {classes.right}>
           <ToolsAccordion onStartDragNode={handleStartDragNode} onEndDragNode = {handleDragEnd}/>

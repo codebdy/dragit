@@ -15,7 +15,7 @@ export const WorkSpace = observer(() => {
       }
       {
         studioStore?.editingNavigation && 
-        <RxNavigationEditor />
+        <RxNavigationEditor items = {studioStore?.rxApp?.navigation_items} />
       }
     </>
   );
