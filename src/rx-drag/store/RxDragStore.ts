@@ -41,10 +41,15 @@ export class RxDragStore{
   redoList: Array<ICommand> = [];
 
   refreshToolbarAndLabelFlag:number = 0;
-  isDirty: boolean = false;
+
+  valueChangeFn?:(metas : Array<IRxMeta>)=>void;
 
   constructor() {    
     makeAutoObservable(this);
+  }
+
+  setValueChangeFn(valueChangeFn?:(metas : Array<IRxMeta>)=>void){
+    this.valueChangeFn = valueChangeFn;
   }
 
   private parsePage(){
@@ -55,6 +60,8 @@ export class RxDragStore{
   setMetas(metas?:Array<IRxMeta>){
     this.metas = metas;
     this.parsePage();
+    this.undoList = [];
+    this.redoList = [];
   }
 
   setShowOutline(showOutline:boolean){
@@ -125,12 +132,12 @@ export class RxDragStore{
   }
 
   excuteCommand(command:ICommand){
-    this.isDirty = true;
     const selectedNode = command.excute();
     this.setSelectedNode(selectedNode);
     this.undoList.push(command);
     this.redoList = [];
     this.refreshToolbarAndLabel();
+    this.valueChangeFn && this.valueChangeFn(this.canvas?.getChildrenMetas()||[]);
   }
 
   undo(){
@@ -141,6 +148,7 @@ export class RxDragStore{
     }
     this.setSelectedNode(selectedNode);
     this.refreshToolbarAndLabel();
+    this.valueChangeFn && this.valueChangeFn(this.canvas?.getChildrenMetas()||[]);
   }
 
   redo(){
@@ -151,6 +159,7 @@ export class RxDragStore{
     }
     this.setSelectedNode(selectedNode);
     this.refreshToolbarAndLabel();
+    this.valueChangeFn && this.valueChangeFn(this.canvas?.getChildrenMetas()||[]);
   }
 
   operateNode (draggedNode:RxNode<IMeta>, targetNode:RxNode<IMeta>, position:CursorPosition){
@@ -176,10 +185,6 @@ export class RxDragStore{
     return false;  
   }
 
-  setIsDirty(isDirty:boolean){
-    this.isDirty = isDirty;
-  }
-
   updateSelecteMeta(field:string, value:any){
     const meta = cloneObject(toJS(this.selectedNode?.meta));
     if(meta && this.selectedNode){
@@ -187,13 +192,5 @@ export class RxDragStore{
       this.excuteCommand(new ChangeMetaCommand(this.selectedNode, meta));
     }
   }
-
-  //updatePageQuery(query?:string){
- //   this.excuteCommand(new UpdatePageSchemaCommand(this, 'query', query));
-  //}
-
-  //updatePageAuths(auths?:Array<string>){
-  //  this.excuteCommand(new UpdatePageSchemaCommand(this, 'auths', auths));
-  //}
 
 }

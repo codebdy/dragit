@@ -2,12 +2,11 @@ import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { VerticalBar } from './VerticalBar';
-import { AppBar, Toolbar, IconButton, Button, ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, ThemeProvider, createMuiTheme } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { useState } from 'react';
 import { AppStudioStore, AppStudioStoreProvider } from './AppStudioStore';
 import Spacer from 'Components/Common/Spacer';
-import intl from 'react-intl-universal';
 import { useHistory, useRouteMatch } from 'react-router';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_RX_APP } from 'Base/GraphQL/GQLs';
@@ -107,7 +106,10 @@ export const AppStudio = observer(() => {
                   <MdiIcon iconClass = "mdi-arrow-left" color={appbarTheme.palette.type === DARK ? '#8a99b5' : "#475f7b"}/>
                 </IconButton>
                 <Spacer />
-                <SavePageButton />
+                {
+                  studioStore?.pageEditor &&
+                  <SavePageButton />
+                }                
               </Toolbar>
             </AppBar>
           </ThemeProvider>

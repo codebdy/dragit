@@ -14,7 +14,7 @@ export interface IRxPage{
   //使用UUID当ID用
   id:ID,
   name?:string, 
-  maxWidth?: MaxWidth;
+  max_width?: MaxWidth;
   width?:number;
   schema?:Array<IMeta>,
   auths?:string[],

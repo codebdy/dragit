@@ -10,8 +10,8 @@ export const WorkSpace = observer(() => {
   return (
     <>
       {
-        studioStore?.editingPage &&
-        <RxPageEditor rxPage = {studioStore?.editingPage}/>
+        studioStore?.pageEditor?.editingPage &&
+        <RxPageEditor rxPage = {studioStore?.pageEditor?.editingPage}/>
       }
       {
         studioStore?.editingNavigation && 

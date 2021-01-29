@@ -23,7 +23,7 @@ export const PopupPage = observer((
       {
         page && !isDrawerStyle &&
         <PageDialog
-          maxWidth = {page?.maxWidth}
+          maxWidth = {page?.max_width}
           open={!!page}
           onClose={onClose}
           title = {page?.name}

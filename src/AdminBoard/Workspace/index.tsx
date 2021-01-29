@@ -28,13 +28,13 @@ const QUERY_MODULE = gql`
       id
       slug
       name
-      moduleType:module_type
-      isDrawerStyle:is_drawer_style
+      module_type
+      is_drawer_style
       pages{
         id
         name
-        maxWidth:max_width
-        inTabIndex:in_tab_index
+        max_width
+        in_tab_index
         width
         schema
         auths

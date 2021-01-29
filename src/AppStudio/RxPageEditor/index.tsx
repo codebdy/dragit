@@ -12,6 +12,8 @@ import { Toolbox } from './Toolbox';
 import { AttributeBox } from './AttrebuteBox';
 import SettingsBox from './SettingsBox';
 import { useEffect } from 'react';
+import { IRxMeta } from 'rx-drag/models/IRxMeta';
+import { toJS } from 'mobx';
 
 export const RxPageEditor = observer((
   props:{
@@ -38,6 +40,11 @@ export const RxPageEditor = observer((
   const handleThemeModeChange = (mode :RxThemeMode)=>{
     studioStore?.setThemeMode(mode);
   }
+
+  const handleChange = (metas: Array<IRxMeta>)=>{
+    studioStore?.pageEditor?.setCurrentData({...toJS(rxPage), schema:metas});
+  }
+
   return (
     <ThemeProvider theme={canvasTheme}>
       <RxDragStoreProvider value = {rxDragStore}>
@@ -70,6 +77,8 @@ export const RxPageEditor = observer((
           }}
 
           onThemeModeChange = {handleThemeModeChange}
+
+          onChange = {handleChange}
         />
       </RxDragStoreProvider>
     </ThemeProvider>

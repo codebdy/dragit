@@ -42,7 +42,7 @@ export const GET_RX_APP = gql`
       pages{
         id
         name 
-        maxWidth:max_width
+        max_width
         width
         schema
         auths

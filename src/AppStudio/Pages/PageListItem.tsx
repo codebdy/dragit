@@ -77,7 +77,7 @@ export const PageListItem = observer((
         });
       },
       onCompleted: (data)=>{
-        if(page.id === studioStore?.editingPage?.id){
+        if(page.id === studioStore?.pageEditor?.editingPage?.id){
           studioStore.editPage(undefined);
         }
       }
@@ -154,7 +154,7 @@ export const PageListItem = observer((
       className = {
         classNames(
           classes.root,
-          {[classes.selected]:studioStore?.editingPage?.id === page.id}
+          {[classes.selected]:studioStore?.pageEditor?.editingPage?.id === page.id}
         )
       } 
       onMouseOver = {()=>{setHover(true)}}

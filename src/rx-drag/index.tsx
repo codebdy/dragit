@@ -30,9 +30,10 @@ export interface IRxDragProps{
 export const RxDrag = observer((
   props: IRxDragProps
 ) => {
-  const {theme, initMetas, toolbox, attributeBox, pageSettings, locales, onThemeModeChange} = props;
+  const {theme, initMetas, toolbox, attributeBox, pageSettings, locales, onChange, onThemeModeChange} = props;
   const [shellStore] = React.useState(new RxDragShellStore(locales))
   const rxDragStore = useRxDragStore();
+  rxDragStore?.setValueChangeFn(onChange);
 
   useEffect(()=>{
     rxDragStore?.setMetas(cloneObject(toJS(initMetas)));

@@ -4,20 +4,17 @@ import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
 import { useContext } from "react";
 import { DARK, RxThemeMode } from "rx-drag/store/IRxThemeOptions";
-
-export class WorkSpaceState{
-  constructor() {
-    makeAutoObservable(this)
-  }
-}
+import { PageEditorStore } from "./RxPageEditor/PageEditorStore";
 
 export class AppStudioStore{
   verticalBarWidth:string = '60px';
   isDirty:boolean = false;
   themeMode:RxThemeMode = DARK;
-  editingPage?:IRxPage;
+  //editingPage?:IRxPage;
   editingNavigation?:boolean;
   rxApp?: IRxApp;
+
+  pageEditor?:PageEditorStore;
 
   constructor() {
     makeAutoObservable(this)
@@ -25,18 +22,24 @@ export class AppStudioStore{
 
   setRxApp(rxApp: IRxApp){
     this.rxApp = rxApp;
-    if(rxApp?.pages?.length){
-      this.editingPage = rxApp.pages[0];
+    if(rxApp?.pages?.length && ! this.pageEditor){
+      this.editPage(rxApp.pages[0]);
     }
   }
 
   editPage(page?:IRxPage){
-    this.editingPage = page;
+    if(page){
+      this.pageEditor = new PageEditorStore(page);
+    }
+    else{
+      this.pageEditor = undefined;
+    }
+
     this.editingNavigation = false;
   }
 
   editNavigation(){
-    this.editingPage = undefined;
+    this.pageEditor = undefined;
     this.editingNavigation = true;
   }
 
