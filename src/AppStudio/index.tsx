@@ -16,6 +16,7 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppSkeleton from './AppSkeleton';
 import { WorkSpace } from './WorkSpace';
 import { DARK } from 'Store/ThemeSettings';
+import { SavePageButton } from './RxPageEditor/SavePageButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -106,9 +107,7 @@ export const AppStudio = observer(() => {
                   <MdiIcon iconClass = "mdi-arrow-left" color={appbarTheme.palette.type === DARK ? '#8a99b5' : "#475f7b"}/>
                 </IconButton>
                 <Spacer />
-                <Button variant = "contained" color= "primary">
-                  {intl.get('save')}
-                </Button>
+                <SavePageButton />
               </Toolbar>
             </AppBar>
           </ThemeProvider>
