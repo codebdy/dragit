@@ -85,6 +85,12 @@ export const AuthListItem = observer((
 
   }
 
+  const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{
+    if(event.key === 'Enter') {
+      handleSave()
+    }
+  }
+
   return (
     <div 
       className = { classes.root }
@@ -99,14 +105,8 @@ export const AuthListItem = observer((
               variant = "outlined" 
               size = "small" 
               value = {slug}
-              onChange = {handleSlugChange} 
-              onKeyUp = {
-                e=>{
-                  if(e.key === 'Enter') {
-                    handleSave()
-                  }
-                }
-              }
+              onChange = { handleSlugChange } 
+              onKeyUp = { handleKeyEnter }
             />
           : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{slug}</Typography> 
         }        
@@ -118,14 +118,8 @@ export const AuthListItem = observer((
               variant = "outlined" 
               size = "small" 
               value = {name}
-              onKeyUp = {
-                e=>{
-                  if(e.key === 'Enter') {
-                    handleSave()
-                  }
-                }
-              }
-              onChange = {handleNameChange} 
+              onKeyUp = { handleKeyEnter }
+              onChange = { handleNameChange } 
             />
           : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{name}</Typography> 
         }   

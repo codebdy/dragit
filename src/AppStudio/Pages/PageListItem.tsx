@@ -141,6 +141,12 @@ export const PageListItem = observer((
     excuteRemoveRxPage({variables:{id:page.id}});
   }
 
+  const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{
+    if(event.key === 'Enter') {
+      handleFinishedEdit()
+    }
+  }
+
   const loading = saving || removing || duplicating;
 
   return (
@@ -162,13 +168,7 @@ export const PageListItem = observer((
             variant = "outlined" 
             value = {name === undefined ? '' : name} 
             onChange = {handleChange}
-            onKeyUp = {
-              e=>{
-                if(e.key === 'Enter') {
-                  handleFinishedEdit()
-                }
-              }
-            }
+            onKeyUp = {handleKeyEnter}
           />
         : <div onClick={onClick} className={classes.name} >
             <Typography variant = "subtitle1">{name}</Typography>
