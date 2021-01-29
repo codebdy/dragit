@@ -8,13 +8,16 @@ import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { toJS } from 'mobx';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import { PageAction } from 'Base/PageUtils/PageAction';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import { IPageJumper } from 'Base/Model/IPageJumper';
 
 const AttributeBoxActionSection = observer(()=>{
   const {rxDragStore} = useDesign();
+  const studioStore = useAppStudioStore();
   const node = rxDragStore?.selectedNode;  
   const action:PageAction = node?.meta.props?.onClick||{};
 
-  const updatAction = (field:string, value:string|IPageMutation|boolean|Array<string>)=>{
+  const updatAction = (field:string, value:string|IPageMutation|IPageJumper|boolean|Array<string>)=>{
     const newAction = cloneObject(action);
     const props = cloneObject(toJS(node?.meta.props)||{})
     newAction[field] = value;
@@ -47,6 +50,11 @@ const AttributeBoxActionSection = observer(()=>{
     updatAction('mutation', mutation);
   }; 
 
+
+  const handlePageChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    const pageId = event.target.value as string;
+    updatAction('pageJumper', {pageId});
+  } 
 
   const handleModuleSlugChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //let newValue = (event.target.value as string);
@@ -87,22 +95,25 @@ const AttributeBoxActionSection = observer(()=>{
         OPEN_PAGE_ACTION === action.name &&
         <Fragment>
           <Grid item xs={12}>
-            <TextField fullWidth
-              variant="outlined" 
-              size = "small"
-              label={intl.get("module-slug")}
-              value={action.page?.moduleSlug} 
-              onChange={handleModuleSlugChange}
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField fullWidth
-              variant="outlined" 
-              size = "small"
-              label = {intl.get("page-slug")}
-              value = {action.page?.pageSlug} 
-              onChange = {handlePageSlugChange}
-            ></TextField>
+            <FormControl variant="outlined" size="small" fullWidth>
+              <InputLabel>{intl.get("page")}</InputLabel>
+              <Select
+                label = {intl.get("page")}
+                value={action.pageJumper?.pageId || ''}
+                onChange={handlePageChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {
+                  studioStore?.rxApp?.pages?.map(page=>{
+                    return(
+                      <MenuItem key = {page.id} value={page.id}>{page.name}</MenuItem>
+                    )
+                  })
+                }
+              </Select>
+            </FormControl>  
           </Grid>
         </Fragment>
       }

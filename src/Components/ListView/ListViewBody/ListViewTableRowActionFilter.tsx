@@ -33,8 +33,8 @@ const ListViewTableRowActionFilter = observer((
 
         break;
       case OPEN_PAGE_ACTION:
-        console.assert(action.page, 'Page not set on OPEN_PAGE_ACTION');
-        parentActionStore?.emit({...action, page:{...action.page, dataId:row.value.id}});
+        console.assert(action.pageJumper, 'Page not set on OPEN_PAGE_ACTION');
+        parentActionStore?.emit({...action, pageJumper:{...action.pageJumper, dataId:row.value.id}});
         break;
       default:
         //处理不了的Action转发给父组件

@@ -32,8 +32,8 @@ export const JumpStyleModule = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
-        setPageParams(action.page)        
-        setPageId(action.page?.pageId);
+        setPageParams(action.pageJumper)        
+        setPageId(action.pageJumper?.pageId);
         return;        
       case GO_BACK_ACTION:
         setPageId(module.entryPage?.id);

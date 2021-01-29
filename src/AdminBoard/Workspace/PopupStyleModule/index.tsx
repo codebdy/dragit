@@ -33,8 +33,8 @@ export const PopupStyleModule = observer((
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
-        setPageParams(action.page)
-        setPopupPageId(action.page?.id);        
+        setPageParams(action.pageJumper)
+        setPopupPageId(action.pageJumper?.id);        
         return;        
       case GO_BACK_ACTION:
         setPopupPageId(undefined);
