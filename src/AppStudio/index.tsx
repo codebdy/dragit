@@ -92,9 +92,15 @@ export const AppStudio = observer(() => {
   useShowAppoloError(error)
 
   const handleBack = ()=>{
-    dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
+    if(studioStore?.pageEditor?.isDirty){
+      dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
+        history.goBack();
+      })       
+    }
+    else{
       history.goBack();
-    })    
+    }
+   
   }
 
 

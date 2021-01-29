@@ -100,9 +100,14 @@ export const VerticalBar = observer(() => {
   const handleNavigationClick = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
 
-    dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
+    if(studioStore?.pageEditor?.isDirty){
+      dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
+        doClickNavigation();
+      })
+    }
+    else{
       doClickNavigation();
-    })   
+    }   
   }
 
   const handleClosePages = ()=>{

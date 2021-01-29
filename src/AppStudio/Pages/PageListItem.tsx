@@ -164,6 +164,9 @@ export const PageListItem = observer((
         onClick && onClick();
       })
     }
+    else{
+      onClick && onClick();
+    }
   }
 
   const loading = saving || removing || duplicating;
