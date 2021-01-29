@@ -36,8 +36,8 @@ export const AuthsDrawer = observer((
       cache.modify({
         id: cache.identify(studioStore?.rxApp as any),
         fields: {
-          pages(existingPageRefs = []){
-            const newPageRef = cache.writeFragment({
+          auths(existingAuthRefs = []){
+            const newAuthRef = cache.writeFragment({
               data: createRxAuth,
               fragment: gql`
                 fragment NewPage on RxAuth {
@@ -45,7 +45,7 @@ export const AuthsDrawer = observer((
                 }
               `
             });
-            return [...existingPageRefs, newPageRef];
+            return [...existingAuthRefs, newAuthRef];
           }
         }
       });
