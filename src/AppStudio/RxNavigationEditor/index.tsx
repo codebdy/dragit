@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function NavigationEditor(){
+export default function RxNavigationEditor(){
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_DRAWER);
   const [rootNode,setRootNode] = React.useState(new RxNode<IMenuItem>());

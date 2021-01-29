@@ -10,10 +10,9 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'Base/Model/IMenuItem';
 import { RxNode } from 'rx-drag/models/RxNode';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
-import { IModuleCategory } from 'Base/Model/IModuleCategory';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { TreeItem, TreeView } from '@material-ui/lab';
+import { TreeView } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -126,7 +125,7 @@ export default function ToolsAccordion(
             aria-controls="panel2bh-content"
             id="panel2bh-header"
           >
-            <Typography >{intl.get('customized-modules')}</Typography>
+            <Typography >{intl.get('pages')}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <TreeView 
@@ -135,37 +134,6 @@ export default function ToolsAccordion(
               disableSelection
               className = {classes.list}
             >
-              {
-                /*moduleCategories?.map(category=>{
-                  return (
-                    <TreeItem nodeId = {'' + category.id} key={category.id} 
-                      label = {
-                        <div className={classes.category}>{category.name}</div>
-                      }
-                    >
-                        {
-                          category.modules?.map(module=>{
-                            const meta:IMenuItem ={
-                              type:'item',
-                              title:module.name,
-                              icon:"mdi-circle-small",
-                              to:`/admin/module/${module.slug}/`,
-                            }
-                            return (
-                              <ListItem key={module.id} draggable = {true}  className={classes.item}
-                                onDragStart = {()=>handleDragStart(meta)}
-                                onDragEnd = {onEndDragNode}
-                              >
-                                <ListItemText primary={module.name} className = {classes.subItem} />
-                              </ListItem>                  
-                            )
-                          })
-                        }
-  
-                    </TreeItem>                  
-                  )
-                })*/
-              }
             </TreeView>
 
           </AccordionDetails>

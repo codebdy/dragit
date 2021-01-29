@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { useAppStudioStore } from './AppStudioStore';
 import { RxPageEditor } from './RxPageEditor';
-import NavigationEditor from './Navigation/NavigationEditor';
+import RxNavigationEditor from './RxNavigationEditor';
 
 export const WorkSpace = observer(() => {
   const studioStore = useAppStudioStore();
@@ -15,7 +15,7 @@ export const WorkSpace = observer(() => {
       }
       {
         studioStore?.editingNavigation && 
-        <NavigationEditor />
+        <RxNavigationEditor />
       }
     </>
   );

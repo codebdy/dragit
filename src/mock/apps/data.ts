@@ -1,3 +1,4 @@
+import { demoDrawerData } from "mock/demo/drawerData";
 import demoPages from "mock/demo/pages";
 
 var appsData = [
@@ -26,7 +27,7 @@ var appsData = [
     color:'#8bc34a',
     app_type:'免费',
     pages: demoPages,
-    navigation_items:[],
+    navigation_items:demoDrawerData,
     auths:[
       {
         id:'guid-21',
