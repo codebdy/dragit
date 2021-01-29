@@ -1,3 +1,4 @@
+import { ID } from "rx-drag/models/baseTypes";
 import { IUser } from "../../Base/Model/IUser";
 
 export class LoggedUser{
@@ -7,7 +8,7 @@ export class LoggedUser{
     this.meta = user;
   }
 
-  authCheck(...auths:string[]) {
+  authCheck(...auths:ID[]) {
     if(!this.meta || !this.meta.login_name){
       return false;
     }

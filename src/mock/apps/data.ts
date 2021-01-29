@@ -43,6 +43,21 @@ var appsData = [
         id:'guid-23',
         rx_slug:'one-to-many',
         name:'1对多',
+      },
+      {
+        id:'guid-24',
+        rx_slug:'auth1',
+        name:'权限1',
+      },
+      {
+        id:'guid-25',
+        rx_slug:'auth2',
+        name:'权限2',
+      },
+      {
+        id:'guid-26',
+        rx_slug:'auth3',
+        name:'权限3',
       }
     ],
     notifications:8,

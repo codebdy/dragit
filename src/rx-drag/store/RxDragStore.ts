@@ -184,7 +184,7 @@ export class RxDragStore{
     const meta = cloneObject(toJS(this.selectedNode?.meta));
     if(meta && this.selectedNode){
       meta[field] =value;
-        this.excuteCommand(new ChangeMetaCommand(this.selectedNode, meta));
+      this.excuteCommand(new ChangeMetaCommand(this.selectedNode, meta));
     }
   }
 

@@ -18,6 +18,7 @@ import { propsInputs } from './PropsInputs';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { MetaConfig } from 'Base/RXNode/MetaConfig';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import { IAuth } from 'Base/Model/IAuth';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -92,9 +93,10 @@ export const AttributeBox = observer(()=>{
   const node = rxDragStore?.selectedNode;  
   const [metaConfig, setMetaConfig] = React.useState<MetaConfig>();
   const [validateRule, setValidateRule] = React.useState<IValidateRule>();
-  const [auths, setAuths] = React.useState(node?.meta.props?.auths);
+  //const [auths, setAuths] = React.useState(node?.meta.auths);
 
   useEffect(() => {
+    //setAuths(node?.meta.auths);
     node?.meta.name && setMetaConfig(resolveMetaConfig(node?.meta.name) as MetaConfig)
   },[node]);
 
@@ -114,9 +116,8 @@ export const AttributeBox = observer(()=>{
     setValidateRule(rule);
   }
 
-  const handleChangeAuths = (auths : string[]|undefined)=>{
-    //node?.updateProp('auths', auths);
-    setAuths(auths);
+  const handleChangeAuths = (auths : IAuth[]|undefined)=>{
+    rxDragStore?.updateSelecteMeta('auths', auths);
   }
 
   const props = node?.meta.props || {};
@@ -209,19 +210,18 @@ export const AttributeBox = observer(()=>{
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <MultiSelectBox fullWidth label={intl.get('authority')} 
-                  variant="outlined" 
-                  size="small"
-                  items = {studioStore?.rxApp?.auths || []}
-                  itemKey = "rx_slug"
-                  value = {auths || []}
-                  onChange = {(e:any)=>handleChangeAuths(e.target.value)}
-                />
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <MultiSelectBox fullWidth label={intl.get('authority')} 
+                    variant="outlined" 
+                    size="small"
+                    items = {studioStore?.rxApp?.auths || []}
+                    value = {node?.meta.auths || []}
+                    onChange = {(e:any)=>handleChangeAuths(e.target.value)}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
-                </AccordionDetails>
+            </AccordionDetails>
           </Accordion>
         </Fragment>
       }

@@ -37,7 +37,7 @@ export function ComponentRender(
     if(!node.meta.auths || node.meta.auths.length === 0){
       return true;
     }
-    return loggedUser?.authCheck(...node.meta.auths||[]);
+    return loggedUser?.authCheck(...node.meta.auths?.map(auth=>auth.id)||[]);
   }
 
   let metaProps = node.meta.props? node.meta.props :{};

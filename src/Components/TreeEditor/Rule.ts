@@ -4,7 +4,7 @@ import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringI
 import { IMeta } from "Base/RXNode/IMeta";
 import elevationRules from "Base/RXNode/Configs/elevationRules";
 import marginConfigs from "Base/RXNode/Configs/marginConfigs";
-import ApiEditor from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/ApiEditor";
+//import ApiEditor from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/ApiEditor";
 
 export class TreeEditorRule extends MetaConfig{
   editPaddingY = '';
@@ -27,16 +27,16 @@ export class TreeEditorRule extends MetaConfig{
         label:'title',
         input:StringInput,      
       },
-      {
-        name:'apiForGet',
-        label:'get-api',
-        input:ApiEditor,
-      },
-      {
-        name:'apiForSave',
-        label:'submit-api',
-        input:ApiEditor,
-      }
+     // {
+     //   name:'apiForGet',
+     //   label:'get-api',
+        //input:ApiEditor,
+      //},
+      //{
+      //  name:'apiForSave',
+       // label:'submit-api',
+        //input:ApiEditor,
+      //}
     ]
   }
 

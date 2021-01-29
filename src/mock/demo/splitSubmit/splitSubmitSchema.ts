@@ -321,7 +321,11 @@ export var splitSubmitSchema = [
                         },
 
                       }           
-                    }
+                    },
+                    auths:[
+                      {id:'guid-24'}, 
+                      {id:'guid-26'}
+                    ],
                   }]
             
                 }
@@ -330,6 +334,7 @@ export var splitSubmitSchema = [
           ],
         },
 
-      ]
+      ],
+      auth:['auth1', 'auth2']
     },   
 ]
