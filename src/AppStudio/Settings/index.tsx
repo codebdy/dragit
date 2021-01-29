@@ -39,7 +39,7 @@ export const Settings = observer((
   const classes = useStyles();
   const studioStore = useAppStudioStore();
   const rxApp = studioStore?.rxApp;
-  const appStore = useDragItStore();
+  const dragItStore = useDragItStore();
 
   const [name, setName] = useState(rxApp?.name);
   const [appType, setAppType] = useState(rxApp?.app_type);
@@ -49,7 +49,7 @@ export const Settings = observer((
   const [excuteSave, {loading, error}] = useMutation(SAVE_RX_APP,{
     onCompleted(){
       onClose && onClose();
-      appStore.setSuccessAlert(true)
+      dragItStore.setSuccessAlert(true)
     }
   });
 

@@ -13,6 +13,8 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import classNames from 'classnames';
 import { pageFieldsGQL } from 'Base/GraphQL/GQLs';
 import ActionButton from 'AppStudio/ActionButton';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import intl from 'react-intl-universal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,13 +57,18 @@ export const PageListItem = observer((
   const [name, setName] = useState(page.name);
   const [editing, setEditing] = useState(false);
   const classes = useStyles();
+  const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
 
   useEffect(()=>{
     setName(page.name)
   },[page.name])
 
-  const [excuteSaveRxPage, {loading:saving, error}] = useMutation( SAVE_RX_PAGE );
+  const [excuteSaveRxPage, {loading:saving, error}] = useMutation( SAVE_RX_PAGE, {
+    onCompleted(){
+      dragItStore.setSuccessAlert(true)
+    }
+  } );
   const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_PAGE,
     {
       update: (cache, { data: { removeRxPage } })=>{
@@ -80,11 +87,15 @@ export const PageListItem = observer((
         if(page.id === studioStore?.pageEditor?.editingPage?.id){
           studioStore.editPage(undefined);
         }
+        dragItStore.setSuccessAlert(true);
       }
     }
   );
 
   const [excuteDuplicate, {loading:duplicating, error:duplicateError}] = useMutation(DUPLICATE_RX_PAGE, {
+    onCompleted(){
+      dragItStore.setSuccessAlert(true);
+    },
     //更新缓存
     update:(cache, { data: { duplicateRxPage } })=>{
       cache.modify({
@@ -147,6 +158,14 @@ export const PageListItem = observer((
     }
   }
 
+  const handleClick = ()=>{
+    if(page.id !== studioStore?.pageEditor?.editingPage?.id && studioStore?.pageEditor?.isDirty){
+      dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
+        onClick && onClick();
+      })
+    }
+  }
+
   const loading = saving || removing || duplicating;
 
   return (
@@ -170,7 +189,7 @@ export const PageListItem = observer((
             onChange = {handleChange}
             onKeyUp = {handleKeyEnter}
           />
-        : <div onClick={onClick} className={classes.name} >
+        : <div onClick={handleClick} className={classes.name} >
             <Typography variant = "subtitle1">{name}</Typography>
           </div>
       }

@@ -16,6 +16,8 @@ import AppSkeleton from './AppSkeleton';
 import { WorkSpace } from './WorkSpace';
 import { DARK } from 'Store/ThemeSettings';
 import { SavePageButton } from './RxPageEditor/SavePageButton';
+import intl from 'react-intl-universal';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const AppStudio = observer(() => {
   const classes = useStyles();
   const [studioStore] = useState(new AppStudioStore());
+  const dragItStore = useDragItStore();
   const history = useHistory();
   const match = useRouteMatch();
   const{id} = match.params as any;
@@ -89,7 +92,9 @@ export const AppStudio = observer(() => {
   useShowAppoloError(error)
 
   const handleBack = ()=>{
-    history.goBack();
+    dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
+      history.goBack();
+    })    
   }
 
 

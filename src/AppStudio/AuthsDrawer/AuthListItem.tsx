@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { REMOVE_RX_AUTH, SAVE_RX_AUTH } from './AUTH_GQLs';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,6 +57,7 @@ export const AuthListItem = observer((
   const [editing, setEditing] = useState(false);
   const [slug, setSlug] = useState(auth?.rx_slug ||'');
   const [name, setName] = useState(auth?.name || '');
+  const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
   useEffect(()=>{
     if(!auth){
@@ -64,9 +66,16 @@ export const AuthListItem = observer((
     }
   },[auth])
 
-  const [excuteSaveRxAuth, {loading:saving, error}] = useMutation( SAVE_RX_AUTH );
+  const [excuteSaveRxAuth, {loading:saving, error}] = useMutation( SAVE_RX_AUTH, {
+    onCompleted(){
+      dragItStore.setSuccessAlert(true)
+    }
+  });
   const [excuteRemoveRxAuth, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_AUTH,
     {
+      onCompleted(){
+        dragItStore.setSuccessAlert(true)
+      },
       update: (cache, { data: { removeRxAuth } })=>{
         cache.modify({
           id: cache.identify(studioStore?.rxApp as any),

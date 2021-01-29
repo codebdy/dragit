@@ -16,6 +16,7 @@ import classNames from 'classnames';
 import SubmitButton from 'Components/Common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { v4 as uuidv4 } from 'uuid';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,6 +79,7 @@ export const TemplatesDialog = observer((
   const [name, setName] = useState(intl.get('new-page'));
   const [selectedId, setSelectedId] = useState('');
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
+  const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
     //更新缓存
@@ -101,6 +103,7 @@ export const TemplatesDialog = observer((
     },
     //结束后返回
     onCompleted: (data)=>{
+      dragItStore.setSuccessAlert(true)
       onClose();
     }
   })

@@ -10,6 +10,7 @@ import SubmitButton from 'Components/Common/SubmitButton';
 import { authFields, CREATE_RX_AUTH } from './AUTH_GQLs';
 import { gql, useMutation } from '@apollo/react-hooks';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,8 +30,12 @@ export const AuthsDrawer = observer((
 ) => {
   const {open, onClose} = props;
   const classes = useStyles();
+  const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_AUTH, {
+    onCompleted(){
+      dragItStore.setSuccessAlert(true)
+    },
     //更新缓存
     update(cache, { data: { createRxAuth } }){
       cache.modify({

@@ -14,6 +14,7 @@ import { AddNewPage } from './Pages/AddNewPage';
 import { AuthsDrawer } from './AuthsDrawer';
 import { Settings } from './Settings';
 import classNames from 'classnames';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,6 +60,7 @@ export const VerticalBar = observer(() => {
   const [authsOpen, setAuthsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const studioStore = useAppStudioStore();
+  const dragItStore = useDragItStore();
   const iconColor = "#8494a7";
   const theme = createMuiTheme({
     palette: {
@@ -88,12 +90,19 @@ export const VerticalBar = observer(() => {
     setAuthsOpen(false);
   }
 
-  const handleNavigationClick = (event:React.MouseEvent<HTMLElement>)=>{
-    event.stopPropagation();
+  const doClickNavigation = ()=>{
     setSettingsOpen(false);
     setPagesOpen(false)
     setAuthsOpen(false);
     studioStore?.editNavigation();
+  }
+
+  const handleNavigationClick = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
+
+    dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
+      doClickNavigation();
+    })   
   }
 
   const handleClosePages = ()=>{
