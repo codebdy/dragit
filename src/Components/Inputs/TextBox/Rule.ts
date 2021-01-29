@@ -1,9 +1,9 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import BooleanInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
-import NumberInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
-import OptionSelect from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
+import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
+import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import inputRules from "Base/RXNode/Configs/inputRules";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 

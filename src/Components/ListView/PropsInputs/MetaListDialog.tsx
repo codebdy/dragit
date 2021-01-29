@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MetaListDialogLeftList from './MetaListDialogLeftList';
 import { ILabelItem } from 'Base/Model/ILabelItem';
 
-import PropsDialog from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/PropsDialog';
+import PropsDialog from 'AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/PropsDialog';
 
 const styles = (theme: Theme) =>
   createStyles({

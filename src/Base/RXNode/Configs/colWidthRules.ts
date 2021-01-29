@@ -1,5 +1,5 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
 const sizeSchema = [
   {

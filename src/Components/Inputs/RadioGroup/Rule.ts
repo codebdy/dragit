@@ -1,7 +1,7 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import BooleanInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
-import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
+import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import colorRule from "Base/RXNode/Configs/colorRule";
 import itemsRule from "Base/RXNode/Configs/itemsRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";

@@ -6,7 +6,7 @@ import { gql, useQuery } from '@apollo/react-hooks';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import withFormField from 'Components/Common/withFormField';
 
-const MultiSelectBox = React.forwardRef((
+export const MultiSelectBox = React.forwardRef((
   props:{
     value?:Array<any>,
     onChange?:any,
@@ -25,7 +25,8 @@ const MultiSelectBox = React.forwardRef((
   },
   ref:any
 )=>{
-  const{value, 
+  const{
+    value, 
     onChange, 
     itemKey = 'id',    
     itemName = 'name',
@@ -93,7 +94,6 @@ const MultiSelectBox = React.forwardRef((
 
       groupBy = {(option) => option.module}
       onChange={handleChange}
-
     />
 
   )

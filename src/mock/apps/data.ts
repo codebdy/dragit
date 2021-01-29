@@ -38,6 +38,11 @@ var appsData = [
         id:'guid-22',
         rx_slug:'compute',
         name:'计算',
+      },
+      {
+        id:'guid-23',
+        rx_slug:'one-to-many',
+        name:'1对多',
       }
     ],
     notifications:8,

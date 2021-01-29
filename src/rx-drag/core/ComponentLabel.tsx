@@ -13,7 +13,7 @@ export const ComponentLabel = observer((
   const{node, followDom} = props;
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const {rxDragCoreStore: editorStore} = useDesign();
+  const {rxDragStore: editorStore} = useDesign();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();

@@ -7,16 +7,17 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import intl from 'react-intl-universal';
 import AttributeBoxActionSection from './ActionSection';
-import AttributeBoxValidateArea from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/ValidateArea';
+import AttributeBoxValidateArea from 'AppStudio/RxPageEditor/AttrebuteBox/ValidateArea';
 import { IValidateRule } from "Base/Model/IValidateRule";
-import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
+import { MultiSelectBox } from 'Components/Inputs/Select/MultiSelectBox';
 import { resolveMetaConfig } from 'rx-drag/RxDrag';
 import { observer } from 'mobx-react';
-import { useDesign } from '../../../../rx-drag/store/useDesign';
+import { useDesign } from '../../../rx-drag/store/useDesign';
 import { toJS } from 'mobx';
 import { propsInputs } from './PropsInputs';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { MetaConfig } from 'Base/RXNode/MetaConfig';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,8 +87,9 @@ const AccordionDetails = withStyles((theme) => ({
 
 export const AttributeBox = observer(()=>{
   const classes = useStyles();
-  const {rxDragCoreStore: editorStore} = useDesign();
-  const node = editorStore?.selectedNode;  
+  const {rxDragStore} = useDesign();
+  const studioStore = useAppStudioStore();
+  const node = rxDragStore?.selectedNode;  
   const [metaConfig, setMetaConfig] = React.useState<MetaConfig>();
   const [validateRule, setValidateRule] = React.useState<IValidateRule>();
   const [auths, setAuths] = React.useState(node?.meta.props?.auths);
@@ -99,12 +101,12 @@ export const AttributeBox = observer(()=>{
   const handlePropChange = (key:string, value:any) => {
     const props = cloneObject(toJS(node?.meta.props)||{});
     props[key] = value;  
-    editorStore?.updateSelecteMeta('props', props);
+    rxDragStore?.updateSelecteMeta('props', props);
   };
 
   const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     let newField = event.target.value as string;
-    editorStore?.updateSelecteMeta('field', newField);
+    rxDragStore?.updateSelecteMeta('field', newField);
   }
 
   const handleRuleChange = (rule:IValidateRule)=>{
@@ -207,15 +209,18 @@ export const AttributeBox = observer(()=>{
               <Typography className={classes.heading}>{intl.get('authority')}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <MultiSelectBox label={intl.get('authority')} 
-                variant="outlined" 
-                size="small"
-                //dataApi = {API_GET_AUTHS}
-                itemKey = "slug"
-                groupByField = "module"
-                value = {auths || []}
-                onChange = {(e:any)=>handleChangeAuths(e.target.value)}
-              />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <MultiSelectBox fullWidth label={intl.get('authority')} 
+                  variant="outlined" 
+                  size="small"
+                  items = {studioStore?.rxApp?.auths || []}
+                  itemKey = "rx_slug"
+                  value = {auths || []}
+                  onChange = {(e:any)=>handleChangeAuths(e.target.value)}
+                />
+              </Grid>
+            </Grid>
                 </AccordionDetails>
           </Accordion>
         </Fragment>

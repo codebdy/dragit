@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import {MenuItem, Select, Switch, FormControl, FormControlLabel, InputLabel, TextField } from '@material-ui/core';
-import { AttributeRow, } from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/AttributeRow';
+import { AttributeRow, } from 'AppStudio/RxPageEditor/AttrebuteBox/AttributeRow';
 import intl from 'react-intl-universal';
-import { IValidateRule } from '../../../../Base/Model/IValidateRule';
+import { IValidateRule } from '../../../Base/Model/IValidateRule';
 
 export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onChange:(rule:IValidateRule)=>void}){
   const {rule, onChange} = props;

@@ -2,7 +2,7 @@ import { gql } from '@apollo/react-hooks';
 
 export const authFields = `
   id
-  rxSlug:rx_slug
+  rx_slug
   name
   predefined
 `

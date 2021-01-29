@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, TextField, FormControlLabel, Checkbox} from '@material-ui/core';
-import { PropsInputProps } from '../../../AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/PropsEditorProps';
+import { PropsInputProps } from '../../../AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/PropsEditorProps';
 import intl from 'react-intl-universal';
 import MetaListDialog from 'Components/ListView/PropsInputs/MetaListDialog';
 import { useEffect } from 'react';

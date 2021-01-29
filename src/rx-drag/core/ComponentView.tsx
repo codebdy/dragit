@@ -60,7 +60,7 @@ export const ComponentView = observer((
   const {node} = props;
   const classes = useStyles();
   const [editStyle, setEditStyle] = useState<any>({});
-  const {rxDragCoreStore: editorStore} = useDesign();
+  const {rxDragStore: editorStore} = useDesign();
   let Component = resolveComponent(node.meta);
 
   let metaProps = node.meta.props? node.meta.props :{};

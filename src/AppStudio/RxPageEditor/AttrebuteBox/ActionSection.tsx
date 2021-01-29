@@ -3,15 +3,15 @@ import { FormControl,  FormControlLabel,  Grid,  InputLabel, MenuItem, Select, S
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
-import { useDesign } from '../../../../rx-drag/store/useDesign';
+import { useDesign } from '../../../rx-drag/store/useDesign';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { toJS } from 'mobx';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import { PageAction } from 'Base/PageUtils/PageAction';
 
 const AttributeBoxActionSection = observer(()=>{
-  const {rxDragCoreStore: editorStore} = useDesign();
-  const node = editorStore?.selectedNode;  
+  const {rxDragStore} = useDesign();
+  const node = rxDragStore?.selectedNode;  
   const action:PageAction = node?.meta.props?.onClick||{};
 
   const updatAction = (field:string, value:string|IPageMutation|boolean|Array<string>)=>{
@@ -19,7 +19,7 @@ const AttributeBoxActionSection = observer(()=>{
     const props = cloneObject(toJS(node?.meta.props)||{})
     newAction[field] = value;
     props.onClick = newAction;
-    editorStore?.updateSelecteMeta('props', props);
+    rxDragStore?.updateSelecteMeta('props', props);
   }
 
   const handleActionChange = (event: React.ChangeEvent<{ value: unknown }>)=>{

@@ -1,9 +1,9 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import SwitchInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
-import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
+import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import SwitchInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
+import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 
 export class TypographyRule extends MetaConfig{
 

@@ -1,6 +1,6 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
+import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import colorRule from "Base/RXNode/Configs/colorRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import sizeRule from "Base/RXNode/Configs/sizeRule";

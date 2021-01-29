@@ -11,7 +11,7 @@ import { useDesign } from '../store/useDesign';
 
 export const DragCusor = observer(()=>{
   const [rect, setRect] = useState<IRect>();
-  const {rxDragCoreStore: editorStore} = useDesign();
+  const {rxDragStore: editorStore} = useDesign();
 
   useEffect(()=>{      
     if(editorStore?.dragOverParam){

@@ -7,6 +7,6 @@ export const RxDragStoreProvider = RxDragStoreContext.Provider;
 export const useRxDragStore = (): RxDragStore|undefined => useContext(RxDragStoreContext);
 
 export function useDesign(){
-  const rxDragCoreStore = useRxDragStore();
-  return {isDesigning:!!rxDragCoreStore, rxDragCoreStore}
+  const rxDragStore = useRxDragStore();
+  return {isDesigning:!!rxDragStore, rxDragStore}
 }

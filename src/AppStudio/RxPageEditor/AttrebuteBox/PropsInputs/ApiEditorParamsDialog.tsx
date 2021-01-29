@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import intl from "react-intl-universal";
-import PropsDialog from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/PropsDialog';
-import MetaListInput from 'AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/MetaListInput';
+import PropsDialog from 'AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/PropsDialog';
+import MetaListInput from 'AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/MetaListInput';
 import { MetaItem } from "Base/Model/MetaItem";
 
 const useStyles = makeStyles((theme: Theme) =>

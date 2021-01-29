@@ -1,6 +1,6 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "AppStudio/Pages/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
+import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import ListViewBatcthCommandDialog from "Components/ListView/PropsInputs/ListViewBatcthCommandDialog";
 import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "./PropsInputs/ListViewFiltersDialog";

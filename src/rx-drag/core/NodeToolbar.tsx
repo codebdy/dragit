@@ -47,7 +47,7 @@ export const NodeToolbar = observer((
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
 
-  const {rxDragCoreStore} = useDesign();
+  const {rxDragStore: rxDragCoreStore} = useDesign();
 
   const doFollow = ()=>{
     const canvasRect = rxDragCoreStore?.canvas?.dom?.getBoundingClientRect();

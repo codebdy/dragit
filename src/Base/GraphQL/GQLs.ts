@@ -10,7 +10,7 @@ const appFieldsGQL = `
   navigationItems: navigation_items
   auths{
     id
-    rxSlug:rx_slug
+    rx_slug:rx_slug
     name
     predefined
   }
