@@ -95,10 +95,18 @@ export const AuthListItem = observer((
         {
           editing
           ? <TextField 
+              autoFocus
               variant = "outlined" 
               size = "small" 
               value = {slug}
               onChange = {handleSlugChange} 
+              onKeyUp = {
+                e=>{
+                  if(e.key === 'Enter') {
+                    handleSave()
+                  }
+                }
+              }
             />
           : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{slug}</Typography> 
         }        
@@ -110,6 +118,13 @@ export const AuthListItem = observer((
               variant = "outlined" 
               size = "small" 
               value = {name}
+              onKeyUp = {
+                e=>{
+                  if(e.key === 'Enter') {
+                    handleSave()
+                  }
+                }
+              }
               onChange = {handleNameChange} 
             />
           : <Typography variant = "subtitle1" className = {auth ? '' : classes.header}>{name}</Typography> 
