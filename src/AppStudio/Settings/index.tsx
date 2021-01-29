@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { Button, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { stringValue } from 'rx-drag/utils/stringValue';
@@ -42,9 +42,10 @@ export const Settings = observer((
   const appStore = useDragItStore();
 
   const [name, setName] = useState(rxApp?.name);
-  const [appType, setAppType] = useState(rxApp?.appType);
+  const [appType, setAppType] = useState(rxApp?.app_type);
   const [icon, setIcon] = useState(rxApp?.icon);
   const [color, setColor] = useState(rxApp?.color);
+  const [entryPageId, setEntryPageId] = useState(rxApp?.entry_page_id);
   const [excuteSave, {loading, error}] = useMutation(SAVE_RX_APP,{
     onCompleted(){
       onClose && onClose();
@@ -57,9 +58,10 @@ export const Settings = observer((
   const handleCancel = ()=>{
     onClose && onClose();
     setName(rxApp?.name);
-    setAppType(rxApp?.appType);
+    setAppType(rxApp?.app_type);
     setIcon(rxApp?.icon);
     setColor(rxApp?.color);
+    setEntryPageId(rxApp?.entry_page_id);
   }
 
   const handleSave = ()=>{
@@ -69,7 +71,8 @@ export const Settings = observer((
         name,
         app_type:appType,
         icon,
-        color
+        color,
+        entry_page_id:entryPageId
       }
     }})
   }
@@ -116,6 +119,28 @@ export const Settings = observer((
             value = {stringValue(color)}
             onChange = {(e)=>setColor(e.target.value as string)}
           />
+        </Grid>
+        <Grid item xs = {12}>
+          <FormControl variant="outlined" size="small" fullWidth>
+            <InputLabel>{intl.get("entry-page")}</InputLabel>
+            <Select
+              label = {intl.get("entry-page")}
+              value={entryPageId || ''}
+              onChange={(e)=>setEntryPageId(e.target.value as string)}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {
+                studioStore?.rxApp?.pages?.map(page=>{
+                  return(
+                    <MenuItem key = {page.id} value={page.id}>{page.name}</MenuItem>
+                  )
+                })
+              }
+            </Select>
+          </FormControl>  
+
         </Grid>
         <Grid item className = {classes.actions} xs = {12}>
           <Button 

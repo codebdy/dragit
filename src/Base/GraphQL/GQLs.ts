@@ -3,14 +3,14 @@ import { gql } from '@apollo/react-hooks';
 const appFieldsGQL = `
   id
   name
-  isSystem:is_system
+  is_system
   icon 
   color
-  appType: app_type
-  navigationItems: navigation_items
+  app_type
+  navigation_items
   auths{
     id
-    rx_slug:rx_slug
+    rx_slug
     name
     predefined
   }

@@ -50,7 +50,6 @@ export const AppManager = observer(() => {
   const { loading, error, data } = useQuery(GET_RX_APP_LIST);
   useShowAppoloError(error);
   const apps = data ? data.rxApps :[];
-
   return (
     <div className={classes.root}>
       <AppBar 

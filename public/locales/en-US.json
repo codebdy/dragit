@@ -225,16 +225,6 @@
     "items-data":"Items data",
     "edit-select-items":"Edit select items",
 
-    "refresh-app-info":"Refresh app info",
-    "is-form-page":"Is form page",
-    "api":"API",
-    "data-api":"Data API",
-    "get-api":"Get API",
-    "submit-api":"Submit API",
-    "is-index-page":"Is index page",
-    "module-pages":"Module pages",
-    "module-auth":"Module Auth",
-
     "error":"Error",
     "input-error":"Some input items error",
     "please-confirm":"Please confirm!",
@@ -248,8 +238,6 @@
     "divider" : "Divider",
     "dashboard": "Dashboard",
     "users-management" :"Users management",
-
-    "module-index":"Module index",
 
     "icon":"Icon",
     "menu-chip":"Chip",
@@ -317,5 +305,6 @@
     "open-page":"Open page",
     "jump-style":"Jump style",
     "popup-style":"Popup style",
-    "drawer-style":"Drawer style"
+    "drawer-style":"Drawer style",
+    "entry-page":"Entry page"
 }

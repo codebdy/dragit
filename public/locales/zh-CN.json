@@ -230,16 +230,6 @@
     "items-data":"条目数据",
     "edit-select-items":"编辑下拉条目",
 
-    "refresh-app-info":"刷新系统信息",
-    "is-form-page":"表单页",
-    "api":"接口",
-    "data-api":"数据接口",
-    "get-api":"获取数据API",
-    "submit-api":"提交数据API",
-    "is-index-page":"索引页",
-    "module-pages":"模块页面",
-    "module-auth":"权限",
-
     "error":"错误",
     "input-error":"部分输入项有错误",
     "please-confirm":"请检查确认！",
@@ -253,8 +243,6 @@
     "divider" : "分割线",
     "dashboard": "仪表板",
     "users-management" :"用户管理",
-
-    "module-index":"模块索引",
 
     "icon":"图标",
     "menu-chip":"特色文字",
@@ -323,6 +311,7 @@
     "open-style":"打开方式",
     "jump-style":"跳转式",
     "popup-style":"弹出式",
-    "drawer-style":"滑出式"
+    "drawer-style":"滑出式",
+    "entry-page":"入口页"
 
 }

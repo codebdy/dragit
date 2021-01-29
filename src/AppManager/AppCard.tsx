@@ -86,7 +86,7 @@ export default function AppCard(
       </CardContent>
       <CardActions className={classes.actions}>
         <Typography className={classes.pos} color="textSecondary">
-          {rxApp.appType}
+          {rxApp.app_type}
         </Typography>
         <IconButton
           onClick = {handleMenuOpen}
@@ -115,7 +115,7 @@ export default function AppCard(
             {intl.get('edit')} 
           </MenuItem>
           {
-            !rxApp.isSystem && 
+            !rxApp.is_system && 
             <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
               <ListItemIcon>
                 <MdiIcon iconClass = "mdi-toy-brick-remove"  size={18}/>
@@ -123,10 +123,10 @@ export default function AppCard(
               {intl.get('uninstall')} 
             </MenuItem>
           }
-          { !rxApp.isSystem && 
+          { !rxApp.is_system && 
             <Divider/>
           }
-          { !rxApp.isSystem && 
+          { !rxApp.is_system && 
             <MenuItem className = {classes.menuItem} onClick={handleRemove}>
               <ListItemIcon>
                 <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>

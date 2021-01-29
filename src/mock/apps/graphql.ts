@@ -28,6 +28,7 @@ export var appGQLType = `
     navigation_items: JSON
     auths: [RxAuth]
     notifications:Int
+    entry_page_id: ID
   }
 `
 
@@ -55,6 +56,7 @@ export var appGQLInput =`
     color: String
     app_type: String
     navigation_items: JSON
+    entry_page_id:ID
   }
 
 `

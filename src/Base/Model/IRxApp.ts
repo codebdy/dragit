@@ -7,12 +7,13 @@ export interface IRxApp{
   //使用GUID当ID用
   id?:ID;
   name?: string;
-  isSystem?: boolean;
+  is_system?: boolean;
   icon?: string; 
   color?: string;
-  appType?: string;
+  app_type?: string;
   pages?: Array<IRxPage>;
-  navigationItems?: Array<IMenuItem>;
+  navigation_items?: Array<IMenuItem>;
   auths?: Array<IAuth>;
   notifications?: number;
+  entry_page_id?:ID;
 }
