@@ -51,14 +51,14 @@ const AttributeBoxActionSection = observer(()=>{
   }; 
 
   const handleOpenStyleChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
-    const openStyle = event.target.value as 'JUMP'|'POPUP'|'DRAWER';
-    updatAction('pageJumper', {openStyle});
+    const openStyle = event.target.value as 'JUMP'|'POPUP'|'DRAWER'|'';
+    updatAction('pageJumper', {...action?.pageJumper, openStyle});
   } 
   
 
   const handlePageChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const pageId = event.target.value as string;
-    updatAction('pageJumper', {pageId});
+    updatAction('pageJumper', {...action?.pageJumper, pageId});
   } 
   
 
