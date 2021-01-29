@@ -57,8 +57,9 @@ export const saveRxPage = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
 
   console.log('Server received RxPage data:', args);
-  const oldRxApp = getRxPage(args.id)
-  let rxPage = {...oldRxApp, ...args.rxPage};
+  const oldRxPage = getRxPage(args.rxPage.id)
+  
+  let rxPage = {...oldRxPage, ...args.rxPage};
   return rxPage;
 }
 
