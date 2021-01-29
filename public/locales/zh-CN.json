@@ -93,7 +93,6 @@
     "searchable":"可检索",
     "sortable":"可排序",
     "show-template":"显示模板",
-    "jump-to":"页面跳转",
     "module-id":"模块ID",
     "page-id":"页面ID",
     "module-slug":"模块标识",
@@ -318,5 +317,12 @@
     "design-page":"设计页面",
     "add-new-page":"新建页面",
     "page-name":"页面名称",
-    "new-page":"新建页面"
+    "new-page":"新建页面",
+
+    "open-page":"打开页面",
+    "open-style":"打开方式",
+    "jump-style":"跳转式",
+    "popup-style":"弹出式",
+    "drawer-style":"滑出式"
+
 }

@@ -50,26 +50,17 @@ const AttributeBoxActionSection = observer(()=>{
     updatAction('mutation', mutation);
   }; 
 
+  const handleOpenStyleChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    const openStyle = event.target.value as 'JUMP'|'POPUP'|'DRAWER';
+    updatAction('pageJumper', {openStyle});
+  } 
+  
 
   const handlePageChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const pageId = event.target.value as string;
     updatAction('pageJumper', {pageId});
   } 
-
-  const handleModuleSlugChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //let newValue = (event.target.value as string);
-    //let newAction:PageAction =  {...action, page:{...action.page, moduleSlug:newValue}};
-    //setAction(newAction);
-    //node.updateProp('onClick', newAction)
-  }; 
-
-  const handlePageSlugChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //let newValue = (event.target.value as string);
-    //let newAction:PageAction =  {...action, page:{...action.page, pageSlug:newValue}};
-    //setAction(newAction);
-    //node.updateProp('onClick', newAction)
-  }; 
-
+  
 
   return (
     <Fragment>
@@ -87,13 +78,31 @@ const AttributeBoxActionSection = observer(()=>{
             <MenuItem value={SUBMIT_MUTATION}>{intl.get("sumbit")}</MenuItem>
             <MenuItem value={RESET_ACTION}>{intl.get("reset")}</MenuItem>
             <MenuItem value={GO_BACK_ACTION}>{intl.get("go-back")}</MenuItem>
-            <MenuItem value={OPEN_PAGE_ACTION}>{intl.get("jump-to")}</MenuItem>
+            <MenuItem value={OPEN_PAGE_ACTION}>{intl.get("open-page")}</MenuItem>
           </Select>
         </FormControl>        
       </Grid>  
       {
         OPEN_PAGE_ACTION === action.name &&
         <Fragment>
+          <Grid item xs={12}>
+            <FormControl variant="outlined" size="small" fullWidth>
+              <InputLabel>{intl.get("open-style")}</InputLabel>
+              <Select
+                label = {intl.get("open-style")}
+                value={action.pageJumper?.openStyle|| ''}
+                onChange={handleOpenStyleChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={'JUMP'}>{intl.get("jump-style")}</MenuItem>
+                <MenuItem value={'POPUP'}>{intl.get("popup-style")}</MenuItem>
+                <MenuItem value={'DRAWER'}>{intl.get("drawer-style")}</MenuItem>
+              </Select>
+            </FormControl>        
+
+          </Grid>
           <Grid item xs={12}>
             <FormControl variant="outlined" size="small" fullWidth>
               <InputLabel>{intl.get("page")}</InputLabel>
