@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { TextField, Typography } from '@material-ui/core';
+import { CircularProgress, TextField, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { IAuth } from 'Base/Model/IAuth';
 import { useEffect } from 'react';
 import ActionButton from 'AppStudio/ActionButton';
+import { useMutation } from '@apollo/react-hooks';
+import { REMOVE_RX_AUTH, SAVE_RX_AUTH } from './AUTH_GQLs';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,12 +56,33 @@ export const AuthListItem = observer((
   const [editing, setEditing] = useState(false);
   const [slug, setSlug] = useState(auth?.rxSlug ||'');
   const [name, setName] = useState(auth?.name || '');
+  const studioStore = useAppStudioStore();
   useEffect(()=>{
     if(!auth){
       setSlug(intl.get('slug'));
       setName(intl.get('name'));
     }
   },[auth])
+
+  const [excuteSaveRxAuth, {loading:saving, error}] = useMutation( SAVE_RX_AUTH );
+  const [excuteRemoveRxAuth, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_AUTH,
+    {
+      update: (cache, { data: { removeRxAuth } })=>{
+        cache.modify({
+          id: cache.identify(studioStore?.rxApp as any),
+          fields: {
+            auths:(existingAuthRefs = [], { readField })=>{
+              return existingAuthRefs.filter(
+                (authRef:any) => auth?.id !== readField('id', authRef)
+              );
+            }
+          }
+        });
+      },
+    }
+  );
+
+  useShowAppoloError(error || removeError);
 
   const handleEditing = ()=>{
     setEditing(true);
@@ -71,6 +96,7 @@ export const AuthListItem = observer((
 
   const handleSave = ()=>{
     setEditing(false);
+    excuteSaveRxAuth({variables:{rxAuth:{id:auth?.id, rx_slug:slug, name:name}}})
   }
 
   const handleSlugChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -82,7 +108,7 @@ export const AuthListItem = observer((
   }
 
   const handleRemove = ()=>{
-
+    excuteRemoveRxAuth({variables:{id:auth?.id}});
   }
 
   const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{
@@ -90,6 +116,8 @@ export const AuthListItem = observer((
       handleSave()
     }
   }
+
+  const loading = saving || removing;
 
   return (
     <div 
@@ -126,14 +154,18 @@ export const AuthListItem = observer((
         
       </div>
       <div  className = {classes.action}>
-        { hover && !editing && auth && !auth.predefined &&
+        {
+          loading &&
+          <CircularProgress size = {24}/>
+        }
+        { hover && !editing && auth && !auth.predefined && !loading &&
           <>
             <ActionButton onClick = {handleEditing} icon = "mdi-pencil" />
             <ActionButton onClick = {handleRemove} icon = "mdi-trash-can-outline" />
           </> 
         }
         {
-          editing &&
+          editing && !loading&&
           <>
             <ActionButton onClick = {handleCancel} icon = "mdi-close" />
             <ActionButton onClick = {handleSave} icon = "mdi-check" />

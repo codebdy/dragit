@@ -118,10 +118,6 @@ export const Settings = observer((
           />
         </Grid>
         <Grid item className = {classes.actions} xs = {12}>
-          应用权限： 此处添加预制权限选择
-        </Grid>
-
-        <Grid item className = {classes.actions} xs = {12}>
           <Button 
             variant = 'outlined'
             onClick = {handleCancel}
