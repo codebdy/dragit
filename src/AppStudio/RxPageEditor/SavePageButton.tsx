@@ -7,12 +7,15 @@ import { useMutation } from '@apollo/react-hooks';
 import { SAVE_RX_PAGE } from 'Base/GraphQL/PAGE_GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { toJS } from 'mobx';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 export const SavePageButton = observer(() => {
   const studioStore = useAppStudioStore();
+  const dragItStore = useDragItStore();
   const [excuteSaveRxPage, {loading:saving, error}] = useMutation( SAVE_RX_PAGE,{
     onCompleted(){
       studioStore?.pageEditor?.setIsDirty(false);
+      dragItStore.setSuccessAlert(true);
     }
   } );
   useShowAppoloError(error);
