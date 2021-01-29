@@ -9,10 +9,11 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       margin: 0,
       padding: theme.spacing(1, 2),
-      minWidth:'260px',
+      minWidth:'300px',
       background: theme.palette.background.paper,
       display:'flex',
       justifyContent:'space-between',
+      alignItems:'center',
     },
   }),
 );

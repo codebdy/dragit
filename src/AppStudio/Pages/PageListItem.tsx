@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { useState } from 'react';
 import PageAction from './PageAction';
 import { IRxPage } from 'Base/Model/IRxPage';
-import { CircularProgress, TextField } from '@material-ui/core';
+import { CircularProgress, TextField, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { gql, useMutation } from '@apollo/react-hooks';
 import { DUPLICATE_RX_PAGE, REMOVE_RX_PAGE, SAVE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
@@ -12,6 +12,7 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import classNames from 'classnames';
 import { pageFieldsGQL } from 'Base/GraphQL/GQLs';
+import ActionButton from 'AppStudio/ActionButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +24,12 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems:'center',
       cursor:'pointer',
       minHeight: theme.spacing(6),
+    },
+    name:{
+      height:'100%',
+      flex:1,
+      display:'flex',
+      alignItems:'center',
     },
     selected:{
       color:theme.palette.primary.main,
@@ -105,6 +112,11 @@ export const PageListItem = observer((
     setEditing(true);
   }
 
+  const handleCancel = ()=>{
+    setName(page.name);
+    setEditing(false);
+  }
+
   const handleFinishedEdit = ()=>{
     setEditing(false);
     if(name !== page.name){
@@ -139,7 +151,6 @@ export const PageListItem = observer((
           {[classes.selected]:studioStore?.editingPage?.id === page.id}
         )
       } 
-      onClick={onClick}
       onMouseOver = {()=>{setHover(true)}}
       onMouseLeave = {()=>{setHover(false)}}
     >
@@ -150,7 +161,6 @@ export const PageListItem = observer((
             size = "small" 
             variant = "outlined" 
             value = {name === undefined ? '' : name} 
-            onBlur = {handleFinishedEdit}
             onChange = {handleChange}
             onKeyUp = {
               e=>{
@@ -160,7 +170,9 @@ export const PageListItem = observer((
               }
             }
           />
-        : name
+        : <div onClick={onClick} className={classes.name} >
+            <Typography variant = "subtitle1">{name}</Typography>
+          </div>
       }
       <div className={classes.rightArea}>
         {
@@ -169,9 +181,7 @@ export const PageListItem = observer((
         }
         {
           hover&& !editing && !loading &&
-          <div onClick={e=>{
-            e.stopPropagation();
-          }}>
+          <div>
             <PageAction 
               onCloseMenu={()=>setHover(false)} 
               onEditName = {handleEditName}
@@ -180,6 +190,13 @@ export const PageListItem = observer((
               onRemove = {handleRemove}
             />
           </div>
+        }
+        {
+          editing && 
+          <>
+            <ActionButton onClick = {handleCancel} icon = "mdi-close" />
+            <ActionButton onClick = {handleFinishedEdit} icon = "mdi-check" />
+          </>
         }      
       </div>
 

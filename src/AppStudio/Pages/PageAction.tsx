@@ -1,15 +1,11 @@
 import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, IconButton, Divider, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Divider, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import intl from 'react-intl-universal';
+import ActionButton from 'AppStudio/ActionButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      width:'32px',
-      height: '32px',
-    },
-
     menuItem:{
       padding:theme.spacing(1, 3),
     },
@@ -62,9 +58,7 @@ export default function PageAction(
 
   return (
     <Fragment>
-      <IconButton size="small" className = {classes.root} onClick={handleMenuOpen}>
-        <MdiIcon iconClass = "mdi-dots-horizontal" size={18}/>
-      </IconButton>
+      <ActionButton onClick={handleMenuOpen} icon = "mdi-dots-horizontal"/>
       <Menu
           anchorEl={anchorEl}
           getContentAnchorEl={null}

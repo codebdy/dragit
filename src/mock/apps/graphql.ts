@@ -72,7 +72,7 @@ export var appGQLMutation = `
   createRxPage(appId:ID, templateId:ID, pageId:ID, name:String):RxPage
   removeRxPage(id:ID):RxPage
   duplicateRxPage(id:ID):RxPage
-  createRxAuth(appId:ID, rxSlug:String, name:String):RxAuth
+  createRxAuth(appId:ID):RxAuth
   saveRxAuth(rxAuth:RxAuthInput):RxAuth
   removeRxAuth(id:ID):RxAuth
 `

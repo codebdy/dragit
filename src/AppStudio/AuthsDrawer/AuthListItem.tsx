@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { IconButton, TextField, Typography, useTheme } from '@material-ui/core';
-import MdiIcon from 'Components/Common/MdiIcon';
+import { TextField, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { IAuth } from 'Base/Model/IAuth';
 import { useEffect } from 'react';
+import ActionButton from 'AppStudio/ActionButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,10 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display:'flex',
       justifyContent:'flex-end',
     },
-    actionButton:{
-      width:'40px',
-      height:'40px',
-    }
+
   }),
 );
 
@@ -55,7 +52,6 @@ export const AuthListItem = observer((
   const [editing, setEditing] = useState(false);
   const [slug, setSlug] = useState(auth?.rxSlug ||'');
   const [name, setName] = useState(auth?.name || '');
-  const theme = useTheme();
   useEffect(()=>{
     if(!auth){
       setSlug(intl.get('slug'));
@@ -83,6 +79,10 @@ export const AuthListItem = observer((
 
   const handleNameChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     setName(event.target.value as string);
+  }
+
+  const handleRemove = ()=>{
+
   }
 
   return (
@@ -119,36 +119,16 @@ export const AuthListItem = observer((
       <div  className = {classes.action}>
         { hover && !editing && auth && !auth.predefined &&
           <>
-            <IconButton 
-              size = "small" 
-              className={classes.actionButton}
-              onClick = {handleEditing}
-            >
-              <MdiIcon iconClass="mdi-pencil" size={18} color = {theme.palette.text.secondary}/>
-            </IconButton>
-            <IconButton size = "small" className={classes.actionButton}>
-              <MdiIcon iconClass="mdi-trash-can-outline" size={18} color = {theme.palette.text.secondary}/>
-            </IconButton>
+            <ActionButton onClick = {handleEditing} icon = "mdi-pencil" />
+            <ActionButton onClick = {handleRemove} icon = "mdi-trash-can-outline" />
           </> 
         }
         {
           editing &&
           <>
-          <IconButton 
-            size = "small" 
-            className={classes.actionButton}
-            onClick = {handleCancel}
-          >
-            <MdiIcon iconClass="mdi-close" size={18} color = {theme.palette.text.secondary}/>
-          </IconButton>
-          <IconButton 
-            size = "small" 
-            className={classes.actionButton}
-            onClick = {handleSave}
-          >
-            <MdiIcon iconClass="mdi-check" size={18} color = {theme.palette.text.secondary}/>
-          </IconButton>
-        </>           
+            <ActionButton onClick = {handleCancel} icon = "mdi-close" />
+            <ActionButton onClick = {handleSave} icon = "mdi-check" />
+          </>           
         }
 
       </div>

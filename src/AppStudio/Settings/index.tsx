@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root:{
       padding: theme.spacing(2),
-      width:'260px',
+      width:'300px',
     },
     actions:{
       display:'flex',

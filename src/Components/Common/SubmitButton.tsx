@@ -4,7 +4,6 @@ import { makeStyles, Theme, createStyles, Button, CircularProgress, ButtonProps 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
-      margin: theme.spacing(1),
       position: 'relative',
     },
     

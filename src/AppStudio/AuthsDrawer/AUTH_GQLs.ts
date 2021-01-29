@@ -1,6 +1,6 @@
 import { gql } from '@apollo/react-hooks';
 
-const authFields = `
+export const authFields = `
   id
   rxSlug:rx_slug
   name
@@ -8,9 +8,7 @@ const authFields = `
 `
 
 export const SAVE_RX_AUTH = gql`
-  mutation($rxAuth:{
-    ${authFields}
-  }){
+  mutation($rxAuth:RxAuthInput){
     saveRxAuth(rxAuth:$rxAuth){
       ${authFields}
     }
@@ -19,8 +17,8 @@ export const SAVE_RX_AUTH = gql`
 
 
 export const CREATE_RX_AUTH = gql`
-  mutation($appId:ID, $rxSlug:String, $name:String){
-    createRxAuth(appId:$appId, rx_slug:$rxSlug, name:$name){
+  mutation($appId:ID!){
+    createRxAuth(appId:$appId){
       ${authFields}
     }
   }
