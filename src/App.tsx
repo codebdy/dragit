@@ -3,9 +3,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import Loading from 'AdminBoard/Common/Loading'
+import Loading from 'Common/Loading'
 
-import {AdminBoard} from 'AdminBoard';
+import {AdminBoard} from 'AppBoard';
 import useShadows from 'Utils/useShadows';
 import RxNavigationEditor from 'AppStudio/RxNavigationEditor';
 import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';

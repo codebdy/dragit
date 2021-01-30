@@ -7,7 +7,7 @@ import { Avatar, Button, Container, Grid, Typography } from '@material-ui/core';
 import Spacer from 'Components/Common/Spacer';
 import AppCard from './AppCard';
 import { Add } from '@material-ui/icons';
-import { AccountAvatar } from 'AdminBoard/TopNav/AccountAvatar';
+import { AccountAvatar } from 'AppBoard/TopNav/AccountAvatar';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import { useQuery } from '@apollo/react-hooks';

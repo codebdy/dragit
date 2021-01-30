@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/react-hooks';
 import {observer} from "mobx-react";
 import { ID } from "rx-drag/models/baseTypes";
 import { GET_DRAWER } from "../../Base/GraphQL/GQLs";
-import Scrollbar from "AdminBoard/Common/Scrollbar";
+import Scrollbar from "Common/Scrollbar";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 import { cloneObject } from "rx-drag/utils/cloneObject";

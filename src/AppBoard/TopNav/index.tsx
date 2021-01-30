@@ -4,9 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
-import { DesignButtons } from 'AdminBoard/TopNav/DesignButtons';
+import { DesignButtons } from 'AppBoard/TopNav/DesignButtons';
 import NavButtons from './NavButtons';
-import { LeftDrawerWidthPlaceholder } from 'AdminBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
+import { LeftDrawerWidthPlaceholder } from 'AppBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 
 import {observer} from "mobx-react";
 import { useThemeSettings, useDragItStore } from 'Store/Helpers/useDragItStore';

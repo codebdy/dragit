@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, Drawer, Divider, IconButton, Typograph
 import MdiIcon from 'Components/Common/MdiIcon';
 import { Close } from '@material-ui/icons';
 import intl from 'react-intl-universal';
-import Scrollbar from 'AdminBoard/Common/Scrollbar';
+import Scrollbar from 'Common/Scrollbar';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { TreeView } from '@material-ui/lab';

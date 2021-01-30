@@ -9,7 +9,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import IMenuItem from 'Base/Model/IMenuItem';
 import { RxNode } from 'rx-drag/models/RxNode';
-import Scrollbar from 'AdminBoard/Common/Scrollbar';
+import Scrollbar from 'Common/Scrollbar';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {observer} from 'mobx-react';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';

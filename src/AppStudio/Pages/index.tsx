@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { PageListItem } from './PageListItem';
 import { IRxPage } from 'Base/Model/IRxPage';
-import Scrollbar from 'AdminBoard/Common/Scrollbar';
+import Scrollbar from 'Common/Scrollbar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

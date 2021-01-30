@@ -3,7 +3,7 @@ import {makeStyles, Theme, createStyles, Drawer, IconButton, Typography, Divider
 import classNames from 'classnames';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Close } from '@material-ui/icons';
-import Scrollbar from 'AdminBoard/Common/Scrollbar';
+import Scrollbar from 'Common/Scrollbar';
 import { useThemeSettings } from 'Store/Helpers/useDragItStore';
 import useShadows from 'Utils/useShadows';
 

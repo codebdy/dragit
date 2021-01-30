@@ -6,7 +6,7 @@ import { ThemeColor } from './ThemeColor';
 import { ToolbarSettings } from './ToolbarSettings';
 import { ElevationStrength } from './ElevationStrength';
 import { SidebarSettings } from './SidebarSettings';
-import RightDrawer from 'AdminBoard/ThemeSettings/RightDrawer';
+import RightDrawer from 'AppBoard/ThemeSettings/RightDrawer';
 import {observer} from 'mobx-react';
 import { useThemeSettings, useDragItStore } from 'Store/Helpers/useDragItStore';
 import useShadows from 'Utils/useShadows';

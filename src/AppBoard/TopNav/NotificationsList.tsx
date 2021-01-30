@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles, Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import SiderBarLoadingSkeleton from 'AdminBoard/Sidebar/LoadingSkeleton';
+import SiderBarLoadingSkeleton from 'AppBoard/Sidebar/LoadingSkeleton';
 import { INotification } from 'Base/Model/INotification';
 import { useHistory } from 'react-router-dom';
 //import { resolvePageUrl } from 'Utils/resolvePageUrl';

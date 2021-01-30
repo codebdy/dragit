@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles, Theme, createStyles, Drawer, IconButton, Typography, Divider, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { Close } from '@material-ui/icons';
-import Scrollbar from 'AdminBoard/Common/Scrollbar';
+import Scrollbar from 'Common/Scrollbar';
 import { useThemeSettings } from 'Store/Helpers/useDragItStore';
 import useShadows from 'Utils/useShadows';
 

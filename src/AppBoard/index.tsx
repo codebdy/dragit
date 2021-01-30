@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
-import Sidebar from 'AdminBoard/Sidebar';
-import {TopNav} from 'AdminBoard/TopNav';
-import { Workspace } from 'AdminBoard/Workspace';
+import Sidebar from 'AppBoard/Sidebar';
+import {TopNav} from 'AppBoard/TopNav';
+import { Workspace } from 'AppBoard/Workspace';
 import { LeftDrawerWidthPlaceholder } from './Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
 import {observer} from 'mobx-react';
 import { ThemeSettings } from './ThemeSettings';

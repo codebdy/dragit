@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import Scrollbar from 'AdminBoard/Common/Scrollbar';
+import Scrollbar from 'Common/Scrollbar';
 import intl from 'react-intl-universal';
 import { PopuDrawer } from 'AppStudio/PopuDrawer';
 import { AuthListItem } from './AuthListItem';
