@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const AdminBoard = observer(()=>{
+export const AppBoard = observer(()=>{
   const leftDrawer = useLeftDrawer();
   const handleOpenMobileDrawer = () => {
     leftDrawer.openOnMobile();

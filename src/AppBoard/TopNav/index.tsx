@@ -4,19 +4,24 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import classNames from 'classnames';
 import TopNavHeightPlaceholder from './TopNavHeightPlaceholder';
-import { DesignButtons } from 'AppBoard/TopNav/DesignButtons';
 import NavButtons from './NavButtons';
 import { LeftDrawerWidthPlaceholder } from 'AppBoard/Sidebar/LeftDrawer/LeftDrawerWidthPlaceholder';
-
+import intl from 'react-intl-universal';
 import {observer} from "mobx-react";
 import { useThemeSettings, useDragItStore } from 'Store/Helpers/useDragItStore';
 import { DARK } from 'Store/ThemeSettings';
+import { IconButton, Tooltip } from '@material-ui/core';
+import MdiIcon from 'Components/Common/MdiIcon';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       color: theme.palette.text.primary,
     },
+    goBackButton:{
+      marginLeft:theme.spacing(-2),
+    }
   }),
 );
 
@@ -24,7 +29,8 @@ export const TopNav = observer((props:{onSidebarToggle: any}) => {
   const classes = useStyles();
   const [sticky, setSticky] = React.useState(false);
   const toolbarSkin = useThemeSettings().toolbarSkin;
-  const appStore = useDragItStore();  
+  const appStore = useDragItStore();
+  const history = useHistory();
   
   const handleScroll = function(event:any){
     let topOffset = window.pageYOffset || document.documentElement.offsetTop || 0
@@ -40,6 +46,9 @@ export const TopNav = observer((props:{onSidebarToggle: any}) => {
     };
   },[]);
 
+  const handleGoback=()=>{
+    history.push('/apps-index/');
+  }
  
   const backgroundColor = toolbarSkin.colored ? 'primary' :'inherit';
 
@@ -63,7 +72,11 @@ export const TopNav = observer((props:{onSidebarToggle: any}) => {
       >
         <Toolbar>
           <LeftDrawerWidthPlaceholder />
-          <DesignButtons color={color}/>
+          <Tooltip title={intl.get('go-back')} arrow placement="bottom">
+            <IconButton aria-label={intl.get('design-layout')} className={classes.goBackButton} onClick={handleGoback}>
+              <MdiIcon iconClass="mdi-arrow-left" color={color}/>
+            </IconButton>
+          </Tooltip>
           <NavButtons color={color} onSidebarToggle = {props.onSidebarToggle}/>
         </Toolbar>
       </AppBar>

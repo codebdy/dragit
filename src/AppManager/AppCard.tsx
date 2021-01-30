@@ -71,10 +71,17 @@ export default function AppCard(
   const handleRemove = ()=>{
     setAnchorEl(null);
   }
+
+  const handleToApp = ()=>{
+    history.push(`/app/${rxApp?.id}/`)
+  }
   
   return (
     <Card className={classes.root}>
-      <CardContent className={classes.content}>
+      <CardContent 
+        className={classes.content}
+        onClick = {handleToApp}
+      >
         <Badge color="secondary" badgeContent={rxApp.notifications}>
           <Avatar className = {classes.appAvata} style={{ backgroundColor: rxApp.color}} variant = "rounded">
             <MdiIcon iconClass = {rxApp.icon} size={40}  />

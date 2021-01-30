@@ -5,9 +5,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Loading from 'Common/Loading'
 
-import {AdminBoard} from 'AppBoard';
+import {AppBoard} from 'AppBoard';
 import useShadows from 'Utils/useShadows';
-import RxNavigationEditor from 'AppStudio/RxNavigationEditor';
 import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';
 import Login from 'AppManager/Login';
 import { useIntl } from 'Base/Hooks/useIntl';
@@ -47,8 +46,7 @@ const App = observer(()=>{
         <BrowserRouter>
           <Switch> 
             <Route path={ LOGIN_URL } component={Login}></Route>
-            <Route path="/admin" component={AdminBoard}></Route>
-            <Route path="/drawer-edit" component={RxNavigationEditor}></Route>
+            <Route path="/app/:appId/" component={AppBoard}></Route>
             <Route path="/apps-index" component={AppManager}></Route>
             <Route path="/app-studio/:id" component={AppStudio}></Route>
             <Redirect to={ LOGIN_URL } from='/' /> 
