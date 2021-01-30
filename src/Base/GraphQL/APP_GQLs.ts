@@ -18,15 +18,6 @@ const appFieldsGQL = `
   notifications
 `
 
-export const pageFieldsGQL = `
-  id
-  name
-  maxWidth:max_width
-  width
-  schema
-  auths
-  query
-`
 
 export const GET_RX_APP_LIST = gql`
   query {

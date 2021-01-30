@@ -8,6 +8,7 @@ export class PageEditorStore {
   currentData?:IRxPage;
   constructor(editingPage?:IRxPage) {
     this.editingPage = editingPage;
+    this.currentData = editingPage;
     makeAutoObservable(this);
   }
 

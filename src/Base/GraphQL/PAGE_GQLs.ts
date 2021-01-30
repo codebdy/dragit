@@ -1,6 +1,14 @@
 import { gql } from '@apollo/react-hooks';
-import { pageFieldsGQL } from './APP_GQLs';
 
+export const pageFieldsGQL = `
+  id
+  name
+  maxWidth:max_width
+  width
+  schema
+  auths
+  query
+`
 
 export const SAVE_RX_PAGE = gql`
   mutation($rxPage:RxPageInput){
