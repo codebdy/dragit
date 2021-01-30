@@ -42,11 +42,15 @@ export const Workspace = observer(()=>{
     
   }
 
+  let maxWidth = page?.max_width ==='false' ? false : page?.max_width;
+
+  maxWidth = maxWidth === '' || maxWidth === undefined ? 'lg' : maxWidth;
+
   return (
     <div className = {classes.root}>      
       {
         page &&
-        <Container className={classes.container} maxWidth = {page?.max_width ==='false' ? false : page?.max_width}>
+        <Container className={classes.container} maxWidth = {maxWidth}>
           <Page 
             page={page}
             onPageAction = {hanlePageAction}

@@ -45,11 +45,13 @@ export default function RxDialog(
 ){
   const {maxWidth, open, onClose, title, children} = props;
   const classes = useStyles();
+  let maxWidthDlg = maxWidth ==='false' ? false : maxWidth;
+  maxWidthDlg = maxWidthDlg === '' || maxWidthDlg === undefined ? 'lg' : maxWidthDlg;
   return (
     <Dialog
       fullWidth
       scroll='paper'
-      maxWidth = {maxWidth ==='false' ? false : maxWidth}
+      maxWidth = {maxWidthDlg}
       open={open}
       onClose={onClose}
       TransitionComponent={Transition}

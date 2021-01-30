@@ -1,5 +1,5 @@
 import { IMeta } from "Base/RXNode/IMeta";
-import { MetaConfig } from "../../Base/RXNode/MetaConfig";
+import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 
 export class CanvasRule extends MetaConfig{
   editPaddingY = '';

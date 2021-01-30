@@ -47,9 +47,11 @@ export const PopupStyleModule = observer((
   const handleClose = ()=>{
     setPopupPageId(undefined);
   }
+  let maxWidth = page?.max_width ==='false' ? false : page?.max_width;
+  maxWidth = maxWidth === '' || maxWidth === undefined ? 'lg' : maxWidth;
 
   return (
-    <Container className={classes.root} maxWidth = {page?.max_width ==='false' ? false : page?.max_width}>
+    <Container className={classes.root} maxWidth = {maxWidth}>
       {
         page &&
         <Page 
