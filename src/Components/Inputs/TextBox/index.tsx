@@ -1,9 +1,7 @@
 import { TextField } from '@material-ui/core';
-import withSkeleton from 'Base/HOCs/withSkeleton';
-import withFormField from 'Components/Common/withFormField';
 import React from 'react';
 
-const TexBox = React.forwardRef((props:any, ref:any)=>{
+export const TextBox = React.forwardRef((props:any, ref:any)=>{
   const {value, shrinkLabel, type, onChange, ...rest} = props;
 
   const handleOnchange = (event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -33,5 +31,3 @@ const TexBox = React.forwardRef((props:any, ref:any)=>{
     />
   )
 })
-
-export default withFormField(withSkeleton(TexBox));

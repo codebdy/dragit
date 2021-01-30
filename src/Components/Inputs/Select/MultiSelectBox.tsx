@@ -4,7 +4,6 @@ import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
 
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import withFormField from 'Components/Common/withFormField';
 
 export const MultiSelectBox = React.forwardRef((
   props:{
@@ -99,6 +98,6 @@ export const MultiSelectBox = React.forwardRef((
   )
 })
 
-const MultiSelectBoxAny = withFormField(MultiSelectBox) as any;
+//const MultiSelectBoxAny = withFormField(MultiSelectBox) as any;
 
-export default MultiSelectBoxAny;
+//export default MultiSelectBoxAny;

@@ -4,9 +4,8 @@ import { Autocomplete } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
 import intl from 'react-intl-universal';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import withFormField from 'Components/Common/withFormField';
 
-const Combobox = React.forwardRef((
+export const Combobox = React.forwardRef((
   props:{
     value?:string|[],
     multiple?:boolean,
@@ -102,4 +101,3 @@ const Combobox = React.forwardRef((
   )
 })
 
-export default withFormField(Combobox);

@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { gql, useQuery } from '@apollo/react-hooks';
-import withFormField from 'Components/Common/withFormField';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,7 +35,7 @@ const groupBy = (array:any, name:string)=>{
   return retValue;
 }
 
-const SelectBox = React.forwardRef((
+export const SelectBox = React.forwardRef((
   props:{
     value?:string|[],
     label?:string,
@@ -135,5 +134,3 @@ const SelectBox = React.forwardRef((
     </FormControl>
   )
 })
-
-export default withFormField(SelectBox);

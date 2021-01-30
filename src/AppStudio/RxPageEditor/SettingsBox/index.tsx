@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles, Theme, createStyles, Grid, TextField, FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 import intl from 'react-intl-universal';
-import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
+import {MultiSelectBox} from 'Components/Inputs/Select/MultiSelectBox';
 import {observer} from "mobx-react";
 import { useDesign } from '../../../rx-drag/store/useDesign';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
