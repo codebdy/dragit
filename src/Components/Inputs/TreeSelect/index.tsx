@@ -6,7 +6,6 @@ import ChipsInput from './ChipsInput';
 import intl from 'react-intl-universal';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import withFormField from 'Components/Common/withFormField';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const TreeSelect = React.forwardRef((props:any, ref:any)=>{
+export const TreeSelect = React.forwardRef((props:any, ref:any)=>{
   const {label, 
     name, 
     variant, 
@@ -111,5 +110,3 @@ const TreeSelect = React.forwardRef((props:any, ref:any)=>{
 
   )
 })
-
-export default withFormField(TreeSelect);

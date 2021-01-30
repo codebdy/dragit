@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import MediaAdder from 'Components/Medias/MediaAdder';
 import { IMedia } from 'Base/Model/IMedia';
-import withSkeleton from 'Base/HOCs/withSkeleton';
-import withFormField from 'Components/Common/withFormField';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MediaSelect = React.forwardRef((props: {
+export const MediaSelect = React.forwardRef((props: {
   label?:string,
   value?:IMedia,
   width?:string,
@@ -66,4 +64,3 @@ const MediaSelect = React.forwardRef((props: {
   )
 })
 
-export default withFormField(withSkeleton(MediaSelect))
