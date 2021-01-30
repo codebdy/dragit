@@ -8,6 +8,7 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { stringValue } from 'rx-drag/utils/stringValue';
 import { PagePropName, PagePropValue, UpdatePageCommand } from './UpdatePageCommand';
 import StringInput from '../AttrebuteBox/PropsInputs/StringInput';
+import { IAuth } from 'Base/Model/IAuth';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,8 +46,10 @@ const SettingsBox = observer(()=>{
   }
 
   const handleChangeAuths = (event: React.ChangeEvent<{ value: unknown }>)=>{
-    const newAuths = event.target.value as any
-    doUpdatePage('auths', newAuths);
+    const newAuths:Array<IAuth> = event.target.value as any
+    doUpdatePage('auths', newAuths?.map(auth=>{
+      return {id:auth.id, name:auth.name, rx_slug: auth.rx_slug}
+    }));
   }
 
   return (

@@ -14,7 +14,7 @@ export var appGQLType = `
     max_width:String
     width:Int
     schema:JSON
-    auths:[String]
+    auths:[RxAuth]
   }
 
   type RxApp{
@@ -26,9 +26,9 @@ export var appGQLType = `
     app_type: String
     pages: [RxPage]
     navigation_items: JSON
-    auths: [RxAuth]
     notifications:Int
     entry_page_id: ID
+    auths:[RxAuth]
   }
 `
 
@@ -47,7 +47,7 @@ export var appGQLInput =`
     max_width:String
     width:Int
     schema:JSON
-    auths:[String]
+    auths:[RxAuthInput]
   }
   input RxAppInput{
     id: ID
@@ -57,6 +57,7 @@ export var appGQLInput =`
     app_type: String
     navigation_items: JSON
     entry_page_id:ID
+    auths:[RxAuthInput]
   }
 
 `

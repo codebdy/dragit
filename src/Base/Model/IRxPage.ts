@@ -1,14 +1,8 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { ID } from "../../rx-drag/models/baseTypes";
+import { IAuth } from "./IAuth";
 
 export type MaxWidth = 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false';
-
-export interface IQuery{
-  name:string;
-  variables:{
-    [key:string]:any;
-  }
-}
 
 export interface IRxPage{
   //使用UUID当ID用
@@ -17,6 +11,6 @@ export interface IRxPage{
   max_width?: MaxWidth;
   width?:number;
   schema?:Array<IMeta>,
-  auths?:string[],
+  auths?:IAuth[],
   query?:string, 
 }
