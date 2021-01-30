@@ -29,8 +29,8 @@ export const removeRxApp = async (parent:any, args:any, context:any, info:any)=>
 export const saveRxApp = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
 
-  console.log('Server received RxApp data:', args);
-  const oldRxApp = getRxApp(args.id)
+  const oldRxApp = getRxApp(args.rxApp?.id)
+  console.log('Server received RxApp data:', args, oldRxApp);
   let rxApp = {...oldRxApp, ...args.rxApp};
   return rxApp;
 }
