@@ -1,6 +1,5 @@
 import { LeftDrawer } from "./LeftDrawer";
 import { makeAutoObservable } from "mobx"
-import { ThemeSettings } from "../AppBoard/store/ThemeSettings";
 import { DesignerStore } from "./DesignerStore";
 import { IUser } from "Base/Model/IUser";
 import { IModule } from "Base/Model/IModule";
@@ -13,7 +12,6 @@ export class DragItStore{
   token:string = "";
   loggedUser: IUser|undefined = undefined;
   leftDrawer: LeftDrawer = new LeftDrawer();
-  themeSettings: ThemeSettings = new ThemeSettings();
   designer:DesignerStore = new DesignerStore();
   successAlert: boolean|string = false;
   error: Error = new Error();

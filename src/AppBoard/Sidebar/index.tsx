@@ -1,10 +1,8 @@
 import React from "react";
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { SidebarLinks } from "./SidebarLinks"
 import LeftDrawer from "./LeftDrawer";
 import {observer} from "mobx-react";
-import { useLeftDrawer } from "Store/Helpers/useDragItStore";
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 
 export enum SidebarSize{
@@ -19,8 +17,12 @@ export enum SidebarSize{
  * @visibleName Sidebar 组件名称
  * @props
  */
-const Sidebar = observer(() => {
-  const leftDrawer = useLeftDrawer();
+const Sidebar = observer((
+  props:{
+    children:any,
+  }
+) => {
+  const {children} = props;
   const themeSettings = useThemeSettings();
   const theme = responsiveFontSizes(createMuiTheme({
     palette: {
@@ -43,10 +45,7 @@ const Sidebar = observer(() => {
   return(
     <ThemeProvider theme={theme}>
       <LeftDrawer>
-        <SidebarLinks 
-          mini ={leftDrawer.isMini}
-          fullWidth = {leftDrawer.fullWidth}
-        />  
+        {children}
       </LeftDrawer>
     </ThemeProvider>
 
