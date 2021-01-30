@@ -159,7 +159,8 @@ export const PageListItem = observer((
   }
 
   const handleClick = ()=>{
-    if(page.id !== studioStore?.pageEditor?.editingPage?.id && studioStore?.pageEditor?.isDirty){
+    if((page.id !== studioStore?.pageEditor?.editingPage?.id && studioStore?.pageEditor?.isDirty)
+      ||studioStore?.navigationEditor?.isDirty){
       dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
         onClick && onClick();
       })

@@ -18,6 +18,7 @@ import { DARK } from 'Store/ThemeSettings';
 import { SavePageButton } from './RxPageEditor/SavePageButton';
 import intl from 'react-intl-universal';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { SaveNavigationButton } from './RxNavigationEditor/SaveNavigationButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -92,7 +93,7 @@ export const AppStudio = observer(() => {
   useShowAppoloError(error)
 
   const handleBack = ()=>{
-    if(studioStore?.pageEditor?.isDirty){
+    if(studioStore?.pageEditor?.isDirty || studioStore?.navigationEditor?.isDirty){
       dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
         history.goBack();
       })       
@@ -120,7 +121,11 @@ export const AppStudio = observer(() => {
                 {
                   studioStore?.pageEditor &&
                   <SavePageButton />
-                }                
+                }
+                {
+                  studioStore?.navigationEditor &&
+                  <SaveNavigationButton />
+                }        
               </Toolbar>
             </AppBar>
           </ThemeProvider>

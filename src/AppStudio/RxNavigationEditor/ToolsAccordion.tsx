@@ -11,8 +11,8 @@ import IMenuItem from 'Base/Model/IMenuItem';
 import { RxNode } from 'rx-drag/models/RxNode';
 import Scrollbar from 'AdminBoard/Common/Scrollbar';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { TreeView } from '@material-ui/lab';
+import {observer} from 'mobx-react';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,15 +43,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function ToolsAccordion(
+export const ToolsAccordion = observer((
   props:{
     onStartDragNode:(node:RxNode<IMenuItem>)=>void,
     onEndDragNode:()=>void,
   }
-) {
+) => {
   const {onStartDragNode, onEndDragNode} = props;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string | false>(false);
+  const studioStore = useAppStudioStore();
 
   //const [moduleCategories] = useAxios<IModuleCategory[]>(API_GET_MODULES);
   const [assistItems] = useState([
@@ -128,17 +129,32 @@ export default function ToolsAccordion(
             <Typography >{intl.get('pages')}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <TreeView 
-              defaultCollapseIcon={<ExpandMoreIcon />}
-              defaultExpandIcon={<ChevronRightIcon />}
-              disableSelection
-              className = {classes.list}
-            >
-            </TreeView>
-
+            <List className={classes.list}>
+              {
+                studioStore?.rxApp?.pages?.map(page=>{
+                  const meta:IMenuItem ={
+                    type:'item',
+                    title:page.name,
+                    icon:"mdi-circle-small",
+                    pageId:page.id,
+                  }
+                  return (
+                    <ListItem 
+                      key={page.id} 
+                      draggable = {true}  
+                      className={classes.item}
+                      onDragStart = {()=>handleDragStart(meta)}
+                      onDragEnd = {onEndDragNode}
+                    >
+                      <ListItemText primary={page.name} />
+                    </ListItem>
+                  )
+                })
+              }
+            </List>
           </AccordionDetails>
         </Accordion>
       </Scrollbar>
     </div>
   );
-}
+})

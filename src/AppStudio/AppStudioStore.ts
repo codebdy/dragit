@@ -4,14 +4,15 @@ import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
 import { useContext } from "react";
 import { DARK, RxThemeMode } from "rx-drag/store/IRxThemeOptions";
+import { NavigationEditorStore } from "./RxNavigationEditor/NavigationEditorStore";
 import { PageEditorStore } from "./RxPageEditor/PageEditorStore";
 
 export class AppStudioStore{
   verticalBarWidth:string = '60px';
   isDirty:boolean = false;
   themeMode:RxThemeMode = DARK;
-  //editingPage?:IRxPage;
-  editingNavigation?:boolean;
+
+  navigationEditor?:NavigationEditorStore;
   rxApp?: IRxApp;
 
   pageEditor?:PageEditorStore;
@@ -35,12 +36,12 @@ export class AppStudioStore{
       this.pageEditor = undefined;
     }
 
-    this.editingNavigation = false;
+    this.navigationEditor = undefined;
   }
 
   editNavigation(){
     this.pageEditor = undefined;
-    this.editingNavigation = true;
+    this.navigationEditor = new NavigationEditorStore();
   }
 
   setThemeMode(mode:RxThemeMode){

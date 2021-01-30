@@ -5,18 +5,29 @@ import { RxNode } from 'rx-drag/models/RxNode';
 import intl from "react-intl-universal";
 import ChipEditor from './ChipEditor';
 import BadgeEditor from './BadgeEditor';
-import MultiSelectBox from 'Components/Inputs/Select/MultiSelectBox';
+import {MultiSelectBox} from 'Components/Inputs/Select/MultiSelectBox';
+import {observer} from 'mobx-react';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 
-export default function NodeEditor(
+export const NodeEditor = observer((
   props:{
     node:RxNode<IMenuItem>,
     onChange:(node:RxNode<IMenuItem>, field:string, value:any)=>void,
   }
-){
+)=>{
   const {node, onChange} = props;
-  const type = node.meta.type;
-  const {title, icon, auths} = node.meta;
+  const {type, title, icon, pageId, auths} = node.meta;
+  const studioStore = useAppStudioStore();
 
+  const handleChangeType = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    const newType = event.target.value as any;
+    onChange(node, 'type', newType);
+  }
+
+  const handleChangePage = (event: React.ChangeEvent<{ value: unknown }>)=>{
+    const newPageId = event.target.value as any;
+    onChange(node, 'pageId', newPageId);
+  }
 
   const handleTitleChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const newTitle = event.target.value as any;
@@ -47,12 +58,11 @@ export default function NodeEditor(
           <InputLabel>{intl.get('type')}</InputLabel>
           <Select
             value={type || 'item'}
-            //onChange={handleChangeType}
+            onChange={handleChangeType}
             label = {intl.get('type')}
-            disabled
           >
           <MenuItem value="item">
-            {intl.get('module-index')}
+            {intl.get('page')}
           </MenuItem>
           <MenuItem value="group">
             {intl.get('fold-group')}
@@ -68,7 +78,30 @@ export default function NodeEditor(
         </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={6}></Grid>
+      <Grid item xs={6}>
+        {
+          type === 'item' && 
+          <FormControl variant="outlined" size="small" fullWidth>
+          <InputLabel>{intl.get("page")}</InputLabel>
+          <Select
+            label = {intl.get("page")}
+            value={pageId || ''}
+            onChange={handleChangePage}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {
+              studioStore?.rxApp?.pages?.map(page=>{
+                return(
+                  <MenuItem key = {page.id} value={page.id}>{page.name}</MenuItem>
+                )
+              })
+            }
+          </Select>
+        </FormControl> 
+        }
+      </Grid>
       {
         type !== 'divider' &&
         <Fragment>
@@ -102,16 +135,14 @@ export default function NodeEditor(
         </Fragment>
       }
       <Grid item xs={12}>
-        <MultiSelectBox label={'权限'} 
+        <MultiSelectBox fullWidth label={intl.get('authority')} 
           variant="outlined" 
           size="small"
-          //dataApi = {API_GET_AUTHS}
-          itemKey = "slug"
-          groupByField = "module"
+          items = {studioStore?.rxApp?.auths || []}
           value = {auths || []}
           onChange = {handleChangeAuths}
         />
       </Grid>
     </Grid>
   )
-}
+})

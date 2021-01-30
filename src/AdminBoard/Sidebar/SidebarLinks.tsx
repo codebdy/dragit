@@ -51,7 +51,7 @@ export const SidebarLinks = observer((
 
   const listItems =items?.map((node:RxNode<IMenuItem>)=>{
     let item = node.meta;
-    const authed = loggedUser.authCheck(...node.meta?.auths||[]);
+    const authed = loggedUser.authCheck(...node.meta?.auths?.map(auth=>auth.id)||[]);
     return (
     <Fragment key={node.id}>
       {

@@ -1,4 +1,3 @@
-import { AUTH_DASHBOARD, AUTH_MEDIAS } from "Base/authSlugs";
 import { POPUP_STYLE_MODULE } from "Utils/consts";
 
 export var demoDrawerData= [{
@@ -8,37 +7,25 @@ export var demoDrawerData= [{
   },
   {
     type: 'item',
-    title: '分析看板',
-    moduleSlug:'dashboard',
-    icon: 'mdi-view-dashboard',
-    chip: {
-        color: 'primary',
-        label: '新',
-        size: 'small',
-    },
-    auths:[AUTH_DASHBOARD]
-  },
-  {
-    type: 'item',
     title: '独立提交',
     icon: 'mdi-arrange-send-to-back',
-    moduleSlug: 'split-demo'
+    pageId: `guid-p-1`
   },
   {
     type: 'item',
     title: '1对多面板',
     icon: 'mdi-file-tree',
-    moduleSlug: 'one-to-many-portlet'
+    pageId: `guid-p-2`
   },
   {
     type: 'item',
     title: '1对多表格',
     icon: 'mdi-table',
-    moduleSlug: 'one-to-many-table'
+    pageId: `guid-p-3`
   },
 
   {
-    title: '模块样式',
+    title: '跳转样式',
     type: 'group',
     icon: 'mdi-palette-swatch-outline',
     children: [
@@ -46,176 +33,21 @@ export var demoDrawerData= [{
           title: '页面跳转式',
           type: 'item',
           icon: 'mdi-circle-small',
-          moduleSlug: 'jump-style-module',
+          to: 'jump-style-module',
       },
       {
           title: '对话框式',
           type: 'item',
           icon: 'mdi-circle-small',
-          moduleSlug: 'popup-style-module',
+          to: 'popup-style-module',
       },
       {
           title: '右侧滑出式',
           type: 'item',
           icon: 'mdi-circle-small',
-          moduleSlug: POPUP_STYLE_MODULE + 2,
+          to: POPUP_STYLE_MODULE + 2,
       },
-      //{
-      //    title: '选项卡式',
-      //    type: 'item',
-      //    icon: 'mdi-circle-small',
-      //    moduleSlug: 'tab-style-module',
-      //},
     ],
-  },
-  {
-    type: 'subheader',
-    title: '应用',
-  },
-  {
-    type: 'item',
-    title: '媒体库',
-    moduleSlug: 'medias',
-    icon: 'mdi-image-auto-adjust',
-    auths:[AUTH_MEDIAS]
-  },
-  {
-      title: '文章管理',
-      type: 'group',
-      icon: 'mdi-text-box-outline',
-      children: [
-          {
-              title: '文章',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/article/',
-          },
-          {
-              title: '频道',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/article-chanel',
-          },
-          {
-              title: '标签',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/article-tag',
-          },
-          {
-              title: '属性',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/article-attribute',
-          },
-      ],
-  },
-  {
-      title: '产品管理',
-      type: 'group',
-      icon: 'mdi-basket-outline',
-      children:[
-          {
-              title: '产品',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/product',
-          },
-          {
-              title: '分类',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/product-category',
-          },
-          {
-              title: '属性',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/product-attribute',
-          },
-      ]
-
-  },
-  {
-      title: '客户关系',
-      type: 'group',
-      icon: 'mdi-account-cash-outline',
-      children:[
-          {
-              title: '订单',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/order',
-          },
-          {
-              title: '客户',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/customer',
-          },
-          {
-              title: '供应商',
-              type: 'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/supplier',
-          },
-      ]
-
-  },
-  {
-      title: '询盘管理',
-      type: 'group',
-      //to: '/admin/module/role/',
-      icon: 'mdi-email-outline',
- 
-      children: [
-          {
-              title:"询盘",
-              type:'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/enquery/',
-              badge: {
-                  color: 'secondary',
-                  field: 'inquiries',
-                  size: 'small',
-              }               
-          },
-          {
-              title:"垃圾箱",
-              type:'item',
-              icon: 'mdi-circle-small',
-              //to: '/admin/module/role/',
-          },
-          {
-              title:"拦截设置",
-              type:'item',
-              icon: 'mdi-circle-small',
-              //to: '/admin/module/role/',
-          }
-
-
-      ]
-
-  },
-  {
-      title:"用户",
-      type: 'group',
-      icon: 'mdi-account-circle',
-      children: [
-          {
-              title:"管理员",
-              type:'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/user/',
-          },
-          {
-              title:"角色",
-              type:'item',
-              icon: 'mdi-circle-small',
-              to: '/admin/module/role/',
-          }
-
-      ]
   },
   {
       type: 'subheader',

@@ -1,3 +1,5 @@
+import { ID } from "rx-drag/models/baseTypes";
+import { IAuth } from "./IAuth";
 
 export interface IMenuBadge {
   color?: 'primary' | 'secondary' | 'default';
@@ -18,7 +20,7 @@ export default interface IMenuItem{
   badge?:IMenuBadge,
   chip?:IMenuChip,
   children?: Array<IMenuItem>,
-  moduleSlug?: string,
-  auths?:string[],
+  pageId?: ID,
+  auths?:IAuth[],
   [key:string]:any,
 }

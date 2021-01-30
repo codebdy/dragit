@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import DrawerItemList from './DrawerItemList';
-import ToolsAccordion from './ToolsAccordion';
+import { ToolsAccordion } from './ToolsAccordion';
 import IMenuItem from 'Base/Model/IMenuItem';
 import { RxNode } from 'rx-drag/models/RxNode';
-import NodeEditor from './NodeEditor';
+import { NodeEditor } from './NodeEditor';
 import { ID } from 'rx-drag/models/baseTypes';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 
@@ -81,6 +81,7 @@ export default function RxNavigationEditor(
     targetNode?.meta && (targetNode.meta[field] = value);
     setRootNode(copy);
     setSelectedNode(targetNode);
+    onChange && onChange(copy.getChildrenMetas())
   }
 
   const handleStartDragNode = (node:RxNode<IMenuItem>)=>{
@@ -105,8 +106,8 @@ export default function RxNavigationEditor(
     let node = copy.getNode(draggedNode.id) || draggedNode;
     let nodeAny = node as any;
     nodeAny[funciontName](targetNode);      
-
-    setRootNode(copy);    
+    setRootNode(copy);   
+    onChange && onChange(copy.getChildrenMetas()) 
   }
 
   const handleDragToBefore = (targetId:ID)=>{
@@ -137,6 +138,7 @@ export default function RxNavigationEditor(
       setSelectedNode(undefined);
     }
     setRootNode(copy); 
+    onChange && onChange(copy.getChildrenMetas())
   }
 
   const handleDragOver = (event: React.DragEvent<unknown>)=>{
