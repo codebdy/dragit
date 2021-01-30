@@ -35,15 +35,15 @@
   left:calc(50% - 10px);
   top:-7px;
 }
-.left-arrow{
+.rx-left-arrow{
   position:absolute;
-  right:-13px;
-  top:-14px;
+  right:-14px;
+  top:-15px;
 }
-.right-arrow{
+.rx-right-arrow{
   position:absolute;
-  left:-13px;
-  top:-14px;
+  left:-14px;
+  top:-15px;
 }
 
 .rx-mouse-follower{
