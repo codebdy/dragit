@@ -47,7 +47,7 @@ export const AppStudio = observer(() => {
   const dragItStore = useDragItStore();
   const history = useHistory();
   const match = useRouteMatch();
-  const{id} = match.params as any;
+  const{appId} = match.params as any;
 
   const theme = createMuiTheme({
     palette: {
@@ -81,10 +81,10 @@ export const AppStudio = observer(() => {
   });
 
   useEffect(()=>{
-    if(id){
-      excuteQuery({variables:{id}});
+    if(appId){
+      excuteQuery({variables:{id: appId}});
     }
-  },[id, excuteQuery]);
+  },[appId, excuteQuery]);
 
   useEffect(()=>{
     studioStore.setRxApp(data?.rxApp);
@@ -95,11 +95,11 @@ export const AppStudio = observer(() => {
   const handleBack = ()=>{
     if(studioStore?.pageEditor?.isDirty || studioStore?.navigationEditor?.isDirty){
       dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
-        history.goBack();
+        history.push("/apps-index");
       })       
     }
     else{
-      history.goBack();
+      history.push("/apps-index");
     }
    
   }

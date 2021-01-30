@@ -15,6 +15,7 @@ import { AuthsDrawer } from './AuthsDrawer';
 import { Settings } from './Settings';
 import classNames from 'classnames';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,6 +60,7 @@ export const VerticalBar = observer(() => {
   const [pagesOpen, setPagesOpen] = React.useState(false);
   const [authsOpen, setAuthsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const history = useHistory();
   const studioStore = useAppStudioStore();
   const dragItStore = useDragItStore();
   const iconColor = "#8494a7";
@@ -94,7 +96,9 @@ export const VerticalBar = observer(() => {
     setSettingsOpen(false);
     setPagesOpen(false)
     setAuthsOpen(false);
-    studioStore?.editNavigation();
+
+    history?.push(`/app-studio/${studioStore?.rxApp?.id}/navigation/`)
+    //studioStore?.editNavigation();
   }
 
   const handleNavigationClick = (event:React.MouseEvent<HTMLElement>)=>{

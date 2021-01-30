@@ -7,22 +7,21 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { RxThemeMode } from 'rx-drag/store/IRxThemeOptions';
 import { RxDragStoreProvider } from 'rx-drag/store/useDesign';
 import { RxDragStore } from 'rx-drag/store/RxDragStore';
-import { IRxPage } from 'Base/Model/IRxPage';
 import { Toolbox } from './Toolbox';
 import { AttributeBox } from './AttrebuteBox';
 import SettingsBox from './SettingsBox';
 import { useEffect } from 'react';
 import { IRxMeta } from 'rx-drag/models/IRxMeta';
+import { useRouteMatch } from 'react-router-dom';
 
-export const RxPageEditor = observer((
-  props:{
-    rxPage:IRxPage
-  }
-) => {
-  const {rxPage} = props; 
-
+export const RxPageEditor = observer(() => {
   const [rxDragStore] = React.useState<RxDragStore>(new RxDragStore());
   const studioStore = useAppStudioStore();
+  const match = useRouteMatch();
+  const{pageId} = match.params as any;  
+
+  const rxPage = pageId ? studioStore?.getPage(pageId) : studioStore?.getFirstPage();
+  
   const theme = useTheme();
   const canvasTheme = createMuiTheme({
     palette: {
@@ -33,8 +32,11 @@ export const RxPageEditor = observer((
     },
   });
   useEffect(()=>{
+    if(rxPage){
+      studioStore?.editPage(rxPage);
+    }
     rxDragStore?.setSelectedNode(undefined);
-  },[rxDragStore, rxPage]);
+  },[rxDragStore, rxPage, studioStore]);
 
   const handleThemeModeChange = (mode :RxThemeMode)=>{
     studioStore?.setThemeMode(mode);
@@ -44,7 +46,6 @@ export const RxPageEditor = observer((
     if(studioStore?.pageEditor?.currentData){
       studioStore?.pageEditor?.setCurrentData({...studioStore?.pageEditor?.currentData, schema:metas});
     }
-
   }
 
   return (
@@ -56,7 +57,7 @@ export const RxPageEditor = observer((
               mode:studioStore?.themeMode,
             }
           }
-          initMetas = {rxPage.schema}
+          initMetas = {rxPage?.schema}
           toolbox = {
             <ThemeProvider theme = {theme}>
               <Toolbox/>

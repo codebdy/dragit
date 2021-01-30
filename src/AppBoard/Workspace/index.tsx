@@ -4,7 +4,6 @@ import {Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { useAppBoardStore } from "AppBoard/store/AppBoardStore";
 import { useRouteMatch } from "react-router-dom";
 import { Page } from "./Page";
-import { IRxPage } from "Base/Model/IRxPage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,13 +29,7 @@ export const Workspace = observer(()=>{
   const match = useRouteMatch();
   const{pageId, id} = match.params as any;
   const newPageId = pageId ? pageId : appboardStore?.rxApp?.entry_page_id;
-  let page:IRxPage = undefined as any;
-
-  appboardStore?.rxApp?.pages?.forEach(pg=>{
-    if(pg.id === newPageId){
-      page = pg;
-    }
-  })
+  let page = appboardStore?.getPage(newPageId);
 
   const hanlePageAction = ()=>{
     

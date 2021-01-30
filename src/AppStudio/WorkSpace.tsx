@@ -1,30 +1,16 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { useAppStudioStore } from './AppStudioStore';
 import { RxPageEditor } from './RxPageEditor';
-import RxNavigationEditor from './RxNavigationEditor';
-import IMenuItem from 'Base/Model/IMenuItem';
+import { RxNavigationEditor } from './RxNavigationEditor';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 export const WorkSpace = observer(() => {
-  const studioStore = useAppStudioStore();
-
-  const handleChangeNavigation = (items:Array<IMenuItem>)=>{
-    studioStore?.navigationEditor?.setCurrentData(items);
-  }
 
   return (
-    <>
-      {
-        studioStore?.pageEditor?.editingPage &&
-        <RxPageEditor rxPage = {studioStore?.pageEditor?.editingPage}/>
-      }
-      {
-        studioStore?.navigationEditor && 
-        <RxNavigationEditor 
-          items = {studioStore?.rxApp?.navigation_items} 
-          onChange = {handleChangeNavigation}
-        />
-      }
-    </>
+    <Switch>
+      <Route path="/app-studio/:appId/page/:pageId?" component={RxPageEditor}></Route> 
+      <Route path="/app-studio/:appId/navigation/" component={RxNavigationEditor}></Route>
+      <Redirect to={`/app-studio/:appId/page/`} from='/app-studio/:appId/' /> 
+    </Switch>
   );
 })

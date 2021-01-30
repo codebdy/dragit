@@ -7,6 +7,8 @@ import { RxNode } from 'rx-drag/models/RxNode';
 import { NodeEditor } from './NodeEditor';
 import { ID } from 'rx-drag/models/baseTypes';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
+import { useAppStudioStore } from 'AppStudio/AppStudioStore';
+import { observer } from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,29 +52,27 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function RxNavigationEditor(
-  props:{
-    items?:Array<IMenuItem>,
-    onChange?:(items:Array<IMenuItem>)=>void,
-  }
-){
-  const {items, onChange} = props;
+export const RxNavigationEditor = observer(()=>{
   const classes = useStyles();
- // const { loading, error, data } = useQuery(GET_DRAWER);
   const [rootNode,setRootNode] = React.useState(new RxNode<IMenuItem>());
   const [selectedNode, setSelectedNode] = useState<RxNode<IMenuItem>>();
   const [draggedNode, setDraggedNode] =  useState<RxNode<IMenuItem>>();
-
+  const studioStore = useAppStudioStore();
  
   useEffect(()=>{
-    rootNode.parse(cloneObject(items||[]));
+    rootNode.parse(cloneObject(studioStore?.rxApp?.navigation_items||[]));
     setRootNode(rootNode.copy());
+    studioStore?.editNavigation();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[items]);
+  },[studioStore?.rxApp?.navigation_items]);
 
 
   const handleSelectedNode = (node:RxNode<IMenuItem>)=>{
     setSelectedNode(node);
+  }
+
+  const doChange = (items:Array<IMenuItem>)=>{
+    studioStore?.navigationEditor?.setCurrentData(items);
   }
 
   const handleMetaChange = (node:RxNode<IMenuItem>, field:string, value:any)=>{
@@ -81,7 +81,7 @@ export default function RxNavigationEditor(
     targetNode?.meta && (targetNode.meta[field] = value);
     setRootNode(copy);
     setSelectedNode(targetNode);
-    onChange && onChange(copy.getChildrenMetas())
+    doChange(copy.getChildrenMetas());
   }
 
   const handleStartDragNode = (node:RxNode<IMenuItem>)=>{
@@ -107,7 +107,7 @@ export default function RxNavigationEditor(
     let nodeAny = node as any;
     nodeAny[funciontName](targetNode);      
     setRootNode(copy);   
-    onChange && onChange(copy.getChildrenMetas()) 
+    doChange(copy.getChildrenMetas()) 
   }
 
   const handleDragToBefore = (targetId:ID)=>{
@@ -138,7 +138,7 @@ export default function RxNavigationEditor(
       setSelectedNode(undefined);
     }
     setRootNode(copy); 
-    onChange && onChange(copy.getChildrenMetas())
+    doChange(copy.getChildrenMetas())
   }
 
   const handleDragOver = (event: React.DragEvent<unknown>)=>{
@@ -179,4 +179,4 @@ export default function RxNavigationEditor(
       </Container>
     </div>
   ) 
-}
+})
