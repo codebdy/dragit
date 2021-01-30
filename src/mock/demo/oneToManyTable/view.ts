@@ -1,5 +1,4 @@
-export const  OneToManyTableView = {
-  layout:[{
+export const  OneToManyTableView = [{
     name: 'GridRow',
     props: {
       justify: 'space-between',
@@ -141,5 +140,4 @@ export const  OneToManyTableView = {
         },
       ]
     }
-  ],
-}
+  ]

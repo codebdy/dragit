@@ -8,7 +8,7 @@ import { stringValue } from 'rx-drag/utils/stringValue';
 import SubmitButton from 'Components/Common/SubmitButton';
 import { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { SAVE_RX_APP } from 'Base/GraphQL/GQLs';
+import { SAVE_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 

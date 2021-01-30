@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_RX_TEMPLATES, pageFieldsGQL } from 'Base/GraphQL/GQLs';
+import { GET_RX_TEMPLATES, pageFieldsGQL } from 'Base/GraphQL/APP_GQLs';
 import { CREATE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';

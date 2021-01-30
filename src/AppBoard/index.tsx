@@ -11,7 +11,7 @@ import useShadows from 'Utils/useShadows';
 import { AppBoardStore, AppBoardStoreProvider } from './store/AppBoardStore';
 import { useRouteMatch } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { GET_RX_APP } from 'Base/GraphQL/GQLs';
+import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import ModuleSkeleton from './Workspace/Common/ModuleSkeleton';
 import { SidebarLinks } from './Sidebar/SidebarLinks';
 import SiderBarLoadingSkeleton from './Sidebar/LoadingSkeleton';

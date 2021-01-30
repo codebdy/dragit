@@ -1,8 +1,7 @@
 import header from "./header";
 import supplierPortlet from "./supplierPortlet";
 
-export const  OneToManyPortletView = {
-  layout:[
+export const  OneToManyPortletView = [
     {
       name: 'GridRow',
       props: {
@@ -29,5 +28,4 @@ export const  OneToManyPortletView = {
       ]
     }
     
-  ],
-}
+  ]

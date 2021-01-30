@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { toJS } from 'mobx';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { SAVE_RX_APP } from 'Base/GraphQL/GQLs';
+import { SAVE_RX_APP } from 'Base/GraphQL/APP_GQLs';
 
 export const SaveNavigationButton = observer(() => {
   const studioStore = useAppStudioStore();

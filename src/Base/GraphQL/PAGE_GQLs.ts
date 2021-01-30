@@ -1,5 +1,5 @@
 import { gql } from '@apollo/react-hooks';
-import { pageFieldsGQL } from './GQLs';
+import { pageFieldsGQL } from './APP_GQLs';
 
 
 export const SAVE_RX_PAGE = gql`

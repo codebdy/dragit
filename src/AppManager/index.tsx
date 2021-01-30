@@ -11,7 +11,7 @@ import { AccountAvatar } from 'AppBoard/TopNav/AccountAvatar';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_RX_APP_LIST } from 'Base/GraphQL/GQLs';
+import { GET_RX_APP_LIST } from 'Base/GraphQL/APP_GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppsSkeleton from './AppsSkeleton';
 import { IRxApp } from 'Base/Model/IRxApp';

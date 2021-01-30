@@ -1,3 +1,5 @@
+import { OneToManyPortletView } from "./oneToManyPortlet/view";
+import { OneToManyTableView } from "./oneToManyTable/view";
 import { splitSubmitSchema } from "./splitSubmit/splitSubmitSchema";
 
 var demoPages = [
@@ -9,10 +11,12 @@ var demoPages = [
   {
     id:'guid-p-2',
     name:'1对多面板',
+    schema:OneToManyPortletView,
   },
   {
     id:'guid-p-3',
     name:'1对多表格',
+    schema:OneToManyTableView,
   }
 ]
 

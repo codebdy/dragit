@@ -11,7 +11,7 @@ import { DUPLICATE_RX_PAGE, REMOVE_RX_PAGE, SAVE_RX_PAGE } from "Base/GraphQL/PA
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import classNames from 'classnames';
-import { pageFieldsGQL } from 'Base/GraphQL/GQLs';
+import { pageFieldsGQL } from 'Base/GraphQL/APP_GQLs';
 import ActionButton from 'AppStudio/ActionButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import intl from 'react-intl-universal';

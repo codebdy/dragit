@@ -59,26 +59,6 @@ export const SAVE_RX_APP = gql`
   }
 `
 
-// 定义查询语句
-//String代替JSON
-export const GET_DRAWER = gql`
-  query {
-    drawer{
-      id
-      items
-    }
-  }
-`;
-
-export const SAVE_DRAWER = gql`
-  mutation ($items:JSON) {
-    drawer(items:$items){
-      id
-      items
-    }
-  }
-`
-
 export const GET_RX_TEMPLATES = gql`
   query {
     rxTemplates{

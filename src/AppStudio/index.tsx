@@ -9,7 +9,7 @@ import { AppStudioStore, AppStudioStoreProvider } from './AppStudioStore';
 import Spacer from 'Components/Common/Spacer';
 import { useHistory, useRouteMatch } from 'react-router';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { GET_RX_APP } from 'Base/GraphQL/GQLs';
+import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import { useEffect } from 'react';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppSkeleton from './AppSkeleton';
