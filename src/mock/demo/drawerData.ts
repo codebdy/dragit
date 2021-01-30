@@ -27,7 +27,7 @@ export var demoDrawerData= [{
   {
     title: '跳转样式',
     type: 'group',
-    icon: 'mdi-palette-swatch-outline',
+    icon: 'mdi-open-in-new',
     children: [
       {
           title: '页面跳转式',

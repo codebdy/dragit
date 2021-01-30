@@ -7,7 +7,9 @@ import React from "react";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { observer } from 'mobx-react';
 import MdiIcon from "Components/Common/MdiIcon";
-import { useLeftDrawer, useDragItStore } from "Store/Helpers/useDragItStore";
+import { useLeftDrawer } from "Store/Helpers/useDragItStore";
+import { useHistory, useRouteMatch } from "react-router";
+import { useAppBoardStore } from "AppBoard/store/AppBoardStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,11 +66,13 @@ export const MenuNode = observer((
   const {badge, chip, title, icon} = item;
   const baggeLabel = useAppValue(badge?.field);
   const leftDrawer = useLeftDrawer();
-  const appStore = useDragItStore();
-
+  const history = useHistory();
+  const match = useRouteMatch();
+  const{pageId} = match.params as any;
+  const appBoardStore = useAppBoardStore(); 
   const handleClick = ()=>{
-    if(item.moduleSlug){
-      appStore.showModule(item.moduleSlug);
+    if(item.pageId){
+      history.push(`/app/${appBoardStore?.rxApp?.id}/${item.pageId}/`)
       leftDrawer.closeOnMobile();
     }else{
       onClick && onClick();      
@@ -98,7 +102,7 @@ export const MenuNode = observer((
 
   const text = <span className={classes.itemText}>{title}</span>;
  
-  const selected = !!appStore.moduleSlug && !!item.moduleSlug && appStore.moduleSlug === item.moduleSlug;
+  const selected = !!pageId && pageId === item.pageId;
 
   return (
     <ListItem 

@@ -27,7 +27,7 @@ export const JumpStyleModule = observer((
   const {module} = props;
   const classes = useStyles();
   const appStore = useDragItStore();
-  const [pageId, setPageId] = useState(appStore.pageId || module.entryPage?.id);
+  const [pageId, setPageId] = useState(/*appStore.pageId ||*/ module.entryPage?.id);
   const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{
     switch (action.name){

@@ -44,7 +44,7 @@ const App = observer(()=>{
         <BrowserRouter>
           <Switch> 
             <Route path={ LOGIN_URL } component={Login}></Route>
-            <Route path="/app/:appId/" component={AppBoard}></Route>
+            <Route path="/app/:appId/:pageId?/:id?" component={AppBoard}></Route>
             <Route path="/apps-index" component={AppManager}></Route>
             <Route path="/app-studio/:id" component={AppStudio}></Route>
             <Redirect to={ LOGIN_URL } from='/' /> 

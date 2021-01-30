@@ -8,6 +8,7 @@ const appFieldsGQL = `
   color
   app_type
   navigation_items
+  entry_page_id
   auths{
     id
     rx_slug

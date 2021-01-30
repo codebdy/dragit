@@ -28,6 +28,7 @@ var appsData = [
     app_type:'免费',
     pages: demoPages,
     navigation_items:demoDrawerData,
+    entry_page_id:'guid-p-1',
     auths:[
       {
         id:'guid-21',

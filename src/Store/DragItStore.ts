@@ -2,7 +2,6 @@ import { LeftDrawer } from "./LeftDrawer";
 import { makeAutoObservable } from "mobx"
 import { DesignerStore } from "./DesignerStore";
 import { IUser } from "Base/Model/IUser";
-import { IModule } from "Base/Model/IModule";
 import { Confirm } from "./Confirm";
 import { Error } from "./Error";
 
@@ -17,18 +16,8 @@ export class DragItStore{
   error: Error = new Error();
   confirm: Confirm = new Confirm();
 
-  moduleSlug: string|undefined = 'dashboard';
-  pageId: string|undefined;
-
-  module?:IModule;
-
-
   constructor() {
     makeAutoObservable(this)
-  }
-
-  setModule(module?:IModule){
-    this.module = module;
   }
 
   setToolbarElevate(show:boolean){
@@ -63,11 +52,6 @@ export class DragItStore{
 
   setToken(token:string){
     this.token = token;
-  }
-
-  showModule(moduleSlug:string, pageSlug?:string){
-    this.moduleSlug = moduleSlug;
-    this.pageId = pageSlug;
   }
 
   confirmAction(message:string, actionCallback:()=>void){

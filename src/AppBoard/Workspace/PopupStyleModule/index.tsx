@@ -27,7 +27,7 @@ export const PopupStyleModule = observer((
   const {module} = props;
   const classes = useStyles();
   const appStore = useDragItStore();
-  const pageId = appStore.pageId || module.entryPage?.id;
+  const pageId = /*appStore.pageId ||*/ module.entryPage?.id;
   const [popupPageId, setPopupPageId] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();
   const hanlePageAction = (action:PageAction)=>{

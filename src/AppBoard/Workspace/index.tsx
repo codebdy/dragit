@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {observer} from 'mobx-react';
-import { gql, useQuery } from "@apollo/react-hooks";
-import { JumpStyleModule } from "./JumpStyleModule";
-import { Fragment } from "react";
-import { PopupStyleModule } from "./PopupStyleModule";
-import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
-import { useDragItStore, useDesigner } from "Store/Helpers/useDragItStore";
-import { useShowAppoloError } from "Store/Helpers/useInfoError";
-import { JUMP_STYLE_MODULE, POPUP_STYLE_MODULE } from "Utils/consts";
-import ModuleSkeleton from "./Common/ModuleSkeleton";
+import {Container, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { useAppBoardStore } from "AppBoard/store/AppBoardStore";
+import { useRouteMatch } from "react-router-dom";
+import { Page } from "./Page";
+import { IRxPage } from "Base/Model/IRxPage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,66 +15,45 @@ const useStyles = makeStyles((theme: Theme) =>
       background:theme.palette.background.default,
       color:theme.palette.text.primary,
     },
+    container:{
+      flex: '1',
+      display:'flex',
+      flexFlow:'column',
+    }
   }),
 );
 
-const QUERY_MODULE = gql`
-  query ($slug: String!){
-    moduleBySlug(slug:$slug){
-      id
-      slug
-      name
-      module_type
-      is_drawer_style
-      pages{
-        id
-        name
-        max_width
-        in_tab_index
-        width
-        schema
-        auths
-      }
-      entryPage{
-        id
-      }
-    }
-  }
-`;
 
 export const Workspace = observer(()=>{
-  const appStore = useDragItStore();
-  const designer = useDesigner();
-
+  const appboardStore = useAppBoardStore();
   const classes = useStyles();
-  
-  const { loading, error, data } = useQuery(QUERY_MODULE, {variables:{slug:appStore.moduleSlug}});
-  useShowAppoloError(error);
+  const match = useRouteMatch();
+  const{pageId, id} = match.params as any;
+  const newPageId = pageId ? pageId : appboardStore?.rxApp?.entry_page_id;
+  let page:IRxPage = undefined as any;
 
-  useEffect(()=>{
-    appStore.setModule(data?.moduleBySlug);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[data])
+  appboardStore?.rxApp?.pages?.forEach(pg=>{
+    if(pg.id === newPageId){
+      page = pg;
+    }
+  })
 
-  const module = appStore.module;
+  const hanlePageAction = ()=>{
+    
+  }
 
   return (
-    <div className = {classes.root}>
+    <div className = {classes.root}>      
       {
-        loading?
-        <Container><ModuleSkeleton /></Container>
-        :
-        <Fragment>
-          {
-            module?.moduleType === JUMP_STYLE_MODULE &&
-            <JumpStyleModule module={module} />
-          }
-          {
-            module?.moduleType === POPUP_STYLE_MODULE &&
-            <PopupStyleModule module={module} />
-          }
-        </Fragment>
-      }
+        page &&
+        <Container className={classes.container} maxWidth = {page?.max_width ==='false' ? false : page?.max_width}>
+          <Page 
+            page={page}
+            onPageAction = {hanlePageAction}
+            pageJumper = {{pageId:newPageId, dataId:id}}
+          />
+        </Container>
+      }    
     </div>
   )
 })

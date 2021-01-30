@@ -98,7 +98,7 @@ export const AppBoard = observer(()=>{
             {
               loading
               ? <Container><ModuleSkeleton /></Container>
-              : <Workspace />
+              : (appboardStore?.rxApp && <Workspace />)
             }
             
           </div>
