@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Close } from '@material-ui/icons';
 import Scrollbar from 'Common/Scrollbar';
-import { useThemeSettings } from 'Store/Helpers/useDragItStore';
+import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 import useShadows from 'Utils/useShadows';
 
 const useStyles = makeStyles((theme: Theme) =>

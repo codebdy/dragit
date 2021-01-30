@@ -6,7 +6,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
 import { ID } from 'rx-drag/models/baseTypes';
-import { useThemeSettings } from 'Store/Helpers/useDragItStore';
+import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 
 const styles = (theme: Theme) =>
   createStyles({

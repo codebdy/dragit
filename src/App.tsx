@@ -13,7 +13,6 @@ import { useIntl } from 'Base/Hooks/useIntl';
 import {observer} from 'mobx-react';
 import { ErrorDialog } from 'Base/Widgets/ErrorDialog';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
-import { useThemeSettings } from 'Store/Helpers/useDragItStore';
 import { LOGIN_URL } from 'Utils/consts';
 import { ConfirmDialog } from 'Base/Widgets/ConfirmDialog';
 import { AppManager } from 'AppManager';
@@ -21,15 +20,14 @@ import { AppStudio } from 'AppStudio';
 
 const App = observer(()=>{
   const [langLoading] = useIntl();
-  const themeSettings = useThemeSettings();
   
   useLoginCheck();
 
   const theme = createMuiTheme({
     palette: {
-      type: themeSettings.themeMode as any,
+      type: 'light',
       primary:{
-        main: themeSettings.primary,
+        main: '#5d78ff',
       },
 
     },

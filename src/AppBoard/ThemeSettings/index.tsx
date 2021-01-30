@@ -8,7 +8,8 @@ import { ElevationStrength } from './ElevationStrength';
 import { SidebarSettings } from './SidebarSettings';
 import RightDrawer from 'AppBoard/ThemeSettings/RightDrawer';
 import {observer} from 'mobx-react';
-import { useThemeSettings, useDragItStore } from 'Store/Helpers/useDragItStore';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 import useShadows from 'Utils/useShadows';
 
 export const ThemeSettings = observer(()=>{

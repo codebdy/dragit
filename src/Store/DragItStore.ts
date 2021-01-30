@@ -1,6 +1,6 @@
 import { LeftDrawer } from "./LeftDrawer";
 import { makeAutoObservable } from "mobx"
-import { ThemeSettings } from "./ThemeSettings";
+import { ThemeSettings } from "../AppBoard/store/ThemeSettings";
 import { DesignerStore } from "./DesignerStore";
 import { IUser } from "Base/Model/IUser";
 import { IModule } from "Base/Model/IModule";

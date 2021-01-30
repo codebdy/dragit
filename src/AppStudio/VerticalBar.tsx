@@ -5,7 +5,7 @@ import { Avatar, createMuiTheme, IconButton, Paper, ThemeProvider, Tooltip } fro
 import MdiIcon from 'Components/Common/MdiIcon';
 import Spacer from 'Components/Common/Spacer';
 import { Fragment } from 'react';
-import { DARK } from 'Store/ThemeSettings';
+import { DARK } from 'AppBoard/store/ThemeSettings';
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from './AppStudioStore';
 import { PopuDrawer } from './PopuDrawer';

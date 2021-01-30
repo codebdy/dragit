@@ -8,8 +8,9 @@ import { useHistory } from 'react-router';
 import { INDEX_URL, TOKEN_NAME } from 'Utils/consts';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
 import SubmitButton from 'Components/Common/SubmitButton';
-import { useDragItStore, useThemeSettings } from 'Store/Helpers/useDragItStore';
-import { LIGHT } from 'Store/ThemeSettings';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { useThemeSettings } from "AppBoard/store/useThemeSettings";
+import { LIGHT } from 'AppBoard/store/ThemeSettings';
 
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -3,7 +3,7 @@ import { Slider, Typography } from '@material-ui/core';
 import intl from "react-intl-universal";
 import useRowStyles from './useRowStyles';
 import {observer} from 'mobx-react';
-import { useThemeSettings } from 'Store/Helpers/useDragItStore';
+import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 
 export const ElevationStrength = observer(()=>{
   const classes = useRowStyles();

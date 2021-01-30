@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppSkeleton from './AppSkeleton';
 import { WorkSpace } from './WorkSpace';
-import { DARK } from 'Store/ThemeSettings';
+import { DARK } from 'AppBoard/store/ThemeSettings';
 import { SavePageButton } from './RxPageEditor/SavePageButton';
 import intl from 'react-intl-universal';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';

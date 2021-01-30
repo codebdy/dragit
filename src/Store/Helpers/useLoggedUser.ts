@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { DragItStoreContext } from './DragItStoreProvider';
+import { DragItContext } from './DragItStoreProvider';
 import { LoggedUser } from './LoggedUser';
 
 export const useLoggedUser = (): LoggedUser => {
-  const loggedUser = useContext(DragItStoreContext).loggedUser;
+  const loggedUser = useContext(DragItContext).loggedUser;
   return new LoggedUser(loggedUser);
 };
