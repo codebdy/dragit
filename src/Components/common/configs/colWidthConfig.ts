@@ -65,7 +65,7 @@ const sizeSchema = [
 ]
 
 
-const colWidthRules:Array<IPropConfig> = [
+const colWidthConfig:Array<IPropConfig> = [
   {
     name:'xl',
     label:'xl',
@@ -109,4 +109,4 @@ const colWidthRules:Array<IPropConfig> = [
   },
 ]
 
-export default colWidthRules;
+export default colWidthConfig;

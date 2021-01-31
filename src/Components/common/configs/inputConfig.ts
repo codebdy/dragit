@@ -3,7 +3,7 @@ import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/Boolea
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 
-const inputRules:Array<IPropConfig> =[
+const inputConfig:Array<IPropConfig> =[
   {
     name:'variant',
     label:'variant',
@@ -42,4 +42,4 @@ const inputRules:Array<IPropConfig> =[
   },
 ]
 
-export default inputRules;
+export default inputConfig;

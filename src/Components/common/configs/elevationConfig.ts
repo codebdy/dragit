@@ -1,7 +1,7 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 
-const elevationRules:Array<IPropConfig> = [
+const elevationConfig:Array<IPropConfig> = [
   {
     name:'elevation',
     label:'elevation',
@@ -14,4 +14,4 @@ const elevationRules:Array<IPropConfig> = [
   },
 ]
 
-export default elevationRules;
+export default elevationConfig;

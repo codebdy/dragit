@@ -3,7 +3,7 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import { IMeta } from "Base/RXNode/IMeta";
-import elevationRules from "Components/common/configs/elevationRules";
+import elevationConfig from "Components/common/configs/elevationConfig";
 import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class OneToManyTableRule extends MetaConfig{
@@ -20,7 +20,7 @@ export class OneToManyTableRule extends MetaConfig{
   getPropConfigs(): Array<IPropConfig>{
     return [
       ...marginConfigs,
-      ...elevationRules,   
+      ...elevationConfig,   
       {
         name:'size',
         label:'size',

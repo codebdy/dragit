@@ -2,7 +2,7 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
-import elevationRules from "Components/common/configs/elevationRules";
+import elevationConfig from "Components/common/configs/elevationConfig";
 import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class OneToManyPortletRule extends MetaConfig{
@@ -19,7 +19,7 @@ export class OneToManyPortletRule extends MetaConfig{
   getPropConfigs(): Array<IPropConfig>{
     return [
       ...marginConfigs,
-      ...elevationRules,   
+      ...elevationConfig,   
       {
         name:'title',
         label:'title',

@@ -1,7 +1,7 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import colWidthRules from "Components/common/configs/colWidthRules";
+import colWidthConfig from "Components/common/configs/colWidthConfig";
 
 export class PortletGridItemRule extends MetaConfig{
   editPaddingY = '';
@@ -17,7 +17,7 @@ export class PortletGridItemRule extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
-      ...colWidthRules
+      ...colWidthConfig
     ]
   }
 

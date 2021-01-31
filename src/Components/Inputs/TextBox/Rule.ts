@@ -4,7 +4,7 @@ import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/Boolea
 import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import inputRules from "Components/common/configs/inputRules";
+import inputConfig from "Components/common/configs/inputConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 
 export class TextBoxRule extends MetaConfig{
@@ -20,7 +20,7 @@ export class TextBoxRule extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
-      ...inputRules,
+      ...inputConfig,
       {
         name:'type',
         label:'type',

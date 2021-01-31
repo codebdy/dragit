@@ -2,8 +2,8 @@ import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import inputRules from "Components/common/configs/inputRules";
-import itemsRule from "Components/common/configs/itemsRule";
+import inputConfig from "Components/common/configs/inputConfig";
+import itemsConfig from "Components/common/configs/itemsConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 
 export class SelectRule extends MetaConfig{
@@ -19,7 +19,7 @@ export class SelectRule extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
-      ...inputRules,
+      ...inputConfig,
       {
         name:'size',
         label:'size',
@@ -60,7 +60,7 @@ export class SelectRule extends MetaConfig{
 
         input:StringInput,
       },
-      itemsRule,
+      itemsConfig,
     ]
   }
 

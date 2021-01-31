@@ -1,7 +1,7 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
-const colorRule:IPropConfig =   {
+const colorConfig:IPropConfig =   {
   name:'color',
   label:'color',
   input:OptionSelect,
@@ -23,4 +23,4 @@ const colorRule:IPropConfig =   {
   },
 }
 
-export default colorRule;
+export default colorConfig;

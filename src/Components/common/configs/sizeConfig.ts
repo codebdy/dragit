@@ -1,6 +1,6 @@
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
-const sizeRule = {
+const sizeConfig = {
   name:'size',
   label:'size',
   input:OptionSelect,
@@ -18,4 +18,4 @@ const sizeRule = {
   },
 }
 
-export default sizeRule;
+export default sizeConfig;
