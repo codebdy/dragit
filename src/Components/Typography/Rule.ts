@@ -154,7 +154,12 @@ export class TypographyRule extends MetaConfig{
       {
         name:'rxText',
         labelKey:'text',
-        propType:'longString',
+        propType:'string',
+        props:{
+          xs:12,
+          rows:3,
+          multiline:true,
+        }
       },
     ]
   }
