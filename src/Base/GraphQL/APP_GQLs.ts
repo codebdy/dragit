@@ -58,6 +58,15 @@ export const CREATE_RX_APP = gql`
   }
 `
 
+export const REMOVE_RX_APP  = gql`
+mutation($id:ID){
+  removeRxApp(id:$id){
+    id
+    name
+  }
+}
+`;
+
 export const GET_RX_TEMPLATES = gql`
   query {
     rxTemplates{

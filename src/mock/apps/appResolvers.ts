@@ -1,4 +1,5 @@
 import { sleep } from "mock/utils/sleep";
+import { remove } from "rx-drag/utils/ArrayHelper";
 import appsData from "./data";
 
 export function getRxApp(id:string){
@@ -23,7 +24,9 @@ export const rxApps = async (parent:any, args:any, context:any, info:any)=>{
 export const removeRxApp = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
   console.log('removeRxApp', args)
-  return getRxApp(args.id)
+  const rxApp = getRxApp(args.id);
+  remove(rxApp, appsData);
+  return rxApp
 }
 
 export const saveRxApp = async (parent:any, args:any, context:any, info:any)=>{

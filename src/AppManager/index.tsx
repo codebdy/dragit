@@ -56,7 +56,6 @@ export const AppManager = observer(() => {
   const [ excuteCreate, {loading:saving, error:createError}] = useMutation(CREATE_RX_APP, {
     //更新缓存
     update(cache, { data: { createRxApp } }){
-      console.log(createRxApp)
       cache.writeQuery({
         query:GET_RX_APP_LIST,
         data:{
@@ -151,7 +150,7 @@ export const AppManager = observer(() => {
                 apps.map((rxApp:IRxApp)=>{
                   return(
                     <Grid item key={rxApp.id} lg={2} md={3} sm={4} xs={6}>
-                      <AppCard rxApp = {rxApp} />
+                      <AppCard apps = {apps} rxApp = {rxApp} />
                     </Grid>
                   )
                 })

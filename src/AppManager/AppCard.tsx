@@ -4,11 +4,15 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
+import { Avatar, Badge, CircularProgress, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 import MdiIcon from 'Components/Common/MdiIcon';
 import { IRxApp } from 'Base/Model/IRxApp';
 import intl from 'react-intl-universal';
 import { useHistory } from 'react-router-dom';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useMutation } from '@apollo/react-hooks';
+import { GET_RX_APP_LIST, REMOVE_RX_APP } from 'Base/GraphQL/APP_GQLs';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     actions:{
       diplay:'flex',
-      justifyContent:'space-between'
+      justifyContent:'space-between',
+      minHeight:theme.spacing(7),
     },
     pos: {
       paddingLeft: theme.spacing(1),
@@ -41,20 +46,47 @@ const useStyles = makeStyles((theme: Theme) =>
     menuItem:{
       padding:theme.spacing(1, 3),
     },
+
+    menuButton:{
+      width: '40px',
+      height: '40px',
+    },
   }),
 );
 
 
 export default function AppCard(
   props:{
+    apps:Array<IRxApp>,
     rxApp:IRxApp
   }
 ) {
-  const {rxApp} = props;
+  const {apps, rxApp} = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();
   const isMenuOpen = Boolean(anchorEl);
   const history = useHistory();
+  const dragItStore = useDragItStore();
+
+  const [excuteRemoveRxPage, {loading, error}] = useMutation( REMOVE_RX_APP,
+    {
+      //更新缓存
+      update(cache, { data: { removeRxApp } }){
+        cache.writeQuery({
+          query:GET_RX_APP_LIST,
+          data:{
+            rxApps:apps.filter(app=>app.id !== removeRxApp.id)
+          }
+        });
+      },
+      onCompleted: (data)=>{
+        dragItStore.setSuccessAlert(true);
+      }
+    }
+  );
+
+  useShowAppoloError(error);
+  
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -70,6 +102,9 @@ export default function AppCard(
 
   const handleRemove = ()=>{
     setAnchorEl(null);
+    excuteRemoveRxPage({
+      variables:{id:rxApp.id}
+    })
   }
 
   const handleToApp = ()=>{
@@ -95,53 +130,60 @@ export default function AppCard(
         <Typography className={classes.pos} color="textSecondary">
           {rxApp.app_type}
         </Typography>
-        <IconButton
-          onClick = {handleMenuOpen}
-        >
-          <MdiIcon iconClass = "mdi-dots-horizontal" size={20} />
-        </IconButton>
-        <Menu
-          anchorEl={anchorEl}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          open={isMenuOpen}
-          onClose={handleMenuClose}
-          
-        >
-          <MenuItem onClick={hadleEdit} className = {classes.menuItem}>
-            <ListItemIcon>
-              <MdiIcon iconClass = "mdi-pencil-ruler"  size={18}/>
-            </ListItemIcon>
-            {intl.get('edit')} 
-          </MenuItem>
-          {
-            !rxApp.is_system && 
-            <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
-              <ListItemIcon>
-                <MdiIcon iconClass = "mdi-toy-brick-remove"  size={18}/>
-              </ListItemIcon>
-              {intl.get('uninstall')} 
-            </MenuItem>
-          }
-          { !rxApp.is_system && 
-            <Divider/>
-          }
-          { !rxApp.is_system && 
-            <MenuItem className = {classes.menuItem} onClick={handleRemove}>
-              <ListItemIcon>
-                <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>
-              </ListItemIcon>
-              {intl.get('delete')} 
-            </MenuItem>
-          }
-        </Menu>
+        {
+          loading 
+          ? <CircularProgress size = {24}/>
+          : <>
+              <IconButton
+                onClick = {handleMenuOpen}
+                className = {classes.menuButton}
+              >
+                <MdiIcon iconClass = "mdi-dots-horizontal" size={20} />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                getContentAnchorEl={null}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+                
+              >
+                <MenuItem onClick={hadleEdit} className = {classes.menuItem}>
+                  <ListItemIcon>
+                    <MdiIcon iconClass = "mdi-pencil-ruler"  size={18}/>
+                  </ListItemIcon>
+                  {intl.get('edit')} 
+                </MenuItem>
+                {
+                  !rxApp.is_system && 
+                  <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
+                    <ListItemIcon>
+                      <MdiIcon iconClass = "mdi-toy-brick-remove"  size={18}/>
+                    </ListItemIcon>
+                    {intl.get('uninstall')} 
+                  </MenuItem>
+                }
+                { !rxApp.is_system && 
+                  <Divider/>
+                }
+                { !rxApp.is_system && 
+                  <MenuItem className = {classes.menuItem} onClick={handleRemove}>
+                    <ListItemIcon>
+                      <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>
+                    </ListItemIcon>
+                    {intl.get('delete')} 
+                  </MenuItem>
+                }
+              </Menu>
+            </>
+        }
 
 
       </CardActions>
