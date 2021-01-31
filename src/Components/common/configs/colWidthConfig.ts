@@ -1,5 +1,4 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
 const sizeSchema = [
   {
@@ -68,32 +67,32 @@ const sizeSchema = [
 const colWidthConfig:Array<IPropConfig> = [
   {
     name:'xl',
-    label:'xl',
-    input:OptionSelect,
+    labelKey:'xl',
+    propType:'select',
     props:{
       items:sizeSchema,
     }
   },
   {
     name:'lg',
-    label:'lg',
-    input:OptionSelect,
+    labelKey:'lg',
+    propType:'select',
     props:{
       items:sizeSchema,
     }
   },
   {
     name:'md',
-    label:'md',
-    input:OptionSelect,
+    labelKey:'md',
+    propType:'select',
     props:{
       items:sizeSchema,
     }
   },
   {
     name:'sm',
-    label:'sm',
-    input:OptionSelect,
+    labelKey:'sm',
+    propType:'select',
     props:{
       items:sizeSchema,
     }
@@ -101,8 +100,8 @@ const colWidthConfig:Array<IPropConfig> = [
 
   {
     name:'xs',
-    label:'xs',
-    input:OptionSelect,
+    labelKey:'xs',
+    propType:'select',
     props:{
       items:sizeSchema,
     }

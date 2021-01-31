@@ -1,7 +1,5 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
-import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 import { IMeta } from "Base/RXNode/IMeta";
 import marginConfigs from "Components/common/configs/marginConfigs";
 
@@ -22,8 +20,8 @@ export class GridRowConfig extends MetaConfig{
       ...marginConfigs,
       {
         name:'direction',
-        label:'direction',
-        input:OptionSelect,
+        labelKey:'direction',
+        propType:'select',
         props:{
           items:[
             {
@@ -47,8 +45,8 @@ export class GridRowConfig extends MetaConfig{
       },
       {
         name:'justify',
-        label:'justify',
-        input:OptionSelect,
+        labelKey:'justify',
+        propType:'select',
         props:{
           items:[
             {
@@ -81,8 +79,8 @@ export class GridRowConfig extends MetaConfig{
 
       {
         name:'alignContent',
-        label:'align-content',
-        input:OptionSelect,
+        labelKey:'align-content',
+        propType:'select',
         props:{
           items:[
             {
@@ -114,8 +112,8 @@ export class GridRowConfig extends MetaConfig{
       },
       {
         name:'alignItems',
-        label:'align-items',
-        input:OptionSelect,
+        labelKey:'align-items',
+        propType:'select',
         props:{
           items:[
             {
@@ -143,8 +141,8 @@ export class GridRowConfig extends MetaConfig{
       },
       {
         name:'spacing',
-        label:'spacing',
-        input:NumberInput,
+        labelKey:'spacing',
+        propType:'number',
         props:{
           'min':0,
           'max':10,
