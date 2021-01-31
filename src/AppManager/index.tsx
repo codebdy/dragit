@@ -15,6 +15,7 @@ import { GET_RX_APP_LIST } from 'Base/GraphQL/APP_GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppsSkeleton from './AppsSkeleton';
 import { IRxApp } from 'Base/Model/IRxApp';
+import SubmitButton from 'Components/Common/SubmitButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,7 +87,7 @@ export const AppManager = observer(() => {
                 <MdiIcon iconClass = "mdi-cloud-download-outline" />
               }
             >{intl.get('download')}</Button>
-            <Button 
+            <SubmitButton 
               className = {classes.addButton}
               variant = "contained" 
               color = "primary" 
@@ -94,7 +95,9 @@ export const AppManager = observer(() => {
               startIcon = {
                 <Add />
               }
-            >{intl.get('create')}</Button>
+            >
+              {intl.get('create')}
+            </SubmitButton>
           </Grid>
         </Grid>
         {

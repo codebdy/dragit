@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
       position: 'relative',
+      display:'inline',
     },
     
     buttonProgress: {
