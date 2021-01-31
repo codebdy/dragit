@@ -310,5 +310,6 @@
     "entry-page":"Entry page",
     "new-app":"New APP",
     "free":"Free",
-    "app-access":"APP access"
+    "app-access":"APP access",
+    "confirm-delete":"Are you sure to delete?"
 }

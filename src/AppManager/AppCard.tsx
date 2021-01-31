@@ -102,9 +102,12 @@ export default function AppCard(
 
   const handleRemove = ()=>{
     setAnchorEl(null);
-    excuteRemoveRxPage({
-      variables:{id:rxApp.id}
+    dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
+      excuteRemoveRxPage({
+        variables:{id:rxApp.id}
+      })     
     })
+
   }
 
   const handleToApp = ()=>{
