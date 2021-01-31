@@ -2,10 +2,8 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 
-export class ListViewToolbarRule extends MetaConfig{
-  editPaddingY = '8px';
-  editPaddingX = '8px';
-  
+export class JsxTemplateParserConfig extends MetaConfig{
+
   accept(child:IMeta){
     return false;
   }

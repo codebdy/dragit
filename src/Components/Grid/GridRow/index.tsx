@@ -2,9 +2,9 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 
 const GridRow = React.forwardRef((props:any, ref:any) => {
-  const{children, ...rest} = props
+  const{spacing, children, ...rest} = props
   return (
-    <Grid container {...rest} ref={ref}>
+    <Grid container spacing = {spacing||0} {...rest} ref={ref}>
       {children}        
     </Grid>
   )

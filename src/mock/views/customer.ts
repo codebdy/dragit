@@ -73,9 +73,12 @@ export default {
               children:[
                 {
                   name:'FormGridContainer',
+                  props:{
+                    spacing:2,
+                  },
                   children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         md:6,
                       },
@@ -97,7 +100,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         md:6,                      
                       },
@@ -115,7 +118,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:6,
                       },
@@ -133,7 +136,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:6,
                       },
@@ -152,7 +155,7 @@ export default {
 
                     },
                     {
-                      name:"PortletGridItem",
+                      name:"FormGridItem",
                       props:{
                         xs:6,
                       },
@@ -172,7 +175,7 @@ export default {
                       ]
                     },
                     {
-                      name:"PortletGridItem",
+                      name:"FormGridItem",
                       props:{
                         xs:6,
                       },
@@ -192,7 +195,7 @@ export default {
                       ]
                     },
                     {
-                      name:"PortletGridItem",
+                      name:"FormGridItem",
                       props:{
                         xs:12,
                       },

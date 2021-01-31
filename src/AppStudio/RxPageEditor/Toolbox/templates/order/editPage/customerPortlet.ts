@@ -14,7 +14,7 @@ export default              {
       name:'FormGridContainer',
       children:[
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -39,7 +39,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:4,
           },
@@ -60,7 +60,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -83,7 +83,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -122,7 +122,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -156,7 +156,7 @@ export default              {
           ]
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -176,7 +176,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:12,
           },
@@ -197,7 +197,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:3,
           },
@@ -217,7 +217,7 @@ export default              {
           ],
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:3,
           },
@@ -237,7 +237,7 @@ export default              {
           ],
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:3,
           },
@@ -257,7 +257,7 @@ export default              {
           ],
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:3,
           },
@@ -278,7 +278,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:4,
           },
@@ -298,7 +298,7 @@ export default              {
           ],
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -317,7 +317,7 @@ export default              {
           ]
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -337,7 +337,7 @@ export default              {
         },
 
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:4,
           },
@@ -357,7 +357,7 @@ export default              {
           ],
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -376,7 +376,7 @@ export default              {
           ]
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             md:4,
           },
@@ -396,7 +396,7 @@ export default              {
         },
 
         {
-          name:"PortletGridItem",
+          name:"FormGridItem",
           props:{
             xs:12,
           },

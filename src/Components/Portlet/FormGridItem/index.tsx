@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 
-const PortletGridItem = React.forwardRef((props:{children:any}, ref:any) => {
+const FormGridItem = React.forwardRef((props:{children:any}, ref:any) => {
   const{children, ...rest} = props
   return (
     <Grid item {...rest} ref={ref}>
@@ -9,4 +9,4 @@ const PortletGridItem = React.forwardRef((props:{children:any}, ref:any) => {
     </Grid>
   )
 });
-export default PortletGridItem
+export default FormGridItem

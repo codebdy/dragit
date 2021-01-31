@@ -39,6 +39,9 @@ export class PortletConfig extends MetaConfig{
         name:'title',
         labelKey:'title',
         propType:'string',
+        props:{
+          xs:12,
+        }
       },
     ]
   }

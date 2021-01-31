@@ -14,7 +14,7 @@ export default{
       name:'FormGridContainer',
       children:[
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:12,
           },
@@ -35,7 +35,7 @@ export default{
           ]
         },
         {
-          name: 'PortletGridItem',
+          name: 'FormGridItem',
           props:{
             xs:12,                      
           },
@@ -57,7 +57,7 @@ export default{
           ]
         },
         {
-          name:"PortletGridItem",
+          name:"FormGridItem",
           props:{
             xs:12,
           },

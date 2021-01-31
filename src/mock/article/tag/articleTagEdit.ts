@@ -30,7 +30,7 @@ export default {
                   name:'FormGridContainer',
                   children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,                      
                       },

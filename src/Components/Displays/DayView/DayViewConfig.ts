@@ -2,9 +2,10 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 
-export class ListViewEnumFilterRUle extends MetaConfig{
-  empertyPadding = '';
-
+export class DayViewConfig extends MetaConfig{
+  //empertyPadding = '';
+  hasField = true;
+  
   accept(child:IMeta){
     return false;
   }

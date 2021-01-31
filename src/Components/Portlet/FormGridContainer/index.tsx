@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const FormGridContainer = observer(React.forwardRef((props:any, ref:any) => {
-  const {[DADA_RXID_CONST]:rxid, rxNode, className, children, error, helperText, ...rest} = props
+  const {[DADA_RXID_CONST]:rxid, spacing, rxNode, className, children, error, helperText, ...rest} = props
   const classes = useStyles();
   const modelStore =  useModelStore();
   const fieldStore = modelStore?.getChild(rxNode?.meta.field);
@@ -36,7 +36,7 @@ const FormGridContainer = observer(React.forwardRef((props:any, ref:any) => {
   }, [fieldName])
   
   return (
-    <Grid {...{[DADA_RXID_CONST]:rxid}} container spacing={2} className={ classNames(classes.portletBody, className) } {...rest} ref={ref}>
+    <Grid {...{[DADA_RXID_CONST]:rxid}} container spacing={spacing || 0} className={ classNames(classes.portletBody, className) } {...rest} ref={ref}>
       {
         rxNode?.meta.field?
         <ModelProvider value = {fieldStore as any}>

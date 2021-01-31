@@ -3,7 +3,7 @@ import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import colWidthConfig from "Components/common/configs/colWidthConfig";
 
-export class PortletGridItemRule extends MetaConfig{
+export class FormGridItemConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
 

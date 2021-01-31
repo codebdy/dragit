@@ -144,7 +144,7 @@ export default [
       {
         titleKey:'form-grid-item',
         meta:{
-          name:'PortletGridItem',
+          name:'FormGridItem',
         }
       },
       {

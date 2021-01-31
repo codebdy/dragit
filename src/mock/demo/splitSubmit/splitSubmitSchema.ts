@@ -27,9 +27,12 @@ export var splitSubmitSchema = [
                 {
                   name:"FormGridContainer",
                   field:'subtraction',
+                  props:{
+                    spacing:2,
+                  },
                   children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,
                       },
@@ -44,7 +47,7 @@ export var splitSubmitSchema = [
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:6,
                       },
@@ -68,7 +71,7 @@ export var splitSubmitSchema = [
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:6,
                       },
@@ -96,9 +99,12 @@ export var splitSubmitSchema = [
                 },
                 {
                   name:"FormGridContainer",
+                  props:{
+                    spacing:2,
+                  },
                   children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,
                       },
@@ -178,11 +184,14 @@ export var splitSubmitSchema = [
               children:[
                 {
                   name:"FormGridContainer",
-                    field:'compound',                    
+                    field:'compound',      
+                    props:{
+                      spacing:2,
+                    },              
              
                     children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
 
                       props:{
                         xs:12,
@@ -198,7 +207,7 @@ export var splitSubmitSchema = [
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:4,
                       },
@@ -221,7 +230,7 @@ export var splitSubmitSchema = [
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:4,
                       },
@@ -244,7 +253,7 @@ export var splitSubmitSchema = [
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:4,
                       },
@@ -267,7 +276,7 @@ export var splitSubmitSchema = [
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,
                         marginTop:2,
