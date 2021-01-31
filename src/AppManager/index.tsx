@@ -90,6 +90,9 @@ export const AppManager = observer(() => {
     }})
   }
 
+  const handleDownload = ()=>{
+    dragItStore.infoError('下载功能尚未开放')
+  }
 
   return (
     <div className={classes.root}>
@@ -126,6 +129,7 @@ export const AppManager = observer(() => {
               startIcon = {
                 <MdiIcon iconClass = "mdi-cloud-download-outline" />
               }
+              onClick = {handleDownload}
             >{intl.get('download')}</Button>
             <SubmitButton 
               className = {classes.addButton}
