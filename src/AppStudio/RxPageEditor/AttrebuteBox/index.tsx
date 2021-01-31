@@ -92,12 +92,17 @@ export const AttributeBox = observer(()=>{
   const studioStore = useAppStudioStore();
   const node = rxDragStore?.selectedNode;  
   const [metaConfig, setMetaConfig] = React.useState<MetaConfig>();
+  const [metaProps, setMetaProps] =  React.useState<any>({});
   const [validateRule, setValidateRule] = React.useState<IValidateRule>();
   //const [auths, setAuths] = React.useState(node?.meta.auths);
 
   useEffect(() => {
     //setAuths(node?.meta.auths);
-    node?.meta.name && setMetaConfig(resolveMetaConfig(node?.meta.name) as MetaConfig)
+    if(node?.meta.name){
+      setMetaProps(node?.meta.props || {});
+      setMetaConfig(resolveMetaConfig(node?.meta.name) as MetaConfig)
+    }
+
   },[node]);
 
   const handlePropChange = (key:string, value:any) => {
@@ -119,8 +124,6 @@ export const AttributeBox = observer(()=>{
   const handleChangeAuths = (auths : IAuth[]|undefined)=>{
     rxDragStore?.updateSelecteMeta('auths', auths);
   }
-
-  const props = node?.meta.props || {};
 
   return (
     <div className={classes.root}>
@@ -144,13 +147,12 @@ export const AttributeBox = observer(()=>{
                     const PropInput = config.propType ? propsInputs[config.propType] : undefined;
                     const label = config.label || intl.get(config.labelKey||'');
                     console.assert(PropInput, `Config editor not exist,Meta:${node?.meta.name}, prop:${config.name}, propType：${config.propType}`);
-                    console.log(index + '-' + config.name, props[config.name]);
                     return(
                       PropInput && 
                       <PropInput 
                         key={index + '-' + config.name} 
                         label = {label}
-                        value = {props[config.name]}
+                        value = {metaProps[config.name]}
                         onChange={(value: any) => handlePropChange(config.name, value)} 
                         {...config.props} 
                       />
