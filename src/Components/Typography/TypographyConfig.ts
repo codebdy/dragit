@@ -2,7 +2,7 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 
-export class TypographyRule extends MetaConfig{
+export class TypographyConfig extends MetaConfig{
 
   match(meta:IMeta){
     return meta.name === 'Typography';

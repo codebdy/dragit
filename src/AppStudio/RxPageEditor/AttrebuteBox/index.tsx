@@ -144,6 +144,7 @@ export const AttributeBox = observer(()=>{
                     const PropInput = config.propType ? propsInputs[config.propType] : undefined;
                     const label = config.label || intl.get(config.labelKey||'');
                     console.assert(PropInput, `Config editor not exist,Meta:${node?.meta.name}, prop:${config.name}, propType：${config.propType}`);
+                    console.log(index + '-' + config.name, props[config.name]);
                     return(
                       PropInput && 
                       <PropInput 

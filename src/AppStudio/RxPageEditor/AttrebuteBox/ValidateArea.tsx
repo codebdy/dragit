@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import {MenuItem, Select, Switch, FormControl, FormControlLabel, InputLabel, TextField } from '@material-ui/core';
-import { AttributeRow, } from 'AppStudio/RxPageEditor/AttrebuteBox/AttributeRow';
+import {MenuItem, Select, Switch, FormControl, FormControlLabel, InputLabel, TextField, Grid } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { IValidateRule } from '../../../Base/Model/IValidateRule';
 
@@ -24,8 +23,8 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
 
 
   return (
-    <div>
-      <AttributeRow>
+    <Grid container spacing = {2}>
+      <Grid item xs = {12}>
         <FormControlLabel
           control={
             <Switch
@@ -38,9 +37,9 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
           style={{margin:'2px'}}
           label={<span style={{fontSize:'0.9rem'}}>{intl.get("required")}</span>}
         />        
-      </AttributeRow>
+      </Grid>
 
-      <AttributeRow>
+      <Grid item xs = {12}>
         <FormControl variant="outlined" size="small" fullWidth>
           <InputLabel>{intl.get("validate-type")}</InputLabel>
           <Select
@@ -57,11 +56,11 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
             <MenuItem value='date'>{intl.get('date')}</MenuItem>
           </Select>
         </FormControl>
-      </AttributeRow>
+      </Grid>
       {
         rule?.valueType === 'string' &&
         <Fragment>
-          <AttributeRow>
+          <Grid item xs = {12}>
             <FormControl variant="outlined" size="small" fullWidth>
               <InputLabel>{intl.get("validate-rules")}</InputLabel>
               <Select
@@ -77,9 +76,9 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
                 <MenuItem value='customized'>{intl.get('customized')}</MenuItem>
               </Select>
             </FormControl>
-          </AttributeRow>
+          </Grid>
 
-          <AttributeRow>
+          <Grid item xs = {6}>
             <TextField 
               fullWidth
               variant="outlined" 
@@ -89,6 +88,8 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
               value={rule.minLength||''}
               onChange={(e:any)=>{handleRuleChange('minLength', e.target.value)}}
             ></TextField>
+          </Grid>
+          <Grid item xs = {6}>
             <TextField 
               size="small"
               fullWidth
@@ -98,10 +99,10 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
               value={rule.maxLength||''}
               onChange={(e:any)=>{handleRuleChange('maxLength', e.target.value)}}
             ></TextField>
-          </AttributeRow>
+          </Grid>
           {
             rule?.ruleType === 'customized'&&
-            <AttributeRow>
+            <Grid item xs = {12}>
               <TextField
                 size="small" 
                 fullWidth
@@ -110,9 +111,9 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
                 value={rule.pattern||''}
                 onChange={(e:any)=>{handleRuleChange('pattern', e.target.value)}}
               ></TextField>
-            </AttributeRow>
+            </Grid>
           }
-          <AttributeRow>
+          <Grid item xs = {12}>
             <TextField 
               size="small"
               fullWidth
@@ -123,14 +124,14 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
               value={rule?.errorMessage||''} 
                 onChange={(e:any)=>{handleRuleChange('errorMessage', e.target.value)}}
             ></TextField>
-          </AttributeRow>
+          </Grid>
         </Fragment>    
       }
 
       {
         rule?.valueType === 'number' &&
         <Fragment>
-          <AttributeRow>
+          <Grid item xs = {6}>
             <TextField 
               size="small"
               fullWidth
@@ -140,6 +141,8 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
               value={rule.min||''} 
               onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}
             ></TextField>
+          </Grid>
+          <Grid item xs = {6}>
             <TextField
               size="small" 
               fullWidth
@@ -149,13 +152,13 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
               value={rule.max||''} 
               onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}
             ></TextField>
-          </AttributeRow>
+          </Grid>
         </Fragment>
       }
       {
         rule?.valueType === 'date' &&
         <Fragment>
-          <AttributeRow>
+          <Grid item xs = {12}>
             <TextField
               size="small" 
               fullWidth
@@ -166,8 +169,8 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
               value={rule.min||''} 
               onChange={(e:any)=>{handleRuleChange('min', e.target.value)}}
             ></TextField>
-          </AttributeRow>
-          <AttributeRow>
+          </Grid>
+          <Grid item xs = {12}>
             <TextField 
               size="small"
               fullWidth
@@ -178,11 +181,11 @@ export default function AttributeBoxValidateArea(props:{rule?:IValidateRule, onC
               value={rule.max||''} 
               onChange={(e:any)=>{handleRuleChange('max', e.target.value)}}
             ></TextField>
-          </AttributeRow>
+          </Grid>
         </Fragment>
       }
 
 
-    </div>
+    </Grid>
   )
 }
