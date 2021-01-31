@@ -32,9 +32,7 @@ export default{
           size: "large",
           onClick:{
             name: OPEN_PAGE_ACTION,
-            page:{
-              pageId:'1012',              
-            }
+            pageJumper: {openStyle: "JUMP", pageId: "guid-p-5"},
           }
         }
       }]

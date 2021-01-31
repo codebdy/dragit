@@ -1,8 +1,7 @@
 import listPage from "./listPage";
 
-export default {
-  layout:[
+export default [
     listPage,
   ] 
-}
+
   

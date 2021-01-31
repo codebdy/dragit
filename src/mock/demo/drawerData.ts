@@ -33,7 +33,7 @@ export var demoDrawerData= [{
           title: '页面跳转式',
           type: 'item',
           icon: 'mdi-circle-small',
-          to: 'jump-style-module',
+          pageId: 'guid-p-4',
       },
       {
           title: '对话框式',

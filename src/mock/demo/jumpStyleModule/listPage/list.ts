@@ -182,9 +182,7 @@ export default {
                 tooltip:'编辑',
                 onClick:{
                   name: OPEN_PAGE_ACTION,
-                  page:{
-                    pageId:'1012',              
-                  }
+                  pageJumper: {openStyle: "JUMP", pageId: "guid-p-5"},
                 }
               }
             },
@@ -206,18 +204,7 @@ export default {
                 `
               }
             },
-            /*{
-              name:'IconButton',
-              props:{
-                icon:'mdi-publish',
-                tooltip:'发布',
-                onClick:{
-                  name: UPDATE_LIST_VIEW_RECORD,
-                  field:'status',
-                  value:'PUBLISHED',
-                }
-              }
-            },*/
+
             {
               name:'IconButton',
               props:{
