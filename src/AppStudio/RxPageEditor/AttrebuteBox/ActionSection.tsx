@@ -3,32 +3,27 @@ import { FormControl,  FormControlLabel,  Grid,  InputLabel, MenuItem, Select, S
 import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, GO_BACK_ACTION, OPEN_PAGE_ACTION, REMOVE_LIST_VIEW_RECORD, RESET_ACTION, SUBMIT_MUTATION, UPDATE_LIST_VIEW_RECORD } from "Base/PageUtils/ACTIONs";
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
-import { useDesign } from '../../../rx-drag/store/useDesign';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
-import { toJS } from 'mobx';
 import { IPageMutation } from 'Base/Model/IPageMutation';
 import { IPageAction } from 'Base/Model/IPageAction';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { stringValue } from 'rx-drag/utils/stringValue';
+import { toJS } from 'mobx';
 
 const AttributeBoxActionSection = observer((
   props:{
     action?:IPageAction,
-    onChange?:(action:IPageAction)=>void,
+    onChange?:(action?:IPageAction)=>void,
   }
 )=>{
-  const {rxDragStore} = useDesign();
+  const {action = {} as IPageAction, onChange} = props;
   const studioStore = useAppStudioStore();
-  const node = rxDragStore?.selectedNode;  
-  const action:IPageAction = node?.meta.props?.onClick||{};
-
+  
   const updatAction = (field:string, value:string|IPageMutation|IPageJumper|boolean|Array<string>)=>{
-    const newAction = cloneObject(action);
-    const props = cloneObject(toJS(node?.meta.props)||{})
+    const newAction = cloneObject(toJS(action));
     newAction[field] = value;
-    props.onClick = newAction;
-    rxDragStore?.updateSelecteMeta('props', props);
+    onChange && onChange(newAction);
   }
 
   const handleActionChange = (event: React.ChangeEvent<{ value: unknown }>)=>{

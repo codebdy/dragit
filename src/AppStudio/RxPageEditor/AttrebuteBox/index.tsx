@@ -113,7 +113,7 @@ export const AttributeBox = observer(()=>{
   },[node?.meta.props]);
 
   const handlePropChange = (key:string, value:any) => {
-    const props = cloneObject(toJS(node?.meta.props)||{});
+    const props = cloneObject(toJS(metaProps)||{});
     props[key] = value;  
     rxDragStore?.updateSelecteMeta('props', props);
   };
@@ -208,7 +208,10 @@ export const AttributeBox = observer(()=>{
               </AccordionSummary>
               <AccordionDetails key={node.id + '-action'}>
                 <Grid container spacing={2}>
-                  <AttributeBoxActionSection />
+                  <AttributeBoxActionSection 
+                    action = {metaProps.onClick} 
+                    onChange = {action=>handlePropChange('onClick', action)}
+                  />
                 </Grid>
               </AccordionDetails>            
             </Accordion>
@@ -248,8 +251,7 @@ export const AttributeBox = observer(()=>{
                      })
 
                     }
-                 </Grid>
-                 
+                 </Grid>                 
                  
                  <Grid item container xs = {12} justify = "center">
                      <IconButton>
