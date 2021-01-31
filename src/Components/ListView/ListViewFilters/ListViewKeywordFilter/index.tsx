@@ -1,7 +1,7 @@
 import { makeStyles, Theme, createStyles, InputAdornment, TextField } from '@material-ui/core';
 import { DADA_RXID_CONST } from 'rx-drag/models/RxNode';
 import classNames from 'classnames';
-import MdiIcon from 'Components/Common/MdiIcon';
+import MdiIcon from 'Components/utils/MdiIcon';
 import { useListViewStore } from 'Components/ListView/ListViewStore';
 import React, { useState } from 'react';
 import intl from 'react-intl-universal';

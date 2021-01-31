@@ -6,8 +6,8 @@ import ListViewColumnsDialog from "./PropsInputs/ListViewColumnsDialog";
 import ListViewFiltersDialog from "./PropsInputs/ListViewFiltersDialog";
 import ListViewRowCommandDialog from "./PropsInputs/ListViewRowCommandDialog";
 import { IMeta } from "Base/RXNode/IMeta";
-import marginConfigs from "Base/RXNode/Configs/marginConfigs";
-import elevationRules from "Base/RXNode/Configs/elevationRules";
+import marginConfigs from "Components/utils/configs/marginConfigs";
+import elevationRules from "Components/utils/configs/elevationRules";
 
 export class ListViewRule extends MetaConfig{
   editPaddingY = '8px';

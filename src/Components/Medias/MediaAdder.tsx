@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core';
-import MdiIcon from 'Components/Common/MdiIcon';
-import Image from 'Components/Common/Image'
+import MdiIcon from 'Components/utils/MdiIcon';
+import Image from 'Components/utils/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import MediasSelectDialog from './MediasSelectDialog';

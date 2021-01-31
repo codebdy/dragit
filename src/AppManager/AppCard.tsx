@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Avatar, Badge, CircularProgress, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
-import MdiIcon from 'Components/Common/MdiIcon';
+import MdiIcon from 'Components/utils/MdiIcon';
 import { IRxApp } from 'Base/Model/IRxApp';
 import intl from 'react-intl-universal';
 import { useHistory } from 'react-router-dom';

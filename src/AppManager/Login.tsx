@@ -7,7 +7,7 @@ import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
 import { INDEX_URL, TOKEN_NAME } from 'Utils/consts';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
-import SubmitButton from 'Components/Common/SubmitButton';
+import SubmitButton from 'Components/utils/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 import { LIGHT } from 'AppBoard/store/ThemeSettings';

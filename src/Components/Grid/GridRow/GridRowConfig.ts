@@ -3,9 +3,9 @@ import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/Option
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
 import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 import { IMeta } from "Base/RXNode/IMeta";
-import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import marginConfigs from "Components/utils/configs/marginConfigs";
 
-export class GridRowRule extends MetaConfig{
+export class GridRowConfig extends MetaConfig{
   editPaddingY = '8px';
   editPaddingX = '8px';
   labelKey ="row";

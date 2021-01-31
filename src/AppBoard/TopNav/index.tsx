@@ -12,7 +12,7 @@ import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 import { DARK } from 'AppBoard/store/ThemeSettings';
 import { IconButton, Tooltip } from '@material-ui/core';
-import MdiIcon from 'Components/Common/MdiIcon';
+import MdiIcon from 'Components/utils/MdiIcon';
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) =>

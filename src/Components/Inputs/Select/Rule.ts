@@ -2,8 +2,8 @@ import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import inputRules from "Base/RXNode/Configs/inputRules";
-import itemsRule from "Base/RXNode/Configs/itemsRule";
+import inputRules from "Components/utils/configs/inputRules";
+import itemsRule from "Components/utils/configs/itemsRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 
 export class SelectRule extends MetaConfig{

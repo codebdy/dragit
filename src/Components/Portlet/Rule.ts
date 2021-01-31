@@ -2,8 +2,8 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import SwitchInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import elevationRules from "Base/RXNode/Configs/elevationRules";
-import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import elevationRules from "Components/utils/configs/elevationRules";
+import marginConfigs from "Components/utils/configs/marginConfigs";
 import { IMeta } from "Base/RXNode/IMeta";
 
 export class PortletRule extends MetaConfig{

@@ -2,8 +2,8 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, lighten, Typography, IconButton, Tooltip } from '@material-ui/core';
 import classNames from 'classnames';
 import intl from "react-intl-universal";
-import MdiIcon from 'Components/Common/MdiIcon';
-import Spacer from 'Components/Common/Spacer';
+import MdiIcon from 'Components/utils/MdiIcon';
+import Spacer from 'Components/utils/Spacer';
 import { IMedia } from 'Base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>

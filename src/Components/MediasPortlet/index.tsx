@@ -7,9 +7,9 @@ import MediasPortletAltsDialog from './MediasPortletAltsDialog';
 import { RXInputProps } from 'Base/RXInputProps';
 import { Skeleton } from '@material-ui/lab';
 import { IMedia } from 'Base/Model/IMedia';
-import MdiIcon from 'Components/Common/MdiIcon';
+import MdiIcon from 'Components/utils/MdiIcon';
 import { add, exchange, remove } from 'rx-drag/utils/ArrayHelper';
-import withFormField from 'Components/Common/withFormField';
+import withFormField from 'Components/utils/withFormField';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/models/RxNode';
 

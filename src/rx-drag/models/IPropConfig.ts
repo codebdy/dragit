@@ -4,7 +4,7 @@ export interface IPropConfig {
   label?: string; 
   labelKey?: string;//存Label ID， 从资源文件读取
   input?: any;
-  propType?: 'string'|'boolean'|'select'|'items'|'number',
+  propType?: 'longString'|'string'|'boolean'|'select'|'items'|'number',
   items?: Array<{value:string, label:string}>;
   props?: any;
   defaultValue?:any;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@material-ui/core';
-import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
+import MultiContentPotlet from 'Components/utils/MultiContentPotlet';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';
 
 import { Observer } from 'mobx-react';

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Badge, IconButton, Popover, Typography, Divider, Button } from '@material-ui/core';
-import MdiIcon from "Components/Common/MdiIcon"
+import MdiIcon from "Components/utils/MdiIcon"
 import NotificationsList from './NotificationsList';
 //import intl from "react-intl-universal";
 import { useHistory } from 'react-router';

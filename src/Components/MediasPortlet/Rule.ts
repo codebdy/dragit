@@ -1,8 +1,8 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import marginConfigs from "Base/RXNode/Configs/marginConfigs";
-import elevationRules from "Base/RXNode/Configs/elevationRules";
+import marginConfigs from "Components/utils/configs/marginConfigs";
+import elevationRules from "Components/utils/configs/elevationRules";
 import { IMeta } from "Base/RXNode/IMeta";
 
 export class MediasPortletRule extends MetaConfig{

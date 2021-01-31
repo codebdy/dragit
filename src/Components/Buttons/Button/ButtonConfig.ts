@@ -1,7 +1,7 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 import { IMeta } from "../../../Base/RXNode/IMeta";
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
-import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import marginConfigs from "Components/utils/configs/marginConfigs";
 
 export class ButtonConfig extends MetaConfig{
   editPaddingY = '';

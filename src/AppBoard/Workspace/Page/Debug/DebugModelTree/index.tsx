@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Drawer, Divider, IconButton, Typography } from '@material-ui/core';
-import MdiIcon from 'Components/Common/MdiIcon';
+import MdiIcon from 'Components/utils/MdiIcon';
 import { Close } from '@material-ui/icons';
 import intl from 'react-intl-universal';
 import Scrollbar from 'Common/Scrollbar';

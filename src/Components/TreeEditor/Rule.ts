@@ -2,8 +2,8 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
-import elevationRules from "Base/RXNode/Configs/elevationRules";
-import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import elevationRules from "Components/utils/configs/elevationRules";
+import marginConfigs from "Components/utils/configs/marginConfigs";
 //import ApiEditor from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/ApiEditor";
 
 export class TreeEditorRule extends MetaConfig{

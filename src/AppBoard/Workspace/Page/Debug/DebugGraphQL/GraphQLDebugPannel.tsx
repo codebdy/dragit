@@ -8,7 +8,7 @@ import {CodeMirrorEditor} from './CodeMirrorEditor';
 import intl from 'react-intl-universal';
 import { useDebugQuery } from './useDebugQuery';
 import { useDebugMutation } from './useDebugMutation';
-import MdiIcon from 'Components/Common/MdiIcon';
+import MdiIcon from 'Components/utils/MdiIcon';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { usePageStore } from 'Base/PageUtils/PageStore';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';

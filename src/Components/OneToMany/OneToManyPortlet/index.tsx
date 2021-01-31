@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, Divider, IconButton } from '@material-ui/core';
-import MultiContentPotlet from 'Components/Common/MultiContentPotlet';
+import MultiContentPotlet from 'Components/utils/MultiContentPotlet';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@material-ui/icons/Close';
 import { ModelProvider, useModelStore } from 'Base/ModelTree/ModelProvider';

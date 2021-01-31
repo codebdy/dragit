@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, AppBar, Button, Dialog, DialogActions, DialogContent, IconButton, Toolbar, Typography, Grow } from '@material-ui/core';
 import intl from "react-intl-universal";
-import Spacer from 'Components/Common/Spacer';
+import Spacer from 'Components/utils/Spacer';
 import MediasContent from './MediasContent';
 import { Close } from '@material-ui/icons';
 import { TransitionProps } from '@material-ui/core/transitions';

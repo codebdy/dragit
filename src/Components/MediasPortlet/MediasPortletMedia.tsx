@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, IconButton } from '@material-ui/core';
-import Image from 'Components/Common/Image'
-import MdiIcon from '../Common/MdiIcon';
+import Image from 'Components/utils/Image'
+import MdiIcon from '../utils/MdiIcon';
 import { IMedia } from 'Base/Model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>

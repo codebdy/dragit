@@ -2,10 +2,10 @@ import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import colorRule from "Base/RXNode/Configs/colorRule";
-import itemsRule from "Base/RXNode/Configs/itemsRule";
+import colorRule from "Components/utils/configs/colorRule";
+import itemsRule from "Components/utils/configs/itemsRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import sizeRule from "Base/RXNode/Configs/sizeRule";
+import sizeRule from "Components/utils/configs/sizeRule";
 
 export class RadioGroupRule extends MetaConfig{
   //editPaddingY = '';

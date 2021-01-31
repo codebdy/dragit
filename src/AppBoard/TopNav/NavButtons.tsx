@@ -4,7 +4,7 @@ import { Hidden, Typography, createStyles, makeStyles, Theme, Tooltip } from "@m
 import MenuIcon from '@material-ui/icons/Menu';
 import intl from "react-intl-universal";
 import EvenNotification from "./Notifications"
-import MdiIcon from "Components/Common/MdiIcon";
+import MdiIcon from "Components/utils/MdiIcon";
 import { useDragItStore } from "Store/Helpers/useDragItStore";
 import { AccountAvatar } from "./AccountAvatar";
 

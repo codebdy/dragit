@@ -5,7 +5,7 @@ import { IToolboxItem } from "../../../rx-drag/models/IToolboxItem";
 import TreeNodeLabel from "./TreeNodeLabel";
 import intl from "react-intl-universal";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
-import MdiIcon from 'Components/Common/MdiIcon';
+import MdiIcon from 'Components/utils/MdiIcon';
 import classNames from "classnames";
 import { useDesign } from "../../../rx-drag/store/useDesign";
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grow, AppBar, Button, Dialog, DialogActions, DialogContent, IconButton, Toolbar, Typography, FormControl, InputAdornment, InputLabel, OutlinedInput, Tooltip } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
-import Spacer from '../Common/Spacer';
+import Spacer from '../utils/Spacer';
 import CloseIcon from '@material-ui/icons/Close';
 import Intl from "react-intl-universal";
-import Image from 'Components/Common/Image';
+import Image from 'Components/utils/Image';
 import classNames from 'classnames';
-import MdiIcon from '../Common/MdiIcon';
+import MdiIcon from '../utils/MdiIcon';
 import { IMedia } from 'Base/Model/IMedia';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 

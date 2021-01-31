@@ -6,7 +6,7 @@ import intl from 'react-intl-universal';
 import { PopuDrawer } from 'AppStudio/PopuDrawer';
 import { AuthListItem } from './AuthListItem';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
-import SubmitButton from 'Components/Common/SubmitButton';
+import SubmitButton from 'Components/utils/SubmitButton';
 import { authFields, CREATE_RX_AUTH } from './AUTH_GQLs';
 import { gql, useMutation } from '@apollo/react-hooks';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';

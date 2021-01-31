@@ -3,8 +3,8 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import { IMeta } from "Base/RXNode/IMeta";
-import elevationRules from "Base/RXNode/Configs/elevationRules";
-import marginConfigs from "Base/RXNode/Configs/marginConfigs";
+import elevationRules from "Components/utils/configs/elevationRules";
+import marginConfigs from "Components/utils/configs/marginConfigs";
 
 export class OneToManyTableRule extends MetaConfig{
   empertyPadding = '';
