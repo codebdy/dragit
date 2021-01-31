@@ -5,7 +5,21 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 
 import { schema, resolvers } from './schema';
 
-const cache = new InMemoryCache(/*{addTypename: false}*/);
+const cache = new InMemoryCache(
+  {
+    typePolicies: {
+      Query: {
+        fields: {
+          rxApps: {
+            merge(existing = [], incoming: any) {
+              return incoming;
+            }
+          }
+        }
+      }
+    }
+  }
+);
 
 const executableSchema = makeExecutableSchema({
   typeDefs: schema,
