@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Accordion as MuiAccordion, Grid, TextField, withStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Accordion as MuiAccordion, Grid, TextField, withStyles, IconButton } from '@material-ui/core';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
@@ -19,6 +19,8 @@ import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { MetaConfig } from 'Base/RXNode/MetaConfig';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { IAuth } from 'Base/Model/IAuth';
+import MdiIcon from 'Components/common/MdiIcon';
+import { stringValue } from 'rx-drag/utils/stringValue';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -211,6 +213,54 @@ export const AttributeBox = observer(()=>{
               </AccordionDetails>            
             </Accordion>
           }
+          {
+             metaConfig?.hasMultiAction &&
+             <Accordion>
+             <AccordionSummary
+               expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
+             >
+               <Typography className={classes.heading}>{intl.get('action')}</Typography>
+             </AccordionSummary>
+             <AccordionDetails key={node.id + '-actions'}>
+               <Grid container spacing={2}>
+                 <Grid item container spacing = {2} justify = "space-between">
+                   {
+                      Object.keys(metaProps.actions)?.map((key:string,index)=>{
+                        return (
+                          <Fragment key = {`${index}-${key}`}>
+                            <Grid item xs = {8}>
+                              <TextField
+                                fullWidth
+                                size="small" 
+                                label = {intl.get('name')}
+                                variant = "outlined" 
+                                value = {stringValue(key)}
+                              />
+                            </Grid>
+                            <Grid>
+                              <IconButton>
+                                <MdiIcon iconClass = "mdi-close"  size = {20}/>
+                              </IconButton>
+                            </Grid>
+                            <AttributeBoxActionSection />
+                          </Fragment>
+                       )
+                     })
+
+                    }
+                 </Grid>
+                 
+                 
+                 <Grid item container xs = {12} justify = "center">
+                     <IconButton>
+                       <MdiIcon iconClass = "mdi-plus"  size = {20}/>
+                     </IconButton>
+                 </Grid>
+               </Grid>
+             </AccordionDetails>            
+           </Accordion>
+          }
+
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}

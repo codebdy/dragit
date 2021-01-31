@@ -4,7 +4,7 @@ import { IRxPage } from 'Base/Model/IRxPage';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/models/RxNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import { gql, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
@@ -30,7 +30,7 @@ export const Page = observer((
     page:IRxPage,
     pageJumper?:IPageJumper,
     hideDebug?:boolean,
-    onPageAction?: (pageAction:PageAction)=> void,
+    onPageAction?: (pageAction:IPageAction)=> void,
   }
 )=>{
   const [openAlert, setOpentAlert] = useState(false);
@@ -92,7 +92,7 @@ export const Page = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mutation])
   
-  const hanlePageAction = (action:PageAction)=>{
+  const hanlePageAction = (action:IPageAction)=>{
     switch (action.name){
       case SUBMIT_MUTATION:
         const submitNode = modelStore?.getModelNode(action.mutation?.submitNode)

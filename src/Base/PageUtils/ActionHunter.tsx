@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
 import React, { Fragment } from 'react';
 import { useActionStore } from 'Base/PageUtils/ActionStore';
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { useEffect } from 'react';
 const ActionHunter = observer((
     props:{
-      onPageAction:(action:PageAction)=>void,
+      onPageAction:(action:IPageAction)=>void,
     }
   )=>{
 

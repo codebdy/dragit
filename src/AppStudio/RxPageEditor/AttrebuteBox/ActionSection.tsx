@@ -1,21 +1,27 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { FormControl,  FormControlLabel,  Grid,  InputLabel, MenuItem, Select, Switch, TextField } from '@material-ui/core';
-import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
+import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, GO_BACK_ACTION, OPEN_PAGE_ACTION, REMOVE_LIST_VIEW_RECORD, RESET_ACTION, SUBMIT_MUTATION, UPDATE_LIST_VIEW_RECORD } from "Base/PageUtils/ACTIONs";
 import intl from 'react-intl-universal';
 import {observer} from 'mobx-react';
 import { useDesign } from '../../../rx-drag/store/useDesign';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { toJS } from 'mobx';
 import { IPageMutation } from 'Base/Model/IPageMutation';
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { IPageJumper } from 'Base/Model/IPageJumper';
+import { stringValue } from 'rx-drag/utils/stringValue';
 
-const AttributeBoxActionSection = observer(()=>{
+const AttributeBoxActionSection = observer((
+  props:{
+    action?:IPageAction,
+    onChange?:(action:IPageAction)=>void,
+  }
+)=>{
   const {rxDragStore} = useDesign();
   const studioStore = useAppStudioStore();
   const node = rxDragStore?.selectedNode;  
-  const action:PageAction = node?.meta.props?.onClick||{};
+  const action:IPageAction = node?.meta.props?.onClick||{};
 
   const updatAction = (field:string, value:string|IPageMutation|IPageJumper|boolean|Array<string>)=>{
     const newAction = cloneObject(action);
@@ -63,7 +69,7 @@ const AttributeBoxActionSection = observer(()=>{
   
 
   return (
-    <Fragment>
+    <>
       <Grid item xs={12}>
         <FormControl variant="outlined" size="small" fullWidth>
           <InputLabel>{intl.get("action")}</InputLabel>
@@ -79,18 +85,23 @@ const AttributeBoxActionSection = observer(()=>{
             <MenuItem value={RESET_ACTION}>{intl.get("reset")}</MenuItem>
             <MenuItem value={GO_BACK_ACTION}>{intl.get("go-back")}</MenuItem>
             <MenuItem value={OPEN_PAGE_ACTION}>{intl.get("open-page")}</MenuItem>
+
+            <MenuItem value={REMOVE_LIST_VIEW_RECORD}>{intl.get("remove-table-record")}</MenuItem>
+            <MenuItem value={UPDATE_LIST_VIEW_RECORD}>{intl.get("update-table-record")}</MenuItem>
+            <MenuItem value={BATCH_REMOVE_LIST_VIEW_RECORDS}>{intl.get("batch-remove-table-record")}</MenuItem>
+            <MenuItem value={BATCH_UPDATE_LIST_VIEW_RECORDS}>{intl.get("batch-update-table-record")}</MenuItem>
           </Select>
         </FormControl>        
       </Grid>  
       {
         OPEN_PAGE_ACTION === action.name &&
-        <Fragment>
+        <>
           <Grid item xs={12}>
             <FormControl variant="outlined" size="small" fullWidth>
               <InputLabel>{intl.get("open-style")}</InputLabel>
               <Select
                 label = {intl.get("open-style")}
-                value={action.pageJumper?.openStyle|| ''}
+                value={stringValue(action.pageJumper?.openStyle)}
                 onChange={handleOpenStyleChange}
               >
                 <MenuItem value="">
@@ -108,7 +119,7 @@ const AttributeBoxActionSection = observer(()=>{
               <InputLabel>{intl.get("page")}</InputLabel>
               <Select
                 label = {intl.get("page")}
-                value={action.pageJumper?.pageId || ''}
+                value={stringValue(action.pageJumper?.pageId)}
                 onChange={handlePageChange}
               >
                 <MenuItem value="">
@@ -124,11 +135,34 @@ const AttributeBoxActionSection = observer(()=>{
               </Select>
             </FormControl>  
           </Grid>
-        </Fragment>
+        </>
+      }
+      {
+        (UPDATE_LIST_VIEW_RECORD === action.name || BATCH_UPDATE_LIST_VIEW_RECORDS === action.name)&&
+        <>
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("field")}
+              value={stringValue(action.field)} 
+              onChange={(event)=>updatAction('field', event.target.value)}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField fullWidth
+              variant="outlined" 
+              size = "small"
+              label = {intl.get("value")}
+              value={stringValue(action.value)} 
+              onChange={(event)=>updatAction('value', event.target.value)}
+            ></TextField>
+          </Grid>
+        </>
       }
       {
         SUBMIT_MUTATION === action.name &&
-        <Fragment>
+        <>
           <Grid item xs={12}>
             <FormControlLabel
               control={
@@ -146,7 +180,7 @@ const AttributeBoxActionSection = observer(()=>{
               variant="outlined" 
               size = "small"
               label = {intl.get("mutaion-name")}
-              value={action.mutation?.name === undefined ? '' :action.mutation?.name} 
+              value={stringValue(action.mutation?.name)} 
               onChange={(event)=>handleChangeMutation(event, 'name')}
             ></TextField>
           </Grid>
@@ -156,7 +190,7 @@ const AttributeBoxActionSection = observer(()=>{
               variant="outlined" 
               size = "small"
               label = {intl.get("variable-name")}
-              value={action.mutation?.variableName === undefined ? '': action.mutation?.variableName} 
+              value={stringValue(action.mutation?.variableName)} 
               onChange={(event)=>handleChangeMutation(event, 'variableName')}
             ></TextField>
           </Grid>
@@ -166,7 +200,7 @@ const AttributeBoxActionSection = observer(()=>{
               variant="outlined" 
               size = "small"
               label = {intl.get("variable-type")}
-              value={action.mutation?.variableType === undefined ? '': action.mutation?.variableType} 
+              value={stringValue(action.mutation?.variableType)} 
               onChange={(event)=>handleChangeMutation(event, 'variableType')}
             ></TextField>
           </Grid>
@@ -175,7 +209,7 @@ const AttributeBoxActionSection = observer(()=>{
               variant="outlined" 
               size = "small"
               label = {intl.get("submit-node")}
-              value={action.mutation?.submitNode === undefined ? '': action.mutation?.submitNode} 
+              value={stringValue(action.mutation?.submitNode)} 
               onChange={(event)=>handleChangeMutation(event, 'submitNode')}
             ></TextField>
           </Grid>
@@ -184,16 +218,16 @@ const AttributeBoxActionSection = observer(()=>{
               variant="outlined" 
               size = "small"
               label = {intl.get("refresh-node")}
-              value={action.mutation?.refreshNode === undefined ? '': action.mutation?.refreshNode} 
+              value={stringValue(action.mutation?.refreshNode)} 
               onChange={(event)=>handleChangeMutation(event, 'refreshNode')}
             ></TextField>
           </Grid>
 
-        </Fragment>
+        </>
       }
       {
         RESET_ACTION === action.name &&
-        <Fragment>
+        <>
           <Grid item xs={12}>
             <TextField fullWidth
               variant="outlined" 
@@ -204,11 +238,11 @@ const AttributeBoxActionSection = observer(()=>{
               helperText = {intl.get("split-by-comma")}
             ></TextField>
           </Grid>
-        </Fragment>
+        </>
 
       }
 
-   </Fragment>
+   </>
   )
 })
 

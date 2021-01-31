@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
-import { PageAction } from "./PageAction";
+import { IPageAction } from "../Model/IPageAction";
 
 export class ActionStore{
-  waitingActions:Array<PageAction> = [];
+  waitingActions:Array<IPageAction> = [];
 
   constructor() {
     makeAutoObservable(this)
@@ -13,7 +13,7 @@ export class ActionStore{
     return this.waitingActions.length > 0;
   }
 
-  emit(action:PageAction){
+  emit(action:IPageAction){
     this.waitingActions.push(action);
   }
   

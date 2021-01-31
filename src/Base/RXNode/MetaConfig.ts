@@ -13,6 +13,7 @@ export class MetaConfig implements IRxMetaConfig{
 
   //动作
   hasAction?:boolean;
+  hasMultiAction?:boolean;
 
   //数据
   hasField?:boolean;

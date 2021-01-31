@@ -310,6 +310,10 @@
     "new-page":"新建页面",
 
     "open-page":"打开页面",
+    "remove-table-record":"删除记录",
+    "update-table-record":"更新记录",
+    "batch-remove-table-record":"批量删除记录",
+    "batch-update-table-record":"批量更新记录",
     "open-style":"打开方式",
     "jump-style":"跳转式",
     "popup-style":"弹出式",

@@ -196,11 +196,10 @@ export default {
                   value:'PUBLISHED',
                 }
               },                
-              template:`
-                  {
-                    model.status === 'DRAFT' &&
-                    <IconButton icon='mdi-publish' tooltip='发布' onClick={publish} />
-                  }
+              template:`{
+                model.status === 'DRAFT' &&
+                <IconButton icon='mdi-publish' tooltip='发布' onClick={publish} />
+               }
                 `
               }
             },

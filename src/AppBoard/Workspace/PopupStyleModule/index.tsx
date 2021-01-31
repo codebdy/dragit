@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import {observer} from "mobx-react";
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/PageUtils/ACTIONs";
 import { Page } from '../Page';
 import { PopupPage } from './PopupPage';
@@ -30,7 +30,7 @@ export const PopupStyleModule = observer((
   const pageId = /*appStore.pageId ||*/ module.entryPage?.id;
   const [popupPageId, setPopupPageId] = useState<string|undefined>();
   const [pageParams, setPageParams] = useState<IPageJumper>();
-  const hanlePageAction = (action:PageAction)=>{
+  const hanlePageAction = (action:IPageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
         setPageParams(action.pageJumper)

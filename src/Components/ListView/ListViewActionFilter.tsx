@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/PageUtils/ActionStore';
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { BATCH_REMOVE_LIST_VIEW_RECORDS, BATCH_UPDATE_LIST_VIEW_RECORDS, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from "Base/PageUtils/ACTIONs";
 import { ID } from 'rx-drag/models/baseTypes';
 import ActionHunter from 'Base/PageUtils/ActionHunter';
@@ -26,7 +26,7 @@ const ListViewActionFilter = observer((
   const parentActionStore = useActionStore();
   const [actionStore] = useState(new ActionStore());
 
-  const hanlePageAction = (action:PageAction)=>{
+  const hanlePageAction = (action:IPageAction)=>{
     switch(action?.name){
       case BATCH_REMOVE_LIST_VIEW_RECORDS:
         onBatchRemove();

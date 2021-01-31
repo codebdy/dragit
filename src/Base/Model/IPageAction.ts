@@ -1,8 +1,8 @@
 import { ID } from "rx-drag/models/baseTypes";
 import { IPageJumper } from "Base/Model/IPageJumper";
-import { IPageMutation } from "../Model/IPageMutation";
+import { IPageMutation } from "./IPageMutation";
 
-export interface PageAction{
+export interface IPageAction{
   name:string;
   confirmMessage?:string;
   mutation?:IPageMutation;
@@ -15,5 +15,5 @@ export interface PageAction{
 }
 
 export interface PageActionHandle{
-  (formAction:PageAction): void;
+  (formAction:IPageAction): void;
 }

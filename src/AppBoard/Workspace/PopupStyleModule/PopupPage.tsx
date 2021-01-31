@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { Page } from '../Page';
 import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
@@ -11,7 +11,7 @@ export const PopupPage = observer((
   props:{
     page?:IRxPage, 
     pageParams?:any,
-    onPageAction?: (pageAction:PageAction)=> void,
+    onPageAction?: (pageAction:IPageAction)=> void,
     onClose:()=>void,
     isDrawerStyle?:boolean
   }

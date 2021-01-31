@@ -5,7 +5,7 @@ import { useDesign } from 'rx-drag/store/useDesign';
 import classNames from 'classnames';
 import IconButton from 'Components/Buttons/IconButton';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { useActionStore } from 'Base/PageUtils/ActionStore';
 import {observer} from "mobx-react";
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const JsxTemplateParser = observer(React.forwardRef((
   props:{
-    actions?:{[key:string]:PageAction},
+    actions?:{[key:string]:IPageAction},
     className?:any,
     graphiQL?:string,
     template:string,

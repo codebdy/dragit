@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { ActionStore, ActionStoreProvider, useActionStore } from 'Base/PageUtils/ActionStore';
-import { PageAction } from 'Base/PageUtils/PageAction';
+import { IPageAction } from 'Base/Model/IPageAction';
 import { OPEN_PAGE_ACTION, REMOVE_LIST_VIEW_RECORD, UPDATE_LIST_VIEW_RECORD } from "Base/PageUtils/ACTIONs";
 import ActionHunter from 'Base/PageUtils/ActionHunter';
 import { RXModel } from 'Base/ModelTree/RXModel';
@@ -20,7 +20,7 @@ const ListViewTableRowActionFilter = observer((
   const parentActionStore = useActionStore();
   const [actionStore] = useState(new ActionStore());
 
-  const hanlePageAction = (action:PageAction)=>{
+  const hanlePageAction = (action:IPageAction)=>{
     switch(action?.name){
       case REMOVE_LIST_VIEW_RECORD:
         parentActionStore?.emit({...action, id:row.value?.id})
