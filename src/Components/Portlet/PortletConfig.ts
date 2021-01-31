@@ -1,12 +1,10 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import SwitchInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import elevationConfig from "Components/common/configs/elevationConfig";
 import marginConfigs from "Components/common/configs/marginConfigs";
 import { IMeta } from "Base/RXNode/IMeta";
 
-export class PortletRule extends MetaConfig{
+export class PortletConfig extends MetaConfig{
 
   accept(child:IMeta){
     if(child.name === "PortletFormGridBody"){
@@ -24,23 +22,23 @@ export class PortletRule extends MetaConfig{
       ...elevationConfig,      
       {
         name:'collapsible',
-        label:'collapsible',
-        input:SwitchInput,
+        labelKey:'collapsible',
+        propType:'boolean',
       },      
       {
         name:'open',
-        label:'defalut-open',
-        input:SwitchInput,
+        labelKey:'defalut-open',
+        propType:'boolean',
       },      
       {
         name:'withHeader',
-        label:'with-header',
-        input:SwitchInput,
+        labelKey:'with-header',
+        propType:'boolean',
       }, 
       {
         name:'title',
-        label:'title',
-        input:StringInput,
+        labelKey:'title',
+        propType:'string',
       },
     ]
   }

@@ -1,9 +1,9 @@
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
+import { IPropConfig } from "rx-drag/models/IPropConfig";
 
-const sizeConfig = {
+const sizeConfig:IPropConfig = {
   name:'size',
-  label:'size',
-  input:OptionSelect,
+  labelKey:'size',
+  propType:'select',
   props:{
     items:[
       {

@@ -1,11 +1,10 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 
 const elevationConfig:Array<IPropConfig> = [
   {
     name:'elevation',
-    label:'elevation',
-    input:NumberInput,
+    labelKey:'elevation',
+    propType:'number',
     props:{
       defaultValue:0,
       min:0,

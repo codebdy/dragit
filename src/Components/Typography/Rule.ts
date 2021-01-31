@@ -1,9 +1,6 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import SwitchInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 
 export class TypographyRule extends MetaConfig{
 
@@ -19,8 +16,8 @@ export class TypographyRule extends MetaConfig{
     return [
       {
         name:'align',
-        label:'align',
-        input:OptionSelect,
+        labelKey:'align',
+        propType:'select',
 
         props:{
           items:[
@@ -49,8 +46,8 @@ export class TypographyRule extends MetaConfig{
       },
       {
         name:'display',
-        label:'display',
-        input:OptionSelect,
+        labelKey:'display',
+        propType:'select',
         props:{
           items:[
             {
@@ -70,23 +67,23 @@ export class TypographyRule extends MetaConfig{
       },
       {
         name:'gutterBottom',
-        label:'gutter-bottom',
-        input:SwitchInput,
+        labelKey:'gutter-bottom',
+        propType:'boolean',
       },
       {
         name:'noWrap',
-        label:'no-wrap',
-        input:SwitchInput,
+        labelKey:'no-wrap',
+        propType:'boolean',
       },
       {
         name:'paragraph',
-        label:'paragraph',
-        input:SwitchInput,
+        labelKey:'paragraph',
+        propType:'boolean',
       },
       {
         name:'variant',
-        label:'variant',
-        input:OptionSelect,
+        labelKey:'variant',
+        propType:'select',
         props:{
           items:[
             {
@@ -156,8 +153,8 @@ export class TypographyRule extends MetaConfig{
 
       {
         name:'rxText',
-        label:'text',
-        input:StringInput,
+        labelKey:'text',
+        propType:'longString',
       },
     ]
   }

@@ -1,11 +1,10 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import marginConfigs from "Components/common/configs/marginConfigs";
 import elevationConfig from "Components/common/configs/elevationConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 
-export class MediasPortletRule extends MetaConfig{
+export class MediasPortletConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -20,8 +19,8 @@ export class MediasPortletRule extends MetaConfig{
       ...elevationConfig,
       {
         name:'cols',
-        label:'cols',
-        input:OptionSelect,
+        labelKey:'cols',
+        propType:'select',
         props:{
           items:[
             {

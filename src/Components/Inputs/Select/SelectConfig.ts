@@ -1,12 +1,11 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import inputConfig from "Components/common/configs/inputConfig";
 import itemsConfig from "Components/common/configs/itemsConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
+import helperTextConfig from "Components/common/configs/helperTextConfig";
 
-export class SelectRule extends MetaConfig{
+export class SelectConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -22,8 +21,8 @@ export class SelectRule extends MetaConfig{
       ...inputConfig,
       {
         name:'size',
-        label:'size',
-        input:OptionSelect,
+        labelKey:'size',
+        propType:'select',
         props:{
           items:[
             {
@@ -45,21 +44,15 @@ export class SelectRule extends MetaConfig{
       },*/
       {
         name:'itemKey',
-        label:'item-key',
-        input:StringInput,
+        labelKey:'item-key',
+        propType:'string',
       },
       {
         name:'itemName',
-        label:'item-name',
-        input:StringInput,
+        labelKey:'item-name',
+        propType:'string',
       },
-
-      {
-        name:'helperText',
-        label:'helper-text',
-
-        input:StringInput,
-      },
+      helperTextConfig,
       itemsConfig,
     ]
   }

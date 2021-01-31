@@ -1,12 +1,10 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
 import elevationConfig from "Components/common/configs/elevationConfig";
 import marginConfigs from "Components/common/configs/marginConfigs";
-//import ApiEditor from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/ApiEditor";
 
-export class TreeEditorRule extends MetaConfig{
+export class TreeEditorConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -24,8 +22,8 @@ export class TreeEditorRule extends MetaConfig{
       ...elevationConfig,   
       {
         name:'title',
-        label:'title',
-        input:StringInput,      
+        labelKey:'title',
+        propType:'string',      
       },
      // {
      //   name:'apiForGet',

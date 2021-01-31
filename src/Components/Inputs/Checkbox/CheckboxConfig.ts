@@ -1,11 +1,11 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import colorConfig from "Components/common/configs/colorConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import sizeConfig from "Components/common/configs/sizeConfig";
+import helperTextConfig from "Components/common/configs/helperTextConfig";
 
-export class SwitchBoxRule extends MetaConfig{
+export class CheckboxConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -20,16 +20,12 @@ export class SwitchBoxRule extends MetaConfig{
     return [
       {
         name:'label',
-        label:'label',
-        input:StringInput,
+        labelKey:'label',
+        propType:'string',
       },
       colorConfig,
       sizeConfig,
-      {
-        name:'helperText',
-        label:'helper-text',
-        input:StringInput,
-      }
+      helperTextConfig
     ]
   }
 

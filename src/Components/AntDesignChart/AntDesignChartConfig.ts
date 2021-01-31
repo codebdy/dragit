@@ -1,10 +1,8 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
-import JSONEditDialog from "./PropsInputs/JSONEditDialog";
 
-export class AntDesignChartRule extends MetaConfig{
+export class AntDesignChartConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -17,13 +15,13 @@ export class AntDesignChartRule extends MetaConfig{
     return [
       {
         name:'chart',
-        label:'chart-type',
-        input:StringInput,
+        labelKey:'chart-type',
+        propType:'string',
       },      
       {
         name:'jsonProps',
-        label:'json-props',
-        input:JSONEditDialog,
+        labelKey:'json-props',
+        propType:'JSON',
       },
 
     ]

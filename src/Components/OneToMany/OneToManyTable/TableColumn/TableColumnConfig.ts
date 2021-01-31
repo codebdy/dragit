@@ -1,10 +1,8 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 
-export class TableColumnRule extends MetaConfig{
+export class TableColumnConfig extends MetaConfig{
  
   accept(child:IMeta){
     if(child.name === 'TableColumn'){
@@ -17,18 +15,18 @@ export class TableColumnRule extends MetaConfig{
     return [
       {
         name:'label',
-        label:'label',
-        input:StringInput,
+        labelKey:'label',
+        propType:'string',
       },
       {
         name:'width',
-        label:'width',
-        input:StringInput,
+        labelKey:'width',
+        propType:'string',
       },
       {
         name:'align',
-        label:'align',
-        input:OptionSelect,
+        labelKey:'align',
+        propType:'select',
         props:{
           items:[
             {
@@ -56,8 +54,8 @@ export class TableColumnRule extends MetaConfig{
       },
       {
         name:'size',
-        label:'size',
-        input:OptionSelect,
+        labelKey:'size',
+        propType:'select',
         props:{
           items:[
             {

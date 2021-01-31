@@ -1,10 +1,9 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 
 const colorConfig:IPropConfig =   {
   name:'color',
-  label:'color',
-  input:OptionSelect,
+  labelKey:'color',
+  propType:'select',
   props:{
     items:[
       {

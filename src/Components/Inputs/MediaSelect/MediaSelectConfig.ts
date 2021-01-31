@@ -1,10 +1,8 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 
-export class MediaSelectRule extends MetaConfig{
+export class MediaSelectConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -17,18 +15,18 @@ export class MediaSelectRule extends MetaConfig{
     return [
       {
         name:'label',
-        label:'label',
-        input:StringInput,
+        labelKey:'label',
+        propType:'string',
       },
       {
         name:'width',
-        label:'width',
-        input:StringInput,
+        labelKey:'width',
+        propType:'string',
       },
       {
         name:'avatar',
-        label:'avatar',
-        input:BooleanInput,
+        labelKey:'avatar',
+        propType:'boolean',
       },
     ]
   }

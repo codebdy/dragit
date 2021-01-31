@@ -1,13 +1,10 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
-import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import inputConfig from "Components/common/configs/inputConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
+import helperTextConfig from "Components/common/configs/helperTextConfig";
 
-export class TextBoxRule extends MetaConfig{
+export class TextBoxConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   empertyPadding = '';
@@ -23,8 +20,8 @@ export class TextBoxRule extends MetaConfig{
       ...inputConfig,
       {
         name:'type',
-        label:'type',
-        input:OptionSelect,
+        labelKey:'type',
+        propType:'select',
         props:{
           items:[
             {
@@ -84,13 +81,13 @@ export class TextBoxRule extends MetaConfig{
       },
       {
         name:'shrinkLabel',
-        label:'shrink-label',
-        input:BooleanInput,
+        labelKey:'shrink-label',
+        propType:'boolean',
       },
       {
         name:'size',
-        label:'size',
-        input:OptionSelect,
+        labelKey:'size',
+        propType:'select',
         props:{
           items:[
             {
@@ -106,22 +103,18 @@ export class TextBoxRule extends MetaConfig{
       },
       {
         name:'multiline',
-        label:'multiline',
-        input:BooleanInput,
+        labelKey:'multiline',
+        propType:'boolean',
       },
       {
         name:'rows',
-        label:'rows',
-        input:NumberInput,
+        labelKey:'rows',
+        propType:'number',
         props:{
           min:1,
         }
       },
-      {
-        name:'helperText',
-        label:'helper-text',
-        input:StringInput,
-      }
+      helperTextConfig
     ]
   }
 

@@ -1,9 +1,8 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
-import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 
-export class TinyMCERule extends MetaConfig{
+export class TinyMCEConifg extends MetaConfig{
   empertyPadding = '';
   hasField = true;
   
@@ -15,8 +14,8 @@ export class TinyMCERule extends MetaConfig{
     return [
       {
         name:'height',
-        label:'height',
-        input: NumberInput,
+        labelKey:'height',
+        propType: 'number',
       }
     ]
   }

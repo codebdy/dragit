@@ -1,10 +1,9 @@
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import SelectItemsInputItemDialog from "Components/Inputs/Select/PropsInputs/SelectItemsInputItemDialog";
 
 const itemsConfig:IPropConfig = {
   name:'items',
-  label:'items-data',
-  input:SelectItemsInputItemDialog,
+  labelKey:'items-data',
+  propType:'items',
 }
 
 export default itemsConfig;

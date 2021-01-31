@@ -1,9 +1,7 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 import { IMeta } from "../../../Base/RXNode/IMeta";
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
-import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import marginConfigs from "Components/common/configs/marginConfigs";
-import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 
 export class IconButtonConfig extends MetaConfig{
   editPaddingY = '';
@@ -24,8 +22,8 @@ export class IconButtonConfig extends MetaConfig{
       ...marginConfigs,
       {
         name:'color',
-        label:'color',
-        input:OptionSelect,
+        labelKey:'color',
+        propType:'select',
         props:{
           items:[
             {
@@ -49,8 +47,8 @@ export class IconButtonConfig extends MetaConfig{
       },
       {
         name:'size',
-        label:'size',
-        input:OptionSelect,
+        labelKey:'size',
+        propType:'select',
         props:{
           items:[
             {
@@ -66,18 +64,18 @@ export class IconButtonConfig extends MetaConfig{
       },
       {
         name:'disabled',
-        label:'disabled',
-        input:BooleanInput,
+        labelKey:'disabled',
+        propType:'boolean',
       },
       {
         name:'disableElevation',
-        label:'disableElevation',
-        input:BooleanInput,
+        labelKey:'disableElevation',
+        propType:'boolean',
       },
       {
         name:'disableRipple',
-        label:'disableRipple',
-        input:BooleanInput,
+        labelKey:'disableRipple',
+        propType:'boolean',
       },
     ]
   }

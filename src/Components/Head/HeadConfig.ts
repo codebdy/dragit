@@ -1,9 +1,8 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 
-export class HeadRule extends MetaConfig{
+export class HeadConfig extends MetaConfig{
   editPaddingY = '';
   editPaddingX = '';
   
@@ -20,7 +19,7 @@ export class HeadRule extends MetaConfig{
        {
         name:'rxText',
         label:'text',
-        input:StringInput,
+        propType:'string',
         props:{
           //multiline:true,
           //rows:2,

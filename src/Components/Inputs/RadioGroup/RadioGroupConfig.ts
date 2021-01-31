@@ -1,14 +1,15 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import colorConfig from "Components/common/configs/colorConfig";
+import itemsConfig from "Components/common/configs/itemsConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import sizeConfig from "Components/common/configs/sizeConfig";
+import helperTextConfig from "Components/common/configs/helperTextConfig";
 
-export class CheckboxRule extends MetaConfig{
-  editPaddingY = '';
-  editPaddingX = '';
-  empertyPadding = '';
+export class RadioGroupConfig extends MetaConfig{
+  //editPaddingY = '';
+  //editPaddingX = '';
+  //empertyPadding = '';
   hasField = true;
   hasValidation = true;
 
@@ -20,16 +21,18 @@ export class CheckboxRule extends MetaConfig{
     return [
       {
         name:'label',
-        label:'label',
-        input:StringInput,
+        labelKey:'label',
+        propType:'string',
       },
       colorConfig,
       sizeConfig,
       {
-        name:'helperText',
-        label:'helper-text',
-        input:StringInput,
-      }
+        name:'row',
+        labelKey:'row-show',
+        propType:'boolean',
+      },
+      helperTextConfig,
+      itemsConfig
     ]
   }
 
