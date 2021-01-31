@@ -7,8 +7,8 @@ export class RxThemeOptions implements IRxThemeOptions {
   darkBackgroundColor: string = "#1a233a";
   lightBorderColor: string = "#dfe3e7";
   darkBorderColor: string = "#464d5c";
-  lightCanvasColor: string = "#FFF";
-  darkCanvasColor: string = "#212121";
+  //lightCanvasColor: string = "#FFF";
+  //darkCanvasColor: string = "#212121";
   canSwitchThemeMode: boolean = true;
 
   constructor() {
@@ -31,9 +31,9 @@ export class RxThemeOptions implements IRxThemeOptions {
     return this.mode === LIGHT ? 'rx-light' : 'rx-dark';
   }
 
-  get canvasColor() {
-    return this.mode === LIGHT ? this.lightCanvasColor : this.darkCanvasColor;
-  }
+  //get canvasColor() {
+  //  return this.mode === LIGHT ? this.lightCanvasColor : this.darkCanvasColor;
+  //}
 
   setOptions(options?: IRxThemeOptions) {
     this.setThemeMode(options?.mode ? options?.mode : this.mode);

@@ -61,9 +61,9 @@ export const AppBoard = observer(()=>{
   
   const theme = createMuiTheme({
     palette: {
-      type: 'light',
+      type: appboardStore.themeSettings.themeMode,
       primary:{
-        main: '#5d78ff',
+        main: appboardStore.themeSettings.primary,
       },
 
     },

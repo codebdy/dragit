@@ -21,16 +21,7 @@ export const RxPageEditor = observer(() => {
   const{pageId} = match.params as any;  
 
   const rxPage = pageId ? studioStore?.getPage(pageId) : studioStore?.getFirstPage();
-  
-  const theme = useTheme();
-  const canvasTheme = createMuiTheme({
-    palette: {
-      type:studioStore?.themeMode,
-      primary:{
-        main:'#5a8dee',
-      },
-    },
-  });
+
   useEffect(()=>{
     if(rxPage){
       studioStore?.editPage(rxPage);
@@ -49,7 +40,6 @@ export const RxPageEditor = observer(() => {
   }
 
   return (
-    <ThemeProvider theme={canvasTheme}>
       <RxDragStoreProvider value = {rxDragStore}>
         <RxDrag
           theme = {
@@ -59,19 +49,13 @@ export const RxPageEditor = observer(() => {
           }
           initMetas = {rxPage?.schema}
           toolbox = {
-            <ThemeProvider theme = {theme}>
-              <Toolbox/>
-            </ThemeProvider>
+            <Toolbox/>
           }
           attributeBox = {
-            <ThemeProvider theme = {theme}>
-              <AttributeBox/>
-            </ThemeProvider>
+            <AttributeBox/>
           }
           pageSettings = {
-            <ThemeProvider theme = {theme}>
-              <SettingsBox />
-            </ThemeProvider>
+            <SettingsBox />
           }
           locales = {{
             components:intl.get('component'),
@@ -84,6 +68,6 @@ export const RxPageEditor = observer(() => {
           onChange = {handleChange}
         />
       </RxDragStoreProvider>
-    </ThemeProvider>
+
   );
 })
