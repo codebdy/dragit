@@ -5,7 +5,7 @@ import { Skeleton } from '@material-ui/lab';
 import { ID } from 'rx-drag/models/baseTypes';
 import { ITreeNode } from 'Base/Model/ITreeNode';
 import { RxNode } from 'rx-drag/models/RxNode';
-import SubmitButton from 'Components/utils/SubmitButton';
+import SubmitButton from 'Components/common/SubmitButton';
 import Portlet from 'Components/Portlet';
 import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";

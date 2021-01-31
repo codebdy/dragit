@@ -6,7 +6,7 @@ import classNames from "classnames";
 import React from "react";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { observer } from 'mobx-react';
-import MdiIcon from "Components/utils/MdiIcon";
+import MdiIcon from "Components/common/MdiIcon";
 import { useLeftDrawer } from "Store/Helpers/useDragItStore";
 import { useHistory, useRouteMatch } from "react-router";
 import { useAppBoardStore } from "AppBoard/store/AppBoardStore";

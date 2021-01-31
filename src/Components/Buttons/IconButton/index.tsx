@@ -1,6 +1,6 @@
 import React from 'react';
 import MuiIconButton from '@material-ui/core/IconButton';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import { Tooltip } from '@material-ui/core';
 
 const IconButton = React.forwardRef((

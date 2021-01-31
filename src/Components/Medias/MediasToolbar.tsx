@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, fade, Hidden, IconButton, InputBase, Tooltip } from '@material-ui/core';
-import MdiIcon from 'Components/utils/MdiIcon';
-import Spacer from 'Components/utils/Spacer';
+import MdiIcon from 'Components/common/MdiIcon';
+import Spacer from 'Components/common/Spacer';
 import intl from 'react-intl-universal';
 import SearchIcon from '@material-ui/icons/Search';
 

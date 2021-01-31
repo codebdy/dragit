@@ -3,8 +3,8 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import inputRules from "Components/utils/configs/inputRules";
-import itemsRule from "Components/utils/configs/itemsRule";
+import inputRules from "Components/common/configs/inputRules";
+import itemsRule from "Components/common/configs/itemsRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 
 export class TreeSelectRule extends MetaConfig{

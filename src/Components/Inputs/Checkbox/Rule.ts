@@ -1,9 +1,9 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
-import colorRule from "Components/utils/configs/colorRule";
+import colorRule from "Components/common/configs/colorRule";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
-import sizeRule from "Components/utils/configs/sizeRule";
+import sizeRule from "Components/common/configs/sizeRule";
 
 export class CheckboxRule extends MetaConfig{
   editPaddingY = '';

@@ -76,7 +76,7 @@ import IconButton from "Components/Buttons/IconButton";
 import JsxTemplateParser from "Components/JsxTemplateParser";
 import { JsxTemplateParserRule } from "Components/JsxTemplateParser/Rule";
 import { ListViewBodyTableRow } from "Components/ListView/ListViewBody/ListViewBodyTableRow";
-import withFormField from "Components/utils/withFormField";
+import withFormField from "Components/common/withFormField";
 import withSkeleton from "Base/HOCs/withSkeleton";
 import { TinyMCE } from "Components/Inputs/TinyMCE";
 import { TreeSelect } from "Components/Inputs/TreeSelect";

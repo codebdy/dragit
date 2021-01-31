@@ -1,7 +1,7 @@
 import React from 'react';
 import { RXInputProps } from 'Base/RXInputProps';
 import withSkeleton from 'Base/HOCs/withSkeleton';
-import withFormField from 'Components/utils/withFormField';
+import withFormField from 'Components/common/withFormField';
 import { useDesign } from 'rx-drag/store/useDesign';
 
 const TextView = React.forwardRef((

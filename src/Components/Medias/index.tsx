@@ -3,7 +3,7 @@ import {makeStyles, Theme, createStyles, Grid} from "@material-ui/core";
 import MediasContent from "./MediasContent";
 import intl from 'react-intl-universal';
 import classNames from "classnames";
-import HoverablePaper from "Components/utils/HoverablePaper";
+import HoverablePaper from "Components/common/HoverablePaper";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -6,7 +6,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import AddIcon from '@material-ui/icons/Add';
 import { IconButton } from '@material-ui/core';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import MediaFolder, { FolderActions, FolderLabel, FolderNode } from './MediaFolder';
 import { IMedia } from 'Base/Model/IMedia';

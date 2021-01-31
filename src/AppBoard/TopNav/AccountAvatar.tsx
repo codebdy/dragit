@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Avatar, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 import {observer} from 'mobx-react';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import { useHistory } from 'react-router';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { TOKEN_NAME, LOGIN_URL } from 'Utils/consts';

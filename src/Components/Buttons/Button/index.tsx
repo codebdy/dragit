@@ -1,6 +1,6 @@
 import React from 'react';
 import MuiButton from '@material-ui/core/Button';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 
 
 const Button = React.forwardRef((

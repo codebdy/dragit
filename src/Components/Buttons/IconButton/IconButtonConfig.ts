@@ -2,7 +2,7 @@ import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 import { IMeta } from "../../../Base/RXNode/IMeta";
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
 import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/OptionSelect";
-import marginConfigs from "Components/utils/configs/marginConfigs";
+import marginConfigs from "Components/common/configs/marginConfigs";
 import BooleanInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/BooleanInput";
 
 export class IconButtonConfig extends MetaConfig{

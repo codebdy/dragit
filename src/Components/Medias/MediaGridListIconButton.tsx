@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

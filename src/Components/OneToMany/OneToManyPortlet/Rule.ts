@@ -2,8 +2,8 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import StringInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/StringInput";
 import { IMeta } from "Base/RXNode/IMeta";
-import elevationRules from "Components/utils/configs/elevationRules";
-import marginConfigs from "Components/utils/configs/marginConfigs";
+import elevationRules from "Components/common/configs/elevationRules";
+import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class OneToManyPortletRule extends MetaConfig{
   empertyPadding = '';

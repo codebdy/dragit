@@ -5,7 +5,7 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } fr
 import intl from 'react-intl-universal';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { stringValue } from 'rx-drag/utils/stringValue';
-import SubmitButton from 'Components/utils/SubmitButton';
+import SubmitButton from 'Components/common/SubmitButton';
 import { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { SAVE_RX_APP } from 'Base/GraphQL/APP_GQLs';

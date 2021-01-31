@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Chip, ListItemIcon, ListItemText, ListItem, createStyles, makeStyles, Theme, Divider } from '@material-ui/core';
 import IMenuItem from 'Base/Model/IMenuItem';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import classNames from 'classnames';
 import { RxNode } from 'rx-drag/models/RxNode';
 import MenuNodeOperateProps from './MenuNodeOperateProps';

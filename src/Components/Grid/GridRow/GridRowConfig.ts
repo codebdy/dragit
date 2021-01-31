@@ -3,7 +3,7 @@ import OptionSelect from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/Option
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
 import NumberInput from "AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/NumberInput";
 import { IMeta } from "Base/RXNode/IMeta";
-import marginConfigs from "Components/utils/configs/marginConfigs";
+import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class GridRowConfig extends MetaConfig{
   editPaddingY = '8px';

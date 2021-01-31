@@ -1,8 +1,8 @@
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 import { IPropConfig } from "../../../rx-drag/models/IPropConfig";
-import colWidthRules from "Components/utils/configs/colWidthRules";
+import colWidthRules from "Components/common/configs/colWidthRules";
 import { IMeta } from "Base/RXNode/IMeta";
-import marginConfigs from "Components/utils/configs/marginConfigs";
+import marginConfigs from "Components/common/configs/marginConfigs";
 
 
 export class GridColumnConfig extends MetaConfig{

@@ -1,8 +1,8 @@
 import { IMedia } from 'Base/Model/IMedia';
 import React from 'react';
-import Image from 'Components/utils/Image';
+import Image from 'Components/common/Image';
 import noImage from 'assets/img/no-image.png';
-import withFormField from 'Components/utils/withFormField';
+import withFormField from 'Components/common/withFormField';
 import withSkeleton from 'Base/HOCs/withSkeleton';
 import { RXInputProps } from 'Base/RXInputProps';
 import { useDesign } from 'rx-drag/store/useDesign';

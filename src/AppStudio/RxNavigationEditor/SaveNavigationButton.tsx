@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
-import SubmitButton from 'Components/utils/SubmitButton';
+import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useMutation } from '@apollo/react-hooks';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';

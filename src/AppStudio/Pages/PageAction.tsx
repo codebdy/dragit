@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, Divider, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import ActionButton from 'AppStudio/ActionButton';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme, createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
-import MdiIcon from 'Components/utils/MdiIcon';
+import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import GraphQLDebug from './DebugGraphQL';
 import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
