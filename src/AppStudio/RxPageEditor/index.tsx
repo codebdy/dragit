@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { createMuiTheme, ThemeProvider, useTheme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { RxDrag } from 'rx-drag';
 import intl from 'react-intl-universal';
