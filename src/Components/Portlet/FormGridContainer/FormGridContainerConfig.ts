@@ -4,7 +4,8 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
 
 export class FormGridContainerConfig extends MetaConfig{
-
+  hasField = true;
+  
   accept(child:IMeta){
     if(child.name === "FormGridItem"){
       return true

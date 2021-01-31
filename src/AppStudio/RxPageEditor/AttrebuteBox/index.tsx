@@ -105,6 +105,11 @@ export const AttributeBox = observer(()=>{
 
   },[node]);
 
+  useEffect(() => {
+    setMetaProps(node?.meta.props || {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[node?.meta.props]);
+
   const handlePropChange = (key:string, value:any) => {
     const props = cloneObject(toJS(node?.meta.props)||{});
     props[key] = value;  
