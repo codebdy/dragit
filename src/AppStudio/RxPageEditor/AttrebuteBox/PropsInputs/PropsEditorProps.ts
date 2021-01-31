@@ -1,4 +1,5 @@
 export interface PropsInputProps{
+  autoFocus?:boolean,
   label?:string;
   value:any;
   onChange:(value:string|boolean|number|Object|unknown)=>void;
