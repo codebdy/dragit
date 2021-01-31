@@ -71,6 +71,7 @@ export var appGQLQuery = `
 export var appGQLMutation = `
   removeRxApp(id:ID):RxApp
   saveRxApp(rxApp:RxAppInput):RxApp
+  createRxApp(rxApp:RxAppInput):RxApp
   saveRxPage(rxPage:RxPageInput):RxPage
   createRxPage(appId:ID, templateId:ID, pageId:ID, name:String):RxPage
   removeRxPage(id:ID):RxPage

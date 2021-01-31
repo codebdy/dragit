@@ -10,12 +10,14 @@ import { Add } from '@material-ui/icons';
 import { AccountAvatar } from 'AppBoard/TopNav/AccountAvatar';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_RX_APP_LIST } from 'Base/GraphQL/APP_GQLs';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { CREATE_RX_APP, GET_RX_APP_LIST } from 'Base/GraphQL/APP_GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppsSkeleton from './AppsSkeleton';
 import { IRxApp } from 'Base/Model/IRxApp';
 import SubmitButton from 'Components/Common/SubmitButton';
+import { v4 as uuidv4 } from 'uuid';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,8 +51,47 @@ const useStyles = makeStyles((theme: Theme) =>
 export const AppManager = observer(() => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_RX_APP_LIST);
-  useShowAppoloError(error);
+  const dragItStore = useDragItStore();
   const apps = data ? data.rxApps :[];
+  const [ excuteCreate, {loading:saving, error:createError}] = useMutation(CREATE_RX_APP, {
+    //更新缓存
+    update(cache, { data: { createRxApp } }){
+      console.log(createRxApp)
+      cache.writeQuery({
+        query:GET_RX_APP_LIST,
+        data:{
+          rxApps:[...apps, createRxApp]
+        }
+      });
+    },
+    //结束后提示
+    onCompleted: (data)=>{
+      dragItStore.setSuccessAlert(true)
+    }
+  })
+  
+  useShowAppoloError(error || createError);
+
+  const handleCreate = ()=>{
+    excuteCreate({variables:{
+      rxApp:{
+        id:uuidv4(),
+        name:intl.get('new-app'),
+        icon:'mdi-application',
+        app_type:intl.get('free'),
+        auths:[
+          {
+            id:uuidv4(),
+            rx_slug:'app',
+            name:intl.get('app-access'),
+            predefined:true,
+          }
+        ]
+      }
+    }})
+  }
+
+
   return (
     <div className={classes.root}>
       <AppBar 
@@ -92,9 +133,11 @@ export const AppManager = observer(() => {
               variant = "contained" 
               color = "primary" 
               size="large"
+              submitting = {saving}
               startIcon = {
                 <Add />
               }
+              onClick = {handleCreate}
             >
               {intl.get('create')}
             </SubmitButton>

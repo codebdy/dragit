@@ -1,6 +1,6 @@
 import { gql } from '@apollo/react-hooks';
 
-const appFieldsGQL = `
+export const appFieldsGQL = `
   id
   name
   is_system
@@ -45,6 +45,14 @@ export const GET_RX_APP = gql`
 export const SAVE_RX_APP = gql`
   mutation($rxApp:RxAppInput){
     saveRxApp(rxApp:$rxApp){
+      ${appFieldsGQL}
+    }
+  }
+`
+
+export const CREATE_RX_APP = gql`
+  mutation($rxApp:RxAppInput){
+    createRxApp(rxApp:$rxApp){
       ${appFieldsGQL}
     }
   }

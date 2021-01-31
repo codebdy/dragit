@@ -307,5 +307,8 @@
     "jump-style":"Jump style",
     "popup-style":"Popup style",
     "drawer-style":"Drawer style",
-    "entry-page":"Entry page"
+    "entry-page":"Entry page",
+    "new-app":"New APP",
+    "free":"Free",
+    "app-access":"APP access"
 }

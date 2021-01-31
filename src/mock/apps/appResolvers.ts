@@ -35,6 +35,14 @@ export const saveRxApp = async (parent:any, args:any, context:any, info:any)=>{
   return rxApp;
 }
 
+export const createRxApp = async (parent:any, args:any, context:any, info:any)=>{
+  await sleep(500);
+  console.log('Server received Create RxApp data:', args);
+  appsData.push(args.rxApp);
+  //let rxApp = {...oldRxApp, ...args.rxApp};
+  return args.rxApp;
+}
+
 export const appQueryResolvers = {
   rxApp,
   rxApps,
@@ -42,5 +50,6 @@ export const appQueryResolvers = {
 
 export const appMutationResolvers = {
   removeRxApp,
-  saveRxApp
+  saveRxApp,
+  createRxApp
 }

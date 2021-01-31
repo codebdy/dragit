@@ -313,6 +313,9 @@
     "jump-style":"跳转式",
     "popup-style":"弹出式",
     "drawer-style":"滑出式",
-    "entry-page":"入口页"
+    "entry-page":"入口页",
+    "new-app":"新建应用",
+    "free":"免费",
+    "app-access":"应用访问"
 
 }
