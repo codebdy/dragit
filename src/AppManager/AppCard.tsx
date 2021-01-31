@@ -110,6 +110,11 @@ export default function AppCard(
 
   }
 
+  const handlePackageDown = ()=>{
+    handleMenuClose();
+    dragItStore.infoError('打包下载功能尚未开放')
+  }
+
   const handleToApp = ()=>{
     history.push(`/app/${rxApp?.id}/`)
   }
@@ -165,12 +170,21 @@ export default function AppCard(
                   {intl.get('edit')} 
                 </MenuItem>
                 {
+                  //!rxApp.is_system && 
+                   // <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
+                   //   <ListItemIcon>
+                   //     <MdiIcon iconClass = "mdi-toy-brick-remove"  size={18}/>
+                   //   </ListItemIcon>
+                  //    {intl.get('uninstall')} 
+                   // </MenuItem>
+                }
+                {
                   !rxApp.is_system && 
-                  <MenuItem onClick={handleMenuClose} className = {classes.menuItem}>
+                  <MenuItem onClick={handlePackageDown} className = {classes.menuItem}>
                     <ListItemIcon>
-                      <MdiIcon iconClass = "mdi-toy-brick-remove"  size={18}/>
+                      <MdiIcon iconClass = "mdi-package-down"  size={18}/>
                     </ListItemIcon>
-                    {intl.get('uninstall')} 
+                    {intl.get('make-package')} 
                   </MenuItem>
                 }
                 { !rxApp.is_system && 
