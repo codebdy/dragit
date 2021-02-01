@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Theme, createStyles, Drawer, Divider, IconButton, Typography } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import { Close } from '@material-ui/icons';

@@ -3,7 +3,7 @@ import {observer} from "mobx-react";
 import { IPageAction } from 'Base/Model/IPageAction';
 import { Page } from '.';
 import PageDialog from './PageDialog';
-import PageDrawer from './PageDrawer';
+import {PageDrawer} from './PageDrawer';
 import { Fragment } from 'react';
 import { useAppBoardStore } from 'AppBoard/store/AppBoardStore';
 import { GO_BACK_ACTION } from 'Base/PageUtils/ACTIONs';
@@ -58,7 +58,7 @@ export const PopupPage = observer((
             isDrawerStyle && page &&
             <Page 
               page={page}
-              onPageAction = {onPageAction}
+              onPageAction = {handlePageActon}
               pageJumper = {pageJumper}
             />            
           }

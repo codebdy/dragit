@@ -5,6 +5,7 @@ import { Close } from '@material-ui/icons';
 import Scrollbar from 'Common/Scrollbar';
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 import useShadows from 'Utils/useShadows';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PageDrawer(
+export const PageDrawer = observer((
   props:{
     title?:string,
     open:boolean,
@@ -40,8 +41,8 @@ export default function PageDrawer(
     children:any,
     width?:number,
   }
-){
-  const {title, open, onClose, width = 430, children} = props;
+)=>{
+  const {title, open, onClose, width = 400, children} = props;
   const classes = useStyles();
   const themeSettings = useThemeSettings();
   
@@ -83,4 +84,4 @@ export default function PageDrawer(
       </Drawer>
     </ThemeProvider>
   )
-}
+})

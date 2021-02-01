@@ -106,8 +106,15 @@ export const Debug = observer(()=>{
           </MenuItem>
         </Menu>
         <ThemeProvider theme={theme}>
-          <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
-          <DebugModelTree open={treeOpen} onClose = {handleCloseTree} />
+          {
+            //防止右侧滑出页面抖动，临时解决
+            gqlOpen &&
+            <GraphQLDebug open={gqlOpen} onClose = {()=>setGqlOpen(false)} />
+          }
+          {
+            treeOpen &&
+            <DebugModelTree open={treeOpen} onClose = {handleCloseTree} />
+          }          
         </ThemeProvider>
         </DebugStoreProvider>
     </Hidden>
