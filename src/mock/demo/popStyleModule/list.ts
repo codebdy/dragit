@@ -154,14 +154,7 @@ export default {
             searchable:true,
           },
     
-          children:[{
-            name:'TextView',
-            field:'roles',
-            props:{
-              variant:'outlined',
-              size:'small',
-            }
-          }]
+          children:[]
         },
 
         {

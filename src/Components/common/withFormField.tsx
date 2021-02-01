@@ -19,6 +19,8 @@ const withFormField = (Component:any)=>{
       }
     }
 
+    console.log('WithFormField', rxNode?.meta)
+
     /*const handleBlur = (event:any)=>{
       if(event){
         event.stopPropagation();
@@ -37,7 +39,7 @@ const withFormField = (Component:any)=>{
       helperText = {error || helperText}
       onChange={handleChange}
       //onBlur={handleBlur}
-      //name = {field}
+      name = {rxNode?.meta.field}
     />;
     return (
       compent

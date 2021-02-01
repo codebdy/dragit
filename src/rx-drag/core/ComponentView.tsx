@@ -139,6 +139,10 @@ export const ComponentView = observer((
     ...node.meta.designProps,
   }
 
+  if(node.meta.field || node.meta.withNode ){
+    elementProps.rxNode = node;
+  }
+
   const elementView = (node.children && node.children.length > 0) || rxText ?
     (<Component {...elementProps}>
       {rxText}

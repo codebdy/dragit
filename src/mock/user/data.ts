@@ -17,7 +17,7 @@ var usersData = [
     name:'演示账号',
     email:'demo@drag.fit',
     roles:[
-     /* {
+      {
         id:2,
         name:'经理',
         status:'normal',
@@ -28,7 +28,7 @@ var usersData = [
         name:'测试',
         description:'只是个测试，哪来地位？',
         status:'forbid',
-      }*/
+      }
     ],
     is_demo:true,
     avatar:{
