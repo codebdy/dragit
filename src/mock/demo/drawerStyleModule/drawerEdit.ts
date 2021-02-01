@@ -1,7 +1,6 @@
 import { GO_BACK_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 
-export default {
-  layout:[
+export default [
     {
       name:'FormGridContainer',
       children:[
@@ -174,8 +173,4 @@ export default {
       }]
 
     }
-],
-
-
-  isFormPage:true,
-}
+]

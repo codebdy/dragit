@@ -12,7 +12,7 @@ import { AppBoardStore, AppBoardStoreProvider } from './store/AppBoardStore';
 import { useRouteMatch } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
-import ModuleSkeleton from './Workspace/Common/ModuleSkeleton';
+import ModuleSkeleton from './AppBoardSkeleton';
 import { SidebarLinks } from './Sidebar/SidebarLinks';
 import SiderBarLoadingSkeleton from './Sidebar/LoadingSkeleton';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';

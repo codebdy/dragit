@@ -5,7 +5,7 @@ import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/models/RxNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { IPageAction } from 'Base/Model/IPageAction';
-import { GO_BACK_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
+import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import { gql, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
@@ -24,6 +24,7 @@ import { PageStore, PageStoreProvider } from 'Base/PageUtils/PageStore';
 import { createMutationGQL } from '../../../Base/PageUtils/createMutationGQL';
 import { PageQuery } from './PageQuery';
 import { RXModel } from 'Base/ModelTree/RXModel';
+import { PopupPage } from './PopupPage';
 
 export const Page = observer((
   props:{
@@ -39,8 +40,10 @@ export const Page = observer((
   const [modelStore, setModelStore] = useState<RXModel>();  
   const [pageStore, setPageStore] = useState<PageStore>();
   const [mutation, setMutation] = useState<IPageMutation>();
-  const appStore = useDragItStore();
+  const [popupPageJumper, setPopupPageJumper] = useState<IPageJumper>();
+  const dragItStore = useDragItStore();
   const loggedUser = useLoggedUser();
+
 
   useEffect(()=>{
     const pgStore = new PageStore(page, pageJumper);
@@ -71,7 +74,7 @@ export const Page = observer((
           setMutation(undefined);
         }
 
-        appStore.setSuccessAlert(true)
+        dragItStore.setSuccessAlert(true)
         if(mutation?.goback){
           onPageAction && onPageAction({name:GO_BACK_ACTION})
         }
@@ -94,6 +97,13 @@ export const Page = observer((
   
   const hanlePageAction = (action:IPageAction)=>{
     switch (action.name){
+      case OPEN_PAGE_ACTION:
+        if(action.pageJumper?.openStyle === 'POPUP'){
+          setPopupPageJumper(action.pageJumper)
+          return;
+        }
+        onPageAction && onPageAction(action);
+        return; 
       case SUBMIT_MUTATION:
         const submitNode = modelStore?.getModelNode(action.mutation?.submitNode)
         console.assert(submitNode, 'Page内错误，提交节点不存在：' + action.mutation?.submitNode);
@@ -109,7 +119,7 @@ export const Page = observer((
         return;
       case GO_BACK_ACTION:
         if(modelStore?.isDirty()){
-          appStore.confirmAction(intl.get('changing-not-save-message'), ()=>{
+          dragItStore.confirmAction(intl.get('changing-not-save-message'), ()=>{
             onPageAction && onPageAction({name:GO_BACK_ACTION})
           })
           return;
@@ -135,6 +145,10 @@ export const Page = observer((
     setOpentAlert(false);
   }
 
+  const handleClosePopupPage = ()=>{
+    setPopupPageJumper(undefined);
+  }
+
   return (
     <PageStoreProvider value = {pageStore}>
       <ActionStoreProvider value = {actionStore}>
@@ -154,6 +168,14 @@ export const Page = observer((
                 />
               )
             })
+          }
+
+          {popupPageJumper&&
+            <PopupPage 
+              onPageAction = {hanlePageAction}
+              pageJumper = {popupPageJumper}
+              onClose={handleClosePopupPage}
+            />          
           }
 
           <Dialog

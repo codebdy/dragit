@@ -1,7 +1,6 @@
 import { OPEN_PAGE_ACTION } from "Base/PageUtils/ACTIONs"
 
-export default {
-  layout:[
+export default [
     {
       name: 'GridRow',
       props: {
@@ -142,4 +141,3 @@ export default {
       ]
     },
   ] 
-}

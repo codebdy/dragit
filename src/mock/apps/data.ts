@@ -83,7 +83,7 @@ var appsData = [
   },
   {
     id:'guid-4',
-    name:'外贸CRM',
+    name:'外贸ERP',
     icon:'mdi-card-account-mail',
     color:'#5d78ff',
     app_type:'免费',

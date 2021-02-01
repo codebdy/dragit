@@ -1,23 +1,23 @@
 import React from 'react';
 import {observer} from "mobx-react";
 import { IPageAction } from 'Base/Model/IPageAction';
-import { Page } from '../Page';
+import { Page } from '.';
 import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
-import { IRxPage } from 'Base/Model/IRxPage';
 import { Fragment } from 'react';
+import { useAppBoardStore } from 'AppBoard/store/AppBoardStore';
 
 export const PopupPage = observer((
   props:{
-    page?:IRxPage, 
-    pageParams?:any,
+    pageJumper?:any,
     onPageAction?: (pageAction:IPageAction)=> void,
     onClose:()=>void,
-    isDrawerStyle?:boolean
   }
 )=>{
-  const {page, pageParams, onPageAction, onClose, isDrawerStyle} = props;
-
+  const {pageJumper, onPageAction, onClose } = props;
+  const isDrawerStyle = pageJumper?.openStyle === 'DRAWER';
+  const appBoardStore = useAppBoardStore();
+  const page = appBoardStore.getPage(pageJumper?.pageId);
    return (
     <Fragment>
       {
@@ -31,7 +31,7 @@ export const PopupPage = observer((
           <Page 
             page={page}
             onPageAction = {onPageAction}
-            pageJumper = {pageParams}
+            pageJumper = {pageJumper}
           />
         </PageDialog>      
       }{
@@ -45,7 +45,7 @@ export const PopupPage = observer((
           <Page 
             page={page}
             onPageAction = {onPageAction}
-            pageJumper = {pageParams}
+            pageJumper = {pageJumper}
           />
         </PageDrawer>
       }

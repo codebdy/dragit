@@ -72,6 +72,7 @@ export const MenuNode = observer((
   const appBoardStore = useAppBoardStore(); 
   const handleClick = ()=>{
     if(item.pageId){
+      appBoardStore.setRootPageId(item.pageId);
       history.push(`/app/${appBoardStore?.rxApp?.id}/${item.pageId}/`)
       leftDrawer.closeOnMobile();
     }else{
@@ -102,7 +103,7 @@ export const MenuNode = observer((
 
   const text = <span className={classes.itemText}>{title}</span>;
  
-  const selected = !!pageId && pageId === item.pageId;
+  const selected = (!!appBoardStore.rootPageId && appBoardStore.rootPageId === item.pageId)||(pageId === item.pageId) ;
 
   return (
     <ListItem 

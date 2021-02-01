@@ -1,7 +1,11 @@
+import drawerEdit from "./drawerStyleModule/drawerEdit";
+import drawerList from "./drawerStyleModule/drawerList";
 import jumpEdit from "./jumpStyleModule/jumpEdit";
 import jumpList from "./jumpStyleModule/jumpList";
 import { OneToManyPortletView } from "./oneToManyPortlet/view";
 import { OneToManyTableView } from "./oneToManyTable/view";
+import popEdit from "./popStyleModule/popEdit";
+import popList from "./popStyleModule/popList";
 import { splitSubmitSchema } from "./splitSubmit/splitSubmitSchema";
 
 var demoPages = [
@@ -30,6 +34,27 @@ var demoPages = [
     name:'文章编辑',
     schema:jumpEdit,
   },
+  {
+    id:'guid-p-6',
+    name:'用户列表',
+    schema:popList,
+  },
+  {
+    id:'guid-p-7',
+    name:'用户编辑',
+    schema:popEdit,
+  },
+
+  {
+    id:'guid-p-8',
+    name:'侧滑式列表',
+    schema:drawerList,
+  },
+  {
+    id:'guid-p-9',
+    name:'用户编辑',
+    schema:drawerEdit,
+  }
 
 ]
 

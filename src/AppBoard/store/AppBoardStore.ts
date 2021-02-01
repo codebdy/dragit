@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { ID } from "rx-drag/models/baseTypes";
 import { ThemeSettings } from "./ThemeSettings";
 export class AppBoardStore{
+  rootPageId?:string;
   rxApp?: IRxApp;
   themeSettings: ThemeSettings = new ThemeSettings();
 
@@ -12,11 +13,18 @@ export class AppBoardStore{
     makeAutoObservable(this)
   }
 
+  setRootPageId(pageId?:string){
+    this.rootPageId = pageId;
+  }
+
   setRxApp(rxApp: IRxApp){
     this.rxApp = rxApp;
   }
 
-  getPage(pageId:ID){
+  getPage(pageId?:ID){
+    if(!pageId){
+      return undefined;
+    }
     const pages = this.rxApp?.pages;
 
     if(pages?.length){

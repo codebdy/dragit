@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import { IPageAction } from 'Base/Model/IPageAction';
 import { OPEN_PAGE_ACTION, GO_BACK_ACTION } from "Base/PageUtils/ACTIONs";
 import { Page } from '../Page';
-import { PopupPage } from './PopupPage';
+import { PopupPage } from '../Page/PopupPage';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { useMemo } from 'react';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
@@ -65,7 +65,7 @@ export const PopupStyleModule = observer((
         page = {popupPage}
         isDrawerStyle = {module.isDrawerStyle} 
         onPageAction = {hanlePageAction}
-        pageParams = {pageParams}
+        pageJumper = {pageParams}
         onClose={handleClose}
       />
     </Container>

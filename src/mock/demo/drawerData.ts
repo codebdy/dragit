@@ -1,5 +1,3 @@
-import { POPUP_STYLE_MODULE } from "Utils/consts";
-
 export var demoDrawerData= [{
     //type:subheader, item, group
     type: 'subheader',
@@ -39,13 +37,13 @@ export var demoDrawerData= [{
           title: '对话框式',
           type: 'item',
           icon: 'mdi-circle-small',
-          to: 'popup-style-module',
+          pageId: 'guid-p-6',
       },
       {
           title: '右侧滑出式',
           type: 'item',
           icon: 'mdi-circle-small',
-          to: POPUP_STYLE_MODULE + 2,
+          pageId: 'guid-p-8',
       },
     ],
   },

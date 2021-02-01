@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ModuleSkeleton(){
+export default function AppBoardSkeleton(){
   const classes = useStyles();
   return (
     <Fragment>

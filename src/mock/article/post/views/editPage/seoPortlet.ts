@@ -11,6 +11,9 @@ export default{
   children:[
     {
       name:'FormGridContainer',
+      props: {
+        spacing: 2,
+      },
       field:'seoMeta',
       children:[
         {
