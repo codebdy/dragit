@@ -13,7 +13,7 @@ function getMetaFieldGql(meta?: IMeta){
 
   if(meta.field){
     if(meta.name === 'FormGridContainer'){
-      return `  ${meta.field}{ ${CHILDREN_GQL} }`;
+      return `  ${meta.field}{ id ${CHILDREN_GQL} }`;
     }
 
     if(meta.name === 'MediasPortlet'){
@@ -29,7 +29,7 @@ function getMetaFieldGql(meta?: IMeta){
     }
 
     if(meta.name === 'LoopPanel'){
-      return `  ${meta.field}{ ${CHILDREN_GQL} }`;
+      return `  ${meta.field}{ id ${CHILDREN_GQL} }`;
     }
 
     return ` ${meta.field} `;

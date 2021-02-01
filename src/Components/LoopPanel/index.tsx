@@ -12,10 +12,13 @@ import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root:{
-      flex:1,
-      display:'inline',
+      position:'relative',
     },
-
+    label:{
+      position:'absolute',
+      top:'0',
+      left:'0'
+    }
   }),
 );
 
@@ -42,6 +45,9 @@ const LoopPanel = observer((props: {
         className={ classNames(classes.root, className)} 
         {...rest}
       >
+        <div className = {classes.label}>
+          Field Loop:{rxNode?.meta.field}
+        </div>
         {children}
       </div>
     : <>

@@ -17,7 +17,7 @@ const TextView = React.forwardRef((
   return (
     <div 
       ref={ref}
-      style={{...style, display:display}}
+      style={{...style, display:isDesigning ? '' : display}}
       {...rest}
     >
       {isDesigning ? `field:${name}` : value}
