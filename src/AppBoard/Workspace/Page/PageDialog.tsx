@@ -43,11 +43,12 @@ export default function PageDialog(
     children:any,
   }
 ){
-  const {maxWidth, open, onClose, title, children} = props;
+  const {maxWidth = 'md', open, onClose, title, children} = props;
   const classes = useStyles();
 
   let maxWidthDlg = maxWidth ==='false' ? false : maxWidth;
-  maxWidthDlg = maxWidthDlg === '' || maxWidthDlg === undefined ? 'lg' : maxWidthDlg;
+  maxWidthDlg = maxWidthDlg === null || maxWidthDlg === '' || maxWidthDlg === undefined ? 'md' : maxWidthDlg;
+  console.log('PageDialog', props.maxWidth, maxWidth, maxWidthDlg)
   return (
     <Dialog
       fullWidth

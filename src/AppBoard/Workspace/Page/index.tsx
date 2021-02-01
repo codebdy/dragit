@@ -172,7 +172,7 @@ export const Page = observer((
 
           {popupPageJumper&&
             <PopupPage 
-              onPageAction = {hanlePageAction}
+              onPageAction = {onPageAction}
               pageJumper = {popupPageJumper}
               onClose={handleClosePopupPage}
             />          

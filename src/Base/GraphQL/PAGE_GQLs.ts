@@ -3,7 +3,7 @@ import { gql } from '@apollo/react-hooks';
 export const pageFieldsGQL = `
   id
   name
-  maxWidth:max_width
+  max_width
   width
   schema
   auths

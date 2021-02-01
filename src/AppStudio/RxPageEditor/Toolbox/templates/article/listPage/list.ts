@@ -3,7 +3,6 @@ export default {
   designProps:{
     query:null,
   },
-  withActions:true,
   props:{
     variant:'outlined',
     //elevation:6,

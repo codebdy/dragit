@@ -62,7 +62,6 @@ export default {
             },
             children: [          {
               name:'ListView',
-              withActions:true,
               props:{
                 //field:'paginate',
                 //noValidation: true,

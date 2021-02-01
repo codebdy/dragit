@@ -42,6 +42,7 @@ var demoPages = [
   {
     id:'guid-p-7',
     name:'用户编辑',
+    max_width: 'sm',
     schema:popEdit,
   },
 

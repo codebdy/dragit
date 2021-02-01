@@ -51,7 +51,6 @@ export default {
               designProps:{
                 query:null,
               },
-              withActions:true,
               props:{
                 //elevation:6,
                 columns:[

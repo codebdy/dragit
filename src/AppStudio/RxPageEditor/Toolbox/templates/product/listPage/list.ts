@@ -3,7 +3,7 @@ export default {
   designProps:{
     query:null,
   },
-  withActions:true,
+
   props:{
     //field:'paginate',
     //noValidation: true,

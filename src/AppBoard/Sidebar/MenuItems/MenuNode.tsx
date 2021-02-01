@@ -103,7 +103,7 @@ export const MenuNode = observer((
 
   const text = <span className={classes.itemText}>{title}</span>;
  
-  const selected = (!!appBoardStore.rootPageId && appBoardStore.rootPageId === item.pageId)||(pageId === item.pageId) ;
+  const selected = (!!appBoardStore.rootPageId && appBoardStore.rootPageId === item.pageId)||(!!pageId && pageId === item.pageId) ;
 
   return (
     <ListItem 

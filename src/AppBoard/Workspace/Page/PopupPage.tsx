@@ -6,6 +6,7 @@ import PageDialog from './PageDialog';
 import PageDrawer from './PageDrawer';
 import { Fragment } from 'react';
 import { useAppBoardStore } from 'AppBoard/store/AppBoardStore';
+import { GO_BACK_ACTION } from 'Base/PageUtils/ACTIONs';
 
 export const PopupPage = observer((
   props:{
@@ -18,6 +19,14 @@ export const PopupPage = observer((
   const isDrawerStyle = pageJumper?.openStyle === 'DRAWER';
   const appBoardStore = useAppBoardStore();
   const page = appBoardStore.getPage(pageJumper?.pageId);
+  const handlePageActon =  (action:IPageAction)=>{
+    switch (action.name){
+      case GO_BACK_ACTION:
+        onClose();
+        return;
+    }
+    onPageAction && onPageAction(action);
+  }
    return (
     <Fragment>
       {
@@ -30,7 +39,7 @@ export const PopupPage = observer((
         >
           <Page 
             page={page}
-            onPageAction = {onPageAction}
+            onPageAction = {handlePageActon}
             pageJumper = {pageJumper}
           />
         </PageDialog>      
