@@ -316,5 +316,6 @@
     "new-app":"New APP",
     "free":"Free",
     "app-access":"APP access",
-    "confirm-delete":"Are you sure to delete?"
+    "confirm-delete":"Are you sure to delete?",
+    "entity":"Entity model"
 }

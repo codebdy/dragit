@@ -322,6 +322,7 @@
     "new-app":"新建应用",
     "free":"免费",
     "app-access":"应用访问",
-    "confirm-delete":"删除后将不可恢复，确定要删除吗？"
+    "confirm-delete":"删除后将不可恢复，确定要删除吗？",
+    "entity":"业务实体模型"
 
 }
