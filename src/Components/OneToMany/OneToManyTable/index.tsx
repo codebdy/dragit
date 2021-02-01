@@ -95,7 +95,7 @@ const OneToManyTable = observer(React.forwardRef((
                     <ModelProvider value={rowStore} key = {rowStore.id}>
                       <TableRow key={`row-${rowStore.id}`} {...{[DADA_RXID_CONST]:rowStore?.node?.rxid}}>
                         {
-                          rxNode?.children.map((column)=>{
+                          rowStore?.node?.children.map((column)=>{
                             return(
                               <ComponentRender key={`${column?.id}-${rowStore.id}`} node = {column} />
                             )

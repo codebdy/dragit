@@ -7,7 +7,7 @@ import { RxNode } from 'rx-drag/models/RxNode';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { useSetTableStore } from 'Components/OneToMany/useSetTableStore';
 import {observer} from 'mobx-react';
-import { useFieldStore } from 'Components/common/useFieldStore';
+import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,7 +48,13 @@ const LoopPanel = observer((props: {
         {
           fieldStore?.getChildren()?.map((rowStore, index) => (
             <ModelProvider value={rowStore} key = {rowStore.id}>
-              {children}
+              {
+                rowStore?.node?.children.map((child)=>{
+                  return(
+                    <ComponentRender key={`${child?.id}-${rowStore.id}`} node = {child} />
+                  )
+                })
+              }
               {
                 index !== fieldStore?.getChildren().length - 1 &&
                 separator
