@@ -159,7 +159,7 @@ export const VerticalBar = observer(() => {
             className = {classes.logoIcon}
             variant="rounded"
           >
-            RX
+            <MdiIcon iconClass = "mdi-feather" />
           </Avatar>
           <div className = {classes.buttons}>
             <Tooltip title={intl.get('pages')} placement="right">

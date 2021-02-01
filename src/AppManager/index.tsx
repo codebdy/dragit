@@ -106,7 +106,7 @@ export const AppManager = observer(() => {
             variant="rounded"
             className={classes.logoIcon}
           >
-            <MdiIcon iconClass = "mdi-feather" />
+            RX
           </Avatar>
           <Spacer />
           <a href="https://github.com/rxwater/rxdrag" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
