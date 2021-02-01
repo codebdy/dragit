@@ -1,13 +1,12 @@
-import React, { Fragment } from 'react';
-import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, responsiveFontSizes, createMuiTheme, ThemeProvider} from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, createStyles, Button, IconButton, WithStyles, withStyles, Typography, Dialog, Grid} from '@material-ui/core';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
-import MetaListInput from '../../../../AppStudio/RxPageEditor/AttrebuteBox/PropsInputs/MetaListInput';
+import MetaListInput from './MetaListInput';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
-import { ID } from 'rx-drag/models/baseTypes';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -41,7 +40,7 @@ const styles = (theme: Theme) =>
   const useStyles = makeStyles(styles);
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id:ID;
+  id: string;
   children: React.ReactNode;
   onClose: () => void;
 }
@@ -73,25 +72,13 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-const theme = responsiveFontSizes(createMuiTheme({
-  palette: {
-    type: 'light',
-    background:{
-      //default:'#f4f5fa',
-    },
-    primary:{
-      main:"#5d78ff",
-    },  
-  },
-
-}));
 
 export interface MetaListDialogProps{
   value?:Array<any>;
   onChange:(newValue:Array<any>)=>void;
 }
 
-export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
+export default function ItemsInputDialog(props:MetaListDialogProps){
   const classes = useStyles();
   const {value,  onChange} = props;
   const [inpuValue, setInputValue] = React.useState<Array<any>>(value?cloneObject(value):[]);
@@ -112,11 +99,12 @@ export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
 
   return (
 
-    <Fragment>
-      <Button variant="outlined"  fullWidth size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> 
-        {intl.get('items-data')} ···
-      </Button>
-      <ThemeProvider theme={theme}>
+    <>
+      <Grid item xs={6}>
+        <Button variant="outlined"  fullWidth size="large" onClick={handleClickOpen} style={{marginTop:'-1px'}}> 
+          {intl.get('items-data')}
+        </Button>
+      </Grid>
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" 
           open={open}
           scroll = 'paper'
@@ -138,8 +126,7 @@ export default function SelectItemsInputItemDialog(props:MetaListDialogProps){
               </Button>
             </DialogActions>
         </Dialog>      
-      </ThemeProvider>      
-    </Fragment>
+    </>
 
     
   )

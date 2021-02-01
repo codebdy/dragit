@@ -4,8 +4,8 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
-import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { MetaItem } from 'Base/Model/MetaItem';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,21 +28,21 @@ export default function MetaListInput(
     label?:string, 
     value:Array<MetaItem>|undefined, 
     onChange:(value:Array<MetaItem>)=>void,
-    slugLabel?:string,
+    idLabel?:string,
     valueLabel?:string,
   }
 ) {
-  const {label, value, onChange, slugLabel, valueLabel} = props; 
+  const {label, value, onChange, idLabel, valueLabel} = props; 
   const classes = useStyles();
   let metas = value ? cloneObject(value) : [];
 
   
-  const handleChangeSlug = (index:number, slug:string)=>{
-    metas[index].slug = slug;
+  const handleChangeSlug = (index:number, id:string)=>{
+    metas[index].id = id;
     onChange([...metas]);
   };
-  const handleChangeName = (index:number, label:string)=>{
-    metas[index].label = label;
+  const handleChangeName = (index:number, name:string)=>{
+    metas[index].name = name;
     onChange([...metas]);
   };
 
@@ -68,10 +68,10 @@ export default function MetaListInput(
             >
               <TextField 
                 className = {classes.itemInput} 
-                label={slugLabel || intl.get('slug')} 
+                label={idLabel || intl.get('slug')} 
                 variant="outlined" 
                 size="small"
-                value = {meta.slug || ''}
+                value = {meta.id || ''}
                 onChange = {event=>{
                   handleChangeSlug(index, event.target.value.trim())
                 }}
@@ -81,7 +81,7 @@ export default function MetaListInput(
                 label={valueLabel || intl.get('name')} 
                 variant="outlined" 
                 size="small"
-                value = {meta.label ||''}
+                value = {meta.name ||''}
                 onChange = {event=>{
                   handleChangeName(index, event.target.value.trim())
                 }}

@@ -6,22 +6,22 @@ import React from 'react';
 
 const CheckboxGroup = React.forwardRef((props:any, ref:any)=>{
   const {label, name, onChange, row, size, color, value = [],  error, helperText, items=[], ...rest} = props;
-  const isChecked = (slug:string)=>{
+  const isChecked = (id:string)=>{
     for(var i = 0; i < value.lenght; i ++){
-      if(value[i] === slug){
+      if(value[i] === id){
         return true;
       }
     }
     return false;
   }
   
-  const handleChange = (slug:string, subValue:boolean) => {
+  const handleChange = (id:string, subValue:boolean) => {
     let newValue = [...value];
     if(!subValue){
-      remove(slug, newValue);
+      remove(id, newValue);
     }
     else{
-      newValue = [...newValue, slug];
+      newValue = [...newValue, id];
     }
     onChange && onChange({
       target:{
@@ -42,13 +42,13 @@ const CheckboxGroup = React.forwardRef((props:any, ref:any)=>{
               <FormControlLabel
                 key = {index}
                 control={<Checkbox 
-                  checked={isChecked(item.slug)} 
-                  onChange={e=>handleChange(item.slug, e.target.checked)} 
-                  name={item.slug}
+                  checked={isChecked(item.id)} 
+                  onChange={e=>handleChange(item.id, e.target.checked)} 
+                  name={item.id}
                   size = {size}
                   color = {color}
                 />}
-                label={item.label}
+                label={item.name}
               />
             )
           })

@@ -1,5 +1,5 @@
 
 export interface MetaItem {
-  slug: string;
-  label: string;
+  id: string;
+  name: string;
 }

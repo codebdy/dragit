@@ -51,9 +51,10 @@ export class SelectConfig extends MetaConfig{
         name:'itemName',
         labelKey:'item-name',
         propType:'string',
-      },
-      helperTextConfig,
+      },      
       itemsConfig,
+      helperTextConfig,
+
     ]
   }
 

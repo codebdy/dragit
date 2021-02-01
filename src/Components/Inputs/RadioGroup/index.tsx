@@ -5,10 +5,10 @@ import React from 'react';
 const RadioGroup = React.forwardRef((props:any, ref:any)=>{
   const {label, name, onChange, row, size, color, value,  error, helperText, items=[], ...rest} = props;
   
-  const handleChange = (slug:string, subValue:boolean) => {
+  const handleChange = (id:string, subValue:boolean) => {
     let newValue = value;
     if(!subValue){
-      newValue = slug;
+      newValue = id;
     }
 
     onChange && onChange({
@@ -30,13 +30,13 @@ const RadioGroup = React.forwardRef((props:any, ref:any)=>{
               <FormControlLabel
                 key = {index}
                 control={<Radio 
-                  checked={value ===item.slug} 
-                  onChange={e=>handleChange(item.slug, e.target.checked)} 
-                  name={item.slug}
+                  checked={value ===item.id} 
+                  onChange={e=>handleChange(item.id, e.target.checked)} 
+                  name={item.id}
                   size = {size}
                   color = {color}
                 />}
-                label={item.label}
+                label={item.name}
               />
             )
           })
