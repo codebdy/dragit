@@ -19,8 +19,6 @@ const withFormField = (Component:any)=>{
       }
     }
 
-    console.log('WithFormField', rxNode?.meta)
-
     /*const handleBlur = (event:any)=>{
       if(event){
         event.stopPropagation();
