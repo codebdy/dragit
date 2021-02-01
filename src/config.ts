@@ -46,8 +46,7 @@ import RadioGroup from 'Components/Inputs/RadioGroup';
 import { RadioGroupConfig } from 'Components/Inputs/RadioGroup/RadioGroupConfig';
 import { AntDesignChartConfig } from 'Components/AntDesignChart/AntDesignChartConfig';
 import { MediaSelectConfig } from "Components/Inputs/MediaSelect/MediaSelectConfig";
-import TableColumn from "Components/TableColumn";
-import { TableColumnConfig } from "Components/TableColumn/TableColumnConfig";
+
 import TextView from "Components/Displays/TextView";
 import { TextViewConfig } from "Components/Displays/TextView/TextViewConfig";
 import { EnumViewConfig } from "Components/Displays/EnumView/EnumViewConfig";
@@ -83,6 +82,10 @@ import { TreeSelect } from "Components/Inputs/TreeSelect";
 import { MediaSelect } from "Components/Inputs/MediaSelect/MediaSelect";
 import { Checkbox } from "Components/Inputs/Checkbox";
 import { FormGridContainerConfig } from "Components/Portlet/FormGridContainer/FormGridContainerConfig";
+import LoopPanel from "Components/LoopPanel";
+import { LoopPanelConfig } from "Components/LoopPanel/LoopPanelConfig";
+import TableColumn from "Components/TableColumn";
+import { TableColumnConfig } from "Components/TableColumn/TableColumnConfig";
 
 register('Canvas', Canvas, CanvasConfig);
 register('Divider', Divider, DividerConfig);
@@ -123,6 +126,7 @@ register('MediaSelect', withFormField(withSkeleton(MediaSelect)), MediaSelectCon
 register('Medias', Medias);
 register('AntDesignChart', AntDesignChart, AntDesignChartConfig);
 
+register('LoopPanel', LoopPanel, LoopPanelConfig);
 register('TextView', TextView, TextViewConfig);
 register('MediaView', MediaView, MediaViewConfig);
 register('EnumView', EnumView, EnumViewConfig);

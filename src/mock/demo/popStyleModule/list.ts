@@ -105,10 +105,6 @@ export default {
           children:[{
             name:'TextView',
             field:'login_name',
-            props:{
-              variant:'outlined',
-              size:'small',
-            }
           }]
         },
         {
@@ -123,10 +119,6 @@ export default {
           children:[{
             name:'TextView',
             field:'name',
-            props:{
-              variant:'outlined',
-              size:'small',
-            }
           }]
         },
         {
@@ -140,21 +132,29 @@ export default {
           children:[{
             name:'TextView',
             field:'email',
-            props:{
-              variant:'outlined',
-              size:'small',
-            }
           }]
         },
         {
           name:'TableColumn',
           props:{
             label:'角色',
-            field:'roles',
-            searchable:true,
           },
     
-          children:[]
+          children:[
+            {
+              name:'LoopPanel',
+              field:'roles',
+              props:{
+                separator:', '
+              },
+              children:[
+                {
+                  name:'TextView',
+                  field:'name',
+                }
+              ]
+            }
+          ]
         },
 
         {

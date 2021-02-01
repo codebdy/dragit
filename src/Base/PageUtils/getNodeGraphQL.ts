@@ -28,6 +28,10 @@ function getMetaFieldGql(meta?: IMeta){
       return `  ${meta.field}{ ${meta.props?.itemKey || 'id'} ${meta.props?.itemName || 'name'} }`;
     }
 
+    if(meta.name === 'LoopPanel'){
+      return `  ${meta.field}{ ${CHILDREN_GQL} }`;
+    }
+
     return ` ${meta.field} `;
   }
 

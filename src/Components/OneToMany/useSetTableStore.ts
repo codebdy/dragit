@@ -13,6 +13,8 @@ export function useSetTableStore(rxNode:RxNode<IMeta>, rowComponentName:string){
     const field = rxNode?.meta.field;
     if(rxNode && field){
       const model = new RXModel(rxNode, field);
+      model.initWithModel(modelStore?.value);
+      model.setLabel(`Field : ${field}`);
       modelStore?.setChild(field, model);
       return ()=>{
         modelStore?.removeChildStore(field);
