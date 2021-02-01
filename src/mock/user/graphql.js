@@ -23,7 +23,17 @@ export var userGQLType = `
 export var userGQLInput =`
   input UserInput{
     id:ID
+    login_name:String
+    password:String
     name:String
+    email: String
+    avatar: ID
+    is_supper:Boolean
+    is_demo:Boolean
+    status:String
+    roles: [ID]
+    auths:[ID]
+    created_at:String
   }
 `
 

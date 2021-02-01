@@ -98,7 +98,7 @@ export const Page = observer((
   const hanlePageAction = (action:IPageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
-        if(action.pageJumper?.openStyle === 'POPUP'){
+        if(action.pageJumper?.openStyle === 'POPUP' || action.pageJumper?.openStyle === 'DRAWER'){
           setPopupPageJumper(action.pageJumper)
           return;
         }
@@ -169,15 +169,11 @@ export const Page = observer((
               )
             })
           }
-
-          {popupPageJumper&&
-            <PopupPage 
-              onPageAction = {onPageAction}
-              pageJumper = {popupPageJumper}
-              onClose={handleClosePopupPage}
-            />          
-          }
-
+          <PopupPage 
+            onPageAction = {onPageAction}
+            pageJumper = {popupPageJumper}
+            onClose={handleClosePopupPage}
+          />          
           <Dialog
             open={openAlert}
             onClose={handleCloseAlert}

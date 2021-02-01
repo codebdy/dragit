@@ -208,7 +208,7 @@ export default {
                 tooltip:'编辑',
                 onClick:{
                   name: OPEN_PAGE_ACTION,
-                  pageJumper: {openStyle: "POPUP", pageId: "guid-p-7"},
+                  pageJumper: {openStyle: "DRAWER", pageId: "guid-p-9"},
                 }
               }
             },

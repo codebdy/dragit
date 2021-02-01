@@ -30,32 +30,39 @@ export const PopupPage = observer((
    return (
     <Fragment>
       {
-        page && !isDrawerStyle &&
         <PageDialog
           maxWidth = {page?.max_width}
-          open={!!page}
+          open={!isDrawerStyle && !!page}
           onClose={onClose}
           title = {page?.name}
         >
-          <Page 
-            page={page}
-            onPageAction = {handlePageActon}
-            pageJumper = {pageJumper}
-          />
+          {
+            page && !isDrawerStyle &&
+            <Page 
+              page={page}
+              onPageAction = {handlePageActon}
+              pageJumper = {pageJumper}
+            />          
+          }
+
         </PageDialog>      
       }{
-        isDrawerStyle && page &&
+        
         <PageDrawer
           title = {page?.name}
           onClose = {onClose}
-          open={!!page}
+          open={isDrawerStyle && !!page}
           width = {page?.width}
         >
-          <Page 
-            page={page}
-            onPageAction = {onPageAction}
-            pageJumper = {pageJumper}
-          />
+          {
+            isDrawerStyle && page &&
+            <Page 
+              page={page}
+              onPageAction = {onPageAction}
+              pageJumper = {pageJumper}
+            />            
+          }
+
         </PageDrawer>
       }
     </Fragment>

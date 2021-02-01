@@ -1,4 +1,3 @@
-import drawerEdit from "./drawerStyleModule/drawerEdit";
 import drawerList from "./drawerStyleModule/drawerList";
 import jumpEdit from "./jumpStyleModule/jumpEdit";
 import jumpList from "./jumpStyleModule/jumpList";
@@ -54,7 +53,8 @@ var demoPages = [
   {
     id:'guid-p-9',
     name:'用户编辑',
-    schema:drawerEdit,
+    width:'400',
+    schema:popEdit,
   }
 
 ]
