@@ -40,7 +40,28 @@ export class ListViewConfig extends MetaConfig{
         }
       },
       ...elevationConfig,
-      squareConfig
+      squareConfig,
+      {
+        name:'query',
+        labelKey:'query-gql',
+        propType:'string',
+        props:{
+          xs:12
+        }
+      },
+      {
+        name:'remove',
+        labelKey:'remove-gql',
+        propType:'string',
+        props:{
+          xs:12
+        }
+      },
+      {
+        name:'update',
+        labelKey:'update-gql',
+        propType:'mutation',
+      }
     ]
   }
 

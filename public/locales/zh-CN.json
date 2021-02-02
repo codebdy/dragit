@@ -324,6 +324,9 @@
     "free":"免费",
     "app-access":"应用访问",
     "confirm-delete":"删除后将不可恢复，确定要删除吗？",
-    "entity":"业务实体模型"
+    "entity":"业务实体模型",
+    "query-gql":"查询GQL",
+    "remove-gql":"删除GQL",
+    "update-gql":"更新GQL"
 
 }

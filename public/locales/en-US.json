@@ -318,5 +318,8 @@
     "free":"Free",
     "app-access":"APP access",
     "confirm-delete":"Are you sure to delete?",
-    "entity":"Entity model"
+    "entity":"Entity model",
+    "query-gql":"Query GQL",
+    "remove-gql":"Remove GQL",
+    "update-gql":"Update GQL"
 }
