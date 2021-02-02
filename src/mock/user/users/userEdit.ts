@@ -172,9 +172,9 @@ export default [
           onClick:{
             name:SUBMIT_MUTATION,
             mutation:{
-              name:'saveUser',
+              name:'saveRxUser',
               variableName:'user',
-              variableType:'UserInput',
+              variableType:'RxUserInput',
               submitNode:'',
               refreshNode:'',
               goback:true,
