@@ -6,6 +6,7 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import { Page } from "./Page";
 import { IPageAction } from "Base/Model/IPageAction";
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION } from "Base/PageUtils/ACTIONs";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +34,12 @@ export const Workspace = observer(()=>{
   const{pageId, id} = match.params as any;
   const newPageId = pageId ? pageId : appboardStore?.rxApp?.entry_page_id;
   let page = appboardStore?.getPage(newPageId);
+
+  useEffect(()=>{
+    if(!appboardStore.rootPageId){
+      appboardStore.setRootPageId(newPageId);
+    }
+  },[appboardStore, newPageId])
 
   const hanlePageAction = (action:IPageAction)=>{
     switch (action.name){
