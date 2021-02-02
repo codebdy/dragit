@@ -236,7 +236,17 @@ const AttributeBoxActionSection = observer((
         </>
 
       }
-
+      <Grid item xs={12}>
+        <TextField fullWidth
+          variant="outlined" 
+          multiline
+          rows ={3}
+          size = "small"
+          label = {intl.get("confirm-message")}
+          value={stringValue(action.confirmMessage)} 
+          onChange={(event)=>updatAction('confirmMessage', event.target.value as string)}
+        ></TextField>
+      </Grid>
    </>
   )
 })
