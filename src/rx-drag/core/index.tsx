@@ -77,13 +77,7 @@ export const RxDragCore = observer((
           node ={rxDragStore.canvas}
         />
       }
-      {
-        rxDragStore.activeNode && (rxDragStore.activeNode.id !== rxDragStore.canvas?.id) &&
-        <ComponentLabel 
-          node={rxDragStore.activeNode}
-          followDom = {rxDragStore.activeNode.dom}
-        />
-      }              
+            
       {
         rxDragStore.selectedNode &&
         <Fragment>
@@ -99,6 +93,15 @@ export const RxDragCore = observer((
           />
         </Fragment>
       }
+
+      {
+        rxDragStore.activeNode && (rxDragStore.activeNode.id !== rxDragStore.canvas?.id) 
+          && (rxDragStore.selectedNode?.id !== rxDragStore.activeNode?.id) &&
+        <ComponentLabel 
+          node={rxDragStore.activeNode}
+          followDom = {rxDragStore.activeNode.dom}
+        />
+      }  
       <Fragment>
         {
           (rxDragStore.draggedToolboxItem || rxDragStore.draggedNode) &&
