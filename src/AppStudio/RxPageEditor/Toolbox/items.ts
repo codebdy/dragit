@@ -142,6 +142,12 @@ export default [
     titleKey: "form",
     children:[
       {
+        titleKey:"form-grid-container",
+        meta: {
+          name:'FormGridContainer',
+        }
+      },
+      {
         titleKey:'form-grid-item',
         meta:{
           name:'FormGridItem',
