@@ -57,7 +57,11 @@ const ListViewKeywordFilter = React.forwardRef((
   }
 
   return (
-    <div className={classNames(className, classes.root)} style={{...style, width}}>
+    <div 
+      className={classNames(className, classes.root)} 
+      style={{...style, width}}
+      {...{[DADA_RXID_CONST]:rxid}}
+    >
       <TextField
         name="table-search"
         type="search"

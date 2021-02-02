@@ -57,7 +57,15 @@ const ListViewEnumFilter = React.forwardRef((
   }
 
   return (
-    <FormControl className={classNames(classes.root, className)} variant={variant} size={size} ref={ref} {...rest} style={{...style, width}}>
+    <FormControl 
+     {...{[DADA_RXID_CONST]:rxid}}
+      className={classNames(classes.root, className)} 
+      variant={variant} 
+      size={size} 
+      ref={ref} 
+      {...rest} 
+      style={{...style, width}}
+    >
       <InputLabel className={classes.label}>{label}</InputLabel>
       <Select
         value={value}
