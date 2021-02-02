@@ -222,7 +222,8 @@ export default {
                   name: REMOVE_LIST_VIEW_RECORD,
                   confirmMessage:'删除后将不可恢复，您确定要删除吗？',
                 }
-              },         
+              },
+              //暂时不支持这种写法：!model.is_supper 
               template:`
                 {
                   model.is_supper !== true &&
