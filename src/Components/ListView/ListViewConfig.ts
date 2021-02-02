@@ -3,6 +3,7 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import marginConfigs from "Components/common/configs/marginConfigs";
 import elevationConfig from "Components/common/configs/elevationConfig";
+import squareConfig from "Components/common/configs/squareConfig";
 
 export class ListViewConfig extends MetaConfig{
   editPaddingY = '8px';
@@ -21,7 +22,25 @@ export class ListViewConfig extends MetaConfig{
   getPropConfigs(): Array<IPropConfig>{
     return [
       ...marginConfigs,
-      ...elevationConfig
+      {
+        name:'variant',
+        labelKey:'variant',
+        propType:'select',
+        props:{
+          items:[
+            {
+              value:'elevation',
+              label:'Elevation',
+            },
+            {
+              value:'outlined',
+              label:'Outlined',
+            },
+          ]
+        }
+      },
+      ...elevationConfig,
+      squareConfig
     ]
   }
 

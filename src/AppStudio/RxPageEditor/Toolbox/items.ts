@@ -28,6 +28,17 @@ export default [
         }
       }, 
       {
+        titleKey:"typography",
+        meta:{
+          name:"Typography",
+          props:{
+            variant:"inherit",
+            rxText: "Typography",
+          }
+        }
+      }, 
+
+      {
         titleKey:"medias",
         meta:{name:'Medias'},
       },       
@@ -280,16 +291,6 @@ export default [
           props:{
             variant:"contained",
             rxText: "Button",
-          }
-        }
-      }, 
-      {
-        titleKey:"typography",
-        meta:{
-          name:"Typography",
-          props:{
-            variant:"inherit",
-            rxText: "Typography",
           }
         }
       }, 

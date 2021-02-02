@@ -1,6 +1,7 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
+import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class HeadConfig extends MetaConfig{
   editPaddingY = '';
@@ -16,6 +17,7 @@ export class HeadConfig extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
+      ...marginConfigs,
        {
         name:'rxText',
         label:'text',

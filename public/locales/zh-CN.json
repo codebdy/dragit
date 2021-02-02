@@ -196,6 +196,7 @@
 
     "cols":"列数",
     "elevation":"海拔阴影",
+    "square":"方角",
     "defalut-open":"展开",
     "collapsible":"可折叠",
     "margin-top":"上边距",

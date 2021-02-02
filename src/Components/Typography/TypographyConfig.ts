@@ -1,6 +1,7 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "Base/RXNode/IMeta";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
+import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class TypographyConfig extends MetaConfig{
 
@@ -14,6 +15,7 @@ export class TypographyConfig extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
+      ...marginConfigs,
       {
         name:'align',
         labelKey:'align',

@@ -3,6 +3,7 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import elevationConfig from "Components/common/configs/elevationConfig";
 import marginConfigs from "Components/common/configs/marginConfigs";
 import { IMeta } from "Base/RXNode/IMeta";
+import squareConfig from "Components/common/configs/squareConfig";
 
 export class PortletConfig extends MetaConfig{
 
@@ -19,7 +20,8 @@ export class PortletConfig extends MetaConfig{
   getPropConfigs(): Array<IPropConfig>{
     return [
       ...marginConfigs,
-      ...elevationConfig,      
+      ...elevationConfig,
+      squareConfig,   
       {
         name:'collapsible',
         labelKey:'collapsible',
