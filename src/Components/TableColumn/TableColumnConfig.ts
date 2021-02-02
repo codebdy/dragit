@@ -5,8 +5,13 @@ import { IMeta } from "Base/RXNode/IMeta";
 export class TableColumnConfig extends MetaConfig{
  
   accept(child:IMeta){
-    if(child.name === 'TableColumn' || child.name === 'ListViewFilters'
-    ||child.name === 'ListViewBatchActions'){
+    if(child.name === 'TableColumn' 
+      || child.name === 'ListViewFilters'
+      ||child.name === 'ListViewBatchActions'
+      ||child.name === 'ListViewKeywordFilter'
+      ||child.name === 'ListViewEnumFilter'
+      ||child.name === 'ListViewRangeFilter'
+    ){
       return false;
     }
     return true;
