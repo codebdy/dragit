@@ -18,7 +18,8 @@ export const ComponentLabel = observer((
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();
     const canvasRect = rxDragStore?.canvas?.dom?.getBoundingClientRect();
-    const canvasTop = (canvasRect?.top || 90) + 20;
+    let canvasTop = (canvasRect?.top || 90) + 20;
+    canvasTop = canvasTop < 110 ? 110 : canvasTop;
     if(rect){
       setLeft(rect.x)
       let top = rect.y < canvasTop ? rect.y + rect.height : rect.y - 20

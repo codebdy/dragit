@@ -53,7 +53,8 @@ export const NodeToolbar = observer((
     const canvasRect = rxDragCoreStore?.canvas?.dom?.getBoundingClientRect();
     const rect =  rxDragCoreStore?.selectedDom?.getBoundingClientRect();
     const canvasLeft = canvasRect?.left || 0;
-    const canvasTop = (canvasRect?.top || 90) + 30;
+    let canvasTop = (canvasRect?.top || 90) + 30;
+    canvasTop = canvasTop < 120 ? 120 : canvasTop;
     if(!rect){
       return 
     }
