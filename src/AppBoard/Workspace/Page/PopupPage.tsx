@@ -10,12 +10,13 @@ import { GO_BACK_ACTION } from 'Base/PageUtils/ACTIONs';
 
 export const PopupPage = observer((
   props:{
+    open: boolean,
     pageJumper?:any,
     onPageAction?: (pageAction:IPageAction)=> void,
     onClose:()=>void,
   }
 )=>{
-  const {pageJumper, onPageAction, onClose } = props;
+  const {open, pageJumper, onPageAction, onClose } = props;
   const isDrawerStyle = pageJumper?.openStyle === 'DRAWER';
   const appBoardStore = useAppBoardStore();
   const page = appBoardStore.getPage(pageJumper?.pageId);
@@ -32,7 +33,7 @@ export const PopupPage = observer((
       {
         <PageDialog
           maxWidth = {page?.max_width}
-          open={!isDrawerStyle && !!page}
+          open={!isDrawerStyle && open}
           onClose={onClose}
           title = {page?.name}
         >
@@ -51,7 +52,7 @@ export const PopupPage = observer((
         <PageDrawer
           title = {page?.name}
           onClose = {onClose}
-          open={isDrawerStyle && !!page}
+          open={isDrawerStyle && open}
           width = {page?.width}
         >
           {

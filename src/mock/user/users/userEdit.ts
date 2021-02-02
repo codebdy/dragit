@@ -1,7 +1,6 @@
 import { GO_BACK_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 
-export default {
-  layout:[
+export default [
     {
       name:'FormGridContainer',
       props:{
@@ -16,12 +15,12 @@ export default {
           children:[
             {
               name:'TextBox',
+              field:'login_name',
               props:{
                 label:'登录名',
                 variant:"outlined",
                 fullWidth:true,
                 required:true,
-                field:'login_name',
                 rule:{
                   valueType:'string',
                   required:true,
@@ -38,11 +37,11 @@ export default {
           children:[
             {
               name:'TextBox',
+              field:'name',
               props:{
                 label:'姓名',
                 variant:"outlined",
                 fullWidth:true,
-                field:'name',
               },
             }
           ]
@@ -55,12 +54,12 @@ export default {
           children:[
             {
               name:'TextBox',
+              field:'password',
               props:{
                 label:'密码',
                 variant:"outlined",
                 type:'password',
                 fullWidth:true,
-                field:'password',
                 placeholder:'保持为空表示不修改',
               },
             }
@@ -75,11 +74,11 @@ export default {
           children:[
             {
               name:'TextBox',
+              field:'email',
               props:{
                 label:'Email',
                 variant:"outlined",
                 fullWidth:true,
-                field:'email',
                 empertyValue:'',
                 rule:{
                   valueType:'string',
@@ -98,10 +97,10 @@ export default {
           children:[
             {
               name:'MultiSelectBox',
+              field:'roles',
               props:{
                 label:"角色",
                 variant:"outlined",
-                field:'roleIds',
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
@@ -118,10 +117,10 @@ export default {
           children:[
             {
               name:'SwitchBox',
+              field:'status',
               props:{
                 label:'禁用',
                 fullWidth:true,
-                field:'forbid',
               },
             }
           ]
@@ -134,8 +133,8 @@ export default {
           children:[
             {
               name:'MediaSelect',
+              field:'avatar',
               props:{
-                field:'avatar',
                 width:'120px',
                 label:'头像',
                 avatar:true,
@@ -171,14 +170,18 @@ export default {
           size:'large',
           marginLeft:2,
           onClick:{
-            name: SUBMIT_MUTATION,
-          }           
+            name:SUBMIT_MUTATION,
+            mutation:{
+              name:'saveUser',
+              variableName:'user',
+              variableType:'UserInput',
+              submitNode:'',
+              refreshNode:'',
+              goback:true,
+            },   
+          }      
         }
       }]
 
     }
-],
-
-
-  isFormPage:true,
-}
+]

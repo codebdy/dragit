@@ -41,6 +41,8 @@ export const Page = observer((
   const [pageStore, setPageStore] = useState<PageStore>();
   const [mutation, setMutation] = useState<IPageMutation>();
   const [popupPageJumper, setPopupPageJumper] = useState<IPageJumper>();
+  //避免关闭闪烁，添加一个显示状态
+  const [showPopup, setShowPopup] = useState(false);
   const dragItStore = useDragItStore();
   const loggedUser = useLoggedUser();
 
@@ -99,6 +101,7 @@ export const Page = observer((
     switch (action.name){
       case OPEN_PAGE_ACTION:
         if(action.pageJumper?.openStyle === 'POPUP' || action.pageJumper?.openStyle === 'DRAWER'){
+          setShowPopup(true);
           setPopupPageJumper(action.pageJumper)
           return;
         }
@@ -146,7 +149,8 @@ export const Page = observer((
   }
 
   const handleClosePopupPage = ()=>{
-    setPopupPageJumper(undefined);
+    setShowPopup(false)
+    //setPopupPageJumper(undefined);
   }
 
   return (
@@ -171,6 +175,7 @@ export const Page = observer((
           }
           <PopupPage 
             onPageAction = {onPageAction}
+            open = {showPopup}
             pageJumper = {popupPageJumper}
             onClose={handleClosePopupPage}
           />          

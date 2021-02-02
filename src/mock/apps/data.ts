@@ -1,5 +1,7 @@
 import { demoDrawerData } from "mock/demo/drawerData";
 import demoPages from "mock/demo/pages";
+import { userDrawerData } from "mock/user/drawerData";
+import userPages from "mock/user/pages";
 
 var appsData = [
   {
@@ -9,8 +11,9 @@ var appsData = [
     color:'#a1887f',
     app_type:'系统',
     is_system:true,
-    pages:[],
-    navigation_items:[],
+    pages:userPages,
+    navigation_items:userDrawerData,
+    entry_page_id:'guid-p-u-1',
     auths:[
       {
         id:'guid-11',
