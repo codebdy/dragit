@@ -104,7 +104,7 @@ export default [
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
-
+                query:'allRxRoles'
               },                         
             }
           ]

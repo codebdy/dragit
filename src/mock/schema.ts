@@ -12,7 +12,7 @@ import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demo/splitSubmi
 import { supplierQueryResolvers } from "./supplier/resolvers";
 import { supplierGQLInput, supplierGQLQuery, supplierGQLType } from "./supplier/graphql";
 import { userGQLType, userGQLInput, userGQLQuery, userGQLMutation } from "./user/userGraphql";
-import { userQueryResolvers, userMutationResolvers } from "./user/resolvers";
+import { userQueryResolvers, userMutationResolvers } from "./user/userResolvers";
 import { appGQLInput, appGQLMutation, appGQLQuery, appGQLType } from "./apps/graphql";
 import { appMutationResolvers, appQueryResolvers } from "./apps/appResolvers";
 import { pageMutationResolvers, pageQueryResolvers } from "./apps/pageResolvers";
@@ -21,6 +21,7 @@ import { templateGQLQuery, templateGQLType } from "./templates/graphql";
 import { authMutationResolvers } from "./apps/authResolvers";
 import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./user/roleGraphql";
 import { authGQLInput, authGQLMutation, authGQLQuery, authGQLType } from "./user/authGraphql";
+import { roleQueryResolvers } from "./user/roleResolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -121,6 +122,7 @@ export const resolvers = {
     ...mediaQueryResolvers,
     ...supplierQueryResolvers,
     ...userQueryResolvers,
+    ...roleQueryResolvers,
   },
 
   Mutation:{

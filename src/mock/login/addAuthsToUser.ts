@@ -1,4 +1,4 @@
-import roles from "mock/data/roles";
+import roles from "mock/user/rolesData";
 
 export function addAuthsToUser(user:any) {
   if (!user) {
