@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { DADA_RXID_CONST, RxNode } from '../../rx-drag/models/RxNode';
 import { resolveComponent } from 'rx-drag/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { makeSpaceStyle } from 'Base/HOCs/withMargin';
+import { makeSpaceStyle } from 'rx-drag/utils/withMargin';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { useActionStore } from './ActionStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';

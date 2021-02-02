@@ -2,33 +2,12 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { DADA_RXID_CONST, RxNode } from '../models/RxNode';
 import { resolveComponent, resolveMetaConfig } from 'rx-drag/RxDrag';
 import { IMeta } from 'Base/RXNode/IMeta';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import classNames from "classnames";
-import { makeSpaceStyle } from 'Base/HOCs/withMargin';
+import { makeSpaceStyle } from 'rx-drag/utils/withMargin';
 import { DragoverCharger } from './DragoverCharger';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import {observer} from 'mobx-react';
 import { useDesign } from '../store/useDesign';
 import { getDomByRxid } from '../utils/getDomByRxid';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    outline: {
-      outline: fade(theme.palette.primary.main, 0.8) + ' dashed 1px',
-    },
-    active:{
-      outline: fade(theme.palette.primary.main, 0.8) + ' solid 1px',
-    },
-    selected:{
-      outline: theme.palette.primary.main + ' solid 2px',
-    },
-    dragged:{
-      opacity:"0.5",
-      outline:theme.palette.secondary.main + ' dashed 1px',
-      pointerEvents:'none',
-    }
-  }),
-);
 
 function getEditStyle(
   node:RxNode<IMeta>,
@@ -58,7 +37,6 @@ export const ComponentView = observer((
   }
 )=>{
   const {node} = props;
-  const classes = useStyles();
   const [editStyle, setEditStyle] = useState<any>({});
   const {rxDragStore: editorStore} = useDesign();
   let Component = resolveComponent(node.meta);
@@ -119,10 +97,10 @@ export const ComponentView = observer((
     className:classNames(
       className, 
       {
-        [classes.outline]: editorStore?.showOutline,
-        [classes.active]: actived,
-        [classes.selected]: selected,
-        [classes.dragged]:dragged,
+        "rx-outline": editorStore?.showOutline,
+        "rx-active": actived,
+        "rx-selected": selected,
+        "rx-dragged":dragged,
       }
     ),
     style:{
