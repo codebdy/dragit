@@ -6,7 +6,7 @@ import CanvasInner from './CanvasInner';
 
 
 const Canvas = observer((props: {className?:string, children?:any, style?:any}) => {
-  const {children, ...rest} = props;
+  const {children, className, style, ...rest} = props;
   const studioStore = useAppStudioStore();
 
   const theme = createMuiTheme({
