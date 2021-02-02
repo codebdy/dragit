@@ -52,17 +52,17 @@ export const NodeToolbar = observer((
   const doFollow = ()=>{
     const canvasRect = rxDragCoreStore?.canvas?.dom?.getBoundingClientRect();
     const rect =  rxDragCoreStore?.selectedDom?.getBoundingClientRect();
-    const canvasLeft = canvasRect?.left || 0
-
+    const canvasLeft = canvasRect?.left || 0;
+    const canvasTop = (canvasRect?.top || 90) + 30;
     if(!rect){
       return 
     }
-    //let rect = followDom.getBoundingClientRect();
+
     let left = rect.x + rect.width - barWidth;
     left = left < canvasLeft ? canvasLeft : left;
     left = left + barWidth > document.body.clientWidth ? document.body.clientWidth - barWidth : left;
     setLeft(left)
-    let top = rect.y < 90 ? rect.y + rect.height : rect.y - 28;
+    let top = rect.y < canvasTop ? rect.y + rect.height : rect.y - 28;
     setTop(top);
   }
 

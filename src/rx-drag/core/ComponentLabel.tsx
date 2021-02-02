@@ -13,13 +13,15 @@ export const ComponentLabel = observer((
   const{node, followDom} = props;
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
-  const {rxDragStore: editorStore} = useDesign();
+  const {rxDragStore} = useDesign();
   
   const doFollow = ()=>{
     let rect = followDom?.getBoundingClientRect();
+    const canvasRect = rxDragStore?.canvas?.dom?.getBoundingClientRect();
+    const canvasTop = (canvasRect?.top || 90) + 20;
     if(rect){
       setLeft(rect.x)
-      let top = rect.y < 90 ? rect.y + rect.height : rect.y - 20
+      let top = rect.y < canvasTop ? rect.y + rect.height : rect.y - 20
       setTop(top)
     }
   }
@@ -37,7 +39,7 @@ export const ComponentLabel = observer((
   useEffect(() => {
     doFollow();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[editorStore?.showPaddingX, editorStore?.showPaddingY, followDom, editorStore?.refreshToolbarAndLabelFlag]);
+  },[rxDragStore?.showPaddingX, rxDragStore?.showPaddingY, followDom, rxDragStore?.refreshToolbarAndLabelFlag]);
 
   return (
     <Fragment>
