@@ -8,6 +8,7 @@ import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IPageAction } from 'Base/Model/IPageAction';
 import { useActionStore } from 'Base/PageUtils/ActionStore';
 import {observer} from "mobx-react";
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,13 +32,19 @@ const JsxTemplateParser = observer(React.forwardRef((
   const {isDesigning} = useDesign();
   const modelStore = useModelStore();
   const actionStore = useActionStore();
+  const dragItStore = useDragItStore();
 
   const actionHandles = {} as any;
   if(actions){
     Object.keys(actions).forEach(function(key){
       const action = actions[key];
       actionHandles[key] = ()=>{
-        actionStore?.emit(action);
+        if(action.confirmMessage){
+          dragItStore?.confirmAction(action.confirmMessage,()=>{actionStore?.emit(action);});
+        }
+        else{
+          actionStore?.emit(action);
+        }        
       }
     });    
   }

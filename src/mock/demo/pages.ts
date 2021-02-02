@@ -31,6 +31,7 @@ var demoPages = [
   {
     id:'guid-p-5',
     name:'文章编辑',
+    query:'post',
     schema:jumpEdit,
   },
   {

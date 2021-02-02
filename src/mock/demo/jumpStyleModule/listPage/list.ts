@@ -211,6 +211,7 @@ export default {
                 tooltip:'删除',
                 onClick:{
                   name: REMOVE_LIST_VIEW_RECORD,
+                  confirmMessage:"删除后将不可恢复，确定要删除吗？",
                 }
               }
             },
