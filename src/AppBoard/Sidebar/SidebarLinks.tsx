@@ -12,6 +12,7 @@ import { ID } from "rx-drag/models/baseTypes";
 import Scrollbar from "Common/Scrollbar";
 import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 import { cloneObject } from "rx-drag/utils/cloneObject";
+import { useLeftDrawer } from "Store/Helpers/useDragItStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,8 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const SidebarLinks = observer((
   props : {
-    fullWidth?:number,
-    mini:boolean,
     items?:Array<IMenuItem>,
   }
 )=>{
@@ -33,7 +32,9 @@ export const SidebarLinks = observer((
   const [openedId, setOpenedId] = React.useState('');
   const loggedUser = useLoggedUser();
   const [nodes,setNodes] = React.useState<Array<RxNode<IMenuItem>>>([]);
-
+  const leftDrawer = useLeftDrawer();
+  const mini = leftDrawer.isMini;
+  const fullWidth = leftDrawer.fullWidth;
   const handleOpened = (id:ID)=>{
     setOpenedId(id)
   }
@@ -50,7 +51,7 @@ export const SidebarLinks = observer((
         component="nav"
         className={classes.root}
         style={{
-          width: (props.fullWidth) + 'px',
+          width: (fullWidth) + 'px',
         }}
       >
         {
@@ -60,10 +61,10 @@ export const SidebarLinks = observer((
             return (
             <Fragment key={node.id}>
               {
-                item.type === 'subheader' && authed && <Subheader mini = {props.mini} node={node} />
+                item.type === 'subheader' && authed && <Subheader mini = {mini} node={node} />
               }
-              {item.type === 'item' && authed && <MenuNode mini = {props.mini} node={node}/>}
-              {item.type === 'group' && authed && <MenuNodeGroup mini = {props.mini} node={node} onOpened={handleOpened} openedId={openedId}/>}
+              {item.type === 'item' && authed && <MenuNode mini = {mini} node={node}/>}
+              {item.type === 'group' && authed && <MenuNodeGroup mini = {mini} node={node} onOpened={handleOpened} openedId={openedId}/>}
               {item.type === 'divider' && authed && <Divider />}
             </Fragment>
             )

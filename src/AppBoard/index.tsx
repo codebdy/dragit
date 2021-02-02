@@ -85,8 +85,6 @@ export const AppBoard = observer(()=>{
               loading
               ? <SiderBarLoadingSkeleton/>
               : <SidebarLinks 
-                  mini ={leftDrawer.isMini}
-                  fullWidth = {leftDrawer.fullWidth}
                   items = {appboardStore.rxApp?.navigation_items}
                 />  
             }            
