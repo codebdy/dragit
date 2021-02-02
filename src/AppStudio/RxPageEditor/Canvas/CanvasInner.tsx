@@ -21,14 +21,15 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const CanvasInner = observer((props: {children?:any}) => {
+const CanvasInner = observer((props: {
+    children?:any
+  }) => {
   const classes = useStyles();
   const studioStore = useAppStudioStore();
   let maxWidth = studioStore?.pageEditor?.currentData?.max_width;
   maxWidth = maxWidth === '' || maxWidth === undefined ? 'lg' : maxWidth;
   let width:any = studioStore?.pageEditor?.currentData?.width
   width = width  ? width + 'px' : '';
-
   return (
     <Container
       maxWidth = {maxWidth==='false'? false : maxWidth as any}
