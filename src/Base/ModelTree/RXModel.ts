@@ -5,6 +5,19 @@ import { validate } from "./validate";
 import { createId } from "Base/creatId";
 import { ID } from "rx-drag/models/baseTypes";
 
+function removeTypeName(value:any){
+  let newValue = toJS(value);
+  if(newValue?.__typename){
+    delete newValue.__typename
+  }
+  if(Array.isArray(newValue)){
+    newValue.forEach((item, index)=>{
+      newValue[index] = removeTypeName(item);
+    })
+  }
+  return newValue;
+}
+
 export class RXModel{
   id:ID;
   //从model中的取值索引
@@ -101,12 +114,12 @@ export class RXModel{
 
   toInputValue(){
     if(this.childrenMap.size === 0){
-      return this.value;
+      return removeTypeName(this.value);
     }
 
     let rtValue = this.defaultValue?.id ? {id:this.defaultValue?.id} as any : {} as any;
     this.childrenMap?.forEach((fieldStore, key)=>{
-      if(!fieldStore.node?.meta.onlyShow){
+      if(!fieldStore.node?.meta.onlyShow && key !=='__typename'){
         rtValue[key] = fieldStore.toInputValue();
       }
     })
