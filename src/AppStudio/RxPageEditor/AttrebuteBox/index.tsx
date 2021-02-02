@@ -139,13 +139,12 @@ export const AttributeBox = observer(()=>{
 
   return (
     <div className={classes.root}>
+      <div className={classes.nodeLabel}>
+        {intl.get('selected-node')}
+        <span style={{color:'#5d78ff'}}>{node?.meta.name ? node?.meta.name : 'None' }</span>
+      </div>
       {node&&
-        <Fragment>
-          <div className={classes.nodeLabel}>
-            {intl.get('selected-node')}
-            <span style={{color:'#5d78ff'}}>{node.meta.name}</span>
-          </div>
-          
+        <Fragment>          
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
