@@ -3,14 +3,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import intl from 'react-intl-universal';
 import { useListViewStore } from '../ListViewStore';
-import {Observer} from 'mobx-react';
+import {observer} from 'mobx-react';
 
-const ListViewPagination = React.forwardRef((
+const ListViewPagination = observer((
     props:{
       rowsPerPageOptions?:string,
       rowsPerPage?:number,
-    }, 
-    ref:any
+    }
   )=>{
   const {rowsPerPageOptions, rowsPerPage = 10, ...rest} = props;
   const listViewStore = useListViewStore();
@@ -39,25 +38,20 @@ const ListViewPagination = React.forwardRef((
   }
 
   return (
-    <Observer>
-      {()=>
-        <TablePagination
-          rowsPerPageOptions={parseRowsPerPageOptions()}
-          component="div"
-          labelRowsPerPage = {intl.get('rows-per-page') + ':'}
-          count={listViewStore.paginatorInfo.total}
-          rowsPerPage={rowsPerPage}
-          page={listViewStore.paginatorInfo.currentPage}
-          onChangePage={(event, newPage)=>hanleChangePage(newPage)}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-          SelectProps={{
-            inputProps: { 'aria-label': 'rows per page' },
-          }}
-          {...rest}  ref={ref}
-        />
-      }
-    </Observer>
-    
+    <TablePagination
+      rowsPerPageOptions={parseRowsPerPageOptions()}
+      component="div"
+      labelRowsPerPage = {intl.get('rows-per-page') + ':'}
+      count={listViewStore.paginatorInfo.total}
+      rowsPerPage={rowsPerPage}
+      page={listViewStore.paginatorInfo.currentPage}
+      onChangePage={(event, newPage)=>hanleChangePage(newPage)}
+      onChangeRowsPerPage={handleChangeRowsPerPage}
+      SelectProps={{
+        inputProps: { 'aria-label': 'rows per page' },
+      }}
+      {...rest}
+    />
   );
 })
 

@@ -21,17 +21,7 @@ export class ListViewConfig extends MetaConfig{
   getPropConfigs(): Array<IPropConfig>{
     return [
       ...marginConfigs,
-      ...elevationConfig,
-      {
-        name:'rowsPerPageOptions',
-        labelKey:'pager-options',
-        propType:'string',
-      },
-      {
-        name:'defalutRowsPerPage',
-        labelKey:'rows-per-page',
-        propType:'string',
-      },
+      ...elevationConfig
     ]
   }
 
