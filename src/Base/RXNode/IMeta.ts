@@ -9,5 +9,5 @@ export interface IMeta extends IRxMeta{
   withNode?:boolean,
   designProps?:{[key:string]: any},
   auths?:IAuth[],
-  graphiQL?:string,
+  fieldsGql?:string,
 }

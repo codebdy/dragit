@@ -45,7 +45,8 @@ const JsxTemplateParser = observer(React.forwardRef((
   const parser = <JsxParser
                   bindings={{
                    ...actionHandles,
-                   model: modelStore?.toInputValue()||{},
+                   //@@@value暂时没根据input跟新，复杂控件需要修改该部分
+                   model: modelStore?.value||{},
                   }}
                   components={{ IconButton:IconButton as any }}
                   jsx = {template}

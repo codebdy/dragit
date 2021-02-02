@@ -98,12 +98,13 @@ export const Debug = observer(()=>{
           onClose={handleClose}
           
         >
+          <MenuItem onClick={handleOpentree} className = {classes.menuItem}>
+            {'Model Tree ' + intl.get('debug')} 
+          </MenuItem>          
           <MenuItem onClick={handleOpenGql} className = {classes.menuItem}>
             {'GraphQL ' + intl.get('debug')} 
           </MenuItem>
-          <MenuItem onClick={handleOpentree} className = {classes.menuItem}>
-            {'Model Tree ' + intl.get('debug')} 
-          </MenuItem>
+
         </Menu>
         <ThemeProvider theme={theme}>
           {

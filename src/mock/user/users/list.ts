@@ -215,29 +215,20 @@ export default {
             },
             {
               name:'JsxTemplateParser',
+              fieldsGql:' is_supper ',   
               props:{
               actions:{
                 remove:{
                   name: REMOVE_LIST_VIEW_RECORD,
                   confirmMessage:'删除后将不可恢复，您确定要删除吗？',
                 }
-              },
-              fieldGql:' is_supper ',            
-              template:`{
-                !model.is_supper &&
-                <IconButton icon='mdi-delete' tooltip='删除' onClick={remove} />
-               }
-                `
-              }
-            },
-            {
-              name:'IconButton',
-              props:{
-                icon:'mdi-delete',
-                tooltip:'删除',
-                onClick:{
-                  name: REMOVE_LIST_VIEW_RECORD,
+              },         
+              template:`
+                {
+                  model.is_supper !== true &&
+                  <IconButton icon='mdi-delete' tooltip='删除' onClick={remove} />
                 }
+                `
               }
             },
           ]

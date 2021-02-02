@@ -7,8 +7,8 @@ function getMetaFieldGql(meta?: IMeta){
     return '';
   }
 
-  if(meta.graphiQL){
-    return meta.graphiQL;
+  if(meta.fieldsGql){
+    return ` ${meta.fieldsGql} `;
   }
 
   if(meta.field){
