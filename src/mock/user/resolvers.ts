@@ -24,13 +24,13 @@ export const users = async (parent:any, args:any, context:any, info:any)=>{
 }
 
 
-export const updateUsers = async (parent:any, args:any, context:any, info:any)=>{
+export const updateRxUsers = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
   //const module = getModuleBySlug(args.slug);
   return usersData
 }
 
-export const saveUser = async (parent:any, args:any, context:any, info:any)=>{
+export const saveRxUser = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
   //const module = getModuleBySlug(args.slug);
   console.log('Server received user data:', args);
@@ -48,6 +48,6 @@ export const userQueryResolvers = {
 
 
 export const userMutationResolvers = {
-  updateUsers,
-  saveUser
+  updateRxUsers,
+  saveRxUser
 }

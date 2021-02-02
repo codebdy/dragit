@@ -1,11 +1,4 @@
 export var appGQLType = `
-  type RxAuth{
-    id: ID!
-    rx_slug: String!
-    name: String
-    predefined: Boolean
-  }
-
   type RxPage{
     id:ID!
     name:String
@@ -33,13 +26,6 @@ export var appGQLType = `
 `
 
 export var appGQLInput =`
-  input RxAuthInput{
-    id: ID
-    rx_slug: String
-    name: String
-    predefined: Boolean
-  }
-
   input RxPageInput{
     id:ID
     name:String
@@ -77,6 +63,4 @@ export var appGQLMutation = `
   removeRxPage(id:ID):RxPage
   duplicateRxPage(id:ID):RxPage
   createRxAuth(appId:ID):RxAuth
-  saveRxAuth(rxAuth:RxAuthInput):RxAuth
-  removeRxAuth(id:ID):RxAuth
 `

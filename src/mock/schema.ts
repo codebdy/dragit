@@ -11,15 +11,16 @@ import { splitDemoMutationResolvers } from "./demo/splitSubmit/resolvers";
 import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demo/splitSubmit/graphql";
 import { supplierQueryResolvers } from "./supplier/resolvers";
 import { supplierGQLInput, supplierGQLQuery, supplierGQLType } from "./supplier/graphql";
-import { userGQLType, userGQLInput, userGQLQuery, userGQLMutation } from "./user/graphql";
+import { userGQLType, userGQLInput, userGQLQuery, userGQLMutation } from "./user/userGraphql";
 import { userQueryResolvers, userMutationResolvers } from "./user/resolvers";
-import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./role/graphql";
 import { appGQLInput, appGQLMutation, appGQLQuery, appGQLType } from "./apps/graphql";
 import { appMutationResolvers, appQueryResolvers } from "./apps/appResolvers";
 import { pageMutationResolvers, pageQueryResolvers } from "./apps/pageResolvers";
 import { templateQueryResolvers } from "./templates/resolvers";
 import { templateGQLQuery, templateGQLType } from "./templates/graphql";
 import { authMutationResolvers } from "./apps/authResolvers";
+import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./user/roleGraphql";
+import { authGQLInput, authGQLMutation, authGQLQuery, authGQLType } from "./user/authGraphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -40,7 +41,7 @@ export const schema = `
   }
 
   type LoginData{
-    user:User! 
+    user:RxUser! 
     token:String!
   }
 
@@ -57,6 +58,9 @@ export const schema = `
     PUBLISHED
     DRAFT 
   }
+
+  ${authGQLType}
+  ${authGQLInput}
 
   ${appGQLType}
   ${appGQLInput}
@@ -76,7 +80,8 @@ export const schema = `
   type Query {
     "登录"
     login(login_name:String!, password:String!):LoginData
-    userByToken(token: String!): User
+    userByToken(token: String!): RxUser
+    ${authGQLQuery}
     ${appGQLQuery}
     ${templateGQLQuery}
     ${articleGQLQuery}
@@ -87,6 +92,7 @@ export const schema = `
   }
 
   type Mutation{
+    ${authGQLMutation}
     ${appGQLMutation}
     ${articleGQLMutation}
     ${mediasGQLMutation}

@@ -82,7 +82,9 @@ const LOGIN = gql`
           title
           src
         }
-        auths 
+        auths{
+          id
+        } 
       }
     }
   }

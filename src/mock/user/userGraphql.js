@@ -1,5 +1,5 @@
 export var userGQLType = `
-  type User {
+  type RxUser {
     id:ID!
     login_name:String!
     name:String
@@ -8,20 +8,20 @@ export var userGQLType = `
     is_supper:Boolean
     is_demo:Boolean
     status:String
-    roles: [Role]
+    roles: [RxRole]
     auths:[String]
     created_at:String
   }
 
-  type Users{
+  type RxUsers{
     paginatorInfo:PaginatorInfo!
-    data:[User]
+    data:[RxUser]
   }
 
 `
 
 export var userGQLInput =`
-  input UserInput{
+  input RxUserInput{
     id:ID
     login_name:String
     password:String
@@ -38,12 +38,12 @@ export var userGQLInput =`
 `
 
 export var userGQLQuery = `
-  users(first: Int!, page: Int, where:JSON, orderBy:JSON):Users!
-  user(id:ID):User
-  allUsers:[User]
+  users(first: Int!, page: Int, where:JSON, orderBy:JSON):RxUsers!
+  user(id:ID):RxUser
+  allRxUsers:[RxUser]
 `
 
 export var userGQLMutation = `
-  updateUsers(command:String, ids:[ID] ):[User]
-  saveUser(user:UserInput):User
+  updateRxUsers(command:String, ids:[ID] ):[RxUser]
+  saveRxUser(user:RxUserInput):RxUser
 `
