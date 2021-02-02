@@ -72,7 +72,7 @@ const ListView = observer(React.forwardRef((
 
   const [excuteUpdate, { error:updateError }] = useMutation(gql`${updateGQL.gql}`,
     {
-      onCompleted:()=>{
+      onCompleted:(data)=>{
         appStore.setSuccessAlert(true);
         listViewStore.setSelects([]);
         listViewStore.finishMutation();

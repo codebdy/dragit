@@ -121,6 +121,8 @@ export default [
               props:{
                 label:'禁用',
                 fullWidth:true,
+                onValue:'FORBID',
+                offValue:'NORMAL'
               },
             }
           ]

@@ -9,7 +9,7 @@ export var userGQLType = `
     is_demo:Boolean
     status:String
     roles: [RxRole]
-    auths:[String]
+    auths:[RxAuth]
     created_at:String
   }
 
@@ -27,12 +27,12 @@ export var userGQLInput =`
     password:String
     name:String
     email: String
-    avatar: ID
+    avatar: MediaInput
     is_supper:Boolean
     is_demo:Boolean
     status:String
-    roles: [ID]
-    auths:[ID]
+    roles: [RxRoleInput]
+    auths:[RxAuthInput]
     created_at:String
   }
 `

@@ -3,13 +3,15 @@ import { RxNode } from "rx-drag/models/RxNode";
 
 const CHILDREN_GQL = "#{children}";
 function getMetaFieldGql(meta?: IMeta){
+  //根节点
   if(!meta){
-    return '';
+    return `{ id ${CHILDREN_GQL} }`;
   }
 
   if(meta.fieldsGql){
     return ` ${meta.fieldsGql} `;
   }
+
 
   if(meta.field){
     if(meta.name === 'FormGridContainer'){
@@ -46,6 +48,8 @@ export function getNodeGraphQL(node?: RxNode<IMeta>) {
   if(!node){
     return '';
   }
+
+  //console.log('getNodeGraphQL', node?.meta.name , node)
   
   let gql = ` ${getMetaFieldGql(node.meta)} `;
 

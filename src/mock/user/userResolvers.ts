@@ -35,11 +35,12 @@ export const updateRxUsers = async (parent:any, args:any, context:any, info:any)
 export const saveRxUser = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
   //const module = getModuleBySlug(args.slug);
-  console.log('Server received user data:', args);
+  
   let user = {...args.user, id:args.user?.id || idSeed++, created_at:''}
   if(user?.seoMeta && !user?.seoMeta.id){
     user.seoMeta.id = ++idSeed;
   }
+  console.log('Server received user data:', user);
   return user;
 }
 

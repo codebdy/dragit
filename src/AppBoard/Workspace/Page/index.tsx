@@ -50,6 +50,7 @@ export const Page = observer((
     const pgStore = new PageStore(page, pageJumper);
     setPageStore(pgStore);
     setActionStore(new ActionStore());
+    
     if(pgStore?.rootNode){
       setModelStore(new RXModel(pgStore.rootNode, 'root'));        
     }

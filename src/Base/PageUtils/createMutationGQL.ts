@@ -7,6 +7,7 @@ export const createMutationGQL = (mutation?: IPageMutation, modelStore?:RXModel)
     return `mutation{emperty}`;
   }
 
+
   const refreshNode = modelStore?.getModelNode(mutation?.refreshNode)    
   const gqlText = `
       mutation ($${mutation?.variableName}:${mutation?.variableType}){
