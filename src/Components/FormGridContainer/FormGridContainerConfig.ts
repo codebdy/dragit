@@ -1,7 +1,7 @@
 import { IMeta } from "Base/RXNode/IMeta";
 import marginConfigs from "Components/common/configs/marginConfigs";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
-import { MetaConfig } from "../../../Base/RXNode/MetaConfig";
+import { MetaConfig } from "../../Base/RXNode/MetaConfig";
 
 export class FormGridContainerConfig extends MetaConfig{
   hasField = true;
