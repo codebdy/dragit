@@ -1,9 +1,10 @@
+import { IRxApp } from "Base/Model/IRxApp";
 import { demoDrawerData } from "mock/demo/drawerData";
 import demoPages from "mock/demo/pages";
 import { userDrawerData } from "mock/user/drawerData";
 import userPages from "mock/user/pages";
 
-var appsData = [
+var appsData:Array<IRxApp> = [
   {
     id:'guid-1',
     name:'用户管理',
@@ -11,8 +12,8 @@ var appsData = [
     color:'#a1887f',
     app_type:'系统',
     is_system:true,
-    pages:userPages,
-    navigation_items:userDrawerData,
+    pages:userPages as any,
+    navigation_items:userDrawerData as any,
     entry_page_id:'guid-p-u-1',
     auths:[
       {
@@ -29,8 +30,8 @@ var appsData = [
     icon:'mdi-leaf',
     color:'#8bc34a',
     app_type:'免费',
-    pages: demoPages,
-    navigation_items:demoDrawerData,
+    pages: demoPages as any,
+    navigation_items:demoDrawerData as any,
     entry_page_id:'guid-p-1',
     auths:[
       {

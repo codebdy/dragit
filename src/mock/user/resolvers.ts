@@ -3,20 +3,22 @@ import usersData from "./data";
 
 var idSeed = 1000;
 
-export const user = async (parent:any, args:any, context:any, info:any)=>{
+export const rxUser = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-
+  console.log('get rxUser', args)
   for(var i = 0; i < usersData.length; i++){
     //ID会被转成String
     // eslint-disable-next-line eqeqeq
     if(usersData[i].id == args.id){
+      //console.log()
       return usersData[i];
     }
   }
+
   return 
 }
 
-export const users = async (parent:any, args:any, context:any, info:any)=>{
+export const rxUsers = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
   //const module = getModuleBySlug(args.slug);
   console.log('mock return users',{data:usersData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}})
@@ -42,8 +44,8 @@ export const saveRxUser = async (parent:any, args:any, context:any, info:any)=>{
 }
 
 export const userQueryResolvers = {
-  user,
-  users,
+  rxUser,
+  rxUsers,
 }
 
 

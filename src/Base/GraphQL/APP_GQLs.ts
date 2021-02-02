@@ -1,4 +1,5 @@
 import { gql } from '@apollo/react-hooks';
+import { pageFieldsGQL } from './PAGE_GQLs';
 
 export const appFieldsGQL = `
   id
@@ -32,12 +33,7 @@ export const GET_RX_APP = gql`
     rxApp(id:$id){
       ${appFieldsGQL}
       pages{
-        id
-        name 
-        max_width
-        width
-        schema
-        auths
+        ${pageFieldsGQL}
       }
     }
   }

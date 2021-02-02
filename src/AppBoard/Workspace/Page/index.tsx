@@ -46,7 +46,6 @@ export const Page = observer((
   const dragItStore = useDragItStore();
   const loggedUser = useLoggedUser();
 
-
   useEffect(()=>{
     const pgStore = new PageStore(page, pageJumper);
     setPageStore(pgStore);
@@ -54,7 +53,6 @@ export const Page = observer((
     if(pgStore?.rootNode){
       setModelStore(new RXModel(pgStore.rootNode, 'root'));        
     }
-  
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageJumper])
 

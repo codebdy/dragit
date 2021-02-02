@@ -9,11 +9,11 @@ export default {
   withNode:true,
   props:{
     variant:'outlined',
-    query:'users',
-    remove:'removeUsers',
+    query:'rxUsers',
+    remove:'removeRxUsers',
     update:{
-      name:'updateUsers',
-      variableType:'UserInput',
+      name:'updateRxUsers',
+      variableType:'RxUserInput',
       variableName:'user',
     }
   },

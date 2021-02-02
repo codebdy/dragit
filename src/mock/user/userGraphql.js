@@ -38,8 +38,8 @@ export var userGQLInput =`
 `
 
 export var userGQLQuery = `
-  users(first: Int!, page: Int, where:JSON, orderBy:JSON):RxUsers!
-  user(id:ID):RxUser
+  rxUsers(first: Int!, page: Int, where:JSON, orderBy:JSON):RxUsers!
+  rxUser(id:ID):RxUser
   allRxUsers:[RxUser]
 `
 

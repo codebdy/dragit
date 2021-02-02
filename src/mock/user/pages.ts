@@ -11,6 +11,7 @@ var userPages = [
     id:'guid-p-u-2',
     name:'用户编辑',
     max_width:'sm',
+    query:'rxUser',
     schema:userEdit,
   },
   {
