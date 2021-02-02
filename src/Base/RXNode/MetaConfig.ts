@@ -14,10 +14,11 @@ export class MetaConfig implements IRxMetaConfig{
   //动作
   hasAction?:boolean;
   hasMultiAction?:boolean;
+  hasGraphQl?:boolean;
 
   //数据
   hasField?:boolean;
-    //验证
+  //验证
   hasValidation?:boolean;
 
   resolveLabel(meta:IMeta):string|undefined{

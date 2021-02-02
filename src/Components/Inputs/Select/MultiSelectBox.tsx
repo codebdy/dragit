@@ -84,7 +84,7 @@ export const MultiSelectBox = React.forwardRef((
       }}
 
       getOptionLabel={(option) => {
-        for(var i = 0; i < itemsData.length; i++){
+        for(var i = 0; i < itemsData?.length; i++){
           if(itemsData[i][itemKey] === option[itemKey]){
             return itemsData[i][name]
           }

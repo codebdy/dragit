@@ -5,6 +5,7 @@ import { IMeta } from "Base/RXNode/IMeta";
 export class JsxTemplateParserConfig extends MetaConfig{
 
   hasMultiAction?:boolean = true;
+  hasGraphQl?:boolean = true;
 
   accept(child:IMeta){
     return false;
