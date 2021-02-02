@@ -28,7 +28,7 @@ const ListViewFilters = observer(React.forwardRef((
   const listViewStore = useListViewStore();
 
   return (
-    listViewStore.selects.length === 0
+    listViewStore?.selects?.length === 0
     ?<div
       className={classNames(className, classes.root)}
       {...rest}

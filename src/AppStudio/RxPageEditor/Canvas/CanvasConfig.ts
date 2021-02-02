@@ -7,7 +7,9 @@ export class CanvasConfig extends MetaConfig{
   dropInMargin = 0;
 
   accept(child:IMeta){
-    if(child.name === 'GridColumn'){
+    
+    if(child.name === 'GridColumn' || child.name === 'ListViewFilters'
+    ||child.name === 'ListViewBatchActions'){
       return false;
     }
     return true;

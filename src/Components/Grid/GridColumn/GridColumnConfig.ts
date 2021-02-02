@@ -11,7 +11,8 @@ export class GridColumnConfig extends MetaConfig{
   labelKey ="column";
 
   accept(child:IMeta){
-    if(child.name === 'GridColumn'){
+    if(child.name === 'GridColumn' || child.name === 'ListViewFilters'
+    ||child.name === 'ListViewBatchActions'){
       return false;
     }
     return true;

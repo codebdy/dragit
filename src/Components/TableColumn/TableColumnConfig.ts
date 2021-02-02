@@ -5,7 +5,8 @@ import { IMeta } from "Base/RXNode/IMeta";
 export class TableColumnConfig extends MetaConfig{
  
   accept(child:IMeta){
-    if(child.name === 'TableColumn'){
+    if(child.name === 'TableColumn' || child.name === 'ListViewFilters'
+    ||child.name === 'ListViewBatchActions'){
       return false;
     }
     return true;
