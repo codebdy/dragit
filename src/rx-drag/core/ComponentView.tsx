@@ -1,16 +1,16 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { DADA_RXID_CONST, RxNode } from '../models/RxNode';
 import { resolveComponent, resolveMetaConfig } from 'rx-drag/RxDrag';
-import { IMeta } from 'Base/RXNode/IMeta';
 import classNames from "classnames";
 import { makeSpaceStyle } from 'rx-drag/utils/withMargin';
 import { DragoverCharger } from './DragoverCharger';
 import {observer} from 'mobx-react';
 import { useDesign } from '../store/useDesign';
 import { getDomByRxid } from '../utils/getDomByRxid';
+import { IRxMeta } from 'rx-drag/models/IRxMeta';
 
 function getEditStyle(
-  node:RxNode<IMeta>,
+  node:RxNode<IRxMeta>,
   showPaddingX?:boolean,
   showPaddingY?:boolean,
 ){
@@ -33,7 +33,7 @@ function getEditStyle(
 
 export const ComponentView = observer((
   props:{
-    node:RxNode<IMeta>,
+    node:RxNode<IRxMeta>,
   }
 )=>{
   const {node} = props;
@@ -124,7 +124,7 @@ export const ComponentView = observer((
   const elementView = (node.children && node.children.length > 0) || rxText ?
     (<Component {...elementProps}>
       {rxText}
-      {node.children?.map((child: RxNode<IMeta>)=>{
+      {node.children?.map((child: RxNode<IRxMeta>)=>{
         return (
           <ComponentView 
             key={child.id} 
