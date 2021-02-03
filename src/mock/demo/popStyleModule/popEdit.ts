@@ -1,4 +1,4 @@
-import { GO_BACK_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
+import { GO_BACK_ACTION } from "Base/PageUtils/ACTIONs";
 
 export default [
     {
@@ -169,17 +169,7 @@ export default [
           color: "primary",
           size:'large',
           marginLeft:2,
-          onClick:{
-            name:SUBMIT_MUTATION,
-            mutation:{
-              name:'saveRxUser',
-              variableName:'user',
-              variableType:'UserRxInput',
-              submitNode:'',
-              refreshNode:'',
-              goback:true,
-            },   
-          }      
+     
         }
       }]
 
