@@ -4,7 +4,7 @@ var roles = [
   {
     id:1,
     name:'管理员',
-    status:'normal',
+    status:'NORMAL',
     description:'只是个小小管理员',
     auths:[
 
@@ -13,7 +13,7 @@ var roles = [
   {
     id:2,
     name:'经理',
-    status:'normal',
+    status:'NORMAL',
     description:'大经理，超级牛',
     auths:[
       AUTH_DASHBOARD
@@ -23,7 +23,7 @@ var roles = [
     id:3,
     name:'测试',
     description:'只是个测试，哪来地位？',
-    status:'forbid',
+    status:'FORBID',
     auths:[
       AUTH_DASHBOARD,
       AUTH_MEDIAS

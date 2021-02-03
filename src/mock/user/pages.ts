@@ -1,3 +1,5 @@
+import roleEdit from "./roles/roleEdit";
+import roleList from "./roles/roleList";
 import userEdit from "./users/userEdit";
 import userList from "./users/userList";
 
@@ -17,12 +19,13 @@ var userPages = [
   {
     id:'guid-p-u-3',
     name:'角色列表',
-    //schema:OneToManyTableView,
+    schema:roleList,
   },
   {
     id:'guid-p-u-4',
     name:'角色编辑',
-    //schema:jumpList,
+    max_width:'sm',
+    schema:roleEdit,
   },
   {
     id:'guid-p-u-5',

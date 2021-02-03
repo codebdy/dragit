@@ -37,11 +37,15 @@ export const saveRxUser = async (parent:any, args:any, context:any, info:any)=>{
   //const module = getModuleBySlug(args.slug);
   
   let user = {...args.user, id:args.user?.id || idSeed++, created_at:''}
-  if(user?.seoMeta && !user?.seoMeta.id){
-    user.seoMeta.id = ++idSeed;
-  }
   console.log('Server received user data:', user);
   return user;
+}
+
+export const removeRxUsers = async (parent:any, args:any, context:any, info:any)=>{
+  await sleep(200);
+  //const module = getModuleBySlug(args.slug);
+  return usersData;
+
 }
 
 export const userQueryResolvers = {
@@ -52,5 +56,6 @@ export const userQueryResolvers = {
 
 export const userMutationResolvers = {
   updateRxUsers,
-  saveRxUser
+  saveRxUser,
+  removeRxUsers
 }

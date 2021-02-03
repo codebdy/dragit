@@ -46,4 +46,5 @@ export var userGQLQuery = `
 export var userGQLMutation = `
   updateRxUsers(command:String, ids:[ID] ):[RxUser]
   saveRxUser(user:RxUserInput):RxUser
+  removeRxUsers(ids:[ID]):[RxUser]
 `
