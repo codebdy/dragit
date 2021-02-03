@@ -12,11 +12,7 @@ export class GridColumnConfig extends MetaConfig{
 
   accept(child:IMeta){
     if(child.name === 'GridColumn' 
-      || child.name === 'ListViewFilters'
-      ||child.name === 'ListViewBatchActions'
-      || child.name === 'ListViewKeywordFilter'
-      || child.name === 'ListViewEnumFilter'
-      || child.name === 'ListViewRangeFilter'
+      || child.name.startsWith('ListView')
     ){
       return false;
     }

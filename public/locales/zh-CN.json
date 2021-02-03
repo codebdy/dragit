@@ -327,6 +327,14 @@
     "entity":"业务实体模型",
     "query-gql":"查询GQL",
     "remove-gql":"删除GQL",
-    "update-gql":"更新GQL"
+    "update-gql":"更新GQL",
+    "list-view-toolbar":"列表工具栏",
+    "list-view-filters":"列表过滤器",
+    "keywords-filter":"关键词过滤器",
+    "enum-filter":"枚举过滤器",
+    "list-view-batch-actions":"批处理命令区",
+    "list-view-body":"列表体",
+    "list-view-pagination":"列表分页",
+    "table-column":"表格列"
 
 }

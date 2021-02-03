@@ -3,6 +3,7 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import inputConfig from "Components/common/configs/inputConfig";
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import helperTextConfig from "Components/common/configs/helperTextConfig";
+import {textboxSizeConfig} from "./textboxSizeConfig";
 
 export class TextBoxConfig extends MetaConfig{
   editPaddingY = '';
@@ -84,23 +85,7 @@ export class TextBoxConfig extends MetaConfig{
         labelKey:'shrink-label',
         propType:'boolean',
       },
-      {
-        name:'size',
-        labelKey:'size',
-        propType:'select',
-        props:{
-          items:[
-            {
-              value:'medium',
-              label:'Medium'
-            },
-            {
-              value:'small',
-              label:'Small'
-            },
-          ]
-        },
-      },
+      textboxSizeConfig,
       {
         name:'multiline',
         labelKey:'multiline',

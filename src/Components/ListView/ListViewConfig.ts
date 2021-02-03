@@ -16,6 +16,10 @@ export class ListViewConfig extends MetaConfig{
     if(child.name === 'ListViewToolbar'){
       return true;
     }
+    if(child.name === 'ListViewPagination'){
+      return true;
+    }
+
     return false;
   }
 

@@ -321,5 +321,13 @@
     "entity":"Entity model",
     "query-gql":"Query GQL",
     "remove-gql":"Remove GQL",
-    "update-gql":"Update GQL"
+    "update-gql":"Update GQL",
+    "list-view-toolbar":"Listview toolbar",
+    "list-view-filters":"Listview filters",
+    "keywords-filter":"Keywords filter",
+    "enum-filter":"Enum filter",
+    "list-view-batch-actions":"Batch actions",
+    "list-view-body":"Listview body",
+    "list-view-pagination":"Listview body",
+    "table-column":"Table column"
 }

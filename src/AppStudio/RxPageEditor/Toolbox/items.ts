@@ -1,5 +1,6 @@
 
 import listView from './listView'
+import listViewToolbar from './listView/listViewToolbar'
 import portlet from './portlet'
 
 export default [
@@ -64,6 +65,64 @@ export default [
       {
         titleKey:"list-view",
         meta:listView,
+        children:[
+          {
+            titleKey:"list-view-toolbar",
+            meta:listViewToolbar,
+            children:[
+              {
+                titleKey:'list-view-filters',
+                meta:{
+                  name:'ListViewToolbar'
+                },
+                children:[
+                  {
+                    titleKey:'keywords-filter',
+                    meta:{
+                      name:'ListViewKeywordFilter'
+                    },
+                  },
+                  {
+                    titleKey:'enum-filter',
+                    meta:{
+                      name:'ListViewEnumFilter'
+                    },
+                  },
+                ]
+              },
+              {
+                titleKey:'list-view-batch-actions',
+                meta:{
+                  name:'ListViewBatchActions'
+                }
+              },
+            ]            
+          },
+          {
+            titleKey:'list-view-body',
+            meta:{
+              name:'ListViewBody'
+            },
+            children:[
+              {
+                titleKey:'table-column',
+                meta:{
+                  name:'TableColumn'
+                }
+              }
+            ]
+          },
+          {
+            titleKey:'list-view-pagination',
+            meta:{
+              name:'ListViewPagination',
+              props:{
+                rowsPerPageOptions: '5, 10, 25, 50, 100'
+              }
+            }
+          }
+
+        ]
       },
 
       {

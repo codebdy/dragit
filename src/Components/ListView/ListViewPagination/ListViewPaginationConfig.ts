@@ -1,6 +1,7 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
+import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class ListViewPaginationConfig extends MetaConfig{
   empertyPadding = '';
@@ -11,11 +12,7 @@ export class ListViewPaginationConfig extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
-      //{
-      //  name:'rowsPerPageOptions',
-      //  labelKey:'pager-options',
-      //  propType:'string',
-      //},
+      ...marginConfigs,
       {
         name:'rowsPerPage',
         labelKey:'rows-per-page',

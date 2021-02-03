@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ListViewKeywordFilter = React.forwardRef((
     props: IFilterProps&{
+      variant?:'filled'|'outlined'|'standard',
       className:any,
     }, 
     ref:any
