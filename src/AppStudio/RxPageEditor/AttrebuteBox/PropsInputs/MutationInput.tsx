@@ -26,7 +26,7 @@ export default function UpdateMutationInput(props:PropsInputProps){
   const [inputValue, setInputValue] = useState<IUpdateMutation>({} as IUpdateMutation);
 
   useEffect(()=>{
-    setInputValue(value);
+    setInputValue(value||{});
   },[value])
 
   const handleNameChange = (event: React.ChangeEvent<{ value: unknown }>) => {

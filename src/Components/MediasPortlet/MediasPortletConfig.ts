@@ -3,6 +3,7 @@ import { IPropConfig } from "rx-drag/models/IPropConfig";
 import marginConfigs from "Components/common/configs/marginConfigs";
 import elevationConfig from "Components/common/configs/elevationConfig";
 import { IMeta } from "Base/RXNode/IMeta";
+import squareConfig from "Components/common/configs/squareConfig";
 
 export class MediasPortletConfig extends MetaConfig{
   editPaddingY = '';
@@ -17,6 +18,7 @@ export class MediasPortletConfig extends MetaConfig{
     return [
       ...marginConfigs,
       ...elevationConfig,
+      squareConfig,
       {
         name:'cols',
         labelKey:'cols',

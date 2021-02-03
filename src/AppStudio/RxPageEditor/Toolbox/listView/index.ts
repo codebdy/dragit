@@ -70,6 +70,22 @@ export default {
                 }
               }
             },
+            {
+              name:'Button',              
+              props:{
+                rxText:'发布',
+                marginLeft:2,
+                //size:'small',
+                variant:"contained",
+                startIcon:'mdi-publish',
+                onClick:{
+                  name: BATCH_UPDATE_LIST_VIEW_RECORDS,
+                  field:'status',
+                  value:'PUBLISHED',
+                }
+              }
+            }
+
           ]
         }
       ]

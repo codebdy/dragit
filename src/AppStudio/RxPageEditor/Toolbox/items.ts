@@ -1,12 +1,8 @@
 
+import listView from './listView'
 import portlet from './portlet'
-import templates from './templates'
 
 export default [
-  {
-    titleKey: "template",
-    children:templates,
-  },
   {
     titleKey: "layout",
     children:[
@@ -67,12 +63,7 @@ export default [
       },  
       {
         titleKey:"list-view",
-        meta:{
-          name:'ListView',
-          props:{
-            elevation: 6,
-          }
-        },
+        meta:listView,
       },
 
       {
