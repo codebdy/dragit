@@ -1,4 +1,4 @@
-import { IAuth } from "Base/Model/IAuth";
+import { IRxAuth } from "Base/Model/IRxAuth";
 import { IRxMeta } from "rx-drag/models/IRxMeta";
 import { IValidateRule } from "../Model/IValidateRule";
 
@@ -8,6 +8,6 @@ export interface IMeta extends IRxMeta{
   rule?:IValidateRule,
   withNode?:boolean,
   designProps?:{[key:string]: any},
-  auths?:IAuth[],
+  auths?:IRxAuth[],
   fieldsGql?:string,
 }

@@ -1,5 +1,5 @@
 import { ID } from "../../rx-drag/models/baseTypes";
-import { IAuth } from "./IAuth";
+import { IRxAuth } from "./IRxAuth";
 import IMenuItem from "./IMenuItem";
 import { IRxPage } from "./IRxPage";
 
@@ -13,7 +13,7 @@ export interface IRxApp{
   app_type?: string;
   pages?: Array<IRxPage>;
   navigation_items?: Array<IMenuItem>;
-  auths?: Array<IAuth>;
+  auths?: Array<IRxAuth>;
   notifications?: number;
   entry_page_id?:ID;
 }

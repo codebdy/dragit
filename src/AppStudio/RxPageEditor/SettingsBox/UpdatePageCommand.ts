@@ -1,11 +1,11 @@
-import { IAuth } from "Base/Model/IAuth";
+import { IRxAuth } from "Base/Model/IRxAuth";
 import { RxDragStore } from "rx-drag/store/RxDragStore";
 import { cloneObject } from "rx-drag/utils/cloneObject";
 import { ICommand } from "../../../rx-drag/commands/ICommand";
 import { PageEditorStore } from "../PageEditorStore";
 
 export type PagePropName = 'query'|'auths'|'max_width'|'width';
-export type PagePropValue = string|Array<IAuth>|number|undefined;
+export type PagePropValue = string|Array<IRxAuth>|number|undefined;
 
 export class UpdatePageCommand implements ICommand{
   rxDragStore?:RxDragStore;

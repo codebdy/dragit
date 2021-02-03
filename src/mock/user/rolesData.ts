@@ -1,4 +1,3 @@
-import { AUTH_DASHBOARD, AUTH_MEDIAS } from "Base/authSlugs";
 
 var roles = [
   {
@@ -16,7 +15,7 @@ var roles = [
     status:'NORMAL',
     description:'大经理，超级牛',
     auths:[
-      AUTH_DASHBOARD
+
     ],
   },
   {
@@ -25,8 +24,7 @@ var roles = [
     description:'只是个测试，哪来地位？',
     status:'FORBID',
     auths:[
-      AUTH_DASHBOARD,
-      AUTH_MEDIAS
+
     ],
   }
 ]

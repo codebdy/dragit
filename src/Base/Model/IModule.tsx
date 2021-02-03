@@ -1,5 +1,5 @@
 import { IRxPage } from 'Base/Model/IRxPage';
-import { IAuth } from 'Base/Model/IAuth';
+import { IRxAuth } from 'Base/Model/IRxAuth';
 import { ID } from '../../rx-drag/models/baseTypes';
 
 export interface IModule {
@@ -10,6 +10,6 @@ export interface IModule {
   isDrawerStyle?:boolean;
   pages?: IRxPage[];
   entryPage?: IRxPage;
-  auths?: IAuth[];
+  auths?: IRxAuth[];
   entry_page_id?:ID; //以后要删除该字段
 }

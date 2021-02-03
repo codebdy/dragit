@@ -1,4 +1,3 @@
-import { AUTH_MEDIAS } from "Base/authSlugs";
 
 export default {
   layout:[
@@ -7,6 +6,6 @@ export default {
     },
   ],
   auths:[
-    AUTH_MEDIAS
+    
   ] 
 }

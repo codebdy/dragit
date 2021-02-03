@@ -1,4 +1,3 @@
-import { AUTH_DASHBOARD } from "Base/authSlugs";
 
 export default {
   layout:[
@@ -220,6 +219,6 @@ export default {
     },
   ],
   auths:[
-    AUTH_DASHBOARD
+    
   ] 
 }

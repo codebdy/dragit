@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { CircularProgress, TextField, Typography } from '@material-ui/core';
 import { useState } from 'react';
 import intl from 'react-intl-universal';
-import { IAuth } from 'Base/Model/IAuth';
+import { IRxAuth } from 'Base/Model/IRxAuth';
 import { useEffect } from 'react';
 import ActionButton from 'AppStudio/ActionButton';
 import { useMutation } from '@apollo/react-hooks';
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AuthListItem = observer((
   props:{
-    auth?: IAuth
+    auth?: IRxAuth
   }
 ) => {
   const {auth} = props;

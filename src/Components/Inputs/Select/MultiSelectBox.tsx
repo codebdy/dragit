@@ -47,6 +47,7 @@ export const MultiSelectBox = React.forwardRef((
     ${query}{
       id
       ${itemName}
+      ${groupByField}
     }
   }`;
   const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
@@ -61,6 +62,8 @@ export const MultiSelectBox = React.forwardRef((
     });
   }
 
+  console.log('MultiSelectBox', groupByField, itemsData)
+
   return (
     <Autocomplete
       multiple = {true}
@@ -68,7 +71,6 @@ export const MultiSelectBox = React.forwardRef((
       loading = {loading || queryLoading }
       ref = {ref}
       value = {value||[]}
-
       fullWidth = {fullWidth}
       //defaultValue = {value||empertyValue}
       renderInput={(params) => (
@@ -85,13 +87,23 @@ export const MultiSelectBox = React.forwardRef((
 
       getOptionLabel={(option) => {
         for(var i = 0; i < itemsData?.length; i++){
+          const groupNanme = itemsData[i][groupByField||''];
+          const label = itemsData[i][name];
+          if(itemsData[i][itemKey] === option[itemKey]){
+            return groupNanme ? groupNanme + '>' + label : label
+          }
+        }
+      }}
+
+      renderOption={(option) => {
+        for(var i = 0; i < itemsData?.length; i++){
           if(itemsData[i][itemKey] === option[itemKey]){
             return itemsData[i][name]
           }
         }
       }}
 
-      groupBy = {(option) => option.module}
+      groupBy = {(option) => option[groupByField||'']}
       onChange={handleChange}
     />
 

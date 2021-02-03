@@ -18,6 +18,7 @@ import { IRxApp } from 'Base/Model/IRxApp';
 import SubmitButton from 'Components/common/SubmitButton';
 import { v4 as uuidv4 } from 'uuid';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { AUTH_APP } from 'Base/authSlugs';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +82,7 @@ export const AppManager = observer(() => {
         auths:[
           {
             id:uuidv4(),
-            rx_slug:'app',
+            rx_slug:AUTH_APP,
             name:intl.get('app-access'),
             predefined:true,
           }

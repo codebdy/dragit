@@ -1,6 +1,5 @@
-export const AUTH_APP = 'app';
-export const AUTH_CUSTOMIZE = "customize";
-export const AUTH_DEBUG = "debug";
-export const AUTH_THEME_SETTINGS = "theme-settings";
-export const AUTH_DASHBOARD = "dashboard";
-export const AUTH_MEDIAS = "meddias";
+export const AUTH_APP = 'AUTH_APP';
+export const AUTH_DEBUG = "AUTH_DEBUG";
+export const AUTH_CREATE_APP = "AUTH_CREATE_APP";
+export const AUTH_EDIT_APP = "AUTH_EDIT_APP";
+export const AUTH_REMOVE_APP = "AUTH_REMOVE_APP";

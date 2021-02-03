@@ -18,9 +18,9 @@ import { appMutationResolvers, appQueryResolvers } from "./apps/appResolvers";
 import { pageMutationResolvers, pageQueryResolvers } from "./apps/pageResolvers";
 import { templateQueryResolvers } from "./templates/resolvers";
 import { templateGQLQuery, templateGQLType } from "./templates/graphql";
-import { authMutationResolvers } from "./apps/authResolvers";
+import { authMutationResolvers, authQueryResolvers } from "./apps/authResolvers";
 import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./user/roleGraphql";
-import { authGQLInput, authGQLMutation, authGQLQuery, authGQLType } from "./user/authGraphql";
+import { authGQLInput, authGQLMutation, authGQLQuery, authGQLType } from "./apps/authGraphql";
 import { roleMutationResolvers, roleQueryResolvers } from "./user/roleResolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
@@ -113,6 +113,7 @@ export const resolvers = {
     ...appQueryResolvers,
     ...pageQueryResolvers,
     ...templateQueryResolvers,
+    ...authQueryResolvers,
     
     ...postQueryResolvers,
     channelTree:channelTreeResolver,

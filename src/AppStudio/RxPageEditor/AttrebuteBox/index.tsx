@@ -18,7 +18,7 @@ import { propsInputs } from './PropsInputs';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { MetaConfig } from 'Base/RXNode/MetaConfig';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
-import { IAuth } from 'Base/Model/IAuth';
+import { IRxAuth } from 'Base/Model/IRxAuth';
 import { AttributeBoxMultiActionSection } from './AttributeBoxMultiActionSection';
 import { stringValue } from 'rx-drag/utils/stringValue';
 
@@ -133,7 +133,7 @@ export const AttributeBox = observer(()=>{
     setValidateRule(rule);
   }
 
-  const handleChangeAuths = (auths : IAuth[]|undefined)=>{
+  const handleChangeAuths = (auths : IRxAuth[]|undefined)=>{
     rxDragStore?.updateSelecteMeta('auths', auths);
   }
 

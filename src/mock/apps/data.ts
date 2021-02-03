@@ -1,3 +1,4 @@
+import { AUTH_APP } from "Base/authSlugs";
 import { IRxApp } from "Base/Model/IRxApp";
 import { demoDrawerData } from "mock/demo/drawerData";
 import demoPages from "mock/demo/pages";
@@ -18,7 +19,7 @@ var appsData:Array<IRxApp> = [
     auths:[
       {
         id:'guid-11',
-        rx_slug:'app',
+        rx_slug:AUTH_APP,
         name:'App访问',
         predefined:true,
       }
@@ -36,7 +37,7 @@ var appsData:Array<IRxApp> = [
     auths:[
       {
         id:'guid-21',
-        rx_slug:'app',
+        rx_slug:AUTH_APP,
         name:'App访问',
         predefined:true,
       },
@@ -79,7 +80,7 @@ var appsData:Array<IRxApp> = [
     auths:[
       {
         id:'guid-31',
-        rx_slug:'app',
+        rx_slug:AUTH_APP,
         name:'App访问',
         predefined:true,
       }
@@ -96,7 +97,7 @@ var appsData:Array<IRxApp> = [
     auths:[
       {
         id:'guid-41',
-        rx_slug:'app',
+        rx_slug:AUTH_APP,
         name:'App访问',
         predefined:true,
       }
@@ -114,7 +115,7 @@ var appsData:Array<IRxApp> = [
     auths:[
       {
         id:'guid-51',
-        rx_slug:'app',
+        rx_slug:AUTH_APP,
         name:'App访问',
         predefined:true,
       }

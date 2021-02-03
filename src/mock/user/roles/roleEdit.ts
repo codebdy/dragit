@@ -59,7 +59,8 @@ export default [
                 itemName:'name',
                 multiple:true,
                 fullWidth:true,
-                query:'allRxRoles'
+                query:'allRxAuths',
+                groupByField:'group_name',
               },                         
             }
           ]

@@ -19,30 +19,25 @@ export const rxRole = async (parent:any, args:any, context:any, info:any)=>{
 
 export const rxRoles = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  //const module = getModuleBySlug(args.slug);
-  console.log('mock return users',{data:rolesData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}})
   return {data:rolesData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}}
 }
 
 export const allRxRoles = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  //const module = getModuleBySlug(args.slug);
   console.log('mock return allRxRoles')
   return rolesData;
 }
 
 export const updateRxRoles = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  //const module = getModuleBySlug(args.slug);
   return rolesData
 }
 
 export const saveRxRole = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  //const module = getModuleBySlug(args.slug);
   
   let user = {...args.user, id:args.user?.id || createId(), created_at:''}
-  console.log('Server received user data:', user);
+
   return user;
 }
 

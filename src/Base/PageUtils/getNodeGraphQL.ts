@@ -27,7 +27,7 @@ function getMetaFieldGql(meta?: IMeta){
     }
 
     if(meta.name === 'MultiSelectBox' || meta.name === 'SelectBox'){
-      return `  ${meta.field}{ ${meta.props?.itemKey || 'id'} ${meta.props?.itemName || 'name'} }`;
+      return `  ${meta.field}{ ${meta.props?.itemKey || 'id'} ${meta.props?.itemName || 'name'}}`;
     }
 
     if(meta.name === 'LoopPanel'){

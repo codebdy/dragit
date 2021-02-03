@@ -20,7 +20,6 @@ export const rxUser = async (parent:any, args:any, context:any, info:any)=>{
 
 export const rxUsers = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  //const module = getModuleBySlug(args.slug);
   console.log('mock return users',{data:usersData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}})
   return {data:usersData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}}
 }
@@ -28,13 +27,11 @@ export const rxUsers = async (parent:any, args:any, context:any, info:any)=>{
 
 export const updateRxUsers = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
-  //const module = getModuleBySlug(args.slug);
   return usersData
 }
 
 export const saveRxUser = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
-  //const module = getModuleBySlug(args.slug);
   
   let user = {...args.user, id:args.user?.id || idSeed++, created_at:''}
   console.log('Server received user data:', user);
@@ -43,7 +40,6 @@ export const saveRxUser = async (parent:any, args:any, context:any, info:any)=>{
 
 export const removeRxUsers = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(200);
-  //const module = getModuleBySlug(args.slug);
   return usersData;
 
 }

@@ -2,6 +2,7 @@ import { sleep } from "mock/utils/sleep";
 import { getRxApp } from "./appResolvers";
 import appsData from "./data";
 import { v4 as uuidv4 } from 'uuid';
+import authsData from "mock/apps/authsData";
 
 function getRxAuth(id:string){
   for(var i = 0; i < appsData.length; i++){
@@ -59,6 +60,30 @@ export const createRxAuth = async (parent:any, args:any, context:any, info:any)=
 
   return auth;
 }
+
+export const systemRxAuths = async (parent:any, args:any, context:any, info:any)=>{
+  await sleep(500);
+  return {data:authsData, paginatorInfo:{currentPage:1, count:8, perPage:10, lastPage:11, total:123}}
+}
+
+export const allRxAuths = async (parent:any, args:any, context:any, info:any)=>{
+  await sleep(500);
+  let allAuths = [...authsData]
+
+  appsData?.forEach(app=>{
+    app?.auths?.forEach(auth=>{
+      allAuths.push({...auth, group_name:app.name});
+    })
+  })
+  console.log('mock return allRxAuths')
+  return allAuths;
+}
+
+export const authQueryResolvers = {
+  systemRxAuths,
+  allRxAuths,
+}
+
 
 export const authMutationResolvers = {
   removeRxAuth,

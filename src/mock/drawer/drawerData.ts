@@ -1,4 +1,3 @@
-import { AUTH_DASHBOARD, AUTH_MEDIAS } from "Base/authSlugs";
 import { POPUP_STYLE_MODULE } from "Utils/consts";
 
 export var drawerData= [{
@@ -16,7 +15,7 @@ export var drawerData= [{
         label: '新',
         size: 'small',
     },
-    auths:[AUTH_DASHBOARD]
+    auths:[]
   },
   {
     type: 'item',
@@ -77,7 +76,7 @@ export var drawerData= [{
     title: '媒体库',
     moduleSlug: 'medias',
     icon: 'mdi-image-auto-adjust',
-    auths:[AUTH_MEDIAS]
+    auths:[]
   },
   {
       title: '文章管理',
