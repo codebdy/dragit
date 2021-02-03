@@ -30,4 +30,5 @@ export var roleGQLQuery = `
 export var roleGQLMutation = `
   updateRxRoles(command:String, ids:[ID] ):[RxRole]
   saveRxRole(role:RxRoleInput):RxRole
+  removeRxRoles(ids:[ID]):[RxRole]
 `

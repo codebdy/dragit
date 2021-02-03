@@ -21,7 +21,7 @@ import { templateGQLQuery, templateGQLType } from "./templates/graphql";
 import { authMutationResolvers } from "./apps/authResolvers";
 import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./user/roleGraphql";
 import { authGQLInput, authGQLMutation, authGQLQuery, authGQLType } from "./user/authGraphql";
-import { roleQueryResolvers } from "./user/roleResolvers";
+import { roleMutationResolvers, roleQueryResolvers } from "./user/roleResolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -133,6 +133,7 @@ export const resolvers = {
     ...postMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
-    ...userMutationResolvers
+    ...userMutationResolvers,
+    ...roleMutationResolvers
   }
 };

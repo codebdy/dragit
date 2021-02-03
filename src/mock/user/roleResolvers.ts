@@ -32,13 +32,13 @@ export const allRxRoles = async (parent:any, args:any, context:any, info:any)=>{
 }
 
 export const updateRxRoles = async (parent:any, args:any, context:any, info:any)=>{
-  await sleep(200);
+  await sleep(500);
   //const module = getModuleBySlug(args.slug);
   return rolesData
 }
 
 export const saveRxRole = async (parent:any, args:any, context:any, info:any)=>{
-  await sleep(200);
+  await sleep(500);
   //const module = getModuleBySlug(args.slug);
   
   let user = {...args.user, id:args.user?.id || createId(), created_at:''}
@@ -47,7 +47,7 @@ export const saveRxRole = async (parent:any, args:any, context:any, info:any)=>{
 }
 
 export const removeRxRoles = async (parent:any, args:any, context:any, info:any)=>{
-  await sleep(200);
+  await sleep(500);
   //const module = getModuleBySlug(args.slug);
   return rolesData;
 
