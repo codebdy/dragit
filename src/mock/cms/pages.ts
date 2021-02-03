@@ -17,7 +17,8 @@ var cmsPages = [
   {
     id:'guid-p-cms-3',
     name:'询盘查看',
-    query:'enquiry',
+    max_width:'sm',
+    query:'readEnquiry',
     excute_query_by_mutation:true,
     schema:viewEnquirySchema as any,
   },

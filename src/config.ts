@@ -87,6 +87,7 @@ import { LoopPanelConfig } from "Components/LoopPanel/LoopPanelConfig";
 import TableColumn from "Components/TableColumn";
 import { TableColumnConfig } from "Components/TableColumn/TableColumnConfig";
 import MdiIcon from "Components/common/MdiIcon";
+import Hidden from "Components/Inputs/Hidden";
 
 register('Canvas', Canvas, CanvasConfig);
 register('Divider', Divider, DividerConfig);
@@ -136,6 +137,7 @@ register('DayView', DayView, DayViewConfig);
 register('JsxTemplateParser', JsxTemplateParser, JsxTemplateParserConfig);
 register('Avatar', Avatar);
 register('MdiIcon', MdiIcon);
+register('Hidden', Hidden);
 
 registerHtmlTag('h1', HeadConfig);
 registerHtmlTag('h2', HeadConfig);

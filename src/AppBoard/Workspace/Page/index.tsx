@@ -25,6 +25,7 @@ import { createMutationGQL } from '../../../Base/PageUtils/createMutationGQL';
 import { PageQuery } from './PageQuery';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import { PopupPage } from './PopupPage';
+import { PageQueryByMutation } from './PageQueryByMutation';
 
 export const Page = observer((
   props:{
@@ -157,8 +158,13 @@ export const Page = observer((
       <ActionStoreProvider value = {actionStore}>
         <ModelProvider value = {modelStore}>
           {
-            pageStore?.queryGQL &&
+            pageStore?.queryGQL && !page.excute_query_by_mutation &&
             <PageQuery queryGQL = {pageStore?.queryGQL}/>
+          }
+
+          {
+            pageStore?.queryGQL && page.excute_query_by_mutation &&
+            <PageQueryByMutation queryGQL = {pageStore?.queryGQL}/>
           }
           
           <ActionHunter onPageAction = {hanlePageAction} />
