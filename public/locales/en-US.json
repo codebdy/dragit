@@ -329,5 +329,12 @@
     "list-view-batch-actions":"Batch actions",
     "list-view-body":"Listview body",
     "list-view-pagination":"Listview body",
-    "table-column":"Table column"
+    "table-column":"Table column",
+    "data-display":"Display",
+    "text-view":"Text view",
+    "enum-view":"Enum view",
+    "day-view":"Day view",
+    "media-view":"Media view",
+    "loop-panel":"Loop panel",
+    "jsx-parser":"JSX template"
 }

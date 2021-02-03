@@ -19,7 +19,7 @@ const EnumView = React.forwardRef((
 ) =>{
   const {name, value, metas, error, helperText, ...rest} = props;
   const {isDesigning} = useDesign();
-  const selectedMeta:ChipMeta|undefined = first(metas?.filter(meta=>meta.value === value))
+  const selectedMeta:ChipMeta|undefined = metas && first(metas?.filter(meta=>meta.value === value))
   const render = value ?
     <Chip label={selectedMeta ? selectedMeta.name : value} color = {selectedMeta && selectedMeta.color} size = "small" {...rest} />
     :

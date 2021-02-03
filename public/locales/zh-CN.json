@@ -335,6 +335,12 @@
     "list-view-batch-actions":"批处理命令区",
     "list-view-body":"列表体",
     "list-view-pagination":"列表分页",
-    "table-column":"表格列"
-
+    "table-column":"表格列",
+    "data-display":"展示",
+    "text-view":"文本展示",
+    "enum-view":"枚举展示",
+    "day-view":"日期时间展示",
+    "media-view":"媒体展示",
+    "loop-panel":"循环展示",
+    "jsx-parser":"JSX模板"
 }
