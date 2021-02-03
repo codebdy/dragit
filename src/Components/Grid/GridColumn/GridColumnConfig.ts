@@ -12,7 +12,7 @@ export class GridColumnConfig extends MetaConfig{
 
   accept(child:IMeta){
     if(child.name === 'GridColumn' 
-      || child.name.startsWith('ListView')
+      || (child.name.startsWith('ListView') && child.name !== 'ListView')
     ){
       return false;
     }

@@ -6,7 +6,7 @@ export class TableColumnConfig extends MetaConfig{
  
   accept(child:IMeta){
     if(child.name === 'TableColumn' 
-      || child.name.startsWith('ListView')
+      || (child.name.startsWith('ListView') && child.name !== 'ListView')
     ){
       return false;
     }

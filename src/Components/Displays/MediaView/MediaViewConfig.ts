@@ -13,7 +13,12 @@ export class MediaViewConfig extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginConfigs
+      ...marginConfigs,
+      {
+        name:'width',
+        labelKey:'width',
+        propType:'number',
+      }
     ]
   }
 
