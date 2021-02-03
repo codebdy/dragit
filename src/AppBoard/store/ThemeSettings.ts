@@ -63,7 +63,7 @@ export class ToolbarSkin{
 }
 
 export class ThemeSettings {
-  themeMode: ThemeMode = DARK;
+  themeMode: ThemeMode = LIGHT;
   elevationStrength: number =  4;
   primary: string = '#5d78ff';
 
