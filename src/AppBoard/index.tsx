@@ -79,7 +79,7 @@ export const AppBoard = observer(()=>{
   return (
     <AppBoardStoreProvider value = {appboardStore}>
       <ThemeProvider theme={theme}>
-        <div className={classes.root}>
+        <div className={classes.root} style={{backgroundColor:theme.palette.background.default}}>
           <Sidebar>
             {
               loading
