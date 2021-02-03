@@ -40,7 +40,7 @@ export function ListViewBodyHead(
               />
             </TableCell>
             {columns.map((column,index) => {
-              const{sortable, searchable, ...restProps} = column.meta.props as any;
+              const{sortable, searchable, ...restProps} = column.meta.props||{} as any;
               return(
                 <TableCell
                   key={column.id + '-' + index}
