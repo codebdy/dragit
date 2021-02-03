@@ -97,48 +97,47 @@ export default {
         {
           name:'TableColumn',
           props:{
-            label:'登录名',
-            field:'login_name',
+            label:'图片',                  
+          },
+          children:[{
+            name:'MediaView',
+            field:'field1',
+            props:{
+              width:'60px',
+            }
+          }]
+        },
+        {
+          name:'TableColumn',
+          props:{
+            label:'排序文字',
+            field:'field2',
             searchable:true,
             sortable:true,
           },
     
           children:[{
             name:'TextView',
-            field:'login_name',
+            field:'field2',
           }]
         },
         {
           name:'TableColumn',
           props:{
-            label:'名称',
+            label:'文字2',
             field:'name',
-            searchable:true,
-            sortable:true,
           },
     
           children:[{
             name:'TextView',
-            field:'name',
+            field:'field2',
           }]
         },
+
         {
           name:'TableColumn',
           props:{
-            label:'邮箱',
-            field:'email',
-            searchable:true,
-          },
-    
-          children:[{
-            name:'TextView',
-            field:'email',
-          }]
-        },
-        {
-          name:'TableColumn',
-          props:{
-            label:'角色',
+            label:'循环',
           },
     
           children:[
@@ -151,7 +150,7 @@ export default {
               children:[
                 {
                   name:'TextView',
-                  field:'name',
+                  field:'field3',
                 }
               ]
             }
@@ -165,7 +164,7 @@ export default {
           },
           children:[{
             name:'EnumView',
-            field:'status',
+            field:'field4',
             props:{
               metas:[
                 {
@@ -186,7 +185,7 @@ export default {
           name:'TableColumn',
           props:{
             label:'时间',
-            field:'created_at',
+            field:'feild5',
             searchable:true,
             sortable:true,
           },

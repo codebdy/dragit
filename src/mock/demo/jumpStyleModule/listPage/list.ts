@@ -103,10 +103,6 @@ export default {
           children:[{
             name:'MediaView',
             field:'feathureImage',
-            graphiQL:`feathureImage{
-              id 
-              thumbnail
-            } `,  
             props:{
               width:'60px',
             }
