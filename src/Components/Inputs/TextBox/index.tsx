@@ -1,5 +1,6 @@
 import { TextField } from '@material-ui/core';
 import React from 'react';
+import { stringValue } from 'rx-drag/utils/stringValue';
 
 export const TextBox = React.forwardRef((props:any, ref:any)=>{
   const {value, shrinkLabel, type, onChange, ...rest} = props;
@@ -19,7 +20,7 @@ export const TextBox = React.forwardRef((props:any, ref:any)=>{
       ref={ref}
       type = {type}
       onChange = {handleOnchange}
-      value = {value === undefined ? '' : value}
+      value = {stringValue(value)}
       {...rest} 
       InputLabelProps = {
         shrinkLabel ? 

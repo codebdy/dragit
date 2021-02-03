@@ -42,15 +42,15 @@ export const MultiSelectBox = React.forwardRef((
   let key =itemKey;
   let name =itemName;
 
-  const QUERY_DATA = gql`
+  const QUERY_STR = `
   query {
     ${query}{
       id
       ${itemName}
-      ${groupByField}
+      ${groupByField||''}
     }
   }`;
-  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
+  const { loading:queryLoading, error: queryError, data } = useQuery(gql`${QUERY_STR}`);
   useShowAppoloError(queryError)
 
   const itemsData = (query? (data&&data[query])||[] : items) as any;

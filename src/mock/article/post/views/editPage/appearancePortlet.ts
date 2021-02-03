@@ -44,7 +44,6 @@ export default{
                 label:"附加属性",
                 variant:"outlined",
                 itemName:'name',
-                multiple:true,
                 fullWidth:true,
                 query:'allPostAttributes',
               },                         
