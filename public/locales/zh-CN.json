@@ -342,5 +342,6 @@
     "day-view":"日期时间展示",
     "media-view":"媒体展示",
     "loop-panel":"循环展示",
-    "jsx-parser":"JSX模板"
+    "jsx-parser":"JSX模板",
+    "format":"格式"
 }

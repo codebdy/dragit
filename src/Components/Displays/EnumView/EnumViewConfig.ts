@@ -1,6 +1,7 @@
 import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IPropConfig } from "rx-drag/models/IPropConfig";
 import { IMeta } from "Base/RXNode/IMeta";
+import marginConfigs from "Components/common/configs/marginConfigs";
 
 export class EnumViewConfig extends MetaConfig{
   //empertyPadding = '';
@@ -12,6 +13,7 @@ export class EnumViewConfig extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
+      ...marginConfigs
     ]
   }
 

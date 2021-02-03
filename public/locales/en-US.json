@@ -336,5 +336,6 @@
     "day-view":"Day view",
     "media-view":"Media view",
     "loop-panel":"Loop panel",
-    "jsx-parser":"JSX template"
+    "jsx-parser":"JSX template",
+    "format":"Format"
 }
