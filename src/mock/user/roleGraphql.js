@@ -18,6 +18,9 @@ export var roleGQLInput =`
   input RxRoleInput{
     id:ID
     name:String
+    status:String
+    description:String
+    auths:[RxAuthInput]
   }
 `
 

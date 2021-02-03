@@ -62,8 +62,6 @@ export const MultiSelectBox = React.forwardRef((
     });
   }
 
-  console.log('MultiSelectBox', groupByField, itemsData)
-
   return (
     <Autocomplete
       multiple = {true}

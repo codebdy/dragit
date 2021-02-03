@@ -14,6 +14,7 @@ export var authGQLInput =`
     rx_slug: String
     name: String
     predefined: Boolean
+    group_name:String
   }
 `
 
