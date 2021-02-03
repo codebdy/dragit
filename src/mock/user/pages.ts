@@ -24,6 +24,7 @@ var userPages = [
   {
     id:'guid-p-u-4',
     name:'角色编辑',
+    query:'rxRole',
     max_width:'sm',
     schema:roleEdit,
   },

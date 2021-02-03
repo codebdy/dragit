@@ -10,28 +10,6 @@ export default [
         {
           name: 'FormGridItem',
           props:{
-            xs:12,
-          },
-          children:[
-            {
-              name:'TextBox',
-              field:'login_name',
-              props:{
-                label:'登录名',
-                variant:"outlined",
-                fullWidth:true,
-                required:true,
-                rule:{
-                  valueType:'string',
-                  required:true,
-                }                      
-              }
-            }
-          ]
-        },
-        {
-          name: 'FormGridItem',
-          props:{
             xs:12,                      
           },
           children:[
@@ -39,7 +17,7 @@ export default [
               name:'TextBox',
               field:'name',
               props:{
-                label:'姓名',
+                label:'名称',
                 variant:"outlined",
                 fullWidth:true,
               },
@@ -54,41 +32,18 @@ export default [
           children:[
             {
               name:'TextBox',
-              field:'password',
+              field:'description',
               props:{
-                label:'密码',
+                label:'描述',
                 variant:"outlined",
-                type:'password',
+                multiline:true,
+                rows:3,
                 fullWidth:true,
-                placeholder:'保持为空表示不修改',
               },
             }
           ]
         },
 
-        {
-          name: 'FormGridItem',
-          props:{
-            xs:12,
-          },
-          children:[
-            {
-              name:'TextBox',
-              field:'email',
-              props:{
-                label:'Email',
-                variant:"outlined",
-                fullWidth:true,
-                empertyValue:'',
-                rule:{
-                  valueType:'string',
-                  ruleType:'email',
-                },
-              },
-            }
-          ]
-
-        },
         {
           name: 'FormGridItem',
           props:{
@@ -97,9 +52,9 @@ export default [
           children:[
             {
               name:'MultiSelectBox',
-              field:'roles',
+              field:'auths',
               props:{
-                label:"角色",
+                label:"权限",
                 variant:"outlined",
                 itemName:'name',
                 multiple:true,
@@ -127,24 +82,6 @@ export default [
             }
           ]
         },
-        {
-          name:"FormGridItem",
-          props:{
-            xs:12,
-          },
-          children:[
-            {
-              name:'MediaSelect',
-              field:'avatar',
-              props:{
-                width:'120px',
-                label:'头像',
-                avatar:true,
-              }                        
-            }
-          ]
-
-        }
         
       ]
     },
@@ -174,9 +111,9 @@ export default [
           onClick:{
             name:SUBMIT_MUTATION,
             mutation:{
-              name:'saveRxUser',
-              variableName:'user',
-              variableType:'RxUserInput',
+              name:'saveRxRole',
+              variableName:'role',
+              variableType:'RxRoleInput',
               submitNode:'',
               refreshNode:'',
               goback:true,
