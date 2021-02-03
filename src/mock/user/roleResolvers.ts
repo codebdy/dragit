@@ -36,9 +36,9 @@ export const updateRxRoles = async (parent:any, args:any, context:any, info:any)
 export const saveRxRole = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
   
-  let user = {...args.user, id:args.user?.id || createId(), created_at:''}
+  let role = {...args.role, id:args.role?.id || createId(), created_at:''}
 
-  return user;
+  return role;
 }
 
 export const removeRxRoles = async (parent:any, args:any, context:any, info:any)=>{
