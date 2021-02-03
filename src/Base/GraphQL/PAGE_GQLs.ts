@@ -8,6 +8,7 @@ export const pageFieldsGQL = `
   schema
   auths
   query
+  excute_query_by_mutation
 `
 
 export const SAVE_RX_PAGE = gql`

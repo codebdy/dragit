@@ -4,8 +4,8 @@ import { cloneObject } from "rx-drag/utils/cloneObject";
 import { ICommand } from "../../../rx-drag/commands/ICommand";
 import { PageEditorStore } from "../PageEditorStore";
 
-export type PagePropName = 'query'|'auths'|'max_width'|'width';
-export type PagePropValue = string|Array<IRxAuth>|number|undefined;
+export type PagePropName = 'query'|'auths'|'max_width'|'width'|'excute_query_by_mutation';
+export type PagePropValue = string|Array<IRxAuth>|number|boolean|undefined;
 
 export class UpdatePageCommand implements ICommand{
   rxDragStore?:RxDragStore;

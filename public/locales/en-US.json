@@ -338,5 +338,6 @@
     "loop-panel":"Loop panel",
     "jsx-parser":"JSX template",
     "format":"Format",
-    "group-by-field":"Group by field"
+    "group-by-field":"Group by field",
+    "excute-query-by-mutation": "Excute query by mutation"
 }

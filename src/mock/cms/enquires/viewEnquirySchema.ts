@@ -1,7 +1,6 @@
 import { GO_BACK_ACTION } from "Base/PageUtils/ACTIONs";
 
-export default {
-  layout:[
+export const viewEnquirySchema = [
     {
       name: 'GridRow',
       props: {
@@ -116,8 +115,4 @@ export default {
         },
       ]
     }
-  ],
-
-
-  isFormPage:true,
-}
+  ]

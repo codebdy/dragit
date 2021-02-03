@@ -3,6 +3,7 @@ export var appGQLType = `
     id:ID!
     name:String
     query:String
+    excute_query_by_mutation:Boolean
     "弹出式页面使用，可选：'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'"
     max_width:String
     width:Int
@@ -30,6 +31,7 @@ export var appGQLInput =`
     id:ID
     name:String
     query:String
+    excute_query_by_mutation:Boolean
     max_width:String
     width:Int
     schema:JSON

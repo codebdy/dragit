@@ -83,6 +83,7 @@ var appsData:Array<IRxApp> = [
     app_type:'免费',
     pages:cmsPages as any,
     navigation_items:cmsDrawerData as any,
+    entry_page_id:'guid-p-cms-1',
     auths:[
       {
         id:'guid-31',

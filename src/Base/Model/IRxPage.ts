@@ -13,4 +13,5 @@ export interface IRxPage{
   schema?:Array<IMeta>,
   auths?:IRxAuth[],
   query?:string, 
+  excute_query_by_mutation?: boolean,
 }

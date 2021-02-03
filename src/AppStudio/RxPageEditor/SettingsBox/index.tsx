@@ -9,11 +9,13 @@ import { stringValue } from 'rx-drag/utils/stringValue';
 import { PagePropName, PagePropValue, UpdatePageCommand } from './UpdatePageCommand';
 import StringInput from '../AttrebuteBox/PropsInputs/StringInput';
 import { IRxAuth } from 'Base/Model/IRxAuth';
+import BooleanInput from '../AttrebuteBox/PropsInputs/BooleanInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root:{
       padding:theme.spacing(2),
+      color:theme.palette.text.primary,
     },
   }),
 );
@@ -38,6 +40,10 @@ const SettingsBox = observer(()=>{
 
   const handleQueryChange = (value: any)=>{
     doUpdatePage('query', value);
+  }
+
+  const handleExcuteQueryByMutationChange =  (value: any)=>{
+    doUpdatePage('excute_query_by_mutation', value);
   }
 
   const handleChangeMaxWidth = (event: React.ChangeEvent<{ value: unknown }>)=>{
@@ -105,6 +111,14 @@ const SettingsBox = observer(()=>{
           value={stringValue(page?.query)}
           onChange={handleQueryChange}
         />
+        <BooleanInput
+          xs = {12} 
+          label={intl.get("excute-query-by-mutation")} 
+          value={page?.excute_query_by_mutation}
+          onChange={handleExcuteQueryByMutationChange}
+          size = "medium"
+        />
+
         <Grid item xs = {12}>
           <MultiSelectBox fullWidth label={intl.get('authority')} 
             variant="outlined" 

@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { FormControlLabel, Grid, Switch} from '@material-ui/core';
 import { PropsInputProps } from './PropsEditorProps';
 
-export default function BooleanInput(props:PropsInputProps){
-  const {label, value, xs=6, onChange, ...rest} = props;
+export default function BooleanInput(props:PropsInputProps&{
+  size?:'small'|'medium'
+}){
+  const {label, value, xs=6, onChange, size='small', ...rest} = props;
   const [inputValue, setInputValue] = React.useState(!!value);
   
   useEffect(()=>{
@@ -24,7 +26,7 @@ export default function BooleanInput(props:PropsInputProps){
             checked={inputValue}
             onChange={handleChange}
             color="primary"
-            size="small" 
+            size={size}
           />
         }
         style={{margin:'2px'}}

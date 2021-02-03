@@ -8,12 +8,12 @@ export var cmsDrawerData= [
         label: '新',
         size: 'small',
     },
-    auths:[]
+    auths:[],
+    pageId:'guid-p-cms-1',
   },
   {
     title: '询盘管理',
     type: 'group',
-    //to: '/admin/module/role/',
     icon: 'mdi-email-outline',
 
     children: [
@@ -21,7 +21,7 @@ export var cmsDrawerData= [
           title:"询盘",
           type:'item',
           icon: 'mdi-circle-small',
-          to: '/admin/module/enquery/',
+          pageId: 'guid-p-cms-2',
           badge: {
               color: 'secondary',
               field: 'inquiries',
@@ -32,13 +32,11 @@ export var cmsDrawerData= [
           title:"垃圾箱",
           type:'item',
           icon: 'mdi-circle-small',
-          //to: '/admin/module/role/',
       },
       {
           title:"拦截设置",
           type:'item',
           icon: 'mdi-circle-small',
-          //to: '/admin/module/role/',
       }
     ]
   },
@@ -46,6 +44,7 @@ export var cmsDrawerData= [
     type: 'item',
     title: '媒体库',
     icon: 'mdi-image-auto-adjust',
+    pageId: 'guid-p-cms-4',
     auths:[]
   },  
   {

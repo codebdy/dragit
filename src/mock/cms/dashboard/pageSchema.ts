@@ -1,6 +1,5 @@
 
-export default {
-  layout:[
+export var dashboardSchema = [
     {
       name: 'GridRow',
       props: {
@@ -217,8 +216,4 @@ export default {
         },
       ]
     },
-  ],
-  auths:[
-    
-  ] 
-}
+  ]

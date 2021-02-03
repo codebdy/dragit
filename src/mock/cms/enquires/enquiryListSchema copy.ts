@@ -1,5 +1,4 @@
-export default {
-  layout:[
+export var enquiryListSchema = [
     {
       name: 'GridRow',
       props: {
@@ -24,11 +23,9 @@ export default {
             props: {
               xs:12,
             },
-            children: [          {
+            children: [          
+              {
               name:'ListView',
-              designProps:{
-                query:null,
-              },
               props:{
                 elevation:6,
                 columns:[
@@ -83,4 +80,3 @@ export default {
       ]
     },
   ] 
-}

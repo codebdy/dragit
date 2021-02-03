@@ -344,5 +344,6 @@
     "loop-panel":"循环展示",
     "jsx-parser":"JSX模板",
     "format":"格式",
-    "group-by-field":"分组字段"
+    "group-by-field":"分组字段",
+    "excute-query-by-mutation":"通过Mutation查询"
 }
