@@ -1,5 +1,7 @@
 import { AUTH_APP } from "Base/authSlugs";
 import { IRxApp } from "Base/Model/IRxApp";
+import { cmsDrawerData } from "mock/cms/drawerData";
+import cmsPages from "mock/cms/pages";
 import { demoDrawerData } from "mock/demo/drawerData";
 import demoPages from "mock/demo/pages";
 import { userDrawerData } from "mock/user/drawerData";
@@ -75,8 +77,8 @@ var appsData:Array<IRxApp> = [
     icon:'mdi-web',
     color:'#ff9100',
     app_type:'免费',
-    pages:[],
-    navigation_items:[],
+    pages:cmsPages as any,
+    navigation_items:cmsDrawerData as any,
     auths:[
       {
         id:'guid-31',
