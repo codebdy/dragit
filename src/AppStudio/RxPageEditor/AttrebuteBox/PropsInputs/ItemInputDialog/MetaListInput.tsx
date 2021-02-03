@@ -2,10 +2,11 @@ import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import { IconButton, TextField } from '@material-ui/core';
+import { FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import { MetaItem } from 'Base/Model/MetaItem';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
+import { SelectItem } from '../OptionSelect';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,9 +33,12 @@ export default function MetaListInput(
     nameKey?:string,
     idLabel?:string,
     nameLabel?:string,
+    additionKey?:string,
+    additionLabelKey?:string,
+    additionItems?:Array<SelectItem>
   }
 ) {
-  const {label, value, onChange, idKey = 'id', nameKey = 'name', idLabel, nameLabel} = props; 
+  const {label, value, onChange, idKey = 'id', nameKey = 'name', idLabel, nameLabel, additionKey, additionLabelKey, additionItems} = props; 
   const classes = useStyles();
   let metas = value ? cloneObject(value) : [];
 
@@ -46,6 +50,14 @@ export default function MetaListInput(
   const handleChangeName = (index:number, name:string)=>{
     metas[index][nameKey] = name;
     onChange([...metas]);
+  };
+
+  const handleAdditionChange =  (index:number, value:string)=>{
+    if(additionKey){
+      metas[index][additionKey] = value;
+      onChange([...metas]);      
+    }
+
   };
 
   const handleAddNewItem = ()=>{
@@ -78,7 +90,7 @@ export default function MetaListInput(
                   handleChangeId(index, event.target.value.trim())
                 }}
               />
-                <TextField 
+              <TextField 
                 className = {classes.itemInput} 
                 label={nameLabel || intl.get('name')} 
                 variant="outlined" 
@@ -88,6 +100,32 @@ export default function MetaListInput(
                   handleChangeName(index, event.target.value.trim())
                 }}
               />
+              {
+                additionKey &&
+                <FormControl variant="outlined" size="small" className = {classes.itemInput}>
+                  <InputLabel>{additionLabelKey&&intl.get(additionLabelKey)}</InputLabel>
+                  <Select
+                      value={meta[additionKey] || ''}
+                      onChange={event=>{
+                        handleAdditionChange(index, event.target.value as string)
+                      }}
+                      label = {additionLabelKey&&intl.get(additionLabelKey)}
+                    >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {
+                      additionItems?.map((item:SelectItem)=>{
+                        return (
+                          <MenuItem key={item.value} value={item.value}>
+                            {item.localLabelKey ? intl.get(item.localLabelKey) : item.label}
+                          </MenuItem>
+                        )
+                      })
+                    }
+                  </Select>
+                </FormControl>
+              }
               <div className={classes.removeButton}>
                 <IconButton aria-label="delete"
                   onClick = {(event) => handleRemoveItem(index)}

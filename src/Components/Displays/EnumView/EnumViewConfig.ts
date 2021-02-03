@@ -13,7 +13,31 @@ export class EnumViewConfig extends MetaConfig{
 
   getPropConfigs(): Array<IPropConfig>{
     return [
-      ...marginConfigs
+      ...marginConfigs,
+      {
+        name:'metas',
+        propType:'items',
+        props:{
+          idKey:'value',
+          nameKey:'name',
+          additionKey:'color',
+          additionLabelKey:'color',
+          additionItems:[
+            {
+              value:'default',
+              label:'Default',
+            },
+            {
+              value:'primary',
+              label:'Primary',
+            },
+            {
+              value:'secondary',
+              label:'Secondary',
+            }
+          ]
+        }
+      }
     ]
   }
 

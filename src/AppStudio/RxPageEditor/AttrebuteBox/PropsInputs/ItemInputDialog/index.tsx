@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
 import MetaListInput from './MetaListInput';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
+import { SelectItem } from '../OptionSelect';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -81,11 +82,14 @@ export interface MetaListDialogProps{
   nameLabel?:string,
   value?:Array<any>;
   onChange:(newValue:Array<any>)=>void;
+  additionKey?:string,
+  additionLabelKey?:string,
+  additionItems?:Array<SelectItem>
 }
 
 export default function ItemsInputDialog(props:MetaListDialogProps){
   const classes = useStyles();
-  const {label, idKey, nameKey, idLabel, nameLabel, value,  onChange} = props;
+  const {label, idKey, nameKey, idLabel, nameLabel, value,  onChange, additionKey, additionLabelKey, additionItems} = props;
   const [inpuValue, setInputValue] = React.useState<Array<any>>(value?cloneObject(value):[]);
  
   const [open, setOpen] = React.useState(false);
@@ -127,6 +131,9 @@ export default function ItemsInputDialog(props:MetaListDialogProps){
                 nameLabel = {nameLabel}
                 value = {inpuValue} 
                 onChange = {setInputValue}
+                additionKey = {additionKey}
+                additionLabelKey = {additionLabelKey}
+                additionItems = {additionItems}
               />
             </div>
           </DialogContent>
