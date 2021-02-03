@@ -24,7 +24,8 @@ export const enquiries = async (parent:any, args:any, context:any, info:any)=>{
 
 
 export const removeEnquiries = async (parent:any, args:any, context:any, info:any)=>{
-  await sleep(200);
+  await sleep(500);
+  console.log('mock removeEnquiries', args)
   return enquiresData;
 
 }
