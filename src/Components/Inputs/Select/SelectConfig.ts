@@ -21,12 +21,11 @@ export class SelectConfig extends MetaConfig{
     return [
       ...inputConfig,
       textboxSizeConfig,
-      /*{
-        name:'multiple',
-        label:'multiple-select',
-        xs:6,
-        input:BooleanInput,
-      },*/
+      {
+        name:'query',
+        labelKey:'query',
+        propType:'string',
+      },
       {
         name:'itemKey',
         labelKey:'item-key',
@@ -36,8 +35,13 @@ export class SelectConfig extends MetaConfig{
         name:'itemName',
         labelKey:'item-name',
         propType:'string',
-      },      
+      }, 
       itemsConfig,
+      {
+        name:'groupByField',
+        labelKey:'group-by-field',
+        propType:'string',
+      },
       helperTextConfig,
 
     ]

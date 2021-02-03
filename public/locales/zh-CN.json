@@ -343,5 +343,6 @@
     "media-view":"媒体展示",
     "loop-panel":"循环展示",
     "jsx-parser":"JSX模板",
-    "format":"格式"
+    "format":"格式",
+    "group-by-field":"分组字段"
 }
