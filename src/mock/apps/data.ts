@@ -4,6 +4,10 @@ import { cmsDrawerData } from "mock/cms/drawerData";
 import cmsPages from "mock/cms/pages";
 import { demoDrawerData } from "mock/demo/drawerData";
 import demoPages from "mock/demo/pages";
+import { erpDrawerData } from "mock/erp/drawerData";
+import erpPages from "mock/erp/pages";
+import { shopDrawerData } from "mock/shop/drawerData";
+import shopPages from "mock/shop/pages";
 import { userDrawerData } from "mock/user/drawerData";
 import userPages from "mock/user/pages";
 
@@ -94,8 +98,8 @@ var appsData:Array<IRxApp> = [
     icon:'mdi-card-account-mail',
     color:'#5d78ff',
     app_type:'免费',
-    pages:[],
-    navigation_items:[],
+    pages:erpPages as any,
+    navigation_items:erpDrawerData as any,
     auths:[
       {
         id:'guid-41',
@@ -112,8 +116,8 @@ var appsData:Array<IRxApp> = [
     icon:'mdi-basket',
     color:'#ba68c8',
     app_type:'商业',
-    pages:[],
-    navigation_items:[],
+    pages: shopPages as any,
+    navigation_items: shopDrawerData as any,
     auths:[
       {
         id:'guid-51',
