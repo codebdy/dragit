@@ -34,6 +34,7 @@ const ListView = observer(React.forwardRef((
       update?:IPageMutation,
       remove?:string,
       children?:any,
+      selectable?:boolean,
     }, 
     ref:any
   )=>{
@@ -44,6 +45,7 @@ const ListView = observer(React.forwardRef((
     update,
     remove,
     children,
+    selectable = true,
     ...rest
   } = props
   
@@ -55,6 +57,10 @@ const ListView = observer(React.forwardRef((
   const removeGQL = useRemoveGQL( rxNode, listViewStore, remove );
   const {isDesigning} = useDesign();
   const modelStore = useModelStore();
+
+  useEffect(()=>{
+    listViewStore.setSelectable(selectable);
+  },[listViewStore, selectable])
 
   useEffect(()=>{
     if(listViewStore.rxModel){

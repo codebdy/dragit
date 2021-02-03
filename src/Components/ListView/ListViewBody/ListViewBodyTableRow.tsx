@@ -29,6 +29,7 @@ export const ListViewBodyTableRow = observer((
 )=>{
   const {children, ...rest} = props;
   const rowModel = useModelStore();
+  const listViewStore = useListViewStore();
   
   return (
     <TableRow
@@ -39,16 +40,17 @@ export const ListViewBodyTableRow = observer((
     >
       {rowModel&&
       <ListViewTableRowActionFilter row={rowModel}>
-        <TableCell padding="checkbox">
-          {
+        {
+          listViewStore.selectable &&
+          <TableCell padding="checkbox">
             <RowCheckBox
               rowId={rowModel.value?.id}
             />
-          }
-        </TableCell>
-          {
-            children
-          }
+          </TableCell>
+        }
+        {
+          children
+        }
         </ListViewTableRowActionFilter>
       }
     </TableRow>

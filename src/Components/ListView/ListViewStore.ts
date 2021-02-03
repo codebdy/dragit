@@ -43,9 +43,14 @@ export class ListViewStore{
   //rows: Array<TableRowStore> = [];
   rxModel?:RXModel; 
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
+  selectable?:boolean = true;
   
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setSelectable(selectable:boolean){
+    this.selectable = selectable;
   }
   
   get columns(){

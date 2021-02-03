@@ -1,3 +1,4 @@
+import autList from "./auths/autList";
 import roleEdit from "./roles/roleEdit";
 import roleList from "./roles/roleList";
 import userEdit from "./users/userEdit";
@@ -31,13 +32,9 @@ var userPages = [
   {
     id:'guid-p-u-5',
     name:'系统权限列表',
-    //schema:jumpEdit,
+    schema:autList,
   },
-  {
-    id:'guid-p-u-6',
-    name:'权限编辑',
-    //schema:popList,
-  },
+
 
 ]
 

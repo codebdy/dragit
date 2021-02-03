@@ -30,15 +30,19 @@ export function ListViewBodyHead(
       {()=>
         <TableHead>
           <TableRow>
-            <TableCell padding="checkbox">
-              <Checkbox
-                id = 'all'
-                indeterminate={listViewStore.selects.length > 0 && listViewStore.selects.length < rows.length}
-                checked={rows.length > 0 && listViewStore.selects.length === rows.length}
-                onChange={handleSelectAll}
-                inputProps={{ 'aria-label': 'select all desserts' }}
-              />
-            </TableCell>
+            {
+              listViewStore?.selectable &&
+              <TableCell padding="checkbox">
+                <Checkbox
+                  id = 'all'
+                  indeterminate={listViewStore.selects.length > 0 && listViewStore.selects.length < rows.length}
+                  checked={rows.length > 0 && listViewStore.selects.length === rows.length}
+                  onChange={handleSelectAll}
+                  inputProps={{ 'aria-label': 'select all desserts' }}
+                />
+              </TableCell>              
+            }
+
             {columns.map((column,index) => {
               const{sortable, searchable, ...restProps} = column.meta.props||{} as any;
               return(

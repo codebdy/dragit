@@ -6,6 +6,11 @@ export var authGQLType = `
     predefined: Boolean
     group_name:String
   }
+
+  type RxAuths{
+    paginatorInfo:PaginatorInfo!
+    data:[RxAuth]
+  }
 `
 
 export var authGQLInput =`
@@ -19,7 +24,7 @@ export var authGQLInput =`
 `
 
 export var authGQLQuery = `
-  systemRxAuths:[RxAuth]
+  systemRxAuths:RxAuths
   allRxAuths:[RxAuth]
 `
 export var authGQLMutation = `
