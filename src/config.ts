@@ -1,6 +1,6 @@
 
 import {register, registerHtmlTag} from "./rx-drag/RxDrag";
-import { Divider, Typography } from '@material-ui/core';
+import { Avatar, Divider, Typography } from '@material-ui/core';
 import FormGridItem from 'Components/FormGridItem';
 import ListView from 'Components/ListView';
 import OneToManyTable from 'Components/OneToMany/OneToManyTable';
@@ -86,6 +86,7 @@ import LoopPanel from "Components/LoopPanel";
 import { LoopPanelConfig } from "Components/LoopPanel/LoopPanelConfig";
 import TableColumn from "Components/TableColumn";
 import { TableColumnConfig } from "Components/TableColumn/TableColumnConfig";
+import MdiIcon from "Components/common/MdiIcon";
 
 register('Canvas', Canvas, CanvasConfig);
 register('Divider', Divider, DividerConfig);
@@ -133,6 +134,8 @@ register('EnumView', EnumView, EnumViewConfig);
 register('DayView', DayView, DayViewConfig);
 
 register('JsxTemplateParser', JsxTemplateParser, JsxTemplateParserConfig);
+register('Avatar', Avatar);
+register('MdiIcon', MdiIcon);
 
 registerHtmlTag('h1', HeadConfig);
 registerHtmlTag('h2', HeadConfig);

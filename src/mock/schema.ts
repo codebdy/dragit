@@ -22,6 +22,8 @@ import { authMutationResolvers, authQueryResolvers } from "./apps/authResolvers"
 import { roleGQLType, roleGQLInput, roleGQLQuery, roleGQLMutation } from "./user/roleGraphql";
 import { authGQLInput, authGQLMutation, authGQLQuery, authGQLType } from "./apps/authGraphql";
 import { roleMutationResolvers, roleQueryResolvers } from "./user/roleResolvers";
+import { enquiryGQLInput, enquiryGQLMutation, enquiryGQLQuery, enquiryGQLType } from "./cms/enquires/enquiryGraphql";
+import { enquiryMutationResolvers, enquiryQueryResolvers } from "./cms/enquires/enquiryResolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -78,6 +80,8 @@ export const schema = `
   ${roleGQLInput}
   ${userGQLType}
   ${userGQLInput}
+  ${enquiryGQLType}
+  ${enquiryGQLInput}
   type Query {
     "登录"
     login(login_name:String!, password:String!):LoginData
@@ -90,6 +94,7 @@ export const schema = `
     ${supplierGQLQuery}
     ${roleGQLQuery}
     ${userGQLQuery}
+    ${enquiryGQLQuery}
   }
 
   type Mutation{
@@ -100,6 +105,7 @@ export const schema = `
     ${splitGQLMutation}
     ${roleGQLMutation}
     ${userGQLMutation}
+    ${enquiryGQLMutation}
   }
 `;
 
@@ -124,6 +130,7 @@ export const resolvers = {
     ...supplierQueryResolvers,
     ...userQueryResolvers,
     ...roleQueryResolvers,
+    ...enquiryQueryResolvers,
   },
 
   Mutation:{
@@ -135,6 +142,7 @@ export const resolvers = {
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
     ...userMutationResolvers,
-    ...roleMutationResolvers
+    ...roleMutationResolvers,
+    ...enquiryMutationResolvers
   }
 };

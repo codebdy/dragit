@@ -4,34 +4,36 @@ import { MetaConfig } from "Base/RXNode/MetaConfig";
 import { IMeta } from "../Base/RXNode/IMeta";
 
 var componentsMap : { 
-  [key: string]: {
-    component?:any,
-    rule:IRxMetaConfig,
-  }
+  [key: string]: any
 } = {}
 
-function register(name:string, component:any, rule:any = MetaConfig): any{
-  componentsMap[name] = {
-    component,
-    rule: new rule(),
-  }
+var configsMap : { 
+  [key: string]: IRxMetaConfig
+} = {}
+
+function register(name:string, component:any, Config:any = MetaConfig): any{
+  configsMap[name] = new Config();
+  componentsMap[name] = component;
 }
 
-function registerHtmlTag(name:string, rule:any = MetaConfig){
-  componentsMap[name] = {
-    rule: new rule()
-  }  
+function registerHtmlTag(name:string, Config:any = MetaConfig){
+  configsMap[name] =  new Config();
 }
 
 function resolveComponent(meta:IMeta):any{
   const name = meta.name;
   const componetNode = componentsMap[name];
-  let component = componetNode && componetNode.component ? componetNode.component : name;
-
+  let component = componetNode ? componetNode : name;
   return component;
 }
 
 function resolveMetaConfig(name:string):IRxMetaConfig{
-  return  componentsMap[name] ? componentsMap[name].rule : new MetaConfig();
+  return  configsMap[name] ? configsMap[name] : new MetaConfig();
 }
-export {register, resolveComponent, resolveMetaConfig, registerHtmlTag}
+
+function allRegisteredComponents(){
+  return componentsMap;
+}
+
+
+export {register, resolveComponent, resolveMetaConfig, registerHtmlTag, allRegisteredComponents}

@@ -3,12 +3,12 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import JsxParser from 'react-jsx-parser'
 import { useDesign } from 'rx-drag/store/useDesign';
 import classNames from 'classnames';
-import IconButton from 'Components/Buttons/IconButton';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IPageAction } from 'Base/Model/IPageAction';
 import { useActionStore } from 'Base/PageUtils/ActionStore';
 import {observer} from "mobx-react";
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { allRegisteredComponents } from 'rx-drag/RxDrag';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,7 +55,7 @@ const JsxTemplateParser = observer(React.forwardRef((
                    //@@@value暂时没根据input跟新，复杂控件需要修改该部分
                    model: modelStore?.value||{},
                   }}
-                  components={{ IconButton:IconButton as any }}
+                  components={{ ...allRegisteredComponents() }}
                   jsx = {template}
                   renderInWrapper = {false}
                   blacklistedAttrs = {[]}

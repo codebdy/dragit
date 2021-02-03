@@ -8,8 +8,8 @@ export default {
   withNode:true,
   props:{
     variant:'outlined',
-    query:'enquires',
-    remove:'removeEnquires',
+    query:'enquiries',
+    remove:'removeEnquiries',
   },
   children:[
     {
@@ -31,15 +31,15 @@ export default {
                 size:'small',
                 label:'状态',
                 width:'120px',
-                field:'status',
+                field:'already_ready',
                 metas:[
                   {
-                    value:'normal',
-                    name:'正常'
+                    value:false,
+                    name:'未读'
                   },
                   {
-                    value:'forbid',
-                    name:'禁用'
+                    value:true,
+                    name:'已读'
                   },
                 ]
               }
@@ -75,30 +75,64 @@ export default {
         {
           name:'TableColumn',
           props:{
-            label:'登录名',
-            field:'login_name',
-            searchable:true,
-            sortable:true,
+            label:'',
+            align:'center',
+            width:'50px',
           },
-    
-          children:[{
-            name:'TextView',
-            field:'login_name',
-          }]
+          children:[
+            {
+              name:'JsxTemplateParser',
+              fieldsGql:' already_read ',   
+              props:{
+              template:`
+              <>
+                {
+                  model.already_read !== true &&
+                  <Avatar style={{backgroundColor:'#5d78ff', color:'#FFF'}}>
+                    <MdiIcon iconClass="mdi-email" />
+                  </Avatar>
+                }
+                {
+                  model.already_read === true&&
+                  <Avatar>
+                    <MdiIcon iconClass="mdi-email-open-outline" />
+                  </Avatar>
+                }
+              </>
+                `
+              }
+            },
+          ]
         },
+
         {
           name:'TableColumn',
           props:{
-            label:'名称',
+            label:'姓名',
             field:'name',
             searchable:true,
-            sortable:true,
           },
     
-          children:[{
-            name:'TextView',
-            field:'name',
-          }]
+          children:[
+            {
+              name:'JsxTemplateParser',
+              fieldsGql:' name ',   
+              props:{
+              template:`
+              <>
+                {
+                  model.already_read !== true &&
+                  <b>{model.name}</b>
+                }
+                {
+                  model.already_read === true&&
+                  model.name
+                }
+              </>
+                `
+              }
+            },            
+          ]
         },
         {
           name:'TableColumn',
@@ -108,30 +142,54 @@ export default {
             searchable:true,
           },
     
-          children:[{
-            name:'TextView',
-            field:'email',
-          }]
+          children:[
+            {
+              name:'JsxTemplateParser',
+              fieldsGql:' email ',   
+              props:{
+              template:`
+              <>
+                {
+                  model.already_read !== true &&
+                  <b>{model.email}</b>
+                }
+                {
+                  model.already_read === true&&
+                  model.email
+                }
+              </>
+                `
+              }
+            },            
+            
+          ]
         },
         {
           name:'TableColumn',
           props:{
-            label:'角色',
+            label:'公司',
+            field:'company',
+            searchable:true,
           },
     
           children:[
             {
-              name:'LoopPanel',
-              field:'roles',
+              name:'JsxTemplateParser',
+              fieldsGql:' company ',   
               props:{
-                separator:', '
-              },
-              children:[
+              template:`
+              <>
                 {
-                  name:'TextView',
-                  field:'name',
+                  model.already_read !== true &&
+                  <b>{model.company}</b>
                 }
-              ]
+                {
+                  model.already_read === true&&
+                  model.company
+                }
+              </>
+                `
+              }
             }
           ]
         },
@@ -139,39 +197,30 @@ export default {
         {
           name:'TableColumn',
           props:{
-            label:'状态',
-          },
-          children:[{
-            name:'EnumView',
-            field:'status',
-            props:{
-              metas:[
-                {
-                  value:'NORMAL',
-                  color:'default',
-                  name:'正常'
-                },
-                {
-                  value:'FORBID',
-                  color:'secondary',
-                  name:'禁用'
-                }
-              ]
-            }
-          }]
-        },
-        {
-          name:'TableColumn',
-          props:{
             label:'时间',
             field:'created_at',
-            searchable:true,
             sortable:true,
           },
-          children:[{
-            name:'DayView',
-            field:'created_at',
-          }],
+          children:[
+            {
+              name:'JsxTemplateParser',
+              fieldsGql:' created_at ',   
+              props:{
+              template:`
+              <>
+                {
+                  model.already_read !== true &&
+                  <b>{model.created_at}</b>
+                }
+                {
+                  model.already_read === true&&
+                  model.created_at
+                }
+              </>
+                `
+              }
+            }
+          ],
         },
         {
           name:'TableColumn',
@@ -183,31 +232,23 @@ export default {
             {
               name:'IconButton',
               props:{
-                icon:'mdi-pencil',
-                tooltip:'编辑',
+                icon:'mdi-magnify',
+                tooltip:'查看',
                 onClick:{
                   name: OPEN_PAGE_ACTION,
-                  pageJumper: {openStyle: "POPUP", pageId: "guid-p-u-2"},
+                  pageJumper: {openStyle: "POPUP", pageId: "guid-p-cms-3"},
                 }
               }
             },
             {
-              name:'JsxTemplateParser',
-              fieldsGql:' is_supper ',   
+              name:'IconButton',
               props:{
-              actions:{
-                remove:{
+                icon:'mdi-delete',
+                tooltip:'删除',
+                onClick:{
                   name: REMOVE_LIST_VIEW_RECORD,
                   confirmMessage:'删除后将不可恢复，您确定要删除吗？',
                 }
-              },
-              //暂时不支持这种写法：!model.is_supper 
-              template:`
-                {
-                  model.is_supper !== true &&
-                  <IconButton icon='mdi-delete' tooltip='删除' onClick={remove} />
-                }
-                `
               }
             },
           ]
