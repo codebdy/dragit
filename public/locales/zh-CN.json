@@ -230,7 +230,7 @@
     "item-key":"条目键值",
     "item-name":"条目名称",
     "items-data":"条目数据",
-    "edit-select-items":"编辑下拉条目",
+    "edit-items":"编辑条目",
 
     "error":"错误",
     "input-error":"部分输入项有错误",

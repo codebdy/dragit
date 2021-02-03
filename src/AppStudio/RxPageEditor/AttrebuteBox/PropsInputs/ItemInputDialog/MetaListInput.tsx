@@ -28,21 +28,23 @@ export default function MetaListInput(
     label?:string, 
     value:Array<MetaItem>|undefined, 
     onChange:(value:Array<MetaItem>)=>void,
+    idKey?:string,
+    nameKey?:string,
     idLabel?:string,
-    valueLabel?:string,
+    nameLabel?:string,
   }
 ) {
-  const {label, value, onChange, idLabel, valueLabel} = props; 
+  const {label, value, onChange, idKey = 'id', nameKey = 'name', idLabel, nameLabel} = props; 
   const classes = useStyles();
   let metas = value ? cloneObject(value) : [];
 
   
-  const handleChangeSlug = (index:number, id:string)=>{
-    metas[index].id = id;
+  const handleChangeId = (index:number, id:string)=>{
+    metas[index][idKey] = id;
     onChange([...metas]);
   };
   const handleChangeName = (index:number, name:string)=>{
-    metas[index].name = name;
+    metas[index][nameKey] = name;
     onChange([...metas]);
   };
 
@@ -61,7 +63,7 @@ export default function MetaListInput(
     <Fragment>
       {label && <div className = {classes.itemInput}>{ label }</div>}
       {
-        metas.map((meta:MetaItem, index:number)=>{
+        metas.map((meta:any, index:number)=>{
           return(
             <div className ={classes.nameValueItem}
               key={index}
@@ -71,17 +73,17 @@ export default function MetaListInput(
                 label={idLabel || intl.get('slug')} 
                 variant="outlined" 
                 size="small"
-                value = {meta.id || ''}
+                value = {meta[idKey] || ''}
                 onChange = {event=>{
-                  handleChangeSlug(index, event.target.value.trim())
+                  handleChangeId(index, event.target.value.trim())
                 }}
               />
                 <TextField 
                 className = {classes.itemInput} 
-                label={valueLabel || intl.get('name')} 
+                label={nameLabel || intl.get('name')} 
                 variant="outlined" 
                 size="small"
-                value = {meta.name ||''}
+                value = {meta[nameKey] ||''}
                 onChange = {event=>{
                   handleChangeName(index, event.target.value.trim())
                 }}

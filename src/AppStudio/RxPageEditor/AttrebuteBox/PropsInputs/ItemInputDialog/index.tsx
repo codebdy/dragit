@@ -74,13 +74,18 @@ const DialogActions = withStyles((theme: Theme) => ({
 
 
 export interface MetaListDialogProps{
+  label?:string,
+  idKey?:string,
+  nameKey?:string,
+  idLabel?:string,
+  nameLabel?:string,
   value?:Array<any>;
   onChange:(newValue:Array<any>)=>void;
 }
 
 export default function ItemsInputDialog(props:MetaListDialogProps){
   const classes = useStyles();
-  const {value,  onChange} = props;
+  const {label, idKey, nameKey, idLabel, nameLabel, value,  onChange} = props;
   const [inpuValue, setInputValue] = React.useState<Array<any>>(value?cloneObject(value):[]);
  
   const [open, setOpen] = React.useState(false);
@@ -110,11 +115,19 @@ export default function ItemsInputDialog(props:MetaListDialogProps){
           scroll = 'paper'
         >
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            {intl.get('edit-select-items')}
+            {intl.get('edit-items')}
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>
             <div className={classes.dlgBody}>
-              <MetaListInput label="" value = {inpuValue} onChange = {setInputValue}/>
+              <MetaListInput 
+                label = {label}
+                idKey = {idKey}
+                nameKey = {nameKey}
+                idLabel = {idLabel}
+                nameLabel = {nameLabel}
+                value = {inpuValue} 
+                onChange = {setInputValue}
+              />
             </div>
           </DialogContent>
           <DialogActions>

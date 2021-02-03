@@ -14,7 +14,15 @@ export class ListViewEnumFilterConfig extends MetaConfig{
   getPropConfigs(): Array<IPropConfig>{
     return [
       ...marginConfigs,
-      textboxSizeConfig
+      textboxSizeConfig,
+      {
+        name:'metas',
+        propType:'items',
+        props:{
+          idKey:'value',
+          nameKey:'name',
+        }
+      }
     ]
   }
 
