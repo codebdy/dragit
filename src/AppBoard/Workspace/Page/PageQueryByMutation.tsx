@@ -19,7 +19,6 @@ export const PageQueryByMutation = observer((
   const [ excuteMutation, { loading, error, data }] = useMutation(gql`${queryGQL.gql}`, {
     variables: { ...queryGQL.variables },
     notifyOnNetworkStatusChange: true,
-    fetchPolicy:'no-cache'
   });
 
   useEffect(()=>{
