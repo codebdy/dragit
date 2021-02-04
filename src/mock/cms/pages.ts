@@ -1,3 +1,4 @@
+import articleChannelSchema from "./channel/articleChannelSchema";
 import { dashboardSchema } from "./dashboard/pageSchema";
 import { enquiryListSchema } from "./enquires/enquiryListSchema";
 import { viewEnquirySchema } from "./enquires/viewEnquirySchema";
@@ -40,6 +41,14 @@ var cmsPages = [
     query:'post',
     schema:postEditSchema,
   },
+
+  {
+    id:'guid-p-cms-7',
+    name:'文章频道',
+    //query:'post',
+    schema:articleChannelSchema,
+  },
+
 
 ]
 

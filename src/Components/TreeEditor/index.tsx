@@ -10,6 +10,10 @@ import Portlet from 'Components/Portlet';
 import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";
 import TreeList from './TreeList';
+import { gql, useQuery } from '@apollo/react-hooks';
+import { cloneObject } from 'rx-drag/utils/cloneObject';
+import { useQueryGQL } from './useQueryGQL';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 
 const TreeEditor = React.forwardRef((
@@ -18,11 +22,14 @@ const TreeEditor = React.forwardRef((
     elevation:number,
     nameKey:string,
     children:any,
+    query?:string,
+    mutation?:string,
   }, 
   ref:any
 )=>{
-  const {nameKey = 'name', children, ...rest} = props;
+  const {nameKey = 'name', query, mutation, children, ...rest} = props;
 
+  const queryGQL = useQueryGQL(query);
   //const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
   //const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
   //const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
@@ -31,12 +38,19 @@ const TreeEditor = React.forwardRef((
   //const [form, setForm] = useState<IForm>(defultForm());
   const [selectedNode, setSelectedNode] = useState<RxNode<ITreeNode>|undefined>();
 
-  /*useEffect(()=>{
-    const items = itemsJustSaved ? itemsJustSaved : itemsGot;
-    let root = new RXNode<ITreeNode>(); 
-    root.parse(items);
-    setRoot(root);
-  },[itemsJustSaved, itemsGot]);*/
+  //console.log('TreeEditor', queryGQL)
+
+  const {loading, data, error} = useQuery( gql` ${queryGQL.gql}`);
+
+  useShowAppoloError(error);
+
+  useEffect(()=>{
+    if(query){
+      let root = new RxNode<ITreeNode>(); 
+      root.parse(cloneObject((data && data[query])||[]));
+      setRoot(root);   
+    }
+  },[data, query]);
 
   const handleNodeDragStart = (node?:RxNode<ITreeNode>)=>{
     setDraggedNode(node);
@@ -153,7 +167,6 @@ const TreeEditor = React.forwardRef((
   }
 
   const saving = false;
-  const loading = false;
 
   return (
     <Portlet 

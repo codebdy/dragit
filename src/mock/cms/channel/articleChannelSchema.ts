@@ -1,5 +1,4 @@
-export default {
-  layout:[
+export default [
     {
       name: 'GridRow',
       props: {
@@ -20,6 +19,8 @@ export default {
                 title:'文章频道',
                 elevation:6,
                 marginTop:4,
+                query:'postChannelTree',
+                mutation:'savePostChannelTree',
               },
               children:[
                 {
@@ -87,4 +88,3 @@ export default {
       ]
     },
   ] 
-}

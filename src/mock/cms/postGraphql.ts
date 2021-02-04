@@ -90,7 +90,6 @@ export var articleGQLInput =`
 export var articleGQLQuery = `
   posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
   post(id:ID):Post
-  channelTree:JSON
   allPostTags:[PostTag]
   allPostAttributes:[PostAttribute]
 `

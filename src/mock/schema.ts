@@ -1,6 +1,6 @@
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
-import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./article/graphql";
-import { channelTreeResolver } from "./article/channel/resolvers";
+import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./cms/postGraphql";
+import { postChannelMutationResolvers, postChannelQueryResolvers } from "./cms/channel/resolvers";
 import { allPostTagsResolver } from "./article/tag/resolvers";
 import { allPostAttributesResolver } from "./article/attribute/resolvers";
 import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graphql";
@@ -24,6 +24,7 @@ import { authGQLInput, authGQLMutation, authGQLQuery, authGQLType } from "./apps
 import { roleMutationResolvers, roleQueryResolvers } from "./user/roleResolvers";
 import { enquiryGQLInput, enquiryGQLMutation, enquiryGQLQuery, enquiryGQLType } from "./cms/enquires/enquiryGraphql";
 import { enquiryMutationResolvers, enquiryQueryResolvers } from "./cms/enquires/enquiryResolvers";
+import { postChannelGQLMutation, postChannelGQLQuery } from "./cms/channelGraphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -71,6 +72,7 @@ export const schema = `
     ${appGQLQuery}
     ${templateGQLQuery}
     ${articleGQLQuery}
+    ${postChannelGQLQuery}
     ${mediasGQLQuery}
     ${supplierGQLQuery}
     ${roleGQLQuery}
@@ -82,6 +84,7 @@ export const schema = `
     ${authGQLMutation}
     ${appGQLMutation}
     ${articleGQLMutation}
+    ${postChannelGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
     ${roleGQLMutation}
@@ -103,7 +106,7 @@ export const resolvers = {
     ...authQueryResolvers,
     
     ...postQueryResolvers,
-    channelTree:channelTreeResolver,
+    ...postChannelQueryResolvers,
     allPostTags:allPostTagsResolver,
     allPostAttributes:allPostAttributesResolver,
     
@@ -120,6 +123,7 @@ export const resolvers = {
     ...authMutationResolvers,
 
     ...postMutationResolvers,
+    ...postChannelMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
     ...userMutationResolvers,

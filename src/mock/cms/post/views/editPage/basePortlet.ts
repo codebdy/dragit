@@ -115,7 +115,7 @@ export default{
                 multiSelect:true,
                 //size:"small",
                 xs:6,
-                query:'channelTree',
+                query:'postChannelTree',
               },        
             }
           ],

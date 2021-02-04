@@ -23,18 +23,28 @@ export class TreeEditorConfig extends MetaConfig{
       {
         name:'title',
         labelKey:'title',
-        propType:'string',      
+        propType:'string',     
+        props:{
+          xs:12
+        } 
       },
-     // {
-     //   name:'apiForGet',
-     //   label:'get-api',
-        //input:ApiEditor,
-      //},
-      //{
-      //  name:'apiForSave',
-       // label:'submit-api',
-        //input:ApiEditor,
-      //}
+      {
+        name:'query',
+        labelKey:'query',
+        propType:'string',
+        props:{
+          xs:12
+        }
+      },
+      {
+        name:'mutation',
+        labelKey:'mutation',
+        propType:'string',
+        props:{
+          xs:12
+        }
+      },
+
     ]
   }
 
