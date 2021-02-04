@@ -88,6 +88,8 @@ import TableColumn from "Components/TableColumn";
 import { TableColumnConfig } from "Components/TableColumn/TableColumnConfig";
 import MdiIcon from "Components/common/MdiIcon";
 import Hidden from "Components/Inputs/Hidden";
+import { MediaGroup } from "Components/Displays/MediaGroup";
+import { MediaGroupConfig } from "Components/Displays/MediaGroup/MediaGroupConfig";
 
 register('Canvas', Canvas, CanvasConfig);
 register('Divider', Divider, DividerConfig);
@@ -133,6 +135,7 @@ register('TextView', TextView, TextViewConfig);
 register('MediaView', MediaView, MediaViewConfig);
 register('EnumView', EnumView, EnumViewConfig);
 register('DayView', DayView, DayViewConfig);
+register('MediaGroup',withFormField(withSkeleton(MediaGroup)), MediaGroupConfig);
 
 register('JsxTemplateParser', JsxTemplateParser, JsxTemplateParserConfig);
 register('Avatar', Avatar);

@@ -98,15 +98,18 @@ export default {
         {
           name:'TableColumn',
           props:{
-            label:'图片',                  
+            label:'图片',
+            width:'120px',             
           },
-          children:[{
-            name:'MediaView',
-            
-            props:{
-              width:'60px',
+          children:[
+            {
+              name:'MediaGroup', 
+              field:'medias',        
+              props:{
+                max:4,
+              }
             }
-          }]
+          ]
         },
         {
           name:'TableColumn',

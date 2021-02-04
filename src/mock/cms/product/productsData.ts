@@ -24,6 +24,24 @@ export default[
             name: 'Morning',
             src: '/static/images/grid-list/morning.jpg',
           },
+          {
+            id:'9',
+            thumbnail: '/static/images/grid-list/mushroom.jpg',
+            title: 'Mushrooms',
+            src: '/static/images/grid-list/mushroom.jpg',
+          },
+          {
+            id:'10',
+            thumbnail: '/static/images/grid-list/olive.jpg',
+            title: 'Olive oil',
+            src: '/static/images/grid-list/olive.jpg',
+          },
+          {
+            id:'11',
+            thumbnail: '/static/images/grid-list/star.jpg',
+            title: 'Sea star',
+            src: '/static/images/grid-list/star.jpg',
+          },
         ],
         categories:[{id:1},{id:3},{id:32}],
         specs:[

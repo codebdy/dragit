@@ -18,7 +18,10 @@ function getMetaFieldGql(meta?: IMeta){
       return `  ${meta.field}{ id ${CHILDREN_GQL} }`;
     }
 
-    if(meta.name === 'MediasPortlet' || meta.name === 'MediaSelect' || meta.name === 'MediaView'){
+    if(meta.name === 'MediasPortlet' 
+    || meta.name === 'MediaSelect' 
+    || meta.name === 'MediaView' 
+    || meta.name === 'MediaGroup'){
       return `  ${meta.field}{ id title  thumbnail  src  alt }`;
     }
 
