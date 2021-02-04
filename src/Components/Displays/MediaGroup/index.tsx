@@ -7,15 +7,16 @@ import React from 'react';
 export const MediaGroup = (
   props:RXInputProps&{
     max?:number,
-    value?:Array<IMedia>
+    value?:Array<IMedia>,
+    spacing?:"medium"|"small"|number,
   }
 ) => {
-  const {max, value, error, helperText, ...rest} = props;
+  const {max, value, error, helperText, spacing = "medium", ...rest} = props;
 
   const medias = value instanceof Array ? value :[];
 
   return (
-    <AvatarGroup max={max} {...rest}>
+    <AvatarGroup max={max} {...rest} spacing = {spacing}>
       {
         medias?.map((media:IMedia)=>{
           return (

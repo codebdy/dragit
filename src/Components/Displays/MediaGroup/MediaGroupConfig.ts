@@ -14,7 +14,29 @@ export class MediaGroupConfig extends MetaConfig{
   getPropConfigs(): Array<IPropConfig>{
     return [
       ...marginConfigs,
+      {
+        name:'max',
+        label:'max',
+        propType:'number',
+      },
+      {
+        name:'spacing',
+        labelKey:'spacing',
+        propType:'select',
+        props:{
+          items:[
+            {
+              value:'small',
+              label:'Small',
+            },
+            {
+              value:'medium',
+              label:'Medium',
+            }
 
+          ]
+        }
+      }
     ]
   }
 

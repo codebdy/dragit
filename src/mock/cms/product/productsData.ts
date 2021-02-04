@@ -75,12 +75,6 @@ export default[
         status:'DRAFT',
         medias:[
           {
-            id:2,
-            thumbnail: '/static/images/grid-list/burgers.jpg',
-            name: 'Tasty burger',
-            src: '/static/images/grid-list/burgers.jpg',
-          },
-          {
             id:5,
             thumbnail: '/static/images/grid-list/camera.jpg',
             name: 'Camera',
@@ -125,6 +119,15 @@ export default[
         id:4,
         status:'PUBLISHED',
         name:'苍蝇手套',
+        medias:[
+          {
+            id:'10',
+            thumbnail: '/static/images/grid-list/olive.jpg',
+            title: 'Olive oil',
+            src: '/static/images/grid-list/olive.jpg',
+          },
+
+        ]
       },
       {
         id:5,
@@ -135,6 +138,15 @@ export default[
         id:6,
         status:'PUBLISHED',
         name:'蟑螂的拖鞋',
+        medias:[
+          {
+            id:'10',
+            thumbnail: '/static/images/grid-list/olive.jpg',
+            title: 'Olive oil',
+            src: '/static/images/grid-list/olive.jpg',
+          },
+
+        ]
       },
       {
         id:7,

@@ -107,6 +107,9 @@ export default {
               field:'medias',        
               props:{
                 max:4,
+                //first:true,
+                variant:'rounded',
+                size:60,
               }
             }
           ]
