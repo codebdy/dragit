@@ -1,4 +1,4 @@
-export var articleGQLType = `
+export var postGQLType = `
   type SeoMeta{
     id:ID!
     title: String
@@ -50,9 +50,8 @@ export var articleGQLType = `
     paginatorInfo:PaginatorInfo!
     data:[Post]
   }
-`
 
-export var articleGQLInput =`
+  
   input PostChannelInput{
     id:ID
     name:String
@@ -76,12 +75,12 @@ export var articleGQLInput =`
   }
 `
 
-export var articleGQLQuery = `
+export var postGQLQuery = `
   posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
   post(id:ID):Post
 `
 
-export var articleGQLMutation = `
+export var postGQLMutation = `
   removePosts(ids:[ID]):[Post]
   updatePosts(postFragment:PostInput, ids:[ID] ):[Post]
   savePost(post:PostInput):Post

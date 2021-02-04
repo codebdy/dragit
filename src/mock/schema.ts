@@ -1,5 +1,5 @@
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
-import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./cms/postGraphql";
+import { postGQLType, postGQLQuery, postGQLMutation } from "./cms/postGraphql";
 import { postChannelMutationResolvers, postChannelQueryResolvers } from "./cms/channel/resolvers";
 import { postTagMutationResolvers, postTagQueryResolvers } from "./cms/postTag/resolvers";
 import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graphql";
@@ -27,6 +27,8 @@ import { postChannelGQLMutation, postChannelGQLQuery } from "./cms/channelGraphq
 import { postTagGQLMutation, postTagGQLQuery, postTagGQLType } from "./cms/postTagGraphql";
 import { postAttributeMutationResolvers, postAttributesQueryResolvers } from "./cms/postAttribute/resolvers";
 import { postAttributeGQLMutation, postAttributeGQLQuery, postAttributeGQLType } from "./cms/postAttributeGraphql";
+import { productGQLMutation, productGQLQuery, productGQLType } from "./cms/productGraphql";
+import { productMutationResolvers, productQueryResolvers } from "./cms/product/resolvers";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -56,8 +58,8 @@ export const schema = `
   ${mediasGQLType}
   ${postTagGQLType}
   ${postAttributeGQLType}
-  ${articleGQLType}
-  ${articleGQLInput}
+  ${postGQLType}
+  ${productGQLType}
   ${splitGQLType}
   ${splitGQLInput}
   ${supplierGQLType}
@@ -75,10 +77,11 @@ export const schema = `
     ${authGQLQuery}
     ${appGQLQuery}
     ${templateGQLQuery}
-    ${articleGQLQuery}
+    ${postGQLQuery}
     ${postChannelGQLQuery}
     ${postTagGQLQuery}
     ${postAttributeGQLQuery}
+    ${productGQLQuery}
     ${mediasGQLQuery}
     ${supplierGQLQuery}
     ${roleGQLQuery}
@@ -89,10 +92,11 @@ export const schema = `
   type Mutation{
     ${authGQLMutation}
     ${appGQLMutation}
-    ${articleGQLMutation}
+    ${postGQLMutation}
     ${postChannelGQLMutation}
     ${postTagGQLMutation}
     ${postAttributeGQLMutation}
+    ${productGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
     ${roleGQLMutation}
@@ -117,6 +121,7 @@ export const resolvers = {
     ...postChannelQueryResolvers,
     ...postTagQueryResolvers,
     ...postAttributesQueryResolvers,
+    ...productQueryResolvers,
     
     ...mediaQueryResolvers,
     ...supplierQueryResolvers,
@@ -134,6 +139,7 @@ export const resolvers = {
     ...postChannelMutationResolvers,
     ...postTagMutationResolvers,
     ...postAttributeMutationResolvers,
+    ...productMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
     ...userMutationResolvers,

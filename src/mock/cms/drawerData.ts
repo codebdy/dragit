@@ -87,7 +87,7 @@ export var cmsDrawerData= [
           title: '产品',
           type: 'item',
           icon: 'mdi-circle-small',
-          to: '/admin/module/product',
+          pageId: 'guid-p-cms-12',
       },
       {
           title: '分类',

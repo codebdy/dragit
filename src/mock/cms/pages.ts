@@ -9,6 +9,8 @@ import { postAttributeEditSchema } from "./postAttribute/postAttributeEditSchema
 import { postAttributeListSchema } from "./postAttribute/postAttributeListSchema";
 import { postTagEditSchema } from "./postTag/postTagEditSchema";
 import { postTagListSchema } from "./postTag/postTagListSchema";
+import { productEditSchema } from "./product/views/editPage";
+import { productListSchema } from "./product/views/listPage";
 
 var cmsPages = [
   {
@@ -76,6 +78,18 @@ var cmsPages = [
     max_width:'xs',
     query:'postAttribute',
     schema:postAttributeEditSchema,
+  },
+
+  {
+    id:'guid-p-cms-12',
+    name:'产品列表',
+    schema:productListSchema,
+  },
+  {
+    id:'guid-p-cms-13',
+    name:'产品编辑',
+    query:'product',
+    schema:productEditSchema,
   },
 
 ]

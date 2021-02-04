@@ -2,7 +2,7 @@ export default[
       {
         id:1,
         name:'鞋子250',
-        is_published:'未发布',
+        status:'DRAFT',
         created_at:'2020-11-30 14:38',
         content:"<p>轻轻的，我来了</p><p>正如我轻轻的走</p>",
         medias:[
@@ -25,7 +25,7 @@ export default[
             src: '/static/images/grid-list/morning.jpg',
           },
         ],
-        channel:[1,3,32],
+        categories:[{id:1},{id:3},{id:32}],
         specs:[
           {
             image: {
@@ -54,7 +54,7 @@ export default[
       {
         id:2,
         name:'iPhone89',
-        is_published:'未发布',
+        status:'DRAFT',
         medias:[
           {
             id:2,
@@ -80,7 +80,7 @@ export default[
       {
         id:3,
         name:'小米无敌拖鞋',
-        is_published:'已发布',
+        status:'PUBLISHED',
         medias:[
           {
             id:7,
@@ -105,51 +105,62 @@ export default[
       },
       {
         id:4,
-
+        status:'PUBLISHED',
         name:'苍蝇手套',
       },
       {
         id:5,
+        status:'PUBLISHED',
         name:'新冠病毒1号',
       },
       {
         id:6,
+        status:'PUBLISHED',
         name:'蟑螂的拖鞋',
       },
       {
         id:7,
+        status:'PUBLISHED',
         name:'老鼠的耳罩',
       },
       {
         id:8,
+        status:'PUBLISHED',
         name:'鸭子的口罩',
       },
       {
         id:9,
+        status:'PUBLISHED',
         name:'茶品',
       },
       {
         id:10,
+        status:'PUBLISHED',
         name:'肉夹馍',
       },
       {
         id:11,
+        status:'PUBLISHED',
         name:'豆芽炒土豆',
       },
       {
         id:12,
+        status:'PUBLISHED',
         name:'都炖肉',
       },
       {
         id:13,
+        status:'PUBLISHED',
         name:'火车轮子',
       },
       {
         id:14,
+        status:'PUBLISHED',
         name:'火箭',
       },
       {
         id:15,
+        status:'PUBLISHED',
         name:'飞机',
       },
     ]
