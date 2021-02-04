@@ -74,7 +74,7 @@ export var cmsDrawerData= [
           title: '属性',
           type: 'item',
           icon: 'mdi-circle-small',
-          to: '/admin/module/article-attribute',
+          pageId: 'guid-p-cms-10',
       },
     ],
   },

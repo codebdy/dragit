@@ -24,8 +24,9 @@ import { roleMutationResolvers, roleQueryResolvers } from "./user/roleResolvers"
 import { enquiryGQLInput, enquiryGQLMutation, enquiryGQLQuery, enquiryGQLType } from "./cms/enquires/enquiryGraphql";
 import { enquiryMutationResolvers, enquiryQueryResolvers } from "./cms/enquires/enquiryResolvers";
 import { postChannelGQLMutation, postChannelGQLQuery } from "./cms/channelGraphql";
-import { postAttributesQueryResolvers } from "./cms/postAttribute/resolvers";
 import { postTagGQLMutation, postTagGQLQuery, postTagGQLType } from "./cms/postTagGraphql";
+import { postAttributeMutationResolvers, postAttributesQueryResolvers } from "./cms/postAttribute/resolvers";
+import { postAttributeGQLMutation, postAttributeGQLQuery, postAttributeGQLType } from "./cms/postAttributeGraphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -54,6 +55,7 @@ export const schema = `
 
   ${mediasGQLType}
   ${postTagGQLType}
+  ${postAttributeGQLType}
   ${articleGQLType}
   ${articleGQLInput}
   ${splitGQLType}
@@ -76,6 +78,7 @@ export const schema = `
     ${articleGQLQuery}
     ${postChannelGQLQuery}
     ${postTagGQLQuery}
+    ${postAttributeGQLQuery}
     ${mediasGQLQuery}
     ${supplierGQLQuery}
     ${roleGQLQuery}
@@ -89,6 +92,7 @@ export const schema = `
     ${articleGQLMutation}
     ${postChannelGQLMutation}
     ${postTagGQLMutation}
+    ${postAttributeGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
     ${roleGQLMutation}
@@ -129,6 +133,7 @@ export const resolvers = {
     ...postMutationResolvers,
     ...postChannelMutationResolvers,
     ...postTagMutationResolvers,
+    ...postAttributeMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
     ...userMutationResolvers,

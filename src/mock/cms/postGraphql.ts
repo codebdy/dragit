@@ -18,11 +18,6 @@ export var articleGQLType = `
     DRAFT 
   }
 
-  type PostAttribute{
-    id: ID!
-    name: String
-  }
-
 
   type PostChannel{
     id:ID!
@@ -63,11 +58,6 @@ export var articleGQLInput =`
     name:String
   }
 
-  input PostAttributeInput{
-    id: ID
-    name: String
-  }
-
   input PostInput{
     id: ID
     slug: String
@@ -89,7 +79,6 @@ export var articleGQLInput =`
 export var articleGQLQuery = `
   posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
   post(id:ID):Post
-  allPostAttributes:[PostAttribute]
 `
 
 export var articleGQLMutation = `

@@ -8,12 +8,12 @@ export default {
   withNode:true,
   props:{
     variant:'outlined',
-    query:'postTags',
-    remove:'removePostTags',
+    query:'postAttributes',
+    remove:'removePostAttributes',
     update:{
-      name:'updatePostTags',
-      variableType:'PostTagInput',
-      variableName:'postTag',
+      name:'updatePostAttributes',
+      variableType:'PostAttributeInput',
+      variableName:'postAttribut',
     }
   },
   children:[
@@ -97,7 +97,7 @@ export default {
                 tooltip:'编辑',
                 onClick:{
                   name: OPEN_PAGE_ACTION,
-                  pageJumper: {openStyle: "POPUP", pageId: "guid-p-cms-9"},
+                  pageJumper: {openStyle: "POPUP", pageId: "guid-p-cms-11"},
                 }
               }
             },

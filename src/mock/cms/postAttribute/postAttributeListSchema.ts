@@ -1,6 +1,6 @@
 import { OPEN_PAGE_ACTION } from "Base/PageUtils/ACTIONs"
 import listView from './list';
-export var postTagListSchema = [
+export var postAttributeListSchema = [
     {
       name: 'GridRow',
       props: {
@@ -25,7 +25,7 @@ export var postTagListSchema = [
                 {
                   name: 'h2',
                   props:{
-                    rxText: '标签列表',
+                    rxText: '附加属性列表',
                   }                    
                 },
                 
@@ -44,7 +44,7 @@ export var postTagListSchema = [
                   onClick:{
                     name: OPEN_PAGE_ACTION,
                     pageJumper:{
-                      pageId:'guid-p-cms-9',
+                      pageId:'guid-p-cms-11',
                     }
                   }
                 }
