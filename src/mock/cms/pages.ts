@@ -5,6 +5,8 @@ import { viewEnquirySchema } from "./enquires/viewEnquirySchema";
 import { mediasPageSchema } from "./medias/mediasPageSchema";
 import { postEditSchema } from "./post/views/editPage";
 import { postListSchema } from "./post/views/listPage";
+import { postTagEditSchema } from "./postTag/postTagEditSchema";
+import { postTagListSchema } from "./postTag/postTagListSchema";
 
 var cmsPages = [
   {
@@ -49,6 +51,30 @@ var cmsPages = [
     schema:articleChannelSchema,
   },
 
+  {
+    id:'guid-p-cms-8',
+    name:'文章标签列表',    
+    schema:postTagListSchema,
+  },
+  {
+    id:'guid-p-cms-9',
+    name:'文章标签编辑',
+    max_width:'xs',
+    query:'postTag',
+    schema:postTagEditSchema,
+  },
+  {
+    id:'guid-p-cms-10',
+    name:'文章属性列表',
+    //query:'post',
+    //schema:articleChannelSchema,
+  },
+  {
+    id:'guid-p-cms-11',
+    name:'文章属性编辑',
+    //query:'post',
+    //schema:articleChannelSchema,
+  },
 
 ]
 

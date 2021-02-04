@@ -1,8 +1,7 @@
 import { userByTokenResolver, loginResolver } from "./login/resolvers";
 import { articleGQLType, articleGQLQuery, articleGQLMutation, articleGQLInput } from "./cms/postGraphql";
 import { postChannelMutationResolvers, postChannelQueryResolvers } from "./cms/channel/resolvers";
-import { allPostTagsResolver } from "./article/tag/resolvers";
-import { allPostAttributesResolver } from "./article/attribute/resolvers";
+import { postTagMutationResolvers, postTagQueryResolvers } from "./cms/postTag/resolvers";
 import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graphql";
 import { mediaQueryResolvers } from "./medias/queryResolvers";
 import { mediaMutationResolvers } from "./medias/mutationResolvers";
@@ -25,6 +24,8 @@ import { roleMutationResolvers, roleQueryResolvers } from "./user/roleResolvers"
 import { enquiryGQLInput, enquiryGQLMutation, enquiryGQLQuery, enquiryGQLType } from "./cms/enquires/enquiryGraphql";
 import { enquiryMutationResolvers, enquiryQueryResolvers } from "./cms/enquires/enquiryResolvers";
 import { postChannelGQLMutation, postChannelGQLQuery } from "./cms/channelGraphql";
+import { postAttributesQueryResolvers } from "./cms/postAttribute/resolvers";
+import { postTagGQLMutation, postTagGQLQuery, postTagGQLType } from "./cms/postTagGraphql";
 const GraphQLJSON = require('graphql-type-json');
 // The GraphQL schema
 export const schema = `
@@ -52,6 +53,7 @@ export const schema = `
   ${templateGQLType}
 
   ${mediasGQLType}
+  ${postTagGQLType}
   ${articleGQLType}
   ${articleGQLInput}
   ${splitGQLType}
@@ -73,6 +75,7 @@ export const schema = `
     ${templateGQLQuery}
     ${articleGQLQuery}
     ${postChannelGQLQuery}
+    ${postTagGQLQuery}
     ${mediasGQLQuery}
     ${supplierGQLQuery}
     ${roleGQLQuery}
@@ -85,6 +88,7 @@ export const schema = `
     ${appGQLMutation}
     ${articleGQLMutation}
     ${postChannelGQLMutation}
+    ${postTagGQLMutation}
     ${mediasGQLMutation}
     ${splitGQLMutation}
     ${roleGQLMutation}
@@ -107,8 +111,8 @@ export const resolvers = {
     
     ...postQueryResolvers,
     ...postChannelQueryResolvers,
-    allPostTags:allPostTagsResolver,
-    allPostAttributes:allPostAttributesResolver,
+    ...postTagQueryResolvers,
+    ...postAttributesQueryResolvers,
     
     ...mediaQueryResolvers,
     ...supplierQueryResolvers,
@@ -124,6 +128,7 @@ export const resolvers = {
 
     ...postMutationResolvers,
     ...postChannelMutationResolvers,
+    ...postTagMutationResolvers,
     ...mediaMutationResolvers,
     ...splitDemoMutationResolvers, 
     ...userMutationResolvers,

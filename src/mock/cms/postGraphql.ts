@@ -23,10 +23,7 @@ export var articleGQLType = `
     name: String
   }
 
-  type PostTag{
-    id:ID!
-    name:String
-  }
+
   type PostChannel{
     id:ID!
     name:String
@@ -92,7 +89,6 @@ export var articleGQLInput =`
 export var articleGQLQuery = `
   posts(first: Int!, page: Int, where:JSON, orderBy:JSON):Posts!
   post(id:ID):Post
-  allPostTags:[PostTag]
   allPostAttributes:[PostAttribute]
 `
 

@@ -68,7 +68,7 @@ export var cmsDrawerData= [
           title: '标签',
           type: 'item',
           icon: 'mdi-circle-small',
-          to: '/admin/module/article-tag',
+          pageId: 'guid-p-cms-8',
       },
       {
           title: '属性',
