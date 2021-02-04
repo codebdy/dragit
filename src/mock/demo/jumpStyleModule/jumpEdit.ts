@@ -1,3 +1,3 @@
-import editPage from "mock/article/post/views/editPage";
+import {postEditSchema} from "mock/cms/post/views/editPage";
 
-export default [editPage]
+export default postEditSchema

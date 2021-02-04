@@ -5,7 +5,7 @@ import header from "./header"
 import mediasPortlet from "./mediasPortlet"
 import seoPortlet from "./seoPortlet"
 
-export default {
+export var postEditSchema =[ {
   name: 'GridRow',
   props: {
   },
@@ -49,4 +49,4 @@ export default {
         ]
       }
   ]
-}
+}]

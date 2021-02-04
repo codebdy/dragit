@@ -76,6 +76,7 @@ const ListView = observer(React.forwardRef((
     //fetchPolicy:'no-cache'
   });
 
+
   const [excuteUpdate, { error:updateError }] = useMutation(gql`${updateGQL.gql}`,
     {
       onCompleted:(data)=>{

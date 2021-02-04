@@ -56,7 +56,7 @@ export var cmsDrawerData= [
           title: '文章',
           type: 'item',
           icon: 'mdi-circle-small',
-          to: '/admin/module/article/',
+          pageId: 'guid-p-cms-5',
       },
       {
           title: '频道',

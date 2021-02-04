@@ -2,6 +2,8 @@ import { dashboardSchema } from "./dashboard/pageSchema";
 import { enquiryListSchema } from "./enquires/enquiryListSchema";
 import { viewEnquirySchema } from "./enquires/viewEnquirySchema";
 import { mediasPageSchema } from "./medias/mediasPageSchema";
+import { postEditSchema } from "./post/views/editPage";
+import { postListSchema } from "./post/views/listPage";
 
 var cmsPages = [
   {
@@ -30,13 +32,13 @@ var cmsPages = [
   {
     id:'guid-p-cms-5',
     name:'文章列表',
-    //schema:roleList,
+    schema:postListSchema,
   },
   {
     id:'guid-p-cms-6',
     name:'文章编辑',
-    query:'rxRole',
-    //schema:roleEdit,
+    query:'post',
+    schema:postEditSchema,
   },
 
 ]

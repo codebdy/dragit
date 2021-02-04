@@ -6,7 +6,7 @@ import { allPostAttributesResolver } from "./article/attribute/resolvers";
 import { mediasGQLMutation, mediasGQLQuery, mediasGQLType } from "./medias/graphql";
 import { mediaQueryResolvers } from "./medias/queryResolvers";
 import { mediaMutationResolvers } from "./medias/mutationResolvers";
-import { postMutationResolvers, postQueryResolvers } from "./article/post/resolvers";
+import { postMutationResolvers, postQueryResolvers } from "./cms/post/resolvers";
 import { splitDemoMutationResolvers } from "./demo/splitSubmit/resolvers";
 import { splitGQLInput, splitGQLMutation, splitGQLType } from "./demo/splitSubmit/graphql";
 import { supplierQueryResolvers } from "./supplier/resolvers";
@@ -29,20 +29,6 @@ const GraphQLJSON = require('graphql-type-json');
 export const schema = `
   scalar JSON
 
-  type SeoMeta{
-    id:ID!
-    title: String
-    keywords: String
-    description: String 
-  }
-
-  input SeoMetaInput{
-    id:ID
-    title: String
-    keywords: String
-    description: String 
-  }
-
   type LoginData{
     user:RxUser! 
     token:String!
@@ -55,11 +41,6 @@ export const schema = `
     lastPage:Int
     perPage:Int
     total:Int
-  }
-
-  enum PostStatus {
-    PUBLISHED
-    DRAFT 
   }
 
   ${authGQLType}

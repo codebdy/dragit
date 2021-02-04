@@ -1,4 +1,23 @@
 export var articleGQLType = `
+  type SeoMeta{
+    id:ID!
+    title: String
+    keywords: String
+    description: String 
+  }
+
+  input SeoMetaInput{
+    id:ID
+    title: String
+    keywords: String
+    description: String 
+  }
+
+  enum PostStatus {
+    PUBLISHED
+    DRAFT 
+  }
+
   type PostAttribute{
     id: ID!
     name: String

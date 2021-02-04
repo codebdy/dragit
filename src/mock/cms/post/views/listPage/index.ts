@@ -2,7 +2,7 @@
 import header from "./header"
 import list from "./list"
 
-export default {
+export var postListSchema = [{
   name: 'GridRow',
   props: {
   },
@@ -34,4 +34,4 @@ export default {
         ]
       }
   ]
-}
+}]

@@ -1,4 +1,4 @@
-import { articlesData } from "mock/article/post/data";
+import { articlesData } from "mock/cms/post/data";
 import { sleep } from "../../utils/sleep";
 
 var idSeed = 1000;

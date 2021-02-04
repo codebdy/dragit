@@ -9,7 +9,7 @@ import { ListViewStore } from "./ListViewStore";
 
 export function useQueryGQL( rxNode:RxNode<IMeta>, listViewStore:ListViewStore, query?:string ){
   const pageStore = usePageStore();
-
+  console.assert(typeof query === 'string', 'query名必须是String类型');
   const createQueryGQL = ()=>{
     const GQL_STRING = `
       query ($first:Int, $page:Int){
