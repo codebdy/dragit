@@ -15,7 +15,7 @@ export default{
           name: 'Typography',
           props:{
             variant:'h5',
-            rxText: '文章编辑',            
+            rxText: '产品编辑',            
           }
         }
       ],
