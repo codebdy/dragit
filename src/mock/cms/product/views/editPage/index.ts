@@ -4,6 +4,7 @@ import contentPortlet from "./contentPortlet"
 import header from "./header"
 import mediasPortlet from "./mediasPortlet"
 import seoPortlet from "./seoPortlet"
+import specsPortlet from "./specsPortlet"
 
 export var productEditSchema =[ {
   name: 'GridRow',
@@ -31,7 +32,7 @@ export var productEditSchema =[ {
                 children: [
                   mediasPortlet,
                   basePortlet,
-                  
+                  specsPortlet,
                   contentPortlet,
                 ]
               },
