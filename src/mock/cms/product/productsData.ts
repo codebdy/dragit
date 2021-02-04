@@ -1,7 +1,7 @@
 export default[
       {
         id:1,
-        name:'鞋子250',
+        name:'鞋子250 【魔幻】穿上能飞款、隐身版',
         status:'DRAFT',
         created_at:'2020-11-30 14:38',
         content:"<p>轻轻的，我来了</p><p>正如我轻轻的走</p>",

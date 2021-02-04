@@ -121,7 +121,6 @@ export default {
             field:'name',
             searchable:true,
             sortable:true,
-            width:'200px',
           },
     
           children:[{
