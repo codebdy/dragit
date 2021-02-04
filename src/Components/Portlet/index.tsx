@@ -36,7 +36,7 @@ interface PortletProps{
 const Portlet = React.forwardRef((props: PortletProps, ref:any) => {
   const classes = useStyles();
   const {open = true,withHeader, children, title, collapsible, className, actions, ...rest} = props;
-  const [opened, setOpened] = React.useState(open);
+  const [opened, setOpened] = React.useState(open||!collapsible);
 
   const hendleClickChevronIcon = ()=>{
     setOpened(!opened)
