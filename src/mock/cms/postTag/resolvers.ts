@@ -45,7 +45,7 @@ export const savePostTag = async (parent:any, args:any, context:any, info:any)=>
   await sleep(500);
 
   console.log('Server received tag data:', args);
-  let tag = {...args.post, id:args.post?.id || createId(), created_at:''}
+  let tag = {...args.postTag, id:args.postTag?.id || createId(), created_at:''}
   return tag;
 }
 
