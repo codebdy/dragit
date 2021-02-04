@@ -29,8 +29,9 @@ export var productEditSchema =[ {
                   md: 8,
                 },
                 children: [
+                  mediasPortlet,
                   basePortlet,
-                  seoPortlet,
+                  
                   contentPortlet,
                 ]
               },
@@ -41,7 +42,7 @@ export var productEditSchema =[ {
                 },
                 children: [
                   appearancePortlet,
-                  mediasPortlet,
+                  seoPortlet,
                 ]
               }
             ]

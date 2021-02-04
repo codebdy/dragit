@@ -7,6 +7,7 @@ export default{
     withHeader:true,
     title:'基本信息',
     collapsible: true,
+    marginTop:2, 
   },
   children:[
     {
@@ -23,13 +24,13 @@ export default{
           children:[
             {
               name:'TextBox',
-              field:'title',
+              field:'name',
               rule:{
                 valueType:'string',
                 required:true,
               },  
               props:{
-                label:'标题',
+                label:'名称',
                 variant:"outlined",
                 fullWidth:true,
               }
@@ -53,92 +54,6 @@ export default{
               },
             }
           ]
-        },
-        {
-          name: 'FormGridItem',
-          props:{
-            xs:6,
-          },
-          children:[
-            {
-              name:'TextBox',
-              field:'auther',
-              props:{
-                label:'作者',
-                variant:"outlined",
-                fullWidth:true,
-                //required:true,
-                helperText:'作者提示',
-              },
-            }
-          ]
-        },
-        {
-          name: 'FormGridItem',
-          props:{
-            xs:6,
-          },
-          children:[
-            {
-              name:'TextBox',
-              field:'email',
-              rule:{
-                valueType:'string',
-                ruleType:'email',
-                required:true,
-              },
-              props:{
-                label:'Email',
-                variant:"outlined",
-                fullWidth:true,
-              },
-            }
-          ]
-
-        },
-        {
-          name: 'FormGridItem',
-          props:{
-            xs:6,
-          },
-          children:[
-            {
-              name:'TreeSelect',
-              field:'channel',
-              designProps:{
-                query:null,
-              },
-              props:{
-                label:"频道",
-                variant:"outlined",
-                fullWidth:true,
-                multiSelect:true,
-                //size:"small",
-                xs:6,
-                query:'postChannelTree',
-              },        
-            }
-          ],
-        },
-        {
-          name: 'FormGridItem',
-          props:{
-            xs:12,
-          },
-          children:[
-            {
-              name:'Combobox',
-              field:'tags',
-              props:{
-                label:"标签",
-                variant:"outlined",
-                multiple:true,
-                fullWidth:true,
-                query:'allPostTags',
-              },                         
-            }
-          ]
-
         },
 
         {
