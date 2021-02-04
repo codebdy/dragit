@@ -29,6 +29,8 @@ export class RXModel{
   error?: string;  
   loading?: boolean;
   childrenMap: Map<string,RXModel>;
+  isTable?:boolean;
+
   private _isDirty:boolean = false;
   constructor(node: RxNode<IMeta>, modelKey:string|number) {
     this.id = createId();
@@ -122,7 +124,27 @@ export class RXModel{
     if(this.childrenMap.size === 0){
       return removeTypeName(this.value);
     }
+    if(this.isTable){
+      return this.toTableInputValue();
+    }
+    else{
+      return this.toModelInputValue();
+    }
+    
+  }
 
+  private toTableInputValue(){
+    let rtValue:Array<any> = [];
+    this.childrenMap?.forEach((fieldStore, key)=>{
+      if(!fieldStore.node?.meta.onlyShow && key !=='__typename'){
+        rtValue.push(fieldStore.toInputValue());
+      }
+    })
+
+    return rtValue;
+  }
+
+  private toModelInputValue(){
     let rtValue = this.defaultValue?.id ? {id:this.defaultValue?.id} as any : {} as any;
     this.childrenMap?.forEach((fieldStore, key)=>{
       if(!fieldStore.node?.meta.onlyShow && key !=='__typename'){
@@ -188,5 +210,9 @@ export class RXModel{
       }
     })
     return node;
+  }
+
+  setIsTable(isTable:boolean){
+    this.isTable = isTable;
   }
 }

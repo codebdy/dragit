@@ -39,13 +39,13 @@ export default{
           children:[
             {
               name:'MultiSelectBox',
-              field:'attributes',
+              //field:'attributes',
               props:{
                 label:"附加属性",
                 variant:"outlined",
                 itemName:'name',
                 fullWidth:true,
-                query:'allPostAttributes',
+                query:'allProductAttributes',
               },                         
             }
           ]

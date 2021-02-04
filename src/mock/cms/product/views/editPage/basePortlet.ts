@@ -45,7 +45,7 @@ export default{
           children:[
             {
               name:'TextBox',
-              field:'slug',
+              field:'rx_slug',
               props:{
                 label:'Slug',
                 variant:"outlined",

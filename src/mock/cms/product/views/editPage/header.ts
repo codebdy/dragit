@@ -45,9 +45,9 @@ export default{
           onClick:{
             name:SUBMIT_MUTATION,
             mutation:{
-              name:'savePost',
-              variableName:'post',
-              variableType:'PostInput',
+              name:'saveProduct',
+              variableName:'product',
+              variableType:'ProductInput',
               submitNode:'',
               refreshNode:'',
               goback:true,

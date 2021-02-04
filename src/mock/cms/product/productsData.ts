@@ -46,6 +46,7 @@ export default[
         categories:[{id:1},{id:3},{id:32}],
         specs:[
           {
+            id:'1',
             image: {
               id:5,
               thumbnail: '/static/images/grid-list/hats.jpg',
@@ -57,6 +58,7 @@ export default[
             category:{id:'100'},
           },
           {
+            id:'2',
             image: {
               id:6,
               thumbnail: '/static/images/grid-list/honey.jpg',

@@ -9,12 +9,34 @@ export var productGQLType = `
     id:ID
     name:String
   }
+  input ProductSpecCategoryInput{
+    id:ID
+    name:String
+  }
 
   type ProductSpec{
+    id:ID
     image:Media
     name:String
     color:String
-    category:ProductSpecCategory,
+    category:ProductSpecCategory
+    stock:Int
+  }
+
+
+  input ProductCategoryInput{
+    id:ID
+    name:String
+    rx_slug:String
+    description:String
+  }
+
+  input ProductSpecInput{
+    id:ID
+    image:MediaInput
+    name:String
+    color:String
+    category:ProductSpecCategoryInput
     stock:Int
   }
 
@@ -35,6 +57,7 @@ export var productGQLType = `
     categories: [ProductCategory]
     specs:[ProductSpec]
     seoMeta:SeoMeta
+    order:String
     content: String
     status: ProductStatus
     created_at: String
@@ -46,25 +69,19 @@ export var productGQLType = `
     data:[Product]
   }
 
-  input ProductCategoryInput{
-    id:ID
-    name:String
-  }
 
   input ProductInput{
     id: ID
-    slug: String
-    title: String
+    medias: [MediaInput]
+    rx_slug: String
+    name: String
     auther: String
     categories: [ProductCategoryInput]
-    tags:[String]
-    email: String
-    shortTitle: String
+    specs:[ProductSpecInput]
     seoMeta:SeoMetaInput
+    order:String
     content: String
-    order: String
-    status: String
-    medias:[MediaInput]
+    status: ProductStatus
   }
 `
 

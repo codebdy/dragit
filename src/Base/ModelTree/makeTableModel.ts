@@ -3,6 +3,7 @@ import { RXModel } from "Base/ModelTree/RXModel";
 import { RxNode } from "rx-drag/models/RxNode";
 
 export function makeTableModel(rows: Array<any> | undefined, parentRxModel: RXModel | undefined, rxNode: RxNode<IMeta> | undefined, rowComponentName: string) {
+  parentRxModel?.setIsTable(true);
   parentRxModel?.clearChildren();
   rows?.forEach((row) => {
     makeTableRowModel(rows, parentRxModel, rxNode, rowComponentName);
