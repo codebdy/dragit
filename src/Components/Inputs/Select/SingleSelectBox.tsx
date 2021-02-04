@@ -35,9 +35,9 @@ const groupBy = (array:any, name:string)=>{
   return retValue;
 }
 
-export const SelectBox = React.forwardRef((
+export const SingleSelectBox = React.forwardRef((
   props:{
-    value?:string|[],
+    value?:any,
     label?:string,
     variant?:string,
     helperText?:string,
@@ -85,12 +85,21 @@ export const SelectBox = React.forwardRef((
   const empertyValue = '';
 
   const itemsData = (query? (data&&data[query])||[] : items) as any;
-
   const groups = groupByField ? groupBy(itemsData, groupByField) :[];
 
+  const handleChange = (event: React.ChangeEvent<{ name?: string | undefined, value: unknown }> )=>{
+    const newValue = event.target.value as any;
+    onChange && onChange({
+      target:{
+        value:{[key]:newValue}
+      }
+    });
+  }
+
+
   const select =  <Select
-      value={value || empertyValue}
-      onChange={onChange}
+      value={(value && value[key]) || empertyValue}
+      onChange={handleChange}
       label={label}
       ref = {ref}
     >

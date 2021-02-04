@@ -14,7 +14,10 @@ function getMetaFieldGql(meta?: IMeta){
 
 
   if(meta.field){
-    if(meta.name === 'FormGridContainer'){
+    if( meta.name === 'FormGridContainer'||
+        meta.name === 'OneToManyPortlet'||
+        meta.name === 'OneToManyTable'
+    ){
       return `  ${meta.field}{ id ${CHILDREN_GQL} }`;
     }
 
@@ -29,7 +32,7 @@ function getMetaFieldGql(meta?: IMeta){
       return `  ${meta.field}{ id }`;
     }
 
-    if(meta.name === 'MultiSelectBox' || meta.name === 'SelectBox'){
+    if(meta.name === 'MultiSelectBox' || meta.name === 'SingleSelectBox'){
       return `  ${meta.field}{ ${meta.props?.itemKey || 'id'} }`;
     }
 

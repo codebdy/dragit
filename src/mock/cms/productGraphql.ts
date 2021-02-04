@@ -14,7 +14,8 @@ export var productGQLType = `
     image:Media
     name:String
     color:String
-    category:ProductSpecCategory
+    category:ProductSpecCategory,
+    stock:Int
   }
 
 

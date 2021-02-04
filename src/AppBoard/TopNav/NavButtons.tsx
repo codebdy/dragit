@@ -50,7 +50,7 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
         onClick = {()=>appStore.openShowThemeSettings()}
       >
         <IconButton aria-label={intl.get('theme-settings')} >
-          <MdiIcon iconClass="mdi-application-cog" color={color} />
+          <MdiIcon iconClass="mdi-compare" color={color} />
         </IconButton>
       </Tooltip>          
 

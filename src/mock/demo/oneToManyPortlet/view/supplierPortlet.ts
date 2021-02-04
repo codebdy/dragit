@@ -23,7 +23,7 @@ export default               {
           },
           children:[
             {
-              name:'SelectBox',
+              name:'SingleSelectBox',
               field:'factory',
               props:{
                 label:'工厂',
@@ -92,7 +92,7 @@ export default               {
           },
           children:[
             {
-              name:'SelectBox',
+              name:'SingleSelectBox',
               field:'payment_term',
               props:{
                 label:'付款方式',
@@ -131,7 +131,7 @@ export default               {
           },
           children:[
             {
-              name:'SelectBox',
+              name:'SingleSelectBox',
               field:'currency',
               props:{
                 label:'币种',

@@ -54,7 +54,7 @@ export default[
             },
             name:'XO500',
             color:'红',
-            category:'100',
+            category:{id:'100'},
           },
           {
             image: {

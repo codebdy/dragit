@@ -94,7 +94,7 @@ export const  OneToManyTableView = [{
                     label:'型号',
                   },
                   children:[{
-                    name:'SelectBox',
+                    name:'SingleSelectBox',
                     field:'specs',
                     props:{
                       variant:"outlined",

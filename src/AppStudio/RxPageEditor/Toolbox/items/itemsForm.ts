@@ -84,7 +84,7 @@ export default{
     {
       titleKey:"selectbox",
       meta:{
-        name: 'SelectBox',
+        name: 'SingleSelectBox',
         props:{
           label:"Select",
           variant:"outlined",

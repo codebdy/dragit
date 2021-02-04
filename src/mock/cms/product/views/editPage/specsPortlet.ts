@@ -1,7 +1,7 @@
 export default            {
   name:'OneToManyTable',
   withNode:true,
-  field:'specsAndStocks',
+  field:'specs',
   props: {
     variant:'outlined',
     title:'规格库存',
@@ -59,11 +59,12 @@ export default            {
         label:'型号',
       },
       children:[{
-        name:'SelectBox',
-        field:'specs',
+        name:'SingleSelectBox',
+        field:'category',
         props:{
           variant:"outlined",
           size:'small',
+          itemKey:'id',
           withoutEmpertyItem:false,                        
           items:[
             {

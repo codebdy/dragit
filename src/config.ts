@@ -8,7 +8,7 @@ import Portlet from 'Components/Portlet';
 import PortletFooter from 'Components/Portlet/PortletFooter';
 import FormGridContainer from 'Components/FormGridContainer';
 import {Combobox} from 'Components/Inputs/Select/Combobox';
-import {SelectBox} from 'Components/Inputs/Select/SelectBox';
+import {SingleSelectBox} from 'Components/Inputs/Select/SingleSelectBox';
 import Canvas from 'AppStudio/RxPageEditor/Canvas';
 import MediasPortlet from 'Components/MediasPortlet';
 import { HeadConfig } from 'Components/Head/HeadConfig';
@@ -117,7 +117,7 @@ register('ListViewBatchActions', ListViewBatchActions, ListViewBatchActionsConfi
 register('ListViewPagination', ListViewPagination, ListViewPaginationConfig);
 register('ListViewBodyTableRow', ListViewBodyTableRow);
 register('MediasPortlet', MediasPortlet, MediasPortletConfig);
-register('SelectBox', withFormField(SelectBox), SelectConfig);
+register('SingleSelectBox', withFormField(SingleSelectBox), SelectConfig);
 register('Combobox', withFormField(Combobox), SelectConfig);
 register('MultiSelectBox', withFormField(MultiSelectBox), SelectConfig );
 register ('TableColumn', TableColumn, TableColumnConfig);
