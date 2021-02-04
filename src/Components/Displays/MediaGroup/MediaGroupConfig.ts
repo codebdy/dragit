@@ -15,6 +15,11 @@ export class MediaGroupConfig extends MetaConfig{
     return [
       ...marginConfigs,
       {
+        name:'count',
+        labelKey:'count',
+        propType:'number',
+      },
+      {
         name:'max',
         label:'max',
         propType:'number',

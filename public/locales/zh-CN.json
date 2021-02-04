@@ -345,5 +345,6 @@
     "jsx-parser":"JSX模板",
     "format":"格式",
     "group-by-field":"分组字段",
-    "excute-query-by-mutation":"通过Mutation查询"
+    "excute-query-by-mutation":"通过Mutation查询",
+    "count":"数量"
 }
