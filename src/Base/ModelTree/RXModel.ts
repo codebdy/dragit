@@ -29,6 +29,7 @@ export class RXModel{
   error?: string;  
   loading?: boolean;
   childrenMap: Map<string,RXModel>;
+  private _isDirty:boolean = false;
   constructor(node: RxNode<IMeta>, modelKey:string|number) {
     this.id = createId();
     this.node = node;
@@ -53,12 +54,16 @@ export class RXModel{
   }
 
   clearDirty(){
+    this._isDirty = false;
     this.childrenMap?.forEach((fieldStore, key)=>{
       fieldStore.clearDirty();
     })
   }
 
   isDirty(){
+    if(this._isDirty){
+      return true;
+    }
     let dirty = false;
     this.childrenMap?.forEach((fieldStore, key)=>{
       if(fieldStore.isDirty()){
@@ -85,6 +90,7 @@ export class RXModel{
   }
 
   setValue(value: any) {
+    this._isDirty = true;
     this.value = value;
     this.childrenMap.forEach(child=>{
       child.initWithModel(value);
@@ -165,6 +171,7 @@ export class RXModel{
   }
 
   clearChildren(){
+    this._isDirty = false;
     this.childrenMap.clear();
   }
 

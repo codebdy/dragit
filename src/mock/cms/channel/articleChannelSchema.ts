@@ -25,6 +25,9 @@ export default [
               children:[
                 {
                   name:"FormGridContainer",
+                  props:{
+                    spacing:2,
+                  },
                   children:[
                     {
                       name: 'FormGridItem',
@@ -34,11 +37,11 @@ export default [
                       children:[
                         {
                           name:'TextBox',
+                          field:'name',
                           props:{
                             label:'名称',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'name',
                           }
                         }
                       ]
@@ -51,11 +54,11 @@ export default [
                       children:[
                         {
                           name:'TextBox',
+                          field:'rx_slug',
                           props:{
                             label:'Slug',
                             variant:"outlined",
                             fullWidth:true,
-                            field:'slug',
                           }
                         }
                       ]
@@ -68,13 +71,13 @@ export default [
                       children:[
                         {
                           name:'TextBox',
+                          field:'description',
                           props:{
                             label:'描述',
                             variant:"outlined",
                             fullWidth:true,
                             multiline:true,
-                            rows:6,
-                            field:'description',
+                            rows:5,
                           },
                         }
                       ]

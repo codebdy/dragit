@@ -14,9 +14,12 @@ import { gql, useQuery } from '@apollo/react-hooks';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { useQueryGQL } from './useQueryGQL';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useDesign } from 'rx-drag/store/useDesign';
+import { useModelStore } from 'Base/ModelTree/ModelProvider';
+import {observer} from 'mobx-react';
 
 
-const TreeEditor = React.forwardRef((
+const TreeEditor =observer((
   props:{
     title:string,
     elevation:number,
@@ -24,11 +27,10 @@ const TreeEditor = React.forwardRef((
     children:any,
     query?:string,
     mutation?:string,
-  }, 
-  ref:any
+  }
 )=>{
   const {nameKey = 'name', query, mutation, children, ...rest} = props;
-
+  const modelStore = useModelStore();
   const queryGQL = useQueryGQL(query);
   //const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
   //const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
@@ -38,7 +40,7 @@ const TreeEditor = React.forwardRef((
   //const [form, setForm] = useState<IForm>(defultForm());
   const [selectedNode, setSelectedNode] = useState<RxNode<ITreeNode>|undefined>();
 
-  //console.log('TreeEditor', queryGQL)
+  const {isDesigning} = useDesign();
 
   const {loading, data, error} = useQuery( gql` ${queryGQL.gql}`);
 
@@ -51,6 +53,14 @@ const TreeEditor = React.forwardRef((
       setRoot(root);   
     }
   },[data, query]);
+
+  useEffect(()=>{
+    if(modelStore?.isDirty()){
+      storeSelectedNode();
+      modelStore?.clearDirty();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[modelStore?.isDirty()])
 
   const handleNodeDragStart = (node?:RxNode<ITreeNode>)=>{
     setDraggedNode(node);
@@ -136,25 +146,15 @@ const TreeEditor = React.forwardRef((
     setRoot(rootCopy); 
   }
 
+  const storeSelectedNode = ()=>{
+    selectedNode?.setMeta({...modelStore?.toInputValue(), id:selectedNode?.meta?.id});
+    valueChanged();
+  }
+
   const handleSelect = (nodeId:ID)=>{
     let node = root?.getNode(nodeId);
-    if(node){
-     /* setForm({
-        ...form,
-        defaultValues:node.meta,
-        values:node.meta,
-        valueChanged:valueChanged
-      })*/
-    }
-    else{
-      /*setForm({
-        ...form,
-        defaultValues:{},
-        values:{},
-      })  */    
-    }
-
-   // setSelectedNode(node)
+    setSelectedNode(node);
+    modelStore?.setValue(node?.getMeta());
   }
 
   const handleSave = ()=>{
@@ -230,9 +230,7 @@ const TreeEditor = React.forwardRef((
 
         </Grid>
         <Grid item xs={7}>
-          {/*<FormContext.Provider value = {form}>
-            {selectedNode && children}
-            </FormContext.Provider>*/}
+          {(selectedNode || isDesigning)&& children}
         </Grid>
       </Grid>
     </Portlet>

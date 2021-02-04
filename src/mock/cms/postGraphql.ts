@@ -30,6 +30,8 @@ export var articleGQLType = `
   type PostChannel{
     id:ID!
     name:String
+    rx_slug:String
+    description:String
   }
 
   type Post{
