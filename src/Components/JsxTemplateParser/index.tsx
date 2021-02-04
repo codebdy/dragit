@@ -9,6 +9,7 @@ import { useActionStore } from 'Base/PageUtils/ActionStore';
 import {observer} from "mobx-react";
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { allRegisteredComponents } from 'rx-drag/RxDrag';
+import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,7 +64,7 @@ const JsxTemplateParser = observer(React.forwardRef((
   return (
     isDesigning
     ? <div className={classNames(classes.root, className)} {...rest} ref={ref}>JSX</div>
-    : parser
+    : (modelStore?.loading ? <Skeleton animation="wave" height={50} width="80%" /> : parser)
   )
 }))
 
