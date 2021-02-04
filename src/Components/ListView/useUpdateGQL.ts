@@ -22,22 +22,22 @@ export function useUpdateGQL( rxNode:RxNode<IMeta>, listViewStore:ListViewStore,
     return GQL_STRING;
   }
 
-  const [queryGQL] = useState(new GraphQLStore(intl.get('data-update'), 'ListView', createQueryGQL()));
+  const [updateGQL] = useState(new GraphQLStore(intl.get('data-update'), 'ListView', createQueryGQL()));
 
   useEffect(()=>{
-    pageStore?.addGql(queryGQL);
+    pageStore?.addGql(updateGQL);
     return ()=>{
-      pageStore?.removeGql(queryGQL);
+      pageStore?.removeGql(updateGQL);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
 
   useEffect(()=>{
-    queryGQL.setVariables({ids:[], [`${update?.variableName}`]:{}})
-    queryGQL.setGql(createQueryGQL());
+    updateGQL.setVariables({ids:[], [`${update?.variableName}`]:{}})
+    updateGQL.setGql(createQueryGQL());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[update])
 
-  return queryGQL;
+  return updateGQL;
 }

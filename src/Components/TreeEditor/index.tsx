@@ -1,7 +1,6 @@
 import { Divider, Grid, IconButton, ListItem, ListItemText } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
-//import { IForm, defultForm, FormContext } from "base/FormContext";
 import { ID } from 'rx-drag/models/baseTypes';
 import { ITreeNode } from 'Base/Model/ITreeNode';
 import { RxNode } from 'rx-drag/models/RxNode';
@@ -10,13 +9,15 @@ import Portlet from 'Components/Portlet';
 import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";
 import TreeList from './TreeList';
-import { gql, useQuery } from '@apollo/react-hooks';
+import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { useQueryGQL } from './useQueryGQL';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import {observer} from 'mobx-react';
+import { useMutationGQL } from './useMutationGQL';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 
 const TreeEditor =observer((
@@ -32,19 +33,21 @@ const TreeEditor =observer((
   const {nameKey = 'name', query, mutation, children, ...rest} = props;
   const modelStore = useModelStore();
   const queryGQL = useQueryGQL(query);
-  //const [itemsGot, loading] = useAxios<Array<ITreeNode>>(apiForGet);
-  //const [configForSave, setConfigForSave] = useState<AxiosRequestConfig>();
-  //const [itemsJustSaved, saving] = useAxios<Array<ITreeNode>>(configForSave);
+  const mutationGQL = useMutationGQL(mutation);
   const [draggedNode, setDraggedNode] = useState<RxNode<ITreeNode>|undefined>();
   const [root, setRoot] = useState<RxNode<ITreeNode>>();
-  //const [form, setForm] = useState<IForm>(defultForm());
   const [selectedNode, setSelectedNode] = useState<RxNode<ITreeNode>|undefined>();
+  const appStore  = useDragItStore();
 
   const {isDesigning} = useDesign();
-
   const {loading, data, error} = useQuery( gql` ${queryGQL.gql}`);
+  const [excuteSave, {loading:saving, error:saveError}] = useMutation(gql`${mutationGQL.gql}`,{
+    onCompleted(){
+      appStore.setSuccessAlert(true);
+    }
+  });
 
-  useShowAppoloError(error);
+  useShowAppoloError(error || saveError);
 
   useEffect(()=>{
     if(query){
@@ -158,15 +161,8 @@ const TreeEditor =observer((
   }
 
   const handleSave = ()=>{
-    /*setConfigForSave(
-      {
-        ...apiForSave,
-        data:root?.getRootMetas()
-      }
-    )*/
+    excuteSave({variables:{tree:root?.getChildrenMetas()}})
   }
-
-  const saving = false;
 
   return (
     <Portlet 
