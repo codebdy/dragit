@@ -66,11 +66,11 @@ export const TreeSelect = React.forwardRef((props:any, ref:any)=>{
   let values = multiSelect ?(value||[]) : (value ? [value]:[]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue = event.target.value
+    let newValue = event.target.value as any
     onChange && onChange({
       target:{
         name:name,
-        value:multiSelect ? newValue : (newValue && newValue.length > 0 ? newValue[0] : undefined),        
+        value:multiSelect ? newValue?.map((item:any)=>({id:item.id})) : (newValue && newValue.length > 0 ? {id:newValue[0].id} : undefined),        
       }
     });
   }; 
