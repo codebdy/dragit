@@ -1,0 +1,51 @@
+.rx-toolbar-button-group{
+  display: flex;
+  align-items: center;
+}
+
+.flip {
+  -moz-transform:scaleX(-1);
+  -webkit-transform:scaleX(-1);
+  -o-transform:scaleX(-1);
+  transform:scaleX(-1);
+  /*IE*/
+  filter:FlipH;
+}
+.rx-toolbar-color{
+  padding-left:10px;
+  border-bottom: solid 1px;
+}
+
+.rx-light .rx-toolbar-color{
+  background: #fff;
+  color:#475f7b;
+}
+
+.rx-dark .rx-toolbar-color{
+  background-color: #272e48;
+  color:#8a99b5;
+}
+
+.rx-toolbar-button{
+  margin-top: 3px;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.rx-toolbar-button:hover, .rx-toolbar-button.checked{
+  color:#5a8dee;
+}
+
+.rx-light .rx-toolbar-button.disabled{
+  color:#c9ccce;
+  cursor: default;
+}
+
+.rx-dark .rx-toolbar-button.disabled{
+  color:#485163;
+  cursor: default;
+}

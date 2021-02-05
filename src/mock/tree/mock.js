@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
-import articleChannels from './articleChannels'
+import articleChannels from '../cms/channel/articleChannelsData'
 import productCategories from './productCategories'
-import { getModelName } from '../utils/getModelName';
+import { getModelName } from '../module/getModelName';
 
 var trees = {
   '/Model/ArticleChannel':articleChannels,

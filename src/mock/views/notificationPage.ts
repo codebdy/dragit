@@ -1,4 +1,4 @@
-import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
+
 export default {
   layout:[
     {
@@ -27,10 +27,9 @@ export default {
             children: [          {
               name:'ListView',
               designProps:{
-                dataApi:null,
+                query:null,
               },
               props:{
-                withActions:true,
                 elevation:6,
                 columns:[
                   {
@@ -45,7 +44,7 @@ export default {
                   },
                 ],
                 rowsPerPageOptions:'10,25,50',
-                defalutRowsPerPage:'10',
+                defalutRowsPerPage:10,
                 batchCommands:[
                   {
                     slug:"setRead",
@@ -76,12 +75,6 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                dataApi:{
-                  ...API_QUERY_AND_OPERATE_MODELS,
-                  params:{
-                    modelName:'/Model/Notification',
-                  },      
-                },
 
               }
             }],

@@ -1,5 +1,4 @@
-import {GO_BACK_ACTION, SUBMIT_ACTION} from "base/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import { GO_BACK_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 
 export default {
   layout:[{
@@ -43,7 +42,7 @@ export default {
             size:'large',
             marginLeft:2,
             onClick:{
-              name:SUBMIT_ACTION,
+              name:SUBMIT_MUTATION,
             }
           }
         }]
@@ -74,9 +73,12 @@ export default {
               children:[
                 {
                   name:'FormGridContainer',
+                  props:{
+                    spacing:2,
+                  },
                   children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         md:6,
                       },
@@ -98,7 +100,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         md:6,                      
                       },
@@ -116,7 +118,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:6,
                       },
@@ -134,7 +136,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:6,
                       },
@@ -153,7 +155,7 @@ export default {
 
                     },
                     {
-                      name:"PortletGridItem",
+                      name:"FormGridItem",
                       props:{
                         xs:6,
                       },
@@ -173,7 +175,7 @@ export default {
                       ]
                     },
                     {
-                      name:"PortletGridItem",
+                      name:"FormGridItem",
                       props:{
                         xs:6,
                       },
@@ -193,7 +195,7 @@ export default {
                       ]
                     },
                     {
-                      name:"PortletGridItem",
+                      name:"FormGridItem",
                       props:{
                         xs:12,
                       },
@@ -300,17 +302,4 @@ export default {
 
 
   isFormPage:true,
-  apiForGet:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/Customer',
-    },      
-  },
-
-  apiForSave:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/Customer',
-    },      
-  }
 }

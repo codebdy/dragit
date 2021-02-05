@@ -1,5 +1,4 @@
-import { API_QUERY_AND_OPERATE_MODELS } from "APIs/model"
-import {JUMP_TO_PAGE_ACTION} from "base/PageAction"
+import { OPEN_PAGE_ACTION } from "Base/PageUtils/ACTIONs"
 export default {
   layout:[
     {
@@ -32,7 +31,7 @@ export default {
                 rxText: '新建',
                 size: "large",
                 onClick:{
-                  name: JUMP_TO_PAGE_ACTION,
+                  name: OPEN_PAGE_ACTION,
                   page:{
                     moduleSlug:'customer',
                     pageSlug:'customer-edit',
@@ -51,7 +50,6 @@ export default {
               props:{
                 //field:'paginate',
                 //noValidation: true,
-                withActions:true,
                 elevation:6,
                 columns:[
                   {
@@ -78,7 +76,7 @@ export default {
 
                 ],
                 rowsPerPageOptions:'10,25,50',
-                defalutRowsPerPage:'10',
+                defalutRowsPerPage:10,
                 filters:[
                   {
                     slug:'gender',
@@ -146,12 +144,6 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                dataApi:{
-                  ...API_QUERY_AND_OPERATE_MODELS,
-                  params:{
-                    modelName:'/Model/Customer',
-                  },      
-                },
               }
             }],
           }

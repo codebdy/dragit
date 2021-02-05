@@ -1,5 +1,5 @@
-import { JUMP_TO_PAGE_ACTION } from "base/PageAction"
-import {API_QUERY_AND_OPERATE_MODELS} from "APIs/model"
+import { OPEN_PAGE_ACTION } from "Base/PageUtils/ACTIONs"
+
 export default {
   layout:[
     {
@@ -42,7 +42,7 @@ export default {
                     rxText: '新建',
                     size: "large",
                     onClick:{
-                      name: JUMP_TO_PAGE_ACTION,
+                      name: OPEN_PAGE_ACTION,
                       page:{
                         moduleSlug:'product-attribute',
                         pageSlug:'product-attribute-edit',
@@ -65,7 +65,6 @@ export default {
               props:{
                 //field:'paginate',
                 //noValidation: true,
-                withActions:true,
                 elevation:6,
                 columns:[
                   {
@@ -82,7 +81,7 @@ export default {
                   },
                 ],
                 rowsPerPageOptions:'10,25,50',
-                defalutRowsPerPage:'10',
+                defalutRowsPerPage:10,
                 batchCommands:[
                   {
                     slug:"delete",
@@ -108,13 +107,6 @@ export default {
                     icon:"mdi-delete",
                   },
                 ],
-                dataApi:{
-                  ...API_QUERY_AND_OPERATE_MODELS,
-                  params:{
-                    modelName:'/Model/ProductAttribute',
-                  },      
-                },
-
               }
             }],
           }

@@ -1,36 +1,39 @@
 import React from 'react';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import Loading from 'admin/common/Loading'
+import Loading from 'Common/Loading'
 
-import Layout from 'admin/Layout';
-import ModuleManager from 'designer/ModuleManager';
-import useThemeSettings from 'store/theme/useThemeSettings';
-import useShadows from 'store/theme/useShadows';
-import DrawerEditor from 'designer/DrawerEditor';
-import SuccessAlertBar from 'base/Widgets/SuccessAlertBar';
-import Login from 'admin/views/Login';
-import { useIntl } from 'base/Hooks/useIntl';
-import { LOGIN_URL } from 'utils/consts';
-import ErrorDialog from 'base/Widgets/ErrorDialog';
+import {AppBoard} from 'AppBoard';
+import useShadows from 'Utils/useShadows';
+import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';
+import Login from 'AppManager/Login';
+import { useIntl } from 'Base/Hooks/useIntl';
+import {observer} from 'mobx-react';
+import { ErrorDialog } from 'Base/Widgets/ErrorDialog';
+import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
+import { LOGIN_URL } from 'Utils/consts';
+import { ConfirmDialog } from 'Base/Widgets/ConfirmDialog';
+import { AppManager } from 'AppManager';
+import { AppStudio } from 'AppStudio';
 
-function App() {
+const App = observer(()=>{
   const [langLoading] = useIntl();
-  const themeSettings = useThemeSettings();
   
-  const theme = responsiveFontSizes(createMuiTheme({
+  useLoginCheck();
+
+  const theme = createMuiTheme({
     palette: {
-      type: themeSettings.themeMode as any,
+      type: 'light',
       primary:{
-        main: themeSettings.primary,
+        main: '#5d78ff',
       },
 
     },
 
     shadows:[...useShadows()] as any
-  }));
+  });
 
 
   return (
@@ -41,16 +44,17 @@ function App() {
         <BrowserRouter>
           <Switch> 
             <Route path={ LOGIN_URL } component={Login}></Route>
-            <Route path="/admin" component={Layout}></Route>
-            <Route path="/design" component={ModuleManager}></Route>
-            <Route path="/drawer-edit" component={DrawerEditor}></Route>
+            <Route path="/app/:appId/:pageId?/:id?" component={AppBoard}></Route>
+            <Route path="/apps-index" component={AppManager}></Route>
+            <Route path="/app-studio/:appId" component={AppStudio}></Route>
             <Redirect to={ LOGIN_URL } from='/' /> 
           </Switch>
         </BrowserRouter>
         <SuccessAlertBar />
         <ErrorDialog />
+        <ConfirmDialog />
       </ThemeProvider>)
   );
-}
+})
 
 export default App;

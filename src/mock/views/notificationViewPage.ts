@@ -1,5 +1,5 @@
-import {GO_BACK_ACTION} from "base/PageAction";
-import {API_GET_MODEL_BY_ID} from "APIs/model"
+import { GO_BACK_ACTION } from "Base/PageUtils/ACTIONs";
+
 
 export default {
   layout:[
@@ -28,9 +28,12 @@ export default {
               children:[
                 {
                   name:'FormGridContainer',
+                  props:{
+                    spacing:2,
+                  },
                   children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,                      
                       },
@@ -48,7 +51,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,                      
                       },
@@ -66,7 +69,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,                      
                       },
@@ -117,11 +120,5 @@ export default {
   ],
 
   refreshAppInfo:true,
-  isFormPage:true,
-  apiForGet:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/Notification',
-    },      
-  },
+
 }

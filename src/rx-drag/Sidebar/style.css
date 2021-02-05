@@ -1,0 +1,64 @@
+.rx-sidebar{
+  display: flex;
+  min-width: 280px;
+  flex-flow: column;
+  justify-content: center;
+  flex:1;
+  height: 0;
+  background-color: #272e48;
+}
+
+
+.rx-sidebar-tabs{
+  display: flex;
+  flex-flow: row;
+  align-items: stretch;
+  height: 40px;
+  border-bottom: solid 1px;
+  background-color: #f2f4f4;
+}
+
+.rx-sidebar-tab-title{
+  flex:1;
+  border-right:solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+
+}
+
+.rx-light .rx-sidebar{
+  background-color: #fff;
+}
+
+.rx-dark .rx-sidebar{
+  background-color: #272e48;
+}
+
+.rx-light .rx-sidebar-tabs{
+  color:#8a99b5;
+  background-color: #f2f4f4;
+}
+
+.rx-dark .rx-sidebar-tabs{
+  background-color: #1a233a;
+  color:#8a99b5;
+}
+
+.rx-dark .rx-sidebar-tab-title.actived{
+  background-color: #272e48;
+  color:#5a8dee;
+}
+
+.rx-light .rx-sidebar-tab-title.actived{
+  background-color: #fff;
+  color:#5a8dee;
+}
+
+.rx-sidebar-tabpanel{
+  flex:1;
+  display:flex;
+  overflow: auto;
+}

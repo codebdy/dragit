@@ -1,5 +1,4 @@
-import {GO_BACK_ACTION, SUBMIT_ACTION} from "base/PageAction";
-import {API_GET_MODEL_BY_ID, API_SUBMIT_MODEL} from "APIs/model"
+import { GO_BACK_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 
 export default {
   layout:[
@@ -28,9 +27,12 @@ export default {
               children:[
                 {
                   name:'FormGridContainer',
+                  props:{
+                    spacing:2,
+                  },
                   children:[
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,                      
                       },
@@ -47,7 +49,7 @@ export default {
                       ]
                     },
                     {
-                      name: 'PortletGridItem',
+                      name: 'FormGridItem',
                       props:{
                         xs:12,                      
                       },
@@ -90,7 +92,7 @@ export default {
                       size:'large',
                       marginLeft:2,
                       onClick:{
-                        name: SUBMIT_ACTION,
+                        name: SUBMIT_MUTATION,
                       }        
                     }
                   }]
@@ -104,19 +106,4 @@ export default {
     }
   ],
 
-
-  isFormPage:true,
-  apiForGet:{
-    ...API_GET_MODEL_BY_ID,
-    params:{
-      modelName:'/Model/ProductAttribute',
-    },      
-  },
-
-  apiForSave:{
-    ...API_SUBMIT_MODEL,
-    params:{
-      modelName:'/Model/ProductAttribute',
-    },      
-  }
 }
