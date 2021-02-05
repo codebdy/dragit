@@ -346,5 +346,6 @@
     "format":"格式",
     "group-by-field":"分组字段",
     "excute-query-by-mutation":"通过Mutation查询",
-    "count":"数量"
+    "count":"数量",
+    "app-store":"商店"
 }
