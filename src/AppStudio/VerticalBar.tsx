@@ -180,7 +180,7 @@ export const VerticalBar = observer(() => {
               <IconButton
                 onClick = {handleEntityClick}
               >
-                <MdiIcon iconClass = "mdi-cube-outline" color={studioStore?.navigationEditor ? activeIconColor : iconColor} />
+                <MdiIcon iconClass = "mdi-cube-outline" color = {iconColor} />
               </IconButton>
             </Tooltip>
 
