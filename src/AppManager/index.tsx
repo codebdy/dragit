@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize:'1.6rem',
     },
 
-    addButton:{
+    buttonMargin:{
       marginLeft:theme.spacing(2),
     },
     githubLink:{
@@ -92,7 +92,7 @@ export const AppManager = observer(() => {
   }
 
   const handleDownload = ()=>{
-    dragItStore.infoError('下载功能尚未开放')
+    dragItStore.infoError('功能尚未开放，敬请期待...')
   }
 
   return (
@@ -128,12 +128,13 @@ export const AppManager = observer(() => {
               variant = "contained" 
               size="large"
               startIcon = {
-                <MdiIcon iconClass = "mdi-cloud-download-outline" />
+                <MdiIcon iconClass = "mdi-cloud-upload-outline" />
               }
               onClick = {handleDownload}
-            >{intl.get('download')}</Button>
+            >{intl.get('upload')}</Button>  
+            
             <SubmitButton 
-              className = {classes.addButton}
+              className = {classes.buttonMargin}
               variant = "contained" 
               color = "primary" 
               size="large"
@@ -144,7 +145,19 @@ export const AppManager = observer(() => {
               onClick = {handleCreate}
             >
               {intl.get('create')}
-            </SubmitButton>
+            </SubmitButton>          
+            <Button 
+              variant = "contained" 
+              size="large"
+              color = "secondary"
+              className = {classes.buttonMargin}
+              startIcon = {
+                <MdiIcon iconClass = "mdi-shopping-outline" />
+              }
+              onClick = {handleDownload}
+            >{intl.get('app-store')}
+            </Button>
+
           </Grid>
         </Grid>
         {
