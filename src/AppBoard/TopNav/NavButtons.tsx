@@ -15,7 +15,10 @@ const useStyles = makeStyles((theme: Theme) =>
     grow: {
       flexGrow: 1,
     },
-
+    githubLink:{
+      color: theme.palette.text.secondary,
+      marginRight:theme.spacing(1),
+    },
   }),
 );
 
@@ -43,6 +46,9 @@ export default function NavButtons(props:{color?:string, onSidebarToggle: any}) 
 
       <div className={classes.grow} />
 
+      <a href="https://github.com/rxwater/rxdrag" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
+        <MdiIcon iconClass = "mdi-github" />
+      </a>
       
       <EvenNotification color={color} />
 
