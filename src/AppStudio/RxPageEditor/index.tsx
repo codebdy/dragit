@@ -34,7 +34,7 @@ export const RxPageEditor = observer(() => {
 
   const handleChange = (metas: Array<IRxMeta>)=>{
     if(studioStore?.pageEditor?.currentData){
-      studioStore?.pageEditor?.setCurrentData({...studioStore?.pageEditor?.currentData, schema:metas});
+      studioStore?.pageEditor?.setCurrentData({...studioStore?.pageEditor?.currentData, schema:JSON.stringify(metas)});
     }
   }
 
@@ -46,7 +46,7 @@ export const RxPageEditor = observer(() => {
               mode:studioStore?.themeMode,
             }
           }
-          initMetas = {rxPage?.schema}
+          initMetas = {JSON.parse(rxPage?.schema||'[]')}
           toolbox = {
             <Toolbox/>
           }

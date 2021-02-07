@@ -10,7 +10,7 @@ export interface IRxPage{
   name?:string, 
   max_width?: MaxWidth;
   width?:number;
-  schema?:Array<IMeta>,
+  schema?:string,//Array<IMeta>,
   auths?:IRxAuth[],
   query?:string, 
   excute_query_by_mutation?: boolean,
