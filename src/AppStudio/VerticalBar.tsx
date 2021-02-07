@@ -166,7 +166,7 @@ export const VerticalBar = observer(() => {
               <IconButton
                 onClick = {handlePagesClick}
               >
-                <MdiIcon iconClass = "mdi-file-outline" color={studioStore?.pageEditor ? activeIconColor : iconColor}/>
+                <MdiIcon iconClass = "mdi-file-multiple-outline" color={studioStore?.pageEditor ? activeIconColor : iconColor}/>
               </IconButton>
             </Tooltip>
             <Tooltip title={intl.get('navigation')} placement="right">

@@ -1,7 +1,6 @@
 import { sleep } from "mock/utils/sleep";
 import { getRxApp } from "./appResolvers";
 import appsData from "./data";
-import { v4 as uuidv4 } from 'uuid';
 import authsData from "mock/apps/authsData";
 
 function getRxAuth(id:string){
@@ -52,7 +51,7 @@ export const saveRxAuth = async (parent:any, args:any, context:any, info:any)=>{
 export const createRxAuth = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
   const app = getRxApp(args.appId)
-  let auth = {id:uuidv4(), rx_slug:'new-authority', name:'新权限'} as any;
+  let auth = {rx_slug:'new-authority', name:'新权限'} as any;
   console.log('Server createRxAuth:', args);
   if(app){
     app.auths = [...app.auths||[], auth];

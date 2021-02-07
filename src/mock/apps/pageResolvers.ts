@@ -3,7 +3,6 @@ import { sleep } from "mock/utils/sleep";
 import { cloneObject } from "rx-drag/utils/cloneObject";
 import { getRxApp } from "./appResolvers";
 import appsData from "./data";
-import { v4 as uuidv4 } from 'uuid';
 
 function getRxPage(id:string){
   for(var i = 0; i < appsData.length; i++){
@@ -90,7 +89,7 @@ export const duplicateRxPage = async (parent:any, args:any, context:any, info:an
   const rxPage = getRxPage(args.id);
   console.log('Server duplicateRxPage:', rxPage);
   const copy = cloneObject(rxPage);
-  copy.id = uuidv4();
+  copy.id = '';
   copy.name = copy.name + ' copy';
   const rxApp = getPageApp(args.id)
   if(rxApp){

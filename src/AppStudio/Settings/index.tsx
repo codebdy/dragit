@@ -8,7 +8,7 @@ import { stringValue } from 'rx-drag/utils/stringValue';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { SAVE_RX_APP } from 'Base/GraphQL/APP_GQLs';
+import { Update_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
@@ -46,7 +46,7 @@ export const Settings = observer((
   const [icon, setIcon] = useState(rxApp?.icon);
   const [color, setColor] = useState(rxApp?.color);
   const [entryPageId, setEntryPageId] = useState(rxApp?.entry_page_id);
-  const [excuteSave, {loading, error}] = useMutation(SAVE_RX_APP,{
+  const [excuteSave, {loading, error}] = useMutation(Update_RX_APP,{
     onCompleted(){
       onClose && onClose();
       dragItStore.setSuccessAlert(true)

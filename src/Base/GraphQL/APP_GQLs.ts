@@ -38,16 +38,16 @@ export const GET_RX_APP = gql`
     }
   }
 `
-export const SAVE_RX_APP = gql`
-  mutation($rxApp:RxAppInput){
-    saveRxApp(rxApp:$rxApp){
+export const Update_RX_APP = gql`
+  mutation($rxApp:UpdateRxAppInput){
+    updateRxApp(rxApp:$rxApp){
       ${appFieldsGQL}
     }
   }
 `
 
 export const CREATE_RX_APP = gql`
-  mutation($rxApp:RxAppInput){
+  mutation($rxApp:CreateRxAppInput){
     createRxApp(rxApp:$rxApp){
       ${appFieldsGQL}
     }

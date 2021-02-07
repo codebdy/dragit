@@ -16,7 +16,6 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppsSkeleton from './AppsSkeleton';
 import { IRxApp } from 'Base/Model/IRxApp';
 import SubmitButton from 'Components/common/SubmitButton';
-import { v4 as uuidv4 } from 'uuid';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { AUTH_APP } from 'Base/authSlugs';
 
@@ -69,24 +68,23 @@ export const AppManager = observer(() => {
       dragItStore.setSuccessAlert(true)
     }
   })
-  
+
   useShowAppoloError(error || createError);
 
   const handleCreate = ()=>{
     excuteCreate({variables:{
       rxApp:{
-        id:uuidv4(),
         name:intl.get('new-app'),
         icon:'mdi-application',
         app_type:intl.get('free'),
-        auths:[
+        auths:{
+          create:[
           {
-            id:uuidv4(),
             rx_slug:AUTH_APP,
             name:intl.get('app-access'),
             predefined:true,
           }
-        ]
+        ]}
       }
     }})
   }

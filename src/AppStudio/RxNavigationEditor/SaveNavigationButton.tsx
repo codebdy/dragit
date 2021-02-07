@@ -7,12 +7,12 @@ import { useMutation } from '@apollo/react-hooks';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { toJS } from 'mobx';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { SAVE_RX_APP } from 'Base/GraphQL/APP_GQLs';
+import { Update_RX_APP } from 'Base/GraphQL/APP_GQLs';
 
 export const SaveNavigationButton = observer(() => {
   const studioStore = useAppStudioStore();
   const dragItStore = useDragItStore();
-  const [excuteSaveRxApp, {loading:saving, error}] = useMutation( SAVE_RX_APP,{
+  const [excuteSaveRxApp, {loading:saving, error}] = useMutation( Update_RX_APP,{
     onCompleted(){
       studioStore?.editNavigation();
       studioStore?.navigationEditor?.setIsDirty(false);

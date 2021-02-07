@@ -15,7 +15,6 @@ import Image from 'Components/common/Image';
 import classNames from 'classnames';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
-import { v4 as uuidv4 } from 'uuid';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -126,7 +125,6 @@ export const TemplatesDialog = observer((
     excuteCreate({variables:{
       appId:studioStore?.rxApp?.id,
       templateId:selectedId,
-      pageId:uuidv4(),
       name
     }})
   }
