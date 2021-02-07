@@ -107,6 +107,7 @@ export default function AppCard(
         variables:{
           id:rxApp.id,
           authIds:rxApp.auths?.map(auth=>auth.id),
+          pageIds:rxApp.pages?.map(page=>page.id)||[''],
         }
       })     
     })

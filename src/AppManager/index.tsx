@@ -84,7 +84,19 @@ export const AppManager = observer(() => {
             name:intl.get('app-access'),
             predefined:true,
           }
-        ]}
+        ]},
+        pages:{
+          create:[
+            {
+              name:'home',
+              schema: JSON.stringify([
+                {
+                  name:'GridRow'
+                }
+              ])
+            }
+          ]
+        }
       }
     }})
   }

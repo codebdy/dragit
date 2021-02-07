@@ -28,6 +28,9 @@ export const GET_RX_APP_LIST = gql`
   query {
     rxApps{
       ${appFieldsGQL}
+      pages{
+        id
+      }
     }
   }
 `
@@ -59,15 +62,18 @@ export const CREATE_RX_APP = gql`
 `
 
 export const REMOVE_RX_APP  = gql`
-mutation($id:ID!, $authIds:[ID!]!){
-  removeRxAuth(id:$authIds){
-    name
+  mutation($id:ID!, $authIds:[ID!]!, $pageIds:[ID!]!){
+    removeRxAuth(id:$authIds){
+      name
+    }
+    removeRxPage(id:$pageIds){
+      name
+    }
+    removeRxApp(id:$id){
+      id
+      name
+    }
   }
-  removeRxApp(id:$id){
-    id
-    name
-  }
-}
 `;
 
 export const GET_RX_TEMPLATES = gql`
