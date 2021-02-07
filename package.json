@@ -36,7 +36,6 @@
     "react-dom": "^16.14.0",
     "react-intl-universal": "^2.4.3",
     "react-jsx-parser": "^1.28.1",
-    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "typescript": "^3.9.7",

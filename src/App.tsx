@@ -8,7 +8,7 @@ import Loading from 'Common/Loading'
 import {AppBoard} from 'AppBoard';
 import useShadows from 'Utils/useShadows';
 import {SuccessAlertBar} from 'Base/Widgets/SuccessAlertBar';
-import Login from 'AppManager/Login';
+import { Login } from 'AppManager/Login';
 import { useIntl } from 'Base/Hooks/useIntl';
 import {observer} from 'mobx-react';
 import { ErrorDialog } from 'Base/Widgets/ErrorDialog';

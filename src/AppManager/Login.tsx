@@ -14,6 +14,7 @@ import { LIGHT } from 'AppBoard/store/ThemeSettings';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { creatLink } from 'client';
 import { QUERY_ME } from 'Base/GraphQL/LOGIN_GQLs';
+import { observer } from 'mobx-react';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -75,7 +76,7 @@ const LOGIN = gql`
   }
 `;
 
-export default function Login(){
+export const Login = observer(()=>{
   const classes = useStyles();
   const client = useApolloClient();
 
@@ -87,16 +88,19 @@ export default function Login(){
 
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMessage, setErroMessage] = useState('');
+  const appStore = useDragItStore();
+  const history = useHistory();
 
-  const [queryMe, { loading:querying, error:queryError }] = useLazyQuery(gql`${QUERY_ME}`,{
-    notifyOnNetworkStatusChange: true,
-    onCompleted(data){
-      if(data){
-        appStore.setLoggedUser(data.me);
-        history.push(INDEX_URL)
-      }
-    },
+  const [queryMe, { loading:querying, data, error:queryError }] = useLazyQuery(gql`${QUERY_ME}`,{
+    notifyOnNetworkStatusChange: true
   });
+
+  useEffect(()=>{
+    if(data){
+      appStore.setLoggedUser(data.me);
+      history.push(INDEX_URL)
+    }
+  }, [appStore, data, history]);
 
   const [excuteLogin, { loading }] = useMutation(LOGIN,{
     notifyOnNetworkStatusChange: true,
@@ -125,13 +129,17 @@ export default function Login(){
 
   useShowAppoloError(queryError);
   
-  const appStore = useDragItStore();
 
-  const history = useHistory();
   
   useEffect(()=>{
     setErroMessage('');
-  },[values])
+  },[values]);
+
+  useEffect(()=>{
+    if(appStore.loggedUser){
+      history.push(INDEX_URL)
+    }
+  },[appStore.loggedUser, history]);
 
 
   const themeSettings = useThemeSettings();
@@ -269,4 +277,4 @@ export default function Login(){
       </form>
     </ThemeProvider>
   )
-}
+})
