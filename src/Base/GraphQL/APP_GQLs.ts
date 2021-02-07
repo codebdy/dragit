@@ -55,7 +55,10 @@ export const CREATE_RX_APP = gql`
 `
 
 export const REMOVE_RX_APP  = gql`
-mutation($id:ID){
+mutation($id:ID!, $authIds:[ID!]!){
+  removeRxAuth(id:$authIds){
+    name
+  }
   removeRxApp(id:$id){
     id
     name

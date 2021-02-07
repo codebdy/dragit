@@ -104,7 +104,10 @@ export default function AppCard(
     setAnchorEl(null);
     dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
       excuteRemoveRxPage({
-        variables:{id:rxApp.id}
+        variables:{
+          id:rxApp.id,
+          authIds:rxApp.auths?.map(auth=>auth.id),
+        }
       })     
     })
 
