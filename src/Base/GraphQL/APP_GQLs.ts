@@ -1,6 +1,13 @@
 import { gql } from '@apollo/react-hooks';
 import { pageFieldsGQL } from './PAGE_GQLs';
 
+export const authsFieldGQL = `
+  id
+  rx_slug
+  name
+  predefined
+`
+
 export const appFieldsGQL = `
   id
   name
@@ -11,10 +18,7 @@ export const appFieldsGQL = `
   navigation_items
   entry_page_id
   auths{
-    id
-    rx_slug
-    name
-    predefined
+    ${authsFieldGQL}
   }
   notifications
 `

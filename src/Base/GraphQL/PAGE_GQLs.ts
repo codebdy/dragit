@@ -6,7 +6,9 @@ export const pageFieldsGQL = `
   max_width
   width
   schema
-  auths
+  auths{
+    id
+  }
   query
   excute_query_by_mutation
 `
