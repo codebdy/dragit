@@ -109,7 +109,7 @@ export const schema = `
 export const resolvers = {
   JSON: GraphQLJSON,
   Query: {
-    userByToken: userByTokenResolver,
+    me: userByTokenResolver,
     login:loginResolver,
 
     ...appQueryResolvers,
