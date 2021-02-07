@@ -1,36 +1,21 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useDragItStore } from "./useDragItStore";
-import { gql, useLazyQuery } from "@apollo/react-hooks";
+import { gql, useApolloClient, useLazyQuery } from "@apollo/react-hooks";
 import { TOKEN_NAME, LOGIN_URL } from "Utils/consts";
 import { useShowAppoloError } from "./useInfoError";
+import { creatLink } from "client";
+import { QUERY_ME } from "Base/GraphQL/LOGIN_GQLs";
 
-// 定义查询语句
-const QUERY_USER = gql`
-  query {
-    me{
-      id
-      login_name
-      name
-      is_demo
-      is_supper
-      avatar{
-        id
-        thumbnail
-      }
-      auths {
-        id
-      }
-    }
-  }
-`;
 
 export function useLoginCheck() {
   const localToken = localStorage.getItem(TOKEN_NAME);
   const history = useHistory();
-  const [excuteQuery, { error }] = useLazyQuery(QUERY_USER,{
+  const client = useApolloClient();
+  const [excuteQuery, { error }] = useLazyQuery(gql`${QUERY_ME}`,{
     notifyOnNetworkStatusChange: true,
     onCompleted(data){
+      console.log('useLoginCheck', data, localToken);
       if(data){
         appStore.setLoggedUser(data.me);
       }
@@ -46,6 +31,7 @@ export function useLoginCheck() {
       history?.push(LOGIN_URL);
     }
     if(!appStore.loggedUser && localToken){
+      client.setLink(creatLink(localToken));
       excuteQuery()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

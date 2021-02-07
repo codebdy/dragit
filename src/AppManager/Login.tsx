@@ -6,11 +6,14 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
 import { INDEX_URL, TOKEN_NAME } from 'Utils/consts';
-import { gql, useLazyQuery } from '@apollo/react-hooks';
+import { gql, useApolloClient, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 import { LIGHT } from 'AppBoard/store/ThemeSettings';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { creatLink } from 'client';
+import { QUERY_ME } from 'Base/GraphQL/LOGIN_GQLs';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -67,31 +70,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 // 定义查询语句
 const LOGIN = gql`
-  query ($login_name: String!, $password: String!){
-    login(login_name:$login_name, password:$password){
-      token,
-      user{
-        id
-        login_name
-        name
-        is_demo
-        is_supper
-        avatar{
-          id
-          thumbnail
-          title
-          src
-        }
-        auths{
-          id
-        } 
-      }
-    }
+  mutation ($login_name: String!, $password: String!, $device_name:String!){
+    login(login_name:$login_name, password:$password, device_name:$device_name)
   }
 `;
 
 export default function Login(){
   const classes = useStyles();
+  const client = useApolloClient();
 
   const [values, setValues] = useState<any>({
     account: 'demo',
@@ -101,40 +87,48 @@ export default function Login(){
 
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMessage, setErroMessage] = useState('');
-  const [login, { called, loading, error, data }] = useLazyQuery(LOGIN,{
-    notifyOnNetworkStatusChange: true
+
+  const [queryMe, { loading:querying, error:queryError }] = useLazyQuery(gql`${QUERY_ME}`,{
+    notifyOnNetworkStatusChange: true,
+    onCompleted(data){
+      if(data){
+        appStore.setLoggedUser(data.me);
+        history.push(INDEX_URL)
+      }
+    },
   });
+
+  const [excuteLogin, { loading }] = useMutation(LOGIN,{
+    notifyOnNetworkStatusChange: true,
+    onCompleted(data){
+      if(data && data.login){
+        const token = data.login;
+        if(rememberMe){
+          localStorage.setItem(TOKEN_NAME, token);        
+        }else{
+          localStorage.removeItem(TOKEN_NAME);
+        }
+        appStore.setToken(token);
+        client.setLink(creatLink(token));
+        queryMe();
+      }
+      else{
+        setErroMessage(intl.get('login-failure'));
+      }
+      
+    },
+    onError(error){
+      console.log(error);
+      setErroMessage(error.message);
+    }
+  });
+
+  useShowAppoloError(queryError);
   
   const appStore = useDragItStore();
 
   const history = useHistory();
   
-  useEffect(()=>{
-    if(called && !loading){
-      if(error){
-        console.log(error);
-        setErroMessage(error.message);
-      }
-      if(data && !data.login){
-        setErroMessage(intl.get('login-failure'));
-      }
-      if(data && data.login){
-        if(rememberMe){
-          localStorage.setItem(TOKEN_NAME, data.login.token);        
-        }else{
-          localStorage.removeItem(TOKEN_NAME);
-        }
-
-        appStore.setLoggedUser(data.login.user);
-        appStore.setToken(data.login.token);
-        history.push(INDEX_URL)
-      }
-
-    }
-    //console.log(data, error)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[called, loading, data, error])
-
   useEffect(()=>{
     setErroMessage('');
   },[values])
@@ -168,10 +162,11 @@ export default function Login(){
   }
 
   const handleLogin = (event?: React.FormEvent<HTMLFormElement>)=>{
-    login({
+    excuteLogin({
       variables:{
         login_name:values.account, 
-        password:values.password
+        password:values.password,
+        device_name:navigator.platform||'Can not identify'
       }
     }); 
     event && event.preventDefault();
@@ -260,7 +255,7 @@ export default function Login(){
                 <Grid item xs={6}>
                     <SubmitButton fullWidth variant="contained" color="primary" size = "large" 
                       style={{fontSize:'1.2rem'}}
-                      submitting = {called && loading}
+                      submitting = {loading || querying}
                       type = "submit"
                     >
                       {intl.get('login')}
