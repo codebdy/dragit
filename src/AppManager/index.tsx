@@ -18,6 +18,7 @@ import { IRxApp } from 'Base/Model/IRxApp';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { AUTH_APP } from 'Base/authSlugs';
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,6 +75,7 @@ export const AppManager = observer(() => {
   const handleCreate = ()=>{
     excuteCreate({variables:{
       rxApp:{
+        uuid:uuidv4(),
         name:intl.get('new-app'),
         icon:'mdi-application',
         app_type:intl.get('free'),
