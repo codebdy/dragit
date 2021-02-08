@@ -19,6 +19,7 @@ import { SavePageButton } from './RxPageEditor/SavePageButton';
 import intl from 'react-intl-universal';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { SaveNavigationButton } from './RxNavigationEditor/SaveNavigationButton';
+import { INDEX_URL } from 'Utils/consts';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,11 +96,11 @@ export const AppStudio = observer(() => {
   const handleBack = ()=>{
     if(studioStore?.pageEditor?.isDirty || studioStore?.navigationEditor?.isDirty){
       dragItStore?.confirmAction(intl.get('changing-not-save-message'),()=>{
-        history.push("/apps-index");
+        history.push(INDEX_URL);
       })       
     }
     else{
-      history.push("/apps-index");
+      history.push(INDEX_URL);
     }
    
   }

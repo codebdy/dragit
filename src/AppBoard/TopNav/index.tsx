@@ -14,6 +14,7 @@ import { DARK } from 'AppBoard/store/ThemeSettings';
 import { IconButton, Tooltip } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import { useHistory } from 'react-router';
+import { INDEX_URL } from 'Utils/consts';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,7 +49,7 @@ export const TopNav = observer((props:{onSidebarToggle: any}) => {
   },[]);
 
   const handleGoback=()=>{
-    history.push('/apps-index/');
+    history.push(INDEX_URL);
   }
  
   const backgroundColor = toolbarSkin.colored ? 'primary' :'inherit';

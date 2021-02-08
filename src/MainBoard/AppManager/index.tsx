@@ -1,13 +1,9 @@
 import React from "react"
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import MdiIcon from 'Components/common/MdiIcon';
-import { Avatar, Button, Container, Grid, Typography } from '@material-ui/core';
-import Spacer from 'Components/common/Spacer';
+import { Button, Container, Grid, Typography } from '@material-ui/core';
 import AppCard from './AppCard';
 import { Add } from '@material-ui/icons';
-import { AccountAvatar } from 'AppBoard/TopNav/AccountAvatar';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import { useMutation, useQuery } from '@apollo/react-hooks';
@@ -22,16 +18,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    logoIcon: {
-      marginRight: theme.spacing(2),
-      backgroundColor: theme.palette.primary.main,
-      letterSpacing:'1px',
-      fontWeight:'bold',
-      fontSize:'20px',
-    },
     titleArea:{
       padding:theme.spacing(4,0),
     },
@@ -41,10 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
     buttonMargin:{
       marginLeft:theme.spacing(2),
-    },
-    githubLink:{
-      color: theme.palette.text.secondary,
-      marginRight:theme.spacing(1),
     },
   }),
 );
@@ -108,64 +90,6 @@ export const AppManager = observer(() => {
   }
 
   return (
-    <div className={classes.root}>
-      <AppBar 
-        position="static" 
-        color = "transparent"
-        variant = "outlined"
-      >
-        <Toolbar>
-          <Avatar
-            variant="rounded"
-            className={classes.logoIcon}
-          >
-            <MdiIcon iconClass = "mdi-feather" />
-          </Avatar>
-          <Button
-            variant = "text"
-            size = "large"
-            color = "primary"
-            onClick={() => {
-              console.info("I'm a button.");
-            }}
-          >
-            {intl.get('applications')}
-          </Button>
-          <Button
-            variant = "text"
-            size = "large"
-            onClick={() => {
-              console.info("I'm a button.");
-            }}
-          >
-            {intl.get('template')}
-          </Button>
-          <Button
-            variant = "text"
-            size = "large"
-            onClick={() => {
-              window.open("https://document.rxdrag.com");  
-            }}
-          >
-            {intl.get('document')}
-          </Button>
-          <Button
-            variant = "text"
-            size = "large"
-            onClick={() => {
-              window.open("https://github.com/rxwater/dragit/issues");  
-            }}
-          >
-            {intl.get('report-bug')}
-          </Button>
-
-          <Spacer />
-          <a href="https://github.com/rxwater/rxdrag" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
-            <MdiIcon iconClass = "mdi-github" />
-          </a>
-          <AccountAvatar />
-        </Toolbar>
-      </AppBar>
       <Container maxWidth = 'lg'>
         <Grid container justify = "space-between" className={classes.titleArea} alignItems="center">
           <Grid item>
@@ -226,6 +150,5 @@ export const AppManager = observer(() => {
             </Grid>
         }
       </Container>
-    </div>
   );
 })
