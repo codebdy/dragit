@@ -17,15 +17,17 @@ const jsonlint = require("jsonlint-mod");
 declare var window:any;
 window.jsonlint = jsonlint;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    codemirror:{
-      width:'100%',
-      height:'260px',
-    },
+const useStyles = (height:string)=>{
+  return makeStyles((theme: Theme) =>
+    createStyles({
+      codemirror:{
+        width:'100%',
+        height:height,
+      },
 
-  }),
-);
+    }),
+  )
+}
 
 export const CodeMirrorEditor = (
   props:{
@@ -33,10 +35,11 @@ export const CodeMirrorEditor = (
     mode:string,
     onChange?:(value:string)=>void,
     lint?:boolean,
+    height?:string,
   }
 )=>{
-  const {value, mode, lint = true, onChange} = props;
-  const classes = useStyles();
+  const {value, mode, lint = true, height = "260px", onChange} = props;
+  const classes = useStyles(height)();
   return (
     <CodeMirror
     className = {classes.codemirror}

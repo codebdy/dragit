@@ -4,7 +4,7 @@ import { GraphQLStore } from 'Base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react';
 import {GQLList} from './GQLList';
 import { print, parse } from 'graphql';
-import {CodeMirrorEditor} from './CodeMirrorEditor';
+import {CodeMirrorEditor} from '../../../../../Base/Widgets/CodeMirrorEditor';
 import intl from 'react-intl-universal';
 import { useDebugQuery } from './useDebugQuery';
 import { useDebugMutation } from './useDebugMutation';

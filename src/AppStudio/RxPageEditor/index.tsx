@@ -9,15 +9,31 @@ import { RxDragStore } from 'rx-drag/store/RxDragStore';
 import { Toolbox } from './Toolbox';
 import { AttributeBox } from './AttrebuteBox';
 import SettingsBox from './SettingsBox';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IRxMeta } from 'rx-drag/models/IRxMeta';
 import { useRouteMatch } from 'react-router-dom';
+import PageDialog from 'Base/Widgets/PageDialog';
+import { CodeMirrorEditor } from 'Base/Widgets/CodeMirrorEditor';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    jsonEditor: {
+      width: '100%',
+      padding: theme.spacing(2),
+      color:theme.palette.text.secondary,
+    },
+  }),
+);
 
 export const RxPageEditor = observer(() => {
   const [rxDragStore] = React.useState<RxDragStore>(new RxDragStore());
   const studioStore = useAppStudioStore();
   const match = useRouteMatch();
   const{pageId} = match.params as any;  
+  const [showJSON, setShowJSON] = useState(false);
+  const [pageJSONSchema, setPageJSONSchema] = useState('');
+  const classes = useStyles();
 
   const rxPage = pageId ? studioStore?.getPage(pageId) : studioStore?.getFirstPage();
 
@@ -39,7 +55,8 @@ export const RxPageEditor = observer(() => {
   }
 
   const handleShowJson = (schema:string)=>{
-    console.log(schema);
+    setShowJSON(true);
+    setPageJSONSchema(schema);
   }
 
   return (
@@ -70,6 +87,21 @@ export const RxPageEditor = observer(() => {
           onChange = {handleChange}
           onShowJson = {handleShowJson}
         />
+
+        <PageDialog 
+          title="JSON Schema" 
+          maxWidth = "lg"
+          open = {showJSON}
+          onClose = {()=>{setShowJSON(false)}}
+        >
+          <div className = {classes.jsonEditor}>
+            <CodeMirrorEditor 
+              value = {pageJSONSchema} 
+              mode="application/json"
+              height = "calc(100vh - 150px)"
+            />
+          </div>
+        </PageDialog>
       </RxDragStoreProvider>
 
   );
