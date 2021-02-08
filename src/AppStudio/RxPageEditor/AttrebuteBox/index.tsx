@@ -277,7 +277,7 @@ export const AttributeBox = observer(()=>{
                     variant="outlined" 
                     size="small"
                     items = {studioStore?.rxApp?.auths || []}
-                    value = {node?.meta.auths || []}
+                    value = {toJS(node?.meta.auths) || []}
                     onChange = {(e:any)=>handleChangeAuths(e.target.value)}
                   />
                 </Grid>
