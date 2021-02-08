@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from "react"
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -119,6 +119,25 @@ export const AppManager = observer(() => {
           >
             <MdiIcon iconClass = "mdi-feather" />
           </Avatar>
+          <Button
+            variant = "text"
+            size = "large"
+            color = "primary"
+            onClick={() => {
+              console.info("I'm a button.");
+            }}
+          >
+            {intl.get('applications')}
+          </Button>
+          <Button
+            variant = "text"
+            size = "large"
+            onClick={() => {
+              console.info("I'm a button.");
+            }}
+          >
+            {intl.get('template')}
+          </Button>
           <Spacer />
           <a href="https://github.com/rxwater/rxdrag" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
             <MdiIcon iconClass = "mdi-github" />

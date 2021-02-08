@@ -1,4 +1,3 @@
-import { getTemplate } from "mock/templates/data";
 import { sleep } from "mock/utils/sleep";
 import { cloneObject } from "rx-drag/utils/cloneObject";
 import createId from "rx-drag/utils/createId";

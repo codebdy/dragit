@@ -38,6 +38,10 @@ export const RxPageEditor = observer(() => {
     }
   }
 
+  const handleShowJson = (schema:string)=>{
+    console.log(schema);
+  }
+
   return (
       <RxDragStoreProvider value = {rxDragStore}>
         <RxDrag
@@ -63,8 +67,8 @@ export const RxPageEditor = observer(() => {
           }}
 
           onThemeModeChange = {handleThemeModeChange}
-
           onChange = {handleChange}
+          onShowJson = {handleShowJson}
         />
       </RxDragStoreProvider>
 

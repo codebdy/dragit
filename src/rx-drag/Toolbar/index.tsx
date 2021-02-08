@@ -41,6 +41,12 @@ const svgClear = `
   </svg>
 `
 
+const svgJson = `
+  <svg viewBox="0 0 24 24">
+    <path fill="currentColor" d="M5,3H7V5H5V10A2,2 0 0,1 3,12A2,2 0 0,1 5,14V19H7V21H5C3.93,20.73 3,20.1 3,19V15A2,2 0 0,0 1,13H0V11H1A2,2 0 0,0 3,9V5A2,2 0 0,1 5,3M19,3A2,2 0 0,1 21,5V9A2,2 0 0,0 23,11H24V13H23A2,2 0 0,0 21,15V19A2,2 0 0,1 19,21H17V19H19V14A2,2 0 0,1 21,12A2,2 0 0,1 19,10V5H17V3H19M12,15A1,1 0 0,1 13,16A1,1 0 0,1 12,17A1,1 0 0,1 11,16A1,1 0 0,1 12,15M8,15A1,1 0 0,1 9,16A1,1 0 0,1 8,17A1,1 0 0,1 7,16A1,1 0 0,1 8,15M16,15A1,1 0 0,1 17,16A1,1 0 0,1 16,17A1,1 0 0,1 15,16A1,1 0 0,1 16,15Z" />
+  </svg>
+`
+
 const svgLight = `
   <svg viewBox="0 0 24 24">
     <path fill="currentColor" d="M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z" />
@@ -66,9 +72,10 @@ const svgRight = `
 export const Toolbar = observer((
   props:{
     onThemeModeChange?:(mode :RxThemeMode)=>void,
+    onShowJson?:()=>void,
   }
 ) => {
-  const {onThemeModeChange} = props;
+  const {onThemeModeChange, onShowJson} = props;
   const shellStore = useRxDragShellStore();
   const rxDragStore = useRxDragStore();
   
@@ -148,6 +155,14 @@ export const Toolbar = observer((
         />
       </div>
       <div className = 'rx-toolbar-button-group'>
+        {
+          onShowJson&&
+          <ToolbarButton 
+            svgIcon = { svgJson} 
+            onClick = { onShowJson }
+          />
+        }
+
         {
           shellStore?.themeOptions.canSwitchThemeMode && 
           <ToolbarButton 

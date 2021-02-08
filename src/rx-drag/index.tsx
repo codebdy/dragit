@@ -25,12 +25,13 @@ export interface IRxDragProps{
   locales?:IRxLocales,
   onChange?: (metas : Array<IRxMeta>)=>void,
   onThemeModeChange?:(mode :RxThemeMode)=>void,
+  onShowJson?:(schema:string) => void
 }
 
 export const RxDrag = observer((
   props: IRxDragProps
 ) => {
-  const {theme, initMetas, toolbox, attributeBox, pageSettings, locales, onChange, onThemeModeChange} = props;
+  const {theme, initMetas, toolbox, attributeBox, pageSettings, locales, onChange, onThemeModeChange, onShowJson} = props;
   const [shellStore] = React.useState(new RxDragShellStore(locales))
   const rxDragStore = useRxDragStore();
   rxDragStore?.setValueChangeFn(onChange);
@@ -47,6 +48,10 @@ export const RxDrag = observer((
     rxDragStore?.refreshToolbarAndLabel();
   }
 
+  const handleShowJson = ()=>{
+    onShowJson && onShowJson(JSON.stringify(rxDragStore?.canvas?.getChildrenMetas()||[]));
+  }
+
   return (
     <RxDragShellStoreProvider value = {shellStore}>
       <div 
@@ -59,7 +64,10 @@ export const RxDrag = observer((
         }
       >
         <div className = 'rx-left'>
-          <Toolbar onThemeModeChange = {onThemeModeChange}/>
+          <Toolbar 
+            onThemeModeChange = {onThemeModeChange}
+            onShowJson = {onShowJson ? handleShowJson : undefined}
+          />
           <div 
             className = 'rx-canvas-background'
             onScroll = {handleScroll}
