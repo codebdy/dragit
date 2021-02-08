@@ -1,6 +1,7 @@
 import { getTemplate } from "mock/templates/data";
 import { sleep } from "mock/utils/sleep";
 import { cloneObject } from "rx-drag/utils/cloneObject";
+import createId from "rx-drag/utils/createId";
 import { getRxApp } from "./appResolvers";
 import appsData from "./data";
 
@@ -72,9 +73,8 @@ export const saveRxPage = async (parent:any, args:any, context:any, info:any)=>{
 
 export const createRxPage = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  const app = getRxApp(args.appId)
-  const template = getTemplate(args.templateId);
-  let page = {id:args.pageId, name:args.name, schema:template?.schema} as any;
+  const app = getRxApp(args.rx_app_id)
+  let page = {id:createId(), name:args.name, schema:args.schema} as any;
   console.log('Server createPage:', args);
   if(app){
     app.pages = [...app.pages||[], page];

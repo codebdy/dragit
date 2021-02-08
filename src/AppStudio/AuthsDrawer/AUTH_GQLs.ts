@@ -17,8 +17,8 @@ export const SAVE_RX_AUTH = gql`
 
 
 export const CREATE_RX_AUTH = gql`
-  mutation($appId:ID!){
-    createRxAuth(appId:$appId){
+  mutation($rx_app_id:ID!){
+    createRxAuth(rx_app_id:$rx_app_id){
       ${authFields}
     }
   }

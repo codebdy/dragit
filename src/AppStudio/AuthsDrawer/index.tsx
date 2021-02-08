@@ -61,7 +61,7 @@ export const AuthsDrawer = observer((
   useShowAppoloError(createError);
 
   const handleNew = ()=>{
-    excuteCreate({variables:{appId:studioStore?.rxApp?.id}})
+    excuteCreate({variables:{rx_app_id:studioStore?.rxApp?.id}})
   }
 
   return (

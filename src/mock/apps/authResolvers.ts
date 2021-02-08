@@ -50,7 +50,7 @@ export const saveRxAuth = async (parent:any, args:any, context:any, info:any)=>{
 
 export const createRxAuth = async (parent:any, args:any, context:any, info:any)=>{
   await sleep(500);
-  const app = getRxApp(args.appId)
+  const app = getRxApp(args.rx_app_id)
   let auth = {rx_slug:'new-authority', name:'新权限'} as any;
   console.log('Server createRxAuth:', args);
   if(app){

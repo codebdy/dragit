@@ -23,8 +23,8 @@ export const SAVE_RX_PAGE = gql`
 
 
 export const CREATE_RX_PAGE = gql`
-  mutation($appId:ID, $templateId:ID, $pageId:ID, $name:String){
-    createRxPage(appId:$appId, templateId:$templateId, pageId:$pageId, name:$name){
+  mutation($rx_app_id:ID, $name:String, $schema:String){
+    createRxPage(rx_app_id:$rx_app_id, rx_page_id:$rx_page_id, name:$name, schema:$schema){
       ${pageFieldsGQL}
     }
   }

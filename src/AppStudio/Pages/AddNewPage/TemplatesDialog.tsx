@@ -76,7 +76,7 @@ export const TemplatesDialog = observer((
   const {open, onClose} = props;
   const classes = useStyles();
   const [name, setName] = useState(intl.get('new-page'));
-  const [selectedId, setSelectedId] = useState('');
+  const [selected, setSelected] = useState<IRxTemplate>();
   const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
@@ -123,8 +123,8 @@ export const TemplatesDialog = observer((
 
   const handleConfirm = ()=>{
     excuteCreate({variables:{
-      appId:studioStore?.rxApp?.id,
-      templateId:selectedId,
+      rx_app_id:studioStore?.rxApp?.id,
+      schema:selected?.schema,
       name
     }})
   }
@@ -149,12 +149,12 @@ export const TemplatesDialog = observer((
                     <Grid 
                       key={template.id} item  md={4} 
                       className = {classes.templateGrid}
-                      onClick={()=>{setSelectedId(template.id)}}
+                      onClick={()=>{setSelected(template)}}
                     >
                       <Image 
                         src = {template.thumbnail} 
                         className={
-                          classNames(classes.image,{[classes.selected]:selectedId === template.id})
+                          classNames(classes.image,{[classes.selected]:selected?.id === template.id})
                         }
                       />
                       <div className = {classes.templateName}>{template.name}</div>
@@ -188,7 +188,7 @@ export const TemplatesDialog = observer((
               color = "primary"
               submitting = {creating}
               onClick = {handleConfirm}
-              disabled = {!name || !selectedId}
+              disabled = {!name || !selected}
             >
               {intl.get('confirm')}
             </SubmitButton>
