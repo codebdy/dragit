@@ -18,12 +18,12 @@ import { toJS } from 'mobx';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
-  initMetas?: Array<IRxMeta>,
+  schema?: string,
   toolbox?: JSX.Element,
   attributeBox?: JSX.Element,
   pageSettings?: JSX.Element,
   locales?:IRxLocales,
-  onChange?: (metas : Array<IRxMeta>)=>void,
+  onChange?: (schema : string)=>void,
   onThemeModeChange?:(mode :RxThemeMode)=>void,
   onShowJson?:(schema:string) => void
 }
@@ -31,14 +31,14 @@ export interface IRxDragProps{
 export const RxDrag = observer((
   props: IRxDragProps
 ) => {
-  const {theme, initMetas, toolbox, attributeBox, pageSettings, locales, onChange, onThemeModeChange, onShowJson} = props;
+  const {theme, schema, toolbox, attributeBox, pageSettings, locales, onChange, onThemeModeChange, onShowJson} = props;
   const [shellStore] = React.useState(new RxDragShellStore(locales))
   const rxDragStore = useRxDragStore();
   rxDragStore?.setValueChangeFn(onChange);
 
   useEffect(()=>{
-    rxDragStore?.setMetas(cloneObject(toJS(initMetas)));
-  },[rxDragStore, initMetas])
+    rxDragStore?.setMetas(JSON.parse(schema||'[]'));
+  },[rxDragStore, schema])
 
   useEffect(()=>{
     shellStore?.setThemeOptions(theme);

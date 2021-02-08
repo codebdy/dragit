@@ -42,13 +42,13 @@ export class RxDragStore{
 
   refreshToolbarAndLabelFlag:number = 0;
 
-  valueChangeFn?:(metas : Array<IRxMeta>)=>void;
+  valueChangeFn?:(schema : string)=>void;
 
   constructor() {    
     makeAutoObservable(this);
   }
 
-  setValueChangeFn(valueChangeFn?:(metas : Array<IRxMeta>)=>void){
+  setValueChangeFn(valueChangeFn?:(schema : string)=>void){
     this.valueChangeFn = valueChangeFn;
   }
 
@@ -137,7 +137,7 @@ export class RxDragStore{
     this.undoList.push(command);
     this.redoList = [];
     this.refreshToolbarAndLabel();
-    this.valueChangeFn && this.valueChangeFn(this.canvas?.getChildrenMetas()||[]);
+    this.valueChangeFn && this.valueChangeFn(JSON.stringify(this.canvas?.getChildrenMetas()||[], null, 2));
   }
 
   undo(){
@@ -148,7 +148,7 @@ export class RxDragStore{
     }
     this.setSelectedNode(selectedNode);
     this.refreshToolbarAndLabel();
-    this.valueChangeFn && this.valueChangeFn(this.canvas?.getChildrenMetas()||[]);
+    this.valueChangeFn && this.valueChangeFn(JSON.stringify(this.canvas?.getChildrenMetas()||[], null, 2));
   }
 
   redo(){
@@ -159,7 +159,7 @@ export class RxDragStore{
     }
     this.setSelectedNode(selectedNode);
     this.refreshToolbarAndLabel();
-    this.valueChangeFn && this.valueChangeFn(this.canvas?.getChildrenMetas()||[]);
+    this.valueChangeFn && this.valueChangeFn(JSON.stringify(this.canvas?.getChildrenMetas()||[], null, 2));
   }
 
   operateNode (draggedNode:RxNode<IMeta>, targetNode:RxNode<IMeta>, position:CursorPosition){

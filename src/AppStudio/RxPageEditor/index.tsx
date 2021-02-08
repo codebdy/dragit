@@ -10,7 +10,6 @@ import { Toolbox } from './Toolbox';
 import { AttributeBox } from './AttrebuteBox';
 import SettingsBox from './SettingsBox';
 import { useEffect, useState } from 'react';
-import { IRxMeta } from 'rx-drag/models/IRxMeta';
 import { useRouteMatch } from 'react-router-dom';
 import PageDialog from 'Base/Widgets/PageDialog';
 import { CodeMirrorEditor } from 'Base/Widgets/CodeMirrorEditor';
@@ -41,6 +40,7 @@ export const RxPageEditor = observer(() => {
     if(rxPage){
       studioStore?.editPage(rxPage);
     }
+    setPageJSONSchema(rxPage?.schema ||'');
     rxDragStore?.setSelectedNode(undefined);
   },[rxDragStore, rxPage, studioStore]);
 
@@ -48,9 +48,9 @@ export const RxPageEditor = observer(() => {
     studioStore?.setThemeMode(mode);
   }
 
-  const handleChange = (metas: Array<IRxMeta>)=>{
+  const handleChange = (schema: string)=>{
     if(studioStore?.pageEditor?.currentData){
-      studioStore?.pageEditor?.setCurrentData({...studioStore?.pageEditor?.currentData, schema:JSON.stringify(metas)});
+      studioStore?.pageEditor?.setCurrentData({...studioStore?.pageEditor?.currentData, schema});
     }
   }
 
@@ -67,7 +67,7 @@ export const RxPageEditor = observer(() => {
               mode:studioStore?.themeMode,
             }
           }
-          initMetas = {JSON.parse(rxPage?.schema||'[]')}
+          schema = {pageJSONSchema}
           toolbox = {
             <Toolbox/>
           }
