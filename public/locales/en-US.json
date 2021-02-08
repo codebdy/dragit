@@ -341,5 +341,6 @@
     "group-by-field":"Group by field",
     "excute-query-by-mutation": "Excute query by mutation",
     "count":"Count",
-    "app-store":"Store"
+    "app-store":"Store",
+    "document":"Document"
 }

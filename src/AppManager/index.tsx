@@ -138,6 +138,15 @@ export const AppManager = observer(() => {
           >
             {intl.get('template')}
           </Button>
+          <Button
+            variant = "text"
+            size = "large"
+            onClick={() => {
+              window.open("https://document.rxdrag.com");  
+            }}
+          >
+            {intl.get('document')}
+          </Button>
           <Spacer />
           <a href="https://github.com/rxwater/rxdrag" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
             <MdiIcon iconClass = "mdi-github" />
