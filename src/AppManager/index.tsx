@@ -147,6 +147,16 @@ export const AppManager = observer(() => {
           >
             {intl.get('document')}
           </Button>
+          <Button
+            variant = "text"
+            size = "large"
+            onClick={() => {
+              window.open("https://github.com/rxwater/dragit/issues");  
+            }}
+          >
+            {intl.get('report-bug')}
+          </Button>
+
           <Spacer />
           <a href="https://github.com/rxwater/rxdrag" className={classes.githubLink} target="_blank" rel="noopener noreferrer">
             <MdiIcon iconClass = "mdi-github" />

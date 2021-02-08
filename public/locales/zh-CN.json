@@ -348,5 +348,6 @@
     "excute-query-by-mutation":"通过Mutation查询",
     "count":"数量",
     "app-store":"商店",
-    "document":"文档"
+    "document":"文档",
+    "report-bug":"提交Bug"
 }
