@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { gql, useQuery } from '@apollo/react-hooks';
-import intl from 'react-intl-universal';
-import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { gql, useLazyQuery } from '@apollo/react-hooks';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 export const Combobox = React.forwardRef((
   props:{
@@ -46,17 +45,15 @@ export const Combobox = React.forwardRef((
       }
     }
   `;
-  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
-  const appStore = useDragItStore();
-  
+  const [excuteQuery,{ loading:queryLoading, error: queryError, data }] = useLazyQuery(QUERY_DATA);
+
   useEffect(()=>{
-    if(queryError){
-      appStore.infoError(intl.get('server-error'), queryError?.message)
-      console.log( queryError);
+    if(query){
+      excuteQuery();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[queryError])
-  
+  },[excuteQuery, query])
+
+  useShowAppoloError(queryError)  
 
   const itemsData = (query? (data&&data[query])||[] : items) as any;
   

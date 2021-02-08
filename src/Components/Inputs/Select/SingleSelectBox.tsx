@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import { gql, useQuery } from '@apollo/react-hooks';
+import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -79,8 +79,15 @@ export const SingleSelectBox = React.forwardRef((
       ${itemName}
     }
   }`;
-  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_DATA);
-  useShowAppoloError(queryError)
+  const [excuteQuery,{ loading:queryLoading, error: queryError, data }] = useLazyQuery(QUERY_DATA);
+
+  useEffect(()=>{
+    if(query){
+      excuteQuery();
+    }
+  },[excuteQuery, query])
+
+  useShowAppoloError(queryError)  
 
   const empertyValue = '';
 

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { gql, useQuery } from '@apollo/react-hooks';
+import { gql, useLazyQuery } from '@apollo/react-hooks';
 
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
@@ -43,15 +43,23 @@ export const MultiSelectBox = React.forwardRef((
   let name =itemName;
 
   const QUERY_STR = `
-  query {
-    ${query}{
-      id
-      ${itemName}
-      ${groupByField||''}
+    query {
+      ${query}
+      {
+        id
+        ${itemName}
+        ${groupByField||''}
+      }
     }
-  }`;
-  const { loading:queryLoading, error: queryError, data } = useQuery(gql`${QUERY_STR}`);
+  `;
+  const [excuteQuery,{ loading:queryLoading, error: queryError, data }] = useLazyQuery(gql`${QUERY_STR}`);
   useShowAppoloError(queryError)
+
+  useEffect(()=>{
+    if(query){
+      excuteQuery();
+    }
+  },[excuteQuery, query])
 
   const itemsData = (query? (data&&data[query])||[] : items) as any;
   const handleChange = (event:any, newValue:any)=>{

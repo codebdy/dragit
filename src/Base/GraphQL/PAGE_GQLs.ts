@@ -14,7 +14,7 @@ export const pageFieldsGQL = `
 `
 
 export const SAVE_RX_PAGE = gql`
-  mutation($rxPage:RxPageInput){
+  mutation($rxPage:UpdateRxPageInput){
     saveRxPage(rxPage:$rxPage){
       ${pageFieldsGQL}
     }
