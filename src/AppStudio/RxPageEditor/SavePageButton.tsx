@@ -23,8 +23,13 @@ export const SavePageButton = observer(() => {
   const handleSave = ()=>{
     const rxPageData = toJS(studioStore?.pageEditor?.currentData) as any; 
     console.assert(rxPageData, 'Page data is undefined or null');
-    delete rxPageData.__typename;
-    excuteSaveRxPage({variables:{rxPage:rxPageData}});      
+    const{__typename, auths, ...rest} = rxPageData
+    excuteSaveRxPage({variables:{
+      rxPage:rest,
+      auths:{
+        update:auths
+      }
+    }});      
   }
   
   return (
