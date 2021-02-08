@@ -49,7 +49,7 @@ export const RxDrag = observer((
   }
 
   const handleShowJson = ()=>{
-    onShowJson && onShowJson(JSON.stringify(rxDragStore?.canvas?.getChildrenMetas()||[]));
+    onShowJson && onShowJson(JSON.stringify(rxDragStore?.canvas?.getChildrenMetas()||[], null, 2));
   }
 
   return (
