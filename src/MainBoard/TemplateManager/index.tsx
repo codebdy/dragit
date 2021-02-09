@@ -2,10 +2,11 @@ import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
-import { Container, Grid, Typography, Button } from '@material-ui/core';
+import { Container, Grid, Typography, Button, TextField, DialogActions } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { useState } from 'react';
 import PageDialog from 'Base/Widgets/PageDialog';
+import { MediaSelect } from 'Components/Inputs/MediaSelect/MediaSelect';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -16,10 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
     title:{
       fontSize:'1.6rem',
     },
-
     buttonMargin:{
       marginLeft:theme.spacing(2),
     },
+    dialogContent:{
+      width:'100%',
+      padding:theme.spacing(2),
+    }
   }),
 );
 
@@ -60,8 +64,37 @@ export const TemplateManager = observer(() => {
 
       </Grid>
     </Grid>
-    <PageDialog title="模板编辑" open = {open} onClose = {hanldeClose}>
-      dd
+    <PageDialog title={intl.get('edit-template')} open = {open} onClose = {hanldeClose}>
+      <div className = {classes.dialogContent}>
+        <Grid container spacing = {2}>
+            <Grid item xs={6}>
+              <TextField fullWidth variant="outlined" label = {intl.get('name')}/>
+            </Grid>
+            <Grid item xs={12}>
+              <MediaSelect 
+                label = {intl.get('thumbnail')}
+                width = "200px"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField 
+                fullWidth 
+                variant="outlined" 
+                label = "Schema"
+                multiline
+                rows = {20}
+              />
+            </Grid>
+        </Grid>
+      </div>
+      <DialogActions>
+        <Button onClick = {hanldeClose}>
+          {intl.get('cancel')}
+        </Button>
+        <Button color = "primary" variant = "contained">
+          {intl.get('save')}
+        </Button>
+      </DialogActions>
     </PageDialog>
 
   </Container>

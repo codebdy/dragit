@@ -293,6 +293,7 @@
     "data-update":"Update data",
     "data-remove":"Delete data",
     "applications":"Applications",
+    "templates":"Templates",
     "download":"Download",
     "create":"Create",
     "uninstall":"Uninstall",
@@ -343,5 +344,7 @@
     "count":"Count",
     "app-store":"Store",
     "document":"Document",
-    "report-bug":"Submmit Bug"
+    "report-bug":"Submmit Bug",
+    "edit-template":"Edit template",
+    "thumbnail":"Thumbnail"
 }

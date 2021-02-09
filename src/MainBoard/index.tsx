@@ -77,7 +77,7 @@ export const MainBoard = observer(() => {
             activeClassName = {classes.activeLink}
             to="/main-board/templates"
           >
-            {intl.get('template')}
+            {intl.get('templates')}
           </NavLink>
 
           <Link
