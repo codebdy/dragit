@@ -4,6 +4,8 @@ import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import { Container, Grid, Typography, Button } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
+import { useState } from 'react';
+import PageDialog from 'Base/Widgets/PageDialog';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,6 +26,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const TemplateManager = observer(() => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = ()=>{
+    setOpen(true);
+  }
+
+  const hanldeClose = ()=>{
+    setOpen(false);
+  }
 
   return (
     <Container maxWidth = 'lg'>
@@ -42,12 +53,16 @@ export const TemplateManager = observer(() => {
           startIcon = {
             <Add />
           }
+          onClick = {handleOpen}
         >
           {intl.get('create')}
         </Button>          
 
       </Grid>
     </Grid>
+    <PageDialog title="模板编辑" open = {open} onClose = {hanldeClose}>
+      dd
+    </PageDialog>
 
   </Container>
 
