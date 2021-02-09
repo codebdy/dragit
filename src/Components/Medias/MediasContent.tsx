@@ -13,7 +13,6 @@ import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MU
 import { ID } from "rx-drag/models/baseTypes";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { toggle, batchRemove, remove } from "rx-drag/utils/ArrayHelper";
-import { cloneObject } from "rx-drag/utils/cloneObject";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -180,7 +179,7 @@ export default function MediasContent(
   
   useEffect(()=>{
     if(folderData){
-      const queriedFolders:Array<FolderNode> = makeupParent(cloneObject((folderData && folderData['mediaFoldersTree'])||[]));
+      const queriedFolders:Array<FolderNode> = makeupParent(JSON.parse((folderData && folderData['rxMediaFoldersTree'])||'[]'));
       setFolders(queriedFolders)
     }
   },[folderData])

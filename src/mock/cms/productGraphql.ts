@@ -50,7 +50,7 @@ export var productGQLType = `
 
   type Product{
     id: ID!
-    medias: [Media]
+    rxMedias: [RxMedia]
     rx_slug: String
     name: String
     auther: String
@@ -72,7 +72,7 @@ export var productGQLType = `
 
   input ProductInput{
     id: ID
-    medias: [MediaInput]
+    rxMedias: [MediaInput]
     rx_slug: String
     name: String
     auther: String

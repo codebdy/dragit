@@ -35,8 +35,8 @@ export var mediasGQLType = `
 `
 
 export var mediasGQLQuery = `
-  mediaFoldersTree:JSON
-  medias(first: Int!, page: Int, where:JSON, orderBy:JSON): Medias
+  rxMediaFoldersTree:String
+  rxMedias(first: Int!, page: Int, where:JSON, orderBy:JSON): Medias
 `
 
 export var mediasGQLMutation = `

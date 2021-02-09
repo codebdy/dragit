@@ -2,16 +2,16 @@ import { gql } from "@apollo/react-hooks";
 
 export const QUERY_FOLDERS = gql`
   query {
-    mediaFoldersTree
+    rxMediaFoldersTree
   }
 `;
 export const QUERY_MEDIAS = gql`
   query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
-    medias(first:$first, page:$page, where:$where, orderBy:$orderBy){
+    rxMedias(first:$first, page:$page, where:$where, orderBy:$orderBy){
       data{
         id
         thumbnail
-        title
+        name
         src
       }
       paginatorInfo{
