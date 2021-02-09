@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MdiIcon from 'Components/common/MdiIcon';
-import { Avatar, Button, Link } from '@material-ui/core';
+import { Avatar, Link } from '@material-ui/core';
 import Spacer from 'Components/common/Spacer';
 import { AccountAvatar } from 'AppBoard/TopNav/AccountAvatar';
 import { observer } from 'mobx-react';
