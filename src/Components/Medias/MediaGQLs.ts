@@ -6,8 +6,8 @@ export const QUERY_FOLDERS = gql`
   }
 `;
 export const QUERY_MEDIAS = gql`
-  query ($first:Int, $page:Int, $where: JSON, $orderBy: JSON){
-    rxMedias(first:$first, page:$page, where:$where, orderBy:$orderBy){
+  query ($first:Int!, $page:Int, $name:String){
+    rxMedias(first:$first, page:$page, name:$name, orderBy: [{ column: CREATED_AT, order: ASC }]){
       data{
         id
         thumbnail

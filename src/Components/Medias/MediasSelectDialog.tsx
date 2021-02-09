@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
     },
     closeButton:{
-      marginRight:'-30px',
+      marginRight:'-10px',
     },
     dialogContent:{
       display:'flex',
