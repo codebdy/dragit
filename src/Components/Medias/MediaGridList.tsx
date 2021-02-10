@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
 import { MediaGridListFolder } from './MediaGridListFolder';
 import { MediaGridListImage } from './MediaGridListImage';
 import { IRxMedia } from 'Base/Model/IRxMedia';
-import { useLazyQuery } from '@apollo/react-hooks';
 import { QUERY_MEDIAS } from './MediasGQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
+import { useQuery } from '@apollo/react-hooks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,15 +43,16 @@ export const MediaGridList = observer(()=>{
 
   const classes = useStyles();
   const ref = useRef(null);  
-  const [medias, setMedias] = React.useState<Array<IRxMedia>>([]);
-  const [pageNumber, setPageNumber] = React.useState(0);
+  const [medias, setMedias] = useState<Array<IRxMedia>>([]);
+  const [queryLoading, setQueryLoading] = useState(false);
+  const [page, setPage] = React.useState(0);
   const [hasMore, setHasMore] = React.useState(true);
   const mediasStore = useMediasStore();
-
-  const folders = mediasStore?.selectedFolderNode?.children;
+  const selectedNode = mediasStore?.selectedFolderNode
+  const folders = selectedNode ? selectedNode.children : mediasStore?.folders;
   
-  const [excuteQuery, { loading:queryLoading, error:queryError, data:mediaData, refetch }] = useLazyQuery(QUERY_MEDIAS, {
-    variables: { first:20, page:pageNumber + 1},
+  const {loading, error:queryError, data:mediaData, refetch} = useQuery(QUERY_MEDIAS, {
+    variables: { first:20, page:page + 1},
     notifyOnNetworkStatusChange: true
   });
 
@@ -62,11 +63,16 @@ export const MediaGridList = observer(()=>{
     setHasMore(mediaData?.medias?.paginatorInfo?.hasMorePages);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mediaData])
+
+  useEffect(()=>{
+    setQueryLoading(loading);
+  },[loading])
   
   const doScroll = ()=>{
     if(!queryLoading && hasMore){
-      //setqueryLoading(true);
-      //refetch && refetch({ first:20, page:pageNumber + 1});
+      setQueryLoading(true);
+      refetch && refetch({ first:20, page:page + 1});
+      setPage(page + 1)
     }
   }
 
@@ -82,10 +88,6 @@ export const MediaGridList = observer(()=>{
       doScroll();
     }
     //e.defaultPrevented();
-  }
-
-  const handleSelect = ()=>{
-
   }
 
   return (

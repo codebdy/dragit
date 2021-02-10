@@ -4,9 +4,10 @@ import MdiIcon from 'Components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import { FolderNode } from "./FolderNode";
 import MediaGridListIconButton from './MediaGridListIconButton';
-import { IRxMedia } from 'Base/Model/IRxMedia';
-import { ID } from 'rx-drag/models/baseTypes';
 import {observer} from 'mobx-react';
+import { useUpdateFolder } from './useUpdateFolder';
+import { useMediasStore } from './MediasStore';
+import { useRemoveFolder } from './useRemoveFolder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,28 +60,48 @@ export const MediaGridListFolder = observer((
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
   const [folderName, setFolderName] = React.useState(folder.name);
+  const mediasStore = useMediasStore();
+
+  const updateFolder = useUpdateFolder(folder, folderName);
+  const removeFolder = useRemoveFolder(folder);
+  const draggedFolder = mediasStore.draggedFolder;
+
   const handleEndEditing = ()=>{
     setEditing(false);
-    //if(folderName !== folder.name){
-    //  onFolderNameChange(folderName, folder);
-     // folder.name = folderName;
-    //}
+    if(folderName !== folder.name){
+      folder.setLoading(true);
+      updateFolder({variables:{
+        id:folder.id,
+        name:folder.name
+      }})
+     
+    }
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = (event.target as HTMLInputElement).value;
-    //setFolderName(value);
+    setFolderName(value);
   };
 
+  const handleDragStart = (event:React.DragEvent<HTMLDivElement>)=>{
+    setHover(false);
+    mediasStore.setDraggedFolder(folder);
+  }
+
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
-    //draggedFolder && draggedFolder !== folder && event.preventDefault();
+    draggedFolder && draggedFolder !== folder && event.preventDefault();
     //draggedMedia && event.preventDefault();
   }
 
+
   const handleDrop = ()=>{
-    //if(draggedFolder && draggedFolder !== folder){
-      //onMoveFolderTo(draggedFolder, folder);
-    //}
+    if(draggedFolder && draggedFolder.id !== folder.id){
+      folder.setLoading(true);
+      updateFolder({variables:{
+        id:draggedFolder.id,
+        parent_id: folder.id
+      }})
+    }
 
     //if(draggedMedia){
     //  onMoveMediaTo(draggedMedia, folder);
@@ -88,11 +109,16 @@ export const MediaGridListFolder = observer((
   }
 
   const handleSelect = ()=>{
-
+    mediasStore?.setSelectedFolderId(folder.id);
   }
 
   const handleRemove = ()=>{
-
+    folder.setLoading(true);
+    removeFolder({
+      variables:{
+        id:folder.getRemoveIds(),
+      }
+    })
   }
 
   return (
@@ -100,15 +126,11 @@ export const MediaGridListFolder = observer((
       <div 
         className={classes.folder}
         draggable={true}
-        //onDoubleClick = {()=>onSelect(folder.id)}
+        onDoubleClick = {handleSelect}
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}
-        onDragStart={()=>{
-          setHover(false);
-          //onDragStart(folder);
-        }}
+        onDragStart={handleDragStart}
         onDragOver = {handleDragOver}
-        //onDragEnd = {onDragEnd}
         onDrop = {handleDrop}          
       >
         <MdiIcon className={classes.folderIcon} iconClass = "mdi-folder-outline" size="50" />
@@ -116,7 +138,6 @@ export const MediaGridListFolder = observer((
           hover&&
           <div className={classes.mask}>
             <div className={classes.toolbar}>
-              <MediaGridListIconButton icon = "mdi-magnify" onClick={handleSelect} />
               <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>setEditing(true)} />
               <MediaGridListIconButton icon = "mdi-delete-outline" onClick={handleRemove} />
             </div>

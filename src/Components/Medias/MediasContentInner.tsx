@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {makeStyles, Theme, createStyles, Divider, Hidden, LinearProgress} from "@material-ui/core";
 import { MediaGridList } from "./MediaGridList";
 import { MediaFolders } from "./MediaFolders";
@@ -8,9 +8,9 @@ import intl from 'react-intl-universal';
 import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
 import { IRxMedia } from "Base/Model/IRxMedia";
-import { MUTATION_ADD_FOLDER,  MUTATION_UPDATE_FOLDER, QUERY_FOLDERS } from "./MediasGQLs";
+import {  MUTATION_UPDATE_FOLDER, QUERY_FOLDERS } from "./MediasGQLs";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
-import { MediasStore, MediasStoreProvider, useMediasStore } from "./MediasStore";
+import { useMediasStore } from "./MediasStore";
 import {observer} from 'mobx-react';
 import SubmitButton from "Components/common/SubmitButton";
 import MediaFilderLoadingSkeleton from "./MediaFilderLoadingSkeleton";
@@ -18,7 +18,6 @@ import { parseFolderNodes } from "./FolderNode/parseFolderNodes";
 import { ID } from "rx-drag/models/baseTypes";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useAddFolder } from "./useAddFolder";
-import { useUpdateFolder } from "./useUpdateFolder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
