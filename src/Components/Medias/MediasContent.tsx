@@ -101,12 +101,13 @@ export const  MediasContent = observer((
   const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
     {
       onCompleted:(data)=>{
-        let newFolder = data?.addRxMediaFolder;
-        if(!newFolder){
+        let json = data?.addRxMediaFolder;
+        if(!json){
           return;
         }
-        mediasStore.addFolder(cloneObject(newFolder));
-        mediasStore.setSelectedFolderId(newFolder?.id || 'root');
+        const folder = new FolderNode(json.id, json.name);
+        folder.setEditing(true);
+        mediasStore.addFolder(folder);        
       }
     }
   );
