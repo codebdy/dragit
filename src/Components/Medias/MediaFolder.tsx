@@ -81,6 +81,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
         node.setLoading(false);
         const json = data?.addRxMediaFolder;
         if(!json){
+          console.assert(json, 'Add Folder failure:get emperyt response');
           return;
         }
         const folder = new FolderNode(json.id, json.name, node);

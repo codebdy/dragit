@@ -5,7 +5,7 @@ import { ID } from 'rx-drag/models/baseTypes';
 export class FolderNode{
   id: ID;
   name: string;
-  children?: Array<FolderNode>;
+  children: Array<FolderNode> = [];
   parent?: FolderNode;
   editing: boolean = false;
   loading: boolean = false;
@@ -18,10 +18,11 @@ export class FolderNode{
   }
 
   setChildren(children?: Array<FolderNode>){
-    this.children = children;
+    this.children = children||[];
   }
 
   addChild(folder:FolderNode){
+    folder?.setParent(this);
     this.children?.push(folder);
   }
 
@@ -54,5 +55,9 @@ export class FolderNode{
 
   setLoading(loading:boolean){
     this.loading = loading;
+  }
+
+  setParent(parent?:FolderNode){
+    this.parent = parent;
   }
 }
