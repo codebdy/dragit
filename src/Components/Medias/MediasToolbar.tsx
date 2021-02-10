@@ -103,11 +103,6 @@ export default function MediasToolbar(){
             <MdiIcon iconClass="mdi-sort-ascending"  size={toolIconSize} />
           </IconButton>
         </Tooltip>
-        <Tooltip title={intl.get('list')} arrow placement="top">
-          <IconButton aria-label={intl.get('list')} component="span">
-            <MdiIcon iconClass="mdi-format-list-checkbox"  size={toolIconSize} />
-          </IconButton>
-        </Tooltip>
 
       </Hidden>
       <Hidden smUp>

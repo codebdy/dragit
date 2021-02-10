@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediasGridList(props:{
     loading:boolean, 
     folderLoading:ID|boolean,
-    draggedFolder:FolderNode|undefined,
+    //draggedFolder:FolderNode|undefined,
     draggedMedia:IRxMedia|undefined,
     folder?:FolderNode,
     folders?:Array<FolderNode>|undefined,
@@ -50,9 +50,9 @@ export default function MediasGridList(props:{
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
     onRemoveMedia:(media:IRxMedia)=>void,
-    onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
+    onMoveFolderTo?:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
     onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
-    onDragFolder:(folder:FolderNode|undefined)=>void,
+    //onDragFolder:(folder:FolderNode|undefined)=>void,
     onMediaDragStart:(media:IRxMedia) =>void,
     onMediaDragEnd:()=>void,
     onToggleSelectMedia:(media:IRxMedia)=>void,
@@ -60,7 +60,7 @@ export default function MediasGridList(props:{
   const {
     loading, 
     folderLoading, 
-    draggedFolder,
+    //draggedFolder,
     draggedMedia,
     folder, 
     folders, 
@@ -69,10 +69,10 @@ export default function MediasGridList(props:{
     onScrollToEnd, 
     onFolderNameChange, 
     onRemoveFolder, 
-    onMoveFolderTo,
+    //onMoveFolderTo,
     onMoveMediaTo,
     onRemoveMedia,
-    onDragFolder,
+    //onDragFolder,
     onMediaDragStart,
     onMediaDragEnd,
     onToggleSelectMedia
@@ -110,19 +110,19 @@ export default function MediasGridList(props:{
           <Grid item key={folder.id + '-folder-' + folder.name} lg={2} sm={3} xs={4}>
             <MediaGridListFolder
               folderLoading = {folderLoading}
-              draggedFolder = {draggedFolder}
+              //draggedFolder = {draggedFolder}
               draggedMedia = {draggedMedia}
               folder={folder} 
               onSelect={handleSelect} 
               onFolderNameChange={onFolderNameChange}
               onRemoveFolder = {onRemoveFolder}
-              onMoveFolderTo = {onMoveFolderTo}
+              
               onMoveMediaTo = {onMoveMediaTo}
               onDragStart = {(folder)=>{
-                onDragFolder(folder)
+                //onDragFolder(folder)
               }}
               onDragEnd = {()=>{
-                onDragFolder(undefined)
+                //onDragFolder(undefined)
               }}                 
             />
           </Grid>

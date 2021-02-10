@@ -8,6 +8,7 @@ export class FolderNode{
   children?: Array<FolderNode>;
   parent?: FolderNode;
   editing: boolean = false;
+  loading: boolean = false;
 
   constructor(id:ID, name:string, parent?:FolderNode) {
     this.id = id;
@@ -43,5 +44,15 @@ export class FolderNode{
       child.getRemoveIds(retIds)
     })
     return retIds;
+  }
+
+  moveTo(folder?:FolderNode){
+    this.parent?.removeChild(this);
+    this.parent = folder;
+    folder?.addChild(this);
+  }
+
+  setLoading(loading:boolean){
+    this.loading = loading;
   }
 }

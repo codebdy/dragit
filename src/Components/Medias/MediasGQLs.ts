@@ -53,6 +53,7 @@ export const MUTATION_UPDATE_MEDIA = gql`
   mutation ($media:MediaInput!){
     updateRxMedia(media:$media){
       id
+      parent_id
     }
   }
 `;

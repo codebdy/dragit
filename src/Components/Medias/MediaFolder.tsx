@@ -75,9 +75,10 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   const [nodeName, setNodeName] = React.useState(node.name);
   const mediaStore = useMediasStore();
   
-  const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
+  const [addFolder, {error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
     {
       onCompleted:(data)=>{
+        node.setLoading(false);
         const json = data?.addRxMediaFolder;
         if(!json){
           return;
@@ -89,13 +90,24 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
     }
   );
 
-  const [updateFolder, {error:updateFolderError, loading:updating}] = useMutation(MUTATION_UPDATE_FOLDER,{
+  const [updateFolder, {error:updateFolderError}] = useMutation(MUTATION_UPDATE_FOLDER,{
     onCompleted:(data)=>{
+      node.setLoading(false);
+      mediaStore.draggedFolder?.setLoading(false);
       node.setName(nodeName);
+      const json = data.updateRxMediaFolder
+      if(mediaStore.draggedFolder && mediaStore?.draggedFolder?.id === json?.id){
+        if(!mediaStore.draggedFolder?.parent){
+          mediaStore.removeFolder(mediaStore.draggedFolder);
+        }
+        mediaStore.draggedFolder?.moveTo(node);
+        mediaStore.setDraggedFolder(undefined);
+      }
     }});
 
-  const [removeFolder, {error:removeFolderError, loading:removing}] = useMutation(MUTATION_REMOVE_FOLDER,{
+  const [removeFolder, {error:removeFolderError}] = useMutation(MUTATION_REMOVE_FOLDER,{
     onCompleted:(data)=>{
+      node.setLoading(false);
       const json = data?.removeRxMediaFolders;
       if(!json){
         return;
@@ -113,6 +125,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
 
   const handleEndEditing = ()=>{
     node.setEditing(false);
+    node.setLoading(true);
     updateFolder({
       variables:{
         id:node.id,
@@ -128,21 +141,34 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   };
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
-    //draggedFolder && draggedFolder !== node && event.preventDefault();
-    //draggedMedia && event.preventDefault();
+    const draggedFolder = mediaStore.draggedFolder;
+    const draggedMedia = mediaStore.draggedMedia;
+    draggedFolder && draggedFolder !== node && event.preventDefault();
+    draggedMedia && event.preventDefault();
+    event.stopPropagation();
   }
 
-  const handleDrop = ()=>{
-    //if(draggedFolder && draggedFolder !== node){
-    //  onMoveFolderTo(draggedFolder, node);
-    //}
-    //if(draggedMedia){
-    //  onMoveMediaTo(draggedMedia, node);
-    //}
+  const handleDrop = (event:React.DragEvent<HTMLDivElement>)=>{
+    const draggedFolder = mediaStore.draggedFolder;
+    const draggedMedia = mediaStore.draggedMedia;
+    if(draggedFolder && draggedFolder !== node){
+      node.setLoading(true);
+      updateFolder({
+        variables:{
+          id:draggedFolder.id,
+          parent_id:node.id
+        }
+      })
+    }
+    if(draggedMedia){
+      //onMoveMediaTo(draggedMedia, node);
+    }
+    event.stopPropagation();
   }
 
   const handelAddFolder = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
+    node.setLoading(true);
     addFolder({
       variables:{
         parent_id:node.id,
@@ -163,6 +189,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   }
 
   const handleRemoveFolder = ()=>{
+    node.setLoading(true);
     removeFolder({
       variables:{
         id:node.getRemoveIds(),
@@ -174,7 +201,6 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
 
   }
 
-  const loading = adding || updating || removing;
 
   return(
     <TreeItem nodeId={node.id.toString()} 
@@ -186,7 +212,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
           draggable={true}
           onDragStart={()=>{
             setHover(false);
-            //onDragStart(node);
+            mediaStore.setDraggedFolder(node);
           }}
           onDragOver = {handleDragOver}
           onDragEnd = {handleDragEnd}
@@ -218,7 +244,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
             }
           </FolderLabel>
           {
-            loading &&
+            node.loading &&
             <CircularProgress size = {24}/>
           }
           {
@@ -233,7 +259,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
             </>
           }
           {
-            hover && !loading && !node.editing &&
+            hover && !node.loading && !node.editing &&
             <FolderActions>
               <IconButton size = "small" onClick={(e)=>{
                 e.stopPropagation();

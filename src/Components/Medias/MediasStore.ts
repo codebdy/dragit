@@ -39,6 +39,10 @@ export class MediasStore{
   removeFolder(folder:FolderNode){
     this.folders?.splice(this.folders.indexOf(folder), 1);
   }
+
+  setDraggedFolder(folder?:FolderNode){
+    this.draggedFolder = folder;
+  }
 }
 
 export const MediasStoreContext = createContext<MediasStore>({} as MediasStore);

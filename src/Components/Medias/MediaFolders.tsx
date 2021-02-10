@@ -26,7 +26,7 @@ export const MediaFolders = observer(() => {
 
   const classes = useStyles();
   const mediaStore = useMediasStore();
-
+  
   return (
     <TreeView
       className={classes.root}

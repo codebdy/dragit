@@ -9,7 +9,7 @@ import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
 import { IRxMedia } from "Base/Model/IRxMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
-import { MUTATION_ADD_FOLDER,  MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediasGQLs";
+import { MUTATION_ADD_FOLDER,  MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediasGQLs";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { toggle, batchRemove, remove } from "rx-drag/utils/ArrayHelper";
 import { MediasStore, MediasStoreProvider } from "./MediasStore";
@@ -80,7 +80,7 @@ export const  MediasContent = observer((
   const classes = useStyles();
   const [mediasStore] = useState(new MediasStore());
   const [folderLoading, setFolderLoading] = React.useState<boolean|ID>(false);
-  const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
+  //const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
   const [draggedMedia, setDraggedMedia] = React.useState<IRxMedia|undefined>();
   //const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
   //const [selectedFolder, setSelectedFolder] = React.useState('root');
@@ -111,6 +111,15 @@ export const  MediasContent = observer((
     }
   );
 
+  const [updateFolder, {error:updateFolderError}] = useMutation(MUTATION_UPDATE_FOLDER,{
+    onCompleted:(data)=>{
+      if(mediasStore?.draggedFolder){
+        mediasStore?.draggedFolder?.setLoading(false);
+        mediasStore?.draggedFolder?.moveTo(undefined);
+        mediasStore.addFolder(mediasStore?.draggedFolder);        
+      }
+
+    }});
 
   const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
     onCompleted:(data)=>{
@@ -130,6 +139,7 @@ export const  MediasContent = observer((
   //const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
   
   const error = queryFolderError || 
+                updateFolderError ||
                 queryError || 
                 addFolderError || 
                 updateMediaError || 
@@ -200,30 +210,6 @@ export const  MediasContent = observer((
     }
   }
 
-  const handleMoveToFolderTo = (folder:FolderNode, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
-    const parentFolder = folder.parent;
-    fromGrid ? setFolderLoading(targetFolder ? targetFolder.id : true) : setFolderLoading(true)
-    //if(selectedFolder === folder.id){
-    //  setSelectedFolder('root');
-    //}
-
-    //updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:targetFolder?.id}}});
-    if(parentFolder){
-        remove(folder, parentFolder.children)
-    }
-    else{
-      //remove(folder, folders)
-    }
-    folder.parent = undefined;
-    if(targetFolder){
-      targetFolder.children = targetFolder?.children? [...targetFolder?.children, folder] : [folder]
-      folder.parent = targetFolder;
-    }
-    else{
-     // folders.push(folder)
-    }
-  }
-
   const handelMoveMediaTo = (media:IRxMedia, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
     //if(targetFolder?.id === selectedFolder || (!targetFolder && selectedFolder==='root')){
     //  return
@@ -261,6 +247,28 @@ export const  MediasContent = observer((
     setSelectedMedias([])
     setMedias([...medias])
   }
+
+  const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
+    const draggedFolder = mediasStore.draggedFolder;
+    draggedFolder && event.preventDefault();
+    event.stopPropagation();
+  }
+
+  const handleDrop = (event:React.DragEvent<HTMLDivElement>)=>{
+    const draggedFolder = mediasStore.draggedFolder;
+    draggedFolder && event.preventDefault();
+    if(draggedFolder?.parent?.id){
+      draggedFolder.setLoading(true);
+      updateFolder({
+        variables:{
+          id:draggedFolder.id,
+          parent_id:null,
+        }
+      })
+    }
+    event.stopPropagation();
+  }
+
  
   return (
     <MediasStoreProvider value = {mediasStore}>
@@ -288,7 +296,7 @@ export const  MediasContent = observer((
               <MediaGridList 
                 loading={gridLoading}
                 folderLoading = {folderLoading}
-                draggedFolder = {draggedFolder}
+                //draggedFolder = {draggedFolder}
                 draggedMedia = {draggedMedia}
                 //folder = {selectedFolderNode}
                 //folders = {selectedFolderNode? selectedFolderNode.children : folders}
@@ -300,10 +308,10 @@ export const  MediasContent = observer((
                 //}}
                 onFolderNameChange = {(name, folder)=>handleFolderNameChange(name, folder, true)}
                 onRemoveFolder = {(folder)=>handleRemoveFolder(folder, true)}
-                onMoveFolderTo = {(folder, targetFolder)=>handleMoveToFolderTo(folder, targetFolder, true)}
+                
                 onMoveMediaTo = {(media, folder)=>handelMoveMediaTo(media, folder, true)}
                 onRemoveMedia = {handeRemoveMedia}
-                onDragFolder = {setDraggedFolder}
+                //onDragFolder = {setDraggedFolder}
                 onMediaDragStart = {setDraggedMedia}
                 onMediaDragEnd = {()=>setDraggedMedia(undefined)}
                 onToggleSelectMedia = {handleToggleSelectMedia}
@@ -312,7 +320,10 @@ export const  MediasContent = observer((
         </div>
         <Divider orientation="vertical" flexItem />
         <Hidden mdDown>
-          <div className = {classes.right}>
+          <div className = {classes.right} 
+            onDragOver = {handleDragOver}
+            onDrop = {handleDrop}
+          >
             <div className = {classes.folderTitle}>
                 {intl.get('folder')}
                 <SubmitButton

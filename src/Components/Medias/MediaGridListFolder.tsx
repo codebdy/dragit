@@ -53,12 +53,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediaGridListFolder(props:{
     folder:FolderNode, 
     folderLoading:boolean|ID,
-    draggedFolder:FolderNode|undefined,
+    //draggedFolder:FolderNode|undefined,
     draggedMedia:IRxMedia|undefined,
     onSelect:(nodeId:ID)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
-    onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
+    onMoveFolderTo?:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
     onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
     onDragStart:(folder:FolderNode)=>void,
     onDragEnd:()=>void,
@@ -67,7 +67,7 @@ export default function MediaGridListFolder(props:{
   const {
     folder, 
     folderLoading, 
-    draggedFolder,
+    //draggedFolder,
     draggedMedia,
     onSelect, 
     onFolderNameChange, 
@@ -95,14 +95,14 @@ export default function MediaGridListFolder(props:{
   };
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
-    draggedFolder && draggedFolder !== folder && event.preventDefault();
+    //draggedFolder && draggedFolder !== folder && event.preventDefault();
     draggedMedia && event.preventDefault();
   }
 
   const handleDrop = ()=>{
-    if(draggedFolder && draggedFolder !== folder){
-      onMoveFolderTo(draggedFolder, folder);
-    }
+    //if(draggedFolder && draggedFolder !== folder){
+      //onMoveFolderTo(draggedFolder, folder);
+    //}
 
     if(draggedMedia){
       onMoveMediaTo(draggedMedia, folder);
