@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { FolderNode } from "./FolderNode";
 import {observer} from 'mobx-react';
 import { ID } from 'rx-drag/models/baseTypes';
+import { useMediasStore } from './MediasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,12 +31,13 @@ function makeupLinkCrumbs(folder?:FolderNode, allCrumbs?:Array<FolderNode>){
   return allCrumbs
 }
 
-export const MediasBreadCrumbItems = observer((props:{folder?:FolderNode})=>{
-  const {folder} = props;
+export const MediasBreadCrumbItems = observer(()=>{
   const classes = useStyles();
+  const mediasStore = useMediasStore();
+  const folder = mediasStore.selectedFolderNode;
   const linkCrumbs = makeupLinkCrumbs(folder);
   const handleSelect = (id:ID)=>{
-
+    mediasStore?.setSelectedFolderId(id);
   }
 
   return (

@@ -85,7 +85,6 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
           return;
         }
         const folder = new FolderNode(json.id, json.name, node);
-        folder.setEditing(true);
         node?.addChild(folder);
       }
     }

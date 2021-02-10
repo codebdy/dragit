@@ -106,7 +106,7 @@ export const  MediasContent = observer((
           return;
         }
         const folder = new FolderNode(json.id, json.name);
-        folder.setEditing(true);
+        //folder.setEditing(true);
         mediasStore.addFolder(folder);        
       }
     }
@@ -288,10 +288,7 @@ export const  MediasContent = observer((
             }
           </div>
           <Divider></Divider>
-          <MediasBreadCrumbs 
-            selectedFolder = {mediasStore.selectedFolderId}
-            selectedFolderNode = {mediasStore.selectedFolderNode}
-          />
+          <MediasBreadCrumbs />
           {batchActionLoading && <LinearProgress />}
           <div className ={classes.mediasGrid}>
               <MediaGridList 
