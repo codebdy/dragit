@@ -1,13 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
-import { FolderNode } from "./FolderNode";
-import MediaGridListFolder from './MediaGridListFolder';
-import MediaGridListImage from './MediaGridListImage';
+import { MediaGridListFolder } from './MediaGridListFolder';
+import { MediaGridListImage } from './MediaGridListImage';
 import { IRxMedia } from 'Base/Model/IRxMedia';
-import { ID } from 'rx-drag/models/baseTypes';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { QUERY_MEDIAS } from './MediasGQLs';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { observer } from 'mobx-react';
+import { useMediasStore } from './MediasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,49 +39,37 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediasGridList(props:{
-    loading:boolean, 
-    folderLoading:ID|boolean,
-    //draggedFolder:FolderNode|undefined,
-    draggedMedia:IRxMedia|undefined,
-    folder?:FolderNode,
-    folders?:Array<FolderNode>|undefined,
-    medias?:Array<IRxMedia>, 
-    selectedMedias:Array<IRxMedia>, 
-    onScrollToEnd:()=>void,
-    onFolderNameChange:(name:string, folder:FolderNode)=>void,
-    onRemoveFolder:(folder:FolderNode)=>void,
-    onRemoveMedia:(media:IRxMedia)=>void,
-    onMoveFolderTo?:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
-    onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
-    //onDragFolder:(folder:FolderNode|undefined)=>void,
-    onMediaDragStart:(media:IRxMedia) =>void,
-    onMediaDragEnd:()=>void,
-    onToggleSelectMedia:(media:IRxMedia)=>void,
-  }) {
-  const {
-    loading, 
-    folderLoading, 
-    //draggedFolder,
-    draggedMedia,
-    folder, 
-    folders, 
-    medias,
-    selectedMedias, 
-    onScrollToEnd, 
-    onFolderNameChange, 
-    onRemoveFolder, 
-    //onMoveFolderTo,
-    onMoveMediaTo,
-    onRemoveMedia,
-    //onDragFolder,
-    onMediaDragStart,
-    onMediaDragEnd,
-    onToggleSelectMedia
-  } = props;
+export const MediaGridList = observer(()=>{
+
   const classes = useStyles();
   const ref = useRef(null);  
+  const [medias, setMedias] = React.useState<Array<IRxMedia>>([]);
+  const [pageNumber, setPageNumber] = React.useState(0);
+  const [hasMore, setHasMore] = React.useState(true);
+  const mediasStore = useMediasStore();
+
+  const folders = mediasStore?.selectedFolderNode?.children;
   
+  const [excuteQuery, { loading:queryLoading, error:queryError, data:mediaData, refetch }] = useLazyQuery(QUERY_MEDIAS, {
+    variables: { first:20, page:pageNumber + 1},
+    notifyOnNetworkStatusChange: true
+  });
+
+  useShowAppoloError(queryError);
+
+  useEffect(()=>{
+    setMedias([...medias, ...(mediaData?.medias?.data||[])])
+    setHasMore(mediaData?.medias?.paginatorInfo?.hasMorePages);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[mediaData])
+  
+  const doScroll = ()=>{
+    if(!queryLoading && hasMore){
+      //setqueryLoading(true);
+      //refetch && refetch({ first:20, page:pageNumber + 1});
+    }
+  }
+
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;
     let innerElement:any = ref.current;
@@ -89,7 +79,7 @@ export default function MediasGridList(props:{
     let innerBottom = (innerRect?.y||0) + (innerRect?.height||0);
     //console.log(scrollBottom - innerBottom )    
     if(scrollBottom - innerBottom >= 20){
-      onScrollToEnd();
+      doScroll();
     }
     //e.defaultPrevented();
   }
@@ -97,8 +87,6 @@ export default function MediasGridList(props:{
   const handleSelect = ()=>{
 
   }
-
-
 
   return (
     <Scrollbar permanent 
@@ -108,46 +96,22 @@ export default function MediasGridList(props:{
       <Grid container className={classes.root} spacing={2} ref={ref}>
         {folders?.map((folder:any, index) => (
           <Grid item key={folder.id + '-folder-' + folder.name} lg={2} sm={3} xs={4}>
-            <MediaGridListFolder
-              folderLoading = {folderLoading}
-              //draggedFolder = {draggedFolder}
-              draggedMedia = {draggedMedia}
-              folder={folder} 
-              onSelect={handleSelect} 
-              onFolderNameChange={onFolderNameChange}
-              onRemoveFolder = {onRemoveFolder}
-              
-              onMoveMediaTo = {onMoveMediaTo}
-              onDragStart = {(folder)=>{
-                //onDragFolder(folder)
-              }}
-              onDragEnd = {()=>{
-                //onDragFolder(undefined)
-              }}                 
-            />
+            <MediaGridListFolder folder = {folder} />
           </Grid>
         ))}
      
-        {medias?.map((tile:any, index) => (
-          <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
-            <MediaGridListImage
-              folder = {folder} 
-              media = {tile} 
-              selectedMedias = {selectedMedias}
-              onRemoveMedia = {onRemoveMedia} 
-              onDragStart={onMediaDragStart}
-              onDragEnd = {onMediaDragEnd}
-              onToggleSelect = {onToggleSelectMedia}
-            />
+        {medias?.map((media:IRxMedia, index) => (
+          <Grid item key={media.id + '-image-' + index + '-' + media.title} lg={2} sm={3} xs={4}>
+            <MediaGridListImage media = {media}/>
           </Grid>
         ))}
       </Grid>
       {
-        loading&&
+        queryLoading&&
         <div className = {classes.progress}>
           <CircularProgress />
         </div>
       }
     </Scrollbar>
   );
-}
+})

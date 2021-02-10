@@ -5,15 +5,15 @@ import AddIcon from '@material-ui/icons/Add';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_UPDATE_FOLDER } from './MediasGQLs';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import { FolderNode } from './FolderNode';
 import { useMediasStore } from './MediasStore';
 import { stringValue } from 'rx-drag/utils/stringValue';
 import { Check, Close } from '@material-ui/icons';
+import { useAddFolder } from './useAddFolder';
+import { useUpdateFolder } from './useUpdateFolder';
+import { useRemoveFolder } from './useRemoveFolder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,7 +66,11 @@ export function FolderActions(props:{children:any}){
 }
 
 
-export const MediaFolder = observer((props:{ node:FolderNode})=>{
+export const MediaFolder = observer((
+  props:{ 
+    node:FolderNode
+  }
+)=>{
   const {
     node,
   } = props;
@@ -75,53 +79,9 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   const [nodeName, setNodeName] = React.useState(node.name);
   const mediaStore = useMediasStore();
   
-  const [addFolder, {error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
-    {
-      onCompleted:(data)=>{
-        node.setLoading(false);
-        const json = data?.addRxMediaFolder;
-        if(!json){
-          console.assert(json, 'Add Folder failure:get emperyt response');
-          return;
-        }
-        const folder = new FolderNode(json.id, json.name, node);
-        node?.addChild(folder);
-      }
-    }
-  );
-
-  const [updateFolder, {error:updateFolderError}] = useMutation(MUTATION_UPDATE_FOLDER,{
-    onCompleted:(data)=>{
-      node.setLoading(false);
-      mediaStore.draggedFolder?.setLoading(false);
-      node.setName(nodeName);
-      const json = data.updateRxMediaFolder
-      if(mediaStore.draggedFolder && mediaStore?.draggedFolder?.id === json?.id){
-        if(!mediaStore.draggedFolder?.parent){
-          mediaStore.removeFolder(mediaStore.draggedFolder);
-        }
-        mediaStore.draggedFolder?.moveTo(node);
-        mediaStore.setDraggedFolder(undefined);
-      }
-    }});
-
-  const [removeFolder, {error:removeFolderError}] = useMutation(MUTATION_REMOVE_FOLDER,{
-    onCompleted:(data)=>{
-      node.setLoading(false);
-      const json = data?.removeRxMediaFolders;
-      if(!json){
-        return;
-      }
-      if(node?.parent){
-        node?.parent?.removeChild(node)
-      }
-      else{
-        mediaStore.removeFolder(node);
-      }
-
-    }});
-
-  useShowAppoloError(addFolderError || updateFolderError || removeFolderError);
+  const {addFolder} = useAddFolder(node);
+  const updateFolder = useUpdateFolder(node, nodeName);
+  const removeFolder = useRemoveFolder(node);
 
   const handleEndEditing = ()=>{
     node.setEditing(false);

@@ -12,6 +12,7 @@ import MdiIcon from 'Components/common/MdiIcon';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { contains } from 'rx-drag/utils/ArrayHelper';
 import Image from 'Components/common/Image';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,25 +71,17 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediaGridListImage(
-  props:{
-    folder?:FolderNode,
-    selectedMedias:Array<IRxMedia>, 
-    media:IRxMedia, 
-    onRemoveMedia:(media:IRxMedia)=>void,
-    onDragStart:(media:IRxMedia)=>void,
-    onDragEnd:()=>void,
-    onToggleSelect:(media:IRxMedia)=>void,
-  }
-){
-  const {folder, selectedMedias, media, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;
+export const MediaGridListImage = observer((
+  props:{media:IRxMedia}
+)=>{
+  const {media} = props;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
   const [mediaTitle, setMediaTitle] = useState(media.title);
   const [loading, setLoading] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
-  const selected = contains(media, selectedMedias);
+  //const selected = contains(media, selectedMedias);
 
   const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
     onCompleted:(data)=>{
@@ -98,7 +91,7 @@ export default function MediaGridListImage(
   const [removeMedias, {error:removeMediasError}] = useMutation(MUTATION_REMOVE_MEDIAS,{
     onCompleted:(data)=>{
       setLoading(false);
-      onRemoveMedia(media);
+      //onRemoveMedia(media);
     }});
 
   useShowAppoloError(updateMediaError||removeMediasError);
@@ -108,7 +101,7 @@ export default function MediaGridListImage(
       return
     }
     setLoading(true)
-    updateMedia({variables:{media:{id:media.id, title:mediaTitle, folderId:folder?.id}}})
+    //updateMedia({variables:{media:{id:media.id, title:mediaTitle, folderId:folder?.id}}})
     media.title = mediaTitle
   }
 
@@ -131,6 +124,8 @@ export default function MediaGridListImage(
     setViewOpen(true);
   }
 
+  const selected = false;
+
   return (
     <Fragment>
       <div className = { classNames(classes.root) }
@@ -139,10 +134,10 @@ export default function MediaGridListImage(
         onMouseLeave = {()=>setHover(false)}          
         onDragStart={()=>{
           setHover(false);
-          onDragStart(media);
+          //onDragStart(media);
         }}
-        onDragEnd = {onDragEnd}
-        onClick = {()=>onToggleSelect(media)}
+        //onDragEnd = {onDragEnd}
+        //onClick = {()=>onToggleSelect(media)}
       >
         <Image 
           src={media.thumbnail}
@@ -160,7 +155,7 @@ export default function MediaGridListImage(
           </div>
         }
         {
-          selected &&
+          //selected &&
           <div className={classes.checkbox}>
             <MdiIcon iconClass="mdi-check" size="18" color="#5d78ff" />
           </div>
@@ -214,4 +209,4 @@ export default function MediaGridListImage(
       }
     </Fragment>
   )
-}
+})

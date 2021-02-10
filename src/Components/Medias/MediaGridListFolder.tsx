@@ -6,6 +6,7 @@ import { FolderNode } from "./FolderNode";
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 import { ID } from 'rx-drag/models/baseTypes';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,53 +51,30 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediaGridListFolder(props:{
-    folder:FolderNode, 
-    folderLoading:boolean|ID,
-    //draggedFolder:FolderNode|undefined,
-    draggedMedia:IRxMedia|undefined,
-    onSelect:(nodeId:ID)=>void,
-    onFolderNameChange:(name:string, folder:FolderNode)=>void,
-    onRemoveFolder:(folder:FolderNode)=>void,
-    onMoveFolderTo?:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
-    onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
-    onDragStart:(folder:FolderNode)=>void,
-    onDragEnd:()=>void,
-  
-  }){
-  const {
-    folder, 
-    folderLoading, 
-    //draggedFolder,
-    draggedMedia,
-    onSelect, 
-    onFolderNameChange, 
-    onRemoveFolder, 
-    onMoveFolderTo,
-    onMoveMediaTo,
-    onDragStart, 
-    onDragEnd
-  } = props;
+export const MediaGridListFolder = observer((
+  props:{folder:FolderNode}
+)=>{
+  const {folder} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
   const [folderName, setFolderName] = React.useState(folder.name);
   const handleEndEditing = ()=>{
     setEditing(false);
-    if(folderName !== folder.name){
-      onFolderNameChange(folderName, folder);
-      folder.name = folderName;
-    }
+    //if(folderName !== folder.name){
+    //  onFolderNameChange(folderName, folder);
+     // folder.name = folderName;
+    //}
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = (event.target as HTMLInputElement).value;
-    setFolderName(value);
+    //setFolderName(value);
   };
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
     //draggedFolder && draggedFolder !== folder && event.preventDefault();
-    draggedMedia && event.preventDefault();
+    //draggedMedia && event.preventDefault();
   }
 
   const handleDrop = ()=>{
@@ -104,9 +82,17 @@ export default function MediaGridListFolder(props:{
       //onMoveFolderTo(draggedFolder, folder);
     //}
 
-    if(draggedMedia){
-      onMoveMediaTo(draggedMedia, folder);
-    }
+    //if(draggedMedia){
+    //  onMoveMediaTo(draggedMedia, folder);
+    //}
+  }
+
+  const handleSelect = ()=>{
+
+  }
+
+  const handleRemove = ()=>{
+
   }
 
   return (
@@ -114,15 +100,15 @@ export default function MediaGridListFolder(props:{
       <div 
         className={classes.folder}
         draggable={true}
-        onDoubleClick = {()=>onSelect(folder.id)}
+        //onDoubleClick = {()=>onSelect(folder.id)}
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}
         onDragStart={()=>{
           setHover(false);
-          onDragStart(folder);
+          //onDragStart(folder);
         }}
         onDragOver = {handleDragOver}
-        onDragEnd = {onDragEnd}
+        //onDragEnd = {onDragEnd}
         onDrop = {handleDrop}          
       >
         <MdiIcon className={classes.folderIcon} iconClass = "mdi-folder-outline" size="50" />
@@ -130,15 +116,15 @@ export default function MediaGridListFolder(props:{
           hover&&
           <div className={classes.mask}>
             <div className={classes.toolbar}>
-              <MediaGridListIconButton icon = "mdi-magnify" onClick={()=>onSelect(folder.id)} />
+              <MediaGridListIconButton icon = "mdi-magnify" onClick={handleSelect} />
               <MediaGridListIconButton icon = "mdi-pencil" onClick={()=>setEditing(true)} />
-              <MediaGridListIconButton icon = "mdi-delete-outline" onClick={()=>onRemoveFolder(folder)} />
+              <MediaGridListIconButton icon = "mdi-delete-outline" onClick={handleRemove} />
             </div>
           </div>
         }
       </div>
       {
-        folderLoading === folder.id && <LinearProgress />
+        folder.loading && <LinearProgress />
       }
       {
         editing?
@@ -161,4 +147,4 @@ export default function MediaGridListFolder(props:{
       
     </Fragment>
   )
-}
+})
