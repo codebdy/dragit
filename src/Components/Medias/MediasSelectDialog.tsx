@@ -13,11 +13,12 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'relative',
       padding:"0",
     },
+    toolbar:{
+      padding: theme.spacing(1),
+      paddingLeft: theme.spacing(2),
+    },
     title: {
       flex: 1,
-    },
-    closeButton:{
-      marginRight:'-10px',
     },
     dialogContent:{
       display:'flex',
@@ -57,11 +58,11 @@ export default function MediasSelectDialog(
   return (
     <Dialog fullScreen open={open} onClose={onClose} TransitionComponent={Transition}>
     <AppBar className={classes.appBar}>
-      <Toolbar>
+      <Toolbar className = {classes.toolbar}>
         <Typography variant="h6" className={classes.title}>
           {intl.get('medias')}
         </Typography>
-        <IconButton color="inherit" onClick={onClose} aria-label="close" className={classes.closeButton}>
+        <IconButton color="inherit" onClick={onClose} aria-label="close" >
           <Close />
         </IconButton>
       </Toolbar>

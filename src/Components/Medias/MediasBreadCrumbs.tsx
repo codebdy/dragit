@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, Hidden, IconButton, SvgIcon } from '@material-ui/core';
 import { MediasBreadCrumbItems } from './MediasBreadCrumbItems';
-import { FolderNode } from './MediaFolder';
+import { FolderNode } from "./FolderNode";
 import { observer } from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>

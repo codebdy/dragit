@@ -3,7 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
-import { FolderNode } from './MediaFolder';
+import { FolderNode } from "./FolderNode";
 import MediaGridListFolder from './MediaGridListFolder';
 import MediaGridListImage from './MediaGridListImage';
 import { IRxMedia } from 'Base/Model/IRxMedia';

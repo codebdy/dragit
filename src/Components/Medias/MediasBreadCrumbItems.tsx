@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, Breadcrumbs, Link, Typography } from '@material-ui/core';
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
-import { FolderNode } from './MediaFolder';
+import { FolderNode } from "./FolderNode";
 import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>

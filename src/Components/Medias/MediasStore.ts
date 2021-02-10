@@ -2,8 +2,8 @@ import { IRxMedia } from "Base/Model/IRxMedia";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { ID } from "rx-drag/models/baseTypes";
-import { getByIdFromTree } from "./getByIdFromTree";
-import { FolderNode } from "./MediaFolder";
+import { FolderNode } from "./FolderNode";
+import { getByIdFromTree } from "./FolderNode/getByIdFromTree";
 
 export class MediasStore{
   draggedFolder?:FolderNode;

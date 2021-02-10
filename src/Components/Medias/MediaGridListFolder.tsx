@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, LinearProgress } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
-import { FolderNode } from './MediaFolder';
+import { FolderNode } from "./FolderNode";
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 

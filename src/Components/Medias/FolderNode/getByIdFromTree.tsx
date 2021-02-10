@@ -1,4 +1,4 @@
-import { FolderNode } from "./MediaFolder";
+import { FolderNode } from ".";
 import { ID } from "rx-drag/models/baseTypes";
 
 export function getByIdFromTree(id: ID, folders?: Array<FolderNode>): FolderNode | undefined {

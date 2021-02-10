@@ -7,7 +7,7 @@ import { IRxMedia } from 'Base/Model/IRxMedia';
 import Close from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
-import { FolderNode } from './MediaFolder';
+import { FolderNode } from "./FolderNode";
 import MdiIcon from 'Components/common/MdiIcon';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { contains } from 'rx-drag/utils/ArrayHelper';

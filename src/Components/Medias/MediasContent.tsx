@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import {makeStyles, Theme, createStyles, Divider, Hidden, LinearProgress} from "@material-ui/core";
 import MediaGridList from "./MediaGridList";
 import { MediaFolders } from "./MediaFolders";
-import { FolderNode } from "./MediaFolder";
+import { FolderNode } from "./FolderNode";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
 import { IRxMedia } from "Base/Model/IRxMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
-import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediasGQLs";
+import { MUTATION_ADD_FOLDER,  MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediasGQLs";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { toggle, batchRemove, remove } from "rx-drag/utils/ArrayHelper";
 import { MediasStore, MediasStoreProvider } from "./MediasStore";
@@ -17,6 +17,7 @@ import {observer} from 'mobx-react';
 import SubmitButton from "Components/common/SubmitButton";
 import MediaFilderLoadingSkeleton from "./MediaFilderLoadingSkeleton";
 import { cloneObject } from "rx-drag/utils/cloneObject";
+import { parseFolderNodes } from "./FolderNode/parseFolderNodes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,14 +69,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function makeupParent(folders?:Array<FolderNode>, parent?:FolderNode){
-  folders && folders.forEach(folder=>{
-    folder.parent = parent;
-    makeupParent(folder.children, folder)
-  })
-  return folders?folders:[];
-}
-
 export const  MediasContent = observer((
   props:{
     single?:boolean,
@@ -107,7 +100,6 @@ export const  MediasContent = observer((
   const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
     {
       onCompleted:(data)=>{
-        setFolderLoading(false);
         let newFolder = data?.addRxMediaFolder;
         if(!newFolder){
           return;
@@ -118,15 +110,6 @@ export const  MediasContent = observer((
     }
   );
 
-  const [updateFolder, {error:updateFolderError}] = useMutation(MUTATION_UPDATE_FOLDER,{
-    onCompleted:(data)=>{
-      setFolderLoading(false);
-    }});
-
-  const [removeFolder, {error:removeFolderError}] = useMutation(MUTATION_REMOVE_FOLDER,{
-    onCompleted:(data)=>{
-      setFolderLoading(false);
-    }});
 
   const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
     onCompleted:(data)=>{
@@ -148,8 +131,6 @@ export const  MediasContent = observer((
   const error = queryFolderError || 
                 queryError || 
                 addFolderError || 
-                updateFolderError || 
-                removeFolderError || 
                 updateMediaError || 
                 removeMediasError;
 
@@ -160,7 +141,7 @@ export const  MediasContent = observer((
   
   useEffect(()=>{
     if(folderData){
-      const queriedFolders:Array<FolderNode> = makeupParent(JSON.parse((folderData && folderData['rxMediaFoldersTree'])||'[]'));
+      const queriedFolders:Array<FolderNode> = parseFolderNodes(JSON.parse((folderData && folderData['rxMediaFoldersTree'])||'[]'));
       mediasStore.setFolders(queriedFolders);
     }
   },[folderData, mediasStore])
@@ -192,11 +173,6 @@ export const  MediasContent = observer((
     }
   }
 
-  const handleAddFolder = (parent?:FolderNode)=>{
-    setFolderLoading(true)
-    addFolder({variables:{parentId:parent?.id}});
-  }
-
   const handleAddNewFolder = ()=>{
     addFolder({variables:{name:intl.get('new-folder')}});
   } 
@@ -204,7 +180,7 @@ export const  MediasContent = observer((
   const handleFolderNameChange = (name:string, folder:FolderNode, fromGrid?:boolean)=>{
     fromGrid ? setFolderLoading(folder.id) : setFolderLoading(true)
     folder.name = name;
-    updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:folder.parent?.id}}});   
+    //updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:folder.parent?.id}}});   
   }
 
   
@@ -214,7 +190,7 @@ export const  MediasContent = observer((
     if(mediasStore.selectedFolderId === folder.id){
       mediasStore.setSelectedFolderId('root');
     }
-    removeFolder({variables:{id:folder.id}})
+    //removeFolder({variables:{id:folder.id}})
     if(!parentFolder){
       //remove(folder, folders)
     }
@@ -230,7 +206,7 @@ export const  MediasContent = observer((
     //  setSelectedFolder('root');
     //}
 
-    updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:targetFolder?.id}}});
+    //updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:targetFolder?.id}}});
     if(parentFolder){
         remove(folder, parentFolder.children)
     }

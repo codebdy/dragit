@@ -1,15 +1,16 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, IconButton, Typography } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, IconButton, Typography, CircularProgress } from '@material-ui/core';
 import { TreeItem } from '@material-ui/lab';
 import AddIcon from '@material-ui/icons/Add';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { ID } from 'rx-drag/models/baseTypes';
 import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_ADD_FOLDER } from './MediasGQLs';
+import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_UPDATE_FOLDER } from './MediasGQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
+import intl from 'react-intl-universal';
+import { FolderNode } from './FolderNode';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,14 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }  
   }),
 );
-
-export interface FolderNode{
-  id:ID;
-  name:string;
-  children?:Array<FolderNode>;
-  editing?:boolean;
-  parent?:FolderNode;
-}
 
 export function FolderLabel(props:{
     children:any,
@@ -76,23 +69,36 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   } = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
-  const [editing, setEditing] = React.useState(node.editing);
+  const [editing, setEditing] = React.useState(false);
   const [nodeName, setNodeName] = React.useState(node.name);
 
   
-  const [addFolder, {error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
+  const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
     {
       onCompleted:(data)=>{
-
+        let newFolder = data?.addRxMediaFolder;
+        if(!newFolder){
+          return;
+        }
       }
     }
   );
 
-  useShowAppoloError(addFolderError);
+  const [updateFolder, {error:updateFolderError, loading:updating}] = useMutation(MUTATION_UPDATE_FOLDER,{
+    onCompleted:(data)=>{
+      //setFolderLoading(false);
+    }});
+
+  const [removeFolder, {error:removeFolderError, loading:removing}] = useMutation(MUTATION_REMOVE_FOLDER,{
+    onCompleted:(data)=>{
+      //setFolderLoading(false);
+    }});
+
+  useShowAppoloError(addFolderError || updateFolderError || removeFolderError);
 
   const handleEndEditing = ()=>{
     setEditing(false);
-    delete node.editing;
+    //delete node.editing;
     //nodeName !== node.name && onFolderNameChange(nodeName, node);  
   }
 
@@ -116,7 +122,12 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   }
 
   const handelAddFolder = ()=>{
-
+    addFolder({
+      variables:{
+        parent_id:node.id,
+        name:intl.get('new-folder')
+      }
+    });
   }
 
   const handleRemoveFolder = ()=>{
@@ -127,12 +138,15 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
 
   }
 
+  const loading = adding || updating || removing;
+
   return(
-    <TreeItem nodeId={node.id.toString()} label={
-      <div 
-        className={classes.labelRoot}
-        onMouseOver = {()=>setHover(true)}
-        onMouseLeave = {()=>setHover(false)}
+    <TreeItem nodeId={node.id.toString()} 
+      label={
+        <div 
+          className={classes.labelRoot}
+          onMouseOver = {()=>setHover(true)}
+          onMouseLeave = {()=>setHover(false)}
           draggable={true}
           onDragStart={()=>{
             setHover(false);
@@ -142,46 +156,51 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
           onDragEnd = {handleDragEnd}
           onDrop = {handleDrop}         
         >
-        <FolderOpenIcon />
-        <FolderLabel>
-          {
-            editing?
-            <input 
-              value={nodeName} 
-              autoFocus= {true} 
-              className={classes.nameInput}
-              onBlur = {handleEndEditing}
-              onKeyUp = {e=>{
-                if(e.key === 'Enter') {
-                  handleEndEditing()
-                }
-              }}
+          <FolderOpenIcon />
+          <FolderLabel>
+            {
+              editing?
+              <input 
+                value={nodeName} 
+                autoFocus= {true} 
+                className={classes.nameInput}
+                onBlur = {handleEndEditing}
+                onKeyUp = {e=>{
+                  if(e.key === 'Enter') {
+                    handleEndEditing()
+                  }
+                }}
 
-              onClick = {e=>e.stopPropagation()}
-              onChange = {handleChange}
-            />
-            :
-            nodeName
+                onClick = {e=>e.stopPropagation()}
+                onChange = {handleChange}
+              />
+              :
+              nodeName
+            }
+          </FolderLabel>
+          {
+            loading &&
+            <CircularProgress size = {24}/>
           }
-        </FolderLabel>
-        {
-          hover&&
-          <FolderActions>
-            <IconButton size = "small" onClick={(e)=>{
-              e.stopPropagation();
-              setEditing(true);
-            }}>
-              <EditIcon fontSize = "small" />
-            </IconButton>
-            <IconButton size = "small" onClick={handelAddFolder}>
-              <AddIcon fontSize = "small" />
-            </IconButton>
-            <IconButton size = "small"  onClick={handleRemoveFolder}>
-              <DeleteIcon fontSize = "small" />
-            </IconButton>
-          </FolderActions>
-        }
-      </div>}
+          {
+            hover && !loading &&
+            <FolderActions>
+              <IconButton size = "small" onClick={(e)=>{
+                e.stopPropagation();
+                setEditing(true);
+              }}>
+                <EditIcon fontSize = "small" />
+              </IconButton>
+              <IconButton size = "small" onClick={handelAddFolder}>
+                <AddIcon fontSize = "small" />
+              </IconButton>
+              <IconButton size = "small"  onClick={handleRemoveFolder}>
+                <DeleteIcon fontSize = "small" />
+              </IconButton>
+            </FolderActions>
+          }
+        </div>
+      }
     >
       {
         node.children?.map((child)=>{
