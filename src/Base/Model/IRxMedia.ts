@@ -1,6 +1,6 @@
 import { ID } from "../../rx-drag/models/baseTypes";
 
-export interface IMedia{
+export interface IRxMedia{
   id:ID,
   title: string,
   thumbnail:string,

@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles, LinearProgress, Dialog, DialogActions,
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import MediaGridListIconButton from './MediaGridListIconButton';
 import classNames from 'classnames';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import Close from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
@@ -73,12 +73,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediaGridListImage(
   props:{
     folder?:FolderNode,
-    selectedMedias:Array<IMedia>, 
-    media:IMedia, 
-    onRemoveMedia:(media:IMedia)=>void,
-    onDragStart:(media:IMedia)=>void,
+    selectedMedias:Array<IRxMedia>, 
+    media:IRxMedia, 
+    onRemoveMedia:(media:IRxMedia)=>void,
+    onDragStart:(media:IRxMedia)=>void,
     onDragEnd:()=>void,
-    onToggleSelect:(media:IMedia)=>void,
+    onToggleSelect:(media:IRxMedia)=>void,
   }
 ){
   const {folder, selectedMedias, media, onRemoveMedia, onDragStart, onDragEnd, onToggleSelect} = props;

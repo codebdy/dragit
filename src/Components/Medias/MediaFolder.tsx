@@ -5,7 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -69,12 +69,12 @@ export function FolderActions(props:{children:any}){
 export default function MediaFolder (props:{
   node:FolderNode,
   draggedFolder:FolderNode|undefined,
-  draggedMedia:IMedia|undefined,
+  draggedMedia:IRxMedia|undefined,
   onFolderNameChange:(name:string, folder:FolderNode)=>void,
   onAddFolder:(parentFolder?:FolderNode)=>void,
   onRemoveFolder:(folder:FolderNode)=>void,
   onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode)=>void,
-  onMoveMediaTo:(media:IMedia, targetFolder:FolderNode|undefined)=>void,
+  onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
   onDragStart:(folder:FolderNode)=>void,
   onDragEnd:()=>void,
 }){

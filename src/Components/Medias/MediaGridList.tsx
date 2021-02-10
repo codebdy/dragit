@@ -6,7 +6,7 @@ import Scrollbar from 'Common/Scrollbar';
 import { FolderNode } from './MediaFolder';
 import MediaGridListFolder from './MediaGridListFolder';
 import MediaGridListImage from './MediaGridListImage';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,22 +40,22 @@ export default function MediasGridList(props:{
     loading:boolean, 
     folderLoading:string|boolean,
     draggedFolder:FolderNode|undefined,
-    draggedMedia:IMedia|undefined,
+    draggedMedia:IRxMedia|undefined,
     folder?:FolderNode,
     folders:Array<FolderNode>|undefined,
-    medias:Array<IMedia>, 
-    selectedMedias:Array<IMedia>, 
+    medias:Array<IRxMedia>, 
+    selectedMedias:Array<IRxMedia>, 
     onScrollToEnd:()=>void,
     onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
-    onRemoveMedia:(media:IMedia)=>void,
+    onRemoveMedia:(media:IRxMedia)=>void,
     onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
-    onMoveMediaTo:(media:IMedia, targetFolder:FolderNode|undefined)=>void,
+    onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
     onDragFolder:(folder:FolderNode|undefined)=>void,
-    onMediaDragStart:(media:IMedia) =>void,
+    onMediaDragStart:(media:IRxMedia) =>void,
     onMediaDragEnd:()=>void,
-    onToggleSelectMedia:(media:IMedia)=>void,
+    onToggleSelectMedia:(media:IRxMedia)=>void,
   }) {
   const {
     loading, 

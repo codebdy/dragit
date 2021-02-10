@@ -1,6 +1,6 @@
 import { Avatar } from '@material-ui/core';
 import { AvatarGroup } from '@material-ui/lab';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import { RXInputProps } from 'Base/RXInputProps';
 import React from 'react';
 
@@ -8,7 +8,7 @@ export const MediaGroup = (
   props:RXInputProps&{
     count?:number,
     max?:number,
-    value?:Array<IMedia>,
+    value?:Array<IRxMedia>,
     spacing?:"medium"|"small"|number,
   }
 ) => {
@@ -19,7 +19,7 @@ export const MediaGroup = (
   return (
     <AvatarGroup max={max} {...rest} spacing = {spacing}>
       {
-        medias?.map((media:IMedia, index)=>{
+        medias?.map((media:IRxMedia, index)=>{
           return (
             ((count && index + 1 <=count)|| !count) &&
             <Avatar key = {media.id} alt= {media.alt} src={media.thumbnail} />

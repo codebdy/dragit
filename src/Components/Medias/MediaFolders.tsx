@@ -9,7 +9,7 @@ import { IconButton } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import MediaFolder, { FolderActions, FolderLabel, FolderNode } from './MediaFolder';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,14 +30,14 @@ export default function MediaFolders(
     props:{
       folders:Array<FolderNode>, 
       draggedFolder:FolderNode|undefined,
-      draggedMedia:IMedia|undefined,
+      draggedMedia:IRxMedia|undefined,
       selectedFolder:string, 
       onSelect:(node:string)=>void,
       onFolderNameChange:(name:string, folder:FolderNode)=>void,
       onAddFolder:(parentFolder?:FolderNode)=>void,
       onRemoveFolder:(folder:FolderNode)=>void,
       onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,
-      onMoveMediaTo:(media:IMedia, targetFolder:FolderNode|undefined)=>void,
+      onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
       onDragFolder:(folder:FolderNode|undefined)=>void
     }
   ) {

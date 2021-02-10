@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { RXInputProps } from 'Base/RXInputProps';
 import { Editor } from '@tinymce/tinymce-react';
 import MediasSelectDialog from 'Components/Medias/MediasSelectDialog';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import { EventEmitter } from 'events';
 
 declare var window: {$bus:EventEmitter};
@@ -58,7 +58,7 @@ export const TinyMCE = React.forwardRef((
     setOpen(false);
   }
 
-  const handleSelectMedias = (medias?:Array<IMedia>)=>{
+  const handleSelectMedias = (medias?:Array<IRxMedia>)=>{
     window.$bus.emit('selectedImages', medias, id );
   }
 

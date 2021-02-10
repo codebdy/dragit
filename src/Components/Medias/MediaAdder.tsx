@@ -5,7 +5,7 @@ import Image from 'Components/common/Image'
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import MediasSelectDialog from './MediasSelectDialog';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import { useDesign } from 'rx-drag/store/useDesign';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,8 +64,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediaAdder(
   props:{
-    value?:Array<IMedia>, 
-    onSelectMedias:(medias?:Array<IMedia>)=>void, 
+    value?:Array<IRxMedia>, 
+    onSelectMedias:(medias?:Array<IRxMedia>)=>void, 
     single?:boolean,
     avatar?:boolean,
   }

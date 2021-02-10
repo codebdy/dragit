@@ -1,7 +1,16 @@
+import { IRxMedia } from "Base/Model/IRxMedia";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
+import { FolderNode } from "./MediaFolder";
 
 export class MediasStore{
+  draggedFolder?:FolderNode;
+  draggedMedia?:IRxMedia;
+  folders:Array<FolderNode> = [];
+  selectedFolder:string = 'root';
+  gridLoading:boolean = false;
+  medias:Array<IRxMedia> = [];
+
   constructor() {
     makeAutoObservable(this)
   }

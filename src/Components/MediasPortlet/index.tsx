@@ -6,7 +6,7 @@ import MediasPortletColumnsGrid from './MediasPortletColumnsGrid';
 import MediasPortletAltsDialog from './MediasPortletAltsDialog';
 import { RXInputProps } from 'Base/RXInputProps';
 import { Skeleton } from '@material-ui/lab';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import MdiIcon from 'Components/common/MdiIcon';
 import { add, exchange, remove } from 'rx-drag/utils/ArrayHelper';
 import withFormField from 'Components/common/withFormField';
@@ -64,7 +64,7 @@ const MediasPortlet = React.forwardRef((
   const classes = useStyles();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [medias, setMedias] = React.useState<Array<IMedia>>(value? value :[]);
+  const [medias, setMedias] = React.useState<Array<IRxMedia>>(value? value :[]);
   const [altsOpen, setAltsOpen] = React.useState(false); 
 
   useEffect(() => {
@@ -112,15 +112,15 @@ const MediasPortlet = React.forwardRef((
     setMenuOpen(false);  
   }
 
-  const handleSelectedMedias = (selectedMedias?:Array<IMedia>|IMedia)=>{
+  const handleSelectedMedias = (selectedMedias?:Array<IRxMedia>|IRxMedia)=>{
     setMedias(mergeArray(medias,selectedMedias ));
   }
 
-  const handleSwap = (first:IMedia, second:IMedia)=>{
+  const handleSwap = (first:IRxMedia, second:IRxMedia)=>{
     setMedias(exchange(first, second, medias));
   }
 
-  const handleRemove = (media:IMedia)=>{
+  const handleRemove = (media:IRxMedia)=>{
     setMedias([...remove(media, medias)]);
   }
 

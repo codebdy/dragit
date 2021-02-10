@@ -1,5 +1,5 @@
 import { ID } from "../../rx-drag/models/baseTypes";
-import { IMedia } from "./IMedia";
+import { IRxMedia } from "./IRxMedia";
 
 
 export interface IUser {
@@ -7,6 +7,6 @@ export interface IUser {
   login_name: string;
   is_supper?: boolean;
   is_demo?: boolean;
-  avatar: IMedia;
+  avatar: IRxMedia;
   auths?: string[];
 }

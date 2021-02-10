@@ -7,7 +7,7 @@ import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import MediasBreadCrumbs from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
-import { IMedia } from "Base/Model/IMedia";
+import { IRxMedia } from "Base/Model/IRxMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediasGQLs";
 import { ID } from "rx-drag/models/baseTypes";
@@ -93,7 +93,7 @@ function getByIdFromTree(id:ID, folders?:Array<FolderNode>):FolderNode|undefined
 export const  MediasContent = observer((
   props:{
     single?:boolean,
-    onSelectedChange?:(medias:Array<IMedia>)=>void
+    onSelectedChange?:(medias:Array<IRxMedia>)=>void
   }
 )=>{
   const {single, onSelectedChange} = props;
@@ -101,12 +101,12 @@ export const  MediasContent = observer((
   const [mediasStore] = useState(new MediasStore());
   const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
-  const [draggedMedia, setDraggedMedia] = React.useState<IMedia|undefined>();
+  const [draggedMedia, setDraggedMedia] = React.useState<IRxMedia|undefined>();
   const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
   const [selectedFolder, setSelectedFolder] = React.useState('root');
   const [gridLoading, setGridLoading] = React.useState(false);
-  const [medias, setMedias] = React.useState<Array<IMedia>>([]);
-  const [selectedMedias, setSelectedMedias] = React.useState<Array<IMedia>>([]);
+  const [medias, setMedias] = React.useState<Array<IRxMedia>>([]);
+  const [selectedMedias, setSelectedMedias] = React.useState<Array<IRxMedia>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
   const [hasData, setHasData] = React.useState(true);
   const [batchActionLoading, setBatchActionLoading] = React.useState(false);
@@ -265,7 +265,7 @@ export const  MediasContent = observer((
     }
   }
 
-  const handelMoveMediaTo = (media:IMedia, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
+  const handelMoveMediaTo = (media:IRxMedia, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
     if(targetFolder?.id === selectedFolder || (!targetFolder && selectedFolder==='root')){
       return
     }
@@ -275,14 +275,14 @@ export const  MediasContent = observer((
     setMedias([...medias]);
   }
 
-  const handeRemoveMedia = (media:IMedia)=>{
+  const handeRemoveMedia = (media:IRxMedia)=>{
     remove(media, medias);
     remove(media, selectedMedias);
     setMedias([...medias]);
     setSelectedMedias([...selectedMedias]);
   }
 
-  const handleToggleSelectMedia = (media:IMedia)=>{
+  const handleToggleSelectMedia = (media:IRxMedia)=>{
     if(single){
       if(selectedMedias.length > 0 && media === selectedMedias[0]){
         setSelectedMedias([])

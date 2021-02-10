@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import intl from "react-intl-universal";
 import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediasBatchActions(
   props:{
-    selectedMedias:Array<IMedia>,
+    selectedMedias:Array<IRxMedia>,
     onClearSelected:()=>void,
     onRemoveSelected:()=>void,
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, IconButton } from '@material-ui/core';
 import Image from 'Components/common/Image'
 import MdiIcon from '../common/MdiIcon';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,12 +34,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediasPortletMedia(
   props:{
-    media:IMedia,
-    draggedMedia:IMedia|undefined,
-    onRemove:(media:IMedia)=>void,
-    onDragStart:(media:IMedia)=>void,
+    media:IRxMedia,
+    draggedMedia:IRxMedia|undefined,
+    onRemove:(media:IRxMedia)=>void,
+    onDragStart:(media:IRxMedia)=>void,
     onDragEnd:()=>void,
-    onDrop:(targetMedia:IMedia)=>void
+    onDrop:(targetMedia:IRxMedia)=>void
   }
 ){
   const {media, draggedMedia, onRemove, onDragStart, onDragEnd, onDrop} = props

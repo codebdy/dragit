@@ -1,4 +1,4 @@
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import React from 'react';
 import Image from 'Components/common/Image';
 import noImage from 'assets/img/no-image.png';
@@ -9,7 +9,7 @@ import { useDesign } from 'rx-drag/store/useDesign';
 
 export const MediaView = React.forwardRef((
   props:RXInputProps& {
-    value:IMedia,
+    value:IRxMedia,
     width:number,
     style?:any,
   },

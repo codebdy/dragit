@@ -2,29 +2,29 @@ import React, { Fragment } from 'react';
 import MediaAdder from '../Medias/MediaAdder';
 import { Grid } from '@material-ui/core';
 import MediasPortletMedia from './MediasPortletMedia';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 
 
 export default function MediasPortletColumnsGrid(
   props:{
-    medias:Array<IMedia>, 
-    onSelectMedias:(selectedMedias?:Array<IMedia>|IMedia)=>void,
-    onSwap:(first:IMedia, second:IMedia)=>void,
-    onRemove:(media:IMedia)=>void,
+    medias:Array<IRxMedia>, 
+    onSelectMedias:(selectedMedias?:Array<IRxMedia>|IRxMedia)=>void,
+    onSwap:(first:IRxMedia, second:IRxMedia)=>void,
+    onRemove:(media:IRxMedia)=>void,
     cols?:number,
   }
 ){
   const {medias, onSelectMedias, onSwap, onRemove, cols=3} = props;
-  const [draggedMedia, setDraggedMedia] = React.useState<IMedia|undefined>(undefined);
+  const [draggedMedia, setDraggedMedia] = React.useState<IRxMedia|undefined>(undefined);
   const colWidth:any = 12/cols;
-  const handleDragStart = (media:IMedia)=>{
+  const handleDragStart = (media:IRxMedia)=>{
     setDraggedMedia(media)
   }
   const handleDragEnd = ()=>{
     setDraggedMedia(undefined);
   }
 
-  const handleDrop = (media:IMedia)=>{
+  const handleDrop = (media:IRxMedia)=>{
     draggedMedia && onSwap(media, draggedMedia);
   }
 

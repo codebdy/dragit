@@ -7,7 +7,7 @@ import Intl from "react-intl-universal";
 import Image from 'Components/common/Image';
 import classNames from 'classnames';
 import MdiIcon from '../common/MdiIcon';
-import { IMedia } from 'Base/Model/IMedia';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,17 +64,17 @@ const Transition = React.forwardRef(function Transition(
 
 export default function MediasPortletAltsDialog(
   props:{
-    medias:Array<IMedia>, 
+    medias:Array<IRxMedia>, 
     open:boolean, 
     onClose:()=>void, 
-    onChange:(medias:Array<IMedia>)=>void,
+    onChange:(medias:Array<IRxMedia>)=>void,
   }
 ){
   const {open, onClose, onChange} = props;
   const classes = useStyles();
-  const [medias, setMedias] = React.useState<Array<IMedia>>(cloneObject(props.medias));
+  const [medias, setMedias] = React.useState<Array<IRxMedia>>(cloneObject(props.medias));
 
-  const handleChange = (alt:string, media:IMedia)=>{
+  const handleChange = (alt:string, media:IRxMedia)=>{
     media.alt = alt;
     setMedias([...medias]);
   }
