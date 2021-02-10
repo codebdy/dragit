@@ -56,7 +56,7 @@ export const MenuNodeGroup = observer((
 )=>
 {
   const open = props.openedId === props.node.id
-  const [openedId, setOpenedId] = React.useState('');
+  const [openedId, setOpenedId] = React.useState(0);
   const loggedUser = useLoggedUser();
 
   const handleOpened = (id:ID)=>{
@@ -64,7 +64,7 @@ export const MenuNodeGroup = observer((
   }
 
   const handleClick = () => {
-    open ? props.onOpened('') : props.onOpened(props.node.id)
+    open ? props.onOpened(0) : props.onOpened(props.node.id)
   };
   const classes = useStyles();
   const dotBadge = getBadge(props.node.children)

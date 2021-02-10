@@ -126,9 +126,9 @@ export const Settings = observer((
             <Select
               label = {intl.get("entry-page")}
               value={entryPageId || ''}
-              onChange={(e)=>setEntryPageId(e.target.value as string)}
+              onChange={(e)=>setEntryPageId(e.target.value as number)}
             >
-              <MenuItem value="">
+              <MenuItem value={0}>
                 <em>None</em>
               </MenuItem>
               {

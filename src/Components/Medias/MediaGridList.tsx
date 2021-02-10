@@ -7,6 +7,7 @@ import { FolderNode } from "./FolderNode";
 import MediaGridListFolder from './MediaGridListFolder';
 import MediaGridListImage from './MediaGridListImage';
 import { IRxMedia } from 'Base/Model/IRxMedia';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediasGridList(props:{
     loading:boolean, 
-    folderLoading:string|boolean,
+    folderLoading:ID|boolean,
     draggedFolder:FolderNode|undefined,
     draggedMedia:IRxMedia|undefined,
     folder?:FolderNode,

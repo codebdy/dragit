@@ -4,5 +4,5 @@ export interface IPageJumper{
   openStyle?:'JUMP'|'POPUP'|'DRAWER'|'',
   pageId?:ID,
   dataId?:string,
-  [key:string]:string|undefined,
+  [key:string]:string|ID|undefined,
 }

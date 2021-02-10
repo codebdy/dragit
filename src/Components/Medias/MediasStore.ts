@@ -9,7 +9,7 @@ export class MediasStore{
   draggedFolder?:FolderNode;
   draggedMedia?:IRxMedia;
   folders:Array<FolderNode> = [];
-  selectedFolderId:string = 'root';
+  selectedFolderId:ID = 0;
   gridLoading:boolean = false;
   medias:Array<IRxMedia> = [];
   selectedMedias:Array<IRxMedia> = [];

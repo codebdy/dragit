@@ -59,7 +59,7 @@ const OneToManyPortlet = observer(React.forwardRef((
   }
 
   const handelRemove = (id:ID)=>{
-    fieldStore?.removeChildStore(id);
+    fieldStore?.removeChildStore(id.toString());
   }
 
   return (

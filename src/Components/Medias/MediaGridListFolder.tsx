@@ -5,6 +5,7 @@ import MediaGridListItemTitle from './MediaGridListItemTitle';
 import { FolderNode } from "./FolderNode";
 import MediaGridListIconButton from './MediaGridListIconButton';
 import { IRxMedia } from 'Base/Model/IRxMedia';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,10 +52,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MediaGridListFolder(props:{
     folder:FolderNode, 
-    folderLoading:boolean|string,
+    folderLoading:boolean|ID,
     draggedFolder:FolderNode|undefined,
     draggedMedia:IRxMedia|undefined,
-    onSelect:(nodeId:string)=>void,
+    onSelect:(nodeId:ID)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
     onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode|undefined)=>void,

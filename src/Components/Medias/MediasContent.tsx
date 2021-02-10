@@ -18,6 +18,7 @@ import SubmitButton from "Components/common/SubmitButton";
 import MediaFilderLoadingSkeleton from "./MediaFilderLoadingSkeleton";
 import { cloneObject } from "rx-drag/utils/cloneObject";
 import { parseFolderNodes } from "./FolderNode/parseFolderNodes";
+import { ID } from "rx-drag/models/baseTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,7 +79,7 @@ export const  MediasContent = observer((
   const {single, onSelectedChange} = props;
   const classes = useStyles();
   const [mediasStore] = useState(new MediasStore());
-  const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
+  const [folderLoading, setFolderLoading] = React.useState<boolean|ID>(false);
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
   const [draggedMedia, setDraggedMedia] = React.useState<IRxMedia|undefined>();
   //const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
@@ -188,7 +189,7 @@ export const  MediasContent = observer((
     const parentFolder = folder.parent;
     setFolderLoading(true)
     if(mediasStore.selectedFolderId === folder.id){
-      mediasStore.setSelectedFolderId('root');
+      mediasStore.setSelectedFolderId(0);
     }
     //removeFolder({variables:{id:folder.id}})
     if(!parentFolder){

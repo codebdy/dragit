@@ -37,7 +37,7 @@ export const ModelTreeNode = observer((
 
   return (
     <TreeItem 
-      nodeId = {modelNode.id} 
+      nodeId = {modelNode.id.toString()} 
       label={
         <div 
           className = {classes.label}

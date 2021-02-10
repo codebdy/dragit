@@ -5,7 +5,6 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import intl from 'react-intl-universal';
-import { ID } from 'rx-drag/models/baseTypes';
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 
 const styles = (theme: Theme) =>
@@ -27,7 +26,6 @@ const styles = (theme: Theme) =>
   const useStyles = makeStyles(styles);
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id:ID;
   children: React.ReactNode;
   onClose: () => void;
 }
@@ -104,7 +102,7 @@ export default function PropsDialog(props:{
           open={open}
           scroll = 'paper'
         >
-          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          <DialogTitle onClose={handleClose}>
             {title}
           </DialogTitle>
           <DialogContent dividers className={classes.dilogContent}>

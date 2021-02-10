@@ -4,6 +4,7 @@ import intl from 'react-intl-universal';
 import classNames from 'classnames';
 import { FolderNode } from "./FolderNode";
 import {observer} from 'mobx-react';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,7 @@ export const MediasBreadCrumbItems = observer((props:{folder?:FolderNode})=>{
   const {folder} = props;
   const classes = useStyles();
   const linkCrumbs = makeupLinkCrumbs(folder);
-  const handleSelect = (id:string)=>{
+  const handleSelect = (id:ID)=>{
 
   }
 
@@ -44,7 +45,7 @@ export const MediasBreadCrumbItems = observer((props:{folder?:FolderNode})=>{
     {
       folder?
       <Link color="inherit" className={classes.crumbLink}
-        onClick={()=>{handleSelect('root')}}
+        onClick={()=>{handleSelect(0)}}
       >
       {intl.get('root-dir')}
       </Link>

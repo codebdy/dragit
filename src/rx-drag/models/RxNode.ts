@@ -9,7 +9,7 @@ export const DADA_RXID_CONST = "data-rxid"
 
 export class RxNode<T>{
   static idSeed:number = 1;
-  id: ID = '';  
+  id: ID = 0;  
   meta!: T;
   children: Array<RxNode<T>>;
   parent?:RxNode<T>;
@@ -46,7 +46,7 @@ export class RxNode<T>{
   }
 
   seedId(){
-    this.id = RxNode.idSeed.toString();
+    this.id = RxNode.idSeed;
     RxNode.idSeed ++
   }
 

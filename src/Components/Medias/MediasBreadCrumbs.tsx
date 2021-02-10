@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles, Grid, Hidden, IconButton, SvgIcon } fr
 import { MediasBreadCrumbItems } from './MediasBreadCrumbItems';
 import { FolderNode } from "./FolderNode";
 import { observer } from 'mobx-react';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const MediasBreadCrumbs = observer((
   props:{
-    selectedFolder:string,
+    selectedFolder:ID,
     selectedFolderNode:FolderNode|undefined,
   }
 )=>{
@@ -30,7 +31,7 @@ export const MediasBreadCrumbs = observer((
     <Grid container justify="space-between" alignItems="center" className={classes.breadCrumbShell}>
       <Grid item>
         <IconButton className={classes.backButton}
-          disabled = {selectedFolder === 'root'}
+          disabled = {selectedFolder === 0}
           onClick={
             ()=>{
               //onSelect(selectedFolderNode?.parent? selectedFolderNode.parent.id : 'root')

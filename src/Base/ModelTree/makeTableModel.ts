@@ -19,7 +19,7 @@ export function makeTableRowModel(rows: any[], parentRxModel: RXModel | undefine
   const rowModel = new RXModel(rowRxNode, key);
   
   rowModel.initWithModel(rows);
-  parentRxModel?.setChild(rowModel.id, rowModel);
+  parentRxModel?.setChild(rowModel.id.toString(), rowModel);
   parentRxModel?.getChildren().forEach((child, index)=>{
     child.setLabel((index + 1).toString());
   })

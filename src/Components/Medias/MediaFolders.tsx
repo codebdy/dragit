@@ -32,10 +32,7 @@ export const MediaFolders = observer(() => {
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
-      selected = {mediaStore.selectedFolderId}
-      onNodeSelect = {(e: any, nodeId: string) =>{
-        mediaStore.setSelectedFolderId(nodeId);
-      }}
+      selected = {mediaStore.selectedFolderId ? mediaStore.selectedFolderId.toString() : ''}
     >
       {
         mediaStore.folders?.map((node)=>{

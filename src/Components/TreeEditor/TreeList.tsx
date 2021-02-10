@@ -41,7 +41,7 @@ export default function TreeList(
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
       onNodeSelect = {(e: any, nodeId: string) =>{
-        onSelect(nodeId);
+        onSelect(parseInt(nodeId));
       }} 
     >
       {

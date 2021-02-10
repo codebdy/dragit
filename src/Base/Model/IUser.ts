@@ -8,5 +8,5 @@ export interface IUser {
   is_supper?: boolean;
   is_demo?: boolean;
   avatar: IRxMedia;
-  auths?: string[];
+  auths?: ID[];
 }

@@ -11,6 +11,7 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import { FolderNode } from './FolderNode';
+import { useMediasStore } from './MediasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,7 +72,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
   const [nodeName, setNodeName] = React.useState(node.name);
-
+  const mediaStore = useMediasStore();
   
   const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
     {
@@ -154,7 +155,12 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
           }}
           onDragOver = {handleDragOver}
           onDragEnd = {handleDragEnd}
-          onDrop = {handleDrop}         
+          onDrop = {handleDrop}    
+          onClick = {()=>{
+              console.log('MediaFolder', node.id);
+              mediaStore.setSelectedFolderId(node.id);
+            }            
+          }     
         >
           <FolderOpenIcon />
           <FolderLabel>

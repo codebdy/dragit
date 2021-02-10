@@ -4,8 +4,9 @@ import { useListViewStore } from "../ListViewStore";
 import {observer} from "mobx-react";
 import ListViewTableRowActionFilter from "./ListViewTableRowActionFilter";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
+import { ID } from "rx-drag/models/baseTypes";
 
-const RowCheckBox = observer((props:{rowId:string}) => {
+const RowCheckBox = observer((props:{rowId:ID}) => {
   const {rowId} = props;
   const listViewStore = useListViewStore();
   const isItemSelected = listViewStore.isRowSelected(rowId);

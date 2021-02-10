@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, createStyles, Checkbox, FormControlLabel } from '@material-ui/core';
 import { TreeItem } from '@material-ui/lab';
 import { ITreeNode } from 'Base/Model/ITreeNode';
+import { ID } from 'rx-drag/models/baseTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ export default function TreeNode(
 ){
   const {node, nameKey, selected, onSelectChange} = props;
   const classes = useStyles();
-  const isChecked = (node?:{id?:string}):boolean=>{
+  const isChecked = (node?:{id?:ID}):boolean=>{
     if(!selected){
       return false;
     }
@@ -42,7 +43,7 @@ export default function TreeNode(
 
   return (
     <TreeItem 
-      nodeId={node.id || ''}
+      nodeId={node.id?.toString() || ''}
       label = {
         <div className = {classes.labelRoot}  onClick = {e=>e.stopPropagation()}>
           <FormControlLabel

@@ -65,7 +65,7 @@ export const DebugModelTree = observer((
           <TreeView
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
-            selected = {debugStore?.selectedModel?.id || ''}
+            selected = {debugStore?.selectedModel?.id.toString() || ''}
           >
             {
               modelStore?.getChildren()?.map((childStore, index)=>{

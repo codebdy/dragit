@@ -58,7 +58,7 @@ const AttributeBoxActionSection = observer((
   
 
   const handlePageChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
-    const pageId = event.target.value as string;
+    const pageId = parseInt(event.target.value as string);
     updatAction('pageJumper', {...action?.pageJumper, pageId});
   } 
   
@@ -114,7 +114,7 @@ const AttributeBoxActionSection = observer((
               <InputLabel>{intl.get("page")}</InputLabel>
               <Select
                 label = {intl.get("page")}
-                value={stringValue(action.pageJumper?.pageId)}
+                value={action.pageJumper?.pageId?.toString()||''}
                 onChange={handlePageChange}
               >
                 <MenuItem value="">

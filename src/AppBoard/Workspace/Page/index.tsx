@@ -13,7 +13,6 @@ import { IPageMutation } from 'Base/Model/IPageMutation';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import intl from 'react-intl-universal';
-import { AUTH_DEBUG } from 'Base/authSlugs';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
@@ -196,7 +195,7 @@ export const Page = observer((
             </Alert>      
           </Dialog>
           {
-            loggedUser.authCheck(AUTH_DEBUG) && !hideDebug &&
+            //loggedUser.authCheck(AUTH_DEBUG) && !hideDebug &&
             <Debug />
           }
         </ModelProvider>
