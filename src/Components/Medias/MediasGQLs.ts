@@ -32,8 +32,8 @@ export const MUTATION_ADD_FOLDER = gql`
 `;
 
 export const MUTATION_UPDATE_FOLDER = gql`
-  mutation ($folder:MediaFolderInput){
-    updateMediaFolder(folder:$folder){
+  mutation ($id:ID, $name:String, $parent_id:ID){
+    updateRxMediaFolder(id:$id, name:$name, parent_id:$parent_id){
       id
       name
     }
@@ -42,7 +42,7 @@ export const MUTATION_UPDATE_FOLDER = gql`
 
 export const MUTATION_REMOVE_FOLDER = gql`
   mutation ($id:ID!){
-    removeMediaFolder(id:$id){
+    removeRxMediaFolder(id:$id){
       id
       name
     }
@@ -51,7 +51,7 @@ export const MUTATION_REMOVE_FOLDER = gql`
 
 export const MUTATION_UPDATE_MEDIA = gql`
   mutation ($media:MediaInput!){
-    updateMedia(media:$media){
+    updateRxMedia(media:$media){
       id
     }
   }
@@ -59,7 +59,7 @@ export const MUTATION_UPDATE_MEDIA = gql`
 
 export const MUTATION_REMOVE_MEDIAS = gql`
   mutation ($ids:[ID]){
-    removeMedias(ids:$ids){
+    removeRxMedias(ids:$ids){
       ids
     }
   }

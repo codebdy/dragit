@@ -7,6 +7,7 @@ export class FolderNode{
   name: string;
   children?: Array<FolderNode>;
   parent?: FolderNode;
+  editing: boolean = false;
 
   constructor(id:ID, name:string, parent?:FolderNode) {
     this.id = id;
@@ -17,5 +18,17 @@ export class FolderNode{
 
   setChildren(children?: Array<FolderNode>){
     this.children = children;
+  }
+
+  addChild(folder:FolderNode){
+    this.children?.push(folder);
+  }
+
+  setEditing(editing:boolean){
+    this.editing = editing;
+  }
+
+  setName(name:string){
+    this.name = name;
   }
 }

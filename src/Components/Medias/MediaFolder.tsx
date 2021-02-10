@@ -12,6 +12,7 @@ import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import { FolderNode } from './FolderNode';
 import { useMediasStore } from './MediasStore';
+import { stringValue } from 'rx-drag/utils/stringValue';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,24 +71,26 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   } = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
-  const [editing, setEditing] = React.useState(false);
   const [nodeName, setNodeName] = React.useState(node.name);
   const mediaStore = useMediasStore();
   
   const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
     {
       onCompleted:(data)=>{
-        let newFolder = data?.addRxMediaFolder;
-        if(!newFolder){
+        const json = data?.addRxMediaFolder;
+        if(!json){
           return;
         }
+        const folder = new FolderNode(json.id, json.name, node);
+        folder.setEditing(true);
+        node?.addChild(folder);
       }
     }
   );
 
   const [updateFolder, {error:updateFolderError, loading:updating}] = useMutation(MUTATION_UPDATE_FOLDER,{
     onCompleted:(data)=>{
-      //setFolderLoading(false);
+      node.setName(nodeName);
     }});
 
   const [removeFolder, {error:removeFolderError, loading:removing}] = useMutation(MUTATION_REMOVE_FOLDER,{
@@ -98,7 +101,14 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
   useShowAppoloError(addFolderError || updateFolderError || removeFolderError);
 
   const handleEndEditing = ()=>{
-    setEditing(false);
+    node.setEditing(false);
+    updateFolder({
+      variables:{
+        id:node.id,
+        name:nodeName,
+        parent_id:node.parent?.id
+      }
+    })
     //delete node.editing;
     //nodeName !== node.name && onFolderNameChange(nodeName, node);  
   }
@@ -122,7 +132,8 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
     //}
   }
 
-  const handelAddFolder = ()=>{
+  const handelAddFolder = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
     addFolder({
       variables:{
         parent_id:node.id,
@@ -165,9 +176,9 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
           <FolderOpenIcon />
           <FolderLabel>
             {
-              editing?
+              node.editing?
               <input 
-                value={nodeName} 
+                value={stringValue(nodeName)} 
                 autoFocus= {true} 
                 className={classes.nameInput}
                 onBlur = {handleEndEditing}
@@ -193,7 +204,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
             <FolderActions>
               <IconButton size = "small" onClick={(e)=>{
                 e.stopPropagation();
-                setEditing(true);
+                node.setEditing(true);
               }}>
                 <EditIcon fontSize = "small" />
               </IconButton>
