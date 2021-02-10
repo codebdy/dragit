@@ -35,6 +35,10 @@ export class MediasStore{
   get selectedFolderNode(){
     return getByIdFromTree(this.selectedFolderId, this.folders);
   }
+
+  removeFolder(folder:FolderNode){
+    this.folders?.splice(this.folders.indexOf(folder), 1);
+  }
 }
 
 export const MediasStoreContext = createContext<MediasStore>({} as MediasStore);

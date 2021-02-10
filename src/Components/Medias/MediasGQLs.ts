@@ -41,8 +41,8 @@ export const MUTATION_UPDATE_FOLDER = gql`
 `;
 
 export const MUTATION_REMOVE_FOLDER = gql`
-  mutation ($id:ID!){
-    removeRxMediaFolder(id:$id){
+  mutation ($id:[ID!]!){
+    removeRxMediaFolders(id:$id){
       id
       name
     }

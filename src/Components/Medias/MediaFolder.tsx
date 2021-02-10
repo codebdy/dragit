@@ -13,6 +13,7 @@ import intl from 'react-intl-universal';
 import { FolderNode } from './FolderNode';
 import { useMediasStore } from './MediasStore';
 import { stringValue } from 'rx-drag/utils/stringValue';
+import { Check, Close } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,7 +96,17 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
 
   const [removeFolder, {error:removeFolderError, loading:removing}] = useMutation(MUTATION_REMOVE_FOLDER,{
     onCompleted:(data)=>{
-      //setFolderLoading(false);
+      const json = data?.removeRxMediaFolders;
+      if(!json){
+        return;
+      }
+      if(node?.parent){
+        node?.parent?.removeChild(node)
+      }
+      else{
+        mediaStore.removeFolder(node);
+      }
+
     }});
 
   useShowAppoloError(addFolderError || updateFolderError || removeFolderError);
@@ -109,8 +120,6 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
         parent_id:node.parent?.id
       }
     })
-    //delete node.editing;
-    //nodeName !== node.name && onFolderNameChange(nodeName, node);  
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,8 +151,23 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
     });
   }
 
-  const handleRemoveFolder = ()=>{
+  const handleFinishEdit = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
+    handleEndEditing();
+  }
 
+  const handleCancelEdit = (event:React.MouseEvent<HTMLElement>)=>{
+    event.stopPropagation();
+    setNodeName(node?.name);
+    node?.setEditing(false);
+  }
+
+  const handleRemoveFolder = ()=>{
+    removeFolder({
+      variables:{
+        id:node.getRemoveIds(),
+      }
+    })
   }
 
   const handleDragEnd = ()=>{
@@ -168,8 +192,7 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
           onDragEnd = {handleDragEnd}
           onDrop = {handleDrop}    
           onClick = {()=>{
-              console.log('MediaFolder', node.id);
-              mediaStore.setSelectedFolderId(node.id);
+              !node.editing && mediaStore.setSelectedFolderId(node.id);
             }            
           }     
         >
@@ -181,7 +204,6 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
                 value={stringValue(nodeName)} 
                 autoFocus= {true} 
                 className={classes.nameInput}
-                onBlur = {handleEndEditing}
                 onKeyUp = {e=>{
                   if(e.key === 'Enter') {
                     handleEndEditing()
@@ -200,7 +222,18 @@ export const MediaFolder = observer((props:{ node:FolderNode})=>{
             <CircularProgress size = {24}/>
           }
           {
-            hover && !loading &&
+            node.editing &&
+            <>
+              <IconButton size = "small" onClick={handleFinishEdit}>
+                <Check fontSize = "small" />
+              </IconButton>
+              <IconButton size = "small"  onClick={handleCancelEdit}>
+                <Close fontSize = "small" />
+              </IconButton>
+            </>
+          }
+          {
+            hover && !loading && !node.editing &&
             <FolderActions>
               <IconButton size = "small" onClick={(e)=>{
                 e.stopPropagation();

@@ -31,4 +31,17 @@ export class FolderNode{
   setName(name:string){
     this.name = name;
   }
+
+  removeChild(folder:FolderNode){
+    this.children?.splice(this.children.indexOf(folder), 1);
+  }
+
+  getRemoveIds(ids?:Array<ID>){
+    let retIds = ids ? ids : [];
+    retIds.push(this.id);
+    this.children?.forEach(child=>{
+      child.getRemoveIds(retIds)
+    })
+    return retIds;
+  }
 }
