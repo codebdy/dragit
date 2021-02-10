@@ -22,13 +22,11 @@ export const QUERY_MEDIAS = gql`
   }
 `;
 export const MUTATION_ADD_FOLDER = gql`
-  mutation ($parentId:ID){
-    addMediaFolder(parentId:$parentId){
+  mutation ($parent_id:ID, $name:String){
+    addRxMediaFolder(parent_id:$parent_id, name:$name){
       id
       name
-      parent{
-        id
-      }
+      parent_id
     }
   }
 `;

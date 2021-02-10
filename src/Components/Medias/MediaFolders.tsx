@@ -3,18 +3,14 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
-import AddIcon from '@material-ui/icons/Add';
-import { IconButton } from '@material-ui/core';
-import MdiIcon from 'Components/common/MdiIcon';
-import intl from 'react-intl-universal';
-import MediaFolder, { FolderActions, FolderLabel, FolderNode } from './MediaFolder';
+import MediaFolder, { FolderNode } from './MediaFolder';
 import { IRxMedia } from 'Base/Model/IRxMedia';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding:theme.spacing(1),
+      padding:theme.spacing(1,1,1,0),
     },
     labelRoot: {
       display: 'flex',
@@ -26,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediaFolders(
+export const MediaFolders = observer((
     props:{
       folders:Array<FolderNode>, 
       draggedFolder:FolderNode|undefined,
@@ -40,7 +36,7 @@ export default function MediaFolders(
       onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
       onDragFolder:(folder:FolderNode|undefined)=>void
     }
-  ) {
+  ) => {
   const {
     folders, 
     draggedFolder, 
@@ -56,14 +52,6 @@ export default function MediaFolders(
   } = props;
   const classes = useStyles();
 
-  //const [draggedParent, setDraggedParent] = React.useState<FolderNode|undefined>();
-
-  const handleAddInRoot = (event: React.MouseEvent<unknown>)=>{
-    event.stopPropagation();
-
-    onAddFolder();
-  }
-
   return (
     <TreeView
       className={classes.root}
@@ -74,56 +62,27 @@ export default function MediaFolders(
         onSelect(nodeId);
       }}
     >
-      <TreeItem nodeId="root" label=
-        {
-          <div className={classes.labelRoot}
-            onDragOver={e=>{
-              if(draggedFolder || draggedMedia){
-                e.preventDefault()
-              }
+      {
+        folders.map((node)=>{
+          return <MediaFolder 
+            key={node.id + '-' + node.name} 
+            node={node} 
+            draggedFolder = {draggedFolder}
+            draggedMedia = {draggedMedia}
+            onFolderNameChange = {onFolderNameChange}
+            onAddFolder = {onAddFolder}
+            onRemoveFolder = {onRemoveFolder}
+            onMoveFolderTo = {onMoveFolderTo}
+            onMoveMediaTo = {onMoveMediaTo}
+            onDragStart = {(folder)=>{
+              onDragFolder(folder)
             }}
-            onDrop={
-              ()=>{
-                draggedFolder && onMoveFolderTo(draggedFolder, undefined);
-                draggedMedia && onMoveMediaTo(draggedMedia, undefined);
-              }
-            }
-          >
-            <MdiIcon iconClass = "mdi-folder-home-outline" size="22" />
-            <FolderLabel>
-              {intl.get('root-dir')}
-            </FolderLabel>
-            <FolderActions>
-              <IconButton size = "small" onClick={handleAddInRoot}>
-                <AddIcon fontSize = "small" />
-              </IconButton>
-            </FolderActions>
-          </div>
-        }
-      >
-        {
-          folders.map((node)=>{
-            return <MediaFolder 
-              key={node.id + '-' + node.name} 
-              node={node} 
-              draggedFolder = {draggedFolder}
-              draggedMedia = {draggedMedia}
-              onFolderNameChange = {onFolderNameChange}
-              onAddFolder = {onAddFolder}
-              onRemoveFolder = {onRemoveFolder}
-              onMoveFolderTo = {onMoveFolderTo}
-              onMoveMediaTo = {onMoveMediaTo}
-              onDragStart = {(folder)=>{
-                onDragFolder(folder)
-              }}
-              onDragEnd = {()=>{
-                onDragFolder(undefined)
-              }}               
-            />
-          })
-
-        }
-      </TreeItem>
+            onDragEnd = {()=>{
+              onDragFolder(undefined)
+            }}               
+          />
+        })
+      }
     </TreeView>
   );
-}
+})

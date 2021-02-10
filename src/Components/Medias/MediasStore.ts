@@ -10,6 +10,9 @@ export class MediasStore{
   selectedFolder:string = 'root';
   gridLoading:boolean = false;
   medias:Array<IRxMedia> = [];
+  selectedMedias:Array<IRxMedia> = [];
+  pageNumber:number = 0;
+  hasMore:boolean = true;
 
   constructor() {
     makeAutoObservable(this)

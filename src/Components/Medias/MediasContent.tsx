@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {makeStyles, Theme, createStyles, Divider, Hidden, LinearProgress} from "@material-ui/core";
 import MediaGridList from "./MediaGridList";
-import MediaFolders from "./MediaFolders";
+import { MediaFolders } from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
@@ -10,11 +10,13 @@ import MediasBatchActions from "./MediasBatchActions";
 import { IRxMedia } from "Base/Model/IRxMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { MUTATION_ADD_FOLDER, MUTATION_REMOVE_FOLDER, MUTATION_REMOVE_MEDIAS, MUTATION_UPDATE_FOLDER, MUTATION_UPDATE_MEDIA, QUERY_FOLDERS, QUERY_MEDIAS } from "./MediasGQLs";
-import { ID } from "rx-drag/models/baseTypes";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { toggle, batchRemove, remove } from "rx-drag/utils/ArrayHelper";
 import { MediasStore, MediasStoreProvider } from "./MediasStore";
 import {observer} from 'mobx-react';
+import { getByIdFromTree } from "./getByIdFromTree";
+import SubmitButton from "Components/common/SubmitButton";
+import MediaFilderLoadingSkeleton from "./MediaFilderLoadingSkeleton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,18 +56,17 @@ const useStyles = makeStyles((theme: Theme) =>
       //padding:theme.spacing(0, 2, 2, 2),
     },
     folderTitle:{
-      padding:theme.spacing(2) ,
-      minHeight:theme.spacing(7),
+      padding:theme.spacing(0, 1) ,
+      height:theme.spacing(7),
       display:'flex',
+      justifyContent:'space-between',
       alignItems: 'center',
       fontWeight: 500,
       fontSize: '1.1rem',
       position: 'relative',
     },
-
   }),
 );
-
 
 function makeupParent(folders?:Array<FolderNode>, parent?:FolderNode){
   folders && folders.forEach(folder=>{
@@ -73,21 +74,6 @@ function makeupParent(folders?:Array<FolderNode>, parent?:FolderNode){
     makeupParent(folder.children, folder)
   })
   return folders?folders:[];
-}
-
-function getByIdFromTree(id:ID, folders?:Array<FolderNode>):FolderNode|undefined{
-  if(folders){
-    for(var i = 0; i < folders.length; i++){
-      if(folders[i].id === id){
-        return folders[i];
-      }
-      let searchedChild = getByIdFromTree(id, folders[i].children);
-      if(searchedChild){
-        return searchedChild;
-      }
-    }
-  }
-  return undefined;
 }
 
 export const  MediasContent = observer((
@@ -108,7 +94,7 @@ export const  MediasContent = observer((
   const [medias, setMedias] = React.useState<Array<IRxMedia>>([]);
   const [selectedMedias, setSelectedMedias] = React.useState<Array<IRxMedia>>([]);
   const [pageNumber, setPageNumber] = React.useState(0);
-  const [hasData, setHasData] = React.useState(true);
+  const [hasMore, setHasData] = React.useState(true);
   const [batchActionLoading, setBatchActionLoading] = React.useState(false);
 
   const { loading, error:queryFolderError, data:folderData } = useQuery(QUERY_FOLDERS, {fetchPolicy:'no-cache'});
@@ -118,11 +104,11 @@ export const  MediasContent = observer((
     fetchPolicy:'no-cache'
   });
 
-  const [addFolder, {error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
+  const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
     {
       onCompleted:(data)=>{
         setFolderLoading(false);
-        let newFolder = data?.addMediaFolder;
+        let newFolder = data?.addRxMediaFolder;
         if(!newFolder){
           return;
         }
@@ -208,7 +194,7 @@ export const  MediasContent = observer((
   },[selectedMedias]);
 
   const handleScrollToEnd = ()=>{
-    if(!gridLoading && hasData){
+    if(!gridLoading && hasMore){
       setGridLoading(true);
       refetch && refetch({ first:20, page:pageNumber + 1});
     }
@@ -218,6 +204,10 @@ export const  MediasContent = observer((
     setFolderLoading(true)
     addFolder({variables:{parentId:parent?.id}});
   }
+
+  const handleAddNewFolder = ()=>{
+    addFolder({variables:{name:intl.get('new-folder')}});
+  } 
 
   const handleFolderNameChange = (name:string, folder:FolderNode, fromGrid?:boolean)=>{
     fromGrid ? setFolderLoading(folder.id) : setFolderLoading(true)
@@ -357,18 +347,26 @@ export const  MediasContent = observer((
           <div className = {classes.right}>
             <div className = {classes.folderTitle}>
                 {intl.get('folder')}
+                <SubmitButton
+                  variant = "outlined"
+                  color = "primary"
+                  submitting = {adding}
+                  onClick = {handleAddNewFolder}
+                >
+                  {intl.get('add-new')}
+                </SubmitButton>
               </div>
               <Divider></Divider>
-                {
-                  (folderLoading === true) && <LinearProgress />
-                }
+              {
+                (folderLoading === true) && <MediaFilderLoadingSkeleton />
+              }
               <MediaFolders
                 draggedFolder = {draggedFolder} 
                 draggedMedia = {draggedMedia}
                 folders = {folders} 
                 selectedFolder={selectedFolder}
                 onSelect = {(folder)=>{
-                    setSelectedFolder(folder);
+                  setSelectedFolder(folder);
                 }}
                 onAddFolder = {handleAddFolder}
                 onFolderNameChange = {handleFolderNameChange}

@@ -14,7 +14,7 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import ModuleSkeleton from './AppBoardSkeleton';
 import { SidebarLinks } from './Sidebar/SidebarLinks';
-import SiderBarLoadingSkeleton from './Sidebar/LoadingSkeleton';
+import ListLoadingSkeleton from './Sidebar/ListLoadingSkeleton';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -83,7 +83,7 @@ export const AppBoard = observer(()=>{
           <Sidebar>
             {
               loading
-              ? <SiderBarLoadingSkeleton/>
+              ? <ListLoadingSkeleton/>
               : <SidebarLinks 
                   items = {appboardStore.rxApp?.navigation_items}
                 />  

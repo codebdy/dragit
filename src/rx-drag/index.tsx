@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { IRxMeta } from './models/IRxMeta';
 import { IRxThemeOptions, RxThemeMode } from './store/IRxThemeOptions';
 import { Toolbar } from './Toolbar';
 import { NodeNavigation } from './NodeNavigation';
@@ -12,9 +11,7 @@ import { IRxLocales } from './models/IRxLocales';
 import './style.css';
 import { useEffect } from 'react';
 import { useRxDragStore } from './store/useDesign';
-import { cloneObject } from './utils/cloneObject';
 import { RxDragCore } from './core';
-import { toJS } from 'mobx';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,

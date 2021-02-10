@@ -7,13 +7,16 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 import { ID } from 'rx-drag/models/baseTypes';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_ADD_FOLDER } from './MediasGQLs';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     labelRoot: {
       display: 'flex',
       alignItems: 'center',
-      padding: theme.spacing(0.5, 0),
+      padding: theme.spacing(1, 0),
       height:'30px',
       userSelect:'none',
     },
@@ -22,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 'inherit',
       flexGrow: 1,
       margintLeft:'4px',
+      marginLeft: theme.spacing(1),
     },  
     actions: {
       width:'76px',
@@ -88,12 +92,23 @@ export default function MediaFolder (props:{
     onMoveFolderTo,
     onMoveMediaTo,
     onDragStart,
-    onDragEnd
+    onDragEnd,
   } = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(node.editing);
   const [nodeName, setNodeName] = React.useState(node.name);
+
+  
+  const [addFolder, {error:addFolderError}] = useMutation(MUTATION_ADD_FOLDER,
+    {
+      onCompleted:(data)=>{
+
+      }
+    }
+  );
+
+  useShowAppoloError(addFolderError);
 
   const handleEndEditing = ()=>{
     setEditing(false);

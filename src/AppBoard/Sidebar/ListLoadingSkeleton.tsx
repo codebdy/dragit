@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-export default function SiderBarLoadingSkeleton() {
+export default function ListLoadingSkeleton() {
   return (
     <Fragment>
       {[1,2,3,4,5].map((index)=>{
