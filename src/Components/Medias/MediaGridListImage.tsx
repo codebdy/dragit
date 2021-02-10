@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { IMedia } from 'Base/Model/IMedia';
 import Close from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediaGQLs';
+import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
 import { FolderNode } from './MediaFolder';
 import MdiIcon from 'Components/common/MdiIcon';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import {makeStyles, Theme, createStyles, Grid} from "@material-ui/core";
-import MediasContent from "./MediasContent";
+import { MediasContent } from "./MediasContent";
 import intl from 'react-intl-universal';
 import classNames from "classnames";
 import HoverablePaper from "Components/common/HoverablePaper";

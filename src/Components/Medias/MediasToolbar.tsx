@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediasToolbar(){
   const classes = useStyles();
   const toolIconSize = 21;
+  const handleUpload = (event:React.ChangeEvent<HTMLInputElement>)=>{
+
+  }
   return (
     <Fragment>
       <div className={classes.search}>
@@ -68,14 +71,16 @@ export default function MediasToolbar(){
       </div>                
       <Spacer />
       
-      <input
-        accept="image/*"
-        className={classes.uploadInput}
-        id="contained-button-file"
-        multiple
-        type="file"
-      />
+
       <Hidden xsDown>
+        <input
+          accept="image/*"
+          className={classes.uploadInput}
+          id="contained-button-file"
+          multiple
+          type="file"
+          onChange = {handleUpload}
+        />        
         <label htmlFor="contained-button-file">
           <Tooltip title={intl.get('upload')} arrow placement="top">
             <IconButton  
