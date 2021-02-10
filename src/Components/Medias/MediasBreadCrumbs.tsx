@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles, Grid, Hidden, IconButton, SvgIcon } from '@material-ui/core';
-import MediasBreadCrumbItems from './MediasBreadCrumbItems';
+import { MediasBreadCrumbItems } from './MediasBreadCrumbItems';
 import { FolderNode } from './MediaFolder';
+import { observer } from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,14 +18,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediasBreadCrumbs(
+export const MediasBreadCrumbs = observer((
   props:{
     selectedFolder:string,
     selectedFolderNode:FolderNode|undefined,
-    onSelect:(folder:string)=>void
   }
-){
-  const {selectedFolder,selectedFolderNode,  onSelect} = props;
+)=>{
+  const {selectedFolder,selectedFolderNode} = props;
   const classes = useStyles();
   return (
     <Grid container justify="space-between" alignItems="center" className={classes.breadCrumbShell}>
@@ -33,7 +33,7 @@ export default function MediasBreadCrumbs(
           disabled = {selectedFolder === 'root'}
           onClick={
             ()=>{
-              onSelect(selectedFolderNode?.parent? selectedFolderNode.parent.id : 'root')
+              //onSelect(selectedFolderNode?.parent? selectedFolderNode.parent.id : 'root')
             }
           }
         >
@@ -44,7 +44,7 @@ export default function MediasBreadCrumbs(
       </Grid>
       <Grid item>
           <MediasBreadCrumbItems folder={selectedFolderNode} 
-            onSelect = {onSelect} 
+            //onSelect = {onSelect} 
           />
       </Grid>
       <Grid item>                  
@@ -58,4 +58,4 @@ export default function MediasBreadCrumbs(
       </Grid>
     </Grid>
   )
-}
+})

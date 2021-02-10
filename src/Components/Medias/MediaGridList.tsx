@@ -42,11 +42,10 @@ export default function MediasGridList(props:{
     draggedFolder:FolderNode|undefined,
     draggedMedia:IRxMedia|undefined,
     folder?:FolderNode,
-    folders:Array<FolderNode>|undefined,
-    medias:Array<IRxMedia>, 
+    folders?:Array<FolderNode>|undefined,
+    medias?:Array<IRxMedia>, 
     selectedMedias:Array<IRxMedia>, 
     onScrollToEnd:()=>void,
-    onSelect:(nodeId:string)=>void,
     onFolderNameChange:(name:string, folder:FolderNode)=>void,
     onRemoveFolder:(folder:FolderNode)=>void,
     onRemoveMedia:(media:IRxMedia)=>void,
@@ -67,7 +66,6 @@ export default function MediasGridList(props:{
     medias,
     selectedMedias, 
     onScrollToEnd, 
-    onSelect, 
     onFolderNameChange, 
     onRemoveFolder, 
     onMoveFolderTo,
@@ -95,6 +93,10 @@ export default function MediasGridList(props:{
     //e.defaultPrevented();
   }
 
+  const handleSelect = ()=>{
+
+  }
+
 
 
   return (
@@ -110,7 +112,7 @@ export default function MediasGridList(props:{
               draggedFolder = {draggedFolder}
               draggedMedia = {draggedMedia}
               folder={folder} 
-              onSelect={onSelect} 
+              onSelect={handleSelect} 
               onFolderNameChange={onFolderNameChange}
               onRemoveFolder = {onRemoveFolder}
               onMoveFolderTo = {onMoveFolderTo}
@@ -125,7 +127,7 @@ export default function MediasGridList(props:{
           </Grid>
         ))}
      
-        {medias.map((tile:any, index) => (
+        {medias?.map((tile:any, index) => (
           <Grid item key={tile.id + '-image-' + index + '-' + tile.title} lg={2} sm={3} xs={4}>
             <MediaGridListImage
               folder = {folder} 

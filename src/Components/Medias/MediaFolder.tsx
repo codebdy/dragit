@@ -5,11 +5,11 @@ import AddIcon from '@material-ui/icons/Add';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { IRxMedia } from 'Base/Model/IRxMedia';
 import { ID } from 'rx-drag/models/baseTypes';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_ADD_FOLDER } from './MediasGQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { observer } from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,29 +70,9 @@ export function FolderActions(props:{children:any}){
 }
 
 
-export default function MediaFolder (props:{
-  node:FolderNode,
-  draggedFolder:FolderNode|undefined,
-  draggedMedia:IRxMedia|undefined,
-  onFolderNameChange:(name:string, folder:FolderNode)=>void,
-  onAddFolder:(parentFolder?:FolderNode)=>void,
-  onRemoveFolder:(folder:FolderNode)=>void,
-  onMoveFolderTo:(folder:FolderNode, targetFolder:FolderNode)=>void,
-  onMoveMediaTo:(media:IRxMedia, targetFolder:FolderNode|undefined)=>void,
-  onDragStart:(folder:FolderNode)=>void,
-  onDragEnd:()=>void,
-}){
+export const MediaFolder = observer((props:{ node:FolderNode})=>{
   const {
     node,
-    draggedFolder,
-    draggedMedia,
-    onFolderNameChange, 
-    onAddFolder, 
-    onRemoveFolder, 
-    onMoveFolderTo,
-    onMoveMediaTo,
-    onDragStart,
-    onDragEnd,
   } = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
@@ -113,7 +93,7 @@ export default function MediaFolder (props:{
   const handleEndEditing = ()=>{
     setEditing(false);
     delete node.editing;
-    nodeName !== node.name && onFolderNameChange(nodeName, node);  
+    //nodeName !== node.name && onFolderNameChange(nodeName, node);  
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,17 +102,29 @@ export default function MediaFolder (props:{
   };
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
-    draggedFolder && draggedFolder !== node && event.preventDefault();
-    draggedMedia && event.preventDefault();
+    //draggedFolder && draggedFolder !== node && event.preventDefault();
+    //draggedMedia && event.preventDefault();
   }
 
   const handleDrop = ()=>{
-    if(draggedFolder && draggedFolder !== node){
-      onMoveFolderTo(draggedFolder, node);
-    }
-    if(draggedMedia){
-      onMoveMediaTo(draggedMedia, node);
-    }
+    //if(draggedFolder && draggedFolder !== node){
+    //  onMoveFolderTo(draggedFolder, node);
+    //}
+    //if(draggedMedia){
+    //  onMoveMediaTo(draggedMedia, node);
+    //}
+  }
+
+  const handelAddFolder = ()=>{
+
+  }
+
+  const handleRemoveFolder = ()=>{
+
+  }
+
+  const handleDragEnd = ()=>{
+
   }
 
   return(
@@ -144,10 +136,10 @@ export default function MediaFolder (props:{
           draggable={true}
           onDragStart={()=>{
             setHover(false);
-            onDragStart(node);
+            //onDragStart(node);
           }}
           onDragOver = {handleDragOver}
-          onDragEnd = {onDragEnd}
+          onDragEnd = {handleDragEnd}
           onDrop = {handleDrop}         
         >
         <FolderOpenIcon />
@@ -181,16 +173,10 @@ export default function MediaFolder (props:{
             }}>
               <EditIcon fontSize = "small" />
             </IconButton>
-            <IconButton size = "small" onClick={(e)=>{
-              e.stopPropagation();
-              onAddFolder(node);
-            }}>
+            <IconButton size = "small" onClick={handelAddFolder}>
               <AddIcon fontSize = "small" />
             </IconButton>
-            <IconButton size = "small"  onClick={(e)=>{
-              e.stopPropagation();
-              onRemoveFolder(node);
-            }}>
+            <IconButton size = "small"  onClick={handleRemoveFolder}>
               <DeleteIcon fontSize = "small" />
             </IconButton>
           </FolderActions>
@@ -203,15 +189,6 @@ export default function MediaFolder (props:{
             <MediaFolder 
               key={child.id + '-' + child.name}               
               node = {child}
-              draggedFolder = {draggedFolder}
-              draggedMedia = {draggedMedia}
-              onFolderNameChange={onFolderNameChange}
-              onAddFolder = {onAddFolder}
-              onRemoveFolder = {onRemoveFolder}
-              onMoveMediaTo = {onMoveMediaTo}
-              onDragStart = {onDragStart}
-              onDragEnd = {onDragEnd}             
-              onMoveFolderTo = {onMoveFolderTo}
             />
           )
         })
@@ -219,4 +196,4 @@ export default function MediaFolder (props:{
     </TreeItem>
 
   )
-}
+})

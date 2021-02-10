@@ -5,7 +5,7 @@ import { MediaFolders } from "./MediaFolders";
 import { FolderNode } from "./MediaFolder";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
-import MediasBreadCrumbs from "./MediasBreadCrumbs";
+import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
 import MediasBatchActions from "./MediasBatchActions";
 import { IRxMedia } from "Base/Model/IRxMedia";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
@@ -14,9 +14,9 @@ import { useShowAppoloError } from "Store/Helpers/useInfoError";
 import { toggle, batchRemove, remove } from "rx-drag/utils/ArrayHelper";
 import { MediasStore, MediasStoreProvider } from "./MediasStore";
 import {observer} from 'mobx-react';
-import { getByIdFromTree } from "./getByIdFromTree";
 import SubmitButton from "Components/common/SubmitButton";
 import MediaFilderLoadingSkeleton from "./MediaFilderLoadingSkeleton";
+import { cloneObject } from "rx-drag/utils/cloneObject";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -88,8 +88,8 @@ export const  MediasContent = observer((
   const [folderLoading, setFolderLoading] = React.useState<boolean|string>(false);
   const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
   const [draggedMedia, setDraggedMedia] = React.useState<IRxMedia|undefined>();
-  const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
-  const [selectedFolder, setSelectedFolder] = React.useState('root');
+  //const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
+  //const [selectedFolder, setSelectedFolder] = React.useState('root');
   const [gridLoading, setGridLoading] = React.useState(false);
   const [medias, setMedias] = React.useState<Array<IRxMedia>>([]);
   const [selectedMedias, setSelectedMedias] = React.useState<Array<IRxMedia>>([]);
@@ -112,16 +112,8 @@ export const  MediasContent = observer((
         if(!newFolder){
           return;
         }
-        setSelectedFolder(newFolder?.id || 'root');
-        const parent = getByIdFromTree(newFolder?.parent?.id, folders);
-        newFolder.editing = true;
-        newFolder.parent = parent;     
-        if(parent){
-          parent.children = parent.children ? [...parent.children, newFolder] : [newFolder];
-          setFolders([...folders])
-        }else{
-          setFolders([...folders, newFolder]);
-        }
+        mediasStore.addFolder(cloneObject(newFolder));
+        mediasStore.setSelectedFolderId(newFolder?.id || 'root');
       }
     }
   );
@@ -151,7 +143,7 @@ export const  MediasContent = observer((
     setGridLoading(queryLoading);
   }, [queryLoading])
   
-  const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
+  //const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
   
   const error = queryFolderError || 
                 queryError || 
@@ -169,9 +161,9 @@ export const  MediasContent = observer((
   useEffect(()=>{
     if(folderData){
       const queriedFolders:Array<FolderNode> = makeupParent(JSON.parse((folderData && folderData['rxMediaFoldersTree'])||'[]'));
-      setFolders(queriedFolders)
+      mediasStore.setFolders(queriedFolders);
     }
-  },[folderData])
+  },[folderData, mediasStore])
 
   useEffect(()=>{
     setMedias([...medias, ...(mediaData?.medias?.data||[])])
@@ -186,7 +178,7 @@ export const  MediasContent = observer((
     setSelectedMedias([]);
     excuteQuery({variables: { first:20, page:pageNumber + 1}});
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[pageNumber, selectedFolder]);
+  },[pageNumber, mediasStore.selectedFolderId]);
 
   useEffect(() => {
     onSelectedChange && onSelectedChange([...selectedMedias]);
@@ -219,31 +211,31 @@ export const  MediasContent = observer((
   const handleRemoveFolder = (folder:FolderNode, fromGrid?:boolean)=>{
     const parentFolder = folder.parent;
     setFolderLoading(true)
-    if(selectedFolder === folder.id){
-      setSelectedFolder('root');
+    if(mediasStore.selectedFolderId === folder.id){
+      mediasStore.setSelectedFolderId('root');
     }
     removeFolder({variables:{id:folder.id}})
     if(!parentFolder){
-      remove(folder, folders)
+      //remove(folder, folders)
     }
     else{
-      remove(folder, parentFolder.children)
+      //remove(folder, parentFolder.children)
     }
   }
 
   const handleMoveToFolderTo = (folder:FolderNode, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
     const parentFolder = folder.parent;
     fromGrid ? setFolderLoading(targetFolder ? targetFolder.id : true) : setFolderLoading(true)
-    if(selectedFolder === folder.id){
-      setSelectedFolder('root');
-    }
+    //if(selectedFolder === folder.id){
+    //  setSelectedFolder('root');
+    //}
 
     updateFolder({variables:{folder:{id:folder.id, name:folder.name, parentId:targetFolder?.id}}});
     if(parentFolder){
         remove(folder, parentFolder.children)
     }
     else{
-      remove(folder, folders)
+      //remove(folder, folders)
     }
     folder.parent = undefined;
     if(targetFolder){
@@ -251,18 +243,18 @@ export const  MediasContent = observer((
       folder.parent = targetFolder;
     }
     else{
-      folders.push(folder)
+     // folders.push(folder)
     }
   }
 
   const handelMoveMediaTo = (media:IRxMedia, targetFolder:FolderNode|undefined, fromGrid?:boolean)=>{
-    if(targetFolder?.id === selectedFolder || (!targetFolder && selectedFolder==='root')){
-      return
-    }
-    fromGrid ? setFolderLoading(targetFolder ? targetFolder.id : true) : setFolderLoading(true);
-    updateMedia({variables:{media:{id:media.id, title:media.title, folderId:targetFolder?.id}}});
-    remove(media, medias);
-    setMedias([...medias]);
+    //if(targetFolder?.id === selectedFolder || (!targetFolder && selectedFolder==='root')){
+    //  return
+    //}
+    //fromGrid ? setFolderLoading(targetFolder ? targetFolder.id : true) : setFolderLoading(true);
+    //updateMedia({variables:{media:{id:media.id, title:media.title, folderId:targetFolder?.id}}});
+    //remove(media, medias);
+    //setMedias([...medias]);
   }
 
   const handeRemoveMedia = (media:IRxMedia)=>{
@@ -311,9 +303,8 @@ export const  MediasContent = observer((
           </div>
           <Divider></Divider>
           <MediasBreadCrumbs 
-            selectedFolder = {selectedFolder}
-            selectedFolderNode = {selectedFolderNode}
-            onSelect={setSelectedFolder}
+            selectedFolder = {mediasStore.selectedFolderId}
+            selectedFolderNode = {mediasStore.selectedFolderNode}
           />
           {batchActionLoading && <LinearProgress />}
           <div className ={classes.mediasGrid}>
@@ -322,14 +313,14 @@ export const  MediasContent = observer((
                 folderLoading = {folderLoading}
                 draggedFolder = {draggedFolder}
                 draggedMedia = {draggedMedia}
-                folder = {selectedFolderNode}
-                folders = {selectedFolderNode? selectedFolderNode.children : folders}
+                //folder = {selectedFolderNode}
+                //folders = {selectedFolderNode? selectedFolderNode.children : folders}
                 medias = {medias}
                 selectedMedias = {selectedMedias}
                 onScrollToEnd = {handleScrollToEnd}
-                onSelect = {(folder)=>{
-                  setSelectedFolder(folder);
-                }}
+                //onSelect = {(folder)=>{
+                //  setSelectedFolder(folder);
+                //}}
                 onFolderNameChange = {(name, folder)=>handleFolderNameChange(name, folder, true)}
                 onRemoveFolder = {(folder)=>handleRemoveFolder(folder, true)}
                 onMoveFolderTo = {(folder, targetFolder)=>handleMoveToFolderTo(folder, targetFolder, true)}
@@ -360,21 +351,7 @@ export const  MediasContent = observer((
               {
                 (folderLoading === true) && <MediaFilderLoadingSkeleton />
               }
-              <MediaFolders
-                draggedFolder = {draggedFolder} 
-                draggedMedia = {draggedMedia}
-                folders = {folders} 
-                selectedFolder={selectedFolder}
-                onSelect = {(folder)=>{
-                  setSelectedFolder(folder);
-                }}
-                onAddFolder = {handleAddFolder}
-                onFolderNameChange = {handleFolderNameChange}
-                onRemoveFolder = {handleRemoveFolder}
-                onMoveFolderTo = {handleMoveToFolderTo}
-                onMoveMediaTo = {handelMoveMediaTo}
-                onDragFolder = {setDraggedFolder}
-              />
+              <MediaFolders/>
             </div>
         </Hidden>
       </div>

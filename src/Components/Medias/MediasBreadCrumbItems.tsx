@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles, Breadcrumbs, Link, Typography } from '
 import intl from 'react-intl-universal';
 import classNames from 'classnames';
 import { FolderNode } from './MediaFolder';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,10 +29,14 @@ function makeupLinkCrumbs(folder?:FolderNode, allCrumbs?:Array<FolderNode>){
   return allCrumbs
 }
 
-export default function MediasBreadCrumbItems(props:{folder?:FolderNode, onSelect:(node:string)=>void}){
-  const {folder, onSelect} = props;
+export const MediasBreadCrumbItems = observer((props:{folder?:FolderNode})=>{
+  const {folder} = props;
   const classes = useStyles();
   const linkCrumbs = makeupLinkCrumbs(folder);
+  const handleSelect = (id:string)=>{
+
+  }
+
   return (
     <Breadcrumbs aria-label="breadcrumb" 
     className={classNames(classes.breadcrumb, classes.breadcumbText) }
@@ -39,7 +44,7 @@ export default function MediasBreadCrumbItems(props:{folder?:FolderNode, onSelec
     {
       folder?
       <Link color="inherit" className={classes.crumbLink}
-        onClick={()=>{onSelect('root')}}
+        onClick={()=>{handleSelect('root')}}
       >
       {intl.get('root-dir')}
       </Link>
@@ -55,7 +60,7 @@ export default function MediasBreadCrumbItems(props:{folder?:FolderNode, onSelec
             color="inherit" 
             className={classes.crumbLink}
             key={crumb.id}
-            onClick={()=>{onSelect(crumb.id)}}
+            onClick={()=>{handleSelect(crumb.id)}}
           >{crumb.name}</Link>
         )
       })
@@ -68,4 +73,4 @@ export default function MediasBreadCrumbItems(props:{folder?:FolderNode, onSelec
     
   </Breadcrumbs>
   )
-}
+})
