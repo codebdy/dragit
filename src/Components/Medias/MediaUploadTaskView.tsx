@@ -10,8 +10,8 @@ import { useEffect } from 'react';
 import { gql, useMutation } from '@apollo/react-hooks';
 
 const UPLOAD_MEDIA = gql`
-  mutation uploadRxMedia($file: Upload!){
-    uploadRxMedia(file:$file){
+  mutation uploadRxMedia($file: Upload!, $rx_media_folder_id:ID){
+    uploadRxMedia(file:$file, rx_media_folder_id :$rx_media_folder_id){
       id
       name
       thumbnail
@@ -51,26 +51,33 @@ export const MediaUploadTaskView = observer((
     mediasStore.removeTask(task);
   }
 
-  const [uploadMutation,{error, loading}] = useMutation(UPLOAD_MEDIA,
+  const [uploadMutation,{error}] = useMutation(UPLOAD_MEDIA,
     {
-      errorPolicy:'all'
+      errorPolicy:'all',
+      onCompleted(data){
+        task.setUploading(false);
+        mediasStore.unshiftMedia(data?.uploadRxMedia);
+        mediasStore.removeTask(task);
+      }
     });
   
   useEffect(()=>{
-    task.setUploading(loading);
     task.setErrorMessage(error?.message);
-  },[error, loading, task])
+  },[error, task])
 
   useEffect(()=>{
     if(!task.errorMessage && !task.uploading && task.file){
+      task.setUploading(true);
       uploadMutation(
         {
           variables:{
-            file:task.file
+            file:task.file,
+            rx_media_folder_id: mediasStore.selectedFolderId || null
           }
         }
       )
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[task, uploadMutation])
 
   return (
@@ -80,7 +87,7 @@ export const MediaUploadTaskView = observer((
         task.uploading && <LinearProgress />
       }
       {
-        task.errorMessage && <div className={classes.error}>{task.errorMessage}</div>
+        task.errorMessage && !task.errorMessage && <div className={classes.error}>{task.errorMessage}</div>
       }
       {
         task.errorMessage &&

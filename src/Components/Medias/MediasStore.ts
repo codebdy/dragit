@@ -61,6 +61,12 @@ export class MediasStore{
   removeTask(task:MediaUploadTask){
     this.tasks?.splice(this.tasks.indexOf(task), 1);
   }
+
+  unshiftMedia(media?:IRxMedia|null){
+    if(media){
+      this.medias.unshift(media);
+    }
+  }
 }
 
 export const MediasStoreContext = createContext<MediasStore>({} as MediasStore);
