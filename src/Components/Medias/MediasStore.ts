@@ -59,6 +59,10 @@ export class MediasStore{
 
     console.log(this.tasks)
   }
+
+  removeTask(task:MediaUploadTask){
+    this.tasks?.splice(this.tasks.indexOf(task), 1);
+  }
 }
 
 export const MediasStoreContext = createContext<MediasStore>({} as MediasStore);
