@@ -4,6 +4,7 @@ import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
 import intl from 'react-intl-universal';
 import SearchIcon from '@material-ui/icons/Search';
+import { useMediasStore } from './MediasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,8 +52,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MediasToolbar(){
   const classes = useStyles();
   const toolIconSize = 21;
+  const mediasStore = useMediasStore();
   const handleUpload = (event:React.ChangeEvent<HTMLInputElement>)=>{
-
+    mediasStore.addUploadFiles(event.target.files);
   }
   return (
     <Fragment>

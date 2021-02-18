@@ -31,7 +31,7 @@ export const MediasBreadCrumbs = observer(()=>{
           disabled = {selectedFolderId === 0}
           onClick={
             ()=>{
-              mediasStore.setSelectedFolderId(selectedFolderNode?.parent? selectedFolderNode.parent.id : 0)
+              mediasStore.selectFolder(selectedFolderNode?.parent? selectedFolderNode.parent.id : 0)
             }
           }
         >

@@ -4,6 +4,7 @@ import { createContext, useContext } from "react";
 import { ID } from "rx-drag/models/baseTypes";
 import { FolderNode } from "./FolderNode";
 import { getByIdFromTree } from "./FolderNode/getByIdFromTree";
+import { MediaUploadTask } from "./MediaUploadTask";
 
 export class MediasStore{
   draggedFolder?:FolderNode;
@@ -13,6 +14,8 @@ export class MediasStore{
   gridLoading:boolean = false;
   medias:Array<IRxMedia> = [];
   selectedMedias:Array<IRxMedia> = [];
+
+  tasks:Array<MediaUploadTask> = [];
 
 
   constructor() {
@@ -27,8 +30,11 @@ export class MediasStore{
     this.folders.push(folder);
   }
 
-  setSelectedFolderId(folderId:ID){
+  selectFolder(folderId:ID){
     this.selectedFolderId = folderId;
+    if(folderId !== this.selectedFolderId){
+      this.tasks = [];
+    }
   }
   
   get selectedFolderNode(){
@@ -41,6 +47,17 @@ export class MediasStore{
 
   setDraggedFolder(folder?:FolderNode){
     this.draggedFolder = folder;
+  }
+
+  addUploadFiles(files:FileList|null){
+    if(!files){
+      return;
+    }
+    for(var i = 0; i < files.length; i++ ){
+      this.tasks.push(new MediaUploadTask(files[i]));
+    }
+
+    console.log(this.tasks)
   }
 }
 

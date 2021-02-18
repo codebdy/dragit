@@ -10,6 +10,8 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
 import { useQuery } from '@apollo/react-hooks';
+import { MediaUploadTaskView } from './MediaUploadTaskView';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -101,6 +103,16 @@ export const MediaGridList = observer(()=>{
             <MediaGridListFolder folder = {folder} />
           </Grid>
         ))}
+
+        {
+          mediasStore?.tasks.map((task, index)=>{
+          return (
+            <Grid item key={'task' + index + '-' + task.file.name} lg={2} sm={3} xs={4}>
+              <MediaUploadTaskView task = {task} />
+            </Grid>
+            )
+          })
+        }
      
         {medias?.map((media:IRxMedia, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.title} lg={2} sm={3} xs={4}>

@@ -178,7 +178,7 @@ export const MediaFolder = observer((
           onDragEnd = {handleDragEnd}
           onDrop = {handleDrop}    
           onClick = {()=>{
-              !node.editing && mediaStore.setSelectedFolderId(node.id);
+              !node.editing && mediaStore.selectFolder(node.id);
             }            
           }     
         >

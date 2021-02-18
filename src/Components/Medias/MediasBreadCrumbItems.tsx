@@ -37,7 +37,7 @@ export const MediasBreadCrumbItems = observer(()=>{
   const folder = mediasStore.selectedFolderNode;
   const linkCrumbs = makeupLinkCrumbs(folder);
   const handleSelect = (id:ID)=>{
-    mediasStore?.setSelectedFolderId(id);
+    mediasStore?.selectFolder(id);
   }
 
   return (

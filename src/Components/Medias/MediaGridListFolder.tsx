@@ -109,7 +109,7 @@ export const MediaGridListFolder = observer((
   }
 
   const handleSelect = ()=>{
-    mediasStore?.setSelectedFolderId(folder.id);
+    mediasStore?.selectFolder(folder.id);
   }
 
   const handleRemove = ()=>{
