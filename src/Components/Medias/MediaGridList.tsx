@@ -92,13 +92,15 @@ export const MediaGridList = observer(()=>{
     //e.defaultPrevented();
   }
 
-  const handleDragOver = (event:React.MouseEvent<HTMLElement>)=>{
+  const handleDragOver = (event:React.DragEvent<HTMLElement>)=>{
     event.preventDefault();
     event.stopPropagation();
   }
 
-  const handleDrop = (event:React.MouseEvent<HTMLElement>)=>{
-    console.log('MediaGridList handleDrop', event.target);
+  const handleDrop = (event:React.DragEvent<HTMLElement>)=>{
+    if(event.dataTransfer.files){
+      mediasStore.addUploadFiles(event.dataTransfer.files);
+    }
     event.preventDefault();
     event.stopPropagation();
   }
@@ -107,14 +109,14 @@ export const MediaGridList = observer(()=>{
     <Scrollbar permanent 
       className={classes.scrollBar} 
       onScroll = {handleScroll}
+      onDragOver = {handleDragOver}
+      onDrop = {handleDrop}
     >
       <Grid 
         container 
         className={classes.root} 
         spacing={2} 
         ref={ref}
-        onDragOver = {handleDragOver}
-        onDrop = {handleDrop}
       >
         {folders?.map((folder:any, index) => (
           <Grid item key={folder.id + '-folder-' + folder.name} lg={2} sm={3} xs={4}>

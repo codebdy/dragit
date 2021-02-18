@@ -42,6 +42,8 @@ interface ScrollbarProps{
   children?: any,
   permanent?:boolean,
   onScroll?: (scrollRef: React.RefObject<HTMLDivElement>)=>void,
+  onDragOver?:(event:React.DragEvent<HTMLElement>)=>void,
+  onDrop?:(event:React.DragEvent<HTMLElement>)=>void,
   style?:any,
 }
 export default function Scrollbar(props:ScrollbarProps = {}) {
@@ -52,6 +54,8 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
     className,
     children,
     onScroll = (scrollRef:React.RefObject<HTMLDivElement>)=>{},
+    onDragOver,
+    onDrop,
     style
   } = props
   const classes = useStyles();
@@ -80,6 +84,9 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
         e.preventDefault();
         onScroll(ref);
       }}
+
+      onDragOver = {onDragOver}
+      onDrop = {onDrop}
 
       {...style}
     >
