@@ -12,4 +12,13 @@ export class MediaUploadTask{
   get thumbnailUrl(){
     return URL.createObjectURL(this.file);
   }
+
+  setUploading(uploading:boolean){
+    this.uploading = uploading;
+  }
+
+  setErrorMessage(errorMessage?:string){
+    this.errorMessage = errorMessage;
+  }
 }
+

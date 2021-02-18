@@ -56,8 +56,6 @@ export class MediasStore{
     for(var i = 0; i < files.length; i++ ){
       this.tasks.push(new MediaUploadTask(files[i]));
     }
-
-    console.log(this.tasks)
   }
 
   removeTask(task:MediaUploadTask){

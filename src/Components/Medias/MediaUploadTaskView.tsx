@@ -6,7 +6,20 @@ import Image from 'Components/common/Image';
 import { IconButton, LinearProgress } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useMediasStore } from './MediasStore';
+import { useEffect } from 'react';
+import { gql, useMutation } from '@apollo/react-hooks';
 
+const UPLOAD_MEDIA = gql`
+  mutation uploadRxMedia($file: Upload!){
+    uploadRxMedia(file:$file){
+      id
+      name
+      thumbnail
+      src      
+    }
+
+  }
+`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +50,28 @@ export const MediaUploadTaskView = observer((
   const handleRemoveTask = ()=>{
     mediasStore.removeTask(task);
   }
+
+  const [uploadMutation,{error, loading}] = useMutation(UPLOAD_MEDIA,
+    {
+      errorPolicy:'all'
+    });
+  
+  useEffect(()=>{
+    task.setUploading(loading);
+    task.setErrorMessage(error?.message);
+  },[error, loading, task])
+
+  useEffect(()=>{
+    if(!task.errorMessage && !task.uploading && task.file){
+      uploadMutation(
+        {
+          variables:{
+            file:task.file
+          }
+        }
+      )
+    }
+  },[task, uploadMutation])
 
   return (
     <div className = {classes.root}>

@@ -1,7 +1,7 @@
 import { ApolloClient } from '@apollo/client';
 import { InMemoryCache } from '@apollo/client/cache';
-import { createHttpLink } from '@apollo/react-hooks';
 import { setContext } from '@apollo/client/link/context';
+import {createUploadLink} from "apollo-upload-client";
 
 const cache = new InMemoryCache(
   {
@@ -19,7 +19,7 @@ const cache = new InMemoryCache(
   }
 );
 
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
   uri: 'http://127.0.0.1:8000/graphql',
   credentials: 'include'
 });
