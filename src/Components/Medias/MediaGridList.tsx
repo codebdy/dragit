@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
-import { MediaGridListFolder } from './MediaGridListFolder';
 import { MediaGridListImage } from './MediaGridListImage';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 import { QUERY_MEDIAS } from './MediasGQLs';
@@ -10,7 +9,8 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
 import { useQuery } from '@apollo/react-hooks';
-import { MediaUploadTaskView } from './MediaUploadTaskView';
+import { MediaGridListFolders } from './MediaGridListFolders';
+import { MediaGridListTasks } from './MediaGridListTasks';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,13 +50,13 @@ export const MediaGridList = observer(()=>{
   const [page, setPage] = React.useState(0);
   const [hasMore, setHasMore] = React.useState(true);
   const mediasStore = useMediasStore();
-  const selectedNode = mediasStore?.selectedFolderNode
-  const folders = selectedNode ? selectedNode.children : mediasStore?.folders;
   
   const {loading, error:queryError, data:mediaData, refetch} = useQuery(QUERY_MEDIAS, {
     variables: { first:20, page:page + 1},
     notifyOnNetworkStatusChange: true
   });
+
+  console.log('MediaGridList', mediaData);
 
   useShowAppoloError(queryError);
 
@@ -118,21 +118,8 @@ export const MediaGridList = observer(()=>{
         spacing={2} 
         ref={ref}
       >
-        {folders?.map((folder:any, index) => (
-          <Grid item key={folder.id + '-folder-' + folder.name} lg={2} sm={3} xs={4}>
-            <MediaGridListFolder folder = {folder} />
-          </Grid>
-        ))}
-
-        {
-          mediasStore?.tasks.map((task, index)=>{
-          return (
-            <Grid item key={'task' + index + '-' + task.file.name} lg={2} sm={3} xs={4}>
-              <MediaUploadTaskView task = {task} />
-            </Grid>
-            )
-          })
-        }
+        <MediaGridListFolders />
+        <MediaGridListTasks />
      
         {medias?.map((media:IRxMedia, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.title} lg={2} sm={3} xs={4}>
