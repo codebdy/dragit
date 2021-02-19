@@ -6,6 +6,10 @@ import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
 import { useMediasStore } from './MediasStore';
 import {observer} from 'mobx-react';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
+import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,19 +41,28 @@ export const MediasBatchActions = observer(()=>{
   const mediasStore = useMediasStore();
   const classes = useStyles();
   const toolIconSize = 21;
+  const [removeMedias, {error}] = useMutation(MUTATION_REMOVE_MEDIAS,{
+    errorPolicy:'all',
+    onCompleted:(data)=>{
+      mediasStore.selectedMediaStores.forEach(media=>media.setLoading(false));
+      mediasStore?.removeMedias(data?.removeRxMedias?.map((media:IRxMedia)=>media.id));
+    }});
+
+  useShowAppoloError(error);
 
   const handleClearSelected = ()=>{
-
+    mediasStore?.clearSelected();
   }
 
   const handelRemoveSelected = ()=>{
-
+    mediasStore.selectedMediaStores.forEach(media=>media.setLoading(true));
+    removeMedias({variables:{id:mediasStore.selectedMedias.map(media=>media.id)}});
   }
 
   return (
     <div className={classNames(classes.root, classes.shell)}>
       <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-         {intl.get('records-selected')} {mediasStore?.selectedMeidas.length}
+         {intl.get('records-selected')} {mediasStore?.selectedMedias.length}
       </Typography>
       <Spacer />
       <Tooltip title={intl.get('clear-selected')} arrow placement="top">
@@ -67,7 +80,7 @@ export const MediasBatchActions = observer(()=>{
         </IconButton>
       </Tooltip>
       {
-        mediasStore?.selectedMeidas.length === 1 &&
+        mediasStore?.selectedMedias.length === 1 &&
         <Tooltip title={intl.get('replace')} arrow placement="top">
           <IconButton aria-label={intl.get('replace')} component="span">
             <MdiIcon iconClass="mdi-file-replace-outline" size={toolIconSize} />

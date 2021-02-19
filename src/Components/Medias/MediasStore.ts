@@ -2,6 +2,7 @@ import { IRxMedia } from "Base/Model/IRxMedia";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { ID } from "rx-drag/models/baseTypes";
+import { contains } from "rx-drag/utils/ArrayHelper";
 import { FolderNode } from "./FolderNode";
 import { getByIdFromTree } from "./FolderNode/getByIdFromTree";
 import { MediaStore } from "./MediaStore";
@@ -96,8 +97,25 @@ export class MediasStore{
     }
   }
 
-  get selectedMeidas(){
+  clearSelected(){
+    this.medias.forEach((mediaStore)=>{
+      mediaStore.setSelected(false);
+    })
+  }
+
+  removeMedias(ids:Array<ID>){
+    if(ids){
+      this.medias = this.medias.filter(media=>!contains(media.id, ids));
+    }
+    
+  }
+
+  get selectedMedias(){
     return this.medias.filter(media=>media.selected).map(media=>media.rxMedia);
+  }
+
+  get selectedMediaStores(){
+    return this.medias.filter(media=>media.selected);
   }
 }
 

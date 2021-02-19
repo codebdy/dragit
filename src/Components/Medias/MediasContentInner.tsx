@@ -238,7 +238,7 @@ export const  MediasContentInner = observer((
         <div className = {classes.left}>
           <div className ={classes.toolbar}>
             {
-              mediasStore.selectedMeidas.length > 0 ?
+              mediasStore.selectedMedias.length > 0 ?
               <MediasBatchActions 
                 //selectedMedias = {selectedMedias}
                 //onClearSelected = {()=>setSelectedMedias([])}

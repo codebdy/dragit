@@ -5,6 +5,7 @@ export class MediaStore implements IRxMedia{
   private _rxMedia: IRxMedia;
 
   selected:boolean = false;
+  loading:boolean = false;
 
   constructor(rxMedia:IRxMedia) {
     this._rxMedia = rxMedia;
@@ -40,5 +41,9 @@ export class MediaStore implements IRxMedia{
 
   get rxMedia(){
     return this._rxMedia;
+  }
+
+  setLoading(loading:boolean){
+    this.loading = loading;
   }
 }

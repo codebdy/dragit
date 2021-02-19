@@ -50,10 +50,10 @@ export const MUTATION_REMOVE_FOLDER = gql`
 `;
 
 export const MUTATION_UPDATE_MEDIA = gql`
-  mutation ($media:MediaInput!){
-    updateRxMedia(media:$media){
+  mutation ($rxMedia:RxMediaInput!){
+    updateRxMedia(rxMedia:$rxMedia){
       id
-      parent_id
+      name
     }
   }
 `;

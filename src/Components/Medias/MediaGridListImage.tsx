@@ -77,8 +77,8 @@ export const MediaGridListImage = observer((
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [mediaTitle, setMediaTitle] = useState(media.name);
-  const [loading, setLoading] = useState(false);
+  const [mediaName, setMediaName] = useState(media.name);
+  //const [loading, setLoading] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
   //const selected = contains(media, selectedMedias);
   const mediasStore = useMediasStore();
@@ -86,40 +86,40 @@ export const MediaGridListImage = observer((
   const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
     errorPolicy:'all',
     onCompleted:(data)=>{
-      setLoading(false);
+      media.setLoading(false);
+      media.name = mediaName;
     }});
 
   const [removeMedias, {error:removeMediasError}] = useMutation(MUTATION_REMOVE_MEDIAS,{
     errorPolicy:'all',
     onCompleted:(data)=>{
-      setLoading(false);
-      //onRemoveMedia(media);
+      media.setLoading(false);
+      mediasStore.removeMedias([media.id]);
     }});
 
   useShowAppoloError(updateMediaError||removeMediasError);
     
-  const changeImageTitleOnServer = ()=>{
-    if(mediaTitle === media.name){
+  const changeImageNameOnServer = ()=>{
+    if(mediaName === media.name){
       return
     }
-    setLoading(true)
-    //updateMedia({variables:{media:{id:media.id, title:mediaTitle, folderId:folder?.id}}})
-    //media.name = mediaTitle
+    media.setLoading(true)
+    updateMedia({variables:{rxMedia:{id:media.id, name:mediaName}}})
   }
 
   const removeMedia = ()=>{
-    setLoading(true)
+    media.setLoading(true)
     removeMedias({variables:{id:[media.id]}})
   }
 
   const handleEndEditing = ()=>{
     setEditing(false);
-    changeImageTitleOnServer();
+    changeImageNameOnServer();
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = (event.target as HTMLInputElement).value;
-    setMediaTitle(value);
+    setMediaName(value);
   };
 
   const handleView = ()=>{
@@ -166,12 +166,12 @@ export const MediaGridListImage = observer((
         }        
       </div>        
       {
-        loading && <LinearProgress />
+        media.loading && <LinearProgress />
       }
       {
         editing?
         <input 
-          value={mediaTitle} 
+          value={mediaName} 
           autoFocus= {true} 
           className={classes.titleInput}
           onBlur = {handleEndEditing}
@@ -183,7 +183,7 @@ export const MediaGridListImage = observer((
           onChange = {handleChange}
         />
         :
-        <MediaGridListItemTitle title={mediaTitle} />
+        <MediaGridListItemTitle title={mediaName} />
       }
 
       {

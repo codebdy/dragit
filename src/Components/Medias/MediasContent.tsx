@@ -13,11 +13,9 @@ export const  MediasContent = observer((
   const {single, onSelectedChange} = props;
   const [mediasStore] = useState(new MediasStore(single));
 
-  console.log('MediasContent', mediasStore);
-
   useEffect(()=>{
-    onSelectedChange&&onSelectedChange(mediasStore.selectedMeidas);
-  },[mediasStore.selectedMeidas, onSelectedChange])
+    onSelectedChange&&onSelectedChange(mediasStore.selectedMedias);
+  },[mediasStore.selectedMedias, onSelectedChange])
 
   return (
     <MediasStoreProvider value = {mediasStore}>
