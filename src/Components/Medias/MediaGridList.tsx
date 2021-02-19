@@ -11,6 +11,7 @@ import { useMediasStore } from './MediasStore';
 import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
+import { MediaStore } from './MediaStore';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -122,7 +123,7 @@ export const MediaGridList = observer(()=>{
         <MediaGridListFolders />
         <MediaGridListTasks />
      
-        {mediasStore?.medias?.map((media:IRxMedia, index) => (
+        {mediasStore?.medias?.map((media:MediaStore, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.name} lg={2} sm={3} xs={4}>
             <MediaGridListImage media = {media}/>
           </Grid>

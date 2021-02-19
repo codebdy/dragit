@@ -59,9 +59,9 @@ export const MUTATION_UPDATE_MEDIA = gql`
 `;
 
 export const MUTATION_REMOVE_MEDIAS = gql`
-  mutation ($ids:[ID]){
-    removeRxMedias(ids:$ids){
-      ids
+  mutation ($id:[ID!]!){
+    removeRxMedias(id:$id){
+      id
     }
   }
 `;

@@ -6,7 +6,7 @@ import { FolderNode } from "./FolderNode";
 import MediasToolbar from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
-import MediasBatchActions from "./MediasBatchActions";
+import { MediasBatchActions } from "./MediasBatchActions";
 import { IRxMedia } from "Base/Model/IRxMedia";
 import {  MUTATION_UPDATE_FOLDER, QUERY_FOLDERS } from "./MediasGQLs";
 import { useShowAppoloError } from "Store/Helpers/useInfoError";
@@ -71,11 +71,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const  MediasContentInner = observer((
   props:{
-    single?:boolean,
     onSelectedChange?:(medias:Array<IRxMedia>)=>void
   }
 )=>{
-  const {single, onSelectedChange} = props;
+  const {onSelectedChange} = props;
   const classes = useStyles();
   const mediasStore = useMediasStore();
   //const [folderLoading, setFolderLoading] = React.useState<boolean|ID>(false);
@@ -85,7 +84,7 @@ export const  MediasContentInner = observer((
   //const [selectedFolder, setSelectedFolder] = React.useState('root');
   //const [gridLoading, setGridLoading] = React.useState(false);
 
-  const [selectedMedias, setSelectedMedias] = React.useState<Array<IRxMedia>>([]);
+  //const [selectedMedias, setSelectedMedias] = React.useState<Array<IRxMedia>>([]);
 
   const [batchActionLoading, setBatchActionLoading] = React.useState(false);
 
@@ -142,10 +141,10 @@ export const  MediasContentInner = observer((
 
 
   
-  useEffect(() => {
-    onSelectedChange && onSelectedChange([...selectedMedias]);
+  //useEffect(() => {
+  //  onSelectedChange && onSelectedChange([...selectedMedias]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selectedMedias]);
+  //},[selectedMedias]);
 
 
   const handleAddNewFolder = ()=>{
@@ -239,11 +238,11 @@ export const  MediasContentInner = observer((
         <div className = {classes.left}>
           <div className ={classes.toolbar}>
             {
-              selectedMedias.length > 0 ?
+              mediasStore.selectedMeidas.length > 0 ?
               <MediasBatchActions 
-                selectedMedias = {selectedMedias}
-                onClearSelected = {()=>setSelectedMedias([])}
-                onRemoveSelected = {handleRemoveSelected}
+                //selectedMedias = {selectedMedias}
+                //onClearSelected = {()=>setSelectedMedias([])}
+                //onRemoveSelected = {handleRemoveSelected}
               />
               :
               <MediasToolbar />

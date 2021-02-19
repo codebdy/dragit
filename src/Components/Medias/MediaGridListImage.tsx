@@ -3,16 +3,15 @@ import { makeStyles, Theme, createStyles, LinearProgress, Dialog, DialogActions,
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import MediaGridListIconButton from './MediaGridListIconButton';
 import classNames from 'classnames';
-import { IRxMedia } from 'Base/Model/IRxMedia';
 import Close from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
-import { FolderNode } from "./FolderNode";
 import MdiIcon from 'Components/common/MdiIcon';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { contains } from 'rx-drag/utils/ArrayHelper';
 import Image from 'Components/common/Image';
 import {observer} from 'mobx-react';
+import { MediaStore } from './MediaStore';
+import { useMediasStore } from './MediasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const MediaGridListImage = observer((
-  props:{media:IRxMedia}
+  props:{media:MediaStore}
 )=>{
   const {media} = props;
   const classes = useStyles();
@@ -82,13 +81,16 @@ export const MediaGridListImage = observer((
   const [loading, setLoading] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
   //const selected = contains(media, selectedMedias);
+  const mediasStore = useMediasStore();
 
   const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
+    errorPolicy:'all',
     onCompleted:(data)=>{
       setLoading(false);
     }});
 
   const [removeMedias, {error:removeMediasError}] = useMutation(MUTATION_REMOVE_MEDIAS,{
+    errorPolicy:'all',
     onCompleted:(data)=>{
       setLoading(false);
       //onRemoveMedia(media);
@@ -102,12 +104,12 @@ export const MediaGridListImage = observer((
     }
     setLoading(true)
     //updateMedia({variables:{media:{id:media.id, title:mediaTitle, folderId:folder?.id}}})
-    media.name = mediaTitle
+    //media.name = mediaTitle
   }
 
   const removeMedia = ()=>{
     setLoading(true)
-    removeMedias({variables:{ids:[media.id]}})
+    removeMedias({variables:{id:[media.id]}})
   }
 
   const handleEndEditing = ()=>{
@@ -124,7 +126,9 @@ export const MediaGridListImage = observer((
     setViewOpen(true);
   }
 
-  const selected = false;
+  const handleToggleSelect = ()=>{
+    mediasStore.toggleSelected(media);
+  }
 
   return (
     <Fragment>
@@ -137,11 +141,11 @@ export const MediaGridListImage = observer((
           //onDragStart(media);
         }}
         //onDragEnd = {onDragEnd}
-        //onClick = {()=>onToggleSelect(media)}
+        onClick = {handleToggleSelect}
       >
         <Image 
           src={media.thumbnail}
-          className = { selected? classes.checked : classes.notChecked } 
+          className = { media.selected? classes.checked : classes.notChecked } 
         />
         {
           hover&&
@@ -155,7 +159,7 @@ export const MediaGridListImage = observer((
           </div>
         }
         {
-          selected &&
+          media.selected &&
           <div className={classes.checkbox}>
             <MdiIcon iconClass="mdi-check" size="18" color="#5d78ff" />
           </div>

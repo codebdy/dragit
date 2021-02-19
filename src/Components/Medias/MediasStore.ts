@@ -14,13 +14,13 @@ export class MediasStore{
   selectedFolderId:ID = 0;
   gridLoading:boolean = false;
   medias:Array<MediaStore> = [];
-  selectedMedias:Array<MediaStore> = [];
-
   tasks:Array<MediaUploadTask> = [];
   hasMorePages:boolean = true;
   currentPage:number = 0;
+  singleSelective?:boolean = false;
 
-  constructor() {
+  constructor(single?:boolean) {
+    this.singleSelective = single;
     makeAutoObservable(this)
   }
 
@@ -37,6 +37,7 @@ export class MediasStore{
     if(folderId !== this.selectedFolderId){
       this.tasks = [];
     }
+    this.hasMorePages = true;
   }
   
   get selectedFolderNode(){
@@ -82,6 +83,21 @@ export class MediasStore{
 
   setHasMorePages(hasMorePages:boolean){
     this.hasMorePages = hasMorePages;
+  }
+
+  toggleSelected(media:MediaStore){
+    media.setSelected(!media.selected);
+    if(this.singleSelective){
+      this.medias.forEach((mediaStore)=>{
+        if(mediaStore.id !== media.id){
+          mediaStore.setSelected(false);
+        }
+      })
+    }
+  }
+
+  get selectedMeidas(){
+    return this.medias.filter(media=>media.selected).map(media=>media.rxMedia);
   }
 }
 

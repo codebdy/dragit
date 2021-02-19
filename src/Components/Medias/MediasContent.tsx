@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IRxMedia } from "Base/Model/IRxMedia";
 import { MediasStore, MediasStoreProvider } from "./MediasStore";
 import {observer} from 'mobx-react';
@@ -11,12 +11,17 @@ export const  MediasContent = observer((
   }
 )=>{
   const {single, onSelectedChange} = props;
-  const [mediasStore] = useState(new MediasStore());
+  const [mediasStore] = useState(new MediasStore(single));
 
- 
+  console.log('MediasContent', mediasStore);
+
+  useEffect(()=>{
+    onSelectedChange&&onSelectedChange(mediasStore.selectedMeidas);
+  },[mediasStore.selectedMeidas, onSelectedChange])
+
   return (
     <MediasStoreProvider value = {mediasStore}>
-      <MediasContentInner single = {single} onSelectedChange = {onSelectedChange} />
+      <MediasContentInner onSelectedChange = {onSelectedChange} />
     </MediasStoreProvider>
   )
 })

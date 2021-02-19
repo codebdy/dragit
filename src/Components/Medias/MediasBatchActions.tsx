@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import intl from "react-intl-universal";
 import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
-import { IRxMedia } from 'Base/Model/IRxMedia';
+import { useMediasStore } from './MediasStore';
+import {observer} from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,39 +32,42 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediasBatchActions(
-  props:{
-    selectedMedias:Array<IRxMedia>,
-    onClearSelected:()=>void,
-    onRemoveSelected:()=>void,
-  }
-){
-  const {selectedMedias, onClearSelected, onRemoveSelected} = props;
+export const MediasBatchActions = observer(()=>{
+  //const {selectedMedias, onClearSelected, onRemoveSelected} = props;
+  const mediasStore = useMediasStore();
   const classes = useStyles();
   const toolIconSize = 21;
+
+  const handleClearSelected = ()=>{
+
+  }
+
+  const handelRemoveSelected = ()=>{
+
+  }
 
   return (
     <div className={classNames(classes.root, classes.shell)}>
       <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-        {selectedMedias.length} {intl.get('records-selected')}
+         {intl.get('records-selected')} {mediasStore?.selectedMeidas.length}
       </Typography>
       <Spacer />
       <Tooltip title={intl.get('clear-selected')} arrow placement="top">
         <IconButton aria-label={intl.get('clear-selected')} component="span"
-          onClick = {onClearSelected}
+          onClick = {handleClearSelected}
         >
           <MdiIcon iconClass="mdi-broom" size={toolIconSize} />
         </IconButton>
       </Tooltip>
       <Tooltip title={intl.get('delete')} arrow placement="top">
         <IconButton aria-label={intl.get('delete')} component="span"
-          onClick = {onRemoveSelected}
+          onClick = {handelRemoveSelected}
         >
           <MdiIcon iconClass="mdi-delete-sweep-outline" size={toolIconSize} />
         </IconButton>
       </Tooltip>
       {
-        selectedMedias.length === 1 &&
+        mediasStore?.selectedMeidas.length === 1 &&
         <Tooltip title={intl.get('replace')} arrow placement="top">
           <IconButton aria-label={intl.get('replace')} component="span">
             <MdiIcon iconClass="mdi-file-replace-outline" size={toolIconSize} />
@@ -72,4 +76,4 @@ export default function MediasBatchActions(
       }
     </div>
   )
-}
+})
