@@ -49,11 +49,22 @@ export const MediaGridList = observer(()=>{
   const mediasStore = useMediasStore();
   const countPerPage = 20;
   
-  const [exccuteQuery, {loading, error:queryError}] = useLazyQuery(QUERY_MEDIAS, {
-    variables: { first:countPerPage, page:mediasStore.currentPage + 1},
+  const [exccuteQuery, {loading, error:queryError, data}] = useLazyQuery(QUERY_MEDIAS, {
+    variables: { 
+      first:countPerPage, 
+      page:mediasStore.currentPage + 1, 
+      name:'%%',
+      //folder_id:mediasStore.selectedFolderId
+    },
     notifyOnNetworkStatusChange: true,
     errorPolicy:'all',
-    onCompleted(data){
+    //onCompleted(data){
+    //  console.log('MediaGridList onCompleted', data);
+    //}
+  });
+
+  useEffect(()=>{
+    if(data){
       const rxMedias = data?.rxMedias;
       if(rxMedias){
         mediasStore.addMedias(rxMedias?.data, 
@@ -65,20 +76,37 @@ export const MediaGridList = observer(()=>{
         mediasStore.setHasMorePages(false);
       }
     }
-  });
+  }, [data, mediasStore])
 
   useShowAppoloError(queryError);
 
   const doQuery = ()=>{
     if(!loading && mediasStore.hasMorePages){
-      exccuteQuery({variables:{ first:countPerPage, page:mediasStore.currentPage + 1}});
+      console.log('doQuery' ,{
+        variables:{ 
+          first:countPerPage, 
+          page:mediasStore.currentPage + 1,
+          folder_id:mediasStore.selectedFolderId
+        }
+      })
+      exccuteQuery({
+        variables:{ 
+          first:countPerPage, 
+          page:mediasStore.currentPage + 1,
+          name:'%%',
+          //folder_id:mediasStore.selectedFolderId
+        }
+      });
     }
   }
 
+  
+
   useEffect(()=>{
+    console.log('mediasStore?.selectedFolderId', mediasStore?.selectedFolderId, mediasStore?.hasMorePages);
     doQuery();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[mediasStore?.hasMorePages, mediasStore?.selectedFolderId])
 
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;

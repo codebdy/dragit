@@ -19,7 +19,7 @@ export const  MediasContent = observer((
 
   return (
     <MediasStoreProvider value = {mediasStore}>
-      <MediasContentInner onSelectedChange = {onSelectedChange} />
+      <MediasContentInner />
     </MediasStoreProvider>
   )
 })

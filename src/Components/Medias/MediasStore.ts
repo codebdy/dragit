@@ -34,11 +34,13 @@ export class MediasStore{
   }
 
   selectFolder(folderId:ID){
-    this.selectedFolderId = folderId;
     if(folderId !== this.selectedFolderId){
       this.tasks = [];
+      this.medias = [];
+      this.hasMorePages = true;    
+      this.currentPage = 0;
     }
-    this.hasMorePages = true;
+    this.selectedFolderId = folderId;
   }
   
   get selectedFolderNode(){

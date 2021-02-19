@@ -6,8 +6,8 @@ export const QUERY_FOLDERS = gql`
   }
 `;
 export const QUERY_MEDIAS = gql`
-  query ($first:Int!, $page:Int, $name:String){
-    rxMedias(first:$first, page:$page, name:$name, orderBy: [{ column: CREATED_AT, order: ASC }]){
+  query ($first:Int!, $page:Int, $name:String, $rx_media_folder_id:ID){
+    rxMedias(first:$first, page:$page, name:$name, rx_media_folder_id:$rx_media_folder_id, orderBy: [{ column: CREATED_AT, order: ASC }]){
       data{
         id
         thumbnail

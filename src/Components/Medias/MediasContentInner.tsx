@@ -69,14 +69,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const  MediasContentInner = observer((
-  props:{
-    onSelectedChange?:(medias:Array<IRxMedia>)=>void
-  }
-)=>{
-  const {onSelectedChange} = props;
+export const  MediasContentInner = observer(()=>{
   const classes = useStyles();
   const mediasStore = useMediasStore();
+
   //const [folderLoading, setFolderLoading] = React.useState<boolean|ID>(false);
   //const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
   //const [draggedMedia, setDraggedMedia] = React.useState<IRxMedia|undefined>();
@@ -85,8 +81,6 @@ export const  MediasContentInner = observer((
   //const [gridLoading, setGridLoading] = React.useState(false);
 
   //const [selectedMedias, setSelectedMedias] = React.useState<Array<IRxMedia>>([]);
-
-  const [batchActionLoading, setBatchActionLoading] = React.useState(false);
 
   const {addFolder, loading:adding} = useAddFolder();
   /*const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
@@ -203,13 +197,6 @@ export const  MediasContentInner = observer((
     }
   }
 */
-  const handleRemoveSelected = ()=>{
-    //setBatchActionLoading(true)
-    //removeMedias({variables:{ids:selectedMedias.map((media)=>{return media.id})}})
-    //batchRemove(selectedMedias, medias)
-    //setSelectedMedias([])
-    //setMedias([...medias])
-  }
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
     const draggedFolder = mediasStore.draggedFolder;
@@ -250,7 +237,7 @@ export const  MediasContentInner = observer((
           </div>
           <Divider></Divider>
           <MediasBreadCrumbs />
-          {batchActionLoading && <LinearProgress />}
+          
           <div className ={classes.mediasGrid}>
             <MediaGridList></MediaGridList>
           </div>
