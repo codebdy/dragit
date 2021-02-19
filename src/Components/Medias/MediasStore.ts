@@ -4,6 +4,7 @@ import { createContext, useContext } from "react";
 import { ID } from "rx-drag/models/baseTypes";
 import { FolderNode } from "./FolderNode";
 import { getByIdFromTree } from "./FolderNode/getByIdFromTree";
+import { MediaStore } from "./MediaStore";
 import { MediaUploadTask } from "./MediaUploadTask";
 
 export class MediasStore{
@@ -12,11 +13,12 @@ export class MediasStore{
   folders:Array<FolderNode> = [];
   selectedFolderId:ID = 0;
   gridLoading:boolean = false;
-  medias:Array<IRxMedia> = [];
-  selectedMedias:Array<IRxMedia> = [];
+  medias:Array<MediaStore> = [];
+  selectedMedias:Array<MediaStore> = [];
 
   tasks:Array<MediaUploadTask> = [];
-
+  hasMorePages:boolean = true;
+  currentPage:number = 0;
 
   constructor() {
     makeAutoObservable(this)
@@ -62,10 +64,24 @@ export class MediasStore{
     this.tasks?.splice(this.tasks.indexOf(task), 1);
   }
 
-  unshiftMedia(media?:IRxMedia|null){
+  unshiftMedia(media?:MediaStore|null){
     if(media){
       this.medias.unshift(media);
     }
+  }
+
+  addMedias(medias:Array<IRxMedia>, hasMorePages:boolean, currentPage:number){
+    this.hasMorePages = hasMorePages;
+    this.currentPage = currentPage;
+    if(medias){
+      medias.forEach((media=>{
+        this.medias.push(new MediaStore(media));
+      }))
+    }
+  }
+
+  setHasMorePages(hasMorePages:boolean){
+    this.hasMorePages = hasMorePages;
   }
 }
 

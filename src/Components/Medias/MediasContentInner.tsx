@@ -78,7 +78,7 @@ export const  MediasContentInner = observer((
   const {single, onSelectedChange} = props;
   const classes = useStyles();
   const mediasStore = useMediasStore();
-  const [folderLoading, setFolderLoading] = React.useState<boolean|ID>(false);
+  //const [folderLoading, setFolderLoading] = React.useState<boolean|ID>(false);
   //const [draggedFolder, setDraggedFolder] = React.useState<FolderNode|undefined>();
   //const [draggedMedia, setDraggedMedia] = React.useState<IRxMedia|undefined>();
   //const [folders, setFolders] = React.useState<Array<FolderNode>>([]);
@@ -89,7 +89,6 @@ export const  MediasContentInner = observer((
 
   const [batchActionLoading, setBatchActionLoading] = React.useState(false);
 
-  const { loading, error:queryFolderError, data:folderData } = useQuery(QUERY_FOLDERS/*, {fetchPolicy:'no-cache'}*/);
   const {addFolder, loading:adding} = useAddFolder();
   /*const [addFolder, {error:addFolderError, loading:adding}] = useMutation(MUTATION_ADD_FOLDER,
     {
@@ -129,23 +128,18 @@ export const  MediasContentInner = observer((
   
   //const selectedFolderNode = getByIdFromTree(selectedFolder, folders);
   
-  const error = queryFolderError || 
+  const error = //queryFolderError || 
                 updateFolderError //||
                 //addFolderError //|| 
                 //updateMediaError || 
                 //removeMediasError;
 
   useShowAppoloError(error);
-  useEffect(()=>{
-    setFolderLoading(loading);
-  },[loading])
+  //useEffect(()=>{
+  //  setFolderLoading(loading);
+ // },[loading])
   
-  useEffect(()=>{
-    if(folderData){
-      const queriedFolders:Array<FolderNode> = parseFolderNodes(JSON.parse((folderData && folderData['rxMediaFoldersTree'])||'[]'));
-      mediasStore.setFolders(queriedFolders);
-    }
-  },[folderData, mediasStore])
+
 
   
   useEffect(() => {
@@ -280,9 +274,6 @@ export const  MediasContentInner = observer((
                 </SubmitButton>
               </div>
               <Divider></Divider>
-              {
-                (folderLoading === true) && <MediaFilderLoadingSkeleton />
-              }
               <MediaFolders/>
             </div>
         </Hidden>

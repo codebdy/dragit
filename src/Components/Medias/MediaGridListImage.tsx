@@ -78,7 +78,7 @@ export const MediaGridListImage = observer((
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [mediaTitle, setMediaTitle] = useState(media.title);
+  const [mediaTitle, setMediaTitle] = useState(media.name);
   const [loading, setLoading] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
   //const selected = contains(media, selectedMedias);
@@ -97,12 +97,12 @@ export const MediaGridListImage = observer((
   useShowAppoloError(updateMediaError||removeMediasError);
     
   const changeImageTitleOnServer = ()=>{
-    if(mediaTitle === media.title){
+    if(mediaTitle === media.name){
       return
     }
     setLoading(true)
     //updateMedia({variables:{media:{id:media.id, title:mediaTitle, folderId:folder?.id}}})
-    media.title = mediaTitle
+    media.name = mediaTitle
   }
 
   const removeMedia = ()=>{
@@ -155,7 +155,7 @@ export const MediaGridListImage = observer((
           </div>
         }
         {
-          //selected &&
+          selected &&
           <div className={classes.checkbox}>
             <MdiIcon iconClass="mdi-check" size="18" color="#5d78ff" />
           </div>
@@ -200,7 +200,7 @@ export const MediaGridListImage = observer((
             </IconButton>
           </DialogTitle>
           <DialogContent>
-            <img width="100%" src={media.src} alt={'view ' + media.title} />
+            <img width="100%" src={media.src} alt={'view ' + media.name} />
           </DialogContent>
           <DialogActions>
             url:{media.src}

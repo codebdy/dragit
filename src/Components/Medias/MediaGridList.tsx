@@ -8,7 +8,7 @@ import { QUERY_MEDIAS } from './MediasGQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 
@@ -45,38 +45,39 @@ export const MediaGridList = observer(()=>{
 
   const classes = useStyles();
   const ref = useRef(null);  
-  const [medias, setMedias] = useState<Array<IRxMedia>>([]);
-  const [queryLoading, setQueryLoading] = useState(false);
-  const [page, setPage] = React.useState(0);
-  const [hasMore, setHasMore] = React.useState(true);
   const mediasStore = useMediasStore();
+  const countPerPage = 20;
   
-  const {loading, error:queryError, data:mediaData, refetch} = useQuery(QUERY_MEDIAS, {
-    variables: { first:20, page:page + 1},
-    notifyOnNetworkStatusChange: true
+  const [exccuteQuery, {loading, error:queryError}] = useLazyQuery(QUERY_MEDIAS, {
+    variables: { first:countPerPage, page:mediasStore.currentPage + 1},
+    notifyOnNetworkStatusChange: true,
+    errorPolicy:'all',
+    onCompleted(data){
+      const rxMedias = data?.rxMedias;
+      if(rxMedias){
+        mediasStore.addMedias(rxMedias?.data, 
+          rxMedias?.paginatorInfo?.hasMorePages, 
+          rxMedias?.paginatorInfo?.currentPage
+        )
+      }
+      else{
+        mediasStore.setHasMorePages(false);
+      }
+    }
   });
-
-  console.log('MediaGridList', mediaData);
 
   useShowAppoloError(queryError);
 
-  useEffect(()=>{
-    setMedias([...medias, ...(mediaData?.medias?.data||[])])
-    setHasMore(mediaData?.medias?.paginatorInfo?.hasMorePages);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[mediaData])
-
-  useEffect(()=>{
-    setQueryLoading(loading);
-  },[loading])
-  
-  const doScroll = ()=>{
-    if(!queryLoading && hasMore){
-      setQueryLoading(true);
-      refetch && refetch({ first:20, page:page + 1});
-      setPage(page + 1)
+  const doQuery = ()=>{
+    if(!loading && mediasStore.hasMorePages){
+      exccuteQuery({variables:{ first:countPerPage, page:mediasStore.currentPage + 1}});
     }
   }
+
+  useEffect(()=>{
+    doQuery();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;
@@ -87,7 +88,7 @@ export const MediaGridList = observer(()=>{
     let innerBottom = (innerRect?.y||0) + (innerRect?.height||0);
     //console.log(scrollBottom - innerBottom )    
     if(scrollBottom - innerBottom >= 20){
-      doScroll();
+      doQuery();
     }
     //e.defaultPrevented();
   }
@@ -121,14 +122,14 @@ export const MediaGridList = observer(()=>{
         <MediaGridListFolders />
         <MediaGridListTasks />
      
-        {medias?.map((media:IRxMedia, index) => (
-          <Grid item key={media.id + '-image-' + index + '-' + media.title} lg={2} sm={3} xs={4}>
+        {mediasStore?.medias?.map((media:IRxMedia, index) => (
+          <Grid item key={media.id + '-image-' + index + '-' + media.name} lg={2} sm={3} xs={4}>
             <MediaGridListImage media = {media}/>
           </Grid>
         ))}
       </Grid>
       {
-        queryLoading&&
+        loading&&
         <div className = {classes.progress}>
           <CircularProgress />
         </div>
