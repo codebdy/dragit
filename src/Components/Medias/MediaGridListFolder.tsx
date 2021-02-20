@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles, Theme, createStyles, LinearProgress } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
@@ -8,7 +8,7 @@ import {observer} from 'mobx-react';
 import { useUpdateFolder } from './useUpdateFolder';
 import { useMediasStore } from './MediasStore';
 import { useRemoveFolder } from './useRemoveFolder';
-import { useUpdateMedia } from './useUpdateMedia';
+import { MediaStore } from './MediaStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,15 +54,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const MediaGridListFolder = observer((
-  props:{folder:FolderNode}
+  props:{
+    folder:FolderNode,
+    onMoveMedia:(media:MediaStore, folder:FolderNode)=>void
+  }
 )=>{
-  const {folder} = props;
+  const {folder, onMoveMedia} = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
   const [editing, setEditing] = React.useState(false);
   const [folderName, setFolderName] = React.useState(folder.name);
   const mediasStore = useMediasStore();
-  const [draggedMediaId, setDraggedMediaId] = useState(mediasStore.draggedMedia?.id);
 
   const updateFolder = useUpdateFolder((data)=>{
     folder.setLoading(false);
@@ -73,13 +75,6 @@ export const MediaGridListFolder = observer((
   const draggedFolder = mediasStore.draggedFolder;
   const draggedMedia = mediasStore.draggedMedia;
 
-  const updateMedia = useUpdateMedia((data)=>{
-    folder.setLoading(false);
-    if(draggedMediaId){
-      mediasStore.removeMedias([draggedMediaId]);
-      setDraggedMediaId(undefined);
-    }
-  });
   
   const handleEndEditing = ()=>{
     setEditing(false);
@@ -118,14 +113,7 @@ export const MediaGridListFolder = observer((
     }
 
     if(draggedMedia && folder.id !== mediasStore.selectedFolderId){
-      folder.setLoading(true);
-      setDraggedMediaId(draggedMedia.id)
-      updateMedia({variables:{
-        rxMedia:{
-          id:draggedMedia.id,
-          rx_media_folder_id:folder.id          
-        }
-      }})
+      onMoveMedia(draggedMedia, folder);
     }
   }
 

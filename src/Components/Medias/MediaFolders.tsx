@@ -12,6 +12,7 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { FolderNode } from './FolderNode';
 import { parseFolderNodes } from './FolderNode/parseFolderNodes';
 import MediaFilderLoadingSkeleton from './MediaFilderLoadingSkeleton';
+import { MediaStore } from './MediaStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,8 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const MediaFolders = observer(() => {
-
+export const MediaFolders = observer((
+  props:{
+    onMoveMedia:(media:MediaStore, folder:FolderNode)=>void
+  }
+) => {
+  const {onMoveMedia} = props;
   const classes = useStyles();
   const mediaStore = useMediasStore();
   const { loading, error:queryFolderError, data:folderData } = useQuery(QUERY_FOLDERS/*, {fetchPolicy:'no-cache'}*/);
@@ -58,7 +63,8 @@ export const MediaFolders = observer(() => {
           mediaStore.folders?.map((node)=>{
             return <MediaFolder 
               key={node.id + '-' + node.name} 
-              node={node}             
+              node={node}      
+              onMoveMedia = {onMoveMedia}       
             />
           })
         }

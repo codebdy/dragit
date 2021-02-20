@@ -10,6 +10,7 @@ import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 import { MediaStore } from './MediaStore';
+import { FolderNode } from './FolderNode';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,8 +41,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const MediaGridList = observer(()=>{
-
+export const MediaGridList = observer((
+  props:{
+    onMoveMedia:(media:MediaStore, folder:FolderNode)=>void
+  }
+)=>{
+  const {onMoveMedia} = props;
   const classes = useStyles();
   const ref = useRef(null);  
   const mediasStore = useMediasStore();
@@ -161,7 +166,7 @@ export const MediaGridList = observer(()=>{
         spacing={2} 
         ref={ref}
       >
-        <MediaGridListFolders />
+        <MediaGridListFolders onMoveMedia = {onMoveMedia} />
         <MediaGridListTasks />
      
         {mediasStore?.medias?.map((media:MediaStore, index) => (

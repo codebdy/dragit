@@ -14,6 +14,7 @@ import { Check, Close } from '@material-ui/icons';
 import { useAddFolder } from './useAddFolder';
 import { useUpdateFolder } from './useUpdateFolder';
 import { useRemoveFolder } from './useRemoveFolder';
+import { MediaStore } from './MediaStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,11 +69,13 @@ export function FolderActions(props:{children:any}){
 
 export const MediaFolder = observer((
   props:{ 
-    node:FolderNode
+    node:FolderNode,
+    onMoveMedia:(media:MediaStore, folder:FolderNode)=>void
   }
 )=>{
   const {
     node,
+    onMoveMedia
   } = props;
   const classes = useStyles();
   const [hover, setHover] = React.useState(false);
@@ -135,7 +138,7 @@ export const MediaFolder = observer((
       })
     }
     if(draggedMedia){
-      //onMoveMediaTo(draggedMedia, node);
+      onMoveMedia(draggedMedia, node);
     }
     event.stopPropagation();
   }
@@ -258,6 +261,7 @@ export const MediaFolder = observer((
             <MediaFolder 
               key={child.id + '-' + child.name}               
               node = {child}
+              onMoveMedia = {onMoveMedia}
             />
           )
         })

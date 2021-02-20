@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {makeStyles, Theme, createStyles, Divider, Hidden} from "@material-ui/core";
 import { MediaGridList } from "./MediaGridList";
 import { MediaFolders } from "./MediaFolders";
@@ -13,6 +13,9 @@ import {observer} from 'mobx-react';
 import SubmitButton from "Components/common/SubmitButton";
 import { useMutation } from "@apollo/react-hooks";
 import { useAddFolder } from "./useAddFolder";
+import { MediaStore } from "./MediaStore";
+import { FolderNode } from "./FolderNode";
+import { useUpdateMedia } from "./useUpdateMedia";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,10 +70,18 @@ const useStyles = makeStyles((theme: Theme) =>
 export const  MediasContentInner = observer(()=>{
   const classes = useStyles();
   const mediasStore = useMediasStore();
-  const [draggedFolder, setDraggedFolder] = React.useState(mediasStore.draggedFolder);  
-
+  const [draggedFolder, setDraggedFolder] = useState(mediasStore.draggedFolder);  
+  const [draggedMedia, setDraggedMedia] = useState(mediasStore.draggedMedia);
 
   const {addFolder, loading:adding} = useAddFolder();
+
+  const updateMedia = useUpdateMedia((data)=>{
+    if(draggedMedia){
+      draggedMedia.setLoading(false);
+      mediasStore.removeMedias([draggedMedia.id]);
+      setDraggedMedia(undefined);
+    }
+  });
 
   const [updateFolder, {error}] = useMutation(MUTATION_UPDATE_FOLDER,{
     onCompleted:(data)=>{
@@ -87,9 +98,20 @@ export const  MediasContentInner = observer(()=>{
     addFolder({variables:{name:intl.get('new-folder')}});
   } 
 
+  const handleMoveMedia = (media:MediaStore, folder?:FolderNode)=>{
+    media.setLoading(true);
+    setDraggedMedia(media)
+    updateMedia({variables:{
+      rxMedia:{
+        id:media.id,
+        rx_media_folder_id:folder?.id||null          
+      }
+    }})
+  }
+
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
-    const draggedFolder = mediasStore.draggedFolder;
-    draggedFolder && event.preventDefault();
+    mediasStore.draggedFolder && event.preventDefault();
+    mediasStore?.draggedMedia && event.preventDefault();
     event.stopPropagation();
   }
 
@@ -105,6 +127,12 @@ export const  MediasContentInner = observer(()=>{
           parent_id:null,
         }
       })
+    }
+
+    mediasStore?.draggedMedia && event.preventDefault();
+
+    if(mediasStore?.draggedMedia){
+      handleMoveMedia(mediasStore?.draggedMedia);
     }
     event.stopPropagation();
   }
@@ -124,7 +152,7 @@ export const  MediasContentInner = observer(()=>{
           <MediasBreadCrumbs />
           
           <div className ={classes.mediasGrid}>
-            <MediaGridList></MediaGridList>
+            <MediaGridList onMoveMedia = {handleMoveMedia}></MediaGridList>
           </div>
         </div>
         <Divider orientation="vertical" flexItem />
@@ -145,7 +173,7 @@ export const  MediasContentInner = observer(()=>{
                 </SubmitButton>
               </div>
               <Divider></Divider>
-              <MediaFolders/>
+              <MediaFolders onMoveMedia = {handleMoveMedia}/>
             </div>
         </Hidden>
       </div>
