@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
 import { MediaGridListImage } from './MediaGridListImage';
-import { IRxMedia } from 'Base/Model/IRxMedia';
 import { QUERY_MEDIAS } from './MediasGQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 import { MediaStore } from './MediaStore';
@@ -54,9 +53,10 @@ export const MediaGridList = observer(()=>{
       first:countPerPage, 
       page:mediasStore.currentPage + 1, 
       name:'%%',
-      //folder_id:mediasStore.selectedFolderId
+      rx_media_folder_id:mediasStore.selectedFolderId || null
     },
     notifyOnNetworkStatusChange: true,
+    fetchPolicy:'no-cache',
     errorPolicy:'all',
     //onCompleted(data){
     //  console.log('MediaGridList onCompleted', data);
@@ -82,28 +82,18 @@ export const MediaGridList = observer(()=>{
 
   const doQuery = ()=>{
     if(!loading && mediasStore.hasMorePages){
-      console.log('doQuery' ,{
-        variables:{ 
-          first:countPerPage, 
-          page:mediasStore.currentPage + 1,
-          folder_id:mediasStore.selectedFolderId
-        }
-      })
       exccuteQuery({
         variables:{ 
           first:countPerPage, 
           page:mediasStore.currentPage + 1,
           name:'%%',
-          //folder_id:mediasStore.selectedFolderId
+          rx_media_folder_id:mediasStore.selectedFolderId || null
         }
       });
     }
-  }
-
-  
+  }  
 
   useEffect(()=>{
-    console.log('mediasStore?.selectedFolderId', mediasStore?.selectedFolderId, mediasStore?.hasMorePages);
     doQuery();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mediasStore?.hasMorePages, mediasStore?.selectedFolderId])
