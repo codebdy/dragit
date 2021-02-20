@@ -6,6 +6,7 @@ import intl from 'react-intl-universal';
 import SearchIcon from '@material-ui/icons/Search';
 import { useMediasStore } from './MediasStore';
 import { observer } from 'mobx-react';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,6 +56,7 @@ export const MediasToolbar = observer(()=>{
   const mediasStore = useMediasStore();  
   const [keyword, setKeyword] = useState(mediasStore?.keyword||'');
   const toolIconSize = 21;
+  const dragitStore = useDragItStore();
 
   const handleUpload = (event:React.ChangeEvent<HTMLInputElement>)=>{
     mediasStore.addUploadFiles(event.target.files);
@@ -116,7 +118,13 @@ export const MediasToolbar = observer(()=>{
         </label>
 
         <Tooltip title={intl.get('filter')} arrow placement="top">
-          <IconButton aria-label={intl.get('filter')} component="span">
+          <IconButton 
+            aria-label={intl.get('filter')} 
+            component="span"
+            onClick = {()=>{
+              dragitStore.infoError('多种文件类型支持正在开发中，敬请期待...');
+            }}
+          >
             <MdiIcon iconClass="mdi-filter-outline" size={toolIconSize} />
           </IconButton>
         </Tooltip>

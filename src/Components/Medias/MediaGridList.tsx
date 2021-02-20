@@ -7,7 +7,7 @@ import { QUERY_MEDIAS } from './MediasGQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 import { MediaStore } from './MediaStore';
@@ -48,11 +48,33 @@ export const MediaGridList = observer(()=>{
   const mediasStore = useMediasStore();
   const countPerPage = 20;
   
-  const [exccuteQuery, {loading, error:queryError, data}] = useLazyQuery(QUERY_MEDIAS, {
+  const [exccuteQuery, {loading, error:queryError, data}] = useLazyQuery( gql`
+      query ($first:Int!, $page:Int, $rx_media_folder_id:ID){
+        rxMedias(
+          first:$first
+          page:$page
+          ${mediasStore.makeWhereGql()}
+          rx_media_folder_id:$rx_media_folder_id, 
+          orderBy: [{ column: CREATED_AT, order: DESC }]
+        ){
+          data{
+            id
+            thumbnail
+            name
+            src
+          }
+          paginatorInfo{
+            currentPage
+            hasMorePages
+          }      
+        }
+      }
+    `, 
+    {
     variables: { 
       first:countPerPage, 
       page:mediasStore.currentPage + 1, 
-      name:`%${mediasStore?.keyword}%`,
+      //name:`%${mediasStore?.keyword}%`,
       rx_media_folder_id:mediasStore.selectedFolderId || null
     },
     notifyOnNetworkStatusChange: true,
@@ -86,7 +108,7 @@ export const MediaGridList = observer(()=>{
         variables:{ 
           first:countPerPage, 
           page:mediasStore.currentPage + 1,
-          name:`%${mediasStore?.keyword}%`,
+          //name:`%${mediasStore?.keyword}%`,
           rx_media_folder_id:mediasStore.selectedFolderId || null
         }
       });

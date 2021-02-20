@@ -131,6 +131,29 @@ export class MediasStore{
     }
 
   }
+
+  makeWhereGql(){
+    if(this.keyword){
+      let where = '';
+      this.keyword.split('').forEach(word=>{
+        let aWord = word.trim();
+        if(aWord){
+          where = where + ` { column: NAME, operator: LIKE, value: "%${aWord}%" } `
+        }
+      })
+      return `where:{
+        OR:[
+          ${
+            where
+          }
+        ]
+      }`      
+    }
+    else{
+      return '';
+    }
+
+  }
 }
 
 export const MediasStoreContext = createContext<MediasStore>({} as MediasStore);
