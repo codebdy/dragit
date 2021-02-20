@@ -33,10 +33,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_RX_APP_LIST);
+  const { loading, error, data } = useQuery(GET_RX_APP_LIST,{errorPolicy:'all'});
   const dragItStore = useDragItStore();
   const apps = data ? data.rxApps :[];
   const [ excuteCreate, {loading:saving, error:createError}] = useMutation(CREATE_RX_APP, {
+    errorPolicy:'all',
     //更新缓存
     update(cache, { data: { createRxApp } }){
       cache.writeQuery({

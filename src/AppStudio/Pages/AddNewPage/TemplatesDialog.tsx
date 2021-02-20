@@ -152,7 +152,7 @@ export const TemplatesDialog = observer((
                       onClick={()=>{setSelected(template)}}
                     >
                       <Image 
-                        src = {template.thumbnail} 
+                        src = {template.media?.thumbnail} 
                         className={
                           classNames(classes.image,{[classes.selected]:selected?.id === template.id})
                         }
