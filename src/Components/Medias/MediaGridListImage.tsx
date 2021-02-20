@@ -5,13 +5,14 @@ import MediaGridListIconButton from './MediaGridListIconButton';
 import classNames from 'classnames';
 import Close from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_UPDATE_MEDIA, MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
+import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
 import MdiIcon from 'Components/common/MdiIcon';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import Image from 'Components/common/Image';
 import {observer} from 'mobx-react';
 import { MediaStore } from './MediaStore';
 import { useMediasStore } from './MediasStore';
+import { useUpdateMedia } from './useUpdateMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,12 +84,10 @@ export const MediaGridListImage = observer((
   //const selected = contains(media, selectedMedias);
   const mediasStore = useMediasStore();
 
-  const [updateMedia, {error:updateMediaError}] = useMutation(MUTATION_UPDATE_MEDIA,{
-    errorPolicy:'all',
-    onCompleted:(data)=>{
-      media.setLoading(false);
-      media.name = mediaName;
-    }});
+  const updateMedia = useUpdateMedia((data)=>{
+    media.setLoading(false);
+    media.name = mediaName;
+  });
 
   const [removeMedias, {error:removeMediasError}] = useMutation(MUTATION_REMOVE_MEDIAS,{
     errorPolicy:'all',
@@ -97,7 +96,7 @@ export const MediaGridListImage = observer((
       mediasStore.removeMedias([media.id]);
     }});
 
-  useShowAppoloError(updateMediaError||removeMediasError);
+  useShowAppoloError(removeMediasError);
     
   const changeImageNameOnServer = ()=>{
     if(mediaName === media.name){
@@ -130,17 +129,23 @@ export const MediaGridListImage = observer((
     mediasStore.toggleSelected(media);
   }
 
+  const handleDragStart = ()=>{
+    setHover(false);
+    mediasStore.setDraggedMedia(media);
+  }
+
+  const handleDragEnd = ()=>{
+    mediasStore.setDraggedMedia(undefined);
+  }
+
   return (
     <Fragment>
       <div className = { classNames(classes.root) }
         draggable={true}
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}          
-        onDragStart={()=>{
-          setHover(false);
-          //onDragStart(media);
-        }}
-        //onDragEnd = {onDragEnd}
+        onDragStart={handleDragStart}
+        onDragEnd = {handleDragEnd}
         onClick = {handleToggleSelect}
       >
         <Image 

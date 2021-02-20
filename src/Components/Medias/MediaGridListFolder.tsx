@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles, LinearProgress } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
@@ -8,6 +8,7 @@ import {observer} from 'mobx-react';
 import { useUpdateFolder } from './useUpdateFolder';
 import { useMediasStore } from './MediasStore';
 import { useRemoveFolder } from './useRemoveFolder';
+import { useUpdateMedia } from './useUpdateMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,11 +62,25 @@ export const MediaGridListFolder = observer((
   const [editing, setEditing] = React.useState(false);
   const [folderName, setFolderName] = React.useState(folder.name);
   const mediasStore = useMediasStore();
+  const [draggedMediaId, setDraggedMediaId] = useState(mediasStore.draggedMedia?.id);
 
-  const updateFolder = useUpdateFolder(folder, folderName);
+  const updateFolder = useUpdateFolder((data)=>{
+    folder.setLoading(false);
+    mediasStore.draggedFolder?.setLoading(false);
+    folder.setName(folderName);
+  });
   const removeFolder = useRemoveFolder(folder);
   const draggedFolder = mediasStore.draggedFolder;
+  const draggedMedia = mediasStore.draggedMedia;
 
+  const updateMedia = useUpdateMedia((data)=>{
+    folder.setLoading(false);
+    if(draggedMediaId){
+      mediasStore.removeMedias([draggedMediaId]);
+      setDraggedMediaId(undefined);
+    }
+  });
+  
   const handleEndEditing = ()=>{
     setEditing(false);
     if(folderName !== folder.name){
@@ -74,7 +89,6 @@ export const MediaGridListFolder = observer((
         id:folder.id,
         name:folder.name
       }})
-     
     }
   }
 
@@ -90,7 +104,7 @@ export const MediaGridListFolder = observer((
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{
     draggedFolder && draggedFolder !== folder && event.preventDefault();
-    //draggedMedia && event.preventDefault();
+    draggedMedia && mediasStore.selectedFolderId !== folder.id && event.preventDefault();
   }
 
 
@@ -103,9 +117,16 @@ export const MediaGridListFolder = observer((
       }})
     }
 
-    //if(draggedMedia){
-    //  onMoveMediaTo(draggedMedia, folder);
-    //}
+    if(draggedMedia && folder.id !== mediasStore.selectedFolderId){
+      folder.setLoading(true);
+      setDraggedMediaId(draggedMedia.id)
+      updateMedia({variables:{
+        rxMedia:{
+          id:draggedMedia.id,
+          rx_media_folder_id:folder.id          
+        }
+      }})
+    }
   }
 
   const handleSelect = ()=>{

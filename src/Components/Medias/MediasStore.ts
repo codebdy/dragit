@@ -17,7 +17,7 @@ export enum MediaSort{
 
 export class MediasStore{
   draggedFolder?:FolderNode;
-  draggedMedia?:IRxMedia;
+  draggedMedia?:MediaStore;
   folders:Array<FolderNode> = [];
   selectedFolderId:ID = 0;
   gridLoading:boolean = false;
@@ -63,6 +63,10 @@ export class MediasStore{
 
   setDraggedFolder(folder?:FolderNode){
     this.draggedFolder = folder;
+  }
+
+  setDraggedMedia(draggedMedia?:MediaStore){
+    this.draggedMedia = draggedMedia;
   }
 
   addUploadFiles(files:FileList|null){
