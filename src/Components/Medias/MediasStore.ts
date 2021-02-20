@@ -8,6 +8,13 @@ import { getByIdFromTree } from "./FolderNode/getByIdFromTree";
 import { MediaStore } from "./MediaStore";
 import { MediaUploadTask } from "./MediaUploadTask";
 
+export enum MediaSort{
+  DESC_BY_CREATE_AT,
+  ASC_BY_CREATE_AT,
+  DESC_BY_NAME,
+  ASC_BY_NAME
+}
+
 export class MediasStore{
   draggedFolder?:FolderNode;
   draggedMedia?:IRxMedia;
@@ -20,6 +27,7 @@ export class MediasStore{
   currentPage:number = 0;
   singleSelective?:boolean = false;
   keyword?:string = '';
+  sortBy:MediaSort = MediaSort.DESC_BY_CREATE_AT;
 
   constructor(single?:boolean) {
     this.singleSelective = single;
@@ -129,7 +137,15 @@ export class MediasStore{
       this.currentPage = 0;
       this.hasMorePages = true;   
     }
+  }
 
+  setSortBy(sortBy:MediaSort){
+    if(this.sortBy !== sortBy){
+      this.medias = [];
+      this.currentPage = 0;
+      this.hasMorePages = true;   
+    }
+    this.sortBy = sortBy;
   }
 
   makeWhereGql(){
@@ -152,6 +168,24 @@ export class MediasStore{
     }
     return gql;
 
+  }
+
+  makeSortByGql(){
+    switch(this.sortBy){
+      case MediaSort.DESC_BY_CREATE_AT:
+        return `{ column: CREATED_AT, order: DESC }`;
+
+        case MediaSort.ASC_BY_CREATE_AT:
+          return `{ column: CREATED_AT, order: ASC }`;
+
+        case MediaSort.DESC_BY_NAME:
+           return `{ column: NAME, order: DESC }`;
+
+        case MediaSort.ASC_BY_NAME:
+          return `{ column: NAME, order: ASC }`;
+    }
+
+    return ''
   }
 }
 

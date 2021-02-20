@@ -54,8 +54,10 @@ export const MediaGridList = observer(()=>{
           page:$page
           ${mediasStore.makeWhereGql()}
           rx_media_folder_id:$rx_media_folder_id, 
-          orderBy: [{ column: CREATED_AT, order: DESC }]
-        ){
+          orderBy: [
+            ${mediasStore.makeSortByGql()}
+          ]
+        ){  
           data{
             id
             thumbnail
@@ -117,7 +119,7 @@ export const MediaGridList = observer(()=>{
   useEffect(()=>{
     doQuery();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[mediasStore?.hasMorePages, mediasStore?.selectedFolderId, mediasStore?.keyword])
+  },[mediasStore?.hasMorePages, mediasStore?.selectedFolderId, mediasStore?.keyword, mediasStore?.sortBy])
 
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;

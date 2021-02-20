@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { makeStyles, Theme, createStyles, fade, Hidden, IconButton, InputBase, Tooltip } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, fade, Hidden, IconButton, InputBase, Tooltip, Menu, MenuItem, ListItemIcon, ListSubheader } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
 import intl from 'react-intl-universal';
 import SearchIcon from '@material-ui/icons/Search';
-import { useMediasStore } from './MediasStore';
+import { MediaSort, useMediasStore } from './MediasStore';
 import { observer } from 'mobx-react';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
@@ -47,7 +47,9 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
-
+    menuItem:{
+      padding:theme.spacing(1, 3),
+    },
   }),
 );
 
@@ -55,6 +57,8 @@ export const MediasToolbar = observer(()=>{
   const classes = useStyles();
   const mediasStore = useMediasStore();  
   const [keyword, setKeyword] = useState(mediasStore?.keyword||'');
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const isMenuOpen = Boolean(anchorEl);
   const toolIconSize = 21;
   const dragitStore = useDragItStore();
 
@@ -70,6 +74,19 @@ export const MediasToolbar = observer(()=>{
     setKeyword(mediasStore?.keyword||'');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mediasStore.keyword, mediasStore.selectedFolderId])
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSort = (sort:MediaSort)=>{
+    handleMenuClose();
+    mediasStore.setSortBy(sort);
+  }
 
   return (
     <Fragment>
@@ -128,18 +145,82 @@ export const MediasToolbar = observer(()=>{
             <MdiIcon iconClass="mdi-filter-outline" size={toolIconSize} />
           </IconButton>
         </Tooltip>
+      </Hidden>
         <Tooltip title={intl.get('sort-by')} arrow placement="top">
-          <IconButton aria-label={intl.get('sort-by')} component="span">
+          <IconButton 
+            aria-label={intl.get('sort-by')} 
+            component="span" 
+            onClick = {handleMenuOpen}
+          >
             <MdiIcon iconClass="mdi-sort-ascending"  size={toolIconSize} />
           </IconButton>
         </Tooltip>
+        <Menu
+          anchorEl={anchorEl}
+          getContentAnchorEl={null}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          open={isMenuOpen}
+          onClose={handleMenuClose}
+          
+        >
+          <ListSubheader component="div"
+            disableSticky
+          >
+            {intl.get('create-time')}
+          </ListSubheader>
+          <MenuItem  
+            className = {classes.menuItem}
+            selected = {mediasStore.sortBy === MediaSort.DESC_BY_CREATE_AT}
+            onClick = {()=>{handleSort(MediaSort.DESC_BY_CREATE_AT)}}
+          >
+            <ListItemIcon>
+              <MdiIcon iconClass = "mdi-sort-descending"  size={18}/>
+            </ListItemIcon>
+            {intl.get('new-to-old')}
+          </MenuItem>
+          <MenuItem  className = {classes.menuItem}
+            selected = {mediasStore.sortBy === MediaSort.ASC_BY_CREATE_AT}
+            onClick = {()=>{handleSort(MediaSort.ASC_BY_CREATE_AT)}}
+          >
+            <ListItemIcon>
+              <MdiIcon iconClass = "mdi-sort-ascending"  size={18}/>
+            </ListItemIcon>
+            {intl.get('old-to-new')}
+          </MenuItem>
 
-      </Hidden>
-      <Hidden smUp>
-          <IconButton aria-label={intl.get('list')} component="span">
-            <MdiIcon iconClass="mdi-dots-horizontal"  size={toolIconSize} />
-          </IconButton>
-      </Hidden>
+          <ListSubheader component="div"
+            disableSticky
+          >
+            {intl.get('name')}
+          </ListSubheader>
+          <MenuItem  className = {classes.menuItem}
+            selected = {mediasStore.sortBy === MediaSort.ASC_BY_NAME}
+            onClick = {()=>{handleSort(MediaSort.ASC_BY_NAME)}}
+          >
+            <ListItemIcon>
+              <MdiIcon iconClass = "mdi-sort-alphabetical-descending"  size={18}/>
+            </ListItemIcon>
+            A ~ Z
+          </MenuItem>
+          <MenuItem  className = {classes.menuItem}
+            selected = {mediasStore.sortBy === MediaSort.DESC_BY_NAME}
+            onClick = {()=>{handleSort(MediaSort.DESC_BY_NAME)}}
+          >
+            <ListItemIcon>
+              <MdiIcon iconClass = "mdi-sort-alphabetical-ascending"  size={18}/>
+            </ListItemIcon>
+            Z ~ A
+          </MenuItem>
+
+        </Menu>
+
     </Fragment>
   )
 })

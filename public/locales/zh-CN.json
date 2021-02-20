@@ -353,5 +353,8 @@
     "report-bug":"提交Bug",
     "edit-template":"模板编辑",
     "thumbnail":"缩略图",
-    "new-folder":"新文件夹"
+    "new-folder":"新文件夹",
+    "create-time":"创建时间",
+    "new-to-old":"由新到旧",
+    "old-to-new":"由旧到新"
 }
