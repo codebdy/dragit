@@ -5,33 +5,7 @@ export const QUERY_FOLDERS = gql`
     rxMediaFoldersTree
   }
 `;
-export const QUERY_MEDIAS = gql`
-  query ($first:Int!, $page:Int, $rx_media_folder_id:ID){
-    rxMedias(
-      first:$first, 
-      page:$page, 
-      where:{
-        OR:[
-          { column: NAME, operator: LIKE, value: "%c%" }
-          { column: NAME, operator: LIKE, value: "%b%" }
-        ]
-      },
-      rx_media_folder_id:$rx_media_folder_id, 
-      orderBy: [{ column: CREATED_AT, order: DESC }]
-    ){
-      data{
-        id
-        thumbnail
-        name
-        src
-      }
-      paginatorInfo{
-        currentPage
-        hasMorePages
-      }      
-    }
-  }
-`;
+
 export const MUTATION_ADD_FOLDER = gql`
   mutation ($parent_id:ID, $name:String){
     addRxMediaFolder(parent_id:$parent_id, name:$name){

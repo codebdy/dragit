@@ -133,15 +133,16 @@ export class MediasStore{
   }
 
   makeWhereGql(){
+    let gql = ''
     if(this.keyword){
       let where = '';
-      this.keyword.split('').forEach(word=>{
+      this.keyword.split(' ').forEach(word=>{
         let aWord = word.trim();
         if(aWord){
           where = where + ` { column: NAME, operator: LIKE, value: "%${aWord}%" } `
         }
       })
-      return `where:{
+      gql = `where:{
         OR:[
           ${
             where
@@ -149,9 +150,7 @@ export class MediasStore{
         ]
       }`      
     }
-    else{
-      return '';
-    }
+    return gql;
 
   }
 }

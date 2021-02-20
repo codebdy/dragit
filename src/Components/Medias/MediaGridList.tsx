@@ -3,7 +3,6 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
 import { MediaGridListImage } from './MediaGridListImage';
-import { QUERY_MEDIAS } from './MediasGQLs';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
