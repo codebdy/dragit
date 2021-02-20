@@ -40,6 +40,7 @@ export class MediasStore{
       this.medias = [];
       this.hasMorePages = true;    
       this.currentPage = 0;
+      this.keyword = '';
     }
     this.selectedFolderId = folderId;
   }

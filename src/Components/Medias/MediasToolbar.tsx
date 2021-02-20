@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles, fade, Hidden, IconButton, InputBase, Tooltip } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
@@ -52,9 +52,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const MediasToolbar = observer(()=>{
   const classes = useStyles();
-  const [keyword, setKeyword] = useState('');
+  const mediasStore = useMediasStore();  
+  const [keyword, setKeyword] = useState(mediasStore?.keyword||'');
   const toolIconSize = 21;
-  const mediasStore = useMediasStore();
+
   const handleUpload = (event:React.ChangeEvent<HTMLInputElement>)=>{
     mediasStore.addUploadFiles(event.target.files);
   }
@@ -62,6 +63,11 @@ export const MediasToolbar = observer(()=>{
   const handleChangeKeyword = (event:React.ChangeEvent<HTMLInputElement>)=>{
     setKeyword(event.target.value as string);
   }
+
+  useEffect(()=>{
+    setKeyword(mediasStore?.keyword||'');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[mediasStore.keyword, mediasStore.selectedFolderId])
 
   return (
     <Fragment>
