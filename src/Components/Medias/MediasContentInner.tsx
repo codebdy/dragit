@@ -3,7 +3,7 @@ import {makeStyles, Theme, createStyles, Divider, Hidden, LinearProgress} from "
 import { MediaGridList } from "./MediaGridList";
 import { MediaFolders } from "./MediaFolders";
 import { FolderNode } from "./FolderNode";
-import MediasToolbar from "./MediasToolbar";
+import { MediasToolbar } from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
 import { MediasBatchActions } from "./MediasBatchActions";
@@ -226,11 +226,7 @@ export const  MediasContentInner = observer(()=>{
           <div className ={classes.toolbar}>
             {
               mediasStore.selectedMedias.length > 0 ?
-              <MediasBatchActions 
-                //selectedMedias = {selectedMedias}
-                //onClearSelected = {()=>setSelectedMedias([])}
-                //onRemoveSelected = {handleRemoveSelected}
-              />
+              <MediasBatchActions />
               :
               <MediasToolbar />
             }

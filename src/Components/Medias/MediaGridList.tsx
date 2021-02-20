@@ -52,7 +52,7 @@ export const MediaGridList = observer(()=>{
     variables: { 
       first:countPerPage, 
       page:mediasStore.currentPage + 1, 
-      name:'%%',
+      name:`%${mediasStore?.keyword}%`,
       rx_media_folder_id:mediasStore.selectedFolderId || null
     },
     notifyOnNetworkStatusChange: true,
@@ -86,7 +86,7 @@ export const MediaGridList = observer(()=>{
         variables:{ 
           first:countPerPage, 
           page:mediasStore.currentPage + 1,
-          name:'%%',
+          name:`%${mediasStore?.keyword}%`,
           rx_media_folder_id:mediasStore.selectedFolderId || null
         }
       });
@@ -96,7 +96,7 @@ export const MediaGridList = observer(()=>{
   useEffect(()=>{
     doQuery();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[mediasStore?.hasMorePages, mediasStore?.selectedFolderId])
+  },[mediasStore?.hasMorePages, mediasStore?.selectedFolderId, mediasStore?.keyword])
 
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;

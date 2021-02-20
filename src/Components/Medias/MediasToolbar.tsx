@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles, Theme, createStyles, fade, Hidden, IconButton, InputBase, Tooltip } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
 import intl from 'react-intl-universal';
 import SearchIcon from '@material-ui/icons/Search';
 import { useMediasStore } from './MediasStore';
+import { observer } from 'mobx-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,13 +50,19 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediasToolbar(){
+export const MediasToolbar = observer(()=>{
   const classes = useStyles();
+  const [keyword, setKeyword] = useState('');
   const toolIconSize = 21;
   const mediasStore = useMediasStore();
   const handleUpload = (event:React.ChangeEvent<HTMLInputElement>)=>{
     mediasStore.addUploadFiles(event.target.files);
   }
+
+  const handleChangeKeyword = (event:React.ChangeEvent<HTMLInputElement>)=>{
+    setKeyword(event.target.value as string);
+  }
+
   return (
     <Fragment>
       <div className={classes.search}>
@@ -68,7 +75,14 @@ export default function MediasToolbar(){
             root: classes.inputRoot,
             input: classes.inputInput,
           }}
-          inputProps={{ 'aria-label': 'search' }}
+          value = {keyword}
+          inputProps={{ 'aria-label': 'search' }}          
+          onChange = {handleChangeKeyword}
+          onKeyUp = {e=>{
+            if(e.key === 'Enter') {
+              mediasStore.setKeyword(keyword.trim());
+            }
+          }}
         />
       </div>                
       <Spacer />
@@ -114,4 +128,4 @@ export default function MediasToolbar(){
       </Hidden>
     </Fragment>
   )
-}
+})

@@ -19,6 +19,7 @@ export class MediasStore{
   hasMorePages:boolean = true;
   currentPage:number = 0;
   singleSelective?:boolean = false;
+  keyword?:string = '';
 
   constructor(single?:boolean) {
     this.singleSelective = single;
@@ -118,6 +119,16 @@ export class MediasStore{
 
   get selectedMediaStores(){
     return this.medias.filter(media=>media.selected);
+  }
+
+  setKeyword(keyword:string){
+    if(keyword !== this.keyword){
+      this.keyword = keyword;
+      this.medias = [];
+      this.currentPage = 0;
+      this.hasMorePages = true;   
+    }
+
   }
 }
 
