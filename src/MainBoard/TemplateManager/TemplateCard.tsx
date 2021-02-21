@@ -7,13 +7,14 @@ import Typography from '@material-ui/core/Typography';
 import { CircularProgress, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
-import { useHistory } from 'react-router-dom';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { gql, useMutation } from '@apollo/react-hooks';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import Image from 'Components/common/Image';
 import { QUERY_TEMPLATES } from './QUERY_TEMPLATES';
+import { EditTemplateDialog } from './EditTemplateDialog';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,9 +67,9 @@ export default function TemplateCard(
 ) {
   const {templates, rxTemplate} = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const isMenuOpen = Boolean(anchorEl);
-  const history = useHistory();
   const dragItStore = useDragItStore();
 
   const [excuteRemoveRxTemplate, {loading, error}] = useMutation( REMOVE_RX_TEMPLATE,
@@ -98,11 +99,6 @@ export default function TemplateCard(
     setAnchorEl(event.currentTarget);
   };
 
-  const hadleEdit = ()=>{
-    history.push(`/app-studio/${rxTemplate.id}`)
-    setAnchorEl(null);
-  }
-
   const handleRemove = ()=>{
     setAnchorEl(null);
     dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
@@ -115,67 +111,73 @@ export default function TemplateCard(
 
   }
 
-  const handleToApp = ()=>{
-    //history.push(`/app/${rxTemplate?.id}/`)
+  const handleEdit = ()=>{
+    setAnchorEl(null);
+    setOpen(true);
+  }
+
+  const handleClose = ()=>{
+    setOpen(false);
   }
   
   return (
-    <Card className={classes.root}>
-      <CardContent 
-        className={classes.content}
-        onClick = {handleToApp}
-      >
-        <Image borderRadius = "0" src = {rxTemplate.media?.thumbnail}/>
-        
-      </CardContent>
-      <CardActions className={classes.actions}>
-        <Typography className={classes.pos}>
-          {rxTemplate.name}
-        </Typography>
-        {
-          loading 
-          ? <CircularProgress size = {24}/>
-          : <>
-              <IconButton
-                onClick = {handleMenuOpen}
-                className = {classes.menuButton}
-              >
-                <MdiIcon iconClass = "mdi-dots-horizontal" size={20} />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                getContentAnchorEl={null}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={isMenuOpen}
-                onClose={handleMenuClose}
-                
-              >
-                <MenuItem onClick={hadleEdit} className = {classes.menuItem}>
-                  <ListItemIcon>
-                    <MdiIcon iconClass = "mdi-pencil"  size={18}/>
-                  </ListItemIcon>
-                  {intl.get('edit')} 
-                </MenuItem>
-                <Divider/>
-                <MenuItem onClick={handleRemove} className = {classes.menuItem}>
-                  <ListItemIcon>
-                    <MdiIcon iconClass = "mdi-delete-forever" color={'red'}  size={18}/>
-                  </ListItemIcon>
-                  {intl.get('delete')} 
-                </MenuItem>
-              </Menu>
-            </>
-        }
-
-
-      </CardActions>
-    </Card>
+    <>
+      <Card className={classes.root}>
+        <CardContent 
+          className={classes.content}
+          onClick = {handleEdit}
+        >
+          <Image borderRadius = "0" src = {rxTemplate.media?.thumbnail}/>
+          
+        </CardContent>
+        <CardActions className={classes.actions}>
+          <Typography className={classes.pos}>
+            {rxTemplate.name}
+          </Typography>
+          {
+            loading 
+            ? <CircularProgress size = {24}/>
+            : <>
+                <IconButton
+                  onClick = {handleMenuOpen}
+                  className = {classes.menuButton}
+                >
+                  <MdiIcon iconClass = "mdi-dots-horizontal" size={20} />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  getContentAnchorEl={null}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={isMenuOpen}
+                  onClose={handleMenuClose}
+                  
+                >
+                  <MenuItem onClick={handleEdit} className = {classes.menuItem}>
+                    <ListItemIcon>
+                      <MdiIcon iconClass = "mdi-pencil"  size={18}/>
+                    </ListItemIcon>
+                    {intl.get('edit')} 
+                  </MenuItem>
+                  <Divider/>
+                  <MenuItem onClick={handleRemove} className = {classes.menuItem}>
+                    <ListItemIcon>
+                      <MdiIcon iconClass = "mdi-delete-forever" color={'red'}  size={18}/>
+                    </ListItemIcon>
+                    {intl.get('delete')} 
+                  </MenuItem>
+                </Menu>
+              </>
+          }
+        </CardActions>
+      </Card>
+      <EditTemplateDialog templates = {templates} template = {rxTemplate} open = {open} onClose = {handleClose}/>
+    </>
   );
 }
