@@ -12,7 +12,12 @@ const cache = new InMemoryCache(
             merge(existing = [], incoming: any) {
               return incoming;
             }
-          }
+          },
+          rxTemplates: {
+            merge(existing = [], incoming: any) {
+              return incoming;
+            }
+          },
         }
       }
     }

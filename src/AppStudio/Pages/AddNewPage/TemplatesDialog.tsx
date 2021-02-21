@@ -7,7 +7,7 @@ import { CREATE_RX_PAGE, pageFieldsGQL } from "Base/GraphQL/PAGE_GQLs";
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
 import RxDialog from 'AppStudio/RxDialog';
-import { IRxTemplate } from 'Base/Model/IRxTemplate2';
+import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import TemplatesSkeleton from './TemplatesSkeleton';
 import { useState } from 'react';

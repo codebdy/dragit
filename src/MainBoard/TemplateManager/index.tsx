@@ -6,10 +6,11 @@ import { Container, Grid, Typography, Button } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { useState } from 'react';
 import { EditTemplateDialog } from './EditTemplateDialog';
-import { gql, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import AppsSkeleton from 'MainBoard/AppManager/AppsSkeleton';
-import { IRxTemplate } from 'Base/Model/IRxTemplate2';
+import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import TemplateCard from './TemplateCard';
+import { QUERY_TEMPLATES } from "./QUERY_TEMPLATES";
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 
@@ -33,24 +34,10 @@ export const TemplateManager = observer(() => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const { loading, error, data } = useQuery(gql`
-    query {
-      rxTemplates{
-        id
-        name
-        schema
-        media{
-          id
-          name
-          thumbnail
-          src
-        }
-      }
+  const { loading, error, data } = useQuery(QUERY_TEMPLATES,
+    {
+      errorPolicy:'all'
     }
-  `,
-  {
-    errorPolicy:'all'
-  }
   );
 
   useShowAppoloError(error);
@@ -103,7 +90,7 @@ export const TemplateManager = observer(() => {
               }
             </Grid>
         }
-      <EditTemplateDialog open = {open} onClose = {hanldeClose}/>
+      <EditTemplateDialog templates = {templates} open = {open} onClose = {hanldeClose}/>
     </Container>
 
   );

@@ -4,16 +4,16 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { CardMedia, CircularProgress, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
+import { CircularProgress, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import { useHistory } from 'react-router-dom';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { useMutation } from '@apollo/react-hooks';
-import { GET_RX_APP_LIST, REMOVE_RX_APP } from 'Base/GraphQL/APP_GQLs';
+import { gql, useMutation } from '@apollo/react-hooks';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { IRxTemplate } from 'Base/Model/IRxTemplate2';
+import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import Image from 'Components/common/Image';
+import { QUERY_TEMPLATES } from './QUERY_TEMPLATES';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +49,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const REMOVE_RX_TEMPLATE = gql`
+  mutation($id:ID!){
+    removeRxTemplate(id:$id){
+      id
+      name
+    }
+  }
+`
 
 export default function TemplateCard(
   props:{
@@ -63,14 +71,14 @@ export default function TemplateCard(
   const history = useHistory();
   const dragItStore = useDragItStore();
 
-  const [excuteRemoveRxPage, {loading, error}] = useMutation( REMOVE_RX_APP,
+  const [excuteRemoveRxTemplate, {loading, error}] = useMutation( REMOVE_RX_TEMPLATE,
     {
       //更新缓存
-      update(cache, { data: { removeRxApp } }){
+      update(cache, { data: { removeRxTemplate } }){
         cache.writeQuery({
-          query:GET_RX_APP_LIST,
+          query:QUERY_TEMPLATES,
           data:{
-            rxTemplates:templates.filter(template=>template.id !== removeRxApp.id)
+            rxTemplates:templates.filter(template=>template.id !== removeRxTemplate.id)
           }
         });
       },
@@ -98,11 +106,9 @@ export default function TemplateCard(
   const handleRemove = ()=>{
     setAnchorEl(null);
     dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
-      excuteRemoveRxPage({
+      excuteRemoveRxTemplate({
         variables:{
           id:rxTemplate.id,
-          //authIds:rxTemplate.auths?.map(auth=>auth.id),
-          //pageIds:rxTemplate.pages?.map(page=>page.id)||[''],
         }
       })     
     })
@@ -158,7 +164,7 @@ export default function TemplateCard(
                   {intl.get('edit')} 
                 </MenuItem>
                 <Divider/>
-                <MenuItem onClick={hadleEdit} className = {classes.menuItem}>
+                <MenuItem onClick={handleRemove} className = {classes.menuItem}>
                   <ListItemIcon>
                     <MdiIcon iconClass = "mdi-delete-forever" color={'red'}  size={18}/>
                   </ListItemIcon>

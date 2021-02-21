@@ -10,6 +10,8 @@ import { IRxMedia } from 'Base/Model/IRxMedia';
 import { gql, useMutation } from '@apollo/react-hooks';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { QUERY_TEMPLATES } from './QUERY_TEMPLATES';
+import { IRxTemplate } from 'Base/Model/IRxTemplate';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,11 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const EditTemplateDialog = observer((
   props:{
+    templates:Array<IRxTemplate>,
     open:boolean,
     onClose?:()=>void,
   }
 ) => {
-  const {open, onClose} = props;
+  const {templates, open, onClose} = props;
   const classes = useStyles();
   const [name, setName] = useState('');
   const [media, setMedia] = useState<IRxMedia>();
@@ -46,7 +49,15 @@ export const EditTemplateDialog = observer((
     gql`
       mutation($rxTemplate:CreateRxTemplateInput){
         createRxTemplate(rxTemplate:$rxTemplate){
-        id
+          id
+          name
+          schema
+          media{
+            id
+            name
+            thumbnail
+            src
+          }
       }
     }
     `,
@@ -54,7 +65,15 @@ export const EditTemplateDialog = observer((
       errorPolicy:'all',
       onCompleted(){
         onClose && onClose();
-      }
+      },
+      update(cache, { data: { createRxTemplate } }){
+        cache.writeQuery({
+          query:QUERY_TEMPLATES,
+          data:{
+            rxTemplates:[...templates, createRxTemplate]
+          }
+        });
+      },
     }
   )
 
