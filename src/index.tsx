@@ -10,6 +10,7 @@ import { CssBaseline } from '@material-ui/core';
 import 'config';
 import { DragItStore } from 'Store/DragItStore';
 import { DragItStoreProvider } from 'Store/Helpers/DragItStoreProvider';
+import { BrowserRouter } from 'react-router-dom';
 
 const appStore = new DragItStore();
 
@@ -17,7 +18,9 @@ ReactDOM.render(
   <DragItStoreProvider value = {appStore}>
     <ApolloProvider client={client}>
       <CssBaseline />      
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ApolloProvider>
   </DragItStoreProvider>  
   ,

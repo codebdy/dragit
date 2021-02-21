@@ -4,8 +4,6 @@ import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
 import { MediaUploadTaskView } from './MediaUploadTaskView';
 
-
-
 export const MediaGridListTasks = observer(()=>{
   const mediasStore = useMediasStore();
   return (

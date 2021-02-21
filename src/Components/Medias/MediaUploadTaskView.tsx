@@ -8,10 +8,11 @@ import { Close } from '@material-ui/icons';
 import { useMediasStore } from './MediasStore';
 import { useEffect } from 'react';
 import { gql, useMutation } from '@apollo/react-hooks';
+import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 
 const UPLOAD_MEDIA = gql`
-  mutation uploadRxMedia($file: Upload!, $rx_media_folder_id:ID){
-    uploadRxMedia(file:$file, rx_media_folder_id :$rx_media_folder_id){
+  mutation uploadRxMedia($file: Upload!, $rx_media_folder_id:ID, $rx_user_id:ID){
+    uploadRxMedia(file:$file, rx_media_folder_id:$rx_media_folder_id, rx_user_id:$rx_user_id){
       id
       name
       thumbnail
@@ -51,7 +52,9 @@ export const MediaUploadTaskView = observer((
     mediasStore.removeTask(task);
   }
 
-  const [uploadMutation,{error}] = useMutation(UPLOAD_MEDIA,
+  const loggedUser = useLoggedUser();
+
+  const [excuteUpload,{error}] = useMutation(UPLOAD_MEDIA,
     {
       errorPolicy:'all',
       onCompleted(data){
@@ -68,17 +71,18 @@ export const MediaUploadTaskView = observer((
   useEffect(()=>{
     if(!task.errorMessage && !task.uploading && task.file){
       task.setUploading(true);
-      uploadMutation(
+      excuteUpload(
         {
           variables:{
             file:task.file,
-            rx_media_folder_id: mediasStore.selectedFolderId || null
+            rx_media_folder_id: mediasStore.selectedFolderId || null,
+            rx_user_id:loggedUser.meta?.id || null
           }
         }
       )
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[task, uploadMutation])
+  },[task, excuteUpload])
 
   return (
     <div className = {classes.root}>

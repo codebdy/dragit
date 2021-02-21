@@ -83,7 +83,7 @@ export const MainBoard = observer(() => {
           <Link
             className = {classes.navLink}
             target = "_blank"
-            href= "https://document.rxdrag.com"
+            href= "https://rxdrag.com/document"
           >
             {intl.get('document')}
           </Link>

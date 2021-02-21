@@ -15,21 +15,26 @@ export function useLoginCheck() {
   const [excuteQuery, { error }] = useLazyQuery(gql`${QUERY_ME}`,{
     notifyOnNetworkStatusChange: true,
     onCompleted(data){
-      if(data){
+      if(data?.me){        
         appStore.setLoggedUser(data.me);
+      }
+      else{
+        localStorage.removeItem(TOKEN_NAME);
+        history?.push(LOGIN_URL);
       }
     }
   });
   //const { loading, error, data } = useQuery(LOGIN,);
   const appStore = useDragItStore();
-
+  
   useShowAppoloError(error);
 
   useEffect(()=>{
     if(!appStore.loggedUser && !localToken){
+      console.log('useLoginCheck',appStore.loggedUser, localToken, LOGIN_URL)
       history?.push(LOGIN_URL);
     }
-    if(!appStore.loggedUser && localToken){
+    if(!appStore.loggedUser && localToken){      
       client.setLink(creatLink(localToken));
       excuteQuery()
     }

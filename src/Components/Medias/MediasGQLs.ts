@@ -7,8 +7,8 @@ export const QUERY_FOLDERS = gql`
 `;
 
 export const MUTATION_ADD_FOLDER = gql`
-  mutation ($parent_id:ID, $name:String){
-    addRxMediaFolder(parent_id:$parent_id, name:$name){
+  mutation ($parent_id:ID, $name:String, $rx_user_id:ID){
+    addRxMediaFolder(parent_id:$parent_id, name:$name, rx_user_id:$rx_user_id){
       id
       name
       parent_id

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Loading from 'Common/Loading'
 import {AppBoard} from 'AppBoard';
 import useShadows from 'Utils/useShadows';
@@ -39,7 +39,6 @@ const App = observer(()=>{
       (<Loading />)
     :
       (<ThemeProvider theme={theme}>
-        <BrowserRouter>
           <Switch> 
             <Route path={ LOGIN_URL } component={Login}></Route>
             <Route path="/app/:appId/:pageId?/:id?" component={AppBoard}></Route>
@@ -47,7 +46,6 @@ const App = observer(()=>{
             <Route path="/app-studio/:appId" component={AppStudio}></Route>
             <Redirect to={ LOGIN_URL } from='/' /> 
           </Switch>
-        </BrowserRouter>
         <SuccessAlertBar />
         <ErrorDialog />
         <ConfirmDialog />
