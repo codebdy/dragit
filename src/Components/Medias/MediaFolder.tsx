@@ -15,7 +15,6 @@ import { useAddFolder } from './useAddFolder';
 import { useUpdateFolder } from './useUpdateFolder';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
-import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,7 +82,6 @@ export const MediaFolder = observer((
   const [nodeName, setNodeName] = React.useState(node.name);
   const mediaStore = useMediasStore();
   const [draggedFolder, setDraggedFolder] = React.useState(mediaStore.draggedFolder);  
-  const loggedUser = useLoggedUser();
   const {addFolder} = useAddFolder(node);
   const updateFolder = useUpdateFolder((data)=>{
     node.setLoading(false);
