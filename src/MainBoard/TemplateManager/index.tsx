@@ -10,7 +10,7 @@ import { useQuery } from '@apollo/react-hooks';
 import AppsSkeleton from 'MainBoard/AppManager/AppsSkeleton';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import TemplateCard from './TemplateCard';
-import { QUERY_TEMPLATES } from "./QUERY_TEMPLATES";
+import { QUERY_TEMPLATES } from "../../Base/GraphQL/QUERY_TEMPLATES";
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 
 

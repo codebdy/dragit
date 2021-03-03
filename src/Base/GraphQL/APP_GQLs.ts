@@ -76,15 +76,4 @@ export const REMOVE_RX_APP  = gql`
   }
 `;
 
-export const GET_RX_TEMPLATES = gql`
-  query {
-    rxTemplates{
-      id
-      name
-      schema
-      thumbnail
-    }
-  }
-`
-
 

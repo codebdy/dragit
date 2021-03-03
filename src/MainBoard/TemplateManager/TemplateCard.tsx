@@ -12,7 +12,7 @@ import { gql, useMutation } from '@apollo/react-hooks';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import Image from 'Components/common/Image';
-import { QUERY_TEMPLATES } from './QUERY_TEMPLATES';
+import { QUERY_TEMPLATES } from '../../Base/GraphQL/QUERY_TEMPLATES';
 import { EditTemplateDialog } from './EditTemplateDialog';
 import { useState } from 'react';
 

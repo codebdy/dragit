@@ -10,7 +10,7 @@ import { IRxMedia } from 'Base/Model/IRxMedia';
 import { gql, useMutation } from '@apollo/react-hooks';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { QUERY_TEMPLATES } from './QUERY_TEMPLATES';
+import { QUERY_TEMPLATES } from '../../Base/GraphQL/QUERY_TEMPLATES';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 
 const useStyles = makeStyles((theme: Theme) =>

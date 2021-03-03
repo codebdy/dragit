@@ -2,7 +2,6 @@ import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_RX_TEMPLATES } from 'Base/GraphQL/APP_GQLs';
 import { CREATE_RX_PAGE, pageFieldsGQL } from "Base/GraphQL/PAGE_GQLs";
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
@@ -16,6 +15,7 @@ import classNames from 'classnames';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { QUERY_TEMPLATES } from 'Base/GraphQL/QUERY_TEMPLATES';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,7 +77,7 @@ export const TemplatesDialog = observer((
   const classes = useStyles();
   const [name, setName] = useState(intl.get('new-page'));
   const [selected, setSelected] = useState<IRxTemplate>();
-  const {loading, data, error} = useQuery(GET_RX_TEMPLATES);
+  const {loading, data, error} = useQuery(QUERY_TEMPLATES);
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
