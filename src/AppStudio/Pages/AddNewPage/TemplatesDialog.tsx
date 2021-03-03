@@ -81,6 +81,7 @@ export const TemplatesDialog = observer((
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
+    errorPolicy:'all',
     //更新缓存
     update(cache, { data: { createRxPage } }){
       cache.modify({
