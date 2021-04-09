@@ -35,7 +35,7 @@ export function useIntl():[boolean, boolean]{
     .catch(e=>{
       setLoading(false);
       setError(true);
-      console.log("error")
+      console.log("error",e)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
