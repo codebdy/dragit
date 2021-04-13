@@ -26,9 +26,11 @@ export function useIntl():[boolean, boolean]{
   const [intlData, setIntlData] = useState();
   useEffect(()=>{
     setLoading(true);
-    fetch(`/locales/${lang}.json`, {headers:{
-      'Accept':'application/json'
-    }})
+    fetch(`/locales/${lang}.json`,{
+      method:'GET',
+      headers: {
+        'Content-Type':'application/json'
+      }})
     .then(response=>response.json())
     .then(data=>{
       setIntlData(data)      
