@@ -26,7 +26,11 @@ export function useIntl():[boolean, boolean]{
   const [intlData, setIntlData] = useState();
   useEffect(()=>{
     setLoading(true);
-    fetch(`/locales/${lang}.json`)
+    fetch(`/locales/${lang}.json`, {
+      method:'GET',
+      headers: {
+        'Content-Type':'application/json'
+      }})
     .then(response=>response.json())
     .then(data=>{
       setIntlData(data)      
@@ -35,7 +39,7 @@ export function useIntl():[boolean, boolean]{
     .catch(e=>{
       setLoading(false);
       setError(true);
-      console.log("error")
+      console.log("error", e)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
