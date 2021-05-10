@@ -31,7 +31,7 @@ export const CREATE_RX_PAGE = gql`
 `;
 
 export const REMOVE_RX_PAGE = gql`
-  mutation($id:ID){
+  mutation($id:[ID!]!){
     removeRxPage(id:$id){
       id
       name

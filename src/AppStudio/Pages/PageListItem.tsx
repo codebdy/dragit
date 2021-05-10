@@ -148,7 +148,7 @@ export const PageListItem = observer((
   }
 
   const handleRemove = ()=>{
-    excuteRemoveRxPage({variables:{id:page.id}});
+    excuteRemoveRxPage({variables:{id:[page.id]}});
   }
 
   const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{
