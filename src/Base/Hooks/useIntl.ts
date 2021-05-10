@@ -14,7 +14,7 @@ function getDefaultLang(){
   //lang = lang.substr(0, 2)
   //目前只实现两个语言版本
   if(lang !== 'zh-CN'){
-    lang = 'en'
+    lang = 'en-US'
   }
   return lang
 }

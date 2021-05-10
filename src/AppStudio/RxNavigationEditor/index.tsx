@@ -60,7 +60,7 @@ export const RxNavigationEditor = observer(()=>{
   const studioStore = useAppStudioStore();
  
   useEffect(()=>{
-    rootNode.parse(cloneObject(studioStore?.rxApp?.navigation_items||[]));
+    rootNode.parse(cloneObject(JSON.parse(studioStore?.rxApp?.navigation_items||'[]')));
     setRootNode(rootNode.copy());
     studioStore?.editNavigation();
   // eslint-disable-next-line react-hooks/exhaustive-deps

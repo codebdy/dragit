@@ -85,7 +85,7 @@ export const AppBoard = observer(()=>{
               loading
               ? <ListLoadingSkeleton/>
               : <SidebarLinks 
-                  items = {appboardStore.rxApp?.navigation_items}
+                  items = {JSON.parse(appboardStore.rxApp?.navigation_items||'[]')}
                 />  
             }            
           </Sidebar>

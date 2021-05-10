@@ -24,7 +24,7 @@ export const SaveNavigationButton = observer(() => {
   const handleSave = ()=>{
     const rxApp = toJS(studioStore?.rxApp);
     const items = toJS(studioStore?.navigationEditor?.currentData); 
-    excuteSaveRxApp({variables:{rxApp:{id:rxApp?.id, navigation_items:items}}});      
+    excuteSaveRxApp({variables:{rxApp:{id:rxApp?.id, navigation_items: JSON.stringify(items)}}});      
   }
   
   return (
