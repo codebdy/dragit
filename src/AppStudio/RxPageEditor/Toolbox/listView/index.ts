@@ -9,12 +9,12 @@ export default {
   withNode:true,
   props:{
     variant:'outlined',
-    query:'rxUsers',
-    remove:'removeRxUsers',
+    //query:'rxUsers',
+    //remove:'removeRxUsers',
     update:{
-      name:'updateRxUsers',
-      variableType:'RxUserInput',
-      variableName:'user',
+      //name:'updateRxUsers',
+      //variableType:'RxUserInput',
+      //variableName:'user',
     }
   },
   children:[
