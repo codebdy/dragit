@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from "axios"
 
 const API_LOGIN : AxiosRequestConfig= {
-  url:'/api/login',
+  url:'/login',
   method:'post',
 }
 
 const API_ME : AxiosRequestConfig= {
-  url:'/api/me',
+  url:'/me',
   method:'get',
 }
 

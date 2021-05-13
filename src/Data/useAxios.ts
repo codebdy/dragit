@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosRequestConfig } from 'axios';
 
+
 export function useAxios<T>(config?:AxiosRequestConfig, tipSuccess?:string|boolean):[T|undefined, boolean, boolean]{
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<T>();

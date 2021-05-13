@@ -6,7 +6,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
 import { INDEX_URL, TOKEN_NAME } from 'Utils/consts';
-import { gql, useApolloClient, useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { gql, useApolloClient, useLazyQuery } from '@apollo/react-hooks';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
@@ -15,6 +15,8 @@ import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { creatLink } from 'client';
 import { QUERY_ME } from 'Base/GraphQL/LOGIN_GQLs';
 import { observer } from 'mobx-react';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_LOGIN } from 'APIs/auth';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -69,13 +71,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-// 定义查询语句
-const LOGIN = gql`
-  mutation ($login_name: String!, $password: String!, $device_name:String!){
-    login(login_name:$login_name, password:$password, device_name:$device_name)
-  }
-`;
-
 export const Login = observer(()=>{
   const classes = useStyles();
   const client = useApolloClient();
@@ -91,22 +86,21 @@ export const Login = observer(()=>{
   const appStore = useDragItStore();
   const history = useHistory();
 
-  const [queryMe, { loading:querying, data, error:queryError }] = useLazyQuery(gql`${QUERY_ME}`,{
-    notifyOnNetworkStatusChange: true
-  });
+  //const [queryMe, { loading:querying, data, error:queryError }] = useLazyQuery(gql`${QUERY_ME}`,{
+  //  notifyOnNetworkStatusChange: true
+  //});
 
-  useEffect(()=>{
-    if(data){
-      appStore.setLoggedUser(data.me);
-      history.push(INDEX_URL)
-    }
-  }, [appStore, data, history]);
+  //useEffect(()=>{
+  //  if(data){
+  //    appStore.setLoggedUser(data.me);
+  //    history.push(INDEX_URL)
+  //  }
+  //}, [appStore, data, history]);
 
-  const [excuteLogin, { loading }] = useMutation(LOGIN,{
-    notifyOnNetworkStatusChange: true,
+  const [login, { loading }] = useLayzyAxios<string>(API_LOGIN,{
     onCompleted(data){
-      if(data && data.login){
-        const token = data.login;
+      if(data && data){
+        const token = data;
         if(rememberMe){
           localStorage.setItem(TOKEN_NAME, token);        
         }else{
@@ -114,7 +108,7 @@ export const Login = observer(()=>{
         }
         appStore.setToken(token);
         client.setLink(creatLink(token));
-        queryMe();
+        //queryMe();
       }
       else{
         setErroMessage(intl.get('login-failure'));
@@ -127,7 +121,7 @@ export const Login = observer(()=>{
     }
   });
 
-  useShowAppoloError(queryError);
+  //useShowAppoloError(queryError);
   
 
   
@@ -170,8 +164,8 @@ export const Login = observer(()=>{
   }
 
   const handleLogin = (event?: React.FormEvent<HTMLFormElement>)=>{
-    excuteLogin({
-      variables:{
+    login({
+      data:{
         login_name:values.account, 
         password:values.password,
         device_name:navigator.platform||'Can not identify'
@@ -263,7 +257,7 @@ export const Login = observer(()=>{
                 <Grid item xs={6}>
                     <SubmitButton fullWidth variant="contained" color="primary" size = "large" 
                       style={{fontSize:'1.2rem'}}
-                      submitting = {loading || querying}
+                      submitting = {loading}
                       type = "submit"
                     >
                       {intl.get('login')}
