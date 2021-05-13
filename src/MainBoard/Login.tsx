@@ -101,6 +101,7 @@ export const Login = observer(()=>{
     onCompleted(data){
       if(data && data){
         const token = data;
+        console.log('login token:', token)
         if(rememberMe){
           localStorage.setItem(TOKEN_NAME, token);        
         }else{
