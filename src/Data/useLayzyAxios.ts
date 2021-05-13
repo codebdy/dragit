@@ -2,20 +2,21 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useState } from "react";
 
 export default function useLayzyAxios<T>(config?:AxiosRequestConfig)
-  :{excute?:()=>void, loading?:boolean, data?:T, error?:string} 
+  :{excute?:(config?:AxiosRequestConfig)=>void, loading?:boolean, data?:T, error?:string} 
 {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<T>();
   const [error, setError] = useState<string>();
-  const excute = ()=>{
-    if(config){
+  const excute = (config2?:AxiosRequestConfig)=>{
+    const theConfig = config2 || config;
+    if(theConfig){
       setLoading(true);
-      axios( config ).then(res => {
+      axios( theConfig ).then(res => {
         setData(res.data);
         setLoading(false);
       })
       .catch(error => {
-        console.log('server error:useLayzyAxios', error);
+        console.log('Server error:useLayzyAxios', error);
         setLoading(false);
         setError(error.message);
       })       
