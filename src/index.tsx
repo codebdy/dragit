@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 //import * as serviceWorker from './serviceWorker';
-import { ApolloProvider } from '@apollo/react-hooks';
-//import client from './mock/client';
-import client from './client';
 import { CssBaseline } from '@material-ui/core';
 import 'config';
 import { DragItStore } from 'Store/DragItStore';
@@ -16,12 +13,10 @@ const appStore = new DragItStore();
 
 ReactDOM.render(
   <DragItStoreProvider value = {appStore}>
-    <ApolloProvider client={client}>
-      <CssBaseline />      
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ApolloProvider>
+    <CssBaseline />      
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </DragItStoreProvider>  
   ,
   document.getElementById('root')

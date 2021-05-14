@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { useState } from "react";
+import { TOKEN_NAME } from "Utils/consts";
 import { axiosConfig } from "./axiosConfig";
 import { serverUrl } from "./fetcher";
 
@@ -17,10 +18,12 @@ export default function useLayzyAxios<T>(
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<T>();
   const [error, setError] = useState<any>();
-  const excute = (config2?:AxiosRequestConfig)=>{
-    
+  const localToken = localStorage.getItem(TOKEN_NAME);
+  
+  const excute = (config2?:AxiosRequestConfig)=>{    
     if(config2 || config){
       setLoading(true);
+      axiosConfig.headers.authorization = localToken ? `Bearer ${localToken}` : ""
       axios( {...config, ...config2, ...axiosConfig} ).then(res => {
         setData(res.data);
         setLoading(false);

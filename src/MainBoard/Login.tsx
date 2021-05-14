@@ -6,14 +6,10 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import intl from "react-intl-universal";
 import { useHistory } from 'react-router';
 import { INDEX_URL, TOKEN_NAME } from 'Utils/consts';
-import { gql, useApolloClient, useLazyQuery } from '@apollo/react-hooks';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useThemeSettings } from "AppBoard/store/useThemeSettings";
 import { LIGHT } from 'AppBoard/store/ThemeSettings';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { creatLink } from 'client';
-import { QUERY_ME } from 'Base/GraphQL/LOGIN_GQLs';
 import { observer } from 'mobx-react';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_LOGIN } from 'APIs/auth';
@@ -73,8 +69,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Login = observer(()=>{
   const classes = useStyles();
-  const client = useApolloClient();
-
   const [values, setValues] = useState<any>({
     account: 'demo',
     password: 'demo',
@@ -107,7 +101,7 @@ export const Login = observer(()=>{
           localStorage.removeItem(TOKEN_NAME);
         }
         appStore.setToken(token);
-        client.setLink(creatLink(token));
+        //client.setLink(creatLink(token));
         //queryMe();
       }
       else{
