@@ -10,26 +10,17 @@ export function useLoginCheck() {
   const localToken = localStorage.getItem(TOKEN_NAME);
   const history = useHistory();
   const appStore = useDragItStore();
-  const { data: user } = useSWR(API_ME.url, fetcher);
-  appStore.setLoggedUser(user);
-  console.log('useLoginCheck', user);
-  //const client = useApolloClient();
-  //const [excuteQuery, { error }] = useLazyQuery(gql`${QUERY_ME}`,{
-  //  notifyOnNetworkStatusChange: true,
-  //  onCompleted(data){
-  //    if(data?.me){        
-  //      appStore.setLoggedUser(data.me);
-  //    }
-  //    else{
-  //      localStorage.removeItem(TOKEN_NAME);
-  //      history?.push(LOGIN_URL);
-  //    }
-  //  }
-  //});
-  //const { loading, error, data } = useQuery(LOGIN,);
-  //const appStore = useDragItStore();
+  const { data: user, error } = useSWR(API_ME.url, fetcher);
+
+  useEffect(()=>{
+    appStore.setLoggedUser(user);
+  },[appStore, user])
   
-  //useShowAppoloError(error);
+  useEffect(()=>{
+    if(error?.status === 401){
+      history?.push(LOGIN_URL);
+    }
+  },[error, history])
 
   useEffect(()=>{
     if(!appStore.loggedUser && !localToken){
