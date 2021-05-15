@@ -1,6 +1,6 @@
 import { TOKEN_NAME } from "Utils/consts";
+import { serverUrl } from "./serverUrl";
 
-const serverUrl = "http://127.0.0.1:8000/api";
 const fetcher = async (url:string) => {
   const token = localStorage.getItem(TOKEN_NAME);
   const res = await fetch(
@@ -26,4 +26,4 @@ const fetcher = async (url:string) => {
   return res.json()
 }
 
-export {fetcher, serverUrl};
+export {fetcher};

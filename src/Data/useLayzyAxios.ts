@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useState } from "react";
 import { TOKEN_NAME } from "Utils/consts";
 import { axiosConfig } from "./axiosConfig";
-import { serverUrl } from "./fetcher";
+import { serverUrl } from "./serverUrl";
 
 axios.defaults.baseURL = serverUrl
 

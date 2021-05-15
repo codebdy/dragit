@@ -136,7 +136,7 @@ export const AppManager = observer(() => {
                 apps.map((rxApp:IRxApp)=>{
                   return(
                     <Grid item key={rxApp.id} lg={2} md={3} sm={4} xs={6}>
-                      <AppCard apps = {apps} rxApp = {rxApp} />
+                      <AppCard rxApp = {rxApp} />
                     </Grid>
                   )
                 })

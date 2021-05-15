@@ -10,9 +10,9 @@ import { IRxApp } from 'Base/Model/IRxApp';
 import intl from 'react-intl-universal';
 import { useHistory } from 'react-router-dom';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
-import { useMutation } from '@apollo/react-hooks';
-import { GET_RX_APP_LIST, REMOVE_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_REMOVE_RX_APP } from 'APIs/app';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,28 +57,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AppCard(
   props:{
-    apps:Array<IRxApp>,
     rxApp:IRxApp
   }
 ) {
-  const {apps, rxApp} = props;
+  const {rxApp} = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();
   const isMenuOpen = Boolean(anchorEl);
   const history = useHistory();
   const dragItStore = useDragItStore();
 
-  const [excuteRemoveRxPage, {loading, error}] = useMutation( REMOVE_RX_APP,
+  const [excuteRemoveRxPage, {loading, error}] = useLayzyAxios<IRxApp>( API_REMOVE_RX_APP,
     {
-      //更新缓存
-      update(cache, { data: { removeRxApp } }){
-        cache.writeQuery({
-          query:GET_RX_APP_LIST,
-          data:{
-            rxApps:apps.filter(app=>app.id !== removeRxApp.id)
-          }
-        });
-      },
       onCompleted: (data)=>{
         dragItStore.setSuccessAlert(true);
       }
@@ -104,7 +94,7 @@ export default function AppCard(
     setAnchorEl(null);
     dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
       excuteRemoveRxPage({
-        variables:{
+        data:{
           id:rxApp.id,
           authIds:rxApp.auths?.map(auth=>auth.id),
           pageIds:rxApp.pages?.map(page=>page.id)||[''],
