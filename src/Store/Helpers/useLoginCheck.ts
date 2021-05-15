@@ -2,25 +2,19 @@ import { useEffect } from "react";
 import { useDragItStore } from "./useDragItStore";
 import { TOKEN_NAME, LOGIN_URL } from "Utils/consts";
 import { useHistory } from "react-router-dom";
-import useSWR from "swr";
-import { fetcher } from "Data/fetcher";
 import { API_ME } from "APIs/auth";
+import { IUser } from "Base/Model/IUser";
+import { useSWRQuery } from "Data/useSWRQuery";
 
 export function useLoginCheck() {
   const localToken = localStorage.getItem(TOKEN_NAME);
   const history = useHistory();
   const appStore = useDragItStore();
-  const { data: user, error } = useSWR(API_ME.url, fetcher);
+  const { data: user } = useSWRQuery<IUser>(API_ME);
 
   useEffect(()=>{
     appStore.setLoggedUser(user);
   },[appStore, user])
-  
-  useEffect(()=>{
-    if(error?.status === 401){
-      history?.push(LOGIN_URL);
-    }
-  },[error, history])
 
   useEffect(()=>{
     if(!appStore.loggedUser && !localToken){

@@ -6,15 +6,18 @@ import AppCard from './AppCard';
 import { Add } from '@material-ui/icons';
 import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { CREATE_RX_APP, GET_RX_APP_LIST } from 'Base/GraphQL/APP_GQLs';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+//import { useMutation, useQuery } from '@apollo/react-hooks';
+//import { CREATE_RX_APP, GET_RX_APP_LIST } from 'Base/GraphQL/APP_GQLs';
+//import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import AppsSkeleton from './AppsSkeleton';
 import { IRxApp } from 'Base/Model/IRxApp';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { AUTH_APP } from 'Base/authSlugs';
 import { v4 as uuidv4 } from 'uuid';
+import { API_CREATE_RX_APP, API_GET_RX_APP_LIST } from "APIs/app";
+import { useSWRQuery } from "Data/useSWRQuery";
+import useLayzyAxios from "Data/useLayzyAxios";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,30 +36,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_RX_APP_LIST,{errorPolicy:'all'});
+  const { loading, data:rxApps } = useSWRQuery<IRxApp[]>(API_GET_RX_APP_LIST);
   const dragItStore = useDragItStore();
-  const apps = data ? data.rxApps :[];
-  const [ excuteCreate, {loading:saving, error:createError}] = useMutation(CREATE_RX_APP, {
-    errorPolicy:'all',
-    //更新缓存
-    update(cache, { data: { createRxApp } }){
-      cache.writeQuery({
-        query:GET_RX_APP_LIST,
-        data:{
-          rxApps:[...apps, createRxApp]
-        }
-      });
-    },
+  const apps = rxApps||[];
+  const [ excuteCreate, {loading:saving}] = useLayzyAxios(API_CREATE_RX_APP, {
     //结束后提示
     onCompleted: (data)=>{
       dragItStore.setSuccessAlert(true)
     }
   })
 
-  useShowAppoloError(error || createError);
+  //useShowAppoloError(error || createError);
 
   const handleCreate = ()=>{
-    excuteCreate({variables:{
+    excuteCreate({data:{
       rxApp:{
         uuid:uuidv4(),
         name:intl.get('new-app'),

@@ -5,7 +5,7 @@ const API_LOGIN : AxiosRequestConfig= {
   method:'post',
 }
 
-const API_ME  = {
+const API_ME : AxiosRequestConfig = {
   url:'/me',
   method:'get',
 }
