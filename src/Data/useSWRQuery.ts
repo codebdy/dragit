@@ -3,17 +3,12 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import useSWR, { SWRResponse } from "swr";
 import { LOGIN_URL } from "Utils/consts";
+import { DataError } from "./DataError";
 import { fetcher } from "./fetcher";
 
-export class QueryError{
-  stack?: string;
-  message?: String;
-  status?: number;
-}
-
-export function useSWRQuery<Data>(api:AxiosRequestConfig):SWRResponse<Data, QueryError>&{loading?:boolean}{
+export function useSWRQuery<Data>(api:AxiosRequestConfig):SWRResponse<Data, DataError>&{loading?:boolean}{
   const history = useHistory();
-  const rtValue = useSWR<Data, QueryError>(api.url||'', fetcher);
+  const rtValue = useSWR<Data, DataError>(api.url||'', fetcher);
   useEffect(()=>{
     if(rtValue?.error?.status === 401){
       history?.push(LOGIN_URL);

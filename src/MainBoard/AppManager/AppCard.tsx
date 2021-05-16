@@ -9,7 +9,6 @@ import MdiIcon from 'Components/common/MdiIcon';
 import { IRxApp } from 'Base/Model/IRxApp';
 import intl from 'react-intl-universal';
 import { useHistory } from 'react-router-dom';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_REMOVE_RX_APP } from 'APIs/app';
@@ -75,7 +74,7 @@ export default function AppCard(
     }
   );
 
-  useShowAppoloError(error);
+  //useShowAppoloError(error);
   
   const handleMenuClose = () => {
     setAnchorEl(null);

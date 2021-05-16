@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { API_CREATE_RX_APP, API_GET_RX_APP_LIST } from "APIs/app";
 import { useSWRQuery } from "Data/useSWRQuery";
 import useLayzyAxios from "Data/useLayzyAxios";
+import { useAxiosError } from "Store/Helpers/useAxiosError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,18 +37,17 @@ export const AppManager = observer(() => {
   const { loading, data:rxApps } = useSWRQuery<IRxApp[]>(API_GET_RX_APP_LIST);
   const dragItStore = useDragItStore();
   const apps = rxApps||[];
-  const [ excuteCreate, {loading:saving}] = useLayzyAxios(API_CREATE_RX_APP, {
+  const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_CREATE_RX_APP, {
     //结束后提示
     onCompleted: (data)=>{
       dragItStore.setSuccessAlert(true)
     }
   })
 
-  //useShowAppoloError(error || createError);
+  useAxiosError(creatError);
 
   const handleCreate = ()=>{
     excuteCreate({data:{
-      rxApp:{
         uuid:uuidv4(),
         name:intl.get('new-app'),
         icon:'mdi-application',
@@ -72,7 +72,6 @@ export const AppManager = observer(() => {
             }
           ]
         }
-      }
     }})
   }
 
