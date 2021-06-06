@@ -91,10 +91,11 @@ export const Login = observer(()=>{
   //  }
   //}, [appStore, data, history]);
 
-  const [login, { loading }] = useLayzyAxios<string>(API_LOGIN,{
+  const [login, { loading }] = useLayzyAxios<any>(API_LOGIN,{
     onCompleted(data){
+      console.log('useLayzyAxios', data);
       if(data && data){
-        const token = data;
+        const token = data.access_token;
         if(rememberMe){
           localStorage.setItem(TOKEN_NAME, token);        
         }else{
@@ -160,9 +161,8 @@ export const Login = observer(()=>{
   const handleLogin = (event?: React.FormEvent<HTMLFormElement>)=>{
     login({
       data:{
-        login_name:values.account, 
-        password:values.password,
-        device_name:navigator.platform||'Can not identify'
+        username:values.account, 
+        password:values.password
       }
     }); 
     event && event.preventDefault();
