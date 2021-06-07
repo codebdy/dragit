@@ -60,11 +60,11 @@ export const RxNavigationEditor = observer(()=>{
   const studioStore = useAppStudioStore();
  
   useEffect(()=>{
-    rootNode.parse(cloneObject(JSON.parse(studioStore?.rxApp?.navigation_items||'[]')));
+    rootNode.parse(cloneObject(JSON.parse(studioStore?.rxApp?.navigationItems||'[]')));
     setRootNode(rootNode.copy());
     studioStore?.editNavigation();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[studioStore?.rxApp?.navigation_items]);
+  },[studioStore?.rxApp?.navigationItems]);
 
 
   const handleSelectedNode = (node:RxNode<IMenuItem>)=>{

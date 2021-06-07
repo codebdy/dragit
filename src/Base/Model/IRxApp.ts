@@ -4,16 +4,15 @@ import { IRxAuth } from "./IRxAuth";
 import { IRxPage } from "./IRxPage";
 
 export interface IRxApp{
-  //使用GUID当ID用
   id?:ID;
   name?: string;
-  is_system?: boolean;
+  isSystem?: boolean;
   icon?: string; 
   color?: string;
-  app_type?: string;
+  appType?: string;
   pages?: Array<IRxPage>;
-  navigation_items?: string;
+  navigationItems?: string;
   auths?: Array<IRxAuth>;
   notifications?: number;
-  entry_page_id?:ID;
+  entryPageId?:ID;
 }

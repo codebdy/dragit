@@ -129,7 +129,7 @@ export default function AppCard(
       </CardContent>
       <CardActions className={classes.actions}>
         <Typography className={classes.pos} color="textSecondary">
-          {rxApp.app_type}
+          {rxApp.appType}
         </Typography>
         {
           loading 
@@ -172,7 +172,7 @@ export default function AppCard(
                    // </MenuItem>
                 }
                 {
-                  !rxApp.is_system && 
+                  !rxApp.isSystem && 
                   <MenuItem onClick={handlePackageDown} className = {classes.menuItem}>
                     <ListItemIcon>
                       <MdiIcon iconClass = "mdi-package-down"  size={18}/>
@@ -180,10 +180,10 @@ export default function AppCard(
                     {intl.get('make-package')} 
                   </MenuItem>
                 }
-                { !rxApp.is_system && 
+                { !rxApp.isSystem && 
                   <Divider/>
                 }
-                { !rxApp.is_system && 
+                { !rxApp.isSystem && 
                   <MenuItem className = {classes.menuItem} onClick={handleRemove}>
                     <ListItemIcon>
                       <MdiIcon iconClass = "mdi-delete-forever" color={'red'} size={18}/>

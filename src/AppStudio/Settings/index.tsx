@@ -42,10 +42,10 @@ export const Settings = observer((
   const dragItStore = useDragItStore();
 
   const [name, setName] = useState(rxApp?.name);
-  const [appType, setAppType] = useState(rxApp?.app_type);
+  const [appType, setAppType] = useState(rxApp?.appType);
   const [icon, setIcon] = useState(rxApp?.icon);
   const [color, setColor] = useState(rxApp?.color);
-  const [entryPageId, setEntryPageId] = useState(rxApp?.entry_page_id);
+  const [entryPageId, setEntryPageId] = useState(rxApp?.entryPageId);
   const [excuteSave, {loading, error}] = useMutation(Update_RX_APP,{
     onCompleted(){
       onClose && onClose();
@@ -58,10 +58,10 @@ export const Settings = observer((
   const handleCancel = ()=>{
     onClose && onClose();
     setName(rxApp?.name);
-    setAppType(rxApp?.app_type);
+    setAppType(rxApp?.appType);
     setIcon(rxApp?.icon);
     setColor(rxApp?.color);
-    setEntryPageId(rxApp?.entry_page_id);
+    setEntryPageId(rxApp?.entryPageId);
   }
 
   const handleSave = ()=>{
