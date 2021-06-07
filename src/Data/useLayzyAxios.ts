@@ -41,7 +41,7 @@ export default function useLayzyAxios<T>(
         if(options?.onError){
           options?.onError(error);
         }
-        if(error.status === 401){
+        if(error.response.status === 401){
           history?.push(LOGIN_URL);
         }   
       })       

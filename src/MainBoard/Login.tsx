@@ -92,15 +92,14 @@ export const Login = observer(()=>{
         }
         appStore.setToken(token);
         history.push(INDEX_URL);
-      }
-      else{
-        setErroMessage(intl.get('login-failure'));
-      }
-      
+      }      
     },
     onError(error){
-      console.log(error);
-      setErroMessage(error.message);
+      if(error.response.status === 401){
+        setErroMessage(intl.get('login-failure'));
+      }else{
+        setErroMessage(error.message);
+      }
     }
   });
 
