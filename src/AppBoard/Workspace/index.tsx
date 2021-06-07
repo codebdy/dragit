@@ -53,7 +53,7 @@ export const Workspace = observer(()=>{
     }
   }
 
-  let maxWidth = page?.max_width ==='false' ? false : page?.max_width;
+  let maxWidth = page?.maxWidth ==='false' ? false : page?.maxWidth;
 
   maxWidth = maxWidth === '' || maxWidth === undefined ? 'lg' : maxWidth;
 

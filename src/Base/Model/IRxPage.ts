@@ -6,10 +6,10 @@ export type MaxWidth = 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'false'| '' |undefined
 export interface IRxPage{
   id:ID,
   name?:string, 
-  max_width?: MaxWidth;
+  maxWidth?: MaxWidth;
   width?:number;
   schema?:string,//Array<IMeta>,
   auths?:IRxAuth[],
   query?:string, 
-  excute_query_by_mutation?: boolean,
+  excuteQueryByMutation?: boolean,
 }

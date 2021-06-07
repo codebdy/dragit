@@ -55,7 +55,7 @@ export const AuthListItem = observer((
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [slug, setSlug] = useState(auth?.rx_slug ||'');
+  const [slug, setSlug] = useState(auth?.rxSlug ||'');
   const [name, setName] = useState(auth?.name || '');
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
@@ -98,7 +98,7 @@ export const AuthListItem = observer((
   }
 
   const handleCancel = ()=>{
-    setSlug(auth?.rx_slug||'');
+    setSlug(auth?.rxSlug||'');
     setName(auth?.name||'');
     setEditing(false);
   }

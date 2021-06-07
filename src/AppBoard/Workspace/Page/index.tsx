@@ -157,12 +157,12 @@ export const Page = observer((
       <ActionStoreProvider value = {actionStore}>
         <ModelProvider value = {modelStore}>
           {
-            pageStore?.queryGQL && !page.excute_query_by_mutation &&
+            pageStore?.queryGQL && !page.excuteQueryByMutation &&
             <PageQuery queryGQL = {pageStore?.queryGQL}/>
           }
 
           {
-            pageStore?.queryGQL && page.excute_query_by_mutation &&
+            pageStore?.queryGQL && page.excuteQueryByMutation &&
             <PageQueryByMutation queryGQL = {pageStore?.queryGQL}/>
           }
           

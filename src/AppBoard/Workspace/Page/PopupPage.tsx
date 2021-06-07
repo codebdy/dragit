@@ -32,7 +32,7 @@ export const PopupPage = observer((
     <Fragment>
       {
         <PageDialog
-          maxWidth = {page?.max_width}
+          maxWidth = {page?.maxWidth}
           open={!isDrawerStyle && open}
           onClose={onClose}
           title = {page?.name}

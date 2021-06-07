@@ -24,7 +24,7 @@ export class PageStore{
     this.rootNode.parse(cloneObject(layout));
     this.makePageMutationGqls();
     const query = page?.query;
-    const quetyType = page?.excute_query_by_mutation ? 'mutation' : 'query';
+    const quetyType = page?.excuteQueryByMutation ? 'mutation' : 'query';
     if(query){
       this.queryGQL = new GraphQLStore(intl.get('data-query'), 'Page', `
         ${quetyType} ($id:ID){

@@ -26,7 +26,7 @@ const CanvasInner = observer((props: {
   }) => {
   const classes = useStyles();
   const studioStore = useAppStudioStore();
-  let maxWidth = studioStore?.pageEditor?.currentData?.max_width;
+  let maxWidth = studioStore?.pageEditor?.currentData?.maxWidth;
   maxWidth = maxWidth === '' || maxWidth === undefined ? 'lg' : maxWidth;
   let width:any = studioStore?.pageEditor?.currentData?.width
   width = width  ? width + 'px' : '';

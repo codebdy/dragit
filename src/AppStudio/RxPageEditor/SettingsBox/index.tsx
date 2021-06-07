@@ -43,18 +43,18 @@ const SettingsBox = observer(()=>{
   }
 
   const handleExcuteQueryByMutationChange =  (value: any)=>{
-    doUpdatePage('excute_query_by_mutation', value);
+    doUpdatePage('excuteQueryByMutation', value);
   }
 
   const handleChangeMaxWidth = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const newMaxWidth = event.target.value as string;
-    doUpdatePage('max_width', newMaxWidth);
+    doUpdatePage('maxWidth', newMaxWidth);
   }
 
   const handleChangeAuths = (event: React.ChangeEvent<{ value: unknown }>)=>{
     const newAuths:Array<IRxAuth> = event.target.value as any
     doUpdatePage('auths', newAuths?.map(auth=>{
-      return {id:auth.id, name:auth.name, rx_slug: auth.rx_slug}
+      return {id:auth.id, name:auth.name, rx_slug: auth.rxSlug}
     }));
   }
 
@@ -65,7 +65,7 @@ const SettingsBox = observer(()=>{
           <FormControl variant="outlined" size="small" fullWidth >
             <InputLabel>{intl.get('max-width')}</InputLabel>
             <Select
-              value={ stringValue(page?.max_width) }
+              value={ stringValue(page?.maxWidth) }
               onChange={handleChangeMaxWidth}
               label = {intl.get('max-width')}
             >
@@ -114,7 +114,7 @@ const SettingsBox = observer(()=>{
         <BooleanInput
           xs = {12} 
           label={intl.get("excute-query-by-mutation")} 
-          value={page?.excute_query_by_mutation}
+          value={page?.excuteQueryByMutation}
           onChange={handleExcuteQueryByMutationChange}
           size = "medium"
         />
