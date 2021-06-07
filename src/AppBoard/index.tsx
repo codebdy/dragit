@@ -16,6 +16,7 @@ import ModuleSkeleton from './AppBoardSkeleton';
 import { SidebarLinks } from './Sidebar/SidebarLinks';
 import ListLoadingSkeleton from './Sidebar/ListLoadingSkeleton';
 import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +43,8 @@ export const AppBoard = observer(()=>{
   const [appboardStore] = useState(new AppBoardStore());
   const match = useRouteMatch();
   const{appId} = match.params as any;
+  
+  useLoginCheck();
   
   const [excuteQuery, { loading, error, data }] = useLazyQuery(GET_RX_APP,{
     notifyOnNetworkStatusChange: true

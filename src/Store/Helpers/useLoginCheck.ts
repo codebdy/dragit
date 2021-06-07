@@ -21,10 +21,10 @@ export function useLoginCheck() {
       console.log('useLoginCheck',appStore.loggedUser, localToken, LOGIN_URL)
       history?.push(LOGIN_URL);
     }
-    if(!appStore.loggedUser && localToken){      
+    //if(!appStore.loggedUser && localToken){      
       //client.setLink(creatLink(localToken));
       //excuteQuery()
-    }
+    //}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

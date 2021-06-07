@@ -80,17 +80,6 @@ export const Login = observer(()=>{
   const appStore = useDragItStore();
   const history = useHistory();
 
-  //const [queryMe, { loading:querying, data, error:queryError }] = useLazyQuery(gql`${QUERY_ME}`,{
-  //  notifyOnNetworkStatusChange: true
-  //});
-
-  //useEffect(()=>{
-  //  if(data){
-  //    appStore.setLoggedUser(data.me);
-  //    history.push(INDEX_URL)
-  //  }
-  //}, [appStore, data, history]);
-
   const [login, { loading }] = useLayzyAxios<any>(API_LOGIN,{
     onCompleted(data){
       console.log('useLayzyAxios', data);
@@ -102,8 +91,7 @@ export const Login = observer(()=>{
           localStorage.removeItem(TOKEN_NAME);
         }
         appStore.setToken(token);
-        //client.setLink(creatLink(token));
-        //queryMe();
+        history.push(INDEX_URL);
       }
       else{
         setErroMessage(intl.get('login-failure'));
@@ -116,10 +104,6 @@ export const Login = observer(()=>{
     }
   });
 
-  //useShowAppoloError(queryError);
-  
-
-  
   useEffect(()=>{
     setErroMessage('');
   },[values]);

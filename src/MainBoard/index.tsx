@@ -11,6 +11,7 @@ import intl from 'react-intl-universal';
 import { NavLink, Redirect, Route, Switch } from "react-router-dom";
 import { AppManager } from "./AppManager";
 import { TemplateManager } from "./TemplateManager";
+import { useLoginCheck } from "Store/Helpers/useLoginCheck";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const MainBoard = observer(() => {
   const classes = useStyles();
-
+  useLoginCheck();
   return (
     <div className={classes.root}>
       <AppBar 

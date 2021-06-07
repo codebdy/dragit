@@ -20,6 +20,7 @@ import intl from 'react-intl-universal';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { SaveNavigationButton } from './RxNavigationEditor/SaveNavigationButton';
 import { INDEX_URL } from 'Utils/consts';
+import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +50,8 @@ export const AppStudio = observer(() => {
   const history = useHistory();
   const match = useRouteMatch();
   const{appId} = match.params as any;
+  
+  useLoginCheck();
 
   const theme = createMuiTheme({
     palette: {
