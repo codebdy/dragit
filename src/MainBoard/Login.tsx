@@ -82,7 +82,7 @@ export const Login = observer(()=>{
 
   const [login, { loading }] = useLayzyAxios<any>(API_LOGIN,{
     onCompleted(data){
-      console.log('useLayzyAxios', data);
+      console.debug('Login token', data);
       if(data && data){
         const token = data.access_token;
         if(rememberMe){
