@@ -8,7 +8,7 @@ import { CircularProgress, TextField, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { gql, useMutation } from '@apollo/react-hooks';
 import { DUPLICATE_RX_PAGE, pageFieldsGQL, REMOVE_RX_PAGE, SAVE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import classNames from 'classnames';
 import ActionButton from 'AppStudio/ActionButton';
@@ -116,7 +116,7 @@ export const PageListItem = observer((
     },
   });
 
-  useShowAppoloError(error || removeError || duplicateError);
+  useShowServerError(error || removeError || duplicateError);
 
   const handleEditName = ()=>{
     setEditing(true);

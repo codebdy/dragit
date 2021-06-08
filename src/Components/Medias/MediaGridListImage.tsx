@@ -7,7 +7,7 @@ import Close from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
 import MdiIcon from 'Components/common/MdiIcon';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import Image from 'Components/common/Image';
 import {observer} from 'mobx-react';
 import { MediaStore } from './MediaStore';
@@ -96,7 +96,7 @@ export const MediaGridListImage = observer((
       mediasStore.removeMedias([media.id]);
     }});
 
-  useShowAppoloError(removeMediasError);
+  useShowServerError(removeMediasError);
     
   const changeImageNameOnServer = ()=>{
     if(mediaName === media.name){

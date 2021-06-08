@@ -15,7 +15,7 @@ import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import ModuleSkeleton from './AppBoardSkeleton';
 import { SidebarLinks } from './Sidebar/SidebarLinks';
 import ListLoadingSkeleton from './Sidebar/ListLoadingSkeleton';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,7 +50,7 @@ export const AppBoard = observer(()=>{
     notifyOnNetworkStatusChange: true
   });
 
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   useEffect(()=>{
     if(appId){

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { CircularProgress, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { gql, useMutation } from '@apollo/react-hooks';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
@@ -89,7 +89,7 @@ export default function TemplateCard(
     }
   );
 
-  useShowAppoloError(error);
+  useShowServerError(error);
   
   const handleMenuClose = () => {
     setAnchorEl(null);

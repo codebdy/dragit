@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { useShowAppoloError } from "Store/Helpers/useInfoError";
+import { useShowServerError } from "Store/Helpers/useInfoError";
 import { MUTATION_UPDATE_MEDIA } from "./MediasGQLs";
 
 export function useUpdateMedia(onCompleted:(data:any)=>void){
@@ -9,6 +9,6 @@ export function useUpdateMedia(onCompleted:(data:any)=>void){
     }
   );
   
-    useShowAppoloError(error);
+    useShowServerError(error);
     return updateMedia
 }

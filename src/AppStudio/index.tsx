@@ -11,7 +11,7 @@ import { useHistory, useRouteMatch } from 'react-router';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import { useEffect } from 'react';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import AppSkeleton from './AppSkeleton';
 import { WorkSpace } from './WorkSpace';
 import { DARK } from 'AppBoard/store/ThemeSettings';
@@ -94,7 +94,7 @@ export const AppStudio = observer(() => {
     studioStore.setRxApp(data?.rxApp);
   },[data, studioStore])
 
-  useShowAppoloError(error)
+  useShowServerError(error)
 
   const handleBack = ()=>{
     if(studioStore?.pageEditor?.isDirty || studioStore?.navigationEditor?.isDirty){

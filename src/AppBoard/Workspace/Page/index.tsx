@@ -14,7 +14,7 @@ import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import intl from 'react-intl-universal';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import { ActionStore, ActionStoreProvider } from 'Base/PageUtils/ActionStore';
 import ActionHunter from 'Base/PageUtils/ActionHunter';
@@ -83,7 +83,7 @@ export const Page = observer((
     }
   );
   
-  useShowAppoloError(muetationError);
+  useShowServerError(muetationError);
 
   useEffect(()=>{
     if(mutation){

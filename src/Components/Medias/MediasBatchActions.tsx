@@ -8,7 +8,7 @@ import { useMediasStore } from './MediasStore';
 import {observer} from 'mobx-react';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -48,7 +48,7 @@ export const MediasBatchActions = observer(()=>{
       mediasStore?.removeMedias(data?.removeRxMedias?.map((media:IRxMedia)=>media.id));
     }});
 
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   const handleClearSelected = ()=>{
     mediasStore?.clearSelected();

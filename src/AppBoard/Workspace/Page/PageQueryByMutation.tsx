@@ -5,7 +5,7 @@ import { usePageStore } from "Base/PageUtils/PageStore";
 import { observer } from "mobx-react";
 import React, { useEffect } from "react"
 import { Fragment } from "react"
-import { useShowAppoloError } from "Store/Helpers/useInfoError";
+import { useShowServerError } from "Store/Helpers/useInfoError";
 
 export const PageQueryByMutation = observer((
   props:{
@@ -40,7 +40,7 @@ export const PageQueryByMutation = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  useShowAppoloError(error);
+  useShowServerError(error);
   return (
     <Fragment></Fragment>
   )

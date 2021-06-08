@@ -1,6 +1,6 @@
 
 export class DataError {
   stack?: string;
-  message?: String;
+  message?: string;
   status?: number;
 }

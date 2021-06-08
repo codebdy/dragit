@@ -7,7 +7,7 @@ import intl from 'react-intl-universal';
 import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
 import { MediasBatchActions } from "./MediasBatchActions";
 import {  MUTATION_UPDATE_FOLDER } from "./MediasGQLs";
-import { useShowAppoloError } from "Store/Helpers/useInfoError";
+import { useShowServerError } from "Store/Helpers/useInfoError";
 import { useMediasStore } from "./MediasStore";
 import {observer} from 'mobx-react';
 import SubmitButton from "Components/common/SubmitButton";
@@ -92,7 +92,7 @@ export const  MediasContentInner = observer(()=>{
       }
     }});
    
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   const handleAddNewFolder = ()=>{
     addFolder({variables:{name:intl.get('new-folder')}});

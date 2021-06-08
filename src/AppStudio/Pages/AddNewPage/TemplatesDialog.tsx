@@ -7,7 +7,7 @@ import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
 import RxDialog from 'AppStudio/RxDialog';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import TemplatesSkeleton from './TemplatesSkeleton';
 import { useState } from 'react';
 import Image from 'Components/common/Image';
@@ -108,7 +108,7 @@ export const TemplatesDialog = observer((
     }
   })
 
-  useShowAppoloError(error||createError);
+  useShowServerError(error||createError);
 
   const templates = data?.rxTemplates;
 

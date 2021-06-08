@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 
 export const Combobox = React.forwardRef((
   props:{
@@ -53,7 +53,7 @@ export const Combobox = React.forwardRef((
     }
   },[excuteQuery, query])
 
-  useShowAppoloError(queryError)  
+  useShowServerError(queryError)  
 
   const itemsData = (query? (data&&data[query])||[] : items) as any;
   

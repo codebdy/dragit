@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 import { gql, useMutation } from '@apollo/react-hooks';
 import SubmitButton from 'Components/common/SubmitButton';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { QUERY_TEMPLATES } from '../../Base/GraphQL/QUERY_TEMPLATES';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 
@@ -118,7 +118,7 @@ export const EditTemplateDialog = observer((
     }
   )
 
-  useShowAppoloError(createError||updateError);
+  useShowServerError(createError||updateError);
 
   const handleSchemaChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     setSchema(event.target.value as string);

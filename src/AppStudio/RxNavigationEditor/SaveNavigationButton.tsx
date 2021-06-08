@@ -4,7 +4,7 @@ import intl from 'react-intl-universal';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useMutation } from '@apollo/react-hooks';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { toJS } from 'mobx';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { Update_RX_APP } from 'Base/GraphQL/APP_GQLs';
@@ -19,7 +19,7 @@ export const SaveNavigationButton = observer(() => {
       dragItStore.setSuccessAlert(true);
     }
   } );
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   const handleSave = ()=>{
     const rxApp = toJS(studioStore?.rxApp);

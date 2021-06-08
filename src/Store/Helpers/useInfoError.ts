@@ -1,9 +1,9 @@
-import { ApolloError } from "@apollo/react-hooks";
+import { DataError } from "Data/DataError";
 import { useEffect } from "react";
 import intl from 'react-intl-universal';
 import { useDragItStore } from "./useDragItStore";
 
-export function useShowAppoloError(error?:ApolloError){
+export function useShowServerError(error?:DataError){
   const appStore = useDragItStore() 
   useEffect(()=>{
     if(error){

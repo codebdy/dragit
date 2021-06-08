@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { useShowAppoloError } from "Store/Helpers/useInfoError";
+import { useShowServerError } from "Store/Helpers/useInfoError";
 import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 import { FolderNode } from "./FolderNode";
 import { MUTATION_ADD_FOLDER } from "./MediasGQLs";
@@ -29,7 +29,7 @@ export function useAddFolder(parent?:FolderNode){
     }
   ); 
 
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   return {addFolder, loading};
 }

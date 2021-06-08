@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { useShowAppoloError } from "Store/Helpers/useInfoError";
+import { useShowServerError } from "Store/Helpers/useInfoError";
 import { FolderNode } from "./FolderNode";
 import { MUTATION_REMOVE_FOLDER } from "./MediasGQLs";
 import { useMediasStore } from "./MediasStore";
@@ -22,7 +22,7 @@ export function useRemoveFolder(node:FolderNode){
 
     }});
 
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   return removeFolder;
 }

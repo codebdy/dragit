@@ -9,7 +9,7 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import SubmitButton from 'Components/common/SubmitButton';
 import { authFields, CREATE_RX_AUTH } from './AUTH_GQLs';
 import { gql, useMutation } from '@apollo/react-hooks';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,7 +58,7 @@ export const AuthsDrawer = observer((
 
   })
 
-  useShowAppoloError(createError);
+  useShowServerError(createError);
 
   const handleNew = ()=>{
     excuteCreate({variables:{rx_app_id:studioStore?.rxApp?.id}})

@@ -3,7 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
 import { MediaGridListImage } from './MediaGridListImage';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
@@ -106,7 +106,7 @@ export const MediaGridList = observer((
     }
   }, [data, mediasStore])
 
-  useShowAppoloError(queryError);
+  useShowServerError(queryError);
 
   const doQuery = ()=>{
     if(!loading && mediasStore.hasMorePages){

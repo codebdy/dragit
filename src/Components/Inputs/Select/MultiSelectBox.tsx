@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { gql, useLazyQuery } from '@apollo/react-hooks';
 
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 
 export const MultiSelectBox = React.forwardRef((
   props:{
@@ -53,7 +53,7 @@ export const MultiSelectBox = React.forwardRef((
     }
   `;
   const [excuteQuery,{ loading:queryLoading, error: queryError, data }] = useLazyQuery(gql`${QUERY_STR}`);
-  useShowAppoloError(queryError)
+  useShowServerError(queryError)
 
   useEffect(()=>{
     if(query){

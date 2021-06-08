@@ -11,7 +11,7 @@ import AppsSkeleton from 'MainBoard/AppManager/AppsSkeleton';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import TemplateCard from './TemplateCard';
 import { QUERY_TEMPLATES } from "../../Base/GraphQL/QUERY_TEMPLATES";
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,7 +40,7 @@ export const TemplateManager = observer(() => {
     }
   );
 
-  useShowAppoloError(error);
+  useShowServerError(error);
   const templates = data ? data.rxTemplates :[];
 
   const handleOpen = ()=>{

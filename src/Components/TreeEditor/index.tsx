@@ -12,7 +12,7 @@ import TreeList from './TreeList';
 import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { useQueryGQL } from './useQueryGQL';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import {observer} from 'mobx-react';
@@ -47,7 +47,7 @@ const TreeEditor =observer((
     }
   });
 
-  useShowAppoloError(error || saveError);
+  useShowServerError(error || saveError);
 
   useEffect(()=>{
     if(query){

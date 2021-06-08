@@ -5,7 +5,7 @@ import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useMutation } from '@apollo/react-hooks';
 import { SAVE_RX_PAGE } from 'Base/GraphQL/PAGE_GQLs';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { toJS } from 'mobx';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
@@ -18,7 +18,7 @@ export const SavePageButton = observer(() => {
       dragItStore.setSuccessAlert(true);
     }
   } );
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   const handleSave = ()=>{
     const rxPageData = toJS(studioStore?.pageEditor?.currentData) as any; 

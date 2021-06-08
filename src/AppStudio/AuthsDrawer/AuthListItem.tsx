@@ -10,7 +10,7 @@ import ActionButton from 'AppStudio/ActionButton';
 import { useMutation } from '@apollo/react-hooks';
 import { REMOVE_RX_AUTH, SAVE_RX_AUTH } from './AUTH_GQLs';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -91,7 +91,7 @@ export const AuthListItem = observer((
     }
   );
 
-  useShowAppoloError(error || removeError);
+  useShowServerError(error || removeError);
 
   const handleEditing = ()=>{
     setEditing(true);

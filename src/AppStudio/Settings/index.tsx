@@ -9,7 +9,7 @@ import SubmitButton from 'Components/common/SubmitButton';
 import { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { Update_RX_APP } from 'Base/GraphQL/APP_GQLs';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,7 +53,7 @@ export const Settings = observer((
     }
   });
 
-  useShowAppoloError(error);
+  useShowServerError(error);
 
   const handleCancel = ()=>{
     onClose && onClose();

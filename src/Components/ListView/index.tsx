@@ -3,7 +3,7 @@ import { Paper } from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { ListViewStore, ListViewStoreProvider } from './ListViewStore';
 import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
@@ -97,7 +97,7 @@ const ListView = observer(React.forwardRef((
     }
   );
 
-  useShowAppoloError(error||updateError||removeError);
+  useShowServerError(error||updateError||removeError);
 
   useEffect(()=>{
     if(!query || isDesigning){

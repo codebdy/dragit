@@ -8,7 +8,7 @@ import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_FOLDERS } from './MediasGQLs';
-import { useShowAppoloError } from 'Store/Helpers/useInfoError';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { FolderNode } from './FolderNode';
 import { parseFolderNodes } from './FolderNode/parseFolderNodes';
 import MediaFilderLoadingSkeleton from './MediaFilderLoadingSkeleton';
@@ -39,7 +39,7 @@ export const MediaFolders = observer((
   const mediaStore = useMediasStore();
   const { loading, error:queryFolderError, data:folderData } = useQuery(QUERY_FOLDERS/*, {fetchPolicy:'no-cache'}*/);
 
-  useShowAppoloError(queryFolderError);
+  useShowServerError(queryFolderError);
   
   useEffect(()=>{
     if(folderData){

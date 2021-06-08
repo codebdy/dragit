@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_REMOVE_RX_APP } from 'APIs/app';
+import { useShowServerError } from 'Store/Helpers/useInfoError';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,7 +75,7 @@ export default function AppCard(
     }
   );
 
-  //useShowAppoloError(error);
+  useShowServerError(error);
   
   const handleMenuClose = () => {
     setAnchorEl(null);
