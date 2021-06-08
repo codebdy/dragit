@@ -12,10 +12,11 @@ import SubmitButton from 'Components/common/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { AUTH_APP } from 'Base/authSlugs';
 import { v4 as uuidv4 } from 'uuid';
-import { API_CREATE_RX_APP, API_GET_RX_APP_LIST } from "APIs/app";
-import { useSWRQuery } from "Data/useSWRQuery";
+import { API_CREATE_RX_APP } from "APIs/app";
 import useLayzyAxios from "Data/useLayzyAxios";
 import { useAxiosError } from "Store/Helpers/useAxiosError";
+import { MegicQuery } from "Data/MegicQuery";
+import { useMagicQuery } from "Data/useMagicQuery";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, data:rxApps } = useSWRQuery<IRxApp[]>(API_GET_RX_APP_LIST);
+  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(new MegicQuery().model('RxApp'));
   const dragItStore = useDragItStore();
   const apps = rxApps||[];
   const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_CREATE_RX_APP, {

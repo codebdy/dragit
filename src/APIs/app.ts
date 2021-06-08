@@ -17,7 +17,7 @@ export const API_REMOVE_RX_APP:AxiosRequestConfig = {
 
 
 export const API_GET_RX_APP_LIST:AxiosRequestConfig = {
-  url:'/get_rx_app_list',
+  url:'/get_rx_app_listxxx',
   method:'get',
 }
 
