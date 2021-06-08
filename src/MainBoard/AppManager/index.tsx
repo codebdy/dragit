@@ -52,7 +52,7 @@ export const AppManager = observer(() => {
         uuid:uuidv4(),
         name:intl.get('new-app'),
         icon:'mdi-application',
-        app_type:intl.get('free'),
+        appType:intl.get('free'),
         auths:{
           create:[
           {
