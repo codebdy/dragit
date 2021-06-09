@@ -12,11 +12,12 @@ import SubmitButton from 'Components/common/SubmitButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { AUTH_APP } from 'Base/authSlugs';
 import { v4 as uuidv4 } from 'uuid';
-import { API_CREATE_RX_APP } from "APIs/app";
 import useLayzyAxios from "Data/useLayzyAxios";
 import { useAxiosError } from "Store/Helpers/useAxiosError";
-import { MegicQuery } from "Data/MegicQuery";
+import { MagicQuery } from "Data/MagicQuery";
 import { useMagicQuery } from "Data/useMagicQuery";
+import { API_MAGIC_POST } from "APIs/magic";
+import { MagicPost } from "Data/MagicPost";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,10 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(new MegicQuery().model('RxApp'));
+  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(new MagicQuery().model('RxApp'));
   const dragItStore = useDragItStore();
   const apps = rxApps||[];
-  const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_CREATE_RX_APP, {
+  const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_MAGIC_POST, {
     //结束后提示
     onCompleted: (data)=>{
       dragItStore.setSuccessAlert(true)
@@ -48,32 +49,39 @@ export const AppManager = observer(() => {
   useAxiosError(creatError);
 
   const handleCreate = ()=>{
-    excuteCreate({data:{
-        uuid:uuidv4(),
-        name:intl.get('new-app'),
-        icon:'mdi-application',
-        appType:intl.get('free'),
-        auths:{
-          create:[
-          {
-            rx_slug:AUTH_APP,
-            name:intl.get('app-access'),
-            predefined:true,
-          }
-        ]},
-        pages:{
-          create:[
-            {
-              name:'home',
-              schema: JSON.stringify([
-                {
-                  name:'GridRow'
-                }
-              ])
-            }
-          ]
+    const newAppMeta = {
+      uuid:uuidv4(),
+      name:intl.get('new-app'),
+      icon:'mdi-application',
+      appType:intl.get('free'),
+      auths:[
+        {
+          rxSlug:AUTH_APP,
+          name:intl.get('app-access'),
+          predefined:true,
         }
-    }})
+      ],
+      pages:[
+        {
+          name:'home',
+          schema: JSON.stringify([
+            {
+              name:'GridRow'
+            }
+          ])
+        }
+      ]
+    };
+
+    const data = new MagicPost()
+      .model('RxApp')
+      .data(newAppMeta)
+      .relation('auths', 'RxAuth')
+      .relation('pages', 'RxPage')
+      .toData();
+    excuteCreate({
+      data: data
+    })
   }
 
   const handleDownload = ()=>{

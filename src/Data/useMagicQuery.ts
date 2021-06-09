@@ -1,9 +1,9 @@
 import  { SWRResponse } from "swr";
 import { DataError } from "./DataError";
-import { MegicQuery } from "./MegicQuery";
+import { MagicQuery } from "./MagicQuery";
 import { useSWRQuery } from "./useSWRQuery";
 
-export function useMagicQuery<T>(queryMeta:MegicQuery):SWRResponse<T, DataError>&{loading?:boolean}{
+export function useMagicQuery<T>(queryMeta:MagicQuery):SWRResponse<T, DataError>&{loading?:boolean}{
 
   const rt = useSWRQuery<T>(queryMeta.toAxioConfig());
 

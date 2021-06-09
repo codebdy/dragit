@@ -1,7 +1,7 @@
 import { API_MAGIC_QUERY } from "APIs/magic";
 import { AxiosRequestConfig } from "axios";
 
-export class MegicQuery{
+export class MagicQuery{
 
   private _model: string = "";
   private _commands: string[] = [];

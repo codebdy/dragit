@@ -1,10 +1,5 @@
 import { AxiosRequestConfig } from "axios"
 
-export const API_CREATE_RX_APP:AxiosRequestConfig = {
-  url:'/create_rx_app',
-  method:'post',
-}
-
 export const API_UPDATE_RX_APP:AxiosRequestConfig = {
   url:'/update_rx_app',
   method:'post',
