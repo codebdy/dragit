@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(new MagicQuery().model('RxApp'));
+  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(new MagicQuery().setModel('RxApp'));
   const dragItStore = useDragItStore();
   const apps = rxApps||[];
   const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_MAGIC_POST, {
@@ -74,10 +74,10 @@ export const AppManager = observer(() => {
     };
 
     const data = new MagicPost()
-      .model('RxApp')
-      .data(newAppMeta)
-      .relation('auths', 'RxAuth')
-      .relation('pages', 'RxPage')
+      .setModel('RxApp')
+      .setSingleData(newAppMeta)
+      .setRelation('auths', 'RxAuth')
+      .setRelation('pages', 'RxPage')
       .toData();
     excuteCreate({
       data: data

@@ -9,30 +9,30 @@ export class MagicQuery{
   private _skip = "";
   private _fetcher = "@getMany";
 
-  model(model:string){
+  setModel(model:string){
     this._model = model;
     return this;
   }
 
-  take(count:number){
+  setTake(count:number){
     this._take = `@take${count}`;
     return this;
   }
 
-  skip(count:number){
+  setSkip(count:number){
     this._skip = `@skip${count}`;
     return this;    
   }
 
-  getMany(){
+  setGetMany(){
     this._fetcher = "@getMany";
   }
 
-  getOne(){
+  setGetOne(){
     this._fetcher = "@getOne";
   }
 
-  modelCommand(command:string){
+  addModelCommand(command:string){
     this._commands.push(`@${command}`);
   }
   
