@@ -43,6 +43,10 @@ export class MagicQuery{
     };
   }
 
+  toUrl(){
+    return this.toAxioConfig().url || '';
+  }
+
   private toQueryString(){
     const queryObj = {} as any;
     queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')}`] = this._model;
