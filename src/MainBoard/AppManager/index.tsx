@@ -14,11 +14,11 @@ import { AUTH_APP } from 'Base/authSlugs';
 import { v4 as uuidv4 } from 'uuid';
 import useLayzyAxios from "Data/useLayzyAxios";
 import { useAxiosError } from "Store/Helpers/useAxiosError";
-import { MagicQuery } from "Data/MagicQuery";
 import { useMagicQuery } from "Data/useMagicQuery";
 import { API_MAGIC_POST } from "APIs/magic";
 import { MagicPost } from "Data/MagicPost";
 import { mutate } from "swr";
+import { queryAll } from "./queryAll";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,8 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
-const queryAll = new MagicQuery().setModel('RxApp');
 
 export const AppManager = observer(() => {
   const classes = useStyles();

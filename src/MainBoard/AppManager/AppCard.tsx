@@ -11,8 +11,11 @@ import intl from 'react-intl-universal';
 import { useHistory } from 'react-router-dom';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyAxios from 'Data/useLayzyAxios';
-import { API_REMOVE_RX_APP } from 'APIs/app';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
+import { API_MAGIC_DELETE } from 'APIs/magic';
+import { MagicDelete } from 'Data/MagicDelete';
+import { mutate } from 'swr';
+import { queryAll } from './queryAll';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,10 +70,12 @@ export default function AppCard(
   const history = useHistory();
   const dragItStore = useDragItStore();
 
-  const [excuteRemoveRxPage, {loading, error}] = useLayzyAxios<IRxApp>( API_REMOVE_RX_APP,
+  const [excuteRemoveRxPage, {loading, error}] = useLayzyAxios<IRxApp>( API_MAGIC_DELETE,
     {
       onCompleted: (data)=>{
         dragItStore.setSuccessAlert(true);
+        //重新获取数据
+        mutate(queryAll.toUrl());
       }
     }
   );
@@ -92,13 +97,16 @@ export default function AppCard(
 
   const handleRemove = ()=>{
     setAnchorEl(null);
+    const data = 
+      new MagicDelete()
+      .setModel('RxApp')
+      .addId(rxApp.id)
+      .addCascade('auths')
+      .addCascade('pages')
+      .toData();
     dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
       excuteRemoveRxPage({
-        data:{
-          id:rxApp.id,
-          authIds:rxApp.auths?.map(auth=>auth.id),
-          pageIds:rxApp.pages?.map(page=>page.id)||[''],
-        }
+        data:data
       })     
     })
 
