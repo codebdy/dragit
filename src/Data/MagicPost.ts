@@ -18,15 +18,6 @@ export class MagicPost{
     this._datas.push(data);
     return this;
   }
-
-  setRelation(relationName:string, relationModel:string){
-    for(const data of this._datas){
-      const relationValue = data[relationName];
-      delete data[relationName];
-      data[`${relationName}@relation(${relationModel})`] = relationValue;      
-    }
-    return this;
-  }
     
   toData(){
     return {

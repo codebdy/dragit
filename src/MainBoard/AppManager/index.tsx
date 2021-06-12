@@ -81,8 +81,6 @@ export const AppManager = observer(() => {
     const data = new MagicPost()
       .setModel('RxApp')
       .setSingleData(newAppMeta)
-      .setRelation('auths', 'RxAuth')
-      .setRelation('pages', 'RxPage')
       .toData();
     excuteCreate({
       data: data
