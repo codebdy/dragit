@@ -7,11 +7,10 @@ import PageDialog from 'Base/Widgets/PageDialog';
 import { MediaSelect } from 'Components/Inputs/MediaSelect/MediaSelect';
 import { useEffect, useState } from 'react';
 import { IRxMedia } from 'Base/Model/IRxMedia';
-import { gql, useMutation } from '@apollo/react-hooks';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
-import { QUERY_TEMPLATES } from '../../Base/GraphQL/QUERY_TEMPLATES';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
+import useLayzyAxios from 'Data/useLayzyAxios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,39 +61,9 @@ export const EditTemplateDialog = observer((
     onClose && onClose();
   }
 
-  const [excuteCreate, {loading:creating, error:createError}] = useMutation(
-    gql`
-      mutation($rxTemplate:CreateRxTemplateInput){
-        createRxTemplate(rxTemplate:$rxTemplate){
-          id
-          name
-          schema
-          media{
-            id
-            name
-            thumbnail
-            src
-          }
-      }
-    }
-    `,
-    {
-      errorPolicy:'all',
-      onCompleted(){
-        onClose && onClose();
-      },
-      update(cache, { data: { createRxTemplate } }){
-        cache.writeQuery({
-          query:QUERY_TEMPLATES,
-          data:{
-            rxTemplates:[...templates, createRxTemplate]
-          }
-        });
-      },
-    }
-  )
+  const [excuteCreate, {loading:creating, error:createError}] = useLayzyAxios()
 
-  const [excuteUpdate, {loading:updating, error:updateError}] = useMutation(
+  const [excuteUpdate, {loading:updating, error:updateError}] = useLayzyAxios();/*(
     gql`
       mutation($rxTemplate:UpdateRxTemplateInput){
         updateRxTemplate(rxTemplate:$rxTemplate){
@@ -116,7 +85,7 @@ export const EditTemplateDialog = observer((
         onClose && onClose();
       }
     }
-  )
+  )*/
 
   useShowServerError(createError||updateError);
 
@@ -142,23 +111,23 @@ export const EditTemplateDialog = observer((
     }
 
     if(template?.id){
-      excuteUpdate({variables:{
-        rxTemplate:{
-          id:template.id,
-          name,
-          rx_media_id: media?.id || null,
-          schema,
-        }
-      }})
+     // excuteUpdate({variables:{
+     //   rxTemplate:{
+    //      id:template.id,
+     //     name,
+     //     rx_media_id: media?.id || null,
+     //     schema,
+     //   }
+      //}})
     }
     else{
-      excuteCreate({variables:{
-        rxTemplate:{
-          name,
-          rx_media_id: media?.id || null,
-          schema,
-        }
-      }})
+    //  excuteCreate({variables:{
+    //    rxTemplate:{
+    //      name,
+    //      rx_media_id: media?.id || null,
+    //      schema,
+    //    }
+    //  }})
     }
 
   }

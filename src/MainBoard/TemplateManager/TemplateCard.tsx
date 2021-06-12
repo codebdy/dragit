@@ -8,11 +8,9 @@ import { CircularProgress, Divider, IconButton, ListItemIcon, Menu, MenuItem } f
 import MdiIcon from 'Components/common/MdiIcon';
 import intl from 'react-intl-universal';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
-import { gql, useMutation } from '@apollo/react-hooks';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import Image from 'Components/common/Image';
-import { QUERY_TEMPLATES } from '../../Base/GraphQL/QUERY_TEMPLATES';
 import { EditTemplateDialog } from './EditTemplateDialog';
 import { useState } from 'react';
 
@@ -50,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const REMOVE_RX_TEMPLATE = gql`
+/*const REMOVE_RX_TEMPLATE = gql`
   mutation($id:ID!){
     removeRxTemplate(id:$id){
       id
@@ -58,7 +56,7 @@ const REMOVE_RX_TEMPLATE = gql`
     }
   }
 `
-
+*/
 export default function TemplateCard(
   props:{
     templates:Array<IRxTemplate>,
@@ -72,24 +70,25 @@ export default function TemplateCard(
   const isMenuOpen = Boolean(anchorEl);
   const dragItStore = useDragItStore();
 
-  const [excuteRemoveRxTemplate, {loading, error}] = useMutation( REMOVE_RX_TEMPLATE,
+  const loading = false;
+  /*const [excuteRemoveRxTemplate, {loading, error}] = useMutation( REMOVE_RX_TEMPLATE,
     {
       //更新缓存
       update(cache, { data: { removeRxTemplate } }){
-        cache.writeQuery({
-          query:QUERY_TEMPLATES,
-          data:{
-            rxTemplates:templates.filter(template=>template.id !== removeRxTemplate.id)
-          }
-        });
+        //cache.writeQuery({
+          //query:QUERY_TEMPLATES,
+        //  data:{
+        //    rxTemplates:templates.filter(template=>template.id !== removeRxTemplate.id)
+        //  }
+        //});
       },
       onCompleted: (data)=>{
         dragItStore.setSuccessAlert(true);
       }
     }
-  );
+  );*/
 
-  useShowServerError(error);
+  //useShowServerError(error);
   
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -102,11 +101,11 @@ export default function TemplateCard(
   const handleRemove = ()=>{
     setAnchorEl(null);
     dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
-      excuteRemoveRxTemplate({
+      /*excuteRemoveRxTemplate({
         variables:{
           id:rxTemplate.id,
         }
-      })     
+      })  */   
     })
 
   }

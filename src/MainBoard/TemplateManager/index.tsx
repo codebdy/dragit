@@ -6,13 +6,12 @@ import { Container, Grid, Typography, Button } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { useState } from 'react';
 import { EditTemplateDialog } from './EditTemplateDialog';
-import { useQuery } from '@apollo/react-hooks';
 import AppsSkeleton from 'MainBoard/AppManager/AppsSkeleton';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import TemplateCard from './TemplateCard';
-import { QUERY_TEMPLATES } from "../../Base/GraphQL/QUERY_TEMPLATES";
 import { useShowServerError } from 'Store/Helpers/useInfoError';
-
+import { queryAllTemplates } from 'MainBoard/AppManager/querys';
+import { useMagicQuery } from 'Data/useMagicQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,19 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
 export const TemplateManager = observer(() => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
-  const { loading, error, data } = useQuery(QUERY_TEMPLATES,
-    {
-      errorPolicy:'all'
-    }
-  );
+  const { loading, error, data } = useMagicQuery<IRxTemplate[]>(queryAllTemplates);
 
   useShowServerError(error);
-  const templates = data ? data.rxTemplates :[];
+  const templates = data;
 
   const handleOpen = ()=>{
     setOpen(true);
@@ -90,7 +83,7 @@ export const TemplateManager = observer(() => {
               }
             </Grid>
         }
-      <EditTemplateDialog templates = {templates} open = {open} onClose = {hanldeClose}/>
+      <EditTemplateDialog templates = {templates||[]} open = {open} onClose = {hanldeClose}/>
     </Container>
 
   );

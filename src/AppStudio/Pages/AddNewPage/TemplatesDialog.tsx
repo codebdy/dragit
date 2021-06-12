@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { gql, useMutation, useQuery } from '@apollo/react-hooks';
+import { gql, useMutation } from '@apollo/react-hooks';
 import { CREATE_RX_PAGE, pageFieldsGQL } from "Base/GraphQL/PAGE_GQLs";
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
@@ -15,7 +15,8 @@ import classNames from 'classnames';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { QUERY_TEMPLATES } from 'Base/GraphQL/QUERY_TEMPLATES';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { queryAllTemplates } from 'MainBoard/AppManager/querys';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,7 +78,7 @@ export const TemplatesDialog = observer((
   const classes = useStyles();
   const [name, setName] = useState(intl.get('new-page'));
   const [selected, setSelected] = useState<IRxTemplate>();
-  const {loading, data, error} = useQuery(QUERY_TEMPLATES);
+  const {loading, data, error} = useMagicQuery<IRxTemplate[]>(queryAllTemplates);
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
@@ -110,7 +111,7 @@ export const TemplatesDialog = observer((
 
   useShowServerError(error||createError);
 
-  const templates = data?.rxTemplates;
+  const templates = data;
 
   const handleClose = ()=>{
     onClose();

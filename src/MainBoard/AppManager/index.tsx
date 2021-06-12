@@ -18,7 +18,7 @@ import { useMagicQuery } from "Data/useMagicQuery";
 import { API_MAGIC_POST } from "APIs/magic";
 import { MagicPost } from "Data/MagicPost";
 import { mutate } from "swr";
-import { queryAll } from "./queryAll";
+import { queryAllApps } from "./querys";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(queryAll);
+  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(queryAllApps);
   const dragItStore = useDragItStore();
   const apps = rxApps||[];
   const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_MAGIC_POST, {
@@ -45,7 +45,7 @@ export const AppManager = observer(() => {
       //结束后提示
       dragItStore.setSuccessAlert(true);
       //重新获取数据
-      mutate(queryAll.toUrl());
+      mutate(queryAllApps.toUrl());
     }
   })
 

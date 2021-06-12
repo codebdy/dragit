@@ -15,7 +15,7 @@ import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { API_MAGIC_DELETE } from 'APIs/magic';
 import { MagicDelete } from 'Data/MagicDelete';
 import { mutate } from 'swr';
-import { queryAll } from './queryAll';
+import { queryAllApps } from './querys';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,7 +75,7 @@ export default function AppCard(
       onCompleted: (data)=>{
         dragItStore.setSuccessAlert(true);
         //重新获取数据
-        mutate(queryAll.toUrl());
+        mutate(queryAllApps.toUrl());
       }
     }
   );
