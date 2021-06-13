@@ -47,7 +47,7 @@ export const MediaFolders = observer((
   
   useEffect(()=>{
     if(folderData){
-      const queriedFolders:Array<FolderNode> = parseFolderNodes(JSON.parse((folderData && folderData['rxMediaFoldersTree'])||'[]'));
+      const queriedFolders:Array<FolderNode> = parseFolderNodes(folderData);
       mediaStore.setFolders(queriedFolders);
     }
   },[folderData, mediaStore]);
