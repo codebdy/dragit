@@ -17,7 +17,8 @@ import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
 import { MagicPost } from 'Data/MagicPost';
 import { MagicDelete } from 'Data/MagicDelete';
-import { RxMediaFolder } from './constants';
+import { folderTreeQuery, RxMediaFolder } from './constants';
+import { mutate } from 'swr';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,20 +85,12 @@ export const MediaFolder = observer((
   const [hover, setHover] = React.useState(false);
   const [nodeName, setNodeName] = React.useState(node.name);
   const mediaStore = useMediasStore();
-  const [draggedFolder, setDraggedFolder] = React.useState(mediaStore.draggedFolder);  
   const {addFolder} = useAddFolder(node);
   const updateFolder = useUpdateFolder((data)=>{
     node.setLoading(false);
     mediaStore.draggedFolder?.setLoading(false);
     node.setName(nodeName);
-    const json = data.updateRxMediaFolder
-    if(draggedFolder && draggedFolder?.id === json?.id){
-      if(!draggedFolder?.parent){
-        mediaStore.removeFolder(draggedFolder);
-      }
-      draggedFolder?.moveTo(node);
-      //mediaStore.setDraggedFolder(undefined);
-    }
+    mutate(folderTreeQuery.toUrl());
   });
   const removeFolder = useRemoveFolder(node);
 
@@ -131,14 +124,16 @@ export const MediaFolder = observer((
     const draggedFolder = mediaStore.draggedFolder;
     const draggedMedia = mediaStore.draggedMedia;
     if(draggedFolder && draggedFolder !== node){
-      setDraggedFolder(draggedFolder);
-      node.setLoading(true);
-      updateFolder({
-        data:{
+      const data = new MagicPost()
+        .setModel(RxMediaFolder)
+        .addData({
           id:draggedFolder.id,
-          parent_id:node.id
-        }
-      })
+          name:draggedFolder.name,
+          parent:node.id,
+        })
+        .toData();
+      node.setLoading(true);
+      updateFolder({ data });
     }
     if(draggedMedia){
       onMoveMedia(draggedMedia, node);

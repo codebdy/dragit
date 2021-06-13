@@ -12,8 +12,7 @@ import { parseFolderNodes } from './FolderNode/parseFolderNodes';
 import MediaFilderLoadingSkeleton from './MediaFilderLoadingSkeleton';
 import { MediaStore } from './MediaStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
-import { MagicQuery } from 'Data/MagicQuery';
-import { RxMediaFolder } from './constants';
+import { folderTreeQuery } from './constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,9 +38,7 @@ export const MediaFolders = observer((
   const classes = useStyles();
   const mediaStore = useMediasStore();
   const { loading, error:queryFolderError, data:folderData } = useMagicQuery<any>(
-    new MagicQuery()
-    .setModel(RxMediaFolder)
-    .addModelCommand('tree')
+    folderTreeQuery
   );
 
   useShowServerError(queryFolderError);

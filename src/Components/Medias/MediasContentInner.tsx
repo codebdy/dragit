@@ -17,7 +17,8 @@ import { useAddFolder } from "./useAddFolder";
 import { API_MAGIC_POST } from "APIs/magic";
 import useLayzyAxios from "Data/useLayzyAxios";
 import { MagicPost } from "Data/MagicPost";
-import { RxMediaFolder } from "./constants";
+import { folderTreeQuery, RxMediaFolder } from "./constants";
+import { mutate } from "swr";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +73,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export const  MediasContentInner = observer(()=>{
   const classes = useStyles();
   const mediasStore = useMediasStore();
-  const [draggedFolder, setDraggedFolder] = useState(mediasStore.draggedFolder);  
   const [draggedMedia, setDraggedMedia] = useState(mediasStore.draggedMedia);
 
   const {addFolder, loading:adding} = useAddFolder();
@@ -87,11 +87,7 @@ export const  MediasContentInner = observer(()=>{
 
   const [updateFolder, {error}] = useLayzyAxios(API_MAGIC_POST,{
     onCompleted:(data)=>{
-      if(draggedFolder){
-        draggedFolder?.setLoading(false);
-        draggedFolder?.moveTo(undefined);
-        mediasStore.addFolder(draggedFolder);        
-      }
+      mutate(folderTreeQuery.toUrl());
     }});
    
   useShowServerError(error);
@@ -123,16 +119,18 @@ export const  MediasContentInner = observer(()=>{
 
   const handleDrop = (event:React.DragEvent<HTMLDivElement>)=>{
     const draggedFolder = mediasStore.draggedFolder;
-    setDraggedFolder(draggedFolder);
     draggedFolder && event.preventDefault();
     if(draggedFolder?.parent?.id){
       draggedFolder.setLoading(true);
-      updateFolder({
-        data:{
+      const data = new MagicPost()
+        .setModel(RxMediaFolder)
+        .addData({
           id:draggedFolder.id,
+          name:draggedFolder.name,
           parent:null,
-        }
-      })
+        })
+        .toData();
+      updateFolder({ data });
     }
 
     mediasStore?.draggedMedia && event.preventDefault();

@@ -10,8 +10,9 @@ import { useMediasStore } from './MediasStore';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
 import { MagicDelete } from 'Data/MagicDelete';
-import { RxMediaFolder } from './constants';
+import { folderTreeQuery, RxMediaFolder } from './constants';
 import { MagicPost } from 'Data/MagicPost';
+import { mutate } from 'swr';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +73,7 @@ export const MediaGridListFolder = observer((
   const updateFolder = useUpdateFolder((data)=>{
     folder.setLoading(false);
     mediasStore.draggedFolder?.setLoading(false);
-    folder.setName(folderName);
+    mutate(folderTreeQuery.toUrl());
   });
   const removeFolder = useRemoveFolder(folder);
   const draggedFolder = mediasStore.draggedFolder;
