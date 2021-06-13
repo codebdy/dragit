@@ -8,9 +8,10 @@ export function useAddFolder(parent?:FolderNode){
   const mediasStore = useMediasStore();
   const [addFolder, {error, loading}] = useLayzyAxios(API_MAGIC_POST,
     {
-      onCompleted:(data)=>{
+      onCompleted:(data:any)=>{
+        console.log('useAddFolder', data);
         parent?.setLoading(false);
-        const json = data as any;
+        const json = data?.RxMediaFolder as any;
         if(!json){
           console.assert(json, 'Add Folder failure:get emperty response');
           return;
