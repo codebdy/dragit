@@ -1,5 +1,6 @@
 import { API_MAGIC_QUERY } from "APIs/magic";
 import { AxiosRequestConfig } from "axios";
+import { orderBy } from "./constants";
 
 export class MagicQuery{
 
@@ -8,6 +9,7 @@ export class MagicQuery{
   private _take = "";
   private _skip = "";
   private _fetcher = "@getMany";
+  private _orderBy: any = undefined;
 
   setModel(model:string){
     this._model = model;
@@ -38,6 +40,23 @@ export class MagicQuery{
     this._commands.push(`@${command}`);
     return this;
   }
+
+  setOrderByASC(key: string){
+    return this.setOrderBy(key, 'ASC');
+  }
+
+  setOrderByDESC(key: string){
+    return this.setOrderBy(key, 'DESC');
+  }
+
+  setOrderBy(key: string, order: string){
+    if(!this._orderBy){
+      this._orderBy = {};
+    }
+
+    this._orderBy[key] = order;
+    return this;
+  }
   
   toAxioConfig():AxiosRequestConfig{
     return {
@@ -53,6 +72,7 @@ export class MagicQuery{
   private toQueryString(){
     const queryObj = {} as any;
     queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')}`] = this._model;
+    this._orderBy && (queryObj[orderBy] = this._orderBy);
     return JSON.stringify(queryObj);
   }
 }
