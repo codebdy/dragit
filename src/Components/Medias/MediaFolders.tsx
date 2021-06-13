@@ -13,6 +13,7 @@ import MediaFilderLoadingSkeleton from './MediaFilderLoadingSkeleton';
 import { MediaStore } from './MediaStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { MagicQuery } from 'Data/MagicQuery';
+import { RxMediaFolder } from './constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +40,7 @@ export const MediaFolders = observer((
   const mediaStore = useMediasStore();
   const { loading, error:queryFolderError, data:folderData } = useMagicQuery<any>(
     new MagicQuery()
-    .setModel('RxMediaFolder')
+    .setModel(RxMediaFolder)
     .addModelCommand('tree')
   );
 

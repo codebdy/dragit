@@ -17,6 +17,7 @@ import { useAddFolder } from "./useAddFolder";
 import { API_MAGIC_POST } from "APIs/magic";
 import useLayzyAxios from "Data/useLayzyAxios";
 import { MagicPost } from "Data/MagicPost";
+import { RxMediaFolder } from "./constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -97,7 +98,7 @@ export const  MediasContentInner = observer(()=>{
 
   const handleAddNewFolder = ()=>{
     const data = new MagicPost()
-      .setModel('RxMediaFolder')
+      .setModel(RxMediaFolder)
       .setSingleData({name:intl.get('new-folder')})
       .toData();
     addFolder({data});

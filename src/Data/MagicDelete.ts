@@ -8,6 +8,11 @@ export class MagicDelete {
     return this;
   }
 
+  setIds(ids:number[]) {
+    this._ids = ids;
+    return this;
+  }
+
   addId(id: number|undefined) {
     id && this._ids.push(id);
     return this;

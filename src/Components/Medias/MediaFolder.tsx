@@ -16,6 +16,8 @@ import { useUpdateFolder } from './useUpdateFolder';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
 import { MagicPost } from 'Data/MagicPost';
+import { MagicDelete } from 'Data/MagicDelete';
+import { RxMediaFolder } from './constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -147,7 +149,7 @@ export const MediaFolder = observer((
     event.stopPropagation();
     node.setLoading(true);
     const data = new MagicPost()
-    .setModel('RxMediaFolder')
+    .setModel(RxMediaFolder)
     .setSingleData({
       parent:node.id,
       name:intl.get('new-folder')
@@ -168,12 +170,12 @@ export const MediaFolder = observer((
   }
 
   const handleRemoveFolder = ()=>{
+    const data = new MagicDelete()
+      .setModel(RxMediaFolder)
+      .setIds(node.getRemoveIds())
+      .toData();
     node.setLoading(true);
-    removeFolder({
-      data:{
-        id:node.getRemoveIds(),
-      }
-    })
+    removeFolder({ data });
   }
 
   const handleDragEnd = ()=>{
