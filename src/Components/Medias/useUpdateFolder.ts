@@ -1,9 +1,9 @@
-import { useMutation } from "@apollo/react-hooks";
+import { API_MAGIC_POST } from "APIs/magic";
+import useLayzyAxios from "Data/useLayzyAxios";
 import { useShowServerError } from "Store/Helpers/useInfoError";
-import { MUTATION_UPDATE_FOLDER } from "./MediasGQLs";
 
 export function useUpdateFolder(onCompleted:(data:any)=>void){
-  const [updateFolder, {error}] = useMutation(MUTATION_UPDATE_FOLDER,{
+  const [updateFolder, {error}] = useLayzyAxios(API_MAGIC_POST,{
   onCompleted:onCompleted});
 
   useShowServerError(error);

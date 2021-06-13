@@ -7,20 +7,9 @@ import { IconButton, LinearProgress } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useMediasStore } from './MediasStore';
 import { useEffect } from 'react';
-import { gql, useMutation } from '@apollo/react-hooks';
 import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
-
-const UPLOAD_MEDIA = gql`
-  mutation uploadRxMedia($file: Upload!, $rx_media_folder_id:ID, $rx_user_id:ID){
-    uploadRxMedia(file:$file, rx_media_folder_id:$rx_media_folder_id, rx_user_id:$rx_user_id){
-      id
-      name
-      thumbnail
-      src      
-    }
-
-  }
-`;
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_POST } from 'APIs/magic';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,10 +43,9 @@ export const MediaUploadTaskView = observer((
 
   const loggedUser = useLoggedUser();
 
-  const [excuteUpload,{error}] = useMutation(UPLOAD_MEDIA,
+  const [excuteUpload,{error}] = useLayzyAxios(API_MAGIC_POST,
     {
-      errorPolicy:'all',
-      onCompleted(data){
+      onCompleted(data:any){
         task.setUploading(false);
         mediasStore.unshiftMedia(data?.uploadRxMedia);
         mediasStore.removeTask(task);
@@ -73,7 +61,7 @@ export const MediaUploadTaskView = observer((
       task.setUploading(true);
       excuteUpload(
         {
-          variables:{
+          data:{
             file:task.file,
             rx_media_folder_id: mediasStore.selectedFolderId || null,
             rx_user_id:loggedUser.meta?.id || null

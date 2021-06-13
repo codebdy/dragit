@@ -6,10 +6,11 @@ import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
 import { useMediasStore } from './MediasStore';
 import {observer} from 'mobx-react';
-import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { IRxMedia } from 'Base/Model/IRxMedia';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_DELETE } from 'APIs/magic';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,11 +42,10 @@ export const MediasBatchActions = observer(()=>{
   const mediasStore = useMediasStore();
   const classes = useStyles();
   const toolIconSize = 21;
-  const [removeMedias, {error}] = useMutation(MUTATION_REMOVE_MEDIAS,{
-    errorPolicy:'all',
-    onCompleted:(data)=>{
+  const [removeMedias, {error}] = useLayzyAxios(API_MAGIC_DELETE,{
+    onCompleted:(data:any)=>{
       mediasStore.selectedMediaStores.forEach(media=>media.setLoading(false));
-      mediasStore?.removeMedias(data?.removeRxMedias?.map((media:IRxMedia)=>media.id));
+      mediasStore?.removeMedias(data?.RxMediaFolder);
     }});
 
   useShowServerError(error);
@@ -56,7 +56,7 @@ export const MediasBatchActions = observer(()=>{
 
   const handelRemoveSelected = ()=>{
     mediasStore.selectedMediaStores.forEach(media=>media.setLoading(true));
-    removeMedias({variables:{id:mediasStore.selectedMedias.map(media=>media.id)}});
+    removeMedias({data:{id:mediasStore.selectedMedias.map(media=>media.id)}});
   }
 
   return (

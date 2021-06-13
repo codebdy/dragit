@@ -6,16 +6,16 @@ import { MediasToolbar } from "./MediasToolbar";
 import intl from 'react-intl-universal';
 import { MediasBreadCrumbs } from "./MediasBreadCrumbs";
 import { MediasBatchActions } from "./MediasBatchActions";
-import {  MUTATION_UPDATE_FOLDER } from "./MediasGQLs";
 import { useShowServerError } from "Store/Helpers/useInfoError";
 import { useMediasStore } from "./MediasStore";
 import {observer} from 'mobx-react';
 import SubmitButton from "Components/common/SubmitButton";
-import { useMutation } from "@apollo/react-hooks";
-import { useAddFolder } from "./useAddFolder";
 import { MediaStore } from "./MediaStore";
 import { FolderNode } from "./FolderNode";
 import { useUpdateMedia } from "./useUpdateMedia";
+import { useAddFolder } from "./useAddFolder";
+import { API_MAGIC_POST } from "APIs/magic";
+import useLayzyAxios from "Data/useLayzyAxios";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,7 +83,7 @@ export const  MediasContentInner = observer(()=>{
     }
   });
 
-  const [updateFolder, {error}] = useMutation(MUTATION_UPDATE_FOLDER,{
+  const [updateFolder, {error}] = useLayzyAxios(API_MAGIC_POST,{
     onCompleted:(data)=>{
       if(draggedFolder){
         draggedFolder?.setLoading(false);
@@ -95,13 +95,13 @@ export const  MediasContentInner = observer(()=>{
   useShowServerError(error);
 
   const handleAddNewFolder = ()=>{
-    addFolder({variables:{name:intl.get('new-folder')}});
+    addFolder({data:{name:intl.get('new-folder')}});
   } 
 
   const handleMoveMedia = (media:MediaStore, folder?:FolderNode)=>{
     media.setLoading(true);
     setDraggedMedia(media)
-    updateMedia({variables:{
+    updateMedia({data:{
       rxMedia:{
         id:media.id,
         rx_media_folder_id:folder?.id||null          
@@ -122,9 +122,9 @@ export const  MediasContentInner = observer(()=>{
     if(draggedFolder?.parent?.id){
       draggedFolder.setLoading(true);
       updateFolder({
-        variables:{
+        data:{
           id:draggedFolder.id,
-          parent_id:null,
+          parent:null,
         }
       })
     }

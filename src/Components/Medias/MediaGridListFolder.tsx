@@ -80,7 +80,7 @@ export const MediaGridListFolder = observer((
     setEditing(false);
     if(folderName !== folder.name){
       folder.setLoading(true);
-      updateFolder({variables:{
+      updateFolder({data:{
         id:folder.id,
         name:folder.name
       }})
@@ -106,7 +106,7 @@ export const MediaGridListFolder = observer((
   const handleDrop = ()=>{
     if(draggedFolder && draggedFolder.id !== folder.id){
       folder.setLoading(true);
-      updateFolder({variables:{
+      updateFolder({data:{
         id:draggedFolder.id,
         parent_id: folder.id
       }})
@@ -124,7 +124,7 @@ export const MediaGridListFolder = observer((
   const handleRemove = ()=>{
     folder.setLoading(true);
     removeFolder({
-      variables:{
+      data:{
         id:folder.getRemoveIds(),
       }
     })

@@ -1,14 +1,13 @@
-import { useMutation } from "@apollo/react-hooks";
+import { API_MAGIC_POST } from "APIs/magic";
+import useLayzyAxios from "Data/useLayzyAxios";
 import { useShowServerError } from "Store/Helpers/useInfoError";
-import { MUTATION_UPDATE_MEDIA } from "./MediasGQLs";
 
 export function useUpdateMedia(onCompleted:(data:any)=>void){
-  const [updateMedia, {error}] = useMutation(MUTATION_UPDATE_MEDIA,{
-      errorPolicy:'all',
+  const [updateMedia, {error}] = useLayzyAxios(API_MAGIC_POST,{
       onCompleted:onCompleted
     }
   );
   
-    useShowServerError(error);
-    return updateMedia
+  useShowServerError(error);
+  return updateMedia
 }

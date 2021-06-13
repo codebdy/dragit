@@ -1,23 +1,18 @@
-import { useMutation } from "@apollo/react-hooks";
+import { API_MAGIC_POST } from "APIs/magic";
+import useLayzyAxios from "Data/useLayzyAxios";
 import { useShowServerError } from "Store/Helpers/useInfoError";
-import { useLoggedUser } from "Store/Helpers/useLoggedUser";
 import { FolderNode } from "./FolderNode";
-import { MUTATION_ADD_FOLDER } from "./MediasGQLs";
 import { useMediasStore } from "./MediasStore";
 
 export function useAddFolder(parent?:FolderNode){
   const mediasStore = useMediasStore();
-  const loggedUser = useLoggedUser();
-  const [addFolder, {error, loading}] = useMutation(MUTATION_ADD_FOLDER,
+  const [addFolder, {error, loading}] = useLayzyAxios(API_MAGIC_POST,
     {
-      variables:{
-        rx_user_id:loggedUser?.meta?.id || null,
-      } as any,
       onCompleted:(data)=>{
         parent?.setLoading(false);
-        const json = data?.addRxMediaFolder;
+        const json = data as any;
         if(!json){
-          console.assert(json, 'Add Folder failure:get emperyt response');
+          console.assert(json, 'Add Folder failure:get emperty response');
           return;
         }
         const folder = new FolderNode(json.id, json.name, parent);

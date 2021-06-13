@@ -6,13 +6,13 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { MediaFolder } from './MediaFolder';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
-import { useQuery } from '@apollo/react-hooks';
-import { QUERY_FOLDERS } from './MediasGQLs';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { FolderNode } from './FolderNode';
 import { parseFolderNodes } from './FolderNode/parseFolderNodes';
 import MediaFilderLoadingSkeleton from './MediaFilderLoadingSkeleton';
 import { MediaStore } from './MediaStore';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQuery } from 'Data/MagicQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +37,11 @@ export const MediaFolders = observer((
   const {onMoveMedia} = props;
   const classes = useStyles();
   const mediaStore = useMediasStore();
-  const { loading, error:queryFolderError, data:folderData } = useQuery(QUERY_FOLDERS/*, {fetchPolicy:'no-cache'}*/);
+  const { loading, error:queryFolderError, data:folderData } = useMagicQuery<any>(
+    new MagicQuery()
+    .setModel('RxMediaFolder')
+    .addModelCommand('tree')
+  );
 
   useShowServerError(queryFolderError);
   
@@ -46,7 +50,7 @@ export const MediaFolders = observer((
       const queriedFolders:Array<FolderNode> = parseFolderNodes(JSON.parse((folderData && folderData['rxMediaFoldersTree'])||'[]'));
       mediaStore.setFolders(queriedFolders);
     }
-  },[folderData, mediaStore])
+  },[folderData, mediaStore]);
 
   return (
     <>

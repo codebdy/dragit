@@ -1,10 +1,18 @@
 import React, { Fragment, useState } from 'react';
-import { makeStyles, Theme, createStyles, LinearProgress, Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@material-ui/core';
+import { makeStyles, 
+  Theme, 
+  createStyles, 
+  LinearProgress, 
+  Dialog, 
+  DialogActions, 
+  DialogContent, 
+  DialogTitle, 
+  IconButton 
+} from '@material-ui/core';
 import MediaGridListItemTitle from './MediaGridListItemTitle';
 import MediaGridListIconButton from './MediaGridListIconButton';
 import classNames from 'classnames';
 import Close from '@material-ui/icons/Close';
-import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
 import MdiIcon from 'Components/common/MdiIcon';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
@@ -13,6 +21,7 @@ import {observer} from 'mobx-react';
 import { MediaStore } from './MediaStore';
 import { useMediasStore } from './MediasStore';
 import { useUpdateMedia } from './useUpdateMedia';
+import { useLazyQuery } from '@apollo/client';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -89,7 +98,7 @@ export const MediaGridListImage = observer((
     media.name = mediaName;
   });
 
-  const [removeMedias, {error:removeMediasError}] = useMutation(MUTATION_REMOVE_MEDIAS,{
+  const [removeMedias, {error:removeMediasError}] = useLazyQuery(MUTATION_REMOVE_MEDIAS,{
     errorPolicy:'all',
     onCompleted:(data)=>{
       media.setLoading(false);
@@ -103,7 +112,7 @@ export const MediaGridListImage = observer((
       return
     }
     media.setLoading(true)
-    updateMedia({variables:{rxMedia:{id:media.id, name:mediaName}}})
+    updateMedia({data:{rxMedia:{id:media.id, name:mediaName}}})
   }
 
   const removeMedia = ()=>{

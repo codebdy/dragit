@@ -102,7 +102,7 @@ export const MediaFolder = observer((
     node.setEditing(false);
     node.setLoading(true);
     updateFolder({
-      variables:{
+      data:{
         id:node.id,
         name:nodeName,
         parent_id:node.parent?.id
@@ -130,7 +130,7 @@ export const MediaFolder = observer((
       setDraggedFolder(draggedFolder);
       node.setLoading(true);
       updateFolder({
-        variables:{
+        data:{
           id:draggedFolder.id,
           parent_id:node.id
         }
@@ -146,8 +146,8 @@ export const MediaFolder = observer((
     event.stopPropagation();
     node.setLoading(true);
     addFolder({
-      variables:{
-        parent_id:node.id,
+      data:{
+        parent:{id:node.id},
         name:intl.get('new-folder')
       }
     });
@@ -167,7 +167,7 @@ export const MediaFolder = observer((
   const handleRemoveFolder = ()=>{
     node.setLoading(true);
     removeFolder({
-      variables:{
+      data:{
         id:node.getRemoveIds(),
       }
     })

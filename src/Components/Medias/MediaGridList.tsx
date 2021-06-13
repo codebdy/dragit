@@ -6,12 +6,12 @@ import { MediaGridListImage } from './MediaGridListImage';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
-import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 import { MediaStore } from './MediaStore';
 import { FolderNode } from './FolderNode';
-
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQuery } from 'Data/MagicQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,48 +52,11 @@ export const MediaGridList = observer((
   const mediasStore = useMediasStore();
   const countPerPage = 20;
   
-  const [exccuteQuery, {loading, error:queryError, data}] = useLazyQuery( gql`
-      query ($first:Int!, $page:Int, $rx_media_folder_id:ID){
-        rxMedias(
-          first:$first
-          page:$page
-          ${mediasStore.makeWhereGql()}
-          rx_media_folder_id:$rx_media_folder_id, 
-          orderBy: [
-            ${mediasStore.makeSortByGql()}
-          ]
-        ){  
-          data{
-            id
-            thumbnail
-            name
-            src
-          }
-          paginatorInfo{
-            currentPage
-            hasMorePages
-          }      
-        }
-      }
-    `, 
-    {
-    variables: { 
-      first:countPerPage, 
-      page:mediasStore.currentPage + 1, 
-      //name:`%${mediasStore?.keyword}%`,
-      rx_media_folder_id:mediasStore.selectedFolderId || null
-    },
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy:'no-cache',
-    errorPolicy:'all',
-    //onCompleted(data){
-    //  console.log('MediaGridList onCompleted', data);
-    //}
-  });
+  const {loading, error:queryError, data} = useMagicQuery(new MagicQuery().setModel('RxMedia'));
 
   useEffect(()=>{
     if(data){
-      const rxMedias = data?.rxMedias;
+      const rxMedias = data as any;
       if(rxMedias){
         mediasStore.addMedias(rxMedias?.data, 
           rxMedias?.paginatorInfo?.hasMorePages, 
@@ -109,7 +72,7 @@ export const MediaGridList = observer((
   useShowServerError(queryError);
 
   const doQuery = ()=>{
-    if(!loading && mediasStore.hasMorePages){
+    /*if(!loading && mediasStore.hasMorePages){
       exccuteQuery({
         variables:{ 
           first:countPerPage, 
@@ -118,7 +81,7 @@ export const MediaGridList = observer((
           rx_media_folder_id:mediasStore.selectedFolderId || null
         }
       });
-    }
+    }*/
   }  
 
   useEffect(()=>{

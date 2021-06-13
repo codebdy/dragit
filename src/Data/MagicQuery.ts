@@ -26,14 +26,17 @@ export class MagicQuery{
 
   setGetMany(){
     this._fetcher = "@getMany";
+    return this;
   }
 
   setGetOne(){
     this._fetcher = "@getOne";
+    return this;
   }
 
   addModelCommand(command:string){
     this._commands.push(`@${command}`);
+    return this;
   }
   
   toAxioConfig():AxiosRequestConfig{
