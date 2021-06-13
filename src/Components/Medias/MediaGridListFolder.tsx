@@ -9,6 +9,9 @@ import { useUpdateFolder } from './useUpdateFolder';
 import { useMediasStore } from './MediasStore';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
+import { MagicDelete } from 'Data/MagicDelete';
+import { RxMediaFolder } from './constants';
+import { MagicPost } from 'Data/MagicPost';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,13 +80,17 @@ export const MediaGridListFolder = observer((
 
   
   const handleEndEditing = ()=>{
+    const data = new MagicPost()
+      .setModel(RxMediaFolder)
+      .addData({
+        id:folder.id,
+        name:folder.name,
+      })
+      .toData();
     setEditing(false);
     if(folderName !== folder.name){
       folder.setLoading(true);
-      updateFolder({data:{
-        id:folder.id,
-        name:folder.name
-      }})
+      updateFolder({ data });
     }
   }
 
@@ -105,11 +112,16 @@ export const MediaGridListFolder = observer((
 
   const handleDrop = ()=>{
     if(draggedFolder && draggedFolder.id !== folder.id){
+      const data = new MagicPost()
+        .setModel(RxMediaFolder)
+        .addData({
+          id:draggedFolder.id,
+          name:draggedFolder.name,
+          parent:folder.id,
+        })
+        .toData();
       folder.setLoading(true);
-      updateFolder({data:{
-        id:draggedFolder.id,
-        parent_id: folder.id
-      }})
+      updateFolder({ data });
     }
 
     if(draggedMedia && folder.id !== mediasStore.selectedFolderId){
@@ -122,12 +134,12 @@ export const MediaGridListFolder = observer((
   }
 
   const handleRemove = ()=>{
+    const data = new MagicDelete()
+      .setModel(RxMediaFolder)
+      .setIds(folder.getRemoveIds())
+      .toData();
     folder.setLoading(true);
-    removeFolder({
-      data:{
-        id:folder.getRemoveIds(),
-      }
-    })
+    removeFolder({ data });
   }
 
   return (

@@ -102,15 +102,16 @@ export const MediaFolder = observer((
   const removeFolder = useRemoveFolder(node);
 
   const handleEndEditing = ()=>{
-    node.setEditing(false);
-    node.setLoading(true);
-    updateFolder({
-      data:{
+    const data = new MagicPost()
+      .setModel(RxMediaFolder)
+      .addData({
         id:node.id,
         name:nodeName,
-        parent_id:node.parent?.id
-      }
-    })
+      })
+      .toData();
+    node.setEditing(false);
+    node.setLoading(true);
+    updateFolder({ data });
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
