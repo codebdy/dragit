@@ -34,7 +34,7 @@ export const TemplateManager = observer(() => {
   const { loading, error, data } = useMagicQuery<IRxTemplate[]>(queryAllTemplates);
 
   useShowServerError(error);
-  const templates = data;
+  const templates = data?.data;
 
   const handleOpen = ()=>{
     setOpen(true);

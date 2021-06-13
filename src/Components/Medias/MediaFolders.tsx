@@ -46,8 +46,8 @@ export const MediaFolders = observer((
   useShowServerError(queryFolderError);
   
   useEffect(()=>{
-    if(folderData){
-      const queriedFolders:Array<FolderNode> = parseFolderNodes(folderData);
+    if(folderData?.data){
+      const queriedFolders:Array<FolderNode> = parseFolderNodes(folderData?.data);
       mediaStore.setFolders(queriedFolders);
     }
   },[folderData, mediaStore]);

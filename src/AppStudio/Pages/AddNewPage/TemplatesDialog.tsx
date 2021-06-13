@@ -111,7 +111,7 @@ export const TemplatesDialog = observer((
 
   useShowServerError(error||createError);
 
-  const templates = data;
+  const templates = data?.data;
 
   const handleClose = ()=>{
     onClose();

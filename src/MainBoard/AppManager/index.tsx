@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, data:rxApps } = useMagicQuery<IRxApp[]>(queryAllApps);
+  const { loading, data:rxAppsData } = useMagicQuery<IRxApp[]>(queryAllApps);
   const dragItStore = useDragItStore();
-  const apps = rxApps||[];
+  const apps = rxAppsData?.data||[];
   const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_MAGIC_POST, {
     onCompleted: (data)=>{
       //结束后提示
