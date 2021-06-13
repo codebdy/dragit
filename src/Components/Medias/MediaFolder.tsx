@@ -15,6 +15,7 @@ import { useAddFolder } from './useAddFolder';
 import { useUpdateFolder } from './useUpdateFolder';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
+import { MagicPost } from 'Data/MagicPost';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -145,12 +146,14 @@ export const MediaFolder = observer((
   const handelAddFolder = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     node.setLoading(true);
-    addFolder({
-      data:{
-        parent:{id:node.id},
-        name:intl.get('new-folder')
-      }
-    });
+    const data = new MagicPost()
+    .setModel('RxMediaFolder')
+    .setSingleData({
+      parent:node.id,
+      name:intl.get('new-folder')
+    })
+    .toData();
+    addFolder({ data });
   }
 
   const handleFinishEdit = (event:React.MouseEvent<HTMLElement>)=>{
