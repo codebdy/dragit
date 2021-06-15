@@ -4,6 +4,6 @@ export interface IRxMedia{
   id:ID,
   name: string,
   thumbnail:string,
-  src?:string,
+  fileName?:string,
   alt?:string,
 }

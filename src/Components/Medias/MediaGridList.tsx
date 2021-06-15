@@ -67,7 +67,7 @@ export const MediaGridList = observer((
     return url;
   }
 
-  const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey);
+  const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
   console.log('MediaGridList', data);
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
@@ -78,7 +78,9 @@ export const MediaGridList = observer((
     isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
   const isLoading = isValidating && data && data.length === size;
 
-  useEffect(()=>{
+  const medias = data ? [].concat(...data.map(data=>data.data)) : [];
+
+  /*useEffect(()=>{
     if(data){
       const rxMedias = data as any;
       if(rxMedias){
@@ -91,11 +93,11 @@ export const MediaGridList = observer((
         mediasStore.setHasMorePages(false);
       }
     }
-  }, [data, mediasStore])
+  }, [data, mediasStore])*/
 
   useShowServerError(error);
 
-  const doQuery = ()=>{
+  //const doQuery = ()=>{
     /*if(!loading && mediasStore.hasMorePages){
       exccuteQuery({
         variables:{ 
@@ -106,12 +108,12 @@ export const MediaGridList = observer((
         }
       });
     }*/
-  }  
+  //}  
 
-  useEffect(()=>{
-    doQuery();
+  //useEffect(()=>{
+  //  doQuery();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[mediasStore?.hasMorePages, mediasStore?.selectedFolderId, mediasStore?.keyword, mediasStore?.sortBy])
+  //},[mediasStore?.hasMorePages, mediasStore?.selectedFolderId, mediasStore?.keyword, mediasStore?.sortBy])
 
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;
@@ -122,7 +124,7 @@ export const MediaGridList = observer((
     let innerBottom = (innerRect?.y||0) + (innerRect?.height||0);
     //console.log(scrollBottom - innerBottom )    
     if(scrollBottom - innerBottom >= 20){
-      doQuery();
+      setSize(size + 1);
     }
     //e.defaultPrevented();
   }
@@ -156,7 +158,7 @@ export const MediaGridList = observer((
         <MediaGridListFolders onMoveMedia = {onMoveMedia} />
         <MediaGridListTasks />
      
-        {mediasStore?.medias?.map((media:MediaStore, index) => (
+        {medias.map((media:MediaStore, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.name} lg={2} sm={3} xs={4}>
             <MediaGridListImage media = {media}/>
           </Grid>

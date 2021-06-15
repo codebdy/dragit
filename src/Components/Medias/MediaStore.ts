@@ -27,8 +27,8 @@ export class MediaStore implements IRxMedia{
   get thumbnail(){
     return this._rxMedia.thumbnail;
   }
-  get src(){
-    return this._rxMedia.src;
+  get fileName(){
+    return this._rxMedia.fileName;
   }
 
   get alt(){

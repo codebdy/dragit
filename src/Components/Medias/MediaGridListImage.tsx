@@ -22,6 +22,7 @@ import { MediaStore } from './MediaStore';
 import { useMediasStore } from './MediasStore';
 import { useUpdateMedia } from './useUpdateMedia';
 import { useLazyQuery } from '@apollo/client';
+import { mediaServerUrl } from 'Data/mediaServerUrl';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -158,7 +159,7 @@ export const MediaGridListImage = observer((
         onClick = {handleToggleSelect}
       >
         <Image 
-          src={media.thumbnail}
+          src={`${mediaServerUrl}/thumbnails/${media.fileName}`}
           className = { media.selected? classes.checked : classes.notChecked } 
         />
         {
@@ -218,10 +219,10 @@ export const MediaGridListImage = observer((
             </IconButton>
           </DialogTitle>
           <DialogContent>
-            <img width="100%" src={media.src} alt={'view ' + media.name} />
+            <img width="100%" src={media.fileName} alt={'view ' + media.name} />
           </DialogContent>
           <DialogActions>
-            url:{media.src}
+            url:{media.fileName}
           </DialogActions>
         </Dialog>
       }
