@@ -12,6 +12,7 @@ import { MediaStore } from './MediaStore';
 import { FolderNode } from './FolderNode';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { MagicQuery } from 'Data/MagicQuery';
+import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const PAGE_SIZE = 10;
+
 export const MediaGridList = observer((
   props:{
     onMoveMedia:(media:MediaStore, folder:FolderNode)=>void
@@ -50,9 +53,20 @@ export const MediaGridList = observer((
   const classes = useStyles();
   const ref = useRef(null);  
   const mediasStore = useMediasStore();
-  const countPerPage = 20;
   
-  const {loading, error:queryError, data} = useMagicQuery(new MagicQuery().setModel('RxMedia'));
+  const getKey = (pageIndex: any, previousPageData: any)=>{
+    return new MagicQuery().setModel('RxMedia').toAxioConfig().url||'';
+  }
+
+  const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey);
+  const isLoadingInitialData = !data && !error;
+  const isLoadingMore =
+    isLoadingInitialData ||
+    (size > 0 && data && typeof data[size - 1] === "undefined");
+  const isEmpty = data?.[0]?.length === 0;
+  const isReachingEnd =
+    isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
+  const isLoading = isValidating && data && data.length === size;
 
   useEffect(()=>{
     if(data){
@@ -69,7 +83,7 @@ export const MediaGridList = observer((
     }
   }, [data, mediasStore])
 
-  useShowServerError(queryError);
+  useShowServerError(error);
 
   const doQuery = ()=>{
     /*if(!loading && mediasStore.hasMorePages){
@@ -139,7 +153,7 @@ export const MediaGridList = observer((
         ))}
       </Grid>
       {
-        loading&&
+        isLoading&&
         <div className = {classes.progress}>
           <CircularProgress />
         </div>

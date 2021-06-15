@@ -106,7 +106,7 @@ export const  MediasContentInner = observer(()=>{
     updateMedia({data:{
       rxMedia:{
         id:media.id,
-        rx_media_folder_id:folder?.id||null          
+        folder:folder?.id||null          
       }
     }})
   }
