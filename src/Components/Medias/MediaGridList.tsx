@@ -55,10 +55,20 @@ export const MediaGridList = observer((
   const mediasStore = useMediasStore();
   
   const getKey = (pageIndex: any, previousPageData: any)=>{
-    return new MagicQuery().setModel('RxMedia').toAxioConfig().url||'';
+    if(previousPageData && !previousPageData.data?.length){
+      return null;
+    }
+    const url = new MagicQuery()
+      .setModel('RxMedia')
+      .setPageSize(PAGE_SIZE)
+      .toAxioConfig()
+      .url||null
+    console.log('MediaGridList url:', url);
+    return url;
   }
 
   const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey);
+  console.log('MediaGridList', data);
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData ||

@@ -10,6 +10,9 @@ export class MagicQuery{
   private _skip = "";
   private _fetcher = "@getMany";
   private _orderBy: any = undefined;
+  private _pageSize: number = 10;
+  private _pageIndex: number = 0;
+  private _isPagination = false;
 
   setModel(model:string){
     this._model = model;
@@ -57,6 +60,18 @@ export class MagicQuery{
     this._orderBy[key] = order;
     return this;
   }
+
+  setPageSize(pageSize: number){
+    this._isPagination = true;
+    this._pageSize = pageSize;
+    return this;
+  }
+
+  setPageIndex(pageIndex: number){
+    this._isPagination = true;
+    this._pageIndex = pageIndex;
+    return this;
+  }
   
   toAxioConfig():AxiosRequestConfig{
     return {
@@ -71,7 +86,8 @@ export class MagicQuery{
 
   private toQueryString(){
     const queryObj = {} as any;
-    queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')}`] = this._model;
+    const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
+    queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')} ${pagination}`] = this._model;
     this._orderBy && (queryObj[orderBy] = this._orderBy);
     return JSON.stringify(queryObj);
   }
