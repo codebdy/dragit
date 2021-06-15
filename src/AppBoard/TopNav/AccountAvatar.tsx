@@ -65,9 +65,9 @@ export const AccountAvatar = observer(()=>{
 
   return (
     <Fragment>
-      <Avatar className={classes.avatar} onClick={handleProfileMenuOpen} src={user?.meta?.avatar?.thumbnail}>
+      <Avatar className={classes.avatar} onClick={handleProfileMenuOpen} src={''/*user?.meta?.avatar?.thumbnail*/}>
         {
-          !user?.meta?.avatar?.thumbnail &&
+          /*!user?.meta?.avatar?.thumbnail &&*/
           <MdiIcon iconClass = "mdi-account" color={'#fff'} />
         }
         

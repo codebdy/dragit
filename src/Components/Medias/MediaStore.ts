@@ -29,7 +29,7 @@ export class MediaStore{
     return `${mediaServerUrl}/thumbnails/${this._rxMedia.fileName}`;
   }
   get src(){
-    return this._rxMedia.src;
+    return `${mediaServerUrl}/uploads/${this._rxMedia.fileName}`;
   }
 
   get alt(){
