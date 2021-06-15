@@ -1,7 +1,8 @@
 import { IRxMedia } from "Base/Model/IRxMedia";
+import { mediaServerUrl } from "Data/mediaServerUrl";
 import { makeAutoObservable } from "mobx";
 
-export class MediaStore implements IRxMedia{
+export class MediaStore{
   private _rxMedia: IRxMedia;
 
   selected:boolean = false;
@@ -25,10 +26,10 @@ export class MediaStore implements IRxMedia{
   }
 
   get thumbnail(){
-    return this._rxMedia.thumbnail;
+    return `${mediaServerUrl}/thumbnails/${this._rxMedia.fileName}`;
   }
-  get fileName(){
-    return this._rxMedia.fileName;
+  get src(){
+    return this._rxMedia.src;
   }
 
   get alt(){

@@ -13,7 +13,6 @@ import MediaGridListItemTitle from './MediaGridListItemTitle';
 import MediaGridListIconButton from './MediaGridListIconButton';
 import classNames from 'classnames';
 import Close from '@material-ui/icons/Close';
-import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
 import MdiIcon from 'Components/common/MdiIcon';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import Image from 'Components/common/Image';
@@ -21,8 +20,11 @@ import {observer} from 'mobx-react';
 import { MediaStore } from './MediaStore';
 import { useMediasStore } from './MediasStore';
 import { useUpdateMedia } from './useUpdateMedia';
-import { useLazyQuery } from '@apollo/client';
 import { mediaServerUrl } from 'Data/mediaServerUrl';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_DELETE } from 'APIs/magic';
+import { MagicDelete } from 'Data/MagicDelete';
+import { RxMedia } from './constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -99,8 +101,7 @@ export const MediaGridListImage = observer((
     media.name = mediaName;
   });
 
-  const [removeMedias, {error:removeMediasError}] = useLazyQuery(MUTATION_REMOVE_MEDIAS,{
-    errorPolicy:'all',
+  const [removeMedias, {error:removeMediasError}] = useLayzyAxios(API_MAGIC_DELETE,{
     onCompleted:(data)=>{
       media.setLoading(false);
       mediasStore.removeMedias([media.id]);
@@ -117,8 +118,12 @@ export const MediaGridListImage = observer((
   }
 
   const removeMedia = ()=>{
+    const data = new MagicDelete()
+      .setModel(RxMedia)
+      .addId(media.id)
+      .toData();
     media.setLoading(true)
-    removeMedias({variables:{id:[media.id]}})
+    removeMedias({data});
   }
 
   const handleEndEditing = ()=>{
@@ -159,7 +164,7 @@ export const MediaGridListImage = observer((
         onClick = {handleToggleSelect}
       >
         <Image 
-          src={`${mediaServerUrl}/thumbnails/${media.fileName}`}
+          src={media.thumbnail}
           className = { media.selected? classes.checked : classes.notChecked } 
         />
         {
@@ -219,10 +224,10 @@ export const MediaGridListImage = observer((
             </IconButton>
           </DialogTitle>
           <DialogContent>
-            <img width="100%" src={media.fileName} alt={'view ' + media.name} />
+            <img width="100%" src={media.src} alt={'view ' + media.name} />
           </DialogContent>
           <DialogActions>
-            url:{media.fileName}
+            url:{media.src}
           </DialogActions>
         </Dialog>
       }

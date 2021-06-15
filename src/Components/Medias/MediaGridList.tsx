@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
@@ -10,9 +10,10 @@ import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 import { MediaStore } from './MediaStore';
 import { FolderNode } from './FolderNode';
-import { useMagicQuery } from 'Data/useMagicQuery';
 import { MagicQuery } from 'Data/MagicQuery';
 import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
+import { RxMedia } from './constants';
+import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,16 +60,14 @@ export const MediaGridList = observer((
       return null;
     }
     const url = new MagicQuery()
-      .setModel('RxMedia')
+      .setModel(RxMedia)
       .setPageSize(PAGE_SIZE)
       .toAxioConfig()
       .url||null
-    console.log('MediaGridList url:', url);
     return url;
   }
 
   const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
-  console.log('MediaGridList', data);
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData ||
@@ -78,9 +77,10 @@ export const MediaGridList = observer((
     isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
   const isLoading = isValidating && data && data.length === size;
 
-  const medias = data ? [].concat(...data.map(data=>data.data)) : [];
+  const medias = (data ? [].concat(...data.map(data=>data.data)) : [])
+    .map(data=>new MediaStore(data));
 
-  /*useEffect(()=>{
+    /*useEffect(()=>{
     if(data){
       const rxMedias = data as any;
       if(rxMedias){
@@ -96,24 +96,6 @@ export const MediaGridList = observer((
   }, [data, mediasStore])*/
 
   useShowServerError(error);
-
-  //const doQuery = ()=>{
-    /*if(!loading && mediasStore.hasMorePages){
-      exccuteQuery({
-        variables:{ 
-          first:countPerPage, 
-          page:mediasStore.currentPage + 1,
-          //name:`%${mediasStore?.keyword}%`,
-          rx_media_folder_id:mediasStore.selectedFolderId || null
-        }
-      });
-    }*/
-  //}  
-
-  //useEffect(()=>{
-  //  doQuery();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  //},[mediasStore?.hasMorePages, mediasStore?.selectedFolderId, mediasStore?.keyword, mediasStore?.sortBy])
 
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;
