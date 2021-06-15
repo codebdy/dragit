@@ -20,7 +20,6 @@ import {observer} from 'mobx-react';
 import { MediaStore } from './MediaStore';
 import { useMediasStore } from './MediasStore';
 import { useUpdateMedia } from './useUpdateMedia';
-import { mediaServerUrl } from 'Data/mediaServerUrl';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_DELETE } from 'APIs/magic';
 import { MagicDelete } from 'Data/MagicDelete';
@@ -84,9 +83,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const MediaGridListImage = observer((
-  props:{media:MediaStore}
+  props:{
+    media: MediaStore,
+    onMutate:()=>void,
+  }
 )=>{
-  const {media} = props;
+  const {media, onMutate} = props;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -104,6 +106,7 @@ export const MediaGridListImage = observer((
   const [removeMedias, {error:removeMediasError}] = useLayzyAxios(API_MAGIC_DELETE,{
     onCompleted:(data)=>{
       media.setLoading(false);
+      onMutate();
       mediasStore.removeMedias([media.id]);
     }});
 

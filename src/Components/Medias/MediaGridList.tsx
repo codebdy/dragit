@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
@@ -77,23 +77,10 @@ export const MediaGridList = observer((
     isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
   const isLoading = isValidating && data && data.length === size;
 
-  const medias = (data ? [].concat(...data.map(data=>data.data)) : [])
-    .map(data=>new MediaStore(data));
-
-    /*useEffect(()=>{
-    if(data){
-      const rxMedias = data as any;
-      if(rxMedias){
-        mediasStore.addMedias(rxMedias?.data, 
-          rxMedias?.paginatorInfo?.hasMorePages, 
-          rxMedias?.paginatorInfo?.currentPage
-        )
-      }
-      else{
-        mediasStore.setHasMorePages(false);
-      }
-    }
-  }, [data, mediasStore])*/
+  useEffect(()=>{
+    mediasStore.setMedias(data ? [].concat(...data.map(data=>data.data)) : []);
+  }, [data, mediasStore])
+  
 
   useShowServerError(error);
 
@@ -140,9 +127,9 @@ export const MediaGridList = observer((
         <MediaGridListFolders onMoveMedia = {onMoveMedia} />
         <MediaGridListTasks />
      
-        {medias.map((media:MediaStore, index) => (
+        {mediasStore.medias?.map((media:MediaStore, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.name} lg={2} sm={3} xs={4}>
-            <MediaGridListImage media = {media}/>
+            <MediaGridListImage media = {media} onMutate = {mutate}/>
           </Grid>
         ))}
       </Grid>

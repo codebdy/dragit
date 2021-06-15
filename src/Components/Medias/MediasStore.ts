@@ -23,8 +23,6 @@ export class MediasStore{
   gridLoading:boolean = false;
   medias:Array<MediaStore> = [];
   tasks:Array<MediaUploadTask> = [];
-  hasMorePages:boolean = true;
-  currentPage:number = 0;
   singleSelective?:boolean = false;
   keyword?:string = '';
   sortBy:MediaSort = MediaSort.DESC_BY_CREATE_AT;
@@ -46,8 +44,6 @@ export class MediasStore{
     if(folderId !== this.selectedFolderId){
       this.tasks = [];
       this.medias = [];
-      this.hasMorePages = true;    
-      this.currentPage = 0;
       this.keyword = '';
     }
     this.selectedFolderId = folderId;
@@ -88,18 +84,10 @@ export class MediasStore{
     }
   }
 
-  addMedias(medias:Array<IRxMedia>, hasMorePages:boolean, currentPage:number){
-    this.hasMorePages = hasMorePages;
-    this.currentPage = currentPage;
+  setMedias(medias:Array<IRxMedia>){
     if(medias){
-      medias.forEach((media=>{
-        this.medias.push(new MediaStore(media));
-      }))
+      this.medias =  medias.map(data=>new MediaStore(data))
     }
-  }
-
-  setHasMorePages(hasMorePages:boolean){
-    this.hasMorePages = hasMorePages;
   }
 
   toggleSelected(media:MediaStore){
@@ -138,61 +126,16 @@ export class MediasStore{
     if(keyword !== this.keyword){
       this.keyword = keyword;
       this.medias = [];
-      this.currentPage = 0;
-      this.hasMorePages = true;   
     }
   }
 
   setSortBy(sortBy:MediaSort){
     if(this.sortBy !== sortBy){
       this.medias = [];
-      this.currentPage = 0;
-      this.hasMorePages = true;   
     }
     this.sortBy = sortBy;
   }
-
-  makeWhereGql(){
-    let gql = ''
-    if(this.keyword){
-      let where = '';
-      this.keyword.split(' ').forEach(word=>{
-        let aWord = word.trim();
-        if(aWord){
-          where = where + ` { column: NAME, operator: LIKE, value: "%${aWord}%" } `
-        }
-      })
-      gql = `where:{
-        OR:[
-          ${
-            where
-          }
-        ]
-      }`      
-    }
-    return gql;
-
-  }
-
-  makeSortByGql(){
-    switch(this.sortBy){
-      case MediaSort.DESC_BY_CREATE_AT:
-        return `{ column: CREATED_AT, order: DESC }`;
-
-        case MediaSort.ASC_BY_CREATE_AT:
-          return `{ column: CREATED_AT, order: ASC }`;
-
-        case MediaSort.DESC_BY_NAME:
-           return `{ column: NAME, order: DESC }`;
-
-        case MediaSort.ASC_BY_NAME:
-          return `{ column: NAME, order: ASC }`;
-    }
-
-    return ''
-  }
 }
-
 export const MediasStoreContext = createContext<MediasStore>({} as MediasStore);
 export const MediasStoreProvider = MediasStoreContext.Provider;
 
