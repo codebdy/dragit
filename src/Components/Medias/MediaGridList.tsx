@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flex: 1,
       padding:theme.spacing(0, 2, 0, 2),
+      //修改滚动bug添加，需要确认单独一个页面时，该改动是否影响
+      height:0,
     },
 
     scrollBar:{
@@ -69,6 +71,7 @@ export const MediaGridList = observer((
 
   const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
   const isLoadingInitialData = !data && !error;
+  //console.log(data);
   const isLoadingMore =
     isLoadingInitialData ||
     (size > 0 && data && typeof data[size - 1] === "undefined");
@@ -93,7 +96,8 @@ export const MediaGridList = observer((
     let innerBottom = (innerRect?.y||0) + (innerRect?.height||0);
     //console.log(scrollBottom - innerBottom )    
     if(scrollBottom - innerBottom >= 20){
-      setSize(size + 1);
+      console.log('handleScroll', size + 1);
+      //setSize(size + 1);
     }
     //e.defaultPrevented();
   }
