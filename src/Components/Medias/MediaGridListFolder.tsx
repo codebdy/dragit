@@ -85,7 +85,7 @@ export const MediaGridListFolder = observer((
       .setModel(RxMediaFolder)
       .addData({
         id:folder.id,
-        name:folder.name,
+        name:folderName,
       })
       .toData();
     setEditing(false);

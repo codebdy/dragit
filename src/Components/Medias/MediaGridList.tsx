@@ -96,7 +96,6 @@ export const MediaGridList = observer((
       && !isLoadingMore
       && !isLoading 
       && !isReachingEnd){
-      console.log('handleScroll', size + 1);
       setSize(size + 1);
     }
     //e.defaultPrevented();
