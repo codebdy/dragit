@@ -5,12 +5,12 @@ import Scrollbar from 'Common/Scrollbar';
 import { MediaGridListImage } from './MediaGridListImage';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
-import { useMediasStore } from './MediasStore';
+import { MediaSort, useMediasStore } from './MediasStore';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 import { MediaStore } from './MediaStore';
 import { FolderNode } from './FolderNode';
-import { MagicQuery } from 'Data/MagicQuery';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
 import { RxMedia } from './constants';
 
@@ -62,8 +62,21 @@ export const MediaGridList = observer((
     if(previousPageData && !previousPageData.data?.length){
       return null;
     }
-    const url = new MagicQuery()
+    let orderField = ['createdAt', 'DESC'];
+    if(mediasStore.sortBy === MediaSort.ASC_BY_CREATE_AT){
+      orderField = ['createdAt', 'ASC'];
+    }
+    if(mediasStore.sortBy === MediaSort.ASC_BY_NAME){
+      orderField = ['name', 'ASC'];
+    }
+    if(mediasStore.sortBy === MediaSort.DESC_BY_NAME){
+      orderField = ['name', 'DESC'];
+    }
+
+    const url = new MagicQueryBuilder()
       .setModel(RxMedia)
+      .addCondition('name', `%${mediasStore.keyword?.trim()}%`, 'like')
+      .setOrderBy(orderField[0], orderField[1])
       .setPageSize(PAGE_SIZE)
       .setPageIndex(pageIndex)
       .toAxioConfig()
@@ -131,7 +144,7 @@ export const MediaGridList = observer((
      
         {mediasStore.medias?.map((media:MediaStore, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.name} lg={2} sm={3} xs={4}>
-            <MediaGridListImage media = {media} onMutate = {mutate}/>
+            <MediaGridListImage media = {media} onRemoved = {mutate}/>
           </Grid>
         ))}
         {

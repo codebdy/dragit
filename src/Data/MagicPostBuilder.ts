@@ -1,4 +1,4 @@
-export class MagicPost{
+export class MagicPostBuilder{
   private _model:string = '';
   private _datas:any[] = [];
   private _isSingle = false;

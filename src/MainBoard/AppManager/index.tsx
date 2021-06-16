@@ -16,7 +16,7 @@ import useLayzyAxios from "Data/useLayzyAxios";
 import { useAxiosError } from "Store/Helpers/useAxiosError";
 import { useMagicQuery } from "Data/useMagicQuery";
 import { API_MAGIC_POST } from "APIs/magic";
-import { MagicPost } from "Data/MagicPost";
+import { MagicPostBuilder } from "Data/MagicPostBuilder";
 import { mutate } from "swr";
 import { queryAllApps } from "./querys";
 
@@ -76,7 +76,7 @@ export const AppManager = observer(() => {
       ]
     };
 
-    const data = new MagicPost()
+    const data = new MagicPostBuilder()
       .setModel('RxApp')
       .setSingleData(newAppMeta)
       .toData();

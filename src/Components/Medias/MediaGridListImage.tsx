@@ -22,8 +22,9 @@ import { useMediasStore } from './MediasStore';
 import { useUpdateMedia } from './useUpdateMedia';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_DELETE } from 'APIs/magic';
-import { MagicDelete } from 'Data/MagicDelete';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 import { RxMedia } from './constants';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,10 +86,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export const MediaGridListImage = observer((
   props:{
     media: MediaStore,
-    onMutate:()=>void,
+    onRemoved:()=>void,
   }
 )=>{
-  const {media, onMutate} = props;
+  const {media, onRemoved} = props;
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -106,7 +107,7 @@ export const MediaGridListImage = observer((
   const [removeMedias, {error:removeMediasError}] = useLayzyAxios(API_MAGIC_DELETE,{
     onCompleted:(data)=>{
       media.setLoading(false);
-      onMutate();
+      onRemoved();
       mediasStore.removeMedias([media.id]);
     }});
 
@@ -117,11 +118,17 @@ export const MediaGridListImage = observer((
       return
     }
     media.setLoading(true)
-    updateMedia({data:{rxMedia:{id:media.id, name:mediaName}}})
+    const data = new MagicPostBuilder()
+      .setModel(RxMedia)
+      .addData({
+        id:media.id, name:mediaName
+      })
+      .toData();
+    updateMedia({data});
   }
 
   const removeMedia = ()=>{
-    const data = new MagicDelete()
+    const data = new MagicDeleteBuilder()
       .setModel(RxMedia)
       .addId(media.id)
       .toData();

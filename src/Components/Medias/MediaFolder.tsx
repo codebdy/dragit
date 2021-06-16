@@ -15,8 +15,8 @@ import { useAddFolder } from './useAddFolder';
 import { useUpdateFolder } from './useUpdateFolder';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
-import { MagicPost } from 'Data/MagicPost';
-import { MagicDelete } from 'Data/MagicDelete';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 import { folderTreeQuery, RxMediaFolder } from './constants';
 import { mutate } from 'swr';
 
@@ -95,7 +95,7 @@ export const MediaFolder = observer((
   const removeFolder = useRemoveFolder(node);
 
   const handleEndEditing = ()=>{
-    const data = new MagicPost()
+    const data = new MagicPostBuilder()
       .setModel(RxMediaFolder)
       .addData({
         id:node.id,
@@ -124,7 +124,7 @@ export const MediaFolder = observer((
     const draggedFolder = mediaStore.draggedFolder;
     const draggedMedia = mediaStore.draggedMedia;
     if(draggedFolder && draggedFolder !== node){
-      const data = new MagicPost()
+      const data = new MagicPostBuilder()
         .setModel(RxMediaFolder)
         .addData({
           id:draggedFolder.id,
@@ -144,7 +144,7 @@ export const MediaFolder = observer((
   const handelAddFolder = (event:React.MouseEvent<HTMLElement>)=>{
     event.stopPropagation();
     node.setLoading(true);
-    const data = new MagicPost()
+    const data = new MagicPostBuilder()
     .setModel(RxMediaFolder)
     .setSingleData({
       parent:node.id,
@@ -166,7 +166,7 @@ export const MediaFolder = observer((
   }
 
   const handleRemoveFolder = ()=>{
-    const data = new MagicDelete()
+    const data = new MagicDeleteBuilder()
       .setModel(RxMediaFolder)
       .setIds(node.getRemoveIds())
       .toData();

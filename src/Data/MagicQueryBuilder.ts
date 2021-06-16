@@ -2,7 +2,7 @@ import { API_MAGIC_QUERY } from "APIs/magic";
 import { AxiosRequestConfig } from "axios";
 import { orderBy } from "./constants";
 
-export class MagicQuery{
+export class MagicQueryBuilder{
 
   private _model: string = "";
   private _commands: string[] = [];
@@ -13,6 +13,7 @@ export class MagicQuery{
   private _pageSize: number = 10;
   private _pageIndex: number = 0;
   private _isPagination = false;
+  private _conditins = {} as any;
 
   setModel(model:string){
     this._model = model;
@@ -36,6 +37,17 @@ export class MagicQuery{
 
   setGetOne(){
     this._fetcher = "@getOne";
+    return this;
+  }
+
+  addCondition(field:string, value:any, operator:string){
+    const key = `${field}${operator ? '@'+operator : ''}`;
+    if(value){
+      this._conditins[key] = value;
+    }
+    else{
+      delete this._conditins[key];
+    }    
     return this;
   }
 
@@ -81,7 +93,7 @@ export class MagicQuery{
   }
 
   toUrl(){
-    return this.toAxioConfig().url || '';
+    return this.toAxioConfig().url || null;
   }
 
   private toQueryString(){
@@ -89,6 +101,6 @@ export class MagicQuery{
     const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
     queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')} ${pagination}`] = this._model;
     this._orderBy && (queryObj[orderBy] = this._orderBy);
-    return JSON.stringify(queryObj);
+    return JSON.stringify({...queryObj, ...this._conditins});
   }
 }

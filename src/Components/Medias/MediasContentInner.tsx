@@ -16,7 +16,7 @@ import { useUpdateMedia } from "./useUpdateMedia";
 import { useAddFolder } from "./useAddFolder";
 import { API_MAGIC_POST } from "APIs/magic";
 import useLayzyAxios from "Data/useLayzyAxios";
-import { MagicPost } from "Data/MagicPost";
+import { MagicPostBuilder } from "Data/MagicPostBuilder";
 import { folderTreeQuery, RxMediaFolder } from "./constants";
 import { mutate } from "swr";
 
@@ -93,7 +93,7 @@ export const  MediasContentInner = observer(()=>{
   useShowServerError(error);
 
   const handleAddNewFolder = ()=>{
-    const data = new MagicPost()
+    const data = new MagicPostBuilder()
       .setModel(RxMediaFolder)
       .setSingleData({name:intl.get('new-folder')})
       .toData();
@@ -122,7 +122,7 @@ export const  MediasContentInner = observer(()=>{
     draggedFolder && event.preventDefault();
     if(draggedFolder?.parent?.id){
       draggedFolder.setLoading(true);
-      const data = new MagicPost()
+      const data = new MagicPostBuilder()
         .setModel(RxMediaFolder)
         .addData({
           id:draggedFolder.id,

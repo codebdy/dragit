@@ -43,19 +43,19 @@ export const MediaUploadTaskView = observer((
 
   const loggedUser = useLoggedUser();
 
-  const [excuteUpload,{error}] = useLayzyAxios(API_MAGIC_POST,
+  const [excuteUpload] = useLayzyAxios(API_MAGIC_POST,
     {
       onCompleted(data:any){
         task.setUploading(false);
         mediasStore.unshiftMedia(data?.uploadRxMedia);
         mediasStore.removeTask(task);
+      },
+      onError(error){
+        task.setErrorMessage(error?.message);
+        task.setUploading(false);
       }
     });
   
-  useEffect(()=>{
-    task.setErrorMessage(error?.message);
-  },[error, task])
-
   useEffect(()=>{
     if(!task.errorMessage && !task.uploading && task.file){
       task.setUploading(true);
@@ -79,7 +79,7 @@ export const MediaUploadTaskView = observer((
         task.uploading && <LinearProgress />
       }
       {
-        task.errorMessage && !task.errorMessage && <div className={classes.error}>{task.errorMessage}</div>
+        task.errorMessage  && <div className={classes.error}>{task.errorMessage}</div>
       }
       {
         task.errorMessage &&

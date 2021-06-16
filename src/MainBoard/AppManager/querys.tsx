@@ -1,4 +1,4 @@
-import { MagicQuery } from "Data/MagicQuery";
+import { MagicQueryBuilder } from "Data/MagicQueryBuilder";
 
-export const queryAllApps = new MagicQuery().setModel('RxApp');
-export const queryAllTemplates = new MagicQuery().setModel('RxTemplate');
+export const queryAllApps = new MagicQueryBuilder().setModel('RxApp');
+export const queryAllTemplates = new MagicQueryBuilder().setModel('RxTemplate');

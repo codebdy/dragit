@@ -13,7 +13,7 @@ import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { API_MAGIC_DELETE } from 'APIs/magic';
-import { MagicDelete } from 'Data/MagicDelete';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 import { mutate } from 'swr';
 import { queryAllApps } from './querys';
 
@@ -98,7 +98,7 @@ export default function AppCard(
   const handleRemove = ()=>{
     setAnchorEl(null);
     const data = 
-      new MagicDelete()
+      new MagicDeleteBuilder()
       .setModel('RxApp')
       .addId(rxApp.id)
       .addCascade('auths')

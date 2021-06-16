@@ -1,4 +1,4 @@
-export class MagicDelete {
+export class MagicDeleteBuilder {
   private _model: string = '';
   private _ids: number[] = [];
   private _cascades: string[] = [];

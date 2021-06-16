@@ -9,9 +9,9 @@ import { useUpdateFolder } from './useUpdateFolder';
 import { useMediasStore } from './MediasStore';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
-import { MagicDelete } from 'Data/MagicDelete';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 import { folderTreeQuery, RxMediaFolder } from './constants';
-import { MagicPost } from 'Data/MagicPost';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
 import { mutate } from 'swr';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -81,7 +81,7 @@ export const MediaGridListFolder = observer((
 
   
   const handleEndEditing = ()=>{
-    const data = new MagicPost()
+    const data = new MagicPostBuilder()
       .setModel(RxMediaFolder)
       .addData({
         id:folder.id,
@@ -113,7 +113,7 @@ export const MediaGridListFolder = observer((
 
   const handleDrop = ()=>{
     if(draggedFolder && draggedFolder.id !== folder.id){
-      const data = new MagicPost()
+      const data = new MagicPostBuilder()
         .setModel(RxMediaFolder)
         .addData({
           id:draggedFolder.id,
@@ -135,7 +135,7 @@ export const MediaGridListFolder = observer((
   }
 
   const handleRemove = ()=>{
-    const data = new MagicDelete()
+    const data = new MagicDeleteBuilder()
       .setModel(RxMediaFolder)
       .setIds(folder.getRemoveIds())
       .toData();

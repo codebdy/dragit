@@ -6,9 +6,7 @@ import MdiIcon from 'Components/common/MdiIcon';
 import Spacer from 'Components/common/Spacer';
 import { useMediasStore } from './MediasStore';
 import {observer} from 'mobx-react';
-import { MUTATION_REMOVE_MEDIAS } from './MediasGQLs';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
-import { IRxMedia } from 'Base/Model/IRxMedia';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_DELETE } from 'APIs/magic';
 
