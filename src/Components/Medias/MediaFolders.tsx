@@ -13,6 +13,7 @@ import MediaFilderLoadingSkeleton from './MediaFilderLoadingSkeleton';
 import { MediaStore } from './MediaStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { folderTreeQuery } from './constants';
+import Scrollbar from 'Common/Scrollbar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +52,7 @@ export const MediaFolders = observer((
   },[folderData, mediaStore]);
 
   return (
-    <>
+    <Scrollbar permanent>
       {
         (loading === true) && <MediaFilderLoadingSkeleton />
       }
@@ -71,6 +72,6 @@ export const MediaFolders = observer((
           })
         }
       </TreeView>
-    </>
+    </Scrollbar>
   );
 })

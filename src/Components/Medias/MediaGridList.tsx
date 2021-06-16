@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
@@ -13,7 +13,6 @@ import { FolderNode } from './FolderNode';
 import { MagicQuery } from 'Data/MagicQuery';
 import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
 import { RxMedia } from './constants';
-import { IRxMedia } from 'Base/Model/IRxMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,7 +53,6 @@ export const MediaGridList = observer((
 )=>{
   const {onMoveMedia} = props;
   const classes = useStyles();
-  const ref = useRef(null);  
   const mediasStore = useMediasStore();
   
   const getKey = (pageIndex: any, previousPageData: any)=>{
@@ -64,6 +62,7 @@ export const MediaGridList = observer((
     const url = new MagicQuery()
       .setModel(RxMedia)
       .setPageSize(PAGE_SIZE)
+      .setPageIndex(pageIndex)
       .toAxioConfig()
       .url||null
     return url;
@@ -71,33 +70,31 @@ export const MediaGridList = observer((
 
   const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
   const isLoadingInitialData = !data && !error;
-  //console.log(data);
   const isLoadingMore =
     isLoadingInitialData ||
     (size > 0 && data && typeof data[size - 1] === "undefined");
   const isEmpty = data?.[0]?.length === 0;
   const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
+    isEmpty || (data && data[data.length - 1]?.data?.length < PAGE_SIZE);
   const isLoading = isValidating && data && data.length === size;
 
   useEffect(()=>{
     mediasStore.setMedias(data ? [].concat(...data.map(data=>data.data)) : []);
   }, [data, mediasStore])
-  
 
   useShowServerError(error);
 
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;
-    let innerElement:any = ref.current;
     let scrollRect = divElement?.getBoundingClientRect();
-    let innerRect = innerElement?.getBoundingClientRect();
-    let scrollBottom = (scrollRect?.y||0) + (scrollRect?.height||0);
-    let innerBottom = (innerRect?.y||0) + (innerRect?.height||0);
-    //console.log(scrollBottom - innerBottom )    
-    if(scrollBottom - innerBottom >= 20){
+    if(divElement 
+      && scrollRect 
+      && (divElement?.scrollHeight - (divElement?.scrollTop + scrollRect?.height) <= 20) 
+      && !isLoadingMore
+      && !isLoading 
+      && !isReachingEnd){
       console.log('handleScroll', size + 1);
-      //setSize(size + 1);
+      setSize(size + 1);
     }
     //e.defaultPrevented();
   }
@@ -126,7 +123,6 @@ export const MediaGridList = observer((
         container 
         className={classes.root} 
         spacing={2} 
-        ref={ref}
       >
         <MediaGridListFolders onMoveMedia = {onMoveMedia} />
         <MediaGridListTasks />
@@ -136,13 +132,13 @@ export const MediaGridList = observer((
             <MediaGridListImage media = {media} onMutate = {mutate}/>
           </Grid>
         ))}
+        {
+          (isLoadingInitialData || isLoadingMore) &&
+          <div className = {classes.progress}>
+            <CircularProgress />
+          </div>
+        }
       </Grid>
-      {
-        isLoading&&
-        <div className = {classes.progress}>
-          <CircularProgress />
-        </div>
-      }
     </Scrollbar>
   );
 })

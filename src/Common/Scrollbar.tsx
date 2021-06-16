@@ -79,7 +79,6 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
         )
         
       }
-      ref = {ref}
       onScroll = {(e)=>{
         e.preventDefault();
         onScroll(ref);
@@ -91,6 +90,7 @@ export default function Scrollbar(props:ScrollbarProps = {}) {
       {...style}
     >
       <div
+        ref = {ref}
         className={
           classNames(className, classes.scrollable, {
             [classes.scrollX]:scrollX,
