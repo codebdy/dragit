@@ -37,9 +37,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     progress:{
-      width:'100%',
       textAlign:'center',
       padding:theme.spacing(10),
+      justifyContent:'center',
+      alignItems:'center',
+      display:'flex',
+      minHeight:'200px',
     }
   }),
 );
@@ -89,7 +92,7 @@ export const MediaGridList = observer((
     let scrollRect = divElement?.getBoundingClientRect();
     if(divElement 
       && scrollRect 
-      && (divElement?.scrollHeight - (divElement?.scrollTop + scrollRect?.height) <= 20) 
+      && (divElement?.scrollHeight - (divElement?.scrollTop + scrollRect?.height) <= 50) 
       && !isLoadingMore
       && !isLoading 
       && !isReachingEnd){
@@ -134,9 +137,9 @@ export const MediaGridList = observer((
         ))}
         {
           (isLoadingInitialData || isLoadingMore) &&
-          <div className = {classes.progress}>
+          <Grid item className = {classes.progress} xs={true}>
             <CircularProgress />
-          </div>
+          </Grid>
         }
       </Grid>
     </Scrollbar>
