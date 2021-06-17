@@ -19,7 +19,7 @@ import useLayzyAxios from 'Data/useLayzyAxios';
 import { mutate } from 'swr';
 import { queryAllTemplates } from 'MainBoard/querys';
 import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
-import { RxTemplate } from './constants';
+import { RxTemplate } from '../constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,7 +71,7 @@ export default function TemplateCard(
     {
       onCompleted(data){
         dragItStore.setSuccessAlert(true);
-        const url = queryAllTemplates.toAxioConfig().url||null;
+        const url = queryAllTemplates.toUrl();
         mutate(url, 
           (data: any)=>{
             data.data = data?.data?.filter((template: IRxTemplate)=>template.id !== rxTemplate.id);

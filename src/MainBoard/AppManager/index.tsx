@@ -19,6 +19,7 @@ import { API_MAGIC_POST } from "APIs/magic";
 import { MagicPostBuilder } from "Data/MagicPostBuilder";
 import { mutate } from "swr";
 import { queryAllApps } from "../querys";
+import { RxApp } from "MainBoard/constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,11 +42,14 @@ export const AppManager = observer(() => {
   const dragItStore = useDragItStore();
   const apps = rxAppsData?.data||[];
   const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_MAGIC_POST, {
-    onCompleted: (data)=>{
+    onCompleted: (createdData:any)=>{
       //结束后提示
       dragItStore.setSuccessAlert(true);
-      //重新获取数据
-      mutate(queryAllApps.toUrl());
+      mutate(queryAllApps.toUrl(), 
+      (data: any)=>{
+        data.data = [...data?.data, createdData[RxApp]];
+        return data;
+      });
     }
   })
 

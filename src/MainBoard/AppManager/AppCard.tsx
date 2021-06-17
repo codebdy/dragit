@@ -74,8 +74,11 @@ export default function AppCard(
     {
       onCompleted: (data)=>{
         dragItStore.setSuccessAlert(true);
-        //重新获取数据
-        mutate(queryAllApps.toUrl());
+        mutate(queryAllApps.toUrl(), 
+          (data: any)=>{
+            data.data = data?.data?.filter((app: IRxApp)=>app.id !== rxApp.id);
+            return data;
+          });
       }
     }
   );

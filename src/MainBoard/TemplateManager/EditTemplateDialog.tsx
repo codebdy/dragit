@@ -13,7 +13,7 @@ import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_POST } from 'APIs/magic';
 import { MagicPostBuilder } from 'Data/MagicPostBuilder';
-import { RxTemplate } from './constants';
+import { RxTemplate } from '../constants';
 import { mutate } from 'swr';
 import { queryAllTemplates } from 'MainBoard/querys';
 
@@ -69,7 +69,7 @@ export const EditTemplateDialog = observer((
       {
         onCompleted(newTemplate:any){
           onClose && onClose();
-          const url = queryAllTemplates.toAxioConfig().url||null;
+          const url = queryAllTemplates.toUrl();
           mutate(url, 
             (data: any)=>{
               data.data = data?.data?.map((oneTemplate: IRxTemplate)=>{
