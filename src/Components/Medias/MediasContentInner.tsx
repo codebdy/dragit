@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {makeStyles, Theme, createStyles, Divider, Hidden} from "@material-ui/core";
 import { MediaGridList } from "./MediaGridList";
 import { MediaFolders } from "./MediaFolders";
@@ -77,7 +77,6 @@ const PAGE_SIZE = 10;
 export const  MediasContentInner = observer(()=>{
   const classes = useStyles();
   const mediasStore = useMediasStore();
-  const [draggedMedia, setDraggedMedia] = useState(mediasStore.draggedMedia);
 
   const getKey = (pageIndex: any, previousPageData: any)=>{
     if(previousPageData && !previousPageData.data?.length){
@@ -131,10 +130,12 @@ export const  MediasContentInner = observer(()=>{
   const {addFolder, loading:adding} = useAddFolder();
 
   const updateMedia = useUpdateMedia((data)=>{
+    const draggedMedia = mediasStore.draggedMedia;
     if(draggedMedia){
       draggedMedia.setLoading(false);
       mediasStore.removeMedias([draggedMedia.id]);
-      setDraggedMedia(undefined);
+      mediasStore.setDraggedMedia(undefined);
+      queryMutate();
     }
   });
 
@@ -163,13 +164,16 @@ export const  MediasContentInner = observer(()=>{
 
   const handleMoveMedia = (media:MediaStore, folder?:FolderNode)=>{
     media.setLoading(true);
-    setDraggedMedia(media)
-    updateMedia({data:{
-      rxMedia:{
-        id:media.id,
-        folder:folder?.id||null          
-      }
-    }})
+    mediasStore.setDraggedMedia(media);
+    const data = new MagicPostBuilder()
+      .setModel(RxMedia)
+      .addData({
+        id:media.id, 
+        name:media.name,
+        folder:folder?.id||null 
+      })
+    .toData();
+    updateMedia({ data });
   }
 
   const handleDragOver = (event:React.DragEvent<HTMLDivElement>)=>{

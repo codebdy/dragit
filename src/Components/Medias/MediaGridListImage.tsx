@@ -94,9 +94,7 @@ export const MediaGridListImage = observer((
   const [hover, setHover] = useState(false);
   const [editing, setEditing] = useState(false);
   const [mediaName, setMediaName] = useState(media.name);
-  //const [loading, setLoading] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
-  //const selected = contains(media, selectedMedias);
   const mediasStore = useMediasStore();
 
   const updateMedia = useUpdateMedia((data)=>{
@@ -159,9 +157,6 @@ export const MediaGridListImage = observer((
     mediasStore.setDraggedMedia(media);
   }
 
-  const handleDragEnd = ()=>{
-    mediasStore.setDraggedMedia(undefined);
-  }
 
   return (
     <Fragment>
@@ -170,7 +165,6 @@ export const MediaGridListImage = observer((
         onMouseOver = {()=>setHover(true)}
         onMouseLeave = {()=>setHover(false)}          
         onDragStart={handleDragStart}
-        onDragEnd = {handleDragEnd}
         onClick = {handleToggleSelect}
       >
         <Image 
