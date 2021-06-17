@@ -18,7 +18,7 @@ import { useMagicQuery } from "Data/useMagicQuery";
 import { API_MAGIC_POST } from "APIs/magic";
 import { MagicPostBuilder } from "Data/MagicPostBuilder";
 import { mutate } from "swr";
-import { queryAllApps } from "./querys";
+import { queryAllApps } from "../querys";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

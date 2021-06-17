@@ -1,6 +1,9 @@
-import { mediaServerUrl } from "./configs";
+import { mediaServerUrl } from "./serverConfig";
 
-export function getImageThumbnail(name:string){
+export function getImageThumbnail(name:string|undefined){
+  if(!name){
+    return name
+  }
   return `${mediaServerUrl}/thumbnails/${name}`;
 }
 

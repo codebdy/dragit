@@ -16,7 +16,7 @@ import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
-import { queryAllTemplates } from 'MainBoard/AppManager/querys';
+import { queryAllTemplates } from 'MainBoard/querys';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

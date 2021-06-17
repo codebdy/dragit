@@ -13,6 +13,7 @@ import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import Image from 'Components/common/Image';
 import { EditTemplateDialog } from './EditTemplateDialog';
 import { useState } from 'react';
+import { getImageThumbnail } from 'Data/helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -126,7 +127,7 @@ export default function TemplateCard(
           className={classes.content}
           onClick = {handleEdit}
         >
-          <Image borderRadius = "0" src = {rxTemplate.media?.thumbnail}/>
+          <Image borderRadius = "0" src = {getImageThumbnail(rxTemplate.media?.fileName)}/>
           
         </CardContent>
         <CardActions className={classes.actions}>
@@ -176,7 +177,7 @@ export default function TemplateCard(
           }
         </CardActions>
       </Card>
-      <EditTemplateDialog templates = {templates} template = {rxTemplate} open = {open} onClose = {handleClose}/>
+      <EditTemplateDialog template = {rxTemplate} open = {open} onClose = {handleClose}/>
     </>
   );
 }

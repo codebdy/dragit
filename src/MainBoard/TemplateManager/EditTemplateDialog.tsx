@@ -11,6 +11,11 @@ import SubmitButton from 'Components/common/SubmitButton';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_POST } from 'APIs/magic';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxTemplate } from './constants';
+import { mutate } from 'swr';
+import { queryAllTemplates } from 'MainBoard/querys';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,23 +30,22 @@ const useStyles = makeStyles((theme: Theme) =>
 export const EditTemplateDialog = observer((
   props:{
     template?:IRxTemplate,
-    templates:Array<IRxTemplate>,
     open:boolean,
     onClose?:()=>void,
   }
 ) => {
-  const {template, templates, open, onClose} = props;
+  const {template, open, onClose} = props;
   const classes = useStyles();
   const [name, setName] = useState('');
   const [media, setMedia] = useState<IRxMedia>();
-  const [schema, setSchema] = useState('');
+  const [schema, setSchema] = useState('[]');
   const [nameError, setNameError] = useState('');
   const [schemaError, setSchemaError] = useState('');
 
   const reset = ()=>{
     setName(template?.name||'');
     setMedia(template?.media);
-    setSchema(template?.schema||'');
+    setSchema(template?.schema||'[]');
   }
 
   useEffect(()=>{
@@ -61,33 +65,16 @@ export const EditTemplateDialog = observer((
     onClose && onClose();
   }
 
-  const [excuteCreate, {loading:creating, error:createError}] = useLayzyAxios()
-
-  const [excuteUpdate, {loading:updating, error:updateError}] = useLayzyAxios();/*(
-    gql`
-      mutation($rxTemplate:UpdateRxTemplateInput){
-        updateRxTemplate(rxTemplate:$rxTemplate){
-          id
-          name
-          schema
-          media{
-            id
-            name
-            thumbnail
-            src
-          }
+  const [excutePost, {loading:updating, error}] = useLayzyAxios(API_MAGIC_POST,
+      {
+        onCompleted(data){
+          onClose && onClose();
+          mutate(queryAllTemplates.toAxioConfig().url||null);
+        }
       }
-    }
-    `,
-    {
-      errorPolicy:'all',
-      onCompleted(){
-        onClose && onClose();
-      }
-    }
-  )*/
+    );
 
-  useShowServerError(createError||updateError);
+  useShowServerError(error);
 
   const handleSchemaChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     setSchema(event.target.value as string);
@@ -109,27 +96,16 @@ export const EditTemplateDialog = observer((
     else{
       setSchemaError('')
     }
-
-    if(template?.id){
-     // excuteUpdate({variables:{
-     //   rxTemplate:{
-    //      id:template.id,
-     //     name,
-     //     rx_media_id: media?.id || null,
-     //     schema,
-     //   }
-      //}})
-    }
-    else{
-    //  excuteCreate({variables:{
-    //    rxTemplate:{
-    //      name,
-    //      rx_media_id: media?.id || null,
-    //      schema,
-    //    }
-    //  }})
-    }
-
+    const data = new MagicPostBuilder()
+      .setModel(RxTemplate)
+      .setSingleData({
+        id:template?.id,
+        name,
+        media: media?.id || null,
+        schema,
+      })
+      .toData();
+      excutePost({data});
   }
 
   return (
@@ -177,7 +153,7 @@ export const EditTemplateDialog = observer((
           {intl.get('cancel')}
         </Button>
         <SubmitButton 
-          submitting = {creating || updating}
+          submitting = {updating}
           color = "primary" 
           variant = "contained"
           onClick = {handleSave}

@@ -10,7 +10,7 @@ import AppsSkeleton from 'MainBoard/AppManager/AppsSkeleton';
 import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import TemplateCard from './TemplateCard';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
-import { queryAllTemplates } from 'MainBoard/AppManager/querys';
+import { queryAllTemplates } from 'MainBoard/querys';
 import { useMagicQuery } from 'Data/useMagicQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -83,7 +83,7 @@ export const TemplateManager = observer(() => {
               }
             </Grid>
         }
-      <EditTemplateDialog templates = {templates||[]} open = {open} onClose = {hanldeClose}/>
+      <EditTemplateDialog open = {open} onClose = {hanldeClose}/>
     </Container>
 
   );

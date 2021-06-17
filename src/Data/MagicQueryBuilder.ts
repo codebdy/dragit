@@ -13,7 +13,8 @@ export class MagicQueryBuilder{
   private _pageSize: number = 10;
   private _pageIndex: number = 0;
   private _isPagination = false;
-  private _conditins = {} as any;
+  private _conditions = {} as any;
+  private _relations = {} as any;
 
   setModel(model:string){
     this._model = model;
@@ -43,11 +44,16 @@ export class MagicQueryBuilder{
   addCondition(field:string, value:any, operator?:string){
     const key = `${field}${operator ? '@'+operator : ''}`;
     if(value){
-      this._conditins[key] = value;
+      this._conditions[key] = value;
     }
     else{
-      delete this._conditins[key];
+      delete this._conditions[key];
     }    
+    return this;
+  }
+
+  addRelation(field:string, value?:any){
+    this._relations[field] = value||{};
     return this;
   }
 
@@ -101,6 +107,6 @@ export class MagicQueryBuilder{
     const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
     queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')} ${pagination}`] = this._model;
     this._orderBy && (queryObj[orderBy] = this._orderBy);
-    return JSON.stringify({...queryObj, ...this._conditins});
+    return JSON.stringify({...queryObj, ...this._conditions, ...this._relations});
   }
 }

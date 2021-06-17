@@ -15,7 +15,7 @@ import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { API_MAGIC_DELETE } from 'APIs/magic';
 import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 import { mutate } from 'swr';
-import { queryAllApps } from './querys';
+import { queryAllApps } from '../querys';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
