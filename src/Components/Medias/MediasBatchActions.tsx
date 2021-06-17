@@ -9,6 +9,9 @@ import {observer} from 'mobx-react';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_DELETE } from 'APIs/magic';
+import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
+import { RxMedia } from './constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,15 +38,21 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const MediasBatchActions = observer(()=>{
-  //const {selectedMedias, onClearSelected, onRemoveSelected} = props;
+export const MediasBatchActions = observer((
+  props:{
+    onMediasChanged:()=>void
+  }
+)=>{
+  const {onMediasChanged} = props;
   const mediasStore = useMediasStore();
   const classes = useStyles();
   const toolIconSize = 21;
+  const dragitStore = useDragItStore();
   const [removeMedias, {error}] = useLayzyAxios(API_MAGIC_DELETE,{
     onCompleted:(data:any)=>{
       mediasStore.selectedMediaStores.forEach(media=>media.setLoading(false));
-      mediasStore?.removeMedias(data?.RxMediaFolder);
+      mediasStore?.removeMedias(data?.RxMedia);
+      onMediasChanged();
     }});
 
   useShowServerError(error);
@@ -53,8 +62,12 @@ export const MediasBatchActions = observer(()=>{
   }
 
   const handelRemoveSelected = ()=>{
+    const data = new MagicDeleteBuilder()
+      .setModel(RxMedia)
+      .setIds(mediasStore.selectedMedias.map(media=>media.id))
+      .toData();
     mediasStore.selectedMediaStores.forEach(media=>media.setLoading(true));
-    removeMedias({data:{id:mediasStore.selectedMedias.map(media=>media.id)}});
+    removeMedias({data});
   }
 
   return (
@@ -80,7 +93,9 @@ export const MediasBatchActions = observer(()=>{
       {
         mediasStore?.selectedMedias.length === 1 &&
         <Tooltip title={intl.get('replace')} arrow placement="top">
-          <IconButton aria-label={intl.get('replace')} component="span">
+          <IconButton aria-label={intl.get('replace')} component="span"
+            onClick = {()=>dragitStore.infoError('文件替换功能正在开发中，敬请期待...')}
+          >
             <MdiIcon iconClass="mdi-file-replace-outline" size={toolIconSize} />
           </IconButton>
         </Tooltip>

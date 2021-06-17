@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Grid} from '@material-ui/core';
 import Scrollbar from 'Common/Scrollbar';
 import { MediaGridListImage } from './MediaGridListImage';
-import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { observer } from 'mobx-react';
-import { MediaSort, useMediasStore } from './MediasStore';
 import { MediaGridListFolders } from './MediaGridListFolders';
 import { MediaGridListTasks } from './MediaGridListTasks';
 import { MediaStore } from './MediaStore';
 import { FolderNode } from './FolderNode';
-import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
-import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
-import { RxMedia } from './constants';
+import { useMediasStore } from './MediasStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,71 +43,27 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const PAGE_SIZE = 10;
-
 export const MediaGridList = observer((
   props:{
-    onMoveMedia:(media:MediaStore, folder:FolderNode)=>void
+    onMoveMedia:(media:MediaStore, folder:FolderNode)=>void,
+    onScrollToBottom:()=>void,
+    onMediasChanged:()=>void,
+    loading:boolean|undefined,
   }
 )=>{
-  const {onMoveMedia} = props;
+  const {onMoveMedia, onScrollToBottom,onMediasChanged, loading} = props;
   const classes = useStyles();
   const mediasStore = useMediasStore();
   
-  const getKey = (pageIndex: any, previousPageData: any)=>{
-    if(previousPageData && !previousPageData.data?.length){
-      return null;
-    }
-    let orderField = ['createdAt', 'DESC'];
-    if(mediasStore.sortBy === MediaSort.ASC_BY_CREATE_AT){
-      orderField = ['createdAt', 'ASC'];
-    }
-    if(mediasStore.sortBy === MediaSort.ASC_BY_NAME){
-      orderField = ['name', 'ASC'];
-    }
-    if(mediasStore.sortBy === MediaSort.DESC_BY_NAME){
-      orderField = ['name', 'DESC'];
-    }
-
-    const builder = new MagicQueryBuilder()
-      .setModel(RxMedia)
-    if(mediasStore.keyword?.trim()){
-      builder.addCondition('name', `%${mediasStore.keyword?.trim()}%`, 'like')
-    }
-      
-    builder.setOrderBy(orderField[0], orderField[1])
-      .setPageSize(PAGE_SIZE)
-      .setPageIndex(pageIndex);
-    return builder.toAxioConfig().url||null;
-  }
-
-  const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
-  const isLoadingInitialData = !data && !error;
-  const isLoadingMore =
-    isLoadingInitialData ||
-    (size > 0 && data && typeof data[size - 1] === "undefined");
-  const isEmpty = data?.[0]?.length === 0;
-  const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.data?.length < PAGE_SIZE);
-  const isLoading = isValidating && data && data.length === size;
-
-  useEffect(()=>{
-    mediasStore.setMedias(data ? [].concat(...data.map(data=>data.data)) : []);
-  }, [data, mediasStore])
-
-  useShowServerError(error);
-
   const handleScroll = (scrollRef: React.RefObject<HTMLDivElement>)=>{
     let divElement = scrollRef.current;
     let scrollRect = divElement?.getBoundingClientRect();
     if(divElement 
       && scrollRect 
-      && (divElement?.scrollHeight - (divElement?.scrollTop + scrollRect?.height) <= 50) 
-      && !isLoadingMore
-      && !isLoading 
-      && !isReachingEnd){
-      setSize(size + 1);
+      && (divElement?.scrollHeight - (divElement?.scrollTop + scrollRect?.height) <= 50) ){
+      onScrollToBottom();
     }
+    
     //e.defaultPrevented();
   }
 
@@ -141,15 +93,15 @@ export const MediaGridList = observer((
         spacing={2} 
       >
         <MediaGridListFolders onMoveMedia = {onMoveMedia} />
-        <MediaGridListTasks onFinishUpload = {mutate} />
+        <MediaGridListTasks onFinishUpload = {onMediasChanged} />
      
         {mediasStore.medias?.map((media:MediaStore, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.name} lg={2} sm={3} xs={4}>
-            <MediaGridListImage media = {media} onRemoved = {mutate}/>
+            <MediaGridListImage media = {media} onRemoved = {onMediasChanged}/>
           </Grid>
         ))}
         {
-          (isLoadingInitialData || isLoadingMore) &&
+          loading &&
           <Grid item className = {classes.progress} xs={true}>
             <CircularProgress />
           </Grid>
