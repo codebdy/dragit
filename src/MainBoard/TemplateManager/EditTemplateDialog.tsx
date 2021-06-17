@@ -67,9 +67,22 @@ export const EditTemplateDialog = observer((
 
   const [excutePost, {loading:updating, error}] = useLayzyAxios(API_MAGIC_POST,
       {
-        onCompleted(data){
+        onCompleted(newTemplate:any){
           onClose && onClose();
-          mutate(queryAllTemplates.toAxioConfig().url||null);
+          const url = queryAllTemplates.toAxioConfig().url||null;
+          mutate(url, 
+            (data: any)=>{
+              data.data = data?.data?.map((oneTemplate: IRxTemplate)=>{
+                if(template?.id === oneTemplate.id){
+                  return newTemplate[RxTemplate];
+                }
+                return oneTemplate;
+              });
+              if(!template?.id){
+                data.data = [...data.data, newTemplate[RxTemplate]];
+              }
+              return data;
+            });
         }
       }
     );

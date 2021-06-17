@@ -71,7 +71,12 @@ export default function TemplateCard(
     {
       onCompleted(data){
         dragItStore.setSuccessAlert(true);
-        mutate(queryAllTemplates.toAxioConfig().url||null);
+        const url = queryAllTemplates.toAxioConfig().url||null;
+        mutate(url, 
+          (data: any)=>{
+            data.data = data?.data?.filter((template: IRxTemplate)=>template.id !== rxTemplate.id);
+            return data;
+          });
       }
     }
   );
