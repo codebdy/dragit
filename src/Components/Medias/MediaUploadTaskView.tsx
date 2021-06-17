@@ -7,9 +7,11 @@ import { IconButton, LinearProgress } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { useMediasStore } from './MediasStore';
 import { useEffect } from 'react';
-import { useLoggedUser } from 'Store/Helpers/useLoggedUser';
 import useLayzyAxios from 'Data/useLayzyAxios';
-import { API_MAGIC_POST } from 'APIs/magic';
+import { API_MAGIC_UPLOAD } from 'APIs/magic';
+import { MagicUploadBuilder } from 'Data/MagicUploadBuilder';
+import { RxMedia } from './constants';
+import { MediaStore } from './MediaStore';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,27 +30,31 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
 export const MediaUploadTaskView = observer((
   props:{
-    task:MediaUploadTask
+    task: MediaUploadTask,
+    onFinishUpload: ()=>void
   }
 ) => {
-  const {task} = props;
+  const {task, onFinishUpload} = props;
   const classes = useStyles();
   const mediasStore = useMediasStore();
   const handleRemoveTask = ()=>{
     mediasStore.removeTask(task);
   }
 
-  const loggedUser = useLoggedUser();
-
-  const [excuteUpload] = useLayzyAxios(API_MAGIC_POST,
+  const [excuteUpload] = useLayzyAxios({
+      ...API_MAGIC_UPLOAD,
+      headers:{"Content-Type": "multipart/form-data;boundary=" + new Date().getTime()}
+    },
     {
       onCompleted(data:any){
-        task.setUploading(false);
-        mediasStore.unshiftMedia(data?.uploadRxMedia);
+        mediasStore.unshiftMedia(new MediaStore(data?.RxMedia));
         mediasStore.removeTask(task);
+        if(mediasStore.tasks.length === 0){
+          onFinishUpload();
+        }
+        task.setUploading(false);
       },
       onError(error){
         task.setErrorMessage(error?.message);
@@ -59,15 +65,14 @@ export const MediaUploadTaskView = observer((
   useEffect(()=>{
     if(!task.errorMessage && !task.uploading && task.file){
       task.setUploading(true);
-      excuteUpload(
-        {
-          data:{
-            file:task.file,
-            rx_media_folder_id: mediasStore.selectedFolderId || null,
-            rx_user_id:loggedUser.meta?.id || null
-          }
-        }
-      )
+      const data = new MagicUploadBuilder()
+        .setModel(RxMedia)
+        .setData({
+          file:task.file,
+          folder: mediasStore.selectedFolderId || null
+        })
+        .toData();
+      excuteUpload({ data });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[task, excuteUpload])

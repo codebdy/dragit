@@ -27,7 +27,7 @@ export default function useLayzyAxios<T>(
     if(config2 || config){
       setLoading(true);
       axiosConfig.headers.authorization = localToken ? `Bearer ${localToken}` : ""
-      axios( {...config, ...config2, ...axiosConfig} ).then(res => {
+      axios( {...axiosConfig, ...config, ...config2} ).then(res => {
         setData(res.data);
         setLoading(false);
         if(options?.onCompleted){

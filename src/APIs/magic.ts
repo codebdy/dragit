@@ -10,6 +10,11 @@ export const API_MAGIC_POST: AxiosRequestConfig = {
   method:'post',
 }
 
+export const API_MAGIC_UPLOAD: AxiosRequestConfig = {
+  url:'/upload',
+  method:'post',
+}
+
 export const API_MAGIC_DELETE: AxiosRequestConfig = {
   url:'/delete',
   method:'post',

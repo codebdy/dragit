@@ -73,15 +73,16 @@ export const MediaGridList = observer((
       orderField = ['name', 'DESC'];
     }
 
-    const url = new MagicQueryBuilder()
+    const builder = new MagicQueryBuilder()
       .setModel(RxMedia)
-      .addCondition('name', `%${mediasStore.keyword?.trim()}%`, 'like')
-      .setOrderBy(orderField[0], orderField[1])
+    if(mediasStore.keyword?.trim()){
+      builder.addCondition('name', `%${mediasStore.keyword?.trim()}%`, 'like')
+    }
+      
+    builder.setOrderBy(orderField[0], orderField[1])
       .setPageSize(PAGE_SIZE)
-      .setPageIndex(pageIndex)
-      .toAxioConfig()
-      .url||null
-    return url;
+      .setPageIndex(pageIndex);
+    return builder.toAxioConfig().url||null;
   }
 
   const { data, error, mutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
@@ -140,7 +141,7 @@ export const MediaGridList = observer((
         spacing={2} 
       >
         <MediaGridListFolders onMoveMedia = {onMoveMedia} />
-        <MediaGridListTasks />
+        <MediaGridListTasks onFinishUpload = {mutate} />
      
         {mediasStore.medias?.map((media:MediaStore, index) => (
           <Grid item key={media.id + '-image-' + index + '-' + media.name} lg={2} sm={3} xs={4}>

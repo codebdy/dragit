@@ -4,7 +4,12 @@ import { observer } from 'mobx-react';
 import { useMediasStore } from './MediasStore';
 import { MediaUploadTaskView } from './MediaUploadTaskView';
 
-export const MediaGridListTasks = observer(()=>{
+export const MediaGridListTasks = observer((
+  props:{
+    onFinishUpload: ()=>void
+  }
+)=>{
+  const {onFinishUpload} = props;
   const mediasStore = useMediasStore();
   return (
     <>
@@ -12,7 +17,7 @@ export const MediaGridListTasks = observer(()=>{
         mediasStore?.tasks.map((task, index)=>{
         return (
           <Grid item key={'task' + index + '-' + task.file.name} lg={2} sm={3} xs={4}>
-            <MediaUploadTaskView task = {task} />
+            <MediaUploadTaskView onFinishUpload = {onFinishUpload} task = {task} />
           </Grid>
           )
         })
