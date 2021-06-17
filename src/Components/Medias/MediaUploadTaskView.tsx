@@ -69,7 +69,8 @@ export const MediaUploadTaskView = observer((
         .setModel(RxMedia)
         .setData({
           file:task.file,
-          folder: mediasStore.selectedFolderId || null
+          folder: mediasStore.selectedFolderId || null,
+          name:task.file.name,
         })
         .toData();
       excuteUpload({ data });
