@@ -14,6 +14,12 @@ import Image from 'Components/common/Image';
 import { EditTemplateDialog } from './EditTemplateDialog';
 import { useState } from 'react';
 import { getImageThumbnail } from 'Data/helpers';
+import { API_MAGIC_DELETE } from 'APIs/magic';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { mutate } from 'swr';
+import { queryAllTemplates } from 'MainBoard/querys';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
+import { RxTemplate } from './constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,47 +55,28 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-/*const REMOVE_RX_TEMPLATE = gql`
-  mutation($id:ID!){
-    removeRxTemplate(id:$id){
-      id
-      name
-    }
-  }
-`
-*/
 export default function TemplateCard(
   props:{
-    templates:Array<IRxTemplate>,
     rxTemplate:IRxTemplate
   }
 ) {
-  const {templates, rxTemplate} = props;
+  const {rxTemplate} = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const isMenuOpen = Boolean(anchorEl);
   const dragItStore = useDragItStore();
 
-  const loading = false;
-  /*const [excuteRemoveRxTemplate, {loading, error}] = useMutation( REMOVE_RX_TEMPLATE,
+  const [excuteDelete, {loading, error}] = useLayzyAxios(API_MAGIC_DELETE,
     {
-      //更新缓存
-      update(cache, { data: { removeRxTemplate } }){
-        //cache.writeQuery({
-          //query:QUERY_TEMPLATES,
-        //  data:{
-        //    rxTemplates:templates.filter(template=>template.id !== removeRxTemplate.id)
-        //  }
-        //});
-      },
-      onCompleted: (data)=>{
+      onCompleted(data){
         dragItStore.setSuccessAlert(true);
+        mutate(queryAllTemplates.toAxioConfig().url||null);
       }
     }
-  );*/
+  );
 
-  //useShowServerError(error);
+  useShowServerError(error);
   
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -102,11 +89,11 @@ export default function TemplateCard(
   const handleRemove = ()=>{
     setAnchorEl(null);
     dragItStore?.confirmAction(intl.get('confirm-delete'), ()=>{
-      /*excuteRemoveRxTemplate({
-        variables:{
-          id:rxTemplate.id,
-        }
-      })  */   
+      const data = new MagicDeleteBuilder()
+        .setModel(RxTemplate)
+        .addId(rxTemplate.id)
+        .toData();
+      excuteDelete({data});
     })
 
   }

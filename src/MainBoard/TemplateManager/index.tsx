@@ -76,7 +76,7 @@ export const TemplateManager = observer(() => {
                 templates?.map((rxTemplate:IRxTemplate)=>{
                   return(
                     <Grid item key={rxTemplate.id} lg={2} md={3} sm={4} xs={6}>
-                      <TemplateCard templates = {templates} rxTemplate = {rxTemplate} />
+                      <TemplateCard rxTemplate = {rxTemplate} />
                     </Grid>
                   )
                 })
