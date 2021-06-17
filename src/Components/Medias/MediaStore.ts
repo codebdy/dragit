@@ -1,6 +1,6 @@
 import { IRxMedia } from "Base/Model/IRxMedia";
-import { mediaServerUrl } from "Data/mediaServerUrl";
 import { makeAutoObservable } from "mobx";
+import { getImageThumbnail, getMediaSrc } from "../../Data/helpers";
 
 export class MediaStore{
   private _rxMedia: IRxMedia;
@@ -26,10 +26,10 @@ export class MediaStore{
   }
 
   get thumbnail(){
-    return `${mediaServerUrl}/thumbnails/${this._rxMedia.fileName}`;
+    return getImageThumbnail(this._rxMedia.fileName);
   }
   get src(){
-    return `${mediaServerUrl}/uploads/${this._rxMedia.fileName}`;
+    return getMediaSrc(this._rxMedia.fileName);
   }
 
   get alt(){

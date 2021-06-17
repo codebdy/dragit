@@ -7,6 +7,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import MediasSelectDialog from './MediasSelectDialog';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 import { useDesign } from 'rx-drag/store/useDesign';
+import { getImageThumbnail } from 'Data/helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -105,7 +106,7 @@ export default function MediaAdder(
             style={{
               borderRadius:avatar ? '50%' :''
             }}
-            src={firstValue?.thumbnail}
+            src={getImageThumbnail(firstValue?.fileName)}
           />
           {
             hover && 

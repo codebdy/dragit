@@ -1,5 +1,5 @@
 import { TOKEN_NAME } from "Utils/consts";
-import { serverUrl } from "./serverUrl";
+import { serverUrl } from "./configs";
 
 const fetcher = async (url:string) => {
   const token = localStorage.getItem(TOKEN_NAME);

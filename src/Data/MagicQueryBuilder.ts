@@ -1,7 +1,7 @@
 import { API_MAGIC_QUERY } from "APIs/magic";
 import { AxiosRequestConfig } from "axios";
-import { orderBy } from "./constants";
 
+const orderBy = 'orderBy'
 export class MagicQueryBuilder{
 
   private _model: string = "";

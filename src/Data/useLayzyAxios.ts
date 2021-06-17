@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { LOGIN_URL, TOKEN_NAME } from "Utils/consts";
 import { axiosConfig } from "./axiosConfig";
+import { serverUrl } from "./configs";
 import { DataError } from "./DataError";
-import { serverUrl } from "./serverUrl";
 
 axios.defaults.baseURL = serverUrl
 
