@@ -124,6 +124,10 @@ export const  MediasContentInner = observer(()=>{
     mediasStore.setMedias(data ? [].concat(...data.map(data=>data.data)) : []);
   }, [data, mediasStore])
 
+  useEffect(()=>{
+    setSize(1);
+  },[mediasStore.selectedFolderId, setSize])
+
   const {addFolder, loading:adding} = useAddFolder();
 
   const updateMedia = useUpdateMedia((data)=>{
