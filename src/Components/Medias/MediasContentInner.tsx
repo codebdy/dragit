@@ -99,15 +99,18 @@ export const  MediasContentInner = observer(()=>{
     if(mediasStore.keyword?.trim()){
       builder.addCondition('name', `%${mediasStore.keyword?.trim()}%`, 'like')
     }
-      
+    if(mediasStore.selectedFolderId){
+      builder.addCondition('folder.id', mediasStore.selectedFolderId);
+    }
+
     builder.setOrderBy(orderField[0], orderField[1])
       .setPageSize(PAGE_SIZE)
       .setPageIndex(pageIndex);
     return builder.toAxioConfig().url||null;
   }
 
-  const { data, error: queryError, mutate: queryMutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
-
+  const { data, error: queryError, mutate: queryMutate, size, setSize, isValidating } = 
+    useMagicQueryInfinite(getKey, {persistSize:true});
   const isLoadingInitialData = !data && !queryError;
   const isLoadingMore =
     isLoadingInitialData ||

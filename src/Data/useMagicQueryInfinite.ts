@@ -12,5 +12,6 @@ export function useMagicQueryInfinite(getKey:(pageIndex: any, previousPageData: 
       history?.push(LOGIN_URL);
     }
   },[rtValue.error, history, rtValue])
-  return rtValue;
+  const rtError = rtValue.error ? {message:rtValue.error?.message?.error} : undefined;
+  return {...rtValue, error:rtError};
 }

@@ -40,7 +40,7 @@ export class MagicQueryBuilder{
     return this;
   }
 
-  addCondition(field:string, value:any, operator:string){
+  addCondition(field:string, value:any, operator?:string){
     const key = `${field}${operator ? '@'+operator : ''}`;
     if(value){
       this._conditins[key] = value;
