@@ -16,7 +16,7 @@ export const MediaGridListTasks = observer((
       {
         mediasStore?.tasks.map((task, index)=>{
         return (
-          <Grid item key={'task' + index + '-' + task.file.name} lg={2} sm={3} xs={4}>
+          <Grid item key={task.id} lg={2} sm={3} xs={4}>
             <MediaUploadTaskView onFinishUpload = {onFinishUpload} task = {task} />
           </Grid>
           )

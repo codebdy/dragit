@@ -54,7 +54,7 @@ export const MediaUploadTaskView = observer((
         if(mediasStore.tasks.length === 0){
           onFinishUpload();
         }
-        task.setUploading(false);
+        //task.setUploading(false);
       },
       onError(error){
         task.setErrorMessage(error?.message);
