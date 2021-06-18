@@ -43,24 +43,8 @@ export const MultiSelectBox = React.forwardRef((
   let key =itemKey;
   let name =itemName;
 
-  const QUERY_STR = `
-    query {
-      ${query}
-      {
-        id
-        ${itemName}
-        ${groupByField||''}
-      }
-    }
-  `;
-  const { loading:queryLoading, error: queryError, data } = useMagicQuery(new MagicQueryBuilder());
+  const { loading:queryLoading, error: queryError, data } = useMagicQuery(query ? new MagicQueryBuilder() : undefined);
   useShowServerError(queryError)
-
-  // useEffect(()=>{
-  //   if(query){
-  //     excuteQuery();
-  //   }
-  // },[excuteQuery, query])
 
   const itemsData = (query? (data)||[] : items) as any;
   const handleChange = (event:any, newValue:any)=>{

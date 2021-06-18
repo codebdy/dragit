@@ -5,9 +5,9 @@ import useSWR, { SWRResponse } from "swr";
 import { LOGIN_URL } from "Utils/consts";
 import { fetcher } from "./fetcher";
 
-export function useSWRQuery<T>(api:AxiosRequestConfig):SWRResponse<T, any>&{loading?:boolean}{
+export function useSWRQuery<T>(api?:AxiosRequestConfig, options?:any):SWRResponse<T, any>&{loading?:boolean}{
   const history = useHistory();
-  const rtValue = useSWR<T>(api.url||null, fetcher);
+  const rtValue = useSWR<T>(api?.url||null, fetcher, {errorRetryCount:0, ...(options||{})});
   useEffect(()=>{
     if(rtValue?.error?.status === 401){
       history?.push(LOGIN_URL);

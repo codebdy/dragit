@@ -139,10 +139,6 @@ export const VerticalBar = observer(() => {
     setSettingsOpen(false);
   }
 
-  const handleEntityClick = ()=>{
-    dragItStore.infoError('该功能依赖具体后端实现，后续推出');
-  }
-
   const popDrawerOpen = pagesOpen||authsOpen||authsOpen||settingsOpen
 
   return (
@@ -174,13 +170,6 @@ export const VerticalBar = observer(() => {
                 onClick = {handleNavigationClick}
               >
                 <MdiIcon iconClass = "mdi-file-tree-outline" color={studioStore?.navigationEditor ? activeIconColor : iconColor} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={intl.get('entity')} placement="right">
-              <IconButton
-                onClick = {handleEntityClick}
-              >
-                <MdiIcon iconClass = "mdi-cube-outline" color = {iconColor} />
               </IconButton>
             </Tooltip>
 

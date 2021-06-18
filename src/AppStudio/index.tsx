@@ -19,7 +19,6 @@ import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { SaveNavigationButton } from './RxNavigationEditor/SaveNavigationButton';
 import { INDEX_URL } from 'Utils/consts';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
-import { API_MAGIC_QUERY } from 'APIs/magic';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 import { RxApp } from 'MainBoard/constants';
@@ -93,14 +92,7 @@ export const AppStudio = observer(() => {
       .setGetOne()
   );
 
-  /*useEffect(()=>{
-    if(appId){
-      excuteQuery({variables:{id: appId}});
-    }
-  },[appId, excuteQuery]);*/
-
   useEffect(()=>{
-    //console.log(data);
     data?.data && studioStore.setRxApp(data?.data);
   },[data, studioStore])
 
@@ -116,7 +108,6 @@ export const AppStudio = observer(() => {
       history.push(INDEX_URL);
     }
   }
-
 
   return (
     <ThemeProvider theme={theme}>
