@@ -7,10 +7,10 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { stringValue } from 'rx-drag/utils/stringValue';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import { Update_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_POST } from 'APIs/magic';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +46,7 @@ export const Settings = observer((
   const [icon, setIcon] = useState(rxApp?.icon);
   const [color, setColor] = useState(rxApp?.color);
   const [entryPageId, setEntryPageId] = useState(rxApp?.entryPageId);
-  const [excuteSave, {loading, error}] = useMutation(Update_RX_APP,{
+  const [excuteSave, {loading, error}] = useLayzyAxios(API_MAGIC_POST,{
     onCompleted(){
       onClose && onClose();
       dragItStore.setSuccessAlert(true)
@@ -65,7 +65,7 @@ export const Settings = observer((
   }
 
   const handleSave = ()=>{
-    excuteSave({variables:{
+    excuteSave({data:{
       rxApp:{
         id:rxApp?.id,
         name,

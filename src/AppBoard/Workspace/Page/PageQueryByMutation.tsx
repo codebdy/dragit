@@ -1,7 +1,7 @@
-import { gql, useMutation } from "@apollo/react-hooks";
 import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
 import { usePageStore } from "Base/PageUtils/PageStore";
+import useLayzyMagicPost from "Data/useLayzyMagicPost";
 import { observer } from "mobx-react";
 import React, { useEffect } from "react"
 import { Fragment } from "react"
@@ -16,9 +16,10 @@ export const PageQueryByMutation = observer((
   const modelStore = useModelStore();
   const pageStore = usePageStore();
   const queryName = pageStore?.page.query;
-  const [ excuteMutation, { loading, error, data }] = useMutation(gql`${queryGQL.gql}`, {
-    variables: { ...queryGQL.variables },
-    notifyOnNetworkStatusChange: true,
+  const [ excuteMutation, { loading, error, data }] = useLayzyMagicPost({
+    onCompleted(){
+
+    }
   });
 
   useEffect(()=>{
@@ -32,7 +33,7 @@ export const PageQueryByMutation = observer((
 
   useEffect(()=>{
     if(data){
-      modelStore?.initWithModel(data[queryName||'']);      
+      //modelStore?.initWithModel(data[queryName||'']);      
     }
     else{
       modelStore?.initWithModel(undefined);

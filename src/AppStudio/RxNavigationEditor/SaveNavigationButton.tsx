@@ -3,16 +3,16 @@ import { observer } from 'mobx-react';
 import intl from 'react-intl-universal';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
-import { useMutation } from '@apollo/react-hooks';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { toJS } from 'mobx';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import { Update_RX_APP } from 'Base/GraphQL/APP_GQLs';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_POST } from 'APIs/magic';
 
 export const SaveNavigationButton = observer(() => {
   const studioStore = useAppStudioStore();
   const dragItStore = useDragItStore();
-  const [excuteSaveRxApp, {loading:saving, error}] = useMutation( Update_RX_APP,{
+  const [excuteSaveRxApp, {loading:saving, error}] = useLayzyAxios( API_MAGIC_POST,{
     onCompleted(){
       studioStore?.editNavigation();
       studioStore?.navigationEditor?.setIsDirty(false);
@@ -24,7 +24,7 @@ export const SaveNavigationButton = observer(() => {
   const handleSave = ()=>{
     const rxApp = toJS(studioStore?.rxApp);
     const items = toJS(studioStore?.navigationEditor?.currentData); 
-    excuteSaveRxApp({variables:{rxApp:{id:rxApp?.id, navigation_items: JSON.stringify(items)}}});      
+    excuteSaveRxApp({data:{rxApp:{id:rxApp?.id, navigation_items: JSON.stringify(items)}}});      
   }
   
   return (

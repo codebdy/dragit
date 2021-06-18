@@ -6,14 +6,14 @@ import PageAction from './PageAction';
 import { IRxPage } from 'Base/Model/IRxPage';
 import { CircularProgress, TextField, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
-import { gql, useMutation } from '@apollo/react-hooks';
-import { DUPLICATE_RX_PAGE, pageFieldsGQL, REMOVE_RX_PAGE, SAVE_RX_PAGE } from "Base/GraphQL/PAGE_GQLs";
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import classNames from 'classnames';
 import ActionButton from 'AppStudio/ActionButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import intl from 'react-intl-universal';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_DELETE, API_MAGIC_POST } from 'APIs/magic';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,14 +63,14 @@ export const PageListItem = observer((
     setName(page.name)
   },[page.name])
 
-  const [excuteSaveRxPage, {loading:saving, error}] = useMutation( SAVE_RX_PAGE, {
+  const [excuteSaveRxPage, {loading:saving, error}] = useLayzyAxios( API_MAGIC_POST, {
     onCompleted(){
       dragItStore.setSuccessAlert(true)
     }
   } );
-  const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_PAGE,
+  const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useLayzyAxios( API_MAGIC_DELETE,
     {
-      update: (cache, { data: { removeRxPage } })=>{
+      /*update: (cache, { data: { removeRxPage } })=>{
         cache.modify({
           id: cache.identify(studioStore?.rxApp as any),
           fields: {
@@ -81,7 +81,7 @@ export const PageListItem = observer((
             }
           }
         });
-      },
+      },*/
       onCompleted: (data)=>{
         if(page.id === studioStore?.pageEditor?.editingPage?.id){
           studioStore.editPage(undefined);
@@ -91,12 +91,12 @@ export const PageListItem = observer((
     }
   );
 
-  const [excuteDuplicate, {loading:duplicating, error:duplicateError}] = useMutation(DUPLICATE_RX_PAGE, {
+  const [excuteDuplicate, {loading:duplicating, error:duplicateError}] = useLayzyAxios(API_MAGIC_POST, {
     onCompleted(){
       dragItStore.setSuccessAlert(true);
     },
     //更新缓存
-    update:(cache, { data: { duplicateRxPage } })=>{
+    /*update:(cache, { data: { duplicateRxPage } })=>{
       cache.modify({
         id: cache.identify(studioStore?.rxApp as any),
         fields: {
@@ -113,7 +113,7 @@ export const PageListItem = observer((
           }
         }
       });
-    },
+    },*/
   });
 
   useShowServerError(error || removeError || duplicateError);
@@ -130,7 +130,7 @@ export const PageListItem = observer((
   const handleFinishedEdit = ()=>{
     setEditing(false);
     if(name !== page.name){
-      excuteSaveRxPage({variables:{rxPage:{id:page.id, name}}})
+      excuteSaveRxPage({data:{rxPage:{id:page.id, name}}})
     }
   }
 
@@ -144,11 +144,11 @@ export const PageListItem = observer((
   }
 
   const handleDuplicate = ()=>{
-    excuteDuplicate({variables:{id:page.id}});
+    excuteDuplicate({data:{id:page.id}});
   }
 
   const handleRemove = ()=>{
-    excuteRemoveRxPage({variables:{id:[page.id]}});
+    excuteRemoveRxPage({data:{id:[page.id]}});
   }
 
   const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{

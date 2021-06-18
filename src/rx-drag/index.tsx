@@ -15,7 +15,7 @@ import { RxDragCore } from './core';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
-  schema?: string,
+  schema?: any,
   toolbox?: JSX.Element,
   attributeBox?: JSX.Element,
   pageSettings?: JSX.Element,
@@ -34,7 +34,7 @@ export const RxDrag = observer((
   rxDragStore?.setValueChangeFn(onChange);
 
   useEffect(()=>{
-    rxDragStore?.setMetas(JSON.parse(schema||'[]'));
+    rxDragStore?.setMetas(schema||[]);
   },[rxDragStore, schema])
 
   useEffect(()=>{

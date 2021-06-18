@@ -1,5 +1,4 @@
-import { gql, useMutation } from "@apollo/react-hooks";
-import { parse } from 'graphql';
+import useLayzyMagicPost from "Data/useLayzyMagicPost";
 
 export function useDebugMutation(graphiQL?:string){
   let graphiQLStr = graphiQL;
@@ -8,13 +7,11 @@ export function useDebugMutation(graphiQL?:string){
   }
 
   try{
-    parse(graphiQL||'');
+   // parse(graphiQL||'');
   }
   catch(e){
     graphiQLStr = 'mutation{empty}'
   }
-  return useMutation(gql`${graphiQLStr}`,{
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy:'no-cache'
+  return useLayzyMagicPost({
   });
 }

@@ -1,4 +1,3 @@
-import { useLazyQuery, gql, useMutation } from '@apollo/react-hooks';
 import { Paper } from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
@@ -17,6 +16,9 @@ import { useDesign } from 'rx-drag/store/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/models/RxNode';
+import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
+import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -71,13 +73,10 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[listViewStore.rxModel]);
 
-  const [excuteQuery, { called, loading:queryLoading, error, data, refetch }] = useLazyQuery(gql`${queryGQL.gql}`, {
-    notifyOnNetworkStatusChange: true,
-    //fetchPolicy:'no-cache'
-  });
+  //const { called, loading:queryLoading, error, data, refetch } = useMagicQueryInfinite();
 
 
-  const [excuteUpdate, { error:updateError }] = useMutation(gql`${updateGQL.gql}`,
+  const [excuteUpdate, { error:updateError }] = useLayzyMagicPost(
     {
       onCompleted:(data)=>{
         appStore.setSuccessAlert(true);
@@ -87,7 +86,7 @@ const ListView = observer(React.forwardRef((
     }
   );
 
-  const [excuteRemove, { error:removeError }] = useMutation(gql`${removeGQL.gql}`,
+  const [excuteRemove, { error:removeError }] = useLayzyMagicDelete(
     {
       onCompleted:(data)=>{
         appStore.setSuccessAlert(true);
@@ -97,40 +96,40 @@ const ListView = observer(React.forwardRef((
     }
   );
 
-  useShowServerError(error||updateError||removeError);
+  useShowServerError(updateError||removeError);
 
   useEffect(()=>{
     if(!query || isDesigning){
       return;
     }
-    if(!called){
-      excuteQuery({variables:listViewStore.getQueryVariables()});
-    }
-    else{
-      refetch && refetch(listViewStore.getQueryVariables());
-    }
+    //if(!called){
+    //  excuteQuery({variables:listViewStore.getQueryVariables()});
+   // }
+    //else{
+    //  refetch && refetch(listViewStore.getQueryVariables());
+    //}
     listViewStore.setSelects([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[listViewStore.refreshQueryFlag])
 
-  useEffect(()=>{
-    queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
-    listViewStore.setLoading(queryLoading);
+  //useEffect(()=>{
+   // queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
+  //  listViewStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[queryLoading])
+  //},[queryLoading])
 
 
-  useEffect(()=>{
-    if(data){
-      !queryLoading && listViewStore.setRows(data && query ? data[query]?.data:[]);
-      listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});      
-    }
+ // useEffect(()=>{
+  //  if(data){
+     // !queryLoading && listViewStore.setRows(data && query ? data[query]?.data:[]);
+  //    listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});      
+ //   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[data])
+ // },[data])
 
   const handelBatchRemove = ()=>{
     listViewStore.setRemovingSelects();
-    excuteRemove({variables:{
+    excuteRemove({data:{
       ids:listViewStore.selects
     }})
   }
@@ -141,7 +140,7 @@ const ListView = observer(React.forwardRef((
     }
     listViewStore.setUpdatingSelects(field);
     const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
-    excuteUpdate({variables:{
+    excuteUpdate({data:{
       ids:listViewStore.selects,
       ...varilabes,
     }})
@@ -153,7 +152,7 @@ const ListView = observer(React.forwardRef((
     }
     listViewStore.setUpdating(id, field);
     const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
-    excuteUpdate({variables:{
+    excuteUpdate({data:{
       ids:[id],
       ...varilabes,
     }})
@@ -161,7 +160,7 @@ const ListView = observer(React.forwardRef((
 
   const handelReomve = (id:ID)=>{
     listViewStore.setRemoving(id);
-    excuteRemove({variables:{
+    excuteRemove({data:{
       ids:[id]
     }})
   }

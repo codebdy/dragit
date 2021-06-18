@@ -62,6 +62,11 @@ export class MagicQueryBuilder{
     return this;
   }
 
+  setTreeCommand(){
+    this._commands.push(`@tree`);
+    return this;
+  }
+
   setOrderByASC(key: string){
     return this.setOrderBy(key, 'ASC');
   }

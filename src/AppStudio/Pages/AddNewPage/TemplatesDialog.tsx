@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
-import { gql, useMutation } from '@apollo/react-hooks';
-import { CREATE_RX_PAGE, pageFieldsGQL } from "Base/GraphQL/PAGE_GQLs";
 import intl from 'react-intl-universal';
 import { Divider, DialogContent, Grid, DialogActions, TextField, Button } from '@material-ui/core';
 import RxDialog from 'AppStudio/RxDialog';
@@ -17,6 +15,8 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { queryAllTemplates } from 'MainBoard/querys';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_POST } from 'APIs/magic';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,10 +81,9 @@ export const TemplatesDialog = observer((
   const {loading, data, error} = useMagicQuery<IRxTemplate[]>(queryAllTemplates);
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
-  const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_PAGE, {
-    errorPolicy:'all',
+  const [excuteCreate, {loading:creating, error:createError}] = useLayzyAxios(API_MAGIC_POST, {
     //更新缓存
-    update(cache, { data: { createRxPage } }){
+    /*update(cache, { data: { createRxPage } }){
       cache.modify({
         id: cache.identify(studioStore?.rxApp as any),
         fields: {
@@ -101,7 +100,7 @@ export const TemplatesDialog = observer((
           }
         }
       });
-    },
+    },*/
     //结束后返回
     onCompleted: (data)=>{
       dragItStore.setSuccessAlert(true)
@@ -124,7 +123,7 @@ export const TemplatesDialog = observer((
   }
 
   const handleConfirm = ()=>{
-    excuteCreate({variables:{
+    excuteCreate({data:{
       rx_app_id:studioStore?.rxApp?.id,
       schema:selected?.schema,
       name

@@ -3,10 +3,8 @@ import { makeStyles, Theme, createStyles, Grid, Typography, Fab, CircularProgres
 import { GraphQLStore } from 'Base/GraphQL/GraphQLStore';
 import {observer} from 'mobx-react';
 import {GQLList} from './GQLList';
-import { print, parse } from 'graphql';
 import {CodeMirrorEditor} from '../../../../../Base/Widgets/CodeMirrorEditor';
 import intl from 'react-intl-universal';
-import { useDebugQuery } from './useDebugQuery';
 import { useDebugMutation } from './useDebugMutation';
 import MdiIcon from 'Components/common/MdiIcon';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
@@ -73,7 +71,7 @@ export const GraphQLDebugPannel = observer(()=>{
   const appStore = useDragItStore();
   const modelStore = useModelStore();
 
-  const [excuteQuery, { loading, error:queryError, data:queryResult }] = useDebugQuery(graphiQL);
+  //const [excuteQuery, { loading, error:queryError, data:queryResult }] = useDebugQuery(graphiQL);
   const [excuteMutation, {loading:mutating, error:mutationError, data:mutationResult}] = useDebugMutation(graphiQL);
 
   const refreshVariables = ()=>{
@@ -93,7 +91,7 @@ export const GraphQLDebugPannel = observer(()=>{
       if(selected?.mutation){
         gql = createMutationGQL(selected?.mutation, modelStore);
       }
-      setGraphQL(gql ? print(parse(gql)) : '');
+      //setGraphQL(gql ? print(parse(gql)) : '');
       refreshVariables();
     }
     catch(e){
@@ -109,8 +107,8 @@ export const GraphQLDebugPannel = observer(()=>{
   let error:any
 
   if(isQuery){
-    result = queryResult;
-    error = queryError;
+    //result = queryResult;
+    //error = queryError;
   }
 
   if(isMutation){
@@ -127,7 +125,7 @@ export const GraphQLDebugPannel = observer(()=>{
     let variables;
     try{
       variables = variablesStr ? JSON.parse(variablesStr) : variablesStr;
-      parse(graphiQL);
+      //parse(graphiQL);
     }
     catch(e){
       //console.error(e);
@@ -137,10 +135,10 @@ export const GraphQLDebugPannel = observer(()=>{
 
     try{
       if(isQuery){
-        excuteQuery({variables:variables});
+        //excuteQuery({variables:variables});
       }
       if(isMutation){
-        excuteMutation({variables:variables});
+        //excuteMutation({variables:variables});
       }
     }
     catch(e){
@@ -194,7 +192,7 @@ export const GraphQLDebugPannel = observer(()=>{
             }
             <div className={classes.fab}>
               {
-                loading || mutating ?
+                mutating ?
                   <CircularProgress />
                 :
                 <Fab 

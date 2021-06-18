@@ -10,13 +10,14 @@ import { useLeftDrawer } from 'Store/Helpers/useDragItStore';
 import useShadows from 'Utils/useShadows';
 import { AppBoardStore, AppBoardStoreProvider } from './store/AppBoardStore';
 import { useRouteMatch } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/react-hooks';
-import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import ModuleSkeleton from './AppBoardSkeleton';
 import { SidebarLinks } from './Sidebar/SidebarLinks';
 import ListLoadingSkeleton from './Sidebar/ListLoadingSkeleton';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
+import { useSWRQuery } from 'Data/useSWRQuery';
+import { API_MAGIC_QUERY } from 'APIs/magic';
+import { IRxApp } from 'Base/Model/IRxApp';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,20 +47,18 @@ export const AppBoard = observer(()=>{
   
   useLoginCheck();
   
-  const [excuteQuery, { loading, error, data }] = useLazyQuery(GET_RX_APP,{
-    notifyOnNetworkStatusChange: true
-  });
+  const{ loading, error, data } = useSWRQuery<{RxApp:IRxApp}>(API_MAGIC_QUERY);
 
   useShowServerError(error);
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     if(appId){
       excuteQuery({variables:{id:appId}});
     }
-  },[appId, excuteQuery]);
+  },[appId, excuteQuery]);*/
 
   useEffect(()=>{
-    appboardStore.setRxApp(data?.rxApp);
+    appboardStore.setRxApp(data?.RxApp as any);
   },[data, appboardStore])
   
   const theme = createMuiTheme({

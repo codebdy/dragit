@@ -9,7 +9,6 @@ import Portlet from 'Components/Portlet';
 import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";
 import TreeList from './TreeList';
-import { gql, useMutation, useQuery } from '@apollo/react-hooks';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
 import { useQueryGQL } from './useQueryGQL';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
@@ -18,6 +17,9 @@ import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import {observer} from 'mobx-react';
 import { useMutationGQL } from './useMutationGQL';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 
 
 const TreeEditor =observer((
@@ -40,8 +42,8 @@ const TreeEditor =observer((
   const appStore  = useDragItStore();
 
   const {isDesigning} = useDesign();
-  const {loading, data, error} = useQuery( gql` ${queryGQL.gql}`);
-  const [excuteSave, {loading:saving, error:saveError}] = useMutation(gql`${mutationGQL.gql}`,{
+  const {loading, data, error} = useMagicQuery(new MagicQueryBuilder());
+  const [excuteSave, {loading:saving, error:saveError}] = useLayzyMagicPost({
     onCompleted(){
       appStore.setSuccessAlert(true);
     }
@@ -52,7 +54,7 @@ const TreeEditor =observer((
   useEffect(()=>{
     if(query){
       let root = new RxNode<ITreeNode>(); 
-      root.parse(cloneObject((data && data[query])||[]));
+      root.parse(cloneObject((data)||[]));
       setRoot(root);   
     }
   },[data, query]);
@@ -161,7 +163,7 @@ const TreeEditor =observer((
   }
 
   const handleSave = ()=>{
-    excuteSave({variables:{tree:root?.getChildrenMetas()}})
+    excuteSave({data:{tree:root?.getChildrenMetas()}})
   }
 
   return (

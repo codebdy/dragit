@@ -7,11 +7,11 @@ import intl from 'react-intl-universal';
 import { IRxAuth } from 'Base/Model/IRxAuth';
 import { useEffect } from 'react';
 import ActionButton from 'AppStudio/ActionButton';
-import { useMutation } from '@apollo/react-hooks';
-import { REMOVE_RX_AUTH, SAVE_RX_AUTH } from './AUTH_GQLs';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,17 +66,16 @@ export const AuthListItem = observer((
     }
   },[auth])
 
-  const [excuteSaveRxAuth, {loading:saving, error}] = useMutation( SAVE_RX_AUTH, {
+  const [excuteSaveRxAuth, {loading:saving, error}] = useLayzyMagicPost({
     onCompleted(){
       dragItStore.setSuccessAlert(true)
     }
   });
-  const [excuteRemoveRxAuth, {loading:removing, error:removeError}] = useMutation( REMOVE_RX_AUTH,
-    {
+  const [excuteRemoveRxAuth, {loading:removing, error:removeError}] = useLayzyMagicDelete(     {
       onCompleted(){
         dragItStore.setSuccessAlert(true)
       },
-      update: (cache, { data: { removeRxAuth } })=>{
+      /*update: (cache, { data: { removeRxAuth } })=>{
         cache.modify({
           id: cache.identify(studioStore?.rxApp as any),
           fields: {
@@ -87,7 +86,7 @@ export const AuthListItem = observer((
             }
           }
         });
-      },
+      },*/
     }
   );
 
@@ -105,7 +104,7 @@ export const AuthListItem = observer((
 
   const handleSave = ()=>{
     setEditing(false);
-    excuteSaveRxAuth({variables:{rxAuth:{id:auth?.id, rx_slug:slug, name:name}}})
+    excuteSaveRxAuth({data:{rxAuth:{id:auth?.id, rx_slug:slug, name:name}}})
   }
 
   const handleSlugChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -117,7 +116,7 @@ export const AuthListItem = observer((
   }
 
   const handleRemove = ()=>{
-    excuteRemoveRxAuth({variables:{id:auth?.id}});
+    excuteRemoveRxAuth({data:{id:auth?.id}});
   }
 
   const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{

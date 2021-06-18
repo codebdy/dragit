@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 
 export const Combobox = React.forwardRef((
   props:{
@@ -37,25 +38,25 @@ export const Combobox = React.forwardRef((
   let name = query ? itemName : 'label';
   //const mountedRef = useRef(true);
   const empertyValue = multiple ? []:'';
-  const QUERY_DATA = gql`
-    query {
-      ${query}{
-        id
-        ${itemName}
-      }
-    }
-  `;
-  const [excuteQuery,{ loading:queryLoading, error: queryError, data }] = useLazyQuery(QUERY_DATA);
+  // const QUERY_DATA = gql`
+  //   query {
+  //     ${query}{
+  //       id
+  //       ${itemName}
+  //     }
+  //   }
+  // `;
+  const {loading:queryLoading, error: queryError, data } = useMagicQuery(new MagicQueryBuilder());
 
-  useEffect(()=>{
-    if(query){
-      excuteQuery();
-    }
-  },[excuteQuery, query])
+  // useEffect(()=>{
+  //   if(query){
+  //     excuteQuery();
+  //   }
+  // },[excuteQuery, query])
 
   useShowServerError(queryError)  
 
-  const itemsData = (query? (data&&data[query])||[] : items) as any;
+  const itemsData = (query? (data)||[] : items) as any;
   
   const [inputValue, setInputValue] = React.useState<any>(value||empertyValue);
 

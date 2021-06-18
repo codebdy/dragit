@@ -1,4 +1,3 @@
-import { gql, useQuery } from '@apollo/react-hooks';
 import { createStyles, FilledInput, FormControl, FormHelperText, Input, InputLabel, makeStyles, OutlinedInput, Theme } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import React, { useEffect } from 'react';
@@ -6,6 +5,8 @@ import ChipsInput from './ChipsInput';
 import intl from 'react-intl-universal';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,12 +39,8 @@ export const TreeSelect = React.forwardRef((props:any, ref:any)=>{
     size, 
     ...rest} = props;
   const classes = useStyles();
-  const QUERY_TREE = gql`
-    query {
-      ${query}
-    }
-  `;
-  const { loading:queryLoading, error: queryError, data } = useQuery(QUERY_TREE);
+
+  const { loading:queryLoading, error: queryError, data } = useMagicQuery(new MagicQueryBuilder().setTreeCommand());
   const appStore = useDragItStore();
   const {isDesigning} = useDesign();
   
@@ -87,7 +84,7 @@ export const TreeSelect = React.forwardRef((props:any, ref:any)=>{
             value={
               {
                 values:values,
-                rootNodes:(data && data[query])||[],
+                rootNodes:(data)||[],
                 nameKey:nameKey,
                 height:height,
                 size:size,

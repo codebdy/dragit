@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import { gql, useLazyQuery } from '@apollo/react-hooks';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,26 +73,20 @@ export const SingleSelectBox = React.forwardRef((
   let name = itemName;
 
   const classes = useStyles();
-  const QUERY_DATA = gql`
-  query {
-    ${query}{
-      id
-      ${itemName}
-    }
-  }`;
-  const [excuteQuery,{ loading:queryLoading, error: queryError, data }] = useLazyQuery(QUERY_DATA);
 
-  useEffect(()=>{
-    if(query){
-      excuteQuery();
-    }
-  },[excuteQuery, query])
+  const { loading:queryLoading, error: queryError, data } = useMagicQuery(new MagicQueryBuilder());
+
+  // useEffect(()=>{
+  //   if(query){
+  //     excuteQuery();
+  //   }
+  // },[excuteQuery, query])
 
   useShowServerError(queryError)  
 
   const empertyValue = '';
 
-  const itemsData = (query? (data&&data[query])||[] : items) as any;
+  const itemsData = (query? (data)||[] : items) as any;
   const groups = groupByField ? groupBy(itemsData, groupByField) :[];
 
   const handleChange = (event: React.ChangeEvent<{ name?: string | undefined, value: unknown }> )=>{

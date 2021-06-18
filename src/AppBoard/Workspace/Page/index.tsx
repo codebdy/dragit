@@ -6,7 +6,6 @@ import { RxNode } from 'rx-drag/models/RxNode';
 import { ComponentRender } from 'Base/PageUtils/ComponentRender';
 import { IPageAction } from 'Base/Model/IPageAction';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
-import { gql, useMutation } from '@apollo/react-hooks';
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
 import { IPageMutation } from 'Base/Model/IPageMutation';
@@ -25,6 +24,7 @@ import { PageQuery } from './PageQuery';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import { PopupPage } from './PopupPage';
 import { PageQueryByMutation } from './PageQueryByMutation';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 
 export const Page = observer((
   props:{
@@ -58,8 +58,7 @@ export const Page = observer((
   },[page, pageJumper])
 
   
-  const [excuteMutation, {error:muetationError}] = useMutation(
-    gql`${createMutationGQL(mutation, modelStore)}`,
+  const [excuteMutation, {error:muetationError}] = useLayzyMagicPost(
     {
       onCompleted:(data)=>{
         if(mutation && mutation.name){
@@ -67,7 +66,7 @@ export const Page = observer((
           submitNode?.updateDefaultValue();
           if(mutation?.refreshNode){
             const refreshNode = modelStore?.getModelNode(mutation?.refreshNode)
-            refreshNode?.initWithModel({[mutation?.refreshNode]:data[mutation.name]})             
+            //refreshNode?.initWithModel({[mutation?.refreshNode]:data[mutation.name]})             
             refreshNode?.setLoading(false);          
           }
 
@@ -91,7 +90,7 @@ export const Page = observer((
       const refreshNode = modelStore?.getModelNode(mutation?.refreshNode) 
       refreshNode?.setLoading(true);
       const varialbles = mutation.variableName? {[mutation.variableName]:submitNode?.toInputValue()} : undefined;
-      excuteMutation({variables:varialbles}); 
+      excuteMutation({data:varialbles}); 
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[mutation])

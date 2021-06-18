@@ -8,8 +8,6 @@ import { useState } from 'react';
 import { AppStudioStore, AppStudioStoreProvider } from './AppStudioStore';
 import Spacer from 'Components/common/Spacer';
 import { useHistory, useRouteMatch } from 'react-router';
-import { useLazyQuery } from '@apollo/react-hooks';
-import { GET_RX_APP } from 'Base/GraphQL/APP_GQLs';
 import { useEffect } from 'react';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import AppSkeleton from './AppSkeleton';
@@ -21,6 +19,11 @@ import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { SaveNavigationButton } from './RxNavigationEditor/SaveNavigationButton';
 import { INDEX_URL } from 'Utils/consts';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
+import { API_MAGIC_QUERY } from 'APIs/magic';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
+import { RxApp } from 'MainBoard/constants';
+import { IRxApp } from 'Base/Model/IRxApp';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,18 +83,25 @@ export const AppStudio = observer(() => {
       }
     },
   });
-  const [excuteQuery, { loading, error, data }] = useLazyQuery(GET_RX_APP,{
-    notifyOnNetworkStatusChange: true
-  });
+  const { loading, error, data } = useMagicQuery<IRxApp>(
+    new MagicQueryBuilder()
+      .setModel(RxApp)
+      .addCondition('id', appId)
+      .addRelation('auths')
+      .addRelation('pages')
+      .addRelation('entryPage')
+      .setGetOne()
+  );
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     if(appId){
       excuteQuery({variables:{id: appId}});
     }
-  },[appId, excuteQuery]);
+  },[appId, excuteQuery]);*/
 
   useEffect(()=>{
-    studioStore.setRxApp(data?.rxApp);
+    //console.log(data);
+    data?.data && studioStore.setRxApp(data?.data);
   },[data, studioStore])
 
   useShowServerError(error)
@@ -105,7 +115,6 @@ export const AppStudio = observer(() => {
     else{
       history.push(INDEX_URL);
     }
-   
   }
 
 

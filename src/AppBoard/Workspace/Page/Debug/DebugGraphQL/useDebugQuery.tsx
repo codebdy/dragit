@@ -1,5 +1,3 @@
-import { useLazyQuery, gql } from "@apollo/react-hooks";
-import { parse } from 'graphql';
 
 export function useDebugQuery(graphiQL?:string){
   let graphiQLStr = graphiQL;
@@ -8,13 +6,14 @@ export function useDebugQuery(graphiQL?:string){
   }
 
   try{
-    parse(graphiQL||'');
+    //parse(graphiQL||'');
   }
   catch(e){
     graphiQLStr = 'query{empty}'
   }
-  return useLazyQuery(gql`${graphiQLStr}`,{
+  /*return useLazyQuery(gql`${graphiQLStr}`,{
     notifyOnNetworkStatusChange: true,
     fetchPolicy:'no-cache'
-  });
+  });*/
+  return [undefined,{}];
 }

@@ -7,10 +7,11 @@ import { PopuDrawer } from 'AppStudio/PopuDrawer';
 import { AuthListItem } from './AuthListItem';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import SubmitButton from 'Components/common/SubmitButton';
-import { authFields, CREATE_RX_AUTH } from './AUTH_GQLs';
-import { gql, useMutation } from '@apollo/react-hooks';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
+import useLayzyAxios from 'Data/useLayzyAxios';
+import { API_MAGIC_POST } from 'APIs/magic';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,12 +33,12 @@ export const AuthsDrawer = observer((
   const classes = useStyles();
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
-  const [excuteCreate, {loading:creating, error:createError}] = useMutation(CREATE_RX_AUTH, {
+  const [excuteCreate, {loading:creating, error:createError}] = useLayzyMagicPost({
     onCompleted(){
       dragItStore.setSuccessAlert(true)
     },
     //更新缓存
-    update(cache, { data: { createRxAuth } }){
+    /*update(cache, { data: { createRxAuth } }){
       cache.modify({
         id: cache.identify(studioStore?.rxApp as any),
         fields: {
@@ -54,14 +55,14 @@ export const AuthsDrawer = observer((
           }
         }
       });
-    },
+    },*/
 
   })
 
   useShowServerError(createError);
 
   const handleNew = ()=>{
-    excuteCreate({variables:{rx_app_id:studioStore?.rxApp?.id}})
+    excuteCreate({data:{rx_app_id:studioStore?.rxApp?.id}})
   }
 
   return (
