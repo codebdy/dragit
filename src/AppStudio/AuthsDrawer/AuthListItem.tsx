@@ -12,6 +12,9 @@ import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxAuth } from './constants';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,21 +75,13 @@ export const AuthListItem = observer((
     }
   });
   const [excuteRemoveRxAuth, {loading:removing, error:removeError}] = useLayzyMagicDelete(     {
-      onCompleted(){
+      onCompleted(data){
         dragItStore.setSuccessAlert(true)
+        if(studioStore?.rxApp){
+          studioStore.rxApp.auths = studioStore.rxApp.auths?.filter(aAuth=>aAuth.id !== auth?.id)
+        }
+        
       },
-      /*update: (cache, { data: { removeRxAuth } })=>{
-        cache.modify({
-          id: cache.identify(studioStore?.rxApp as any),
-          fields: {
-            auths:(existingAuthRefs = [], { readField })=>{
-              return existingAuthRefs.filter(
-                (authRef:any) => auth?.id !== readField('id', authRef)
-              );
-            }
-          }
-        });
-      },*/
     }
   );
 
@@ -104,7 +99,17 @@ export const AuthListItem = observer((
 
   const handleSave = ()=>{
     setEditing(false);
-    excuteSaveRxAuth({data:{rxAuth:{id:auth?.id, rx_slug:slug, name:name}}})
+    const data = new MagicPostBuilder()
+      .setModel(RxAuth)
+      .setSingleData(
+        {
+          id:auth?.id, 
+          rxSlug:slug, 
+          name:name
+        }
+      )
+      .toData();
+    excuteSaveRxAuth({data});
   }
 
   const handleSlugChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -116,7 +121,11 @@ export const AuthListItem = observer((
   }
 
   const handleRemove = ()=>{
-    excuteRemoveRxAuth({data:{id:auth?.id}});
+    const data = new MagicDeleteBuilder()
+      .setModel(RxAuth)
+      .addId(auth?.id)
+      .toData();
+    excuteRemoveRxAuth({data});
   }
 
   const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{

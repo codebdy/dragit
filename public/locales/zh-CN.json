@@ -356,5 +356,6 @@
     "new-folder":"新文件夹",
     "create-time":"创建时间",
     "new-to-old":"由新到旧",
-    "old-to-new":"由旧到新"
+    "old-to-new":"由旧到新",
+    "new-auth":"新权限"
 }

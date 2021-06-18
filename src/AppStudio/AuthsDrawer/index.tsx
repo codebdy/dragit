@@ -9,9 +9,9 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import SubmitButton from 'Components/common/SubmitButton';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import useLayzyAxios from 'Data/useLayzyAxios';
-import { API_MAGIC_POST } from 'APIs/magic';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxAuth } from './constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,35 +34,29 @@ export const AuthsDrawer = observer((
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
   const [excuteCreate, {loading:creating, error:createError}] = useLayzyMagicPost({
-    onCompleted(){
-      dragItStore.setSuccessAlert(true)
+    onCompleted(data:any){
+      console.log(data);
+      dragItStore.setSuccessAlert(true);
+      if(studioStore?.rxApp?.auths && data){
+        studioStore?.rxApp?.auths.push(data[RxAuth])
+      }
     },
-    //更新缓存
-    /*update(cache, { data: { createRxAuth } }){
-      cache.modify({
-        id: cache.identify(studioStore?.rxApp as any),
-        fields: {
-          auths(existingAuthRefs = []){
-            const newAuthRef = cache.writeFragment({
-              data: createRxAuth,
-              fragment: gql`
-                fragment NewPage on RxAuth {
-                  ${authFields}
-                }
-              `
-            });
-            return [...existingAuthRefs, newAuthRef];
-          }
-        }
-      });
-    },*/
-
   })
 
   useShowServerError(createError);
 
   const handleNew = ()=>{
-    excuteCreate({data:{rx_app_id:studioStore?.rxApp?.id}})
+    const data = new MagicPostBuilder()
+      .setModel(RxAuth)
+      .setSingleData(
+        {
+          app:studioStore?.rxApp?.id,
+          rxSlug:'new-auth',
+          name:intl.get('new-auth')
+        }
+      )
+      .toData();
+    excuteCreate({data});
   }
 
   return (
