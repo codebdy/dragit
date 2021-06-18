@@ -11,6 +11,8 @@ import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_POST } from 'APIs/magic';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxApp } from 'MainBoard/constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,7 +47,7 @@ export const Settings = observer((
   const [appType, setAppType] = useState(rxApp?.appType);
   const [icon, setIcon] = useState(rxApp?.icon);
   const [color, setColor] = useState(rxApp?.color);
-  const [entryPageId, setEntryPageId] = useState(rxApp?.entryPageId);
+  const [entryPageId, setEntryPageId] = useState(rxApp?.entryPage?.id);
   const [excuteSave, {loading, error}] = useLayzyAxios(API_MAGIC_POST,{
     onCompleted(){
       onClose && onClose();
@@ -61,20 +63,25 @@ export const Settings = observer((
     setAppType(rxApp?.appType);
     setIcon(rxApp?.icon);
     setColor(rxApp?.color);
-    setEntryPageId(rxApp?.entryPageId);
+    setEntryPageId(rxApp?.entryPage?.id);
   }
 
   const handleSave = ()=>{
-    excuteSave({data:{
-      rxApp:{
-        id:rxApp?.id,
-        name,
-        app_type:appType,
-        icon,
-        color,
-        entry_page_id:entryPageId
-      }
-    }})
+    const data = new MagicPostBuilder()
+      .setModel(RxApp)
+      .setSingleData(
+        {
+          id:rxApp?.id,
+          name,
+          appType:appType,
+          icon,
+          color,
+          entryPage:entryPageId
+        }
+      )
+      .toData();
+    console.log(data);
+    excuteSave({data});
   }
 
   return (

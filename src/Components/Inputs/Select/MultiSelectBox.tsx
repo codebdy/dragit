@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
@@ -100,7 +100,3 @@ export const MultiSelectBox = React.forwardRef((
 
   )
 })
-
-//const MultiSelectBoxAny = withFormField(MultiSelectBox) as any;
-
-//export default MultiSelectBoxAny;
