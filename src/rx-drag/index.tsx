@@ -23,7 +23,7 @@ export interface IRxDragProps{
   locales?:IRxLocales,
   onChange?: (schema : any)=>void,
   onThemeModeChange?:(mode :RxThemeMode)=>void,
-  onShowJson?:(schema:string) => void
+  onShowJson?:(schema:any) => void
 }
 
 export const RxDrag = observer((
@@ -48,7 +48,7 @@ export const RxDrag = observer((
   }
 
   const handleShowJson = ()=>{
-    onShowJson && onShowJson(JSON.stringify(rxDragStore?.canvas?.getChildrenMetas()||[], null, 2));
+    onShowJson && onShowJson(rxDragStore?.canvas?.getChildrenMetas()||[]);
   }
 
   return (

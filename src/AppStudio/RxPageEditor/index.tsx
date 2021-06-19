@@ -54,7 +54,7 @@ export const RxPageEditor = observer(() => {
     }
   }
 
-  const handleShowJson = (schema:string)=>{
+  const handleShowJson = (schema:any)=>{
     setShowJSON(true);
     setPageJSONSchema(schema);
   }
@@ -96,7 +96,7 @@ export const RxPageEditor = observer(() => {
         >
           <div className = {classes.jsonEditor}>
             <CodeMirrorEditor 
-              value = {pageJSONSchema} 
+              value = {JSON.stringify(pageJSONSchema, null, 2)} 
               mode="application/json"
               height = "calc(100vh - 150px)"
             />
