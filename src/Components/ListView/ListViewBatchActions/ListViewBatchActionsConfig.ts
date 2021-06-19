@@ -18,4 +18,7 @@ export class ListViewBatchActionsConfig extends MetaConfig{
     ]
   }
 
+  getDataConfig(): Array<IPropConfig>{
+    return [];
+  }
 }

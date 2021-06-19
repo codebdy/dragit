@@ -45,4 +45,7 @@ export class ListViewPaginationConfig extends MetaConfig{
     ]
   }
 
+  getDataConfig(): Array<IPropConfig>{
+    return [];
+  }
 }

@@ -20,4 +20,7 @@ export class ListViewBodyConfig extends MetaConfig{
     ]
   }
 
+  getDataConfig(): Array<IPropConfig>{
+    return [];
+  }
 }

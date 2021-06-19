@@ -33,8 +33,6 @@ const ListView = observer(React.forwardRef((
     props:{
       rxNode:RxNode<IMeta>,
       query?:string,
-      update?:IPageMutation,
-      remove?:string,
       children?:any,
       selectable?:boolean,
     }, 
@@ -44,8 +42,6 @@ const ListView = observer(React.forwardRef((
   const {
     rxNode,
     query,
-    update,
-    remove,
     children,
     selectable = true,
     ...rest
@@ -54,9 +50,6 @@ const ListView = observer(React.forwardRef((
   const [listViewStore] = useState(new ListViewStore())
   
   const appStore = useDragItStore();
-  const queryGQL = useQueryGQL( rxNode, listViewStore, query );
-  const updateGQL = useUpdateGQL( rxNode, listViewStore, update );
-  const removeGQL = useRemoveGQL( rxNode, listViewStore, remove );
   const {isDesigning} = useDesign();
   const modelStore = useModelStore();
 
@@ -135,26 +128,26 @@ const ListView = observer(React.forwardRef((
   }
 
   const handleBatchUpadate = (field:string, value:any)=>{
-    if(!update){
-      return;
-    }
+    //if(!update){
+    //  return;
+    //}
     listViewStore.setUpdatingSelects(field);
-    const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
+    //const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
     excuteUpdate({data:{
       ids:listViewStore.selects,
-      ...varilabes,
+      //...varilabes,
     }})
   }
 
   const handleUpdate = (id:ID, field:string, value:any)=>{
-    if(!update){
-      return;
-    }
+    //if(!update){
+    //  return;
+   // }
     listViewStore.setUpdating(id, field);
-    const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
+    //const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
     excuteUpdate({data:{
       ids:[id],
-      ...varilabes,
+      //...varilabes,
     }})
   }
 

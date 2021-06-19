@@ -18,4 +18,7 @@ export class ListViewFiltersConfig extends MetaConfig{
     ]
   }
 
+  getDataConfig(): Array<IPropConfig>{
+    return [];
+  }
 }

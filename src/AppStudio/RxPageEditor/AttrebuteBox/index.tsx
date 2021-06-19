@@ -172,7 +172,7 @@ export const AttributeBox = observer(()=>{
               </Grid>
             </AccordionDetails>
           </Accordion>
-          {metaConfig?.getDataConfig().length &&
+          {metaConfig && metaConfig?.getDataConfig().length > 0 &&
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}

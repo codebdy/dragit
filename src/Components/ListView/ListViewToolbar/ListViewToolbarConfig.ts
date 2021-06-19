@@ -21,4 +21,7 @@ export class ListViewToolbarConfig extends MetaConfig{
     ]
   }
 
+  getDataConfig(): Array<IPropConfig>{
+    return [];
+  }
 }

@@ -28,28 +28,19 @@ export class ListViewConfig extends MetaConfig{
       ...marginConfigs,
       ...elevationConfig,
       squareConfig,
-      {
-        name:'query',
-        labelKey:'query-gql',
-        propType:'string',
-        props:{
-          xs:12
-        }
-      },
-      {
-        name:'remove',
-        labelKey:'remove-gql',
-        propType:'string',
-        props:{
-          xs:12
-        }
-      },
-      {
-        name:'update',
-        labelKey:'update-gql',
-        propType:'mutation',
-      }
     ]
   }
 
+  getDataConfig(): Array<IPropConfig>{
+    return [
+      {
+        name:'query',
+        labelKey:'query',
+        propType:'JSON',
+        props:{
+          xs:12
+        }
+      },
+    ]
+  }
 }
