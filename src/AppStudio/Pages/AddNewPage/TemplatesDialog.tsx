@@ -119,7 +119,6 @@ export const TemplatesDialog = observer((
       .toData();
     excuteCreate({data});
   }
-
   
   return (
     <RxDialog 
