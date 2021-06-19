@@ -34,7 +34,7 @@ export const RxPageEditor = observer(() => {
   const [pageJSONSchema, setPageJSONSchema] = useState('');
   const classes = useStyles();
 
-  const rxPage = pageId ? studioStore?.getPage(pageId) : studioStore?.getFirstPage();
+  const rxPage = pageId ? studioStore?.getPage(parseInt(pageId)) : studioStore?.getFirstPage();
 
   useEffect(()=>{
     if(rxPage){
@@ -67,7 +67,7 @@ export const RxPageEditor = observer(() => {
               mode:studioStore?.themeMode,
             }
           }
-          schema = {pageJSONSchema}
+          schema = { pageJSONSchema }
           toolbox = {
             <Toolbox/>
           }

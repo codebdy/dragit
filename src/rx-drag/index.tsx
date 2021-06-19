@@ -12,6 +12,7 @@ import './style.css';
 import { useEffect } from 'react';
 import { useRxDragStore } from './store/useDesign';
 import { RxDragCore } from './core';
+import { cloneObject } from './utils/cloneObject';
 
 export interface IRxDragProps{
   theme?: IRxThemeOptions,
@@ -34,7 +35,8 @@ export const RxDrag = observer((
   rxDragStore?.setValueChangeFn(onChange);
 
   useEffect(()=>{
-    rxDragStore?.setMetas(schema||[]);
+    //复制一份SCHEMA，防止数据污染
+    rxDragStore?.setMetas(cloneObject(schema||[]));
   },[rxDragStore, schema])
 
   useEffect(()=>{
