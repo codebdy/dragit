@@ -12,8 +12,11 @@ import classNames from 'classnames';
 import ActionButton from 'AppStudio/ActionButton';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import intl from 'react-intl-universal';
-import useLayzyAxios from 'Data/useLayzyAxios';
-import { API_MAGIC_DELETE, API_MAGIC_POST } from 'APIs/magic';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
+import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxPage } from 'modelConstants';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,57 +66,32 @@ export const PageListItem = observer((
     setName(page.name)
   },[page.name])
 
-  const [excuteSaveRxPage, {loading:saving, error}] = useLayzyAxios( API_MAGIC_POST, {
+  const [excuteSaveRxPage, {loading:saving, error}] = useLayzyMagicPost({
     onCompleted(){
       dragItStore.setSuccessAlert(true)
     }
-  } );
-  const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useLayzyAxios( API_MAGIC_DELETE,
+  });
+  const [excuteRemoveRxPage, {loading:removing, error:removeError}] = useLayzyMagicDelete(
     {
-      /*update: (cache, { data: { removeRxPage } })=>{
-        cache.modify({
-          id: cache.identify(studioStore?.rxApp as any),
-          fields: {
-            pages:(existingPageRefs = [], { readField })=>{
-              return existingPageRefs.filter(
-                (pageRef:any) => page.id !== readField('id', pageRef)
-              );
-            }
-          }
-        });
-      },*/
       onCompleted: (data)=>{
         if(page.id === studioStore?.pageEditor?.editingPage?.id){
           studioStore.editPage(undefined);
+        }
+        if(studioStore?.rxApp?.pages){
+          studioStore.setRxAppPages(studioStore.rxApp.pages.filter(aPage=>aPage.id !== page.id));
         }
         dragItStore.setSuccessAlert(true);
       }
     }
   );
 
-  const [excuteDuplicate, {loading:duplicating, error:duplicateError}] = useLayzyAxios(API_MAGIC_POST, {
-    onCompleted(){
+  const [excuteDuplicate, {loading:duplicating, error:duplicateError}] = useLayzyMagicPost<{RxPage:IRxPage}>({
+    onCompleted(data:{RxPage:IRxPage}){
       dragItStore.setSuccessAlert(true);
+      if(studioStore?.rxApp?.pages){
+        studioStore.setRxAppPages([...studioStore.rxApp.pages, data.RxPage]);
+      }
     },
-    //更新缓存
-    /*update:(cache, { data: { duplicateRxPage } })=>{
-      cache.modify({
-        id: cache.identify(studioStore?.rxApp as any),
-        fields: {
-          pages(existingPageRefs = []){
-            const newPageRef = cache.writeFragment({
-              data: duplicateRxPage,
-              fragment: gql`
-                fragment NewPage on RxPage {
-                  ${pageFieldsGQL}
-                }
-              `
-            });
-            return [...existingPageRefs, newPageRef];
-          }
-        }
-      });
-    },*/
   });
 
   useShowServerError(error || removeError || duplicateError);
@@ -130,7 +108,16 @@ export const PageListItem = observer((
   const handleFinishedEdit = ()=>{
     setEditing(false);
     if(name !== page.name){
-      excuteSaveRxPage({data:{rxPage:{id:page.id, name}}})
+      const data = new MagicPostBuilder()
+        .setModel(RxPage)
+        .setSingleData(
+          {
+            ...page,
+            name
+          }
+        )
+        .toData();
+      excuteSaveRxPage({data});
     }
   }
 
@@ -144,11 +131,21 @@ export const PageListItem = observer((
   }
 
   const handleDuplicate = ()=>{
-    excuteDuplicate({data:{id:page.id}});
+    const {id, ...pageData} = page;
+    pageData.name = 'Copy of ' + page.name;
+    const data = new MagicPostBuilder()
+      .setModel(RxPage)
+      .setSingleData(pageData)
+      .toData()
+    excuteDuplicate({data});
   }
 
   const handleRemove = ()=>{
-    excuteRemoveRxPage({data:{id:[page.id]}});
+    const data = new MagicDeleteBuilder()
+      .setModel(RxPage)
+      .addId(page.id)
+      .toData();
+    excuteRemoveRxPage({data});
   }
 
   const handleKeyEnter = (event:React.KeyboardEvent<HTMLElement>)=>{

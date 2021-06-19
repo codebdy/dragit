@@ -29,6 +29,10 @@ export class AppStudioStore{
     //}
   }
 
+  setRxAppPages(pages: IRxPage[]){
+    this.rxApp?.pages && (this.rxApp.pages = pages);
+  }
+
   getFirstPage(){
     return this.rxApp?.pages?.length ? this.rxApp?.pages[0] : undefined;
   }

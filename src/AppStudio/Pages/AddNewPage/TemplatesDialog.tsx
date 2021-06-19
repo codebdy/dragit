@@ -15,8 +15,10 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { queryAllTemplates } from 'MainBoard/querys';
-import useLayzyAxios from 'Data/useLayzyAxios';
-import { API_MAGIC_POST } from 'APIs/magic';
+import { getImageThumbnail } from 'Data/helpers';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxPage } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,29 +83,13 @@ export const TemplatesDialog = observer((
   const {loading, data, error} = useMagicQuery<IRxTemplate[]>(queryAllTemplates);
   const dragItStore = useDragItStore();
   const studioStore = useAppStudioStore();
-  const [excuteCreate, {loading:creating, error:createError}] = useLayzyAxios(API_MAGIC_POST, {
-    //更新缓存
-    /*update(cache, { data: { createRxPage } }){
-      cache.modify({
-        id: cache.identify(studioStore?.rxApp as any),
-        fields: {
-          pages(existingPageRefs = []){
-            const newPageRef = cache.writeFragment({
-              data: createRxPage,
-              fragment: gql`
-                fragment NewPage on RxPage {
-                  ${pageFieldsGQL}
-                }
-              `
-            });
-            return [...existingPageRefs, newPageRef];
-          }
-        }
-      });
-    },*/
+  const [excuteCreate, {loading:creating, error:createError}] = useLayzyMagicPost({
     //结束后返回
-    onCompleted: (data)=>{
-      dragItStore.setSuccessAlert(true)
+    onCompleted: (data:any)=>{
+      dragItStore.setSuccessAlert(true);
+      if(studioStore?.rxApp){
+        studioStore.setRxAppPages([...studioStore.rxApp.pages||[], data.RxPage]);
+      }      
       onClose();
     }
   })
@@ -123,11 +109,15 @@ export const TemplatesDialog = observer((
   }
 
   const handleConfirm = ()=>{
-    excuteCreate({data:{
-      rx_app_id:studioStore?.rxApp?.id,
-      schema:selected?.schema,
-      name
-    }})
+    const data = new MagicPostBuilder()
+      .setModel(RxPage)
+      .setSingleData({
+        app:studioStore?.rxApp?.id,
+        schema:selected?.schema,
+        name
+      })
+      .toData();
+    excuteCreate({data});
   }
 
   
@@ -153,7 +143,7 @@ export const TemplatesDialog = observer((
                       onClick={()=>{setSelected(template)}}
                     >
                       <Image 
-                        src = {template.media?.thumbnail} 
+                        src = {getImageThumbnail(template.media?.fileName)} 
                         className={
                           classNames(classes.image,{[classes.selected]:selected?.id === template.id})
                         }
