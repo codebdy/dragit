@@ -15,6 +15,7 @@ export class MagicQueryBuilder{
   private _isPagination = false;
   private _conditions = {} as any;
   private _relations = {} as any;
+  private _queryString?: string;
 
   setModel(model:string){
     this._model = model;
@@ -38,6 +39,11 @@ export class MagicQueryBuilder{
 
   setGetOne(){
     this._fetcher = "@getOne";
+    return this;
+  }
+
+  setQueryString(queryString:string){
+    this._queryString = queryString;
     return this;
   }
 
@@ -108,6 +114,9 @@ export class MagicQueryBuilder{
   }
 
   private toQueryString(){
+    if(this._queryString){
+      return this._queryString;
+    }
     const queryObj = {} as any;
     const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
     queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')} ${pagination}`] = this._model;

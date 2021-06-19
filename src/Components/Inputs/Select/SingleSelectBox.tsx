@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles, Theme, createStyles, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
@@ -75,12 +75,6 @@ export const SingleSelectBox = React.forwardRef((
   const classes = useStyles();
 
   const { loading:queryLoading, error: queryError, data } = useMagicQuery(new MagicQueryBuilder());
-
-  // useEffect(()=>{
-  //   if(query){
-  //     excuteQuery();
-  //   }
-  // },[excuteQuery, query])
 
   useShowServerError(queryError)  
 

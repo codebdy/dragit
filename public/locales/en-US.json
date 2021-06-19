@@ -290,6 +290,7 @@
     "variables":"Variables",
     "list-update":"List update",
     "data-query":"Query data",
+    "base-data-query":"Query base data",
     "data-update":"Update data",
     "data-remove":"Delete data",
     "applications":"Applications",

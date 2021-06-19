@@ -294,6 +294,7 @@
     "graphiqL":"GraphQL语句",
     "variables":"变量",
     "data-query":"数据查询",
+    "base-data-query":"基础数据查询",
     "data-update":"数据更新",
     "data-remove":"数据删除",
     "applications":"应用",

@@ -42,5 +42,17 @@ export class SelectConfig extends MetaConfig{
     ]
   }
 
+  getDataConfig(): Array<IPropConfig>{
+    return [...super.getDataConfig(),
+      {
+        name:'query',
+        labelKey:'base-data-query',
+        propType:'JSON',
+        props:{
+          xs:12
+        }
+      },
+    ]
+  }
 
 }
