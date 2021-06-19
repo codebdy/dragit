@@ -48,7 +48,7 @@ export const RxPageEditor = observer(() => {
     studioStore?.setThemeMode(mode);
   }
 
-  const handleChange = (schema: string)=>{
+  const handleChange = (schema: any)=>{
     if(studioStore?.pageEditor?.currentData){
       studioStore?.pageEditor?.setCurrentData({...studioStore?.pageEditor?.currentData, schema});
     }

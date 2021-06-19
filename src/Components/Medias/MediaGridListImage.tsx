@@ -23,8 +23,8 @@ import { useUpdateMedia } from './useUpdateMedia';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_DELETE } from 'APIs/magic';
 import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
-import { RxMedia } from './constants';
 import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxMedia } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,7 +1,6 @@
 import { MagicQueryBuilder } from "Data/MagicQueryBuilder";
+import { RxMediaFolder } from "modelConstants";
 
-export const RxMedia = 'RxMedia';
-export const RxMediaFolder = 'RxMediaFolder';
 export const folderTreeQuery = new MagicQueryBuilder()
   .setModel(RxMediaFolder)
   .setTreeCommand()

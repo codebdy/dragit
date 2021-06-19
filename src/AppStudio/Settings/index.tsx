@@ -12,7 +12,7 @@ import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_POST } from 'APIs/magic';
 import { MagicPostBuilder } from 'Data/MagicPostBuilder';
-import { RxApp } from 'MainBoard/constants';
+import { RxApp } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

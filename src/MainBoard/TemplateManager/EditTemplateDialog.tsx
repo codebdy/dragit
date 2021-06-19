@@ -13,7 +13,7 @@ import { IRxTemplate } from 'Base/Model/IRxTemplate';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_POST } from 'APIs/magic';
 import { MagicPostBuilder } from 'Data/MagicPostBuilder';
-import { RxTemplate } from '../constants';
+import { RxTemplate } from '../../modelConstants';
 import { mutate } from 'swr';
 import { queryAllTemplates } from 'MainBoard/querys';
 

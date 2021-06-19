@@ -17,10 +17,11 @@ import { useAddFolder } from "./useAddFolder";
 import { API_MAGIC_POST } from "APIs/magic";
 import useLayzyAxios from "Data/useLayzyAxios";
 import { MagicPostBuilder } from "Data/MagicPostBuilder";
-import { folderTreeQuery, RxMedia, RxMediaFolder } from "./constants";
+import { folderTreeQuery } from "./querys";
 import { useMagicQueryInfinite } from "Data/useMagicQueryInfinite";
 import { MagicQueryBuilder } from "Data/MagicQueryBuilder";
 import { mutate } from "swr";
+import { RxMedia, RxMediaFolder } from "modelConstants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

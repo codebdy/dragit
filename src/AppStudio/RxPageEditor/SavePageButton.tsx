@@ -8,6 +8,8 @@ import { toJS } from 'mobx';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_POST } from 'APIs/magic';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxPage } from 'modelConstants';
 
 export const SavePageButton = observer(() => {
   const studioStore = useAppStudioStore();
@@ -23,13 +25,11 @@ export const SavePageButton = observer(() => {
   const handleSave = ()=>{
     const rxPageData = toJS(studioStore?.pageEditor?.currentData) as any; 
     console.assert(rxPageData, 'Page data is undefined or null');
-    const{__typename, auths, ...rest} = rxPageData
-    excuteSaveRxPage({data:{
-      rxPage:rest,
-      auths:{
-        update:auths
-      }
-    }});      
+    const data = new MagicPostBuilder()
+      .setModel(RxPage)
+      .setSingleData(rxPageData)
+      .toData();
+    excuteSaveRxPage({data});      
   }
   
   return (

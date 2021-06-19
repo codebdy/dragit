@@ -21,8 +21,8 @@ import { INDEX_URL } from 'Utils/consts';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
-import { RxApp } from 'MainBoard/constants';
 import { IRxApp } from 'Base/Model/IRxApp';
+import { RxApp } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

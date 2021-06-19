@@ -10,8 +10,8 @@ import { useEffect } from 'react';
 import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_UPLOAD } from 'APIs/magic';
 import { MagicUploadBuilder } from 'Data/MagicUploadBuilder';
-import { RxMedia } from './constants';
 import { MediaStore } from './MediaStore';
+import { RxMedia } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

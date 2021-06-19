@@ -12,7 +12,7 @@ import { parseFolderNodes } from './FolderNode/parseFolderNodes';
 import MediaFilderLoadingSkeleton from './MediaFilderLoadingSkeleton';
 import { MediaStore } from './MediaStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
-import { folderTreeQuery } from './constants';
+import { folderTreeQuery } from './querys';
 import Scrollbar from 'Common/Scrollbar';
 
 const useStyles = makeStyles((theme: Theme) =>

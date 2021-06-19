@@ -19,7 +19,7 @@ import useLayzyAxios from 'Data/useLayzyAxios';
 import { mutate } from 'swr';
 import { queryAllTemplates } from 'MainBoard/querys';
 import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
-import { RxTemplate } from '../constants';
+import { RxTemplate } from '../../modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

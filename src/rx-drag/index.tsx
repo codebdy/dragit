@@ -20,7 +20,7 @@ export interface IRxDragProps{
   attributeBox?: JSX.Element,
   pageSettings?: JSX.Element,
   locales?:IRxLocales,
-  onChange?: (schema : string)=>void,
+  onChange?: (schema : any)=>void,
   onThemeModeChange?:(mode :RxThemeMode)=>void,
   onShowJson?:(schema:string) => void
 }

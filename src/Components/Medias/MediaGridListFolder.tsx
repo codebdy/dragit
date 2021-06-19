@@ -10,9 +10,10 @@ import { useMediasStore } from './MediasStore';
 import { useRemoveFolder } from './useRemoveFolder';
 import { MediaStore } from './MediaStore';
 import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
-import { folderTreeQuery, RxMediaFolder } from './constants';
+import { folderTreeQuery } from './querys';
 import { MagicPostBuilder } from 'Data/MagicPostBuilder';
 import { mutate } from 'swr';
+import { RxMediaFolder } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -11,7 +11,7 @@ import useLayzyAxios from 'Data/useLayzyAxios';
 import { API_MAGIC_DELETE } from 'APIs/magic';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
-import { RxMedia } from './constants';
+import { RxMedia } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
