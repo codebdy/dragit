@@ -12,7 +12,7 @@ export class ListViewKeywordFilterConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
       inputVariantConfig,

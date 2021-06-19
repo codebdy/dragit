@@ -17,15 +17,10 @@ export class SelectConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...inputConfig,
       textboxSizeConfig,
-      {
-        name:'query',
-        labelKey:'query',
-        propType:'string',
-      },
       {
         name:'itemKey',
         labelKey:'item-key',

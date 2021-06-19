@@ -17,7 +17,7 @@ export class RadioGroupConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       {
         name:'label',

@@ -16,7 +16,7 @@ export class TreeEditorConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
       ...elevationConfig,   

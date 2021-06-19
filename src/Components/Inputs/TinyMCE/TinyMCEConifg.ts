@@ -10,7 +10,7 @@ export class TinyMCEConifg extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       {
         name:'height',

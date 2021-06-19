@@ -16,7 +16,7 @@ export class CheckboxConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       {
         name:'label',

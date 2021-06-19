@@ -15,7 +15,7 @@ export class ListViewToolbarConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
     ]

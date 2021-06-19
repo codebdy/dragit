@@ -20,7 +20,7 @@ export class FormGridItemConfig extends MetaConfig{
     return 'Grid Item';
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...colWidthConfig
     ]

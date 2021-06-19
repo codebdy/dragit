@@ -19,7 +19,7 @@ export class GridColumnConfig extends MetaConfig{
     return true;
   }
   
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
       ...colWidthConfig

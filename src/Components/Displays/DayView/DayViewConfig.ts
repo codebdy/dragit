@@ -11,7 +11,7 @@ export class DayViewConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
       {

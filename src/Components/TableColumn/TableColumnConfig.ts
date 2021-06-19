@@ -13,7 +13,7 @@ export class TableColumnConfig extends MetaConfig{
     return true;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       {
         name:'label',

@@ -11,7 +11,7 @@ export class ListViewEnumFilterConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
       textboxSizeConfig,

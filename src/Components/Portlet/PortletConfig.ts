@@ -17,7 +17,7 @@ export class PortletConfig extends MetaConfig{
     return true;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
       ...elevationConfig,

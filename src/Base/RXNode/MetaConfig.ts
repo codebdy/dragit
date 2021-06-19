@@ -1,7 +1,7 @@
-import { IRxMetaConfig } from "../../rx-drag/models/IRxMetaConfig";
 import { IPropConfig } from "../../rx-drag/models/IPropConfig";
 import { IMeta } from "./IMeta";
 import intl from 'react-intl-universal';
+import { IRxMetaConfig } from "rx-drag/models/IRxMetaConfig";
 
 export class MetaConfig implements IRxMetaConfig{
   editPaddingY = '';
@@ -35,7 +35,22 @@ export class MetaConfig implements IRxMetaConfig{
     return true;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return []
   }
+
+  getDataConfig(): Array<IPropConfig>{
+    return [
+      {
+        name:'field',
+        labelKey:'field',
+        propType:'string',
+        props:{
+          xs:12
+        },
+        isMeta: true,
+      }
+    ]
+  }
+
 }

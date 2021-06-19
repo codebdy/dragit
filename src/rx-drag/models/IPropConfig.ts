@@ -6,5 +6,6 @@ export interface IPropConfig {
   propType?: 'string'|'boolean'|'select'|'items'|'number'|'JSON'|'mutation',
   items?: Array<{value:string, label:string}>;
   props?: any;
+  isMeta?: boolean;
   defaultValue?:any;
 }

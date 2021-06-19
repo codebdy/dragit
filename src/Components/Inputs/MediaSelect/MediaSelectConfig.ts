@@ -11,7 +11,7 @@ export class MediaSelectConfig extends MetaConfig{
   accept(child:IMeta){
     return false;
   }
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       {
         name:'label',

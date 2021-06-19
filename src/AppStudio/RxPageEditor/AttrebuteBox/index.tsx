@@ -118,9 +118,8 @@ export const AttributeBox = observer(()=>{
     rxDragStore?.updateSelecteMeta('props', props);
   };
 
-  const handleFieldChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
-    let newField = event.target.value as string;
-    rxDragStore?.updateSelecteMeta('field', newField);
+  const handleMetaChange = (key:string, value:any)=>{
+    rxDragStore?.updateSelecteMeta(key, value);
   }
 
   const handleFieldGQLChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
@@ -154,7 +153,7 @@ export const AttributeBox = observer(()=>{
             <AccordionDetails>
               <Grid container spacing={2}>
                 {
-                  metaConfig?.getPropConfigs().map((config:IPropConfig, index)=>{
+                  metaConfig?.getPropsConfig().map((config:IPropConfig, index)=>{
                     const PropInput = config.propType ? propsInputs[config.propType] : undefined;
                     const label = config.label || (config.labelKey && intl.get(config.labelKey)) ||'';
                     console.assert(PropInput, `Config editor not exist,Meta:${node?.meta.name}, prop:${config.name}, propType：${config.propType}`);
@@ -173,7 +172,7 @@ export const AttributeBox = observer(()=>{
               </Grid>
             </AccordionDetails>
           </Accordion>
-          {metaConfig?.hasField &&
+          {metaConfig?.getDataConfig().length &&
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
@@ -181,13 +180,33 @@ export const AttributeBox = observer(()=>{
                 <Typography className={classes.heading}>{intl.get('data')}</Typography>
               </AccordionSummary>
               <AccordionDetails  key={node.id + '-data'}>
-                <TextField
-                  fullWidth
-                  size="small" 
-                  variant = "outlined" 
-                  label={intl.get("field")} value={stringValue(node?.meta.field)}
-                  onChange={handleFieldChange}>
-                </TextField>
+                <Grid container spacing={2}>
+                  {
+                    metaConfig?.getDataConfig().map((config:IPropConfig, index)=>{
+                      const PropInput = config.propType ? propsInputs[config.propType] : undefined;
+                      const label = config.label || (config.labelKey && intl.get(config.labelKey)) ||'';
+                      console.assert(PropInput, `Config editor not exist,Meta:${node?.meta.name}, prop:${config.name}, propType：${config.propType}`);
+                      return(
+                        PropInput && 
+                        <PropInput 
+                          key={index + '-' + config.name} 
+                          label = {label}
+                          value = {config.isMeta ? node.meta[config.name] : metaProps[config.name]}
+                          onChange={
+                            (value: any) => {
+                              if(config.isMeta){
+                                handleMetaChange(config.name, value)
+                              }else{
+                                handlePropChange(config.name, value)
+                              }                              
+                            }
+                          } 
+                          {...config.props} 
+                        />
+                      )
+                    })
+                  }
+                </Grid>
               </AccordionDetails>            
             </Accordion>
           }

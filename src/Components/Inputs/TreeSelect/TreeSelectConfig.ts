@@ -16,7 +16,7 @@ export class TreeSelectConfig extends MetaConfig{
     return false;
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...inputConfig,
       {

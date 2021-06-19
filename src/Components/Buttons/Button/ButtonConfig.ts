@@ -17,7 +17,7 @@ export class ButtonConfig extends MetaConfig{
     return meta.name
   }
 
-  getPropConfigs(): Array<IPropConfig>{
+  getPropsConfig(): Array<IPropConfig>{
     return [
       ...marginConfigs,
       {

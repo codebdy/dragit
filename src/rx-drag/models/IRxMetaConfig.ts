@@ -14,6 +14,6 @@ export interface IRxMetaConfig{
   resolveLabel: (meta:IRxMeta)=>string|undefined;
 
   //属性字段
-  getPropConfigs: ()=>Array<IPropConfig>;
+  getPropsConfig: ()=>Array<IPropConfig>;
 
 }
