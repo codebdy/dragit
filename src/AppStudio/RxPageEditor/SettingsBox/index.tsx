@@ -7,9 +7,8 @@ import { useDesign } from '../../../rx-drag/store/useDesign';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { stringValue } from 'rx-drag/utils/stringValue';
 import { PagePropName, PagePropValue, UpdatePageCommand } from './UpdatePageCommand';
-import StringInput from '../AttrebuteBox/PropsInputs/StringInput';
 import { IRxAuth } from 'Base/Model/IRxAuth';
-import BooleanInput from '../AttrebuteBox/PropsInputs/BooleanInput';
+import JSONInput from '../AttrebuteBox/PropsInputs/JSONInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,10 +39,6 @@ const SettingsBox = observer(()=>{
 
   const handleQueryChange = (value: any)=>{
     doUpdatePage('query', value);
-  }
-
-  const handleExcuteQueryByMutationChange =  (value: any)=>{
-    doUpdatePage('excuteQueryByMutation', value);
   }
 
   const handleChangeMaxWidth = (event: React.ChangeEvent<{ value: unknown }>)=>{
@@ -105,18 +100,11 @@ const SettingsBox = observer(()=>{
           >
           </TextField>        
         </Grid>
-        <StringInput
+        <JSONInput
           xs = {12} 
           label={intl.get("query")} 
           value={stringValue(page?.query)}
           onChange={handleQueryChange}
-        />
-        <BooleanInput
-          xs = {12} 
-          label={intl.get("excute-query-by-mutation")} 
-          value={page?.excuteQueryByMutation}
-          onChange={handleExcuteQueryByMutationChange}
-          size = "medium"
         />
 
         <Grid item xs = {12}>

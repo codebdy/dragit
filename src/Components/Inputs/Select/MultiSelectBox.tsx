@@ -5,6 +5,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
+import { useDesign } from 'rx-drag/store/useDesign';
 
 export const MultiSelectBox = React.forwardRef((
   props:{
@@ -42,9 +43,10 @@ export const MultiSelectBox = React.forwardRef((
 
   let key =itemKey;
   let name =itemName;
+  const {isDesigning} = useDesign();
 
   const { loading:queryLoading, error: queryError, data } = useMagicQuery(
-    query 
+    query && !isDesigning 
       ? new MagicQueryBuilder().setQueryString(query)
       : undefined
   );

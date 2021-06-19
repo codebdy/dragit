@@ -6,13 +6,14 @@ import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { toJS } from 'mobx';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
-import useLayzyAxios from 'Data/useLayzyAxios';
-import { API_MAGIC_POST } from 'APIs/magic';
+import useLayzyMagicPost from 'Data/useLayzyMagicPost';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { RxApp } from 'modelConstants';
 
 export const SaveNavigationButton = observer(() => {
   const studioStore = useAppStudioStore();
   const dragItStore = useDragItStore();
-  const [excuteSaveRxApp, {loading:saving, error}] = useLayzyAxios( API_MAGIC_POST,{
+  const [excuteSaveRxApp, {loading:saving, error}] = useLayzyMagicPost({
     onCompleted(){
       studioStore?.editNavigation();
       studioStore?.navigationEditor?.setIsDirty(false);
@@ -24,7 +25,16 @@ export const SaveNavigationButton = observer(() => {
   const handleSave = ()=>{
     const rxApp = toJS(studioStore?.rxApp);
     const items = toJS(studioStore?.navigationEditor?.currentData); 
-    excuteSaveRxApp({data:{rxApp:{id:rxApp?.id, navigation_items: JSON.stringify(items)}}});      
+    const data = new MagicPostBuilder()
+      .setModel(RxApp)
+      .setSingleData(
+        {
+          ...rxApp, 
+          navigationTtems: items
+        }
+      )
+      .toData();
+    excuteSaveRxApp({data});      
   }
   
   return (
