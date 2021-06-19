@@ -51,6 +51,9 @@ export const AppBoard = observer(()=>{
   const{ loading, error, data } = useMagicQuery<IRxApp>(
     new MagicQueryBuilder()
       .setModel(RxApp)
+      .addRelation('pages')
+      .addRelation('entryPage')
+      .addRelation('auths')
       .addCondition('id', parseInt(appId))
       .setGetOne()
   );

@@ -22,7 +22,6 @@ import { PageStore, PageStoreProvider } from 'Base/PageUtils/PageStore';
 import { PageQuery } from './PageQuery';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import { PopupPage } from './PopupPage';
-import { PageQueryByMutation } from './PageQueryByMutation';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 
 export const Page = observer((
@@ -159,11 +158,6 @@ export const Page = observer((
             <PageQuery queryGQL = {pageStore?.queryGQL}/>
           }
 
-          {
-            pageStore?.queryGQL && page.excuteQueryByMutation &&
-            <PageQueryByMutation queryGQL = {pageStore?.queryGQL}/>
-          }
-          
           <ActionHunter onPageAction = {hanlePageAction} />
           {
             pageStore?.pageLayout?.map((child:RxNode<IMeta>)=>{

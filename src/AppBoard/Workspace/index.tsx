@@ -32,8 +32,8 @@ export const Workspace = observer(()=>{
   const history = useHistory();
   const match = useRouteMatch();
   const{pageId, id} = match.params as any;
-  const newPageId = pageId ? pageId : appboardStore?.rxApp?.entryPage?.id;
-  let page = appboardStore?.getPage(newPageId);
+  const newPageId = pageId ? parseInt(pageId) : appboardStore?.rxApp?.entryPage?.id;
+  const page = appboardStore?.getPage(newPageId);
 
   useEffect(()=>{
     if(!appboardStore.rootPageId){
