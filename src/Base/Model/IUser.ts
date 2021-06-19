@@ -4,9 +4,9 @@ import { IRxMedia } from "./IRxMedia";
 
 export interface IUser {
   id: ID;
-  login_name: string;
-  is_supper?: boolean;
-  is_demo?: boolean;
+  loginName: string;
+  isSupper?: boolean;
+  isDemo?: boolean;
   avatar: IRxMedia;
   auths?: ID[];
 }

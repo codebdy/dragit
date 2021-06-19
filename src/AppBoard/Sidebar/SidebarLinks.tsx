@@ -35,6 +35,7 @@ export const SidebarLinks = observer((
   const leftDrawer = useLeftDrawer();
   const mini = leftDrawer.isMini;
   const fullWidth = leftDrawer.fullWidth;
+
   const handleOpened = (id:ID)=>{
     setOpenedId(id)
   }
@@ -44,7 +45,6 @@ export const SidebarLinks = observer((
     root.parse(cloneObject(items||[]));
     setNodes(root.children);
   },[items]);
-
   return (
     <Scrollbar>
       <List

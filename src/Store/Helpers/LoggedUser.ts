@@ -9,11 +9,11 @@ export class LoggedUser{
   }
 
   authCheck(...auths:ID[]) {
-    if(!this.meta || !this.meta.login_name){
+    if(!this.meta || !this.meta.loginName){
       return false;
     }
 
-    if(this.meta.is_supper || this.meta.is_demo){
+    if(this.meta.isSupper || this.meta.isDemo){
       return true;
     }
     if(!auths || !this.meta.auths){

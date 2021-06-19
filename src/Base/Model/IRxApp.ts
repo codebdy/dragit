@@ -11,7 +11,7 @@ export interface IRxApp{
   color?: string;
   appType?: string;
   pages?: Array<IRxPage>;
-  navigationItems?: string;
+  navigationItems?: any;
   auths?: Array<IRxAuth>;
   notifications?: number;
   entryPage?:IRxPage;

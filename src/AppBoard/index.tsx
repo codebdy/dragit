@@ -15,9 +15,10 @@ import { SidebarLinks } from './Sidebar/SidebarLinks';
 import ListLoadingSkeleton from './Sidebar/ListLoadingSkeleton';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useLoginCheck } from 'Store/Helpers/useLoginCheck';
-import { useSWRQuery } from 'Data/useSWRQuery';
-import { API_MAGIC_QUERY } from 'APIs/magic';
 import { IRxApp } from 'Base/Model/IRxApp';
+import { useMagicQuery } from 'Data/useMagicQuery';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
+import { RxApp } from 'modelConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,18 +48,17 @@ export const AppBoard = observer(()=>{
   
   useLoginCheck();
   
-  const{ loading, error, data } = useSWRQuery<{RxApp:IRxApp}>(API_MAGIC_QUERY);
+  const{ loading, error, data } = useMagicQuery<IRxApp>(
+    new MagicQueryBuilder()
+      .setModel(RxApp)
+      .addCondition('id', parseInt(appId))
+      .setGetOne()
+  );
 
   useShowServerError(error);
 
-  /*useEffect(()=>{
-    if(appId){
-      excuteQuery({variables:{id:appId}});
-    }
-  },[appId, excuteQuery]);*/
-
   useEffect(()=>{
-    appboardStore.setRxApp(data?.RxApp as any);
+    data?.data && appboardStore.setRxApp(data?.data);
   },[data, appboardStore])
   
   const theme = createMuiTheme({
@@ -87,7 +87,7 @@ export const AppBoard = observer(()=>{
               loading
               ? <ListLoadingSkeleton/>
               : <SidebarLinks 
-                  items = {JSON.parse(appboardStore.rxApp?.navigationItems||'[]')}
+                  items = {appboardStore.rxApp?.navigationItems||[]}
                 />  
             }            
           </Sidebar>
