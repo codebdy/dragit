@@ -35,17 +35,17 @@ export default function useLayzyAxios<T>(
         }        
       })
       .catch(error => {
-        console.log('Server error:useLayzyAxios', error.response?.data);
+        console.log('Server error:useLayzyAxios', error.message);
         setLoading(false);
         const dataError = {
-          message: error.response?.data?.error, 
+          message: error.response?.data?.error || error.message, 
           status: error.response?.data?.message
         }
         setError(dataError);
         if(options?.onError){
           options?.onError(dataError);
         }
-        if(error.response.status === 401){
+        if(error.response?.status === 401){
           history?.push(LOGIN_URL);
         }   
       })       

@@ -19,6 +19,8 @@ import { RxNode } from 'rx-drag/models/RxNode';
 import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
+import { ListViewQueryMeta } from './ListViewQueryMeta';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -47,7 +49,13 @@ const ListView = observer(React.forwardRef((
     ...rest
   } = props
   
-  const [listViewStore] = useState(new ListViewStore())
+  const [listViewStore] = useState(
+    new ListViewStore(
+      query
+      ? new ListViewQueryMeta(query)
+      : undefined
+    )
+  )
   
   const appStore = useDragItStore();
   const {isDesigning} = useDesign();
@@ -66,7 +74,32 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[listViewStore.rxModel]);
 
-  //const { called, loading:queryLoading, error, data, refetch } = useMagicQueryInfinite();
+  const getKey = (pageIndex: any, previousPageData: any)=>{
+    if(previousPageData && !previousPageData.data?.length){
+      return null;
+    }
+
+    if(!listViewStore.queryMeta){
+      return null;
+    }
+
+    const builder = new MagicQueryBuilder()
+      .setQueryString(listViewStore.queryMeta.toQueryString());
+    /*if(mediasStore.keyword?.trim()){
+      builder.addCondition('name', `%${mediasStore.keyword?.trim()}%`, 'like')
+    }
+    if(mediasStore.selectedFolderId){
+      builder.addCondition('folder.id', mediasStore.selectedFolderId);
+    }
+
+    builder.setOrderBy(orderField[0], orderField[1])
+      .setPageSize(PAGE_SIZE)
+      .setPageIndex(pageIndex);*/
+    return builder.toAxioConfig().url||null;
+  }
+
+
+  const { data, error: queryError, mutate: queryMutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
 
 
   const [excuteUpdate, { error:updateError }] = useLayzyMagicPost(

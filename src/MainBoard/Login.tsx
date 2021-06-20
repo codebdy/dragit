@@ -94,7 +94,7 @@ export const Login = observer(()=>{
       }      
     },
     onError(error){
-      if(error.response.status === 401){
+      if(error.response?.status === 401){
         setErroMessage(intl.get('login-failure'));
       }else{
         setErroMessage(error.message);

@@ -7,6 +7,8 @@ import { createContext, useContext } from "react";
 import { remove } from "rx-drag/utils/ArrayHelper";
 import { makeTableModel } from "../../Base/ModelTree/makeTableModel";
 import { PaginatorInfo } from "./PaginatorInfo";
+import { ListViewQueryMeta } from "./ListViewQueryMeta";
+import { ASC, DESC } from "Components/common/contants";
 
 type Order = 'asc' | 'desc';
 export class FieldOrder {
@@ -35,17 +37,18 @@ interface Updating{
 
 
 export class ListViewStore{
-  refreshQueryFlag:number = 1;
+  refreshQueryFlag: number = 1;
   tableRxNode?: RxNode<IMeta>;
-  selects:ID[] = [];
+  selects: ID[] = [];
   whereGraphQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
-  //rows: Array<TableRowStore> = [];
-  rxModel?:RXModel; 
+  rxModel?: RXModel; 
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
-  selectable?:boolean = true;
+  selectable?: boolean = true;
+  queryMeta?: ListViewQueryMeta;
   
-  constructor() {
+  constructor(queryMeta?:ListViewQueryMeta) {
+    this.queryMeta = queryMeta;
     makeAutoObservable(this)
   }
 
@@ -118,13 +121,13 @@ export class ListViewStore{
   sortField(field: string){
     let order = this.getOrderBy(field);
     if(order){
-      if(order.direction === 'asc'){
-        order.setDirection('desc');
-      }else if(order.direction === 'desc'){
+      if(order.direction === ASC){
+        order.setDirection(DESC);
+      }else if(order.direction === DESC){
         remove(order, this.orderByArray);
       }
     }else{
-      this.orderByArray.push(new FieldOrder(field, 'asc'));
+      this.orderByArray.push(new FieldOrder(field, ASC));
     }
 
   };

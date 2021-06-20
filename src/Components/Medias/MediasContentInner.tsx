@@ -22,6 +22,7 @@ import { useMagicQueryInfinite } from "Data/useMagicQueryInfinite";
 import { MagicQueryBuilder } from "Data/MagicQueryBuilder";
 import { mutate } from "swr";
 import { RxMedia, RxMediaFolder } from "modelConstants";
+import { ASC, DESC } from "Components/common/contants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,15 +84,15 @@ export const  MediasContentInner = observer(()=>{
     if(previousPageData && !previousPageData.data?.length){
       return null;
     }
-    let orderField = ['createdAt', 'DESC'];
+    let orderField = ['createdAt', DESC];
     if(mediasStore.sortBy === MediaSort.ASC_BY_CREATE_AT){
-      orderField = ['createdAt', 'ASC'];
+      orderField = ['createdAt', ASC];
     }
     if(mediasStore.sortBy === MediaSort.ASC_BY_NAME){
-      orderField = ['name', 'ASC'];
+      orderField = ['name', ASC];
     }
     if(mediasStore.sortBy === MediaSort.DESC_BY_NAME){
-      orderField = ['name', 'DESC'];
+      orderField = ['name', DESC];
     }
 
     const builder = new MagicQueryBuilder()
