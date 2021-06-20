@@ -1,6 +1,7 @@
 export class MagicQueryMeta{
   private _queryJSON:any;
   private _model = '';
+  private _conditions = {} as any;
   constructor(query:string){
     try {
     this._queryJSON = JSON.parse(query);
@@ -19,6 +20,10 @@ export class MagicQueryMeta{
     }
   }
 
+  addCondition(key:string, value:any){
+    this._conditions[key] = value;
+  }
+
   get model(){
     return this._model;
   }
@@ -27,6 +32,6 @@ export class MagicQueryMeta{
     if(!this._model){
       return '';
     }
-    return JSON.stringify(this._queryJSON);
+    return JSON.stringify({...this._queryJSON, ...this._conditions});
   }
 }

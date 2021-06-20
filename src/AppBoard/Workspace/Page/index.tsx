@@ -154,8 +154,8 @@ export const Page = observer((
       <ActionStoreProvider value = {actionStore}>
         <ModelProvider value = {modelStore}>
           {
-            page?.query &&
-            <PageQuery query = {page?.query}/>
+            page?.query && pageJumper?.dataId &&
+            <PageQuery query = {page?.query} id = {parseInt(pageJumper?.dataId)}/>
           }
 
           <ActionHunter onPageAction = {hanlePageAction} />
