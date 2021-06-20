@@ -14,7 +14,7 @@ import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/models/RxNode';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
-import { ListViewQueryMeta } from './ListViewQueryMeta';
+import { MagicQueryMeta } from '../../Data/MagicQueryMeta';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 import { useMagicQuery } from 'Data/useMagicQuery';
 
@@ -48,7 +48,7 @@ const ListView = observer(React.forwardRef((
   const [listViewStore] = useState(
     new ListViewStore(
       query
-      ? new ListViewQueryMeta(query)
+      ? new MagicQueryMeta(query)
       : undefined
     )
   )

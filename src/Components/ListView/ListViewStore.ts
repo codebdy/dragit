@@ -7,7 +7,7 @@ import { createContext, useContext } from "react";
 import { remove } from "rx-drag/utils/ArrayHelper";
 import { makeTableModel } from "../../Base/ModelTree/makeTableModel";
 import { PaginatorInfo } from "./PaginatorInfo";
-import { ListViewQueryMeta } from "./ListViewQueryMeta";
+import { MagicQueryMeta } from "../../Data/MagicQueryMeta";
 import { ASC, DESC } from "Components/common/contants";
 
 type Order = 'asc' | 'desc';
@@ -45,9 +45,9 @@ export class ListViewStore{
   rxModel?: RXModel; 
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
   selectable?: boolean = true;
-  queryMeta?: ListViewQueryMeta;
+  queryMeta?: MagicQueryMeta;
   
-  constructor(queryMeta?:ListViewQueryMeta) {
+  constructor(queryMeta?:MagicQueryMeta) {
     this.queryMeta = queryMeta;
     makeAutoObservable(this)
   }

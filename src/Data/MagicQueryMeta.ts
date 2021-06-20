@@ -1,4 +1,4 @@
-export class ListViewQueryMeta{
+export class MagicQueryMeta{
   private _queryJSON:any;
   private _model = '';
   constructor(query:string){
