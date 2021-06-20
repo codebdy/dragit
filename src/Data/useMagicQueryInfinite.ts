@@ -6,7 +6,7 @@ import { fetcher } from "./fetcher";
 
 export function useMagicQueryInfinite(getKey:(pageIndex: any, previousPageData: any)=>string|null, option?:any){
   const history = useHistory();
-  const rtValue = useSWRInfinite(getKey, fetcher, option);
+  const rtValue = useSWRInfinite(getKey, fetcher, {errorRetryCount:0, ...option});
   useEffect(()=>{
     if(rtValue?.error?.status === 401){
       history?.push(LOGIN_URL);

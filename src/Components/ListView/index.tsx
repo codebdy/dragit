@@ -16,11 +16,11 @@ import { useDesign } from 'rx-drag/store/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/models/RxNode';
-import { useMagicQueryInfinite } from 'Data/useMagicQueryInfinite';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
 import { ListViewQueryMeta } from './ListViewQueryMeta';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
+import { useMagicQuery } from 'Data/useMagicQuery';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -74,33 +74,21 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[listViewStore.rxModel]);
 
-  const getKey = (pageIndex: any, previousPageData: any)=>{
-    if(previousPageData && !previousPageData.data?.length){
-      return null;
+
+  const builder = listViewStore.queryMeta && !isDesigning
+    ? new MagicQueryBuilder()
+        .setQueryString(listViewStore.queryMeta.toQueryString())
+    : undefined;
+
+  const { data, error: queryError, mutate: queryMutate, loading:queryLoading } = useMagicQuery(
+    builder, 
+    {
+      persistSize:true,
+      onError(){
+        listViewStore.setRows([]);
+      }
     }
-
-    if(!listViewStore.queryMeta){
-      return null;
-    }
-
-    const builder = new MagicQueryBuilder()
-      .setQueryString(listViewStore.queryMeta.toQueryString());
-    /*if(mediasStore.keyword?.trim()){
-      builder.addCondition('name', `%${mediasStore.keyword?.trim()}%`, 'like')
-    }
-    if(mediasStore.selectedFolderId){
-      builder.addCondition('folder.id', mediasStore.selectedFolderId);
-    }
-
-    builder.setOrderBy(orderField[0], orderField[1])
-      .setPageSize(PAGE_SIZE)
-      .setPageIndex(pageIndex);*/
-    return builder.toAxioConfig().url||null;
-  }
-
-
-  const { data, error: queryError, mutate: queryMutate, size, setSize, isValidating } = useMagicQueryInfinite(getKey, {persistSize:true});
-
+  );
 
   const [excuteUpdate, { error:updateError }] = useLayzyMagicPost(
     {
@@ -112,7 +100,7 @@ const ListView = observer(React.forwardRef((
     }
   );
 
-  const [excuteRemove, { error:removeError }] = useLayzyMagicDelete(
+  const [excuteRemove, { error:removeError }] = useLayzyMagicDelete<any>(
     {
       onCompleted:(data)=>{
         appStore.setSuccessAlert(true);
@@ -122,7 +110,7 @@ const ListView = observer(React.forwardRef((
     }
   );
 
-  useShowServerError(updateError||removeError);
+  useShowServerError(queryError||updateError||removeError);
 
   useEffect(()=>{
     if(!query || isDesigning){
@@ -138,20 +126,20 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[listViewStore.refreshQueryFlag])
 
-  //useEffect(()=>{
-   // queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
-  //  listViewStore.setLoading(queryLoading);
+  useEffect(()=>{
+    queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
+    listViewStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //},[queryLoading])
+  },[queryLoading])
 
 
- // useEffect(()=>{
-  //  if(data){
-     // !queryLoading && listViewStore.setRows(data && query ? data[query]?.data:[]);
-  //    listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});      
- //   }
+  useEffect(()=>{
+    if(data){
+      !queryLoading && listViewStore.setRows(data && query ? (data.data as any[]) : []);
+      //listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});      
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
- // },[data])
+  },[data])
 
   const handelBatchRemove = ()=>{
     listViewStore.setRemovingSelects();
