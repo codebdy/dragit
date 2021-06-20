@@ -10,12 +10,10 @@ import React, { useEffect, useState } from 'react';
 import intl from "react-intl-universal";
 import TreeList from './TreeList';
 import { cloneObject } from 'rx-drag/utils/cloneObject';
-import { useQueryGQL } from './useQueryGQL';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { useDesign } from 'rx-drag/store/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import {observer} from 'mobx-react';
-import { useMutationGQL } from './useMutationGQL';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
@@ -29,13 +27,12 @@ const TreeEditor =observer((
     nameKey:string,
     children:any,
     query?:string,
-    mutation?:string,
   }
 )=>{
-  const {nameKey = 'name', query, mutation, children, ...rest} = props;
+  const {nameKey = 'name', query, children, ...rest} = props;
   const modelStore = useModelStore();
-  const queryGQL = useQueryGQL(query);
-  const mutationGQL = useMutationGQL(mutation);
+  //const queryGQL = useQueryGQL(query);
+  //const mutationGQL = useMutationGQL(mutation);
   const [draggedNode, setDraggedNode] = useState<RxNode<ITreeNode>|undefined>();
   const [root, setRoot] = useState<RxNode<ITreeNode>>();
   const [selectedNode, setSelectedNode] = useState<RxNode<ITreeNode>|undefined>();

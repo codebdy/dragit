@@ -1,4 +1,3 @@
-import { GraphQLStore } from "Base/GraphQL/GraphQLStore";
 import { useModelStore } from "Base/ModelTree/ModelProvider";
 import { usePageStore } from "Base/PageUtils/PageStore";
 import { MagicQueryBuilder } from "Data/MagicQueryBuilder";
@@ -10,7 +9,7 @@ import { useShowServerError } from "Store/Helpers/useInfoError";
 
 export const PageQuery = observer((
   props:{
-    queryGQL:GraphQLStore
+    query:string
   }
 )=>{
   const modelStore = useModelStore();

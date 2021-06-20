@@ -4,12 +4,8 @@ import { useState } from 'react';
 import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { useShowServerError } from 'Store/Helpers/useInfoError';
 import { ListViewStore, ListViewStoreProvider } from './ListViewStore';
-import { useQueryGQL } from './useQueryGQL';
 import { observer } from 'mobx-react'
 import { useEffect } from 'react';
-import { useRemoveGQL } from './useRemoveGQL';
-import { useUpdateGQL } from './useUpdateGQL';
-import { IPageMutation } from 'Base/Model/IPageMutation';
 import ListViewActionFilter from './ListViewActionFilter';
 import { ID } from 'rx-drag/models/baseTypes';
 import { useDesign } from 'rx-drag/store/useDesign';

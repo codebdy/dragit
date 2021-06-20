@@ -154,8 +154,8 @@ export const Page = observer((
       <ActionStoreProvider value = {actionStore}>
         <ModelProvider value = {modelStore}>
           {
-            pageStore?.queryGQL && !page.excuteQueryByMutation &&
-            <PageQuery queryGQL = {pageStore?.queryGQL}/>
+            page?.query &&
+            <PageQuery query = {page?.query}/>
           }
 
           <ActionHunter onPageAction = {hanlePageAction} />

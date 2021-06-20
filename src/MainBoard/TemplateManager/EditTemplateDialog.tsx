@@ -118,7 +118,7 @@ export const EditTemplateDialog = observer((
         schema,
       })
       .toData();
-      excutePost({data});
+    excutePost({data});
   }
 
   return (
