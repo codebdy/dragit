@@ -10,13 +10,12 @@ import { useShowServerError } from "Store/Helpers/useInfoError";
 
 export const PageQuery = observer((
   props:{
-    query:string,
+    queryMeta:MagicQueryMeta,
     id:ID
   }
 )=>{
-  const {query, id} = props;
+  const {queryMeta, id} = props;
   const modelStore = useModelStore();
-  const queryMeta = new MagicQueryMeta(query);
   queryMeta.addCondition('id', id);
   const { loading, error, data } = useMagicQuery(
     new MagicQueryBuilder()

@@ -1,7 +1,5 @@
 export interface IPageMutation {
-  name?: string,
-  variableName?: string,
-  variableType?: string,
+  model?: string,
   submitNode?: string,
   refreshNode?: string,
   goback?:boolean,

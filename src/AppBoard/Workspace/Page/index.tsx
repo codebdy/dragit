@@ -8,7 +8,6 @@ import { IPageAction } from 'Base/Model/IPageAction';
 import { GO_BACK_ACTION, OPEN_PAGE_ACTION, RESET_ACTION, SUBMIT_MUTATION } from "Base/PageUtils/ACTIONs";
 import { IPageJumper } from 'Base/Model/IPageJumper';
 import { ModelProvider } from '../../../Base/ModelTree/ModelProvider';
-import { IPageMutation } from 'Base/Model/IPageMutation';
 import { Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import intl from 'react-intl-universal';
@@ -23,6 +22,9 @@ import { PageQuery } from './PageQuery';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import { PopupPage } from './PopupPage';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
+import { AUTH_DEBUG } from 'Base/authSlugs';
+import { MagicPostBuilder } from 'Data/MagicPostBuilder';
+import { MagicQueryMeta } from 'Data/MagicQueryMeta';
 
 export const Page = observer((
   props:{
@@ -35,14 +37,14 @@ export const Page = observer((
   const [openAlert, setOpentAlert] = useState(false);
   const {page, pageJumper, hideDebug, onPageAction} = props;
   const [actionStore, setActionStore] = useState<ActionStore>();
-  const [modelStore, setModelStore] = useState<RXModel>();  
+  const [modelStore, setModelStore] = useState<RXModel>(); 
   const [pageStore, setPageStore] = useState<PageStore>();
-  const [mutation, setMutation] = useState<IPageMutation>();
   const [popupPageJumper, setPopupPageJumper] = useState<IPageJumper>();
   //避免关闭闪烁，添加一个显示状态
   const [showPopup, setShowPopup] = useState(false);
   const dragItStore = useDragItStore();
   const loggedUser = useLoggedUser();
+  const queryMeta = (page?.query) ? new MagicQueryMeta(page.query) : undefined;
 
   useEffect(()=>{
     const pgStore = new PageStore(page, pageJumper);
@@ -56,10 +58,20 @@ export const Page = observer((
   },[page, pageJumper])
 
   
-  const [excuteMutation, {error:muetationError}] = useLayzyMagicPost(
+  const [excuteMutation, {error:muetationError, loading:mutating}] = useLayzyMagicPost(
     {
       onCompleted:(data)=>{
-        if(mutation && mutation.name){
+        const refesheNode = modelStore?.getModelNode(pageStore?.submittingMutation?.refreshNode);
+        refesheNode?.setLoading(false);
+        const submitNode = modelStore?.getModelNode(pageStore?.submittingMutation?.model);
+        submitNode?.clearDirty();
+        dragItStore.setSuccessAlert(true);
+        if(pageStore?.submittingMutation?.goback){
+          onPageAction && onPageAction({name:GO_BACK_ACTION})
+        }
+        pageStore?.setSubmittingMutation(undefined);
+        //setLoadingNode(undefined);
+       /* if(mutation && mutation.model){
           const submitNode = modelStore?.getModelNode(mutation.submitNode);
           submitNode?.updateDefaultValue();
           if(mutation?.refreshNode){
@@ -75,24 +87,19 @@ export const Page = observer((
         dragItStore.setSuccessAlert(true)
         if(mutation?.goback){
           onPageAction && onPageAction({name:GO_BACK_ACTION})
-        }
+        }*/
+      },
+      onError:()=>{
+        const refesheNode = modelStore?.getModelNode(pageStore?.submittingMutation?.refreshNode) 
+        refesheNode?.setLoading(false);
+        pageStore?.setSubmittingMutation(undefined);
       }
     }
+
   );
   
   useShowServerError(muetationError);
 
-  useEffect(()=>{
-    if(mutation){
-      const submitNode = modelStore?.getModelNode(mutation.submitNode)
-      const refreshNode = modelStore?.getModelNode(mutation?.refreshNode) 
-      refreshNode?.setLoading(true);
-      const varialbles = mutation.variableName? {[mutation.variableName]:submitNode?.toInputValue()} : undefined;
-      excuteMutation({data:varialbles}); 
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[mutation])
-  
   const hanlePageAction = (action:IPageAction)=>{
     switch (action.name){
       case OPEN_PAGE_ACTION:
@@ -106,15 +113,26 @@ export const Page = observer((
       case SUBMIT_MUTATION:
         const submitNode = modelStore?.getModelNode(action.mutation?.submitNode)
         console.assert(submitNode, 'Page内错误，提交节点不存在：' + action.mutation?.submitNode);
+        if(mutating||pageStore?.submittingMutation){
+          console.error('有节点提交尚未完成，等完成再试');
+        }
         if(submitNode?.validate()){
           if(action.mutation){
-            setMutation(action.mutation)
+            pageStore?.setSubmittingMutation(action.mutation);
+            const refreshNode = modelStore?.getModelNode(action.mutation.refreshNode) 
+            refreshNode?.setLoading(true);
+            const data = new MagicPostBuilder()
+              .setModel(action.mutation.model || queryMeta?.model || '')
+              .setSingleData(
+                submitNode?.toInputValue()
+              )
+              .toData();
+            excuteMutation({data});
           }           
         }
         else{
           setOpentAlert(true);
         }
-       
         return;
       case GO_BACK_ACTION:
         if(modelStore?.isDirty()){
@@ -146,7 +164,6 @@ export const Page = observer((
 
   const handleClosePopupPage = ()=>{
     setShowPopup(false)
-    //setPopupPageJumper(undefined);
   }
 
   return (
@@ -154,8 +171,8 @@ export const Page = observer((
       <ActionStoreProvider value = {actionStore}>
         <ModelProvider value = {modelStore}>
           {
-            page?.query && pageJumper?.dataId &&
-            <PageQuery query = {page?.query} id = {parseInt(pageJumper?.dataId)}/>
+            queryMeta && pageJumper?.dataId &&
+            <PageQuery queryMeta = {queryMeta} id = {parseInt(pageJumper?.dataId)}/>
           }
 
           <ActionHunter onPageAction = {hanlePageAction} />
@@ -187,7 +204,7 @@ export const Page = observer((
             </Alert>      
           </Dialog>
           {
-            //loggedUser.authCheck(AUTH_DEBUG) && !hideDebug &&
+            loggedUser.authCheck(AUTH_DEBUG) && !hideDebug &&
             <Debug />
           }
         </ModelProvider>

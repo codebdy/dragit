@@ -44,7 +44,7 @@ const AttributeBoxActionSection = observer((
   }; 
 
   const handleChangeMutation =  (event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>, 
-    key:'name'|'variableName'|'variableType'|'submitNode'|'refreshNode') => {
+    key:'model'|'submitNode'|'refreshNode') => {
     const newValue = (event.target.value as string) || '';
     const mutation:IPageMutation = cloneObject(action.mutation) ||{};
     mutation[key] = newValue;
@@ -174,29 +174,9 @@ const AttributeBoxActionSection = observer((
             <TextField fullWidth
               variant="outlined" 
               size = "small"
-              label = {intl.get("mutaion-name")}
-              value={stringValue(action.mutation?.name)} 
-              onChange={(event)=>handleChangeMutation(event, 'name')}
-            ></TextField>
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField fullWidth
-              variant="outlined" 
-              size = "small"
-              label = {intl.get("variable-name")}
-              value={stringValue(action.mutation?.variableName)} 
-              onChange={(event)=>handleChangeMutation(event, 'variableName')}
-            ></TextField>
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField fullWidth
-              variant="outlined" 
-              size = "small"
-              label = {intl.get("variable-type")}
-              value={stringValue(action.mutation?.variableType)} 
-              onChange={(event)=>handleChangeMutation(event, 'variableType')}
+              label = {intl.get("model-name")}
+              value={stringValue(action.mutation?.model)} 
+              onChange={(event)=>handleChangeMutation(event, 'model')}
             ></TextField>
           </Grid>
           <Grid item xs={12}>

@@ -5,9 +5,11 @@ import { RxNode } from "rx-drag/models/RxNode";
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { cloneObject } from "rx-drag/utils/cloneObject";
+import { IPageMutation } from "Base/Model/IPageMutation";
 
 export class PageStore{
   rootNode: RxNode<IMeta>;
+  submittingMutation?: IPageMutation;
   page: IRxPage;
   //ActionStore
   constructor(page:IRxPage, pageJumper?:IPageJumper) {
@@ -21,6 +23,10 @@ export class PageStore{
 
   get pageLayout(){
     return this.rootNode.children;
+  }
+
+  setSubmittingMutation(mustaion?:IPageMutation){
+    this.submittingMutation = mustaion;
   }
 }
 
