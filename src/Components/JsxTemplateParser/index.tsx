@@ -25,10 +25,11 @@ const JsxTemplateParser = observer(React.forwardRef((
     className?:any,
     graphiQL?:string,
     template:string,
+    showSkeleton:boolean,
   },
   ref:any
 )=>{
-  const {actions, className, graphiQL, template, ...rest} = props;
+  const {actions, className, graphiQL, template, showSkeleton, ...rest} = props;
   const classes = useStyles();
   const {isDesigning} = useDesign();
   const modelStore = useModelStore();
@@ -64,7 +65,7 @@ const JsxTemplateParser = observer(React.forwardRef((
   return (
     isDesigning
     ? <div className={classNames(classes.root, className)} {...rest} ref={ref}>JSX</div>
-    : (modelStore?.loading ? <Skeleton animation="wave" height={50} width="80%" /> : parser)
+    : (modelStore?.loading && showSkeleton ? <Skeleton animation="wave" height={50} width="80%" /> : parser)
   )
 }))
 

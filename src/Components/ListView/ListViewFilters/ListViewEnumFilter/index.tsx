@@ -51,8 +51,8 @@ const ListViewEnumFilter = React.forwardRef((
   const handleChange = (event:React.ChangeEvent<{ value: unknown }>)=>{
     let newValue = event.target.value as string;
     setValue(newValue);
-    const gql = newValue ? `{column:${field}, operator:EQ, value:"${newValue}"}` : newValue;
-    listViewStore.setWhereGraphQL(rxid, gql);
+    //const gql = newValue ? `{column:${field}, operator:EQ, value:"${newValue}"}` : newValue;
+    //listViewStore.setWhereGraphQL(rxid, gql);
     listViewStore.excuteQuery();
   }
 

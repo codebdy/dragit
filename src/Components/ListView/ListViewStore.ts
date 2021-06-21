@@ -40,7 +40,6 @@ export class ListViewStore{
   refreshQueryFlag: number = 1;
   tableRxNode?: RxNode<IMeta>;
   selects: ID[] = [];
-  whereGraphQLs: Map<string,string> = new Map<string,string>();
   orderByArray: Array<FieldOrder> = [];
   rxModel?: RXModel; 
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
@@ -86,25 +85,6 @@ export class ListViewStore{
     return this.selects.indexOf(id) > -1
   }
 
-  setWhereGraphQL(rxId:string, grahpiQL: string){
-    this.whereGraphQLs.set(rxId, grahpiQL);
-  }
-
-  toWhereGaphiQL(){
-    let gqls = ''
-    this.whereGraphQLs.forEach(gql=>{
-      gqls = gqls + ' ' + gql
-    })
-    return gqls
-    ? `
-        {
-          AND:[
-            ${ gqls }
-          ]
-        }
-      `
-    : '{}'
-  }
 
   excuteQuery(){
     this.refreshQueryFlag ++;
@@ -138,15 +118,6 @@ export class ListViewStore{
     }
 
     return this.getOrderBy(field)?.direction;
-  }
-
-  toOrderByGraphQL(){
-    let gqls = '';
-    this.orderByArray.forEach(gql=>{
-      gqls = gqls + `{column:${gql.field}, order:${gql.direction.toUpperCase()}}`
-    })
-
-    return `[${gqls}]`
   }
 
   isRowSelected(rowId:ID){

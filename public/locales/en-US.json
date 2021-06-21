@@ -285,8 +285,6 @@
     "mutation":"Mutation",
     "page-mutaion":"Page mutaion",
     "result":"Result",
-    "input-graphql-error":"Input error",
-    "graphiqL":"GraphQL",
     "variables":"Variables",
     "list-update":"List update",
     "data-query":"Query data",
@@ -352,5 +350,6 @@
     "create-time":"Create time",
     "new-to-old":"New to old",
     "old-to-new":"Old to new",
-    "new-auth":"New auth"
+    "new-auth":"New auth",
+    "show-skeleton":"Show skeleton"
 }

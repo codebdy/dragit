@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Accordion as MuiAccordion, Grid, TextField, withStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Accordion as MuiAccordion, Grid, withStyles } from '@material-ui/core';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
@@ -20,7 +20,6 @@ import { MetaConfig } from 'Base/RXNode/MetaConfig';
 import { useAppStudioStore } from 'AppStudio/AppStudioStore';
 import { IRxAuth } from 'Base/Model/IRxAuth';
 import { AttributeBoxMultiActionSection } from './AttributeBoxMultiActionSection';
-import { stringValue } from 'rx-drag/utils/stringValue';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -120,11 +119,6 @@ export const AttributeBox = observer(()=>{
 
   const handleMetaChange = (key:string, value:any)=>{
     rxDragStore?.updateSelecteMeta(key, value);
-  }
-
-  const handleFieldGQLChange = (event: React.ChangeEvent<{ value: unknown }>)=>{
-    let newFieldGQL = event.target.value as string;
-    rxDragStore?.updateSelecteMeta('fieldsGql', newFieldGQL);
   }
 
   const handleRuleChange = (rule:IValidateRule)=>{
@@ -258,31 +252,6 @@ export const AttributeBox = observer(()=>{
              </AccordionDetails>            
            </Accordion>
           }
-
-          {
-             metaConfig?.hasGraphQl &&
-             <Accordion>
-             <AccordionSummary
-               expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}
-             >
-               <Typography className={classes.heading}>GraphQL</Typography>
-             </AccordionSummary>
-             <AccordionDetails key={node.id + '-grahpql'}>
-               <Grid container spacing={2}>
-                <TextField
-                  fullWidth
-                  multiline
-                  rows = {3}
-                  size="small" 
-                  variant = "outlined" 
-                  label={intl.get("field") + ' GraphQL'} value={stringValue(node?.meta.fieldsGql)}
-                  onChange={handleFieldGQLChange}>
-                </TextField>
-               </Grid>
-             </AccordionDetails>            
-           </Accordion>
-          }
-
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon className = {classes.moreIcon} />}

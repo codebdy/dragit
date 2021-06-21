@@ -5,7 +5,6 @@ import { IMeta } from "Base/RXNode/IMeta";
 export class JsxTemplateParserConfig extends MetaConfig{
 
   hasMultiAction?:boolean = true;
-  hasGraphQl?:boolean = true;
 
   accept(child:IMeta){
     return false;
@@ -21,6 +20,14 @@ export class JsxTemplateParserConfig extends MetaConfig{
           xs:12,
           multiline:true,
           rows:5,
+        }
+      },
+      {
+        name:'showSkeleton',
+        labelKey:'show-skeleton',
+        propType:'boolean',
+        props:{
+          xs:12,
         }
       }
     ]

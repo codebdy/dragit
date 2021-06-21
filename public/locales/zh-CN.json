@@ -290,8 +290,6 @@
     "mutation":"更改",
     "page-mutaion":"数据提交",
     "result":"结果",
-    "input-graphql-error":"输入错误",
-    "graphiqL":"GraphQL语句",
     "variables":"变量",
     "data-query":"数据查询",
     "base-data-query":"基础数据查询",
@@ -358,5 +356,6 @@
     "create-time":"创建时间",
     "new-to-old":"由新到旧",
     "old-to-new":"由旧到新",
-    "new-auth":"新权限"
+    "new-auth":"新权限",
+    "show-skeleton":"显示加载骨架"
 }
