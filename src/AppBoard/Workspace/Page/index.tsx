@@ -18,13 +18,14 @@ import { ActionStore, ActionStoreProvider } from 'Base/PageUtils/ActionStore';
 import ActionHunter from 'Base/PageUtils/ActionHunter';
 import { Debug } from './Debug';
 import { PageStore, PageStoreProvider } from 'Base/PageUtils/PageStore';
-import { PageQuery } from './PageQuery';
 import { RXModel } from 'Base/ModelTree/RXModel';
 import { PopupPage } from './PopupPage';
 import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 import { AUTH_DEBUG } from 'Base/authSlugs';
 import { MagicPostBuilder } from 'Data/MagicPostBuilder';
 import { MagicQueryMeta } from 'Data/MagicQueryMeta';
+import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
+import { useMagicQuery } from 'Data/useMagicQuery';
 
 export const Page = observer((
   props:{
@@ -34,8 +35,8 @@ export const Page = observer((
     onPageAction?: (pageAction:IPageAction)=> void,
   }
 )=>{
-  const [openAlert, setOpentAlert] = useState(false);
   const {page, pageJumper, hideDebug, onPageAction} = props;
+  const [openAlert, setOpentAlert] = useState(false);
   const [actionStore, setActionStore] = useState<ActionStore>();
   const [modelStore, setModelStore] = useState<RXModel>(); 
   const [pageStore, setPageStore] = useState<PageStore>();
@@ -45,7 +46,7 @@ export const Page = observer((
   const dragItStore = useDragItStore();
   const loggedUser = useLoggedUser();
   const queryMeta = (page?.query) ? new MagicQueryMeta(page.query) : undefined;
-
+  
   useEffect(()=>{
     const pgStore = new PageStore(page, pageJumper);
     setPageStore(pgStore);
@@ -57,8 +58,24 @@ export const Page = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageJumper])
 
-  
-  const [excuteMutation, {error:muetationError, loading:mutating}] = useLayzyMagicPost(
+  const { loading, error, data } = useMagicQuery(
+    queryMeta
+      ? new MagicQueryBuilder()
+        .setQueryString(queryMeta.toQueryString())
+      : undefined
+  );
+
+  useEffect(()=>{
+    modelStore?.setLoading(loading);
+  }, [loading, modelStore]);
+
+  useEffect(()=>{
+    if(data){
+      modelStore?.initWithModel(data.data);      
+    }
+  },[data, modelStore]);
+
+  const [excuteMutation, {error:muetationError, loading:mutating}] = useLayzyMagicPost<any>(
     {
       onCompleted:(data)=>{
         const mutation = pageStore?.submittingMutation;
@@ -70,6 +87,7 @@ export const Page = observer((
             //refreshNode?.initWithModel({[mutation?.refreshNode]:data[mutation.name]})             
             refreshNode?.setLoading(false);          
           }
+          //data?.data && onDataChange && onDataChange(DataChangeType.UPDATE, data.data)
 
           submitNode?.clearDirty();
           pageStore?.setSubmittingMutation(undefined);
@@ -89,7 +107,7 @@ export const Page = observer((
 
   );
   
-  useShowServerError(muetationError);
+  useShowServerError(error || muetationError);
 
   const hanlePageAction = (action:IPageAction)=>{
     switch (action.name){
@@ -143,7 +161,6 @@ export const Page = observer((
         else{
           modelStore?.reset();
         }
-
         return;
     }
     onPageAction && onPageAction(action);
@@ -161,11 +178,6 @@ export const Page = observer((
     <PageStoreProvider value = {pageStore}>
       <ActionStoreProvider value = {actionStore}>
         <ModelProvider value = {modelStore}>
-          {
-            queryMeta && pageJumper?.dataId &&
-            <PageQuery queryMeta = {queryMeta} id = {parseInt(pageJumper?.dataId)}/>
-          }
-
           <ActionHunter onPageAction = {hanlePageAction} />
           {
             pageStore?.pageLayout?.map((child:RxNode<IMeta>)=>{

@@ -13,7 +13,7 @@ export const PopupPage = observer((
     open: boolean,
     pageJumper?:any,
     onPageAction?: (pageAction:IPageAction)=> void,
-    onClose:()=>void,
+    onClose:()=>void
   }
 )=>{
   const {open, pageJumper, onPageAction, onClose } = props;

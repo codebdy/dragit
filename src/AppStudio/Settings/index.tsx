@@ -80,7 +80,6 @@ export const Settings = observer((
         }
       )
       .toData();
-    console.log(data);
     excuteSave({data});
   }
 
