@@ -1,5 +1,4 @@
 import { useModelStore } from "Base/ModelTree/ModelProvider";
-import { usePageStore } from "Base/PageUtils/PageStore";
 import { MagicQueryBuilder } from "Data/MagicQueryBuilder";
 import { MagicQueryMeta } from "Data/MagicQueryMeta";
 import { useMagicQuery } from "Data/useMagicQuery";
@@ -24,21 +23,15 @@ export const PageQuery = observer((
       .setQueryString(queryMeta.toQueryString())
   );
 
-  console.log(loading);
   useEffect(()=>{
     modelStore?.setLoading(loading);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
+  }, [loading, modelStore]);
 
   useEffect(()=>{
     if(data){
-      modelStore?.initWithModel(data?.data);      
+      modelStore?.initWithModel(data.data);      
     }
-    else{
-      modelStore?.initWithModel(undefined);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  },[data, modelStore]);
 
   useShowServerError(error);
   return (
