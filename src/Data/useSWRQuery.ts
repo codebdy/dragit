@@ -8,7 +8,12 @@ import { fetcher } from "./fetcher";
 export function useSWRQuery<T>(api?:AxiosRequestConfig, options?:any):SWRResponse<T, any>&{loading?:boolean}{
   const history = useHistory();
   const {onError, ...otherOptions} = options||{};
-  const rtValue = useSWR<T>(api?.url||null, fetcher, {errorRetryCount:0, ...(otherOptions||{})});
+  const rtValue = useSWR<T>(api?.url||null, fetcher, {
+      errorRetryCount:0, 
+      revalidateOnFocus: false,
+      ...(otherOptions||{})
+    }
+  );
   useEffect(()=>{
     if(rtValue?.error && onError){
       onError(rtValue?.error);
