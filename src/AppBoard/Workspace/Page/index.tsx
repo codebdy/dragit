@@ -61,17 +61,8 @@ export const Page = observer((
   const [excuteMutation, {error:muetationError, loading:mutating}] = useLayzyMagicPost(
     {
       onCompleted:(data)=>{
-        const refesheNode = modelStore?.getModelNode(pageStore?.submittingMutation?.refreshNode);
-        refesheNode?.setLoading(false);
-        const submitNode = modelStore?.getModelNode(pageStore?.submittingMutation?.model);
-        submitNode?.clearDirty();
-        dragItStore.setSuccessAlert(true);
-        if(pageStore?.submittingMutation?.goback){
-          onPageAction && onPageAction({name:GO_BACK_ACTION})
-        }
-        pageStore?.setSubmittingMutation(undefined);
-        //setLoadingNode(undefined);
-       /* if(mutation && mutation.model){
+        const mutation = pageStore?.submittingMutation;
+        if(mutation){
           const submitNode = modelStore?.getModelNode(mutation.submitNode);
           submitNode?.updateDefaultValue();
           if(mutation?.refreshNode){
@@ -81,13 +72,13 @@ export const Page = observer((
           }
 
           submitNode?.clearDirty();
-          setMutation(undefined);
+          pageStore?.setSubmittingMutation(undefined);
         }
 
         dragItStore.setSuccessAlert(true)
         if(mutation?.goback){
           onPageAction && onPageAction({name:GO_BACK_ACTION})
-        }*/
+        }
       },
       onError:()=>{
         const refesheNode = modelStore?.getModelNode(pageStore?.submittingMutation?.refreshNode) 
