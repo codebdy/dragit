@@ -58,7 +58,6 @@ export function ListViewBodyHead(
                       direction={listViewStore.getFieldDirection(column.meta.props?.field)}
                       onClick={()=>{
                         listViewStore.sortField(column.meta.props?.field);
-                        listViewStore.excuteQuery();
                       }}
                     >
                       {column.meta.props?.label}

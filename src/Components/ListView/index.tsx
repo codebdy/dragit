@@ -126,24 +126,10 @@ const ListView = observer(React.forwardRef((
   useShowServerError(queryError||updateError||removeError);
 
   useEffect(()=>{
-    if(!query || isDesigning){
-      return;
-    }
-    //if(!called){
-    //  excuteQuery({variables:listViewStore.getQueryVariables()});
-   // }
-    //else{
-    //  refetch && refetch(listViewStore.getQueryVariables());
-    //}
-    listViewStore.setSelects([]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[listViewStore.refreshQueryFlag])
-
-  useEffect(()=>{
     queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
     listViewStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[queryLoading])
+  })
 
 
   useEffect(()=>{

@@ -53,7 +53,6 @@ const ListViewEnumFilter = React.forwardRef((
     setValue(newValue);
     //const gql = newValue ? `{column:${field}, operator:EQ, value:"${newValue}"}` : newValue;
     //listViewStore.setWhereGraphQL(rxid, gql);
-    listViewStore.excuteQuery();
   }
 
   return (

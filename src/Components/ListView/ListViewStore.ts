@@ -37,7 +37,6 @@ interface Updating{
 
 
 export class ListViewStore{
-  refreshQueryFlag: number = 1;
   tableRxNode?: RxNode<IMeta>;
   selects: ID[] = [];
   orderByArray: Array<FieldOrder> = [];
@@ -83,11 +82,6 @@ export class ListViewStore{
 
   isSelected(id:ID){
     return this.selects.indexOf(id) > -1
-  }
-
-
-  excuteQuery(){
-    this.refreshQueryFlag ++;
   }
 
   getOrderBy(field:string){
