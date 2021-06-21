@@ -42,9 +42,9 @@ const ListViewPagination = observer((
       rowsPerPageOptions={parseRowsPerPageOptions()}
       component="div"
       labelRowsPerPage = {intl.get('rows-per-page') + ':'}
-      count={listViewStore.paginatorInfo.total}
+      count={listViewStore.paginatorInfo.totalCount}
       rowsPerPage={rowsPerPage}
-      page={listViewStore.paginatorInfo.currentPage}
+      page={listViewStore.paginatorInfo.pageIndex}
       onChangePage={(event, newPage)=>hanleChangePage(newPage)}
       onChangeRowsPerPage={handleChangeRowsPerPage}
       SelectProps={{

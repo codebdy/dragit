@@ -73,13 +73,18 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[listViewStore.rxModel]);
 
-
-  const builder = listViewStore.queryMeta && !isDesigning
+  const builder = listViewStore.queryMeta && !isDesigning && listViewStore.paginatorInfo.pageSize > 0
     ? new MagicQueryBuilder()
-        .setQueryString(listViewStore.queryMeta.toQueryString())
+        .setQueryString(
+          listViewStore
+            .queryMeta
+            .setPageSize(listViewStore.paginatorInfo.pageSize)
+            .setPageIndex(listViewStore.paginatorInfo.pageIndex)
+            .toQueryString()
+        )
     : undefined;
 
-  const { data, error: queryError, mutate, loading:queryLoading } = useMagicQuery(
+  const { data, error: queryError, mutate, loading:queryLoading } = useMagicQuery<any>(
     builder, 
     {
       persistSize:true,
@@ -88,6 +93,8 @@ const ListView = observer(React.forwardRef((
       }
     }
   );
+
+  console.log('哈哈', data);
 
   const handleDataChange = (changeArg:DataChangeArg) => {
     if(changeArg.model === listViewStore.queryMeta?.model){
@@ -135,7 +142,7 @@ const ListView = observer(React.forwardRef((
   useShowServerError(queryError||updateError||removeError);
 
   useEffect(()=>{
-    queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.perPage));
+    queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.pageSize));
     listViewStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   })
@@ -143,7 +150,7 @@ const ListView = observer(React.forwardRef((
   useEffect(()=>{
     //if(data){
       !queryLoading && listViewStore.setRows(data && query ? (data.data as any[]) : []);
-      //listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});      
+      listViewStore.paginatorInfo.setQueryResult(data && query ? (data?.pagination):{}, data?.data?.length||0);      
     //}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data])

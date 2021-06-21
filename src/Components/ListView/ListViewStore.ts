@@ -119,7 +119,7 @@ export class ListViewStore{
   }
 
   getQueryVariables(){
-    return {first:this.paginatorInfo.perPage, page:this.paginatorInfo.currentPage}
+    return {first:this.paginatorInfo.pageSize, page:this.paginatorInfo.pageIndex}
   }
 
   setRows(rows?:Array<any>){

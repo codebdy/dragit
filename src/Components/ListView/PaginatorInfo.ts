@@ -1,41 +1,33 @@
 import { makeAutoObservable } from "mobx";
+import { Paginator } from "../../Data/Paginator";
 
 
 export class PaginatorInfo {
   count: number = 0;
-  currentPage: number = 0;
-  hasMorePages: boolean = false;
-  lastPage: number = 0;
-  perPage: number = 0;
-  total: number = 0;
+  pageIndex: number = 0;
+  pageSize: number = 0;
+  totalCount: number = 0;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setQueryResult(data: any = {}) {
+  setQueryResult(pagination?: Paginator, count?:number) {
     const {
-      count = 0,
-      currentPage = 0,
-      hasMorePages = false,
-      lastPage = 0,
-      perPage = this.perPage,
-      total = 0
-    } = data;
+      pageIndex = 0,
+      totalCount = 0
+    } = pagination||{};
 
-    this.count = count;
-    this.currentPage = currentPage;
-    this.hasMorePages = hasMorePages;
-    this.lastPage = lastPage;
-    this.perPage = perPage;
-    this.total = total;
+    this.count = count||0;
+    this.pageIndex = pageIndex;
+    this.totalCount = totalCount;
   }
 
   setPerPage(perPage: number) {
-    this.perPage = perPage;
+    this.pageSize = perPage;
   }
 
   setCurrentPage(currentPage: number) {
-    this.currentPage = currentPage;
+    this.pageIndex = currentPage;
   }
 }

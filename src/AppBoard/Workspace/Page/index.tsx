@@ -120,7 +120,6 @@ export const Page = observer((
         pageStore?.setSubmittingMutation(undefined);
       }
     }
-
   );
   
   useShowServerError(error || muetationError);
