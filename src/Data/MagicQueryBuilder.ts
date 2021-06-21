@@ -1,5 +1,6 @@
 import { API_MAGIC_QUERY } from "APIs/magic";
 import { AxiosRequestConfig } from "axios";
+import { MagicQueryMeta } from "./MagicQueryMeta";
 
 const orderBy = 'orderBy'
 export class MagicQueryBuilder{
@@ -15,7 +16,14 @@ export class MagicQueryBuilder{
   private _isPagination = false;
   private _conditions = {} as any;
   private _relations = {} as any;
-  private _queryString?: string;
+  private _queryMeta?: MagicQueryMeta;
+
+  constructor(queryString?:string){
+    if(queryString){
+      this._queryMeta = new MagicQueryMeta(queryString);
+      this._model = this._queryMeta.model;
+    }
+  }
 
   setModel(model:string){
     this._model = model;
@@ -39,11 +47,6 @@ export class MagicQueryBuilder{
 
   setGetOne(){
     this._fetcher = "@getOne";
-    return this;
-  }
-
-  setQueryString(queryString:string){
-    this._queryString = queryString;
     return this;
   }
 
@@ -114,13 +117,13 @@ export class MagicQueryBuilder{
   }
 
   private toQueryString(){
-    if(this._queryString){
-      return this._queryString;
-    }
     const queryObj = {} as any;
+    const commands = this._queryMeta ? this._commands.concat(this._queryMeta.commands) : this._commands;
+    const conditions = this._queryMeta ? {...this._conditions, ...this._queryMeta.otherJSON } : this._commands;
+
     const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
-    queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${this._commands.join(' ')} ${pagination}`] = this._model;
+    queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${commands.join(' ')} ${pagination}`] = this._model;
     this._orderBy && (queryObj[orderBy] = this._orderBy);
-    return JSON.stringify({...queryObj, ...this._conditions, ...this._relations});
+    return JSON.stringify({...queryObj, ...conditions, ...this._relations});
   }
 }

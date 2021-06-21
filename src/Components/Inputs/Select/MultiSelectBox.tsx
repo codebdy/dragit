@@ -47,7 +47,7 @@ export const MultiSelectBox = React.forwardRef((
 
   const { loading:queryLoading, error: queryError, data } = useMagicQuery(
     query && !isDesigning 
-      ? new MagicQueryBuilder().setQueryString(query)
+      ? new MagicQueryBuilder(query)
       : undefined
   );
   useShowServerError(queryError)

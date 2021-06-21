@@ -1,11 +1,8 @@
 export class MagicQueryMeta{
   private _queryJSON:any;
   private _model = '';
-  private _modelCommandString = '';
-  private _conditions = {} as any;
-  private _isPagination = false;
-  private _pageSize: number = 10;
-  private _pageIndex: number = 0;
+  private _commands:string[] = [];
+  private _otherJSON = {} as any;
   private _modelKey = '';
 
   constructor(query:string){
@@ -22,42 +19,29 @@ export class MagicQueryMeta{
       const keyStringArray = key.split('@');
       if(keyStringArray[0].trim().toLowerCase() === 'model'){
         this._model = this._queryJSON[key];
-        this._modelCommandString = keyStringArray.slice(1).join('');
+        this._commands = keyStringArray.slice(1).map(command => '@' + command);
         this._modelKey = key;
+      }
+      else{
+        this._otherJSON[key] = this._queryJSON[key];
       }
     }
   }
 
   addCondition(key:string, value:any){
-    this._conditions[key] = value;
+    this._otherJSON[key] = value;
   }
 
   get model(){
     return this._model;
   }
 
-  setPageSize(pageSize: number){
-    this._isPagination = true;
-    this._pageSize = pageSize;
-    return this;
+  get commands():string[]{
+    return this._commands;
   }
 
-  setPageIndex(pageIndex: number){
-    this._isPagination = true;
-    this._pageIndex = pageIndex;
-    return this;
+  get otherJSON(){
+    return this._otherJSON;
   }
 
-  toQueryString(){
-    if(!this._model){
-      return '';
-    }
-    const copyOfQueryJSON = {...this._queryJSON};
-
-    delete copyOfQueryJSON[this._modelKey];
-
-    const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
-    copyOfQueryJSON[this._modelKey + pagination] = this._model;
-    return JSON.stringify({...copyOfQueryJSON, ...this._conditions});
-  }
 }

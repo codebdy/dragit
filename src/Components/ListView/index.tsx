@@ -74,14 +74,9 @@ const ListView = observer(React.forwardRef((
   },[listViewStore.rxModel]);
 
   const builder = listViewStore.queryMeta && !isDesigning && listViewStore.paginatorInfo.pageSize > 0
-    ? new MagicQueryBuilder()
-        .setQueryString(
-          listViewStore
-            .queryMeta
-            .setPageSize(listViewStore.paginatorInfo.pageSize)
-            .setPageIndex(listViewStore.paginatorInfo.pageIndex)
-            .toQueryString()
-        )
+    ? new MagicQueryBuilder(query)
+      .setPageSize(listViewStore.paginatorInfo.pageSize)
+      .setPageIndex(listViewStore.paginatorInfo.pageIndex)
     : undefined;
 
   const { data, error: queryError, mutate, loading:queryLoading } = useMagicQuery<any>(

@@ -6,7 +6,7 @@ export class PaginatorInfo {
   count: number = 0;
   pageIndex: number = 0;
   pageSize: number = 0;
-  totalCount: number = 0;
+  total: number = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -20,7 +20,7 @@ export class PaginatorInfo {
 
     this.count = count||0;
     this.pageIndex = pageIndex;
-    this.totalCount = totalCount;
+    this.total = Math.ceil(totalCount/this.pageSize);
   }
 
   setPerPage(perPage: number) {

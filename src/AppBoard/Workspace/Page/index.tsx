@@ -63,8 +63,8 @@ export const Page = observer((
 
   const { loading, error, data, mutate } = useMagicQuery(
     queryMeta
-      ? new MagicQueryBuilder()
-        .setQueryString(queryMeta.toQueryString())
+      ? new MagicQueryBuilder(page.query)
+
       : undefined
   );
 

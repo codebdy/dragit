@@ -29,12 +29,10 @@ const ListViewPagination = observer((
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     listViewStore.paginatorInfo.setPerPage(parseInt(event.target.value, rowsPerPage));
-    //listViewStore.excuteQuery();
   };
 
   const hanleChangePage = (newPage:number)=>{
     listViewStore.paginatorInfo.setCurrentPage(newPage);
-    //listViewStore.excuteQuery();
   }
 
   return (
@@ -42,8 +40,8 @@ const ListViewPagination = observer((
       rowsPerPageOptions={parseRowsPerPageOptions()}
       component="div"
       labelRowsPerPage = {intl.get('rows-per-page') + ':'}
-      count={listViewStore.paginatorInfo.totalCount}
-      rowsPerPage={rowsPerPage}
+      count={listViewStore.paginatorInfo.total}
+      rowsPerPage={listViewStore.paginatorInfo.pageSize||rowsPerPage}
       page={listViewStore.paginatorInfo.pageIndex}
       onChangePage={(event, newPage)=>hanleChangePage(newPage)}
       onChangeRowsPerPage={handleChangeRowsPerPage}
