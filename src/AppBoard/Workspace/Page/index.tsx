@@ -61,7 +61,7 @@ export const Page = observer((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[page, pageJumper])
 
-  const { loading, error, data } = useMagicQuery(
+  const { loading, error, data, mutate } = useMagicQuery(
     queryMeta
       ? new MagicQueryBuilder()
         .setQueryString(queryMeta.toQueryString())
@@ -99,6 +99,11 @@ export const Page = observer((
               data: model ? data[model] : undefined
             }
           )
+
+          //如果全局提交，则更新缓存
+          if(!mutation?.submitNode){
+            mutate(data);
+          }
 
           submitNode?.clearDirty();
           pageStore?.setSubmittingMutation(undefined);

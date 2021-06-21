@@ -14,5 +14,5 @@ interface ModeData{
 export interface DataChangeArg {
   changeType: DataChangeType;
   model: string;
-  data: ModeData|ModeData[]|ID|ID[];
+  data: any;
 }

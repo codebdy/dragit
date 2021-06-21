@@ -79,7 +79,7 @@ const ListView = observer(React.forwardRef((
         .setQueryString(listViewStore.queryMeta.toQueryString())
     : undefined;
 
-  const { data, error: queryError, mutate: queryMutate, loading:queryLoading } = useMagicQuery(
+  const { data, error: queryError, mutate, loading:queryLoading } = useMagicQuery(
     builder, 
     {
       persistSize:true,
@@ -91,7 +91,16 @@ const ListView = observer(React.forwardRef((
 
   const handleDataChange = (changeArg:DataChangeArg) => {
     if(changeArg.model === listViewStore.queryMeta?.model){
-      queryMutate();
+      builder && mutate((data:any)=>{
+        data.data = data?.data?.map((row: any) =>{
+          return row.id === changeArg.data.id ? {...row, ...changeArg.data} : row;
+        })
+        //不加一个字段，不刷新，后面有时间再调查原因
+        return {...data, _to_refresh:''} as any;
+      }, true);
+    }
+    else{
+      mutate();
     }
   }
 
@@ -131,12 +140,11 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   })
 
-
   useEffect(()=>{
-    if(data){
+    //if(data){
       !queryLoading && listViewStore.setRows(data && query ? (data.data as any[]) : []);
       //listViewStore.paginatorInfo.setQueryResult(data && query ? data[query]?.paginatorInfo:{});      
-    }
+    //}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data])
 
