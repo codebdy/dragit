@@ -26,6 +26,9 @@ import { MagicPostBuilder } from 'Data/MagicPostBuilder';
 import { MagicQueryMeta } from 'Data/MagicQueryMeta';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 import { useMagicQuery } from 'Data/useMagicQuery';
+import bus from 'Base/bus';
+import { EVENT_DATA_CHANGE } from 'Base/events';
+import { DataChangeType } from 'Data/DataChangeArg';
 
 export const Page = observer((
   props:{
@@ -87,7 +90,15 @@ export const Page = observer((
             //refreshNode?.initWithModel({[mutation?.refreshNode]:data[mutation.name]})             
             refreshNode?.setLoading(false);          
           }
-          //data?.data && onDataChange && onDataChange(DataChangeType.UPDATE, data.data)
+          const model = mutation.model || queryMeta?.model;
+          data && bus.emit(
+            EVENT_DATA_CHANGE,
+            {
+              changeType: pageJumper?.dataId ? DataChangeType.UPDATE : DataChangeType.CREATE, 
+              model: model,
+              data: model ? data[model] : undefined
+            }
+          )
 
           submitNode?.clearDirty();
           pageStore?.setSubmittingMutation(undefined);

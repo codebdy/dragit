@@ -17,6 +17,9 @@ import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
 import { MagicQueryMeta } from '../../Data/MagicQueryMeta';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 import { useMagicQuery } from 'Data/useMagicQuery';
+import bus from 'Base/bus';
+import { EVENT_DATA_CHANGE } from 'Base/events';
+import { DataChangeArg } from 'Data/DataChangeArg';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -85,6 +88,20 @@ const ListView = observer(React.forwardRef((
       }
     }
   );
+
+  const handleDataChange = (changeArg:DataChangeArg) => {
+    if(changeArg.model === listViewStore.queryMeta?.model){
+      queryMutate();
+    }
+  }
+
+  useEffect(()=>{
+    bus?.on(EVENT_DATA_CHANGE, handleDataChange);
+    return ()=>{
+      bus?.off(EVENT_DATA_CHANGE, handleDataChange);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   const [excuteUpdate, { error:updateError }] = useLayzyMagicPost(
     {

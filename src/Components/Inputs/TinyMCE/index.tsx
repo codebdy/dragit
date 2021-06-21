@@ -5,6 +5,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import MediasSelectDialog from 'Components/Medias/MediasSelectDialog';
 import { IRxMedia } from 'Base/Model/IRxMedia';
 import { EventEmitter } from 'events';
+import { EVENT_SELECT_IMAGE } from "Base/events";
 
 declare var window: {$bus:EventEmitter};
 
@@ -39,9 +40,9 @@ export const TinyMCE = React.forwardRef((
   }
 
   useEffect(()=>{
-    window.$bus?.on('selectImage', openMediaDialog);
+    window.$bus?.on(EVENT_SELECT_IMAGE, openMediaDialog);
     return ()=>{
-      window.$bus?.off('selectImage', openMediaDialog);
+      window.$bus?.off(EVENT_SELECT_IMAGE, openMediaDialog);
     }
   },[])
 
