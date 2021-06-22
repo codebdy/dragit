@@ -13,13 +13,13 @@ import { useDragItStore } from 'Store/Helpers/useDragItStore';
 import { AUTH_APP } from 'Base/authSlugs';
 import { v4 as uuidv4 } from 'uuid';
 import useLayzyAxios from "Data/useLayzyAxios";
-import { useAxiosError } from "Store/Helpers/useAxiosError";
 import { useMagicQuery } from "Data/useMagicQuery";
 import { API_MAGIC_POST } from "APIs/magic";
 import { MagicPostBuilder } from "Data/MagicPostBuilder";
 import { mutate } from "swr";
 import { queryAllApps } from "../querys";
 import { RxApp } from "modelConstants";
+import { useShowServerError } from "Store/Helpers/useInfoError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppManager = observer(() => {
   const classes = useStyles();
-  const { loading, data:rxAppsData } = useMagicQuery<IRxApp[]>(queryAllApps);
+  const { loading, data:rxAppsData, error } = useMagicQuery<IRxApp[]>(queryAllApps);
   const dragItStore = useDragItStore();
   const apps = rxAppsData?.data||[];
   const [ excuteCreate, {loading:saving, error:creatError}] = useLayzyAxios(API_MAGIC_POST, {
@@ -53,7 +53,7 @@ export const AppManager = observer(() => {
     }
   })
 
-  useAxiosError(creatError);
+  useShowServerError(error || creatError);
 
   const handleCreate = ()=>{
     const newAppMeta = {

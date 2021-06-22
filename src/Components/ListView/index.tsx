@@ -143,10 +143,8 @@ const ListView = observer(React.forwardRef((
   })
 
   useEffect(()=>{
-    //if(data){
-      !queryLoading && listViewStore.setRows(data && query ? (data.data as any[]) : []);
-      listViewStore.paginatorInfo.setQueryResult(data && query ? (data?.pagination):{}, data?.data?.length||0);      
-    //}
+    !queryLoading && listViewStore.setRows(data && query ? (data.data as any[]) : []);
+    listViewStore.paginatorInfo.setQueryResult(data && query ? (data?.pagination):{}, data?.data?.length||0);      
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[data])
 

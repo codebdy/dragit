@@ -1,6 +1,7 @@
 import { API_MAGIC_QUERY } from "APIs/magic";
 import { AxiosRequestConfig } from "axios";
 import { MagicQueryMeta } from "./MagicQueryMeta";
+import { WhereGroupBuilder } from "./WhereGroupBuilder";
 
 const orderBy = 'orderBy'
 export class MagicQueryBuilder{
@@ -14,9 +15,10 @@ export class MagicQueryBuilder{
   private _pageSize: number = 10;
   private _pageIndex: number = 0;
   private _isPagination = false;
-  private _conditions = {} as any;
+  //private _conditions = {} as any;
   private _relations = {} as any;
   private _queryMeta?: MagicQueryMeta;
+  private _whereGroup = new WhereGroupBuilder();
 
   constructor(queryString?:string){
     if(queryString){
@@ -51,13 +53,7 @@ export class MagicQueryBuilder{
   }
 
   addCondition(field:string, value:any, operator?:string){
-    const key = `${field}${operator ? '@'+operator : ''}`;
-    if(value){
-      this._conditions[key] = value;
-    }
-    else{
-      delete this._conditions[key];
-    }    
+    this._whereGroup.addCondition(field, value, operator);
     return this;
   }
 
@@ -119,7 +115,7 @@ export class MagicQueryBuilder{
   private toQueryString(){
     const queryObj = {} as any;
     const commands = this._queryMeta ? this._commands.concat(this._queryMeta.commands) : this._commands;
-    const conditions = this._queryMeta ? {...this._conditions, ...this._queryMeta.otherJSON } : this._commands;
+    const conditions = this._queryMeta ? {...this._whereGroup.toJSON(), ...this._queryMeta.otherJSON } : this._commands;
 
     const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
     queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${commands.join(' ')} ${pagination}`] = this._model;
