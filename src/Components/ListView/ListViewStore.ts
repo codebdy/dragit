@@ -44,6 +44,7 @@ export class ListViewStore{
   paginatorInfo: PaginatorInfo = new PaginatorInfo();
   selectable?: boolean = true;
   queryMeta?: MagicQueryMeta;
+  whereSQLs: Map<string,string> = new Map<string,string>();
   
   constructor(queryMeta?:MagicQueryMeta) {
     this.queryMeta = queryMeta;
@@ -84,6 +85,19 @@ export class ListViewStore{
     return this.selects.indexOf(id) > -1
   }
 
+  setWhereSQL(rxId:string, sql?: string){
+    sql && this.whereSQLs.set(rxId, sql);
+  }
+
+  toWhereSQL(){
+    const sqlsArray:string[] = []
+
+    this.whereSQLs.forEach(sql=>{
+      sqlsArray.push(`(${sql})`)
+    })
+    return sqlsArray.join(' AND ');
+  }
+
   getOrderBy(field:string){
     for(var i = 0; i < this.orderByArray.length; i++){
       if(field === this.orderByArray[i].field){
@@ -116,10 +130,6 @@ export class ListViewStore{
 
   isRowSelected(rowId:ID){
     return !!this.selects.find(id=>id === rowId);
-  }
-
-  getQueryVariables(){
-    return {first:this.paginatorInfo.pageSize, page:this.paginatorInfo.pageIndex}
   }
 
   setRows(rows?:Array<any>){

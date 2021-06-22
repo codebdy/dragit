@@ -77,6 +77,7 @@ const ListView = observer(React.forwardRef((
     ? new MagicQueryBuilder(query)
       .setPageSize(listViewStore.paginatorInfo.pageSize)
       .setPageIndex(listViewStore.paginatorInfo.pageIndex)
+      .setWhereSql(listViewStore.toWhereSQL())
     : undefined;
 
   const { data, error: queryError, mutate, loading:queryLoading } = useMagicQuery<any>(
@@ -88,8 +89,6 @@ const ListView = observer(React.forwardRef((
       }
     }
   );
-
-  console.log('哈哈', data);
 
   const handleDataChange = (changeArg:DataChangeArg) => {
     if(changeArg.model === listViewStore.queryMeta?.model){

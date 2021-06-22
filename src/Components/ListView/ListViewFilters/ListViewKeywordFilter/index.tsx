@@ -38,24 +38,18 @@ const ListViewKeywordFilter = React.forwardRef((
   const listViewStore = useListViewStore();
   
   const handleSearch = ()=>{
-    let gql = '';
-    keywords.split(' ').forEach(keyword=>{    
-      if(keyword.trim()){
-        let oneKeywordSql = '';
-        listViewStore.columns.forEach(column=>{
-          if(column.meta.props?.searchable && column.meta.props?.field){
-            oneKeywordSql = ` ${oneKeywordSql} {column:${column.meta.props?.field}, operator:LIKE, value:"%${keyword.trim()}%"} `            
-          }
-        }) 
-        
-        if(oneKeywordSql){
-          gql = `${gql} {OR:[${oneKeywordSql}]}`;
+    let sql = listViewStore.columns
+      .filter(column=>column.meta.props?.searchable && column.meta.props?.field)
+      .map(
+        column=>{
+          const oneSql = keywords.split(' ')
+          .map(keyword=>`${column.meta.props?.field} LIKE '%${keyword.trim()}%'`)
+          .join(' AND ')
+          return `(${oneSql})`;
         }
-      }
-    })
-    //listViewStore.setWhereGraphQL(rxid, gql);
-    //
-    //listViewStore.excuteQuery();
+      )
+      .join(' OR ');
+    listViewStore.setWhereSQL(rxid, sql);
   }
 
   return (

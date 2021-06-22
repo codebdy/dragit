@@ -1,7 +1,7 @@
 import { API_MAGIC_QUERY } from "APIs/magic";
 import { AxiosRequestConfig } from "axios";
 import { MagicQueryMeta } from "./MagicQueryMeta";
-import { WhereGroupBuilder } from "./WhereGroupBuilder";
+import { WhereBuilder } from "./WhereBuilder";
 
 const orderBy = 'orderBy'
 export class MagicQueryBuilder{
@@ -18,7 +18,7 @@ export class MagicQueryBuilder{
   //private _conditions = {} as any;
   private _relations = {} as any;
   private _queryMeta?: MagicQueryMeta;
-  private _whereGroup = new WhereGroupBuilder();
+  private _whereGroup = new WhereBuilder();
 
   constructor(queryString?:string){
     if(queryString){
@@ -98,6 +98,11 @@ export class MagicQueryBuilder{
   setPageIndex(pageIndex: number){
     this._isPagination = true;
     this._pageIndex = pageIndex;
+    return this;
+  }
+
+  setWhereSql(whereStr: string){
+    this._whereGroup.setWhereSql(whereStr);
     return this;
   }
   
