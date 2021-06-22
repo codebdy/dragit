@@ -195,7 +195,7 @@ export const MediaGridListImage = observer((
       {
         editing?
         <input 
-          value={mediaName} 
+          value={mediaName||''} 
           autoFocus= {true} 
           className={classes.titleInput}
           onBlur = {handleEndEditing}

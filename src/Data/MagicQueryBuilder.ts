@@ -115,7 +115,7 @@ export class MagicQueryBuilder{
   private toQueryString(){
     const queryObj = {} as any;
     const commands = this._queryMeta ? this._commands.concat(this._queryMeta.commands) : this._commands;
-    const conditions = this._queryMeta ? {...this._whereGroup.toJSON(), ...this._queryMeta.otherJSON } : this._commands;
+    const conditions = this._queryMeta ? {...this._whereGroup.toJSON(), ...this._queryMeta.otherJSON } : this._whereGroup.toJSON();
 
     const pagination = this._isPagination ? `@paginate(${this._pageSize},${this._pageIndex})` :'';
     queryObj[`model ${this._take} ${this._skip} ${this._fetcher} ${commands.join(' ')} ${pagination}`] = this._model;
