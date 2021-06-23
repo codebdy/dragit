@@ -45,6 +45,7 @@ export class ListViewStore{
   selectable?: boolean = true;
   queryMeta?: MagicQueryMeta;
   whereSQLs: Map<string,string> = new Map<string,string>();
+  rows?: any[] = [];
   
   constructor(queryMeta?:MagicQueryMeta) {
     this.queryMeta = queryMeta;
@@ -120,6 +121,18 @@ export class ListViewStore{
 
   };
 
+  getSortMetas(){
+    if(this.orderByArray.length === 0){
+      return undefined;
+    }
+
+    const sortMetas = {} as any;
+    this.orderByArray.forEach(sortMeta=>{
+      sortMetas[sortMeta.field] = sortMeta.direction;
+    })
+    return sortMetas;
+  }
+
   getFieldDirection(field?:string){
     if(!field){
       return;
@@ -134,6 +147,7 @@ export class ListViewStore{
 
   setRows(rows?:Array<any>){
     makeTableModel(rows, this.rxModel, this.tableRxNode, 'ListViewBodyTableRow')
+    this.rows = rows;
   }
 
   setLoading(loading?:boolean){

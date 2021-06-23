@@ -77,13 +77,13 @@ const ListView = observer(React.forwardRef((
     ? new MagicQueryBuilder(query)
       .setPageSize(listViewStore.paginatorInfo.pageSize)
       .setPageIndex(listViewStore.paginatorInfo.pageIndex)
+      .setOrderbyMap(listViewStore.getSortMetas())
       .setWhereSql(listViewStore.toWhereSQL())
     : undefined;
 
   const { data, error: queryError, mutate, loading:queryLoading } = useMagicQuery<any>(
     builder, 
     {
-      persistSize:true,
       onError(){
         listViewStore.setRows([]);
       }
@@ -136,7 +136,7 @@ const ListView = observer(React.forwardRef((
   useShowServerError(queryError||updateError||removeError);
 
   useEffect(()=>{
-    queryLoading && !data && listViewStore.setRows(creatEmpertyRows(listViewStore.paginatorInfo.pageSize));
+    queryLoading && !data && listViewStore.setRows(creatEmpertyRows( listViewStore.rows?.length || listViewStore.paginatorInfo.pageSize));
     listViewStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   })

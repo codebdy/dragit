@@ -89,6 +89,11 @@ export class MagicQueryBuilder{
     return this;
   }
 
+  setOrderbyMap(orderBy:any){
+    this._orderBy = orderBy;
+    return this;
+  }
+
   setPageSize(pageSize: number){
     this._isPagination = true;
     this._pageSize = pageSize;
