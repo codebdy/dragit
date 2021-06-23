@@ -143,7 +143,6 @@ export default {
             },
             {
               name:'JsxTemplateParser',
-              fieldsGql:' is_supper ',   
               props:{
               actions:{
                 remove:{
@@ -151,10 +150,10 @@ export default {
                   confirmMessage:'删除后将不可恢复，您确定要删除吗？',
                 }
               },
-              //暂时不支持这种写法：!model.is_supper 
+              //暂时不支持这种写法：!model.isSupper 
               template:`
                 {
-                  model.is_supper !== true &&
+                  model.isSupper !== true &&
                   <IconButton icon='mdi-delete' tooltip='删除' onClick={remove} />
                 }
                 `

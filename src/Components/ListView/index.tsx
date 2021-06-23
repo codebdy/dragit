@@ -20,6 +20,7 @@ import { useMagicQuery } from 'Data/useMagicQuery';
 import bus from 'Base/bus';
 import { EVENT_DATA_CHANGE } from 'Base/events';
 import { DataChangeArg } from 'Data/DataChangeArg';
+import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -84,7 +85,11 @@ const ListView = observer(React.forwardRef((
   const { data, error: queryError, mutate, loading:queryLoading } = useMagicQuery<any>(
     builder, 
     {
+      onComplate(){
+        listViewStore.setLoading(false);
+      },
       onError(){
+        listViewStore.setLoading(false);
         listViewStore.setRows([]);
       }
     }
@@ -125,10 +130,17 @@ const ListView = observer(React.forwardRef((
 
   const [excuteRemove, { error:removeError }] = useLayzyMagicDelete<any>(
     {
-      onCompleted:(data)=>{
+      onCompleted:(deletedData)=>{
         appStore.setSuccessAlert(true);
-        listViewStore.setSelects([]);
         listViewStore.finishMutation();
+        builder && mutate((data:any)=>{
+          data.data = data?.data?.filter((row: any) =>{
+            return !deletedData[listViewStore.queryMeta?.model||''].find((id: any)=>row.id === id);
+          })   
+          //不加一个字段，不刷新，后面有时间再调查原因
+          return {...data, _to_refresh:''} as any;
+        }, true);
+        listViewStore.setSelects([]);
       }
     }
   );
@@ -137,7 +149,7 @@ const ListView = observer(React.forwardRef((
 
   useEffect(()=>{
     queryLoading && !data && listViewStore.setRows(creatEmpertyRows( listViewStore.rows?.length || listViewStore.paginatorInfo.pageSize));
-    listViewStore.setLoading(queryLoading);
+    queryLoading && listViewStore.setLoading(queryLoading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   })
 
@@ -149,9 +161,11 @@ const ListView = observer(React.forwardRef((
 
   const handelBatchRemove = ()=>{
     listViewStore.setRemovingSelects();
-    excuteRemove({data:{
-      ids:listViewStore.selects
-    }})
+    const data = new MagicDeleteBuilder()
+      .setModel(listViewStore.queryMeta?.model||'')
+      .setIds(listViewStore.selects)
+      .toData();
+    excuteRemove({data});
   }
 
   const handleBatchUpadate = (field:string, value:any)=>{
@@ -180,9 +194,12 @@ const ListView = observer(React.forwardRef((
 
   const handelReomve = (id:ID)=>{
     listViewStore.setRemoving(id);
-    excuteRemove({data:{
-      ids:[id]
-    }})
+    const data = new MagicDeleteBuilder()
+      .setModel(listViewStore.queryMeta?.model||'')
+      .addId(id)
+      .toData();
+
+    excuteRemove({data});
   }
 
   return (

@@ -186,7 +186,7 @@ export class ListViewStore{
   setRemoving(id:ID){
     this.rxModel?.childrenMap.forEach(rowStore=>{
       if(rowStore.value?.id === id){
-        rowStore.setLoading(true);        
+        rowStore.setLoading(true); 
       }
     })
   }

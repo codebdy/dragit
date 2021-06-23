@@ -10,5 +10,4 @@ export interface IMeta extends IRxMeta{
   withNode?:boolean,
   designProps?:{[key:string]: any},
   auths?:IRxAuth[],
-  fieldsGql?:string,
 }
