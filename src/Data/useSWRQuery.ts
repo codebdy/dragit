@@ -23,5 +23,5 @@ export function useSWRQuery<T>(api?:AxiosRequestConfig, options?:any):SWRRespons
     }
   },[rtValue.error, history, rtValue, onError])
   const rtError = rtValue.error ? {message:rtValue.error?.message?.error} : undefined;
-  return {...rtValue, loading: !rtValue.data && !rtValue.error && !!api?.url, error:rtError};
+  return {...rtValue, loading: !rtValue.data && !rtValue.error, error:rtError};
 }

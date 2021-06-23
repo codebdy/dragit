@@ -87,12 +87,7 @@ export class ListViewStore{
   }
 
   setWhereSQL(rxId:string, sql?: string){
-    if(sql){
-      this.whereSQLs.set(rxId, sql);
-    }
-    else{
-      this.whereSQLs.delete(rxId);
-    }
+    sql && this.whereSQLs.set(rxId, sql);
   }
 
   toWhereSQL(){

@@ -62,9 +62,9 @@ export const Page = observer((
   },[page, pageJumper])
 
   const { loading, error, data, mutate } = useMagicQuery(
-    queryMeta && pageJumper?.dataId
+    queryMeta
       ? new MagicQueryBuilder(page.query)
-          .addCondition('id', pageJumper?.dataId)
+
       : undefined
   );
 
