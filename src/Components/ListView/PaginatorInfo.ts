@@ -5,7 +5,7 @@ import { Paginator } from "../../Data/Paginator";
 export class PaginatorInfo {
   count: number = 0;
   pageIndex: number = 0;
-  pageSize: number = 0;
+  pageSize: number = 10;
   total: number = 0;
 
   constructor() {

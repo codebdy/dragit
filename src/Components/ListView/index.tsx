@@ -91,6 +91,7 @@ const ListView = observer(React.forwardRef((
   );
 
   const handleDataChange = (changeArg:DataChangeArg) => {
+    console.log(listViewStore.queryMeta && !isDesigning && listViewStore.paginatorInfo.pageSize > 0, builder)
     if(changeArg.model === listViewStore.queryMeta?.model){
       builder && mutate((data:any)=>{
         data.data = data?.data?.map((row: any) =>{
