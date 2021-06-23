@@ -4,6 +4,7 @@ import { IValidateRule } from "../Model/IValidateRule";
 
 export interface IMeta extends IRxMeta{
   field?:string,
+  isSelect?:boolean,
   onlyShow?:boolean,
   rule?:IValidateRule,
   withNode?:boolean,

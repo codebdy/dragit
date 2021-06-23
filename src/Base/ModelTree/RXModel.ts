@@ -108,6 +108,12 @@ export class RXModel{
 
 
   toInputValue(){
+    if(this.node?.meta?.isSelect){
+      const value = toJS(this.value);
+      return Array.isArray(value)
+        ? value.map(obj=>obj.id)
+        : value?.id;
+    }
     if(this.childrenMap.size === 0){
       return toJS(this.value);
     }
