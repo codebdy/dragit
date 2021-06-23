@@ -12,15 +12,16 @@ import { useDesign } from 'rx-drag/store/useDesign';
 import { useModelStore } from 'Base/ModelTree/ModelProvider';
 import { IMeta } from 'Base/RXNode/IMeta';
 import { RxNode } from 'rx-drag/models/RxNode';
-import useLayzyMagicPost from 'Data/useLayzyMagicPost';
 import useLayzyMagicDelete from 'Data/useLayzyMagicDelete';
 import { MagicQueryMeta } from '../../Data/MagicQueryMeta';
 import { MagicQueryBuilder } from 'Data/MagicQueryBuilder';
 import { useMagicQuery } from 'Data/useMagicQuery';
 import bus from 'Base/bus';
 import { EVENT_DATA_CHANGE } from 'Base/events';
-import { DataChangeArg } from 'Data/DataChangeArg';
+import { DataChangeArg, DataChangeType } from 'Data/DataChangeArg';
 import { MagicDeleteBuilder } from 'Data/MagicDeleteBuilder';
+import { MagicUpdateBuilder } from 'Data/MagicUpdateBuilder';
+import useLayzyMagicUpdate from 'Data/useLayzyMagicUpdate';
 
 function creatEmpertyRows(length:number){
   let rows = []
@@ -95,12 +96,24 @@ const ListView = observer(React.forwardRef((
     }
   );
 
+  const getRowFormArgData = (data:any, id:ID)=>{
+    if(Array.isArray(data)){
+      return (data as any[]).find(row=>row.id === id);
+    }
+    else if(data.id === id){
+      return data;
+    }
+  }
+
   const handleDataChange = (changeArg:DataChangeArg) => {
     if(changeArg.model === listViewStore.queryMeta?.model){
       builder && mutate((data:any)=>{
+
         data.data = data?.data?.map((row: any) =>{
-          return row.id === changeArg.data.id ? {...row, ...changeArg.data} : row;
-        })
+          const changedData = getRowFormArgData(changeArg.data, row.id);
+          return row.id === (changedData?.id) ? {...row, ...changedData} : row;
+        })          
+
         //不加一个字段，不刷新，后面有时间再调查原因
         return {...data, _to_refresh:''} as any;
       }, true);
@@ -118,12 +131,25 @@ const ListView = observer(React.forwardRef((
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  const [excuteUpdate, { error:updateError }] = useLayzyMagicPost(
+  const [excuteUpdate, { error:updateError }] = useLayzyMagicUpdate(
     {
-      onCompleted:(data)=>{
+      onCompleted:(data:any)=>{
         appStore.setSuccessAlert(true);
         listViewStore.setSelects([]);
         listViewStore.finishMutation();
+        const model = listViewStore.queryMeta?.model||'';
+
+        const rows = data[model] as any[];
+
+        handleDataChange({
+          changeType: DataChangeType.UPDATE,
+          model: model,
+          data: rows
+        })
+        listViewStore.setLoading(false);
+      },
+      onError:()=>{
+        listViewStore.setLoading(false);
       }
     }
   );
@@ -169,27 +195,31 @@ const ListView = observer(React.forwardRef((
   }
 
   const handleBatchUpadate = (field:string, value:any)=>{
-    //if(!update){
-    //  return;
-    //}
+    if(!field){
+      return;
+    }
     listViewStore.setUpdatingSelects(field);
-    //const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
-    excuteUpdate({data:{
-      ids:listViewStore.selects,
-      //...varilabes,
-    }})
+    const data = new MagicUpdateBuilder()
+      .setModel(listViewStore.queryMeta?.model||'')
+      .setIds(listViewStore.selects)
+      .setParams({[field]:value})
+      .toData();
+    
+    excuteUpdate({data});
   }
 
   const handleUpdate = (id:ID, field:string, value:any)=>{
-    //if(!update){
-    //  return;
-   // }
+    if(!field){
+      return;
+    }
+    listViewStore.setUpdatingSelects(field);
+    const data = new MagicUpdateBuilder()
+      .setModel(listViewStore.queryMeta?.model||'')
+      .addId(id)
+      .setParams({[field]:value})
+      .toData();
     listViewStore.setUpdating(id, field);
-    //const varilabes = update.variableName ? {[update.variableName]:{[field]:value}} : undefined;
-    excuteUpdate({data:{
-      ids:[id],
-      //...varilabes,
-    }})
+    excuteUpdate({data})
   }
 
   const handelReomve = (id:ID)=>{

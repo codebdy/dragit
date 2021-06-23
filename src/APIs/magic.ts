@@ -19,3 +19,8 @@ export const API_MAGIC_DELETE: AxiosRequestConfig = {
   url:'/delete',
   method:'post',
 }
+
+export const API_MAGIC_UPDATE: AxiosRequestConfig = {
+  url:'/update',
+  method:'post',
+}

@@ -28,7 +28,7 @@ const ListViewTableRowActionFilter = observer((
       case UPDATE_LIST_VIEW_RECORD:
         console.assert(action.field, 'Update action field not set');
         if(action.field){
-          parentActionStore?.emit({...action, id:row.value.id, value:row.value[action.field]})          
+          parentActionStore?.emit({...action, id:row.value.id})          
         }
 
         break;

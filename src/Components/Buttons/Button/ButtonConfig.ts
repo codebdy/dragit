@@ -19,6 +19,14 @@ export class ButtonConfig extends MetaConfig{
 
   getPropsConfig(): Array<IPropConfig>{
     return [
+      {
+        name:'startIcon',
+        labelKey:'icon',
+        propType:'string',
+        props:{
+          xs:12
+        }
+      },
       ...marginConfigs,
       {
         name:'color',

@@ -19,6 +19,14 @@ export class IconButtonConfig extends MetaConfig{
 
   getPropsConfig(): Array<IPropConfig>{
     return [
+      {
+        name:'icon',
+        labelKey:'icon',
+        propType:'string',
+        props:{
+          xs:12
+        }
+      },
       ...marginConfigs,
       {
         name:'color',
