@@ -49,7 +49,7 @@ export const Page = observer((
   const dragItStore = useDragItStore();
   const loggedUser = useLoggedUser();
   const queryMeta = (page?.query) ? new MagicQueryMeta(page.query) : undefined;
-  
+
   useEffect(()=>{
     const pgStore = new PageStore(page, pageJumper);
     setPageStore(pgStore);
@@ -62,9 +62,10 @@ export const Page = observer((
   },[page, pageJumper])
 
   const { loading, error, data, mutate } = useMagicQuery(
-    queryMeta
+    queryMeta && pageJumper?.dataId
       ? new MagicQueryBuilder(page.query)
-
+          .setGetOne()
+          .addCondition('id', pageJumper?.dataId)
       : undefined
   );
 
@@ -209,7 +210,7 @@ export const Page = observer((
             open = {showPopup}
             pageJumper = {popupPageJumper}
             onClose={handleClosePopupPage}
-          />          
+          /> 
           <Dialog
             open={openAlert}
             onClose={handleCloseAlert}

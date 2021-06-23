@@ -42,7 +42,7 @@ export const MediaSelect = React.forwardRef((props: {
     onChange && onChange(
       {
         target:{
-          value:currentValue,
+          value:currentValue||null,
         }
       }
     )

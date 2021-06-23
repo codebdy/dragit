@@ -10,9 +10,9 @@ import { IPageMutation } from "Base/Model/IPageMutation";
 export class PageStore{
   rootNode: RxNode<IMeta>;
   submittingMutation?: IPageMutation;
-  page: IRxPage;
+  page?: IRxPage;
   //ActionStore
-  constructor(page:IRxPage, pageJumper?:IPageJumper) {
+  constructor(page?:IRxPage, pageJumper?:IPageJumper) {
     this.page = page;
     makeAutoObservable(this)
     const layout = cloneObject(page?.schema || []);

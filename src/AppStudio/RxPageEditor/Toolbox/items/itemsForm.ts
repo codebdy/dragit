@@ -85,6 +85,7 @@ export default{
       titleKey:"selectbox",
       meta:{
         name: 'SingleSelectBox',
+        isSelect: true,
         props:{
           label:"Select",
           variant:"outlined",
@@ -96,6 +97,7 @@ export default{
       titleKey:"multi-selectbox",
       meta:{
         name: 'MultiSelectBox',
+        isSelect: true,
         props:{
           label:"Select",
           variant:"outlined",
@@ -107,6 +109,7 @@ export default{
       titleKey:"tree-select",
       meta:{
         name: 'TreeSelect',
+        isSelect: true,
         props:{
           label:"Tree Select",
           variant:"outlined",
@@ -126,6 +129,10 @@ export default{
           }
         }
       },
+    },
+    {
+      titleKey:"media-select",
+      isSelect: true,
     },
     {
       title:"TinyMCE",
