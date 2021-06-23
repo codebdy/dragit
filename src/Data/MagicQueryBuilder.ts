@@ -10,7 +10,7 @@ export class MagicQueryBuilder{
   private _commands: string[] = [];
   private _take = "";
   private _skip = "";
-  private _fetcher = "@getMany";
+  private _fetcher = "";
   private _orderBy: any = undefined;
   private _pageSize: number = 10;
   private _pageIndex: number = 0;
