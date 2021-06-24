@@ -30,10 +30,14 @@ export const SaveNavigationButton = observer(() => {
       .setSingleData(
         {
           ...rxApp, 
-          navigationTtems: items
+          navigationItems: items,
+          entryPage: undefined,
+          auths:undefined,
+          pages:undefined
         }
       )
       .toData();
+    console.log('吼吼', items);
     excuteSaveRxApp({data});      
   }
   
