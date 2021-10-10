@@ -1,4 +1,4 @@
-可视化构建前端 [演示地址](https://dragit.vercel.app/).  [演示地址2](https://drag.fit/).  
+可视化构建前端 [演示地址](https://dragit.vercel.app/).  
 包含权限跟Form校验  
 QQ群：957619750  
 
