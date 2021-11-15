@@ -7,6 +7,8 @@ admin/admin
 demo/demo  
 test/test  
  
+# 只是个原型，正式代码尚未上传，敬请期待...    
+ 
 ## Available Scripts
 
 In the project directory, you can run:
