@@ -7,7 +7,7 @@ admin/admin
 demo/demo  
 test/test  
  
-# 只是个原型，正式代码尚未上传，敬请期待...    
+# 本代码不在维护，替代产品：https://github.com/codebdy/rxdrag  
  
 ## Available Scripts
 
